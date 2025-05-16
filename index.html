@@ -6,58 +6,69 @@
     <title>Rasoul Unlimited | محمد رسول سهرابی</title>
     <meta name="description" content="Official website of Mohammad Rasoul Sohrabi (Rasoul Unlimited), a biomedical engineering student, developer, designer, and founder. Explore my projects, content, skills, and media mentions showcasing my digital presence and notability.">
 
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
         :root {
-            /* Define CSS Variables for easier theme changes */
-            --primary-color: #0056b3; /* Slightly darker blue */
-            --secondary-color: #333; /* Dark Grey */
-            --accent-color: #007bff; /* Bright blue for links/highlights */
-            --background-color: #f8f9fa; /* Very light grey background */
+            /* Color Palette */
+            --primary-color: #0056b3; /* Deep Blue */
+            --secondary-color: #212529; /* Dark Charcoal */
+            --accent-color: #007bff; /* Bright Blue */
+            --background-start-color: #e9ecef; /* Light Grey for Gradient Start */
+            --background-end-color: #f8f9fa; /* Very Light Grey for Gradient End */
             --container-bg: white;
-            --card-bg: #ffffff; /* Card background */
-            --shadow-color: rgba(0,0,0,0.1);
-            --text-color: #495057; /* Default text color */
-            --heading-color: #212529; /* Heading color */
-            --tagline-color: #6c757d; /* Muted tagline color */
-            --border-color: #dee2e6; /* Light border */
+            --card-bg: #ffffff;
+            --shadow-color: rgba(0,0,0,0.15); /* Slightly stronger shadow */
+            --text-color: #495057;
+            --heading-color: #212529;
+            --tagline-color: #6c757d;
+            --border-color: #dee2e6;
+
+            /* Spacing */
+            --space-xs: 5px;
+            --space-sm: 10px;
+            --space-md: 20px;
+            --space-lg: 30px;
+            --space-xl: 40px;
+            --space-xxl: 60px; /* More space between sections */
         }
 
-        /* Smooth scrolling */
+        /* Smooth scrolling and padding for fixed nav */
         html {
             scroll-behavior: smooth;
+            /* Account for fixed header height when scrolling to anchor links */
+            scroll-padding-top: 80px; /* Should be slightly more than navbar height */
         }
 
         body {
             font-family: 'Roboto', "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--background-color);
+            background: linear-gradient(135deg, var(--background-start-color), var(--background-end-color)); /* Subtle gradient background */
             margin: 0;
             padding: 0;
             color: var(--text-color);
-            line-height: 1.6;
+            line-height: 1.7; /* Slightly increased line height for readability */
             box-sizing: border-box;
             position: relative;
-            padding-top: 70px; /* Adjust padding to account for taller sticky nav */
+            padding-top: 70px; /* Still need body padding for initial load */
         }
 
-         /* Container for overall layout */
+        /* Container for overall layout */
         .container {
-            max-width: 900px; /* Slightly wider container */
+            max-width: 960px; /* Even wider container */
             width: 100%;
-            margin: 20px auto;
-            padding: 0 20px; /* Add horizontal padding */
+            margin: var(--space-md) auto; /* Use variable */
+            padding: 0 var(--space-md); /* Use variable */
             box-sizing: border-box;
         }
 
         /* Style for content within the container */
         .content-area {
              background: var(--container-bg);
-             padding: 2rem;
+             padding: var(--space-xl); /* Use variable */
              border-radius: 12px;
-             box-shadow: 0 0 25px var(--shadow-color);
+             box-shadow: 0 0 30px var(--shadow-color); /* Stronger shadow */
         }
 
         /* --- Navigation Bar --- */
@@ -66,23 +77,24 @@
             top: 0;
             left: 0;
             width: 100%;
-            background-color: rgba(255, 255, 255, 0.98); /* More opaque */
-            box-shadow: 0 2px 12px var(--shadow-color);
-            padding: 12px 0; /* More padding */
+            background-color: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 15px var(--shadow-color); /* Stronger shadow */
+            padding: var(--space-sm) 0; /* Use variable */
             z-index: 1000;
             text-align: center;
-            backdrop-filter: blur(8px); /* Stronger blur */
+            backdrop-filter: blur(10px); /* Stronger blur */
             border-bottom: 1px solid var(--border-color);
         }
 
         .navbar nav a {
             color: var(--secondary-color);
             text-decoration: none;
-            margin: 0 15px;
+            margin: 0 var(--space-md); /* Use variable */
             font-weight: 500;
-            font-size: 1rem; /* Standard font size */
+            font-size: 1.05rem; /* Slightly larger nav links */
             transition: color 0.3s ease;
-            position: relative; /* Needed for underline effect */
+            position: relative;
+            padding-bottom: var(--space-xs); /* Add padding for underline */
         }
 
         .navbar nav a:hover {
@@ -94,12 +106,12 @@
             content: '';
             position: absolute;
             width: 0;
-            height: 2px;
-            bottom: -5px;
+            height: 3px; /* Thicker underline */
+            bottom: 0;
             left: 50%;
             transform: translateX(-50%);
             background-color: var(--accent-color);
-            transition: width 0.3s ease;
+            transition: width 0.3s ease-in-out; /* Smoother transition */
         }
 
         .navbar nav a:hover::after {
@@ -108,69 +120,75 @@
 
         /* --- Hero/Header Section --- */
         #hero {
-             padding-top: 0; /* Remove padding-top here, it's on body */
-             margin-bottom: 3rem; /* Space below hero */
-             text-align: center; /* Ensure hero content is centered */
+             padding-top: 0;
+             margin-bottom: var(--space-xxl); /* Use variable */
+             text-align: center;
         }
 
         .profile-image {
-            width: 160px; /* Slightly larger image */
-            height: 160px;
+            width: 180px; /* Even larger image */
+            height: 180px;
             border-radius: 50%;
-            margin-bottom: 1.5rem;
+            margin-bottom: var(--space-lg); /* Use variable */
             object-fit: cover;
-            border: 5px solid var(--accent-color); /* Use accent color for border */
-            box-shadow: 0 6px 12px var(--shadow-color); /* Stronger shadow */
-             transition: transform 0.3s ease; /* Add transition for hover effect */
+            border: 6px solid var(--accent-color); /* Thicker border */
+            box-shadow: 0 8px 16px var(--shadow-color); /* Stronger shadow */
+            transition: transform 0.4s ease-in-out; /* Smoother transition */
         }
          .profile-image:hover {
-             transform: scale(1.05); /* Slightly enlarge on hover */
+             transform: scale(1.08) rotate(2deg); /* More noticeable effect */
          }
 
 
         h1 {
-            font-family: 'Montserrat', sans-serif; /* Use Montserrat for headings */
-            font-size: 3rem; /* Larger heading */
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem; /* Even larger heading */
             color: var(--heading-color);
             margin-top: 0;
-            margin-bottom: 0.8rem; /* Space below H1 */
-            font-weight: 700;
-            line-height: 1.2;
+            margin-bottom: var(--space-sm); /* Use variable */
+            font-weight: 800; /* Extra bold */
+            line-height: 1.1;
         }
 
         .tagline {
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.3rem; /* Larger tagline */
+            font-size: 1.4rem; /* Even larger tagline */
             font-weight: 600;
             color: var(--tagline-color);
-            margin-bottom: 3rem; /* More space below tagline */
+            margin-bottom: var(--space-xxl); /* Use variable */
             margin-top: 0;
         }
 
         /* --- General Section Styling --- */
         section {
-            margin-bottom: 4rem; /* More space between sections */
-            padding-top: 2rem; /* Padding for anchor links, higher than nav height */
+            margin-bottom: var(--space-xxl); /* Use variable */
+            padding-top: var(--space-lg); /* Padding for anchor links, higher than nav height */
+            border-bottom: 1px solid var(--border-color); /* Subtle separator */
+            padding-bottom: var(--space-xxl); /* Add padding below section before separator */
+        }
+        section:last-child {
+             border-bottom: none; /* No border for the last section */
+             padding-bottom: 0;
         }
 
          section h2 {
             font-family: 'Montserrat', sans-serif;
-            font-size: 2rem; /* Section heading size */
+            font-size: 2.2rem; /* Larger section heading size */
             color: var(--heading-color);
             margin-top: 0;
-            margin-bottom: 2rem; /* Space below section heading */
-            position: relative; /* For potential pseudo-elements */
-            text-align: center; /* Center section headings */
+            margin-bottom: var(--space-xl); /* Use variable */
+            position: relative;
+            text-align: center;
+            font-weight: 700;
         }
 
-        /* Optional: Add a small separator below section titles */
          section h2::after {
              content: '';
              display: block;
-             width: 60px;
-             height: 3px;
+             width: 80px; /* Wider separator */
+             height: 4px; /* Thicker separator */
              background-color: var(--primary-color);
-             margin: 10px auto 0;
+             margin: var(--space-sm) auto 0; /* Use variable */
              border-radius: 2px;
          }
 
@@ -178,29 +196,39 @@
         /* Align text left within sections */
         #about p {
             text-align: justify;
-             max-width: 700px; /* Limit width for readability */
+             max-width: 800px; /* Limit width for readability */
              margin-left: auto;
              margin-right: auto;
+             font-size: 1.05rem; /* Slightly larger bio text */
+             color: #333;
         }
 
         /* --- Links Section --- */
         #links ul {
             padding: 0;
             list-style-type: none;
-            margin-bottom: 1.5rem;
+            margin-bottom: var(--space-md); /* Use variable */
              text-align: center;
         }
 
         #links ul li {
-            margin: 1rem 0; /* Increase vertical space */
-             font-size: 1.1rem;
+            margin: var(--space-md) 0; /* Use variable */
+             font-size: 1.2rem; /* Larger link text */
         }
          #links ul li i {
-             margin-right: 10px;
+             margin-right: var(--space-sm); /* Use variable */
              color: var(--accent-color);
-             width: 20px; /* Fixed width for icon alignment */
+             width: 25px; /* Fixed width for icon alignment */
              text-align: center;
+             transition: transform 0.3s ease; /* Icon hover effect */
          }
+         #links ul li:hover i {
+             transform: scale(1.2); /* Enlarge icon on hover */
+         }
+         #links ul li a {
+              font-weight: 500;
+         }
+
 
         a {
             color: var(--accent-color);
@@ -216,175 +244,290 @@
         /* --- Card Grid Layout --- */
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
-            gap: 25px; /* Space between cards */
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Adjust min width */
+            gap: var(--space-lg); /* Use variable */
             padding: 0;
         }
 
         .card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 4px 8px var(--shadow-color);
-            display: flex; /* Use flexbox for content inside card */
+            border-radius: 10px; /* Slightly more rounded corners */
+            padding: var(--space-md); /* Use variable */
+            box-shadow: 0 6px 15px var(--shadow-color); /* Stronger initial shadow */
+            display: flex;
             flex-direction: column;
-            justify-content: space-between; /* Distribute space */
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hover effects */
-             text-align: left; /* Align card content left */
+            justify-content: space-between;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smoother transition */
+             text-align: left;
         }
 
         .card:hover {
-            transform: translateY(-5px); /* Lift card slightly */
-            box-shadow: 0 8px 16px var(--shadow-color); /* Stronger shadow on hover */
+            transform: translateY(-8px); /* Lift card more */
+            box-shadow: 0 12px 25px var(--shadow-color); /* Much stronger shadow on hover */
         }
+
+         .card-image {
+             width: 100%;
+             height: 200px; /* Fixed height for images */
+             object-fit: cover; /* Cover the area */
+             border-radius: 8px 8px 0 0; /* Rounded top corners */
+             margin-bottom: var(--space-md); /* Use variable */
+             border-bottom: 1px solid var(--border-color);
+         }
+
 
         .card h3 {
             font-family: 'Montserrat', sans-serif;
             margin-top: 0;
-            margin-bottom: 10px;
+            margin-bottom: var(--space-sm); /* Use variable */
             color: var(--secondary-color);
-            font-size: 1.3rem;
+            font-size: 1.4rem; /* Larger card titles */
+            font-weight: 600;
         }
 
         .card p {
-            margin-bottom: 15px;
+            margin-bottom: var(--space-md); /* Use variable */
             font-size: 1rem;
             color: var(--text-color);
-            flex-grow: 1; /* Allow paragraph to take available space */
-        }
-
-        .card .card-links {
-             margin-top: 10px; /* Space above links */
-        }
-
-        .card .card-links a {
-             margin-right: 15px;
-             font-size: 0.95rem;
-             white-space: nowrap; /* Prevent links from wrapping */
+            flex-grow: 1;
         }
 
         .card .card-meta {
-             font-size: 0.85rem;
-             color: #666;
-             margin-bottom: 10px;
+             font-size: 0.9rem; /* Slightly larger meta text */
+             color: #555;
+             margin-bottom: var(--space-sm); /* Use variable */
+             font-weight: 500;
         }
+         .card .card-meta i {
+              margin-right: var(--space-xs);
+              color: var(--primary-color);
+         }
+
+
+        .card .card-links {
+             margin-top: var(--space-sm); /* Use variable */
+             padding-top: var(--space-sm);
+             border-top: 1px solid #eee; /* Separator for links */
+        }
+
+        .card .card-links a {
+             margin-right: var(--space-md); /* Use variable */
+             font-size: 1rem; /* Larger link text */
+             white-space: nowrap;
+             font-weight: 500;
+             display: inline-flex; /* Align icon and text */
+             align-items: center;
+        }
+         .card .card-links a i {
+              margin-right: var(--space-xs);
+              font-size: 0.9rem;
+         }
+
+         /* Specific adjustments for mention cards */
+         .mention-card h3 {
+             font-size: 1.3rem;
+         }
+          .mention-card p {
+             font-style: italic;
+             color: #666;
+          }
+          .mention-card .card-links a {
+              font-weight: 700; /* Bolder link for mentions */
+          }
+
 
         /* --- Skills Section --- */
         #skills .skills-list {
              list-style: none;
              padding: 0;
-             display: flex; /* Use flexbox for skills */
-             flex-wrap: wrap; /* Allow skills to wrap */
-             justify-content: center; /* Center skills */
+             display: flex;
+             flex-wrap: wrap;
+             justify-content: center;
+             gap: var(--space-sm); /* Use variable for gap */
         }
          #skills .skills-list li {
-             background-color: #e9ecef; /* Light background for skill tags */
+             background-color: #e9ecef;
              color: var(--secondary-color);
-             padding: 8px 15px;
-             margin: 5px;
-             border-radius: 20px; /* Pill shape */
-             font-size: 0.9rem;
+             padding: var(--space-sm) var(--space-md); /* Use variable */
+             margin: 0; /* Gap handles spacing */
+             border-radius: 20px;
+             font-size: 0.95rem; /* Slightly larger */
              font-weight: 500;
              border: 1px solid var(--border-color);
+             transition: background-color 0.3s ease, transform 0.2s ease; /* Hover effect */
          }
+          #skills .skills-list li:hover {
+              background-color: var(--accent-color);
+              color: white;
+              transform: translateY(-3px);
+          }
          #skills .skills-list li i {
-              margin-right: 8px;
-              color: var(--primary-color);
+              margin-right: var(--space-xs);
+              color: var(--primary-color); /* Default color */
+              transition: color 0.3s ease; /* Icon color transition */
          }
+          #skills .skills-list li:hover i {
+              color: white; /* Icon color on hover */
+          }
 
 
         /* --- Footer --- */
         .footer {
-            margin-top: 4rem; /* More space above footer */
-            font-size: 0.9rem;
+            margin-top: var(--space-xxl); /* Use variable */
+            font-size: 0.95rem; /* Slightly larger footer text */
             color: var(--footer-color);
             border-top: 1px solid var(--border-color);
-            padding: 2rem 0; /* More padding */
+            padding: var(--space-xl) 0; /* Use variable */
             text-align: center;
         }
+         .footer a {
+             color: var(--footer-color); /* Footer link color */
+             text-decoration: underline; /* Underline footer links by default */
+         }
+          .footer a:hover {
+              color: var(--secondary-color);
+              text-decoration: none; /* Remove underline on hover */
+          }
+         .footer p {
+             margin-top: var(--space-md); /* Use variable */
+             margin-bottom: 0;
+             font-size: 0.9rem;
+             color: #888;
+         }
 
         /* Responsive adjustments */
         @media (max-width: 768px) {
-            .container {
-                padding: 0 15px;
+            html {
+                scroll-padding-top: 70px;
             }
-             body {
+            body {
                  padding-top: 60px;
              }
+             .container {
+                 padding: 0 var(--space-md);
+                 margin: var(--space-md) auto;
+             }
+             .content-area {
+                 padding: var(--space-lg);
+                 box-shadow: 0 0 20px var(--shadow-color);
+             }
              .navbar {
-                 padding: 10px 0;
+                 padding: var(--space-sm) 0;
              }
              .navbar nav a {
-                 margin: 0 10px;
-                 font-size: 0.95rem;
+                 margin: 0 var(--space-sm);
+                 font-size: 1rem;
              }
             h1 {
-                font-size: 2.5rem;
+                font-size: 3rem;
             }
              section h2 {
-                 font-size: 1.8rem;
+                 font-size: 2rem;
              }
             .tagline {
-                font-size: 1.2rem;
+                font-size: 1.3rem;
             }
             .profile-image {
-                width: 140px;
-                height: 140px;
+                width: 150px;
+                height: 150px;
+                 border-width: 5px;
             }
             .grid-container {
                  grid-template-columns: 1fr; /* Stack cards on small screens */
-                 gap: 20px;
+                 gap: var(--space-md); /* Use variable */
             }
             .card {
-                 padding: 15px;
+                 padding: var(--space-md);
             }
+             .card h3 {
+                 font-size: 1.3rem;
+             }
+             .card p {
+                 font-size: 1rem;
+             }
+             .card .card-links a {
+                 margin-right: var(--space-sm);
+                 font-size: 0.95rem;
+             }
+             #skills .skills-list li {
+                 padding: var(--space-xs) var(--space-sm);
+                 font-size: 0.9rem;
+             }
+             section {
+                 margin-bottom: var(--space-xl);
+                 padding-bottom: var(--space-xl);
+             }
+        }
+
+         @media (max-width: 480px) {
+            html {
+                scroll-padding-top: 60px;
+            }
+              body {
+                 padding-top: 55px;
+             }
+             .container {
+                 padding: 0 var(--space-sm);
+                  margin: var(--space-sm) auto;
+             }
+              .content-area {
+                 padding: var(--space-md);
+                 box-shadow: 0 0 15px var(--shadow-color);
+             }
+             .navbar {
+                 padding: var(--space-xs) 0;
+             }
+             .navbar nav a {
+                 margin: 0 var(--space-xs);
+                 font-size: 0.9rem;
+             }
+             h1 {
+                 font-size: 2.5rem;
+             }
+              section h2 {
+                 font-size: 1.8rem;
+             }
+             .tagline {
+                 font-size: 1.2rem;
+             }
+             .profile-image {
+                 width: 120px;
+                 height: 120px;
+                  border-width: 4px;
+             }
+             .card {
+                 padding: var(--space-sm);
+             }
              .card h3 {
                  font-size: 1.2rem;
              }
              .card p {
                  font-size: 0.95rem;
              }
-             .card .card-links a {
-                 margin-right: 10px;
+              section {
+                 margin-bottom: var(--space-lg);
+                 padding-bottom: var(--space-lg);
              }
-             #skills .skills-list li {
-                 padding: 6px 12px;
-                 font-size: 0.85rem;
-             }
-        }
-
-         @media (max-width: 480px) {
-              body {
-                 padding-top: 55px;
-             }
-             .navbar nav a {
-                 margin: 0 5px; /* Reduce margin more */
-                 font-size: 0.9rem;
-             }
-             h1 {
-                 font-size: 2rem;
-             }
-              section h2 {
-                 font-size: 1.5rem;
-             }
-             .tagline {
-                 font-size: 1.1rem;
-             }
-             .profile-image {
-                 width: 120px;
-                 height: 120px;
-             }
-             .card {
-                 padding: 12px;
-             }
-             .card h3 {
-                 font-size: 1.1rem;
-             }
-             .card p {
-                 font-size: 0.9rem;
+             .footer {
+                 padding: var(--space-lg) 0;
              }
          }
+         /* Basic Fade-in Animation (Requires JavaScript for trigger on scroll)
+            Since we aim for pure CSS, we can't easily trigger on scroll without libraries.
+            Keeping this commented out, focus on hover effects instead for CSS only.
+         */
+         /*
+         .fade-in {
+             opacity: 0;
+             transform: translateY(20px);
+             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+         }
+         .fade-in.is-visible {
+             opacity: 1;
+             transform: translateY(0);
+         }
+         */
 
 
     </style>
@@ -395,15 +538,19 @@
         <nav>
             <a href="#hero">Home</a>
             <a href="#about">About</a>
-            <a href="#skills">Skills</a> <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
             <a href="#content">Content</a>
             <a href="#mentions">Mentions</a>
-            <a href="#links">Links</a> <a href="#footer">Contact</a>
+            <a href="#links">Links</a>
+            <a href="#footer">Contact</a>
         </nav>
     </div>
 
     <div class="container">
-        <div class="content-area"> <main>
+        <div class="content-area">
+
+            <main>
                 <section id="hero">
                      <img src="RasoulUnlimited.png" alt="Mohammad Rasoul Sohrabi Profile Image" class="profile-image" />
                      <h1>Rasoul Unlimited | محمد رسول سهرابی</h1>
@@ -440,7 +587,7 @@
                      <div class="grid-container">
                          <div class="card project-card">
                              <h3>Project Name (e.g., AI-Powered Diagnostic Tool)</h3>
-                              <div class="card-meta">Technology Stack: Python, TensorFlow, Flask</div>
+                              <div class="card-meta"><i class="fas fa-microchip"></i> Technology Stack: Python, TensorFlow, Flask</div>
                              <p>A brief description of the project. What problem does it solve? What was your specific contribution? Highlight any measurable impact or achievement (e.g., "Reduced diagnosis time by 30%").</p>
                               <div class="card-links">
                                    <a href="#" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Live Demo</a>
@@ -449,8 +596,8 @@
                          </div>
 
                           <div class="card project-card">
-                             <h3>Another Project (e.g., Patient Management System UI)</h3>
-                             <div class="card-meta">Technology Stack: React, Node.js, MongoDB</div>
+                              <h3>Another Project (e.g., Patient Management System UI)</h3>
+                             <div class="card-meta"><i class="fas fa-code-branch"></i> Technology Stack: React, Node.js, MongoDB</div>
                              <p>Description of the second project. Focus on your role (Designer, Developer, etc.) and the outcome.</p>
                               <div class="card-links">
                                    <a href="#" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> View Project</a>
@@ -464,7 +611,7 @@
                       <div class="grid-container">
                           <div class="card content-card">
                              <h3>Title of Your Article/Post</h3>
-                             <div class="card-meta">Platform: Virgool | Date: YYYY-MM-DD</div>
+                             <div class="card-meta"><i class="fas fa-tag"></i> Platform: Virgool | <i class="fas fa-calendar-alt"></i> Date: YYYY-MM-DD</div>
                              <p>A short summary of the article or what it's about. Why is it important or representative of your work? Did it receive significant views or positive feedback?</p>
                               <div class="card-links">
                                  <a href="https://virgool.io/@YourArticleLink" target="_blank" rel="noopener noreferrer"><i class="fas fa-book-open"></i> Read on Virgool</a>
@@ -473,7 +620,7 @@
 
                           <div class="card content-card">
                              <h3>Title of Another Article/Post</h3>
-                             <div class="card-meta">Platform: Medium | Date: YYYY-MM-DD</div>
+                             <div class="card-meta"><i class="fas fa-tag"></i> Platform: Medium | <i class="fas fa-calendar-alt"></i> Date: YYYY-MM-DD</div>
                              <p>Summary of the second article. Mention topic and impact.</p>
                               <div class="card-links">
                                   <a href="https://medium.com/@YourArticleLink" target="_blank" rel="noopener noreferrer"><i class="fas fa-book-open"></i> Read Article</a>
@@ -487,7 +634,7 @@
                      <div class="grid-container">
                          <div class="card mention-card">
                               <h3>Mention/Feature Title (e.g., Interview about X Project)</h3>
-                              <div class="card-meta">Source: [Name of Reputable Media Outlet] | Date: YYYY-MM-DD</div>
+                              <div class="card-meta"><i class="fas fa-bullhorn"></i> Source: [Name of Reputable Media Outlet] | <i class="fas fa-calendar-alt"></i> Date: YYYY-MM-DD</div>
                               <p>Brief context of the mention. What was discussed? Why is this significant? (e.g., "Featured as a young innovator in digital health").</p>
                                <div class="card-links">
                                    <a href="https://link-to-the-actual-article.com" target="_blank" rel="noopener noreferrer"><i class="fas fa-newspaper"></i> Read the Article on [Source Name]</a>
@@ -496,8 +643,8 @@
 
                          <div class="card mention-card">
                              <h3>Award/Honor Received (e.g., Winner of X Competition)</h3>
-                              <div class="card-meta">Awarding Body: [Name of Organization] | Date: YYYY-MM-DD</div>
-                             <p>Description of the award or recognition. Why was it given? What project or work did it recognize?</p>
+                              <div class="card-meta"><i class="fas fa-award"></i> Awarding Body: [Name of Organization] | <i class="fas fa-calendar-alt"></i> Date: YYYY-MM-DD</div>
+                             <p>Description of the award or recognition. Why was it given? What project or work did it recognize? Provide context about the awarding body's credibility.</p>
                               <div class="card-links">
                                   <a href="https://link-to-award-details.com" target="_blank" rel="noopener noreferrer"><i class="fas fa-trophy"></i> View Details</a>
                              </div>
@@ -521,7 +668,7 @@
         </div> </div> <footer class="footer" id="footer">
         📍 Tehran / Karaj | 🎓 Biomedical Engineering, University of Tehran<br>
         Contact: <a href="mailto:rasoul.unlimited@gmail.com">rasoul.unlimited [at] gmail [dot] com</a>
-         <p style="margin-top: 10px;">&copy; 2024 Rasoul Unlimited. All rights reserved.</p> </footer>
+         <p style="margin-top: var(--space-sm);">&copy; 2024 Rasoul Unlimited. All rights reserved.</p> </footer>
 
 </body>
 </html>
