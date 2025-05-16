@@ -13,7 +13,7 @@
     <meta property="og:image" content="[Link to your profile image or a representative image for social sharing]"/> <meta property="og:image:alt" content="Mohammad Rasoul Sohrabi (Rasoul Unlimited) Profile Image"/>
 
     <meta name="twitter:card" content="summary_large_image"/>
-    <meta name="twitter:site" content="@[YourTwitterHandle]"/> <meta name="twitter:title" content="Rasoul Unlimited | محمد رسول سهرabi - Official Digital Hub"/>
+    <meta name="twitter:site" content="@[YourTwitterHandle]"/> <meta name="twitter:title" content="Rasoul Unlimited | محمد رسول سهرابی - Official Digital Hub"/>
     <meta name="twitter:description" content="Explore the compelling digital presence of Mohammad Rasoul Sohrabi (Rasoul Unlimited), a biomedical engineering innovator, full-stack developer, and content strategist. Featuring a detailed timeline, impactful projects, verifiable media mentions, and key skills showcasing his verifiable notability and expertise."/>
     <meta name="twitter:image" content="[Link to your profile image or a representative image for social sharing]"/> <meta name="twitter:image:alt" content="Mohammad Rasoul Sohrabi (Rasoul Unlimited) Profile Image"/>
 
@@ -298,7 +298,7 @@
             position: relative;
              max-width: 90%;
              height: auto;
-             display: block; /* Remove extra space below image */
+             display: block;
              margin-left: auto;
              margin-right: auto;
         }
@@ -393,42 +393,6 @@
              line-height: 1.8;
         }
 
-        /* --- Links Section --- */
-        #links ul {
-            padding: 0;
-            list-style-type: none;
-            margin-bottom: var(--space-md);
-             text-align: center;
-        }
-
-        #links ul li {
-            margin: var(--space-md) 0;
-             font-size: 1.3rem;
-        }
-         #links ul li i {
-             margin-right: var(--space-sm);
-             color: var(--accent-color);
-             width: 28px;
-             text-align: center;
-             transition: transform var(--transition-duration-short) var(--transition-easing-springy), color var(--transition-duration-short) var(--transition-easing-standard);
-         }
-         #links ul li a:hover i, #links ul li a:focus-visible i {
-             transform: scale(1.4) rotate(10deg);
-              color: var(--primary-color);
-         }
-         #links ul li a {
-              font-weight: 500;
-              transition: color var(--transition-duration-short) var(--transition-easing-standard), text-decoration var(--transition-duration-short) var(--transition-easing-standard);
-               /* Added for focus state */
-             outline: none; /* Remove default outline */
-         }
-         #links ul li a:hover, #links ul li a:focus-visible {
-              color: var(--primary-color);
-              text-decoration: underline;
-              /* Custom focus outline handled by :focus-visible rule */
-         }
-
-
         /* --- Card Grid Layout (Adding 3D Effect) --- */
         .grid-container {
             display: grid;
@@ -454,8 +418,7 @@
              position: relative;
              transform-style: preserve-3d;
              z-index: 1;
-             /* Added for focus state */
-             outline: none; /* Remove default outline */
+             outline: none;
         }
 
         .card:hover {
@@ -490,7 +453,7 @@
              border-bottom: 1px solid var(--border-color);
              max-width: 100%;
              height: auto;
-             display: block; /* Remove extra space below image */
+             display: block;
          }
 
 
@@ -549,13 +512,11 @@
               padding: var(--space-xs) var(--space-sm);
               border-radius: var(--border-radius-sm);
               transition: background-color var(--transition-duration-short) var(--transition-easing-standard), color var(--transition-duration-short) var(--transition-easing-standard);
-               /* Added for focus state */
-             outline: none; /* Remove default outline */
+              outline: none;
         }
          .card .card-links a:hover, .card .card-links a:focus-visible {
              background-color: #e9ecef;
              color: var(--primary-color);
-              /* Custom focus outline handled by :focus-visible rule */
          }
          .card .card-links a i {
               margin-right: var(--space-xs);
@@ -578,7 +539,7 @@
           }
            /* Ensure featured card focus state is also highlighted */
            .card.is-featured:focus-within {
-               box-shadow: 0 0 0 3px var(--highlight-color), 0 0 0 6px rgba(255, 193, 7, 0.5), 0 8px 25px var(--shadow-color-medium); /* Highlight glow + original shadow */
+               box-shadow: 0 0 0 3px var(--highlight-color), 0 0 0 6px rgba(255, 193, 7, 0.5), 0 8px 25px var(--shadow-color-medium);
            }
 
 
@@ -604,15 +565,13 @@
              cursor: pointer;
              display: inline-flex;
              align-items: center;
-              /* Added for focus state */
-             outline: none; /* Remove default outline */
+             outline: none;
          }
           #skills .skills-list li:hover, #skills .skills-list li:focus-visible {
               background-color: var(--accent-color);
               color: white;
               transform: translateY(-5px);
               box-shadow: 0 5px 10px var(--shadow-color-light);
-               /* Custom focus outline handled by :focus-visible rule */
           }
          #skills .skills-list li i {
               margin-right: var(--space-xs);
@@ -655,21 +614,20 @@
             position: relative;
             background-color: inherit;
             width: 50%;
-             /* Added for focus state */
-             outline: none; /* Remove default outline */
+             outline: none;
         }
 
         /* Right side timeline items (Desktop) */
         .timeline li:nth-child(odd) {
             left: 50%;
             padding-left: var(--space-xl);
-             padding-right: var(--space-md); /* Add some right padding for consistency */
+             padding-right: var(--space-md);
         }
 
         /* Left side timeline items (Desktop) */
         .timeline li:nth-child(even) {
              padding-right: var(--space-xl);
-             padding-left: var(--space-md); /* Add some left padding for consistency */
+             padding-left: var(--space-md);
         }
 
 
@@ -679,7 +637,7 @@
             position: absolute;
             width: var(--space-lg);
             height: var(--space-lg);
-            right: -14px; /* Position for right items */
+            right: -14px;
             background-color: var(--accent-color);
             border: 4px solid var(--primary-color);
             top: 30px;
@@ -690,8 +648,8 @@
 
         /* Circles for left items (Desktop) */
         .timeline li:nth-child(even)::after {
-            left: -14px; /* Position for left items */
-            right: auto; /* Reset right */
+            left: -14px;
+            right: auto;
         }
 
         .timeline li:hover::after, .timeline li:focus-within::after {
@@ -710,8 +668,7 @@
              box-shadow: 0 4px 15px var(--shadow-color-light);
              transition: transform var(--transition-duration-short) var(--transition-easing-springy), box-shadow var(--transition-duration-short) var(--transition-easing-standard);
              z-index: 1;
-              /* Added for focus state */
-             outline: none; /* Remove default outline */
+              outline: none;
         }
          .timeline li:hover .timeline-content, .timeline li:focus-within .timeline-content {
               transform: translateY(-8px);
@@ -728,13 +685,13 @@
             border-style: solid;
             border-color: transparent transparent transparent var(--card-bg);
             right: -16px;
-             left: auto; /* Ensure left is auto */
+             left: auto;
         }
 
         /* Arrow for left items (Desktop) */
         .timeline li:nth-child(even) .timeline-content::before {
              left: -16px;
-             right: auto; /* Reset right */
+             right: auto;
              border-color: transparent var(--card-bg) transparent transparent;
         }
          /* Match border color (Desktop - Right items) */
@@ -746,13 +703,13 @@
              border-style: solid;
              border-color: transparent transparent transparent var(--border-color);
              right: -18px;
-             left: auto; /* Ensure left is auto */
+             left: auto;
              z-index: -1;
          }
          /* Match border color (Desktop - Left items) */
          .timeline li:nth-child(even) .timeline-content::after {
              left: -18px;
-             right: auto; /* Reset right */
+             right: auto;
              border-color: transparent var(--border-color) transparent transparent;
          }
 
@@ -801,13 +758,11 @@
              color: #555;
              position: relative;
               transition: transform var(--transition-duration-short) var(--transition-easing-springy), box-shadow var(--transition-duration-short) var(--transition-easing-standard);
-              /* Added for focus state */
-             outline: none; /* Remove default outline */
+              outline: none;
          }
           .testimonial-item:hover, .testimonial-item:focus-within {
              transform: translateY(-5px);
              box-shadow: 0 6px 20px var(--shadow-color-medium);
-              /* Custom focus outline handled by :focus-visible rule */
           }
           .testimonial-item::before {
               content: "\201C";
@@ -846,47 +801,69 @@
            }
 
 
-        /* --- Contact Section --- */
-        #contact {
-            text-align: center;
+        /* --- Connect Section (Combined Contact & Links) --- */
+        #connect {
+            text-align: center; /* Default alignment for heading */
+             background: linear-gradient(135deg, var(--background-end-color) 0%, #eef2f7 100%); /* Slightly different background */
+             padding-top: var(--section-v-padding);
+             padding-bottom: var(--section-v-padding);
+             margin-bottom: 0; /* Last section has no bottom margin */
         }
-         #contact h2 {
-             margin-bottom: var(--space-xl);
+         #connect h2 {
+             margin-bottom: var(--space-xxl); /* More space below heading */
          }
-        #contact p {
-             font-size: 1.15rem;
-             margin-bottom: var(--space-md);
-             max-width: 700px;
-             margin-left: auto;
-             margin-right: auto;
-             line-height: 1.8;
-             color: #333;
+
+        .connect-content {
+             display: flex; /* Use flexbox for layout */
+             gap: var(--space-xxl); /* Space between columns */
+             text-align: left; /* Align text within columns */
+             max-width: 900px; /* Limit content width */
+             margin: 0 auto; /* Center the flex container */
+             align-items: flex-start; /* Align items to the top */
         }
+
+        .connect-info-block {
+             flex: 1; /* Allow block to grow */
+             min-width: 280px; /* Minimum width before wrapping */
+             /* background-color: var(--card-bg); /* Optional: Give block a background */
+             /* padding: var(--space-md); */
+             /* border-radius: var(--border-radius-md); */
+        }
+         .connect-info-block p {
+              text-align: left; /* Ensure text is left aligned */
+              font-size: 1.15rem;
+              margin-bottom: var(--space-md);
+              color: #333;
+              line-height: 1.8;
+              max-width: none; /* Remove max-width inherited from #about p */
+              margin-left: 0; margin-right: 0;
+         }
+
+
         .contact-info {
              display: flex;
              flex-direction: column;
-             align-items: center;
+             align-items: flex-start; /* Align items to the left */
              font-size: 1.3rem;
              font-weight: 500;
              color: var(--secondary-color);
+             margin-bottom: var(--space-md); /* Space below contact info */
         }
          .contact-info a {
              margin-top: var(--space-sm);
              color: var(--secondary-color);
              text-decoration: none;
              transition: color var(--transition-duration-short) var(--transition-easing-standard), transform var(--transition-duration-short) var(--transition-easing-springy);
-             display: inline-flex;
+             display: inline-flex; /* Use inline-flex to wrap content if needed */
              align-items: center;
-             padding: var(--space-xs);
+             padding: var(--space-xs) 0; /* Keep padding but remove horizontal for alignment */
              border-radius: var(--border-radius-sm);
-              /* Added for focus state */
-             outline: none; /* Remove default outline */
+              outline: none;
          }
          .contact-info a:hover, .contact-info a:focus-visible {
              color: var(--primary-color);
              text-decoration: underline;
              transform: translateX(8px);
-              /* Custom focus outline handled by :focus-visible rule */
          }
          .contact-info i {
               margin-right: var(--space-sm);
@@ -900,23 +877,89 @@
              color: var(--primary-color);
          }
 
-         #contact .location-edu {
+         #connect .location-edu {
              margin-top: var(--space-md);
              font-size: 1rem;
              color: var(--text-color-light);
              font-weight: 400;
+              text-align: left;
          }
-          #contact .location-edu i {
+          #connect .location-edu i {
              margin-right: var(--space-xs);
              color: var(--text-color-light);
              width: auto;
              text-align: left;
           }
 
+        .connect-links-block {
+             flex: 1; /* Allow block to grow */
+             min-width: 250px; /* Minimum width */
+             /* background-color: var(--card-bg); /* Optional: Give block a background */
+             /* padding: var(--space-md); */
+             /* border-radius: var(--border-radius-md); */
+        }
+         .connect-links-block h3 {
+             font-family: 'Montserrat', sans-serif;
+             font-size: 1.5rem;
+             color: var(--secondary-color);
+             margin-top: 0;
+             margin-bottom: var(--space-lg); /* More space below mini heading */
+             text-align: left; /* Align mini heading to the left */
+         }
+
+
+        .connect-links-block ul {
+            padding: 0;
+            list-style-type: none;
+            margin: 0; /* Remove default list margin */
+             display: flex; /* Use flexbox for the list items */
+             flex-direction: column; /* Stack list items */
+             gap: var(--space-sm); /* Space between list items */
+        }
+
+         .connect-links-block ul li {
+             margin: 0; /* Remove default list item margin */
+             font-size: 1.15rem; /* Slightly smaller link text */
+             display: flex; /* Flex to align icon and text */
+             align-items: center;
+             padding: var(--space-xs) 0; /* Add vertical padding */
+             border-bottom: 1px solid #eee; /* Add subtle separator */
+         }
+         .connect-links-block ul li:last-child { border-bottom: none; } /* No border for the last item */
+
+
+         .connect-links-block ul li i {
+             margin-right: var(--space-md); /* More space between icon and text */
+             color: var(--accent-color);
+             width: 28px;
+             text-align: center;
+             transition: transform var(--transition-duration-short) var(--transition-easing-springy), color var(--transition-duration-short) var(--transition-easing-standard);
+         }
+         .connect-links-block ul li a:hover i, .connect-links-block ul li a:focus-visible i {
+             transform: scale(1.2); /* Slightly smaller icon effect */
+              color: var(--primary-color);
+         }
+         .connect-links-block ul li a {
+              color: var(--secondary-color); /* Default link color */
+              text-decoration: none;
+              font-weight: 500;
+               transition: color var(--transition-duration-short) var(--transition-easing-standard), text-decoration var(--transition-duration-short) var(--transition-easing-standard);
+               display: flex; /* Flex inside link for full-area click */
+               align-items: center;
+               flex-grow: 1; /* Allow link to take up space */
+                outline: none;
+                padding: var(--space-xxs) 0; /* Fine tune padding */
+         }
+
+         .connect-links-block ul li a:hover, .connect-links-block ul li a:focus-visible {
+              color: var(--primary-color);
+              text-decoration: underline;
+         }
+
 
         /* --- Footer --- */
         .footer {
-            margin-top: var(--space-xxl);
+            margin-top: var(--space-md); /* Reduced margin after connect section */
             font-size: 0.95rem;
             color: var(--footer-color);
             border-top: 1px solid var(--border-color);
@@ -936,13 +979,13 @@
         /* Tablet and Smaller Desktops */
         @media (max-width: 1200px) {
              .container {
-                 padding: 0 var(--space-md); /* Reduce horizontal padding */
+                 padding: 0 var(--space-md);
              }
               .content-area {
-                 padding: var(--space-xl); /* Reduce padding inside */
+                 padding: var(--space-xl);
              }
              section h2 {
-                 font-size: 2.6rem; /* Slightly smaller headings */
+                 font-size: 2.6rem;
              }
              .tagline {
                  font-size: 1.5rem;
@@ -956,16 +999,26 @@
               .card p {
                   font-size: 1rem;
               }
+
+             /* Connect Section */
+             .connect-content {
+                 gap: var(--space-xl); /* Reduce gap between columns */
+                 max-width: 800px;
+             }
+             .connect-info-block { min-width: 250px; }
+             .connect-links-block { min-width: 200px; }
+             .connect-links-block h3 { font-size: 1.4rem; }
+              .connect-links-block ul li { font-size: 1.1rem; }
         }
 
 
-        /* Medium Tablets and Mobile */
+        /* Medium Tablets and Mobile (Refined Timeline & Connect) */
         @media (max-width: 768px) {
             /* Adjust global padding and navbar height */
              :root {
                  --navbar-height: 70px;
-                 --section-v-padding: var(--space-xl); /* Smaller vertical section padding */
-                 --section-margin-bottom: var(--space-xxl); /* Smaller margin below sections */
+                 --section-v-padding: var(--space-xl);
+                 --section-margin-bottom: var(--space-xxl);
              }
              html { scroll-padding-top: var(--navbar-height); }
               body { padding-top: var(--navbar-height); }
@@ -1008,22 +1061,22 @@
 
             /* Cards */
             .grid-container {
-                 grid-template-columns: 1fr; /* Stack cards on small screens */
+                 grid-template-columns: 1fr;
                  gap: var(--space-md);
-                 perspective: none; /* Remove perspective on small screens */
+                 perspective: none;
             }
              .card {
-                 transform: none !important; /* Disable 3D transform */
-                 box-shadow: 0 6px 20px var(--shadow-color-medium); /* Standard shadow */
-                 transition: transform var(--transition-duration-short) var(--transition-easing-springy), box-shadow var(--transition-duration-short) var(--transition-easing-standard); /* Adjust transition for 2D hover */
+                 transform: none !important;
+                 box-shadow: 0 6px 20px var(--shadow-color-medium);
+                 transition: transform var(--transition-duration-short) var(--transition-easing-springy), box-shadow var(--transition-duration-short) var(--transition-easing-standard);
              }
               .card:hover {
-                 transform: translateY(-8px) !important; /* Just lift on hover */
+                 transform: translateY(-8px) !important;
                   box-shadow: 0 10px 30px var(--shadow-color-medium);
               }
                .card::before { height: 4px; }
                 .card.is-featured {
-                  transform: rotateZ(-1deg) !important; /* Keep subtle rotation */
+                  transform: rotateZ(-1deg) !important;
                    box-shadow: 0 6px 20px var(--shadow-color-medium), 0 0 10px var(--highlight-color);
                    background-color: #fffbe6;
                 }
@@ -1046,33 +1099,32 @@
 
             /* Timeline (Single Column Mobile) */
              .timeline::after { /* Vertical line */
-                 left: var(--space-md); /* Move line to the left */
-                 margin-left: 0; /* Reset margin */
+                 left: var(--space-md);
+                 margin-left: 0;
              }
              .timeline li {
-                 width: 100%; /* Full width */
-                 padding-left: var(--space-xxl); /* Padding for content (line + space) */
-                 padding-right: var(--space-md); /* Right padding */
-                 padding-bottom: var(--space-lg); /* Smaller bottom padding for items */
-                 padding-top: var(--space-lg); /* Smaller top padding for items */
+                 width: 100%;
+                 padding-left: var(--space-xxl);
+                 padding-right: var(--space-md);
+                 padding-bottom: var(--space-lg);
+                 padding-top: var(--space-lg);
              }
-              .timeline li:last-child { padding-bottom: var(--space-md); /* Less padding for the very last item */ }
+              .timeline li:last-child { padding-bottom: var(--space-md); }
 
-             /* Left and Right items styling combined for single column */
              .timeline li:nth-child(odd),
              .timeline li:nth-child(even) {
-                 left: 0; /* Align all to the left */
-                 padding-left: var(--space-xxl); /* Consistently position content */
+                 left: 0;
+                 padding-left: var(--space-xxl);
                  padding-right: var(--space-md);
              }
 
 
              .timeline li::after { /* Circles */
-                 left: calc(var(--space-md) - var(--space-xs)); /* Position circles on the left line */
-                 right: auto; /* Reset right */
-                 top: 30px; /* Keep vertical position */
+                 left: calc(var(--space-md) - var(--space-xs));
+                 right: auto;
+                 top: 30px;
              }
-              .timeline li:nth-child(even)::after { /* Ensure left items also position correctly */
+              .timeline li:nth-child(even)::after {
                   left: calc(var(--space-md) - var(--space-xs));
                   right: auto;
               }
@@ -1080,9 +1132,9 @@
 
             /* Timeline Arrows (Point Left) */
             .timeline-content::before {
-                left: -16px; /* Position arrow to the left */
-                right: auto; /* Reset right */
-                border-color: transparent var(--card-bg) transparent transparent; /* Arrow points left */
+                left: -16px;
+                right: auto;
+                border-color: transparent var(--card-bg) transparent transparent;
             }
 
             /* Arrow for left items (now same as others) */
@@ -1094,9 +1146,9 @@
 
              /* Timeline Arrow Borders (Point Left) */
              .timeline-content::after {
-                 left: -18px; /* Position border arrow to the left */
-                 right: auto; /* Reset right */
-                 border-color: transparent var(--border-color) transparent transparent; /* Border arrow points left */
+                 left: -18px;
+                 right: auto;
+                 border-color: transparent var(--border-color) transparent transparent;
              }
              /* Border Arrow for left items (now same as others) */
              .timeline li:nth-child(even) .timeline-content::after {
@@ -1115,18 +1167,39 @@
              .testimonial-item .author { font-size: 0.95rem; }
 
 
-            /* Contact */
-             #contact p { font-size: 1rem; }
-             #contact .contact-info { font-size: 1.1rem; }
+            /* Connect Section (Stacked Mobile) */
+             .connect-content {
+                 flex-direction: column; /* Stack columns */
+                 gap: var(--space-xl); /* Space between stacked blocks */
+                 text-align: center; /* Center align text within blocks */
+             }
+             .connect-info-block, .connect-links-block {
+                 min-width: 100%; /* Take full width */
+                 padding: 0; /* Remove padding if added */
+                  /* background-color: transparent; /* Ensure no background */
+             }
+              .connect-info-block p { text-align: center; } /* Center align intro text */
+              .contact-info { align-items: center; } /* Center contact info items */
+              #connect .location-edu { text-align: center; } /* Center location/edu */
+              .connect-links-block h3 { text-align: center; margin-bottom: var(--space-md); } /* Center mini heading */
+              .connect-links-block ul { gap: var(--space-sm); } /* Space between list items */
+             .connect-links-block ul li { justify-content: center; border-bottom: 1px solid #eee; padding: var(--space-xs) 0;} /* Center list items, keep border */
+             .connect-links-block ul li:last-child { border-bottom: none; }
+             .connect-links-block ul li a { justify-content: center; } /* Center the link content */
+             .connect-links-block ul li i { margin-right: var(--space-sm); } /* Reduce icon margin */
+
+
+            /* Footer */
+             .footer { margin-top: var(--space-md); }
         }
 
-         /* Smaller Mobile Screens */
+         /* Smaller Mobile Screens (Further Refinements) */
          @media (max-width: 480px) {
              /* Adjust global padding and navbar height */
              :root {
                  --navbar-height: 65px;
-                 --section-v-padding: var(--space-lg); /* Even Smaller vertical section padding */
-                 --section-margin-bottom: var(--space-xl); /* Even Smaller margin below sections */
+                 --section-v-padding: var(--space-lg);
+                 --section-margin-bottom: var(--space-xl);
              }
               html { scroll-padding-top: var(--navbar-height); }
               body { padding-top: var(--navbar-height); }
@@ -1148,7 +1221,7 @@
 
              /* Hero */
              h1 { font-size: 2.8rem; letter-spacing: -1px; }
-              section h2 { font-size: 2rem; }
+              section h2 { font-size: 2.2rem; }
              .tagline { font-size: 1.3rem; }
              .profile-image {
                  width: 120px; height: 120px; border-width: 4px;
@@ -1174,7 +1247,7 @@
                  margin: calc(-1 * var(--space-sm)) calc(-1 * var(--space-sm)) var(--space-sm) calc(-1 * var(--space-sm));
              }
              .card h3 { font-size: 1.2rem; }
-             .card p { font-size: 0.9rem; }
+             .card p { font-size: 0.95rem; }
               .card .card-meta { gap: var(--space-xs); font-size: 0.85rem;}
               .card .card-links { gap: var(--space-xs); }
               .card .card-links a { font-size: 0.9rem; padding: var(--space-xs); }
@@ -1188,17 +1261,17 @@
              .timeline::after { left: var(--space-md); }
              .timeline li,
              .timeline li:nth-child(even) {
-                 padding-left: var(--space-xl); /* Keep content slightly offset */
+                 padding-left: var(--space-xl);
                  padding-right: var(--space-sm);
-                  padding-top: var(--space-md); /* Even smaller item padding */
+                  padding-top: var(--space-md);
                   padding-bottom: var(--space-md);
              }
               .timeline li:last-child { padding-bottom: var(--space-md); }
 
              .timeline li::after,
              .timeline li:nth-child(even)::after {
-                 left: calc(var(--space-md) - var(--space-xs) / 2); /* Adjust circle position */
-                 width: var(--space-md); height: var(--space-md); border-width: 3px; top: 20px; /* Adjust circle size/position */
+                 left: calc(var(--space-md) - var(--space-xs) / 2);
+                 width: var(--space-md); height: var(--space-md); border-width: 3px; top: 20px;
              }
               .timeline-content { padding: var(--space-sm); }
              .timeline-content::before { left: -14px; border-width: 7px; }
@@ -1218,11 +1291,14 @@
              .testimonial-item .author span { font-size: 0.8rem; }
 
 
-            /* Contact */
-             #contact p { font-size: 0.95rem; }
-             #contact .contact-info { font-size: 1rem; }
-              #contact .contact-info i { width: 20px; }
-              #contact .location-edu { font-size: 0.9rem; }
+            /* Connect Section */
+             .connect-content { gap: var(--space-lg); } /* Reduce gap */
+             #connect .contact-info { font-size: 1.1rem; }
+             .connect-links-block h3 { font-size: 1.3rem; }
+             .connect-links-block ul { gap: var(--space-xs); } /* Reduce gap between links */
+             .connect-links-block ul li { font-size: 1rem; padding: var(--space-xxs) 0;} /* Reduce font size and padding */
+             .connect-links-block ul li i { margin-right: var(--space-sm); } /* Reduce icon margin */
+              #connect .location-edu { font-size: 0.9rem; }
 
          }
 
@@ -1239,9 +1315,7 @@
             <a href="#projects">Projects</a>
             <a href="#content">Content</a>
             <a href="#mentions">Mentions</a>
-             <a href="#links">Links</a>
-            <a href="#contact">Contact</a>
-        </nav>
+             <a href="#connect">Connect</a> </nav>
     </div>
 
     <div class="container">
@@ -1412,30 +1486,33 @@
                          </div>
                  </section>
 
-                 <section id="links">
-                    <h2>🔗 My Hubs | پیوندهای من</h2>
-                    <ul>
-                        <li><i class="fab fa-instagram" aria-hidden="true"></i> <a href="https://www.instagram.com/rasoul.unlimited" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on Instagram">Instagram</a></li>
-                        <li><i class="fas fa-pen-fancy" aria-hidden="true"></i> <a href="https://virgool.io/@RasoulUnlimited" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on Virgool">Virgool</a></li>
-                        <li><i class="fab fa-linkedin" aria-hidden="true"></i> <a href="https://www.linkedin.com/in/rasoulunlimited" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on LinkedIn">LinkedIn</a></li>
-                        <li><i class="fab fa-github" aria-hidden="true"></i> <a href="https://github.com/rasoul-unlimited" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on GitHub">GitHub</a></li>
-                        <li><i class="fab fa-medium" aria-hidden="true"></i> <a href="https://rasoulunlimited.medium.com" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on Medium">Medium</a></li>
-                         </ul>
-                </section>
-
-                <section id="contact">
-                    <h2>✉️ Get In Touch | تماس با من</h2>
-                     <p>
-                         If you have any questions, project ideas, or just want to connect, feel free to reach out!
-                         <br>I'm always open to discussing collaborations and new opportunities.
-                     </p>
-                     <div class="contact-info">
-                         <a href="mailto:rasoul.unlimited@gmail.com" aria-label="Send an email to Rasoul Unlimited"><i class="fas fa-envelope" aria-hidden="true"></i> rasoul.unlimited [at] gmail [dot] com</a>
+                 <section id="connect">
+                     <h2>Connect | تماس و پیوندهای من</h2>
+                     <div class="connect-content">
+                         <div class="connect-info-block">
+                             <p>
+                                 If you have any questions, project ideas, or just want to connect, feel free to reach out!
+                                 <br>I'm always open to discussing collaborations and new opportunities.
+                             </p>
+                             <div class="contact-info">
+                                 <a href="mailto:rasoul.unlimited@gmail.com" aria-label="Send an email to Rasoul Unlimited"><i class="fas fa-envelope" aria-hidden="true"></i> rasoul.unlimited [at] gmail [dot] com</a>
+                                 </div>
+                              <p class="location-edu">
+                                  <i class="fas fa-map-marker-alt" aria-hidden="true"></i> تهران / کرج <i class="fas fa-graduation-cap" aria-hidden="true" style="margin-left: var(--space-md);"></i> کارشناسی مهندسی پزشکی – دانشگاه تهران (مرکز)
+                             </p>
                          </div>
-                      <p class="location-edu">
-                          <i class="fas fa-map-marker-alt" aria-hidden="true"></i> تهران / کرج <i class="fas fa-graduation-cap" aria-hidden="true" style="margin-left: var(--space-md);"></i> کارشناسی مهندسی پزشکی – دانشگاه تهران (مرکز)
-                     </p>
-                </section>
+                         <div class="connect-links-block">
+                             <h3>My Hubs | پیوندهای من</h3>
+                             <ul>
+                                 <li><a href="https://www.instagram.com/rasoul.unlimited" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on Instagram"><i class="fab fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+                                 <li><a href="https://virgool.io/@RasoulUnlimited" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on Virgool"><i class="fas fa-pen-fancy" aria-hidden="true"></i> Virgool</a></li>
+                                 <li><a href="https://www.linkedin.com/in/rasoulunlimited" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+                                 <li><a href="https://github.com/rasoul-unlimited" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on GitHub"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a></li>
+                                 <li><a href="https://rasoulunlimited.medium.com" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on Medium"><i class="fab fa-medium" aria-hidden="true"></i> Medium</a></li>
+                                 </ul>
+                         </div>
+                     </div>
+                 </section>
 
 
             </main>
