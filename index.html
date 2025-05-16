@@ -46,17 +46,15 @@
         "name": "University of Tehran",
         "location": "Tehran, Iran"
       },
-      "knowsAbout": ["Biomedical Engineering", "Software Development", "Web Development", "Python", "JavaScript", "Digital Health", "Personal Branding", "Karate", "Discord Bot Development"]
-      // TODO: Add more detailed knowledge areas, projects, awards etc. if desired
-      // Example Project in Schema:
-      // "hasProject": {
-      //   "@type": "CreativeWork",
-      //   "name": "First Persian Discord Bot (Unlimited Bot)",
-      //   "description": "First independent Persian-language bot on Discord, officially verified by Discord.",
-      //   "url": "https://vrgl.ir/9D6Hy" // Link to article describing it
-      // }
-       // Example Award in Schema:
-      // "award": "Official Verification of First Persian Discord Bot by Discord"
+      "knowsAbout": ["Biomedical Engineering", "Software Development", "Web Development", "Python", "JavaScript", "Digital Health", "Personal Branding", "Karate", "Discord Bot Development"],
+      "award": [
+           "Official Verification of First Persian Discord Bot by Discord"
+           // TODO: Add any other verifiable awards or recognitions here
+       ]
+       // TODO: Consider adding 'mentions' property linking to reputable articles if available in schema format
+       // TODO: Consider adding 'worksFor' or 'memberOf' if applicable
+       // TODO: For complex projects, consider adding specific 'CreativeWork' or 'SoftwareSourceCode' schema objects and linking them via 'hasProject'
+       // TODO: For content pieces, consider adding specific 'Article' schema objects and linking them
     }
     </script>
      <script type="application/ld+json">
@@ -175,12 +173,18 @@
          }
 
         /* Custom focus styles for complex elements */
-         .card:focus-within, .skills-list li:focus-within, .timeline li:focus-within .timeline-content {
+         .card:focus-within, .skills-list li:focus-within, .timeline li:focus-within .timeline-content,
+         .contact-info a:focus-visible, .connect-links-block ul li a:focus-visible {
              outline: none; /* Remove default outline */
               box-shadow: 0 0 0 3px var(--accent-color), 0 0 0 6px rgba(0, 123, 255, 0.25); /* Custom double ring focus */
              z-index: 5;
              position: relative;
          }
+         /* Adjust focus for featured cards */
+         .card.is-featured:focus-within {
+              box-shadow: 0 0 0 3px var(--highlight-color), 0 0 0 6px rgba(255, 193, 7, 0.5), 0 8px 25px var(--shadow-color-medium);
+         }
+
 
         /* Hide default outline for elements inside focused complex elements */
          .card:focus-within > *, .timeline li:focus-within .timeline-content > * {
@@ -235,13 +239,12 @@
             padding-bottom: var(--space-xs);
             display: inline-block;
              /* Added for focus state */
-            outline: none; /* Remove default outline */
+            outline: none;
         }
 
-        .navbar nav a:hover, .navbar nav a:focus-visible { /* Apply hover effect on focus too */
+        .navbar nav a:hover, .navbar nav a:focus-visible {
             color: var(--primary-color);
             transform: translateY(-4px);
-             /* Custom focus outline handled by :focus-visible rule */
         }
 
         .navbar nav a::after {
@@ -256,7 +259,7 @@
             transition: width var(--transition-duration-medium) var(--transition-easing-standard);
         }
 
-        .navbar nav a:hover::after, .navbar nav a:focus-visible::after { /* Apply hover effect on focus too */
+        .navbar nav a:hover::after, .navbar nav a:focus-visible::after {
             width: 100%;
         }
 
@@ -740,6 +743,7 @@
              background-color: #f0f0f0;
              padding-top: var(--section-v-padding);
              padding-bottom: var(--section-v-padding);
+             margin-bottom: var(--section-margin-bottom); /* Ensure margin below if not the last section */
         }
          #testimonials h2 {
              margin-bottom: var(--space-xl);
@@ -803,39 +807,36 @@
 
         /* --- Connect Section (Combined Contact & Links) --- */
         #connect {
-            text-align: center; /* Default alignment for heading */
-             background: linear-gradient(135deg, var(--background-end-color) 0%, #eef2f7 100%); /* Slightly different background */
+            text-align: center;
+             background: linear-gradient(135deg, var(--background-end-color) 0%, #eef2f7 100%);
              padding-top: var(--section-v-padding);
              padding-bottom: var(--section-v-padding);
-             margin-bottom: 0; /* Last section has no bottom margin */
+             margin-bottom: 0;
         }
          #connect h2 {
-             margin-bottom: var(--space-xxl); /* More space below heading */
+             margin-bottom: var(--space-xxl);
          }
 
         .connect-content {
-             display: flex; /* Use flexbox for layout */
-             gap: var(--space-xxl); /* Space between columns */
-             text-align: left; /* Align text within columns */
-             max-width: 900px; /* Limit content width */
-             margin: 0 auto; /* Center the flex container */
-             align-items: flex-start; /* Align items to the top */
+             display: flex;
+             gap: var(--space-xxl);
+             text-align: left;
+             max-width: 900px;
+             margin: 0 auto;
+             align-items: flex-start;
         }
 
         .connect-info-block {
-             flex: 1; /* Allow block to grow */
-             min-width: 280px; /* Minimum width before wrapping */
-             /* background-color: var(--card-bg); /* Optional: Give block a background */
-             /* padding: var(--space-md); */
-             /* border-radius: var(--border-radius-md); */
+             flex: 1;
+             min-width: 280px;
         }
          .connect-info-block p {
-              text-align: left; /* Ensure text is left aligned */
+              text-align: left;
               font-size: 1.15rem;
               margin-bottom: var(--space-md);
               color: #333;
               line-height: 1.8;
-              max-width: none; /* Remove max-width inherited from #about p */
+              max-width: none;
               margin-left: 0; margin-right: 0;
          }
 
@@ -843,22 +844,22 @@
         .contact-info {
              display: flex;
              flex-direction: column;
-             align-items: flex-start; /* Align items to the left */
+             align-items: flex-start;
              font-size: 1.3rem;
              font-weight: 500;
              color: var(--secondary-color);
-             margin-bottom: var(--space-md); /* Space below contact info */
+             margin-bottom: var(--space-md);
         }
          .contact-info a {
              margin-top: var(--space-sm);
              color: var(--secondary-color);
              text-decoration: none;
              transition: color var(--transition-duration-short) var(--transition-easing-standard), transform var(--transition-duration-short) var(--transition-easing-springy);
-             display: inline-flex; /* Use inline-flex to wrap content if needed */
+             display: inline-flex;
              align-items: center;
-             padding: var(--space-xs) 0; /* Keep padding but remove horizontal for alignment */
+             padding: var(--space-xs) 0;
              border-radius: var(--border-radius-sm);
-              outline: none;
+             outline: none;
          }
          .contact-info a:hover, .contact-info a:focus-visible {
              color: var(--primary-color);
@@ -892,63 +893,64 @@
           }
 
         .connect-links-block {
-             flex: 1; /* Allow block to grow */
-             min-width: 250px; /* Minimum width */
-             /* background-color: var(--card-bg); /* Optional: Give block a background */
-             /* padding: var(--space-md); */
-             /* border-radius: var(--border-radius-md); */
+             flex: 1;
+             min-width: 250px;
         }
          .connect-links-block h3 {
              font-family: 'Montserrat', sans-serif;
              font-size: 1.5rem;
              color: var(--secondary-color);
              margin-top: 0;
-             margin-bottom: var(--space-lg); /* More space below mini heading */
-             text-align: left; /* Align mini heading to the left */
+             margin-bottom: var(--space-lg);
+             text-align: left;
          }
 
 
         .connect-links-block ul {
             padding: 0;
             list-style-type: none;
-            margin: 0; /* Remove default list margin */
-             display: flex; /* Use flexbox for the list items */
-             flex-direction: column; /* Stack list items */
-             gap: var(--space-sm); /* Space between list items */
+            margin: 0;
+             display: flex;
+             flex-direction: column;
+             gap: var(--space-sm);
         }
 
          .connect-links-block ul li {
-             margin: 0; /* Remove default list item margin */
-             font-size: 1.15rem; /* Slightly smaller link text */
-             display: flex; /* Flex to align icon and text */
+             margin: 0;
+             font-size: 1.15rem;
+             display: flex;
              align-items: center;
-             padding: var(--space-xs) 0; /* Add vertical padding */
-             border-bottom: 1px solid #eee; /* Add subtle separator */
+             padding: var(--space-xs) 0;
+             border-bottom: 1px solid #eee;
+             transition: background-color var(--transition-duration-short) var(--transition-easing-standard); /* Added transition for list item background */
          }
-         .connect-links-block ul li:last-child { border-bottom: none; } /* No border for the last item */
+          .connect-links-block ul li:hover, .connect-links-block ul li:focus-within {
+               background-color: #f8f9fa; /* Subtle background on hover/focus */
+          }
+         .connect-links-block ul li:last-child { border-bottom: none; }
 
 
          .connect-links-block ul li i {
-             margin-right: var(--space-md); /* More space between icon and text */
+             margin-right: var(--space-md);
              color: var(--accent-color);
              width: 28px;
              text-align: center;
              transition: transform var(--transition-duration-short) var(--transition-easing-springy), color var(--transition-duration-short) var(--transition-easing-standard);
          }
          .connect-links-block ul li a:hover i, .connect-links-block ul li a:focus-visible i {
-             transform: scale(1.2); /* Slightly smaller icon effect */
+             transform: scale(1.2);
               color: var(--primary-color);
          }
          .connect-links-block ul li a {
-              color: var(--secondary-color); /* Default link color */
+              color: var(--secondary-color);
               text-decoration: none;
               font-weight: 500;
                transition: color var(--transition-duration-short) var(--transition-easing-standard), text-decoration var(--transition-duration-short) var(--transition-easing-standard);
-               display: flex; /* Flex inside link for full-area click */
+               display: flex;
                align-items: center;
-               flex-grow: 1; /* Allow link to take up space */
+               flex-grow: 1;
                 outline: none;
-                padding: var(--space-xxs) 0; /* Fine tune padding */
+                padding: var(--space-xxs) 0;
          }
 
          .connect-links-block ul li a:hover, .connect-links-block ul li a:focus-visible {
@@ -959,7 +961,7 @@
 
         /* --- Footer --- */
         .footer {
-            margin-top: var(--space-md); /* Reduced margin after connect section */
+            margin-top: var(--space-md);
             font-size: 0.95rem;
             color: var(--footer-color);
             border-top: 1px solid var(--border-color);
@@ -1002,7 +1004,7 @@
 
              /* Connect Section */
              .connect-content {
-                 gap: var(--space-xl); /* Reduce gap between columns */
+                 gap: var(--space-xl);
                  max-width: 800px;
              }
              .connect-info-block { min-width: 250px; }
@@ -1098,7 +1100,7 @@
              #skills .skills-list li { padding: var(--space-xs) var(--space-sm); font-size: 0.9rem; }
 
             /* Timeline (Single Column Mobile) */
-             .timeline::after { /* Vertical line */
+             .timeline::after {
                  left: var(--space-md);
                  margin-left: 0;
              }
@@ -1119,7 +1121,7 @@
              }
 
 
-             .timeline li::after { /* Circles */
+             .timeline li::after {
                  left: calc(var(--space-md) - var(--space-xs));
                  right: auto;
                  top: 30px;
@@ -1169,24 +1171,23 @@
 
             /* Connect Section (Stacked Mobile) */
              .connect-content {
-                 flex-direction: column; /* Stack columns */
-                 gap: var(--space-xl); /* Space between stacked blocks */
-                 text-align: center; /* Center align text within blocks */
+                 flex-direction: column;
+                 gap: var(--space-xl);
+                 text-align: center;
              }
              .connect-info-block, .connect-links-block {
-                 min-width: 100%; /* Take full width */
-                 padding: 0; /* Remove padding if added */
-                  /* background-color: transparent; /* Ensure no background */
+                 min-width: 100%;
+                 padding: 0;
              }
-              .connect-info-block p { text-align: center; } /* Center align intro text */
-              .contact-info { align-items: center; } /* Center contact info items */
-              #connect .location-edu { text-align: center; } /* Center location/edu */
-              .connect-links-block h3 { text-align: center; margin-bottom: var(--space-md); } /* Center mini heading */
-              .connect-links-block ul { gap: var(--space-sm); } /* Space between list items */
-             .connect-links-block ul li { justify-content: center; border-bottom: 1px solid #eee; padding: var(--space-xs) 0;} /* Center list items, keep border */
+              .connect-info-block p { text-align: center; }
+              .contact-info { align-items: center; }
+              #connect .location-edu { text-align: center; }
+              .connect-links-block h3 { text-align: center; margin-bottom: var(--space-md); }
+              .connect-links-block ul { gap: var(--space-sm); }
+             .connect-links-block ul li { justify-content: center; border-bottom: 1px solid #eee; padding: var(--space-xs) 0;}
              .connect-links-block ul li:last-child { border-bottom: none; }
-             .connect-links-block ul li a { justify-content: center; } /* Center the link content */
-             .connect-links-block ul li i { margin-right: var(--space-sm); } /* Reduce icon margin */
+             .connect-links-block ul li a { justify-content: center; }
+             .connect-links-block ul li i { margin-right: var(--space-sm); }
 
 
             /* Footer */
@@ -1227,19 +1228,7 @@
                  width: 120px; height: 120px; border-width: 4px;
              }
 
-             /* General Sections */
-               section {
-                 padding-top: var(--section-v-padding);
-                 padding-bottom: var(--section-v-padding);
-                 margin-bottom: var(--section-margin-bottom);
-             }
-              section::after {
-                 bottom: calc(var(--section-v-padding) * -1 - 1px);
-                 width: 100px;
-              }
-              section h2::after { width: 100px; height: 5px; }
-
-            /* Cards */
+             /* Cards */
              .card { padding: var(--space-sm); }
               .card-image {
                  height: 160px;
@@ -1292,12 +1281,12 @@
 
 
             /* Connect Section */
-             .connect-content { gap: var(--space-lg); } /* Reduce gap */
+             .connect-content { gap: var(--space-lg); }
              #connect .contact-info { font-size: 1.1rem; }
              .connect-links-block h3 { font-size: 1.3rem; }
-             .connect-links-block ul { gap: var(--space-xs); } /* Reduce gap between links */
-             .connect-links-block ul li { font-size: 1rem; padding: var(--space-xxs) 0;} /* Reduce font size and padding */
-             .connect-links-block ul li i { margin-right: var(--space-sm); } /* Reduce icon margin */
+             .connect-links-block ul { gap: var(--space-xs); }
+             .connect-links-block ul li { font-size: 1rem; padding: var(--space-xxs) 0;}
+             .connect-links-block ul li i { margin-right: var(--space-sm); }
               #connect .location-edu { font-size: 0.9rem; }
 
          }
@@ -1315,7 +1304,8 @@
             <a href="#projects">Projects</a>
             <a href="#content">Content</a>
             <a href="#mentions">Mentions</a>
-             <a href="#connect">Connect</a> </nav>
+             <a href="#testimonials">Testimonials</a> <a href="#connect">Connect</a>
+        </nav>
     </div>
 
     <div class="container">
@@ -1433,8 +1423,8 @@
                                   <span><i class="fas fa-building" aria-hidden="true"></i> دانشگاه تهران / صنعتی سهند تبریز</span>
                                   <span><i class="fas fa-code-branch" aria-hidden="true"></i> حوزه: متنوع (ذکر حوزه‌ها)</span> </div>
                              <p>مشارکت فعال و توسعه پروژه‌های برنامه‌نویسی در چارچوب فعالیت‌های دانشگاهی در دانشگاه تهران و دانشگاه صنعتی سهند تبریز. این پروژه‌ها فرصتی برای گسترش مهارت‌های فنی و کاربرد آن‌ها در پروژه‌های واقعی انجام شده است.</p> <div class="card-links">
-                                   <a href="https://github.com/your-github" target="_blank" rel="noopener noreferrer" aria-label="View University Projects on GitHub"><i class="fab fa-github" aria-hidden="true"></i> مشاهده در GitHub</a>
-                              </div>
+                                   <a href="https://github.com/rasoul-unlimited" target="_blank" rel="noopener noreferrer" aria-label="View University Projects on GitHub"><i class="fab fa-github" aria-hidden="true"></i> مشاهده در GitHub</a>
+                                    </div>
                          </div>
 
                          </div>
@@ -1468,16 +1458,20 @@
                          </div>
 
                          </div>
-                </section>
+                 </section>
 
                  <section id="mentions">
                      <h2>📰 Mentions & Recognition | حضور در رسانه‌ها و افتخارات</h2>
-                     <div class="grid-container">
+                     <p style="text-align: center; max-width: 700px; margin: 0 auto var(--space-xl);">
+                         این بخش شامل اشاره به من در منابع رسانه‌ای معتبر و مستقل (اخبار، مصاحبه‌ها، مقالات، پادکست‌ها) و همچنین افتخارات یا جوایز رسمی است که به شناخته شدن من کمک می‌کند.
+                         برای درخواست تیک آبی اینستاگرام، **این بخش بسیار کلیدی است** و باید شامل لینک به منابع معتبر و مستقل باشد که درباره شما صحبت کرده‌اند.
+                     </p>
+                      <div class="grid-container">
                          <div class="card mention-card is-featured"> <h3>تأیید رسمی اولین ربات فارسی دیسکورد توسط Discord</h3>
                               <div class="card-meta">
                                   <span><i class="fas fa-award" aria-hidden="true"></i> مرجع تأیید: شرکت Discord</span>
                                   <span><i class="fas fa-calendar-alt" aria-hidden="true"></i> سال تأیید: حدود 2020</span> </div>
-                              <p>تأیید رسمی قابلیت‌ها و استاندارد بودن اولین ربات مستقل فارسی‌زبان توسط تیم رسمی شرکت Discord. این تأیید نه تنها کیفیت پروژه را نشان می‌دهد، بلکه نام ایران را برای اولین‌بار در میان توسعه‌دهندگان مورد تأیید دیسکورد قرار داد.</p>
+                              <p>تأیید رسمی قابلیت‌ها و استاندارد بودن اولین ربات مستقل فارسی‌زبان توسط تیم رسمی شرکت Discord. این تأیید نه تنها کیفیت پروژه را نشان می‌دهد، بلکه نام ایران را برای اولین‌بار در میان توسعه‌دهندگان مورد تأیید دیسکورد قرار داد و یک نقطه عطف مهم در فعالیت‌های اولیه من بود.</p>
                                <div class="card-links">
                                    <a href="https://vrgl.ir/9D6Hy" target="_blank" rel="noopener noreferrer" aria-label="Read about Discord verification (Source: Virgool Article)"><i class="fas fa-book-open" aria-hidden="true"></i> مشاهده منبع (مقاله ویرگول)</a>
                                    </div>
@@ -1485,6 +1479,17 @@
 
                          </div>
                  </section>
+
+                 <section id="testimonials">
+                     <h2>💬 What Others Say | نظر دیگران</h2>
+                      <p style="text-align: center; max-width: 700px; margin: 0 auto var(--space-xl);">
+                         نظرات و توصیه‌های افراد، همکاران، اساتید یا کاربرانی که با شما یا کارهایتان آشنا هستند، اعتبار اجتماعی شما را افزایش می‌دهد.
+                         برای تکمیل این بخش، نقل قول‌های واقعی (با اجازه) از افراد معتبر اضافه کنید.
+                     </p>
+                     <div class="testimonial-slider">
+                         </div>
+                 </section>
+
 
                  <section id="connect">
                      <h2>Connect | تماس و پیوندهای من</h2>
@@ -1519,7 +1524,7 @@
 
         </div> </div> <footer class="footer">
          <p>&copy; 2024 Rasoul Unlimited. All rights reserved.</p>
-    </footer>
+         </footer>
 
 </body>
 </html>
