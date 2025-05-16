@@ -17,7 +17,7 @@
     <meta name="twitter:description" content="Explore the compelling digital presence of Mohammad Rasoul Sohrabi (Rasoul Unlimited), a biomedical engineering innovator, full-stack developer, and content strategist. Featuring a detailed timeline, impactful projects, verifiable media mentions, and key skills showcasing his verifiable notability and expertise."/>
     <meta name="twitter:image" content="[Link to your profile image or a representative image for social sharing]"/> <meta name="twitter:image:alt" content="Mohammad Rasoul Sohrabi (Rasoul Unlimited) Profile Image"/>
 
-
+    <link rel="icon" type="image/png" href="favicon.png" />
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap" as="style"/>
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" as="style"/>
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style"/>
@@ -50,8 +50,8 @@
       "sameAs": [
         "https://www.instagram.com/Rasoul.Unlimited",
         "https://virgool.io/@RasoulUnlimited",
-        "https://www.linkedin.com/in/rasoulunlimited",
-        "https://github.com/RasoulUnlimited",
+        "https://www.linkedin.com/in/rasoulunlimited/",
+        "https://github.com/RasoulUnlimited/",
         "https://rasoulunlimited.medium.com",
         "https://t.me/RasoulUnlimited"
         // TODO: Add other relevant social/professional profiles
@@ -64,7 +64,7 @@
       },
       "knowsAbout": ["Biomedical Engineering", "Software Development", "Web Development", "Python", "JavaScript", "C Programming", "Digital Health", "Personal Branding", "Karate", "Discord Bot Development", "Academic Projects", "Open Source", "MIT License"],
       "award": [
-           "Official Verification of First Persian Discord Bot by Discord",
+           "Official Verification of First Persian Discord Bot by Discord"
            // TODO: Add any other verifiable awards or recognitions here
        ],
        "memberOf": [
@@ -1265,7 +1265,7 @@
              .card p { font-size: 0.95rem; }
               .card .card-meta { gap: var(--space-xs); font-size: 0.85rem;}
               .card .card-links { gap: var(--space-xs); }
-              .card .card-links a { font-size: 0.9rem; padding: var(--space-xs); }
+              .card .card-links a { font-size: 0.9rem; padding: var(--space-xxs); }
               .card::before { height: 3px; }
 
 
@@ -1388,7 +1388,7 @@
                                 <div class="timeline-content">
                                     <h3 class="date">سال 1403 شمسی (حدود 2024 میلادی)</h3>
                                     <h3>توسعه پروژه‌های برنامه‌نویسی با زبان C (دانشگاهی)</h3>
-                                    <p>انجام چندین پروژه کوچک با زبان C برای دروس دانشگاهی در دانشگاه تهران (واحد مرکزی). نویسنده این پروژه‌ها هستم و آن‌ها دارای MIT License برای استفاده و مشارکت عمومی هستند.</p>
+                                    <p>انجام چندین پروژه کوچک با زبان C برای دروس ترم اول دانشگاه تهران. نویسنده این پروژه‌ها هستم و آن‌ها دارای MIT License برای استفاده و مشارکت عمومی هستند.</p>
                                      <div class="card-links" style="border-top: none; padding-top: 0; margin-top: var(--space-xs);">
                                         <a href="https://github.com/RasoulUnlimited/Small-projects-with-c" target="_blank" rel="noopener noreferrer" aria-label="View C projects on GitHub"><i class="fab fa-github" aria-hidden="true"></i> مشاهده در GitHub</a>
                                     </div>
@@ -1477,7 +1477,7 @@
                                <p>مجموعه‌ای از پروژه‌های برنامه‌نویسی کوچک که در چارچوب دروس ترم اول دانشگاه تهران انجام شده‌اند. این پروژه‌ها با زبان C نوشته شده‌اند و به صورت متن‌باز در گیت‌هاب قابل دسترسی هستند.</p>
                                 <div class="card-links">
                                      <a href="https://github.com/RasoulUnlimited/Small-projects-with-c" target="_blank" rel="noopener noreferrer" aria-label="View C projects on GitHub"><i class="fab fa-github" aria-hidden="true"></i> مشاهده در GitHub</a>
-                                </div>
+                                    </div>
                            </div>
 
                             <div class="card project-card">
@@ -1491,8 +1491,8 @@
                                <p>مجموعه‌ای از پروژه‌های برنامه‌نویسی کوچک با زبان پایتون که در چارچوب همکاری با دانشگاه صنعتی سهند تبریز انجام شده‌اند. این پروژه‌ها به صورت متن‌باز در گیت‌هاب قابل دسترسی هستند.</p>
                                 <div class="card-links">
                                      <a href="https://github.com/RasoulUnlimited/Small-projects-with-python" target="_blank" rel="noopener noreferrer" aria-label="View Python projects on GitHub"><i class="fab fa-github" aria-hidden="true"></i> مشاهده در GitHub</a>
-                                </div>
-                           </div>
+                                      </div>
+                            </div>
 
                          </div>
                  </section>
@@ -1591,8 +1591,13 @@
             </main>
 
         </div> </div> <footer class="footer">
-         <p>&copy; 2024 Rasoul Unlimited. All rights reserved.</p>
+         <p>&copy; <span id="current-year"></span> Rasoul Unlimited. All rights reserved.</p>
          </footer>
+
+    <script>
+        // Automatically update the current year in the footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
 
 </body>
 </html>
