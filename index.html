@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Rasoul Unlimited | محمد رسول سهرابی</title>
-    <meta name="description" content="Explore the compelling digital presence of Mohammad Rasoul Sohrabi, a biomedical engineering innovator, full-stack developer, and content strategist. Featuring a detailed timeline, impactful projects, reputable media mentions, and key skills showcasing his verifiable notability and expertise."/>
+    <meta name="description" content="Explore the compelling digital presence of Mohammad Rasoul Sohrabi, a biomedical engineering innovator, full-stack developer, and content strategist. Featuring a detailed timeline, impactful projects (like the first verified Persian Discord bot), reputable media mentions, and key skills showcasing his verifiable notability and expertise."/>
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"/>
 
@@ -78,7 +78,7 @@
             overflow-x: hidden;
              /* Subtle Background Animation */
             animation: backgroundGradient 20s ease infinite;
-            background-size: 200% 200%; /* Ensure gradient covers area during animation */
+            background-size: 200% 200%;
         }
 
         /* Background Gradient Animation */
@@ -93,8 +93,8 @@
             outline: 3px solid var(--accent-color);
             outline-offset: var(--space-xs);
             box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.25);
-            z-index: 5; /* Bring focused element to front */
-            position: relative; /* Needed for z-index */
+            z-index: 5;
+            position: relative;
         }
         /* Hide default outline for elements inside focused card */
          .card:focus-within > *, .timeline li:focus-within .timeline-content > * {
@@ -105,7 +105,7 @@
 
         /* --- Layout Containers --- */
         .container {
-            max-width: 1200px; /* Even wider max-width */
+            max-width: 1200px;
             width: 100%;
             margin: var(--space-md) auto;
             padding: 0 var(--space-lg);
@@ -115,7 +115,7 @@
              background: var(--container-bg);
              padding: var(--space-xl) var(--space-xxl);
              border-radius: var(--border-radius-lg);
-             box-shadow: 0 10px 30px var(--shadow-color-medium); /* Stronger initial shadow */
+             box-shadow: 0 10px 30px var(--shadow-color-medium);
         }
 
         /* --- Navigation Bar --- */
@@ -139,7 +139,7 @@
             margin: 0 var(--space-md);
             font-weight: 500;
             font-size: 1.05rem;
-            transition: color var(--transition-duration-short) var(--transition-easing-standard), transform var(--transition-duration-short) var(--transition-easing-springy); /* Springy effect on hover */
+            transition: color var(--transition-duration-short) var(--transition-easing-standard), transform var(--transition-duration-short) var(--transition-easing-springy);
             position: relative;
             padding-bottom: var(--space-xs);
             display: inline-block;
@@ -147,7 +147,7 @@
 
         .navbar nav a:hover {
             color: var(--primary-color);
-            transform: translateY(-4px); /* More pronounced lift */
+            transform: translateY(-4px);
         }
 
         .navbar nav a::after {
@@ -192,38 +192,38 @@
 
 
         .profile-image {
-            width: 220px; /* Larger image */
+            width: 220px;
             height: 220px;
             border-radius: var(--border-radius-full);
             margin-bottom: var(--space-lg);
             object-fit: cover;
             border: 8px solid var(--accent-color);
             box-shadow: 0 12px 30px var(--shadow-color-medium);
-            transition: transform var(--transition-duration-medium) var(--transition-easing-springy), box-shadow var(--transition-duration-medium) var(--transition-easing-standard); /* Springy transform */
+            transition: transform var(--transition-duration-medium) var(--transition-easing-springy), box-shadow var(--transition-duration-medium) var(--transition-easing-standard);
             z-index: 1;
             position: relative;
         }
          .profile-image:hover {
-             transform: scale(1.12) rotate(5deg); /* More pronounced and interesting effect */
+             transform: scale(1.12) rotate(5deg);
              box-shadow: 0 20px 50px var(--shadow-color-strong);
          }
 
 
         h1 {
             font-family: 'Montserrat', sans-serif;
-            font-size: 5rem; /* Even larger heading */
+            font-size: 5rem;
             color: var(--heading-color);
             margin-top: 0;
             margin-bottom: var(--space-xs);
             font-weight: 900;
             line-height: 1.1;
-            letter-spacing: -3px; /* Tighter spacing */
-            text-shadow: 3px 3px 8px var(--shadow-color-light); /* More pronounced text shadow */
+            letter-spacing: -3px;
+            text-shadow: 3px 3px 8px var(--shadow-color-light);
         }
 
         .tagline {
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.7rem; /* Larger tagline */
+            font-size: 1.7rem;
             font-weight: 700;
             color: var(--tagline-color);
             margin-bottom: var(--space-xxl);
@@ -232,14 +232,14 @@
 
         /* --- General Section Styling --- */
         section {
-            margin-bottom: var(--space-xxxl); /* More space between sections */
-            padding-top: var(--space-xxl); /* Padding for anchor links */
+            margin-bottom: var(--space-xxxl);
+            padding-top: var(--space-xxl);
              position: relative;
              z-index: 1;
         }
          section:last-of-type {
              margin-bottom: var(--space-xl);
-             padding-bottom: 0; /* Remove padding bottom for the last section */
+             padding-bottom: 0;
          }
 
         /* Creative Section Separator */
@@ -249,9 +249,9 @@
             bottom: calc(var(--space-xxl) * -1 - 1px);
             left: 50%;
             transform: translateX(-50%);
-            width: 200px; /* Wider separator */
-            height: 3px; /* Thicker visual line */
-            background: linear-gradient(to right, rgba(0,123,255,0) 0%, var(--primary-color) 50%, rgba(0,123,255,0) 100%); /* Gradient line */
+            width: 200px;
+            height: 3px;
+            background: linear-gradient(to right, rgba(0,123,255,0) 0%, var(--primary-color) 50%, rgba(0,123,255,0) 100%);
             z-index: 0;
              pointer-events: none;
          }
@@ -262,20 +262,20 @@
 
          section h2 {
             font-family: 'Montserrat', sans-serif;
-            font-size: 3rem; /* Larger section heading size */
+            font-size: 3rem;
             color: var(--heading-color);
             margin-top: 0;
             margin-bottom: var(--space-xl);
             position: relative;
             text-align: center;
-            font-weight: 800; /* Extra bold */
+            font-weight: 800;
         }
 
          section h2::after {
              content: '';
              display: block;
-             width: 150px; /* Wider separator */
-             height: 6px; /* Thicker separator */
+             width: 150px;
+             height: 6px;
              background-color: var(--primary-color);
              margin: var(--space-sm) auto 0;
              border-radius: 3px;
@@ -284,10 +284,10 @@
         /* --- About Section --- */
         #about p {
             text-align: justify;
-             max-width: 900px; /* Wider text block */
+             max-width: 900px;
              margin-left: auto;
              margin-right: auto;
-             font-size: 1.2rem; /* Larger bio text */
+             font-size: 1.2rem;
              color: #333;
              line-height: 1.8;
         }
@@ -302,17 +302,17 @@
 
         #links ul li {
             margin: var(--space-md) 0;
-             font-size: 1.3rem; /* Larger link text */
+             font-size: 1.3rem;
         }
          #links ul li i {
              margin-right: var(--space-sm);
              color: var(--accent-color);
-             width: 28px; /* Wider icon area */
+             width: 28px;
              text-align: center;
              transition: transform var(--transition-duration-short) var(--transition-easing-springy), color var(--transition-duration-short) var(--transition-easing-standard);
          }
          #links ul li:hover i {
-             transform: scale(1.4) rotate(10deg); /* More pronounced effect */
+             transform: scale(1.4) rotate(10deg);
               color: var(--primary-color);
          }
          #links ul li a {
@@ -328,10 +328,10 @@
         /* --- Card Grid Layout (Adding 3D Effect) --- */
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Adjusted min width */
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: var(--space-lg);
             padding: 0;
-             perspective: 1000px; /* Add perspective to create 3D space */
+             perspective: 1000px;
         }
 
         .card {
@@ -339,7 +339,7 @@
             border: 1px solid var(--border-color);
             border-radius: var(--border-radius-md);
             padding: var(--space-md);
-            box-shadow: 0 8px 25px var(--shadow-color-medium); /* Stronger initial shadow */
+            box-shadow: 0 8px 25px var(--shadow-color-medium);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -347,12 +347,12 @@
              text-align: left;
              overflow: hidden;
              position: relative;
-             transform-style: preserve-3d; /* Preserve 3D space for children if needed */
+             transform-style: preserve-3d;
         }
 
         .card:hover {
-            transform: translateY(-15px) rotateX(5deg) rotateY(5deg); /* Lift and subtle 3D tilt */
-            box-shadow: 0 25px 50px var(--shadow-color-strong), 0 0 10px var(--accent-color); /* Stronger shadow and subtle accent glow */
+            transform: translateY(-15px) rotateX(5deg) rotateY(5deg);
+            box-shadow: 0 25px 50px var(--shadow-color-strong), 0 0 10px var(--accent-color);
         }
 
          /* Optional: Subtle accent border on hover */
@@ -362,11 +362,11 @@
              top: 0;
              left: 0;
              width: 100%;
-             height: 6px; /* Thicker accent border */
+             height: 6px;
              background-color: var(--accent-color);
              transform: translateY(-100%);
              transition: transform var(--transition-duration-medium) var(--transition-easing-standard);
-              z-index: 2; /* Ensure it's on top */
+              z-index: 2;
          }
           .card:hover::before {
               transform: translateY(0);
@@ -376,7 +376,7 @@
          .card-image {
              width: calc(100% + var(--space-md) * 2);
              margin: calc(-1 * var(--space-md)) calc(-1 * var(--space-md)) var(--space-md) calc(-1 * var(--space-md));
-             height: 240px; /* Taller images */
+             height: 240px;
              object-fit: cover;
              border-bottom: 1px solid var(--border-color);
          }
@@ -387,21 +387,21 @@
             margin-top: 0;
             margin-bottom: var(--space-sm);
             color: var(--secondary-color);
-            font-size: 1.5rem; /* Larger card titles */
+            font-size: 1.5rem;
             font-weight: 700;
             line-height: 1.4;
         }
 
         .card p {
             margin-bottom: var(--space-md);
-            font-size: 1.05rem; /* Slightly larger text */
+            font-size: 1.05rem;
             color: var(--text-color);
             flex-grow: 1;
             line-height: 1.7;
         }
 
         .card .card-meta {
-             font-size: 1rem; /* Larger meta text */
+             font-size: 1rem;
              color: var(--text-color-light);
              margin-bottom: var(--space-sm);
              font-weight: 500;
@@ -412,7 +412,7 @@
          .card .card-meta i {
               margin-right: var(--space-xs);
               color: var(--primary-color);
-              width: 18px; /* Wider icon */
+              width: 18px;
               text-align: center;
          }
 
@@ -428,37 +428,37 @@
         }
 
         .card .card-links a {
-             font-size: 1.05rem; /* Larger link text */
+             font-size: 1.05rem;
              white-space: nowrap;
              font-weight: 500;
              display: inline-flex;
              align-items: center;
-              padding: var(--space-xs) var(--space-sm); /* More padding */
+              padding: var(--space-xs) var(--space-sm);
               border-radius: var(--border-radius-sm);
               transition: background-color var(--transition-duration-short) var(--transition-easing-standard), color var(--transition-duration-short) var(--transition-easing-standard);
         }
          .card .card-links a:hover {
-             background-color: #e9ecef; /* Lighter background on hover */
+             background-color: #e9ecef;
              color: var(--primary-color);
          }
          .card .card-links a i {
               margin-right: var(--space-xs);
-              font-size: 1rem; /* Larger icon */
+              font-size: 1rem;
          }
 
          /* Style for Featured Card (Highlight) */
          .card.is-featured {
              border-color: var(--highlight-color);
              box-shadow: 0 8px 25px var(--shadow-color-medium), 0 0 15px var(--highlight-color);
-             transform: scale(1.04) rotateZ(-1deg); /* Slightly larger and rotated */
+             transform: scale(1.04) rotateZ(-1deg);
              background-color: #fffbe6;
          }
           .card.is-featured::before {
               background-color: var(--highlight-color);
           }
           .card.is-featured:hover {
-             transform: translateY(-18px) rotateX(5deg) rotateY(5deg) scale(1.07); /* More pronounced hover effect */
-              box-shadow: 0 30px 60px var(--shadow-color-strong), 0 0 25px var(--highlight-color); /* Stronger highlight glow on hover */
+             transform: translateY(-18px) rotateX(5deg) rotateY(5deg) scale(1.07);
+              box-shadow: 0 30px 60px var(--shadow-color-strong), 0 0 25px var(--highlight-color);
           }
           .card.is-featured h3,
           .card.is-featured .card-meta,
@@ -498,8 +498,8 @@
           #skills .skills-list li:hover {
               background-color: var(--accent-color);
               color: white;
-              transform: translateY(-5px); /* More pronounced lift */
-              box-shadow: 0 5px 10px var(--shadow-color-light); /* Subtle shadow on hover */
+              transform: translateY(-5px);
+              box-shadow: 0 5px 10px var(--shadow-color-light);
           }
          #skills .skills-list li i {
               margin-right: var(--space-xs);
@@ -579,7 +579,7 @@
         .timeline li:hover::after {
              background-color: var(--primary-color);
              border-color: var(--accent-color);
-             transform: scale(1.2); /* Enlarge circle on hover */
+             transform: scale(1.2);
         }
 
 
@@ -591,10 +591,10 @@
             border-radius: var(--border-radius-md);
              box-shadow: 0 4px 15px var(--shadow-color-light);
              transition: transform var(--transition-duration-short) var(--transition-easing-springy), box-shadow var(--transition-duration-short) var(--transition-easing-standard);
-             z-index: 1; /* Ensure content is above line */
+             z-index: 1;
         }
          .timeline li:hover .timeline-content {
-              transform: translateY(-8px); /* More pronounced lift */
+              transform: translateY(-8px);
               box-shadow: 0 8px 20px var(--shadow-color-medium);
          }
 
@@ -650,12 +650,12 @@
              color: var(--text-color-light);
              font-weight: 500;
              margin-bottom: var(--space-sm);
-             display: block; /* Ensure date is on its own line */
+             display: block;
          }
 
         /* --- Testimonials Section --- */
         #testimonials {
-             background-color: #f0f0f0; /* Slightly different background */
+             background-color: #f0f0f0;
              padding-top: var(--space-xxl);
              padding-bottom: var(--space-xxl);
         }
@@ -675,7 +675,7 @@
              font-style: italic;
              color: #555;
              position: relative;
-              transition: transform var(--transition-duration-short) var(--transition-easing-springy), box-shadow var(--transition-duration-short) var(--transition-easing-standard); /* Add hover effect */
+              transition: transform var(--transition-duration-short) var(--transition-easing-springy), box-shadow var(--transition-duration-short) var(--transition-easing-standard);
          }
           .testimonial-item:hover {
              transform: translateY(-5px);
@@ -683,12 +683,12 @@
           }
           .testimonial-item::before {
               content: "\201C";
-              font-size: 3.5em; /* Larger quote */
+              font-size: 3.5em;
               color: var(--primary-color);
               position: absolute;
               top: var(--space-xs);
               left: var(--space-md);
-              opacity: 0.15; /* More subtle */
+              opacity: 0.15;
               font-family: serif;
                z-index: 0;
           }
@@ -699,7 +699,7 @@
               line-height: 1.7;
               color: var(--text-color);
               font-style: normal;
-               position: relative; /* Bring text above pseudo-element */
+               position: relative;
                z-index: 1;
            }
            .testimonial-item .author {
@@ -726,7 +726,7 @@
              margin-bottom: var(--space-xl);
          }
         #contact p {
-             font-size: 1.15rem; /* Larger text */
+             font-size: 1.15rem;
              margin-bottom: var(--space-md);
              max-width: 700px;
              margin-left: auto;
@@ -738,29 +738,29 @@
              display: flex;
              flex-direction: column;
              align-items: center;
-             font-size: 1.3rem; /* Larger contact info */
+             font-size: 1.3rem;
              font-weight: 500;
              color: var(--secondary-color);
         }
          .contact-info a {
-             margin-top: var(--space-sm); /* Adjusted margin */
+             margin-top: var(--space-sm);
              color: var(--secondary-color);
              text-decoration: none;
              transition: color var(--transition-duration-short) var(--transition-easing-standard), transform var(--transition-duration-short) var(--transition-easing-springy);
              display: inline-flex;
              align-items: center;
-             padding: var(--space-xs); /* Add padding for larger click area */
+             padding: var(--space-xs);
              border-radius: var(--border-radius-sm);
          }
          .contact-info a:hover {
              color: var(--primary-color);
              text-decoration: underline;
-             transform: translateX(8px); /* More pronounced slide */
+             transform: translateX(8px);
          }
          .contact-info i {
               margin-right: var(--space-sm);
               color: var(--accent-color);
-              width: 25px; /* Wider icon area */
+              width: 25px;
               text-align: center;
               transition: transform var(--transition-duration-short) var(--transition-easing-springy), color var(--transition-duration-short) var(--transition-easing-standard);
          }
@@ -771,7 +771,7 @@
 
          #contact .location-edu {
              margin-top: var(--space-md);
-             font-size: 1rem; /* Slightly larger */
+             font-size: 1rem;
              color: var(--text-color-light);
              font-weight: 400;
          }
@@ -1032,7 +1032,7 @@
              }
              .navbar nav a {
                  margin: 0 var(--space-xs);
-                 font-size: 0.8rem; /* Smaller nav links */
+                 font-size: 0.8rem;
              }
              h1 {
                  font-size: 2.8rem;
@@ -1153,8 +1153,8 @@
                 <section id="about">
                     <h2>About Me | درباره من</h2>
                     <p>
-                        I'm a passionate biomedical engineering student at the University of Tehran (Central Campus) with a strong interest in leveraging technology for digital health solutions. My journey involves diving deep into software development, refining design aesthetics, and building impactful projects from the ground up. I believe in the power of technology to drive positive change, particularly at the intersection of engineering and healthcare, and actively share my insights and experiences through various online platforms.
-                         </p>
+                        در میان جوانان نسل نو، محمد رسول سهرابی، ملقب به «آنلیمیتد»، نمونه‌ای کم‌نظیر از تلفیق ورزش قهرمانی، توسعه فنی، و آینده‌نگری علمی‌ست. او که متولد شهریور ۱۳۸۴ در تهران و ساکن کرج است و اکنون تنها ۱۹ سال دارد، دانشجوی مهندسی پزشکی در دانشگاه تهران (واحد مرکزی) است. نگاه او فراتر از مرزهای کلاس و نمره است و تجربه‌اش در ورزش قهرمانی (دان ۱ رسمی فدراسیون کاراته)، روحیه‌ای سخت‌کوش و مبارز در او ایجاد کرده که در عرصه‌های دیجیتال نیز بروز یافته است. محمد رسول به دنبال ایجاد تحول در سلامت و ارتباطات پزشکی، به ترکیب خلاقانه‌ مهندسی پزشکی و برنامه‌نویسی‌ست و با آینده‌نگری، دقت، منطق، و مهارت‌های حرفه‌ای در تعامل و مدیریت، فراتر از سن‌وسالش، در مسیر ساختن دنیایی متفاوت گام برمی‌دارد.
+                    </p>
                 </section>
 
                  <section id="timeline">
@@ -1162,30 +1162,36 @@
                      <ul class="timeline" aria-label="Educational and Professional Timeline">
                          <li>
                              <div class="timeline-content">
-                                 <h3 class="date">YYYY-MM-DD</h3>
-                                 <h3>Milestone Title (e.g., Started University of Tehran)</h3>
-                                 <p>Brief description of this milestone. What did you achieve or start here? What was the significance?</p>
-                             </div>
-                         </li>
-                         <li>
-                             <div class="timeline-content">
-                                 <h3 class="date">YYYY-MM-DD</h3>
-                                 <h3>Milestone Title (e.g., Launched First Major Project)</h3>
-                                 <p>Description of launching the project. Mention technologies, goals, initial impact.</p>
-                             </div>
-                         </li>
-                         <li>
-                             <div class="timeline-content">
-                                 <h3 class="date">YYYY-MM-DD</h3>
-                                 <h3>Milestone Title (e.g., Published Key Research/Article)</h3>
-                                 <p>Description of publishing. Mention platform (Virgool/Medium/Journal), topic, and reception.</p>
+                                 <h3 class="date">سنین پایین</h3>
+                                 <h3>شروع ورزش قهرمانی کاراته</h3>
+                                 <p>شروع جدی ورزش کاراته و کسب روحیه سخت‌کوشی و نظم از طریق حضور در مسابقات ملی و دریافت دان ۱ رسمی فدراسیون کاراته جمهوری اسلامی ایران.</p>
                              </div>
                          </li>
                           <li>
                              <div class="timeline-content">
-                                 <h3 class="date">Present</h3>
-                                 <h3>Current Focus (e.g., Specializing in AI in Healthcare)</h3>
-                                 <p>What are you currently working on or focusing your studies/efforts on?</p>
+                                 <h3 class="date">سال 2020 (14 سالگی)</h3>
+                                 <h3>توسعه اولین ربات فارسی‌زبان دیسکورد</h3>
+                                 <p>توسعه اولین ربات مستقل فارسی‌زبان در پلتفرم دیسکورد با زبان پایتون، در قالب یک تیم ده‌نفره. این پروژه به تأیید رسمی شرکت Discord رسید و نام ایران را برای اولین‌بار در میان توسعه‌دهندگان رسمی این پلتفرم قرار داد.</p>
+                             </div>
+                         </li>
+                         <li>
+                             <div class="timeline-content">
+                                 <h3 class="date">تاریخ شروع دانشگاه</h3> <h3>آغاز تحصیل در مهندسی پزشکی دانشگاه تهران</h3>
+                                 <p>ورود به دانشگاه تهران (واحد مرکزی) برای تحصیل در رشته مهندسی پزشکی و تمرکز بر ترکیب دانش مهندسی و برنامه‌نویسی برای حوزه سلامت دیجیتال.</p>
+                             </div>
+                         </li>
+                          <li>
+                             <div class="timeline-content">
+                                 <h3 class="date">سال‌های اخیر</h3>
+                                 <h3>مشارکت در پروژه‌های دانشگاهی و توسعه نرم‌افزار</h3>
+                                 <p>فعالیت و همکاری در پروژه‌های برنامه‌نویسی دانشگاه تهران و دانشگاه صنعتی سهند تبریز و انتشار خروجی‌ها در گیت‌هاب.</p>
+                             </div>
+                         </li>
+                          <li>
+                             <div class="timeline-content">
+                                 <h3 class="date">حال حاضر</h3>
+                                 <h3>تمرکز بر سلامت دیجیتال، توسعه و مدیریت محتوا</h3>
+                                 <p>فعالیت مستمر در حوزه‌ی سلامت دیجیتال، گسترش مهارت‌ها در توسعه وب و بک‌اند، و همچنین مدیریت محتوا و شبکه‌های اجتماعی.</p>
                              </div>
                          </li>
                      </ul>
@@ -1197,104 +1203,93 @@
                      <ul class="skills-list" aria-label="List of Skills and Technologies">
                          <li><i class="fas fa-code" aria-hidden="true"></i> Python</li>
                          <li><i class="fas fa-code" aria-hidden="true"></i> JavaScript</li>
-                         <li><i class="fab fa-react" aria-hidden="true"></i> React / React Native</li>
-                         <li><i class="fas fa-database" aria-hidden="true"></i> SQL</li>
-                         <li><i class="fas fa-server" aria-hidden="true"></i> Node.js</li>
-                         <li><i class="fas fa-brain" aria-hidden="true"></i> Machine Learning (TensorFlow, PyTorch, etc.)</li>
-                         <li><i class="fas fa-dna" aria-hidden="true"></i> Biomedical Signal Processing</li>
-                         <li><i class="fas fa-mobile-alt" aria-hidden="true"></i> Mobile App Development</li>
-                         <li><i class="fas fa-palette" aria-hidden="true"></i> UI/UX Design (Figma, Adobe XD)</li>
-                         <li><i class="fas fa-pencil-alt" aria-hidden="true"></i> Content Creation (Virgool, Medium)</li>
-                         <li><i class="fas fa-bullhorn" aria-hidden="true"></i> Digital Strategy</li>
-                          <li><i class="fas fa-language" aria-hidden="true"></i> English (Fluent)</li>
+                         <li><i class="fas fa-laptop-code" aria-hidden="true"></i> توسعه وب (وب، بک‌اند)</li>
+                         <li><i class="fas fa-server" aria-hidden="true"></i> مهندسی نرم‌افزار</li>
+                         <li><i class="fas fa-dna" aria-hidden="true"></i> مهندسی پزشکی</li>
+                         <li><i class="fas fa-heartbeat" aria-hidden="true"></i> سلامت دیجیتال</li>
+                         <li><i class="fas fa-pencil-alt" aria-hidden="true"></i> مدیریت محتوا</li>
+                         <li><i class="fas fa-bullhorn" aria-hidden="true"></i> مدیریت شبکه‌های اجتماعی</li>
+                         <li><i class="fas fa-fist-raised" aria-hidden="true"></i> کاراته (دان ۱ رسمی)</li>
+                         <li><i class="fas fa-brain" aria-hidden="true"></i> سخت‌کوشی و نظم</li>
+                         <li><i class="fas fa-users" aria-hidden="true"></i> کار تیمی (تجربه در تیم 10 نفره)</li>
+                          <li><i class="fas fa-search" aria-hidden="true"></i> آینده‌نگری و تحلیل</li>
+                         <li><i class="fas fa-language" aria-hidden="true"></i> English (Fluent)</li>
                          <li><i class="fas fa-language" aria-hidden="true"></i> Persian (Native)</li>
-                         </ul>
+                         <li><i class="fab fa-react" aria-hidden="true"></i> React / React Native</li> <li><i class="fas fa-database" aria-hidden="true"></i> SQL</li> <li><i class="fas fa-server" aria-hidden="true"></i> Node.js</li> <li><i class="fas fa-brain" aria-hidden="true"></i> Machine Learning (Mention specific libraries/frameworks if applicable)</li> <li><i class="fas fa-mobile-alt" aria-hidden="true"></i> Mobile App Development</li> <li><i class="fas fa-palette" aria-hidden="true"></i> UI/UX Design (Figma, Adobe XD)</li> </ul>
                  </section>
 
 
                  <section id="projects">
                      <h2>💻 Projects | پروژه‌ها</h2>
                      <div class="grid-container">
-                         <div class="card project-card is-featured"> <h3>Project Name (e.g., AI-Powered Diagnostic Tool)</h3>
+                         <div class="card project-card is-featured">
+                             <h3>اولین ربات فارسی‌زبان دیسکورد (Unlimited Bot)</h3>
                               <div class="card-meta">
-                                  <span><i class="fas fa-microchip" aria-hidden="true"></i> Technology Stack: Python, TensorFlow, Flask</span>
-                                   <span><i class="fas fa-users" aria-hidden="true"></i> Impact: Used by 500+ users</span> <span><i class="fas fa-clock" aria-hidden="true"></i> Duration: 3 months</span>
-                                  </div>
-                             <p>A detailed description of the project. What problem does it solve? What was your specific contribution? **Highlight measurable impact or achievement (e.g., "Reduced diagnosis time by 30%," "Secured funding from X," "Presented at Y conference").**</p>
+                                  <span><i class="fas fa-microchip" aria-hidden="true"></i> زبان برنامه‌نویسی: پایتون</span>
+                                   <span><i class="fas fa-users" aria-hidden="true"></i> اندازه تیم: ۱۰ نفره</span>
+                                   <span><i class="fas fa-calendar-alt" aria-hidden="true"></i> سال توسعه: ۲۰۲۰ (در ۱۴ سالگی)</span>
+                              </div>
+                             <p>نخستین ربات مستقل فارسی‌زبان در پلتفرم دیسکورد که با مشارکت یک تیم ده‌نفره توسعه یافت. این پروژه نه‌تنها به **تأیید رسمی شرکت Discord** رسید، بلکه نام ایران را برای اولین‌بار در میان توسعه‌دهندگان رسمی این پلتفرم قرار داد.</p>
                               <div class="card-links">
-                                   <a href="#" target="_blank" rel="noopener noreferrer" aria-label="View Live Demo of Project Name"><i class="fas fa-external-link-alt" aria-hidden="true"></i> Live Demo</a>
-                                   <a href="#" target="_blank" rel="noopener noreferrer" aria-label="View Project Name on GitHub"><i class="fab fa-github" aria-hidden="true"></i> GitHub Repo</a>
-                                  </div>
+                                   <a href="https://vrgl.ir/9D6Hy" target="_blank" rel="noopener noreferrer" aria-label="Read about the Discord Bot project"><i class="fas fa-book-open" aria-hidden="true"></i> معرفی پروژه (مقاله ویرگول)</a>
+                                   </div>
                          </div>
 
                           <div class="card project-card">
-                              <h3>Another Project (e.g., Patient Management System UI)</h3>
+                              <h3>پروژه‌های برنامه‌نویسی دانشگاهی</h3>
                              <div class="card-meta">
-                                  <span><i class="fas fa-code-branch" aria-hidden="true"></i> Technology Stack: React, Node.js, MongoDB</span>
-                                  <span><i class="fas fa-briefcase" aria-hidden="true"></i> Role: Lead Developer</span>
-                                  </div>
-                             <p>Description of the second project. Focus on your role (Designer, Developer, etc.) and the outcome. **Mention any specific challenges overcome or unique features.**</p>
-                              <div class="card-links">
-                                   <a href="#" target="_blank" rel="noopener noreferrer" aria-label="View Another Project"><i class="fas fa-external-link-alt" aria-hidden="true"></i> View Project</a>
+                                  <span><i class="fas fa-building" aria-hidden="true"></i> دانشگاه تهران / صنعتی سهند تبریز</span>
+                                  <span><i class="fas fa-code-branch" aria-hidden="true"></i> حوزه: متنوع (ذکر حوزه‌ها)</span> </div>
+                             <p>مشارکت فعال و توسعه پروژه‌های برنامه‌نویسی در چارچوب فعالیت‌های دانشگاهی در دانشگاه تهران و دانشگاه صنعتی سهند تبریز. این پروژه‌ها شامل [ذکر چند حوزه یا تکنولوژی کلیدی] می‌شوند.</p> <div class="card-links">
+                                   <a href="https://github.com/your-github" target="_blank" rel="noopener noreferrer" aria-label="View University Projects on GitHub"><i class="fab fa-github" aria-hidden="true"></i> مشاهده در GitHub</a>
                               </div>
                          </div>
+
                          </div>
                  </section>
 
                 <section id="content">
                      <h2>✍️ Featured Content | محتوای منتخب</h2>
                       <div class="grid-container">
-                          <div class="card content-card is-featured"> <h3>Title of Your Article/Post</h3>
+                          <div class="card content-card is-featured">
+                             <h3>محمد رسول سهرابی (آنلیمیتد) – از tatami تا تکنولوژی</h3>
                              <div class="card-meta">
-                                 <span><i class="fas fa-tag" aria-hidden="true"></i> Platform: Virgool</span>
-                                 <span><i class="fas fa-calendar-alt" aria-hidden="true"></i> Date:<\ctrl97>MM-DD-YYYY</span>
-                                 <span><i class="fas fa-eye" aria-hidden="true"></i> Views: 5k+</span> </div>
-                             <p>A short, compelling summary of the article. **Highlight its key takeaway, why it's important, or if it gained significant attention or sparked discussion.**</p>
+                                 <span><i class="fas fa-tag" aria-hidden="true"></i> پلتفرم: ویرگول</span>
+                                 <span><i class="fas fa-calendar-alt" aria-hidden="true"></i> تاریخ انتشار: <a href="https://vrgl.ir/9D6Hy" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">تاریخ دقیق از صفحه ویرگول</a></span> </div>
+                             <p>اولین مقاله جامع معرفی‌کننده من در پلتفرم ویرگول. این مقاله به صورت چندوجهی به بررسی مسیر من از ورزش قهرمانی کاراته تا ورود به دنیای توسعه نرم‌افزار، مهندسی پزشکی و سلامت دیجیتال می‌پردازد و نقاط عطف مهمی مانند توسعه اولین ربات فارسی دیسکورد را هایلایت می‌کند.</p>
                               <div class="card-links">
-                                 <a href="https://virgool.io/@YourArticleLink" target="_blank" rel="noopener noreferrer" aria-label="Read the article 'Title of Your Article' on Virgool"><i class="fas fa-book-open" aria-hidden="true"></i> Read on Virgool</a>
-                                  </div>
+                                 <a href="https://vrgl.ir/9D6Hy" target="_blank" rel="noopener noreferrer" aria-label="Read the article 'از tatami تا تکنولوژی' on Virgool"><i class="fas fa-book-open" aria-hidden="true"></i> مطالعه مقاله در ویرگول</a>
+                              </div>
                          </div>
 
                           <div class="card content-card">
-                             <h3>Title of Another Article/Post</h3>
-                             <div class="card-meta">
-                                 <span><i class="fas fa-tag" aria-hidden="true"></i> Platform: Medium</span>
-                                 <span><i class="fas fa-calendar-alt" aria-hidden="true"></i> Date:<\ctrl97>MM-DD-YYYY</span>
-                             </div>
-                             <p>Summary of the second article. Mention topic and key points. **Include any positive feedback or shares.**</p>
-                              <div class="card-links">
-                                  <a href="https://medium.com/@YourArticleLink" target="_blank" rel="noopener noreferrer" aria-label="Read the article 'Title of Another Article' on Medium"><i class="fas fa-book-open" aria-hidden="true"></i> Read Article</a>
+                              <h3>عنوان مقاله یا پست دیگر</h3>
+                              <div class="card-meta">
+                                  <span><i class="fas fa-tag" aria-hidden="true"></i> پلتفرم: مدیوم / ویرگول</span>
+                                  <span><i class="fas fa-calendar-alt" aria-hidden="true"></i> تاریخ: YYYY-MM-DD</span>
                               </div>
-                         </div>
+                              <p>خلاصه مقاله یا پست دوم. موضوع و نکات کلیدی آن را ذکر کنید.</p>
+                               <div class="card-links">
+                                   <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Read the article 'عنوان مقاله یا پست دیگر'"><i class="fas fa-book-open" aria-hidden="true"></i> مطالعه مقاله</a>
+                               </div>
+                          </div>
                          </div>
                 </section>
 
                  <section id="mentions">
                      <h2>📰 Mentions & Recognition | حضور در رسانه‌ها و افتخارات</h2>
                      <div class="grid-container">
-                         <div class="card mention-card is-featured"> <h3>Mention/Feature Title (e.g., Interview about X Project)</h3>
+                         <div class="card mention-card is-featured"> <h3>تأیید رسمی اولین ربات فارسی دیسکورد توسط Discord</h3>
                               <div class="card-meta">
-                                  <span><i class="fas fa-bullhorn" aria-hidden="true"></i> Source: [Name of **Reputable** Media Outlet]</span>
-                                  <span><i class="fas fa-calendar-alt" aria-hidden="true"></i> Date:<\ctrl97>MM-DD-YYYY</span>
-                            </div>
-                              <p>**Compelling** brief context of the mention. What was discussed? Why is this significant? **(e.g., "Featured as a young innovator in digital health on National News Channel," "Our project recognized by Ministry of Health").**</p>
+                                  <span><i class="fas fa-award" aria-hidden="true"></i> مرجع تأیید: شرکت Discord</span>
+                                  <span><i class="fas fa-calendar-alt" aria-hidden="true"></i> سال تأیید: حدود 2020</span> </div>
+                              <p>تأیید رسمی قابلیت‌ها و استاندارد بودن اولین ربات مستقل فارسی‌زبان توسط تیم رسمی شرکت Discord. این تأیید نه تنها کیفیت پروژه را نشان می‌دهد، بلکه نام ایران را برای اولین‌بار در میان توسعه‌دهندگان مورد تأیید دیسکورد قرار داد.</p>
                                <div class="card-links">
-                                   <a href="https://link-to-the-actual-article.com" target="_blank" rel="noopener noreferrer" aria-label="Read the mention in [Source Name]"><i class="fas fa-newspaper" aria-hidden="true"></i> Read the Article on [Source Name]</a>
+                                   <a href="https://vrgl.ir/9D6Hy" target="_blank" rel="noopener noreferrer" aria-label="Read about Discord verification"><i class="fas fa-book-open" aria-hidden="true"></i> مشاهده منبع (مقاله ویرگول)</a>
                                    </div>
                          </div>
 
-                         <div class="card mention-card">
-                             <h3>Award/Honor Received (e.g., Winner of X Competition)</h3>
-                              <div class="card-meta">
-                                   <span><i class="fas fa-award" aria-hidden="true"></i> Awarding Body: [Name of Organization]</span>
-                                   <span><i class="fas fa-calendar-alt" aria-hidden="true"></i> Date:<\ctrl97>MM-DD-YYYY</span>
-                              </div>
-                             <p>Description of the award or recognition. Why was it given? What project or work did it recognize? **Provide context about the awarding body's credibility (e.g., "Prestigious award from National Institute of Health").**</p>
-                              <div class="card-links">
-                                  <a href="https://link-to-award-details.com" target="_blank" rel="noopener noreferrer" aria-label="View details about Award/Honor"><i class="fas fa-trophy" aria-hidden="true"></i> View Details</a>
-                             </div>
                          </div>
-                          </div>
                  </section>
 
                  <section id="links">
@@ -1318,7 +1313,7 @@
                          <a href="mailto:rasoul.unlimited@gmail.com" aria-label="Send an email to Rasoul Unlimited"><i class="fas fa-envelope" aria-hidden="true"></i> rasoul.unlimited [at] gmail [dot] com</a>
                          </div>
                       <p class="location-edu">
-                          <i class="fas fa-map-marker-alt" aria-hidden="true"></i> Tehran / Karaj <i class="fas fa-graduation-cap" aria-hidden="true" style="margin-left: var(--space-md);"></i> Biomedical Engineering, University of Tehran
+                          <i class="fas fa-map-marker-alt" aria-hidden="true"></i> تهران / کرج <i class="fas fa-graduation-cap" aria-hidden="true" style="margin-left: var(--space-md);"></i> کارشناسی مهندسی پزشکی – دانشگاه تهران (مرکز)
                      </p>
                 </section>
 
