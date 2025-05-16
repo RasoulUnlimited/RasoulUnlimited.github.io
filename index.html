@@ -4,285 +4,388 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Rasoul Unlimited | محمد رسول سهرابی</title>
-    <meta name="description" content="Official website of Mohammad Rasoul Sohrabi (Rasoul Unlimited), a biomedical engineering student, developer, designer, and founder. Explore my projects, content, and media mentions.">
+    <meta name="description" content="Official website of Mohammad Rasoul Sohrabi (Rasoul Unlimited), a biomedical engineering student, developer, designer, and founder. Explore my projects, content, skills, and media mentions showcasing my digital presence and notability.">
 
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <style>
         :root {
-            --primary-color: #0077cc;
-            --secondary-color: #333;
-            --background-color: #f4f4f4;
+            /* Define CSS Variables for easier theme changes */
+            --primary-color: #0056b3; /* Slightly darker blue */
+            --secondary-color: #333; /* Dark Grey */
+            --accent-color: #007bff; /* Bright blue for links/highlights */
+            --background-color: #f8f9fa; /* Very light grey background */
             --container-bg: white;
+            --card-bg: #ffffff; /* Card background */
             --shadow-color: rgba(0,0,0,0.1);
-            --text-color: #333;
-            --heading-color: #222;
-            --tagline-color: #555;
-            --footer-color: #777;
-            --border-color: #eee;
+            --text-color: #495057; /* Default text color */
+            --heading-color: #212529; /* Heading color */
+            --tagline-color: #6c757d; /* Muted tagline color */
+            --border-color: #dee2e6; /* Light border */
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Open Sans', 'Roboto', "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Roboto', "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
             background: var(--background-color);
             margin: 0;
-            padding: 0; /* Remove body padding as container has margin/padding */
+            padding: 0;
             color: var(--text-color);
             line-height: 1.6;
             box-sizing: border-box;
-            position: relative; /* Needed for sticky footer if you add one */
-            padding-top: 60px; /* Add padding to prevent content being hidden behind sticky nav */
+            position: relative;
+            padding-top: 70px; /* Adjust padding to account for taller sticky nav */
         }
 
+         /* Container for overall layout */
         .container {
-            max-width: 800px;
+            max-width: 900px; /* Slightly wider container */
             width: 100%;
-            margin: 20px auto; /* Adjust margin */
-            padding: 2rem;
-            background: var(--container-bg);
-            border-radius: 12px;
-            box-shadow: 0 0 20px var(--shadow-color);
-            text-align: center;
+            margin: 20px auto;
+            padding: 0 20px; /* Add horizontal padding */
+            box-sizing: border-box;
+        }
+
+        /* Style for content within the container */
+        .content-area {
+             background: var(--container-bg);
+             padding: 2rem;
+             border-radius: 12px;
+             box-shadow: 0 0 25px var(--shadow-color);
         }
 
         /* --- Navigation Bar --- */
         .navbar {
-            position: fixed; /* Make it sticky/fixed */
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background-color: rgba(255, 255, 255, 0.95); /* Semi-transparent white */
-            box-shadow: 0 2px 10px var(--shadow-color);
-            padding: 10px 0;
-            z-index: 1000; /* Ensure it's on top */
+            background-color: rgba(255, 255, 255, 0.98); /* More opaque */
+            box-shadow: 0 2px 12px var(--shadow-color);
+            padding: 12px 0; /* More padding */
+            z-index: 1000;
             text-align: center;
-            backdrop-filter: blur(5px); /* Frosted glass effect */
+            backdrop-filter: blur(8px); /* Stronger blur */
+            border-bottom: 1px solid var(--border-color);
         }
 
         .navbar nav a {
-            color: var(--secondary-color); /* Nav links color */
+            color: var(--secondary-color);
             text-decoration: none;
             margin: 0 15px;
             font-weight: 500;
+            font-size: 1rem; /* Standard font size */
             transition: color 0.3s ease;
+            position: relative; /* Needed for underline effect */
         }
 
         .navbar nav a:hover {
             color: var(--primary-color);
-            text-decoration: underline;
         }
 
+        /* Animated underline effect */
+        .navbar nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .navbar nav a:hover::after {
+            width: 100%;
+        }
 
         /* --- Hero/Header Section --- */
         #hero {
-             padding-top: 2rem; /* Add space below the fixed nav */
+             padding-top: 0; /* Remove padding-top here, it's on body */
+             margin-bottom: 3rem; /* Space below hero */
+             text-align: center; /* Ensure hero content is centered */
         }
 
         .profile-image {
-            width: 150px;
-            height: 150px;
+            width: 160px; /* Slightly larger image */
+            height: 160px;
             border-radius: 50%;
             margin-bottom: 1.5rem;
             object-fit: cover;
-            border: 4px solid var(--primary-color);
-            box-shadow: 0 4px 8px var(--shadow-color);
+            border: 5px solid var(--accent-color); /* Use accent color for border */
+            box-shadow: 0 6px 12px var(--shadow-color); /* Stronger shadow */
+             transition: transform 0.3s ease; /* Add transition for hover effect */
         }
+         .profile-image:hover {
+             transform: scale(1.05); /* Slightly enlarge on hover */
+         }
+
 
         h1 {
-            font-size: 2.5rem; /* Slightly larger heading */
+            font-family: 'Montserrat', sans-serif; /* Use Montserrat for headings */
+            font-size: 3rem; /* Larger heading */
             color: var(--heading-color);
             margin-top: 0;
-            margin-bottom: 0.5rem;
-            font-weight: 700; /* Make heading bolder */
+            margin-bottom: 0.8rem; /* Space below H1 */
+            font-weight: 700;
+            line-height: 1.2;
         }
 
         .tagline {
-            font-size: 1.2rem; /* Slightly larger tagline */
-            font-weight: 500;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.3rem; /* Larger tagline */
+            font-weight: 600;
             color: var(--tagline-color);
-            margin-bottom: 2rem;
+            margin-bottom: 3rem; /* More space below tagline */
             margin-top: 0;
         }
 
         /* --- General Section Styling --- */
         section {
-            margin-bottom: 3rem; /* Space between sections */
-            padding-top: 1rem; /* Padding for anchor links */
+            margin-bottom: 4rem; /* More space between sections */
+            padding-top: 2rem; /* Padding for anchor links, higher than nav height */
         }
 
          section h2 {
-            font-size: 1.8rem; /* Section heading size */
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem; /* Section heading size */
             color: var(--heading-color);
-            margin-top: 0; /* Remove default top margin */
-            margin-bottom: 1.5rem; /* Space below section heading */
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 0.5rem;
-            display: inline-block;
-             /* Use text-align: center on container if needed, or left-align in section */
+            margin-top: 0;
+            margin-bottom: 2rem; /* Space below section heading */
+            position: relative; /* For potential pseudo-elements */
+            text-align: center; /* Center section headings */
         }
 
-        /* Align text left within sections for readability */
-        #about p,
-        .project,
-        .content-item,
-        .mention-item {
-            text-align: left;
-            margin-bottom: 1.5rem;
-        }
+        /* Optional: Add a small separator below section titles */
+         section h2::after {
+             content: '';
+             display: block;
+             width: 60px;
+             height: 3px;
+             background-color: var(--primary-color);
+             margin: 10px auto 0;
+             border-radius: 2px;
+         }
 
 
-        /* --- About Section --- */
+        /* Align text left within sections */
         #about p {
-             text-align: justify; /* Keep bio justified if preferred */
+            text-align: justify;
+             max-width: 700px; /* Limit width for readability */
+             margin-left: auto;
+             margin-right: auto;
         }
 
         /* --- Links Section --- */
         #links ul {
             padding: 0;
             list-style-type: none;
-            margin-bottom: 1.5rem; /* Adjust space */
-             text-align: center; /* Center links list */
+            margin-bottom: 1.5rem;
+             text-align: center;
         }
 
         #links ul li {
-            margin: 0.8rem 0;
+            margin: 1rem 0; /* Increase vertical space */
+             font-size: 1.1rem;
         }
+         #links ul li i {
+             margin-right: 10px;
+             color: var(--accent-color);
+             width: 20px; /* Fixed width for icon alignment */
+             text-align: center;
+         }
 
         a {
-            color: var(--primary-color);
+            color: var(--accent-color);
             text-decoration: none;
-            transition: color 0.3s ease, text-decoration 0.3s ease;
+            transition: color 0.3s ease;
         }
 
         a:hover {
-            color: var(--secondary-color);
+            color: var(--primary-color);
             text-decoration: underline;
         }
 
-        /* --- Projects Section --- */
-        .project {
+        /* --- Card Grid Layout --- */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+            gap: 25px; /* Space between cards */
+            padding: 0;
+        }
+
+        .card {
+            background-color: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-            background-color: #f9f9f9; /* Slight background for project boxes */
-            box-shadow: 0 2px 5px var(--shadow-color);
+            padding: 20px;
+            box-shadow: 0 4px 8px var(--shadow-color);
+            display: flex; /* Use flexbox for content inside card */
+            flex-direction: column;
+            justify-content: space-between; /* Distribute space */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hover effects */
+             text-align: left; /* Align card content left */
         }
 
-        .project h3 {
+        .card:hover {
+            transform: translateY(-5px); /* Lift card slightly */
+            box-shadow: 0 8px 16px var(--shadow-color); /* Stronger shadow on hover */
+        }
+
+        .card h3 {
+            font-family: 'Montserrat', sans-serif;
             margin-top: 0;
-            margin-bottom: 0.5rem;
+            margin-bottom: 10px;
             color: var(--secondary-color);
-            font-size: 1.2rem;
+            font-size: 1.3rem;
         }
 
-        .project p {
-            margin-bottom: 1rem;
-             font-size: 1rem;
-             color: #555;
+        .card p {
+            margin-bottom: 15px;
+            font-size: 1rem;
+            color: var(--text-color);
+            flex-grow: 1; /* Allow paragraph to take available space */
         }
 
-        .project a {
-             font-size: 0.9rem;
+        .card .card-links {
+             margin-top: 10px; /* Space above links */
+        }
+
+        .card .card-links a {
              margin-right: 15px;
-        }
-
-
-        /* --- Content Section --- */
-        .content-item {
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px dashed var(--border-color); /* Separator for content items */
-        }
-
-        .content-item:last-child {
-            border-bottom: none; /* No border for the last item */
-        }
-
-         .content-item h3 {
-             margin-top: 0;
-             margin-bottom: 0.5rem;
-             color: var(--secondary-color);
-             font-size: 1.1rem;
-         }
-
-         .content-item p {
-             margin-bottom: 0.8rem;
              font-size: 0.95rem;
-             color: #555;
-         }
-         .content-item a {
+             white-space: nowrap; /* Prevent links from wrapping */
+        }
+
+        .card .card-meta {
+             font-size: 0.85rem;
+             color: #666;
+             margin-bottom: 10px;
+        }
+
+        /* --- Skills Section --- */
+        #skills .skills-list {
+             list-style: none;
+             padding: 0;
+             display: flex; /* Use flexbox for skills */
+             flex-wrap: wrap; /* Allow skills to wrap */
+             justify-content: center; /* Center skills */
+        }
+         #skills .skills-list li {
+             background-color: #e9ecef; /* Light background for skill tags */
+             color: var(--secondary-color);
+             padding: 8px 15px;
+             margin: 5px;
+             border-radius: 20px; /* Pill shape */
              font-size: 0.9rem;
+             font-weight: 500;
+             border: 1px solid var(--border-color);
+         }
+         #skills .skills-list li i {
+              margin-right: 8px;
+              color: var(--primary-color);
          }
 
-        /* --- Mentions Section --- */
-         .mention-item {
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px dashed var(--border-color); /* Separator for mentions */
-        }
-
-        .mention-item:last-child {
-            border-bottom: none; /* No border for the last item */
-        }
-
-        .mention-item p {
-             margin-bottom: 0.5rem;
-             font-size: 1rem;
-             color: #555;
-             font-style: italic;
-        }
-         .mention-item a {
-             font-size: 0.9rem;
-             font-weight: bold;
-         }
 
         /* --- Footer --- */
         .footer {
-            margin-top: 3rem;
+            margin-top: 4rem; /* More space above footer */
             font-size: 0.9rem;
             color: var(--footer-color);
             border-top: 1px solid var(--border-color);
-            padding-top: 1.5rem;
+            padding: 2rem 0; /* More padding */
             text-align: center;
         }
 
         /* Responsive adjustments */
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
             .container {
-                padding: 1.5rem;
-                margin: 10px auto;
+                padding: 0 15px;
             }
              body {
-                 padding-top: 50px; /* Adjust padding for smaller nav */
+                 padding-top: 60px;
              }
              .navbar {
-                 padding: 8px 0;
+                 padding: 10px 0;
              }
              .navbar nav a {
-                 margin: 0 8px;
-                 font-size: 0.9rem;
+                 margin: 0 10px;
+                 font-size: 0.95rem;
              }
             h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
              section h2 {
-                 font-size: 1.6rem;
+                 font-size: 1.8rem;
              }
             .tagline {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
             }
             .profile-image {
-                width: 100px;
-                height: 100px;
+                width: 140px;
+                height: 140px;
             }
-             /* Adjust text alignment for small screens if needed */
-            #about p,
-            .project,
-            .content-item,
-            .mention-item {
-                text-align: left;
+            .grid-container {
+                 grid-template-columns: 1fr; /* Stack cards on small screens */
+                 gap: 20px;
             }
+            .card {
+                 padding: 15px;
+            }
+             .card h3 {
+                 font-size: 1.2rem;
+             }
+             .card p {
+                 font-size: 0.95rem;
+             }
+             .card .card-links a {
+                 margin-right: 10px;
+             }
+             #skills .skills-list li {
+                 padding: 6px 12px;
+                 font-size: 0.85rem;
+             }
         }
+
+         @media (max-width: 480px) {
+              body {
+                 padding-top: 55px;
+             }
+             .navbar nav a {
+                 margin: 0 5px; /* Reduce margin more */
+                 font-size: 0.9rem;
+             }
+             h1 {
+                 font-size: 2rem;
+             }
+              section h2 {
+                 font-size: 1.5rem;
+             }
+             .tagline {
+                 font-size: 1.1rem;
+             }
+             .profile-image {
+                 width: 120px;
+                 height: 120px;
+             }
+             .card {
+                 padding: 12px;
+             }
+             .card h3 {
+                 font-size: 1.1rem;
+             }
+             .card p {
+                 font-size: 0.9rem;
+             }
+         }
+
 
     </style>
 </head>
@@ -292,92 +395,133 @@
         <nav>
             <a href="#hero">Home</a>
             <a href="#about">About</a>
-            <a href="#links">Links</a>
-            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a> <a href="#projects">Projects</a>
             <a href="#content">Content</a>
             <a href="#mentions">Mentions</a>
-            <a href="#footer">Contact</a>
+            <a href="#links">Links</a> <a href="#footer">Contact</a>
         </nav>
     </div>
 
     <div class="container">
+        <div class="content-area"> <main>
+                <section id="hero">
+                     <img src="RasoulUnlimited.png" alt="Mohammad Rasoul Sohrabi Profile Image" class="profile-image" />
+                     <h1>Rasoul Unlimited | محمد رسول سهرابی</h1>
+                     <p class="tagline">Developer. Designer. Founder.</p>
+                </section>
 
-        <main>
-            <section id="hero">
-                 <img src="RasoulUnlimited.png" alt="Rasoul Unlimited Profile Image" class="profile-image" />
-                 <h1>Rasoul Unlimited | محمد رسول سهرابی</h1>
-                 <p class="tagline">Developer. Designer. Founder.</p>
-            </section>
+                <section id="about">
+                    <h2>About Me | درباره من</h2>
+                    <p>
+                        I'm a passionate biomedical engineering student at the University of Tehran (Central Campus) with a strong interest in leveraging technology for digital health solutions. My journey involves diving deep into software development, refining design aesthetics, and building impactful projects from the ground up. I believe in the power of technology to drive positive change, particularly at the intersection of engineering and healthcare, and actively share my insights and experiences through various online platforms.
+                         </p>
+                </section>
 
-
-            <section id="about">
-                <h2>About Me | درباره من</h2>
-                <p>
-                    I'm a biomedical engineering student at the University of Tehran (Central Campus), passionate about digital health, software development, and content strategy. My work focuses on leveraging technology to solve healthcare problems and sharing knowledge through various platforms.
-                    </p>
-            </section>
-
-            <section id="links">
-                <h2>🔗 My Hubs | پیوندهای من</h2>
-                <ul>
-                    <li><a href="https://www.instagram.com/rasoul.unlimited" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-                    <li><a href="https://virgool.io/@RasoulUnlimited" target="_blank" rel="noopener noreferrer">Virgool</a></li>
-                    <li><a href="https://www.linkedin.com/in/rasoulunlimited" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-                    <li><a href="https://github.com/rasoul-unlimited" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-                    <li><a href="https://rasoulunlimited.medium.com" target="_blank" rel="noopener noreferrer">Medium</a></li>
-                     </ul>
-            </section>
-
-             <section id="projects">
-                 <h2>💻 Projects | پروژه‌ها</h2>
-                 <div class="project">
-                     <h3>Project Name (e.g., Digital Health App X)</h3>
-                     <p>A brief description of the project. What problem does it solve? What technologies were used? What was your role? What was its impact?</p>
-                     <a href="#" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-                     <a href="#" target="_blank" rel="noopener noreferrer">Live Demo / Website</a>
-                     </div>
-
-                  <div class="project">
-                     <h3>Project Name 2 (e.g., E-commerce Platform)</h3>
-                     <p>Another project description...</p>
-                     <a href="#" target="_blank" rel="noopener noreferrer">View Project</a>
-                 </div>
+                 <section id="skills">
+                     <h2>🛠️ Skills & Technologies | مهارت‌ها و تکنولوژی‌ها</h2>
+                     <ul class="skills-list">
+                         <li><i class="fas fa-code"></i> Python</li>
+                         <li><i class="fas fa-code"></i> JavaScript</li>
+                         <li><i class="fab fa-react"></i> React / React Native</li>
+                         <li><i class="fas fa-database"></i> SQL</li>
+                         <li><i class="fas fa-server"></i> Node.js</li>
+                         <li><i class="fas fa-brain"></i> Machine Learning (Mention specific libraries/frameworks if applicable)</li>
+                         <li><i class="fas fa-dna"></i> Biomedical Signal Processing</li>
+                         <li><i class="fas fa-mobile-alt"></i> Mobile App Development</li>
+                         <li><i class="fas fa-palette"></i> UI/UX Design</li>
+                         <li><i class="fas fa-pencil-alt"></i> Content Creation</li>
+                         <li><i class="fas fa-bullhorn"></i> Digital Strategy</li>
+                         </ul>
                  </section>
 
-            <section id="content">
-                 <h2>✍️ Featured Content | محتوای منتخب</h2>
-                  <div class="content-item">
-                     <h3>Title of Your Article/Post</h3>
-                     <p>A short summary of the article or what it's about. Why is it important or representative of your work?</p>
-                     <a href="https://virgool.io/@YourArticleLink" target="_blank" rel="noopener noreferrer">Read on Virgool</a>
-                     </div>
 
-                  <div class="content-item">
-                     <h3>Title of Another Article</h3>
-                     <p>Summary of the second article...</p>
-                     <a href="https://medium.com/@YourArticleLink" target="_blank" rel="noopener noreferrer">Read Article</a>
-                 </div>
+                 <section id="projects">
+                     <h2>💻 Projects | پروژه‌ها</h2>
+                     <div class="grid-container">
+                         <div class="card project-card">
+                             <h3>Project Name (e.g., AI-Powered Diagnostic Tool)</h3>
+                              <div class="card-meta">Technology Stack: Python, TensorFlow, Flask</div>
+                             <p>A brief description of the project. What problem does it solve? What was your specific contribution? Highlight any measurable impact or achievement (e.g., "Reduced diagnosis time by 30%").</p>
+                              <div class="card-links">
+                                   <a href="#" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                                   <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub Repo</a>
+                                  </div>
+                         </div>
+
+                          <div class="card project-card">
+                             <h3>Another Project (e.g., Patient Management System UI)</h3>
+                             <div class="card-meta">Technology Stack: React, Node.js, MongoDB</div>
+                             <p>Description of the second project. Focus on your role (Designer, Developer, etc.) and the outcome.</p>
+                              <div class="card-links">
+                                   <a href="#" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> View Project</a>
+                              </div>
+                         </div>
+                         </div>
                  </section>
 
-             <section id="mentions">
-                 <h2>📰 Mentions & Press | حضور در رسانه‌ها</h2>
-                  <div class="mention-item">
-                     <p>Your Name/Work mentioned in [Name of Reputable Media Outlet]</p>
-                     <a href="https://link-to-the-actual-article.com" target="_blank" rel="noopener noreferrer">Read the Article (e.g., Fars News, Tech Website, etc.)</a>
-                     </div>
+                <section id="content">
+                     <h2>✍️ Featured Content | محتوای منتخب</h2>
+                      <div class="grid-container">
+                          <div class="card content-card">
+                             <h3>Title of Your Article/Post</h3>
+                             <div class="card-meta">Platform: Virgool | Date: YYYY-MM-DD</div>
+                             <p>A short summary of the article or what it's about. Why is it important or representative of your work? Did it receive significant views or positive feedback?</p>
+                              <div class="card-links">
+                                 <a href="https://virgool.io/@YourArticleLink" target="_blank" rel="noopener noreferrer"><i class="fas fa-book-open"></i> Read on Virgool</a>
+                                  </div>
+                         </div>
 
-                 <div class="mention-item">
-                     <p>Interview with Your Name on [Name of Podcast/YouTube Channel]</p>
-                     <a href="https://link-to-the-interview-source.com" target="_blank" rel="noopener noreferrer">Watch/Listen to the Interview</a>
-                 </div>
-                  </section>
+                          <div class="card content-card">
+                             <h3>Title of Another Article/Post</h3>
+                             <div class="card-meta">Platform: Medium | Date: YYYY-MM-DD</div>
+                             <p>Summary of the second article. Mention topic and impact.</p>
+                              <div class="card-links">
+                                  <a href="https://medium.com/@YourArticleLink" target="_blank" rel="noopener noreferrer"><i class="fas fa-book-open"></i> Read Article</a>
+                              </div>
+                         </div>
+                         </div>
+                </section>
 
-        </main>
+                 <section id="mentions">
+                     <h2>📰 Mentions & Recognition | حضور در رسانه‌ها و افتخارات</h2>
+                     <div class="grid-container">
+                         <div class="card mention-card">
+                              <h3>Mention/Feature Title (e.g., Interview about X Project)</h3>
+                              <div class="card-meta">Source: [Name of Reputable Media Outlet] | Date: YYYY-MM-DD</div>
+                              <p>Brief context of the mention. What was discussed? Why is this significant? (e.g., "Featured as a young innovator in digital health").</p>
+                               <div class="card-links">
+                                   <a href="https://link-to-the-actual-article.com" target="_blank" rel="noopener noreferrer"><i class="fas fa-newspaper"></i> Read the Article on [Source Name]</a>
+                                   </div>
+                         </div>
 
-        <footer class="footer" id="footer">
-            📍 Tehran / Karaj | 🎓 Biomedical Engineering, University of Tehran<br>
-            Contact: rasoul.unlimited [at] gmail [dot] com
-        </footer>
-    </div>
+                         <div class="card mention-card">
+                             <h3>Award/Honor Received (e.g., Winner of X Competition)</h3>
+                              <div class="card-meta">Awarding Body: [Name of Organization] | Date: YYYY-MM-DD</div>
+                             <p>Description of the award or recognition. Why was it given? What project or work did it recognize?</p>
+                              <div class="card-links">
+                                  <a href="https://link-to-award-details.com" target="_blank" rel="noopener noreferrer"><i class="fas fa-trophy"></i> View Details</a>
+                             </div>
+                         </div>
+                          </div>
+                 </section>
+
+                 <section id="links">
+                    <h2>🔗 My Hubs | پیوندهای من</h2>
+                    <ul>
+                        <li><i class="fab fa-instagram"></i> <a href="https://www.instagram.com/rasoul.unlimited" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                        <li><i class="fas fa-pen-fancy"></i> <a href="https://virgool.io/@RasoulUnlimited" target="_blank" rel="noopener noreferrer">Virgool</a></li>
+                        <li><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/rasoulunlimited" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                        <li><i class="fab fa-github"></i> <a href="https://github.com/rasoul-unlimited" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                        <li><i class="fab fa-medium"></i> <a href="https://rasoulunlimited.medium.com" target="_blank" rel="noopener noreferrer">Medium</a></li>
+                         </ul>
+                </section>
+
+            </main>
+
+        </div> </div> <footer class="footer" id="footer">
+        📍 Tehran / Karaj | 🎓 Biomedical Engineering, University of Tehran<br>
+        Contact: <a href="mailto:rasoul.unlimited@gmail.com">rasoul.unlimited [at] gmail [dot] com</a>
+         <p style="margin-top: 10px;">&copy; 2024 Rasoul Unlimited. All rights reserved.</p> </footer>
+
 </body>
 </html>
