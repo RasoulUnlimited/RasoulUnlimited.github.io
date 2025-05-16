@@ -13,7 +13,7 @@
     <meta property="og:image" content="[Link to your profile image or a representative image for social sharing]"/> <meta property="og:image:alt" content="Mohammad Rasoul Sohrabi (Rasoul Unlimited) Profile Image"/>
 
     <meta name="twitter:card" content="summary_large_image"/>
-    <meta name="twitter:site" content="@[YourTwitterHandle]"/> <meta name="twitter:title" content="Rasoul Unlimited | محمد رسول سهرابی - Official Digital Hub"/>
+    <meta name="twitter:site" content="@[YourTwitterHandle]"/> <meta name="twitter:title" content="Rasoul Unlimited | محمد رسول سهرabi - Official Digital Hub"/>
     <meta name="twitter:description" content="Explore the compelling digital presence of Mohammad Rasoul Sohrabi (Rasoul Unlimited), a biomedical engineering innovator, full-stack developer, and content strategist. Featuring a detailed timeline, impactful projects, verifiable media mentions, and key skills showcasing his verifiable notability and expertise."/>
     <meta name="twitter:image" content="[Link to your profile image or a representative image for social sharing]"/> <meta name="twitter:image:alt" content="Mohammad Rasoul Sohrabi (Rasoul Unlimited) Profile Image"/>
 
@@ -46,7 +46,7 @@
         "name": "University of Tehran",
         "location": "Tehran, Iran"
       },
-      "knowsAbout": ["Biomedical Engineering", "Software Development", "Web Development", "Python", "JavaScript", "Digital Health", "Personal Branding", "Karate"]
+      "knowsAbout": ["Biomedical Engineering", "Software Development", "Web Development", "Python", "JavaScript", "Digital Health", "Personal Branding", "Karate", "Discord Bot Development"]
       // TODO: Add more detailed knowledge areas, projects, awards etc. if desired
       // Example Project in Schema:
       // "hasProject": {
@@ -55,6 +55,8 @@
       //   "description": "First independent Persian-language bot on Discord, officially verified by Discord.",
       //   "url": "https://vrgl.ir/9D6Hy" // Link to article describing it
       // }
+       // Example Award in Schema:
+      // "award": "Official Verification of First Persian Discord Bot by Discord"
     }
     </script>
      <script type="application/ld+json">
@@ -119,6 +121,9 @@
 
              /* Max Content Width */
              --max-content-width: 1200px;
+
+             /* Navbar Height */
+             --navbar-height: 80px;
         }
 
         /* --- Base Styles --- */
@@ -129,7 +134,7 @@
         html {
             scroll-behavior: smooth;
             /* Ensure scroll padding accounts for potentially taller nav on smaller screens */
-            scroll-padding-top: 90px; /* Start value */
+            scroll-padding-top: var(--navbar-height);
         }
 
         body {
@@ -140,7 +145,7 @@
             color: var(--text-color);
             line-height: 1.7;
             position: relative;
-            padding-top: 80px; /* Default padding for fixed nav */
+            padding-top: var(--navbar-height); /* Default padding for fixed nav */
             min-height: 100vh;
             overflow-x: hidden;
              /* Subtle Background Animation */
@@ -156,12 +161,11 @@
         }
 
         /* Improve focus styles for accessibility */
-        a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible,
-        .card:focus-within, .skills-list li:focus-within, .timeline li:focus-within .timeline-content {
-            outline: 3px solid var(--accent-color);
+        a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+             outline: 3px solid var(--accent-color);
             outline-offset: var(--space-xs);
             box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.25);
-            z-index: 5;
+            z-index: 10; /* High z-index for focused elements */
             position: relative;
         }
          /* Use focus-visible for better accessibility (only shows outline when using keyboard/non-pointer focus) */
@@ -170,7 +174,15 @@
              outline: none;
          }
 
-        /* Hide default outline for elements inside focused card */
+        /* Custom focus styles for complex elements */
+         .card:focus-within, .skills-list li:focus-within, .timeline li:focus-within .timeline-content {
+             outline: none; /* Remove default outline */
+              box-shadow: 0 0 0 3px var(--accent-color), 0 0 0 6px rgba(0, 123, 255, 0.25); /* Custom double ring focus */
+             z-index: 5;
+             position: relative;
+         }
+
+        /* Hide default outline for elements inside focused complex elements */
          .card:focus-within > *, .timeline li:focus-within .timeline-content > * {
              outline: none;
              box-shadow: none;
@@ -205,6 +217,11 @@
             text-align: center;
             backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border-color);
+             /* Ensure navbar height is controlled for scroll-padding-top */
+             height: var(--navbar-height);
+             display: flex;
+             align-items: center;
+             justify-content: center;
         }
 
         .navbar nav a {
@@ -217,11 +234,14 @@
             position: relative;
             padding-bottom: var(--space-xs);
             display: inline-block;
+             /* Added for focus state */
+            outline: none; /* Remove default outline */
         }
 
-        .navbar nav a:hover {
+        .navbar nav a:hover, .navbar nav a:focus-visible { /* Apply hover effect on focus too */
             color: var(--primary-color);
             transform: translateY(-4px);
+             /* Custom focus outline handled by :focus-visible rule */
         }
 
         .navbar nav a::after {
@@ -236,7 +256,7 @@
             transition: width var(--transition-duration-medium) var(--transition-easing-standard);
         }
 
-        .navbar nav a:hover::after {
+        .navbar nav a:hover::after, .navbar nav a:focus-visible::after { /* Apply hover effect on focus too */
             width: 100%;
         }
 
@@ -276,9 +296,11 @@
             transition: transform var(--transition-duration-medium) var(--transition-easing-springy), box-shadow var(--transition-duration-medium) var(--transition-easing-standard);
             z-index: 1;
             position: relative;
-             /* Ensure image is responsive but maintains aspect ratio */
              max-width: 90%;
              height: auto;
+             display: block; /* Remove extra space below image */
+             margin-left: auto;
+             margin-right: auto;
         }
          .profile-image:hover {
              transform: scale(1.12) rotate(5deg);
@@ -296,7 +318,7 @@
             line-height: 1.1;
             letter-spacing: -3px;
             text-shadow: 3px 3px 8px var(--shadow-color-light);
-             word-break: break-word; /* Prevent long titles from overflowing */
+             word-break: break-word;
         }
 
         .tagline {
@@ -314,7 +336,7 @@
             padding-top: var(--section-v-padding);
              position: relative;
              z-index: 1;
-             padding-bottom: var(--section-v-padding); /* Add padding bottom matching top */
+             padding-bottom: var(--section-v-padding);
         }
          section:last-of-type {
              margin-bottom: var(--space-xl);
@@ -325,7 +347,7 @@
          section::after {
             content: '';
             position: absolute;
-            bottom: calc(var(--section-v-padding) * -1 - 1px); /* Position based on section padding */
+            bottom: calc(var(--section-v-padding) * -1 - 1px);
             left: 50%;
             transform: translateX(-50%);
             width: 200px;
@@ -390,17 +412,20 @@
              text-align: center;
              transition: transform var(--transition-duration-short) var(--transition-easing-springy), color var(--transition-duration-short) var(--transition-easing-standard);
          }
-         #links ul li a:hover i, #links ul li a:focus-visible i { /* Apply hover effect on focus too */
+         #links ul li a:hover i, #links ul li a:focus-visible i {
              transform: scale(1.4) rotate(10deg);
               color: var(--primary-color);
          }
          #links ul li a {
               font-weight: 500;
               transition: color var(--transition-duration-short) var(--transition-easing-standard), text-decoration var(--transition-duration-short) var(--transition-easing-standard);
+               /* Added for focus state */
+             outline: none; /* Remove default outline */
          }
-         #links ul li a:hover, #links ul li a:focus-visible { /* Apply hover effect on focus too */
+         #links ul li a:hover, #links ul li a:focus-visible {
               color: var(--primary-color);
               text-decoration: underline;
+              /* Custom focus outline handled by :focus-visible rule */
          }
 
 
@@ -411,7 +436,6 @@
             gap: var(--space-lg);
             padding: 0;
              perspective: 1000px;
-             /* Ensure grid items manage their size well */
              align-items: stretch;
         }
 
@@ -429,14 +453,15 @@
              overflow: hidden;
              position: relative;
              transform-style: preserve-3d;
-             /* Added for focus state z-index */
              z-index: 1;
+             /* Added for focus state */
+             outline: none; /* Remove default outline */
         }
 
         .card:hover {
             transform: translateY(-15px) rotateX(5deg) rotateY(5deg);
             box-shadow: 0 25px 50px var(--shadow-color-strong), 0 0 10px var(--accent-color);
-             z-index: 2; /* Bring hovered card to front */
+             z-index: 2;
         }
 
          /* Optional: Subtle accent border on hover */
@@ -463,9 +488,9 @@
              height: 240px;
              object-fit: cover;
              border-bottom: 1px solid var(--border-color);
-              /* Ensure image is responsive */
              max-width: 100%;
-             height: auto; /* Keep aspect ratio */
+             height: auto;
+             display: block; /* Remove extra space below image */
          }
 
 
@@ -477,7 +502,7 @@
             font-size: 1.5rem;
             font-weight: 700;
             line-height: 1.4;
-            word-break: break-word; /* Prevent long titles from overflowing */
+            word-break: break-word;
         }
 
         .card p {
@@ -524,10 +549,13 @@
               padding: var(--space-xs) var(--space-sm);
               border-radius: var(--border-radius-sm);
               transition: background-color var(--transition-duration-short) var(--transition-easing-standard), color var(--transition-duration-short) var(--transition-easing-standard);
+               /* Added for focus state */
+             outline: none; /* Remove default outline */
         }
-         .card .card-links a:hover, .card .card-links a:focus-visible { /* Apply hover effect on focus too */
+         .card .card-links a:hover, .card .card-links a:focus-visible {
              background-color: #e9ecef;
              color: var(--primary-color);
+              /* Custom focus outline handled by :focus-visible rule */
          }
          .card .card-links a i {
               margin-right: var(--space-xs);
@@ -550,7 +578,7 @@
           }
            /* Ensure featured card focus state is also highlighted */
            .card.is-featured:focus-within {
-               box-shadow: 0 0 0 4px rgba(255, 193, 7, 0.5), 0 8px 25px var(--shadow-color-medium); /* Highlight glow + original shadow */
+               box-shadow: 0 0 0 3px var(--highlight-color), 0 0 0 6px rgba(255, 193, 7, 0.5), 0 8px 25px var(--shadow-color-medium); /* Highlight glow + original shadow */
            }
 
 
@@ -579,19 +607,19 @@
               /* Added for focus state */
              outline: none; /* Remove default outline */
          }
-          #skills .skills-list li:hover, #skills .skills-list li:focus-visible { /* Apply hover effect on focus too */
+          #skills .skills-list li:hover, #skills .skills-list li:focus-visible {
               background-color: var(--accent-color);
               color: white;
               transform: translateY(-5px);
               box-shadow: 0 5px 10px var(--shadow-color-light);
-              /* Custom focus outline handled by :focus-visible rule */
+               /* Custom focus outline handled by :focus-visible rule */
           }
          #skills .skills-list li i {
               margin-right: var(--space-xs);
               color: var(--primary-color);
               transition: color var(--transition-duration-short) var(--transition-easing-standard);
          }
-          #skills .skills-list li:hover i, #skills .skills-list li:focus-visible i { /* Apply hover effect on focus too */
+          #skills .skills-list li:hover i, #skills .skills-list li:focus-visible i {
               color: white;
           }
 
@@ -610,7 +638,7 @@
             list-style: none;
         }
 
-        /* Vertical line */
+        /* Vertical line (Desktop) */
         .timeline::after {
             content: '';
             position: absolute;
@@ -631,25 +659,27 @@
              outline: none; /* Remove default outline */
         }
 
-        /* Right side timeline items */
+        /* Right side timeline items (Desktop) */
         .timeline li:nth-child(odd) {
             left: 50%;
             padding-left: var(--space-xl);
+             padding-right: var(--space-md); /* Add some right padding for consistency */
         }
 
-        /* Left side timeline items */
+        /* Left side timeline items (Desktop) */
         .timeline li:nth-child(even) {
              padding-right: var(--space-xl);
+             padding-left: var(--space-md); /* Add some left padding for consistency */
         }
 
 
-        /* Circles on the timeline */
+        /* Circles on the timeline (Desktop) */
         .timeline li::after {
             content: '';
             position: absolute;
             width: var(--space-lg);
             height: var(--space-lg);
-            right: -14px;
+            right: -14px; /* Position for right items */
             background-color: var(--accent-color);
             border: 4px solid var(--primary-color);
             top: 30px;
@@ -658,12 +688,13 @@
             transition: background-color var(--transition-duration-short) var(--transition-easing-standard), border-color var(--transition-duration-short) var(--transition-easing-standard), transform var(--transition-duration-short) var(--transition-easing-springy);
         }
 
-        /* Circles for left items */
+        /* Circles for left items (Desktop) */
         .timeline li:nth-child(even)::after {
-            left: -14px;
+            left: -14px; /* Position for left items */
+            right: auto; /* Reset right */
         }
 
-        .timeline li:hover::after, .timeline li:focus-within::after { /* Apply hover effect on focus too */
+        .timeline li:hover::after, .timeline li:focus-within::after {
              background-color: var(--primary-color);
              border-color: var(--accent-color);
              transform: scale(1.2);
@@ -679,16 +710,16 @@
              box-shadow: 0 4px 15px var(--shadow-color-light);
              transition: transform var(--transition-duration-short) var(--transition-easing-springy), box-shadow var(--transition-duration-short) var(--transition-easing-standard);
              z-index: 1;
-             /* Added for focus state */
+              /* Added for focus state */
              outline: none; /* Remove default outline */
         }
-         .timeline li:hover .timeline-content, .timeline li:focus-within .timeline-content { /* Apply hover effect on focus too */
+         .timeline li:hover .timeline-content, .timeline li:focus-within .timeline-content {
               transform: translateY(-8px);
               box-shadow: 0 8px 20px var(--shadow-color-medium);
          }
 
 
-        /* Arrow pointing to the line */
+        /* Arrow pointing to the line (Desktop - Right items) */
         .timeline-content::before {
             content: " ";
             position: absolute;
@@ -697,14 +728,16 @@
             border-style: solid;
             border-color: transparent transparent transparent var(--card-bg);
             right: -16px;
+             left: auto; /* Ensure left is auto */
         }
 
-        /* Arrow for left items */
+        /* Arrow for left items (Desktop) */
         .timeline li:nth-child(even) .timeline-content::before {
              left: -16px;
+             right: auto; /* Reset right */
              border-color: transparent var(--card-bg) transparent transparent;
         }
-         /* Match border color */
+         /* Match border color (Desktop - Right items) */
          .timeline-content::after {
              content: " ";
              position: absolute;
@@ -713,10 +746,13 @@
              border-style: solid;
              border-color: transparent transparent transparent var(--border-color);
              right: -18px;
+             left: auto; /* Ensure left is auto */
              z-index: -1;
          }
+         /* Match border color (Desktop - Left items) */
          .timeline li:nth-child(even) .timeline-content::after {
              left: -18px;
+             right: auto; /* Reset right */
              border-color: transparent var(--border-color) transparent transparent;
          }
 
@@ -768,7 +804,7 @@
               /* Added for focus state */
              outline: none; /* Remove default outline */
          }
-          .testimonial-item:hover, .testimonial-item:focus-within { /* Apply hover effect on focus too */
+          .testimonial-item:hover, .testimonial-item:focus-within {
              transform: translateY(-5px);
              box-shadow: 0 6px 20px var(--shadow-color-medium);
               /* Custom focus outline handled by :focus-visible rule */
@@ -846,11 +882,11 @@
               /* Added for focus state */
              outline: none; /* Remove default outline */
          }
-         .contact-info a:hover, .contact-info a:focus-visible { /* Apply hover effect on focus too */
+         .contact-info a:hover, .contact-info a:focus-visible {
              color: var(--primary-color);
              text-decoration: underline;
              transform: translateX(8px);
-             /* Custom focus outline handled by :focus-visible rule */
+              /* Custom focus outline handled by :focus-visible rule */
          }
          .contact-info i {
               margin-right: var(--space-sm);
@@ -859,7 +895,7 @@
               text-align: center;
               transition: transform var(--transition-duration-short) var(--transition-easing-springy), color var(--transition-duration-short) var(--transition-easing-standard);
          }
-         .contact-info a:hover i, .contact-info a:focus-visible i { /* Apply hover effect on focus too */
+         .contact-info a:hover i, .contact-info a:focus-visible i {
              transform: scale(1.2);
              color: var(--primary-color);
          }
@@ -896,44 +932,83 @@
 
 
         /* --- Responsive Adjustments --- */
-        /* Ensure scroll padding adapts to navbar height changes if any */
+
+        /* Tablet and Smaller Desktops */
+        @media (max-width: 1200px) {
+             .container {
+                 padding: 0 var(--space-md); /* Reduce horizontal padding */
+             }
+              .content-area {
+                 padding: var(--space-xl); /* Reduce padding inside */
+             }
+             section h2 {
+                 font-size: 2.6rem; /* Slightly smaller headings */
+             }
+             .tagline {
+                 font-size: 1.5rem;
+             }
+              #about p {
+                 font-size: 1.15rem;
+             }
+             .card h3 {
+                 font-size: 1.4rem;
+             }
+              .card p {
+                  font-size: 1rem;
+              }
+        }
+
+
+        /* Medium Tablets and Mobile */
         @media (max-width: 768px) {
-             html {
-                scroll-padding-top: 80px; /* Adjust if nav height changes */
+            /* Adjust global padding and navbar height */
+             :root {
+                 --navbar-height: 70px;
+                 --section-v-padding: var(--space-xl); /* Smaller vertical section padding */
+                 --section-margin-bottom: var(--space-xxl); /* Smaller margin below sections */
              }
-              body {
-                 padding-top: 70px; /* Adjust if nav height changes */
+             html { scroll-padding-top: var(--navbar-height); }
+              body { padding-top: var(--navbar-height); }
+             .container {
+                 padding: 0 var(--space-sm);
              }
+              .content-area {
+                 padding: var(--space-lg);
+                 box-shadow: 0 4px 15px var(--shadow-color-medium);
+             }
+
+             /* Navbar */
+             .navbar { height: var(--navbar-height); }
              .navbar nav a {
-                 font-size: 1rem;
+                 margin: 0 var(--space-sm);
+                 font-size: 0.95rem;
              }
-             h1 {
-                font-size: 3.8rem;
-                letter-spacing: -1px;
-             }
-              section h2 {
-                 font-size: 2.8rem;
-             }
-            .tagline {
-                font-size: 1.6rem;
-            }
+
+            /* Hero */
+            h1 { font-size: 3.5rem; letter-spacing: -1px; }
+             section h2 { font-size: 2.2rem; }
+            .tagline { font-size: 1.4rem; }
             .profile-image {
-                width: 160px;
-                height: 160px;
-                 border-width: 6px;
+                width: 150px; height: 150px; border-width: 6px;
             }
+             #hero { padding-bottom: var(--space-xxl); margin-bottom: var(--section-margin-bottom); }
+
+
+             /* General Sections */
              section {
-                 padding-top: var(--space-xl);
-                 padding-bottom: var(--space-xl);
-                 margin-bottom: var(--space-xxl);
+                 padding-top: var(--section-v-padding);
+                 padding-bottom: var(--section-v-padding);
+                 margin-bottom: var(--section-margin-bottom);
              }
               section::after {
-                 bottom: calc(var(--space-xl) * -1 - 1px);
+                 bottom: calc(var(--section-v-padding) * -1 - 1px);
                  width: 150px;
               }
+             section h2::after { width: 120px; }
 
+            /* Cards */
             .grid-container {
-                 grid-template-columns: 1fr;
+                 grid-template-columns: 1fr; /* Stack cards on small screens */
                  gap: var(--space-md);
                  perspective: none; /* Remove perspective on small screens */
             }
@@ -946,9 +1021,7 @@
                  transform: translateY(-8px) !important; /* Just lift on hover */
                   box-shadow: 0 10px 30px var(--shadow-color-medium);
               }
-               .card::before {
-                  height: 4px; /* Thinner accent border */
-               }
+               .card::before { height: 4px; }
                 .card.is-featured {
                   transform: rotateZ(-1deg) !important; /* Keep subtle rotation */
                    box-shadow: 0 6px 20px var(--shadow-color-medium), 0 0 10px var(--highlight-color);
@@ -959,76 +1032,104 @@
                      box-shadow: 0 10px 30px var(--shadow-color-medium), 0 0 15px var(--highlight-color);
                  }
 
-
              .card-image {
                  height: 200px;
                   width: calc(100% + var(--space-md) * 2);
                  margin: calc(-1 * var(--space-md)) calc(-1 * var(--space-md)) var(--space-md) calc(-1 * var(--space-md));
              }
-             .card h3 {
-                 font-size: 1.3rem;
+             .card h3 { font-size: 1.3rem; }
+             .card p { font-size: 1rem; }
+             .card .card-links a { margin-right: var(--space-sm); font-size: 0.95rem; }
+
+            /* Skills */
+             #skills .skills-list li { padding: var(--space-xs) var(--space-sm); font-size: 0.9rem; }
+
+            /* Timeline (Single Column Mobile) */
+             .timeline::after { /* Vertical line */
+                 left: var(--space-md); /* Move line to the left */
+                 margin-left: 0; /* Reset margin */
              }
-             .card p {
-                 font-size: 1rem;
+             .timeline li {
+                 width: 100%; /* Full width */
+                 padding-left: var(--space-xxl); /* Padding for content (line + space) */
+                 padding-right: var(--space-md); /* Right padding */
+                 padding-bottom: var(--space-lg); /* Smaller bottom padding for items */
+                 padding-top: var(--space-lg); /* Smaller top padding for items */
              }
-             .card .card-links a {
-                 margin-right: var(--space-sm);
-                 font-size: 0.95rem;
-             }
-             #skills .skills-list li {
-                 padding: var(--space-xs) var(--space-sm);
-                 font-size: 0.9rem;
-             }
-             #contact p {
-                 font-size: 1.05rem;
-             }
-             #contact .contact-info {
-                 font-size: 1.1rem;
-             }
-             .timeline::after {
-                 left: var(--space-lg);
-             }
-             .timeline li,
+              .timeline li:last-child { padding-bottom: var(--space-md); /* Less padding for the very last item */ }
+
+             /* Left and Right items styling combined for single column */
+             .timeline li:nth-child(odd),
              .timeline li:nth-child(even) {
-                 padding-left: var(--space-xl);
+                 left: 0; /* Align all to the left */
+                 padding-left: var(--space-xxl); /* Consistently position content */
                  padding-right: var(--space-md);
              }
-             .timeline li::after,
-             .timeline li:nth-child(even)::after {
-                 left: var(--space-lg);
+
+
+             .timeline li::after { /* Circles */
+                 left: calc(var(--space-md) - var(--space-xs)); /* Position circles on the left line */
+                 right: auto; /* Reset right */
+                 top: 30px; /* Keep vertical position */
              }
-             /* Arrows remain pointing left towards the single line */
-             .timeline-content::before {
-                 right: auto;
-                 left: -16px;
-                  border-color: transparent var(--card-bg) transparent transparent;
-             }
-             .timeline li:nth-child(even) .timeline-content::before {
-                  left: -16px;
-                   border-color: transparent var(--card-bg) transparent transparent;
-             }
-              .timeline-content::after {
-                 right: auto;
-                 left: -18px;
-                  border-color: transparent var(--border-color) transparent transparent;
+              .timeline li:nth-child(even)::after { /* Ensure left items also position correctly */
+                  left: calc(var(--space-md) - var(--space-xs));
+                  right: auto;
               }
+
+
+            /* Timeline Arrows (Point Left) */
+            .timeline-content::before {
+                left: -16px; /* Position arrow to the left */
+                right: auto; /* Reset right */
+                border-color: transparent var(--card-bg) transparent transparent; /* Arrow points left */
+            }
+
+            /* Arrow for left items (now same as others) */
+            .timeline li:nth-child(even) .timeline-content::before {
+                 left: -16px;
+                 right: auto;
+                 border-color: transparent var(--card-bg) transparent transparent;
+            }
+
+             /* Timeline Arrow Borders (Point Left) */
+             .timeline-content::after {
+                 left: -18px; /* Position border arrow to the left */
+                 right: auto; /* Reset right */
+                 border-color: transparent var(--border-color) transparent transparent; /* Border arrow points left */
+             }
+             /* Border Arrow for left items (now same as others) */
              .timeline li:nth-child(even) .timeline-content::after {
                   left: -18px;
-                   border-color: transparent var(--border-color) transparent transparent;
+                  right: auto;
+                  border-color: transparent var(--border-color) transparent transparent;
              }
-             .testimonial-slider {
-                 grid-template-columns: 1fr;
-             }
+            .timeline-content h3 { font-size: 1.2rem; }
+             .timeline-content p { font-size: 0.95rem; }
+             .timeline-content .date { font-size: 0.85rem; }
+
+
+            /* Testimonials */
+             .testimonial-slider { grid-template-columns: 1fr; }
+             .testimonial-item p { font-size: 1rem; }
+             .testimonial-item .author { font-size: 0.95rem; }
+
+
+            /* Contact */
+             #contact p { font-size: 1rem; }
+             #contact .contact-info { font-size: 1.1rem; }
         }
 
-        /* Added breakpoint for very small screens */
+         /* Smaller Mobile Screens */
          @media (max-width: 480px) {
-             html {
-                scroll-padding-top: 70px; /* Adjust if nav height changes */
+             /* Adjust global padding and navbar height */
+             :root {
+                 --navbar-height: 65px;
+                 --section-v-padding: var(--space-lg); /* Even Smaller vertical section padding */
+                 --section-margin-bottom: var(--space-xl); /* Even Smaller margin below sections */
              }
-              body {
-                 padding-top: 65px; /* Adjust if nav height changes */
-             }
+              html { scroll-padding-top: var(--navbar-height); }
+              body { padding-top: var(--navbar-height); }
              .container {
                  padding: 0 var(--space-sm);
                   margin: var(--space-sm) auto;
@@ -1037,107 +1138,93 @@
                  padding: var(--space-md);
                  box-shadow: 0 3px 10px var(--shadow-color-light);
              }
-             .navbar {
-                 padding: var(--space-xs) 0;
-             }
+
+             /* Navbar */
+             .navbar { height: var(--navbar-height); }
              .navbar nav a {
                  margin: 0 var(--space-xs);
                  font-size: 0.85rem;
              }
-             h1 {
-                 font-size: 3rem;
-                 letter-spacing: -1px;
-             }
-              section h2 {
-                 font-size: 2.2rem;
-             }
-             .tagline {
-                 font-size: 1.4rem;
-             }
+
+             /* Hero */
+             h1 { font-size: 2.8rem; letter-spacing: -1px; }
+              section h2 { font-size: 2rem; }
+             .tagline { font-size: 1.3rem; }
              .profile-image {
-                 width: 120px;
-                 height: 120px;
-                  border-width: 4px;
+                 width: 120px; height: 120px; border-width: 4px;
              }
-             .card {
-                 padding: var(--space-sm);
+
+             /* General Sections */
+               section {
+                 padding-top: var(--section-v-padding);
+                 padding-bottom: var(--section-v-padding);
+                 margin-bottom: var(--section-margin-bottom);
              }
+              section::after {
+                 bottom: calc(var(--section-v-padding) * -1 - 1px);
+                 width: 100px;
+              }
+              section h2::after { width: 100px; height: 5px; }
+
+            /* Cards */
+             .card { padding: var(--space-sm); }
               .card-image {
                  height: 160px;
                   width: calc(100% + var(--space-sm) * 2);
                  margin: calc(-1 * var(--space-sm)) calc(-1 * var(--space-sm)) var(--space-sm) calc(-1 * var(--space-sm));
              }
-             .card h3 {
-                 font-size: 1.2rem;
-             }
-             .card p {
-                 font-size: 0.95rem;
-             }
-              .card .card-meta {
-                  gap: var(--space-xs);
-                  font-size: 0.9rem;
-              }
-              .card .card-links {
-                 gap: var(--space-xs);
-              }
-              .card .card-links a {
-                  font-size: 0.9rem;
-                  padding: var(--space-xs);
-              }
-              #skills .skills-list li {
-                 padding: var(--space-xs) var(--space-sm);
-                 font-size: 0.8rem;
-              }
-               section {
-                 margin-bottom: var(--space-xl);
-                 padding-top: var(--space-lg); /* Adjusted padding top */
-                 padding-bottom: var(--space-lg); /* Adjusted padding bottom */
-             }
-              section::after {
-                 bottom: calc(var(--space-lg) * -1 - 1px); /* Position based on section padding */
-                 width: 100px;
-              }
+             .card h3 { font-size: 1.2rem; }
+             .card p { font-size: 0.9rem; }
+              .card .card-meta { gap: var(--space-xs); font-size: 0.85rem;}
+              .card .card-links { gap: var(--space-xs); }
+              .card .card-links a { font-size: 0.9rem; padding: var(--space-xs); }
+              .card::before { height: 3px; }
 
-             #contact p {
-                 font-size: 1rem;
-             }
-             #contact .contact-info {
-                 font-size: 1rem;
-             }
-             .timeline::after {
-                 left: var(--space-md);
-             }
+
+            /* Skills */
+              #skills .skills-list li { padding: var(--space-xs) var(--space-sm); font-size: 0.8rem; }
+
+            /* Timeline */
+             .timeline::after { left: var(--space-md); }
              .timeline li,
              .timeline li:nth-child(even) {
-                 padding-left: var(--space-xl);
+                 padding-left: var(--space-xl); /* Keep content slightly offset */
                  padding-right: var(--space-sm);
+                  padding-top: var(--space-md); /* Even smaller item padding */
+                  padding-bottom: var(--space-md);
              }
+              .timeline li:last-child { padding-bottom: var(--space-md); }
+
              .timeline li::after,
              .timeline li:nth-child(even)::after {
-                 left: var(--space-md);
-                 width: var(--space-md);
-                 height: var(--space-md);
-                 border-width: 3px;
-                 top: 25px;
+                 left: calc(var(--space-md) - var(--space-xs) / 2); /* Adjust circle position */
+                 width: var(--space-md); height: var(--space-md); border-width: 3px; top: 20px; /* Adjust circle size/position */
              }
-             .timeline-content::before {
-                 right: auto;
-                 left: -14px;
-                 border-width: 7px;
-             }
-             .timeline li:nth-child(even) .timeline-content::before {
-                  left: -14px;
-             }
-              .timeline-content::after {
-                 right: auto;
-                 left: -15px;
-                 border-width: 8px;
-              }
-             .timeline li:nth-child(even) .timeline-content::after {
-                  left: -15px;
-             }
-         }
+              .timeline-content { padding: var(--space-sm); }
+             .timeline-content::before { left: -14px; border-width: 7px; }
+             .timeline li:nth-child(even) .timeline-content::before { left: -14px; }
+              .timeline-content::after { left: -15px; border-width: 8px; }
+             .timeline li:nth-child(even) .timeline-content::after { left: -15px; }
+             .timeline-content h3 { font-size: 1.1rem; }
+             .timeline-content p { font-size: 0.9rem; }
+             .timeline-content .date { font-size: 0.8rem; }
 
+
+            /* Testimonials */
+             .testimonial-item { padding: var(--space-sm); }
+              .testimonial-item::before { font-size: 3em; left: var(--space-sm); }
+             .testimonial-item p { font-size: 1rem; margin-top: var(--space-md); margin-bottom: var(--space-md); }
+             .testimonial-item .author { font-size: 0.9rem; }
+             .testimonial-item .author span { font-size: 0.8rem; }
+
+
+            /* Contact */
+             #contact p { font-size: 0.95rem; }
+             #contact .contact-info { font-size: 1rem; }
+              #contact .contact-info i { width: 20px; }
+              #contact .location-edu { font-size: 0.9rem; }
+
+         }
 
     </style>
 </head>
@@ -1170,9 +1257,8 @@
                 <section id="about">
                     <h2>About Me | درباره من</h2>
                     <p>
-                        در میان جوانان نسل نو، محمد رسول سهرابی، ملقب به «آنلیمیتد»، نمونه‌ای کم‌نظیر از تلفیق ورزش قهرمانی، توسعه فنی، و آینده‌نگری علمی‌ست. او که متولد شهریور ۱۳۸۴ در تهران و ساکن کرج است و اکنون تنها ۱۹ سال دارد، دانشجوی مهندسی پزشکی در دانشگاه تهران (واحد مرکزی) است. محمد رسول باور دارد که در دنیای شلوغ امروز، فقط صدای واقعی شنیده می‌شود و برند شخصی واقعی، برداشتی است که دیگران از شما دارند وقتی خودتان حضور ندارید.
-                         انرژی درونی بزرگ، انگیزه زیاد، و حس عجیب برای تاثیرگذاری در او، باعث شد که نخواهد عادی بماند و به دنبال ایجاد تحول باشد. از راه‌اندازی پروژه پیشگامانه اولین ربات فارسی‌زبان دیسکورد با تایید رسمی دیسکورد در سن ۱۴ سالگی، تا انتشار مقالات در ویرگول و مشارکت در پروژه‌های برنامه‌نویسی دانشگاهی، در هر کاری سعی کرده امضای خودش را بگذارد.
-                         با روحیه‌ای سخت‌کوش و مبارز برگرفته از ورزش قهرمانی کاراته (دان ۱ رسمی)، و ترکیبی نادر از فیزیک، منطق و تحلیل، او به دنبال ترکیب خلاقانه مهندسی پزشکی و برنامه‌نویسی برای ایجاد تحول در سلامت و ارتباطات پزشکی‌ست. آینده‌نگری، دقت، و مهارت‌های حرفه‌ای او را تبدیل به فردی کرده که فراتر از سن‌وسالش، در مسیر ساختن دنیایی متفاوت با **ذهنیت «نامحدود»** گام برمی‌دارد؛ ذهنیتی که فراتر از توصیف ساده، بیانگر اصالتی از یک چیز بی‌نهایت خوب (شخصیت، ثروت، اندیشه، زندگی) است.
+                        محمد رسول سهرابی، ملقب به «آنلیمیتد»، نمونه‌ای کم‌نظیر از تلفیق ورزش قهرمانی (کاراته دان ۱)، توسعه فنی، و آینده‌نگری علمی‌ست. او دانشجوی مهندسی پزشکی دانشگاه تهران است و باور دارد در دنیای شلوغ امروز، فقط صدای واقعی شنیده می‌شود.
+                         با انگیزه‌ی درونی برای تاثیرگذاری و ذهنیت «نامحدود»، از راه‌اندازی پروژه اولین ربات فارسی‌زبان دیسکورد با تایید رسمی دیسکورد در ۱۴ سالگی، تا انتشار مقالات در ویرگول و مشارکت در پروژه‌های دانشگاهی، در هر کاری سعی کرده امضای خودش را بگذارد. او به دنبال ترکیب خلاقانه‌ مهندسی پزشکی و برنامه‌نویسی برای ایجاد تحول در حوزه سلامت دیجیتال است و فراتر از سن‌وسالش گام برمی‌دارد.
                     </p>
                 </section>
 
@@ -1183,20 +1269,20 @@
                              <div class="timeline-content">
                                  <h3 class="date">سنین پایین</h3>
                                  <h3>شروع ورزش قهرمانی کاراته و کسب دان ۱</h3>
-                                 <p>شروع جدی ورزش کاراته و کسب روحیه سخت‌کوشی و نظم از طریق حضور در مسابقات ملی و دریافت دان ۱ رسمی فدراسیون کاراته جمهوری اسلامی ایران. این تجربه پایه و اساس روحیه‌ی مبارزه‌ی من در عرصه‌های دیگر زندگی شد.</p>
+                                 <p>شروع جدی ورزش کاراته و کسب روحیه سخت‌کوشی و نظم از طریق حضور در مسابقات ملی و دریافت دان ۱ رسمی فدراسیون کاراته جمهوری اسلامی ایران.</p>
                              </div>
                          </li>
                           <li>
                              <div class="timeline-content">
                                  <h3 class="date">سال 2020 (14 سالگی)</h3>
                                  <h3>توسعه اولین ربات فارسی‌زبان دیسکورد</h3>
-                                 <p>توسعه اولین ربات مستقل فارسی‌زبان در پلتفرم دیسکورد با زبان پایتون، در قالب یک تیم ده‌نفره. این پروژه که با انگیزه‌ی ایجاد تحول و امضای شخصی انجام شد، به تأیید رسمی شرکت Discord رسید و نام ایران را برای اولین‌بار در میان توسعه‌دهندگان رسمی این پلتفرم قرار داد.</p>
+                                 <p>توسعه اولین ربات مستقل فارسی‌زبان در پلتفرم دیسکورد با زبان پایتون، در قالب یک تیم ده‌نفره. این پروژه که با انگیزه‌ی ایجاد تحول انجام شد، به تأیید رسمی شرکت Discord رسید و نام ایران را برای اولین‌بار در میان توسعه‌دهندگان رسمی این پلتفرم قرار داد.</p>
                              </div>
                          </li>
                          <li>
                              <div class="timeline-content">
                                  <h3 class="date">پاییز 1402 (حدود سپتامبر 2023)</h3> <h3>آغاز تحصیل در مهندسی پزشکی دانشگاه تهران</h3>
-                                 <p>ورود به دانشگاه تهران (واحد مرکزی) برای تحصیل در رشته مهندسی پزشکی. این گام در راستای نگاه من فراتر از مرزهای کلاس و نمره و تمرکز بر ترکیب دانش مهندسی و برنامه‌نویسی برای حوزه سلامت دیجیتال بود.</p>
+                                 <p>ورود به دانشگاه تهران (واحد مرکزی) برای تحصیل در رشته مهندسی پزشکی و تمرکز بر ترکیب دانش مهندسی و برنامه‌نویسی برای حوزه سلامت دیجیتال.</p>
                              </div>
                          </li>
                           <li>
@@ -1209,14 +1295,14 @@
                              <div class="timeline-content">
                                  <h3 class="date">27 نوامبر 2022</h3>
                                  <h3>انتشار اولین مقاله معرفی در ویرگول</h3>
-                                 <p>نشر مقاله "محمد رسول سهرابی (آنلیمیتد) – از tatami تا تکنولوژی" به عنوان اولین معرفی جامع من در فضای دیجیتال. این مقاله بازخوردهای قابل توجهی دریافت کرد و مسیر را برای تولید محتوای بعدی هموار کرد.</p>
+                                 <p>نشر مقاله "محمد رسول سهرابی (آنلیمیتد) – از tatami تا تکنولوژی" به عنوان اولین معرفی جامع من در فضای دیجیتال.</p>
                              </div>
                          </li>
                           <li>
                              <div class="timeline-content">
                                  <h3 class="date">23 آوریل 2023</h3>
                                  <h3>انتشار مقاله برند شخصی در ویرگول</h3>
-                                 <p>نشر مقاله "چطور توی دنیای شلوغ امروز، یه برند شخصی واقعی بسازیم؟ | داستان Rasoul Unlimited". این مقاله به فلسفه‌ی برند شخصی من، چرایی کارهایم و معنای لقب "آنلیمیتد" می‌پردازد و تجربه‌ی شخصی‌ام در این مسیر را روایت می‌کند.</p>
+                                 <p>نشر مقاله "چطور توی دنیای شلوغ امروز، یه برند شخصی واقعی بسازیم؟ | داستان Rasoul Unlimited" که به فلسفه‌ی شخصی من درباره‌ی برند شخصی و معنای لقب «آنلیمیتد» می‌پردازد.</p>
                              </div>
                          </li>
                           <li>
@@ -1303,7 +1389,7 @@
                                  </div>
                              <p>این مقاله به فلسفه‌ی شخصی من درباره‌ی ساخت یک "برند شخصی واقعی" در دنیای پرهیاهوی امروز می‌پردازد. در آن به چرایی انتخاب این مسیر، معنای لقب «آنلیمیتد»، و تجربه‌هایم در یافتن صدای خودم اشاره کرده‌ام. این مقاله بیشتر روایتی از درون و دیدگاه من است.</p>
                               <div class="card-links">
-                                  <a href="https://vrgl.ir/cUmcv" target="_blank" rel="noopener noreferrer" aria-label="Read the article 'چطور توی دنیای شلوغ امروز، یه برند شخصی واقعی بسازیم؟' on Virgool"><i class="fas fa-book-open" aria-hidden="true"></i> مطالعه مقاله در ویرگول)</a>
+                                  <a href="https://vrgl.ir/cUmcv" target="_blank" rel="noopener noreferrer" aria-label="Read the article 'چطور توی دنیای شلوغ امروز، یه برند شخصی واقعی بسازیم؟' on Virgool"><i class="fas fa-book-open" aria-hidden="true"></i> مطالعه مقاله در ویرگول</a>
                               </div>
                          </div>
 
