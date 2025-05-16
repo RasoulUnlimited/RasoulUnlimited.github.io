@@ -4,48 +4,55 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Rasoul Unlimited | محمد رسول سهرابی</title>
-    <meta name="description" content="Discover Mohammad Rasoul Sohrabi's impactful journey in biomedical engineering, software development, and digital strategy. Featuring key projects, media mentions, skills, and achievements that define his notable digital presence."/>
+    <meta name="description" content="Explore the compelling digital presence of Mohammad Rasoul Sohrabi, a biomedical engineering innovator, full-stack developer, and content strategist. Featuring a detailed timeline, impactful projects, reputable media mentions, and key skills showcasing his verifiable notability and expertise."/>
 
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Roboto:wght@400;500&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"/>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
 
     <style>
-        /* --- CSS Variables --- */
+        /* --- CSS Variables (Refined and Expanded) --- */
         :root {
             /* Color Palette */
-            --primary-color: #0056b3; /* Deep Blue */
-            --secondary-color: #212529; /* Dark Charcoal */
+            --primary-color: #004085; /* Deeper Blue */
+            --secondary-color: #1a1d20; /* Near Black */
             --accent-color: #007bff; /* Bright Blue */
-            --highlight-color: #ffc107; /* Yellow/Orange for highlights */
-            --background-start-color: #e9ecef;
-            --background-end-color: #f8f9fa;
+            --highlight-color: #ffc107; /* Yellow/Orange */
+            --background-start-color: #eef2f7; /* Lighter gradient start */
+            --background-end-color: #f8f9fa; /* Lighter gradient end */
             --container-bg: white;
             --card-bg: #ffffff;
-            --shadow-color-light: rgba(0,0,0,0.1);
+            --shadow-color-light: rgba(0,0,0,0.08);
             --shadow-color-medium: rgba(0,0,0,0.15);
-            --shadow-color-strong: rgba(0,0,0,0.3); /* Stronger shadow */
-            --text-color: #343a40; /* Slightly darker text */
+            --shadow-color-strong: rgba(0,0,0,0.35); /* Stronger shadow */
+            --text-color: #343a40;
             --text-color-light: #6c757d;
             --heading-color: #212529;
             --tagline-color: #343a40;
-            --border-color: #dee2e6;
 
-            /* Spacing Scale */
-            --space-xxs: 4px;
-            --space-xs: 8px;
-            --space-sm: 12px;
-            --space-md: 16px;
-            --space-lg: 24px;
-            --space-xl: 32px;
-            --space-xxl: 48px;
-            --space-xxxl: 80px; /* More space between major sections */
+            /* Spacing Scale (Mathematical progression) */
+            --space-unit: 8px; /* Base unit */
+            --space-xxs: calc(var(--space-unit) * 0.5); /* 4px */
+            --space-xs: var(--space-unit); /* 8px */
+            --space-sm: calc(var(--space-unit) * 1.5); /* 12px */
+            --space-md: calc(var(--space-unit) * 2); /* 16px */
+            --space-lg: calc(var(--space-unit) * 3); /* 24px */
+            --space-xl: calc(var(--space-unit) * 4); /* 32px */
+            --space-xxl: calc(var(--space-unit) * 6); /* 48px */
+            --space-xxxl: calc(var(--space-unit) * 10); /* 80px */
 
             /* Border Radius */
             --border-radius-sm: 4px;
             --border-radius-md: 8px;
             --border-radius-lg: 12px;
             --border-radius-full: 50%;
+
+             /* Transition Durations & Easing */
+            --transition-duration-short: 0.2s;
+            --transition-duration-medium: 0.4s;
+            --transition-duration-long: 0.6s;
+            --transition-easing-standard: ease-in-out;
+             --transition-easing-springy: cubic-bezier(0.68, -0.55, 0.27, 1.55); /* For bouncy effects */
         }
 
         /* --- Base Styles --- */
@@ -55,7 +62,7 @@
 
         html {
             scroll-behavior: smooth;
-            scroll-padding-top: 90px; /* Account for potentially taller fixed nav */
+            scroll-padding-top: 90px;
         }
 
         body {
@@ -66,31 +73,49 @@
             color: var(--text-color);
             line-height: 1.7;
             position: relative;
-            padding-top: 80px; /* Padding for fixed nav */
+            padding-top: 80px;
             min-height: 100vh;
-             overflow-x: hidden; /* Prevent horizontal scroll from animations/shadows */
+            overflow-x: hidden;
+             /* Subtle Background Animation */
+            animation: backgroundGradient 20s ease infinite;
+            background-size: 200% 200%; /* Ensure gradient covers area during animation */
+        }
+
+        /* Background Gradient Animation */
+        @keyframes backgroundGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         /* Improve focus styles for accessibility */
-        a:focus, button:focus, input:focus, select:focus, textarea:focus {
+        a:focus, button:focus, input:focus, select:focus, textarea:focus, .card:focus-within, .skills-list li:focus-within, .timeline li:focus-within .timeline-content {
             outline: 3px solid var(--accent-color);
-            outline-offset: 2px;
-            box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.25); /* Add a subtle glow */
+            outline-offset: var(--space-xs);
+            box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.25);
+            z-index: 5; /* Bring focused element to front */
+            position: relative; /* Needed for z-index */
         }
+        /* Hide default outline for elements inside focused card */
+         .card:focus-within > *, .timeline li:focus-within .timeline-content > * {
+             outline: none;
+             box-shadow: none;
+         }
+
 
         /* --- Layout Containers --- */
         .container {
-            max-width: 1100px; /* Even wider container */
+            max-width: 1200px; /* Even wider max-width */
             width: 100%;
             margin: var(--space-md) auto;
-            padding: 0 var(--space-lg); /* More horizontal padding */
+            padding: 0 var(--space-lg);
         }
 
         .content-area {
              background: var(--container-bg);
-             padding: var(--space-xl) var(--space-xxl); /* More padding inside */
+             padding: var(--space-xl) var(--space-xxl);
              border-radius: var(--border-radius-lg);
-             box-shadow: 0 8px 30px var(--shadow-color-medium); /* Stronger initial shadow */
+             box-shadow: 0 10px 30px var(--shadow-color-medium); /* Stronger initial shadow */
         }
 
         /* --- Navigation Bar --- */
@@ -100,11 +125,11 @@
             left: 0;
             width: 100%;
             background-color: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 4px 20px var(--shadow-color-medium); /* Stronger shadow */
-            padding: var(--space-md) 0; /* More padding */
+            box-shadow: 0 4px 20px var(--shadow-color-medium);
+            padding: var(--space-sm) 0;
             z-index: 1000;
             text-align: center;
-            backdrop-filter: blur(12px); /* Stronger blur */
+            backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border-color);
         }
 
@@ -114,7 +139,7 @@
             margin: 0 var(--space-md);
             font-weight: 500;
             font-size: 1.05rem;
-            transition: color 0.3s ease, transform 0.2s ease;
+            transition: color var(--transition-duration-short) var(--transition-easing-standard), transform var(--transition-duration-short) var(--transition-easing-springy); /* Springy effect on hover */
             position: relative;
             padding-bottom: var(--space-xs);
             display: inline-block;
@@ -122,7 +147,7 @@
 
         .navbar nav a:hover {
             color: var(--primary-color);
-            transform: translateY(-3px); /* More pronounced lift */
+            transform: translateY(-4px); /* More pronounced lift */
         }
 
         .navbar nav a::after {
@@ -134,7 +159,7 @@
             left: 50%;
             transform: translateX(-50%);
             background-color: var(--accent-color);
-            transition: width 0.3s ease-in-out;
+            transition: width var(--transition-duration-medium) var(--transition-easing-standard);
         }
 
         .navbar nav a:hover::after {
@@ -143,15 +168,15 @@
 
         /* --- Hero/Header Section --- */
         #hero {
-             position: relative; /* For positioning background elements */
+             position: relative;
              padding-top: var(--space-xxl);
              padding-bottom: var(--space-xxxl);
              margin-bottom: var(--space-xxxl);
              text-align: center;
-             overflow: hidden; /* Hide overflowing pseudo-elements */
+             overflow: hidden;
         }
 
-        /* Optional: Subtle background pattern for hero */
+        /* Decorative shape/pattern in hero */
         #hero::before {
             content: '';
             position: absolute;
@@ -159,45 +184,46 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle, rgba(0,123,255,0.05) 0%, rgba(255,255,255,0) 50%);
+            background: radial-gradient(circle at top left, rgba(0,123,255,0.08) 0%, rgba(255,255,255,0) 30%),
+                        radial-gradient(circle at bottom right, rgba(255,193,7,0.08) 0%, rgba(255,255,255,0) 30%);
             z-index: 0;
-             pointer-events: none; /* Allow clicks through */
+             pointer-events: none;
         }
 
 
         .profile-image {
-            width: 200px; /* Larger image */
-            height: 200px;
+            width: 220px; /* Larger image */
+            height: 220px;
             border-radius: var(--border-radius-full);
             margin-bottom: var(--space-lg);
             object-fit: cover;
-            border: 8px solid var(--accent-color); /* Thicker border */
-            box-shadow: 0 10px 25px var(--shadow-color-medium); /* Stronger initial shadow */
-            transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1), box-shadow 0.5s ease; /* Smoother animation */
-            z-index: 1; /* Bring image above pseudo-element */
+            border: 8px solid var(--accent-color);
+            box-shadow: 0 12px 30px var(--shadow-color-medium);
+            transition: transform var(--transition-duration-medium) var(--transition-easing-springy), box-shadow var(--transition-duration-medium) var(--transition-easing-standard); /* Springy transform */
+            z-index: 1;
             position: relative;
         }
          .profile-image:hover {
-             transform: scale(1.1) rotate(5deg); /* More pronounced and interesting effect */
-             box-shadow: 0 15px 40px var(--shadow-color-strong);
+             transform: scale(1.12) rotate(5deg); /* More pronounced and interesting effect */
+             box-shadow: 0 20px 50px var(--shadow-color-strong);
          }
 
 
         h1 {
             font-family: 'Montserrat', sans-serif;
-            font-size: 4.5rem; /* Even larger heading */
+            font-size: 5rem; /* Even larger heading */
             color: var(--heading-color);
             margin-top: 0;
-            margin-bottom: var(--space-sm);
+            margin-bottom: var(--space-xs);
             font-weight: 900;
             line-height: 1.1;
-            letter-spacing: -2px; /* Tighter spacing */
-            text-shadow: 2px 2px 5px var(--shadow-color-light); /* Subtle text shadow */
+            letter-spacing: -3px; /* Tighter spacing */
+            text-shadow: 3px 3px 8px var(--shadow-color-light); /* More pronounced text shadow */
         }
 
         .tagline {
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.6rem; /* Larger tagline */
+            font-size: 1.7rem; /* Larger tagline */
             font-weight: 700;
             color: var(--tagline-color);
             margin-bottom: var(--space-xxl);
@@ -208,47 +234,48 @@
         section {
             margin-bottom: var(--space-xxxl); /* More space between sections */
             padding-top: var(--space-xxl); /* Padding for anchor links */
-             position: relative; /* Needed for separator positioning */
-             z-index: 1; /* Ensure content is above body background/divs */
+             position: relative;
+             z-index: 1;
         }
          section:last-of-type {
-             margin-bottom: var(--space-xl); /* Less margin for the last section before footer */
+             margin-bottom: var(--space-xl);
+             padding-bottom: 0; /* Remove padding bottom for the last section */
          }
 
         /* Creative Section Separator */
          section::after {
             content: '';
             position: absolute;
-            bottom: calc(var(--space-xxl) * -1 - 1px); /* Position below section */
+            bottom: calc(var(--space-xxl) * -1 - 1px);
             left: 50%;
             transform: translateX(-50%);
-            width: 150px; /* Wider separator */
-            height: 1px; /* Visual line thickness */
-            background: radial-gradient(ellipse at center, var(--border-color) 0%, rgba(255,255,255,0) 70%); /* Fading line */
-            z-index: 0; /* Below section content */
+            width: 200px; /* Wider separator */
+            height: 3px; /* Thicker visual line */
+            background: linear-gradient(to right, rgba(0,123,255,0) 0%, var(--primary-color) 50%, rgba(0,123,255,0) 100%); /* Gradient line */
+            z-index: 0;
              pointer-events: none;
          }
           section:last-of-type::after {
-             display: none; /* No separator after the last section */
+             display: none;
           }
 
 
          section h2 {
             font-family: 'Montserrat', sans-serif;
-            font-size: 2.8rem; /* Larger section heading size */
+            font-size: 3rem; /* Larger section heading size */
             color: var(--heading-color);
             margin-top: 0;
             margin-bottom: var(--space-xl);
             position: relative;
             text-align: center;
-            font-weight: 700;
+            font-weight: 800; /* Extra bold */
         }
 
          section h2::after {
              content: '';
              display: block;
-             width: 120px; /* Wider separator */
-             height: 5px; /* Thicker separator */
+             width: 150px; /* Wider separator */
+             height: 6px; /* Thicker separator */
              background-color: var(--primary-color);
              margin: var(--space-sm) auto 0;
              border-radius: 3px;
@@ -257,10 +284,10 @@
         /* --- About Section --- */
         #about p {
             text-align: justify;
-             max-width: 800px;
+             max-width: 900px; /* Wider text block */
              margin-left: auto;
              margin-right: auto;
-             font-size: 1.15rem; /* Slightly larger bio text */
+             font-size: 1.2rem; /* Larger bio text */
              color: #333;
              line-height: 1.8;
         }
@@ -275,22 +302,22 @@
 
         #links ul li {
             margin: var(--space-md) 0;
-             font-size: 1.2rem;
+             font-size: 1.3rem; /* Larger link text */
         }
          #links ul li i {
              margin-right: var(--space-sm);
              color: var(--accent-color);
-             width: 25px;
+             width: 28px; /* Wider icon area */
              text-align: center;
-             transition: transform 0.3s ease, color 0.3s ease; /* Add color transition */
+             transition: transform var(--transition-duration-short) var(--transition-easing-springy), color var(--transition-duration-short) var(--transition-easing-standard);
          }
          #links ul li:hover i {
-             transform: scale(1.3) rotate(8deg); /* More pronounced effect */
-              color: var(--primary-color); /* Change icon color on hover */
+             transform: scale(1.4) rotate(10deg); /* More pronounced effect */
+              color: var(--primary-color);
          }
          #links ul li a {
               font-weight: 500;
-              transition: color 0.3s ease, text-decoration 0.3s ease;
+              transition: color var(--transition-duration-short) var(--transition-easing-standard), text-decoration var(--transition-duration-short) var(--transition-easing-standard);
          }
          #links ul li a:hover {
               color: var(--primary-color);
@@ -298,12 +325,13 @@
          }
 
 
-        /* --- Card Grid Layout --- */
+        /* --- Card Grid Layout (Adding 3D Effect) --- */
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Adjusted min width */
             gap: var(--space-lg);
             padding: 0;
+             perspective: 1000px; /* Add perspective to create 3D space */
         }
 
         .card {
@@ -311,19 +339,20 @@
             border: 1px solid var(--border-color);
             border-radius: var(--border-radius-md);
             padding: var(--space-md);
-            box-shadow: 0 8px 20px var(--shadow-color-medium); /* Stronger initial shadow */
+            box-shadow: 0 8px 25px var(--shadow-color-medium); /* Stronger initial shadow */
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1), box-shadow 0.5s ease;
+            transition: transform var(--transition-duration-medium) var(--transition-easing-springy), box-shadow var(--transition-duration-medium) var(--transition-easing-standard);
              text-align: left;
-             overflow: hidden; /* Hide overflowing image/content */
-             position: relative; /* Needed for pseudo-elements or internal positioning */
+             overflow: hidden;
+             position: relative;
+             transform-style: preserve-3d; /* Preserve 3D space for children if needed */
         }
 
         .card:hover {
-            transform: translateY(-12px); /* Lift card more */
-            box-shadow: 0 20px 40px var(--shadow-color-strong); /* Much stronger shadow on hover */
+            transform: translateY(-15px) rotateX(5deg) rotateY(5deg); /* Lift and subtle 3D tilt */
+            box-shadow: 0 25px 50px var(--shadow-color-strong), 0 0 10px var(--accent-color); /* Stronger shadow and subtle accent glow */
         }
 
          /* Optional: Subtle accent border on hover */
@@ -333,20 +362,21 @@
              top: 0;
              left: 0;
              width: 100%;
-             height: 5px; /* Thickness of the accent border */
+             height: 6px; /* Thicker accent border */
              background-color: var(--accent-color);
-             transform: translateY(-100%); /* Start above the card */
-             transition: transform 0.4s ease-in-out;
+             transform: translateY(-100%);
+             transition: transform var(--transition-duration-medium) var(--transition-easing-standard);
+              z-index: 2; /* Ensure it's on top */
          }
           .card:hover::before {
-              transform: translateY(0); /* Slide down on hover */
+              transform: translateY(0);
           }
 
 
          .card-image {
              width: calc(100% + var(--space-md) * 2);
              margin: calc(-1 * var(--space-md)) calc(-1 * var(--space-md)) var(--space-md) calc(-1 * var(--space-md));
-             height: 220px;
+             height: 240px; /* Taller images */
              object-fit: cover;
              border-bottom: 1px solid var(--border-color);
          }
@@ -357,21 +387,21 @@
             margin-top: 0;
             margin-bottom: var(--space-sm);
             color: var(--secondary-color);
-            font-size: 1.4rem;
+            font-size: 1.5rem; /* Larger card titles */
             font-weight: 700;
             line-height: 1.4;
         }
 
         .card p {
             margin-bottom: var(--space-md);
-            font-size: 1rem;
+            font-size: 1.05rem; /* Slightly larger text */
             color: var(--text-color);
             flex-grow: 1;
             line-height: 1.7;
         }
 
         .card .card-meta {
-             font-size: 0.95rem;
+             font-size: 1rem; /* Larger meta text */
              color: var(--text-color-light);
              margin-bottom: var(--space-sm);
              font-weight: 500;
@@ -382,7 +412,7 @@
          .card .card-meta i {
               margin-right: var(--space-xs);
               color: var(--primary-color);
-              width: 16px;
+              width: 18px; /* Wider icon */
               text-align: center;
          }
 
@@ -394,50 +424,51 @@
              display: flex;
              flex-wrap: wrap;
              gap: var(--space-sm);
-             align-items: center; /* Vertically align links */
+             align-items: center;
         }
 
         .card .card-links a {
-             font-size: 1rem;
+             font-size: 1.05rem; /* Larger link text */
              white-space: nowrap;
              font-weight: 500;
              display: inline-flex;
              align-items: center;
-              padding: var(--space-xs);
+              padding: var(--space-xs) var(--space-sm); /* More padding */
               border-radius: var(--border-radius-sm);
-              transition: background-color 0.3s ease, color 0.3s ease; /* Add color transition */
+              transition: background-color var(--transition-duration-short) var(--transition-easing-standard), color var(--transition-duration-short) var(--transition-easing-standard);
         }
          .card .card-links a:hover {
-             background-color: #f0f0f0;
-             color: var(--primary-color); /* Change link color on hover */
+             background-color: #e9ecef; /* Lighter background on hover */
+             color: var(--primary-color);
          }
          .card .card-links a i {
               margin-right: var(--space-xs);
-              font-size: 0.9rem;
+              font-size: 1rem; /* Larger icon */
          }
 
          /* Style for Featured Card (Highlight) */
          .card.is-featured {
-             border-color: var(--highlight-color); /* Highlight border */
-             box-shadow: 0 8px 25px var(--shadow-color-medium), 0 0 15px var(--highlight-color); /* Add highlight glow */
-             transform: scale(1.03); /* Slightly larger */
-             background-color: #fffbe6; /* Light yellow background */
+             border-color: var(--highlight-color);
+             box-shadow: 0 8px 25px var(--shadow-color-medium), 0 0 15px var(--highlight-color);
+             transform: scale(1.04) rotateZ(-1deg); /* Slightly larger and rotated */
+             background-color: #fffbe6;
          }
           .card.is-featured::before {
-              background-color: var(--highlight-color); /* Highlight accent border */
+              background-color: var(--highlight-color);
           }
           .card.is-featured:hover {
-             transform: translateY(-15px) scale(1.05); /* More pronounced hover effect */
-              box-shadow: 0 25px 50px var(--shadow-color-strong), 0 0 20px var(--highlight-color); /* Stronger highlight glow on hover */
+             transform: translateY(-18px) rotateX(5deg) rotateY(5deg) scale(1.07); /* More pronounced hover effect */
+              box-shadow: 0 30px 60px var(--shadow-color-strong), 0 0 25px var(--highlight-color); /* Stronger highlight glow on hover */
           }
           .card.is-featured h3,
           .card.is-featured .card-meta,
           .card.is-featured p,
           .card.is-featured .card-links a {
-              color: var(--secondary-color); /* Ensure readability on light background */
+              color: var(--secondary-color);
           }
            .card.is-featured .card-links a:hover {
-               background-color: #ffe066; /* Hover on highlight links */
+               background-color: #ffe066;
+               color: var(--secondary-color);
            }
 
 
@@ -459,21 +490,21 @@
              font-size: 0.95rem;
              font-weight: 500;
              border: 1px solid var(--border-color);
-             transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+             transition: background-color var(--transition-duration-short) var(--transition-easing-standard), transform var(--transition-duration-short) var(--transition-easing-springy), box-shadow var(--transition-duration-short) var(--transition-easing-standard);
              cursor: pointer;
-             display: inline-flex; /* Align icon and text */
+             display: inline-flex;
              align-items: center;
          }
           #skills .skills-list li:hover {
               background-color: var(--accent-color);
               color: white;
-              transform: translateY(-3px);
-              box-shadow: 0 3px 6px var(--shadow-color-light);
+              transform: translateY(-5px); /* More pronounced lift */
+              box-shadow: 0 5px 10px var(--shadow-color-light); /* Subtle shadow on hover */
           }
          #skills .skills-list li i {
               margin-right: var(--space-xs);
               color: var(--primary-color);
-              transition: color 0.3s ease;
+              transition: color var(--transition-duration-short) var(--transition-easing-standard);
          }
           #skills .skills-list li:hover i {
               color: white;
@@ -503,7 +534,7 @@
             top: 0;
             bottom: 0;
             left: 50%;
-            margin-left: -1.5px; /* Center the line */
+            margin-left: -1.5px;
         }
 
         .timeline li {
@@ -531,23 +562,24 @@
             position: absolute;
             width: var(--space-lg);
             height: var(--space-lg);
-            right: -14px; /* Position on the line */
+            right: -14px;
             background-color: var(--accent-color);
-            border: 4px solid var(--primary-color); /* Match primary color border */
-            top: 30px; /* Position from top of li */
+            border: 4px solid var(--primary-color);
+            top: 30px;
             border-radius: var(--border-radius-full);
             z-index: 1;
-            transition: background-color 0.3s ease, border-color 0.3s ease;
+            transition: background-color var(--transition-duration-short) var(--transition-easing-standard), border-color var(--transition-duration-short) var(--transition-easing-standard), transform var(--transition-duration-short) var(--transition-easing-springy);
         }
 
         /* Circles for left items */
         .timeline li:nth-child(even)::after {
-            left: -14px; /* Position on the line for left items */
+            left: -14px;
         }
 
         .timeline li:hover::after {
-             background-color: var(--primary-color); /* Change circle color on hover */
-             border-color: var(--accent-color); /* Change border color on hover */
+             background-color: var(--primary-color);
+             border-color: var(--accent-color);
+             transform: scale(1.2); /* Enlarge circle on hover */
         }
 
 
@@ -558,11 +590,12 @@
             position: relative;
             border-radius: var(--border-radius-md);
              box-shadow: 0 4px 15px var(--shadow-color-light);
-             transition: transform 0.3s ease, box-shadow 0.3s ease;
+             transition: transform var(--transition-duration-short) var(--transition-easing-springy), box-shadow var(--transition-duration-short) var(--transition-easing-standard);
+             z-index: 1; /* Ensure content is above line */
         }
          .timeline li:hover .timeline-content {
-              transform: translateY(-5px);
-              box-shadow: 0 6px 20px var(--shadow-color-medium);
+              transform: translateY(-8px); /* More pronounced lift */
+              box-shadow: 0 8px 20px var(--shadow-color-medium);
          }
 
 
@@ -571,27 +604,27 @@
             content: " ";
             position: absolute;
             top: var(--space-md);
-            border-width: 8px; /* Size of the arrow */
+            border-width: 8px;
             border-style: solid;
-            border-color: transparent transparent transparent var(--card-bg); /* Arrow color matching card background */
-            right: -16px; /* Position the arrow */
+            border-color: transparent transparent transparent var(--card-bg);
+            right: -16px;
         }
 
         /* Arrow for left items */
         .timeline li:nth-child(even) .timeline-content::before {
              left: -16px;
-             border-color: transparent var(--card-bg) transparent transparent; /* Arrow color */
+             border-color: transparent var(--card-bg) transparent transparent;
         }
          /* Match border color */
          .timeline-content::after {
              content: " ";
              position: absolute;
              top: var(--space-md);
-             border-width: 9px; /* Slightly larger border for visibility */
+             border-width: 9px;
              border-style: solid;
-             border-color: transparent transparent transparent var(--border-color); /* Arrow border color */
-             right: -18px; /* Position the border arrow */
-             z-index: -1; /* Behind the main arrow */
+             border-color: transparent transparent transparent var(--border-color);
+             right: -18px;
+             z-index: -1;
          }
          .timeline li:nth-child(even) .timeline-content::after {
              left: -18px;
@@ -616,6 +649,8 @@
              font-size: 0.9rem;
              color: var(--text-color-light);
              font-weight: 500;
+             margin-bottom: var(--space-sm);
+             display: block; /* Ensure date is on its own line */
          }
 
         /* --- Testimonials Section --- */
@@ -628,8 +663,6 @@
              margin-bottom: var(--space-xl);
          }
          .testimonial-slider {
-             /* If you add a slider library, style it here */
-             /* For static version, just style the quotes */
              display: grid;
              grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
              gap: var(--space-lg);
@@ -642,31 +675,39 @@
              font-style: italic;
              color: #555;
              position: relative;
+              transition: transform var(--transition-duration-short) var(--transition-easing-springy), box-shadow var(--transition-duration-short) var(--transition-easing-standard); /* Add hover effect */
          }
+          .testimonial-item:hover {
+             transform: translateY(-5px);
+             box-shadow: 0 6px 20px var(--shadow-color-medium);
+          }
           .testimonial-item::before {
-              content: "\201C"; /* Opening quote */
-              font-size: 3em;
+              content: "\201C";
+              font-size: 3.5em; /* Larger quote */
               color: var(--primary-color);
               position: absolute;
               top: var(--space-xs);
               left: var(--space-md);
-              opacity: 0.2;
-              font-family: serif; /* Ensure quote style */
+              opacity: 0.15; /* More subtle */
+              font-family: serif;
+               z-index: 0;
           }
            .testimonial-item p {
-              margin-top: var(--space-md); /* Space below quote */
+              margin-top: var(--space-md);
               margin-bottom: var(--space-md);
               font-size: 1.05rem;
               line-height: 1.7;
               color: var(--text-color);
-              font-style: normal; /* Quote text is not italic */
+              font-style: normal;
+               position: relative; /* Bring text above pseudo-element */
+               z-index: 1;
            }
            .testimonial-item .author {
               font-weight: 700;
               font-style: normal;
               color: var(--secondary-color);
               text-align: right;
-              display: block; /* Author on new line */
+              display: block;
               margin-top: var(--space-sm);
               font-size: 1rem;
            }
@@ -681,8 +722,11 @@
         #contact {
             text-align: center;
         }
+         #contact h2 {
+             margin-bottom: var(--space-xl);
+         }
         #contact p {
-             font-size: 1.1rem;
+             font-size: 1.15rem; /* Larger text */
              margin-bottom: var(--space-md);
              max-width: 700px;
              margin-left: auto;
@@ -690,44 +734,44 @@
              line-height: 1.8;
              color: #333;
         }
-         #contact h2 {
-             margin-bottom: var(--space-xl); /* Space below heading */
-         }
         .contact-info {
              display: flex;
              flex-direction: column;
              align-items: center;
-             font-size: 1.2rem;
+             font-size: 1.3rem; /* Larger contact info */
              font-weight: 500;
              color: var(--secondary-color);
         }
          .contact-info a {
-             margin-top: var(--space-xs);
+             margin-top: var(--space-sm); /* Adjusted margin */
              color: var(--secondary-color);
              text-decoration: none;
-             transition: color 0.3s ease, transform 0.2s ease; /* Add transform transition */
-             display: inline-flex; /* Align icon and text */
+             transition: color var(--transition-duration-short) var(--transition-easing-standard), transform var(--transition-duration-short) var(--transition-easing-springy);
+             display: inline-flex;
              align-items: center;
+             padding: var(--space-xs); /* Add padding for larger click area */
+             border-radius: var(--border-radius-sm);
          }
          .contact-info a:hover {
              color: var(--primary-color);
              text-decoration: underline;
-             transform: translateX(5px); /* Slide right on hover */
+             transform: translateX(8px); /* More pronounced slide */
          }
          .contact-info i {
               margin-right: var(--space-sm);
               color: var(--accent-color);
-              width: 20px;
+              width: 25px; /* Wider icon area */
               text-align: center;
-              transition: transform 0.3s ease; /* Icon hover effect */
+              transition: transform var(--transition-duration-short) var(--transition-easing-springy), color var(--transition-duration-short) var(--transition-easing-standard);
          }
          .contact-info a:hover i {
-             transform: scale(1.1); /* Slightly enlarge icon */
+             transform: scale(1.2);
+             color: var(--primary-color);
          }
 
          #contact .location-edu {
              margin-top: var(--space-md);
-             font-size: 1rem;
+             font-size: 1rem; /* Slightly larger */
              color: var(--text-color-light);
              font-weight: 400;
          }
@@ -741,14 +785,14 @@
 
         /* --- Footer --- */
         .footer {
-            margin-top: var(--space-xxl); /* Adjusted margin top */
+            margin-top: var(--space-xxl);
             font-size: 0.95rem;
             color: var(--footer-color);
             border-top: 1px solid var(--border-color);
             padding: var(--space-xl) 0;
             text-align: center;
         }
-        .footer p {
+         .footer p {
              margin-top: var(--space-sm);
              margin-bottom: 0;
              font-size: 0.9rem;
@@ -757,30 +801,36 @@
 
 
         /* --- Responsive Adjustments --- */
+        @media (max-width: 1200px) {
+             .container {
+                 padding: 0 var(--space-lg);
+             }
+        }
+
         @media (max-width: 1000px) {
             .content-area {
                 padding: var(--space-xl);
             }
              .timeline::after {
-                 left: var(--space-lg); /* Move line to the left */
+                 left: var(--space-lg);
              }
              .timeline li {
                  width: 100%;
-                 padding-left: var(--space-xxl); /* Padding for content */
+                 padding-left: var(--space-xxl);
                  padding-right: var(--space-md);
              }
-             .timeline li:nth-child(even) { /* Adjust left items */
+             .timeline li:nth-child(even) {
                  left: 0;
                  padding-left: var(--space-xxl);
                  padding-right: var(--space-md);
              }
              .timeline li::after {
-                 left: var(--space-lg); /* Position circles on the left line */
+                 left: var(--space-lg);
              }
               .timeline li:nth-child(even)::after {
-                  left: var(--space-lg); /* Position circles on the left line */
+                  left: var(--space-lg);
               }
-              .timeline-content::before { /* Adjust arrows for left items */
+              .timeline-content::before {
                   right: auto;
                   left: -16px;
                    border-color: transparent var(--card-bg) transparent transparent;
@@ -789,7 +839,7 @@
                    left: -16px;
                     border-color: transparent var(--card-bg) transparent transparent;
               }
-               .timeline-content::after { /* Adjust arrow borders */
+               .timeline-content::after {
                   right: auto;
                   left: -18px;
                    border-color: transparent var(--border-color) transparent transparent;
@@ -798,7 +848,35 @@
                    left: -18px;
                     border-color: transparent var(--border-color) transparent transparent;
                }
-
+             h1 {
+                 font-size: 4rem;
+                 letter-spacing: -2px;
+             }
+             section h2 {
+                 font-size: 2.8rem;
+             }
+             .tagline {
+                 font-size: 1.6rem;
+             }
+             .profile-image {
+                 width: 180px;
+                 height: 180px;
+             }
+             .card h3 {
+                 font-size: 1.4rem;
+             }
+             .card p {
+                 font-size: 1rem;
+             }
+             .card .card-links a {
+                  font-size: 1rem;
+             }
+             .card.is-featured {
+                 transform: scale(1.02) rotateZ(-1deg);
+             }
+              .card.is-featured:hover {
+                transform: translateY(-15px) rotateX(5deg) rotateY(5deg) scale(1.04);
+             }
         }
 
         @media (max-width: 768px) {
@@ -821,20 +899,20 @@
              }
              .navbar nav a {
                  margin: 0 var(--space-sm);
-                 font-size: 1rem;
+                 font-size: 0.95rem;
              }
             h1 {
-                font-size: 3.8rem;
+                font-size: 3.5rem;
             }
              section h2 {
-                 font-size: 2.4rem;
+                 font-size: 2.2rem;
              }
             .tagline {
                 font-size: 1.5rem;
             }
             .profile-image {
-                width: 160px;
-                height: 160px;
+                width: 150px;
+                height: 150px;
                  border-width: 6px;
             }
              section {
@@ -842,19 +920,39 @@
                  padding-bottom: var(--space-xl);
                  margin-bottom: var(--space-xxl);
              }
-             section::after {
+              section::after {
                  bottom: calc(var(--space-xl) * -1 - 1px);
              }
 
             .grid-container {
-                 grid-template-columns: 1fr; /* Stack cards on small screens */
+                 grid-template-columns: 1fr;
                  gap: var(--space-md);
+                 perspective: none; /* Remove perspective on small screens */
             }
-            .card {
-                 padding: var(--space-md);
-            }
+             .card {
+                 transform: none !important; /* Disable 3D transform */
+                 box-shadow: 0 6px 20px var(--shadow-color-medium); /* Standard shadow */
+             }
+              .card:hover {
+                 transform: translateY(-8px) !important; /* Just lift on hover */
+                  box-shadow: 0 10px 30px var(--shadow-color-medium);
+              }
+               .card::before {
+                  height: 4px; /* Thinner accent border */
+               }
+                .card.is-featured {
+                  transform: rotateZ(-1deg) !important; /* Keep subtle rotation */
+                   box-shadow: 0 6px 20px var(--shadow-color-medium), 0 0 10px var(--highlight-color);
+                   background-color: #fffbe6;
+                }
+                 .card.is-featured:hover {
+                     transform: translateY(-8px) rotateZ(-1deg) !important;
+                     box-shadow: 0 10px 30px var(--shadow-color-medium), 0 0 15px var(--highlight-color);
+                 }
+
+
              .card-image {
-                 height: 200px;
+                 height: 180px;
                   width: calc(100% + var(--space-md) * 2);
                  margin: calc(-1 * var(--space-md)) calc(-1 * var(--space-md)) var(--space-md) calc(-1 * var(--space-md));
              }
@@ -890,17 +988,24 @@
              .timeline li:nth-child(even)::after {
                  left: var(--space-lg);
              }
-             .timeline-content::before,
-              .timeline li:nth-child(even) .timeline-content::before {
-                   left: -16px;
-                   right: auto;
+             /* Arrows remain pointing left towards the single line */
+             .timeline-content::before {
+                 right: auto;
+                 left: -16px;
+                  border-color: transparent var(--card-bg) transparent transparent;
+             }
+             .timeline li:nth-child(even) .timeline-content::before {
+                  left: -16px;
                    border-color: transparent var(--card-bg) transparent transparent;
-              }
-             .timeline-content::after,
-              .timeline li:nth-child(even) .timeline-content::after {
-                  left: -18px;
-                  right: auto;
+             }
+              .timeline-content::after {
+                 right: auto;
+                 left: -18px;
                   border-color: transparent var(--border-color) transparent transparent;
+              }
+             .timeline li:nth-child(even) .timeline-content::after {
+                  left: -18px;
+                   border-color: transparent var(--border-color) transparent transparent;
              }
              .testimonial-slider {
                  grid-template-columns: 1fr;
@@ -927,17 +1032,17 @@
              }
              .navbar nav a {
                  margin: 0 var(--space-xs);
-                 font-size: 0.85rem;
+                 font-size: 0.8rem; /* Smaller nav links */
              }
              h1 {
-                 font-size: 3rem;
+                 font-size: 2.8rem;
                  letter-spacing: -1px;
              }
               section h2 {
                  font-size: 2rem;
              }
              .tagline {
-                 font-size: 1.4rem;
+                 font-size: 1.3rem;
              }
              .profile-image {
                  width: 120px;
@@ -999,16 +1104,18 @@
                  top: 25px;
              }
              .timeline-content::before {
-                 right: -14px;
+                 right: auto;
+                 left: -14px;
                  border-width: 7px;
              }
              .timeline li:nth-child(even) .timeline-content::before {
                   left: -14px;
              }
               .timeline-content::after {
-                 right: -15px;
+                 right: auto;
+                 left: -15px;
                  border-width: 8px;
-             }
+              }
              .timeline li:nth-child(even) .timeline-content::after {
                   left: -15px;
              }
@@ -1023,7 +1130,8 @@
         <nav>
             <a href="#hero">Home</a>
             <a href="#about">About</a>
-             <a href="#timeline">Journey</a> <a href="#skills">Skills</a>
+             <a href="#timeline">Journey</a>
+            <a href="#skills">Skills</a>
             <a href="#projects">Projects</a>
             <a href="#content">Content</a>
             <a href="#mentions">Mentions</a>
