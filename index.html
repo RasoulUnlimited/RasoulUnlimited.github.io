@@ -4,71 +4,93 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Rasoul Unlimited | محمد رسول سهرابی</title>
-    <meta name="description" content="Official website of Mohammad Rasoul Sohrabi (Rasoul Unlimited), a biomedical engineering student, developer, designer, and founder. Explore my projects, content, skills, and media mentions showcasing my digital presence and notability.">
+    <meta name="description" content="Discover Mohammad Rasoul Sohrabi's impactful journey in biomedical engineering, software development, and digital strategy. Featuring key projects, media mentions, skills, and achievements that define his notable digital presence."/>
 
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Roboto:wght@400;500&display=swap" rel="stylesheet"/>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
 
     <style>
+        /* --- CSS Variables --- */
         :root {
             /* Color Palette */
             --primary-color: #0056b3; /* Deep Blue */
             --secondary-color: #212529; /* Dark Charcoal */
             --accent-color: #007bff; /* Bright Blue */
-            --background-start-color: #e9ecef; /* Light Grey for Gradient Start */
-            --background-end-color: #f8f9fa; /* Very Light Grey for Gradient End */
+            --highlight-color: #ffc107; /* Yellow/Orange for highlights */
+            --background-start-color: #e9ecef;
+            --background-end-color: #f8f9fa;
             --container-bg: white;
             --card-bg: #ffffff;
-            --shadow-color: rgba(0,0,0,0.15); /* Slightly stronger shadow */
-            --text-color: #495057;
+            --shadow-color-light: rgba(0,0,0,0.1);
+            --shadow-color-medium: rgba(0,0,0,0.15);
+            --shadow-color-strong: rgba(0,0,0,0.3); /* Stronger shadow */
+            --text-color: #343a40; /* Slightly darker text */
+            --text-color-light: #6c757d;
             --heading-color: #212529;
-            --tagline-color: #6c757d;
+            --tagline-color: #343a40;
             --border-color: #dee2e6;
 
-            /* Spacing */
-            --space-xs: 5px;
-            --space-sm: 10px;
-            --space-md: 20px;
-            --space-lg: 30px;
-            --space-xl: 40px;
-            --space-xxl: 60px; /* More space between sections */
+            /* Spacing Scale */
+            --space-xxs: 4px;
+            --space-xs: 8px;
+            --space-sm: 12px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-xxl: 48px;
+            --space-xxxl: 80px; /* More space between major sections */
+
+            /* Border Radius */
+            --border-radius-sm: 4px;
+            --border-radius-md: 8px;
+            --border-radius-lg: 12px;
+            --border-radius-full: 50%;
         }
 
-        /* Smooth scrolling and padding for fixed nav */
+        /* --- Base Styles --- */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
         html {
             scroll-behavior: smooth;
-            /* Account for fixed header height when scrolling to anchor links */
-            scroll-padding-top: 80px; /* Should be slightly more than navbar height */
+            scroll-padding-top: 90px; /* Account for potentially taller fixed nav */
         }
 
         body {
-            font-family: 'Roboto', "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, var(--background-start-color), var(--background-end-color)); /* Subtle gradient background */
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, var(--background-start-color) 0%, var(--background-end-color) 100%);
             margin: 0;
             padding: 0;
             color: var(--text-color);
-            line-height: 1.7; /* Slightly increased line height for readability */
-            box-sizing: border-box;
+            line-height: 1.7;
             position: relative;
-            padding-top: 70px; /* Still need body padding for initial load */
+            padding-top: 80px; /* Padding for fixed nav */
+            min-height: 100vh;
+             overflow-x: hidden; /* Prevent horizontal scroll from animations/shadows */
         }
 
-        /* Container for overall layout */
+        /* Improve focus styles for accessibility */
+        a:focus, button:focus, input:focus, select:focus, textarea:focus {
+            outline: 3px solid var(--accent-color);
+            outline-offset: 2px;
+            box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.25); /* Add a subtle glow */
+        }
+
+        /* --- Layout Containers --- */
         .container {
-            max-width: 960px; /* Even wider container */
+            max-width: 1100px; /* Even wider container */
             width: 100%;
-            margin: var(--space-md) auto; /* Use variable */
-            padding: 0 var(--space-md); /* Use variable */
-            box-sizing: border-box;
+            margin: var(--space-md) auto;
+            padding: 0 var(--space-lg); /* More horizontal padding */
         }
 
-        /* Style for content within the container */
         .content-area {
              background: var(--container-bg);
-             padding: var(--space-xl); /* Use variable */
-             border-radius: 12px;
-             box-shadow: 0 0 30px var(--shadow-color); /* Stronger shadow */
+             padding: var(--space-xl) var(--space-xxl); /* More padding inside */
+             border-radius: var(--border-radius-lg);
+             box-shadow: 0 8px 30px var(--shadow-color-medium); /* Stronger initial shadow */
         }
 
         /* --- Navigation Bar --- */
@@ -78,40 +100,41 @@
             left: 0;
             width: 100%;
             background-color: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 2px 15px var(--shadow-color); /* Stronger shadow */
-            padding: var(--space-sm) 0; /* Use variable */
+            box-shadow: 0 4px 20px var(--shadow-color-medium); /* Stronger shadow */
+            padding: var(--space-md) 0; /* More padding */
             z-index: 1000;
             text-align: center;
-            backdrop-filter: blur(10px); /* Stronger blur */
+            backdrop-filter: blur(12px); /* Stronger blur */
             border-bottom: 1px solid var(--border-color);
         }
 
         .navbar nav a {
             color: var(--secondary-color);
             text-decoration: none;
-            margin: 0 var(--space-md); /* Use variable */
+            margin: 0 var(--space-md);
             font-weight: 500;
-            font-size: 1.05rem; /* Slightly larger nav links */
-            transition: color 0.3s ease;
+            font-size: 1.05rem;
+            transition: color 0.3s ease, transform 0.2s ease;
             position: relative;
-            padding-bottom: var(--space-xs); /* Add padding for underline */
+            padding-bottom: var(--space-xs);
+            display: inline-block;
         }
 
         .navbar nav a:hover {
             color: var(--primary-color);
+            transform: translateY(-3px); /* More pronounced lift */
         }
 
-        /* Animated underline effect */
         .navbar nav a::after {
             content: '';
             position: absolute;
             width: 0;
-            height: 3px; /* Thicker underline */
+            height: 3px;
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
             background-color: var(--accent-color);
-            transition: width 0.3s ease-in-out; /* Smoother transition */
+            transition: width 0.3s ease-in-out;
         }
 
         .navbar nav a:hover::after {
@@ -120,63 +143,102 @@
 
         /* --- Hero/Header Section --- */
         #hero {
-             padding-top: 0;
-             margin-bottom: var(--space-xxl); /* Use variable */
+             position: relative; /* For positioning background elements */
+             padding-top: var(--space-xxl);
+             padding-bottom: var(--space-xxxl);
+             margin-bottom: var(--space-xxxl);
              text-align: center;
+             overflow: hidden; /* Hide overflowing pseudo-elements */
         }
 
+        /* Optional: Subtle background pattern for hero */
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0,123,255,0.05) 0%, rgba(255,255,255,0) 50%);
+            z-index: 0;
+             pointer-events: none; /* Allow clicks through */
+        }
+
+
         .profile-image {
-            width: 180px; /* Even larger image */
-            height: 180px;
-            border-radius: 50%;
-            margin-bottom: var(--space-lg); /* Use variable */
+            width: 200px; /* Larger image */
+            height: 200px;
+            border-radius: var(--border-radius-full);
+            margin-bottom: var(--space-lg);
             object-fit: cover;
-            border: 6px solid var(--accent-color); /* Thicker border */
-            box-shadow: 0 8px 16px var(--shadow-color); /* Stronger shadow */
-            transition: transform 0.4s ease-in-out; /* Smoother transition */
+            border: 8px solid var(--accent-color); /* Thicker border */
+            box-shadow: 0 10px 25px var(--shadow-color-medium); /* Stronger initial shadow */
+            transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1), box-shadow 0.5s ease; /* Smoother animation */
+            z-index: 1; /* Bring image above pseudo-element */
+            position: relative;
         }
          .profile-image:hover {
-             transform: scale(1.08) rotate(2deg); /* More noticeable effect */
+             transform: scale(1.1) rotate(5deg); /* More pronounced and interesting effect */
+             box-shadow: 0 15px 40px var(--shadow-color-strong);
          }
 
 
         h1 {
             font-family: 'Montserrat', sans-serif;
-            font-size: 3.5rem; /* Even larger heading */
+            font-size: 4.5rem; /* Even larger heading */
             color: var(--heading-color);
             margin-top: 0;
-            margin-bottom: var(--space-sm); /* Use variable */
-            font-weight: 800; /* Extra bold */
+            margin-bottom: var(--space-sm);
+            font-weight: 900;
             line-height: 1.1;
+            letter-spacing: -2px; /* Tighter spacing */
+            text-shadow: 2px 2px 5px var(--shadow-color-light); /* Subtle text shadow */
         }
 
         .tagline {
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.4rem; /* Even larger tagline */
-            font-weight: 600;
+            font-size: 1.6rem; /* Larger tagline */
+            font-weight: 700;
             color: var(--tagline-color);
-            margin-bottom: var(--space-xxl); /* Use variable */
+            margin-bottom: var(--space-xxl);
             margin-top: 0;
         }
 
         /* --- General Section Styling --- */
         section {
-            margin-bottom: var(--space-xxl); /* Use variable */
-            padding-top: var(--space-lg); /* Padding for anchor links, higher than nav height */
-            border-bottom: 1px solid var(--border-color); /* Subtle separator */
-            padding-bottom: var(--space-xxl); /* Add padding below section before separator */
+            margin-bottom: var(--space-xxxl); /* More space between sections */
+            padding-top: var(--space-xxl); /* Padding for anchor links */
+             position: relative; /* Needed for separator positioning */
+             z-index: 1; /* Ensure content is above body background/divs */
         }
-        section:last-child {
-             border-bottom: none; /* No border for the last section */
-             padding-bottom: 0;
-        }
+         section:last-of-type {
+             margin-bottom: var(--space-xl); /* Less margin for the last section before footer */
+         }
+
+        /* Creative Section Separator */
+         section::after {
+            content: '';
+            position: absolute;
+            bottom: calc(var(--space-xxl) * -1 - 1px); /* Position below section */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px; /* Wider separator */
+            height: 1px; /* Visual line thickness */
+            background: radial-gradient(ellipse at center, var(--border-color) 0%, rgba(255,255,255,0) 70%); /* Fading line */
+            z-index: 0; /* Below section content */
+             pointer-events: none;
+         }
+          section:last-of-type::after {
+             display: none; /* No separator after the last section */
+          }
+
 
          section h2 {
             font-family: 'Montserrat', sans-serif;
-            font-size: 2.2rem; /* Larger section heading size */
+            font-size: 2.8rem; /* Larger section heading size */
             color: var(--heading-color);
             margin-top: 0;
-            margin-bottom: var(--space-xl); /* Use variable */
+            margin-bottom: var(--space-xl);
             position: relative;
             text-align: center;
             font-weight: 700;
@@ -185,94 +247,107 @@
          section h2::after {
              content: '';
              display: block;
-             width: 80px; /* Wider separator */
-             height: 4px; /* Thicker separator */
+             width: 120px; /* Wider separator */
+             height: 5px; /* Thicker separator */
              background-color: var(--primary-color);
-             margin: var(--space-sm) auto 0; /* Use variable */
-             border-radius: 2px;
+             margin: var(--space-sm) auto 0;
+             border-radius: 3px;
          }
 
-
-        /* Align text left within sections */
+        /* --- About Section --- */
         #about p {
             text-align: justify;
-             max-width: 800px; /* Limit width for readability */
+             max-width: 800px;
              margin-left: auto;
              margin-right: auto;
-             font-size: 1.05rem; /* Slightly larger bio text */
+             font-size: 1.15rem; /* Slightly larger bio text */
              color: #333;
+             line-height: 1.8;
         }
 
         /* --- Links Section --- */
         #links ul {
             padding: 0;
             list-style-type: none;
-            margin-bottom: var(--space-md); /* Use variable */
+            margin-bottom: var(--space-md);
              text-align: center;
         }
 
         #links ul li {
-            margin: var(--space-md) 0; /* Use variable */
-             font-size: 1.2rem; /* Larger link text */
+            margin: var(--space-md) 0;
+             font-size: 1.2rem;
         }
          #links ul li i {
-             margin-right: var(--space-sm); /* Use variable */
+             margin-right: var(--space-sm);
              color: var(--accent-color);
-             width: 25px; /* Fixed width for icon alignment */
+             width: 25px;
              text-align: center;
-             transition: transform 0.3s ease; /* Icon hover effect */
+             transition: transform 0.3s ease, color 0.3s ease; /* Add color transition */
          }
          #links ul li:hover i {
-             transform: scale(1.2); /* Enlarge icon on hover */
+             transform: scale(1.3) rotate(8deg); /* More pronounced effect */
+              color: var(--primary-color); /* Change icon color on hover */
          }
          #links ul li a {
               font-weight: 500;
+              transition: color 0.3s ease, text-decoration 0.3s ease;
+         }
+         #links ul li a:hover {
+              color: var(--primary-color);
+              text-decoration: underline;
          }
 
-
-        a {
-            color: var(--accent-color);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        a:hover {
-            color: var(--primary-color);
-            text-decoration: underline;
-        }
 
         /* --- Card Grid Layout --- */
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Adjust min width */
-            gap: var(--space-lg); /* Use variable */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-lg);
             padding: 0;
         }
 
         .card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 10px; /* Slightly more rounded corners */
-            padding: var(--space-md); /* Use variable */
-            box-shadow: 0 6px 15px var(--shadow-color); /* Stronger initial shadow */
+            border-radius: var(--border-radius-md);
+            padding: var(--space-md);
+            box-shadow: 0 8px 20px var(--shadow-color-medium); /* Stronger initial shadow */
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smoother transition */
+            transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1), box-shadow 0.5s ease;
              text-align: left;
+             overflow: hidden; /* Hide overflowing image/content */
+             position: relative; /* Needed for pseudo-elements or internal positioning */
         }
 
         .card:hover {
-            transform: translateY(-8px); /* Lift card more */
-            box-shadow: 0 12px 25px var(--shadow-color); /* Much stronger shadow on hover */
+            transform: translateY(-12px); /* Lift card more */
+            box-shadow: 0 20px 40px var(--shadow-color-strong); /* Much stronger shadow on hover */
         }
 
-         .card-image {
+         /* Optional: Subtle accent border on hover */
+         .card::before {
+             content: '';
+             position: absolute;
+             top: 0;
+             left: 0;
              width: 100%;
-             height: 200px; /* Fixed height for images */
-             object-fit: cover; /* Cover the area */
-             border-radius: 8px 8px 0 0; /* Rounded top corners */
-             margin-bottom: var(--space-md); /* Use variable */
+             height: 5px; /* Thickness of the accent border */
+             background-color: var(--accent-color);
+             transform: translateY(-100%); /* Start above the card */
+             transition: transform 0.4s ease-in-out;
+         }
+          .card:hover::before {
+              transform: translateY(0); /* Slide down on hover */
+          }
+
+
+         .card-image {
+             width: calc(100% + var(--space-md) * 2);
+             margin: calc(-1 * var(--space-md)) calc(-1 * var(--space-md)) var(--space-md) calc(-1 * var(--space-md));
+             height: 220px;
+             object-fit: cover;
              border-bottom: 1px solid var(--border-color);
          }
 
@@ -280,61 +355,90 @@
         .card h3 {
             font-family: 'Montserrat', sans-serif;
             margin-top: 0;
-            margin-bottom: var(--space-sm); /* Use variable */
+            margin-bottom: var(--space-sm);
             color: var(--secondary-color);
-            font-size: 1.4rem; /* Larger card titles */
-            font-weight: 600;
+            font-size: 1.4rem;
+            font-weight: 700;
+            line-height: 1.4;
         }
 
         .card p {
-            margin-bottom: var(--space-md); /* Use variable */
+            margin-bottom: var(--space-md);
             font-size: 1rem;
             color: var(--text-color);
             flex-grow: 1;
+            line-height: 1.7;
         }
 
         .card .card-meta {
-             font-size: 0.9rem; /* Slightly larger meta text */
-             color: #555;
-             margin-bottom: var(--space-sm); /* Use variable */
+             font-size: 0.95rem;
+             color: var(--text-color-light);
+             margin-bottom: var(--space-sm);
              font-weight: 500;
+             display: flex;
+             flex-wrap: wrap;
+             gap: var(--space-sm);
         }
          .card .card-meta i {
               margin-right: var(--space-xs);
               color: var(--primary-color);
+              width: 16px;
+              text-align: center;
          }
 
 
         .card .card-links {
-             margin-top: var(--space-sm); /* Use variable */
+             margin-top: var(--space-sm);
              padding-top: var(--space-sm);
-             border-top: 1px solid #eee; /* Separator for links */
+             border-top: 1px solid #eee;
+             display: flex;
+             flex-wrap: wrap;
+             gap: var(--space-sm);
+             align-items: center; /* Vertically align links */
         }
 
         .card .card-links a {
-             margin-right: var(--space-md); /* Use variable */
-             font-size: 1rem; /* Larger link text */
+             font-size: 1rem;
              white-space: nowrap;
              font-weight: 500;
-             display: inline-flex; /* Align icon and text */
+             display: inline-flex;
              align-items: center;
+              padding: var(--space-xs);
+              border-radius: var(--border-radius-sm);
+              transition: background-color 0.3s ease, color 0.3s ease; /* Add color transition */
         }
+         .card .card-links a:hover {
+             background-color: #f0f0f0;
+             color: var(--primary-color); /* Change link color on hover */
+         }
          .card .card-links a i {
               margin-right: var(--space-xs);
               font-size: 0.9rem;
          }
 
-         /* Specific adjustments for mention cards */
-         .mention-card h3 {
-             font-size: 1.3rem;
+         /* Style for Featured Card (Highlight) */
+         .card.is-featured {
+             border-color: var(--highlight-color); /* Highlight border */
+             box-shadow: 0 8px 25px var(--shadow-color-medium), 0 0 15px var(--highlight-color); /* Add highlight glow */
+             transform: scale(1.03); /* Slightly larger */
+             background-color: #fffbe6; /* Light yellow background */
          }
-          .mention-card p {
-             font-style: italic;
-             color: #666;
+          .card.is-featured::before {
+              background-color: var(--highlight-color); /* Highlight accent border */
           }
-          .mention-card .card-links a {
-              font-weight: 700; /* Bolder link for mentions */
+          .card.is-featured:hover {
+             transform: translateY(-15px) scale(1.05); /* More pronounced hover effect */
+              box-shadow: 0 25px 50px var(--shadow-color-strong), 0 0 20px var(--highlight-color); /* Stronger highlight glow on hover */
           }
+          .card.is-featured h3,
+          .card.is-featured .card-meta,
+          .card.is-featured p,
+          .card.is-featured .card-links a {
+              color: var(--secondary-color); /* Ensure readability on light background */
+          }
+           .card.is-featured .card-links a:hover {
+               background-color: #ffe066; /* Hover on highlight links */
+           }
 
 
         /* --- Skills Section --- */
@@ -344,65 +448,365 @@
              display: flex;
              flex-wrap: wrap;
              justify-content: center;
-             gap: var(--space-sm); /* Use variable for gap */
+             gap: var(--space-sm);
         }
          #skills .skills-list li {
              background-color: #e9ecef;
              color: var(--secondary-color);
-             padding: var(--space-sm) var(--space-md); /* Use variable */
-             margin: 0; /* Gap handles spacing */
+             padding: var(--space-xs) var(--space-md);
+             margin: 0;
              border-radius: 20px;
-             font-size: 0.95rem; /* Slightly larger */
+             font-size: 0.95rem;
              font-weight: 500;
              border: 1px solid var(--border-color);
-             transition: background-color 0.3s ease, transform 0.2s ease; /* Hover effect */
+             transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+             cursor: pointer;
+             display: inline-flex; /* Align icon and text */
+             align-items: center;
          }
           #skills .skills-list li:hover {
               background-color: var(--accent-color);
               color: white;
               transform: translateY(-3px);
+              box-shadow: 0 3px 6px var(--shadow-color-light);
           }
          #skills .skills-list li i {
               margin-right: var(--space-xs);
-              color: var(--primary-color); /* Default color */
-              transition: color 0.3s ease; /* Icon color transition */
+              color: var(--primary-color);
+              transition: color 0.3s ease;
          }
           #skills .skills-list li:hover i {
-              color: white; /* Icon color on hover */
+              color: white;
+          }
+
+        /* --- Timeline Section --- */
+        #timeline {
+             position: relative;
+        }
+         #timeline h2 {
+             margin-bottom: var(--space-xxl);
+         }
+
+        .timeline {
+            position: relative;
+            width: 100%;
+            padding: var(--space-md) 0;
+            list-style: none;
+        }
+
+        /* Vertical line */
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 3px;
+            background-color: var(--primary-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1.5px; /* Center the line */
+        }
+
+        .timeline li {
+            padding: var(--space-lg) 0;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+
+        /* Right side timeline items */
+        .timeline li:nth-child(odd) {
+            left: 50%;
+            padding-left: var(--space-xl);
+        }
+
+        /* Left side timeline items */
+        .timeline li:nth-child(even) {
+             padding-right: var(--space-xl);
+        }
+
+
+        /* Circles on the timeline */
+        .timeline li::after {
+            content: '';
+            position: absolute;
+            width: var(--space-lg);
+            height: var(--space-lg);
+            right: -14px; /* Position on the line */
+            background-color: var(--accent-color);
+            border: 4px solid var(--primary-color); /* Match primary color border */
+            top: 30px; /* Position from top of li */
+            border-radius: var(--border-radius-full);
+            z-index: 1;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        /* Circles for left items */
+        .timeline li:nth-child(even)::after {
+            left: -14px; /* Position on the line for left items */
+        }
+
+        .timeline li:hover::after {
+             background-color: var(--primary-color); /* Change circle color on hover */
+             border-color: var(--accent-color); /* Change border color on hover */
+        }
+
+
+        /* Timeline Content */
+        .timeline-content {
+            padding: var(--space-md);
+            background-color: var(--card-bg);
+            position: relative;
+            border-radius: var(--border-radius-md);
+             box-shadow: 0 4px 15px var(--shadow-color-light);
+             transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+         .timeline li:hover .timeline-content {
+              transform: translateY(-5px);
+              box-shadow: 0 6px 20px var(--shadow-color-medium);
+         }
+
+
+        /* Arrow pointing to the line */
+        .timeline-content::before {
+            content: " ";
+            position: absolute;
+            top: var(--space-md);
+            border-width: 8px; /* Size of the arrow */
+            border-style: solid;
+            border-color: transparent transparent transparent var(--card-bg); /* Arrow color matching card background */
+            right: -16px; /* Position the arrow */
+        }
+
+        /* Arrow for left items */
+        .timeline li:nth-child(even) .timeline-content::before {
+             left: -16px;
+             border-color: transparent var(--card-bg) transparent transparent; /* Arrow color */
+        }
+         /* Match border color */
+         .timeline-content::after {
+             content: " ";
+             position: absolute;
+             top: var(--space-md);
+             border-width: 9px; /* Slightly larger border for visibility */
+             border-style: solid;
+             border-color: transparent transparent transparent var(--border-color); /* Arrow border color */
+             right: -18px; /* Position the border arrow */
+             z-index: -1; /* Behind the main arrow */
+         }
+         .timeline li:nth-child(even) .timeline-content::after {
+             left: -18px;
+             border-color: transparent var(--border-color) transparent transparent;
+         }
+
+
+         .timeline-content h3 {
+             font-family: 'Montserrat', sans-serif;
+             margin-top: 0;
+             margin-bottom: var(--space-xs);
+             color: var(--secondary-color);
+             font-size: 1.3rem;
+             font-weight: 700;
+         }
+          .timeline-content p {
+             font-size: 1rem;
+             margin-bottom: var(--space-xs);
+             color: var(--text-color);
+          }
+         .timeline-content .date {
+             font-size: 0.9rem;
+             color: var(--text-color-light);
+             font-weight: 500;
+         }
+
+        /* --- Testimonials Section --- */
+        #testimonials {
+             background-color: #f0f0f0; /* Slightly different background */
+             padding-top: var(--space-xxl);
+             padding-bottom: var(--space-xxl);
+        }
+         #testimonials h2 {
+             margin-bottom: var(--space-xl);
+         }
+         .testimonial-slider {
+             /* If you add a slider library, style it here */
+             /* For static version, just style the quotes */
+             display: grid;
+             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+             gap: var(--space-lg);
+         }
+         .testimonial-item {
+             background-color: var(--card-bg);
+             padding: var(--space-md);
+             border-radius: var(--border-radius-md);
+             box-shadow: 0 4px 15px var(--shadow-color-light);
+             font-style: italic;
+             color: #555;
+             position: relative;
+         }
+          .testimonial-item::before {
+              content: "\201C"; /* Opening quote */
+              font-size: 3em;
+              color: var(--primary-color);
+              position: absolute;
+              top: var(--space-xs);
+              left: var(--space-md);
+              opacity: 0.2;
+              font-family: serif; /* Ensure quote style */
+          }
+           .testimonial-item p {
+              margin-top: var(--space-md); /* Space below quote */
+              margin-bottom: var(--space-md);
+              font-size: 1.05rem;
+              line-height: 1.7;
+              color: var(--text-color);
+              font-style: normal; /* Quote text is not italic */
+           }
+           .testimonial-item .author {
+              font-weight: 700;
+              font-style: normal;
+              color: var(--secondary-color);
+              text-align: right;
+              display: block; /* Author on new line */
+              margin-top: var(--space-sm);
+              font-size: 1rem;
+           }
+           .testimonial-item .author span {
+               font-weight: 400;
+               font-size: 0.9rem;
+               color: var(--text-color-light);
+           }
+
+
+        /* --- Contact Section --- */
+        #contact {
+            text-align: center;
+        }
+        #contact p {
+             font-size: 1.1rem;
+             margin-bottom: var(--space-md);
+             max-width: 700px;
+             margin-left: auto;
+             margin-right: auto;
+             line-height: 1.8;
+             color: #333;
+        }
+         #contact h2 {
+             margin-bottom: var(--space-xl); /* Space below heading */
+         }
+        .contact-info {
+             display: flex;
+             flex-direction: column;
+             align-items: center;
+             font-size: 1.2rem;
+             font-weight: 500;
+             color: var(--secondary-color);
+        }
+         .contact-info a {
+             margin-top: var(--space-xs);
+             color: var(--secondary-color);
+             text-decoration: none;
+             transition: color 0.3s ease, transform 0.2s ease; /* Add transform transition */
+             display: inline-flex; /* Align icon and text */
+             align-items: center;
+         }
+         .contact-info a:hover {
+             color: var(--primary-color);
+             text-decoration: underline;
+             transform: translateX(5px); /* Slide right on hover */
+         }
+         .contact-info i {
+              margin-right: var(--space-sm);
+              color: var(--accent-color);
+              width: 20px;
+              text-align: center;
+              transition: transform 0.3s ease; /* Icon hover effect */
+         }
+         .contact-info a:hover i {
+             transform: scale(1.1); /* Slightly enlarge icon */
+         }
+
+         #contact .location-edu {
+             margin-top: var(--space-md);
+             font-size: 1rem;
+             color: var(--text-color-light);
+             font-weight: 400;
+         }
+          #contact .location-edu i {
+             margin-right: var(--space-xs);
+             color: var(--text-color-light);
+             width: auto;
+             text-align: left;
           }
 
 
         /* --- Footer --- */
         .footer {
-            margin-top: var(--space-xxl); /* Use variable */
-            font-size: 0.95rem; /* Slightly larger footer text */
+            margin-top: var(--space-xxl); /* Adjusted margin top */
+            font-size: 0.95rem;
             color: var(--footer-color);
             border-top: 1px solid var(--border-color);
-            padding: var(--space-xl) 0; /* Use variable */
+            padding: var(--space-xl) 0;
             text-align: center;
         }
-         .footer a {
-             color: var(--footer-color); /* Footer link color */
-             text-decoration: underline; /* Underline footer links by default */
-         }
-          .footer a:hover {
-              color: var(--secondary-color);
-              text-decoration: none; /* Remove underline on hover */
-          }
-         .footer p {
-             margin-top: var(--space-md); /* Use variable */
+        .footer p {
+             margin-top: var(--space-sm);
              margin-bottom: 0;
              font-size: 0.9rem;
              color: #888;
          }
 
-        /* Responsive adjustments */
+
+        /* --- Responsive Adjustments --- */
+        @media (max-width: 1000px) {
+            .content-area {
+                padding: var(--space-xl);
+            }
+             .timeline::after {
+                 left: var(--space-lg); /* Move line to the left */
+             }
+             .timeline li {
+                 width: 100%;
+                 padding-left: var(--space-xxl); /* Padding for content */
+                 padding-right: var(--space-md);
+             }
+             .timeline li:nth-child(even) { /* Adjust left items */
+                 left: 0;
+                 padding-left: var(--space-xxl);
+                 padding-right: var(--space-md);
+             }
+             .timeline li::after {
+                 left: var(--space-lg); /* Position circles on the left line */
+             }
+              .timeline li:nth-child(even)::after {
+                  left: var(--space-lg); /* Position circles on the left line */
+              }
+              .timeline-content::before { /* Adjust arrows for left items */
+                  right: auto;
+                  left: -16px;
+                   border-color: transparent var(--card-bg) transparent transparent;
+              }
+              .timeline li:nth-child(even) .timeline-content::before {
+                   left: -16px;
+                    border-color: transparent var(--card-bg) transparent transparent;
+              }
+               .timeline-content::after { /* Adjust arrow borders */
+                  right: auto;
+                  left: -18px;
+                   border-color: transparent var(--border-color) transparent transparent;
+               }
+               .timeline li:nth-child(even) .timeline-content::after {
+                   left: -18px;
+                    border-color: transparent var(--border-color) transparent transparent;
+               }
+
+        }
+
         @media (max-width: 768px) {
             html {
-                scroll-padding-top: 70px;
+                scroll-padding-top: 80px;
             }
             body {
-                 padding-top: 60px;
+                 padding-top: 70px;
              }
              .container {
                  padding: 0 var(--space-md);
@@ -410,7 +814,7 @@
              }
              .content-area {
                  padding: var(--space-lg);
-                 box-shadow: 0 0 20px var(--shadow-color);
+                 box-shadow: 0 4px 15px var(--shadow-color-medium);
              }
              .navbar {
                  padding: var(--space-sm) 0;
@@ -420,26 +824,40 @@
                  font-size: 1rem;
              }
             h1 {
-                font-size: 3rem;
+                font-size: 3.8rem;
             }
              section h2 {
-                 font-size: 2rem;
+                 font-size: 2.4rem;
              }
             .tagline {
-                font-size: 1.3rem;
+                font-size: 1.5rem;
             }
             .profile-image {
-                width: 150px;
-                height: 150px;
-                 border-width: 5px;
+                width: 160px;
+                height: 160px;
+                 border-width: 6px;
             }
+             section {
+                 padding-top: var(--space-xl);
+                 padding-bottom: var(--space-xl);
+                 margin-bottom: var(--space-xxl);
+             }
+             section::after {
+                 bottom: calc(var(--space-xl) * -1 - 1px);
+             }
+
             .grid-container {
                  grid-template-columns: 1fr; /* Stack cards on small screens */
-                 gap: var(--space-md); /* Use variable */
+                 gap: var(--space-md);
             }
             .card {
                  padding: var(--space-md);
             }
+             .card-image {
+                 height: 200px;
+                  width: calc(100% + var(--space-md) * 2);
+                 margin: calc(-1 * var(--space-md)) calc(-1 * var(--space-md)) var(--space-md) calc(-1 * var(--space-md));
+             }
              .card h3 {
                  font-size: 1.3rem;
              }
@@ -454,18 +872,47 @@
                  padding: var(--space-xs) var(--space-sm);
                  font-size: 0.9rem;
              }
-             section {
-                 margin-bottom: var(--space-xl);
-                 padding-bottom: var(--space-xl);
+             #contact p {
+                 font-size: 1.05rem;
+             }
+             #contact .contact-info {
+                 font-size: 1.1rem;
+             }
+             .timeline::after {
+                 left: var(--space-lg);
+             }
+             .timeline li,
+             .timeline li:nth-child(even) {
+                 padding-left: var(--space-xl);
+                 padding-right: var(--space-md);
+             }
+             .timeline li::after,
+             .timeline li:nth-child(even)::after {
+                 left: var(--space-lg);
+             }
+             .timeline-content::before,
+              .timeline li:nth-child(even) .timeline-content::before {
+                   left: -16px;
+                   right: auto;
+                   border-color: transparent var(--card-bg) transparent transparent;
+              }
+             .timeline-content::after,
+              .timeline li:nth-child(even) .timeline-content::after {
+                  left: -18px;
+                  right: auto;
+                  border-color: transparent var(--border-color) transparent transparent;
+             }
+             .testimonial-slider {
+                 grid-template-columns: 1fr;
              }
         }
 
          @media (max-width: 480px) {
             html {
-                scroll-padding-top: 60px;
+                scroll-padding-top: 65px;
             }
               body {
-                 padding-top: 55px;
+                 padding-top: 60px;
              }
              .container {
                  padding: 0 var(--space-sm);
@@ -473,23 +920,24 @@
              }
               .content-area {
                  padding: var(--space-md);
-                 box-shadow: 0 0 15px var(--shadow-color);
+                 box-shadow: 0 3px 10px var(--shadow-color-light);
              }
              .navbar {
                  padding: var(--space-xs) 0;
              }
              .navbar nav a {
                  margin: 0 var(--space-xs);
-                 font-size: 0.9rem;
+                 font-size: 0.85rem;
              }
              h1 {
-                 font-size: 2.5rem;
+                 font-size: 3rem;
+                 letter-spacing: -1px;
              }
               section h2 {
-                 font-size: 1.8rem;
+                 font-size: 2rem;
              }
              .tagline {
-                 font-size: 1.2rem;
+                 font-size: 1.4rem;
              }
              .profile-image {
                  width: 120px;
@@ -499,35 +947,72 @@
              .card {
                  padding: var(--space-sm);
              }
+              .card-image {
+                 height: 160px;
+                  width: calc(100% + var(--space-sm) * 2);
+                 margin: calc(-1 * var(--space-sm)) calc(-1 * var(--space-sm)) var(--space-sm) calc(-1 * var(--space-sm));
+             }
              .card h3 {
                  font-size: 1.2rem;
              }
              .card p {
-                 font-size: 0.95rem;
+                 font-size: 0.9rem;
              }
-              section {
-                 margin-bottom: var(--space-lg);
-                 padding-bottom: var(--space-lg);
+              .card .card-meta {
+                  gap: var(--space-xs);
+              }
+              .card .card-links {
+                 gap: var(--space-xs);
+              }
+              .card .card-links a {
+                  font-size: 0.9rem;
+                  padding: var(--space-xs);
+              }
+              #skills .skills-list li {
+                 padding: var(--space-xs) var(--space-sm);
+                 font-size: 0.85rem;
+              }
+               section {
+                 margin-bottom: var(--space-xl);
+                 padding-bottom: var(--space-xl);
              }
-             .footer {
-                 padding: var(--space-lg) 0;
+             #contact p {
+                 font-size: 1rem;
+             }
+             #contact .contact-info {
+                 font-size: 1rem;
+             }
+             .timeline::after {
+                 left: var(--space-md);
+             }
+             .timeline li,
+             .timeline li:nth-child(even) {
+                 padding-left: var(--space-xl);
+                 padding-right: var(--space-sm);
+             }
+             .timeline li::after,
+             .timeline li:nth-child(even)::after {
+                 left: var(--space-md);
+                 width: var(--space-md);
+                 height: var(--space-md);
+                 border-width: 3px;
+                 top: 25px;
+             }
+             .timeline-content::before {
+                 right: -14px;
+                 border-width: 7px;
+             }
+             .timeline li:nth-child(even) .timeline-content::before {
+                  left: -14px;
+             }
+              .timeline-content::after {
+                 right: -15px;
+                 border-width: 8px;
+             }
+             .timeline li:nth-child(even) .timeline-content::after {
+                  left: -15px;
              }
          }
-         /* Basic Fade-in Animation (Requires JavaScript for trigger on scroll)
-            Since we aim for pure CSS, we can't easily trigger on scroll without libraries.
-            Keeping this commented out, focus on hover effects instead for CSS only.
-         */
-         /*
-         .fade-in {
-             opacity: 0;
-             transform: translateY(20px);
-             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-         }
-         .fade-in.is-visible {
-             opacity: 1;
-             transform: translateY(0);
-         }
-         */
 
 
     </style>
@@ -538,12 +1023,12 @@
         <nav>
             <a href="#hero">Home</a>
             <a href="#about">About</a>
-            <a href="#skills">Skills</a>
+             <a href="#timeline">Journey</a> <a href="#skills">Skills</a>
             <a href="#projects">Projects</a>
             <a href="#content">Content</a>
             <a href="#mentions">Mentions</a>
-            <a href="#links">Links</a>
-            <a href="#footer">Contact</a>
+             <a href="#links">Links</a>
+            <a href="#contact">Contact</a>
         </nav>
     </div>
 
@@ -552,7 +1037,7 @@
 
             <main>
                 <section id="hero">
-                     <img src="RasoulUnlimited.png" alt="Mohammad Rasoul Sohrabi Profile Image" class="profile-image" />
+                     <img src="RasoulUnlimited.png" alt="Mohammad Rasoul Sohrabi Profile Image" class="profile-image" aria-label="Mohammad Rasoul Sohrabi's Profile Picture"/>
                      <h1>Rasoul Unlimited | محمد رسول سهرابی</h1>
                      <p class="tagline">Developer. Designer. Founder.</p>
                 </section>
@@ -564,20 +1049,57 @@
                          </p>
                 </section>
 
+                 <section id="timeline">
+                     <h2>⏳ My Journey | مسیر من</h2>
+                     <ul class="timeline" aria-label="Educational and Professional Timeline">
+                         <li>
+                             <div class="timeline-content">
+                                 <h3 class="date">YYYY-MM-DD</h3>
+                                 <h3>Milestone Title (e.g., Started University of Tehran)</h3>
+                                 <p>Brief description of this milestone. What did you achieve or start here? What was the significance?</p>
+                             </div>
+                         </li>
+                         <li>
+                             <div class="timeline-content">
+                                 <h3 class="date">YYYY-MM-DD</h3>
+                                 <h3>Milestone Title (e.g., Launched First Major Project)</h3>
+                                 <p>Description of launching the project. Mention technologies, goals, initial impact.</p>
+                             </div>
+                         </li>
+                         <li>
+                             <div class="timeline-content">
+                                 <h3 class="date">YYYY-MM-DD</h3>
+                                 <h3>Milestone Title (e.g., Published Key Research/Article)</h3>
+                                 <p>Description of publishing. Mention platform (Virgool/Medium/Journal), topic, and reception.</p>
+                             </div>
+                         </li>
+                          <li>
+                             <div class="timeline-content">
+                                 <h3 class="date">Present</h3>
+                                 <h3>Current Focus (e.g., Specializing in AI in Healthcare)</h3>
+                                 <p>What are you currently working on or focusing your studies/efforts on?</p>
+                             </div>
+                         </li>
+                     </ul>
+                 </section>
+
+
                  <section id="skills">
                      <h2>🛠️ Skills & Technologies | مهارت‌ها و تکنولوژی‌ها</h2>
-                     <ul class="skills-list">
-                         <li><i class="fas fa-code"></i> Python</li>
-                         <li><i class="fas fa-code"></i> JavaScript</li>
-                         <li><i class="fab fa-react"></i> React / React Native</li>
-                         <li><i class="fas fa-database"></i> SQL</li>
-                         <li><i class="fas fa-server"></i> Node.js</li>
-                         <li><i class="fas fa-brain"></i> Machine Learning (Mention specific libraries/frameworks if applicable)</li>
-                         <li><i class="fas fa-dna"></i> Biomedical Signal Processing</li>
-                         <li><i class="fas fa-mobile-alt"></i> Mobile App Development</li>
-                         <li><i class="fas fa-palette"></i> UI/UX Design</li>
-                         <li><i class="fas fa-pencil-alt"></i> Content Creation</li>
-                         <li><i class="fas fa-bullhorn"></i> Digital Strategy</li>
+                     <ul class="skills-list" aria-label="List of Skills and Technologies">
+                         <li><i class="fas fa-code" aria-hidden="true"></i> Python</li>
+                         <li><i class="fas fa-code" aria-hidden="true"></i> JavaScript</li>
+                         <li><i class="fab fa-react" aria-hidden="true"></i> React / React Native</li>
+                         <li><i class="fas fa-database" aria-hidden="true"></i> SQL</li>
+                         <li><i class="fas fa-server" aria-hidden="true"></i> Node.js</li>
+                         <li><i class="fas fa-brain" aria-hidden="true"></i> Machine Learning (TensorFlow, PyTorch, etc.)</li>
+                         <li><i class="fas fa-dna" aria-hidden="true"></i> Biomedical Signal Processing</li>
+                         <li><i class="fas fa-mobile-alt" aria-hidden="true"></i> Mobile App Development</li>
+                         <li><i class="fas fa-palette" aria-hidden="true"></i> UI/UX Design (Figma, Adobe XD)</li>
+                         <li><i class="fas fa-pencil-alt" aria-hidden="true"></i> Content Creation (Virgool, Medium)</li>
+                         <li><i class="fas fa-bullhorn" aria-hidden="true"></i> Digital Strategy</li>
+                          <li><i class="fas fa-language" aria-hidden="true"></i> English (Fluent)</li>
+                         <li><i class="fas fa-language" aria-hidden="true"></i> Persian (Native)</li>
                          </ul>
                  </section>
 
@@ -585,22 +1107,27 @@
                  <section id="projects">
                      <h2>💻 Projects | پروژه‌ها</h2>
                      <div class="grid-container">
-                         <div class="card project-card">
-                             <h3>Project Name (e.g., AI-Powered Diagnostic Tool)</h3>
-                              <div class="card-meta"><i class="fas fa-microchip"></i> Technology Stack: Python, TensorFlow, Flask</div>
-                             <p>A brief description of the project. What problem does it solve? What was your specific contribution? Highlight any measurable impact or achievement (e.g., "Reduced diagnosis time by 30%").</p>
+                         <div class="card project-card is-featured"> <h3>Project Name (e.g., AI-Powered Diagnostic Tool)</h3>
+                              <div class="card-meta">
+                                  <span><i class="fas fa-microchip" aria-hidden="true"></i> Technology Stack: Python, TensorFlow, Flask</span>
+                                   <span><i class="fas fa-users" aria-hidden="true"></i> Impact: Used by 500+ users</span> <span><i class="fas fa-clock" aria-hidden="true"></i> Duration: 3 months</span>
+                                  </div>
+                             <p>A detailed description of the project. What problem does it solve? What was your specific contribution? **Highlight measurable impact or achievement (e.g., "Reduced diagnosis time by 30%," "Secured funding from X," "Presented at Y conference").**</p>
                               <div class="card-links">
-                                   <a href="#" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Live Demo</a>
-                                   <a href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub Repo</a>
+                                   <a href="#" target="_blank" rel="noopener noreferrer" aria-label="View Live Demo of Project Name"><i class="fas fa-external-link-alt" aria-hidden="true"></i> Live Demo</a>
+                                   <a href="#" target="_blank" rel="noopener noreferrer" aria-label="View Project Name on GitHub"><i class="fab fa-github" aria-hidden="true"></i> GitHub Repo</a>
                                   </div>
                          </div>
 
                           <div class="card project-card">
                               <h3>Another Project (e.g., Patient Management System UI)</h3>
-                             <div class="card-meta"><i class="fas fa-code-branch"></i> Technology Stack: React, Node.js, MongoDB</div>
-                             <p>Description of the second project. Focus on your role (Designer, Developer, etc.) and the outcome.</p>
+                             <div class="card-meta">
+                                  <span><i class="fas fa-code-branch" aria-hidden="true"></i> Technology Stack: React, Node.js, MongoDB</span>
+                                  <span><i class="fas fa-briefcase" aria-hidden="true"></i> Role: Lead Developer</span>
+                                  </div>
+                             <p>Description of the second project. Focus on your role (Designer, Developer, etc.) and the outcome. **Mention any specific challenges overcome or unique features.**</p>
                               <div class="card-links">
-                                   <a href="#" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> View Project</a>
+                                   <a href="#" target="_blank" rel="noopener noreferrer" aria-label="View Another Project"><i class="fas fa-external-link-alt" aria-hidden="true"></i> View Project</a>
                               </div>
                          </div>
                          </div>
@@ -609,21 +1136,26 @@
                 <section id="content">
                      <h2>✍️ Featured Content | محتوای منتخب</h2>
                       <div class="grid-container">
-                          <div class="card content-card">
-                             <h3>Title of Your Article/Post</h3>
-                             <div class="card-meta"><i class="fas fa-tag"></i> Platform: Virgool | <i class="fas fa-calendar-alt"></i> Date: YYYY-MM-DD</div>
-                             <p>A short summary of the article or what it's about. Why is it important or representative of your work? Did it receive significant views or positive feedback?</p>
+                          <div class="card content-card is-featured"> <h3>Title of Your Article/Post</h3>
+                             <div class="card-meta">
+                                 <span><i class="fas fa-tag" aria-hidden="true"></i> Platform: Virgool</span>
+                                 <span><i class="fas fa-calendar-alt" aria-hidden="true"></i> Date:<\ctrl97>MM-DD-YYYY</span>
+                                 <span><i class="fas fa-eye" aria-hidden="true"></i> Views: 5k+</span> </div>
+                             <p>A short, compelling summary of the article. **Highlight its key takeaway, why it's important, or if it gained significant attention or sparked discussion.**</p>
                               <div class="card-links">
-                                 <a href="https://virgool.io/@YourArticleLink" target="_blank" rel="noopener noreferrer"><i class="fas fa-book-open"></i> Read on Virgool</a>
+                                 <a href="https://virgool.io/@YourArticleLink" target="_blank" rel="noopener noreferrer" aria-label="Read the article 'Title of Your Article' on Virgool"><i class="fas fa-book-open" aria-hidden="true"></i> Read on Virgool</a>
                                   </div>
                          </div>
 
                           <div class="card content-card">
                              <h3>Title of Another Article/Post</h3>
-                             <div class="card-meta"><i class="fas fa-tag"></i> Platform: Medium | <i class="fas fa-calendar-alt"></i> Date: YYYY-MM-DD</div>
-                             <p>Summary of the second article. Mention topic and impact.</p>
+                             <div class="card-meta">
+                                 <span><i class="fas fa-tag" aria-hidden="true"></i> Platform: Medium</span>
+                                 <span><i class="fas fa-calendar-alt" aria-hidden="true"></i> Date:<\ctrl97>MM-DD-YYYY</span>
+                             </div>
+                             <p>Summary of the second article. Mention topic and key points. **Include any positive feedback or shares.**</p>
                               <div class="card-links">
-                                  <a href="https://medium.com/@YourArticleLink" target="_blank" rel="noopener noreferrer"><i class="fas fa-book-open"></i> Read Article</a>
+                                  <a href="https://medium.com/@YourArticleLink" target="_blank" rel="noopener noreferrer" aria-label="Read the article 'Title of Another Article' on Medium"><i class="fas fa-book-open" aria-hidden="true"></i> Read Article</a>
                               </div>
                          </div>
                          </div>
@@ -632,21 +1164,26 @@
                  <section id="mentions">
                      <h2>📰 Mentions & Recognition | حضور در رسانه‌ها و افتخارات</h2>
                      <div class="grid-container">
-                         <div class="card mention-card">
-                              <h3>Mention/Feature Title (e.g., Interview about X Project)</h3>
-                              <div class="card-meta"><i class="fas fa-bullhorn"></i> Source: [Name of Reputable Media Outlet] | <i class="fas fa-calendar-alt"></i> Date: YYYY-MM-DD</div>
-                              <p>Brief context of the mention. What was discussed? Why is this significant? (e.g., "Featured as a young innovator in digital health").</p>
+                         <div class="card mention-card is-featured"> <h3>Mention/Feature Title (e.g., Interview about X Project)</h3>
+                              <div class="card-meta">
+                                  <span><i class="fas fa-bullhorn" aria-hidden="true"></i> Source: [Name of **Reputable** Media Outlet]</span>
+                                  <span><i class="fas fa-calendar-alt" aria-hidden="true"></i> Date:<\ctrl97>MM-DD-YYYY</span>
+                            </div>
+                              <p>**Compelling** brief context of the mention. What was discussed? Why is this significant? **(e.g., "Featured as a young innovator in digital health on National News Channel," "Our project recognized by Ministry of Health").**</p>
                                <div class="card-links">
-                                   <a href="https://link-to-the-actual-article.com" target="_blank" rel="noopener noreferrer"><i class="fas fa-newspaper"></i> Read the Article on [Source Name]</a>
+                                   <a href="https://link-to-the-actual-article.com" target="_blank" rel="noopener noreferrer" aria-label="Read the mention in [Source Name]"><i class="fas fa-newspaper" aria-hidden="true"></i> Read the Article on [Source Name]</a>
                                    </div>
                          </div>
 
                          <div class="card mention-card">
                              <h3>Award/Honor Received (e.g., Winner of X Competition)</h3>
-                              <div class="card-meta"><i class="fas fa-award"></i> Awarding Body: [Name of Organization] | <i class="fas fa-calendar-alt"></i> Date: YYYY-MM-DD</div>
-                             <p>Description of the award or recognition. Why was it given? What project or work did it recognize? Provide context about the awarding body's credibility.</p>
+                              <div class="card-meta">
+                                   <span><i class="fas fa-award" aria-hidden="true"></i> Awarding Body: [Name of Organization]</span>
+                                   <span><i class="fas fa-calendar-alt" aria-hidden="true"></i> Date:<\ctrl97>MM-DD-YYYY</span>
+                              </div>
+                             <p>Description of the award or recognition. Why was it given? What project or work did it recognize? **Provide context about the awarding body's credibility (e.g., "Prestigious award from National Institute of Health").**</p>
                               <div class="card-links">
-                                  <a href="https://link-to-award-details.com" target="_blank" rel="noopener noreferrer"><i class="fas fa-trophy"></i> View Details</a>
+                                  <a href="https://link-to-award-details.com" target="_blank" rel="noopener noreferrer" aria-label="View details about Award/Honor"><i class="fas fa-trophy" aria-hidden="true"></i> View Details</a>
                              </div>
                          </div>
                           </div>
@@ -655,20 +1192,34 @@
                  <section id="links">
                     <h2>🔗 My Hubs | پیوندهای من</h2>
                     <ul>
-                        <li><i class="fab fa-instagram"></i> <a href="https://www.instagram.com/rasoul.unlimited" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-                        <li><i class="fas fa-pen-fancy"></i> <a href="https://virgool.io/@RasoulUnlimited" target="_blank" rel="noopener noreferrer">Virgool</a></li>
-                        <li><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/rasoulunlimited" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-                        <li><i class="fab fa-github"></i> <a href="https://github.com/rasoul-unlimited" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-                        <li><i class="fab fa-medium"></i> <a href="https://rasoulunlimited.medium.com" target="_blank" rel="noopener noreferrer">Medium</a></li>
+                        <li><i class="fab fa-instagram" aria-hidden="true"></i> <a href="https://www.instagram.com/rasoul.unlimited" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on Instagram">Instagram</a></li>
+                        <li><i class="fas fa-pen-fancy" aria-hidden="true"></i> <a href="https://virgool.io/@RasoulUnlimited" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on Virgool">Virgool</a></li>
+                        <li><i class="fab fa-linkedin" aria-hidden="true"></i> <a href="https://www.linkedin.com/in/rasoulunlimited" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on LinkedIn">LinkedIn</a></li>
+                        <li><i class="fab fa-github" aria-hidden="true"></i> <a href="https://github.com/rasoul-unlimited" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on GitHub">GitHub</a></li>
+                        <li><i class="fab fa-medium" aria-hidden="true"></i> <a href="https://rasoulunlimited.medium.com" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on Medium">Medium</a></li>
                          </ul>
                 </section>
 
+                <section id="contact">
+                    <h2>✉️ Get In Touch | تماس با من</h2>
+                     <p>
+                         If you have any questions, project ideas, or just want to connect, feel free to reach out!
+                         <br>I'm always open to discussing collaborations and new opportunities.
+                     </p>
+                     <div class="contact-info">
+                         <a href="mailto:rasoul.unlimited@gmail.com" aria-label="Send an email to Rasoul Unlimited"><i class="fas fa-envelope" aria-hidden="true"></i> rasoul.unlimited [at] gmail [dot] com</a>
+                         </div>
+                      <p class="location-edu">
+                          <i class="fas fa-map-marker-alt" aria-hidden="true"></i> Tehran / Karaj <i class="fas fa-graduation-cap" aria-hidden="true" style="margin-left: var(--space-md);"></i> Biomedical Engineering, University of Tehran
+                     </p>
+                </section>
+
+
             </main>
 
-        </div> </div> <footer class="footer" id="footer">
-        📍 Tehran / Karaj | 🎓 Biomedical Engineering, University of Tehran<br>
-        Contact: <a href="mailto:rasoul.unlimited@gmail.com">rasoul.unlimited [at] gmail [dot] com</a>
-         <p style="margin-top: var(--space-sm);">&copy; 2024 Rasoul Unlimited. All rights reserved.</p> </footer>
+        </div> </div> <footer class="footer">
+         <p>&copy; 2024 Rasoul Unlimited. All rights reserved.</p>
+    </footer>
 
 </body>
 </html>
