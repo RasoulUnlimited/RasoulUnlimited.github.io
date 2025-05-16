@@ -3,15 +3,76 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Rasoul Unlimited | محمد رسول سهرابی</title>
-    <meta name="description" content="Explore the compelling digital presence of Mohammad Rasoul Sohrabi (Rasoul Unlimited), a biomedical engineering student, developer, designer, and founder. Featuring a detailed timeline, impactful projects, verifiable media mentions, and key skills showcasing his verifiable notability and expertise."/>
+    <title>Rasoul Unlimited | محمد رسول سهرابی - Official Digital Hub</title>
+    <meta name="description" content="Explore the compelling digital presence of Mohammad Rasoul Sohrabi (Rasoul Unlimited), a biomedical engineering innovator, full-stack developer, and content strategist. Featuring a detailed timeline, impactful projects (like the first verified Persian Discord bot), reputable media mentions, and key skills showcasing his verifiable notability and expertise."/>
+    <meta name="keywords" content="Mohammad Rasoul Sohrabi, Rasoul Unlimited, Biomedical Engineering, University of Tehran, Python Developer, Discord Bot, Personal Branding, Karaj, Tehran, Software Engineer, Content Strategist, Media Mentions, Notability, Verification"/>
+
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="[Your Website URL Here]"/> <meta property="og:title" content="Rasoul Unlimited | محمد رسول سهرابی - Official Digital Hub"/>
+    <meta property="og:description" content="Explore the compelling digital presence of Mohammad Rasoul Sohrabi (Rasoul Unlimited), a biomedical engineering innovator, full-stack developer, and content strategist. Featuring a detailed timeline, impactful projects, verifiable media mentions, and key skills showcasing his verifiable notability and expertise."/>
+    <meta property="og:image" content="[Link to your profile image or a representative image for social sharing]"/> <meta property="og:image:alt" content="Mohammad Rasoul Sohrabi (Rasoul Unlimited) Profile Image"/>
+
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:site" content="@[YourTwitterHandle]"/> <meta name="twitter:title" content="Rasoul Unlimited | محمد رسول سهرابی - Official Digital Hub"/>
+    <meta name="twitter:description" content="Explore the compelling digital presence of Mohammad Rasoul Sohrabi (Rasoul Unlimited), a biomedical engineering innovator, full-stack developer, and content strategist. Featuring a detailed timeline, impactful projects, verifiable media mentions, and key skills showcasing his verifiable notability and expertise."/>
+    <meta name="twitter:image" content="[Link to your profile image or a representative image for social sharing]"/> <meta name="twitter:image:alt" content="Mohammad Rasoul Sohrabi (Rasoul Unlimited) Profile Image"/>
+
+
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap" as="style"/>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" as="style"/>
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style"/>
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"/>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
 
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Mohammad Rasoul Sohrabi",
+      "alternateName": "Rasoul Unlimited",
+      "url": "[Your Website URL Here]", "image": "[Link to your profile image or a representative image]", "sameAs": [
+        "https://www.instagram.com/rasoul.unlimited",
+        "https://virgool.io/@RasoulUnlimited",
+        "https://www.linkedin.com/in/rasoulunlimited",
+        "https://github.com/rasoul-unlimited",
+        "https://rasoulunlimited.medium.com"
+        // TODO: Add other relevant social/professional profiles
+      ],
+      "jobTitle": ["Biomedical Engineering Student", "Software Developer", "Designer", "Founder", "Content Strategist"],
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "University of Tehran",
+        "location": "Tehran, Iran"
+      },
+      "knowsAbout": ["Biomedical Engineering", "Software Development", "Web Development", "Python", "JavaScript", "Digital Health", "Personal Branding", "Karate"]
+      // TODO: Add more detailed knowledge areas, projects, awards etc. if desired
+      // Example Project in Schema:
+      // "hasProject": {
+      //   "@type": "CreativeWork",
+      //   "name": "First Persian Discord Bot (Unlimited Bot)",
+      //   "description": "First independent Persian-language bot on Discord, officially verified by Discord.",
+      //   "url": "https://vrgl.ir/9D6Hy" // Link to article describing it
+      // }
+    }
+    </script>
+     <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "url": "[Your Website URL Here]", "name": "Rasoul Unlimited | محمد رسول سهرابی",
+      "description": "Official Digital Hub and Portfolio of Mohammad Rasoul Sohrabi (Rasoul Unlimited).",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "[Your Website URL Here]?q={search_term_string}", "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+
     <style>
-        /* --- CSS Variables (Refined and Expanded) --- */
+        /* --- CSS Variables (Finalized and Expanded) --- */
         :root {
             /* Color Palette */
             --primary-color: #004085; /* Deeper Blue */
@@ -40,6 +101,8 @@
             --space-xl: calc(var(--space-unit) * 4); /* 32px */
             --space-xxl: calc(var(--space-unit) * 6); /* 48px */
             --space-xxxl: calc(var(--space-unit) * 10); /* 80px */
+            --section-v-padding: var(--space-xxl); /* Vertical padding for sections */
+            --section-margin-bottom: var(--space-xxxl); /* Margin below sections */
 
             /* Border Radius */
             --border-radius-sm: 4px;
@@ -53,6 +116,9 @@
             --transition-duration-long: 0.6s;
             --transition-easing-standard: ease-in-out;
              --transition-easing-springy: cubic-bezier(0.68, -0.55, 0.27, 1.55); /* For bouncy effects */
+
+             /* Max Content Width */
+             --max-content-width: 1200px;
         }
 
         /* --- Base Styles --- */
@@ -62,7 +128,8 @@
 
         html {
             scroll-behavior: smooth;
-            scroll-padding-top: 90px;
+            /* Ensure scroll padding accounts for potentially taller nav on smaller screens */
+            scroll-padding-top: 90px; /* Start value */
         }
 
         body {
@@ -73,7 +140,7 @@
             color: var(--text-color);
             line-height: 1.7;
             position: relative;
-            padding-top: 80px;
+            padding-top: 80px; /* Default padding for fixed nav */
             min-height: 100vh;
             overflow-x: hidden;
              /* Subtle Background Animation */
@@ -89,13 +156,20 @@
         }
 
         /* Improve focus styles for accessibility */
-        a:focus, button:focus, input:focus, select:focus, textarea:focus, .card:focus-within, .skills-list li:focus-within, .timeline li:focus-within .timeline-content {
+        a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible,
+        .card:focus-within, .skills-list li:focus-within, .timeline li:focus-within .timeline-content {
             outline: 3px solid var(--accent-color);
             outline-offset: var(--space-xs);
             box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.25);
             z-index: 5;
             position: relative;
         }
+         /* Use focus-visible for better accessibility (only shows outline when using keyboard/non-pointer focus) */
+         /* Fallback for browsers that don't support :focus-visible */
+         a:focus:not(:focus-visible), button:focus:not(:focus-visible), input:focus:not(:focus-visible), select:focus:not(:focus-visible), textarea:focus:not(:focus-visible) {
+             outline: none;
+         }
+
         /* Hide default outline for elements inside focused card */
          .card:focus-within > *, .timeline li:focus-within .timeline-content > * {
              outline: none;
@@ -105,7 +179,7 @@
 
         /* --- Layout Containers --- */
         .container {
-            max-width: 1200px;
+            max-width: var(--max-content-width);
             width: 100%;
             margin: var(--space-md) auto;
             padding: 0 var(--space-lg);
@@ -169,9 +243,9 @@
         /* --- Hero/Header Section --- */
         #hero {
              position: relative;
-             padding-top: var(--space-xxl);
+             padding-top: var(--section-v-padding);
              padding-bottom: var(--space-xxxl);
-             margin-bottom: var(--space-xxxl);
+             margin-bottom: var(--section-margin-bottom);
              text-align: center;
              overflow: hidden;
         }
@@ -202,6 +276,9 @@
             transition: transform var(--transition-duration-medium) var(--transition-easing-springy), box-shadow var(--transition-duration-medium) var(--transition-easing-standard);
             z-index: 1;
             position: relative;
+             /* Ensure image is responsive but maintains aspect ratio */
+             max-width: 90%;
+             height: auto;
         }
          .profile-image:hover {
              transform: scale(1.12) rotate(5deg);
@@ -219,6 +296,7 @@
             line-height: 1.1;
             letter-spacing: -3px;
             text-shadow: 3px 3px 8px var(--shadow-color-light);
+             word-break: break-word; /* Prevent long titles from overflowing */
         }
 
         .tagline {
@@ -232,10 +310,11 @@
 
         /* --- General Section Styling --- */
         section {
-            margin-bottom: var(--space-xxxl);
-            padding-top: var(--space-xxl);
+            margin-bottom: var(--section-margin-bottom);
+            padding-top: var(--section-v-padding);
              position: relative;
              z-index: 1;
+             padding-bottom: var(--section-v-padding); /* Add padding bottom matching top */
         }
          section:last-of-type {
              margin-bottom: var(--space-xl);
@@ -246,7 +325,7 @@
          section::after {
             content: '';
             position: absolute;
-            bottom: calc(var(--space-xxl) * -1 - 1px);
+            bottom: calc(var(--section-v-padding) * -1 - 1px); /* Position based on section padding */
             left: 50%;
             transform: translateX(-50%);
             width: 200px;
@@ -311,7 +390,7 @@
              text-align: center;
              transition: transform var(--transition-duration-short) var(--transition-easing-springy), color var(--transition-duration-short) var(--transition-easing-standard);
          }
-         #links ul li:hover i {
+         #links ul li a:hover i, #links ul li a:focus-visible i { /* Apply hover effect on focus too */
              transform: scale(1.4) rotate(10deg);
               color: var(--primary-color);
          }
@@ -319,7 +398,7 @@
               font-weight: 500;
               transition: color var(--transition-duration-short) var(--transition-easing-standard), text-decoration var(--transition-duration-short) var(--transition-easing-standard);
          }
-         #links ul li a:hover {
+         #links ul li a:hover, #links ul li a:focus-visible { /* Apply hover effect on focus too */
               color: var(--primary-color);
               text-decoration: underline;
          }
@@ -332,6 +411,8 @@
             gap: var(--space-lg);
             padding: 0;
              perspective: 1000px;
+             /* Ensure grid items manage their size well */
+             align-items: stretch;
         }
 
         .card {
@@ -348,11 +429,14 @@
              overflow: hidden;
              position: relative;
              transform-style: preserve-3d;
+             /* Added for focus state z-index */
+             z-index: 1;
         }
 
         .card:hover {
             transform: translateY(-15px) rotateX(5deg) rotateY(5deg);
             box-shadow: 0 25px 50px var(--shadow-color-strong), 0 0 10px var(--accent-color);
+             z-index: 2; /* Bring hovered card to front */
         }
 
          /* Optional: Subtle accent border on hover */
@@ -379,6 +463,9 @@
              height: 240px;
              object-fit: cover;
              border-bottom: 1px solid var(--border-color);
+              /* Ensure image is responsive */
+             max-width: 100%;
+             height: auto; /* Keep aspect ratio */
          }
 
 
@@ -390,6 +477,7 @@
             font-size: 1.5rem;
             font-weight: 700;
             line-height: 1.4;
+            word-break: break-word; /* Prevent long titles from overflowing */
         }
 
         .card p {
@@ -437,7 +525,7 @@
               border-radius: var(--border-radius-sm);
               transition: background-color var(--transition-duration-short) var(--transition-easing-standard), color var(--transition-duration-short) var(--transition-easing-standard);
         }
-         .card .card-links a:hover {
+         .card .card-links a:hover, .card .card-links a:focus-visible { /* Apply hover effect on focus too */
              background-color: #e9ecef;
              color: var(--primary-color);
          }
@@ -460,15 +548,9 @@
              transform: translateY(-18px) rotateX(5deg) rotateY(5deg) scale(1.07);
               box-shadow: 0 30px 60px var(--shadow-color-strong), 0 0 25px var(--highlight-color);
           }
-          .card.is-featured h3,
-          .card.is-featured .card-meta,
-          .card.is-featured p,
-          .card.is-featured .card-links a {
-              color: var(--secondary-color);
-          }
-           .card.is-featured .card-links a:hover {
-               background-color: #ffe066;
-               color: var(--secondary-color);
+           /* Ensure featured card focus state is also highlighted */
+           .card.is-featured:focus-within {
+               box-shadow: 0 0 0 4px rgba(255, 193, 7, 0.5), 0 8px 25px var(--shadow-color-medium); /* Highlight glow + original shadow */
            }
 
 
@@ -494,19 +576,22 @@
              cursor: pointer;
              display: inline-flex;
              align-items: center;
+              /* Added for focus state */
+             outline: none; /* Remove default outline */
          }
-          #skills .skills-list li:hover {
+          #skills .skills-list li:hover, #skills .skills-list li:focus-visible { /* Apply hover effect on focus too */
               background-color: var(--accent-color);
               color: white;
               transform: translateY(-5px);
               box-shadow: 0 5px 10px var(--shadow-color-light);
+              /* Custom focus outline handled by :focus-visible rule */
           }
          #skills .skills-list li i {
               margin-right: var(--space-xs);
               color: var(--primary-color);
               transition: color var(--transition-duration-short) var(--transition-easing-standard);
          }
-          #skills .skills-list li:hover i {
+          #skills .skills-list li:hover i, #skills .skills-list li:focus-visible i { /* Apply hover effect on focus too */
               color: white;
           }
 
@@ -542,6 +627,8 @@
             position: relative;
             background-color: inherit;
             width: 50%;
+             /* Added for focus state */
+             outline: none; /* Remove default outline */
         }
 
         /* Right side timeline items */
@@ -576,7 +663,7 @@
             left: -14px;
         }
 
-        .timeline li:hover::after {
+        .timeline li:hover::after, .timeline li:focus-within::after { /* Apply hover effect on focus too */
              background-color: var(--primary-color);
              border-color: var(--accent-color);
              transform: scale(1.2);
@@ -592,8 +679,10 @@
              box-shadow: 0 4px 15px var(--shadow-color-light);
              transition: transform var(--transition-duration-short) var(--transition-easing-springy), box-shadow var(--transition-duration-short) var(--transition-easing-standard);
              z-index: 1;
+             /* Added for focus state */
+             outline: none; /* Remove default outline */
         }
-         .timeline li:hover .timeline-content {
+         .timeline li:hover .timeline-content, .timeline li:focus-within .timeline-content { /* Apply hover effect on focus too */
               transform: translateY(-8px);
               box-shadow: 0 8px 20px var(--shadow-color-medium);
          }
@@ -656,8 +745,8 @@
         /* --- Testimonials Section --- */
         #testimonials {
              background-color: #f0f0f0;
-             padding-top: var(--space-xxl);
-             padding-bottom: var(--space-xxl);
+             padding-top: var(--section-v-padding);
+             padding-bottom: var(--section-v-padding);
         }
          #testimonials h2 {
              margin-bottom: var(--space-xl);
@@ -676,10 +765,13 @@
              color: #555;
              position: relative;
               transition: transform var(--transition-duration-short) var(--transition-easing-springy), box-shadow var(--transition-duration-short) var(--transition-easing-standard);
+              /* Added for focus state */
+             outline: none; /* Remove default outline */
          }
-          .testimonial-item:hover {
+          .testimonial-item:hover, .testimonial-item:focus-within { /* Apply hover effect on focus too */
              transform: translateY(-5px);
              box-shadow: 0 6px 20px var(--shadow-color-medium);
+              /* Custom focus outline handled by :focus-visible rule */
           }
           .testimonial-item::before {
               content: "\201C";
@@ -751,11 +843,14 @@
              align-items: center;
              padding: var(--space-xs);
              border-radius: var(--border-radius-sm);
+              /* Added for focus state */
+             outline: none; /* Remove default outline */
          }
-         .contact-info a:hover {
+         .contact-info a:hover, .contact-info a:focus-visible { /* Apply hover effect on focus too */
              color: var(--primary-color);
              text-decoration: underline;
              transform: translateX(8px);
+             /* Custom focus outline handled by :focus-visible rule */
          }
          .contact-info i {
               margin-right: var(--space-sm);
@@ -764,7 +859,7 @@
               text-align: center;
               transition: transform var(--transition-duration-short) var(--transition-easing-springy), color var(--transition-duration-short) var(--transition-easing-standard);
          }
-         .contact-info a:hover i {
+         .contact-info a:hover i, .contact-info a:focus-visible i { /* Apply hover effect on focus too */
              transform: scale(1.2);
              color: var(--primary-color);
          }
@@ -801,118 +896,30 @@
 
 
         /* --- Responsive Adjustments --- */
-        @media (max-width: 1200px) {
-             .container {
-                 padding: 0 var(--space-lg);
-             }
-        }
-
-        @media (max-width: 1000px) {
-            .content-area {
-                padding: var(--space-xl);
-            }
-             .timeline::after {
-                 left: var(--space-lg);
-             }
-             .timeline li {
-                 width: 100%;
-                 padding-left: var(--space-xxl);
-                 padding-right: var(--space-md);
-             }
-             .timeline li:nth-child(even) {
-                 left: 0;
-                 padding-left: var(--space-xxl);
-                 padding-right: var(--space-md);
-             }
-             .timeline li::after {
-                 left: var(--space-lg);
-             }
-              .timeline li:nth-child(even)::after {
-                  left: var(--space-lg);
-              }
-              .timeline-content::before {
-                  right: auto;
-                  left: -16px;
-                   border-color: transparent var(--card-bg) transparent transparent;
-              }
-              .timeline li:nth-child(even) .timeline-content::before {
-                   left: -16px;
-                    border-color: transparent var(--card-bg) transparent transparent;
-              }
-               .timeline-content::after {
-                  right: auto;
-                  left: -18px;
-                   border-color: transparent var(--border-color) transparent transparent;
-               }
-               .timeline li:nth-child(even) .timeline-content::after {
-                   left: -18px;
-                    border-color: transparent var(--border-color) transparent transparent;
-               }
-             h1 {
-                 font-size: 4rem;
-                 letter-spacing: -2px;
-             }
-             section h2 {
-                 font-size: 2.8rem;
-             }
-             .tagline {
-                 font-size: 1.6rem;
-             }
-             .profile-image {
-                 width: 180px;
-                 height: 180px;
-             }
-             .card h3 {
-                 font-size: 1.4rem;
-             }
-             .card p {
-                 font-size: 1rem;
-             }
-             .card .card-links a {
-                  font-size: 1rem;
-             }
-             .card.is-featured {
-                 transform: scale(1.02) rotateZ(-1deg);
-             }
-              .card.is-featured:hover {
-                transform: translateY(-15px) rotateX(5deg) rotateY(5deg) scale(1.04);
-             }
-        }
-
+        /* Ensure scroll padding adapts to navbar height changes if any */
         @media (max-width: 768px) {
-            html {
-                scroll-padding-top: 80px;
-            }
-            body {
-                 padding-top: 70px;
+             html {
+                scroll-padding-top: 80px; /* Adjust if nav height changes */
              }
-             .container {
-                 padding: 0 var(--space-md);
-                 margin: var(--space-md) auto;
-             }
-             .content-area {
-                 padding: var(--space-lg);
-                 box-shadow: 0 4px 15px var(--shadow-color-medium);
-             }
-             .navbar {
-                 padding: var(--space-sm) 0;
+              body {
+                 padding-top: 70px; /* Adjust if nav height changes */
              }
              .navbar nav a {
-                 margin: 0 var(--space-sm);
-                 font-size: 0.95rem;
+                 font-size: 1rem;
              }
-            h1 {
-                font-size: 3.5rem;
-            }
-             section h2 {
-                 font-size: 2.2rem;
+             h1 {
+                font-size: 3.8rem;
+                letter-spacing: -1px;
+             }
+              section h2 {
+                 font-size: 2.8rem;
              }
             .tagline {
-                font-size: 1.5rem;
+                font-size: 1.6rem;
             }
             .profile-image {
-                width: 150px;
-                height: 150px;
+                width: 160px;
+                height: 160px;
                  border-width: 6px;
             }
              section {
@@ -922,7 +929,8 @@
              }
               section::after {
                  bottom: calc(var(--space-xl) * -1 - 1px);
-             }
+                 width: 150px;
+              }
 
             .grid-container {
                  grid-template-columns: 1fr;
@@ -932,6 +940,7 @@
              .card {
                  transform: none !important; /* Disable 3D transform */
                  box-shadow: 0 6px 20px var(--shadow-color-medium); /* Standard shadow */
+                 transition: transform var(--transition-duration-short) var(--transition-easing-springy), box-shadow var(--transition-duration-short) var(--transition-easing-standard); /* Adjust transition for 2D hover */
              }
               .card:hover {
                  transform: translateY(-8px) !important; /* Just lift on hover */
@@ -952,7 +961,7 @@
 
 
              .card-image {
-                 height: 180px;
+                 height: 200px;
                   width: calc(100% + var(--space-md) * 2);
                  margin: calc(-1 * var(--space-md)) calc(-1 * var(--space-md)) var(--space-md) calc(-1 * var(--space-md));
              }
@@ -1012,12 +1021,13 @@
              }
         }
 
+        /* Added breakpoint for very small screens */
          @media (max-width: 480px) {
-            html {
-                scroll-padding-top: 65px;
-            }
+             html {
+                scroll-padding-top: 70px; /* Adjust if nav height changes */
+             }
               body {
-                 padding-top: 60px;
+                 padding-top: 65px; /* Adjust if nav height changes */
              }
              .container {
                  padding: 0 var(--space-sm);
@@ -1032,17 +1042,17 @@
              }
              .navbar nav a {
                  margin: 0 var(--space-xs);
-                 font-size: 0.8rem;
+                 font-size: 0.85rem;
              }
              h1 {
-                 font-size: 2.8rem;
+                 font-size: 3rem;
                  letter-spacing: -1px;
              }
               section h2 {
-                 font-size: 2rem;
+                 font-size: 2.2rem;
              }
              .tagline {
-                 font-size: 1.3rem;
+                 font-size: 1.4rem;
              }
              .profile-image {
                  width: 120px;
@@ -1061,10 +1071,11 @@
                  font-size: 1.2rem;
              }
              .card p {
-                 font-size: 0.9rem;
+                 font-size: 0.95rem;
              }
               .card .card-meta {
                   gap: var(--space-xs);
+                  font-size: 0.9rem;
               }
               .card .card-links {
                  gap: var(--space-xs);
@@ -1075,12 +1086,18 @@
               }
               #skills .skills-list li {
                  padding: var(--space-xs) var(--space-sm);
-                 font-size: 0.85rem;
+                 font-size: 0.8rem;
               }
                section {
                  margin-bottom: var(--space-xl);
-                 padding-bottom: var(--space-xl);
+                 padding-top: var(--space-lg); /* Adjusted padding top */
+                 padding-bottom: var(--space-lg); /* Adjusted padding bottom */
              }
+              section::after {
+                 bottom: calc(var(--space-lg) * -1 - 1px); /* Position based on section padding */
+                 width: 100px;
+              }
+
              #contact p {
                  font-size: 1rem;
              }
@@ -1145,7 +1162,7 @@
 
             <main>
                 <section id="hero">
-                     <img src="RasoulUnlimited.png" alt="Mohammad Rasoul Sohrabi Profile Image" class="profile-image" aria-label="Mohammad Rasoul Sohrabi's Profile Picture"/>
+                     <img src="RasoulUnlimited.png" alt="Mohammad Rasoul Sohrabi Profile Image - Rasoul Unlimited" class="profile-image" aria-label="Mohammad Rasoul Sohrabi's Profile Picture"/>
                      <h1>Rasoul Unlimited | محمد رسول سهرابی</h1>
                      <p class="tagline">Developer. Designer. Founder.</p>
                 </section>
@@ -1274,7 +1291,7 @@
                                  </div>
                              <p>اولین مقاله جامع معرفی‌کننده من در پلتفرم ویرگول. این مقاله به صورت چندوجهی به بررسی مسیر من از ورزش قهرمانی کاراته تا ورود به دنیای توسعه نرم‌افزار، مهندسی پزشکی و سلامت دیجیتال می‌پردازد و نقاط عطف مهمی مانند توسعه اولین ربات فارسی دیسکورد را هایلایت می‌کند.</p>
                               <div class="card-links">
-                                 <a href="https://vrgl.ir/9D6Hy" target="_blank" rel="noopener noreferrer" aria-label="Read the article 'از tatami تا تکنولوژی' on Virgool"><i class="fas fa-book-open" aria-hidden="true"></i> مطالعه مقاله در ویرگول)</a>
+                                 <a href="https://vrgl.ir/9D6Hy" target="_blank" rel="noopener noreferrer" aria-label="Read the article 'از tatami تا تکنولوژی' on Virgool"><i class="fas fa-book-open" aria-hidden="true"></i> مطالعه مقاله در ویرگول</a>
                               </div>
                          </div>
 
