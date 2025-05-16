@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Rasoul Unlimited | محمد رسول سهرابی - Official Digital Hub</title>
     <meta name="description" content="Explore the compelling digital presence of Mohammad Rasoul Sohrabi (Rasoul Unlimited), a biomedical engineering innovator, full-stack developer, and content strategist. Featuring a detailed timeline, impactful projects (like the first verified Persian Discord bot), reputable media mentions, and key skills showcasing his verifiable notability and expertise."/>
-    <meta name="keywords" content="Mohammad Rasoul Sohrabi, Rasoul Unlimited, Biomedical Engineering, University of Tehran, Python Developer, Discord Bot, Personal Branding, Karaj, Tehran, Software Engineer, Content Strategist, Media Mentions, Notability, Verification"/>
+    <meta name="keywords" content="Mohammad Rasoul Sohrabi, Rasoul Unlimited, Biomedical Engineering, University of Tehran, Python Developer, Discord Bot, Personal Branding, Karaj, Tehran, Software Engineer, Content Strategist, Media Mentions, Notability, Verification, GitHub, Virgool, LinkedIn, Telegram, MIT License"/>
 
     <meta property="og:type" content="website"/>
     <meta property="og:url" content="[Your Website URL Here]"/> <meta property="og:title" content="Rasoul Unlimited | محمد رسول سهرابی - Official Digital Hub"/>
@@ -32,12 +32,28 @@
       "@type": "Person",
       "name": "Mohammad Rasoul Sohrabi",
       "alternateName": "Rasoul Unlimited",
-      "url": "[Your Website URL Here]", "image": "[Link to your profile image or a representative image]", "sameAs": [
-        "https://www.instagram.com/rasoul.unlimited",
+      "url": "[Your Website URL Here]", "image": "[Link to your profile image or a representative image]", "birthDate": "2005-09-06",
+      "birthPlace": {
+          "@type": "Place",
+          "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Tehran, Iran"
+          }
+      },
+      "homeLocation": {
+           "@type": "Place",
+           "address": {
+               "@type": "PostalAddress",
+               "addressLocality": "Karaj, Iran"
+           }
+      },
+      "sameAs": [
+        "https://www.instagram.com/Rasoul.Unlimited",
         "https://virgool.io/@RasoulUnlimited",
         "https://www.linkedin.com/in/rasoulunlimited",
-        "https://github.com/rasoul-unlimited",
-        "https://rasoulunlimited.medium.com"
+        "https://github.com/RasoulUnlimited",
+        "https://rasoulunlimited.medium.com",
+        "https://t.me/RasoulUnlimited"
         // TODO: Add other relevant social/professional profiles
       ],
       "jobTitle": ["Biomedical Engineering Student", "Software Developer", "Designer", "Founder", "Content Strategist"],
@@ -46,13 +62,19 @@
         "name": "University of Tehran",
         "location": "Tehran, Iran"
       },
-      "knowsAbout": ["Biomedical Engineering", "Software Development", "Web Development", "Python", "JavaScript", "Digital Health", "Personal Branding", "Karate", "Discord Bot Development"],
+      "knowsAbout": ["Biomedical Engineering", "Software Development", "Web Development", "Python", "JavaScript", "C Programming", "Digital Health", "Personal Branding", "Karate", "Discord Bot Development", "Academic Projects", "Open Source", "MIT License"],
       "award": [
-           "Official Verification of First Persian Discord Bot by Discord"
+           "Official Verification of First Persian Discord Bot by Discord",
            // TODO: Add any other verifiable awards or recognitions here
+       ],
+       "memberOf": [
+           {
+               "@type": "Organization",
+               "name": "Biomedical Engineering Association (University of Tehran)"
+           }
+           // TODO: Add membership in other organizations if applicable
        ]
        // TODO: Consider adding 'mentions' property linking to reputable articles if available in schema format
-       // TODO: Consider adding 'worksFor' or 'memberOf' if applicable
        // TODO: For complex projects, consider adding specific 'CreativeWork' or 'SoftwareSourceCode' schema objects and linking them via 'hasProject'
        // TODO: For content pieces, consider adding specific 'Article' schema objects and linking them
     }
@@ -174,7 +196,8 @@
 
         /* Custom focus styles for complex elements */
          .card:focus-within, .skills-list li:focus-within, .timeline li:focus-within .timeline-content,
-         .contact-info a:focus-visible, .connect-links-block ul li a:focus-visible {
+         .contact-info a:focus-visible, .connect-links-block ul li a:focus-visible,
+         .testimonial-item:focus-within {
              outline: none; /* Remove default outline */
               box-shadow: 0 0 0 3px var(--accent-color), 0 0 0 6px rgba(0, 123, 255, 0.25); /* Custom double ring focus */
              z-index: 5;
@@ -187,7 +210,8 @@
 
 
         /* Hide default outline for elements inside focused complex elements */
-         .card:focus-within > *, .timeline li:focus-within .timeline-content > * {
+         .card:focus-within > *, .timeline li:focus-within .timeline-content > *,
+         .testimonial-item:focus-within > * {
              outline: none;
              box-shadow: none;
          }
@@ -743,7 +767,7 @@
              background-color: #f0f0f0;
              padding-top: var(--section-v-padding);
              padding-bottom: var(--section-v-padding);
-             margin-bottom: var(--section-margin-bottom); /* Ensure margin below if not the last section */
+             margin-bottom: var(--section-margin-bottom);
         }
          #testimonials h2 {
              margin-bottom: var(--space-xl);
@@ -922,10 +946,10 @@
              align-items: center;
              padding: var(--space-xs) 0;
              border-bottom: 1px solid #eee;
-             transition: background-color var(--transition-duration-short) var(--transition-easing-standard); /* Added transition for list item background */
+             transition: background-color var(--transition-duration-short) var(--transition-easing-standard);
          }
           .connect-links-block ul li:hover, .connect-links-block ul li:focus-within {
-               background-color: #f8f9fa; /* Subtle background on hover/focus */
+               background-color: #f8f9fa;
           }
          .connect-links-block ul li:last-child { border-bottom: none; }
 
@@ -1165,7 +1189,9 @@
 
             /* Testimonials */
              .testimonial-slider { grid-template-columns: 1fr; }
-             .testimonial-item p { font-size: 1rem; }
+             .testimonial-item { padding: var(--space-sm); }
+              .testimonial-item::before { font-size: 3em; left: var(--space-sm); }
+             .testimonial-item p { font-size: 1rem; margin-top: var(--space-md); margin-bottom: var(--space-md); }
              .testimonial-item .author { font-size: 0.95rem; }
 
 
@@ -1304,7 +1330,8 @@
             <a href="#projects">Projects</a>
             <a href="#content">Content</a>
             <a href="#mentions">Mentions</a>
-             <a href="#testimonials">Testimonials</a> <a href="#connect">Connect</a>
+             <a href="#testimonials">Testimonials</a>
+            <a href="#connect">Connect</a>
         </nav>
     </div>
 
@@ -1321,7 +1348,7 @@
                 <section id="about">
                     <h2>About Me | درباره من</h2>
                     <p>
-                        محمد رسول سهرابی، ملقب به «آنلیمیتد»، نمونه‌ای کم‌نظیر از تلفیق ورزش قهرمانی (کاراته دان ۱)، توسعه فنی، و آینده‌نگری علمی‌ست. او دانشجوی مهندسی پزشکی دانشگاه تهران است و باور دارد در دنیای شلوغ امروز، فقط صدای واقعی شنیده می‌شود.
+                        محمد رسول سهرابی، متولد ۱۵ شهریور ۱۳۸۴ و ملقب به «آنلیمیتد»، نمونه‌ای کم‌نظیر از تلفیق ورزش قهرمانی (کاراته دان ۱ رسمی فدراسیون)، توسعه فنی، و آینده‌نگری علمی‌ست. او دانشجوی مهندسی پزشکی دانشگاه تهران (واحد مرکزی) و عضو انجمن علمی مهندسی پزشکی دانشگاه است و باور دارد در دنیای شلوغ امروز، فقط صدای واقعی شنیده می‌شود.
                          با انگیزه‌ی درونی برای تاثیرگذاری و ذهنیت «نامحدود»، از راه‌اندازی پروژه اولین ربات فارسی‌زبان دیسکورد با تایید رسمی دیسکورد در ۱۴ سالگی، تا انتشار مقالات در ویرگول و مشارکت در پروژه‌های دانشگاهی، در هر کاری سعی کرده امضای خودش را بگذارد. او به دنبال ترکیب خلاقانه‌ مهندسی پزشکی و برنامه‌نویسی برای ایجاد تحول در حوزه سلامت دیجیتال است و فراتر از سن‌وسالش گام برمی‌دارد.
                     </p>
                 </section>
@@ -1329,6 +1356,13 @@
                  <section id="timeline">
                      <h2>⏳ My Journey | مسیر من</h2>
                      <ul class="timeline" aria-label="Educational and Professional Timeline">
+                         <li>
+                             <div class="timeline-content">
+                                 <h3 class="date">۱۵ شهریور ۱۳۸۴ (September 6, 2005)</h3>
+                                 <h3>تولد</h3>
+                                 <p>متولد تهران و ساکن کرج.</p>
+                             </div>
+                         </li>
                          <li>
                              <div class="timeline-content">
                                  <h3 class="date">سنین پایین</h3>
@@ -1345,16 +1379,31 @@
                          </li>
                          <li>
                              <div class="timeline-content">
-                                 <h3 class="date">پاییز 1402 (حدود سپتامبر 2023)</h3> <h3>آغاز تحصیل در مهندسی پزشکی دانشگاه تهران</h3>
+                                 <h3 class="date">پاییز 1402 (Fall 2023)</h3>
+                                 <h3>آغاز تحصیل در مهندسی پزشکی دانشگاه تهران</h3>
                                  <p>ورود به دانشگاه تهران (واحد مرکزی) برای تحصیل در رشته مهندسی پزشکی و تمرکز بر ترکیب دانش مهندسی و برنامه‌نویسی برای حوزه سلامت دیجیتال.</p>
                              </div>
                          </li>
-                          <li>
-                             <div class="timeline-content">
-                                 <h3 class="date">سال‌های اخیر</h3>
-                                 <h3>مشارکت در پروژه‌های برنامه‌نویسی دانشگاهی</h3>
-                                 <p>فعالیت و همکاری در پروژه‌های برنامه‌نویسی دانشگاهی در دانشگاه تهران و دانشگاه صنعتی سهند تبریز. این پروژه‌ها فرصتی برای گسترش مهارت‌های فنی و کاربرد آن‌ها در پروژه‌های واقعی انجام شده است.</p> </div>
-                         </li>
+                           <li>
+                                <div class="timeline-content">
+                                    <h3 class="date">سال 1403 شمسی (حدود 2024 میلادی)</h3>
+                                    <h3>توسعه پروژه‌های برنامه‌نویسی با زبان C (دانشگاهی)</h3>
+                                    <p>انجام چندین پروژه کوچک با زبان C برای دروس دانشگاهی در دانشگاه تهران (واحد مرکزی). نویسنده این پروژه‌ها هستم و آن‌ها دارای MIT License برای استفاده و مشارکت عمومی هستند.</p>
+                                     <div class="card-links" style="border-top: none; padding-top: 0; margin-top: var(--space-xs);">
+                                        <a href="https://github.com/RasoulUnlimited/Small-projects-with-c" target="_blank" rel="noopener noreferrer" aria-label="View C projects on GitHub"><i class="fab fa-github" aria-hidden="true"></i> مشاهده در GitHub</a>
+                                    </div>
+                                </div>
+                            </li>
+                             <li>
+                                <div class="timeline-content">
+                                     <h3 class="date">سال 1403 شمسی (حدود 2024 میلادی)</h3>
+                                     <h3>توسعه پروژه‌های برنامه‌نویسی با زبان پایتون (دانشگاهی)</h3>
+                                     <p>انجام چندین پروژه کوچک با زبان پایتون برای دروس دانشگاهی در دانشگاه صنعتی سهند تبریز. نویسنده این پروژه‌ها هستم و آن‌ها دارای MIT License برای استفاده و مشارکت عمومی هستند.</p>
+                                      <div class="card-links" style="border-top: none; padding-top: 0; margin-top: var(--space-xs);">
+                                        <a href="https://github.com/RasoulUnlimited/Small-projects-with-python" target="_blank" rel="noopener noreferrer" aria-label="View Python projects on GitHub"><i class="fab fa-github" aria-hidden="true"></i> مشاهده در GitHub</a>
+                                     </div>
+                                 </div>
+                            </li>
                           <li>
                              <div class="timeline-content">
                                  <h3 class="date">27 نوامبر 2022</h3>
@@ -1384,7 +1433,7 @@
                      <h2>🛠️ Skills & Technologies | مهارت‌ها و تکنولوژی‌ها</h2>
                      <ul class="skills-list" aria-label="List of Skills and Technologies">
                          <li><i class="fas fa-code" aria-hidden="true"></i> Python</li>
-                         <li><i class="fas fa-code" aria-hidden="true"></i> JavaScript</li>
+                          <li><i class="fas fa-code" aria-hidden="true"></i> C</li> <li><i class="fas fa-code" aria-hidden="true"></i> JavaScript</li>
                          <li><i class="fas fa-laptop-code" aria-hidden="true"></i> توسعه وب (وب، بک‌اند)</li>
                          <li><i class="fas fa-server" aria-hidden="true"></i> مهندسی نرم‌افزار</li>
                          <li><i class="fas fa-dna" aria-hidden="true"></i> مهندسی پزشکی</li>
@@ -1397,7 +1446,7 @@
                           <li><i class="fas fa-search" aria-hidden="true"></i> آینده‌نگری و تحلیل</li>
                          <li><i class="fas fa-language" aria-hidden="true"></i> English (Fluent)</li>
                          <li><i class="fas fa-language" aria-hidden="true"></i> Persian (Native)</li>
-                         <li><i class="fab fa-react" aria-hidden="true"></i> React / React Native</li> <li><i class="fas fa-database" aria-hidden="true"></i> SQL</li> <li><i class="fas fa-server" aria-hidden="true"></i> Node.js</li> <li><i class="fas fa-brain" aria-hidden="true"></i> Machine Learning (Mention specific libraries/frameworks if applicable)</li> <li><i class="fas fa-mobile-alt" aria-hidden="true"></i> Mobile App Development</li> <li><i class="fas fa-palette" aria-hidden="true"></i> UI/UX Design (Figma, Adobe XD)</li> </ul>
+                         <li><i class="fab fa-react" aria-hidden="true"></i> React / React Native</li> <li><i class="fas fa-database" aria-hidden="true"></i> SQL</li> <li><i class="fas fa-server" aria-hidden="true"></i> Node.js</li> <li><i class="fas fa-brain" aria-hidden="true"></i> Machine Learning (Mention specific libraries/frameworks if applicable)</li> <li><i class="fas fa-mobile-alt" aria-hidden="true"></i> Mobile App Development</li> <li><i class="fas fa-palette" aria-hidden="true"></i> UI/UX Design (Figma, Adobe XD)</li> <li><i class="fas fa-code-branch" aria-hidden="true"></i> پروژه‌های آکادمیک و متن‌باز</li> </ul>
                  </section>
 
 
@@ -1418,14 +1467,32 @@
                          </div>
 
                           <div class="card project-card">
-                              <h3>پروژه‌های برنامه‌نویسی دانشگاهی</h3>
-                             <div class="card-meta">
-                                  <span><i class="fas fa-building" aria-hidden="true"></i> دانشگاه تهران / صنعتی سهند تبریز</span>
-                                  <span><i class="fas fa-code-branch" aria-hidden="true"></i> حوزه: متنوع (ذکر حوزه‌ها)</span> </div>
-                             <p>مشارکت فعال و توسعه پروژه‌های برنامه‌نویسی در چارچوب فعالیت‌های دانشگاهی در دانشگاه تهران و دانشگاه صنعتی سهند تبریز. این پروژه‌ها فرصتی برای گسترش مهارت‌های فنی و کاربرد آن‌ها در پروژه‌های واقعی انجام شده است.</p> <div class="card-links">
-                                   <a href="https://github.com/rasoul-unlimited" target="_blank" rel="noopener noreferrer" aria-label="View University Projects on GitHub"><i class="fab fa-github" aria-hidden="true"></i> مشاهده در GitHub</a>
-                                    </div>
-                         </div>
+                               <h3>پروژه‌های برنامه‌نویسی با زبان C (دانشگاهی)</h3>
+                               <div class="card-meta">
+                                    <span><i class="fas fa-building" aria-hidden="true"></i> دانشگاه تهران (مرکز)</span>
+                                    <span><i class="fas fa-code" aria-hidden="true"></i> زبان: C</span>
+                                    <span><i class="fas fa-calendar-alt" aria-hidden="true"></i> سال انجام: ۱۴۰۳</span>
+                                    <span><i class="fas fa-code-branch" aria-hidden="true"></i> متن‌باز با MIT License</span>
+                               </div>
+                               <p>مجموعه‌ای از پروژه‌های برنامه‌نویسی کوچک که در چارچوب دروس ترم اول دانشگاه تهران انجام شده‌اند. این پروژه‌ها با زبان C نوشته شده‌اند و به صورت متن‌باز در گیت‌هاب قابل دسترسی هستند.</p>
+                                <div class="card-links">
+                                     <a href="https://github.com/RasoulUnlimited/Small-projects-with-c" target="_blank" rel="noopener noreferrer" aria-label="View C projects on GitHub"><i class="fab fa-github" aria-hidden="true"></i> مشاهده در GitHub</a>
+                                </div>
+                           </div>
+
+                            <div class="card project-card">
+                               <h3>پروژه‌های برنامه‌نویسی با زبان پایتون (دانشگاهی)</h3>
+                               <div class="card-meta">
+                                    <span><i class="fas fa-building" aria-hidden="true"></i> دانشگاه صنعتی سهند تبریز (همکاری)</span>
+                                    <span><i class="fas fa-code" aria-hidden="true"></i> زبان: پایتون</span>
+                                    <span><i class="fas fa-calendar-alt" aria-hidden="true"></i> سال انجام: ۱۴۰۳</span>
+                                     <span><i class="fas fa-code-branch" aria-hidden="true"></i> متن‌باز با MIT License</span>
+                               </div>
+                               <p>مجموعه‌ای از پروژه‌های برنامه‌نویسی کوچک با زبان پایتون که در چارچوب همکاری با دانشگاه صنعتی سهند تبریز انجام شده‌اند. این پروژه‌ها به صورت متن‌باز در گیت‌هاب قابل دسترسی هستند.</p>
+                                <div class="card-links">
+                                     <a href="https://github.com/RasoulUnlimited/Small-projects-with-python" target="_blank" rel="noopener noreferrer" aria-label="View Python projects on GitHub"><i class="fab fa-github" aria-hidden="true"></i> مشاهده در GitHub</a>
+                                </div>
+                           </div>
 
                          </div>
                  </section>
@@ -1509,11 +1576,12 @@
                          <div class="connect-links-block">
                              <h3>My Hubs | پیوندهای من</h3>
                              <ul>
-                                 <li><a href="https://www.instagram.com/rasoul.unlimited" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on Instagram"><i class="fab fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+                                 <li><a href="https://www.instagram.com/Rasoul.Unlimited" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on Instagram"><i class="fab fa-instagram" aria-hidden="true"></i> Instagram</a></li>
                                  <li><a href="https://virgool.io/@RasoulUnlimited" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on Virgool"><i class="fas fa-pen-fancy" aria-hidden="true"></i> Virgool</a></li>
-                                 <li><a href="https://www.linkedin.com/in/rasoulunlimited" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
-                                 <li><a href="https://github.com/rasoul-unlimited" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on GitHub"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a></li>
+                                 <li><a href="https://www.linkedin.com/in/rasoulunlimited/" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+                                 <li><a href="https://github.com/RasoulUnlimited/" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on GitHub"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a></li>
                                  <li><a href="https://rasoulunlimited.medium.com" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on Medium"><i class="fab fa-medium" aria-hidden="true"></i> Medium</a></li>
+                                  <li><a href="https://t.me/RasoulUnlimited" target="_blank" rel="noopener noreferrer" aria-label="Join Rasoul Unlimited Telegram Channel"><i class="fab fa-telegram-plane" aria-hidden="true"></i> Telegram Channel</a></li>
                                  </ul>
                          </div>
                      </div>
