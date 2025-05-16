@@ -1,82 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Rasoul Unlimited | محمد رسول سهرابی</title>
-  <style>
-    body {
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      background: #f4f4f4;
-      margin: 0;
-      padding: 0;
-      color: #333;
-    }
-    .container {
-      max-width: 800px;
-      margin: 4rem auto;
-      padding: 2rem;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.1);
-    }
-    h1 {
-      font-size: 2rem;
-      color: #222;
-      margin-bottom: 0.5rem;
-    }
-    p {
-      line-height: 1.6;
-    }
-    ul {
-      padding-left: 1rem;
-      list-style-type: none;
-    }
-    ul li {
-      margin: 0.5rem 0;
-    }
-    a {
-      color: #0077cc;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    .tagline {
-      font-weight: bold;
-      color: #555;
-      margin-bottom: 1.5rem;
-    }
-    .footer {
-      margin-top: 2rem;
-      font-size: 0.9rem;
-      color: #777;
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Rasoul Unlimited | محمد رسول سهرابی</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Define CSS Variables for easier theme changes */
+            --primary-color: #0077cc; /* Blue */
+            --secondary-color: #333; /* Dark Grey */
+            --background-color: #f4f4f4; /* Light Grey */
+            --container-bg: white;
+            --shadow-color: rgba(0,0,0,0.1);
+            --text-color: #333;
+            --heading-color: #222;
+            --tagline-color: #555;
+            --footer-color: #777;
+        }
+
+        body {
+            font-family: 'Open Sans', 'Roboto', "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--background-color);
+            margin: 0;
+            padding: 20px; /* Add some padding on body */
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex; /* Use flexbox to potentially center content */
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Center vertically */
+            box-sizing: border-box; /* Include padding in element's total width and height */
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%; /* Ensure container takes full width on small screens */
+            margin: auto; /* Center the container horizontally */
+            padding: 2rem;
+            background: var(--container-bg);
+            border-radius: 12px;
+            box-shadow: 0 0 20px var(--shadow-color);
+            text-align: center; /* Center text content */
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px; /* Make height same as width for perfect circle */
+            border-radius: 50%; /* Make it circular */
+            margin-bottom: 1.5rem; /* Increase space below image */
+            object-fit: cover; /* Ensure image covers the circular area */
+            border: 4px solid var(--primary-color); /* Add a subtle border */
+            box-shadow: 0 4px 8px var(--shadow-color); /* Add a subtle shadow */
+        }
+
+        h1 {
+            font-size: 2.2rem; /* Slightly larger heading */
+            color: var(--heading-color);
+            margin-top: 0; /* Remove default top margin */
+            margin-bottom: 0.5rem;
+            font-weight: 600; /* Make heading bolder */
+        }
+
+        .tagline {
+            font-size: 1.1rem; /* Slightly larger tagline */
+            font-weight: 500; /* Medium font weight */
+            color: var(--tagline-color);
+            margin-bottom: 2rem; /* Increase space below tagline */
+            margin-top: 0;
+        }
+
+        p {
+            margin-bottom: 1.5rem; /* Add space below paragraphs */
+            text-align: justify; /* Justify bio text */
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: var(--heading-color);
+            margin-top: 2rem; /* Space above section headings */
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--background-color); /* Add a subtle separator */
+            padding-bottom: 0.5rem;
+            display: inline-block; /* Shrink border to text width */
+            text-align: center; /* Center the heading itself */
+        }
+
+        ul {
+            padding: 0; /* Remove default padding */
+            list-style-type: none; /* Remove bullets */
+            margin-bottom: 2rem; /* Space below list */
+        }
+
+        ul li {
+            margin: 0.8rem 0; /* Increase vertical space between list items */
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none; /* Remove default underline */
+            transition: color 0.3s ease, text-decoration 0.3s ease; /* Smooth transition */
+        }
+
+        a:hover {
+            color: var(--secondary-color); /* Change color on hover */
+            text-decoration: underline; /* Add underline on hover */
+        }
+
+        .footer {
+            margin-top: 3rem; /* More space above footer */
+            font-size: 0.9rem;
+            color: var(--footer-color);
+            border-top: 1px solid #eee; /* Subtle separator line */
+            padding-top: 1.5rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .container {
+                padding: 1.5rem;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            .tagline {
+                font-size: 1rem;
+            }
+            .profile-image {
+                width: 120px;
+                height: 120px;
+            }
+             p {
+                text-align: left; /* Maybe left align bio on small screens */
+             }
+        }
+
+    </style>
 </head>
 <body>
-  <div class="container">
-    <img src="RasoulUnlimited.png" alt="Rasoul Unlimited" style="width:150px; border-radius: 100px; margin-bottom: 1rem;" />
-    <h1>Rasoul Unlimited | محمد رسول سهرابی</h1>
-    <p class="tagline">Developer. Designer. Founder.</p>
+    <div class="container">
+        <img src="RasoulUnlimited.png" alt="Rasoul Unlimited Profile Image" class="profile-image" />
+        <h1>Rasoul Unlimited | محمد رسول سهرابی</h1>
+        <p class="tagline">Developer. Designer. Founder.</p>
 
-    <p>
-      I'm a biomedical engineering student at the University of Tehran (Central Campus), passionate about digital health, software development, and content strategy.
-    </p>
+        <main>
+            <section class="about-me">
+                <p>
+                    I'm a biomedical engineering student at the University of Tehran (Central Campus), passionate about digital health, software development, and content strategy.
+                </p>
+            </section>
 
-    <h2>🔗 Links</h2>
-    <ul>
-      <li><a href="https://www.instagram.com/rasoul.unlimited" target="_blank">Instagram</a></li>
-      <li><a href="https://virgool.io/@RasoulUnlimited" target="_blank">Virgool</a></li>
-      <li><a href="https://www.linkedin.com/in/rasoulunlimited" target="_blank">LinkedIn</a></li>
-      <li><a href="https://github.com/rasoul-unlimited" target="_blank">GitHub</a></li>
-      <li><a href="https://rasoulunlimited.medium.com" target="_blank">Medium</a></li>
-    </ul>
+            <section class="links">
+                <h2>🔗 Links</h2>
+                <ul>
+                    <li><a href="https://www.instagram.com/rasoul.unlimited" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                    <li><a href="https://virgool.io/@RasoulUnlimited" target="_blank" rel="noopener noreferrer">Virgool</a></li>
+                    <li><a href="https://www.linkedin.com/in/rasoulunlimited" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                    <li><a href="https://github.com/rasoul-unlimited" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                    <li><a href="https://rasoulunlimited.medium.com" target="_blank" rel="noopener noreferrer">Medium</a></li>
+                </ul>
+            </section>
+        </main>
 
-    <div class="footer">
-      📍 Tehran / Karaj | 🎓 Biomedical Engineering, University of Tehran<br>
-      Contact: rasoul.unlimited [at] gmail [dot] com
+        <footer class="footer">
+            📍 Tehran / Karaj | 🎓 Biomedical Engineering, University of Tehran<br>
+            Contact: rasoul.unlimited [at] gmail [dot] com
+        </footer>
     </div>
-  </div>
 </body>
 </html>
