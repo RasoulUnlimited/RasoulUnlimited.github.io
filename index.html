@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Rasoul Unlimited | محمد رسول سهرابی - Official Digital Hub</title>
     <meta name="description" content="Explore the compelling digital presence of Mohammad Rasoul Sohrabi (Rasoul Unlimited), a biomedical engineering innovator, full-stack developer, and content strategist. Featuring a detailed timeline, impactful projects (like the first verified Persian Discord bot), reputable media mentions, and key skills showcasing his verifiable notability and expertise."/>
-    <meta name="keywords" content="Mohammad Rasoul Sohrabi, Rasoul Unlimited, Biomedical Engineering, University of Tehran, Python Developer, Discord Bot, Personal Branding, Karaj, Tehran, Software Engineer, Content Strategist, Media Mentions, Notability, Verification, GitHub, Virgool, LinkedIn, Telegram, MIT License"/>
+    <meta name="keywords" content="Mohammad Rasoul Sohrabi, Rasoul Unlimited, Biomedical Engineering, University of Tehran, Python Developer, Discord Bot, Personal Branding, Karaj, Tehran, Software Engineer, Content Strategist, Media Mentions, Notability, Verification, GitHub, Virgool, LinkedIn, Telegram, MIT License, Wikidata, Medium, Personal Branding Article"/>
 
     <meta property="og:type" content="website"/>
     <meta property="og:url" content="[Your Website URL Here]"/> <meta property="og:title" content="Rasoul Unlimited | محمد رسول سهرابی - Official Digital Hub"/>
@@ -52,9 +52,9 @@
         "https://virgool.io/@RasoulUnlimited",
         "https://www.linkedin.com/in/rasoulunlimited/",
         "https://github.com/RasoulUnlimited/",
-        "https://rasoulunlimited.medium.com",
-        "https://t.me/RasoulUnlimited"
+        "https://rasoulunlimited.medium.com", "https://medium.com/@rasoulunlimited/how-to-build-a-genuine-personal-brand-in-todays-noisy-world-c2adb129e623", "https://t.me/RasoulUnlimited"
         // TODO: Add other relevant social/professional profiles
+        // TODO: Add your Wikidata link here if you create one: "https://www.wikidata.org/wiki/[Your Wikidata Item ID]"
       ],
       "jobTitle": ["Biomedical Engineering Student", "Software Developer", "Designer", "Founder", "Content Strategist"],
       "alumniOf": {
@@ -205,7 +205,7 @@
          }
          /* Adjust focus for featured cards */
          .card.is-featured:focus-within {
-              box-shadow: 0 0 0 3px var(--highlight-color), 0 0 0 6px rgba(255, 193, 7, 0.5), 0 8px 25px var(--shadow-color-medium);
+               box-shadow: 0 0 0 3px var(--highlight-color), 0 0 0 6px rgba(255, 193, 7, 0.5), 0 8px 25px var(--shadow-color-medium);
          }
 
 
@@ -1299,6 +1299,7 @@
 
 
             /* Testimonials */
+             .testimonial-slider { grid-template-columns: 1fr; }
              .testimonial-item { padding: var(--space-sm); }
               .testimonial-item::before { font-size: 3em; left: var(--space-sm); }
              .testimonial-item p { font-size: 1rem; margin-top: var(--space-md); margin-bottom: var(--space-md); }
@@ -1306,14 +1307,130 @@
              .testimonial-item .author span { font-size: 0.8rem; }
 
 
-            /* Connect Section */
-             .connect-content { gap: var(--space-lg); }
-             #connect .contact-info { font-size: 1.1rem; }
-             .connect-links-block h3 { font-size: 1.3rem; }
-             .connect-links-block ul { gap: var(--space-xs); }
-             .connect-links-block ul li { font-size: 1rem; padding: var(--space-xxs) 0;}
+            /* Connect Section (Stacked Mobile) */
+             .connect-content {
+                 flex-direction: column;
+                 gap: var(--space-xl);
+                 text-align: center;
+             }
+             .connect-info-block, .connect-links-block {
+                 min-width: 100%;
+                 padding: 0;
+             }
+              .connect-info-block p { text-align: center; }
+              .contact-info { align-items: center; }
+              #connect .location-edu { text-align: center; }
+              .connect-links-block h3 { text-align: center; margin-bottom: var(--space-md); }
+              .connect-links-block ul { gap: var(--space-sm); }
+             .connect-links-block ul li { justify-content: center; border-bottom: 1px solid #eee; padding: var(--space-xs) 0;}
+             .connect-links-block ul li:last-child { border-bottom: none; }
+             .connect-links-block ul li a { justify-content: center; }
              .connect-links-block ul li i { margin-right: var(--space-sm); }
-              #connect .location-edu { font-size: 0.9rem; }
+
+
+            /* Footer */
+             .footer { margin-top: var(--space-md); }
+        }
+
+         /* Smaller Mobile Screens (Further Refinements) */
+         @media (max-width: 480px) {
+             /* Adjust global padding and navbar height */
+             :root {
+                 --navbar-height: 65px;
+                 --section-v-padding: var(--space-lg);
+                 --section-margin-bottom: var(--space-xl);
+             }
+              html { scroll-padding-top: var(--navbar-height); }
+              body { padding-top: var(--navbar-height); }
+             .container {
+                 padding: 0 var(--space-sm);
+                  margin: var(--space-sm) auto;
+             }
+              .content-area {
+                 padding: var(--space-md);
+                 box-shadow: 0 3px 10px var(--shadow-color-light);
+             }
+
+             /* Navbar */
+             .navbar { height: var(--navbar-height); }
+             .navbar nav a {
+                 margin: 0 var(--space-xs);
+                 font-size: 0.85rem;
+             }
+
+             /* Hero */
+             h1 { font-size: 2.8rem; letter-spacing: -1px; }
+              section h2 { font-size: 2.2rem; }
+             .tagline { font-size: 1.3rem; }
+             .profile-image {
+                 width: 120px; height: 120px; border-width: 4px;
+             }
+
+             /* Cards */
+             .card { padding: var(--space-sm); }
+              .card-image {
+                 height: 160px;
+                  width: calc(100% + var(--space-sm) * 2);
+                 margin: calc(-1 * var(--space-sm)) calc(-1 * var(--space-sm)) var(--space-sm) calc(-1 * var(--space-sm));
+             }
+             .card h3 { font-size: 1.1rem; }
+             .card p { font-size: 0.9rem; }
+              .card .card-meta { gap: var(--space-xs); font-size: 0.8rem;}
+              .card .card-links { gap: var(--space-xs); }
+              .card .card-links a { font-size: 0.85rem; padding: var(--space-xxs); }
+              .card::before { height: 3px; }
+
+
+            /* Skills */
+              #skills .skills-list li { padding: var(--space-xs) var(--space-sm); font-size: 0.8rem; }
+
+            /* Timeline */
+             .timeline::after { left: var(--space-md); }
+             .timeline li,
+             .timeline li:nth-child(even) {
+                 padding-left: var(--space-xl);
+                 padding-right: var(--space-sm);
+                  padding-top: var(--space-md);
+                  padding-bottom: var(--space-md);
+             }
+              .timeline li:last-child { padding-bottom: var(--space-md); }
+
+             .timeline li::after,
+             .timeline li:nth-child(even)::after {
+                 left: calc(var(--space-md) - var(--space-xs) / 2);
+                 width: var(--space-md); height: var(--space-md); border-width: 3px; top: 20px;
+             }
+              .timeline-content { padding: var(--space-sm); }
+             .timeline-content::before { left: -14px; border-width: 7px; }
+             .timeline li:nth-child(even) .timeline-content::before { left: -14px; }
+              .timeline-content::after { left: -15px; border-width: 8px; }
+             .timeline li:nth-child(even) .timeline-content::after { left: -15px; }
+             .timeline-content h3 { font-size: 1rem; }
+             .timeline-content p { font-size: 0.85rem; }
+             .timeline-content .date { font-size: 0.75rem; }
+
+
+            /* Testimonials */
+             .testimonial-slider { grid-template-columns: 1fr; }
+             .testimonial-item { padding: var(--space-sm); }
+              .testimonial-item::before { font-size: 2.8em; left: var(--space-sm); }
+             .testimonial-item p { font-size: 0.95rem; margin-top: var(--space-md); margin-bottom: var(--space-md); }
+             .testimonial-item .author { font-size: 0.85rem; }
+             .testimonial-item .author span { font-size: 0.75rem; }
+
+
+            /* Connect Section (Stacked Mobile) */
+             .connect-content {
+                 flex-direction: column;
+                 gap: var(--space-lg);
+                 text-align: center;
+             }
+             #connect .contact-info { font-size: 1rem; }
+             .connect-links-block h3 { font-size: 1.2rem; }
+             .connect-links-block ul { gap: var(--space-xs); }
+             .connect-links-block ul li { font-size: 0.95rem; padding: var(--space-xxs) 0;}
+             .connect-links-block ul li i { margin-right: var(--space-sm); }
+              #connect .location-edu { font-size: 0.85rem; }
 
          }
 
@@ -1524,6 +1641,20 @@
                               </div>
                          </div>
 
+                         <div class="card content-card is-featured">
+                              <h3>How to Build a Genuine Personal Brand in Today’s Noisy World</h3>
+                              <div class="card-meta">
+                                  <span><i class="fas fa-tag" aria-hidden="true"></i> پلتفرم: Medium</span>
+                                  <span><i class="fas fa-calendar-alt" aria-hidden="true"></i> تاریخ انتشار: [TODO: Add Publication Date]</span>
+                                  </div>
+                              <p>
+                                  This article, a translated and combined version of my Virgool posts, explores the concept of building a genuine personal brand in the digital age. It shares my journey from sports to technology and digital health innovation, discussing the meaning behind "Rasoul Unlimited" and providing insights on finding your authentic voice amidst the noise.
+                              </p>
+                               <div class="card-links">
+                                   <a href="https://medium.com/@rasoulunlimited/how-to-build-a-genuine-personal-brand-in-todays-noisy-world-c2adb129e623" target="_blank" rel="noopener noreferrer" aria-label="Read the article on Medium"><i class="fab fa-medium" aria-hidden="true"></i> Read on Medium</a>
+                               </div>
+                          </div>
+
                          </div>
                  </section>
 
@@ -1576,7 +1707,7 @@
                          <div class="connect-links-block">
                              <h3>My Hubs | پیوندهای من</h3>
                              <ul>
-                                 <li><a href="https://www.instagram.com/Rasoul.Unlimited" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on Instagram"><i class="fab fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+                                  <li><a href="https://www.instagram.com/Rasoul.Unlimited" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on Instagram"><i class="fab fa-instagram" aria-hidden="true"></i> Instagram</a></li>
                                  <li><a href="https://virgool.io/@RasoulUnlimited" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on Virgool"><i class="fas fa-pen-fancy" aria-hidden="true"></i> Virgool</a></li>
                                  <li><a href="https://www.linkedin.com/in/rasoulunlimited/" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
                                  <li><a href="https://github.com/RasoulUnlimited/" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on GitHub"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a></li>
