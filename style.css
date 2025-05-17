@@ -75,6 +75,7 @@ body {
      /* Subtle Background Animation */
     animation: backgroundGradient 20s ease infinite;
     background-size: 200% 200%;
+    direction: ltr; /* Default direction for the whole body */
 }
 
 /* Background Gradient Animation */
@@ -134,6 +135,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
      padding: var(--space-xl) var(--space-xxl);
      border-radius: var(--border-radius-lg);
      box-shadow: 0 10px 30px var(--shadow-color-medium);
+     /* direction: rtl; REMOVED */
+     /* text-align: right; REMOVED */
 }
 
 /* --- Navigation Bar --- */
@@ -197,7 +200,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
      padding-top: var(--section-v-padding);
      padding-bottom: var(--space-xxxl);
      margin-bottom: var(--section-margin-bottom);
-     text-align: center;
+     text-align: center; /* Centered as requested */
+     direction: ltr; /* Explicitly LTR as requested */
      overflow: hidden;
 }
 
@@ -250,6 +254,8 @@ h1 {
     letter-spacing: -3px;
     text-shadow: 3px 3px 8px var(--shadow-color-light);
      word-break: break-word;
+     /* text-align: center; Inherits from #hero */
+     /* direction: ltr; Inherits from #hero */
 }
 
 .tagline {
@@ -259,6 +265,8 @@ h1 {
     color: var(--tagline-color);
     margin-bottom: var(--space-xxl);
     margin-top: 0;
+     /* text-align: center; Inherits from #hero */
+      /* direction: ltr; Inherits from #hero */
 }
 
 /* --- General Section Styling --- */
@@ -301,7 +309,10 @@ section {
     position: relative;
     text-align: center;
     font-weight: 800;
-}
+ }
+  /* Direction for section titles - keep LTR or default, centering handles overall block */
+  /* direction: ltr; */
+
 
  section h2::after {
      content: '';
@@ -322,6 +333,9 @@ section {
      font-size: 1.2rem;
      color: #333;
      line-height: 1.8;
+     /* Added for RTL text */
+     direction: rtl;
+     text-align: right;
 }
 
 /* --- Card Grid Layout (Adding 3D Effect) --- */
@@ -332,6 +346,7 @@ section {
     padding: 0;
      perspective: 1000px;
      align-items: stretch;
+     /* direction: ltr; Reverted to default */
 }
 
 .card {
@@ -344,7 +359,7 @@ section {
     flex-direction: column;
     justify-content: space-between;
     transition: transform var(--transition-duration-medium) var(--transition-easing-springy), box-shadow var(--transition-duration-medium) var(--transition-easing-standard);
-     text-align: left;
+     text-align: left; /* Default LTR alignment for the card structure */
      overflow: hidden;
      position: relative;
      transform-style: preserve-3d;
@@ -363,7 +378,8 @@ section {
      content: '';
      position: absolute;
      top: 0;
-     left: 0;
+     left: 0; /* Reverted to LTR positioning */
+     right: auto; /* Ensure right is not set */
      width: 100%;
      height: 6px;
      background-color: var(--accent-color);
@@ -378,7 +394,7 @@ section {
 
  .card-image {
      width: calc(100% + var(--space-md) * 2);
-     margin: calc(-1 * var(--space-md)) calc(-1 * var(--space-md)) var(--space-md) calc(-1 * var(--space-md));
+     margin: calc(-1 * var(--space-md)) calc(-1 * var(--space-md)) var(--space-md) calc(-1 * var(--space-md)); /* Keep original margins */
      height: 240px;
      object-fit: cover;
      border-bottom: 1px solid var(--border-color);
@@ -387,7 +403,7 @@ section {
      display: block;
  }
 
-
+/* Title within cards - Set to RTL */
 .card h3 {
     font-family: 'Montserrat', sans-serif;
     margin-top: 0;
@@ -397,16 +413,24 @@ section {
     font-weight: 700;
     line-height: 1.4;
     word-break: break-word;
+    /* text-align: left; Default LTR alignment */
+    direction: rtl; /* Set to RTL as requested */
+    text-align: right; /* Align right as requested */
 }
 
+/* Paragraph text within cards - Set to RTL */
 .card p {
     margin-bottom: var(--space-md);
     font-size: 1.05rem;
     color: var(--text-color);
     flex-grow: 1;
     line-height: 1.7;
+    /* Added for RTL text */
+    direction: rtl;
+    text-align: right;
 }
 
+/* Meta info within cards - Set to RTL as requested */
 .card .card-meta {
      font-size: 1rem;
      color: var(--text-color-light);
@@ -415,11 +439,19 @@ section {
      display: flex;
      flex-wrap: wrap;
      gap: var(--space-sm);
+     /* direction: ltr; Removed */
+     direction: rtl; /* Set to RTL as requested */
+     /* text-align: left; Removed */
+     text-align: right; /* Set to right as requested */
+      justify-content: flex-start; /* This will align items to the right in RTL */
 }
+ /* Icon within meta info - Adjust margin for RTL */
  .card .card-meta i {
-      margin-right: var(--space-xs);
+      /* margin-right: var(--space-xs); Removed */
+      margin-left: var(--space-xs); /* Add margin to the left of the icon */
+      margin-right: 0; /* Ensure right margin is not set */
       color: var(--primary-color);
-      width: 18px;
+      width: 1em; /* Use em for width for consistency */
       text-align: center;
  }
 
@@ -432,6 +464,7 @@ section {
      flex-wrap: wrap;
      gap: var(--space-sm);
      align-items: center;
+      justify-content: flex-start; /* Align links to the left in LTR */
 }
 
 .card .card-links a {
@@ -444,13 +477,18 @@ section {
       border-radius: var(--border-radius-sm);
       transition: background-color var(--transition-duration-short) var(--transition-easing-standard), color var(--transition-duration-short) var(--transition-easing-standard);
       outline: none;
+      /* Reverse icon direction removed */
+      flex-direction: row; /* Keep icon on the left */
+       direction: ltr; /* Keep link LTR */
+       text-align: left;
 }
  .card .card-links a:hover, .card .card-links a:focus-visible {
      background-color: #e9ecef;
      color: var(--primary-color);
  }
  .card .card-links a i {
-      margin-right: var(--space-xs);
+      margin-right: var(--space-xs); /* Keep original margin */
+      margin-left: 0; /* Ensure left margin is not set */
       font-size: 1rem;
  }
 
@@ -482,6 +520,8 @@ section {
      flex-wrap: wrap;
      justify-content: center;
      gap: var(--space-sm);
+     /* direction: ltr; Removed explicit LTR - let it inherit default LTR from body */
+     /* text-align: left; Removed explicit alignment */
 }
  #skills .skills-list li {
      background-color: #e9ecef;
@@ -497,6 +537,8 @@ section {
      display: inline-flex;
      align-items: center;
      outline: none;
+      /* direction: ltr; Removed explicit LTR */
+      /* text-align: left; Removed explicit alignment */
  }
   #skills .skills-list li:hover, #skills .skills-list li:focus-visible {
       background-color: var(--accent-color);
@@ -506,8 +548,10 @@ section {
   }
  #skills .skills-list li i {
       margin-right: var(--space-xs);
+      margin-left: 0; /* Ensure left margin is not set */
       color: var(--primary-color);
-      transition: color var(--transition-duration-short) var(--transition-easing-standard);
+      width: 1em; /* Use em for width for consistency */
+      text-align: center;
  }
   #skills .skills-list li:hover i, #skills .skills-list li:focus-visible i {
       color: white;
@@ -526,6 +570,7 @@ section {
     width: 100%;
     padding: var(--space-md) 0;
     list-style: none;
+    direction: ltr; /* Keep LTR for timeline structure */
 }
 
 /* Vertical line (Desktop) */
@@ -562,13 +607,15 @@ section {
 }
 
 
-/* Circles on the timeline (Desktop) */
+/* Circles on the timeline (Desktop) - Corrected Positioning */
 .timeline li::after {
     content: '';
     position: absolute;
     width: var(--space-lg);
     height: var(--space-lg);
-    right: -14px;
+    /* Position relative to the item's edge closer to the center line */
+    right: -14px; /* For odd items (right side) */
+    left: auto; /* Ensure left is not set */
     background-color: var(--accent-color);
     border: 4px solid var(--primary-color);
     top: 30px;
@@ -577,11 +624,12 @@ section {
     transition: background-color var(--transition-duration-short) var(--transition-easing-standard), border-color var(--transition-duration-short) var(--transition-easing-standard), transform var(--transition-duration-short) var(--transition-easing-springy);
 }
 
-/* Circles for left items (Desktop) */
+/* Circles for left items (Desktop) - Corrected Positioning */
 .timeline li:nth-child(even)::after {
-    left: -14px;
-    right: auto;
+    left: -14px; /* For even items (left side) */
+    right: auto; /* Ensure right is not set */
 }
+
 
 .timeline li:hover::after, .timeline li:focus-within::after {
      background-color: var(--primary-color);
@@ -600,6 +648,8 @@ section {
      transition: transform var(--transition-duration-short) var(--transition-easing-springy), box-shadow var(--transition-duration-short) var(--transition-easing-standard);
      z-index: 1;
       outline: none;
+      direction: rtl; /* Content is RTL */
+      text-align: right;
 }
  .timeline li:hover .timeline-content, .timeline li:focus-within .timeline-content {
       transform: translateY(-8px);
@@ -614,16 +664,16 @@ section {
     top: var(--space-md);
     border-width: 8px;
     border-style: solid;
-    border-color: transparent transparent transparent var(--card-bg);
-    right: -16px;
+    border-color: transparent transparent transparent var(--card-bg); /* Points left */
+    right: -16px; /* Positioned on the left edge of the block in RTL content */
      left: auto;
 }
 
-/* Arrow for left items (Desktop) */
+/* Arrow for left items (Desktop) - Needs to point right */
 .timeline li:nth-child(even) .timeline-content::before {
-     left: -16px;
+     left: -16px; /* Positioned on the right edge of the block in RTL content */
      right: auto;
-     border-color: transparent var(--card-bg) transparent transparent;
+     border-color: transparent var(--card-bg) transparent transparent; /* Points right */
 }
  /* Match border color (Desktop - Right items) */
  .timeline-content::after {
@@ -632,16 +682,16 @@ section {
      top: var(--space-md);
      border-width: 9px;
      border-style: solid;
-     border-color: transparent transparent transparent var(--border-color);
-     right: -18px;
+     border-color: transparent transparent transparent var(--border-color); /* Border points left */
+     right: -18px; /* Positioned on the left edge of the block in RTL content */
      left: auto;
      z-index: -1;
  }
- /* Match border color (Desktop - Left items) */
+ /* Match border color (Desktop - Left items) - Needs to point right */
  .timeline li:nth-child(even) .timeline-content::after {
-     left: -18px;
+     left: -18px; /* Positioned on the right edge of the block in RTL content */
      right: auto;
-     border-color: transparent var(--border-color) transparent transparent;
+     border-color: transparent var(--border-color) transparent transparent; /* Border points right */
  }
 
 
@@ -657,6 +707,8 @@ section {
      font-size: 1rem;
      margin-bottom: var(--space-xs);
      color: var(--text-color);
+      direction: rtl; /* Ensure paragraph is RTL */
+      text-align: right;
   }
  .timeline-content .date {
      font-size: 0.9rem;
@@ -664,7 +716,14 @@ section {
      font-weight: 500;
      margin-bottom: var(--space-sm);
      display: block;
+      direction: ltr; /* Dates are LTR */
+      text-align: left; /* Default LTR alignment */
  }
+ /* Adjust alignment for dates based on list item position */
+ /* These rules were needed when the parent was RTL, might not be needed now */
+ /* .timeline li:nth-child(odd) .timeline-content .date { text-align: left; } */
+ /* .timeline li:nth-child(even) .timeline-content .date { text-align: right; } */
+
 
 /* --- Testimonials Section --- */
 #testimonials {
@@ -680,6 +739,7 @@ section {
      display: grid;
      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
      gap: var(--space-lg);
+     /* direction: ltr; Removed explicit LTR - let it inherit default LTR from body */
  }
  .testimonial-item {
      background-color: var(--card-bg);
@@ -691,6 +751,8 @@ section {
      position: relative;
       transition: transform var(--transition-duration-short) var(--transition-easing-springy), box-shadow var(--transition-duration-short) var(--transition-easing-standard);
       outline: none;
+      direction: rtl; /* Testimonial text is RTL */
+      text-align: right;
  }
   .testimonial-item:hover, .testimonial-item:focus-within {
      transform: translateY(-5px);
@@ -702,7 +764,8 @@ section {
       color: var(--primary-color);
       position: absolute;
       top: var(--space-xs);
-      left: var(--space-md);
+      right: var(--space-md); /* Place quote on the right */
+      left: auto;
       opacity: 0.15;
       font-family: serif;
        z-index: 0;
@@ -716,6 +779,8 @@ section {
       font-style: normal;
        position: relative;
        z-index: 1;
+        direction: rtl; /* Ensure paragraph is RTL */
+        text-align: right;
    }
    .testimonial-item .author {
       font-weight: 700;
@@ -725,11 +790,13 @@ section {
       display: block;
       margin-top: var(--space-sm);
       font-size: 1rem;
+       direction: rtl; /* Author name is RTL */
    }
    .testimonial-item .author span {
        font-weight: 400;
        font-size: 0.9rem;
        color: var(--text-color-light);
+        direction: rtl; /* Span within author is RTL */
    }
 
 
@@ -752,27 +819,31 @@ section {
      max-width: 900px;
      margin: 0 auto;
      align-items: flex-start;
+     direction: ltr; /* Explicitly LTR for the flex container - REVERTED TO ORIGINAL */
 }
 
 .connect-info-block {
      flex: 1;
      min-width: 280px;
+     /* direction: rtl; Removed explicit RTL - let it inherit LTR from parent */
+     /* text-align: right; Removed explicit alignment */
 }
  .connect-info-block p {
-      text-align: left;
       font-size: 1.15rem;
       margin-bottom: var(--space-md);
       color: #333;
       line-height: 1.8;
       max-width: none;
       margin-left: 0; margin-right: 0;
+       direction: rtl; /* Ensure paragraph is RTL */
+       text-align: right;
  }
 
 
 .contact-info {
      display: flex;
      flex-direction: column;
-     align-items: flex-start;
+     align-items: flex-start; /* Reverted to original LTR alignment */
      font-size: 1.3rem;
      font-weight: 500;
      color: var(--secondary-color);
@@ -788,16 +859,20 @@ section {
      padding: var(--space-xs) 0;
      border-radius: var(--border-radius-sm);
      outline: none;
+      flex-direction: row; /* Keep original LTR icon direction */
+      direction: ltr; /* Email link is LTR */
+      text-align: left;
  }
  .contact-info a:hover, .contact-info a:focus-visible {
      color: var(--primary-color);
      text-decoration: underline;
-     transform: translateX(8px);
+     transform: translateX(8px); /* Reverted to original slide direction */
  }
  .contact-info i {
-      margin-right: var(--space-sm);
+      margin-right: var(--space-sm); /* Keep original margin */
+      margin-left: 0;
       color: var(--accent-color);
-      width: 25px;
+      width: 1em; /* Use em for width */
       text-align: center;
       transition: transform var(--transition-duration-short) var(--transition-easing-springy), color var(--transition-duration-short) var(--transition-easing-standard);
  }
@@ -811,18 +886,28 @@ section {
      font-size: 1rem;
      color: var(--text-color-light);
      font-weight: 400;
-      text-align: left;
+      direction: rtl; /* Location text is RTL */
+      text-align: right;
  }
   #connect .location-edu i {
-     margin-right: var(--space-xs);
+     margin-right: var(--space-xs); /* Keep original margin */
+     margin-left: 0;
      color: var(--text-color-light);
-     width: auto;
-     text-align: left;
+     width: auto; /* Allow auto width */
+     text-align: left; /* Keep original LTR alignment */
   }
+   /* Adjust margin for the second icon - maybe needed for visual separation in RTL text */
+   #connect .location-edu i:last-child {
+        margin-right: var(--space-md); /* Original margin direction */
+        margin-left: 0;
+   }
+
 
 .connect-links-block {
      flex: 1;
      min-width: 250px;
+     /* direction: ltr; Removed explicit LTR - let it inherit LTR from parent */
+     /* text-align: left; Removed explicit alignment */
 }
  .connect-links-block h3 {
      font-family: 'Montserrat', sans-serif;
@@ -830,7 +915,7 @@ section {
      color: var(--secondary-color);
      margin-top: 0;
      margin-bottom: var(--space-lg);
-     text-align: left;
+     text-align: left; /* Title is LTR aligned */
  }
 
 
@@ -851,6 +936,7 @@ section {
      padding: var(--space-xs) 0;
      border-bottom: 1px solid #eee;
      transition: background-color var(--transition-duration-short) var(--transition-easing-standard);
+      justify-content: flex-start; /* Align list items to the left */
  }
   .connect-links-block ul li:hover, .connect-links-block ul li:focus-within {
        background-color: #f8f9fa;
@@ -859,9 +945,10 @@ section {
 
 
  .connect-links-block ul li i {
-     margin-right: var(--space-md);
+     margin-right: var(--space-md); /* Keep original margin */
+     margin-left: 0;
      color: var(--accent-color);
-     width: 28px;
+     width: 1em; /* Use em for width */
      text-align: center;
      transition: transform var(--transition-duration-short) var(--transition-easing-springy), color var(--transition-duration-short) var(--transition-easing-standard);
  }
@@ -879,7 +966,10 @@ section {
        flex-grow: 1;
         outline: none;
         padding: var(--space-xxs) 0;
- }
+         direction: ltr; /* Link text is LTR */
+         text-align: left;
+     }
+
 
  .connect-links-block ul li a:hover, .connect-links-block ul li a:focus-visible {
       color: var(--primary-color);
@@ -895,12 +985,15 @@ section {
     border-top: 1px solid var(--border-color);
     padding: var(--space-xl) 0;
     text-align: center;
+     direction: ltr; /* Footer is LTR */
 }
  .footer p {
      margin-top: var(--space-sm);
      margin-bottom: 0;
      font-size: 0.9rem;
      color: #888;
+      direction: ltr; /* Footer text is LTR */
+      text-align: center; /* Keep footer text centered */
  }
 
 
@@ -934,11 +1027,23 @@ section {
      .connect-content {
          gap: var(--space-xl);
          max-width: 800px;
+         /* direction: ltr; Removed explicit LTR */
      }
      .connect-info-block { min-width: 250px; }
+      .connect-info-block p { direction: rtl; text-align: right;} /* Ensure paragraph is RTL */
      .connect-links-block { min-width: 200px; }
-     .connect-links-block h3 { font-size: 1.4rem; }
+      .connect-links-block h3 { font-size: 1.4rem; }
       .connect-links-block ul li { font-size: 1.1rem; }
+       .contact-info { align-items: flex-start; } /* Reverted */
+       .contact-info a { direction: ltr; text-align: left; flex-direction: row;} /* Keep original LTR */
+       #connect .location-edu { direction: rtl; text-align: right;} /* Ensure location is RTL */
+        #connect .location-edu i { margin-right: var(--space-xs); margin-left: 0;}
+         #connect .location-edu i:last-child { margin-right: var(--space-md); margin-left: 0;}
+       .connect-links-block ul li { justify-content: flex-start;} /* Reverted */
+        .connect-links-block ul li a { direction: ltr; text-align: left;} /* Ensure links are LTR */
+         .connect-links-block ul li i { margin-right: var(--space-md); margin-left: 0;}
+
+
 }
 
 
@@ -958,6 +1063,8 @@ section {
       .content-area {
          padding: var(--space-lg);
          box-shadow: 0 4px 15px var(--shadow-color-medium);
+         /* direction: ltr; Default */
+         /* text-align: left; Default */
      }
 
      /* Navbar */
@@ -974,7 +1081,7 @@ section {
     .profile-image {
         width: 150px; height: 150px; border-width: 6px;
     }
-     #hero { padding-bottom: var(--space-xxl); margin-bottom: var(--section-margin-bottom); }
+     #hero { padding-bottom: var(--space-xxl); margin-bottom: var(--section-margin-bottom); text-align: center; direction: ltr;} /* Ensure centered LTR on mobile */
 
 
      /* General Sections */
@@ -994,11 +1101,13 @@ section {
          grid-template-columns: 1fr;
          gap: var(--space-md);
          perspective: none;
+         /* direction: ltr; Default */
     }
      .card {
          transform: none !important;
          box-shadow: 0 6px 20px var(--shadow-color-medium);
          transition: transform var(--transition-duration-short) var(--transition-easing-springy), box-shadow var(--transition-duration-short) var(--transition-easing-standard);
+         text-align: left; /* Default LTR */
      }
       .card:hover {
          transform: translateY(-8px) !important;
@@ -1018,18 +1127,25 @@ section {
      .card-image {
          height: 200px;
           width: calc(100% + var(--space-md) * 2);
-         margin: calc(-1 * var(--space-md)) calc(-1 * var(--space-md)) var(--space-md) calc(-1 * var(--space-md));
+         margin: calc(-1 * var(--space-md)) calc(-1 * var(--space-md)) var(--space-md) calc(-1 * var(--space-md)); /* Keep original margins */
      }
-     .card h3 { font-size: 1.3rem; }
-     .card p { font-size: 1rem; }
-     .card .card-links a { margin-right: var(--space-sm); font-size: 0.95rem; }
+     .card h3 { font-size: 1.3rem; direction: rtl; text-align: right;} /* Title RTL on mobile */
+     .card p { font-size: 0.95rem; direction: rtl; text-align: right;} /* Paragraph RTL */
+     /* Card Meta Mobile - Adjust direction and margins */
+     .card .card-meta { gap: var(--space-sm); direction: rtl; text-align: right; justify-content: flex-end;} /* RTL and align right on mobile */
+      .card .card-meta i { margin-left: var(--space-xs); margin-right: 0;} /* Icon margin left */
+
+     .card .card-links { gap: var(--space-sm); margin-right: var(--space-sm); margin-left: 0; }
+      .card .card-links a { font-size: 0.95rem; padding: var(--space-xs) var(--space-sm); }
 
     /* Skills */
      #skills .skills-list li { padding: var(--space-xs) var(--space-sm); font-size: 0.9rem; }
+      #skills .skills-list li i { margin-right: var(--space-xs); margin-left: 0; }
+
 
     /* Timeline (Single Column Mobile) */
      .timeline::after {
-         left: var(--space-md);
+         left: var(--space-md); /* Vertical line position */
          margin-left: 0;
      }
      .timeline li {
@@ -1044,171 +1160,59 @@ section {
      .timeline li:nth-child(odd),
      .timeline li:nth-child(even) {
          left: 0;
-         padding-left: var(--space-xxl);
+         padding-left: var(--space-xxl); /* Content shifted right to make space for line/circle */
          padding-right: var(--space-md);
      }
 
-
      .timeline li::after {
-         left: calc(var(--space-md) - var(--space-xs));
+         left: calc(var(--space-md) - var(--space-xs)); /* Circle position relative to vertical line */
          right: auto;
          top: 30px;
      }
-      .timeline li:nth-child(even)::after {
+      .timeline li:nth-child(even)::after { /* Same position for all circles on mobile */
           left: calc(var(--space-md) - var(--space-xs));
           right: auto;
       }
 
 
-    /* Timeline Arrows (Point Left) */
+    /* Timeline Arrows (Point Left towards line in mobile) */
     .timeline-content::before {
-        left: -16px;
+        left: -16px; /* Positioned on the left edge of the block */
         right: auto;
-        border-color: transparent var(--card-bg) transparent transparent;
+        border-color: transparent var(--card-bg) transparent transparent; /* Points left */
     }
 
-    /* Arrow for left items (now same as others) */
+    /* Arrow for left items (now same as others in mobile) */
     .timeline li:nth-child(even) .timeline-content::before {
          left: -16px;
          right: auto;
          border-color: transparent var(--card-bg) transparent transparent;
     }
 
-     /* Timeline Arrow Borders (Point Left) */
+     /* Timeline Arrow Borders (Point Left towards line in mobile) */
      .timeline-content::after {
          left: -18px;
          right: auto;
-         border-color: transparent var(--border-color) transparent transparent;
+         border-color: transparent var(--border-color) transparent transparent; /* Border points left */
      }
-     /* Border Arrow for left items (now same as others) */
+     /* Border Arrow for left items (now same as others in mobile) */
      .timeline li:nth-child(even) .timeline-content::after {
           left: -18px;
           right: auto;
           border-color: transparent var(--border-color) transparent transparent;
      }
     .timeline-content h3 { font-size: 1.2rem; }
-     .timeline-content p { font-size: 0.95rem; }
-     .timeline-content .date { font-size: 0.85rem; }
+     .timeline-content p { font-size: 0.95rem; direction: rtl; text-align: right;} /* Paragraph RTL */
+     .timeline-content .date { font-size: 0.85rem; direction: ltr; text-align: left;} /* Date LTR, left align */
 
 
     /* Testimonials */
      .testimonial-slider { grid-template-columns: 1fr; }
-     .testimonial-item { padding: var(--space-sm); }
-      .testimonial-item::before { font-size: 3em; left: var(--space-sm); }
-     .testimonial-item p { font-size: 1rem; margin-top: var(--space-md); margin-bottom: var(--space-md); }
-     .testimonial-item .author { font-size: 0.95rem; }
-
-
-    /* Connect Section (Stacked Mobile) */
-     .connect-content {
-         flex-direction: column;
-         gap: var(--space-xl);
-         text-align: center;
-     }
-     .connect-info-block, .connect-links-block {
-         min-width: 100%;
-         padding: 0;
-     }
-      .connect-info-block p { text-align: center; }
-      .contact-info { align-items: center; }
-      #connect .location-edu { text-align: center; }
-      .connect-links-block h3 { text-align: center; margin-bottom: var(--space-md); }
-      .connect-links-block ul { gap: var(--space-sm); }
-     .connect-links-block ul li { justify-content: center; border-bottom: 1px solid #eee; padding: var(--space-xs) 0;}
-     .connect-links-block ul li:last-child { border-bottom: none; }
-     .connect-links-block ul li a { justify-content: center; }
-     .connect-links-block ul li i { margin-right: var(--space-sm); }
-
-
-    /* Footer */
-     .footer { margin-top: var(--space-md); }
-}
-
- /* Smaller Mobile Screens (Further Refinements) */
- @media (max-width: 480px) {
-     /* Adjust global padding and navbar height */
-     :root {
-         --navbar-height: 65px;
-         --section-v-padding: var(--space-lg);
-         --section-margin-bottom: var(--space-xl);
-     }
-      html { scroll-padding-top: var(--navbar-height); }
-      body { padding-top: var(--navbar-height); }
-     .container {
-         padding: 0 var(--space-sm);
-          margin: var(--space-sm) auto;
-     }
-      .content-area {
-         padding: var(--space-md);
-         box-shadow: 0 3px 10px var(--shadow-color-light);
-     }
-
-     /* Navbar */
-     .navbar { height: var(--navbar-height); }
-     .navbar nav a {
-         margin: 0 var(--space-xs);
-         font-size: 0.85rem;
-     }
-
-     /* Hero */
-     h1 { font-size: 2.8rem; letter-spacing: -1px; }
-      section h2 { font-size: 2.2rem; }
-     .tagline { font-size: 1.3rem; }
-     .profile-image {
-         width: 120px; height: 120px; border-width: 4px;
-     }
-
-     /* Cards */
-     .card { padding: var(--space-sm); }
-      .card-image {
-         height: 160px;
-          width: calc(100% + var(--space-sm) * 2);
-         margin: calc(-1 * var(--space-sm)) calc(-1 * var(--space-sm)) var(--space-sm) calc(-1 * var(--space-sm));
-     }
-     .card h3 { font-size: 1.1rem; }
-     .card p { font-size: 0.9rem; }
-      .card .card-meta { gap: var(--space-xs); font-size: 0.8rem;}
-      .card .card-links { gap: var(--space-xs); }
-      .card .card-links a { font-size: 0.9rem; padding: var(--space-xxs); }
-      .card::before { height: 3px; }
-
-
-    /* Skills */
-      #skills .skills-list li { padding: var(--space-xs) var(--space-sm); font-size: 0.8rem; }
-
-    /* Timeline */
-     .timeline::after { left: var(--space-md); }
-     .timeline li,
-     .timeline li:nth-child(even) {
-         padding-left: var(--space-xl);
-         padding-right: var(--space-sm);
-          padding-top: var(--space-md);
-          padding-bottom: var(--space-md);
-     }
-      .timeline li:last-child { padding-bottom: var(--space-md); }
-
-     .timeline li::after,
-     .timeline li:nth-child(even)::after {
-         left: calc(var(--space-md) - var(--space-xs) / 2);
-         width: var(--space-md); height: var(--space-md); border-width: 3px; top: 20px;
-     }
-      .timeline-content { padding: var(--space-sm); }
-     .timeline-content::before { left: -14px; border-width: 7px; }
-     .timeline li:nth-child(even) .timeline-content::before { left: -14px; }
-      .timeline-content::after { left: -15px; border-width: 8px; }
-     .timeline li:nth-child(even) .timeline-content::after { left: -15px; }
-     .timeline-content h3 { font-size: 1rem; }
-     .timeline-content p { font-size: 0.85rem; }
-     .timeline-content .date { font-size: 0.75rem; }
-
-
-    /* Testimonials */
-     .testimonial-slider { grid-template-columns: 1fr; }
-     .testimonial-item { padding: var(--space-sm); }
-      .testimonial-item::before { font-size: 2.8em; left: var(--space-sm); }
-     .testimonial-item p { font-size: 0.95rem; margin-top: var(--space-md); margin-bottom: var(--space-md); }
-     .testimonial-item .author { font-size: 0.85rem; }
-     .testimonial-item .author span { font-size: 0.75rem; }
+     .testimonial-item { padding: var(--space-sm); direction: rtl; text-align: right; } /* Item RTL */
+      .testimonial-item::before { font-size: 2.8em; right: var(--space-sm); left: auto;} /* Quote positioned right */
+     .testimonial-item p { font-size: 0.95rem; margin-top: var(--space-md); margin-bottom: var(--space-md); direction: rtl; text-align: right;} /* Paragraph RTL */
+     .testimonial-item .author { font-size: 0.85rem; text-align: right; direction: rtl;} /* Author RTL */
+     .testimonial-item .author span { font-size: 0.75rem; direction: rtl;} /* Span RTL */
 
 
     /* Connect Section (Stacked Mobile) */
@@ -1216,14 +1220,34 @@ section {
          flex-direction: column;
          gap: var(--space-lg);
          text-align: center;
+         /* direction: ltr; Removed explicit LTR */
      }
-     #connect .contact-info { font-size: 1rem; }
-     .connect-links-block h3 { font-size: 1.2rem; }
-     .connect-links-block ul { gap: var(--space-xs); }
-     .connect-links-block ul li { font-size: 0.95rem; padding: var(--space-xxs) 0;}
-     .connect-links-block ul li i { margin-right: var(--space-sm); }
-      #connect .location-edu { font-size: 0.85rem; }
+     .connect-info-block, .connect-links-block {
+         min-width: 100%;
+         padding: 0;
+     }
+      .connect-info-block { direction: rtl; text-align: right;} /* Info block RTL */
+      .connect-info-block p { text-align: center; direction: rtl;} /* Info block paragraph centered */
+      .contact-info { align-items: center; } /* Center aligns items in mobile */
+       .contact-info a { direction: ltr; text-align: left; flex-direction: row;} /* Keep original LTR */
+       .contact-info a:hover, .contact-info a:focus-visible { transform: translateX(0);} /* No slide on mobile */
+       .contact-info i { margin-right: var(--space-sm); margin-left: 0;} /* Keep original margins */
 
- }
+
+      .connect-links-block { direction: ltr; text-align: left;} /* Links block LTR */
+      .connect-links-block h3 { text-align: center; margin-bottom: var(--space-md); }
+      .connect-links-block ul { gap: var(--space-xs); }
+     .connect-links-block ul li { font-size: 0.95rem; padding: var(--space-xxs) 0; justify-content: center;}
+     .connect-links-block ul li:last-child { border-bottom: none; }
+     .connect-links-block ul li a { justify-content: center; direction: ltr; text-align: left;} /* Links LTR */
+      .connect-links-block ul li i { margin-right: var(--space-sm); margin-left: 0;} /* Keep original margins */
+
+
+      #connect .location-edu { font-size: 0.85rem; text-align: center; direction: rtl;} /* Location RTL */
+       #connect .location-edu i { margin-right: var(--space-xs); margin-left: 0; } /* Keep original margins */
+        #connect .location-edu i:last-child { margin-right: var(--space-md); margin-left: 0;} /* Keep original margins */
+
+
+         }
 
     </style>
