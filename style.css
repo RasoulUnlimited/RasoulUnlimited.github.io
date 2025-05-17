@@ -1,23 +1,26 @@
-/* --- CSS Variables (Finalized and Expanded) --- */
+/* --- CSS Variables (Refined and Expanded for Modern Look) --- */
 :root {
-    /* Color Palette */
-    --primary-color: #004085; /* Deeper Blue */
-    --secondary-color: #1a1d20; /* Near Black */
-    --accent-color: #007bff; /* Bright Blue */
-    --highlight-color: #ffc107; /* Yellow/Orange */
-    --background-start-color: #eef2f7; /* Lighter gradient start */
-    --background-end-color: #f8f9fa; /* Lighter gradient end */
-    --container-bg: white;
-    --card-bg: #ffffff;
-    --shadow-color-light: rgba(0,0,0,0.08);
-    --shadow-color-medium: rgba(0,0,0,0.15);
-    --shadow-color-strong: rgba(0,0,0,0.35); /* Stronger shadow */
-    --text-color: #343a40;
-    --text-color-light: #6c757d;
-    --heading-color: #212529;
-    --tagline-color: #343a40;
+    /* Color Palette - Slightly refined for modern feel */
+    --primary-color: #0056b3; /* A slightly richer blue */
+    --secondary-color: #212529; /* Dark text, kept */
+    --accent-color: #007bff; /* Bright Blue, good for highlights */
+    --highlight-color: #ffc107; /* Yellow/Orange, kept */
+    --background-start-color: #eef2f7; /* Lighter gradient start, kept */
+    --background-end-color: #f8f9fa; /* Lighter gradient end, kept */
+    --container-bg: #ffffff; /* White container background */
+    --card-bg: #ffffff; /* White card background */
+    --shadow-color-light: rgba(0, 0, 0, 0.08);
+    --shadow-color-medium: rgba(0, 0, 0, 0.12); /* Softer medium shadow */
+    --shadow-color-strong: rgba(0, 0, 0, 0.2); /* Softer strong shadow */
+    --text-color: #343a40; /* Dark gray text */
+    --text-color-light: #6c757d; /* Lighter gray text */
+    --heading-color: #212529; /* Dark heading color */
+    --tagline-color: #495057; /* Slightly darker tagline */
+    --border-color: #dee2e6; /* Light gray border */
+    --footer-color: #495057; /* Dark gray for footer */
 
-    /* Spacing Scale (Mathematical progression) */
+
+    /* Spacing Scale (Mathematical progression) - Kept consistent */
     --space-unit: 8px; /* Base unit */
     --space-xxs: calc(var(--space-unit) * 0.5); /* 4px */
     --space-xs: var(--space-unit); /* 8px */
@@ -30,23 +33,23 @@
     --section-v-padding: var(--space-xxl); /* Vertical padding for sections */
     --section-margin-bottom: var(--space-xxxl); /* Margin below sections */
 
-    /* Border Radius */
+    /* Border Radius - Kept consistent */
     --border-radius-sm: 4px;
     --border-radius-md: 8px;
     --border-radius-lg: 12px;
     --border-radius-full: 50%;
 
-     /* Transition Durations & Easing */
+     /* Transition Durations & Easing - Kept consistent */
     --transition-duration-short: 0.2s;
     --transition-duration-medium: 0.4s;
     --transition-duration-long: 0.6s;
     --transition-easing-standard: ease-in-out;
      --transition-easing-springy: cubic-bezier(0.68, -0.55, 0.27, 1.55); /* For bouncy effects */
 
-     /* Max Content Width */
+     /* Max Content Width - Kept consistent */
      --max-content-width: 1200px;
 
-     /* Navbar Height */
+     /* Navbar Height - Kept consistent */
      --navbar-height: 80px;
 }
 
@@ -57,7 +60,6 @@
 
 html {
     scroll-behavior: smooth;
-    /* Ensure scroll padding accounts for potentially taller nav on smaller screens */
     scroll-padding-top: var(--navbar-height);
 }
 
@@ -67,54 +69,50 @@ body {
     margin: 0;
     padding: 0;
     color: var(--text-color);
-    line-height: 1.7;
+    line-height: 1.7; /* Slightly increased line height for readability */
     position: relative;
-    padding-top: var(--navbar-height); /* Default padding for fixed nav */
+    padding-top: var(--navbar-height);
     min-height: 100vh;
     overflow-x: hidden;
-     /* Subtle Background Animation */
     animation: backgroundGradient 20s ease infinite;
     background-size: 200% 200%;
-    direction: ltr; /* Default direction for the whole body */
+    direction: ltr;
 }
 
-/* Background Gradient Animation */
+/* Background Gradient Animation - Kept consistent */
 @keyframes backgroundGradient {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
-/* Improve focus styles for accessibility */
+/* Improve focus styles for accessibility - Refined outline color/shadow */
 a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
      outline: 3px solid var(--accent-color);
     outline-offset: var(--space-xs);
     box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.25);
-    z-index: 10; /* High z-index for focused elements */
+    z-index: 10;
     position: relative;
 }
- /* Use focus-visible for better accessibility (only shows outline when using keyboard/non-pointer focus) */
- /* Fallback for browsers that don't support :focus-visible */
  a:focus:not(:focus-visible), button:focus:not(:focus-visible), input:focus:not(:focus-visible), select:focus:not(:focus-visible), textarea:focus:not(:focus-visible) {
      outline: none;
  }
 
-/* Custom focus styles for complex elements */
+/* Custom focus styles for complex elements - Refined shadows */
  .card:focus-within, .skills-list li:focus-within, .timeline li:focus-within .timeline-content,
  .contact-info a:focus-visible, .connect-links-block ul li a:focus-visible,
  .testimonial-item:focus-within {
-     outline: none; /* Remove default outline */
-      box-shadow: 0 0 0 3px var(--accent-color), 0 0 0 6px rgba(0, 123, 255, 0.25); /* Custom double ring focus */
+     outline: none;
+      box-shadow: 0 0 0 3px var(--accent-color), 0 0 0 6px rgba(0, 123, 255, 0.25);
      z-index: 5;
      position: relative;
  }
- /* Adjust focus for featured cards */
  .card.is-featured:focus-within {
        box-shadow: 0 0 0 3px var(--highlight-color), 0 0 0 6px rgba(255, 193, 7, 0.5), 0 8px 25px var(--shadow-color-medium);
  }
 
 
-/* Hide default outline for elements inside focused complex elements */
+/* Hide default outline for elements inside focused complex elements - Kept consistent */
  .card:focus-within > *, .timeline li:focus-within .timeline-content > *,
  .testimonial-item:focus-within > * {
      outline: none;
@@ -132,11 +130,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 
 .content-area {
      background: var(--container-bg);
-     padding: var(--space-xl) var(--space-xxl);
-     border-radius: var(--border-radius-lg);
-     box-shadow: 0 10px 30px var(--shadow-color-medium);
-     /* direction: rtl; REMOVED */
-     /* text-align: right; REMOVED */
+     padding: var(--space-xl) var(--space-xxl); /* Generous padding */
+     border-radius: var(--border-radius-lg); /* More rounded corners */
+     box-shadow: 0 15px 40px var(--shadow-color-strong); /* Stronger initial shadow */
 }
 
 /* --- Navigation Bar --- */
@@ -150,13 +146,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     padding: var(--space-sm) 0;
     z-index: 1000;
     text-align: center;
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border-color);
-     /* Ensure navbar height is controlled for scroll-padding-top */
-     height: var(--navbar-height);
-     display: flex;
-     align-items: center;
-     justify-content: center;
+    backdrop-filter: blur(12px); /* Keep blur effect */
+    border-bottom: 1px solid var(--border-color); /* Lighter border */
+    height: var(--navbar-height);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .navbar nav a {
@@ -169,13 +164,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     position: relative;
     padding-bottom: var(--space-xs);
     display: inline-block;
-     /* Added for focus state */
     outline: none;
 }
 
 .navbar nav a:hover, .navbar nav a:focus-visible {
-    color: var(--primary-color);
-    transform: translateY(-4px);
+    color: var(--primary-color); /* Hover color change */
+    transform: translateY(-3px); /* Subtle lift on hover */
 }
 
 .navbar nav a::after {
@@ -200,12 +194,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
      padding-top: var(--section-v-padding);
      padding-bottom: var(--space-xxxl);
      margin-bottom: var(--section-margin-bottom);
-     text-align: center; /* Centered as requested */
-     direction: ltr; /* Explicitly LTR as requested */
+     text-align: center;
+     direction: ltr;
      overflow: hidden;
 }
 
-/* Decorative shape/pattern in hero */
+/* Decorative shape/pattern in hero - Slightly refined opacity */
 #hero::before {
     content: '';
     position: absolute;
@@ -213,8 +207,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at top left, rgba(0,123,255,0.08) 0%, rgba(255,255,255,0) 30%),
-                radial-gradient(circle at bottom right, rgba(255,193,7,0.08) 0%, rgba(255,255,255,0) 30%);
+    background: radial-gradient(circle at top left, rgba(0,123,255,0.05) 0%, rgba(255,255,255,0) 30%),
+                radial-gradient(circle at bottom right, rgba(255,193,7,0.05) 0%, rgba(255,255,255,0) 30%);
     z-index: 0;
      pointer-events: none;
 }
@@ -227,7 +221,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     margin-bottom: var(--space-lg);
     object-fit: cover;
     border: 8px solid var(--accent-color);
-    box-shadow: 0 12px 30px var(--shadow-color-medium);
+    box-shadow: 0 15px 35px var(--shadow-color-medium); /* Enhanced shadow */
     transition: transform var(--transition-duration-medium) var(--transition-easing-springy), box-shadow var(--transition-duration-medium) var(--transition-easing-standard);
     z-index: 1;
     position: relative;
@@ -238,8 +232,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
      margin-right: auto;
 }
  .profile-image:hover {
-     transform: scale(1.12) rotate(5deg);
-     box-shadow: 0 20px 50px var(--shadow-color-strong);
+     transform: scale(1.1) rotate(3deg); /* Softer hover effect */
+     box-shadow: 0 25px 60px var(--shadow-color-strong); /* Stronger hover shadow */
  }
 
 
@@ -251,22 +245,18 @@ h1 {
     margin-bottom: var(--space-xs);
     font-weight: 900;
     line-height: 1.1;
-    letter-spacing: -3px;
-    text-shadow: 3px 3px 8px var(--shadow-color-light);
+    letter-spacing: -2px; /* Slightly less aggressive letter spacing */
+    text-shadow: 2px 2px 6px var(--shadow-color-light); /* Softer text shadow */
      word-break: break-word;
-     /* text-align: center; Inherits from #hero */
-     /* direction: ltr; Inherits from #hero */
 }
 
 .tagline {
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.7rem;
+    font-size: 1.8rem; /* Slightly larger tagline */
     font-weight: 700;
     color: var(--tagline-color);
     margin-bottom: var(--space-xxl);
     margin-top: 0;
-     /* text-align: center; Inherits from #hero */
-      /* direction: ltr; Inherits from #hero */
 }
 
 /* --- General Section Styling --- */
@@ -282,7 +272,7 @@ section {
      padding-bottom: 0;
  }
 
-/* Creative Section Separator */
+/* Creative Section Separator - Kept consistent */
  section::after {
     content: '';
     position: absolute;
@@ -291,7 +281,7 @@ section {
     transform: translateX(-50%);
     width: 200px;
     height: 3px;
-    background: linear-gradient(to right, rgba(0,123,255,0) 0%, var(--primary-color) 50%, rgba(0,123,255,0) 100%);
+    background: linear-gradient(to right, rgba(0,86,179,0) 0%, var(--primary-color) 50%, rgba(0,86,179,0) 100%); /* Updated gradient color */
     z-index: 0;
      pointer-events: none;
  }
@@ -310,8 +300,6 @@ section {
     text-align: center;
     font-weight: 800;
  }
-  /* Direction for section titles - keep LTR or default, centering handles overall block */
-  /* direction: ltr; */
 
 
  section h2::after {
@@ -330,10 +318,9 @@ section {
      max-width: 900px;
      margin-left: auto;
      margin-right: auto;
-     font-size: 1.2rem;
-     color: #333;
-     line-height: 1.8;
-     /* Added for RTL text */
+     font-size: 1.2rem; /* Slightly larger text */
+     color: var(--text-color); /* Use text color variable */
+     line-height: 1.8; /* Increased line height */
      direction: rtl;
      text-align: right;
 }
@@ -346,7 +333,6 @@ section {
     padding: 0;
      perspective: 1000px;
      align-items: stretch;
-     /* direction: ltr; Reverted to default */
 }
 
 .card {
@@ -354,12 +340,12 @@ section {
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-md);
     padding: var(--space-md);
-    box-shadow: 0 8px 25px var(--shadow-color-medium);
+    box-shadow: 0 10px 30px var(--shadow-color-medium); /* Enhanced initial shadow */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     transition: transform var(--transition-duration-medium) var(--transition-easing-springy), box-shadow var(--transition-duration-medium) var(--transition-easing-standard);
-     text-align: left; /* Default LTR alignment for the card structure */
+     text-align: left;
      overflow: hidden;
      position: relative;
      transform-style: preserve-3d;
@@ -368,18 +354,18 @@ section {
 }
 
 .card:hover {
-    transform: translateY(-15px) rotateX(5deg) rotateY(5deg);
-    box-shadow: 0 25px 50px var(--shadow-color-strong), 0 0 10px var(--accent-color);
+    transform: translateY(-12px) rotateX(3deg) rotateY(3deg); /* Softer 3D effect */
+    box-shadow: 0 20px 50px var(--shadow-color-strong), 0 0 10px var(--accent-color); /* Enhanced hover shadow */
      z-index: 2;
 }
 
- /* Optional: Subtle accent border on hover */
+ /* Subtle accent border on hover - Kept consistent */
  .card::before {
      content: '';
      position: absolute;
      top: 0;
-     left: 0; /* Reverted to LTR positioning */
-     right: auto; /* Ensure right is not set */
+     left: 0;
+     right: auto;
      width: 100%;
      height: 6px;
      background-color: var(--accent-color);
@@ -394,7 +380,7 @@ section {
 
  .card-image {
      width: calc(100% + var(--space-md) * 2);
-     margin: calc(-1 * var(--space-md)) calc(-1 * var(--space-md)) var(--space-md) calc(-1 * var(--space-md)); /* Keep original margins */
+     margin: calc(-1 * var(--space-md)) calc(-1 * var(--space-md)) var(--space-md) calc(-1 * var(--space-md));
      height: 240px;
      object-fit: cover;
      border-bottom: 1px solid var(--border-color);
@@ -413,9 +399,8 @@ section {
     font-weight: 700;
     line-height: 1.4;
     word-break: break-word;
-    /* text-align: left; Default LTR alignment */
-    direction: rtl; /* Set to RTL as requested */
-    text-align: right; /* Align right as requested */
+    direction: rtl;
+    text-align: right;
 }
 
 /* Paragraph text within cards - Set to RTL */
@@ -425,7 +410,6 @@ section {
     color: var(--text-color);
     flex-grow: 1;
     line-height: 1.7;
-    /* Added for RTL text */
     direction: rtl;
     text-align: right;
 }
@@ -439,19 +423,16 @@ section {
      display: flex;
      flex-wrap: wrap;
      gap: var(--space-sm);
-     /* direction: ltr; Removed */
-     direction: rtl; /* Set to RTL as requested */
-     /* text-align: left; Removed */
-     text-align: right; /* Set to right as requested */
-      justify-content: flex-start; /* This will align items to the right in RTL */
+     direction: rtl;
+     text-align: right;
+      justify-content: flex-start;
 }
  /* Icon within meta info - Adjust margin for RTL */
  .card .card-meta i {
-      /* margin-right: var(--space-xs); Removed */
-      margin-left: var(--space-xs); /* Add margin to the left of the icon */
-      margin-right: 0; /* Ensure right margin is not set */
-      color: var(--primary-color);
-      width: 1em; /* Use em for width for consistency */
+      margin-left: var(--space-xs);
+      margin-right: 0;
+      color: var(--primary-color); /* Use primary color for icons */
+      width: 1em;
       text-align: center;
  }
 
@@ -459,12 +440,12 @@ section {
 .card .card-links {
      margin-top: var(--space-sm);
      padding-top: var(--space-sm);
-     border-top: 1px solid #eee;
+     border-top: 1px solid var(--border-color);
      display: flex;
      flex-wrap: wrap;
      gap: var(--space-sm);
      align-items: center;
-      justify-content: flex-start; /* Align links to the left in LTR */
+      justify-content: flex-start;
 }
 
 .card .card-links a {
@@ -475,40 +456,47 @@ section {
      align-items: center;
       padding: var(--space-xs) var(--space-sm);
       border-radius: var(--border-radius-sm);
-      transition: background-color var(--transition-duration-short) var(--transition-easing-standard), color var(--transition-duration-short) var(--transition-easing-standard);
+      transition: background-color var(--transition-duration-short) var(--transition-easing-standard), color var(--transition-duration-short) var(--transition-easing-standard), transform var(--transition-duration-short) var(--transition-easing-springy); /* Added transform transition */
       outline: none;
-      /* Reverse icon direction removed */
-      flex-direction: row; /* Keep icon on the left */
-       direction: ltr; /* Keep link LTR */
+       flex-direction: row;
+       direction: ltr;
        text-align: left;
+       color: var(--primary-color); /* Use primary color for links */
+       text-decoration: none; /* Remove default underline */
 }
  .card .card-links a:hover, .card .card-links a:focus-visible {
      background-color: #e9ecef;
      color: var(--primary-color);
+     transform: translateY(-2px); /* Subtle lift on hover */
+     text-decoration: underline; /* Add underline on hover */
  }
  .card .card-links a i {
-      margin-right: var(--space-xs); /* Keep original margin */
-      margin-left: 0; /* Ensure left margin is not set */
+      margin-right: var(--space-xs);
+      margin-left: 0;
       font-size: 1rem;
+      color: var(--primary-color); /* Use primary color for icons */
+ }
+ .card .card-links a:hover i, .card .card-links a:focus-visible i {
+     color: var(--primary-color); /* Keep icon color on hover */
  }
 
- /* Style for Featured Card (Highlight) */
+
+ /* Style for Featured Card (Highlight) - Enhanced highlight effect */
  .card.is-featured {
      border-color: var(--highlight-color);
-     box-shadow: 0 8px 25px var(--shadow-color-medium), 0 0 15px var(--highlight-color);
-     transform: scale(1.04) rotateZ(-1deg);
-     background-color: #fffbe6;
+     box-shadow: 0 10px 30px var(--shadow-color-medium), 0 0 15px var(--highlight-color);
+     transform: scale(1.03) rotateZ(-1deg); /* Softer initial transform */
+     background-color: #fffbe6; /* Keep light yellow background */
  }
   .card.is-featured::before {
       background-color: var(--highlight-color);
   }
   .card.is-featured:hover {
-     transform: translateY(-18px) rotateX(5deg) rotateY(5deg) scale(1.07);
-      box-shadow: 0 30px 60px var(--shadow-color-strong), 0 0 25px var(--highlight-color);
+     transform: translateY(-15px) rotateX(4deg) rotateY(4deg) scale(1.05); /* Enhanced hover transform */
+      box-shadow: 0 25px 55px var(--shadow-color-strong), 0 0 25px var(--highlight-color); /* Enhanced hover shadow */
   }
-   /* Ensure featured card focus state is also highlighted */
    .card.is-featured:focus-within {
-       box-shadow: 0 0 0 3px var(--highlight-color), 0 0 0 6px rgba(255, 193, 7, 0.5), 0 8px 25px var(--shadow-color-medium);
+       box-shadow: 0 0 0 3px var(--highlight-color), 0 0 0 6px rgba(255, 193, 7, 0.5), 0 10px 30px var(--shadow-color-medium);
    }
 
 
@@ -520,8 +508,6 @@ section {
      flex-wrap: wrap;
      justify-content: center;
      gap: var(--space-sm);
-     /* direction: ltr; Removed explicit LTR - let it inherit default LTR from body */
-     /* text-align: left; Removed explicit alignment */
 }
  #skills .skills-list li {
      background-color: #e9ecef;
@@ -532,29 +518,28 @@ section {
      font-size: 0.95rem;
      font-weight: 500;
      border: 1px solid var(--border-color);
-     transition: background-color var(--transition-duration-short) var(--transition-easing-standard), transform var(--transition-duration-short) var(--transition-easing-springy), box-shadow var(--transition-duration-short) var(--transition-easing-standard);
+     transition: background-color var(--transition-duration-short) var(--transition-easing-standard), transform var(--transition-duration-short) var(--transition-easing-springy), box-shadow var(--transition-duration-short) var(--transition-easing-standard), color var(--transition-duration-short) var(--transition-easing-standard); /* Added color transition */
      cursor: pointer;
      display: inline-flex;
      align-items: center;
      outline: none;
-      /* direction: ltr; Removed explicit LTR */
-      /* text-align: left; Removed explicit alignment */
  }
   #skills .skills-list li:hover, #skills .skills-list li:focus-visible {
-      background-color: var(--accent-color);
+      background-color: var(--primary-color); /* Use primary color for hover */
       color: white;
-      transform: translateY(-5px);
-      box-shadow: 0 5px 10px var(--shadow-color-light);
+      transform: translateY(-3px); /* Subtle lift */
+      box-shadow: 0 3px 8px var(--shadow-color-light); /* Subtle shadow */
   }
  #skills .skills-list li i {
       margin-right: var(--space-xs);
-      margin-left: 0; /* Ensure left margin is not set */
-      color: var(--primary-color);
-      width: 1em; /* Use em for width for consistency */
+      margin-left: 0;
+      color: var(--primary-color); /* Use primary color for icons */
+      width: 1em;
       text-align: center;
+      transition: color var(--transition-duration-short) var(--transition-easing-standard); /* Added color transition */
  }
   #skills .skills-list li:hover i, #skills .skills-list li:focus-visible i {
-      color: white;
+      color: white; /* White icon on hover */
   }
 
 /* --- Timeline Section --- */
@@ -570,10 +555,10 @@ section {
     width: 100%;
     padding: var(--space-md) 0;
     list-style: none;
-    direction: ltr; /* Keep LTR for timeline structure */
+    direction: ltr;
 }
 
-/* Vertical line (Desktop) */
+/* Vertical line (Desktop) - Kept consistent */
 .timeline::after {
     content: '';
     position: absolute;
@@ -593,29 +578,28 @@ section {
      outline: none;
 }
 
-/* Right side timeline items (Desktop) */
+/* Right side timeline items (Desktop) - Kept consistent */
 .timeline li:nth-child(odd) {
     left: 50%;
     padding-left: var(--space-xl);
      padding-right: var(--space-md);
 }
 
-/* Left side timeline items (Desktop) */
+/* Left side timeline items (Desktop) - Kept consistent */
 .timeline li:nth-child(even) {
      padding-right: var(--space-xl);
      padding-left: var(--space-md);
 }
 
 
-/* Circles on the timeline (Desktop) - Corrected Positioning */
+/* Circles on the timeline (Desktop) - Refined border color/transition */
 .timeline li::after {
     content: '';
     position: absolute;
     width: var(--space-lg);
     height: var(--space-lg);
-    /* Position relative to the item's edge closer to the center line */
-    right: -14px; /* For odd items (right side) */
-    left: auto; /* Ensure left is not set */
+    right: -14px;
+    left: auto;
     background-color: var(--accent-color);
     border: 4px solid var(--primary-color);
     top: 30px;
@@ -624,15 +608,15 @@ section {
     transition: background-color var(--transition-duration-short) var(--transition-easing-standard), border-color var(--transition-duration-short) var(--transition-easing-standard), transform var(--transition-duration-short) var(--transition-easing-springy);
 }
 
-/* Circles for left items (Desktop) - Corrected Positioning */
+/* Circles for left items (Desktop) - Kept consistent */
 .timeline li:nth-child(even)::after {
-    left: -14px; /* For even items (left side) */
-    right: auto; /* Ensure right is not set */
+    left: -14px;
+    right: auto;
 }
 
 
 .timeline li:hover::after, .timeline li:focus-within::after {
-     background-color: var(--primary-color);
+     background-color: var(--primary-color); /* Hover color change */
      border-color: var(--accent-color);
      transform: scale(1.2);
 }
@@ -648,50 +632,50 @@ section {
      transition: transform var(--transition-duration-short) var(--transition-easing-springy), box-shadow var(--transition-duration-short) var(--transition-easing-standard);
      z-index: 1;
       outline: none;
-      direction: rtl; /* Content is RTL */
+      direction: rtl;
       text-align: right;
 }
  .timeline li:hover .timeline-content, .timeline li:focus-within .timeline-content {
-      transform: translateY(-8px);
-      box-shadow: 0 8px 20px var(--shadow-color-medium);
+      transform: translateY(-5px); /* Softer lift */
+      box-shadow: 0 6px 20px var(--shadow-color-medium); /* Enhanced shadow */
  }
 
 
-/* Arrow pointing to the line (Desktop - Right items) */
+/* Arrow pointing to the line (Desktop - Right items) - Kept consistent */
 .timeline-content::before {
     content: " ";
     position: absolute;
     top: var(--space-md);
     border-width: 8px;
     border-style: solid;
-    border-color: transparent transparent transparent var(--card-bg); /* Points left */
-    right: -16px; /* Positioned on the left edge of the block in RTL content */
+    border-color: transparent transparent transparent var(--card-bg);
+    right: -16px;
      left: auto;
 }
 
-/* Arrow for left items (Desktop) - Needs to point right */
+/* Arrow for left items (Desktop) - Kept consistent */
 .timeline li:nth-child(even) .timeline-content::before {
-     left: -16px; /* Positioned on the right edge of the block in RTL content */
+     left: -16px;
      right: auto;
-     border-color: transparent var(--card-bg) transparent transparent; /* Points right */
+     border-color: transparent var(--card-bg) transparent transparent;
 }
- /* Match border color (Desktop - Right items) */
+ /* Match border color (Desktop - Right items) - Kept consistent */
  .timeline-content::after {
      content: " ";
      position: absolute;
      top: var(--space-md);
      border-width: 9px;
      border-style: solid;
-     border-color: transparent transparent transparent var(--border-color); /* Border points left */
-     right: -18px; /* Positioned on the left edge of the block in RTL content */
+     border-color: transparent transparent transparent var(--border-color);
+     right: -18px;
      left: auto;
      z-index: -1;
  }
- /* Match border color (Desktop - Left items) - Needs to point right */
+ /* Match border color (Desktop - Left items) - Kept consistent */
  .timeline li:nth-child(even) .timeline-content::after {
-     left: -18px; /* Positioned on the right edge of the block in RTL content */
+     left: -18px;
      right: auto;
-     border-color: transparent var(--border-color) transparent transparent; /* Border points right */
+     border-color: transparent var(--border-color) transparent transparent;
  }
 
 
@@ -707,7 +691,7 @@ section {
      font-size: 1rem;
      margin-bottom: var(--space-xs);
      color: var(--text-color);
-      direction: rtl; /* Ensure paragraph is RTL */
+      direction: rtl;
       text-align: right;
   }
  .timeline-content .date {
@@ -716,18 +700,14 @@ section {
      font-weight: 500;
      margin-bottom: var(--space-sm);
      display: block;
-      direction: ltr; /* Dates are LTR */
-      text-align: left; /* Default LTR alignment */
+      direction: ltr;
+      text-align: left;
  }
- /* Adjust alignment for dates based on list item position */
- /* These rules were needed when the parent was RTL, might not be needed now */
- /* .timeline li:nth-child(odd) .timeline-content .date { text-align: left; } */
- /* .timeline li:nth-child(even) .timeline-content .date { text-align: right; } */
 
 
 /* --- Testimonials Section --- */
 #testimonials {
-     background-color: #f0f0f0;
+     background-color: #f8f9fa; /* Use a lighter background from palette */
      padding-top: var(--section-v-padding);
      padding-bottom: var(--section-v-padding);
      margin-bottom: var(--section-margin-bottom);
@@ -739,7 +719,6 @@ section {
      display: grid;
      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
      gap: var(--space-lg);
-     /* direction: ltr; Removed explicit LTR - let it inherit default LTR from body */
  }
  .testimonial-item {
      background-color: var(--card-bg);
@@ -751,8 +730,9 @@ section {
      position: relative;
       transition: transform var(--transition-duration-short) var(--transition-easing-springy), box-shadow var(--transition-duration-short) var(--transition-easing-standard);
       outline: none;
-      direction: rtl; /* Testimonial text is RTL */
+      direction: rtl;
       text-align: right;
+      border-left: 4px solid var(--accent-color); /* Add an accent border */
  }
   .testimonial-item:hover, .testimonial-item:focus-within {
      transform: translateY(-5px);
@@ -761,10 +741,10 @@ section {
   .testimonial-item::before {
       content: "\201C";
       font-size: 3.5em;
-      color: var(--primary-color);
+      color: var(--primary-color); /* Use primary color for quotes */
       position: absolute;
       top: var(--space-xs);
-      right: var(--space-md); /* Place quote on the right */
+      right: var(--space-md);
       left: auto;
       opacity: 0.15;
       font-family: serif;
@@ -779,7 +759,7 @@ section {
       font-style: normal;
        position: relative;
        z-index: 1;
-        direction: rtl; /* Ensure paragraph is RTL */
+        direction: rtl;
         text-align: right;
    }
    .testimonial-item .author {
@@ -790,13 +770,13 @@ section {
       display: block;
       margin-top: var(--space-sm);
       font-size: 1rem;
-       direction: rtl; /* Author name is RTL */
+       direction: rtl;
    }
    .testimonial-item .author span {
        font-weight: 400;
        font-size: 0.9rem;
        color: var(--text-color-light);
-        direction: rtl; /* Span within author is RTL */
+        direction: rtl;
    }
 
 
@@ -819,14 +799,12 @@ section {
      max-width: 900px;
      margin: 0 auto;
      align-items: flex-start;
-     direction: ltr; /* Explicitly LTR for the flex container - REVERTED TO ORIGINAL */
+     direction: ltr;
 }
 
 .connect-info-block {
      flex: 1;
      min-width: 280px;
-     /* direction: rtl; Removed explicit RTL - let it inherit LTR from parent */
-     /* text-align: right; Removed explicit alignment */
 }
  .connect-info-block p {
       font-size: 1.15rem;
@@ -835,7 +813,7 @@ section {
       line-height: 1.8;
       max-width: none;
       margin-left: 0; margin-right: 0;
-       direction: rtl; /* Ensure paragraph is RTL */
+       direction: rtl;
        text-align: right;
  }
 
@@ -843,7 +821,7 @@ section {
 .contact-info {
      display: flex;
      flex-direction: column;
-     align-items: flex-start; /* Reverted to original LTR alignment */
+     align-items: flex-start;
      font-size: 1.3rem;
      font-weight: 500;
      color: var(--secondary-color);
@@ -851,7 +829,7 @@ section {
 }
  .contact-info a {
      margin-top: var(--space-sm);
-     color: var(--secondary-color);
+     color: var(--primary-color); /* Use primary color for contact links */
      text-decoration: none;
      transition: color var(--transition-duration-short) var(--transition-easing-standard), transform var(--transition-duration-short) var(--transition-easing-springy);
      display: inline-flex;
@@ -859,25 +837,25 @@ section {
      padding: var(--space-xs) 0;
      border-radius: var(--border-radius-sm);
      outline: none;
-      flex-direction: row; /* Keep original LTR icon direction */
-      direction: ltr; /* Email link is LTR */
+      flex-direction: row;
+      direction: ltr;
       text-align: left;
  }
  .contact-info a:hover, .contact-info a:focus-visible {
      color: var(--primary-color);
      text-decoration: underline;
-     transform: translateX(8px); /* Reverted to original slide direction */
+     transform: translateX(5px); /* Subtle slide on hover */
  }
  .contact-info i {
-      margin-right: var(--space-sm); /* Keep original margin */
+      margin-right: var(--space-sm);
       margin-left: 0;
       color: var(--accent-color);
-      width: 1em; /* Use em for width */
+      width: 1em;
       text-align: center;
       transition: transform var(--transition-duration-short) var(--transition-easing-springy), color var(--transition-duration-short) var(--transition-easing-standard);
  }
  .contact-info a:hover i, .contact-info a:focus-visible i {
-     transform: scale(1.2);
+     transform: scale(1.1); /* Subtle scale on hover */
      color: var(--primary-color);
  }
 
@@ -886,19 +864,18 @@ section {
      font-size: 1rem;
      color: var(--text-color-light);
      font-weight: 400;
-      direction: rtl; /* Location text is RTL */
+      direction: rtl;
       text-align: right;
  }
   #connect .location-edu i {
-     margin-right: var(--space-xs); /* Keep original margin */
+     margin-right: var(--space-xs);
      margin-left: 0;
      color: var(--text-color-light);
-     width: auto; /* Allow auto width */
-     text-align: left; /* Keep original LTR alignment */
+     width: auto;
+     text-align: left;
   }
-   /* Adjust margin for the second icon - maybe needed for visual separation in RTL text */
    #connect .location-edu i:last-child {
-        margin-right: var(--space-md); /* Original margin direction */
+        margin-right: var(--space-md);
         margin-left: 0;
    }
 
@@ -906,8 +883,6 @@ section {
 .connect-links-block {
      flex: 1;
      min-width: 250px;
-     /* direction: ltr; Removed explicit LTR - let it inherit LTR from parent */
-     /* text-align: left; Removed explicit alignment */
 }
  .connect-links-block h3 {
      font-family: 'Montserrat', sans-serif;
@@ -915,7 +890,7 @@ section {
      color: var(--secondary-color);
      margin-top: 0;
      margin-bottom: var(--space-lg);
-     text-align: left; /* Title is LTR aligned */
+     text-align: left;
  }
 
 
@@ -925,7 +900,7 @@ section {
     margin: 0;
      display: flex;
      flex-direction: column;
-     gap: var(--space-sm);
+     gap: var(--space-sm); /* Spacing between list items */
 }
 
  .connect-links-block ul li {
@@ -934,26 +909,26 @@ section {
      display: flex;
      align-items: center;
      padding: var(--space-xs) 0;
-     border-bottom: 1px solid #eee;
+     border-bottom: 1px solid var(--border-color); /* Lighter border */
      transition: background-color var(--transition-duration-short) var(--transition-easing-standard);
-      justify-content: flex-start; /* Align list items to the left */
+      justify-content: flex-start;
  }
   .connect-links-block ul li:hover, .connect-links-block ul li:focus-within {
-       background-color: #f8f9fa;
+       background-color: #f8f9fa; /* Subtle background change on hover */
   }
  .connect-links-block ul li:last-child { border-bottom: none; }
 
 
  .connect-links-block ul li i {
-     margin-right: var(--space-md); /* Keep original margin */
+     margin-right: var(--space-md);
      margin-left: 0;
      color: var(--accent-color);
-     width: 1em; /* Use em for width */
+     width: 1em;
      text-align: center;
      transition: transform var(--transition-duration-short) var(--transition-easing-springy), color var(--transition-duration-short) var(--transition-easing-standard);
  }
  .connect-links-block ul li a:hover i, .connect-links-block ul li a:focus-visible i {
-     transform: scale(1.2);
+     transform: scale(1.1); /* Subtle scale on hover */
       color: var(--primary-color);
  }
  .connect-links-block ul li a {
@@ -966,13 +941,13 @@ section {
        flex-grow: 1;
         outline: none;
         padding: var(--space-xxs) 0;
-         direction: ltr; /* Link text is LTR */
+         direction: ltr;
          text-align: left;
      }
 
 
  .connect-links-block ul li a:hover, .connect-links-block ul li a:focus-visible {
-      color: var(--primary-color);
+      color: var(--primary-color); /* Primary color on hover */
       text-decoration: underline;
  }
 
@@ -985,15 +960,15 @@ section {
     border-top: 1px solid var(--border-color);
     padding: var(--space-xl) 0;
     text-align: center;
-     direction: ltr; /* Footer is LTR */
+     direction: ltr;
 }
  .footer p {
      margin-top: var(--space-sm);
      margin-bottom: 0;
      font-size: 0.9rem;
-     color: #888;
-      direction: ltr; /* Footer text is LTR */
-      text-align: center; /* Keep footer text centered */
+     color: var(--footer-color); /* Use footer color variable */
+      direction: ltr;
+      text-align: center;
  }
 
 
@@ -1027,20 +1002,19 @@ section {
      .connect-content {
          gap: var(--space-xl);
          max-width: 800px;
-         /* direction: ltr; Removed explicit LTR */
      }
      .connect-info-block { min-width: 250px; }
-      .connect-info-block p { direction: rtl; text-align: right;} /* Ensure paragraph is RTL */
+      .connect-info-block p { direction: rtl; text-align: right;}
      .connect-links-block { min-width: 200px; }
       .connect-links-block h3 { font-size: 1.4rem; }
       .connect-links-block ul li { font-size: 1.1rem; }
-       .contact-info { align-items: flex-start; } /* Reverted */
-       .contact-info a { direction: ltr; text-align: left; flex-direction: row;} /* Keep original LTR */
-       #connect .location-edu { direction: rtl; text-align: right;} /* Ensure location is RTL */
+       .contact-info { align-items: flex-start; }
+       .contact-info a { direction: ltr; text-align: left; flex-direction: row;}
+       #connect .location-edu { direction: rtl; text-align: right;}
         #connect .location-edu i { margin-right: var(--space-xs); margin-left: 0;}
          #connect .location-edu i:last-child { margin-right: var(--space-md); margin-left: 0;}
-       .connect-links-block ul li { justify-content: flex-start;} /* Reverted */
-        .connect-links-block ul li a { direction: ltr; text-align: left;} /* Ensure links are LTR */
+       .connect-links-block ul li { justify-content: flex-start;}
+        .connect-links-block ul li a { direction: ltr; text-align: left;}
          .connect-links-block ul li i { margin-right: var(--space-md); margin-left: 0;}
 
 
@@ -1063,8 +1037,6 @@ section {
       .content-area {
          padding: var(--space-lg);
          box-shadow: 0 4px 15px var(--shadow-color-medium);
-         /* direction: ltr; Default */
-         /* text-align: left; Default */
      }
 
      /* Navbar */
@@ -1080,8 +1052,9 @@ section {
     .tagline { font-size: 1.4rem; }
     .profile-image {
         width: 150px; height: 150px; border-width: 6px;
+        box-shadow: 0 8px 20px var(--shadow-color-medium); /* Adjusted shadow for mobile */
     }
-     #hero { padding-bottom: var(--space-xxl); margin-bottom: var(--section-margin-bottom); text-align: center; direction: ltr;} /* Ensure centered LTR on mobile */
+     #hero { padding-bottom: var(--space-xxl); margin-bottom: var(--section-margin-bottom); text-align: center; direction: ltr;}
 
 
      /* General Sections */
@@ -1101,13 +1074,12 @@ section {
          grid-template-columns: 1fr;
          gap: var(--space-md);
          perspective: none;
-         /* direction: ltr; Default */
     }
      .card {
          transform: none !important;
          box-shadow: 0 6px 20px var(--shadow-color-medium);
          transition: transform var(--transition-duration-short) var(--transition-easing-springy), box-shadow var(--transition-duration-short) var(--transition-easing-standard);
-         text-align: left; /* Default LTR */
+         text-align: left;
      }
       .card:hover {
          transform: translateY(-8px) !important;
@@ -1127,13 +1099,13 @@ section {
      .card-image {
          height: 200px;
           width: calc(100% + var(--space-md) * 2);
-         margin: calc(-1 * var(--space-md)) calc(-1 * var(--space-md)) var(--space-md) calc(-1 * var(--space-md)); /* Keep original margins */
+         margin: calc(-1 * var(--space-md)) calc(-1 * var(--space-md)) var(--space-md) calc(-1 * var(--space-md));
      }
-     .card h3 { font-size: 1.3rem; direction: rtl; text-align: right;} /* Title RTL on mobile */
-     .card p { font-size: 0.95rem; direction: rtl; text-align: right;} /* Paragraph RTL */
+     .card h3 { font-size: 1.3rem; direction: rtl; text-align: right;}
+     .card p { font-size: 0.95rem; direction: rtl; text-align: right;}
      /* Card Meta Mobile - Adjust direction and margins */
-     .card .card-meta { gap: var(--space-sm); direction: rtl; text-align: right; justify-content: flex-end;} /* RTL and align right on mobile */
-      .card .card-meta i { margin-left: var(--space-xs); margin-right: 0;} /* Icon margin left */
+     .card .card-meta { gap: var(--space-sm); direction: rtl; text-align: right; justify-content: flex-end;}
+      .card .card-meta i { margin-left: var(--space-xs); margin-right: 0;}
 
      .card .card-links { gap: var(--space-sm); margin-right: var(--space-sm); margin-left: 0; }
       .card .card-links a { font-size: 0.95rem; padding: var(--space-xs) var(--space-sm); }
@@ -1145,7 +1117,7 @@ section {
 
     /* Timeline (Single Column Mobile) */
      .timeline::after {
-         left: var(--space-md); /* Vertical line position */
+         left: var(--space-md);
          margin-left: 0;
      }
      .timeline li {
@@ -1160,16 +1132,16 @@ section {
      .timeline li:nth-child(odd),
      .timeline li:nth-child(even) {
          left: 0;
-         padding-left: var(--space-xxl); /* Content shifted right to make space for line/circle */
+         padding-left: var(--space-xxl);
          padding-right: var(--space-md);
      }
 
      .timeline li::after {
-         left: calc(var(--space-md) - var(--space-xs)); /* Circle position relative to vertical line */
+         left: calc(var(--space-md) - var(--space-xs));
          right: auto;
          top: 30px;
      }
-      .timeline li:nth-child(even)::after { /* Same position for all circles on mobile */
+      .timeline li:nth-child(even)::after {
           left: calc(var(--space-md) - var(--space-xs));
           right: auto;
       }
@@ -1177,9 +1149,9 @@ section {
 
     /* Timeline Arrows (Point Left towards line in mobile) */
     .timeline-content::before {
-        left: -16px; /* Positioned on the left edge of the block */
+        left: -16px;
         right: auto;
-        border-color: transparent var(--card-bg) transparent transparent; /* Points left */
+        border-color: transparent var(--card-bg) transparent transparent;
     }
 
     /* Arrow for left items (now same as others in mobile) */
@@ -1193,7 +1165,7 @@ section {
      .timeline-content::after {
          left: -18px;
          right: auto;
-         border-color: transparent var(--border-color) transparent transparent; /* Border points left */
+         border-color: transparent var(--border-color) transparent transparent;
      }
      /* Border Arrow for left items (now same as others in mobile) */
      .timeline li:nth-child(even) .timeline-content::after {
@@ -1202,17 +1174,17 @@ section {
           border-color: transparent var(--border-color) transparent transparent;
      }
     .timeline-content h3 { font-size: 1.2rem; }
-     .timeline-content p { font-size: 0.95rem; direction: rtl; text-align: right;} /* Paragraph RTL */
-     .timeline-content .date { font-size: 0.85rem; direction: ltr; text-align: left;} /* Date LTR, left align */
+     .timeline-content p { font-size: 0.95rem; direction: rtl; text-align: right;}
+     .timeline-content .date { font-size: 0.85rem; direction: ltr; text-align: left;}
 
 
     /* Testimonials */
      .testimonial-slider { grid-template-columns: 1fr; }
-     .testimonial-item { padding: var(--space-sm); direction: rtl; text-align: right; } /* Item RTL */
-      .testimonial-item::before { font-size: 2.8em; right: var(--space-sm); left: auto;} /* Quote positioned right */
-     .testimonial-item p { font-size: 0.95rem; margin-top: var(--space-md); margin-bottom: var(--space-md); direction: rtl; text-align: right;} /* Paragraph RTL */
-     .testimonial-item .author { font-size: 0.85rem; text-align: right; direction: rtl;} /* Author RTL */
-     .testimonial-item .author span { font-size: 0.75rem; direction: rtl;} /* Span RTL */
+     .testimonial-item { padding: var(--space-sm); direction: rtl; text-align: right; border-left: 4px solid var(--accent-color);}
+      .testimonial-item::before { font-size: 2.8em; right: var(--space-sm); left: auto;}
+     .testimonial-item p { font-size: 0.95rem; margin-top: var(--space-md); margin-bottom: var(--space-md); direction: rtl; text-align: right;}
+     .testimonial-item .author { font-size: 0.85rem; text-align: right; direction: rtl;}
+     .testimonial-item .author span { font-size: 0.75rem; direction: rtl;}
 
 
     /* Connect Section (Stacked Mobile) */
@@ -1220,34 +1192,29 @@ section {
          flex-direction: column;
          gap: var(--space-lg);
          text-align: center;
-         /* direction: ltr; Removed explicit LTR */
      }
      .connect-info-block, .connect-links-block {
          min-width: 100%;
          padding: 0;
      }
-      .connect-info-block { direction: rtl; text-align: right;} /* Info block RTL */
-      .connect-info-block p { text-align: center; direction: rtl;} /* Info block paragraph centered */
-      .contact-info { align-items: center; } /* Center aligns items in mobile */
-       .contact-info a { direction: ltr; text-align: left; flex-direction: row;} /* Keep original LTR */
-       .contact-info a:hover, .contact-info a:focus-visible { transform: translateX(0);} /* No slide on mobile */
-       .contact-info i { margin-right: var(--space-sm); margin-left: 0;} /* Keep original margins */
+      .connect-info-block { direction: rtl; text-align: right;}
+      .connect-info-block p { text-align: center; direction: rtl;}
+      .contact-info { align-items: center; }
+       .contact-info a { direction: ltr; text-align: left; flex-direction: row;}
+       .contact-info a:hover, .contact-info a:focus-visible { transform: translateX(0);}
+       .contact-info i { margin-right: var(--space-sm); margin-left: 0;}
 
 
-      .connect-links-block { direction: ltr; text-align: left;} /* Links block LTR */
+      .connect-links-block { direction: ltr; text-align: left;}
       .connect-links-block h3 { text-align: center; margin-bottom: var(--space-md); }
       .connect-links-block ul { gap: var(--space-xs); }
      .connect-links-block ul li { font-size: 0.95rem; padding: var(--space-xxs) 0; justify-content: center;}
      .connect-links-block ul li:last-child { border-bottom: none; }
-     .connect-links-block ul li a { justify-content: center; direction: ltr; text-align: left;} /* Links LTR */
-      .connect-links-block ul li i { margin-right: var(--space-sm); margin-left: 0;} /* Keep original margins */
+     .connect-links-block ul li a { justify-content: center; direction: ltr; text-align: left;}
+      .connect-links-block ul li i { margin-right: var(--space-sm); margin-left: 0;}
 
 
-      #connect .location-edu { font-size: 0.85rem; text-align: center; direction: rtl;} /* Location RTL */
-       #connect .location-edu i { margin-right: var(--space-xs); margin-left: 0; } /* Keep original margins */
-        #connect .location-edu i:last-child { margin-right: var(--space-md); margin-left: 0;} /* Keep original margins */
-
-
-         }
-
-    </style>
+      #connect .location-edu { font-size: 0.85rem; text-align: center; direction: rtl;}
+       #connect .location-edu i { margin-right: var(--space-xs); margin-left: 0; }
+        #connect .location-edu i:last-child { margin-right: var(--space-md); margin-left: 0;}
+    }
