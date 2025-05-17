@@ -1,4 +1,4 @@
-/* --- CSS Variables (Refined and Expanded for Modern Look) --- */
+/* --- CSS Variables (Finalized and Expanded) --- */
 :root {
     /* Color Palette - Slightly refined for modern feel */
     --primary-color: #0056b3; /* A slightly richer blue */
@@ -101,7 +101,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 /* Custom focus styles for complex elements - Refined shadows */
  .card:focus-within, .skills-list li:focus-within, .timeline li:focus-within .timeline-content,
  .contact-info a:focus-visible, .connect-links-block ul li a:focus-visible,
- .testimonial-item:focus-within {
+ .testimonial-item:focus-within, .empty-testimonials-state:focus-within { /* Added empty state */
      outline: none;
       box-shadow: 0 0 0 3px var(--accent-color), 0 0 0 6px rgba(0, 123, 255, 0.25);
      z-index: 5;
@@ -351,11 +351,14 @@ section {
      transform-style: preserve-3d;
      z-index: 1;
      outline: none;
+     /* Added overflow hidden to prevent image overflow on hover transform */
+     overflow: hidden;
 }
 
+/* Enhanced Card Hover Effect */
 .card:hover {
-    transform: translateY(-12px) rotateX(3deg) rotateY(3deg); /* Softer 3D effect */
-    box-shadow: 0 20px 50px var(--shadow-color-strong), 0 0 10px var(--accent-color); /* Enhanced hover shadow */
+    transform: translateY(-15px) rotateX(5deg) rotateY(5deg) scale(1.02); /* More pronounced 3D effect */
+    box-shadow: 0 25px 60px var(--shadow-color-strong), 0 0 15px var(--accent-color); /* Enhanced hover shadow */
      z-index: 2;
 }
 
@@ -377,17 +380,30 @@ section {
       transform: translateY(0);
   }
 
+/* Style for project and content image placeholders */
+.project-image-placeholder, .content-image-placeholder {
+    width: calc(100% + var(--space-md) * 2);
+    margin: calc(-1 * var(--space-md)) calc(-1 * var(--space-md)) var(--space-md) calc(-1 * var(--space-md));
+    height: 200px; /* Adjusted height */
+    background-color: #e9ecef; /* Placeholder background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border-color);
+}
 
- .card-image {
-     width: calc(100% + var(--space-md) * 2);
-     margin: calc(-1 * var(--space-md)) calc(-1 * var(--space-md)) var(--space-md) calc(-1 * var(--space-md));
-     height: 240px;
-     object-fit: cover;
-     border-bottom: 1px solid var(--border-color);
-     max-width: 100%;
-     height: auto;
-     display: block;
+.project-image-placeholder img, .content-image-placeholder img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cover the area */
+    transition: transform var(--transition-duration-medium) var(--transition-easing-standard);
+}
+ .card:hover .project-image-placeholder img, .card:hover .content-image-placeholder img {
+     transform: scale(1.1); /* Subtle zoom on hover */
  }
+
 
 /* Title within cards - Set to RTL */
 .card h3 {
@@ -492,8 +508,8 @@ section {
       background-color: var(--highlight-color);
   }
   .card.is-featured:hover {
-     transform: translateY(-15px) rotateX(4deg) rotateY(4deg) scale(1.05); /* Enhanced hover transform */
-      box-shadow: 0 25px 55px var(--shadow-color-strong), 0 0 25px var(--highlight-color); /* Enhanced hover shadow */
+     transform: translateY(-18px) rotateX(6deg) rotateY(6deg) scale(1.04); /* More pronounced hover transform */
+      box-shadow: 0 30px 70px var(--shadow-color-strong), 0 0 30px var(--highlight-color); /* Enhanced hover shadow */
   }
    .card.is-featured:focus-within {
        box-shadow: 0 0 0 3px var(--highlight-color), 0 0 0 6px rgba(255, 193, 7, 0.5), 0 10px 30px var(--shadow-color-medium);
@@ -536,10 +552,11 @@ section {
       color: var(--primary-color); /* Use primary color for icons */
       width: 1em;
       text-align: center;
-      transition: color var(--transition-duration-short) var(--transition-easing-standard); /* Added color transition */
+      transition: color var(--transition-duration-short) var(--transition-easing-standard), transform var(--transition-duration-short) var(--transition-easing-springy); /* Added transform transition for icon */
  }
   #skills .skills-list li:hover i, #skills .skills-list li:focus-visible i {
       color: white; /* White icon on hover */
+       transform: scale(1.1); /* Subtle scale on hover */
   }
 
 /* --- Timeline Section --- */
@@ -576,6 +593,9 @@ section {
     background-color: inherit;
     width: 50%;
      outline: none;
+     /* Ensure timeline items are visible for AOS */
+     opacity: 1;
+     transform: none;
 }
 
 /* Right side timeline items (Desktop) - Kept consistent */
@@ -640,6 +660,30 @@ section {
       box-shadow: 0 6px 20px var(--shadow-color-medium); /* Enhanced shadow */
  }
 
+ /* Timeline Icon Styling */
+.timeline-icon {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: var(--space-xxl);
+    height: var(--space-xxl);
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: var(--border-radius-full);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    z-index: 2;
+    border: 3px solid var(--container-bg); /* Border to stand out from line */
+}
+.timeline li:nth-child(even) .timeline-icon {
+    left: auto;
+    right: 50%;
+    transform: translateX(50%) translateY(-50%);
+}
+
 
 /* Arrow pointing to the line (Desktop - Right items) - Kept consistent */
 .timeline-content::before {
@@ -676,12 +720,13 @@ section {
      left: -18px;
      right: auto;
      border-color: transparent var(--border-color) transparent transparent;
+     z-index: -1;
  }
 
 
  .timeline-content h3 {
      font-family: 'Montserrat', sans-serif;
-     margin-top: 0;
+     margin-top: var(--space-sm); /* Added margin to push content below icon */
      margin-bottom: var(--space-xs);
      color: var(--secondary-color);
      font-size: 1.3rem;
@@ -720,6 +765,40 @@ section {
      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
      gap: var(--space-lg);
  }
+
+/* Empty Testimonials State Styling */
+.empty-testimonials-state {
+    text-align: center;
+    padding: var(--space-xxl);
+    border: 2px dashed var(--border-color);
+    border-radius: var(--border-radius-md);
+    max-width: 600px;
+    margin: var(--space-xl) auto;
+    color: var(--text-color-light);
+     background-color: #e9ecef;
+     direction: rtl;
+     outline: none;
+     transition: box-shadow var(--transition-duration-short) var(--transition-easing-standard), transform var(--transition-duration-short) var(--transition-easing-springy);
+}
+ .empty-testimonials-state:hover {
+     box-shadow: 0 4px 15px var(--shadow-color-light);
+      transform: translateY(-5px); /* Subtle lift on hover */
+ }
+
+ .empty-testimonials-state .empty-icon {
+     font-size: 3rem;
+     color: var(--accent-color);
+     margin-bottom: var(--space-md);
+ }
+ .empty-testimonials-state p {
+     font-size: 1.1rem;
+     margin-bottom: var(--space-sm);
+     color: var(--text-color-light); /* Ensure paragraph uses lighter text color */
+     direction: rtl;
+     text-align: center;
+ }
+
+
  .testimonial-item {
      background-color: var(--card-bg);
      padding: var(--space-md);
@@ -912,6 +991,9 @@ section {
      border-bottom: 1px solid var(--border-color); /* Lighter border */
      transition: background-color var(--transition-duration-short) var(--transition-easing-standard);
       justify-content: flex-start;
+      /* Ensure list items are visible for AOS */
+     opacity: 1;
+     transform: none;
  }
   .connect-links-block ul li:hover, .connect-links-block ul li:focus-within {
        background-color: #f8f9fa; /* Subtle background change on hover */
@@ -1010,6 +1092,8 @@ section {
       .connect-links-block ul li { font-size: 1.1rem; }
        .contact-info { align-items: flex-start; }
        .contact-info a { direction: ltr; text-align: left; flex-direction: row;}
+       .contact-info a:hover, .contact-info a:focus-visible { transform: translateX(0);}
+       .contact-info i { margin-right: var(--space-sm); margin-left: 0;}
        #connect .location-edu { direction: rtl; text-align: right;}
         #connect .location-edu i { margin-right: var(--space-xs); margin-left: 0;}
          #connect .location-edu i:last-child { margin-right: var(--space-md); margin-left: 0;}
@@ -1096,11 +1180,14 @@ section {
              box-shadow: 0 10px 30px var(--shadow-color-medium), 0 0 15px var(--highlight-color);
          }
 
-     .card-image {
-         height: 200px;
-          width: calc(100% + var(--space-md) * 2);
+     /* Project and Content Image Placeholders Mobile */
+     .project-image-placeholder, .content-image-placeholder {
+         height: 160px; /* Adjusted height for mobile */
+         width: calc(100% + var(--space-md) * 2);
          margin: calc(-1 * var(--space-md)) calc(-1 * var(--space-md)) var(--space-md) calc(-1 * var(--space-md));
      }
+
+
      .card h3 { font-size: 1.3rem; direction: rtl; text-align: right;}
      .card p { font-size: 0.95rem; direction: rtl; text-align: right;}
      /* Card Meta Mobile - Adjust direction and margins */
@@ -1146,8 +1233,20 @@ section {
           right: auto;
       }
 
+    /* Timeline Icon Styling Mobile */
+     .timeline-icon {
+         left: var(--space-md);
+         right: auto;
+         transform: translateX(-50%) translateY(-50%);
+     }
+     .timeline li:nth-child(even) .timeline-icon {
+         left: var(--space-md);
+         right: auto;
+         transform: translateX(-50%) translateY(-50%);
+     }
 
-    /* Timeline Arrows (Point Left towards line in mobile) */
+
+    /* Arrow pointing to the line (Point Left towards line in mobile) */
     .timeline-content::before {
         left: -16px;
         right: auto;
@@ -1166,12 +1265,14 @@ section {
          left: -18px;
          right: auto;
          border-color: transparent var(--border-color) transparent transparent;
+         z-index: -1;
      }
      /* Border Arrow for left items (now same as others in mobile) */
      .timeline li:nth-child(even) .timeline-content::after {
           left: -18px;
           right: auto;
           border-color: transparent var(--border-color) transparent transparent;
+          z-index: -1;
      }
     .timeline-content h3 { font-size: 1.2rem; }
      .timeline-content p { font-size: 0.95rem; direction: rtl; text-align: right;}
@@ -1185,6 +1286,11 @@ section {
      .testimonial-item p { font-size: 0.95rem; margin-top: var(--space-md); margin-bottom: var(--space-md); direction: rtl; text-align: right;}
      .testimonial-item .author { font-size: 0.85rem; text-align: right; direction: rtl;}
      .testimonial-item .author span { font-size: 0.75rem; direction: rtl;}
+
+     /* Empty Testimonials State Mobile */
+     .empty-testimonials-state { padding: var(--space-xl); }
+      .empty-testimonials-state .empty-icon { font-size: 2.5rem; }
+      .empty-testimonials-state p { font-size: 1rem; }
 
 
     /* Connect Section (Stacked Mobile) */

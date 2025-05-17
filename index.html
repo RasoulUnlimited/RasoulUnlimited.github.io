@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Rasoul Unlimited | محمد رسول سهرابی - Official Digital Hub</title>
     <meta name="description" content="Explore the compelling digital presence of Mohammad Rasoul Sohrabi (Rasoul Unlimited), a biomedical engineering innovator, full-stack developer, and content strategist. Featuring a detailed timeline, impactful projects (like the first verified Persian Discord bot), reputable media mentions, and key skills showcasing his verifiable notability and expertise."/>
-    <meta name="keywords" content="Mohammad Rasoul Sohrabi, Rasoul Unlimited, Biomedical Engineering, University of Tehran, Python Developer, Discord Bot, Persian Bot, Personal Branding, Karaj, Tehran, Software Engineer, Content Strategist, Media Mentions, Notability, Verification, GitHub, Virgool, LinkedIn, Telegram, MIT License"/>
+    <meta name="keywords" content="Mohammad Rasoul Sohrabi, Rasoul Unlimited, Biomedical Engineering, University of Tehran, Python Developer, Discord Bot, Persian Bot, Personal Branding, Karaj, Tehran, Software Engineer, Content Strategist, Media Mentions, Notability, Verification, GitHub, Virgool, LinkedIn, Telegram, MIT License, AOS, Scroll Animation"/>
 
     <meta property="og:type" content="website"/>
     <meta property="og:url" content="https://rasoulunlimited.github.io/"/>
@@ -22,6 +22,8 @@
 
     <link rel="icon" type="image/png" href="images/favicon.png" />
     <link rel="stylesheet" href="style.css">
+
+    <link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet">
 
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap" as="style"/>
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" as="style"/>
@@ -166,7 +168,7 @@
 <body>
 
     <div class="navbar">
-        <nav>
+        <nav data-aos="fade-down">
             <a href="#hero">Home</a>
             <a href="#about">About</a>
              <a href="#timeline">Journey</a>
@@ -180,16 +182,16 @@
     </div>
 
     <div class="container">
-        <div class="content-area">
+        <div class="content-area" data-aos="fade-up">
 
             <main>
-                <section id="hero">
+                <section id="hero" data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="300">
                      <img src="images/RasoulUnlimited.png" alt="Mohammad Rasoul Sohrabi Profile Image - Rasoul Unlimited" class="profile-image" aria-label="Mohammad Rasoul Sohrabi's Profile Picture"/>
                      <h1>Rasoul Unlimited | محمد رسول سهرابی</h1>
                      <p class="tagline">Developer. Designer. Founder.</p>
                 </section>
 
-                <section id="about">
+                <section id="about" data-aos="fade-right">
                     <h2>About Me | درباره من</h2>
                     <p>
                         محمد رسول سهرابی، متولد ۱۵ شهریور ۱۳۸۴ و ملقب به «آنلیمیتد»، نمونه‌ای کم‌نظیر از تلفیق ورزش قهرمانی (کاراته دان ۱ رسمی فدراسیون)، توسعه فنی، و آینده‌نگری علمی‌ست. او دانشجوی مهندسی پزشکی دانشگاه تهران (واحد مرکزی) و عضو انجمن علمی مهندسی پزشکی دانشگاه است و باور دارد در دنیای شلوغ امروز، فقط صدای واقعی شنیده می‌شود.
@@ -197,40 +199,40 @@
                     </p>
                 </section>
 
-                 <section id="timeline">
+                 <section id="timeline" data-aos="fade-up">
                      <h2>⏳ My Journey | مسیر من</h2>
                      <ul class="timeline" aria-label="Educational and Professional Timeline">
-                         <li>
+                         <li data-aos="fade-up">
                              <div class="timeline-content">
-                                 <h3 class="date">۱۵ شهریور ۱۳۸۴ (September 6, 2005)</h3>
+                                  <div class="timeline-icon"><i class="fas fa-birthday-cake" aria-hidden="true"></i></div> <h3 class="date">۱۵ شهریور ۱۳۸۴ (September 6, 2005)</h3>
                                  <h3>تولد</h3>
                                  <p>نقطه آغازین زندگی و مسیر من در این جهان.</p>
                              </div>
                          </li>
-                         <li>
+                         <li data-aos="fade-up">
                              <div class="timeline-content">
-                                 <h3 class="date">سنین پایین</h3>
+                                  <div class="timeline-icon"><i class="fas fa-medal" aria-hidden="true"></i></div> <h3 class="date">سنین پایین</h3>
                                  <h3>شروع ورزش قهرمانی کاراته و کسب دان ۱</h3>
                                  <p>شروع جدی ورزش کاراته و کسب روحیه سخت‌کوشی و نظم از طریق حضور در مسابقات ملی و دریافت دان ۱ رسمی فدراسیون کاراته جمهوری اسلامی ایران.</p>
                              </div>
                          </li>
-                          <li>
+                          <li data-aos="fade-up">
                              <div class="timeline-content">
-                                 <h3 class="date">سال 2020 (14 سالگی)</h3>
+                                  <div class="timeline-icon"><i class="fab fa-discord" aria-hidden="true"></i></div> <h3 class="date">سال 2020 (14 سالگی)</h3>
                                  <h3>توسعه اولین ربات فارسی‌زبان دیسکورد (Persian Bot)</h3>
-                                 <p>توسعه اولین ربات مستقل فارسی‌زبان در پلتفرم دیسکورد با زبان پایتون، در قالب یک تیم ده‌نفره. این پروژه که با انگیزه‌ی ایجاد تحول انجام شد، به تأیید رسمی شرکت Discord رسید و نام ایران را برای اولین‌بار در میان توسعه‌دهندگان رسمی این پلتفرم قرار داد.</p>
+                                 <p>توسعه اولین ربات مستقل فارسی‌زبان در پلتفرم دیسکورد با زبان پایتون، در قالب یک تیم ده‌نفره. این پروژه که با انگیزه‌ی ایجاد تحول انجام شد، به **تأیید رسمی شرکت Discord** رسید و نام ایران را برای اولین‌بار در میان توسعه‌دهندگان رسمی این پلتفرم قرار داد.</p>
                              </div>
                          </li>
-                         <li>
+                         <li data-aos="fade-up">
                              <div class="timeline-content">
-                                 <h3 class="date">پاییز 1402 (Fall 2023)</h3>
+                                  <div class="timeline-icon"><i class="fas fa-graduation-cap" aria-hidden="true"></i></div> <h3 class="date">پاییز 1402 (Fall 2023)</h3>
                                  <h3>آغاز تحصیل در مهندسی پزشکی دانشگاه تهران</h3>
-                                 <p>ورود به دانشگاه تهران (واحد مرکزی) برای تحصیل در رشته مهندسی پزشکی و تمرکز بر ترکیب دانش مهندسی و برنامه‌نویسی برای حوزه سلامت دیجیتال.</p>
+                                 <p>ورود به دانشگاه تهران (واحد مرکزی) برای تحصیل در رشته مهندسی پزشکی و تمرکز بر ترکیب دانش دانش مهندسی و برنامه‌نویسی برای حوزه سلامت دیجیتال.</p>
                              </div>
                          </li>
-                           <li>
+                           <li data-aos="fade-up">
                                 <div class="timeline-content">
-                                    <h3 class="date">سال 1403 شمسی (حدود 2024 میلادی)</h3>
+                                    <div class="timeline-icon"><i class="fas fa-code" aria-hidden="true"></i></div> <h3 class="date">سال 1403 شمسی (حدود 2024 میلادی)</h3>
                                     <h3>توسعه پروژه‌های برنامه‌نویسی با زبان C (دانشگاهی)</h3>
                                     <p>انجام چندین پروژه کوچک با زبان C برای دروس ترم اول دانشگاه تهران. نویسنده این پروژه‌ها هستم و آن‌ها دارای MIT License برای استفاده و مشارکت عمومی هستند.</p>
                                      <div class="card-links" style="border-top: none; padding-top: 0; margin-top: var(--space-xs);">
@@ -238,9 +240,9 @@
                                     </div>
                                 </div>
                             </li>
-                             <li>
+                             <li data-aos="fade-up">
                                 <div class="timeline-content">
-                                     <h3 class="date">سال 1403 شمسی (حدود 2024 میلادی)</h3>
+                                    <div class="timeline-icon"><i class="fab fa-python" aria-hidden="true"></i></div> <h3 class="date">سال 1403 شمسی (حدود 2024 میلadi)</h3>
                                      <h3>توسعه پروژه‌های برنامه‌نویسی با زبان پایتون (دانشگاهی)</h3>
                                      <p>انجام چندین پروژه کوچک با زبان پایتون که در چارچوب همکاری با دانشگاه صنعتی سهند تبریز انجام شده‌اند. نویسنده این پروژه‌ها هستم و آن‌ها دارای MIT License برای استفاده و مشارکت عمومی هستند.</p>
                                       <div class="card-links" style="border-top: none; padding-top: 0; margin-top: var(--space-xs);">
@@ -248,32 +250,32 @@
                                      </div>
                                  </div>
                             </li>
-                          <li>
+                          <li data-aos="fade-up">
                              <div class="timeline-content">
-                                 <h3 class="date">27 نوامبر 2022</h3>
+                                  <div class="timeline-icon"><i class="fas fa-feather-alt" aria-hidden="true"></i></div> <h3 class="date">27 نوامبر 2022</h3>
                                  <h3>انتشار اولین مقاله معرفی در ویرگول</h3>
                                  <p>نشر مقاله "محمد رسول سهرابی (آنلیمیتد) – از tatami تا تکنولوژی" به عنوان اولین معرفی جامع من در فضای دیجیتال.</p>
                              </div>
                          </li>
-                          <li>
+                          <li data-aos="fade-up">
                              <div class="timeline-content">
-                                 <h3 class="date">23 آوریل 2023</h3>
+                                   <div class="timeline-icon"><i class="fas fa-feather-alt" aria-hidden="true"></i></div> <h3 class="date">23 آوریل 2023</h3>
                                  <h3>انتشار مقاله برند شخصی در ویرگول</h3>
                                  <p>نشر مقاله "چطور توی دنیای شلوغ امروز، یه برند شخصی واقعی بسازیم؟ | داستان Rasoul Unlimited" که به فلسفه‌ی شخصی من درباره‌ی برند شخصی و معنای لقب «آنلیمیتد» می‌پردازد.</p>
                              </div>
                          </li>
-                          <li>
+                          <li data-aos="fade-up">
                              <div class="timeline-content">
-                                 <h3 class="date">حال حاضر</h3>
+                                  <div class="timeline-icon"><i class="fas fa-stream" aria-hidden="true"></i></div> <h3 class="date">حال حاضر</h3>
                                  <h3>تمرکز بر سلامت دیجیتال، توسعه و مدیریت محتوا</h3>
-                                 <p>ادامه فعالیت و تمرکز بر ترکیب مهندسی پزشکی و توسعه نرم‌افزار برای ایجاد تحول در حوزه سلامت دیجیتال، همراه با تولید محتوا و مدیریت شبکه‌های اجتماعی برای تاثیرگذاری بیشتر.</p>
+                                 <p>ادامه فعالیت و تمرکز بر ترکیب مهندسی پزشکی و برنامه‌نویسی برای ایجاد تحول در حوزه سلامت دیجیتال، همراه با تولید محتوا و مدیریت شبکه‌های اجتماعی برای تاثیرگذاری بیشتر.</p>
                              </div>
                          </li>
                      </ul>
                  </section>
 
 
-                 <section id="skills">
+                 <section id="skills" data-aos="fade-left">
                      <h2>🛠️ Skills & Technologies | مهارت‌ها و تکنولوژی‌ها</h2>
                      <ul class="skills-list" aria-label="List of Skills and Technologies">
                          <li><i class="fas fa-code" aria-hidden="true"></i> Python</li>
@@ -302,10 +304,13 @@
                  </section>
 
 
-                 <section id="projects">
+                 <section id="projects" data-aos="fade-up">
                      <h2>💻 Projects | پروژه‌ها</h2>
                      <div class="grid-container">
-                         <div class="card project-card is-featured">
+                         <div class="card project-card is-featured" data-aos="fade-up">
+                              <div class="project-image-placeholder">
+                                  <img src="images/placeholder-project.png" alt="Persian Bot Project Image Placeholder"/>
+                              </div>
                              <h3>اولین ربات فارسی‌زبان دیسکورد (Persian Bot)</h3>
                               <div class="card-meta">
                                   <span><i class="fas fa-microchip" aria-hidden="true"></i> زبان برنامه‌نویسی: پایتون</span>
@@ -328,7 +333,10 @@
                                    </div>
                          </div>
 
-                          <div class="card project-card">
+                          <div class="card project-card" data-aos="fade-up">
+                              <div class="project-image-placeholder">
+                                  <img src="images/placeholder-code-c.png" alt="C Projects Image Placeholder"/>
+                              </div>
                                <h3>پروژه‌های برنامه‌نویسی با زبان C (دانشگاهی)</h3>
                                <div class="card-meta">
                                     <span><i class="fas fa-building" aria-hidden="true"></i> دانشگاه تهران (مرکز)</span>
@@ -342,7 +350,10 @@
                                     </div>
                            </div>
 
-                            <div class="card project-card">
+                            <div class="card project-card" data-aos="fade-up">
+                                 <div class="project-image-placeholder">
+                                  <img src="images/placeholder-code-python.png" alt="Python Projects Image Placeholder"/>
+                              </div>
                                <h3>پروژه‌های برنامه‌نویسی با زبان پایتون (دانشگاهی)</h3>
                                <div class="card-meta">
                                     <span><i class="fas fa-building" aria-hidden="true"></i> دانشگاه صنعتی سهند تبریز (همکاری)</span>
@@ -359,13 +370,16 @@
                          </div>
                  </section>
 
-                <section id="content">
+                <section id="content" data-aos="fade-right">
                      <h2>✍️ Featured Content | محتوای منتخب</h2>
                       <p style="text-align: center; max-width: 700px; margin: 0 auto var(--space-xl);">
                          این بخش شامل محتوایی است که شما تولید کرده‌اید، مانند مقالات وبلاگ، پست‌های شبکه‌های اجتماعی طولانی، ویدیوها، ارائه‌ها و غیره.
                      </p>
                       <div class="grid-container">
-                          <div class="card content-card is-featured">
+                          <div class="card content-card is-featured" data-aos="fade-up">
+                              <div class="content-image-placeholder">
+                                  <img src="images/placeholder-content-virgool1.png" alt="Virgool Article Thumbnail Placeholder"/>
+                              </div>
                              <h3>محمد رسول سهرابی (آنلیمیتد) – از tatami تا تکنولوژی</h3>
                              <div class="card-meta">
                                  <span><i class="fas fa-tag" aria-hidden="true"></i> پلتفرم: ویرگول</span>
@@ -377,7 +391,10 @@
                               </div>
                          </div>
 
-                          <div class="card content-card is-featured">
+                          <div class="card content-card is-featured" data-aos="fade-up">
+                               <div class="content-image-placeholder">
+                                  <img src="images/placeholder-content-virgool2.png" alt="Virgool Article Thumbnail Placeholder"/>
+                              </div>
                              <h3>چطور توی دنیای شلوغ امروز، یه برند شخصی واقعی بسازیم؟ | داستان Rasoul Unlimited</h3>
                              <div class="card-meta">
                                  <span><i class="fas fa-tag" aria-hidden="true"></i> پلتفرم: ویرگول</span>
@@ -389,7 +406,10 @@
                               </div>
                          </div>
 
-                        <div class="card content-card">
+                        <div class="card content-card" data-aos="fade-up">
+                             <div class="content-image-placeholder">
+                                  <img src="images/placeholder-content-medium.png" alt="Medium Article Thumbnail Placeholder"/>
+                             </div>
                              <h3>عنوان مقاله شما در مدیوم (به فارسی)</h3> <div class="card-meta">
                                  <span><i class="fas fa-tag" aria-hidden="true"></i> پلتفرم: Medium</span>
                                  <span><i class="fas fa-calendar-alt" aria-hidden="true"></i> تاریخ انتشار: [تاریخ انتشار]</span> </div>
@@ -399,14 +419,17 @@
                          </div>
                  </section>
 
-                 <section id="mentions">
+                 <section id="mentions" data-aos="fade-left">
                      <h2>📰 Mentions & Recognition | حضور در رسانه‌ها و افتخارات</h2>
                      <p style="text-align: center; max-width: 700px; margin: 0 auto var(--space-xl);">
                          این بخش شامل اشاره به من در منابع رسانه‌ای معتبر و مستقل (اخبار، مصاحبه‌ها، مقالات، پادکست‌ها) و همچنین افتخارات یا جوایز رسمی است که به شناخته شدن من کمک می‌کند.
                          برای درخواست تیک آبی اینستاگرام، **این بخش بسیار کلیدی است** و باید شامل لینک به منابع معتبر و مستقل باشد که درباره شما صحبت کرده‌اند.
                      </p>
                       <div class="grid-container">
-                         <div class="card mention-card is-featured"> <h3>تأیید رسمی اولین ربات فارسی دیسکورد توسط Discord</h3>
+                         <div class="card mention-card is-featured" data-aos="fade-up">
+                             <div class="mention-icon-placeholder">
+                                 <i class="fas fa-trophy" aria-hidden="true"></i> </div>
+                             <h3>تأیید رسمی اولین ربات فارسی دیسکورد توسط Discord</h3>
                               <div class="card-meta">
                                   <span><i class="fas fa-award" aria-hidden="true"></i> مرجع تأیید: شرکت Discord</span>
                                   <span><i class="fas fa-calendar-alt" aria-hidden="true"></i> سال تأیید: حدود 2020</span> </div>
@@ -418,21 +441,26 @@
                          </div>
                  </section>
 
-                 <section id="testimonials">
+                 <section id="testimonials" data-aos="fade-up">
                      <h2>💬 What Others Say | نظر دیگران</h2>
                       <p style="text-align: center; max-width: 700px; margin: 0 auto var(--space-xl);">
                          نظرات و توصیه‌های افراد، همکاران، اساتید یا کاربرانی که با شما یا کارهایتان آشنا هستند، اعتبار اجتماعی شما را افزایش می‌دهد.
                          برای تکمیل این بخش، نقل قول‌های واقعی (با اجازه) از افراد معتبر اضافه کنید.
                      </p>
                      <div class="testimonial-slider">
+                         <div class="empty-testimonials-state">
+                              <div class="empty-icon"><i class="fas fa-comment-alt" aria-hidden="true"></i></div>
+                              <p>نظرات و توصیه‌های ارزشمند شما در اینجا نمایش داده خواهد شد.</p>
+                              <p style="font-size: 0.9em; color: var(--text-color-light);">(برای اضافه کردن نظر خود، می‌توانید با من در ارتباط باشید.)</p>
+                          </div>
                          </div>
                  </section>
 
 
-                 <section id="connect">
+                 <section id="connect" data-aos="fade-up">
                      <h2>Connect | تماس و پیوندهای من</h2>
                      <div class="connect-content">
-                         <div class="connect-info-block">
+                         <div class="connect-info-block" data-aos="fade-right">
                              <p>
                                  If you have any questions, project ideas, or just want to connect, feel free to reach out!
                                  <br>I'm always open to discussing collaborations and new opportunities.
@@ -444,15 +472,15 @@
                                   <i class="fas fa-map-marker-alt" aria-hidden="true"></i> تهران / کرج <i class="fas fa-graduation-cap" aria-hidden="true" style="margin-left: var(--space-md);"></i> کارشناسی مهندسی پزشکی – دانشگاه تهران (مرکز)
                              </p>
                          </div>
-                         <div class="connect-links-block">
+                         <div class="connect-links-block" data-aos="fade-left">
                              <h3>My Hubs | پیوندهای من</h3>
                              <ul>
-                                  <li><a href="https://www.instagram.com/Rasoul.Unlimited" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on Instagram"><i class="fab fa-instagram" aria-hidden="true"></i> Instagram</a></li>
-                                 <li><a href="https://virgool.io/@RasoulUnlimited" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on Virgool"><i class="fas fa-pen-fancy" aria-hidden="true"></i> Virgool</a></li>
-                                 <li><a href="https://www.linkedin.com/in/rasoulunlimited/" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
-                                 <li><a href="https://github.com/RasoulUnlimited/" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on GitHub"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a></li>
-                                 <li><a href="https://rasoulunlimited.medium.com" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on Medium"><i class="fab fa-medium" aria-hidden="true"></i> Medium</a></li>
-                                  <li><a href="https://t.me/RasoulUnlimited" target="_blank" rel="noopener noreferrer" aria-label="Join Rasoul Unlimited Telegram Channel"><i class="fab fa-telegram-plane" aria-hidden="true"></i> Telegram Channel</a></li>
+                                  <li data-aos="fade-up" data-aos-delay="100"><a href="https://www.instagram.com/Rasoul.Unlimited" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on Instagram"><i class="fab fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+                                 <li data-aos="fade-up" data-aos-delay="200"><a href="https://virgool.io/@RasoulUnlimited" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on Virgool"><i class="fas fa-pen-fancy" aria-hidden="true"></i> Virgool</a></li>
+                                 <li data-aos="fade-up" data-aos-delay="300"><a href="https://www.linkedin.com/in/rasoulunlimited/" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+                                 <li data-aos="fade-up" data-aos-delay="400"><a href="https://github.com/RasoulUnlimited/" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on GitHub"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a></li>
+                                 <li data-aos="fade-up" data-aos-delay="500"><a href="https://rasoulunlimited.medium.com" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on Medium"><i class="fab fa-medium" aria-hidden="true"></i> Medium</a></li>
+                                  <li data-aos="fade-up" data-aos-delay="600"><a href="https://t.me/RasoulUnlimited" target="_blank" rel="noopener noreferrer" aria-label="Join Rasoul Unlimited Telegram Channel"><i class="fab fa-telegram-plane" aria-hidden="true"></i> Telegram Channel</a></li>
                                  </ul>
                          </div>
                      </div>
@@ -466,6 +494,30 @@
          </footer>
 
     <script src="script.js"></script>
+    <script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        // Global settings:
+        disable: false, // accepts following values: 'phone', 'tablet', 'mobile', boolean, expression or function
+        startEvent: 'DOMContentLoaded', // name of the event dispatched on the document, that AOS should initialize on
+        initClassName: 'aos-init', // class applied after initialization
+        animatedClassName: 'aos-animate', // class applied on animation
+        useClassNames: false, // if true, will add content of `data-aos` as classes on scroll
+        disableMutationObserver: false, // disables automatic mutations' detections (advanced)
+        debounceDelay: 50, // the delay before recalculating position of scroll
+        throttleDelay: 99, // the delay before invoking the scroll handler
+
+        // Settings that can be overridden on per-element basis, by `data-aos-*` attributes:
+        offset: 120, // offset (in px) from the original trigger point
+        delay: 0, // values from 0 to 3000, with step 50ms
+        duration: 800, // values from 0 to 3000, with step 50ms
+        easing: 'ease', // default easing for AOS animations
+        once: false, // whether animation should happen only once - while scrolling down
+        mirror: false, // whether elements should animate out while scrolling past them
+        anchorPlacement: 'top-bottom', // defines which position of the element regarding to window should trigger the animation
+
+      });
+    </script>
 
 </body>
 </html>
