@@ -1,23 +1,24 @@
-/* --- CSS Variables (Finalized and Expanded) --- */
+/* --- CSS Variables (Refined for Professional Look) --- */
 :root {
     /* Color Palette - Slightly refined for modern feel */
-    --primary-color: #0056b3; /* A slightly richer blue */
-    --secondary-color: #212529; /* Dark text, kept */
-    --accent-color: #007bff; /* Bright Blue, good for highlights */
-    --highlight-color: #ffc107; /* Yellow/Orange, kept */
-    --background-start-color: #eef2f7; /* Lighter gradient start, kept */
-    --background-end-color: #f8f9fa; /* Lighter gradient end, kept */
+    --primary-color: #005a9e; /* A slightly deeper, more professional blue */
+    --secondary-color: #1a1a1a; /* Very dark almost black for strong contrast */
+    --accent-color: #007acc; /* A clean blue for highlights and links */
+    --highlight-color: #ffc107; /* Yellow/Orange, kept for highlights */
+    --background-start-color: #f4f7f6; /* Very light gray-blue */
+    --background-end-color: #e0e7e9; /* Light blue-gray */
     --container-bg: #ffffff; /* White container background */
     --card-bg: #ffffff; /* White card background */
-    --shadow-color-light: rgba(0, 0, 0, 0.08);
-    --shadow-color-medium: rgba(0, 0, 0, 0.12); /* Softer medium shadow */
-    --shadow-color-strong: rgba(0, 0, 0, 0.2); /* Softer strong shadow */
-    --text-color: #343a40; /* Dark gray text */
-    --text-color-light: #6c757d; /* Lighter gray text */
-    --heading-color: #212529; /* Dark heading color */
-    --tagline-color: #495057; /* Slightly darker tagline */
-    --border-color: #dee2e6; /* Light gray border */
-    --footer-color: #495057; /* Dark gray for footer */
+    --shadow-color-light: rgba(0, 0, 0, 0.05); /* Even lighter shadow */
+    --shadow-color-medium: rgba(0, 0, 0, 0.1); /* Lighter medium shadow */
+    --shadow-color-strong: rgba(0, 0, 0, 0.15); /* Lighter strong shadow */
+    --text-color: #333333; /* Dark gray text */
+    --text-color-light: #555555; /* Medium gray text for secondary info */
+    --text-color-link: var(--accent-color); /* Define link color */
+    --heading-color: var(--secondary-color); /* Headings are very dark */
+    --tagline-color: #4a4a4a; /* Darker gray for tagline */
+    --border-color: #e0e0e0; /* Softer gray border */
+    --footer-color: #555555; /* Medium gray for footer */
 
 
     /* Spacing Scale (Mathematical progression) - Kept consistent */
@@ -90,7 +91,7 @@ body {
 a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
      outline: 3px solid var(--accent-color);
     outline-offset: var(--space-xs);
-    box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.25);
+    box-shadow: 0 0 0 4px rgba(0, 122, 204, 0.25); /* Adjusted based on new accent */
     z-index: 10;
     position: relative;
 }
@@ -103,7 +104,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
  .contact-info a:focus-visible, .connect-links-block ul li a:focus-visible,
  .testimonial-item:focus-within, .empty-testimonials-state:focus-within { /* Added empty state */
      outline: none;
-      box-shadow: 0 0 0 3px var(--accent-color), 0 0 0 6px rgba(0, 123, 255, 0.25);
+      box-shadow: 0 0 0 3px var(--accent-color), 0 0 0 6px rgba(0, 122, 204, 0.25); /* Adjusted based on new accent */
      z-index: 5;
      position: relative;
  }
@@ -133,6 +134,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
      padding: var(--space-xl) var(--space-xxl); /* Generous padding */
      border-radius: var(--border-radius-lg); /* More rounded corners */
      box-shadow: 0 15px 40px var(--shadow-color-strong); /* Stronger initial shadow */
+     /* Added a subtle border for definition */
+     border: 1px solid var(--border-color);
 }
 
 /* --- Navigation Bar --- */
@@ -207,7 +210,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at top left, rgba(0,123,255,0.05) 0%, rgba(255,255,255,0) 30%),
+    background: radial-gradient(circle at top left, rgba(0,122,204,0.05) 0%, rgba(255,255,255,0) 30%), /* Adjusted based on new accent */
                 radial-gradient(circle at bottom right, rgba(255,193,7,0.05) 0%, rgba(255,255,255,0) 30%);
     z-index: 0;
      pointer-events: none;
@@ -232,27 +235,27 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
      margin-right: auto;
 }
  .profile-image:hover {
-     transform: scale(1.1) rotate(3deg); /* Softer hover effect */
-     box-shadow: 0 25px 60px var(--shadow-color-strong); /* Stronger hover shadow */
+     transform: scale(1.05) rotate(1deg); /* Softer hover effect */
+     box-shadow: 0 20px 50px var(--shadow-color-strong); /* Stronger hover shadow */
  }
 
 
 h1 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 5rem;
+    font-size: 4.5rem; /* Slightly adjusted size */
     color: var(--heading-color);
     margin-top: 0;
     margin-bottom: var(--space-xs);
     font-weight: 900;
     line-height: 1.1;
-    letter-spacing: -2px; /* Slightly less aggressive letter spacing */
-    text-shadow: 2px 2px 6px var(--shadow-color-light); /* Softer text shadow */
+    letter-spacing: -1px; /* Slightly less aggressive letter spacing */
+    text-shadow: 1px 1px 3px var(--shadow-color-light); /* Softer text shadow */
      word-break: break-word;
 }
 
 .tagline {
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.8rem; /* Slightly larger tagline */
+    font-size: 1.6rem; /* Slightly larger tagline */
     font-weight: 700;
     color: var(--tagline-color);
     margin-bottom: var(--space-xxl);
@@ -281,7 +284,7 @@ section {
     transform: translateX(-50%);
     width: 200px;
     height: 3px;
-    background: linear-gradient(to right, rgba(0,86,179,0) 0%, var(--primary-color) 50%, rgba(0,86,179,0) 100%); /* Updated gradient color */
+    background: linear-gradient(to right, rgba(0,90,158,0) 0%, var(--primary-color) 50%, rgba(0,90,158,0) 100%); /* Updated gradient color */
     z-index: 0;
      pointer-events: none;
  }
@@ -292,7 +295,7 @@ section {
 
  section h2 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 3rem;
+    font-size: 2.8rem; /* Adjusted size */
     color: var(--heading-color);
     margin-top: 0;
     margin-bottom: var(--space-xl);
@@ -305,30 +308,44 @@ section {
  section h2::after {
      content: '';
      display: block;
-     width: 150px;
-     height: 6px;
+     width: 100px; /* Adjusted size */
+     height: 5px; /* Adjusted size */
      background-color: var(--primary-color);
      margin: var(--space-sm) auto 0;
-     border-radius: 3px;
+     border-radius: 2.5px;
  }
 
 /* --- About Section --- */
 #about p {
     text-align: justify;
-     max-width: 900px;
+     max-width: 800px; /* Slightly narrower for better readability */
      margin-left: auto;
      margin-right: auto;
-     font-size: 1.2rem; /* Slightly larger text */
+     font-size: 1.15rem; /* Slightly larger text */
      color: var(--text-color); /* Use text color variable */
      line-height: 1.8; /* Increased line height */
      direction: rtl;
      text-align: right;
 }
 
+/* Style text links within content areas */
+.content-area a:not(.navbar nav a):not(.card .card-links a):not(.contact-info a):not(.connect-links-block ul li a):not(.footer a) {
+    color: var(--text-color-link);
+    text-decoration: underline;
+    transition: color var(--transition-duration-short) ease, text-decoration var(--transition-duration-short) ease;
+    font-weight: 500; /* Make inline links slightly bolder */
+}
+
+.content-area a:not(.navbar nav a):not(.card .card-links a):not(.contact-info a):not(.connect-links-block ul li a):not(.footer a):hover {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+
 /* --- Card Grid Layout (Adding 3D Effect) --- */
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Slightly smaller min */
     gap: var(--space-lg);
     padding: 0;
      perspective: 1000px;
@@ -340,7 +357,7 @@ section {
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-md);
     padding: var(--space-md);
-    box-shadow: 0 10px 30px var(--shadow-color-medium); /* Enhanced initial shadow */
+    box-shadow: 0 8px 25px var(--shadow-color-medium); /* Enhanced initial shadow */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -357,8 +374,8 @@ section {
 
 /* Enhanced Card Hover Effect */
 .card:hover {
-    transform: translateY(-15px) rotateX(5deg) rotateY(5deg) scale(1.02); /* More pronounced 3D effect */
-    box-shadow: 0 25px 60px var(--shadow-color-strong), 0 0 15px var(--accent-color); /* Enhanced hover shadow */
+    transform: translateY(-10px) rotateX(2deg) rotateY(2deg) scale(1.01); /* More subtle 3D effect */
+    box-shadow: 0 18px 50px var(--shadow-color-strong), 0 0 10px var(--accent-color); /* Enhanced hover shadow */
      z-index: 2;
 }
 
@@ -370,7 +387,7 @@ section {
      left: 0;
      right: auto;
      width: 100%;
-     height: 6px;
+     height: 4px; /* Slightly thinner */
      background-color: var(--accent-color);
      transform: translateY(-100%);
      transition: transform var(--transition-duration-medium) var(--transition-easing-standard);
@@ -384,13 +401,16 @@ section {
 .project-image-placeholder, .content-image-placeholder {
     width: calc(100% + var(--space-md) * 2);
     margin: calc(-1 * var(--space-md)) calc(-1 * var(--space-md)) var(--space-md) calc(-1 * var(--space-md));
-    height: 200px; /* Adjusted height */
+    height: 180px; /* Adjusted height */
     background-color: #e9ecef; /* Placeholder background */
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
     border-bottom: 1px solid var(--border-color);
+    /* Added border radius only to top corners matching card */
+    border-top-left-radius: var(--border-radius-md);
+    border-top-right-radius: var(--border-radius-md);
 }
 
 .project-image-placeholder img, .content-image-placeholder img {
@@ -401,7 +421,7 @@ section {
     transition: transform var(--transition-duration-medium) var(--transition-easing-standard);
 }
  .card:hover .project-image-placeholder img, .card:hover .content-image-placeholder img {
-     transform: scale(1.1); /* Subtle zoom on hover */
+     transform: scale(1.05); /* Subtle zoom on hover */
  }
 
 
@@ -411,7 +431,7 @@ section {
     margin-top: 0;
     margin-bottom: var(--space-sm);
     color: var(--secondary-color);
-    font-size: 1.5rem;
+    font-size: 1.4rem; /* Slightly smaller */
     font-weight: 700;
     line-height: 1.4;
     word-break: break-word;
@@ -422,7 +442,7 @@ section {
 /* Paragraph text within cards - Set to RTL */
 .card p {
     margin-bottom: var(--space-md);
-    font-size: 1.05rem;
+    font-size: 1rem; /* Slightly smaller */
     color: var(--text-color);
     flex-grow: 1;
     line-height: 1.7;
@@ -432,7 +452,7 @@ section {
 
 /* Meta info within cards - Set to RTL as requested */
 .card .card-meta {
-     font-size: 1rem;
+     font-size: 0.95rem; /* Slightly smaller */
      color: var(--text-color-light);
      margin-bottom: var(--space-sm);
      font-weight: 500;
@@ -465,7 +485,7 @@ section {
 }
 
 .card .card-links a {
-     font-size: 1.05rem;
+     font-size: 1rem; /* Adjusted size */
      white-space: nowrap;
      font-weight: 500;
      display: inline-flex;
@@ -479,41 +499,68 @@ section {
        text-align: left;
        color: var(--primary-color); /* Use primary color for links */
        text-decoration: none; /* Remove default underline */
+       border: 1px solid var(--primary-color); /* Added subtle border to links */
 }
  .card .card-links a:hover, .card .card-links a:focus-visible {
-     background-color: #e9ecef;
-     color: var(--primary-color);
+     background-color: var(--primary-color); /* Fill background on hover */
+     color: white;
      transform: translateY(-2px); /* Subtle lift on hover */
-     text-decoration: underline; /* Add underline on hover */
+     text-decoration: none; /* Remove underline on hover */
+     box-shadow: 0 2px 5px var(--shadow-color-light);
  }
+  .card .card-links a:hover i, .card .card-links a:focus-visible i {
+      color: white; /* White icon on hover */
+  }
  .card .card-links a i {
       margin-right: var(--space-xs);
       margin-left: 0;
-      font-size: 1rem;
+      font-size: 0.9rem; /* Slightly smaller icon */
       color: var(--primary-color); /* Use primary color for icons */
- }
- .card .card-links a:hover i, .card .card-links a:focus-visible i {
-     color: var(--primary-color); /* Keep icon color on hover */
+      transition: color var(--transition-duration-short) var(--transition-easing-standard); /* Added color transition for icon */
  }
 
 
  /* Style for Featured Card (Highlight) - Enhanced highlight effect */
  .card.is-featured {
      border-color: var(--highlight-color);
-     box-shadow: 0 10px 30px var(--shadow-color-medium), 0 0 15px var(--highlight-color);
-     transform: scale(1.03) rotateZ(-1deg); /* Softer initial transform */
-     background-color: #fffbe6; /* Keep light yellow background */
+     box-shadow: 0 8px 25px var(--shadow-color-medium), 0 0 10px var(--highlight-color);
+     transform: scale(1.01) rotateZ(-0.5deg); /* Softer initial transform */
+     background-color: #fffef5; /* Keep light yellow background, slightly adjusted */
  }
   .card.is-featured::before {
       background-color: var(--highlight-color);
   }
   .card.is-featured:hover {
-     transform: translateY(-18px) rotateX(6deg) rotateY(6deg) scale(1.04); /* More pronounced hover transform */
-      box-shadow: 0 30px 70px var(--shadow-color-strong), 0 0 30px var(--highlight-color); /* Enhanced hover shadow */
+     transform: translateY(-12px) rotateX(3deg) rotateY(3deg) scale(1.02); /* More pronounced hover transform */
+      box-shadow: 0 20px 50px var(--shadow-color-strong), 0 0 20px var(--highlight-color); /* Enhanced hover shadow */
   }
    .card.is-featured:focus-within {
-       box-shadow: 0 0 0 3px var(--highlight-color), 0 0 0 6px rgba(255, 193, 7, 0.5), 0 10px 30px var(--shadow-color-medium);
+       box-shadow: 0 0 0 3px var(--highlight-color), 0 0 0 6px rgba(255, 193, 7, 0.5), 0 8px 25px var(--shadow-color-medium);
    }
+
+
+/* Style for Mention Card icon placeholder */
+.mention-icon-placeholder {
+     width: calc(100% + var(--space-md) * 2);
+     margin: calc(-1 * var(--space-md)) calc(-1 * var(--space-md)) var(--space-md) calc(-1 * var(--space-md));
+     height: 100px; /* Fixed height */
+     background-color: #e9ecef; /* Placeholder background */
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     overflow: hidden;
+     border-bottom: 1px solid var(--border-color);
+      border-top-left-radius: var(--border-radius-md);
+     border-top-right-radius: var(--border-radius-md);
+     font-size: 3rem;
+     color: var(--primary-color);
+}
+ .mention-icon-placeholder i {
+     transition: transform var(--transition-duration-medium) var(--transition-easing-springy);
+ }
+ .card:hover .mention-icon-placeholder i {
+     transform: scale(1.1) rotate(5deg);
+ }
 
 
 /* --- Skills Section --- */
@@ -654,6 +701,7 @@ section {
       outline: none;
       direction: rtl;
       text-align: right;
+      border: 1px solid var(--border-color); /* Added border to timeline content */
 }
  .timeline li:hover .timeline-content, .timeline li:focus-within .timeline-content {
       transform: translateY(-5px); /* Softer lift */
@@ -825,7 +873,7 @@ section {
       top: var(--space-xs);
       right: var(--space-md);
       left: auto;
-      opacity: 0.15;
+      opacity: 0.1; /* Slightly less opaque */
       font-family: serif;
        z-index: 0;
   }
@@ -851,11 +899,13 @@ section {
       font-size: 1rem;
        direction: rtl;
    }
-   .testimonial-item .author span {
+   .testimonial-item .author-title { /* Added style for author title */
        font-weight: 400;
        font-size: 0.9rem;
        color: var(--text-color-light);
         direction: rtl;
+        display: block;
+        margin-top: var(--space-xxs);
    }
 
 
@@ -878,20 +928,22 @@ section {
      max-width: 900px;
      margin: 0 auto;
      align-items: flex-start;
-     direction: ltr;
+     direction: ltr; /* Keep LTR for layout, RTL handled within elements */
 }
 
 .connect-info-block {
      flex: 1;
      min-width: 280px;
+     direction: rtl; /* Set RTL for content within */
+     text-align: right;
 }
  .connect-info-block p {
       font-size: 1.15rem;
       margin-bottom: var(--space-md);
-      color: #333;
+      color: var(--text-color);
       line-height: 1.8;
       max-width: none;
-      margin-left: 0; margin-right: 0;
+      margin-left: 0; margin-right: auto; /* Adjust margin for RTL */
        direction: rtl;
        text-align: right;
  }
@@ -900,11 +952,12 @@ section {
 .contact-info {
      display: flex;
      flex-direction: column;
-     align-items: flex-start;
-     font-size: 1.3rem;
+     align-items: flex-start; /* Align items to the right in RTL block */
+     font-size: 1.2rem; /* Slightly smaller */
      font-weight: 500;
      color: var(--secondary-color);
      margin-bottom: var(--space-md);
+     direction: ltr; /* Keep LTR for the link format */
 }
  .contact-info a {
      margin-top: var(--space-sm);
@@ -921,7 +974,7 @@ section {
       text-align: left;
  }
  .contact-info a:hover, .contact-info a:focus-visible {
-     color: var(--primary-color);
+     color: var(--accent-color); /* Change color on hover */
      text-decoration: underline;
      transform: translateX(5px); /* Subtle slide on hover */
  }
@@ -935,7 +988,7 @@ section {
  }
  .contact-info a:hover i, .contact-info a:focus-visible i {
      transform: scale(1.1); /* Subtle scale on hover */
-     color: var(--primary-color);
+     color: var(--primary-color); /* Change icon color on hover */
  }
 
  #connect .location-edu {
@@ -962,10 +1015,12 @@ section {
 .connect-links-block {
      flex: 1;
      min-width: 250px;
+     direction: ltr; /* Keep LTR for layout */
+     text-align: left;
 }
  .connect-links-block h3 {
      font-family: 'Montserrat', sans-serif;
-     font-size: 1.5rem;
+     font-size: 1.4rem; /* Adjusted size */
      color: var(--secondary-color);
      margin-top: 0;
      margin-bottom: var(--space-lg);
@@ -984,7 +1039,7 @@ section {
 
  .connect-links-block ul li {
      margin: 0;
-     font-size: 1.15rem;
+     font-size: 1.1rem; /* Adjusted size */
      display: flex;
      align-items: center;
      padding: var(--space-xs) 0;
@@ -1065,20 +1120,25 @@ section {
          padding: var(--space-xl);
      }
      section h2 {
-         font-size: 2.6rem;
+         font-size: 2.4rem; /* Adjusted size */
      }
      .tagline {
-         font-size: 1.5rem;
-     }
-      #about p {
-         font-size: 1.15rem;
-     }
-     .card h3 {
          font-size: 1.4rem;
      }
+      #about p {
+         font-size: 1.1rem; /* Adjusted size */
+         max-width: 700px; /* Adjusted width */
+     }
+     .card h3 {
+         font-size: 1.3rem; /* Adjusted size */
+     }
       .card p {
-          font-size: 1rem;
+          font-size: 0.95rem; /* Adjusted size */
       }
+      .card .card-meta {
+          font-size: 0.9rem; /* Adjusted size */
+      }
+
 
      /* Connect Section */
      .connect-content {
@@ -1087,19 +1147,21 @@ section {
      }
      .connect-info-block { min-width: 250px; }
       .connect-info-block p { direction: rtl; text-align: right;}
-     .connect-links-block { min-width: 200px; }
-      .connect-links-block h3 { font-size: 1.4rem; }
-      .connect-links-block ul li { font-size: 1.1rem; }
-       .contact-info { align-items: flex-start; }
+     .contact-info { font-size: 1.1rem; } /* Adjusted size */
        .contact-info a { direction: ltr; text-align: left; flex-direction: row;}
        .contact-info a:hover, .contact-info a:focus-visible { transform: translateX(0);}
        .contact-info i { margin-right: var(--space-sm); margin-left: 0;}
-       #connect .location-edu { direction: rtl; text-align: right;}
+
+     .connect-links-block { min-width: 200px; }
+      .connect-links-block h3 { font-size: 1.3rem; } /* Adjusted size */
+      .connect-links-block ul li { font-size: 1rem; } /* Adjusted size */
+       .connect-links-block ul li a { direction: ltr; text-align: left;}
+       .connect-links-block ul li i { margin-right: var(--space-md); margin-left: 0;}
+
+
+      #connect .location-edu { direction: rtl; text-align: right;}
         #connect .location-edu i { margin-right: var(--space-xs); margin-left: 0;}
          #connect .location-edu i:last-child { margin-right: var(--space-md); margin-left: 0;}
-       .connect-links-block ul li { justify-content: flex-start;}
-        .connect-links-block ul li a { direction: ltr; text-align: left;}
-         .connect-links-block ul li i { margin-right: var(--space-md); margin-left: 0;}
 
 
 }
@@ -1131,14 +1193,16 @@ section {
      }
 
     /* Hero */
-    h1 { font-size: 3.5rem; letter-spacing: -1px; }
-     section h2 { font-size: 2.2rem; }
-    .tagline { font-size: 1.4rem; }
+    h1 { font-size: 3rem; letter-spacing: 0; } /* Adjusted size and spacing */
+     section h2 { font-size: 2rem; } /* Adjusted size */
+     section h2::after { width: 80px; height: 4px;} /* Adjusted size */
+    .tagline { font-size: 1.3rem; } /* Adjusted size */
     .profile-image {
-        width: 150px; height: 150px; border-width: 6px;
-        box-shadow: 0 8px 20px var(--shadow-color-medium); /* Adjusted shadow for mobile */
+        width: 130px; height: 130px; border-width: 5px; /* Adjusted size and border */
+        box-shadow: 0 6px 15px var(--shadow-color-medium); /* Adjusted shadow for mobile */
     }
      #hero { padding-bottom: var(--space-xxl); margin-bottom: var(--section-margin-bottom); text-align: center; direction: ltr;}
+     #hero::before { background: none; } /* Remove gradient on mobile for simplicity */
 
 
      /* General Sections */
@@ -1149,9 +1213,9 @@ section {
      }
       section::after {
          bottom: calc(var(--section-v-padding) * -1 - 1px);
-         width: 150px;
+         width: 120px; /* Adjusted width */
       }
-     section h2::after { width: 120px; }
+
 
     /* Cards */
     .grid-container {
@@ -1166,40 +1230,45 @@ section {
          text-align: left;
      }
       .card:hover {
-         transform: translateY(-8px) !important;
-          box-shadow: 0 10px 30px var(--shadow-color-medium);
+         transform: translateY(-5px) !important; /* Softer lift on mobile */
+          box-shadow: 0 8px 25px var(--shadow-color-medium);
       }
-       .card::before { height: 4px; }
+       .card::before { height: 3px; } /* Thinner border on mobile */
         .card.is-featured {
-          transform: rotateZ(-1deg) !important;
-           box-shadow: 0 6px 20px var(--shadow-color-medium), 0 0 10px var(--highlight-color);
-           background-color: #fffbe6;
+          transform: rotateZ(-0.5deg) !important; /* Softer initial transform */
+           box-shadow: 0 6px 20px var(--shadow-color-medium), 0 0 8px var(--highlight-color); /* Adjusted shadow */
+           background-color: #fffef5;
         }
          .card.is-featured:hover {
-             transform: translateY(-8px) rotateZ(-1deg) !important;
-             box-shadow: 0 10px 30px var(--shadow-color-medium), 0 0 15px var(--highlight-color);
+             transform: translateY(-5px) rotateZ(-0.5deg) !important;
+             box-shadow: 0 10px 30px var(--shadow-color-medium), 0 0 12px var(--highlight-color); /* Adjusted shadow */
          }
 
      /* Project and Content Image Placeholders Mobile */
      .project-image-placeholder, .content-image-placeholder {
-         height: 160px; /* Adjusted height for mobile */
+         height: 140px; /* Adjusted height for mobile */
          width: calc(100% + var(--space-md) * 2);
          margin: calc(-1 * var(--space-md)) calc(-1 * var(--space-md)) var(--space-md) calc(-1 * var(--space-md));
      }
+     .mention-icon-placeholder {
+         height: 80px; /* Adjusted height */
+         font-size: 2.5rem; /* Adjusted size */
+     }
 
 
-     .card h3 { font-size: 1.3rem; direction: rtl; text-align: right;}
-     .card p { font-size: 0.95rem; direction: rtl; text-align: right;}
+     .card h3 { font-size: 1.2rem; direction: rtl; text-align: right;} /* Adjusted size */
+     .card p { font-size: 0.9rem; direction: rtl; text-align: right;} /* Adjusted size */
      /* Card Meta Mobile - Adjust direction and margins */
-     .card .card-meta { gap: var(--space-sm); direction: rtl; text-align: right; justify-content: flex-end;}
-      .card .card-meta i { margin-left: var(--space-xs); margin-right: 0;}
+     .card .card-meta { gap: var(--space-xs); direction: rtl; text-align: right; justify-content: flex-end; font-size: 0.85rem;} /* Adjusted size and gap */
+      .card .card-meta i { margin-left: var(--space-xxs); margin-right: 0;} /* Adjusted margin */
 
      .card .card-links { gap: var(--space-sm); margin-right: var(--space-sm); margin-left: 0; }
-      .card .card-links a { font-size: 0.95rem; padding: var(--space-xs) var(--space-sm); }
+      .card .card-links a { font-size: 0.9rem; padding: var(--space-xxs) var(--space-sm); } /* Adjusted size and padding */
+
 
     /* Skills */
-     #skills .skills-list li { padding: var(--space-xs) var(--space-sm); font-size: 0.9rem; }
-      #skills .skills-list li i { margin-right: var(--space-xs); margin-left: 0; }
+     #skills .skills-list li { padding: var(--space-xs) var(--space-sm); font-size: 0.85rem; } /* Adjusted size and padding */
+      #skills .skills-list li i { margin-right: var(--space-xxs); margin-left: 0; } /* Adjusted margin */
 
 
     /* Timeline (Single Column Mobile) */
@@ -1274,23 +1343,24 @@ section {
           border-color: transparent var(--border-color) transparent transparent;
           z-index: -1;
      }
-    .timeline-content h3 { font-size: 1.2rem; }
-     .timeline-content p { font-size: 0.95rem; direction: rtl; text-align: right;}
-     .timeline-content .date { font-size: 0.85rem; direction: ltr; text-align: left;}
+    .timeline-content h3 { font-size: 1.1rem; } /* Adjusted size */
+     .timeline-content p { font-size: 0.9rem; direction: rtl; text-align: right;} /* Adjusted size */
+     .timeline-content .date { font-size: 0.8rem; direction: ltr; text-align: left;} /* Adjusted size */
 
 
     /* Testimonials */
      .testimonial-slider { grid-template-columns: 1fr; }
      .testimonial-item { padding: var(--space-sm); direction: rtl; text-align: right; border-left: 4px solid var(--accent-color);}
-      .testimonial-item::before { font-size: 2.8em; right: var(--space-sm); left: auto;}
-     .testimonial-item p { font-size: 0.95rem; margin-top: var(--space-md); margin-bottom: var(--space-md); direction: rtl; text-align: right;}
-     .testimonial-item .author { font-size: 0.85rem; text-align: right; direction: rtl;}
-     .testimonial-item .author span { font-size: 0.75rem; direction: rtl;}
+      .testimonial-item::before { font-size: 2.5em; right: var(--space-sm); left: auto;} /* Adjusted size */
+     .testimonial-item p { font-size: 0.9rem; margin-top: var(--space-md); margin-bottom: var(--space-md); direction: rtl; text-align: right;} /* Adjusted size */
+     .testimonial-item .author { font-size: 0.8rem; text-align: right; direction: rtl;} /* Adjusted size */
+     .testimonial-item .author-title { font-size: 0.7rem; direction: rtl;} /* Adjusted size */
+
 
      /* Empty Testimonials State Mobile */
      .empty-testimonials-state { padding: var(--space-xl); }
-      .empty-testimonials-state .empty-icon { font-size: 2.5rem; }
-      .empty-testimonials-state p { font-size: 1rem; }
+      .empty-testimonials-state .empty-icon { font-size: 2rem; } /* Adjusted size */
+      .empty-testimonials-state p { font-size: 0.95rem; } /* Adjusted size */
 
 
     /* Connect Section (Stacked Mobile) */
@@ -1305,7 +1375,7 @@ section {
      }
       .connect-info-block { direction: rtl; text-align: right;}
       .connect-info-block p { text-align: center; direction: rtl;}
-      .contact-info { align-items: center; }
+      .contact-info { align-items: center; font-size: 1.1rem;} /* Adjusted size */
        .contact-info a { direction: ltr; text-align: left; flex-direction: row;}
        .contact-info a:hover, .contact-info a:focus-visible { transform: translateX(0);}
        .contact-info i { margin-right: var(--space-sm); margin-left: 0;}
@@ -1314,13 +1384,13 @@ section {
       .connect-links-block { direction: ltr; text-align: left;}
       .connect-links-block h3 { text-align: center; margin-bottom: var(--space-md); }
       .connect-links-block ul { gap: var(--space-xs); }
-     .connect-links-block ul li { font-size: 0.95rem; padding: var(--space-xxs) 0; justify-content: center;}
+     .connect-links-block ul li { font-size: 0.9rem; padding: var(--space-xxs) 0; justify-content: center;} /* Adjusted size */
      .connect-links-block ul li:last-child { border-bottom: none; }
      .connect-links-block ul li a { justify-content: center; direction: ltr; text-align: left;}
-      .connect-links-block ul li i { margin-right: var(--space-sm); margin-left: 0;}
+      .connect-links-block ul li i { margin-right: var(--space-sm); margin-left: 0;} /* Adjusted margin */
 
 
-      #connect .location-edu { font-size: 0.85rem; text-align: center; direction: rtl;}
+      #connect .location-edu { font-size: 0.8rem; text-align: center; direction: rtl;} /* Adjusted size */
        #connect .location-edu i { margin-right: var(--space-xs); margin-left: 0; }
         #connect .location-edu i:last-child { margin-right: var(--space-md); margin-left: 0;}
     }
