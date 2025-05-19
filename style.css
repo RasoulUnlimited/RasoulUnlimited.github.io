@@ -54,6 +54,12 @@
      --navbar-height: 80px;
 }
 
+/*
+  Style Sheet for Rasoul Unlimited's Official Digital Hub
+  Author: Mohammad Rasoul Sohrabi (Rasoul Unlimited)
+  Custom styles and variable definitions
+  */
+
 /* --- Base Styles --- */
 *, *::before, *::after {
     box-sizing: border-box;
@@ -276,6 +282,7 @@ section {
      padding-bottom: 0;
  }
 
+
 /* Creative Section Separator - Kept consistent */
  section::after {
     content: '';
@@ -343,13 +350,13 @@ section {
 }
 
 
-/* --- Card Grid Layout (Adding 3D Effect) --- */
+/* --- Card Grid Layout --- */
 .grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Slightly smaller min */
     gap: var(--space-lg);
     padding: 0;
-     perspective: 1000px;
+     /* Removed perspective for a flatter, more formal look */
      align-items: stretch;
 }
 
@@ -362,21 +369,22 @@ section {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: transform var(--transition-duration-medium) var(--transition-easing-springy), box-shadow var(--transition-duration-medium) var(--transition-easing-standard);
+    /* Adjusted transition for subtle hover effect */
+    transition: transform var(--transition-duration-medium) var(--transition-easing-standard), box-shadow var(--transition-duration-medium) var(--transition-easing-standard);
      text-align: left;
      overflow: hidden;
      position: relative;
-     transform-style: preserve-3d;
+     /* Removed transform-style */
      z-index: 1;
      outline: none;
      /* Added overflow hidden to prevent image overflow on hover transform */
      overflow: hidden;
 }
 
-/* Enhanced Card Hover Effect */
+/* Enhanced Card Hover Effect (Less 3D, More Subtle) */
 .card:hover {
-    transform: translateY(-10px) rotateX(2deg) rotateY(2deg) scale(1.01); /* More subtle 3D effect */
-    box-shadow: 0 18px 50px var(--shadow-color-strong), 0 0 10px var(--accent-color); /* Enhanced hover shadow */
+    transform: translateY(-8px); /* Subtle upward lift */
+    box-shadow: 0 15px 40px var(--shadow-color-strong); /* Enhanced hover shadow */
      z-index: 2;
 }
 
@@ -521,19 +529,21 @@ section {
  }
 
 
- /* Style for Featured Card (Highlight) - Enhanced highlight effect */
+ /* Style for Featured Card (Highlight) */
  .card.is-featured {
      border-color: var(--highlight-color);
      box-shadow: 0 8px 25px var(--shadow-color-medium), 0 0 10px var(--highlight-color);
-     transform: scale(1.01) rotateZ(-0.5deg); /* Softer initial transform */
+     /* Adjusted initial transform */
+     transform: translateY(0);
      background-color: #fffef5; /* Keep light yellow background, slightly adjusted */
  }
   .card.is-featured::before {
       background-color: var(--highlight-color);
   }
+  /* Enhanced Featured Card Hover Effect (Less 3D, More Subtle) */
   .card.is-featured:hover {
-     transform: translateY(-12px) rotateX(3deg) rotateY(3deg) scale(1.02); /* More pronounced hover transform */
-      box-shadow: 0 20px 50px var(--shadow-color-strong), 0 0 20px var(--highlight-color); /* Enhanced hover shadow */
+     transform: translateY(-10px); /* Subtle upward lift, slightly more than regular card */
+      box-shadow: 0 18px 50px var(--shadow-color-strong), 0 0 15px var(--highlight-color); /* Enhanced hover shadow */
   }
    .card.is-featured:focus-within {
        box-shadow: 0 0 0 3px var(--highlight-color), 0 0 0 6px rgba(255, 193, 7, 0.5), 0 8px 25px var(--shadow-color-medium);
@@ -1036,7 +1046,7 @@ section {
     display: grid; /* استفاده از گرید برای چینش */
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* چینش آیتم‌ها در ستون‌هایی با حداقل عرض ۱۵۰ پیکسل */
     gap: var(--space-md); /* فاصله بین آیتم‌ها در گرید */
-     justify-content: center; /* وسط چینش گرید در صورت نیاز */
+     justify-content: center; /* وسظ چینش گرید در صورت نیاز */
 }
 
 .connect-links-block ul li {
@@ -1242,14 +1252,16 @@ section {
       }
        .card::before { height: 3px; } /* Thinner border on mobile */
         .card.is-featured {
-          transform: rotateZ(-0.5deg) !important; /* Softer initial transform */
+          /* Removed initial transform rotation on mobile */
+           transform: translateY(0) !important;
            box-shadow: 0 6px 20px var(--shadow-color-medium), 0 0 8px var(--highlight-color); /* Adjusted shadow */
            background-color: #fffef5;
         }
          .card.is-featured:hover {
-             transform: translateY(-5px) rotateZ(-0.5deg) !important;
-             box-shadow: 10px 30px var(--shadow-color-medium), 0 0 12px var(--highlight-color); /* Adjusted shadow */
+             transform: translateY(-7px) !important; /* Slightly more lift than regular card on mobile */
+             box-shadow: 0 10px 30px var(--shadow-color-medium), 0 0 12px var(--highlight-color); /* Adjusted shadow */
          }
+
 
      /* Project and Content Image Placeholders Mobile */
      .project-image-placeholder, .content-image-placeholder {
