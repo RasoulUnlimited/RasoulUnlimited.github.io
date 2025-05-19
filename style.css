@@ -1028,65 +1028,71 @@ section {
  }
 
 
-.connect-links-block ul {
+ .connect-links-block ul {
     padding: 0;
     list-style-type: none;
     margin: 0;
-     display: flex;
-     flex-direction: column;
-     gap: var(--space-sm); /* Spacing between list items */
+    display: grid; /* استفاده از گرید برای چینش */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* چینش آیتم‌ها در ستون‌هایی با حداقل عرض ۱۵۰ پیکسل */
+    gap: var(--space-md); /* فاصله بین آیتم‌ها در گرید */
+     justify-content: center; /* وسظ چینش گرید در صورت نیاز */
 }
 
- .connect-links-block ul li {
-     margin: 0;
-     font-size: 1.1rem; /* Adjusted size */
-     display: flex;
-     align-items: center;
-     padding: var(--space-xs) 0;
-     border-bottom: 1px solid var(--border-color); /* Lighter border */
-     transition: background-color var(--transition-duration-short) var(--transition-easing-standard);
-      justify-content: flex-start;
-      /* Ensure list items are visible for AOS */
-     opacity: 1;
-     transform: none;
+.connect-links-block ul li {
+    margin: 0; /* Reset margin */
+    font-size: 1.05rem; /* Slightly smaller font */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* وسط چین کردن محتوای داخل هر آیتم */
+    padding: var(--space-sm); /* اضافه کردن پدینگ داخلی برای هر آیتم گرید */
+    border: 1px solid var(--border-color); /* اضافه کردن حاشیه به هر آیتم */
+    border-radius: var(--border-radius-sm); /* گرد کردن گوشه حاشیه */
+    transition: background-color var(--transition-duration-short) var(--transition-easing-standard), transform var(--transition-duration-short) var(--transition-easing-springy), box-shadow var(--transition-duration-short) var(--transition-easing-standard);
+     /* Ensure list items are visible for AOS */
+    opacity: 1;
+    transform: none;
+    /* background-color: transparent; /* یا این خط یا کلا حذف شود */
+    box-shadow: 0 2px 8px var(--shadow-color-light); /* سایه ملایم */
+     outline: none;
+}
+ .connect-links-block ul li:hover, .connect-links-block ul li:focus-within {
+      background-color: rgba(255, 255, 255, 0.5); /* پس زمینه نیمه شفاف سفید در هاور */
+      transform: translateY(-3px); /* لیفت شدن در هاور */
+      box-shadow: 0 4px 12px var(--shadow-color-medium); /* سایه کمی بیشتر در هاور */
  }
-  .connect-links-block ul li:hover, .connect-links-block ul li:focus-within {
-       background-color: #f8f9fa; /* Subtle background change on hover */
-  }
- .connect-links-block ul li:last-child { border-bottom: none; }
+ /* حذف استایل خط زیر آیتم آخر که در گرید نیازی نیست */
+ .connect-links-block ul li:last-child { } /* این بلاک خالی می‌ماند یا حذف می‌شود */
 
-
- .connect-links-block ul li i {
-     margin-right: var(--space-md);
-     margin-left: 0;
-     color: var(--accent-color);
-     width: 1em;
-     text-align: center;
-     transition: transform var(--transition-duration-short) var(--transition-easing-springy), color var(--transition-duration-short) var(--transition-easing-standard);
- }
- .connect-links-block ul li a:hover i, .connect-links-block ul li a:focus-visible i {
-     transform: scale(1.1); /* Subtle scale on hover */
-      color: var(--primary-color);
- }
+  /* استایل لینک داخل آیتم لیست */
  .connect-links-block ul li a {
       color: var(--secondary-color);
       text-decoration: none;
       font-weight: 500;
-       transition: color var(--transition-duration-short) var(--transition-easing-standard), text-decoration var(--transition-duration-short) var(--transition-easing-standard);
+       transition: color var(--transition-duration-short) var(--transition-easing-standard);
        display: flex;
        align-items: center;
        flex-grow: 1;
+       justify-content: center; /* وسط چین کردن محتوای لینک */
         outline: none;
-        padding: var(--space-xxs) 0;
-         direction: ltr;
-         text-align: left;
+        padding: 0; /* حذف پدینگ از خود لینک */
+        direction: ltr; /* حفظ جهت LTR برای لینک */
+         text-align: center; /* وسط چین متن لینک */
      }
-
-
- .connect-links-block ul li a:hover, .connect-links-block ul li a:focus-visible {
-      color: var(--primary-color); /* Primary color on hover */
-      text-decoration: underline;
- }
+  .connect-links-block ul li a:hover, .connect-links-block ul li a:focus-visible {
+       color: var(--primary-color); /* تغییر رنگ متن لینک در هاور */
+       text-decoration: none; /* عدم نمایش زیرخط در هاور */
+  }
+   .connect-links-block ul li i {
+       margin-right: var(--space-sm); /* فاصله آیکون از متن */
+       margin-left: 0;
+       color: var(--accent-color); /* رنگ آیکون */
+       width: 1em;
+       text-align: center;
+        transition: color var(--transition-duration-short) var(--transition-easing-standard);
+   }
+    .connect-links-block ul li a:hover i, .connect-links-block ul li a:focus-visible i {
+        color: var(--primary-color); /* تغییر رنگ آیکون در هاور */
+    }
 
 
 /* --- Footer --- */
