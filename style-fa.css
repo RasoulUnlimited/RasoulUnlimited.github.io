@@ -433,6 +433,34 @@ section {
      transform: scale(1.05); /* Subtle zoom on hover */
  }
 
+/* Lang Switch */
+
+.lang-switcher {
+    text-align: center;
+    margin: 10px 0;
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .lang-switcher .lang-link {
+    text-decoration: none;
+    color: #1a73e8;
+    padding: 4px 8px;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .lang-switcher .lang-link:hover {
+    color: #0b59d0;
+    text-decoration: underline;
+  }
+  
+  .lang-switcher .active {
+    font-weight: bold;
+    text-decoration: underline;
+    color: #000;
+  }
+
 
 /* Title within cards - Set to RTL */
 .card h3 {
