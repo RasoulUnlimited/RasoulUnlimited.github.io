@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml"> <url>
-        <loc>https://rasoulunlimited.github.io/</loc>
+        <loc>https://rasoulunlimited.ir/</loc>
         <lastmod>2025-05-17</lastmod>
         <changefreq>monthly</changefreq>
         <priority>1.0</priority>
         <xhtml:link
             rel="alternate"
             hreflang="en-US"
-            href="https://rasoulunlimited.github.io/en/" />
+            href="https://rasoulunlimited.ir/en/" />
         <xhtml:link
             rel="alternate"
             hreflang="fa-IR"
-            href="https://rasoulunlimited.github.io/" />
+            href="https://rasoulunlimited.ir/" />
     </url>
 
     <url>
-        <loc>https://rasoulunlimited.github.io/en/</loc>
+        <loc>https://rasoulunlimited.ir/en/</loc>
         <lastmod>2025-05-17</lastmod> <changefreq>monthly</changefreq>
         <priority>0.9</priority> <xhtml:link
             rel="alternate"
             hreflang="fa-IR"
-            href="https://rasoulunlimited.github.io/" />
+            href="https://rasoulunlimited.ir/" />
         <xhtml:link
             rel="alternate"
             hreflang="en-US"
-            href="https://rasoulunlimited.github.io/en/" />
+            href="https://rasoulunlimited.ir/en/" />
     </url>
 
 </urlset>
