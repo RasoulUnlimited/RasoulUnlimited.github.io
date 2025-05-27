@@ -1,7 +1,6 @@
 // Automatically update the current year in the footer
 document.getElementById('current-year').textContent = new Date().getFullYear();
 
-<script>
 AOS.init({
   // Global settings:
   disable: false,
@@ -22,4 +21,3 @@ AOS.init({
   mirror: false,
   anchorPlacement: "top-bottom",
 });
-</script>
