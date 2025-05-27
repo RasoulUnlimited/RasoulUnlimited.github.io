@@ -1,685 +1,1373 @@
 <!DOCTYPE html>
-<html lang="en"> <head>
+<html lang="en">
+  <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="google-site-verification" content="sI3YvXPMuU3icAsGNq50ESbsjBsZqBxuw_cA_pag7GU" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="google-site-verification"
+      content="sI3YvXPMuU3icAsGNq50ESbsjBsZqBxuw_cA_pag7GU"
+    />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
 
     <link rel="icon" type="image/png" href="../images/favicon.png" />
 
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap" as="style"/>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" as="style"/>
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style"/>
-  
-    <link rel="stylesheet" href="../style-en.css">
-    <style>
-      [data-aos][data-aos][data-aos-duration="50"],body[data-aos-duration="50"] [data-aos]{transition-duration:50ms}[data-aos][data-aos][data-aos-delay="50"],body[data-aos-delay="50"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="50"].aos-animate,body[data-aos-delay="50"] [data-aos].aos-animate{transition-delay:50ms}[data-aos][data-aos][data-aos-duration="100"],body[data-aos-duration="100"] [data-aos]{transition-duration:.1s}[data-aos][data-aos][data-aos-delay="100"],body[data-aos-delay="100"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="100"].aos-animate,body[data-aos-delay="100"] [data-aos].aos-animate{transition-delay:.1s}[data-aos][data-aos][data-aos-duration="150"],body[data-aos-duration="150"] [data-aos]{transition-duration:.15s}[data-aos][data-aos][data-aos-delay="150"],body[data-aos-delay="150"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="150"].aos-animate,body[data-aos-delay="150"] [data-aos].aos-animate{transition-delay:.15s}[data-aos][data-aos][data-aos-duration="200"],body[data-aos-duration="200"] [data-aos]{transition-duration:.2s}[data-aos][data-aos][data-aos-delay="200"],body[data-aos-delay="200"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="200"].aos-animate,body[data-aos-delay="200"] [data-aos].aos-animate{transition-delay:.2s}[data-aos][data-aos][data-aos-duration="250"],body[data-aos-duration="250"] [data-aos]{transition-duration:.25s}[data-aos][data-aos][data-aos-delay="250"],body[data-aos-delay="250"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="250"].aos-animate,body[data-aos-delay="250"] [data-aos].aos-animate{transition-delay:.25s}[data-aos][data-aos][data-aos-duration="300"],body[data-aos-duration="300"] [data-aos]{transition-duration:.3s}[data-aos][data-aos][data-aos-delay="300"],body[data-aos-delay="300"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="300"].aos-animate,body[data-aos-delay="300"] [data-aos].aos-animate{transition-delay:.3s}[data-aos][data-aos][data-aos-duration="350"],body[data-aos-duration="350"] [data-aos]{transition-duration:.35s}[data-aos][data-aos][data-aos-delay="350"],body[data-aos-delay="350"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="350"].aos-animate,body[data-aos-delay="350"] [data-aos].aos-animate{transition-delay:.35s}[data-aos][data-aos][data-aos-duration="400"],body[data-aos-duration="400"] [data-aos]{transition-duration:.4s}[data-aos][data-aos][data-aos-delay="400"],body[data-aos-delay="400"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="400"].aos-animate,body[data-aos-delay="400"] [data-aos].aos-animate{transition-delay:.4s}[data-aos][data-aos][data-aos-duration="450"],body[data-aos-duration="450"] [data-aos]{transition-duration:.45s}[data-aos][data-aos][data-aos-delay="450"],body[data-aos-delay="450"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="450"].aos-animate,body[data-aos-delay="450"] [data-aos].aos-animate{transition-delay:.45s}[data-aos][data-aos][data-aos-duration="500"],body[data-aos-duration="500"] [data-aos]{transition-duration:.5s}[data-aos][data-aos][data-aos-delay="500"],body[data-aos-delay="500"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="500"].aos-animate,body[data-aos-delay="500"] [data-aos].aos-animate{transition-delay:.5s}[data-aos][data-aos][data-aos-duration="550"],body[data-aos-duration="550"] [data-aos]{transition-duration:.55s}[data-aos][data-aos][data-aos-delay="550"],body[data-aos-delay="550"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="550"].aos-animate,body[data-aos-delay="550"] [data-aos].aos-animate{transition-delay:.55s}[data-aos][data-aos][data-aos-duration="600"],body[data-aos-duration="600"] [data-aos]{transition-duration:.6s}[data-aos][data-aos][data-aos-delay="600"],body[data-aos-delay="600"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="600"].aos-animate,body[data-aos-delay="600"] [data-aos].aos-animate{transition-delay:.6s}[data-aos][data-aos][data-aos-duration="650"],body[data-aos-duration="650"] [data-aos]{transition-duration:.65s}[data-aos][data-aos][data-aos-delay="650"],body[data-aos-delay="650"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="650"].aos-animate,body[data-aos-delay="650"] [data-aos].aos-animate{transition-delay:.65s}[data-aos][data-aos][data-aos-duration="700"],body[data-aos-duration="700"] [data-aos]{transition-duration:.7s}[data-aos][data-aos][data-aos-delay="700"],body[data-aos-delay="700"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="700"].aos-animate,body[data-aos-delay="700"] [data-aos].aos-animate{transition-delay:.7s}[data-aos][data-aos][data-aos-duration="750"],body[data-aos-duration="750"] [data-aos]{transition-duration:.75s}[data-aos][data-aos][data-aos-delay="750"],body[data-aos-delay="750"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="750"].aos-animate,body[data-aos-delay="750"] [data-aos].aos-animate{transition-delay:.75s}[data-aos][data-aos][data-aos-duration="800"],body[data-aos-duration="800"] [data-aos]{transition-duration:.8s}[data-aos][data-aos][data-aos-delay="800"],body[data-aos-delay="800"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="800"].aos-animate,body[data-aos-delay="800"] [data-aos].aos-animate{transition-delay:.8s}[data-aos][data-aos][data-aos-duration="850"],body[data-aos-duration="850"] [data-aos]{transition-duration:.85s}[data-aos][data-aos][data-aos-delay="850"],body[data-aos-delay="850"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="850"].aos-animate,body[data-aos-delay="850"] [data-aos].aos-animate{transition-delay:.85s}[data-aos][data-aos][data-aos-duration="900"],body[data-aos-duration="900"] [data-aos]{transition-duration:.9s}[data-aos][data-aos][data-aos-delay="900"],body[data-aos-delay="900"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="900"].aos-animate,body[data-aos-delay="900"] [data-aos].aos-animate{transition-delay:.9s}[data-aos][data-aos][data-aos-duration="950"],body[data-aos-duration="950"] [data-aos]{transition-duration:.95s}[data-aos][data-aos][data-aos-delay="950"],body[data-aos-delay="950"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="950"].aos-animate,body[data-aos-delay="950"] [data-aos].aos-animate{transition-delay:.95s}[data-aos][data-aos][data-aos-duration="1000"],body[data-aos-duration="1000"] [data-aos]{transition-duration:1s}[data-aos][data-aos][data-aos-delay="1000"],body[data-aos-delay="1000"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="1000"].aos-animate,body[data-aos-delay="1000"] [data-aos].aos-animate{transition-delay:1s}[data-aos][data-aos][data-aos-duration="1050"],body[data-aos-duration="1050"] [data-aos]{transition-duration:1.05s}[data-aos][data-aos][data-aos-delay="1050"],body[data-aos-delay="1050"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="1050"].aos-animate,body[data-aos-delay="1050"] [data-aos].aos-animate{transition-delay:1.05s}[data-aos][data-aos][data-aos-duration="1100"],body[data-aos-duration="1100"] [data-aos]{transition-duration:1.1s}[data-aos][data-aos][data-aos-delay="1100"],body[data-aos-delay="1100"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="1100"].aos-animate,body[data-aos-delay="1100"] [data-aos].aos-animate{transition-delay:1.1s}[data-aos][data-aos][data-aos-duration="1150"],body[data-aos-duration="1150"] [data-aos]{transition-duration:1.15s}[data-aos][data-aos][data-aos-delay="1150"],body[data-aos-delay="1150"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="1150"].aos-animate,body[data-aos-delay="1150"] [data-aos].aos-animate{transition-delay:1.15s}[data-aos][data-aos][data-aos-duration="1200"],body[data-aos-duration="1200"] [data-aos]{transition-duration:1.2s}[data-aos][data-aos][data-aos-delay="1200"],body[data-aos-delay="1200"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="1200"].aos-animate,body[data-aos-delay="1200"] [data-aos].aos-animate{transition-delay:1.2s}[data-aos][data-aos][data-aos-duration="1250"],body[data-aos-duration="1250"] [data-aos]{transition-duration:1.25s}[data-aos][data-aos][data-aos-delay="1250"],body[data-aos-delay="1250"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="1250"].aos-animate,body[data-aos-delay="1250"] [data-aos].aos-animate{transition-delay:1.25s}[data-aos][data-aos][data-aos-duration="1300"],body[data-aos-duration="1300"] [data-aos]{transition-duration:1.3s}[data-aos][data-aos][data-aos-delay="1300"],body[data-aos-delay="1300"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="1300"].aos-animate,body[data-aos-delay="1300"] [data-aos].aos-animate{transition-delay:1.3s}[data-aos][data-aos][data-aos-duration="1350"],body[data-aos-duration="1350"] [data-aos]{transition-duration:1.35s}[data-aos][data-aos][data-aos-delay="1350"],body[data-aos-delay="1350"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="1350"].aos-animate,body[data-aos-delay="1350"] [data-aos].aos-animate{transition-delay:1.35s}[data-aos][data-aos][data-aos-duration="1400"],body[data-aos-duration="1400"] [data-aos]{transition-duration:1.4s}[data-aos][data-aos][data-aos-delay="1400"],body[data-aos-delay="1400"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="1400"].aos-animate,body[data-aos-delay="1400"] [data-aos].aos-animate{transition-delay:1.4s}[data-aos][data-aos][data-aos-duration="1450"],body[data-aos-duration="1450"] [data-aos]{transition-duration:1.45s}[data-aos][data-aos][data-aos-delay="1450"],body[data-aos-delay="1450"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="1450"].aos-animate,body[data-aos-delay="1450"] [data-aos].aos-animate{transition-delay:1.45s}[data-aos][data-aos][data-aos-duration="1500"],body[data-aos-duration="1500"] [data-aos]{transition-duration:1.5s}[data-aos][data-aos][data-aos-delay="1500"],body[data-aos-delay="1500"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="1500"].aos-animate,body[data-aos-delay="1500"] [data-aos].aos-animate{transition-delay:1.5s}[data-aos][data-aos][data-aos-duration="1550"],body[data-aos-duration="1550"] [data-aos]{transition-duration:1.55s}[data-aos][data-aos][data-aos-delay="1550"],body[data-aos-delay="1550"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="1550"].aos-animate,body[data-aos-delay="1550"] [data-aos].aos-animate{transition-delay:1.55s}[data-aos][data-aos][data-aos-duration="1600"],body[data-aos-duration="1600"] [data-aos]{transition-duration:1.6s}[data-aos][data-aos][data-aos-delay="1600"],body[data-aos-delay="1600"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="1600"].aos-animate,body[data-aos-delay="1600"] [data-aos].aos-animate{transition-delay:1.6s}[data-aos][data-aos][data-aos-duration="1650"],body[data-aos-duration="1650"] [data-aos]{transition-duration:1.65s}[data-aos][data-aos][data-aos-delay="1650"],body[data-aos-delay="1650"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="1650"].aos-animate,body[data-aos-delay="1650"] [data-aos].aos-animate{transition-delay:1.65s}[data-aos][data-aos][data-aos-duration="1700"],body[data-aos-duration="1700"] [data-aos]{transition-duration:1.7s}[data-aos][data-aos][data-aos-delay="1700"],body[data-aos-delay="1700"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="1700"].aos-animate,body[data-aos-delay="1700"] [data-aos].aos-animate{transition-delay:1.7s}[data-aos][data-aos][data-aos-duration="1750"],body[data-aos-duration="1750"] [data-aos]{transition-duration:1.75s}[data-aos][data-aos][data-aos-delay="1750"],body[data-aos-delay="1750"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="1750"].aos-animate,body[data-aos-delay="1750"] [data-aos].aos-animate{transition-delay:1.75s}[data-aos][data-aos][data-aos-duration="1800"],body[data-aos-duration="1800"] [data-aos]{transition-duration:1.8s}[data-aos][data-aos][data-aos-delay="1800"],body[data-aos-delay="1800"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="1800"].aos-animate,body[data-aos-delay="1800"] [data-aos].aos-animate{transition-delay:1.8s}[data-aos][data-aos][data-aos-duration="1850"],body[data-aos-duration="1850"] [data-aos]{transition-duration:1.85s}[data-aos][data-aos][data-aos-delay="1850"],body[data-aos-delay="1850"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="1850"].aos-animate,body[data-aos-delay="1850"] [data-aos].aos-animate{transition-delay:1.85s}[data-aos][data-aos][data-aos-duration="1900"],body[data-aos-duration="1900"] [data-aos]{transition-duration:1.9s}[data-aos][data-aos][data-aos-delay="1900"],body[data-aos-delay="1900"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="1900"].aos-animate,body[data-aos-delay="1900"] [data-aos].aos-animate{transition-delay:1.9s}[data-aos][data-aos][data-aos-duration="1950"],body[data-aos-duration="1950"] [data-aos]{transition-duration:1.95s}[data-aos][data-aos][data-aos-delay="1950"],body[data-aos-delay="1950"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="1950"].aos-animate,body[data-aos-delay="1950"] [data-aos].aos-animate{transition-delay:1.95s}[data-aos][data-aos][data-aos-duration="2000"],body[data-aos-duration="2000"] [data-aos]{transition-duration:2s}[data-aos][data-aos][data-aos-delay="2000"],body[data-aos-delay="2000"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="2000"].aos-animate,body[data-aos-delay="2000"] [data-aos].aos-animate{transition-delay:2s}[data-aos][data-aos][data-aos-duration="2050"],body[data-aos-duration="2050"] [data-aos]{transition-duration:2.05s}[data-aos][data-aos][data-aos-delay="2050"],body[data-aos-delay="2050"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="2050"].aos-animate,body[data-aos-delay="2050"] [data-aos].aos-animate{transition-delay:2.05s}[data-aos][data-aos][data-aos-duration="2100"],body[data-aos-duration="2100"] [data-aos]{transition-duration:2.1s}[data-aos][data-aos][data-aos-delay="2100"],body[data-aos-delay="2100"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="2100"].aos-animate,body[data-aos-delay="2100"] [data-aos].aos-animate{transition-delay:2.1s}[data-aos][data-aos][data-aos-duration="2150"],body[data-aos-duration="2150"] [data-aos]{transition-duration:2.15s}[data-aos][data-aos][data-aos-delay="2150"],body[data-aos-delay="2150"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="2150"].aos-animate,body[data-aos-delay="2150"] [data-aos].aos-animate{transition-delay:2.15s}[data-aos][data-aos][data-aos-duration="2200"],body[data-aos-duration="2200"] [data-aos]{transition-duration:2.2s}[data-aos][data-aos][data-aos-delay="2200"],body[data-aos-delay="2200"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="2200"].aos-animate,body[data-aos-delay="2200"] [data-aos].aos-animate{transition-delay:2.2s}[data-aos][data-aos][data-aos-duration="2250"],body[data-aos-duration="2250"] [data-aos]{transition-duration:2.25s}[data-aos][data-aos][data-aos-delay="2250"],body[data-aos-delay="2250"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="2250"].aos-animate,body[data-aos-delay="2250"] [data-aos].aos-animate{transition-delay:2.25s}[data-aos][data-aos][data-aos-duration="2300"],body[data-aos-duration="2300"] [data-aos]{transition-duration:2.3s}[data-aos][data-aos][data-aos-delay="2300"],body[data-aos-delay="2300"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="2300"].aos-animate,body[data-aos-delay="2300"] [data-aos].aos-animate{transition-delay:2.3s}[data-aos][data-aos][data-aos-duration="2350"],body[data-aos-duration="2350"] [data-aos]{transition-duration:2.35s}[data-aos][data-aos][data-aos-delay="2350"],body[data-aos-delay="2350"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="2350"].aos-animate,body[data-aos-delay="2350"] [data-aos].aos-animate{transition-delay:2.35s}[data-aos][data-aos][data-aos-duration="2400"],body[data-aos-duration="2400"] [data-aos]{transition-duration:2.4s}[data-aos][data-aos][data-aos-delay="2400"],body[data-aos-delay="2400"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="2400"].aos-animate,body[data-aos-delay="2400"] [data-aos].aos-animate{transition-delay:2.4s}[data-aos][data-aos][data-aos-duration="2450"],body[data-aos-duration="2450"] [data-aos]{transition-duration:2.45s}[data-aos][data-aos][data-aos-delay="2450"],body[data-aos-delay="2450"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="2450"].aos-animate,body[data-aos-delay="2450"] [data-aos].aos-animate{transition-delay:2.45s}[data-aos][data-aos][data-aos-duration="2500"],body[data-aos-duration="2500"] [data-aos]{transition-duration:2.5s}[data-aos][data-aos][data-aos-delay="2500"],body[data-aos-delay="2500"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="2500"].aos-animate,body[data-aos-delay="2500"] [data-aos].aos-animate{transition-delay:2.5s}[data-aos][data-aos][data-aos-duration="2550"],body[data-aos-duration="2550"] [data-aos]{transition-duration:2.55s}[data-aos][data-aos][data-aos-delay="2550"],body[data-aos-delay="2550"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="2550"].aos-animate,body[data-aos-delay="2550"] [data-aos].aos-animate{transition-delay:2.55s}[data-aos][data-aos][data-aos-duration="2600"],body[data-aos-duration="2600"] [data-aos]{transition-duration:2.6s}[data-aos][data-aos][data-aos-delay="2600"],body[data-aos-delay="2600"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="2600"].aos-animate,body[data-aos-delay="2600"] [data-aos].aos-animate{transition-delay:2.6s}[data-aos][data-aos][data-aos-duration="2650"],body[data-aos-duration="2650"] [data-aos]{transition-duration:2.65s}[data-aos][data-aos][data-aos-delay="2650"],body[data-aos-delay="2650"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="2650"].aos-animate,body[data-aos-delay="2650"] [data-aos].aos-animate{transition-delay:2.65s}[data-aos][data-aos][data-aos-duration="2700"],body[data-aos-duration="2700"] [data-aos]{transition-duration:2.7s}[data-aos][data-aos][data-aos-delay="2700"],body[data-aos-delay="2700"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="2700"].aos-animate,body[data-aos-delay="2700"] [data-aos].aos-animate{transition-delay:2.7s}[data-aos][data-aos][data-aos-duration="2750"],body[data-aos-duration="2750"] [data-aos]{transition-duration:2.75s}[data-aos][data-aos][data-aos-delay="2750"],body[data-aos-delay="2750"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="2750"].aos-animate,body[data-aos-delay="2750"] [data-aos].aos-animate{transition-delay:2.75s}[data-aos][data-aos][data-aos-duration="2800"],body[data-aos-duration="2800"] [data-aos]{transition-duration:2.8s}[data-aos][data-aos][data-aos-delay="2800"],body[data-aos-delay="2800"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="2800"].aos-animate,body[data-aos-delay="2800"] [data-aos].aos-animate{transition-delay:2.8s}[data-aos][data-aos][data-aos-duration="2850"],body[data-aos-duration="2850"] [data-aos]{transition-duration:2.85s}[data-aos][data-aos][data-aos-delay="2850"],body[data-aos-delay="2850"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="2850"].aos-animate,body[data-aos-delay="2850"] [data-aos].aos-animate{transition-delay:2.85s}[data-aos][data-aos][data-aos-duration="2900"],body[data-aos-duration="2900"] [data-aos]{transition-duration:2.9s}[data-aos][data-aos][data-aos-delay="2900"],body[data-aos-delay="2900"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="2900"].aos-animate,body[data-aos-delay="2900"] [data-aos].aos-animate{transition-delay:2.9s}[data-aos][data-aos][data-aos-duration="2950"],body[data-aos-duration="2950"] [data-aos]{transition-duration:2.95s}[data-aos][data-aos][data-aos-delay="2950"],body[data-aos-delay="2950"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="2950"].aos-animate,body[data-aos-delay="2950"] [data-aos].aos-animate{transition-delay:2.95s}[data-aos][data-aos][data-aos-duration="3000"],body[data-aos-duration="3000"] [data-aos]{transition-duration:3s}[data-aos][data-aos][data-aos-delay="3000"],body[data-aos-delay="3000"] [data-aos]{transition-delay:0}[data-aos][data-aos][data-aos-delay="3000"].aos-animate,body[data-aos-delay="3000"] [data-aos].aos-animate{transition-delay:3s}[data-aos][data-aos][data-aos-easing=linear],body[data-aos-easing=linear] [data-aos]{transition-timing-function:cubic-bezier(.25,.25,.75,.75)}[data-aos][data-aos][data-aos-easing=ease],body[data-aos-easing=ease] [data-aos]{transition-timing-function:ease}[data-aos][data-aos][data-aos-easing=ease-in],body[data-aos-easing=ease-in] [data-aos]{transition-timing-function:ease-in}[data-aos][data-aos][data-aos-easing=ease-out],body[data-aos-easing=ease-out] [data-aos]{transition-timing-function:ease-out}[data-aos][data-aos][data-aos-easing=ease-in-out],body[data-aos-easing=ease-in-out] [data-aos]{transition-timing-function:ease-in-out}[data-aos][data-aos][data-aos-easing=ease-in-back],body[data-aos-easing=ease-in-back] [data-aos]{transition-timing-function:cubic-bezier(.6,-.28,.735,.045)}[data-aos][data-aos][data-aos-easing=ease-out-back],body[data-aos-easing=ease-out-back] [data-aos]{transition-timing-function:cubic-bezier(.175,.885,.32,1.275)}[data-aos][data-aos][data-aos-easing=ease-in-out-back],body[data-aos-easing=ease-in-out-back] [data-aos]{transition-timing-function:cubic-bezier(.68,-.55,.265,1.55)}[data-aos][data-aos][data-aos-easing=ease-in-sine],body[data-aos-easing=ease-in-sine] [data-aos]{transition-timing-function:cubic-bezier(.47,0,.745,.715)}[data-aos][data-aos][data-aos-easing=ease-out-sine],body[data-aos-easing=ease-out-sine] [data-aos]{transition-timing-function:cubic-bezier(.39,.575,.565,1)}[data-aos][data-aos][data-aos-easing=ease-in-out-sine],body[data-aos-easing=ease-in-out-sine] [data-aos]{transition-timing-function:cubic-bezier(.445,.05,.55,.95)}[data-aos][data-aos][data-aos-easing=ease-in-quad],body[data-aos-easing=ease-in-quad] [data-aos]{transition-timing-function:cubic-bezier(.55,.085,.68,.53)}[data-aos][data-aos][data-aos-easing=ease-out-quad],body[data-aos-easing=ease-out-quad] [data-aos]{transition-timing-function:cubic-bezier(.25,.46,.45,.94)}[data-aos][data-aos][data-aos-easing=ease-in-out-quad],body[data-aos-easing=ease-in-out-quad] [data-aos]{transition-timing-function:cubic-bezier(.455,.03,.515,.955)}[data-aos][data-aos][data-aos-easing=ease-in-cubic],body[data-aos-easing=ease-in-cubic] [data-aos]{transition-timing-function:cubic-bezier(.55,.085,.68,.53)}[data-aos][data-aos][data-aos-easing=ease-out-cubic],body[data-aos-easing=ease-out-cubic] [data-aos]{transition-timing-function:cubic-bezier(.25,.46,.45,.94)}[data-aos][data-aos][data-aos-easing=ease-in-out-cubic],body[data-aos-easing=ease-in-out-cubic] [data-aos]{transition-timing-function:cubic-bezier(.455,.03,.515,.955)}[data-aos][data-aos][data-aos-easing=ease-in-quart],body[data-aos-easing=ease-in-quart] [data-aos]{transition-timing-function:cubic-bezier(.55,.085,.68,.53)}[data-aos][data-aos][data-aos-easing=ease-out-quart],body[data-aos-easing=ease-out-quart] [data-aos]{transition-timing-function:cubic-bezier(.25,.46,.45,.94)}[data-aos][data-aos][data-aos-easing=ease-in-out-quart],body[data-aos-easing=ease-in-out-quart] [data-aos]{transition-timing-function:cubic-bezier(.455,.03,.515,.955)}[data-aos^=fade][data-aos^=fade]{opacity:0;transition-property:opacity,transform}[data-aos^=fade][data-aos^=fade].aos-animate{opacity:1;transform:translateZ(0)}[data-aos=fade-up]{transform:translate3d(0,100px,0)}[data-aos=fade-down]{transform:translate3d(0,-100px,0)}[data-aos=fade-right]{transform:translate3d(-100px,0,0)}[data-aos=fade-left]{transform:translate3d(100px,0,0)}[data-aos=fade-up-right]{transform:translate3d(-100px,100px,0)}[data-aos=fade-up-left]{transform:translate3d(100px,100px,0)}[data-aos=fade-down-right]{transform:translate3d(-100px,-100px,0)}[data-aos=fade-down-left]{transform:translate3d(100px,-100px,0)}[data-aos^=zoom][data-aos^=zoom]{opacity:0;transition-property:opacity,transform}[data-aos^=zoom][data-aos^=zoom].aos-animate{opacity:1;transform:translateZ(0) scale(1)}[data-aos=zoom-in]{transform:scale(.6)}[data-aos=zoom-in-up]{transform:translate3d(0,100px,0) scale(.6)}[data-aos=zoom-in-down]{transform:translate3d(0,-100px,0) scale(.6)}[data-aos=zoom-in-right]{transform:translate3d(-100px,0,0) scale(.6)}[data-aos=zoom-in-left]{transform:translate3d(100px,0,0) scale(.6)}[data-aos=zoom-out]{transform:scale(1.2)}[data-aos=zoom-out-up]{transform:translate3d(0,100px,0) scale(1.2)}[data-aos=zoom-out-down]{transform:translate3d(0,-100px,0) scale(1.2)}[data-aos=zoom-out-right]{transform:translate3d(-100px,0,0) scale(1.2)}[data-aos=zoom-out-left]{transform:translate3d(100px,0,0) scale(1.2)}[data-aos^=slide][data-aos^=slide]{transition-property:transform}[data-aos^=slide][data-aos^=slide].aos-animate{transform:translateZ(0)}[data-aos=slide-up]{transform:translate3d(0,100%,0)}[data-aos=slide-down]{transform:translate3d(0,-100%,0)}[data-aos=slide-right]{transform:translate3d(-100%,0,0)}[data-aos=slide-left]{transform:translate3d(100%,0,0)}[data-aos^=flip][data-aos^=flip]{backface-visibility:hidden;transition-property:transform}[data-aos=flip-left]{transform:perspective(2500px) rotateY(-100deg)}[data-aos=flip-left].aos-animate{transform:perspective(2500px) rotateY(0)}[data-aos=flip-right]{transform:perspective(2500px) rotateY(100deg)}[data-aos=flip-right].aos-animate{transform:perspective(2500px) rotateY(0)}[data-aos=flip-up]{transform:perspective(2500px) rotateX(-100deg)}[data-aos=flip-up].aos-animate{transform:perspective(2500px) rotateX(0)}[data-aos=flip-down]{transform:perspective(2500px) rotateX(100deg)}[data-aos=flip-down].aos-animate{transform:perspective(2500px) rotateX(0)}
-    </style>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap"
+      as="style"
+    />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      as="style"
+    />
+    <link
+      rel="preload"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      as="style"
+    />
 
-    <meta http-equiv="Content-Security-Policy" content="
+    <link rel="stylesheet" href="../style-en.css" />
+    <link
+      rel="preload"
+      as="style"
+      href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript
+      ><link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
+    /></noscript>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="
     default-src 'self';
     script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://static.cloudflareinsights.com;
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net;
     font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com; 
     img-src 'self' data:;
     object-src 'none';
-    " />
+    "
+    />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta name="theme-color" content="#0f172a" />
 
     <title>Rasoul Unlimited | Mohammad Rasoul Sohrabi - Official Website</title>
-    <meta name="description" content="Explore the compelling digital presence of Mohammad Rasoul Sohrabi (Rasoul Unlimited), a biomedical engineering innovator, full-stack developer, and content strategist. Featuring a detailed timeline of academic and project milestones, impactful projects (like the first verified Persian Discord bot), reputable media mentions, and key skills showcasing his verifiable notability and expertise. Discover his contributions to open-source, content creation, and academic research."/>
-    <meta name="keywords" content="Mohammad Rasoul Sohrabi, Rasoul Unlimited, Biomedical Engineering, University of Tehran, Python Developer, Discord Bot, Persian Bot, Personal Branding, Karaj, Tehran, Software Engineer, Content Strategist, Media Mentions, Notability, Verification, GitHub, Virgool, LinkedIn, Telegram, MIT License, AOS, Scroll Animation, Wikidata, Q134503479, dev.to, ORCID, About.me, YouTube, Academic Research, Open Source, Project Management, Data Science, Bioinformatics"/>
-    <link rel="alternate" href="https://rasoulunlimited.ir/en/" hreflang="en-US" />
+
+    <link rel="canonical" href="https://rasoulunlimited.ir/en/" />
+
+    <meta
+      name="description"
+      content="Explore the compelling digital presence of Mohammad Rasoul Sohrabi (Rasoul Unlimited), a biomedical engineering innovator, full-stack developer, and content strategist. Featuring a detailed timeline of academic and project milestones, impactful projects (like the first verified Persian Discord bot), reputable media mentions, and key skills showcasing his verifiable notability and expertise. Discover his contributions to open-source, content creation, and academic research."
+    />
+    <meta
+      name="keywords"
+      content="Mohammad Rasoul Sohrabi, Rasoul Unlimited, Biomedical Engineering, University of Tehran, Python Developer, Discord Bot, Persian Bot, Personal Branding, Karaj, Tehran, Software Engineer, Content Strategist, Media Mentions, Notability, Verification, GitHub, Virgool, LinkedIn, Telegram, MIT License, AOS, Scroll Animation, Wikidata, Q134503479, dev.to, ORCID, About.me, YouTube, Academic Research, Open Source, Project Management, Data Science, Bioinformatics"
+    />
+    <link
+      rel="alternate"
+      href="https://rasoulunlimited.ir/en/"
+      hreflang="en-US"
+    />
     <link rel="alternate" href="https://rasoulunlimited.ir/" hreflang="fa-IR" />
-    <link rel="alternate" href="https://rasoulunlimited.ir/" hreflang="x-default" />
+    <link
+      rel="alternate"
+      href="https://rasoulunlimited.ir/"
+      hreflang="x-default"
+    />
 
-    <meta property="og:type" content="website"/>
-    <meta property="og:url" content="https://rasoulunlimited.ir/en/"/>
-    <meta property="og:title" content="Rasoul Unlimited | Mohammad Rasoul Sohrabi - Official Website"/>
-    <meta property="og:description" content="Explore the compelling digital presence of Mohammad Rasoul Sohrabi (Rasoul Unlimited), a biomedical engineering innovator, full-stack developer, and content strategist. Featuring a detailed timeline, impactful projects, verifiable media mentions, and key skills showcasing his verifiable notability and expertise."/>
-    <meta property="og:image" content="https://rasoulunlimited.ir/images/RasoulUnlimited.webp"/>
-    <meta property="og:image:alt" content="Mohammad Rasoul Sohrabi (Rasoul Unlimited) Profile Image"/>
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://rasoulunlimited.ir/en/" />
+    <meta
+      property="og:title"
+      content="Rasoul Unlimited | Mohammad Rasoul Sohrabi - Official Website"
+    />
+    <meta
+      property="og:description"
+      content="Explore the compelling digital presence of Mohammad Rasoul Sohrabi (Rasoul Unlimited), a biomedical engineering innovator, full-stack developer, and content strategist. Featuring a detailed timeline, impactful projects, verifiable media mentions, and key skills showcasing his verifiable notability and expertise."
+    />
+    <meta
+      property="og:image"
+      content="https://rasoulunlimited.ir/images/RasoulUnlimited.webp"
+    />
+    <meta
+      property="og:image:alt"
+      content="Mohammad Rasoul Sohrabi (Rasoul Unlimited) Profile Image"
+    />
 
-    <meta name="twitter:card" content="summary_large_image"/>
-    <meta name="twitter:site" content="@rasoulunlimited"/>
-    <meta name="twitter:title" content="Rasoul Unlimited | Mohammad Rasoul Sohrabi - Official Website"/>
-    <meta name="twitter:description" content="Explore the compelling digital presence of Mohammad Rasoul Sohrabi (Rasoul Unlimited), a biomedical engineering innovator, full-stack developer, and content strategist. Featuring a detailed timeline, impactful projects, verifiable media mentions, and key skills showcasing his verifiable notability and expertise." />
-    <meta name="twitter:image" content="https://rasoulunlimited.ir/images/RasoulUnlimited.webp"/>
-    <meta name="twitter:image:alt" content="Mohammad Rasoul Sohrabi (Rasoul Unlimited) Profile Image"/>
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@rasoulunlimited" />
+    <meta
+      name="twitter:title"
+      content="Rasoul Unlimited | Mohammad Rasoul Sohrabi - Official Website"
+    />
+    <meta
+      name="twitter:description"
+      content="Explore the compelling digital presence of Mohammad Rasoul Sohrabi (Rasoul Unlimited), a biomedical engineering innovator, full-stack developer, and content strategist. Featuring a detailed timeline, impactful projects, verifiable media mentions, and key skills showcasing his verifiable notability and expertise."
+    />
+    <meta
+      name="twitter:image"
+      content="https://rasoulunlimited.ir/images/RasoulUnlimited.webp"
+    />
+    <meta
+      name="twitter:image:alt"
+      content="Mohammad Rasoul Sohrabi (Rasoul Unlimited) Profile Image"
+    />
 
     <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "Person",
-          "@id": "https://rasoulunlimited.ir/#person",
-          "name": "Mohammad Rasoul Sohrabi",
-          "alternateName": "Rasoul Unlimited",
-          "url": "https://rasoulunlimited.ir/en/",
-          "image": "https://rasoulunlimited.ir/images/RasoulUnlimited.webp",
-          "identifier": "https://www.wikidata.org/wiki/Q134503479",
-          "disambiguatingDescription": "Iranian medical engineering student and creator of the first Persian Discord bot, Rasoul Unlimited.",
-          "birthDate": "2005-09-06",
-          "birthPlace": {
-            "@type": "Place",
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": "Tehran, Iran"
-            }
-          },
-          "homeLocation": {
-            "@type": "Place",
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": "Karaj, Iran"
-            }
-          },
-          "hasCredential": [
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "@id": "https://rasoulunlimited.ir/#person",
+        "name": "Mohammad Rasoul Sohrabi",
+        "alternateName": "Rasoul Unlimited",
+        "url": "https://rasoulunlimited.ir/en/",
+        "image": "https://rasoulunlimited.ir/images/RasoulUnlimited.webp",
+        "identifier": "https://www.wikidata.org/wiki/Q134503479",
+        "disambiguatingDescription": "Iranian medical engineering student and creator of the first Persian Discord bot, Rasoul Unlimited.",
+        "birthDate": "2005-09-06",
+        "birthPlace": {
+          "@type": "Place",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Tehran, Iran"
+          }
+        },
+        "homeLocation": {
+          "@type": "Place",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Karaj, Iran"
+          }
+        },
+        "hasCredential": [
           {
             "@type": "EducationalOccupationalCredential",
             "credentialCategory": "Student",
             "name": "Medical engineering student",
             "competencyRequired": "Medical engineering"
           }
-          ],
-          "sameAs": [
-            "https://www.instagram.com/Rasoul.Unlimited",
-            "https://virgool.io/@RasoulUnlimited",
-            "https://rasoulunlimited.ir/",
-            "https://www.linkedin.com/in/rasoulunlimited/",
-            "https://github.com/RasoulUnlimited/",
-            "https://www.wikidata.org/wiki/Q134503479",
-            "https://rasoulunlimited.medium.com",
-            "https://dev.to/rasoulunlimited",
-            "https://t.me/RasoulUnlimited",
-            "https://orcid.org/0009-0004-7177-2080",
-            "https://about.me/rasoulunlimited",
-            "https://www.youtube.com/@RasoulUnlimited"
-          ],
-          "jobTitle": ["Biomedical Engineering Student", "Software Developer", "Designer", "Founder", "Content Strategist"],
-          "alumniOf": {
-            "@type": "EducationalOrganization",
-            "name": "University of Tehran",
-            "url": "https://ctb.iau.ir"
-          },
-          "affiliation": {
+        ],
+        "sameAs": [
+          "https://www.instagram.com/Rasoul.Unlimited",
+          "https://virgool.io/@RasoulUnlimited",
+          "https://rasoulunlimited.ir/",
+          "https://www.linkedin.com/in/rasoulunlimited/",
+          "https://github.com/RasoulUnlimited/",
+          "https://www.wikidata.org/wiki/Q134503479",
+          "https://rasoulunlimited.medium.com",
+          "https://dev.to/rasoulunlimited",
+          "https://t.me/RasoulUnlimited",
+          "https://orcid.org/0009-0004-7177-2080",
+          "https://about.me/rasoulunlimited",
+          "https://www.youtube.com/@RasoulUnlimited"
+        ],
+        "jobTitle": [
+          "Biomedical Engineering Student",
+          "Software Developer",
+          "Designer",
+          "Founder",
+          "Content Strategist"
+        ],
+        "alumniOf": {
+          "@type": "EducationalOrganization",
+          "name": "University of Tehran",
+          "url": "https://ctb.iau.ir"
+        },
+        "affiliation": {
+          "@type": "Organization",
+          "name": "University of Tehran",
+          "url": "https://ctb.iau.ir",
+          "location": {
+            "@type": "Place",
+            "name": "Tehran, Iran"
+          }
+        },
+        "knowsAbout": [
+          "Biomedical Engineering",
+          "Software Development",
+          "Web Development",
+          "Python",
+          "JavaScript",
+          "C Programming",
+          "Digital Health",
+          "Personal Branding",
+          "Karate",
+          "Discord Bot Development",
+          "Persian Bot",
+          "Academic Projects",
+          "Open Source",
+          "MIT License",
+          "React",
+          "React Native",
+          "SQL",
+          "Node.js",
+          "Machine Learning",
+          "Mobile App Development",
+          "UI/UX Design",
+          "Figma",
+          "Adobe XD"
+        ],
+        "memberOf": [
+          {
             "@type": "Organization",
-            "name": "University of Tehran",
-            "url": "https://ctb.iau.ir", 
-            "location": {
-              "@type": "Place",
-              "name": "Tehran, Iran"
+            "name": "Biomedical Engineering Association (University of Tehran)"
+          }
+        ],
+        "funder": {
+          "@type": "Organization",
+          "name": "University of Tehran",
+          "url": "https://ctb.iau.ir"
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://rasoulunlimited.ir/en/"
+        }
+      }
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "url": "https://rasoulunlimited.ir/en/",
+        "name": "Rasoul Unlimited | Mohammad Rasoul Sohrabi",
+        "description": "Official Website and Portfolio of Mohammad Rasoul Sohrabi (Rasoul Unlimited), an Iranian software developer, content strategist, and biomedical engineering student.",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://rasoulunlimited.ir/en/?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "CreativeWorkSeries",
+        "name": "Rasoul Unlimited",
+        "alternateName": "رسول آنلیمیتد",
+        "url": "https://rasoulunlimited.ir/",
+        "creator": {
+          "@type": "Person",
+          "@id": "https://rasoulunlimited.ir/#person",
+          "name": "Mohammad Rasoul Sohrabi",
+          "url": "https://www.wikidata.org/wiki/Q134503479"
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://rasoulunlimited.ir/en/"
+        },
+        "description": "Rasoul Unlimited is a personal creative and technological brand led by Mohammad Rasoul Sohrabi, focused on software development, digital health, content strategy, and personal growth.",
+        "inLanguage": ["en"],
+        "keywords": [
+          "Rasoul Unlimited",
+          "رسول آنلیمیتد",
+          "Persian Bot",
+          "Personal Brand",
+          "Software Development",
+          "Biomedical Engineering"
+        ],
+        "hasPart": [
+          {
+            "@type": "SoftwareSourceCode",
+            "name": "Persian Bot (First Persian Discord Bot)",
+            "description": "The first independent Persian-language Discord bot officially verified by Discord.",
+            "url": "https://top.gg/bot/735403725132136510",
+            "creator": {
+              "@type": "Person",
+              "@id": "https://rasoulunlimited.ir/#person",
+              "name": "Mohammad Rasoul Sohrabi"
             }
           },
-          "knowsAbout": ["Biomedical Engineering", "Software Development", "Web Development", "Python", "JavaScript", "C Programming", "Digital Health", "Personal Branding", "Karate", "Discord Bot Development", "Persian Bot", "Academic Projects", "Open Source", "MIT License", "React", "React Native", "SQL", "Node.js", "Machine Learning", "Mobile App Development", "UI/UX Design", "Figma", "Adobe XD"],
-          "memberOf": [
-            {
+          {
+            "@type": "SoftwareSourceCode",
+            "name": "Small projects with C",
+            "description": "Collection of small programming projects in C developed for University of Tehran.",
+            "url": "https://github.com/RasoulUnlimited/Small-projects-with-c",
+            "codeRepository": "https://github.com/RasoulUnlimited/Small-projects-with-c",
+            "programmingLanguage": "C",
+            "license": "MIT",
+            "creator": {
+              "@type": "Person",
+              "@id": "https://rasoulunlimited.ir/#person",
+              "name": "Mohammad Rasoul Sohrabi"
+            }
+          },
+          {
+            "@type": "SoftwareSourceCode",
+            "name": "Small projects with Python",
+            "description": "Collection of small programming projects in Python developed in collaboration with Sahand University of Technology, Tabriz.",
+            "url": "https://github.com/RasoulUnlimited/Small-projects-with-python",
+            "codeRepository": "https://github.com/RasoulUnlimited/Small-projects-with-python",
+            "programmingLanguage": "Python",
+            "license": "MIT",
+            "creator": {
+              "@type": "Person",
+              "@id": "https://rasoulunlimited.ir/#person",
+              "name": "Mohammad Rasoul Sohrabi"
+            }
+          },
+          {
+            "@type": "Article",
+            "name": "Mohammad Rasoul Sohrabi (Unlimited) - From Tatami to Technology",
+            "headline": "Mohammad Rasoul Sohrabi (Unlimited) - From Tatami to Technology",
+            "image": [
+              "https://rasoulunlimited.ir/images/placeholder-content-virgool1.webp"
+            ],
+            "author": {
+              "@type": "Person",
+              "@id": "https://rasoulunlimited.ir/#person",
+              "name": "Mohammad Rasoul Sohrabi"
+            },
+            "url": "https://vrgl.ir/9D6Hy",
+            "publisher": {
               "@type": "Organization",
-              "name": "Biomedical Engineering Association (University of Tehran)"
+              "name": "Virgool",
+              "url": "https://virgool.io/"
             }
-          ],
-          "funder": { 
-            "@type": "Organization",
-            "name": "University of Tehran",
-            "url": "https://ctb.iau.ir"
           },
-          "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https://rasoulunlimited.ir/en/"
-          }
-        }
-        </script>
-        
-        <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "WebSite",
-          "url": "https://rasoulunlimited.ir/en/",
-          "name": "Rasoul Unlimited | Mohammad Rasoul Sohrabi",
-          "description": "Official Website and Portfolio of Mohammad Rasoul Sohrabi (Rasoul Unlimited), an Iranian software developer, content strategist, and biomedical engineering student.",
-          "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://rasoulunlimited.ir/en/?q={search_term_string}",
-            "query-input": "required name=search_term_string"
-          }
-        }
-        </script>
-        
-        <script type="application/ld+json">
-            {
-              "@context": "https://schema.org",
-              "@type": "CreativeWorkSeries",
-              "name": "Rasoul Unlimited",
-              "alternateName": "رسول آنلیمیتد",
-              "url": "https://rasoulunlimited.ir/",
-              "creator": {
-                "@type": "Person",
-                "@id": "https://rasoulunlimited.ir/#person",
-                "name": "Mohammad Rasoul Sohrabi",
-                "url": "https://www.wikidata.org/wiki/Q134503479"
-              },
-              "mainEntityOfPage": {
-                "@type": "WebPage",
-                "@id": "https://rasoulunlimited.ir/en/"
-              },
-              "description": "Rasoul Unlimited is a personal creative and technological brand led by Mohammad Rasoul Sohrabi, focused on software development, digital health, content strategy, and personal growth.",
-              "inLanguage": ["en"],
-              "keywords": [
-                "Rasoul Unlimited", "رسول آنلیمیتد", "Persian Bot", "Personal Brand", "Software Development", "Biomedical Engineering"
-              ],
-              "hasPart": [
-                {
-                  "@type": "SoftwareSourceCode",
-                  "name": "Persian Bot (First Persian Discord Bot)",
-                  "description": "The first independent Persian-language Discord bot officially verified by Discord.",
-                  "url": "https://top.gg/bot/735403725132136510",
-                  "creator": {
-                    "@type": "Person",
-                    "@id": "https://rasoulunlimited.ir/#person",
-                    "name": "Mohammad Rasoul Sohrabi"
-                  }
-                },
-                {
-                  "@type": "SoftwareSourceCode",
-                  "name": "Small projects with C",
-                  "description": "Collection of small programming projects in C developed for University of Tehran.",
-                  "url": "https://github.com/RasoulUnlimited/Small-projects-with-c",
-                  "codeRepository": "https://github.com/RasoulUnlimited/Small-projects-with-c",
-                  "programmingLanguage": "C",
-                  "license": "MIT",
-                  "creator": {
-                    "@type": "Person",
-                    "@id": "https://rasoulunlimited.ir/#person",
-                    "name": "Mohammad Rasoul Sohrabi"
-                  }
-                },
-                {
-                  "@type": "SoftwareSourceCode",
-                  "name": "Small projects with Python",
-                  "description": "Collection of small programming projects in Python developed in collaboration with Sahand University of Technology, Tabriz.",
-                  "url": "https://github.com/RasoulUnlimited/Small-projects-with-python",
-                  "codeRepository": "https://github.com/RasoulUnlimited/Small-projects-with-python",
-                  "programmingLanguage": "Python",
-                  "license": "MIT",
-                  "creator": {
-                    "@type": "Person",
-                    "@id": "https://rasoulunlimited.ir/#person",
-                    "name": "Mohammad Rasoul Sohrabi"
-                  }
-                },
-                {
-                  "@type": "Article",
-                  "name": "Mohammad Rasoul Sohrabi (Unlimited) - From Tatami to Technology",
-                  "headline": "Mohammad Rasoul Sohrabi (Unlimited) - From Tatami to Technology",
-                  "image": [
-                  "https://rasoulunlimited.ir/images/placeholder-content-virgool1.webp"
-                   ],
-                  "author": {
-                    "@type": "Person",
-                    "@id": "https://rasoulunlimited.ir/#person",
-                    "name": "Mohammad Rasoul Sohrabi"
-                  },
-                  "url": "https://vrgl.ir/9D6Hy",
-                  "publisher": {
-                    "@type": "Organization",
-                    "name": "Virgool",
-                    "url": "https://virgool.io/"
-                  }
-                },
-                {
-                  "@type": "Article",
-                  "name": "How to Build a Genuine Personal Brand in Today’s Noisy World | The Story of Rasoul Unlimited",
-                  "headline": "How to Build a Genuine Personal Brand in Today’s Noisy World | The Story of Rasoul Unlimited",
-                  "image": [
-                  "https://rasoulunlimited.ir/images/placeholder-content-virgool2.webp"
-                   ],
-                  "author": {
-                    "@type": "Person",
-                    "@id": "https://rasoulunlimited.ir/#person",
-                    "name": "Mohammad Rasoul Sohrabi"
-                  },
-                  "url": "https://vrgl.ir/cUmcv",
-                  "publisher": {
-                    "@type": "Organization",
-                    "name": "Virgool",
-                    "url": "https://virgool.io/"
-                  }
-                },
-                {
-                  "@type": "Article",
-                  "name": "«I am not a brand, I am a journey» | A fresh perspective on personal branding in the age of fleeting attention.",
-                  "headline": "«I am not a brand, I am a journey» | A fresh perspective on personal branding in the age of fleeting attention.",
-                  "image": [
-                  "https://rasoulunlimited.ir/images/placeholder-content-virgool3.webp"
-                   ],
-                  "author": {
-                    "@type": "Person",
-                    "@id": "https://rasoulunlimited.ir/#person",
-                    "name": "Mohammad Rasoul Sohrabi"
-                  },
-                  "url": "https://vrgl.ir/CKXlz",
-                  "publisher": {
-                    "@type": "Organization",
-                    "name": "Virgool",
-                    "url": "https://virgool.io/"
-                  }
-                },
-                {
-                  "@type": "Article",
-                  "name": "How to Build a Genuine Personal Brand in Today’s Noisy World",
-                  "headline": "How to Build a Genuine Personal Brand in Today’s Noisy World",
-                  "image": [
-                  "https://rasoulunlimited.ir/images/placeholder-content-medium.webp"
-                   ],
-                  "author": {
-                    "@type": "Person",
-                    "@id": "https://rasoulunlimited.ir/#person",
-                    "name": "Mohammad Rasoul Sohrabi"
-                  },
-                  "url": "https://rasoulunlimited.medium.com/how-to-build-a-genuine-personal-brand-in-todays-noisy-world-c2adb129e623",
-                  "identifier": "https://www.wikidata.org/wiki/Q134546786",
-                  "publisher": {
-                    "@type": "Organization",
-                    "name": "Medium",
-                    "url": "https://medium.com"
-                  }
-                },
-                {
-                  "@type": "Article",
-                  "name": "How to Build a Genuine Personal Brand in Today’s Noisy World",
-                  "headline": "How to Build a Genuine Personal Brand in Today’s Noisy World",
-                  "image": [
-                  "https://rasoulunlimited.ir/images/placeholder-content-devto.webp"
-                   ],
-                  "author": {
-                    "@type": "Person",
-                    "@id": "https://rasoulunlimited.ir/#person",
-                    "name": "Mohammad Rasoul Sohrabi"
-                  },
-                  "url": "https://dev.to/rasoulunlimited/how-to-build-a-genuine-personal-brand-in-todays-noisy-world-31k",
-                  "publisher": {
-                    "@type": "Organization",
-                    "name": "Dev.to",
-                    "url": "https://dev.to"
-                  }
-                },
-                {
-                  "@type": "CreativeWork",
-                  "name": "Official Verification of First Persian Discord Bot by Discord",
-                  "description": "Recognized by Discord for creating the first verified Persian Discord bot, enhancing community engagement for Farsi speakers.",
-                  "creator": {
-                    "@type": "Person",
-                    "@id": "https://rasoulunlimited.ir/#person",
-                    "name": "Mohammad Rasoul Sohrabi"
-                  }
-                }
-              ]
+          {
+            "@type": "Article",
+            "name": "How to Build a Genuine Personal Brand in Today’s Noisy World | The Story of Rasoul Unlimited",
+            "headline": "How to Build a Genuine Personal Brand in Today’s Noisy World | The Story of Rasoul Unlimited",
+            "image": [
+              "https://rasoulunlimited.ir/images/placeholder-content-virgool2.webp"
+            ],
+            "author": {
+              "@type": "Person",
+              "@id": "https://rasoulunlimited.ir/#person",
+              "name": "Mohammad Rasoul Sohrabi"
+            },
+            "url": "https://vrgl.ir/cUmcv",
+            "publisher": {
+              "@type": "Organization",
+              "name": "Virgool",
+              "url": "https://virgool.io/"
             }
-            </script>
-
-</head>
-<body>
-
+          },
+          {
+            "@type": "Article",
+            "name": "«I am not a brand, I am a journey» | A fresh perspective on personal branding in the age of fleeting attention.",
+            "headline": "«I am not a brand, I am a journey» | A fresh perspective on personal branding in the age of fleeting attention.",
+            "image": [
+              "https://rasoulunlimited.ir/images/placeholder-content-virgool3.webp"
+            ],
+            "author": {
+              "@type": "Person",
+              "@id": "https://rasoulunlimited.ir/#person",
+              "name": "Mohammad Rasoul Sohrabi"
+            },
+            "url": "https://vrgl.ir/CKXlz",
+            "publisher": {
+              "@type": "Organization",
+              "name": "Virgool",
+              "url": "https://virgool.io/"
+            }
+          },
+          {
+            "@type": "Article",
+            "name": "How to Build a Genuine Personal Brand in Today’s Noisy World",
+            "headline": "How to Build a Genuine Personal Brand in Today’s Noisy World",
+            "image": [
+              "https://rasoulunlimited.ir/images/placeholder-content-medium.webp"
+            ],
+            "author": {
+              "@type": "Person",
+              "@id": "https://rasoulunlimited.ir/#person",
+              "name": "Mohammad Rasoul Sohrabi"
+            },
+            "url": "https://rasoulunlimited.medium.com/how-to-build-a-genuine-personal-brand-in-todays-noisy-world-c2adb129e623",
+            "identifier": "https://www.wikidata.org/wiki/Q134546786",
+            "publisher": {
+              "@type": "Organization",
+              "name": "Medium",
+              "url": "https://medium.com"
+            }
+          },
+          {
+            "@type": "Article",
+            "name": "How to Build a Genuine Personal Brand in Today’s Noisy World",
+            "headline": "How to Build a Genuine Personal Brand in Today’s Noisy World",
+            "image": [
+              "https://rasoulunlimited.ir/images/placeholder-content-devto.webp"
+            ],
+            "author": {
+              "@type": "Person",
+              "@id": "https://rasoulunlimited.ir/#person",
+              "name": "Mohammad Rasoul Sohrabi"
+            },
+            "url": "https://dev.to/rasoulunlimited/how-to-build-a-genuine-personal-brand-in-todays-noisy-world-31k",
+            "publisher": {
+              "@type": "Organization",
+              "name": "Dev.to",
+              "url": "https://dev.to"
+            }
+          },
+          {
+            "@type": "CreativeWork",
+            "name": "Official Verification of First Persian Discord Bot by Discord",
+            "description": "Recognized by Discord for creating the first verified Persian Discord bot, enhancing community engagement for Farsi speakers.",
+            "creator": {
+              "@type": "Person",
+              "@id": "https://rasoulunlimited.ir/#person",
+              "name": "Mohammad Rasoul Sohrabi"
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
     <div class="navbar">
-        <nav data-aos="fade-down">
-            <a href="#hero">Home</a>
-            <a href="#about">About</a>
-            <a href="#timeline">Journey</a>
-            <a href="#skills">Skills</a>
-            <a href="#projects">Projects</a>
-            <a href="#content">Content</a>
-            <a href="#mentions">Mentions</a>
-            <a href="#testimonials">Testimonials</a>
-            <a href="#connect">Connect</a>
-            <a href="https://rasoulunlimited.ir/" class="lang-switcher" aria-label="Switch to Persian"><i class="fas fa-language" aria-hidden="true"></i> فارسی</a>
-        </nav>
+      <nav data-aos="fade-down">
+        <a href="#hero">Home</a>
+        <a href="#about">About</a>
+        <a href="#timeline">Journey</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#content">Content</a>
+        <a href="#mentions">Mentions</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#connect">Connect</a>
+        <a
+          href="https://rasoulunlimited.ir/"
+          class="lang-switcher"
+          aria-label="Switch to Persian"
+          ><i class="fas fa-language" aria-hidden="true"></i> فارسی</a
+        >
+      </nav>
     </div>
 
     <div class="container">
-        <div class="content-area" data-aos="fade-up">
+      <div class="content-area" data-aos="fade-up">
+        <main>
+          <section
+            id="hero"
+            data-aos="fade-zoom-in"
+            data-aos-easing="ease-in-back"
+            data-aos-delay="300"
+          >
+            <img
+              src="../images/RasoulUnlimited.webp"
+              alt="Mohammad Rasoul Sohrabi Profile Image - Rasoul Unlimited"
+              class="profile-image"
+              aria-label="Mohammad Rasoul Sohrabi's Profile Picture"
+            />
+            <h1>Rasoul Unlimited | Mohammad Rasoul Sohrabi</h1>
+            <p class="tagline">
+              Biomedical Engineering Student, Developer & Brand Strategist
+            </p>
+          </section>
 
-            <main>
-                <section id="hero" data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="300">
-                     <img src="../images/RasoulUnlimited.webp" alt="Mohammad Rasoul Sohrabi Profile Image - Rasoul Unlimited" class="profile-image" aria-label="Mohammad Rasoul Sohrabi's Profile Picture"/>
-                     <h1>Rasoul Unlimited | Mohammad Rasoul Sohrabi</h1>
-                     <p class="tagline">Biomedical Engineering Student, Developer & Brand Strategist</p>
-                </section>
+          <section id="about" data-aos="fade-right">
+            <h2>About Me</h2>
+            <p>
+              Mohammad Rasoul Sohrabi, born on September 6, 2005, and known as
+              "Unlimited," is a unique blend of championship athlete (official
+              1st Dan Karate Federation), technical developer, and scientific
+              visionary. He is a Biomedical Engineering student at the
+              University of Tehran (Central Campus) and a member of the
+              university's Biomedical Engineering Scientific Association. He
+              believes that in today's noisy world, only the authentic voice is
+              heard. With an inherent drive to make an impact and an "unlimited"
+              mindset, from launching the first Discord Persian bot with
+              official Discord verification at the age of 14, to publishing
+              articles on Virgool, and participating in university projects, he
+              has aimed to leave his unique mark on everything he does. He seeks
+              to creatively combine biomedical engineering and programming to
+              bring about a revolution in digital health, taking steps beyond
+              his age.
+            </p>
+          </section>
 
-                <section id="about" data-aos="fade-right">
-                    <h2>About Me</h2>
-                    <p>
-                        Mohammad Rasoul Sohrabi, born on September 6, 2005, and known as "Unlimited," is a unique blend of championship athlete (official 1st Dan Karate Federation), technical developer, and scientific visionary. He is a Biomedical Engineering student at the University of Tehran (Central Campus) and a member of the university's Biomedical Engineering Scientific Association. He believes that in today's noisy world, only the authentic voice is heard.
-                        With an inherent drive to make an impact and an "unlimited" mindset, from launching the first Discord Persian bot with official Discord verification at the age of 14, to publishing articles on Virgool, and participating in university projects, he has aimed to leave his unique mark on everything he does. He seeks to creatively combine biomedical engineering and programming to bring about a revolution in digital health, taking steps beyond his age.
-                    </p>
-                </section>
+          <section id="timeline" data-aos="fade-up">
+            <h2>⏳ My Journey</h2>
+            <ul
+              class="timeline"
+              aria-label="Educational and Professional Timeline"
+            >
+              <li data-aos="fade-up">
+                <div class="timeline-content">
+                  <div class="timeline-icon">
+                    <i class="fas fa-birthday-cake" aria-hidden="true"></i>
+                  </div>
+                  <h3 class="date">September 6, 2005</h3>
+                  <h3>Birth</h3>
+                  <p>
+                    The starting point of my life and journey in this world.
+                  </p>
+                </div>
+              </li>
+              <li data-aos="fade-up">
+                <div class="timeline-content">
+                  <div class="timeline-icon">
+                    <i class="fas fa-medal" aria-hidden="true"></i>
+                  </div>
+                  <h3 class="date">Early Ages</h3>
+                  <h3>Began Competitive Karate & Achieved 1st Dan</h3>
+                  <p>
+                    A serious start in karate, developing a spirit of hard work
+                    and discipline through national competitions and achieving
+                    the official 1st Dan from the Karate Federation of the
+                    Islamic Republic of Iran.
+                  </p>
+                </div>
+              </li>
+              <li data-aos="fade-up">
+                <div class="timeline-content">
+                  <div class="timeline-icon">
+                    <i class="fab fa-discord" aria-hidden="true"></i>
+                  </div>
+                  <h3 class="date">2020 (Age 14)</h3>
+                  <h3>Developed the First Persian Discord Bot (Persian Bot)</h3>
+                  <p>
+                    The first independent Persian-language bot on the Discord
+                    platform, developed with a team of ten. This project, driven
+                    by a desire for innovation, received official verification
+                    from Discord, placing Iran's name among the platform's
+                    official developers for the first time.
+                  </p>
+                </div>
+              </li>
+              <li data-aos="fade-up">
+                <div class="timeline-content">
+                  <div class="timeline-icon">
+                    <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+                  </div>
+                  <h3 class="date">Fall 2023</h3>
+                  <h3>
+                    Began Studying Biomedical Engineering at University of
+                    Tehran
+                  </h3>
+                  <p>
+                    Enrolled at the University of Tehran (Central Campus) to
+                    study Biomedical Engineering, focusing on combining
+                    engineering and programming knowledge for the digital health
+                    sector.
+                  </p>
+                </div>
+              </li>
+              <li data-aos="fade-up">
+                <div class="timeline-content">
+                  <div class="timeline-icon">
+                    <i class="fas fa-code" aria-hidden="true"></i>
+                  </div>
+                  <h3 class="date">2024</h3>
+                  <h3>Developed C Programming Projects (University)</h3>
+                  <p>
+                    A collection of small programming projects developed in C as
+                    part of the first-semester courses at the University of
+                    Tehran. These projects are open-source and available on
+                    GitHub.
+                  </p>
+                  <div
+                    class="card-links"
+                    style="
+                      border-top: none;
+                      padding-top: 0;
+                      margin-top: var(--space-xs);
+                    "
+                  >
+                    <a
+                      href="https://github.com/RasoulUnlimited/Small-projects-with-c"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="View C projects on GitHub"
+                      ><i class="fab fa-github" aria-hidden="true"></i> View on
+                      GitHub</a
+                    >
+                  </div>
+                </div>
+              </li>
+              <li data-aos="fade-up">
+                <div class="timeline-content">
+                  <div class="timeline-icon">
+                    <i class="fab fa-python" aria-hidden="true"></i>
+                  </div>
+                  <h3 class="date">2024</h3>
+                  <h3>Developed Python Programming Projects (University)</h3>
+                  <p>
+                    A collection of small programming projects in Python
+                    developed in collaboration with Sahand University of
+                    Technology, Tabriz. I am the author of these projects, and
+                    they are licensed under the MIT License for public use and
+                    contribution.
+                  </p>
+                  <div
+                    class="card-links"
+                    style="
+                      border-top: none;
+                      padding-top: 0;
+                      margin-top: var(--space-xs);
+                    "
+                  >
+                    <a
+                      href="https://github.com/RasoulUnlimited/Small-projects-with-python"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="View Python projects on GitHub"
+                      ><i class="fab fa-python" aria-hidden="true"></i> View on
+                      GitHub</a
+                    >
+                  </div>
+                </div>
+              </li>
+              <li data-aos="fade-up">
+                <div class="timeline-content">
+                  <div class="timeline-icon">
+                    <i class="fas fa-feather-alt" aria-hidden="true"></i>
+                  </div>
+                  <h3 class="date">November 27, 2022</h3>
+                  <h3>Published First Introductory Article on Virgool</h3>
+                  <p>
+                    Published the article "Mohammad Rasoul Sohrabi (Unlimited) –
+                    From Tatami to Technology" as my first comprehensive digital
+                    introduction.
+                  </p>
+                </div>
+              </li>
+              <li data-aos="fade-up">
+                <div class="timeline-content">
+                  <div class="timeline-icon">
+                    <i class="fas fa-feather-alt" aria-hidden="true"></i>
+                  </div>
+                  <h3 class="date">April 23, 2023</h3>
+                  <h3>Published Personal Branding Article on Virgool</h3>
+                  <p>
+                    Published the article "How to Build a Genuine Personal Brand
+                    in Today’s Noisy World | The Story of Rasoul Unlimited,"
+                    which delves into my personal philosophy on personal
+                    branding and the meaning of the "Unlimited" moniker.
+                  </p>
+                </div>
+              </li>
+              <li data-aos="fade-up">
+                <div class="timeline-content">
+                  <div class="fas fa-stream" aria-hidden="true"></div>
+                  <h3 class="date">Present</h3>
+                  <h3>
+                    Focus on Digital Health, Development & Content Strategy
+                  </h3>
+                  <p>
+                    Continuing activities and focusing on combining biomedical
+                    engineering knowledge and programming to drive innovation in
+                    digital health, alongside content creation and social media
+                    management for greater impact.
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </section>
 
-                 <section id="timeline" data-aos="fade-up">
-                     <h2>⏳ My Journey</h2>
-                     <ul class="timeline" aria-label="Educational and Professional Timeline">
-                         <li data-aos="fade-up">
-                             <div class="timeline-content">
-                                  <div class="timeline-icon"><i class="fas fa-birthday-cake" aria-hidden="true"></i></div> <h3 class="date">September 6, 2005</h3>
-                                 <h3>Birth</h3>
-                                 <p>The starting point of my life and journey in this world.</p>
-                             </div>
-                         </li>
-                         <li data-aos="fade-up">
-                             <div class="timeline-content">
-                                  <div class="timeline-icon"><i class="fas fa-medal" aria-hidden="true"></i></div> <h3 class="date">Early Ages</h3>
-                                 <h3>Began Competitive Karate & Achieved 1st Dan</h3>
-                                 <p>A serious start in karate, developing a spirit of hard work and discipline through national competitions and achieving the official 1st Dan from the Karate Federation of the Islamic Republic of Iran.</p>
-                             </div>
-                         </li>
-                          <li data-aos="fade-up">
-                             <div class="timeline-content">
-                                  <div class="timeline-icon"><i class="fab fa-discord" aria-hidden="true"></i></div> <h3 class="date">2020 (Age 14)</h3>
-                                 <h3>Developed the First Persian Discord Bot (Persian Bot)</h3>
-                                 <p>The first independent Persian-language bot on the Discord platform, developed with a team of ten. This project, driven by a desire for innovation, received official verification from Discord, placing Iran's name among the platform's official developers for the first time.</p>
-                             </div>
-                         </li>
-                         <li data-aos="fade-up">
-                             <div class="timeline-content">
-                                  <div class="timeline-icon"><i class="fas fa-graduation-cap" aria-hidden="true"></i></div> <h3 class="date">Fall 2023</h3>
-                                 <h3>Began Studying Biomedical Engineering at University of Tehran</h3>
-                                 <p>Enrolled at the University of Tehran (Central Campus) to study Biomedical Engineering, focusing on combining engineering and programming knowledge for the digital health sector.</p>
-                             </div>
-                         </li>
-                           <li data-aos="fade-up">
-                                <div class="timeline-content">
-                                    <div class="timeline-icon"><i class="fas fa-code" aria-hidden="true"></i></div> <h3 class="date">2024</h3>
-                                    <h3>Developed C Programming Projects (University)</h3>
-                                    <p>A collection of small programming projects developed in C as part of the first-semester courses at the University of Tehran. These projects are open-source and available on GitHub.</p>
-                                     <div class="card-links" style="border-top: none; padding-top: 0; margin-top: var(--space-xs);">
-                                        <a href="https://github.com/RasoulUnlimited/Small-projects-with-c" target="_blank" rel="noopener noreferrer" aria-label="View C projects on GitHub"><i class="fab fa-github" aria-hidden="true"></i> View on GitHub</a>
-                                    </div>
-                                </div>
-                            </li>
-                             <li data-aos="fade-up">
-                                <div class="timeline-content">
-                                    <div class="timeline-icon"><i class="fab fa-python" aria-hidden="true"></i></div> <h3 class="date">2024</h3>
-                                     <h3>Developed Python Programming Projects (University)</h3>
-                                     <p>A collection of small programming projects in Python developed in collaboration with Sahand University of Technology, Tabriz. I am the author of these projects, and they are licensed under the MIT License for public use and contribution.</p>
-                                      <div class="card-links" style="border-top: none; padding-top: 0; margin-top: var(--space-xs);">
-                                        <a href="https://github.com/RasoulUnlimited/Small-projects-with-python" target="_blank" rel="noopener noreferrer" aria-label="View Python projects on GitHub"><i class="fab fa-python" aria-hidden="true"></i> View on GitHub</a>
-                                     </div>
-                                 </div>
-                            </li>
-                          <li data-aos="fade-up">
-                             <div class="timeline-content">
-                                  <div class="timeline-icon"><i class="fas fa-feather-alt" aria-hidden="true"></i></div> <h3 class="date">November 27, 2022</h3>
-                                 <h3>Published First Introductory Article on Virgool</h3>
-                                 <p>Published the article "Mohammad Rasoul Sohrabi (Unlimited) – From Tatami to Technology" as my first comprehensive digital introduction.</p>
-                             </div>
-                         </li>
-                          <li data-aos="fade-up">
-                             <div class="timeline-content">
-                                   <div class="timeline-icon"><i class="fas fa-feather-alt" aria-hidden="true"></i></div> <h3 class="date">April 23, 2023</h3>
-                                 <h3>Published Personal Branding Article on Virgool</h3>
-                                 <p>Published the article "How to Build a Genuine Personal Brand in Today’s Noisy World | The Story of Rasoul Unlimited," which delves into my personal philosophy on personal branding and the meaning of the "Unlimited" moniker.</p>
-                             </div>
-                         </li>
-                          <li data-aos="fade-up">
-                             <div class="timeline-content">
-                                  <div class="fas fa-stream" aria-hidden="true"></div> <h3 class="date">Present</h3>
-                                 <h3>Focus on Digital Health, Development & Content Strategy</h3>
-                                 <p>Continuing activities and focusing on combining biomedical engineering knowledge and programming to drive innovation in digital health, alongside content creation and social media management for greater impact.</p>
-                             </div>
-                         </li>
-                     </ul>
-                 </section>
+          <section id="skills" data-aos="fade-left">
+            <h2>🛠️ Skills & Technologies</h2>
+            <ul
+              class="skills-list"
+              aria-label="List of Skills and Technologies"
+            >
+              <li><i class="fas fa-code" aria-hidden="true"></i> Python</li>
+              <li><i class="fas fa-code" aria-hidden="true"></i> C</li>
+              <li><i class="fas fa-code" aria-hidden="true"></i> JavaScript</li>
+              <li>
+                <i class="fas fa-laptop-code" aria-hidden="true"></i> Web
+                Development (Frontend, Backend)
+              </li>
+              <li>
+                <i class="fas fa-server" aria-hidden="true"></i> Software
+                Engineering
+              </li>
+              <li>
+                <i class="fas fa-dna" aria-hidden="true"></i> Biomedical
+                Engineering
+              </li>
+              <li>
+                <i class="fas fa-heartbeat" aria-hidden="true"></i> Digital
+                Health
+              </li>
+              <li>
+                <i class="fas fa-pencil-alt" aria-hidden="true"></i> Content
+                Management
+              </li>
+              <li>
+                <i class="fas fa-bullhorn" aria-hidden="true"></i> Social Media
+                Management
+              </li>
+              <li>
+                <i class="fas fa-fist-raised" aria-hidden="true"></i> Karate
+                (Official 1st Dan)
+              </li>
+              <li>
+                <i class="fas fa-brain" aria-hidden="true"></i> Hard Work &
+                Discipline
+              </li>
+              <li>
+                <i class="fas fa-users" aria-hidden="true"></i> Teamwork
+                (Experience in 10-person team)
+              </li>
+              <li>
+                <i class="fas fa-search" aria-hidden="true"></i> Foresight &
+                Analysis
+              </li>
+              <li>
+                <i class="fas fa-language" aria-hidden="true"></i> English
+                (Fluent)
+              </li>
+              <li>
+                <i class="fas fa-language" aria-hidden="true"></i> Persian
+                (Native)
+              </li>
+              <li>
+                <i class="fab fa-react" aria-hidden="true"></i> React / React
+                Native
+              </li>
+              <li><i class="fas fa-database" aria-hidden="true"></i> SQL</li>
+              <li><i class="fas fa-server" aria-hidden="true"></i> Node.js</li>
+              <li>
+                <i class="fas fa-brain" aria-hidden="true"></i> Machine Learning
+              </li>
+              <li>
+                <i class="fas fa-mobile-alt" aria-hidden="true"></i> Mobile App
+                Development
+              </li>
+              <li>
+                <i class="fas fa-palette" aria-hidden="true"></i> UI/UX Design
+                (Figma, Adobe XD)
+              </li>
+              <li>
+                <i class="fas fa-code-branch" aria-hidden="true"></i> Academic &
+                Open Source Projects
+              </li>
+            </ul>
+          </section>
 
+          <section id="projects" data-aos="fade-up">
+            <h2>💻 Projects</h2>
+            <div class="grid-container">
+              <div class="card project-card is-featured" data-aos="fade-up">
+                <div class="project-image-placeholder">
+                  <img
+                    src="../images/placeholder-project.webp"
+                    alt="Persian Bot Project Image Placeholder"
+                  />
+                </div>
+                <h3>First Persian Discord Bot (Persian Bot)</h3>
+                <div class="card-meta">
+                  <span
+                    ><i class="fas fa-microchip" aria-hidden="true"></i>
+                    Language: Python</span
+                  >
+                  <span
+                    ><i class="fas fa-users" aria-hidden="true"></i> Team Size:
+                    10 people</span
+                  >
+                  <span
+                    ><i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                    Development Year: 2020 (at age 14)</span
+                  >
+                </div>
+                <p>
+                  The first independent Persian-language bot on the Discord
+                  platform, developed with a team of ten. This project, driven
+                  by a desire for innovation, received official verification
+                  from Discord, placing Iran's name among the platform's
+                  official developers for the first time.
+                </p>
 
-                 <section id="skills" data-aos="fade-left">
-                     <h2>🛠️ Skills & Technologies</h2>
-                     <ul class="skills-list" aria-label="List of Skills and Technologies">
-                         <li><i class="fas fa-code" aria-hidden="true"></i> Python</li>
-                          <li><i class="fas fa-code" aria-hidden="true"></i> C</li>
-                          <li><i class="fas fa-code" aria-hidden="true"></i> JavaScript</li>
-                         <li><i class="fas fa-laptop-code" aria-hidden="true"></i> Web Development (Frontend, Backend)</li>
-                         <li><i class="fas fa-server" aria-hidden="true"></i> Software Engineering</li>
-                         <li><i class="fas fa-dna" aria-hidden="true"></i> Biomedical Engineering</li>
-                         <li><i class="fas fa-heartbeat" aria-hidden="true"></i> Digital Health</li>
-                         <li><i class="fas fa-pencil-alt" aria-hidden="true"></i> Content Management</li>
-                         <li><i class="fas fa-bullhorn" aria-hidden="true"></i> Social Media Management</li>
-                         <li><i class="fas fa-fist-raised" aria-hidden="true"></i> Karate (Official 1st Dan)</li>
-                         <li><i class="fas fa-brain" aria-hidden="true"></i> Hard Work & Discipline</li>
-                         <li><i class="fas fa-users" aria-hidden="true"></i> Teamwork (Experience in 10-person team)</li>
-                          <li><i class="fas fa-search" aria-hidden="true"></i> Foresight & Analysis</li>
-                         <li><i class="fas fa-language" aria-hidden="true"></i> English (Fluent)</li>
-                         <li><i class="fas fa-language" aria-hidden="true"></i> Persian (Native)</li>
-                         <li><i class="fab fa-react" aria-hidden="true"></i> React / React Native</li>
-                         <li><i class="fas fa-database" aria-hidden="true"></i> SQL</li>
-                         <li><i class="fas fa-server" aria-hidden="true"></i> Node.js</li>
-                         <li><i class="fas fa-brain" aria-hidden="true"></i> Machine Learning</li>
-                         <li><i class="fas fa-mobile-alt" aria-hidden="true"></i> Mobile App Development</li>
-                         <li><i class="fas fa-palette" aria-hidden="true"></i> UI/UX Design (Figma, Adobe XD)</li>
-                         <li><i class="fas fa-code-branch" aria-hidden="true"></i> Academic & Open Source Projects</li>
-                     </ul>
-                 </section>
+                <div
+                  style="
+                    border-top: 1px solid var(--border-color);
+                    padding-top: var(--space-md);
+                    margin-top: var(--space-md);
+                  "
+                >
+                  <h4
+                    style="
+                      font-family: 'Montserrat', sans-serif;
+                      font-size: 1.1rem;
+                      color: var(--secondary-color);
+                      margin-top: 0;
+                      margin-bottom: var(--space-sm);
+                      text-align: left;
+                      direction: ltr;
+                    "
+                  >
+                    <i
+                      class="fas fa-link"
+                      aria-hidden="true"
+                      style="margin-right: var(--space-xs); margin-left: 0"
+                    ></i>
+                    Project Mentions on the Web:
+                  </h4>
+                  <div
+                    style="
+                      display: flex;
+                      flex-wrap: wrap;
+                      gap: var(--space-sm);
+                      justify-content: flex-start;
+                      direction: ltr;
+                    "
+                  >
+                    <a
+                      href="https://top.gg/bot/735403725132136510"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="View Persian Bot on Top.gg"
+                      >Top.gg</a
+                    >
+                    <a
+                      href="https://discordweb.ir/persian-bot-discord/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Read about Persian Bot on Discordweb.ir"
+                      >Discordweb.ir</a
+                    >
+                    <a
+                      href="https://www.aparat.com/v/AxQyY"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Watch video about Persian Bot on Aparat"
+                      >Aparat (Video)</a
+                    >
+                    <a
+                      href="https://alternative.me/discord/bots/persian-bot/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="View Persian Bot on Alternative.me"
+                      >Alternative.me</a
+                    >
+                  </div>
+                  <p
+                    style="
+                      font-size: 0.9rem;
+                      color: var(--text-color-light);
+                      margin-top: var(--space-sm);
+                      text-align: left;
+                      direction: ltr;
+                    "
+                  >
+                    Note: These links refer to platforms and content related to
+                    the project and are not necessarily independent media
+                    coverage.
+                  </p>
+                </div>
 
+                <div
+                  class="card-links"
+                  style="
+                    margin-top: var(--space-md);
+                    padding-top: var(--space-sm);
+                    border-top: 1px solid var(--border-color);
+                  "
+                >
+                  <a
+                    href="https://vrgl.ir/9D6Hy"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Read about the Discord Bot project"
+                    ><i class="fas fa-book-open" aria-hidden="true"></i> Project
+                    Introduction (Virgool Article)</a
+                  >
+                </div>
+              </div>
 
-                 <section id="projects" data-aos="fade-up">
-                     <h2>💻 Projects</h2>
-                     <div class="grid-container">
-                         <div class="card project-card is-featured" data-aos="fade-up">
-                              <div class="project-image-placeholder">
-                                  <img src="../images/placeholder-project.webp" alt="Persian Bot Project Image Placeholder"/>
-                              </div>
-                             <h3>First Persian Discord Bot (Persian Bot)</h3>
-                              <div class="card-meta">
-                                  <span><i class="fas fa-microchip" aria-hidden="true"></i> Language: Python</span>
-                                   <span><i class="fas fa-users" aria-hidden="true"></i> Team Size: 10 people</span>
-                                   <span><i class="fas fa-calendar-alt" aria-hidden="true"></i> Development Year: 2020 (at age 14)</span>
-                              </div>
-                             <p>The first independent Persian-language bot on the Discord platform, developed with a team of ten. This project, driven by a desire for innovation, received official verification from Discord, placing Iran's name among the platform's official developers for the first time.</p>
+              <div class="card project-card" data-aos="fade-up">
+                <div class="project-image-placeholder">
+                  <img
+                    src="../images/placeholder-code-c.webp"
+                    alt="C Projects Image Placeholder"
+                  />
+                </div>
+                <h3>C Programming Projects (University)</h3>
+                <div class="card-meta">
+                  <span
+                    ><i class="fas fa-building" aria-hidden="true"></i>
+                    University of Tehran (Central Campus)</span
+                  >
+                  <span
+                    ><i class="fas fa-code" aria-hidden="true"></i> Language:
+                    C</span
+                  >
+                  <span
+                    ><i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                    Year: 2024</span
+                  >
+                  <span
+                    ><i class="fas fa-code-branch" aria-hidden="true"></i>
+                    Open-Source with MIT License</span
+                  >
+                </div>
+                <p>
+                  A collection of small programming projects developed in C as
+                  part of the first-semester courses at the University of
+                  Tehran. These projects are open-source and available on
+                  GitHub.
+                </p>
+                <div class="card-links">
+                  <a
+                    href="https://github.com/RasoulUnlimited/Small-projects-with-c"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="View C projects on GitHub"
+                    ><i class="fab fa-github" aria-hidden="true"></i> View on
+                    GitHub</a
+                  >
+                </div>
+              </div>
 
-                             <div style="border-top: 1px solid var(--border-color); padding-top: var(--space-md); margin-top: var(--space-md);">
-                                 <h4 style="font-family: 'Montserrat', sans-serif; font-size: 1.1rem; color: var(--secondary-color); margin-top: 0; margin-bottom: var(--space-sm); text-align: left; direction: ltr;"><i class="fas fa-link" aria-hidden="true" style="margin-right: var(--space-xs); margin-left: 0;"></i> Project Mentions on the Web:</h4>
-                                 <div style="display: flex; flex-wrap: wrap; gap: var(--space-sm); justify-content: flex-start; direction: ltr;">
-                                     <a href="https://top.gg/bot/735403725132136510" target="_blank" rel="noopener noreferrer" aria-label="View Persian Bot on Top.gg">Top.gg</a>
-                                     <a href="https://discordweb.ir/persian-bot-discord/" target="_blank" rel="noopener noreferrer" aria-label="Read about Persian Bot on Discordweb.ir">Discordweb.ir</a>
-                                     <a href="https://www.aparat.com/v/AxQyY" target="_blank" rel="noopener noreferrer" aria-label="Watch video about Persian Bot on Aparat">Aparat (Video)</a>
-                                      <a href="https://alternative.me/discord/bots/persian-bot/" target="_blank" rel="noopener noreferrer" aria-label="View Persian Bot on Alternative.me">Alternative.me</a>
-                                 </div>
-                                <p style="font-size: 0.9rem; color: var(--text-color-light); margin-top: var(--space-sm); text-align: left; direction: ltr;">Note: These links refer to platforms and content related to the project and are not necessarily independent media coverage.</p>
-                             </div>
+              <div class="card project-card" data-aos="fade-up">
+                <div class="project-image-placeholder">
+                  <img
+                    src="../images/placeholder-code-python.webp"
+                    alt="Python Projects Image Placeholder"
+                  />
+                </div>
+                <h3>Python Programming Projects (University Collaboration)</h3>
+                <div class="card-meta">
+                  <span
+                    ><i class="fas fa-building" aria-hidden="true"></i> Sahand
+                    University of Technology, Tabriz (Collaboration)</span
+                  >
+                  <span
+                    ><i class="fas fa-code" aria-hidden="true"></i> Language:
+                    Python</span
+                  >
+                  <span
+                    ><i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                    Year: 2024</span
+                  >
+                  <span
+                    ><i class="fas fa-code-branch" aria-hidden="true"></i>
+                    Open-Source with MIT License</span
+                  >
+                </div>
+                <p>
+                  A collection of small programming projects in Python developed
+                  in collaboration with Sahand University of Technology, Tabriz.
+                  I am the author of these projects, and they are licensed under
+                  the MIT License for public use and contribution.
+                </p>
+                <div class="card-links">
+                  <a
+                    href="https://github.com/RasoulUnlimited/Small-projects-with-python"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="View Python projects on GitHub"
+                    ><i class="fab fa-python" aria-hidden="true"></i> View on
+                    GitHub</a
+                  >
+                </div>
+              </div>
+            </div>
+          </section>
 
-                              <div class="card-links" style="margin-top: var(--space-md); padding-top: var(--space-sm); border-top: 1px solid var(--border-color);">
-                                   <a href="https://vrgl.ir/9D6Hy" target="_blank" rel="noopener noreferrer" aria-label="Read about the Discord Bot project"><i class="fas fa-book-open" aria-hidden="true"></i> Project Introduction (Virgool Article)</a>
-                                   </div>
-                         </div>
+          <section id="content" data-aos="fade-right">
+            <h2>✍️ Featured Content</h2>
 
-                          <div class="card project-card" data-aos="fade-up">
-                              <div class="project-image-placeholder">
-                                  <img src="../images/placeholder-code-c.webp" alt="C Projects Image Placeholder"/>
-                              </div>
-                               <h3>C Programming Projects (University)</h3>
-                               <div class="card-meta">
-                                    <span><i class="fas fa-building" aria-hidden="true"></i> University of Tehran (Central Campus)</span>
-                                    <span><i class="fas fa-code" aria-hidden="true"></i> Language: C</span>
-                                    <span><i class="fas fa-calendar-alt" aria-hidden="true"></i> Year: 2024</span>
-                                    <span><i class="fas fa-code-branch" aria-hidden="true"></i> Open-Source with MIT License</span>
-                               </div>
-                               <p>A collection of small programming projects developed in C as part of the first-semester courses at the University of Tehran. These projects are open-source and available on GitHub.</p>
-                                <div class="card-links">
-                                     <a href="https://github.com/RasoulUnlimited/Small-projects-with-c" target="_blank" rel="noopener noreferrer" aria-label="View C projects on GitHub"><i class="fab fa-github" aria-hidden="true"></i> View on GitHub</a>
-                                    </div>
-                           </div>
+            <div class="grid-container">
+              <div class="card content-card is-featured" data-aos="fade-up">
+                <div class="content-image-placeholder">
+                  <img
+                    src="../images/placeholder-content-virgool1.webp"
+                    alt="Virgool Article Thumbnail Placeholder"
+                  />
+                </div>
+                <h3>
+                  Mohammad Rasoul Sohrabi (Unlimited) – From Tatami to
+                  Technology
+                </h3>
+                <div class="card-meta">
+                  <span
+                    ><i class="fas fa-tag" aria-hidden="true"></i> Platform:
+                    Virgool</span
+                  >
+                  <span
+                    ><i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                    Published: November 27, 2022</span
+                  >
+                </div>
+                <p>
+                  My first comprehensive introductory article on the Virgool
+                  platform. This article multi-facetedly explores my journey
+                  from competitive karate to entering the world of software
+                  development, biomedical engineering, and digital health,
+                  highlighting key milestones like the development of the first
+                  Discord Persian bot.
+                </p>
+                <div class="card-links">
+                  <a
+                    href="https://vrgl.ir/9D6Hy"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Read the article 'Mohammad Rasoul Sohrabi (Unlimited) – From Tatami to Technology' on Virgool"
+                    ><i class="fas fa-book-open" aria-hidden="true"></i> Read on
+                    Virgool</a
+                  >
+                </div>
+              </div>
 
-                            <div class="card project-card" data-aos="fade-up">
-                                 <div class="project-image-placeholder">
-                                  <img src="../images/placeholder-code-python.webp" alt="Python Projects Image Placeholder"/>
-                              </div>
-                               <h3>Python Programming Projects (University Collaboration)</h3>
-                               <div class="card-meta">
-                                    <span><i class="fas fa-building" aria-hidden="true"></i> Sahand University of Technology, Tabriz (Collaboration)</span>
-                                    <span><i class="fas fa-code" aria-hidden="true"></i> Language: Python</span>
-                                    <span><i class="fas fa-calendar-alt" aria-hidden="true"></i> Year: 2024</span>
-                                     <span><i class="fas fa-code-branch" aria-hidden="true"></i> Open-Source with MIT License</span>
-                               </div>
-                               <p>A collection of small programming projects in Python developed in collaboration with Sahand University of Technology, Tabriz. I am the author of these projects, and they are licensed under the MIT License for public use and contribution.</p>
-                                <div class="card-links">
-                                     <a href="https://github.com/RasoulUnlimited/Small-projects-with-python" target="_blank" rel="noopener noreferrer" aria-label="View Python projects on GitHub"><i class="fab fa-python" aria-hidden="true"></i> View on GitHub</a>
-                                      </div>
-                            </div>
+              <div class="card content-card is-featured" data-aos="fade-up">
+                <div class="content-image-placeholder">
+                  <img
+                    src="../images/placeholder-content-virgool2.webp"
+                    alt="Virgool Article Thumbnail Placeholder"
+                  />
+                </div>
+                <h3>
+                  How to Build a Genuine Personal Brand in Today’s Noisy World |
+                  The Story of Rasoul Unlimited
+                </h3>
+                <div class="card-meta">
+                  <span
+                    ><i class="fas fa-tag" aria-hidden="true"></i> Platform:
+                    Virgool</span
+                  >
+                  <span
+                    ><i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                    Published: April 23, 2023</span
+                  >
+                </div>
+                <p>
+                  This article delves into my personal philosophy on building a
+                  "genuine personal brand" in today's noisy world. It discusses
+                  the reasons behind choosing this path, the meaning of the
+                  "Unlimited" moniker, and my experiences in finding my own
+                  voice. This article is primarily a narrative from my
+                  perspective.
+                </p>
+                <div class="card-links">
+                  <a
+                    href="https://vrgl.ir/cUmcv"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Read the article 'How to Build a Genuine Personal Brand in Today’s Noisy World' on Virgool"
+                    ><i class="fas fa-book-open" aria-hidden="true"></i> Read on
+                    Virgool</a
+                  >
+                </div>
+              </div>
 
-                         </div>
-                 </section>
+              <div class="card content-card" data-aos="fade-up">
+                <div class="content-image-placeholder">
+                  <img
+                    src="../images/placeholder-content-medium.webp"
+                    alt="Medium Article Thumbnail Placeholder"
+                  />
+                </div>
+                <h3>
+                  How to Build a Genuine Personal Brand in Today’s Noisy World
+                </h3>
+                <div class="card-meta">
+                  <span
+                    ><i class="fas fa-tag" aria-hidden="true"></i> Platform:
+                    Medium</span
+                  >
+                  <span
+                    ><i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                    Published: May 14, 2025</span
+                  >
+                </div>
+                <p>
+                  This article shares insights into building a genuine personal
+                  brand, drawing from my journey as Rasoul Unlimited. It
+                  explores the meaning of personal branding, why it's important,
+                  and offers lessons learned along the way.
+                </p>
+                <div class="card-links">
+                  <a
+                    href="https://rasoulunlimited.medium.com/how-to-build-a-genuine-personal-brand-in-todays-noisy-world-c2adb129e623"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Read the article on Medium"
+                    ><i class="fab fa-medium" aria-hidden="true"></i> Read on
+                    Medium</a
+                  >
+                </div>
+              </div>
+              <div class="card content-card" data-aos="fade-up">
+                <div class="content-image-placeholder">
+                  <img
+                    src="../images/placeholder-content-devto.webp"
+                    alt="dev.to Article Thumbnail Placeholder"
+                  />
+                </div>
+                <h3>
+                  How to Build a Genuine Personal Brand in Today’s Noisy World
+                </h3>
+                <div class="card-meta">
+                  <span
+                    ><i class="fas fa-tag" aria-hidden="true"></i> Platform:
+                    dev.to</span
+                  >
+                  <span
+                    ><i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                    Published: May 18, 2025</span
+                  >
+                </div>
+                <p>
+                  This article explores the journey of building a genuine
+                  personal brand in the digital age, sharing insights from my
+                  own path as Rasoul Unlimited, a developer and biomedical
+                  engineering student. It highlights key achievements and the
+                  importance of authenticity.
+                </p>
+                <div class="card-links">
+                  <a
+                    href="https://dev.to/rasoulunlimited/how-to-build-a-genuine-personal-brand-in-todays-noisy-world-31k"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Read the article on dev.to"
+                    ><i class="fab fa-dev" aria-hidden="true"></i> Read on
+                    dev.to</a
+                  >
+                </div>
+              </div>
+            </div>
+          </section>
 
-                <section id="content" data-aos="fade-right">
-                     <h2>✍️ Featured Content</h2>
+          <section id="mentions" data-aos="fade-left">
+            <h2>📰 Mentions & Recognition</h2>
 
-                      <div class="grid-container">
-                          <div class="card content-card is-featured" data-aos="fade-up">
-                              <div class="content-image-placeholder">
-                                  <img src="../images/placeholder-content-virgool1.webp" alt="Virgool Article Thumbnail Placeholder"/>
-                              </div>
-                             <h3>Mohammad Rasoul Sohrabi (Unlimited) – From Tatami to Technology</h3>
-                             <div class="card-meta">
-                                 <span><i class="fas fa-tag" aria-hidden="true"></i> Platform: Virgool</span>
-                                 <span><i class="fas fa-calendar-alt" aria-hidden="true"></i> Published: November 27, 2022</span>
-                                 </div>
-                             <p>My first comprehensive introductory article on the Virgool platform. This article multi-facetedly explores my journey from competitive karate to entering the world of software development, biomedical engineering, and digital health, highlighting key milestones like the development of the first Discord Persian bot.</p>
-                              <div class="card-links">
-                                 <a href="https://vrgl.ir/9D6Hy" target="_blank" rel="noopener noreferrer" aria-label="Read the article 'Mohammad Rasoul Sohrabi (Unlimited) – From Tatami to Technology' on Virgool"><i class="fas fa-book-open" aria-hidden="true"></i> Read on Virgool</a>
-                              </div>
-                         </div>
+            <div class="grid-container">
+              <div class="card mention-card is-featured" data-aos="fade-up">
+                <div class="mention-icon-placeholder">
+                  <i class="fas fa-trophy" aria-hidden="true"></i>
+                </div>
+                <h3>
+                  Official Verification of First Persian Discord Bot by Discord
+                </h3>
+                <div class="card-meta">
+                  <span
+                    ><i class="fas fa-award" aria-hidden="true"></i> Authority:
+                    Discord Inc.</span
+                  >
+                  <span
+                    ><i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                    Verification Year: Approx. 2020</span
+                  >
+                </div>
+                <p>
+                  Official verification of the features and standards of the
+                  first independent Persian-language bot by the official Discord
+                  team. This verification not only demonstrates the quality of
+                  the project but also placed Iran's name among Discord's
+                  officially verified developers for the first time, marking a
+                  significant milestone in my early activities.
+                </p>
+                <div class="card-links">
+                  <a
+                    href="https://vrgl.ir/9D6Hy"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Read about Discord verification (Source: Virgool Article)"
+                    ><i class="fas fa-book-open" aria-hidden="true"></i> View
+                    Source (Virgool Article)</a
+                  >
+                </div>
+              </div>
+            </div>
+          </section>
 
-                          <div class="card content-card is-featured" data-aos="fade-up">
-                               <div class="content-image-placeholder">
-                                  <img src="../images/placeholder-content-virgool2.webp" alt="Virgool Article Thumbnail Placeholder"/>
-                              </div>
-                             <h3>How to Build a Genuine Personal Brand in Today’s Noisy World | The Story of Rasoul Unlimited</h3>
-                             <div class="card-meta">
-                                 <span><i class="fas fa-tag" aria-hidden="true"></i> Platform: Virgool</span>
-                                 <span><i class="fas fa-calendar-alt" aria-hidden="true"></i> Published: April 23, 2023</span>
-                                 </div>
-                             <p>This article delves into my personal philosophy on building a "genuine personal brand" in today's noisy world. It discusses the reasons behind choosing this path, the meaning of the "Unlimited" moniker, and my experiences in finding my own voice. This article is primarily a narrative from my perspective.</p>
-                              <div class="card-links">
-                                  <a href="https://vrgl.ir/cUmcv" target="_blank" rel="noopener noreferrer" aria-label="Read the article 'How to Build a Genuine Personal Brand in Today’s Noisy World' on Virgool"><i class="fas fa-book-open" aria-hidden="true"></i> Read on Virgool</a>
-                              </div>
-                         </div>
+          <section id="testimonials" data-aos="fade-up">
+            <h2>💬 What Others Say</h2>
 
-                         <div class="card content-card" data-aos="fade-up">
-                             <div class="content-image-placeholder">
-                                  <img src="../images/placeholder-content-medium.webp" alt="Medium Article Thumbnail Placeholder"/>
-                             </div>
-                             <h3>How to Build a Genuine Personal Brand in Today’s Noisy World</h3>
-                             <div class="card-meta">
-                                 <span><i class="fas fa-tag" aria-hidden="true"></i> Platform: Medium</span>
-                                 <span><i class="fas fa-calendar-alt" aria-hidden="true"></i> Published: May 14, 2025</span>
-                                 </div>
-                             <p>
-                                 This article shares insights into building a genuine personal brand, drawing from my journey as Rasoul Unlimited. It explores the meaning of personal branding, why it's important, and offers lessons learned along the way.
-                             </p>
-                              <div class="card-links">
-                                 <a href="https://rasoulunlimited.medium.com/how-to-build-a-genuine-personal-brand-in-todays-noisy-world-c2adb129e623" target="_blank" rel="noopener noreferrer" aria-label="Read the article on Medium"><i class="fab fa-medium" aria-hidden="true"></i> Read on Medium</a> </div>
-                         </div>
-                          <div class="card content-card" data-aos="fade-up">
-                              <div class="content-image-placeholder">
-                                  <img src="../images/placeholder-content-devto.webp" alt="dev.to Article Thumbnail Placeholder"/>
-                              </div>
-                             <h3>How to Build a Genuine Personal Brand in Today’s Noisy World</h3>
-                             <div class="card-meta">
-                                 <span><i class="fas fa-tag" aria-hidden="true"></i> Platform: dev.to</span>
-                                 <span><i class="fas fa-calendar-alt" aria-hidden="true"></i> Published: May 18, 2025</span>
-                                 </div>
-                             <p>
-                                 This article explores the journey of building a genuine personal brand in the digital age, sharing insights from my own path as Rasoul Unlimited, a developer and biomedical engineering student. It highlights key achievements and the importance of authenticity.
-                             </p>
-                              <div class="card-links">
-                                 <a href="https://dev.to/rasoulunlimited/how-to-build-a-genuine-personal-brand-in-todays-noisy-world-31k" target="_blank" rel="noopener noreferrer" aria-label="Read the article on dev.to"><i class="fab fa-dev" aria-hidden="true"></i> Read on dev.to</a>
-                              </div>
-                         </div>
-                          </div>
-                 </section>
+            <div class="testimonial-slider">
+              <div class="empty-testimonials-state" data-aos="fade-up">
+                <div class="empty-icon">
+                  <i class="fas fa-comment-alt" aria-hidden="true"></i>
+                </div>
+                <p>
+                  Your valuable testimonials and recommendations will be
+                  displayed here.
+                </p>
+                <p
+                  style="
+                    font-size: 0.9em;
+                    color: var(--text-color-light);
+                    margin-top: var(--space-xs);
+                  "
+                >
+                  (To add your testimonial, please feel free to contact me.)
+                </p>
+              </div>
+            </div>
+          </section>
 
-                 <section id="mentions" data-aos="fade-left">
-                     <h2>📰 Mentions & Recognition</h2>
-
-                      <div class="grid-container">
-                         <div class="card mention-card is-featured" data-aos="fade-up">
-                             <div class="mention-icon-placeholder">
-                                 <i class="fas fa-trophy" aria-hidden="true"></i>
-                             </div>
-                             <h3>Official Verification of First Persian Discord Bot by Discord</h3>
-                              <div class="card-meta">
-                                  <span><i class="fas fa-award" aria-hidden="true"></i> Authority: Discord Inc.</span>
-                                  <span><i class="fas fa-calendar-alt" aria-hidden="true"></i> Verification Year: Approx. 2020</span>
-                              </div>
-                              <p>Official verification of the features and standards of the first independent Persian-language bot by the official Discord team. This verification not only demonstrates the quality of the project but also placed Iran's name among Discord's officially verified developers for the first time, marking a significant milestone in my early activities.</p>
-                               <div class="card-links">
-                                   <a href="https://vrgl.ir/9D6Hy" target="_blank" rel="noopener noreferrer" aria-label="Read about Discord verification (Source: Virgool Article)"><i class="fas fa-book-open" aria-hidden="true"></i> View Source (Virgool Article)</a>
-                                   </div>
-                         </div>
-                         </div>
-                 </section>
-
-                 <section id="testimonials" data-aos="fade-up">
-                     <h2>💬 What Others Say</h2>
-
-                     <div class="testimonial-slider">
-                         <div class="empty-testimonials-state" data-aos="fade-up">
-                              <div class="empty-icon"><i class="fas fa-comment-alt" aria-hidden="true"></i></div>
-                              <p>Your valuable testimonials and recommendations will be displayed here.</p>
-                              <p style="font-size: 0.9em; color: var(--text-color-light); margin-top: var(--space-xs);">(To add your testimonial, please feel free to contact me.)</p>
-                          </div>
-                         </div>
-                 </section>
-
-
-                 <section id="connect" data-aos="fade-up">
-                     <h2>Connect</h2>
-                     <div class="connect-content">
-                         <div class="connect-info-block" data-aos="fade-right">
-                             <p>
-                                 If you have any questions, project ideas, or just want to connect, feel free to reach out!
-                                 <br>I'm always open to discussing collaborations and new opportunities.
-                             </p>
-                             <div class="contact-info">
-                                 <a href="mailto:rasoul.unlimited@gmail.com" aria-label="Send an email to Rasoul Unlimited"><i class="fas fa-envelope" aria-hidden="true"></i> rasoul.unlimited [at] gmail [dot] com</a>
-                             </div>
-                             <p class="location-edu">
-                                 <i class="fas fa-map-marker-alt" aria-hidden="true"></i> Tehran / Karaj <i class="fas fa-graduation-cap" aria-hidden="true" style="margin-right: var(--space-md);"></i> B.Sc. Biomedical Engineering – University of Tehran (Central Campus)
-                             </p>
-                         </div>
-                         <div class="connect-links-block" data-aos="fade-left">
-                             <h3>My Hubs</h3>
-                             <ul>
-                                  <li><a href="https://www.instagram.com/Rasoul.Unlimited" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on Instagram"><i class="fab fa-instagram" aria-hidden="true"></i> Instagram</a></li>
-                                  <li><a href="https://virgool.io/@RasoulUnlimited" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on Virgool"><i class="fas fa-pen-fancy" aria-hidden="true"></i> Virgool (Persian)</a></li>
-                                  <li><a href="https://www.linkedin.com/in/rasoulunlimited/" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
-                                  <li><a href="https://github.com/RasoulUnlimited/" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on GitHub"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a></li>
-                                  <li><a href="https://www.wikidata.org/wiki/Q134503479" target="_blank" rel="noopener noreferrer" aria-label="View Rasoul Unlimited's item on Wikidata"><i class="fas fa-database" aria-hidden="true"></i> Wikidata</a></li>
-                                  <li><a href="https://rasoulunlimited.medium.com" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on Medium"><i class="fab fa-medium" aria-hidden="true"></i> Medium</a></li>
-                                  <li><a href="https://dev.to/rasoulunlimited" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on dev.to"><i class="fab fa-dev" aria-hidden="true"></i> dev.to</a></li>
-                                  <li><a href="https://t.me/RasoulUnlimited" target="_blank" rel="noopener noreferrer" aria-label="Join Rasoul Unlimited Telegram Channel"><i class="fab fa-telegram-plane" aria-hidden="true"></i> Telegram Channel</a></li>
-                                  <li><a href="https://orcid.org/0009-0004-7177-2080" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on ORCID"><i class="fab fa-orcid" aria-hidden="true"></i> ORCID</a></li>
-                                  <li><a href="https://about.me/rasoulunlimited" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on About.me"><i class="fas fa-user-circle" aria-hidden="true"></i> About.me</a></li>
-                                  <li><a href="https://www.youtube.com/@RasoulUnlimited" target="_blank" rel="noopener noreferrer" aria-label="Visit Rasoul Unlimited on YouTube"><i class="fab fa-youtube" aria-hidden="true"></i> YouTube</a></li> </ul>
-                         </div>
-                     </div>
-                 </section>
-
-
-            </main>
-
-        </div>
+          <section id="connect" data-aos="fade-up">
+            <h2>Connect</h2>
+            <div class="connect-content">
+              <div class="connect-info-block" data-aos="fade-right">
+                <p>
+                  If you have any questions, project ideas, or just want to
+                  connect, feel free to reach out!
+                  <br />I'm always open to discussing collaborations and new
+                  opportunities.
+                </p>
+                <div class="contact-info">
+                  <a
+                    href="mailto:rasoul.unlimited@gmail.com"
+                    aria-label="Send an email to Rasoul Unlimited"
+                    ><i class="fas fa-envelope" aria-hidden="true"></i>
+                    rasoul.unlimited [at] gmail [dot] com</a
+                  >
+                </div>
+                <p class="location-edu">
+                  <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                  Tehran / Karaj
+                  <i
+                    class="fas fa-graduation-cap"
+                    aria-hidden="true"
+                    style="margin-right: var(--space-md)"
+                  ></i>
+                  B.Sc. Biomedical Engineering – University of Tehran (Central
+                  Campus)
+                </p>
+              </div>
+              <div class="connect-links-block" data-aos="fade-left">
+                <h3>My Hubs</h3>
+                <ul>
+                  <li>
+                    <a
+                      href="https://www.instagram.com/Rasoul.Unlimited"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Visit Rasoul Unlimited on Instagram"
+                      ><i class="fab fa-instagram" aria-hidden="true"></i>
+                      Instagram</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="https://virgool.io/@RasoulUnlimited"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Visit Rasoul Unlimited on Virgool"
+                      ><i class="fas fa-pen-fancy" aria-hidden="true"></i>
+                      Virgool (Persian)</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="https://www.linkedin.com/in/rasoulunlimited/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Visit Rasoul Unlimited on LinkedIn"
+                      ><i class="fab fa-linkedin" aria-hidden="true"></i>
+                      LinkedIn</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="https://github.com/RasoulUnlimited/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Visit Rasoul Unlimited on GitHub"
+                      ><i class="fab fa-github" aria-hidden="true"></i>
+                      GitHub</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="https://www.wikidata.org/wiki/Q134503479"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="View Rasoul Unlimited's item on Wikidata"
+                      ><i class="fas fa-database" aria-hidden="true"></i>
+                      Wikidata</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="https://rasoulunlimited.medium.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Visit Rasoul Unlimited on Medium"
+                      ><i class="fab fa-medium" aria-hidden="true"></i>
+                      Medium</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="https://dev.to/rasoulunlimited"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Visit Rasoul Unlimited on dev.to"
+                      ><i class="fab fa-dev" aria-hidden="true"></i> dev.to</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="https://t.me/RasoulUnlimited"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Join Rasoul Unlimited Telegram Channel"
+                      ><i class="fab fa-telegram-plane" aria-hidden="true"></i>
+                      Telegram Channel</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="https://orcid.org/0009-0004-7177-2080"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Visit Rasoul Unlimited on ORCID"
+                      ><i class="fab fa-orcid" aria-hidden="true"></i> ORCID</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="https://about.me/rasoulunlimited"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Visit Rasoul Unlimited on About.me"
+                      ><i class="fas fa-user-circle" aria-hidden="true"></i>
+                      About.me</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="https://www.youtube.com/@RasoulUnlimited"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Visit Rasoul Unlimited on YouTube"
+                      ><i class="fab fa-youtube" aria-hidden="true"></i>
+                      YouTube</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
     </div>
 
     <footer class="footer">
-        <div class="lang-switcher">
-            <a href="https://rasoulunlimited.ir/" class="lang-link">فارسی</a>
-            <span>|</span>
-            <a href="https://rasoulunlimited.ir/en" class="lang-link active">English</a>
-          </div>
-         <p>© <span id="current-year-en"></span> Rasoul Unlimited. All rights reserved.</p>
+      <div class="lang-switcher">
+        <a href="https://rasoulunlimited.ir/" class="lang-link">فارسی</a>
+        <span>|</span>
+        <a href="https://rasoulunlimited.ir/en" class="lang-link active"
+          >English</a
+        >
+      </div>
+      <p>
+        © <span id="current-year-en"></span> Rasoul Unlimited. All rights
+        reserved.
+      </p>
     </footer>
 
     <script src="../script.js" defer></script>
@@ -688,9 +1376,9 @@
       AOS.init({
         // Global settings:
         disable: false,
-        startEvent: 'DOMContentLoaded',
-        initClassName: 'aos-init',
-        animatedClassName: 'aos-animate',
+        startEvent: "DOMContentLoaded",
+        initClassName: "aos-init",
+        animatedClassName: "aos-animate",
         useClassNames: false,
         disableMutationObserver: false,
         debounceDelay: 50,
@@ -700,15 +1388,15 @@
         offset: 120,
         delay: 0,
         duration: 800,
-        easing: 'ease',
+        easing: "ease",
         once: false,
         mirror: false,
-        anchorPlacement: 'top-bottom',
+        anchorPlacement: "top-bottom",
       });
 
       // Update current year for English version
-      document.getElementById('current-year-en').textContent = new Date().getFullYear();
+      document.getElementById("current-year-en").textContent =
+        new Date().getFullYear();
     </script>
-
-</body>
+  </body>
 </html>
