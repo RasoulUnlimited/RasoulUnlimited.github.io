@@ -1099,8 +1099,6 @@ section {
       transform: translateY(-3px); /* لیفت شدن در هاور */
       box-shadow: 0 4px 12px var(--shadow-color-medium); /* سایه کمی بیشتر در هاور */
  }
- /* حذف استایل خط زیر آیتم آخر که در گرید نیازی نیست */
- .connect-links-block ul li:last-child { } /* این بلاک خالی می‌ماند یا حذف می‌شود */
 
   /* استایل لینک داخل آیتم لیست */
  .connect-links-block ul li a {
@@ -1441,4 +1439,3 @@ section {
        #connect .location-edu i { margin-right: var(--space-xs); margin-left: 0; }
         #connect .location-edu i:last-child { margin-right: var(--space-md); margin-left: 0;}
     }
-}
