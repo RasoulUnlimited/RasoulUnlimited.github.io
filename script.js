@@ -26,20 +26,25 @@ window.addEventListener('load', () => {
   const giscusContainer = document.querySelector('.giscus-container');
   const emptyState = document.querySelector('.empty-testimonials-state');
 
-  // بعد از 5 ثانیه بررسی می‌کنیم که آیا iframe گیسکس لود شده یا نه
-  setTimeout(() => {
-    // آیا iframe وجود دارد؟
-    const iframe = giscusContainer.querySelector('iframe');
+  // هر چند وقت یه بار بررسی می‌کنیم محتوای گیسکس چیه
+  let attempts = 0;
+  const maxAttempts = 20; // مثلا 20 بار چک کن (هر 500ms یعنی 10 ثانیه)
+  const interval = setInterval(() => {
+    attempts++;
 
-    if (!iframe) {
-      // iframe نیومده یعنی کامنت‌ها هنوز بارگذاری نشده یا خالیه
+    // بررسی محتوا
+    const hasContent = giscusContainer.innerText.trim().length > 0;
+
+    if (hasContent) {
+      // یعنی کامنت یا حداقل چیزی دیده شده
+      emptyState.style.display = 'none';
+      giscusContainer.style.display = 'block';
+      clearInterval(interval);
+    } else if (attempts >= maxAttempts) {
+      // بعد 10 ثانیه هنوز چیزی نیومده، فرض می‌کنیم کامنتی نیست
       emptyState.style.display = 'block';
       giscusContainer.style.display = 'none';
-      return;
+      clearInterval(interval);
     }
-
-    // اگر iframe هست، ممکنه کامنت داشته باشه، پس حالت خالی را مخفی کن
-    emptyState.style.display = 'none';
-    giscusContainer.style.display = 'block';
-  }, 5000);
+  }, 500);
 });
