@@ -1,5 +1,5 @@
 // Automatically update the current year in the footer
-document.getElementById('current-year').textContent = new Date().getFullYear();
+document.getElementById("current-year").textContent = new Date().getFullYear();
 
 AOS.init({
   // Global settings:
@@ -22,9 +22,9 @@ AOS.init({
   anchorPlacement: "top-bottom",
 });
 
-window.addEventListener('load', () => {
-  const giscusContainer = document.querySelector('.giscus-container');
-  const emptyState = document.querySelector('.empty-testimonials-state');
+window.addEventListener("load", () => {
+  const giscusContainer = document.querySelector(".giscus-container");
+  const emptyState = document.querySelector(".empty-testimonials-state");
 
   // هر چند وقت یه بار بررسی می‌کنیم محتوای گیسکس چیه
   let attempts = 0;
@@ -37,13 +37,13 @@ window.addEventListener('load', () => {
 
     if (hasContent) {
       // یعنی کامنت یا حداقل چیزی دیده شده
-      emptyState.style.display = 'none';
-      giscusContainer.style.display = 'block';
+      emptyState.style.display = "none";
+      giscusContainer.style.display = "block";
       clearInterval(interval);
     } else if (attempts >= maxAttempts) {
       // بعد 10 ثانیه هنوز چیزی نیومده، فرض می‌کنیم کامنتی نیست
-      emptyState.style.display = 'block';
-      giscusContainer.style.display = 'none';
+      emptyState.style.display = "block";
+      giscusContainer.style.display = "none";
       clearInterval(interval);
     }
   }, 500);
