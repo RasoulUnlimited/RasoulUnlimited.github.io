@@ -837,137 +837,194 @@ section {
  }
 
 
-/* --- Testimonials Section --- */
-#testimonials {
-     background-color: #f8f9fa; /* Use a lighter background from palette */
-     padding-top: var(--section-v-padding);
-     padding-bottom: var(--section-v-padding);
-     margin-bottom: var(--section-margin-bottom);
-}
- #testimonials h2 {
-     margin-bottom: var(--space-xl);
- }
- .testimonial-slider {
-     display: grid;
-     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-     gap: var(--space-lg);
- }
-
 /* Empty Testimonials State Styling */
 .empty-testimonials-state {
     text-align: center;
     padding: var(--space-xxl);
-    border: 2px dashed var(--border-color);
-    border-radius: var(--border-radius-md);
-    max-width: 600px;
+    border-radius: var(--border-radius-lg); /* گوشه‌ها رو گردتر می‌کنیم */
+    max-width: 650px; /* کمی پهن‌ترش می‌کنیم */
     margin: var(--space-xl) auto;
     color: var(--text-color-light);
-     background-color: #e9ecef;
-     direction: rtl;
-     outline: none;
-     transition: box-shadow var(--transition-duration-short) var(--transition-easing-standard), transform var(--transition-duration-short) var(--transition-easing-springy);
-}
- .empty-testimonials-state:hover {
-     box-shadow: 0 4px 15px var(--shadow-color-light);
-      transform: translateY(-5px); /* Subtle lift on hover */
- }
-
- .empty-testimonials-state .empty-icon {
-     font-size: 3rem;
-     color: var(--accent-color);
-     margin-bottom: var(--space-md);
- }
- .empty-testimonials-state p {
-     font-size: 1.1rem;
-     margin-bottom: var(--space-sm);
-     color: var(--text-color-light); /* Ensure paragraph uses lighter text color */
-     direction: rtl;
-     text-align: center;
- }
-
-
- .testimonial-item {
-     background-color: var(--card-bg);
-     padding: var(--space-md);
-     border-radius: var(--border-radius-md);
-     box-shadow: 0 4px 15px var(--shadow-color-light);
-     font-style: italic;
-     color: #555;
-     position: relative;
-      transition: transform var(--transition-duration-short) var(--transition-easing-springy), box-shadow var(--transition-duration-short) var(--transition-easing-standard);
-      outline: none;
-      direction: rtl;
-      text-align: right;
-      border-left: 4px solid var(--accent-color); /* Add an accent border */
- }
-  .testimonial-item:hover, .testimonial-item:focus-within {
-     transform: translateY(-5px);
-     box-shadow: 0 6px 20px var(--shadow-color-medium);
-  }
-  .testimonial-item::before {
-      content: "\201C";
-      font-size: 3.5em;
-      color: var(--primary-color); /* Use primary color for quotes */
-      position: absolute;
-      top: var(--space-xs);
-      right: var(--space-md);
-      left: auto;
-      opacity: 0.1; /* Slightly less opaque */
-      font-family: serif;
-       z-index: 0;
-  }
-   .testimonial-item p {
-      margin-top: var(--space-md);
-      margin-bottom: var(--space-md);
-      font-size: 1.05rem;
-      line-height: 1.7;
-      color: var(--text-color);
-      font-style: normal;
-       position: relative;
-       z-index: 1;
-        direction: rtl;
-        text-align: right;
-   }
-   .testimonial-item .author {
-      font-weight: 700;
-      font-style: normal;
-      color: var(--secondary-color);
-      text-align: right;
-      display: block;
-      margin-top: var(--space-sm);
-      font-size: 1rem;
-       direction: rtl;
-   }
-   .testimonial-item .author-title { /* Added style for author title */
-       font-weight: 400;
-       font-size: 0.9rem;
-       color: var(--text-color-light);
-        direction: rtl;
-        display: block;
-        margin-top: var(--space-xxs);
-   }
-
-   .testimonials-section {
-    padding: var(--space-lg) 0 ;
-  }
-  
-  .giscus-container {
-    border: 1px solid var(--border-color);
-    border-radius: 16px;
-    padding: var(--space-md);
-    margin-top: var(--space-md);
-    background: rgba(255, 255, 255, 0.02);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
-    transition: background 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .text-right {
-    text-align: right;
-  }
-  .rtl {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e0e7eb 100%); /* گرادیانت جذاب‌تر */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); /* سایه عمیق‌تر و دلنشین‌تر */
     direction: rtl;
-  }
+    outline: none;
+    transition: all 0.3s ease-in-out; /* ترنزیشن جامع‌تر */
+    position: relative;
+    overflow: hidden; /* برای المان‌های اضافه */
+    z-index: 1; /* اطمینان از اینکه روی عناصر پس‌زمینه باشد */
+}
 
+.empty-testimonials-state::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(var(--accent-color-rgb, 108, 117, 125), 0.15) 0%, transparent 70%); /* رنگ پیش‌فرض برای rgb در صورت عدم تعریف */
+    border-radius: 50%;
+    z-index: 0;
+    transition: all 0.4s ease-out;
+}
+
+.empty-testimonials-state:hover::before {
+    top: -80px;
+    left: -80px;
+    width: 250px;
+    height: 250px;
+}
+
+.empty-testimonials-state:hover {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15); /* سایه بیشتر روی هاور */
+    transform: translateY(-8px); /* لیفت بیشتر */
+    /* border-color: var(--accent-color);  اگر خواستید خط چین داشته باشید و رنگش تغییر کند */
+}
+
+.empty-testimonials-state .empty-icon {
+    font-size: 4.5rem; /* بزرگتر شدن آیکون */
+    color: var(--accent-color);
+    margin-bottom: var(--space-md);
+    animation: bounce 1s infinite alternate; /* انیمیشن برای آیکون */
+    position: relative;
+    z-index: 1;
+}
+
+.empty-testimonials-state p {
+    font-size: 1.25rem; /* بزرگتر شدن متن */
+    margin-bottom: var(--space-md); /* فاصله بیشتر */
+    color: var(--text-color); /* استفاده از رنگ اصلی متن */
+    direction: rtl;
+    text-align: center;
+    line-height: 1.6;
+    position: relative;
+    z-index: 1;
+}
+
+.empty-testimonials-state .cta-button { /* دکمه تشویق به عمل */
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: white;
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: var(--border-radius-md);
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: var(--space-md);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.empty-testimonials-state .cta-button:hover {
+    background-color: var(--accent-color);
+    transform: translateY(-2px);
+}
+
+@keyframes bounce {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-10px);
+    }
+}
+
+/* Existing Testimonial Item Styling (Modified for better appearance) */
+.testimonial-item {
+    background-color: var(--card-bg);
+    padding: var(--space-lg); /* پدینگ بیشتر */
+    border-radius: var(--border-radius-xl); /* گوشه‌های خیلی گردتر */
+    box-shadow: 0 8px 25px var(--shadow-color-light); /* سایه جذاب‌تر */
+    font-style: italic;
+    color: var(--text-color); /* استفاده از رنگ اصلی متن */
+    position: relative;
+    transition: all 0.3s ease-in-out; /* ترنزیشن جامع‌تر */
+    outline: none;
+    direction: rtl;
+    text-align: right;
+    border-left: 6px solid var(--accent-color); /* پهن‌تر شدن border */
+    margin-bottom: var(--space-lg); /* فاصله بین آیتم‌ها */
+}
+
+.testimonial-item:hover, .testimonial-item:focus-within {
+    transform: translateY(-10px); /* لیفت بیشتر */
+    box-shadow: 0 15px 40px var(--shadow-color-medium); /* سایه عمیق‌تر */
+    border-color: var(--primary-color); /* تغییر رنگ border روی هاور */
+}
+
+.testimonial-item::before {
+    content: "\201C";
+    font-size: 5em; /* بزرگتر شدن گیومه */
+    color: var(--primary-color);
+    position: absolute;
+    top: var(--space-xs);
+    right: var(--space-md);
+    left: auto;
+    opacity: 0.08; /* شفافیت کمتر */
+    font-family: 'Georgia', serif; /* فونت جذاب‌تر برای گیومه */
+    z-index: 0;
+}
+
+.testimonial-item p {
+    margin-top: var(--space-md);
+    margin-bottom: var(--space-md);
+    font-size: 1.15rem; /* بزرگتر شدن متن */
+    line-height: 1.8; /* فاصله خطوط بیشتر */
+    color: var(--text-color);
+    font-style: normal;
+    position: relative;
+    z-index: 1;
+    direction: rtl;
+    text-align: right;
+}
+
+.testimonial-item .author {
+    font-weight: 700;
+    font-style: normal;
+    color: var(--secondary-color);
+    text-align: right;
+    display: block;
+    margin-top: var(--space-md); /* فاصله بیشتر */
+    font-size: 1.1rem; /* بزرگتر شدن اسم نویسنده */
+    direction: rtl;
+}
+
+.testimonial-item .author-title {
+    font-weight: 400;
+    font-size: 1rem; /* بزرگتر شدن عنوان */
+    color: var(--text-color-light);
+    direction: rtl;
+    display: block;
+    margin-top: var(--space-xxs);
+}
+
+/* Testimonials Section & Giscus Container */
+.testimonials-section {
+    padding: var(--space-lg) 0;
+}
+
+.giscus-container {
+    border: none; /* حذف حاشیه پیش‌فرض */
+    border-radius: 20px; /* گوشه‌ها رو گردتر می‌کنیم */
+    padding: var(--space-md);
+    margin-top: var(--space-lg); /* فاصله از بالا بیشتر */
+    background: var(--card-bg); /* استفاده از رنگ پس‌زمینه کارت‌های شما */
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1); /* سایه جذاب‌تر */
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden; /* برای اطمینان از اینکه محتوا از کادر بیرون نزنه */
+}
+
+.giscus-container:hover {
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15); /* سایه بیشتر روی هاور */
+}
+
+/* Helper classes */
+.text-right {
+    text-align: right;
+}
+.rtl {
+    direction: rtl;
+}
 
 /* --- Connect Section (Combined Contact & Links) --- */
 #connect {
