@@ -948,7 +948,7 @@ section {
    }
 
    .testimonials-section {
-    padding: var(--space-lg) 0 !important;
+    padding: var(--space-lg) 0 ;
   }
   
   .giscus-container {
