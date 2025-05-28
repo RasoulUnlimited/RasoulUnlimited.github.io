@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml"> <url>
-        <loc>https://rasoulunlimited.ir/</loc>
+        <loc>https://rasoulunlimited.ir</loc>
         <lastmod>2025-05-17</lastmod>
         <changefreq>monthly</changefreq>
         <priority>1.0</priority>
@@ -12,7 +12,7 @@
         <xhtml:link
             rel="alternate"
             hreflang="fa-IR"
-            href="https://rasoulunlimited.ir/" />
+            href="https://rasoulunlimited.ir" />
     </url>
 
     <url>
@@ -21,7 +21,7 @@
         <priority>0.9</priority> <xhtml:link
             rel="alternate"
             hreflang="fa-IR"
-            href="https://rasoulunlimited.ir/" />
+            href="https://rasoulunlimited.ir" />
         <xhtml:link
             rel="alternate"
             hreflang="en-US"
