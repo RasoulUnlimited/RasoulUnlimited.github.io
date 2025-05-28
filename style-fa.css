@@ -1200,7 +1200,6 @@ section h2::after {
   /* Ensure list items are visible for AOS */
   opacity: 1;
   transform: none;
-  /* background-color: transparent; /* یا این خط یا کلا حذف شود */
   box-shadow: 0 2px 8px var(--shadow-color-light); /* سایه ملایم */
   outline: none;
 }
