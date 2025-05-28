@@ -21,3 +21,25 @@ AOS.init({
   mirror: false,
   anchorPlacement: "top-bottom",
 });
+
+window.addEventListener('load', () => {
+  const giscusContainer = document.querySelector('.giscus-container');
+  const emptyState = document.querySelector('.empty-testimonials-state');
+
+  // بعد از 5 ثانیه بررسی می‌کنیم که آیا iframe گیسکس لود شده یا نه
+  setTimeout(() => {
+    // آیا iframe وجود دارد؟
+    const iframe = giscusContainer.querySelector('iframe');
+
+    if (!iframe) {
+      // iframe نیومده یعنی کامنت‌ها هنوز بارگذاری نشده یا خالیه
+      emptyState.style.display = 'block';
+      giscusContainer.style.display = 'none';
+      return;
+    }
+
+    // اگر iframe هست، ممکنه کامنت داشته باشه، پس حالت خالی را مخفی کن
+    emptyState.style.display = 'none';
+    giscusContainer.style.display = 'block';
+  }, 5000);
+});
