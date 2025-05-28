@@ -841,18 +841,18 @@ section {
 .empty-testimonials-state {
     text-align: center;
     padding: var(--space-xxl);
-    border-radius: var(--border-radius-lg); /* گوشه‌ها رو گردتر می‌کنیم */
-    max-width: 650px; /* کمی پهن‌ترش می‌کنیم */
+    border-radius: var(--border-radius-lg);
+    max-width: 650px;
     margin: var(--space-xl) auto;
     color: var(--text-color-light);
-    background: linear-gradient(135deg, #f8f9fa 0%, #e0e7eb 100%); /* گرادیانت جذاب‌تر */
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); /* سایه عمیق‌تر و دلنشین‌تر */
+    background: linear-gradient(135deg, #f8f9fa 0%, #e0e7eb 100%);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
     direction: rtl;
     outline: none;
-    transition: all 0.3s ease-in-out; /* ترنزیشن جامع‌تر */
+    transition: all 0.3s ease-in-out;
     position: relative;
-    overflow: hidden; /* برای المان‌های اضافه */
-    z-index: 1; /* اطمینان از اینکه روی عناصر پس‌زمینه باشد */
+    overflow: hidden;
+    z-index: 1;
 }
 
 .empty-testimonials-state::before {
@@ -862,7 +862,7 @@ section {
     left: -50px;
     width: 200px;
     height: 200px;
-    background: radial-gradient(circle, rgba(var(--accent-color-rgb, 108, 117, 125), 0.15) 0%, transparent 70%); /* رنگ پیش‌فرض برای rgb در صورت عدم تعریف */
+    background: radial-gradient(circle, rgba(var(--accent-color-rgb, 108, 117, 125), 0.15) 0%, transparent 70%);
     border-radius: 50%;
     z-index: 0;
     transition: all 0.4s ease-out;
@@ -876,24 +876,23 @@ section {
 }
 
 .empty-testimonials-state:hover {
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15); /* سایه بیشتر روی هاور */
-    transform: translateY(-8px); /* لیفت بیشتر */
-    /* border-color: var(--accent-color);  اگر خواستید خط چین داشته باشید و رنگش تغییر کند */
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    transform: translateY(-8px);
 }
 
 .empty-testimonials-state .empty-icon {
-    font-size: 4.5rem; /* بزرگتر شدن آیکون */
+    font-size: 4.5rem;
     color: var(--accent-color);
     margin-bottom: var(--space-md);
-    animation: bounce 1s infinite alternate; /* انیمیشن برای آیکون */
+    animation: bounce 1s infinite alternate;
     position: relative;
     z-index: 1;
 }
 
 .empty-testimonials-state p {
-    font-size: 1.25rem; /* بزرگتر شدن متن */
-    margin-bottom: var(--space-md); /* فاصله بیشتر */
-    color: var(--text-color); /* استفاده از رنگ اصلی متن */
+    font-size: 1.25rem;
+    margin-bottom: var(--space-md);
+    color: var(--text-color);
     direction: rtl;
     text-align: center;
     line-height: 1.6;
@@ -901,7 +900,7 @@ section {
     z-index: 1;
 }
 
-.empty-testimonials-state .cta-button { /* دکمه تشویق به عمل */
+.empty-testimonials-state .cta-button {
     display: inline-block;
     background-color: var(--primary-color);
     color: white;
@@ -932,44 +931,44 @@ section {
 /* Existing Testimonial Item Styling (Modified for better appearance) */
 .testimonial-item {
     background-color: var(--card-bg);
-    padding: var(--space-lg); /* پدینگ بیشتر */
-    border-radius: var(--border-radius-xl); /* گوشه‌های خیلی گردتر */
-    box-shadow: 0 8px 25px var(--shadow-color-light); /* سایه جذاب‌تر */
+    padding: var(--space-lg);
+    border-radius: var(--border-radius-xl);
+    box-shadow: 0 8px 25px var(--shadow-color-light);
     font-style: italic;
-    color: var(--text-color); /* استفاده از رنگ اصلی متن */
+    color: var(--text-color);
     position: relative;
-    transition: all 0.3s ease-in-out; /* ترنزیشن جامع‌تر */
+    transition: all 0.3s ease-in-out;
     outline: none;
     direction: rtl;
     text-align: right;
-    border-left: 6px solid var(--accent-color); /* پهن‌تر شدن border */
-    margin-bottom: var(--space-lg); /* فاصله بین آیتم‌ها */
+    border-left: 6px solid var(--accent-color);
+    margin-bottom: var(--space-lg);
 }
 
 .testimonial-item:hover, .testimonial-item:focus-within {
-    transform: translateY(-10px); /* لیفت بیشتر */
-    box-shadow: 0 15px 40px var(--shadow-color-medium); /* سایه عمیق‌تر */
-    border-color: var(--primary-color); /* تغییر رنگ border روی هاور */
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px var(--shadow-color-medium);
+    border-color: var(--primary-color);
 }
 
 .testimonial-item::before {
     content: "\201C";
-    font-size: 5em; /* بزرگتر شدن گیومه */
+    font-size: 5em;
     color: var(--primary-color);
     position: absolute;
     top: var(--space-xs);
     right: var(--space-md);
     left: auto;
-    opacity: 0.08; /* شفافیت کمتر */
-    font-family: 'Georgia', serif; /* فونت جذاب‌تر برای گیومه */
+    opacity: 0.08;
+    font-family: 'Georgia', serif;
     z-index: 0;
 }
 
 .testimonial-item p {
     margin-top: var(--space-md);
     margin-bottom: var(--space-md);
-    font-size: 1.15rem; /* بزرگتر شدن متن */
-    line-height: 1.8; /* فاصله خطوط بیشتر */
+    font-size: 1.15rem;
+    line-height: 1.8;
     color: var(--text-color);
     font-style: normal;
     position: relative;
@@ -984,14 +983,14 @@ section {
     color: var(--secondary-color);
     text-align: right;
     display: block;
-    margin-top: var(--space-md); /* فاصله بیشتر */
-    font-size: 1.1rem; /* بزرگتر شدن اسم نویسنده */
+    margin-top: var(--space-md);
+    font-size: 1.1rem;
     direction: rtl;
 }
 
 .testimonial-item .author-title {
     font-weight: 400;
-    font-size: 1rem; /* بزرگتر شدن عنوان */
+    font-size: 1rem;
     color: var(--text-color-light);
     direction: rtl;
     display: block;
@@ -1004,19 +1003,27 @@ section {
 }
 
 .giscus-container {
-    border: none; /* حذف حاشیه پیش‌فرض */
-    border-radius: 20px; /* گوشه‌ها رو گردتر می‌کنیم */
+    border: none;
+    border-radius: 20px;
     padding: var(--space-md);
-    margin-top: var(--space-lg); /* فاصله از بالا بیشتر */
-    background: var(--card-bg); /* استفاده از رنگ پس‌زمینه کارت‌های شما */
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1); /* سایه جذاب‌تر */
+    margin-top: var(--space-lg);
+    background: var(--card-bg);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
     transition: background 0.3s ease, box-shadow 0.3s ease;
-    overflow: hidden; /* برای اطمینان از اینکه محتوا از کادر بیرون نزنه */
+    overflow: hidden;
 }
 
 .giscus-container:hover {
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15); /* سایه بیشتر روی هاور */
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
 }
+
+/* NEW: This is the crucial part for Giscus iframe sizing */
+.giscus-container iframe {
+    width: 100%;
+    min-height: 350px; /* Adjust as needed */
+    border: none;
+}
+
 
 /* Helper classes */
 .text-right {
