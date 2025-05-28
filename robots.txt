@@ -1,4 +1,10 @@
 User-agent: *
 Allow: /
 
+Allow: /en/
+Allow: /images/
+Allow: *.css
+Allow: *.js
+
+
 Sitemap: https://rasoulunlimited.ir/sitemap.xml
