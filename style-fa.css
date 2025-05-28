@@ -948,7 +948,7 @@ section {
    }
 
    .testimonials-section {
-    padding: var(--space-lg) 0;
+    padding: var(--space-lg) 0 !important;
   }
   
   .giscus-container {
@@ -962,7 +962,7 @@ section {
   }
   
   .text-right {
-    text-align: right !important;
+    text-align: right;
   }
   .rtl {
     direction: rtl;
