@@ -1439,3 +1439,24 @@ section {
        #connect .location-edu i { margin-right: var(--space-xs); margin-left: 0; }
         #connect .location-edu i:last-child { margin-right: var(--space-md); margin-left: 0;}
     }
+
+    .testimonials-section {
+        padding: var(--space-lg) 0;
+      }
+      
+      .giscus-container {
+        border: 1px solid var(--border-color);
+        border-radius: 16px;
+        padding: var(--space-md);
+        margin-top: var(--space-md);
+        background: rgba(255, 255, 255, 0.02);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+        transition: background 0.3s ease, box-shadow 0.3s ease;
+      }
+      
+      .text-right {
+        text-align: right;
+      }
+      .rtl {
+        direction: rtl;
+      }
