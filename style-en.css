@@ -1213,27 +1213,56 @@ section {
 /* Medium Tablets and Mobile (Refined Timeline & Connect) */
 @media (max-width: 768px) {
     /* Adjust global padding and navbar height */
-     :root {
-         --navbar-height: 70px;
-         --section-v-padding: var(--space-xl);
-         --section-margin-bottom: var(--space-xxl);
-     }
-     html { scroll-padding-top: var(--navbar-height); }
-      body { padding-top: var(--navbar-height); }
-     .container {
-         padding: 0 var(--space-sm);
-     }
-      .content-area {
-         padding: var(--space-lg);
-         box-shadow: 0 4px 15px var(--shadow-color-medium);
-     }
+    :root {
+        --navbar-height: 70px;
+        --section-v-padding: var(--space-xl);
+        --section-margin-bottom: var(--space-xxl);
+    }
+    html { scroll-padding-top: var(--navbar-height); }
+     body { padding-top: var(--navbar-height); }
+    .container {
+        padding: 0 var(--space-sm);
+    }
+     .content-area {
+        padding: var(--space-lg);
+        box-shadow: 0 4px 15px var(--shadow-color-medium);
+    }
 
-     /* Navbar */
-     .navbar { height: var(--navbar-height); }
-     .navbar nav a {
-         margin: 0 var(--space-sm);
-         font-size: 0.95rem;
-     }
+   /* Navbar */
+   .navbar {
+       height: auto; /* ارتفاع خودکار برای تطابق با چند ردیف */
+       padding: var(--space-xxs) 0; /* پدینگ برای فاصله از بالا و پایین */
+       display: flex; /* استفاده از فلکس‌باکس برای چیدمان */
+       align-items: center; /* تراز عمودی */
+       justify-content: center; /* تراز افقی در مرکز (اگر کمتر از 100% عرض داشته باشند) */
+       flex-wrap: wrap; /* آیتم‌ها در صورت نیاز به ردیف بعدی میروند */
+   }
+
+   .navbar nav {
+       display: flex; /* خود nav هم فلکس باشد */
+       flex-wrap: wrap; /* آیتم‌های داخلی nav هم به ردیف بعدی بروند */
+       justify-content: center; /* آیتم‌ها در مرکز ردیف قرار بگیرند */
+       align-items: center;
+       width: 100%; /* تمام عرض رو پر کنه */
+       gap: var(--space-xxs) var(--space-xs); /* فاصله بین آیتم‌ها: عمودی و افقی */
+       margin: 0 auto;  
+   }
+
+   .navbar nav a {
+       margin: 0; /* حذف margin قبلی که باعث مشکل میشد */
+       font-size: 0.85rem; /* کوچک‌تر کردن فونت برای جا شدن */
+       padding: var(--space-xxs) var(--space-sm); /* پدینگ برای دکمه‌ها */
+       white-space: nowrap; /* جلوگیری از شکستن متن لینک‌ها */
+       /* اگر بخواهید به صورت بلوک عمل کنند تا padding بهتر اعمال شود: */
+       display: inline-block;
+   }
+
+   .navbar nav a.lang-switcher {
+       font-size: 0.8rem; /* زبان کوچکتر باشد */
+       padding: var(--space-xxs) var(--space-xs);
+       border: 1px solid var(--border-color); /* حاشیه برای متمایز کردن */
+       border-radius: var(--border-radius-sm);
+   }
 
     /* Hero */
     h1 { font-size: 3rem; letter-spacing: 0; } /* Adjusted size and spacing */
