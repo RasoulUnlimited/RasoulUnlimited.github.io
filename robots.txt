@@ -5,6 +5,9 @@ Allow: /en/
 Allow: /images/
 Allow: *.css
 Allow: *.js
+Allow: /projects/
+Allow: /projects/c-projects/
+Allow: /projects/python-projects/
 
 
 Sitemap: https://rasoulunlimited.ir/sitemap.xml
