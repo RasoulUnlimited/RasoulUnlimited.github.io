@@ -64,6 +64,34 @@
   --navbar-height: 80px;
 }
 
+.micro-profile {
+  font-size: 0.75rem;
+  color: #555;
+  opacity: 0.6;
+  text-align: center;
+  max-width: 400px;
+  margin: 2rem auto 0;
+  padding: 0.5rem 1rem;
+  border-top: 1px dashed #ccc;
+}
+.micro-profile img.u-photo {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: 0.5rem auto;
+  display: block;
+}
+.micro-profile a.u-url {
+  display: inline-block;
+  color: #0066cc;
+  font-weight: bold;
+  text-decoration: none;
+}
+.micro-profile a.u-url:hover {
+  text-decoration: underline;
+}
+
 .theme-switch {
   position: relative;
   display: inline-block;
