@@ -1,24 +1,33 @@
-<?xml version="1.0"?>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-  xmlns:foaf="http://xmlns.com/foaf/0.1/">
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:foaf="http://xmlns.com/foaf/0.1/"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
 
-  <foaf:Person>
+  <foaf:Person rdf:about="https://rasoulunlimited.ir/#person">
     <foaf:name>Mohammad Rasoul Sohrabi</foaf:name>
     <foaf:nick>Rasoul Unlimited</foaf:nick>
+    <foaf:title>Biomedical Engineering Student, Software Developer</foaf:title>
+
     <foaf:homepage rdf:resource="https://rasoulunlimited.ir" />
     <foaf:img rdf:resource="https://rasoulunlimited.ir/images/RasoulUnlimited.webp" />
-    <foaf:mbox_sha1sum>d3b07384d113edec49eaa6238ad5ff00</foaf:mbox_sha1sum> <!-- Hash of email -->
+    <foaf:workplaceHomepage rdf:resource="https://ctb.iau.ir" />
+    <foaf:schoolHomepage rdf:resource="https://ctb.iau.ir" />
+
+    <foaf:topic_interest rdf:resource="http://dbpedia.org/resource/Biomedical_engineering" />
+    <foaf:topic_interest rdf:resource="http://dbpedia.org/resource/Open-source_software" />
+    <foaf:topic_interest rdf:resource="http://dbpedia.org/resource/Discord_(software)" />
+
     <foaf:account>
       <foaf:OnlineAccount>
         <foaf:accountServiceHomepage rdf:resource="https://github.com" />
         <foaf:accountName>RasoulUnlimited</foaf:accountName>
       </foaf:OnlineAccount>
     </foaf:account>
-    <foaf:workplaceHomepage rdf:resource="https://ctb.iau.ir" />
-    <foaf:schoolHomepage rdf:resource="https://ctb.iau.ir" />
-    <foaf:topic_interest>Biomedical Engineering</foaf:topic_interest>
-    <foaf:topic_interest>Open Source</foaf:topic_interest>
-    <foaf:topic_interest>Persian Discord Bot</foaf:topic_interest>
+
+    <rdfs:seeAlso rdf:resource="https://orcid.org/0009-0004-7177-2080" />
+    <rdfs:seeAlso rdf:resource="https://www.wikidata.org/wiki/Q134619124" />
   </foaf:Person>
 
 </rdf:RDF>
