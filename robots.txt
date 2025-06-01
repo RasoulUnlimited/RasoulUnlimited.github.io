@@ -12,3 +12,5 @@ Allow: /humans.txt
 Allow: /foaf.rdf
 
 Sitemap: https://rasoulunlimited.ir/sitemap.xml
+Host: rasoulunlimited.ir
+Identity: https://rasoulunlimited.com/.well-known/identity
