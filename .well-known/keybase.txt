@@ -1,0 +1,68 @@
+==================================================================
+https://keybase.io/rasoulunlimited
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://rasoulunlimited.ir
+  * I am rasoulunlimited (https://keybase.io/rasoulunlimited) on keybase.
+  * I have a public key with fingerprint D483 4991 882E 7EC4 4187  40AC 1CAF 52B8 DB95 F6FE
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "01013f3de8bdea0d20c26b95e93f19ffc0cc4e370fb76affcc22a5a46bda5efb712e0a",
+      "fingerprint": "d4834991882e7ec4418740ac1caf52b8db95f6fe",
+      "host": "keybase.io",
+      "key_id": "1caf52b8db95f6fe",
+      "kid": "01013f3de8bdea0d20c26b95e93f19ffc0cc4e370fb76affcc22a5a46bda5efb712e0a",
+      "uid": "f3d947e6097561f1f2294aa376669819",
+      "username": "rasoulunlimited"
+    },
+    "service": {
+      "hostname": "rasoulunlimited.ir",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "ctime": 1748792860,
+  "expire_in": 157680000,
+  "prev": "92def2fd7748394cf1376b990ef422e5e0336e1cdfcbf6ae46efdb7f040add6f",
+  "seqno": 4,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.1.13
+Comment: https://keybase.io/crypto
+
+yMIoAnicrVJrSBRRFN7VrE0Ke4hQWMTQn8hknndmliIrQvJXpAb2YJmZe647uu5s
+M7ObVpZpYJJKaJmYREpWSOCPXkRG+SAh00qiggp6Exgo9DAIsjtS//zZ/XM553zf
+d75z7h1cmOxL9T+d2NlYkPK6xz/cdyHuC69PZB5kdAtXMMGDTCnMXBDB4LihUhMz
+QYblWE4gAgZFx6CxmGcNHumqBKpAOJUQgzUMEQSZJbqMNBobPK9Jmoh0rElAkxwP
+rMZkMcSMFoMds82oS2WxqAiiqnKKwoMMhihyiiyymsEZGpF4XcG0BUEEKDFsOR6D
+mtM1B7JNi+ZoEJqxNwv+P/uOz8hRJVWUAbGqLCGOcITnVVHTBBkhpCqc6gEdsKNa
+GVC0rTlWPBKPRswy0wXMVGYxtJgwDfD26w00OzDbtKlQzLZcy7AitB523ZgT9Phu
+Rcwj7Ac99FcqpJtRTJdKGQmwHdOKMkGOIg3X9LQ5WVRklVcQm8VAecy0IWR6CElG
+CkuP1wcSVFLlMRCeYJkSBFU0CEen0lWVBSLyPEjACgICzsDE0AnSQERAsC4Tlr4X
+xogw3nD7ohYTFKlNrZhKOmZxVHPjNjCV/ff2zPH5U31zU5K8z+ZLnb/o3xe8WBfw
+NY3k3wwu29twtaOxN8mu/P61+sqKM8mbXk6/vbFqYPXKksc1Dy+vHaudaA4MZjhj
+VZ01W5t620ue3Tla+GLJ4OpdB3LftLkP0K+h8tbmOJecf25iektnX/jC9pePdti3
+O3oz7ibqSxq2fR5PackfOiEkQocz08LTx8/X1t9a2t3dH7l3turK1NSdru1H/Hnp
+5UUb0gtxUijn20B1Ej59sjov8C4webTs6VheaWa/u3yzdL9r5EdgnX/Y/95Ym/Yp
++/3olzXWvNHeX1efbH5+7PeCHJLbWsTUfEz90Nb+s+d6wbGMS9Ubn/nqKhsXzYWu
+V7uzpCPj19AhY/73Uy1v3dHJxT0v/gCrZ07V
+=j8gd
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/rasoulunlimited
+
+==================================================================
