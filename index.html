@@ -733,8 +733,10 @@
     </script>
   </head>
   <body>
+    <a href="#main-content" class="skip-link">پرش به محتوای اصلی</a>
+
     <div class="navbar">
-      <nav data-aos="fade-down">
+      <nav data-aos="fade-down" role="navigation" aria-label="منوی اصلی سایت">
         <a href="#hero">صفحه اصلی</a>
         <a href="#about">درباره من</a>
         <a href="#timeline">مسیر من</a>
@@ -748,7 +750,7 @@
         <a
           href="https://rasoulunlimited.ir/en/"
           class="lang-switcher"
-          aria-label="Switch website language to English"
+          aria-label="تغییر زبان وبسایت به انگلیسی"
           ><i class="fas fa-language" aria-hidden="true"></i> English</a
         >
         <label class="theme-switch" aria-label="تغییر تم سایت (روشن/تاریک)">
@@ -760,7 +762,7 @@
 
     <div class="container">
       <div class="content-area" data-aos="fade-up">
-        <main>
+        <main id="main-content" role="main">
           <section
             id="hero"
             data-aos="fade-zoom-in"
@@ -770,7 +772,7 @@
             <img
               src="assets/images/RasoulUnlimited.webp"
               loading="eager"
-              alt="تصویر پروفایل محمد رسول سهرابی - رسول آنلیمیتد"
+              alt="تصویر پروفایل محمد رسول سهرابی - رسول آنلیمیتد، دانشجوی مهندسی پزشکی و توسعه‌دهنده نرم‌افزار"
               class="profile-image"
               aria-label="عکس پروفایل محمد رسول سهرابی"
             />
@@ -1035,7 +1037,7 @@
                   <img
                     src="assets/images/placeholder-project.webp"
                     loading="lazy"
-                    alt="تصویر پیش‌نمایش پروژه ربات فارسی"
+                    alt="تصویر پیش‌نمایش پروژه اولین ربات فارسی دیسکورد"
                   />
                 </div>
                 <h3>اولین ربات فارسی‌زبان دیسکورد (Persian Bot)</h3>
@@ -1118,7 +1120,7 @@
                   <img
                     src="assets/images/placeholder-code-c.webp"
                     loading="lazy"
-                    alt="تصویر پیش‌نمایش پروژه‌های C"
+                    alt="تصویر پیش‌نمایش پروژه‌های برنامه‌نویسی با زبان C"
                   />
                 </div>
 
@@ -1183,7 +1185,7 @@
                   <img
                     src="assets/images/placeholder-code-python.webp"
                     loading="lazy"
-                    alt="تصویر پیش‌نمایش پروژه‌های پایتون"
+                    alt="تصویر پیش‌نمایش پروژه‌های برنامه‌نویسی با زبان پایتون"
                   />
                 </div>
                 <h3>پروژه‌های برنامه‌نویسی با زبان پایتون (دانشگاهی)</h3>
@@ -1251,7 +1253,7 @@
                   <img
                     src="assets/images/placeholder-content-virgool1.webp"
                     loading="lazy"
-                    alt="تصویر پیش‌نمایش مقاله ویرگول: از Tatami تا تکنولوژی"
+                    alt="تصویر پیش‌نمایش مقاله ویرگول با عنوان 'محمد رسول سهرابی (آنلیمیتد) – از Tatami تا تکنولوژی'"
                   />
                 </div>
                 <h3>محمد رسول سهرابی (آنلیمیتد) – از tatami تا تکنولوژی</h3>
@@ -1289,7 +1291,7 @@
                   <img
                     src="assets/images/placeholder-content-virgool2.webp"
                     loading="lazy"
-                    alt="تصویر پیش‌نمایش مقاله ویرگول: چطور برند شخصی بسازیم؟"
+                    alt="تصویر پیش‌نمایش مقاله ویرگول با عنوان 'چطور توی دنیای شلوغ امروز، یه برند شخصی واقعی بسازیم؟'"
                   />
                 </div>
                 <h3>
@@ -1330,7 +1332,7 @@
                   <img
                     src="assets/images/placeholder-content-virgool3.webp"
                     loading="lazy"
-                    alt="تصویر پیش‌نمایش مقاله ویرگول: من برند نیستم، یک مسیرم"
+                    alt="تصویر پیش‌نمایش مقاله ویرگول با عنوان 'من برند نیستم، یک مسیرم'"
                   />
                 </div>
                 <h3>
@@ -1370,7 +1372,7 @@
                   <img
                     src="assets/images/placeholder-content-medium.webp"
                     loading="lazy"
-                    alt="تصویر پیش‌نمایش مقاله مدیوم"
+                    alt="تصویر پیش‌نمایش مقاله مدیوم با عنوان 'How to Build a Genuine Personal Brand in Today’s Noisy World'"
                   />
                 </div>
                 <h3>
@@ -1408,7 +1410,7 @@
                   <img
                     src="assets/images/placeholder-content-devto.webp"
                     loading="lazy"
-                    alt="تصویر پیش‌نمایش مقاله dev.to"
+                    alt="تصویر پیش‌نمایش مقاله dev.to با عنوان 'How to Build a Genuine Personal Brand in Today’s Noisy World'"
                   />
                 </div>
                 <h3>
@@ -1490,9 +1492,9 @@
             <div class="faq-container">
               <details class="faq-item">
                 <summary>
-                  <h3>محمد رسول سهرابی کیست؟</h3>
+                  <h3 class="faq-question">محمد رسول سهرابی کیست؟</h3>
                 </summary>
-                <p>
+                <p class="faq-answer">
                   محمد رسول سهرابی، ملقب به «آنلیمیتد»، دانشجوی مهندسی پزشکی
                   دانشگاه تهران، توسعه‌دهنده نرم‌افزار (پایتون، C، جاوااسکریپت)
                   و استراتژیست محتوا است. او خالق اولین ربات فارسی‌زبان دیسکورد
@@ -1501,9 +1503,9 @@
               </details>
               <details class="faq-item">
                 <summary>
-                  <h3>مهم‌ترین پروژه‌های محمد رسول سهرابی کدامند؟</h3>
+                  <h3 class="faq-question">مهم‌ترین پروژه‌های محمد رسول سهرابی کدامند؟</h3>
                 </summary>
-                <p>
+                <p class="faq-answer">
                   مهم‌ترین پروژه‌های او شامل «اولین ربات فارسی‌زبان دیسکورد» با
                   تأیید رسمی دیسکورد، و مجموعه‌ای از پروژه‌های برنامه‌نویسی
                   متن‌باز با زبان‌های C و پایتون است که در همکاری با دانشگاه‌ها
@@ -1512,9 +1514,9 @@
               </details>
               <details class="faq-item">
                 <summary>
-                  <h3>چگونه می‌توان با محمد رسول سهرابی ارتباط برقرار کرد؟</h3>
+                  <h3 class="faq-question">چگونه می‌توان با محمد رسول سهرابی ارتباط برقرار کرد؟</h3>
                 </summary>
-                <p>
+                <p class="faq-answer">
                   می‌توانید از طریق ایمیل rasoul.unlimited@gmail.com، یا شبکه‌های
                   اجتماعی مانند لینکدین، گیت‌هاب، تلگرام و اینستاگرام با او در
                   ارتباط باشید. لینک‌های مستقیم در بخش «تماس و پیوندهای من» موجود
@@ -1523,9 +1525,9 @@
               </details>
               <details class="faq-item">
                 <summary>
-                  <h3>«آنلیمیتد» به چه معناست و چرا این لقب انتخاب شده است؟</h3>
+                  <h3 class="faq-question">«آنلیمیتد» به چه معناست و چرا این لقب انتخاب شده است؟</h3>
                 </summary>
-                <p>
+                <p class="faq-answer">
                   لقب «آنلیمیتد» (Unlimited) به معنای «نامحدود» است و فلسفه شخصی
                   محمد رسول سهرابی در زندگی و کار را بازتاب می‌دهد؛ اینکه او
                   محدودیت‌ها را به چالش می‌کشد و همواره به دنبال فراتر رفتن از
@@ -1732,7 +1734,7 @@
           <span>|</span>
           <a href="https://rasoulunlimited.ir/en" class="lang-link">English</a>
         </div>
-        <nav class="footer-links">
+        <nav class="footer-links" role="navigation" aria-label="لینک‌های فوتر">
           <a href="/faq" class="footer-link">سؤالات متداول</a>
           <a href="#connect" class="footer-link">ارتباط با من</a>
           <a href="#about" class="footer-link">درباره من</a>
@@ -1744,7 +1746,7 @@
           <img
             class="u-photo"
             src="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp"
-            alt="Rasoul Unlimited"
+            alt="تصویر پروفایل محمد رسول سهرابی"
             loading="lazy"
           />
           <p class="p-note">
