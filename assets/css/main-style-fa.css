@@ -64,6 +64,24 @@
   --navbar-height: 80px;
 }
 
+/* Skip Link for Accessibility */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--primary-color);
+  color: white;
+  padding: 8px;
+  z-index: 9999;
+  text-decoration: none;
+  font-weight: bold;
+  transition: top 0.3s ease-in-out;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
 /* Footer Links */
 .footer-links {
   margin-top: 1rem;
@@ -287,7 +305,8 @@ textarea:focus:not(:focus-visible) {
 .contact-info a:focus-visible,
 .connect-links-block ul li a:focus-visible,
 .testimonial-item:focus-within,
-.empty-testimonials-state:focus-within {
+.empty-testimonials-state:focus-within,
+.faq-item summary:focus-visible { /* Added FAQ summary focus */
   outline: none;
   box-shadow: 0 0 0 3px var(--accent-color), 0 0 0 6px var(--shadow-color-light);
   z-index: 5;
@@ -300,7 +319,8 @@ textarea:focus:not(:focus-visible) {
 
 .card:focus-within > *,
 .timeline li:focus-within .timeline-content > *,
-.testimonial-item:focus-within > * {
+.testimonial-item:focus-within > *,
+.faq-item summary:focus-within > * { /* Added FAQ summary child focus */
   outline: none;
   box-shadow: none;
 }
@@ -334,7 +354,7 @@ textarea:focus:not(:focus-visible) {
 }
 
 .footer-link:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(100, 100, 100, 0.1);
   color: #fff;
 }
 
@@ -1123,10 +1143,7 @@ section h2::after {
   list-style: none; /* Removes default marker */
 }
 
-.faq-item summary::-webkit-details-marker {
-  display: none; /* Removes default marker for Webkit browsers */
-}
-
+/* Custom marker for details summary */
 .faq-item summary::after {
   content: "\25c0"; /* Left-pointing triangle */
   position: absolute;
