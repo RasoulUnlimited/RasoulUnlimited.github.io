@@ -11,7 +11,7 @@
     <foaf:title>Biomedical Engineering Student, Software Developer</foaf:title>
 
     <foaf:homepage rdf:resource="https://rasoulunlimited.ir" />
-    <foaf:img rdf:resource="https://rasoulunlimited.ir/images/RasoulUnlimited.webp" />
+    <foaf:img rdf:resource="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp" />
     <foaf:workplaceHomepage rdf:resource="https://ctb.iau.ir" />
     <foaf:schoolHomepage rdf:resource="https://ctb.iau.ir" />
 
