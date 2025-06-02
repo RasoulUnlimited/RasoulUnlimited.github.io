@@ -261,7 +261,7 @@ body {
   direction: ltr; /* Default direction, overridden by rtl in specific sections */
 
   transition: background-color var(--transition-duration-medium)
-      var(--transition-easing-standard),
+    var(--transition-easing-standard),
     color var(--transition-duration-medium) var(--transition-easing-standard),
     background var(--transition-duration-medium)
       var(--transition-easing-standard);
@@ -341,11 +341,11 @@ textarea:focus:not(:focus-visible) {
   border: 1px solid var(--border-color);
 
   transition: background var(--transition-duration-medium)
-      var(--transition-easing-standard),
+    var(--transition-easing-standard),
     box-shadow var(--transition-duration-medium)
-      var(--transition-easing-standard),
+    var(--transition-easing-standard),
     border-color var(--transition-duration-medium)
-      var(--transition-easing-standard);
+    var(--transition-easing-standard);
 }
 
 /* Footer Link Styles */
@@ -377,11 +377,11 @@ textarea:focus:not(:focus-visible) {
   justify-content: center;
 
   transition: background-color var(--transition-duration-medium)
-      var(--transition-easing-standard),
+    var(--transition-easing-standard),
     box-shadow var(--transition-duration-medium)
-      var(--transition-easing-standard),
+    var(--transition-easing-standard),
     border-color var(--transition-duration-medium)
-      var(--transition-easing-standard);
+    var(--transition-easing-standard);
 }
 
 .navbar nav a {
@@ -391,7 +391,7 @@ textarea:focus:not(:focus-visible) {
   font-weight: 500;
   font-size: 1.05rem;
   transition: color var(--transition-duration-short)
-      var(--transition-easing-standard),
+    var(--transition-easing-standard),
     transform var(--transition-duration-short) var(--transition-easing-springy);
   position: relative;
   padding-bottom: var(--space-xs);
@@ -464,11 +464,11 @@ textarea:focus:not(:focus-visible) {
   border: 8px solid var(--accent-color);
   box-shadow: 0 15px 35px var(--shadow-color-medium);
   transition: transform var(--transition-duration-medium)
-      var(--transition-easing-springy),
+    var(--transition-easing-springy),
     box-shadow var(--transition-duration-medium)
-      var(--transition-easing-standard),
+    var(--transition-easing-standard),
     border-color var(--transition-duration-medium)
-      var(--transition-easing-standard);
+    var(--transition-easing-standard);
   z-index: 1;
   position: relative;
   max-width: 90%;
@@ -613,13 +613,13 @@ section h2::after {
   justify-content: space-between;
 
   transition: transform var(--transition-duration-medium)
-      var(--transition-easing-standard),
+    var(--transition-easing-standard),
     box-shadow var(--transition-duration-medium)
-      var(--transition-easing-standard),
+    var(--transition-easing-standard),
     background-color var(--transition-duration-medium)
-      var(--transition-easing-standard),
+    var(--transition-easing-standard),
     border-color var(--transition-duration-medium)
-      var(--transition-easing-standard);
+    var(--transition-easing-standard);
   text-align: left;
   overflow: hidden;
   position: relative;
@@ -780,7 +780,7 @@ section h2::after {
   padding: var(--space-xs) var(--space-sm);
   border-radius: var(--border-radius-sm);
   transition: background-color var(--transition-duration-short)
-      var(--transition-easing-standard),
+    var(--transition-easing-standard),
     color var(--transition-duration-short) var(--transition-easing-standard),
     transform var(--transition-duration-short) var(--transition-easing-springy);
   outline: none;
@@ -880,10 +880,10 @@ section h2::after {
   font-weight: 500;
   border: 1px solid var(--border-color);
   transition: background-color var(--transition-duration-short)
-      var(--transition-easing-standard),
+    var(--transition-easing-standard),
     transform var(--transition-duration-short) var(--transition-easing-springy),
     box-shadow var(--transition-duration-short)
-      var(--transition-easing-standard),
+    var(--transition-easing-standard),
     color var(--transition-duration-short) var(--transition-easing-standard);
   cursor: pointer;
   display: inline-flex;
@@ -904,7 +904,7 @@ section h2::after {
   width: 1em;
   text-align: center;
   transition: color var(--transition-duration-short)
-      var(--transition-easing-standard),
+    var(--transition-easing-standard),
     transform var(--transition-duration-short) var(--transition-easing-springy);
 }
 #skills .skills-list li:hover i,
@@ -975,9 +975,9 @@ section h2::after {
   border-radius: var(--border-radius-full);
   z-index: 1;
   transition: background-color var(--transition-duration-short)
-      var(--transition-easing-standard),
+    var(--transition-easing-standard),
     border-color var(--transition-duration-short)
-      var(--transition-easing-standard),
+    var(--transition-easing-standard),
     transform var(--transition-duration-short) var(--transition-easing-springy);
 }
 
@@ -1000,13 +1000,13 @@ section h2::after {
   border-radius: var(--border-radius-md);
   box-shadow: 0 4px 15px var(--shadow-color-light);
   transition: transform var(--transition-duration-short)
-      var(--transition-easing-springy),
+    var(--transition-easing-springy),
     box-shadow var(--transition-duration-short)
-      var(--transition-easing-standard),
+    var(--transition-easing-standard),
     background-color var(--transition-duration-short)
-      var(--transition-easing-standard),
+    var(--transition-easing-standard),
     border-color var(--transition-duration-short)
-      var(--transition-easing-standard);
+    var(--transition-easing-standard);
   z-index: 1;
   outline: none;
   direction: rtl; /* Force RTL for content within timeline items */
@@ -1347,7 +1347,7 @@ section h2::after {
   color: var(--primary-color);
   text-decoration: none;
   transition: color var(--transition-duration-short)
-      var(--transition-easing-standard),
+    var(--transition-easing-standard),
     transform var(--transition-duration-short) var(--transition-easing-springy);
   display: inline-flex;
   align-items: center;
@@ -1375,7 +1375,7 @@ section h2::after {
   width: 1em;
   text-align: center;
   transition: transform var(--transition-duration-short)
-      var(--transition-easing-springy),
+    var(--transition-easing-springy),
     color var(--transition-duration-short) var(--transition-easing-standard);
 }
 .contact-info a:hover i,
@@ -1439,10 +1439,10 @@ section h2::after {
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius-sm);
   transition: background-color var(--transition-duration-short)
-      var(--transition-easing-standard),
+    var(--transition-easing-standard),
     transform var(--transition-duration-short) var(--transition-easing-springy),
     box-shadow var(--transition-duration-short)
-      var(--transition-easing-standard);
+    var(--transition-easing-standard);
 
   opacity: 1;
   transform: none;
@@ -1505,9 +1505,9 @@ section h2::after {
   direction: ltr; /* Default LTR for footer */
 
   transition: color var(--transition-duration-medium)
-      var(--transition-easing-standard),
+    var(--transition-easing-standard),
     border-color var(--transition-duration-medium)
-      var(--transition-easing-standard);
+    var(--transition-easing-standard);
 }
 .footer p {
   margin-top: var(--space-sm);
@@ -1710,9 +1710,9 @@ section h2::after {
     transform: none !important;
     box-shadow: 0 6px 20px var(--shadow-color-medium);
     transition: transform var(--transition-duration-short)
-        var(--transition-easing-springy),
+      var(--transition-easing-springy),
       box-shadow var(--transition-duration-short)
-        var(--transition-easing-standard);
+      var(--transition-easing-standard);
     text-align: left;
   }
   .card:hover {
