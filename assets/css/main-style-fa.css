@@ -1141,6 +1141,7 @@ section h2::after {
   outline: none;
   position: relative;
   list-style: none; /* Removes default marker */
+  touch-action: manipulation; /* Improves responsiveness on touch devices */
 }
 
 /* Custom marker for details summary */
@@ -1356,6 +1357,10 @@ section h2::after {
   flex-direction: row; /* Ensure icon is to the left of text */
   direction: ltr; /* Force LTR */
   text-align: left;
+  /* Ensure touch target size is adequate */
+  min-height: 44px; /* WCAG recommendation for touch targets */
+  padding-left: var(--space-sm);
+  padding-right: var(--space-sm);
 }
 .contact-info a:hover,
 .contact-info a:focus-visible {
@@ -1465,6 +1470,10 @@ section h2::after {
   padding: 0;
   direction: ltr; /* Force LTR for link text */
   text-align: center;
+  /* Ensure touch target size is adequate */
+  min-height: 44px; /* WCAG recommendation for touch targets */
+  padding-left: var(--space-sm);
+  padding-right: var(--space-sm);
 }
 .connect-links-block ul li a:hover,
 .connect-links-block ul li a:focus-visible {
@@ -1768,6 +1777,7 @@ section h2::after {
   .card .card-links a {
     font-size: 0.9rem;
     padding: var(--space-xxs) var(--space-sm);
+    min-height: 38px; /* Adjusted for smaller screens */
   }
 
   #skills .skills-list li {
