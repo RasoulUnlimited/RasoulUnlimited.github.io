@@ -1,10 +1,10 @@
 /*
-  Style Sheet for Rasoul Unlimited's Official Digital Hub
-  Author: Mohammad Rasoul Sohrabi (Rasoul Unlimited)
-  Custom styles and variable definitions
-  */
+ * Style Sheet for Rasoul Unlimited's Official Digital Hub
+ * Author: Mohammad Rasoul Sohrabi (Rasoul Unlimited)
+ * Custom styles and variable definitions
+ */
 
-:root {
+ :root {
   --primary-color: #005a9e;
   --secondary-color: #1a1a1a;
   --accent-color: #007acc;
@@ -64,6 +64,27 @@
   --navbar-height: 80px;
 }
 
+/* Footer Links */
+.footer-links {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.footer-link {
+  color: var(--faq-link-color, #555);
+  font-size: 0.9rem;
+  text-decoration: none;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.footer-link:hover {
+  background-color: rgba(100, 100, 100, 0.1);
+  color: var(--faq-link-hover-color, #0f172a);
+}
+
+/* Micro Profile in Footer */
 .micro-profile {
   font-size: 0.75rem;
   color: #555;
@@ -92,6 +113,7 @@
   text-decoration: underline;
 }
 
+/* Theme Switch (Dark/Light Mode Toggle) */
 .theme-switch {
   position: relative;
   display: inline-block;
@@ -132,7 +154,7 @@
 
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
-  content: "\f185";
+  content: "\f185"; /* Sun icon for light mode */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -150,11 +172,11 @@ input:focus + .slider {
 
 input:checked + .slider:before {
   transform: translateX(24px);
-
-  content: "\f186";
+  content: "\f186"; /* Moon icon for dark mode */
   color: white;
 }
 
+/* Dark Mode Specific Styles */
 .dark-mode {
   --primary-color: #61dafb;
   --secondary-color: #f0f0f0;
@@ -188,6 +210,7 @@ input:checked + .slider:before {
   --giscus-border: 1px solid var(--border-color);
 }
 
+/* Base Styles */
 *,
 *::before,
 *::after {
@@ -217,7 +240,7 @@ body {
   overflow-x: hidden;
   animation: backgroundGradient 20s ease infinite;
   background-size: 200% 200%;
-  direction: ltr;
+  direction: ltr; /* Default direction, overridden by rtl in specific sections */
 
   transition: background-color var(--transition-duration-medium)
       var(--transition-easing-standard),
@@ -238,6 +261,7 @@ body {
   }
 }
 
+/* Accessibility Focus Styles */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
@@ -281,6 +305,7 @@ textarea:focus:not(:focus-visible) {
   box-shadow: none;
 }
 
+/* Layout Container */
 .container {
   max-width: var(--max-content-width);
   width: 100%;
@@ -303,6 +328,17 @@ textarea:focus:not(:focus-visible) {
       var(--transition-easing-standard);
 }
 
+/* Footer Link Styles */
+.footer-link {
+  color: #bbb; /* Specific color for footer links */
+}
+
+.footer-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+/* Navbar (Fixed Header) */
 .navbar {
   position: fixed;
   top: 0;
@@ -367,13 +403,14 @@ textarea:focus:not(:focus-visible) {
   width: 100%;
 }
 
+/* Hero Section (Main Introduction) */
 #hero {
   position: relative;
   padding-top: var(--section-v-padding);
   padding-bottom: var(--space-xxxl);
   margin-bottom: var(--section-margin-bottom);
   text-align: center;
-  direction: ltr;
+  direction: ltr; /* LTR for English text, overridden by RTL for Persian */
   overflow: hidden;
 }
 
@@ -447,6 +484,7 @@ h1 {
   margin-top: 0;
 }
 
+/* General Section Styles */
 section {
   margin-bottom: var(--section-margin-bottom);
   padding-top: var(--section-v-padding);
@@ -501,8 +539,9 @@ section h2::after {
   border-radius: 2.5px;
 }
 
+/* About Section Paragraphs */
 #about p {
-  text-align: justify;
+  text-align: justify; /* Keeps original justify */
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
@@ -513,6 +552,7 @@ section h2::after {
   text-align: right;
 }
 
+/* General Link Styles within Content Area */
 .content-area
   a:not(.navbar nav a):not(.card .card-links a):not(.contact-info a):not(
     .connect-links-block ul li a
@@ -532,15 +572,16 @@ section h2::after {
   text-decoration: none;
 }
 
+/* Grid Container for Cards */
 .grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: var(--space-lg);
   padding: 0;
-
   align-items: stretch;
 }
 
+/* Card Styles (for Projects and Content) */
 .card {
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
@@ -593,6 +634,7 @@ section h2::after {
   transform: translateY(0);
 }
 
+/* Image Placeholders within Cards */
 .project-image-placeholder,
 .content-image-placeholder {
   width: calc(100% + var(--space-md) * 2);
@@ -624,10 +666,11 @@ section h2::after {
   transform: scale(1.05);
 }
 
+/* Language Switcher */
 .lang-switcher {
   text-align: center;
   margin: 10px 0;
-  font-family: "Vazirmatn", sans-serif;
+  font-family: "Vazirmatn", sans-serif; /* Assuming Vazirmatn is desired for Persian */
   font-size: 14px;
   color: var(--text-color-light);
 }
@@ -650,6 +693,7 @@ section h2::after {
   color: var(--lang-switcher-active-color);
 }
 
+/* Card Headings and Paragraphs */
 .card h3 {
   font-family: "Montserrat", sans-serif;
   margin-top: 0;
@@ -673,6 +717,7 @@ section h2::after {
   text-align: right;
 }
 
+/* Card Meta Information (e.g., programming language, team size) */
 .card .card-meta {
   font-size: 0.95rem;
   color: var(--text-color-light);
@@ -687,13 +732,14 @@ section h2::after {
 }
 
 .card .card-meta i {
-  margin-left: var(--space-xs);
+  margin-left: var(--space-xs); /* Adjust for RTL */
   margin-right: 0;
   color: var(--primary-color);
   width: 1em;
   text-align: center;
 }
 
+/* Card Links (e.g., GitHub, Zenodo) */
 .card .card-links {
   margin-top: var(--space-sm);
   padding-top: var(--space-sm);
@@ -718,8 +764,8 @@ section h2::after {
     color var(--transition-duration-short) var(--transition-easing-standard),
     transform var(--transition-duration-short) var(--transition-easing-springy);
   outline: none;
-  flex-direction: row;
-  direction: ltr;
+  flex-direction: row; /* Ensure icon is to the left of text */
+  direction: ltr; /* Force LTR for links with icons */
   text-align: left;
   color: var(--primary-color);
   text-decoration: none;
@@ -738,7 +784,7 @@ section h2::after {
   color: white;
 }
 .card .card-links a i {
-  margin-right: var(--space-xs);
+  margin-right: var(--space-xs); /* Adjust for LTR link text */
   margin-left: 0;
   color: var(--primary-color);
   width: 1em;
@@ -747,6 +793,7 @@ section h2::after {
     var(--transition-easing-standard);
 }
 
+/* Featured Card Styles */
 .card.is-featured {
   border-color: var(--highlight-color);
   box-shadow: 0 8px 25px var(--shadow-color-medium),
@@ -769,6 +816,7 @@ section h2::after {
     0 0 0 6px var(--shadow-color-light), 0 8px 25px var(--shadow-color-medium);
 }
 
+/* Mention Card Icon Placeholder */
 .mention-icon-placeholder {
   width: calc(100% + var(--space-md) * 2);
   margin: calc(-1 * var(--space-md)) calc(-1 * var(--space-md)) var(--space-md)
@@ -793,6 +841,7 @@ section h2::after {
   transform: scale(1.1) rotate(5deg);
 }
 
+/* Skills Section */
 #skills .skills-list {
   list-style: none;
   padding: 0;
@@ -829,7 +878,7 @@ section h2::after {
   box-shadow: 0 3px 8px var(--shadow-color-light);
 }
 #skills .skills-list li i {
-  margin-right: var(--space-xs);
+  margin-right: var(--space-xs); /* Adjust for RTL */
   margin-left: 0;
   color: var(--primary-color);
   width: 1em;
@@ -844,6 +893,7 @@ section h2::after {
   transform: scale(1.1);
 }
 
+/* Timeline Section */
 #timeline {
   position: relative;
 }
@@ -856,7 +906,7 @@ section h2::after {
   width: 100%;
   padding: var(--space-md) 0;
   list-style: none;
-  direction: ltr;
+  direction: ltr; /* Force LTR for timeline structure */
 }
 
 .timeline::after {
@@ -897,7 +947,7 @@ section h2::after {
   position: absolute;
   width: var(--space-lg);
   height: var(--space-lg);
-  right: -14px;
+  right: -14px; /* Adjust for RTL */
   left: auto;
   background-color: var(--accent-color);
   border: 4px solid var(--timeline-dot-border-color);
@@ -912,7 +962,7 @@ section h2::after {
 }
 
 .timeline li:nth-child(even)::after {
-  left: -14px;
+  left: -14px; /* Adjust for RTL */
   right: auto;
 }
 
@@ -939,7 +989,7 @@ section h2::after {
       var(--transition-easing-standard);
   z-index: 1;
   outline: none;
-  direction: rtl;
+  direction: rtl; /* Force RTL for content within timeline items */
   text-align: right;
   border: 1px solid var(--timeline-content-border-color);
 }
@@ -979,12 +1029,12 @@ section h2::after {
   border-width: 8px;
   border-style: solid;
   border-color: transparent transparent transparent var(--card-bg);
-  right: -16px;
+  right: -16px; /* Adjust for RTL */
   left: auto;
 }
 
 .timeline li:nth-child(even) .timeline-content::before {
-  left: -16px;
+  left: -16px; /* Adjust for RTL */
   right: auto;
   border-color: transparent var(--card-bg) transparent transparent;
 }
@@ -997,13 +1047,13 @@ section h2::after {
   border-style: solid;
   border-color: transparent transparent transparent
     var(--timeline-content-border-color);
-  right: -18px;
+  right: -18px; /* Adjust for RTL */
   left: auto;
   z-index: -1;
 }
 
 .timeline li:nth-child(even) .timeline-content::after {
-  left: -18px;
+  left: -18px; /* Adjust for RTL */
   right: auto;
   border-color: transparent var(--timeline-content-border-color) transparent
     transparent;
@@ -1031,10 +1081,76 @@ section h2::after {
   font-weight: 500;
   margin-bottom: var(--space-sm);
   display: block;
-  direction: ltr;
+  direction: ltr; /* Force LTR for dates */
   text-align: left;
 }
 
+/* FAQ Section Styling */
+.faq-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  max-width: 800px;
+  margin: var(--space-xl) auto;
+}
+
+.faq-item {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  box-shadow: 0 4px 15px var(--shadow-color-light);
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+  direction: rtl;
+  text-align: right;
+}
+
+.faq-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px var(--shadow-color-medium);
+}
+
+.faq-item summary {
+  display: block; /* Ensures full clickable area */
+  padding: var(--space-md);
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--secondary-color);
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  list-style: none; /* Removes default marker */
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none; /* Removes default marker for Webkit browsers */
+}
+
+.faq-item summary::after {
+  content: "\25c0"; /* Left-pointing triangle */
+  position: absolute;
+  left: var(--space-md);
+  top: 50%;
+  transform: translateY(-50%) rotate(0deg);
+  transition: transform 0.2s ease-in-out;
+  color: var(--primary-color);
+}
+
+.faq-item[open] summary::after {
+  transform: translateY(-50%) rotate(-90deg); /* Down-pointing triangle when open */
+}
+
+.faq-item p {
+  padding: 0 var(--space-md) var(--space-md);
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-color);
+  text-align: justify;
+}
+
+/* Testimonials Section */
 .testimonial-item {
   background-color: var(--card-bg);
   padding: var(--space-lg);
@@ -1059,12 +1175,12 @@ section h2::after {
 }
 
 .testimonial-item::before {
-  content: "\201C";
+  content: "\201C"; /* Left double quotation mark */
   font-size: 5em;
   color: var(--primary-color);
   position: absolute;
   top: var(--space-xs);
-  right: var(--space-md);
+  right: var(--space-md); /* Adjust for RTL */
   left: auto;
   opacity: 0.08;
   font-family: "Georgia", serif;
@@ -1132,6 +1248,7 @@ section h2::after {
   border-radius: 12px;
 }
 
+/* Utility Classes */
 .text-right {
   text-align: right;
 }
@@ -1150,6 +1267,7 @@ section h2::after {
   margin-top: 0.5rem;
 }
 
+/* Connect Section */
 #connect {
   text-align: center;
   background: linear-gradient(
@@ -1175,13 +1293,13 @@ section h2::after {
   max-width: 900px;
   margin: 0 auto;
   align-items: flex-start;
-  direction: ltr;
+  direction: ltr; /* Default LTR, inner blocks handle RTL */
 }
 
 .connect-info-block {
   flex: 1;
   min-width: 280px;
-  direction: rtl;
+  direction: rtl; /* Force RTL for this block */
   text-align: right;
 }
 .connect-info-block p {
@@ -1204,7 +1322,7 @@ section h2::after {
   font-weight: 500;
   color: var(--secondary-color);
   margin-bottom: var(--space-md);
-  direction: ltr;
+  direction: ltr; /* Force LTR for contact info links */
 }
 .contact-info a {
   margin-top: var(--space-sm);
@@ -1218,8 +1336,8 @@ section h2::after {
   padding: var(--space-xs) 0;
   border-radius: var(--border-radius-sm);
   outline: none;
-  flex-direction: row;
-  direction: ltr;
+  flex-direction: row; /* Ensure icon is to the left of text */
+  direction: ltr; /* Force LTR */
   text-align: left;
 }
 .contact-info a:hover,
@@ -1229,7 +1347,7 @@ section h2::after {
   transform: translateX(5px);
 }
 .contact-info i {
-  margin-right: var(--space-sm);
+  margin-right: var(--space-sm); /* Adjust for LTR */
   margin-left: 0;
   color: var(--accent-color);
   width: 1em;
@@ -1249,25 +1367,25 @@ section h2::after {
   font-size: 1rem;
   color: var(--text-color-light);
   font-weight: 400;
-  direction: rtl;
+  direction: rtl; /* Force RTL for location/education text */
   text-align: right;
 }
 #connect .location-edu i {
-  margin-right: var(--space-xs);
+  margin-right: var(--space-xs); /* Adjust for RTL */
   margin-left: 0;
   color: var(--text-color-light);
   width: auto;
   text-align: left;
 }
 #connect .location-edu i:last-child {
-  margin-right: var(--space-md);
+  margin-right: var(--space-md); /* Adjust for RTL */
   margin-left: 0;
 }
 
 .connect-links-block {
   flex: 1;
   min-width: 250px;
-  direction: ltr;
+  direction: ltr; /* Default LTR, individual links handle their direction */
   text-align: left;
 }
 .connect-links-block h3 {
@@ -1328,7 +1446,7 @@ section h2::after {
   justify-content: center;
   outline: none;
   padding: 0;
-  direction: ltr;
+  direction: ltr; /* Force LTR for link text */
   text-align: center;
 }
 .connect-links-block ul li a:hover,
@@ -1337,7 +1455,7 @@ section h2::after {
   text-decoration: none;
 }
 .connect-links-block ul li i {
-  margin-right: var(--space-sm);
+  margin-right: var(--space-sm); /* Adjust for LTR */
   margin-left: 0;
   color: var(--accent-color);
   width: 1em;
@@ -1350,6 +1468,7 @@ section h2::after {
   color: var(--primary-color);
 }
 
+/* Footer Styles */
 .footer {
   margin-top: var(--space-md);
   font-size: 0.95rem;
@@ -1357,7 +1476,7 @@ section h2::after {
   border-top: 1px solid var(--border-color);
   padding: var(--space-xl) 0;
   text-align: center;
-  direction: ltr;
+  direction: ltr; /* Default LTR for footer */
 
   transition: color var(--transition-duration-medium)
       var(--transition-easing-standard),
@@ -1369,10 +1488,11 @@ section h2::after {
   margin-bottom: 0;
   font-size: 0.9rem;
   color: var(--footer-color);
-  direction: ltr;
+  direction: ltr; /* Default LTR for footer paragraphs */
   text-align: center;
 }
 
+/* Responsive Adjustments */
 @media (max-width: 1200px) {
   .container {
     padding: 0 var(--space-md);
