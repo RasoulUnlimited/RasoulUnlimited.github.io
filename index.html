@@ -733,20 +733,23 @@
     </script>
   </head>
   <body>
+    <!-- Skip Link for Accessibility -->
+    <a href="#main-content" class="skip-link">پرش به محتوای اصلی</a>
+
     <div id="theme-toast" role="status" aria-live="polite"></div>
 
     <div class="navbar">
       <nav data-aos="fade-down" role="navigation" aria-label="منوی اصلی سایت">
-        <a href="#hero" title="بازگشت به صفحه اصلی">صفحه اصلی</a>
-        <a href="#about" title="درباره محمد رسول سهرابی بیشتر بدانید">درباره من</a>
-        <a href="#timeline" title="مسیر تحصیلی و حرفه‌ای من">مسیر من</a>
-        <a href="#skills" title="مهارت‌ها و تکنولوژی‌های من">مهارت‌ها</a>
-        <a href="#projects" title="پروژه‌های توسعه نرم‌افزار من">پروژه‌ها</a>
-        <a href="#content" title="محتوا و مقالات من">محتوا</a>
-        <a href="#mentions" title="حضور در رسانه‌ها و افتخارات">اشارات</a>
-        <a href="#faq" title="سوالات متداول درباره من و فعالیت‌هایم">سوالات متداول</a>
-        <a href="#testimonials" title="نظرات دیگران درباره من و پروژه‌هایم">نظرات</a>
-        <a href="#connect" title="راه‌های ارتباط با محمد رسول سهرابی">ارتباط</a>
+        <a href="#hero" title="بازگشت به صفحه اصلی" aria-label="صفحه اصلی">صفحه اصلی</a>
+        <a href="#about" title="درباره محمد رسول سهرابی بیشتر بدانید" aria-label="درباره من">درباره من</a>
+        <a href="#timeline" title="مسیر تحصیلی و حرفه‌ای من" aria-label="مسیر من">مسیر من</a>
+        <a href="#skills" title="مهارت‌ها و تکنولوژی‌های من" aria-label="مهارت‌ها">مهارت‌ها</a>
+        <a href="#projects" title="پروژه‌های توسعه نرم‌افزار من" aria-label="پروژه‌ها">پروژه‌ها</a>
+        <a href="#content" title="محتوا و مقالات من" aria-label="محتوا">محتوا</a>
+        <a href="#mentions" title="حضور در رسانه‌ها و افتخارات" aria-label="اشارات">اشارات</a>
+        <a href="#faq" title="سوالات متداول درباره من و فعالیت‌هایم" aria-label="سوالات متداول">سوالات متداول</a>
+        <a href="#testimonials" title="نظرات دیگران درباره من و پروژه‌هایم" aria-label="نظرات">نظرات</a>
+        <a href="#connect" title="راه‌های ارتباط با محمد رسول سهرابی" aria-label="ارتباط">ارتباط</a>
         <a
           href="https://rasoulunlimited.ir/en/"
           class="lang-switcher"
@@ -769,6 +772,8 @@
             data-aos="fade-zoom-in"
             data-aos-easing="ease-in-back"
             data-aos-delay="300"
+            role="region"
+            aria-labelledby="hero-heading"
           >
             <img
               src="assets/images/RasoulUnlimited.webp"
@@ -779,12 +784,12 @@
               width="220"
               height="220"
             />
-            <h1>Rasoul Unlimited | محمد رسول سهرابی</h1>
+            <h1 id="hero-heading">Rasoul Unlimited | محمد رسول سهرابی</h1>
             <p class="tagline">دانشجوی مهندسی پزشکی، توسعه‌دهنده و استراتژیست برند</p>
           </section>
 
-          <section id="about" data-aos="fade-right">
-            <h2>درباره من</h2>
+          <section id="about" data-aos="fade-right" role="region" aria-labelledby="about-heading">
+            <h2 id="about-heading">درباره من</h2>
             <p>
               محمد رسول سهرابی، متولد ۱۵ شهریور ۱۳۸۴ و ملقب به «آنلیمیتد»،
               نمونه‌ای کم‌نظیر از تلفیق ورزش قهرمانی (کاراته دان ۱ رسمی
@@ -805,8 +810,8 @@
             </p>
           </section>
 
-          <section id="timeline" data-aos="fade-up">
-            <h2>⏳ مسیر من</h2>
+          <section id="timeline" data-aos="fade-up" role="region" aria-labelledby="timeline-heading">
+            <h2 id="timeline-heading">⏳ مسیر من</h2>
             <ul class="timeline" aria-label="نمای کلی آموزشی و حرفه‌ای">
               <li data-aos="fade-up">
                 <div class="timeline-content">
@@ -970,88 +975,88 @@
             </ul>
           </section>
 
-          <section id="skills" data-aos="fade-left">
-            <h2>🛠️ مهارت‌ها و تکنولوژی‌ها</h2>
+          <section id="skills" data-aos="fade-left" role="region" aria-labelledby="skills-heading">
+            <h2 id="skills-heading">🛠️ مهارت‌ها و تکنولوژی‌ها</h2>
             <ul class="skills-list" aria-label="لیست مهارت‌ها و تکنولوژی‌ها">
-              <li><i class="fas fa-code" aria-hidden="true"></i> پایتون</li>
-              <li><i class="fas fa-code" aria-hidden="true"></i> C</li>
-              <li>
+              <li tabindex="0"><i class="fas fa-code" aria-hidden="true"></i> پایتون</li>
+              <li tabindex="0"><i class="fas fa-code" aria-hidden="true"></i> C</li>
+              <li tabindex="0">
                 <i class="fas fa-code" aria-hidden="true"></i> جاوااسکریپت
               </li>
-              <li>
+              <li tabindex="0">
                 <i class="fas fa-laptop-code" aria-hidden="true"></i> توسعه وب
                 (فرانت‌اند، بک‌اند)
               </li>
-              <li>
+              <li tabindex="0">
                 <i class="fas fa-server" aria-hidden="true"></i> مهندسی
                 نرم‌افزار
               </li>
-              <li>
+              <li tabindex="0">
                 <i class="fas fa-dna" aria-hidden="true"></i> مهندسی پزشکی
               </li>
-              <li>
+              <li tabindex="0">
                 <i class="fas fa-heartbeat" aria-hidden="true"></i> سلامت
                 دیجیتال
               </li>
-              <li>
+              <li tabindex="0">
                 <i class="fas fa-pencil-alt" aria-hidden="true"></i> مدیریت
                 محتوا
               </li>
-              <li>
+              <li tabindex="0">
                 <i class="fas fa-bullhorn" aria-hidden="true"></i> مدیریت
                 شبکه‌های اجتماعی
               </li>
-              <li>
+              <li tabindex="0">
                 <i class="fas fa-fist-raised" aria-hidden="true"></i> کاراته
                 (دان ۱ رسمی)
               </li>
-              <li>
+              <li tabindex="0">
                 <i class="fas fa-brain" aria-hidden="true"></i> سخت‌کوشی و نظم
               </li>
-              <li>
+              <li tabindex="0">
                 <i class="fas fa-users" aria-hidden="true"></i> کار تیمی (تجربه
                 در تیم 10 نفره)
               </li>
-              <li>
+              <li tabindex="0">
                 <i class="fas fa-search" aria-hidden="true"></i> آینده‌نگری و
                 تحلیل
               </li>
-              <li>
+              <li tabindex="0">
                 <i class="fas fa-language" aria-hidden="true"></i> انگلیسی
                 (روان)
               </li>
-              <li>
+              <li tabindex="0">
                 <i class="fas fa-language" aria-hidden="true"></i> فارسی (زبان
                 مادری)
               </li>
-              <li>
+              <li tabindex="0">
                 <i class="fab fa-react" aria-hidden="true"></i> React / React
                 Native
               </li>
-              <li><i class="fas fa-database" aria-hidden="true"></i> SQL</li>
-              <li><i class="fas fa-server" aria-hidden="true"></i> Node.js</li>
-              <li>
+              <li tabindex="0"><i class="fas fa-database" aria-hidden="true"></i> SQL</li>
+              <li tabindex="0"><i class="fas fa-server" aria-hidden="true"></i> Node.js</li>
+              <li tabindex="0">
                 <i class="fas fa-brain" aria-hidden="true"></i> یادگیری ماشین
               </li>
-              <li>
+              <li tabindex="0">
                 <i class="fas fa-mobile-alt" aria-hidden="true"></i> توسعه
                 اپلیکیشن موبایل
               </li>
-              <li>
+              <li tabindex="0">
                 <i class="fas fa-palette" aria-hidden="true"></i> طراحی UI/UX
                 (فیگما، ادوبی ایکس‌دی)
               </li>
-              <li>
+              <li tabindex="0">
                 <i class="fas fa-code-branch" aria-hidden="true"></i> پروژه‌های
                 آکادمیک و متن‌باز
               </li>
             </ul>
           </section>
 
-          <section id="projects" data-aos="fade-up">
-            <h2>💻 پروژه‌ها</h2>
+          <section id="projects" data-aos="fade-up" role="region" aria-labelledby="projects-heading">
+            <h2 id="projects-heading">💻 پروژه‌ها</h2>
             <div class="grid-container">
-              <div class="card project-card is-featured" data-aos="fade-up">
+              <div class="card project-card is-featured" data-aos="fade-up" tabindex="0">
                 <div class="project-image-placeholder">
                   <img
                     src="assets/images/placeholder-project.webp"
@@ -1146,7 +1151,7 @@
                 </div>
               </div>
 
-              <div class="card project-card" data-aos="fade-up">
+              <div class="card project-card" data-aos="fade-up" tabindex="0">
                 <div class="project-image-placeholder">
                   <img
                     src="assets/images/placeholder-code-c.webp"
@@ -1217,7 +1222,7 @@
                 </div>
               </div>
 
-              <div class="card project-card" data-aos="fade-up">
+              <div class="card project-card" data-aos="fade-up" tabindex="0">
                 <div class="project-image-placeholder">
                   <img
                     src="assets/images/placeholder-code-python.webp"
@@ -1287,11 +1292,11 @@
             </div>
           </section>
 
-          <section id="content" data-aos="fade-right">
-            <h2>✍️ محتوای منتخب</h2>
+          <section id="content" data-aos="fade-right" role="region" aria-labelledby="content-heading">
+            <h2 id="content-heading">✍️ محتوای منتخب</h2>
 
             <div class="grid-container">
-              <div class="card content-card is-featured" data-aos="fade-up">
+              <div class="card content-card is-featured" data-aos="fade-up" tabindex="0">
                 <div class="content-image-placeholder">
                   <img
                     src="assets/images/placeholder-content-virgool1.webp"
@@ -1334,7 +1339,7 @@
                 </div>
               </div>
 
-              <div class="card content-card is-featured" data-aos="fade-up">
+              <div class="card content-card is-featured" data-aos="fade-up" tabindex="0">
                 <div class="content-image-placeholder">
                   <img
                     src="assets/images/placeholder-content-virgool2.webp"
@@ -1380,7 +1385,7 @@
                 </div>
               </div>
 
-              <div class="card content-card is-featured" data-aos="fade-up">
+              <div class="card content-card is-featured" data-aos="fade-up" tabindex="0">
                 <div class="content-image-placeholder">
                   <img
                     src="assets/images/placeholder-content-virgool3.webp"
@@ -1425,7 +1430,7 @@
                 </div>
               </div>
 
-              <div class="card content-card" data-aos="fade-up">
+              <div class="card content-card" data-aos="fade-up" tabindex="0">
                 <div class="content-image-placeholder">
                   <img
                     src="assets/images/placeholder-content-medium.webp"
@@ -1467,7 +1472,7 @@
                   >
                 </div>
               </div>
-              <div class="card content-card" data-aos="fade-up">
+              <div class="card content-card" data-aos="fade-up" tabindex="0">
                 <div class="content-image-placeholder">
                   <img
                     src="assets/images/placeholder-content-devto.webp"
@@ -1513,11 +1518,11 @@
             </div>
           </section>
 
-          <section id="mentions" data-aos="fade-left">
-            <h2>📰 حضور در رسانه‌ها و افتخارات</h2>
+          <section id="mentions" data-aos="fade-left" role="region" aria-labelledby="mentions-heading">
+            <h2 id="mentions-heading">📰 حضور در رسانه‌ها و افتخارات</h2>
 
             <div class="grid-container">
-              <div class="card mention-card is-featured" data-aos="fade-up">
+              <div class="card mention-card is-featured" data-aos="fade-up" tabindex="0">
                 <div class="mention-icon-placeholder">
                   <i class="fas fa-trophy" aria-hidden="true"></i>
                 </div>
@@ -1555,11 +1560,11 @@
             </div>
           </section>
 
-          <section id="faq" data-aos="fade-up">
-            <h2>❓ سوالات متداول (FAQ)</h2>
+          <section id="faq" data-aos="fade-up" role="region" aria-labelledby="faq-heading">
+            <h2 id="faq-heading">❓ سوالات متداول (FAQ)</h2>
             <div class="faq-container">
               <details class="faq-item">
-                <summary>
+                <summary tabindex="0">
                   <h3 class="faq-question">محمد رسول سهرابی کیست؟</h3>
                 </summary>
                 <p class="faq-answer">
@@ -1570,7 +1575,7 @@
                 </p>
               </details>
               <details class="faq-item">
-                <summary>
+                <summary tabindex="0">
                   <h3 class="faq-question">مهم‌ترین پروژه‌های محمد رسول سهرابی کدامند؟</h3>
                 </summary>
                 <p class="faq-answer">
@@ -1581,7 +1586,7 @@
                 </p>
               </details>
               <details class="faq-item">
-                <summary>
+                <summary tabindex="0">
                   <h3 class="faq-question">چگونه می‌توان با محمد رسول سهرابی ارتباط برقرار کرد؟</h3>
                 </summary>
                 <p class="faq-answer">
@@ -1592,7 +1597,7 @@
                 </p>
               </details>
               <details class="faq-item">
-                <summary>
+                <summary tabindex="0">
                   <h3 class="faq-question">«آنلیمیتد» به چه معناست و چرا این لقب انتخاب شده است؟</h3>
                 </summary>
                 <p class="faq-answer">
@@ -1610,8 +1615,10 @@
             id="testimonials"
             class="testimonials-section"
             data-aos="fade-up"
+            role="region"
+            aria-labelledby="testimonials-heading"
           >
-            <h2>💬 نظر دیگران</h2>
+            <h2 id="testimonials-heading">💬 نظر دیگران</h2>
             <p class="text-small subtle-text space-top-xs text-right rtl">
               اگر تجربه‌ای از پروژه‌های من دارید، یا دوست دارید بازخوردی بدید،
               <strong>در این بخش با حساب GitHub خود</strong> وارد شوید و نظر
@@ -1640,8 +1647,8 @@
             </div>
           </section>
 
-          <section id="connect" data-aos="fade-up">
-            <h2>تماس و پیوندهای من</h2>
+          <section id="connect" data-aos="fade-up" role="region" aria-labelledby="connect-heading">
+            <h2 id="connect-heading">تماس و پیوندهای من</h2>
             <div class="connect-content">
               <div class="connect-info-block" data-aos="fade-right">
                 <p>
