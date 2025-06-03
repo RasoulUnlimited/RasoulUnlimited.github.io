@@ -253,7 +253,7 @@ body {
   margin: 0;
   padding: 0;
   color: var(--text-color);
-  line-height: 1.9; /* Adjusted for better Persian readability */
+  line-height: 2.0; /* Adjusted for better Persian readability */
   position: relative;
   padding-top: var(--navbar-height);
   min-height: 100vh;
@@ -350,7 +350,52 @@ textarea:focus:not(:focus-visible) {
     var(--transition-easing-standard);
 }
 
+/* Breadcrumb Navigation */
+.breadcrumb-nav {
+  max-width: var(--max-content-width);
+  width: 100%;
+  margin: var(--space-md) auto var(--space-sm);
+  padding: 0 var(--space-lg);
+  font-size: 0.9rem;
+  color: var(--text-color-light);
+  direction: rtl;
+  text-align: right;
+}
+
+.breadcrumb-nav ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.breadcrumb-nav li {
+  display: inline;
+}
+
+.breadcrumb-nav li + li::before {
+  content: "/\00a0"; /* Add a slash and non-breaking space */
+  padding: 0 var(--space-xxs);
+  color: var(--text-color-light);
+}
+
+.breadcrumb-nav a {
+  color: var(--text-color-link);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.breadcrumb-nav a:hover {
+  text-decoration: underline;
+}
+
 /* Footer Link Styles */
+.footer-links {
+  margin-top: 1rem;
+  text-align: center;
+}
+
 .footer-link {
   color: #bbb; /* Specific color for footer links */
 }
@@ -358,6 +403,132 @@ textarea:focus:not(:focus-visible) {
 .footer-link:hover {
   background-color: rgba(100, 100, 100, 0.1);
   color: #fff;
+}
+
+/* Micro Profile in Footer */
+.micro-profile {
+  font-size: 0.75rem;
+  color: #555;
+  opacity: 0.6;
+  text-align: center;
+  max-width: 400px;
+  margin: 2rem auto 0;
+  padding: 0.5rem 1rem;
+  border-top: 1px dashed #ccc;
+}
+.micro-profile img.u-photo {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: 0.5rem auto;
+  display: block;
+}
+.micro-profile a.u-url {
+  display: inline-block;
+  color: #0066cc;
+  font-weight: bold;
+  text-decoration: none;
+}
+.micro-profile a.u-url:hover {
+  text-decoration: underline;
+}
+
+/* Theme Switch (Dark/Light Mode Toggle) */
+.theme-switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 24px;
+  margin-left: var(--space-md);
+  vertical-align: middle;
+}
+
+.theme-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--text-color-light);
+  transition: var(--transition-duration-short);
+  border-radius: 24px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: var(--card-bg);
+  transition: var(--transition-duration-short);
+  border-radius: 50%;
+
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  content: "\f185"; /* Sun icon for light mode */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-color);
+  font-size: 0.8em;
+}
+
+input:checked + .slider {
+  background-color: var(--primary-color);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px var(--primary-color);
+}
+
+input:checked + .slider:before {
+  transform: translateX(24px);
+  content: "\f186"; /* Moon icon for dark mode */
+  color: white;
+}
+
+/* Dark Mode Specific Styles */
+.dark-mode {
+  --primary-color: #61dafb;
+  --secondary-color: #f0f0f0;
+  --accent-color: #a0a0a0;
+  --highlight-color: #fdd835;
+
+  --background-start-color: #2b2d42;
+  --background-end-color: #232533;
+  --container-bg: #1e1e1e;
+  --card-bg: #282828;
+  --navbar-bg: rgba(30, 30, 30, 0.98);
+  --giscus-bg: #1e1e1e;
+  --skills-bg: #3a3a3a;
+
+  --shadow-color-light: rgba(0, 0, 0, 0.15);
+  --shadow-color-medium: rgba(0, 0, 0, 0.3);
+  --shadow-color-strong: rgba(0, 0, 0, 0.45);
+
+  --text-color: #c0c0c0;
+  --text-color-light: #a0a0a0;
+  --text-color-link: var(--primary-color);
+  --heading-color: var(--secondary-color);
+  --tagline-color: #b0b0b0;
+  --footer-color: #a0a0a0;
+  --lang-switcher-active-color: #c0c0c0;
+
+  --border-color: #3a3a3a;
+  --timeline-line-color: #555555;
+  --timeline-dot-border-color: var(--primary-color);
+  --timeline-content-border-color: #4a4a4a;
+  --giscus-border: 1px solid var(--border-color);
 }
 
 /* Navbar (Fixed Header) */
@@ -423,46 +594,6 @@ textarea:focus:not(:focus-visible) {
 .navbar nav a:hover::after,
 .navbar nav a:focus-visible::after {
   width: 100%;
-}
-
-/* Breadcrumb Navigation */
-.breadcrumb-nav {
-  max-width: var(--max-content-width);
-  width: 100%;
-  margin: var(--space-md) auto var(--space-sm);
-  padding: 0 var(--space-lg);
-  font-size: 0.9rem;
-  color: var(--text-color-light);
-  direction: rtl;
-  text-align: right;
-}
-
-.breadcrumb-nav ol {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.breadcrumb-nav li {
-  display: inline;
-}
-
-.breadcrumb-nav li + li::before {
-  content: "/\00a0"; /* Add a slash and non-breaking space */
-  padding: 0 var(--space-xxs);
-  color: var(--text-color-light);
-}
-
-.breadcrumb-nav a {
-  color: var(--text-color-link);
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.breadcrumb-nav a:hover {
-  text-decoration: underline;
 }
 
 /* Hero Section (Main Introduction) */
@@ -609,7 +740,7 @@ section h2::after {
   margin-right: auto;
   font-size: 1.15rem;
   color: var(--text-color);
-  line-height: 1.9; /* Adjusted for better Persian readability */
+  line-height: 2.0; /* Adjusted for better Persian readability */
   direction: rtl;
   text-align: right;
 }
@@ -774,10 +905,32 @@ section h2::after {
   font-size: 1rem;
   color: var(--text-color);
   flex-grow: 1;
-  line-height: 1.7; /* Adjusted for better Persian readability */
+  line-height: 1.8; /* Adjusted for better Persian readability */
   direction: rtl;
   text-align: right;
 }
+
+/* Dopamine Microcopy */
+.dopamine-microcopy {
+  font-size: 0.9rem;
+  color: var(--primary-color); /* Use primary color for emphasis */
+  font-weight: 600;
+  margin-top: var(--space-sm);
+  margin-bottom: var(--space-md);
+  display: block;
+  text-align: right;
+  direction: rtl;
+  opacity: 0; /* Initially hidden */
+  transform: translateY(10px); /* Start slightly below */
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Smooth transition */
+}
+
+/* Show microcopy on card hover */
+.card:hover .dopamine-microcopy {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 
 /* Card Meta Information (e.g., programming language, team size) */
 .card .card-meta {
@@ -1213,7 +1366,7 @@ section h2::after {
   padding: 0 var(--space-md) var(--space-md);
   margin: 0;
   font-size: 1rem;
-  line-height: 1.7; /* Adjusted for better Persian readability */
+  line-height: 1.8; /* Adjusted for better Persian readability */
   color: var(--text-color);
   text-align: justify;
 }
