@@ -329,7 +329,7 @@
           "@type": "ProfilePage",
           "@id": "https://rasoulunlimited.ir",
           "url": "https://rasoulunlimited.ir",
-          "name": "صفحه رسمی محمد رسول سهرابی (Rasoul Unlimited)"
+          "name": "صفحه رسمی محمد رسول سهرabi (Rasoul Unlimited)"
         }
       }
     </script>
@@ -686,7 +686,14 @@
         "url": "https://rasoulunlimited.ir",
         "speakable": {
           "@type": "SpeakableSpecification",
-          "cssSelector": ["#hero h1", "#about p", "#faq h3"]
+          "cssSelector": [
+            "#hero h1",
+            "#about p",
+            "#faq h3",
+            "#projects h3",
+            "#content h3",
+            "#mentions h3"
+          ]
         }
       }
     </script>
@@ -733,23 +740,20 @@
     </script>
   </head>
   <body>
-    <!-- Skip Link for Accessibility -->
-    <a href="#main-content" class="skip-link">پرش به محتوای اصلی</a>
-
     <div id="theme-toast" role="status" aria-live="polite"></div>
 
     <div class="navbar">
       <nav data-aos="fade-down" role="navigation" aria-label="منوی اصلی سایت">
-        <a href="#hero" title="بازگشت به صفحه اصلی" aria-label="صفحه اصلی">صفحه اصلی</a>
-        <a href="#about" title="درباره محمد رسول سهرابی بیشتر بدانید" aria-label="درباره من">درباره من</a>
-        <a href="#timeline" title="مسیر تحصیلی و حرفه‌ای من" aria-label="مسیر من">مسیر من</a>
-        <a href="#skills" title="مهارت‌ها و تکنولوژی‌های من" aria-label="مهارت‌ها">مهارت‌ها</a>
-        <a href="#projects" title="پروژه‌های توسعه نرم‌افزار من" aria-label="پروژه‌ها">پروژه‌ها</a>
-        <a href="#content" title="محتوا و مقالات من" aria-label="محتوا">محتوا</a>
-        <a href="#mentions" title="حضور در رسانه‌ها و افتخارات" aria-label="اشارات">اشارات</a>
-        <a href="#faq" title="سوالات متداول درباره من و فعالیت‌هایم" aria-label="سوالات متداول">سوالات متداول</a>
-        <a href="#testimonials" title="نظرات دیگران درباره من و پروژه‌هایم" aria-label="نظرات">نظرات</a>
-        <a href="#connect" title="راه‌های ارتباط با محمد رسول سهرابی" aria-label="ارتباط">ارتباط</a>
+        <a href="#hero" title="بازگشت به صفحه اصلی">صفحه اصلی</a>
+        <a href="#about" title="درباره محمد رسول سهرابی بیشتر بدانید">درباره من</a>
+        <a href="#timeline" title="مسیر تحصیلی و حرفه‌ای من">مسیر من</a>
+        <a href="#skills" title="مهارت‌ها و تکنولوژی‌های من">مهارت‌ها</a>
+        <a href="#projects" title="پروژه‌های توسعه نرم‌افزار من">پروژه‌ها</a>
+        <a href="#content" title="محتوا و مقالات من">محتوا</a>
+        <a href="#mentions" title="حضور در رسانه‌ها و افتخارات">اشارات</a>
+        <a href="#faq" title="سوالات متداول درباره من و فعالیت‌هایم">سوالات متداول</a>
+        <a href="#testimonials" title="نظرات دیگران درباره من و پروژه‌هایم">نظرات</a>
+        <a href="#connect" title="راه‌های ارتباط با محمد رسول سهرابی">ارتباط</a>
         <a
           href="https://rasoulunlimited.ir/en/"
           class="lang-switcher"
@@ -772,8 +776,8 @@
             data-aos="fade-zoom-in"
             data-aos-easing="ease-in-back"
             data-aos-delay="300"
-            role="region"
-            aria-labelledby="hero-heading"
+            itemscope
+            itemtype="https://schema.org/Person"
           >
             <img
               src="assets/images/RasoulUnlimited.webp"
@@ -783,68 +787,71 @@
               aria-label="عکس پروفایل محمد رسول سهرابی"
               width="220"
               height="220"
+              itemprop="image"
             />
-            <h1 id="hero-heading">Rasoul Unlimited | محمد رسول سهرابی</h1>
-            <p class="tagline">دانشجوی مهندسی پزشکی، توسعه‌دهنده و استراتژیست برند</p>
+            <h1 itemprop="name">Rasoul Unlimited | محمد رسول سهرابی</h1>
+            <p class="tagline" itemprop="jobTitle">دانشجوی مهندسی پزشکی، توسعه‌دهنده و استراتژیست برند</p>
           </section>
 
-          <section id="about" data-aos="fade-right" role="region" aria-labelledby="about-heading">
-            <h2 id="about-heading">درباره من</h2>
-            <p>
+          <section id="about" data-aos="fade-right">
+            <h2>درباره من</h2>
+            <p itemprop="description">
               محمد رسول سهرابی، متولد ۱۵ شهریور ۱۳۸۴ و ملقب به «آنلیمیتد»،
               نمونه‌ای کم‌نظیر از تلفیق ورزش قهرمانی (کاراته دان ۱ رسمی
               فدراسیون)، توسعه فنی، و آینده‌نگری علمی‌ست. او دانشجوی مهندسی
               پزشکی دانشگاه تهران (واحد مرکزی) و عضو انجمن علمی مهندسی پزشکی
               دانشگاه است.
             </p>
-            <p>
+            <p itemprop="description">
               با انگیزه‌ی درونی برای تاثیرگذاری و ذهنیت «نامحدود»، از
-              راه‌اندازی پروژه <a href="#projects" title="مشاهده پروژه‌های من">اولین ربات فارسی‌زبان دیسکورد</a> با تایید رسمی
+              راه‌اندازی پروژه
+              <a href="#projects" title="مشاهده پروژه‌های من">اولین ربات فارسی‌زبان دیسکورد</a> با تایید رسمی
               دیسکورد در ۱۴ سالگی، تا انتشار مقالات در ویرگول و مشارکت در
               پروژه‌های دانشگاهی، در هر کاری سعی کرده امضای خودش را بگذارد.
             </p>
-            <p>
+            <p itemprop="description">
               او باور دارد در دنیای شلوغ امروز، فقط صدای واقعی شنیده
               می‌شود. هدف اصلی او ترکیب خلاقانه‌ مهندسی پزشکی و برنامه‌نویسی برای ایجاد
-              تحول در حوزه <a href="#skills" title="مشاهده مهارت‌های من در سلامت دیجیتال">سلامت دیجیتال</a> است و همواره فراتر از سن‌وسالش گام برمی‌دارد.
+              تحول در حوزه
+              <a href="#skills" title="مشاهده مهارت‌های من در سلامت دیجیتال">سلامت دیجیتال</a> است و همواره فراتر از سن‌وسالش گام برمی‌دارد.
             </p>
           </section>
 
-          <section id="timeline" data-aos="fade-up" role="region" aria-labelledby="timeline-heading">
-            <h2 id="timeline-heading">⏳ مسیر من</h2>
+          <section id="timeline" data-aos="fade-up">
+            <h2>⏳ مسیر من</h2>
             <ul class="timeline" aria-label="نمای کلی آموزشی و حرفه‌ای">
-              <li data-aos="fade-up">
+              <li data-aos="fade-up" itemscope itemtype="https://schema.org/Event">
                 <div class="timeline-content">
                   <div class="timeline-icon">
                     <i class="fas fa-birthday-cake" aria-hidden="true"></i>
                   </div>
-                  <h3 class="date">۱۵ شهریور ۱۳۸۴ (September 6, 2005)</h3>
-                  <h3>تولد</h3>
-                  <p>نقطه آغازین زندگی و مسیر من در این جهان.</p>
+                  <h3 class="date" itemprop="startDate" content="2005-09-06">۱۵ شهریور ۱۳۸۴ (September 6, 2005)</h3>
+                  <h3 itemprop="name">تولد</h3>
+                  <p itemprop="description">نقطه آغازین زندگی و مسیر من در این جهان.</p>
                 </div>
               </li>
-              <li data-aos="fade-up">
+              <li data-aos="fade-up" itemscope itemtype="https://schema.org/Event">
                 <div class="timeline-content">
                   <div class="timeline-icon">
                     <i class="fas fa-medal" aria-hidden="true"></i>
                   </div>
-                  <h3 class="date">سنین پایین</h3>
-                  <h3>شروع ورزش قهرمانی کاراته و کسب دان ۱</h3>
-                  <p>
+                  <h3 class="date" itemprop="startDate">سنین پایین</h3>
+                  <h3 itemprop="name">شروع ورزش قهرمانی کاراته و کسب دان ۱</h3>
+                  <p itemprop="description">
                     شروع جدی ورزش کاراته و کسب روحیه سخت‌کوشی و نظم از طریق حضور
                     در مسابقات ملی و دریافت دان ۱ رسمی فدراسیون کاراته جمهوری
                     اسلامی ایران.
                   </p>
                 </div>
               </li>
-              <li data-aos="fade-up">
+              <li data-aos="fade-up" itemscope itemtype="https://schema.org/SoftwareSourceCode">
                 <div class="timeline-content">
                   <div class="timeline-icon">
                     <i class="fab fa-discord" aria-hidden="true"></i>
                   </div>
-                  <h3 class="date">سال 2020 (14 سالگی)</h3>
-                  <h3>توسعه اولین ربات فارسی‌زبان دیسکورد (Persian Bot)</h3>
-                  <p>
+                  <h3 class="date" itemprop="dateCreated" content="2020">سال 2020 (14 سالگی)</h3>
+                  <h3 itemprop="name">توسعه اولین ربات فارسی‌زبان دیسکورد (Persian Bot)</h3>
+                  <p itemprop="description">
                     نخستین ربات مستقل فارسی‌زبان در پلتفرم دیسکورد که با مشارکت
                     یک تیم ده‌نفره توسعه یافت. این پروژه که با انگیزه‌ی ایجاد
                     تحول انجام شد، به تأیید رسمی شرکت Discord رسید و نام ایران
@@ -853,40 +860,49 @@
                   </p>
                   <div class="card-links card-links-clean">
                     <a
-                      href="https://github.com/RasoulUnlimited/Small-projects-with-c"
+                      href="https://top.gg/bot/735403725132136510"
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label="مشاهده پروژه‌های C در GitHub"
-                      title="مشاهده کد ربات فارسی در گیت‌هاب"
+                      aria-label="مشاهده ربات فارسی در Top.gg"
+                      title="مشاهده ربات فارسی در Top.gg"
                       role="button"
+                      itemprop="url"
                       ><i class="fab fa-github" aria-hidden="true"></i> مشاهده
-                      در GitHub</a
+                      در Top.gg</a
                     >
                   </div>
                 </div>
               </li>
-              <li data-aos="fade-up">
+              <li data-aos="fade-up" itemscope itemtype="https://schema.org/EducationalOccupationalExperience">
                 <div class="timeline-content">
                   <div class="timeline-icon">
                     <i class="fas fa-graduation-cap" aria-hidden="true"></i>
                   </div>
-                  <h3 class="date">پاییز ۱۴۰۲ (Fall 2023)</h3>
-                  <h3>آغاز تحصیل در مهندسی پزشکی دانشگاه تهران</h3>
-                  <p>
+                  <h3 class="date" itemprop="startDate" content="2023-09">پاییز ۱۴۰۲ (Fall 2023)</h3>
+                  <h3 itemprop="name">آغاز تحصیل در مهندسی پزشکی دانشگاه تهران</h3>
+                  <p itemprop="description">
                     ورود به دانشگاه تهران (واحد مرکزی) برای تحصیل در رشته مهندسی
                     پزشکی و تمرکز بر ترکیب دانش مهندسی و برنامه‌نویسی برای
                     حوزه سلامت دیجیتال.
                   </p>
+                  <meta itemprop="educationalLevel" content="کارشناسی" />
+                  <div itemprop="educationalProgram" itemscope itemtype="https://schema.org/EducationalProgram">
+                    <meta itemprop="name" content="مهندسی پزشکی" />
+                  </div>
+                  <div itemprop="provider" itemscope itemtype="https://schema.org/EducationalOrganization">
+                    <meta itemprop="name" content="دانشگاه تهران" />
+                    <meta itemprop="url" content="https://ut.ac.ir" />
+                  </div>
                 </div>
               </li>
-              <li data-aos="fade-up">
+              <li data-aos="fade-up" itemscope itemtype="https://schema.org/SoftwareSourceCode">
                 <div class="timeline-content">
                   <div class="timeline-icon">
                     <i class="fas fa-code" aria-hidden="true"></i>
                   </div>
-                  <h3 class="date">۱۵ آبان ۱۴۰۲ (2023 November 16)</h3>
-                  <h3>توسعه پروژه‌های برنامه‌نویسی با زبان C (دانشگاهی)</h3>
-                  <p>
+                  <h3 class="date" itemprop="dateCreated" content="2023-11-16">۱۵ آبان ۱۴۰۲ (2023 November 16)</h3>
+                  <h3 itemprop="name">توسعه پروژه‌های برنامه‌نویسی با زبان C (دانشگاهی)</h3>
+                  <p itemprop="description">
                     مجموعه‌ای از پروژه‌های برنامه‌نویسی کوچک که در چارچوب دروس
                     ترم اول دانشگاه تهران انجام شده‌اند. این پروژه‌ها با زبان C
                     نوشته شده‌اند و به صورت متن‌باز در گیت‌هاب قابل دسترسی
@@ -900,22 +916,25 @@
                       aria-label="مشاهده پروژه‌های C در GitHub"
                       title="مشاهده پروژه‌های برنامه‌نویسی C در گیت‌هاب"
                       role="button"
+                      itemprop="codeRepository"
                       ><i class="fab fa-github" aria-hidden="true"></i> مشاهده
                       در GitHub</a
                     >
                   </div>
+                  <meta itemprop="programmingLanguage" content="C" />
+                  <meta itemprop="license" content="MIT" />
                 </div>
               </li>
-              <li data-aos="fade-up">
+              <li data-aos="fade-up" itemscope itemtype="https://schema.org/SoftwareSourceCode">
                 <div class="timeline-content">
                   <div class="timeline-icon">
                     <i class="fab fa-python" aria-hidden="true"></i>
                   </div>
-                  <h3 class="date">۲۲ اسفند ۱۴۰۲ (2024 March 12)</h3>
-                  <h3>
+                  <h3 class="date" itemprop="dateCreated" content="2024-03-12">۲۲ اسفند ۱۴۰۲ (2024 March 12)</h3>
+                  <h3 itemprop="name">
                     توسعه پروژه‌های برنامه‌نویسی با زبان پایتون (دانشگاهی)
                   </h3>
-                  <p>
+                  <p itemprop="description">
                     مجموعه‌ای از پروژه‌های برنامه‌نویسی کوچک با زبان پایتون که
                     در چارچوب همکاری با دانشگاه صنعتی سهند تبریز انجام شده‌اند.
                     نویسنده این پروژه‌ها هستم و آن‌ها دارای MIT License برای
@@ -929,43 +948,54 @@
                       aria-label="مشاهده پروژه‌های پایتون در GitHub"
                       title="مشاهده پروژه‌های برنامه‌نویسی پایتون در گیت‌هاب"
                       role="button"
+                      itemprop="codeRepository"
                       ><i class="fab fa-python" aria-hidden="true"></i> مشاهده در
                       GitHub</a
                     >
                   </div>
+                  <meta itemprop="programmingLanguage" content="Python" />
+                  <meta itemprop="license" content="MIT" />
                 </div>
               </li>
-              <li data-aos="fade-up">
+              <li data-aos="fade-up" itemscope itemtype="https://schema.org/Article">
                 <div class="timeline-content">
                   <div class="timeline-icon">
                     <i class="fas fa-feather-alt" aria-hidden="true"></i>
                   </div>
-                  <h3 class="date">۲۰ اردیبهشت ۱۴۰۴ (2025 May 10)</h3>
-                  <h3>انتشار اولین مقاله معرفی در ویرگول</h3>
-                  <p>
+                  <h3 class="date" itemprop="datePublished" content="2025-05-10">۲۰ اردیبهشت ۱۴۰۴ (2025 May 10)</h3>
+                  <h3 itemprop="name">انتشار اولین مقاله معرفی در ویرگول</h3>
+                  <p itemprop="articleBody">
                     نشر مقاله "<a href="https://vrgl.ir/9D6Hy" target="_blank" rel="noopener noreferrer" title="خواندن مقاله 'از tatami تا تکنولوژی' در ویرگول">محمد رسول سهرابی (آنلیمیتد) – از tatami تا تکنولوژی</a>" به عنوان اولین معرفی جامع من در فضای دیجیتال.
                   </p>
+                  <meta itemprop="url" content="https://vrgl.ir/9D6Hy" />
+                  <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+                    <meta itemprop="name" content="ویرگول" />
+                  </div>
                 </div>
               </li>
-              <li data-aos="fade-up">
+              <li data-aos="fade-up" itemscope itemtype="https://schema.org/Article">
                 <div class="timeline-content">
                   <div class="timeline-icon">
                     <i class="fas fa-feather-alt" aria-hidden="true"></i>
                   </div>
-                  <h3 class="date">۲۳ اردیبهشت ۱۴۰۴ (2025 May 13)</h3>
-                  <h3>انتشار مقاله برند شخصی در ویرگول</h3>
-                  <p>
+                  <h3 class="date" itemprop="datePublished" content="2025-05-13">۲۳ اردیبهشت ۱۴۰۴ (2025 May 13)</h3>
+                  <h3 itemprop="name">انتشار مقاله برند شخصی در ویرگول</h3>
+                  <p itemprop="articleBody">
                     نشر مقاله "<a href="https://vrgl.ir/cUmcv" target="_blank" rel="noopener noreferrer" title="خواندن مقاله 'چطور توی دنیای شلوغ امروز، یه برند شخصی واقعی بسازیم؟' در ویرگول">چطور توی دنیای شلوغ امروز، یه برند شخصی واقعی بسازیم؟ | داستان Rasoul Unlimited</a>" که به فلسفه‌ی شخصی من
                     درباره‌ی برند شخصی و معنای لقب «آنلیمیتد» می‌پردازد.
                   </p>
+                  <meta itemprop="url" content="https://vrgl.ir/cUmcv" />
+                  <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+                    <meta itemprop="name" content="ویرگول" />
+                  </div>
                 </div>
               </li>
-              <li data-aos="fade-up">
+              <li data-aos="fade-up" itemscope itemtype="https://schema.org/Event">
                 <div class="timeline-content">
                   <div class="fas fa-stream" aria-hidden="true"></div>
-                  <h3 class="date">حال حاضر</h3>
-                  <h3>تمرکز بر سلامت دیجیتال، توسعه و مدیریت محتوا</h3>
-                  <p>
+                  <h3 class="date" itemprop="startDate">حال حاضر</h3>
+                  <h3 itemprop="name">تمرکز بر سلامت دیجیتال، توسعه و مدیریت محتوا</h3>
+                  <p itemprop="description">
                     ادامه فعالیت و تمرکز بر ترکیب دانش مهندسی پزشکی و
                     برنامه‌نویسی برای ایجاد تحول در حوزه سلامت دیجیتال، همراه با
                     تولید محتوا و مدیریت شبکه‌های اجتماعی برای تاثیرگذاری بیشتر.
@@ -975,88 +1005,38 @@
             </ul>
           </section>
 
-          <section id="skills" data-aos="fade-left" role="region" aria-labelledby="skills-heading">
-            <h2 id="skills-heading">🛠️ مهارت‌ها و تکنولوژی‌ها</h2>
+          <section id="skills" data-aos="fade-left">
+            <h2>🛠️ مهارت‌ها و تکنولوژی‌ها</h2>
             <ul class="skills-list" aria-label="لیست مهارت‌ها و تکنولوژی‌ها">
-              <li tabindex="0"><i class="fas fa-code" aria-hidden="true"></i> پایتون</li>
-              <li tabindex="0"><i class="fas fa-code" aria-hidden="true"></i> C</li>
-              <li tabindex="0">
-                <i class="fas fa-code" aria-hidden="true"></i> جاوااسکریپت
-              </li>
-              <li tabindex="0">
-                <i class="fas fa-laptop-code" aria-hidden="true"></i> توسعه وب
-                (فرانت‌اند، بک‌اند)
-              </li>
-              <li tabindex="0">
-                <i class="fas fa-server" aria-hidden="true"></i> مهندسی
-                نرم‌افزار
-              </li>
-              <li tabindex="0">
-                <i class="fas fa-dna" aria-hidden="true"></i> مهندسی پزشکی
-              </li>
-              <li tabindex="0">
-                <i class="fas fa-heartbeat" aria-hidden="true"></i> سلامت
-                دیجیتال
-              </li>
-              <li tabindex="0">
-                <i class="fas fa-pencil-alt" aria-hidden="true"></i> مدیریت
-                محتوا
-              </li>
-              <li tabindex="0">
-                <i class="fas fa-bullhorn" aria-hidden="true"></i> مدیریت
-                شبکه‌های اجتماعی
-              </li>
-              <li tabindex="0">
-                <i class="fas fa-fist-raised" aria-hidden="true"></i> کاراته
-                (دان ۱ رسمی)
-              </li>
-              <li tabindex="0">
-                <i class="fas fa-brain" aria-hidden="true"></i> سخت‌کوشی و نظم
-              </li>
-              <li tabindex="0">
-                <i class="fas fa-users" aria-hidden="true"></i> کار تیمی (تجربه
-                در تیم 10 نفره)
-              </li>
-              <li tabindex="0">
-                <i class="fas fa-search" aria-hidden="true"></i> آینده‌نگری و
-                تحلیل
-              </li>
-              <li tabindex="0">
-                <i class="fas fa-language" aria-hidden="true"></i> انگلیسی
-                (روان)
-              </li>
-              <li tabindex="0">
-                <i class="fas fa-language" aria-hidden="true"></i> فارسی (زبان
-                مادری)
-              </li>
-              <li tabindex="0">
-                <i class="fab fa-react" aria-hidden="true"></i> React / React
-                Native
-              </li>
-              <li tabindex="0"><i class="fas fa-database" aria-hidden="true"></i> SQL</li>
-              <li tabindex="0"><i class="fas fa-server" aria-hidden="true"></i> Node.js</li>
-              <li tabindex="0">
-                <i class="fas fa-brain" aria-hidden="true"></i> یادگیری ماشین
-              </li>
-              <li tabindex="0">
-                <i class="fas fa-mobile-alt" aria-hidden="true"></i> توسعه
-                اپلیکیشن موبایل
-              </li>
-              <li tabindex="0">
-                <i class="fas fa-palette" aria-hidden="true"></i> طراحی UI/UX
-                (فیگما، ادوبی ایکس‌دی)
-              </li>
-              <li tabindex="0">
-                <i class="fas fa-code-branch" aria-hidden="true"></i> پروژه‌های
-                آکادمیک و متن‌باز
-              </li>
+              <li itemprop="knowsAbout">پایتون</li>
+              <li itemprop="knowsAbout">C</li>
+              <li itemprop="knowsAbout">جاوااسکریپت</li>
+              <li itemprop="knowsAbout">توسعه وب (فرانت‌اند، بک‌اند)</li>
+              <li itemprop="knowsAbout">مهندسی نرم‌افزار</li>
+              <li itemprop="knowsAbout">مهندسی پزشکی</li>
+              <li itemprop="knowsAbout">سلامت دیجیتال</li>
+              <li itemprop="knowsAbout">مدیریت محتوا</li>
+              <li itemprop="knowsAbout">مدیریت شبکه‌های اجتماعی</li>
+              <li itemprop="knowsAbout">کاراته (دان ۱ رسمی)</li>
+              <li itemprop="knowsAbout">سخت‌کوشی و نظم</li>
+              <li itemprop="knowsAbout">کار تیمی (تجربه در تیم 10 نفره)</li>
+              <li itemprop="knowsAbout">آینده‌نگری و تحلیل</li>
+              <li itemprop="knowsAbout">انگلیسی (روان)</li>
+              <li itemprop="knowsAbout">فارسی (زبان مادری)</li>
+              <li itemprop="knowsAbout">React / React Native</li>
+              <li itemprop="knowsAbout">SQL</li>
+              <li itemprop="knowsAbout">Node.js</li>
+              <li itemprop="knowsAbout">یادگیری ماشین</li>
+              <li itemprop="knowsAbout">توسعه اپلیکیشن موبایل</li>
+              <li itemprop="knowsAbout">طراحی UI/UX (فیگما، ادوبی ایکس‌دی)</li>
+              <li itemprop="knowsAbout">پروژه‌های آکادمیک و متن‌باز</li>
             </ul>
           </section>
 
-          <section id="projects" data-aos="fade-up" role="region" aria-labelledby="projects-heading">
-            <h2 id="projects-heading">💻 پروژه‌ها</h2>
+          <section id="projects" data-aos="fade-up">
+            <h2>💻 پروژه‌ها</h2>
             <div class="grid-container">
-              <div class="card project-card is-featured" data-aos="fade-up" tabindex="0">
+              <div class="card project-card is-featured" data-aos="fade-up" itemscope itemtype="https://schema.org/SoftwareSourceCode">
                 <div class="project-image-placeholder">
                   <img
                     src="assets/images/placeholder-project.webp"
@@ -1064,24 +1044,24 @@
                     alt="تصویر پیش‌نمایش پروژه اولین ربات فارسی دیسکورد"
                     width="400"
                     height="225"
+                    itemprop="image"
                   />
                 </div>
-                <h3>اولین ربات فارسی‌زبان دیسکورد (Persian Bot)</h3>
+                <h3 itemprop="name">اولین ربات فارسی‌زبان دیسکورد (Persian Bot)</h3>
                 <div class="card-meta">
                   <span
+                    itemprop="programmingLanguage"
                     ><i class="fas fa-microchip" aria-hidden="true"></i> زبان
                     برنامه‌نویسی: پایتون</span
                   >
+                  <span><i class="fas fa-users" aria-hidden="true"></i> اندازه تیم: ۱۰ نفره</span>
                   <span
-                    ><i class="fas fa-users" aria-hidden="true"></i> اندازه تیم:
-                    ۱۰ نفره</span
-                  >
-                  <span
+                    itemprop="dateCreated" content="2020"
                     ><i class="fas fa-calendar-alt" aria-hidden="true"></i> سال
                     توسعه: ۲۰۲۰ (در ۱۴ سالگی)</span
                   >
                 </div>
-                <p>
+                <p itemprop="description">
                   نخستین ربات مستقل فارسی‌زبان در پلتفرم دیسکورد که با مشارکت یک
                   تیم ده‌نفره توسعه یافت. این پروژه که با انگیزه‌ی ایجاد تحول
                   انجام شد، به تأیید رسمی شرکت Discord رسید و نام ایران را برای
@@ -1101,6 +1081,7 @@
                       aria-label="مشاهده ربات فارسی در Top.gg"
                       title="مشاهده ربات فارسی در Top.gg"
                       role="button"
+                      itemprop="url"
                       >Top.gg</a
                     >
                     <a
@@ -1110,6 +1091,7 @@
                       aria-label="درباره ربات فارسی در Discordweb.ir بخوانید"
                       title="درباره ربات فارسی در Discordweb.ir بخوانید"
                       role="button"
+                      itemprop="url"
                       >Discordweb.ir</a
                     >
                     <a
@@ -1119,6 +1101,7 @@
                       aria-label="مشاهده ویدئو درباره ربات فارسی در آپارات"
                       title="مشاهده ویدئو درباره ربات فارسی در آپارات"
                       role="button"
+                      itemprop="url"
                       >آپارات (ویدئو)</a
                     >
                     <a
@@ -1128,6 +1111,7 @@
                       aria-label="مشاهده ربات فارسی در Alternative.me"
                       title="مشاهده ربات فارسی در Alternative.me"
                       role="button"
+                      itemprop="url"
                       >Alternative.me</a
                     >
                   </div>
@@ -1145,13 +1129,14 @@
                     aria-label="مقاله معرفی پروژه ربات دیسکورد را بخوانید"
                     title="خواندن مقاله معرفی پروژه ربات دیسکورد در ویرگول"
                     role="button"
+                    itemprop="url"
                     ><i class="fas fa-book-open" aria-hidden="true"></i> معرفی
                     پروژه (مقاله ویرگول)</a
                   >
                 </div>
               </div>
 
-              <div class="card project-card" data-aos="fade-up" tabindex="0">
+              <div class="card project-card" data-aos="fade-up" itemscope itemtype="https://schema.org/SoftwareSourceCode">
                 <div class="project-image-placeholder">
                   <img
                     src="assets/images/placeholder-code-c.webp"
@@ -1159,31 +1144,32 @@
                     alt="تصویر پیش‌نمایش پروژه‌های برنامه‌نویسی با زبان C"
                     width="400"
                     height="225"
+                    itemprop="image"
                   />
                 </div>
 
-                <h3>پروژه‌های برنامه‌نویسی با زبان C (دانشگاهی)</h3>
+                <h3 itemprop="name">پروژه‌های برنامه‌نویسی با زبان C (دانشگاهی)</h3>
 
                 <div class="card-meta">
-                  <span>
+                  <span itemprop="provider" itemscope itemtype="https://schema.org/EducationalOrganization">
                     <i class="fas fa-building" aria-hidden="true"></i>
-                    دانشگاه تهران (مرکز)
+                    <span itemprop="name">دانشگاه تهران (مرکز)</span>
                   </span>
-                  <span>
+                  <span itemprop="programmingLanguage">
                     <i class="fas fa-code" aria-hidden="true"></i>
                     زبان: C
                   </span>
-                  <span>
+                  <span itemprop="dateCreated" content="2023">
                     <i class="fas fa-calendar-alt" aria-hidden="true"></i>
                     سال انجام: ۱۴۰۲
                   </span>
-                  <span>
+                  <span itemprop="license">
                     <i class="fas fa-code-branch" aria-hidden="true"></i>
                     متن‌باز با MIT License
                   </span>
                 </div>
 
-                <p>
+                <p itemprop="description">
                   مجموعه‌ای از پروژه‌های برنامه‌نویسی کوچک که در چارچوب دروس ترم
                   اول دانشگاه تهران انجام شده‌اند. این پروژه‌ها با زبان C نوشته
                   شده‌اند و به صورت متن‌باز در گیت‌هاب قابل دسترسی هستند.
@@ -1191,7 +1177,14 @@
 
                 <p class="text-small subtle-text">
                   این پروژه دارای شناسه دائمی علمی (DOI) از طریق
-                  <strong>Zenodo</strong> است و به صورت رسمی در مخازن تحقیقاتی
+                  <strong
+                    itemprop="citation"
+                    itemscope
+                    itemtype="https://schema.org/CreativeWork"
+                  >
+                    <a href="https://doi.org/10.5281/zenodo.15548850" itemprop="url">Zenodo</a>
+                  </strong>
+                  است و به صورت رسمی در مخازن تحقیقاتی
                   نمایه شده است.
                 </p>
 
@@ -1203,6 +1196,7 @@
                     aria-label="مشاهده پروژه‌های C در GitHub"
                     title="مشاهده پروژه‌های برنامه‌نویسی C در گیت‌هاب"
                     role="button"
+                    itemprop="codeRepository"
                   >
                     <i class="fab fa-github" aria-hidden="true"></i>
                     مشاهده در GitHub
@@ -1215,6 +1209,7 @@
                     aria-label="دریافت نسخه رسمی علمی از Zenodo"
                     title="دریافت نسخه رسمی علمی پروژه‌های C از Zenodo"
                     role="button"
+                    itemprop="url"
                   >
                     <i class="fas fa-university" aria-hidden="true"></i>
                     دریافت از Zenodo
@@ -1222,7 +1217,7 @@
                 </div>
               </div>
 
-              <div class="card project-card" data-aos="fade-up" tabindex="0">
+              <div class="card project-card" data-aos="fade-up" itemscope itemtype="https://schema.org/SoftwareSourceCode">
                 <div class="project-image-placeholder">
                   <img
                     src="assets/images/placeholder-code-python.webp"
@@ -1230,28 +1225,33 @@
                     alt="تصویر پیش‌نمایش پروژه‌های برنامه‌نویسی با زبان پایتون"
                     width="400"
                     height="225"
+                    itemprop="image"
                   />
                 </div>
-                <h3>پروژه‌های برنامه‌نویسی با زبان پایتون (دانشگاهی)</h3>
+                <h3 itemprop="name">پروژه‌های برنامه‌نویسی با زبان پایتون (دانشگاهی)</h3>
                 <div class="card-meta">
                   <span
-                    ><i class="fas fa-building" aria-hidden="true"></i> دانشگاه
-                    صنعتی سهند تبریز (همکاری)</span
+                    itemprop="provider" itemscope itemtype="https://schema.org/EducationalOrganization"
+                    ><i class="fas fa-building" aria-hidden="true"></i> <span itemprop="name">دانشگاه
+                    صنعتی سهند تبریز (همکاری)</span></span
                   >
                   <span
+                    itemprop="programmingLanguage"
                     ><i class="fas fa-code" aria-hidden="true"></i> زبان:
                     پایتون</span
                   >
                   <span
+                    itemprop="dateCreated" content="2023"
                     ><i class="fas fa-calendar-alt" aria-hidden="true"></i> سال
                     انجام: ۱۴۰۲</span
                   >
                   <span
+                    itemprop="license"
                     ><i class="fas fa-code-branch" aria-hidden="true"></i>
                     متن‌باز با MIT License</span
                   >
                 </div>
-                <p>
+                <p itemprop="description">
                   مجموعه‌ای از پروژه‌های برنامه‌نویسی کوچک با زبان پایتون که در
                   چارچوب همکاری با دانشگاه صنعتی سهند تبریز انجام شده‌اند.
                   نویسنده این پروژه‌ها هستم و آن‌ها دارای MIT License برای
@@ -1260,7 +1260,14 @@
 
                 <p class="text-small subtle-text">
                   این پروژه دارای شناسه دائمی علمی (DOI) از طریق
-                  <strong>Zenodo</strong> است و به صورت رسمی در مخازن تحقیقاتی
+                  <strong
+                    itemprop="citation"
+                    itemscope
+                    itemtype="https://schema.org/CreativeWork"
+                  >
+                    <a href="https://doi.org/10.5281/zenodo.15548859" itemprop="url">Zenodo</a>
+                  </strong>
+                  است و به صورت رسمی در مخازن تحقیقاتی
                   نمایه شده است.
                 </p>
 
@@ -1272,6 +1279,7 @@
                     aria-label="مشاهده پروژه‌های پایتون در GitHub"
                     title="مشاهده پروژه‌های برنامه‌نویسی پایتون در گیت‌هاب"
                     role="button"
+                    itemprop="codeRepository"
                     ><i class="fab fa-python" aria-hidden="true"></i> مشاهده در
                     GitHub</a
                   >
@@ -1283,6 +1291,7 @@
                     aria-label="دریافت نسخه رسمی علمی از Zenodo"
                     title="دریافت نسخه رسمی علمی پروژه‌های پایتون از Zenodo"
                     role="button"
+                    itemprop="url"
                   >
                     <i class="fas fa-university" aria-hidden="true"></i>
                     دریافت از Zenodo
@@ -1292,11 +1301,11 @@
             </div>
           </section>
 
-          <section id="content" data-aos="fade-right" role="region" aria-labelledby="content-heading">
-            <h2 id="content-heading">✍️ محتوای منتخب</h2>
+          <section id="content" data-aos="fade-right">
+            <h2>✍️ محتوای منتخب</h2>
 
             <div class="grid-container">
-              <div class="card content-card is-featured" data-aos="fade-up" tabindex="0">
+              <div class="card content-card is-featured" data-aos="fade-up" itemscope itemtype="https://schema.org/Article">
                 <div class="content-image-placeholder">
                   <img
                     src="assets/images/placeholder-content-virgool1.webp"
@@ -1304,20 +1313,22 @@
                     alt="تصویر پیش‌نمایش مقاله ویرگول با عنوان 'محمد رسول سهرابی (آنلیمیتد) – از Tatami تا تکنولوژی'"
                     width="400"
                     height="225"
+                    itemprop="image"
                   />
                 </div>
-                <h3>محمد رسول سهرابی (آنلیمیتد) – از tatami تا تکنولوژی</h3>
+                <h3 itemprop="name" itemprop="headline">محمد رسول سهرابی (آنلیمیتد) – از tatami تا تکنولوژی</h3>
                 <div class="card-meta">
                   <span
-                    ><i class="fas fa-tag" aria-hidden="true"></i> پلتفرم:
-                    ویرگول</span
+                    itemprop="publisher" itemscope itemtype="https://schema.org/Organization"
+                    ><i class="fas fa-tag" aria-hidden="true"></i> <span itemprop="name">پلتفرم: ویرگول</span></span
                   >
                   <span
+                    itemprop="datePublished" content="2025-05-10"
                     ><i class="fas fa-calendar-alt" aria-hidden="true"></i>
                     تاریخ انتشار: ۲۰ اردیبهشت ۱۴۰۴</span
                   >
                 </div>
-                <p>
+                <p itemprop="articleBody">
                   اولین مقاله جامع معرفی‌کننده من در پلتفرم ویرگول. این مقاله به
                   صورت چندوجهی به بررسی مسیر من از ورزش قهرمانی کاراته تا ورود
                   به دنیای توسعه نرم‌افزار، مهندسی پزشکی و سلامت دیجیتال
@@ -1333,13 +1344,14 @@
                     aria-label="مقاله 'از tatami تا تکنولوژی' را در ویرگول بخوانید"
                     title="خواندن مقاله 'از tatami تا تکنولوژی' در ویرگول"
                     role="button"
+                    itemprop="url"
                     ><i class="fas fa-book-open" aria-hidden="true"></i> مطالعه
                     مقاله در ویرگول</a
                   >
                 </div>
               </div>
 
-              <div class="card content-card is-featured" data-aos="fade-up" tabindex="0">
+              <div class="card content-card is-featured" data-aos="fade-up" itemscope itemtype="https://schema.org/Article">
                 <div class="content-image-placeholder">
                   <img
                     src="assets/images/placeholder-content-virgool2.webp"
@@ -1347,23 +1359,26 @@
                     alt="تصویر پیش‌نمایش مقاله ویرگول با عنوان 'چطور توی دنیای شلوغ امروز، یه برند شخصی واقعی بسازیم؟'"
                     width="400"
                     height="225"
+                    itemprop="image"
                   />
                 </div>
-                <h3>
+                <h3 itemprop="name" itemprop="headline">
                   چطور توی دنیای شلوغ امروز، یه برند شخصی واقعی بسازیم؟ | داستان
                   Rasoul Unlimited
                 </h3>
                 <div class="card-meta">
                   <span
-                    ><i class="fas fa-tag" aria-hidden="true"></i> پلتفرم:
-                    ویرگول</span
+                    itemprop="publisher" itemscope itemtype="https://schema.org/Organization"
+                    ><i class="fas fa-tag" aria-hidden="true"></i> <span itemprop="name">پلتفرم:
+                    ویرگول</span></span
                   >
                   <span
+                    itemprop="datePublished" content="2025-05-13"
                     ><i class="fas fa-calendar-alt" aria-hidden="true"></i>
                     تاریخ انتشار: ۲۳ اردیبهشت ۱۴۰۴</span
                   >
                 </div>
-                <p>
+                <p itemprop="articleBody">
                   این مقاله به فلسفه‌ی شخصی من درباره‌ی ساخت یک "برند شخصی
                   واقعی" در دنیای پرهیاهوی امروز می‌پردازد. در آن به چرایی
                   انتخاب این مسیر، معنای لقب «آنلیمیتد»، و تجربه‌هایم در یافتن
@@ -1379,13 +1394,14 @@
                     aria-label="مقاله 'چطور توی دنیای شلوغ امروز، یه برند شخصی واقعی بسازیم؟' را در ویرگول بخوانید"
                     title="خواندن مقاله 'چطور توی دنیای شلوغ امروز، یه برند شخصی واقعی بسازیم؟' در ویرگول"
                     role="button"
+                    itemprop="url"
                     ><i class="fas fa-book-open" aria-hidden="true"></i> مطالعه
                     مقاله در ویرگول</a
                   >
                 </div>
               </div>
 
-              <div class="card content-card is-featured" data-aos="fade-up" tabindex="0">
+              <div class="card content-card is-featured" data-aos="fade-up" itemscope itemtype="https://schema.org/Article">
                 <div class="content-image-placeholder">
                   <img
                     src="assets/images/placeholder-content-virgool3.webp"
@@ -1393,23 +1409,26 @@
                     alt="تصویر پیش‌نمایش مقاله ویرگول با عنوان 'من برند نیستم، یک مسیرم'"
                     width="400"
                     height="225"
+                    itemprop="image"
                   />
                 </div>
-                <h3>
+                <h3 itemprop="name" itemprop="headline">
                   «من برند نیستم، یک مسیرم» | نگاهی متفاوت به مفهوم برند شخصی در
                   عصر توجه‌های لحظه‌ای
                 </h3>
                 <div class="card-meta">
                   <span
-                    ><i class="fas fa-tag" aria-hidden="true"></i> پلتفرم:
-                    ویرگول</span
+                    itemprop="publisher" itemscope itemtype="https://schema.org/Organization"
+                    ><i class="fas fa-tag" aria-hidden="true"></i> <span itemprop="name">پلتفرم:
+                    ویرگول</span></span
                   >
                   <span
+                    itemprop="datePublished" content="2025-05-24"
                     ><i class="fas fa-calendar-alt" aria-hidden="true"></i>
                     تاریخ انتشار: ۰۳ خرداد ۱۴۰۴
                   </span>
                 </div>
-                <p>
+                <p itemprop="articleBody">
                   «من برند نیستم، یک مسیرم» | این مقاله مفهوم برند شخصی را از
                   ریشه‌اش به چالش می‌کشد. با نگاهی عمیق به اصالت، ساختن و تجربه
                   زیسته، به شما نشان می‌دهد که چگونه هویت واقعی و ماندگار خود را
@@ -1424,13 +1443,14 @@
                     aria-label="مقاله 'من برند نیستم، یک مسیرم» | نگاهی متفاوت به مفهوم برند شخصی در عصر توجه‌های لحظه‌ای' را در ویرگول بخوانید"
                     title="خواندن مقاله 'من برند نیستم، یک مسیرم' در ویرگول"
                     role="button"
+                    itemprop="url"
                     ><i class="fas fa-book-open" aria-hidden="true"></i> مطالعه
                     مقاله در ویرگول</a
                   >
                 </div>
               </div>
 
-              <div class="card content-card" data-aos="fade-up" tabindex="0">
+              <div class="card content-card" data-aos="fade-up" itemscope itemtype="https://schema.org/Article">
                 <div class="content-image-placeholder">
                   <img
                     src="assets/images/placeholder-content-medium.webp"
@@ -1438,22 +1458,25 @@
                     alt="تصویر پیش‌نمایش مقاله مدیوم با عنوان 'How to Build a Genuine Personal Brand in Today’s Noisy World'"
                     width="400"
                     height="225"
+                    itemprop="image"
                   />
                 </div>
-                <h3>
+                <h3 itemprop="name" itemprop="headline">
                   How to Build a Genuine Personal Brand in Today’s Noisy World
                 </h3>
                 <div class="card-meta">
                   <span
-                    ><i class="fas fa-tag" aria-hidden="true"></i> پلتفرم:
-                    Medium</span
+                    itemprop="publisher" itemscope itemtype="https://schema.org/Organization"
+                    ><i class="fas fa-tag" aria-hidden="true"></i> <span itemprop="name">پلتفرم:
+                    Medium</span></span
                   >
                   <span
+                    itemprop="datePublished" content="2025-05-14"
                     ><i class="fas fa-calendar-alt" aria-hidden="true"></i>
                     تاریخ انتشار: May 14, 2025</span
                   >
                 </div>
-                <p>
+                <p itemprop="articleBody">
                   This article shares insights into building a genuine personal
                   brand, drawing from my journey as Rasoul Unlimited. It
                   explores the meaning of personal branding, why it's important,
@@ -1467,12 +1490,13 @@
                     aria-label="مقاله را در مدیوم بخوانید"
                     title="Read the article on Medium"
                     role="button"
+                    itemprop="url"
                     ><i class="fab fa-medium" aria-hidden="true"></i> Read on
                     Medium</a
                   >
                 </div>
               </div>
-              <div class="card content-card" data-aos="fade-up" tabindex="0">
+              <div class="card content-card" data-aos="fade-up" itemscope itemtype="https://schema.org/Article">
                 <div class="content-image-placeholder">
                   <img
                     src="assets/images/placeholder-content-devto.webp"
@@ -1480,22 +1504,25 @@
                     alt="تصویر پیش‌نمایش مقاله dev.to با عنوان 'How to Build a Genuine Personal Brand in Today’s Noisy World'"
                     width="400"
                     height="225"
+                    itemprop="image"
                   />
                 </div>
-                <h3>
+                <h3 itemprop="name" itemprop="headline">
                   How to Build a Genuine Personal Brand in Today’s Noisy World
                 </h3>
                 <div class="card-meta">
                   <span
-                    ><i class="fas fa-tag" aria-hidden="true"></i> پلتفرم:
-                    dev.to</span
+                    itemprop="publisher" itemscope itemtype="https://schema.org/Organization"
+                    ><i class="fas fa-tag" aria-hidden="true"></i> <span itemprop="name">پلتفرم:
+                    dev.to</span></span
                   >
                   <span
+                    itemprop="datePublished" content="2025-05-18"
                     ><i class="fas fa-calendar-alt" aria-hidden="true"></i>
                     تاریخ انتشار: May 18, 2025</span
                   >
                 </div>
-                <p>
+                <p itemprop="articleBody">
                   This article explores the journey of building a genuine
                   personal brand in the digital age, sharing insights from my
                   own path as Rasoul Unlimited, a developer and biomedical
@@ -1510,6 +1537,7 @@
                     aria-label="مقاله را در dev.to بخوانید"
                     title="Read the article on dev.to"
                     role="button"
+                    itemprop="url"
                     ><i class="fab fa-dev" aria-hidden="true"></i> Read on
                     dev.to</a
                   >
@@ -1518,26 +1546,28 @@
             </div>
           </section>
 
-          <section id="mentions" data-aos="fade-left" role="region" aria-labelledby="mentions-heading">
-            <h2 id="mentions-heading">📰 حضور در رسانه‌ها و افتخارات</h2>
+          <section id="mentions" data-aos="fade-left">
+            <h2>📰 حضور در رسانه‌ها و افتخارات</h2>
 
             <div class="grid-container">
-              <div class="card mention-card is-featured" data-aos="fade-up" tabindex="0">
+              <div class="card mention-card is-featured" data-aos="fade-up" itemscope itemtype="https://schema.org/CreativeWork">
                 <div class="mention-icon-placeholder">
                   <i class="fas fa-trophy" aria-hidden="true"></i>
                 </div>
-                <h3>تأیید رسمی اولین ربات فارسی دیسکورد توسط Discord</h3>
+                <h3 itemprop="name">تأیید رسمی اولین ربات فارسی دیسکورد توسط Discord</h3>
                 <div class="card-meta">
                   <span
-                    ><i class="fas fa-award" aria-hidden="true"></i> مرجع تأیید:
-                    شرکت Discord</span
+                    itemprop="publisher" itemscope itemtype="https://schema.org/Organization"
+                    ><i class="fas fa-award" aria-hidden="true"></i> <span itemprop="name">مرجع تأیید:
+                    شرکت Discord</span></span
                   >
                   <span
+                    itemprop="datePublished" content="2020"
                     ><i class="fas fa-calendar-alt" aria-hidden="true"></i> سال
                     تأیید: حدود 2020</span
                   >
                 </div>
-                <p>
+                <p itemprop="description">
                   تأیید رسمی قابلیت‌ها و استاندارد بودن اولین ربات مستقل
                   فارسی‌زبان توسط تیم رسمی شرکت Discord. این تأیید نه تنها کیفیت
                   پروژه را نشان می‌دهد، بلکه نام ایران را برای اولین‌بار در میان
@@ -1552,6 +1582,7 @@
                     aria-label="مشاهده منبع تأیید دیسکورد (منبع: مقاله ویرگول)"
                     title="مشاهده منبع تأیید دیسکورد در مقاله ویرگول"
                     role="button"
+                    itemprop="url"
                     ><i class="fas fa-book-open" aria-hidden="true"></i> مشاهده
                     منبع (مقاله ویرگول)</a
                   >
@@ -1560,52 +1591,52 @@
             </div>
           </section>
 
-          <section id="faq" data-aos="fade-up" role="region" aria-labelledby="faq-heading">
-            <h2 id="faq-heading">❓ سوالات متداول (FAQ)</h2>
+          <section id="faq" data-aos="fade-up" itemscope itemtype="https://schema.org/FAQPage">
+            <h2>❓ سوالات متداول (FAQ)</h2>
             <div class="faq-container">
-              <details class="faq-item">
-                <summary tabindex="0">
-                  <h3 class="faq-question">محمد رسول سهرابی کیست؟</h3>
+              <details class="faq-item" itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
+                <summary>
+                  <h3 class="faq-question" itemprop="name">محمد رسول سهرابی کیست؟</h3>
                 </summary>
-                <p class="faq-answer">
-                  محمد رسول سهرابی، ملقب به «آنلیمیتد»، دانشجوی مهندسی پزشکی
+                <p class="faq-answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+                  <span itemprop="text">محمد رسول سهرابی، ملقب به «آنلیمیتد»، دانشجوی مهندسی پزشکی
                   دانشگاه تهران، توسعه‌دهنده نرم‌افزار (پایتون، C، جاوااسکریپت)
                   و استراتژیست محتوا است. او خالق اولین ربات فارسی‌زبان دیسکورد
-                  است و در حوزه سلامت دیجیتال فعالیت می‌کند.
+                  است و در حوزه سلامت دیجیتال فعالیت می‌کند.</span>
                 </p>
               </details>
-              <details class="faq-item">
-                <summary tabindex="0">
-                  <h3 class="faq-question">مهم‌ترین پروژه‌های محمد رسول سهرابی کدامند؟</h3>
+              <details class="faq-item" itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
+                <summary>
+                  <h3 class="faq-question" itemprop="name">مهم‌ترین پروژه‌های محمد رسول سهرابی کدامند؟</h3>
                 </summary>
-                <p class="faq-answer">
-                  مهم‌ترین پروژه‌های او شامل «اولین ربات فارسی‌زبان دیسکورد» با
+                <p class="faq-answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+                  <span itemprop="text">مهم‌ترین پروژه‌های او شامل «اولین ربات فارسی‌زبان دیسکورد» با
                   تأیید رسمی دیسکورد، و مجموعه‌ای از پروژه‌های برنامه‌نویسی
                   متن‌باز با زبان‌های C و پایتون است که در همکاری با دانشگاه‌ها
-                  توسعه یافته‌اند.
+                  توسعه یافته‌اند.</span>
                 </p>
               </details>
-              <details class="faq-item">
-                <summary tabindex="0">
-                  <h3 class="faq-question">چگونه می‌توان با محمد رسول سهرابی ارتباط برقرار کرد؟</h3>
+              <details class="faq-item" itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
+                <summary>
+                  <h3 class="faq-question" itemprop="name">چگونه می‌توان با محمد رسول سهرابی ارتباط برقرار کرد؟</h3>
                 </summary>
-                <p class="faq-answer">
-                  می‌توانید از طریق ایمیل rasoul.unlimited@gmail.com، یا شبکه‌های
+                <p class="faq-answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+                  <span itemprop="text">می‌توانید از طریق ایمیل rasoul.unlimited@gmail.com، یا شبکه‌های
                   اجتماعی مانند لینکدین، گیت‌هاب، تلگرام و اینستاگرام با او در
                   ارتباط باشید. لینک‌های مستقیم در بخش «تماس و پیوندهای من» موجود
-                  است.
+                  است.</span>
                 </p>
               </details>
-              <details class="faq-item">
-                <summary tabindex="0">
-                  <h3 class="faq-question">«آنلیمیتد» به چه معناست و چرا این لقب انتخاب شده است؟</h3>
+              <details class="faq-item" itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
+                <summary>
+                  <h3 class="faq-question" itemprop="name">«آنلیمیتد» به چه معناست و چرا این لقب انتخاب شده است؟</h3>
                 </summary>
-                <p class="faq-answer">
-                  لقب «آنلیمیتد» (Unlimited) به معنای «نامحدود» است و فلسفه شخصی
+                <p class="faq-answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+                  <span itemprop="text">لقب «آنلیمیتد» (Unlimited) به معنای «نامحدود» است و فلسفه شخصی
                   محمد رسول سهرابی در زندگی و کار را بازتاب می‌دهد؛ اینکه او
                   محدودیت‌ها را به چالش می‌کشد و همواره به دنبال فراتر رفتن از
                   مرزهای موجود در ورزش، فناوری و رشد شخصی است. این مفهوم در
-                  مقالات او در ویرگول نیز توضیح داده شده است.
+                  مقالات او در ویرگول نیز توضیح داده شده است.</span>
                 </p>
               </details>
             </div>
@@ -1615,10 +1646,8 @@
             id="testimonials"
             class="testimonials-section"
             data-aos="fade-up"
-            role="region"
-            aria-labelledby="testimonials-heading"
           >
-            <h2 id="testimonials-heading">💬 نظر دیگران</h2>
+            <h2>💬 نظر دیگران</h2>
             <p class="text-small subtle-text space-top-xs text-right rtl">
               اگر تجربه‌ای از پروژه‌های من دارید، یا دوست دارید بازخوردی بدید،
               <strong>در این بخش با حساب GitHub خود</strong> وارد شوید و نظر
@@ -1647,8 +1676,8 @@
             </div>
           </section>
 
-          <section id="connect" data-aos="fade-up" role="region" aria-labelledby="connect-heading">
-            <h2 id="connect-heading">تماس و پیوندهای من</h2>
+          <section id="connect" data-aos="fade-up">
+            <h2>تماس و پیوندهای من</h2>
             <div class="connect-content">
               <div class="connect-info-block" data-aos="fade-right">
                 <p>
@@ -1662,24 +1691,26 @@
                     href="mailto:rasoul.unlimited@gmail.com"
                     aria-label="ارسال ایمیل به رسول آنلیمیتد"
                     title="ارسال ایمیل به محمد رسول سهرابی"
+                    itemprop="email"
                     ><i class="fas fa-envelope" aria-hidden="true"></i>
                     rasoul.unlimited [at] gmail [dot] com</a
                   >
                 </div>
-                <p class="location-edu">
-                  <i class="fas fa-map-marker-alt" aria-hidden="true"></i> تهران
-                  / کرج
+                <p class="location-edu" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                  <i class="fas fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="addressLocality">تهران / کرج</span>
                   <i
                     class="fas fa-graduation-cap icon-margin-left"
                     aria-hidden="true"
                   ></i>
-                  کارشناسی مهندسی پزشکی – دانشگاه تهران (مرکز)
+                  <span itemprop="alumniOf" itemscope itemtype="https://schema.org/EducationalOrganization">
+                    <span itemprop="name">کارشناسی مهندسی پزشکی – دانشگاه تهران (مرکز)</span>
+                  </span>
                 </p>
               </div>
               <div class="connect-links-block" data-aos="fade-left">
                 <h3>پیوندهای من</h3>
                 <ul>
-                  <li>
+                  <li itemprop="sameAs">
                     <a
                       href="https://www.instagram.com/Rasoul.Unlimited"
                       target="_blank"
@@ -1691,7 +1722,7 @@
                       اینستاگرام</a
                     >
                   </li>
-                  <li>
+                  <li itemprop="sameAs">
                     <a
                       href="https://virgool.io/@RasoulUnlimited"
                       target="_blank"
@@ -1703,7 +1734,7 @@
                       ویرگول</a
                     >
                   </li>
-                  <li>
+                  <li itemprop="sameAs">
                     <a
                       href="https://www.linkedin.com/in/rasoulunlimited/"
                       target="_blank"
@@ -1715,7 +1746,7 @@
                       لینکدین</a
                     >
                   </li>
-                  <li>
+                  <li itemprop="sameAs">
                     <a
                       href="https://github.com/RasoulUnlimited/"
                       target="_blank"
@@ -1727,7 +1758,7 @@
                       گیت‌هاب</a
                     >
                   </li>
-                  <li>
+                  <li itemprop="sameAs">
                     <a
                       href="https://www.wikidata.org/wiki/Q134503479"
                       target="_blank"
@@ -1739,7 +1770,7 @@
                       ویکی‌دیتا</a
                     >
                   </li>
-                  <li>
+                  <li itemprop="sameAs">
                     <a
                       href="https://rasoulunlimited.medium.com"
                       target="_blank"
@@ -1750,7 +1781,7 @@
                       ><i class="fab fa-medium" aria-hidden="true"></i> مدیوم</a
                     >
                   </li>
-                  <li>
+                  <li itemprop="sameAs">
                     <a
                       href="https://dev.to/rasoulunlimited"
                       target="_blank"
@@ -1761,7 +1792,7 @@
                       ><i class="fab fa-dev" aria-hidden="true"></i> dev.to</a
                     >
                   </li>
-                  <li>
+                  <li itemprop="sameAs">
                     <a
                       href="https://t.me/RasoulUnlimited"
                       target="_blank"
@@ -1773,7 +1804,7 @@
                       کانال تلگرام</a
                     >
                   </li>
-                  <li>
+                  <li itemprop="sameAs">
                     <a
                       href="https://orcid.org/0009-0004-7177-2080"
                       target="_blank"
@@ -1784,7 +1815,7 @@
                       ><i class="fab fa-orcid" aria-hidden="true"></i> ORCID</a
                     >
                   </li>
-                  <li>
+                  <li itemprop="sameAs">
                     <a
                       href="https://about.me/rasoulunlimited"
                       target="_blank"
@@ -1796,7 +1827,7 @@
                       About.me</a
                     >
                   </li>
-                  <li>
+                  <li itemprop="sameAs">
                     <a
                       href="https://www.youtube.com/@RasoulUnlimited"
                       target="_blank"
@@ -1808,7 +1839,7 @@
                       یوتیوب</a
                     >
                   </li>
-                  <li>
+                  <li itemprop="sameAs">
                     <a
                       href="https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi"
                       target="_blank"
