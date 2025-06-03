@@ -62,4 +62,11 @@
         <priority>0.5</priority>
     </url>
 
+    <url>
+        <loc>https://rasoulunlimited.com/.well-known/identity</loc>
+        <lastmod>2025-06-03</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+
 </urlset>
