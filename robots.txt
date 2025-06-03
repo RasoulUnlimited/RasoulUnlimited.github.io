@@ -2,9 +2,10 @@ User-agent: *
 Allow: /
 
 Allow: /en/
-Allow: /images/
-Allow: *.css
-Allow: *.js
+Allow: /assets/
+Allow: /assets/css/
+Allow: /assets/images/
+Allow: /assets/js/
 Allow: /projects/
 Allow: /projects/c-projects/
 Allow: /projects/python-projects/
