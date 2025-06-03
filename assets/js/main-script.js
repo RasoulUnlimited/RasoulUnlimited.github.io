@@ -216,66 +216,6 @@ document.querySelectorAll("#skills .skills-list li").forEach(skillItem => {
   });
 });
 
-// 9. انیمیشن تایم‌لاین با پیشرفت (اصل پیشرفت قابل مشاهده، اصل حس موفقیت، اصل داستان‌پردازی، اصل حافظه هیجانی)
-// این بخش انیمیشن‌های ورود عناصر تایم‌لاین را کنترل می‌کند تا حس پیشرفت در داستان زندگی را القا کند.
-// ارائه اطلاعات به صورت داستانی و بصری، به بهبود حافظه هیجانی و درک ساختاری کمک می‌کند.
-const timelineItems = document.querySelectorAll('.timeline li');
-
-// افزودن پیام‌های "بینش" برای هر آیتم تایم‌لاین (اصل داستان‌پردازی، کنجکاوی، پاداش دوپامینی)
-const timelineInsights = {
-    "timeline-item-1": "شروع یک مسیر هیجان‌انگیز در دنیای فناوری و خلاقیت.",
-    "timeline-item-2": "پایه‌گذاری دانش عمیق در علوم کامپیوتر و برنامه‌نویسی.",
-    "timeline-item-3": "اولین گام‌های جدی در توسعه پروژه‌های کاربردی و نوآورانه.",
-    "timeline-item-4": "توسعه مهارت‌های تیمی و همکاری در پروژه‌های بزرگتر.",
-    "timeline-item-5": "گسترش افق دید به سمت هوش مصنوعی و یادگیری ماشین.",
-    "timeline-item-6": "ایجاد محتوای آموزشی و به اشتراک‌گذاری دانش با جامعه.",
-    "timeline-item-7": "افتخارات و دستاوردهایی که مسیر را روشن‌تر کردند.",
-    "timeline-item-8": "همکاری با متخصصان برجسته و شبکه‌سازی حرفه‌ای.",
-    "timeline-item-9": "سفر به سوی آینده‌ای نامحدود با تکنولوژی‌های نوین."
-};
-
-timelineItems.forEach(item => {
-    const insightMessage = timelineInsights[item.id];
-    if (insightMessage) {
-        const insightSpan = document.createElement('span');
-        insightSpan.className = 'timeline-insight-message';
-        insightSpan.textContent = insightMessage;
-        item.querySelector('.timeline-content').appendChild(insightSpan); // اضافه کردن به داخل محتوای تایم‌لاین
-
-        let insightHideTimeout;
-        item.addEventListener('mouseenter', () => {
-            clearTimeout(insightHideTimeout);
-            insightSpan.style.opacity = '1';
-            insightSpan.style.transform = 'translateY(0)';
-        });
-        item.addEventListener('mouseleave', () => {
-            insightHideTimeout = setTimeout(() => {
-                insightSpan.style.opacity = '0';
-                insightSpan.style.transform = 'translateY(10px)';
-            }, 300);
-        });
-    }
-});
-
-
-const timelineObserverOptions = {
-  root: null,
-  rootMargin: '0px',
-  threshold: 0.2
-};
-
-const timelineObserver = new IntersectionObserver((entries, observer) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('timeline-item-visible');
-      observer.unobserve(entry.target);
-    }
-  });
-}, timelineObserverOptions);
-
-timelineItems.forEach(item => {
-  timelineObserver.observe(item);
-});
 
 // 10. بازخورد برای باز شدن FAQ (اصل بازخورد آنی، اصل کشف و پیش‌بینی، اصل تلاش کم)
 // بازخورد بصری هنگام باز و بسته شدن آیتم‌های FAQ، تعامل را واضح‌تر و دلپذیرتر می‌کند.
