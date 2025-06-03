@@ -236,7 +236,8 @@ document.querySelectorAll('.faq-item summary').forEach(summary => {
   });
 });
 
-// 11. پیام خوش‌آمدگویی برای کاربران جدید/بازگشتی (اصل شخصی‌سازی، اصل تعلق و ارتباط)
+// 11. پیام خوش‌آمدگویی برای کاربران جدید/بازگشتی (اصل شخصی‌سازی، اصل تعلق و ارتباط، اصل هویت و شأن فردی)
+// این پیام برای ایجاد حس شخصی‌سازی و تعلق خاطر در کاربر طراحی شده است.
 const welcomeToast = document.createElement('div');
 welcomeToast.id = 'welcome-toast';
 welcomeToast.setAttribute('role', 'status');
@@ -248,9 +249,9 @@ window.addEventListener('load', () => {
   let message = '';
 
   if (hasVisited) {
-    message = 'خوش آمدید! از بازگشت شما خرسندیم.';
+    message = 'خوش آمدید! از بازگشت شما خرسندیم.'; // پیام دلنشین‌تر برای بازگشتی‌ها
   } else {
-    message = 'به وبسایت رسمی رسول آنلیمیتد خوش آمدید.';
+    message = 'به وبسایت رسمی رسول آنلیمیتد خوش آمدید.'; // پیام جذاب‌تر برای جدیدها
     localStorage.setItem('hasVisited', 'true');
   }
 
@@ -263,7 +264,8 @@ window.addEventListener('load', () => {
   }
 });
 
-// 12. جشن اتمام صفحه (اصل اثر پایان خوش، اصل حس موفقیت)
+// 12. جشن اتمام صفحه (اصل اثر پایان خوش، اصل حس موفقیت، اصل جذابیت بصری و ظاهری)
+// این بخش یک حس مثبت قوی در پایان تجربه کاربری ایجاد می‌کند.
 const endOfPageToast = document.createElement('div');
 endOfPageToast.id = 'end-of-page-toast';
 endOfPageToast.setAttribute('role', 'status');
@@ -283,25 +285,28 @@ window.addEventListener('scroll', () => {
   }
 });
 
-// 13. بازخورد برای کپی ایمیل (اصل بازخورد آنی، اصل پاداش فوری)
+// 13. بازخورد برای کپی ایمیل (اصل بازخورد آنی، اصل پاداش فوری، اصل نشانه‌های تعاملی)
+// ارائه بازخورد فوری و واضح برای یک عمل مهم.
 const emailLink = document.querySelector('.contact-info a[href^="mailto:"]');
 if (emailLink) {
   emailLink.addEventListener('click', (e) => {
-    e.preventDefault();
+    e.preventDefault(); // جلوگیری از باز شدن ایمیل کلاینت
     const email = emailLink.href.replace('mailto:', '');
 
+    // ایجاد یک المان موقت برای کپی کردن متن
     const tempInput = document.createElement('input');
     tempInput.value = email;
     document.body.appendChild(tempInput);
     tempInput.select();
-    document.execCommand('copy');
+    document.execCommand('copy'); // کپی کردن متن
     document.body.removeChild(tempInput);
 
     showToastNotification('ایمیل کپی شد. ✅');
   });
 }
 
-// تابع کمکی برای نمایش پیام‌های Toast (اصل بازخورد آنی)
+// تابع کمکی برای نمایش پیام‌های Toast (اصل بازخورد آنی، اصل روان‌روانی و سهولت جریان)
+// این تابع به صورت مرکزی برای نمایش پیام‌های کوتاه و غیرمزاحم استفاده می‌شود.
 function showToastNotification(message, duration = 3000) {
   const dynamicToast = document.createElement('div');
   dynamicToast.className = 'dynamic-toast';
@@ -325,7 +330,7 @@ function createConfetti() {
   confettiContainer.id = 'confetti-container';
   document.body.appendChild(confettiContainer);
 
-  const confettiCount = 30; // کاهش تعداد کنفتی برای حس حرفه‌ای‌تر
+  const confettiCount = 30; // کاهش تعداد کنفتی برای حس حرفه‌ای‌تر و ظریف‌تر
   const colors = ['#ffc107', '#007acc', '#005a9e', '#f0f0f0']; // رنگ‌های تم سایت
 
   for (let i = 0; i < confettiCount; i++) {
@@ -358,7 +363,7 @@ function createConfetti() {
 }
 
 // 15. پیام‌های "دانستنی جالب" (Fun Fact) (اصل کنجکاوی و رمزآلود بودن، اصل تضاد و تنوع حسی، اصل تأخیر معنادار پاداش)
-// این بخش پیام‌های تصادفی با دانستنی‌های جالب را در زمان‌های غیرقابل پیش‌بینی نمایش می‌دهد.
+// این بخش پیام‌های تصادفی با دانستنی‌های جالب را در زمان‌های غیرقابل پیش‌بینی و با فرکانس کمتر نمایش می‌دهد.
 const funFacts = [
   "اولین ربات فارسی دیسکورد توسط من در ۱۴ سالگی توسعه یافت.",
   "من در کاراته دان ۱ رسمی فدراسیون هستم.",
@@ -408,7 +413,7 @@ window.addEventListener('load', () => {
     showFunFact();
     funFactInterval = setInterval(() => {
       showFunFact();
-    }, Math.random() * 60000 + 60000); // بین 60 تا 120 ثانیه (کاهش فرکانس)
+    }, Math.random() * 60000 + 60000); // بین 60 تا 120 ثانیه (کاهش فرکانس برای جلوگیری از اسپم)
   }, 20000); // شروع نمایش دانستنی‌ها پس از 20 ثانیه (تأخیر بیشتر)
 });
 
@@ -419,9 +424,8 @@ window.addEventListener('beforeunload', () => {
 });
 
 // 16. بازخورد کشف بخش‌ها (اصل پیشرفت قابل مشاهده، اصل پاداش فوری، اصل حس موفقیت)
-// این تابع یک پیام toast را هنگام ورود به یک بخش جدید نمایش می‌دهد.
-// این بخش برای حفظ حرفه‌ای بودن و جلوگیری از شلوغی، حذف شده است.
-// AOS به تنهایی برای انتقال حس پیشرفت کافی است.
+// این تابع که قبلاً برای نمایش پیام toast هنگام ورود به یک بخش جدید استفاده می‌شد،
+// برای حفظ حرفه‌ای بودن و جلوگیری از شلوغی، حذف شده است. AOS به تنهایی برای انتقال حس پیشرفت کافی است.
 /*
 const sectionTitles = {
   'hero': 'صفحه اصلی',
