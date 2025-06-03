@@ -397,6 +397,28 @@ const funFacts = [
 
 let funFactToastElement = null;
 let funFactInterval = null;
+let userIsIdle = false;
+let idleTimeout;
+
+function resetIdleTimer() {
+  clearTimeout(idleTimeout);
+  userIsIdle = false;
+  idleTimeout = setTimeout(() => {
+    userIsIdle = true;
+    if (!funFactToastElement) { // فقط اگر پیام دانستنی نمایش داده نشده باشد
+      showFunFact();
+    }
+  }, 30000); // کاربر پس از 30 ثانیه عدم فعالیت، بیکار محسوب می‌شود
+}
+
+// رویدادهای فعالیت کاربر
+['mousemove', 'keydown', 'scroll', 'touchstart'].forEach(event => {
+  window.addEventListener(event, resetIdleTimer);
+});
+
+// شروع اولیه تایمر بیکاری
+resetIdleTimer();
+
 
 function showFunFact() {
   if (funFactToastElement) {
@@ -420,6 +442,7 @@ function showFunFact() {
     funFactToastElement.classList.remove('show');
     funFactToastElement.addEventListener('transitionend', () => funFactToastElement.remove());
     funFactToastElement = null;
+    resetIdleTimer(); // پس از بستن دستی، تایمر بیکاری را ریست کن
   });
 
   setTimeout(() => {
@@ -431,62 +454,108 @@ function showFunFact() {
   }, 8000); // نمایش برای 8 ثانیه
 }
 
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    showFunFact();
-    funFactInterval = setInterval(() => {
-      showFunFact();
-    }, Math.random() * 60000 + 60000); // بین 60 تا 120 ثانیه (کاهش فرکانس برای جلوگیری از اسپم)
-  }, 20000); // شروع نمایش دانستنی‌ها پس از 20 ثانیه (تأخیر بیشتر)
-});
+// 16. فعال‌سازی افکت "جرقه" برای کارت‌های برجسته (روان‌شناسی توجه، پاداش دوپامینی، لذت زیبایی‌شناختی)
+// این افکت بصری ظریف، توجه کاربر را به محتوای مهم‌تر جلب می‌کند و یک پاداش بصری کوچک ارائه می‌دهد.
+function createSparkle(element) {
+  const sparkle = document.createElement('div');
+  sparkle.className = 'sparkle-effect';
+  const size = Math.random() * 10 + 5; // اندازه بین 5 تا 15 پیکسل
+  sparkle.style.width = `${size}px`;
+  sparkle.style.height = `${size}px`;
+  sparkle.style.left = `${Math.random() * 100}%`;
+  sparkle.style.top = `${Math.random() * 100}%`;
+  sparkle.style.backgroundColor = 'white'; // رنگ درخشش
+  sparkle.style.opacity = 0;
+  sparkle.style.position = 'absolute';
+  sparkle.style.borderRadius = '50%';
+  sparkle.style.boxShadow = `0 0 ${size / 2}px ${size / 4}px var(--highlight-color)`; // درخشش اطراف
+  sparkle.style.zIndex = 10;
+  sparkle.style.pointerEvents = 'none'; // برای اینکه روی کلیک تداخلی ایجاد نکند
 
-window.addEventListener('beforeunload', () => {
-  if (funFactInterval) {
-    clearInterval(funFactInterval);
-  }
-});
+  element.style.position = 'relative'; // اطمینان از موقعیت‌دهی صحیح
+  element.appendChild(sparkle);
 
-// 16. بازخورد کشف بخش‌ها (اصل پیشرفت قابل مشاهده، اصل پاداش فوری، اصل حس موفقیت)
-// این تابع که قبلاً برای نمایش پیام toast هنگام ورود به یک بخش جدید استفاده می‌شد،
-// برای حفظ حرفه‌ای بودن و جلوگیری از شلوغی، حذف شده است. AOS به تنهایی برای انتقال حس پیشرفت کافی است.
-/*
-const sectionTitles = {
-  'hero': 'صفحه اصلی',
-  'about': 'درباره من',
-  'timeline': 'مسیر من',
-  'skills': 'مهارت‌ها و تکنولوژی‌ها',
-  'projects': 'پروژه‌ها',
-  'content': 'محتوای منتخب',
-  'mentions': 'حضور در رسانه‌ها و افتخارات',
-  'faq': 'سوالات متداول',
-  'testimonials': 'نظرات',
-  'connect': 'تماس و پیوندهای من'
-};
+  sparkle.animate([
+    { opacity: 0, transform: 'scale(0) rotate(0deg)' },
+    { opacity: 1, transform: 'scale(1) rotate(180deg)' },
+    { opacity: 0, transform: 'scale(0.5) rotate(360deg)' }
+  ], {
+    duration: 800, // مدت زمان انیمیشن
+    easing: 'ease-out',
+    fill: 'forwards'
+  }).onfinish = () => sparkle.remove();
+}
 
-const visitedSections = new Set();
-
-const sectionObserverOptions = {
-  root: null,
-  rootMargin: '0px',
-  threshold: 0.3
-};
-
-const sectionObserver = new IntersectionObserver((entries, observer) => {
+const featuredCards = document.querySelectorAll('.card.is-featured');
+const featuredCardObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
-    if (entry.isIntersecting && !visitedSections.has(entry.target.id)) {
-      const sectionId = entry.target.id;
-      const title = sectionTitles[sectionId];
-      if (title) {
-        // showToastNotification(`شما وارد بخش "${title}" شدید! 🌟`); // حذف این خط
-        visitedSections.add(sectionId);
+    if (entry.isIntersecting) {
+      // ایجاد چند جرقه در نقاط مختلف کارت
+      for (let i = 0; i < 3; i++) { // 3 جرقه برای هر کارت
+        setTimeout(() => createSparkle(entry.target), i * 150); // با کمی تأخیر
+      }
+      featuredCardObserver.unobserve(entry.target); // فقط یک بار جرقه بزند
+    }
+  });
+}, { threshold: 0.5 }); // وقتی 50% از کارت قابل مشاهده باشد
+
+featuredCards.forEach(card => {
+  featuredCardObserver.observe(card);
+});
+
+// 17. پیام پیشرفت "بخش‌های کاوش شده" (اصل پیشرفت قابل مشاهده، اصل حس موفقیت، انگیزه درونی)
+// این قابلیت به کاربر حس پیشرفت و موفقیت در کاوش سایت را می‌دهد و انگیزه او را برای ادامه افزایش می‌دهد.
+const sections = document.querySelectorAll('section[id]'); // همه بخش‌های دارای ID
+const sectionsVisited = new Set();
+let lastSectionsExploredToast = 0; // زمان آخرین نمایش toast
+
+const sectionProgressObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      sectionsVisited.add(entry.target.id);
+      const now = Date.now();
+      // نمایش toast هر 3 بخش یا هر 15 ثانیه، هر کدام که زودتر اتفاق بیفتد
+      if (sectionsVisited.size > 0 && sectionsVisited.size % 3 === 0 && (now - lastSectionsExploredToast > 15000)) {
+        showToastNotification(`شما ${sectionsVisited.size} بخش از سایت را کاوش کرده‌اید! عالیه! ✨`, 4000);
+        lastSectionsExploredToast = now;
       }
     }
   });
-}, sectionObserverOptions);
+}, { threshold: 0.3 }); // وقتی 30% از بخش قابل مشاهده باشد
 
-document.querySelectorAll('section').forEach(section => {
-  if (section.id) {
-    sectionObserver.observe(section);
-  }
+sections.forEach(section => {
+  sectionProgressObserver.observe(section);
 });
+
+// 18. افکت پالس/گلو برای دکمه‌های CTA اصلی (روان‌شناسی توجه، پاداش دوپامینی)
+// این انیمیشن‌های ظریف، دکمه‌های اصلی را برجسته‌تر کرده و کاربر را به کلیک تشویق می‌کنند.
+// این یک پاداش بصری برای جلب توجه است.
+const mainCTAs = document.querySelectorAll('.main-cta-button'); // فرض بر وجود کلاسی به این نام برای دکمه‌های اصلی
+
+mainCTAs.forEach(button => {
+  // اضافه کردن یک کلاس برای انیمیشن CSS
+  button.classList.add('cta-pulse-effect');
+});
+
+// می‌توانید CSS مربوط به 'cta-pulse-effect' را در فایل CSS اضافه کنید.
+// مثال (برای CSS):
+/*
+.cta-pulse-effect {
+  animation: ctaPulse 2s infinite ease-in-out;
+}
+
+@keyframes ctaPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 90, 158, 0.7);
+  }
+  70% {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 10px rgba(0, 90, 158, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 90, 158, 0);
+  }
+}
 */
