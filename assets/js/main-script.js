@@ -25,7 +25,6 @@ AOS.init({
   debounceDelay: 50,
   throttleDelay: 99,
   offset: 120,
-  delay: 0,
   duration: 800,
   easing: "ease",
   once: false,
@@ -222,6 +221,43 @@ document.querySelectorAll("#skills .skills-list li").forEach(skillItem => {
 // ارائه اطلاعات به صورت داستانی و بصری، به بهبود حافظه هیجانی و درک ساختاری کمک می‌کند.
 const timelineItems = document.querySelectorAll('.timeline li');
 
+// افزودن پیام‌های "بینش" برای هر آیتم تایم‌لاین (اصل داستان‌پردازی، کنجکاوی، پاداش دوپامینی)
+const timelineInsights = {
+    "timeline-item-1": "شروع یک مسیر هیجان‌انگیز در دنیای فناوری و خلاقیت.",
+    "timeline-item-2": "پایه‌گذاری دانش عمیق در علوم کامپیوتر و برنامه‌نویسی.",
+    "timeline-item-3": "اولین گام‌های جدی در توسعه پروژه‌های کاربردی و نوآورانه.",
+    "timeline-item-4": "توسعه مهارت‌های تیمی و همکاری در پروژه‌های بزرگتر.",
+    "timeline-item-5": "گسترش افق دید به سمت هوش مصنوعی و یادگیری ماشین.",
+    "timeline-item-6": "ایجاد محتوای آموزشی و به اشتراک‌گذاری دانش با جامعه.",
+    "timeline-item-7": "افتخارات و دستاوردهایی که مسیر را روشن‌تر کردند.",
+    "timeline-item-8": "همکاری با متخصصان برجسته و شبکه‌سازی حرفه‌ای.",
+    "timeline-item-9": "سفر به سوی آینده‌ای نامحدود با تکنولوژی‌های نوین."
+};
+
+timelineItems.forEach(item => {
+    const insightMessage = timelineInsights[item.id];
+    if (insightMessage) {
+        const insightSpan = document.createElement('span');
+        insightSpan.className = 'timeline-insight-message';
+        insightSpan.textContent = insightMessage;
+        item.querySelector('.timeline-content').appendChild(insightSpan); // اضافه کردن به داخل محتوای تایم‌لاین
+
+        let insightHideTimeout;
+        item.addEventListener('mouseenter', () => {
+            clearTimeout(insightHideTimeout);
+            insightSpan.style.opacity = '1';
+            insightSpan.style.transform = 'translateY(0)';
+        });
+        item.addEventListener('mouseleave', () => {
+            insightHideTimeout = setTimeout(() => {
+                insightSpan.style.opacity = '0';
+                insightSpan.style.transform = 'translateY(10px)';
+            }, 300);
+        });
+    }
+});
+
+
 const timelineObserverOptions = {
   root: null,
   rootMargin: '0px',
@@ -262,6 +298,19 @@ welcomeToast.setAttribute('role', 'status');
 welcomeToast.setAttribute('aria-live', 'polite');
 document.body.appendChild(welcomeToast);
 
+function getGreetingBasedOnTime() {
+  const hour = new Date().getHours();
+  if (hour >= 5 && hour < 12) {
+    return 'صبح بخیر! به وبسایت رسمی رسول آنلیمیتد خوش آمدید.';
+  } else if (hour >= 12 && hour < 18) {
+    return 'ظهر بخیر! به وبسایت رسمی رسول آنلیمیتد خوش آمدید.';
+  } else if (hour >= 18 && hour < 22) {
+    return 'عصر بخیر! به وبسایت رسمی رسول آنلیمیتد خوش آمدید.';
+  } else {
+    return 'شب بخیر! به وبسایت رسمی رسول آنلیمیتد خوش آمدید.';
+  }
+}
+
 window.addEventListener('load', () => {
   const hasVisited = localStorage.getItem('hasVisited');
   let message = '';
@@ -269,7 +318,7 @@ window.addEventListener('load', () => {
   if (hasVisited) {
     message = 'خوش آمدید! از بازگشت شما خرسندیم.'; // پیام دلنشین‌تر برای بازگشتی‌ها
   } else {
-    message = 'به وبسایت رسمی رسول آنلیمیتد خوش آمدید.'; // پیام جذاب‌تر برای جدیدها
+    message = getGreetingBasedOnTime(); // پیام جذاب‌تر برای جدیدها با شخصی‌سازی زمانی
     localStorage.setItem('hasVisited', 'true');
   }
 
@@ -537,25 +586,80 @@ mainCTAs.forEach(button => {
   button.classList.add('cta-pulse-effect');
 });
 
-// می‌توانید CSS مربوط به 'cta-pulse-effect' را در فایل CSS اضافه کنید.
-// مثال (برای CSS):
-/*
-.cta-pulse-effect {
-  animation: ctaPulse 2s infinite ease-in-out;
-}
+// 19. بارگذاری تنبل تصاویر (Lazy Loading) (اصل بار شناختی پایین، اصل سرعت بارگذاری، اصل روان‌روانی)
+// این بخش تصاویر را تنها زمانی بارگذاری می‌کند که به viewport نزدیک شوند تا عملکرد و تجربه کاربری بهبود یابد.
+document.addEventListener("DOMContentLoaded", function() {
+  const lazyImages = document.querySelectorAll('img[data-src]');
 
-@keyframes ctaPulse {
-  0% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(0, 90, 158, 0.7);
+  const imageObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const img = entry.target;
+        img.src = img.dataset.src;
+        if (img.dataset.srcset) {
+          img.srcset = img.dataset.srcset;
+        }
+        img.removeAttribute('data-src');
+        img.removeAttribute('data-srcset');
+        img.classList.add('loaded'); // اضافه کردن کلاس برای انیمیشن یا استایل پس از بارگذاری
+        observer.unobserve(img);
+      }
+    });
+  }, {
+    rootMargin: '0px 0px 100px 0px', // بارگذاری 100px قبل از رسیدن به viewport
+    threshold: 0.01 // حتی اگر 1% از تصویر قابل مشاهده باشد
+  });
+
+  lazyImages.forEach(img => {
+    imageObserver.observe(img);
+  });
+});
+
+// 20. دکمه بازگشت به بالا (Scroll-to-Top Button) (اصل سهولت و تلاش کم، اصل قابلیت پیش‌بینی)
+// این دکمه به کاربر کمک می‌کند تا به راحتی و با تلاش کم به بالای صفحه بازگردد، به خصوص در صفحات طولانی.
+const scrollToTopButton = document.createElement('button');
+scrollToTopButton.id = 'scroll-to-top';
+scrollToTopButton.innerHTML = '<i class="fas fa-arrow-up"></i>';
+scrollToTopButton.setAttribute('aria-label', 'بازگشت به بالای صفحه');
+document.body.appendChild(scrollToTopButton);
+
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 300) { // نمایش پس از 300px اسکرول
+    scrollToTopButton.classList.add('show');
+  } else {
+    scrollToTopButton.classList.remove('show');
   }
-  70% {
-    transform: scale(1.02);
-    box-shadow: 0 0 0 10px rgba(0, 90, 158, 0);
-  }
-  100% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(0, 90, 158, 0);
-  }
-}
-*/
+});
+
+scrollToTopButton.addEventListener('click', () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+});
+
+// 21. قابلیت کپی کردن لینک شبکه‌های اجتماعی (اصل بازخورد آنی، اصل تلاش کم)
+// این قابلیت به کاربر اجازه می‌دهد تا با یک کلیک، لینک شبکه‌های اجتماعی را کپی کند،
+// که باعث افزایش راحتی و کاهش تلاش برای به اشتراک‌گذاری می‌شود.
+document.querySelectorAll('.connect-links-block ul li a').forEach(socialLink => {
+  socialLink.addEventListener('click', (e) => {
+    // فقط در صورتی که لینک به یک صفحه خارجی باشد و نه یک # (لینک داخلی)
+    if (socialLink.href && socialLink.href.startsWith('http')) {
+      e.preventDefault(); // جلوگیری از باز شدن لینک در تب جدید
+
+      const linkToCopy = socialLink.href;
+      const tempInput = document.createElement('input');
+      tempInput.value = linkToCopy;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+
+      let linkName = socialLink.textContent.trim();
+      if (socialLink.querySelector('i')) {
+        linkName = socialLink.querySelector('i').nextSibling.textContent.trim(); // گرفتن متن بعد از آیکون
+      }
+      showToastNotification(`لینک ${linkName} کپی شد! ✅`);
+    }
+  });
+});

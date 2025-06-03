@@ -741,6 +741,20 @@ section h2::after {
   transform: scale(1.05); /* اصل پاداش فوری، اصل جذابیت بصری و ظاهری */
 }
 
+/* Lazy Loaded Images (اصل بار شناختی پایین، اصل سرعت بارگذاری، اصل روان‌روانی) */
+img.loaded {
+  opacity: 0;
+  animation: fadeInImage 0.5s ease-out forwards;
+}
+
+@keyframes fadeInImage {
+  to {
+    opacity: 1;
+  }
+}
+
+
+
 /* Language Switcher (اصل کنترل و انتخاب، اصل هم‌ذات‌پنداری) */
 .lang-switcher {
   text-align: center;
@@ -1196,6 +1210,87 @@ section h2::after {
   display: block;
   direction: ltr; /* Force LTR for dates */
   text-align: left;
+}
+
+/* Sparkle Effect (روان‌شناسی توجه، پاداش دوپامینی، لذت زیبایی‌شناختی) */
+.sparkle-effect {
+  position: absolute;
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: 0 0 5px 2px var(--highlight-color);
+  pointer-events: none;
+  opacity: 0;
+  animation: sparkle-fade-in-out 0.8s ease-out forwards;
+}
+
+@keyframes sparkle-fade-in-out {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+}
+
+/* CTA Pulse Effect (روان‌شناسی توجه، پاداش دوپامینی) */
+.cta-pulse-effect {
+  animation: ctaPulse 2s infinite ease-in-out;
+}
+
+@keyframes ctaPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 90, 158, 0.7);
+  }
+  70% {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 10px rgba(0, 90, 158, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 90, 158, 0);
+  }
+}
+
+/* Scroll-to-Top Button (اصل سهولت و تلاش کم، اصل قابلیت پیش‌بینی) */
+#scroll-to-top {
+  position: fixed;
+  bottom: 80px; /* بالاتر از فوتر و سایر عناصر ثابت پایین */
+  right: 20px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out, transform 0.3s var(--transition-easing-springy);
+  z-index: 999;
+}
+
+#scroll-to-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+#scroll-to-top:hover {
+  transform: translateY(-5px);
+  background-color: var(--accent-color);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
 /* FAQ Section Styling (اصل کشف و پیش‌بینی، اصل کنترل و انتخاب، اصل رهایی از بار شناختی) */
