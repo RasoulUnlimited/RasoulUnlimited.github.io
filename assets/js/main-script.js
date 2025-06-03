@@ -6,133 +6,98 @@
 // اقتصاد رفتاری، انسان‌شناسی دیجیتال و تحلیل رفتار مصرف‌کننده بهینه‌سازی شده است.
 // هدف، ایجاد یک تجربه کاربری جذاب، قابل پیش‌بینی، پاداش‌دهنده و با بار شناختی پایین است.
 
-// 1. به‌روزرسانی سال جاری در فوتر
+// 1. به‌روزرسانی سال جاری در فوتر (اصل قابلیت پیش‌بینی، اصل کنترل و انتخاب)
 // این بخش تضمین می‌کند که سال کپی‌رایت در پایین صفحه همیشه به‌روز باشد.
-// این یک نکته کوچک اما مهم برای حفظ دقت و اعتبار سایت است که حس "قابلیت پیش‌بینی"
-// و "حس کنترل" را به کاربر می‌دهد، زیرا اطلاعات همیشه دقیق و به‌روز هستند.
 document.getElementById("current-year").textContent = new Date().getFullYear();
 
-// 2. راه‌اندازی کتابخانه AOS (Animate On Scroll)
+// 2. راه‌اندازی کتابخانه AOS (Animate On Scroll) (اصل کشف و پیش‌بینی، اصل پاداش فوری، اصل تضاد و تنوع حسی)
 // AOS یک کتابخانه جاوااسکریپت برای افزودن انیمیشن‌های اسکرول به عناصر صفحه است.
 // این کار باعث بهبود تجربه کاربری (UX) و جذابیت بصری سایت می‌شود.
-// انیمیشن‌ها حس "کشف و پیش‌بینی" را تقویت می‌کنند، زیرا عناصر به شکلی پویا ظاهر می‌شوند.
-// همچنین، حرکت‌های روان و جذاب، "پاداش فوری و مثبت" بصری را برای کاربر فراهم می‌آورند.
-// تنظیمات پیش‌فرض:
-//    - disable: false (انیمیشن‌ها فعال هستند)
-//    - startEvent: "DOMContentLoaded" (شروع انیمیشن‌ها پس از بارگذاری کامل DOM)
-//    - duration: 800 (مدت زمان انیمیشن به میلی‌ثانیه)
-//    - once: false (انیمیشن‌ها هر بار که عنصر وارد viewport شود، اجرا می‌شوند)
-//    - mirror: false (انیمیشن‌ها هنگام اسکرول به بالا، معکوس نمی‌شوند)
 AOS.init({
-  disable: false, // انیمیشن‌ها فعال هستند
-  startEvent: "DOMContentLoaded", // شروع انیمیشن‌ها پس از بارگذاری کامل DOM
-  initClassName: "aos-init", // کلاسی که به عناصر AOS پس از مقداردهی اولیه اضافه می‌شود
-  animatedClassName: "aos-animate", // کلاسی که هنگام فعال شدن انیمیشن اضافه می‌شود
-  useClassNames: false, // استفاده از کلاس‌های AOS به جای ویژگی‌های data-aos
-  disableMutationObserver: false, // غیرفعال کردن MutationObserver (برای بهبود عملکرد در برخی موارد)
-  debounceDelay: 50, // تاخیر برای debounce کردن رویدادهای اسکرول (کاهش بار شناختی با بهینه‌سازی عملکرد)
-  throttleDelay: 99, // تاخیر برای throttle کردن رویدادهای اسکرول (کاهش بار شناختی با بهینه‌سازی عملکرد)
-
-  offset: 120, // فاصله (پیکسل) از بالای صفحه که انیمیشن شروع می‌شود
-  delay: 0, // تاخیر (میلی‌ثانیه) قبل از شروع انیمیشن
-  duration: 800, // مدت زمان انیمیشن (میلی‌ثانیه)
-  easing: "ease", // نوع easing برای انیمیشن (زیبایی تعاملی)
-  once: false, // آیا انیمیشن فقط یک بار اجرا شود؟ (false = هر بار که عنصر وارد viewport شود - حس پیشرفت و دستاورد)
-  mirror: false, // آیا انیمیشن هنگام اسکرول به بالا معکوس شود؟
-  anchorPlacement: "top-bottom", // محل قرارگیری لنگر برای تشخیص شروع انیمیشن
+  disable: false,
+  startEvent: "DOMContentLoaded",
+  initClassName: "aos-init",
+  animatedClassName: "aos-animate",
+  useClassNames: false,
+  disableMutationObserver: false,
+  debounceDelay: 50,
+  throttleDelay: 99,
+  offset: 120,
+  delay: 0,
+  duration: 800,
+  easing: "ease",
+  once: false,
+  mirror: false,
+  anchorPlacement: "top-bottom",
 });
 
-// 3. مدیریت تغییر تم (حالت روشن/تاریک)
-// این بخش مسئول پیاده‌سازی قابلیت تغییر تم سایت بین حالت روشن و تاریک است.
-// این ویژگی به بهبود دسترسی‌پذیری و تجربه کاربری (UX) کمک می‌کند،
-// و به کاربر حس "کنترل" و "شخصی‌سازی" می‌دهد که با اصل "پاداش فوری و مثبت" و "زیبایی تعاملی" همسو است.
-// انتخاب تم مناسب با "پیش‌زمینه و زمینه" (کنتراست کافی) نیز در اینجا رعایت می‌شود.
-const themeToggleInput = document.getElementById("theme-toggle"); // المان ورودی برای تغییر تم
-const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches; // بررسی ترجیح سیستم کاربر برای حالت تاریک
-const savedTheme = localStorage.getItem("theme"); // بازیابی تم ذخیره شده از Local Storage (پیش‌فرض هوشمند)
-const themeToast = document.getElementById("theme-toast"); // المان برای نمایش پیام تغییر تم
+// 3. مدیریت تغییر تم (حالت روشن/تاریک) (اصل کنترل و انتخاب، اصل شخصی‌سازی، اصل پاداش فوری، اصل بازخورد آنی، اصل زیبایی‌شناسی)
+const themeToggleInput = document.getElementById("theme-toggle");
+const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+const savedTheme = localStorage.getItem("theme");
+const themeToast = document.createElement('div');
+themeToast.id = 'theme-toast';
+themeToast.setAttribute('role', 'status');
+themeToast.setAttribute('aria-live', 'polite');
+document.body.appendChild(themeToast);
 
-// تابع applyTheme: تم را بر اساس ورودی اعمال می‌کند و وضعیت دکمه را به‌روز می‌کند.
-// این تابع از Local Storage برای حفظ انتخاب کاربر بین بازدیدها استفاده می‌کند.
 function applyTheme(theme, showToast = false) {
-  // افزودن یا حذف کلاس 'dark-mode' از بدنه HTML
   document.body.classList.toggle("dark-mode", theme === "dark");
-  // افزودن یا حذف کلاس 'light-mode' از بدنه HTML (اختیاری، برای وضوح بیشتر)
   document.body.classList.toggle("light-mode", theme === "light");
-  // به‌روزرسانی وضعیت دکمه (چک‌باکس) بر اساس تم اعمال شده
   themeToggleInput.checked = theme === "dark";
 
-  // نمایش پیام تغییر تم (اصل پاداش فوری و مثبت، اصل بازخورد آنی)
-  if (showToast && themeToast) {
-    themeToast.textContent = `تم به حالت ${theme === 'dark' ? 'تاریک' : 'روشن'} تغییر یافت!`;
+  if (showToast) {
+    themeToast.textContent = `تم به حالت ${theme === 'dark' ? 'تاریک' : 'روشن'} تغییر یافت.`;
     themeToast.classList.add("show");
     setTimeout(() => {
       themeToast.classList.remove("show");
-    }, 3000); // پیام پس از 3 ثانیه محو می‌شود
+    }, 3000);
   }
 }
 
-// بررسی تم ذخیره شده یا ترجیح سیستم در هنگام بارگذاری صفحه
-// این یک "پیش‌فرض هوشمند" است که تجربه کاربر را از ابتدا بهبود می‌بخشد.
 if (savedTheme) {
-  // اگر تمی در Local Storage ذخیره شده باشد، آن را اعمال کن
   applyTheme(savedTheme);
 } else {
-  // در غیر این صورت، تم را بر اساس ترجیح سیستم کاربر اعمال کن
   applyTheme(prefersDark ? "dark" : "light");
 }
 
-// افزودن Event Listener برای تغییر تم هنگام کلیک کاربر روی دکمه
 themeToggleInput.addEventListener("change", () => {
-  // تعیین تم جدید بر اساس وضعیت فعلی دکمه
   const newTheme = themeToggleInput.checked ? "dark" : "light";
-  // اعمال تم جدید و نمایش پیام
   applyTheme(newTheme, true);
-  // ذخیره تم جدید در Local Storage برای بازدیدهای بعدی
   localStorage.setItem("theme", newTheme);
 });
 
-// 4. مدیریت اسکرول صاف برای لینک‌های ناوبری (Smooth Scroll)
-// این بخش تضمین می‌کند که کلیک بر روی لینک‌های ناوبری به جای پرش ناگهانی،
-// با یک اسکرول نرم به بخش مربوطه منتقل شود. این کار "بار شناختی" را کاهش داده
-// و حس "زیبایی تعاملی" را افزایش می‌دهد، زیرا کاربر می‌تواند مسیر حرکت صفحه را دنبال کند.
+// 4. مدیریت اسکرول صاف برای لینک‌های ناوبری (Smooth Scroll) (اصل روان‌روانی و سهولت جریان، اصل زیبایی‌شناسی)
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   anchor.addEventListener("click", function (e) {
-    e.preventDefault(); // جلوگیری از رفتار پیش‌فرض لینک
+    e.preventDefault();
 
     const targetId = this.getAttribute("href");
     const targetElement = document.querySelector(targetId);
 
     if (targetElement) {
-      // اسکرول نرم به سمت عنصر هدف
       window.scrollTo({
-        top: targetElement.offsetTop - (document.querySelector('.navbar')?.offsetHeight || 0), // تنظیم آفست برای نوار ناوبری ثابت
-        behavior: "smooth", // اسکرول نرم
+        top: targetElement.offsetTop - (document.querySelector('.navbar')?.offsetHeight || 0),
+        behavior: "smooth",
       });
     }
   });
 });
 
-// 5. بازخورد بصری برای کلیک روی کارت‌ها (اصل پاداش فوری و مثبت، اصل کشف و پیش‌بینی)
-// این بخش یک بازخورد بصری کوچک (مثلاً یک انیمیشن پاپ) را هنگام کلیک روی کارت‌ها اضافه می‌کند.
-// این کار حس "پاداش فوری" را تقویت کرده و تعامل را جذاب‌تر می‌کند.
+// 5. بازخورد بصری برای کلیک روی کارت‌ها (اصل پاداش فوری و مثبت، اصل نشانه‌های تعاملی، اصل جذابیت بصری و ظاهری)
 document.querySelectorAll(".card").forEach((card) => {
   card.addEventListener("click", function () {
-    // افزودن یک کلاس موقت برای فعال کردن انیمیشن "پاپ"
     this.classList.add("clicked-pop");
-    // حذف کلاس پس از اتمام انیمیشن برای آماده‌سازی برای کلیک‌های بعدی
     setTimeout(() => {
       this.classList.remove("clicked-pop");
-    }, 300); // مدت زمان انیمیشن (میلی‌ثانیه)
+    }, 300);
   });
 });
 
-// 6. نوار پیشرفت اسکرول (اصل پیشرفت قابل مشاهده، اصل حس موفقیت)
-// این بخش یک نوار در بالای صفحه ایجاد می‌کند که میزان پیشرفت کاربر در اسکرول صفحه را نشان می‌دهد.
-// این کار به کاربر حس پیشرفت می‌دهد و او را برای ادامه اسکرول و کشف محتوای بیشتر تشویق می‌کند.
+// 6. نوار پیشرفت اسکرول (اصل پیشرفت قابل مشاهده، اصل حس موفقیت، اصل تأخیر معنادار پاداش)
 const scrollProgressBar = document.createElement('div');
 scrollProgressBar.id = 'scroll-progress-bar';
-document.body.prepend(scrollProgressBar); // اضافه کردن به ابتدای بدنه
+document.body.prepend(scrollProgressBar);
 
 window.addEventListener('scroll', () => {
   const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -140,50 +105,361 @@ window.addEventListener('scroll', () => {
   const progress = (scrolled / totalHeight) * 100;
   scrollProgressBar.style.width = progress + '%';
 
-  // تغییر رنگ نوار پیشرفت بر اساس میزان پیشرفت برای حس پاداش متغیر
   if (progress > 90) {
-    scrollProgressBar.style.backgroundColor = 'var(--highlight-color)'; // نزدیک به پایان
+    scrollProgressBar.style.backgroundColor = 'var(--highlight-color)';
   } else if (progress > 50) {
-    scrollProgressBar.style.backgroundColor = 'var(--accent-color)'; // نیمه راه
+    scrollProgressBar.style.backgroundColor = 'var(--accent-color)';
   } else {
-    scrollProgressBar.style.backgroundColor = 'var(--primary-color)'; // شروع
+    scrollProgressBar.style.backgroundColor = 'var(--primary-color)';
   }
 });
 
-// CSS برای نوار پیشرفت اسکرول باید به فایل main-style-fa.css اضافه شود:
-/*
-#scroll-progress-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 4px;
-  background-color: var(--primary-color);
-  width: 0%;
-  z-index: 1001;
-  transition: background-color 0.3s ease-in-out;
-}
-*/
+// 7. Hint برای کاوش بیشتر (اصل کشف و پیش‌بینی، اصل کنجکاوی و رمزآلود بودن، اصل انتظارات مثبت)
+// این بخش یک المان کوچک و متحرک را پس از چند ثانیه نمایش می‌دهد که کاربر را به کاوش بخش پروژه‌ها تشویق می‌کند.
+// این hint تنها زمانی ظاهر می‌شود که کاربر در بخش Hero باشد و پس از اسکرول ناپدید می‌شود تا مزاحم نباشد.
+const exploreHint = document.createElement('a');
+exploreHint.href = '#projects';
+exploreHint.id = 'explore-hint';
+exploreHint.innerHTML = '<i class="fas fa-lightbulb"></i> <span class="hint-text">پروژه‌های من را کشف کنید.</span>';
+exploreHint.style.opacity = '0';
+exploreHint.style.transform = 'translateY(20px)';
+document.body.appendChild(exploreHint);
 
-// CSS برای پیام تغییر تم (Toast Notification) باید به فایل main-style-fa.css اضافه شود:
-/*
-#theme-toast {
-  position: fixed;
-  top: var(--navbar-height); // زیر نوار ناوبری
-  left: 50%;
-  transform: translateX(-50%) translateY(-100%); // پنهان در ابتدا
-  background-color: var(--primary-color);
-  color: white;
-  padding: 10px 20px;
-  border-radius: 8px;
-  z-index: 1002;
-  opacity: 0;
-  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  white-space: nowrap; // جلوگیری از شکستن متن
+let hintTimeout;
+let hintVisible = false;
+
+const heroSection = document.getElementById('hero');
+const heroObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      // اگر کاربر وارد بخش Hero شد، تایمر را برای نمایش hint شروع کن
+      if (!hintVisible) {
+        hintTimeout = setTimeout(() => {
+          exploreHint.style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out';
+          exploreHint.style.opacity = '1';
+          exploreHint.style.transform = 'translateY(0)';
+          hintVisible = true;
+        }, 8000); // نمایش پس از 8 ثانیه در بخش Hero
+      }
+    } else {
+      // اگر کاربر از بخش Hero خارج شد، hint را پنهان کن و تایمر را پاک کن
+      clearTimeout(hintTimeout);
+      if (hintVisible) {
+        exploreHint.style.opacity = '0';
+        exploreHint.style.transform = 'translateY(20px)';
+        hintVisible = false;
+      }
+    }
+  });
+}, { threshold: 0.5 }); // وقتی 50% از Hero قابل مشاهده باشد
+
+if (heroSection) {
+  heroObserver.observe(heroSection);
 }
 
-#theme-toast.show {
-  transform: translateX(-50%) translateY(20px); // نمایش با کمی فاصله از بالا
-  opacity: 1;
+exploreHint.addEventListener('click', (e) => {
+  e.preventDefault();
+  exploreHint.style.opacity = '0';
+  exploreHint.style.transform = 'translateY(20px)';
+  hintVisible = false; // Reset state
+  window.scrollTo({
+    top: document.querySelector('#projects').offsetTop - (document.querySelector('.navbar')?.offsetHeight || 0),
+    behavior: 'smooth'
+  });
+});
+
+// 8. پیام‌های پاداش متغیر برای مهارت‌ها (اصل تأخیر معنادار پاداش، اصل کنجکاوی و رمزآلود بودن، اصل لذت از تسلط)
+// هنگام هاور روی هر مهارت، یک پیام تصادفی و جذاب نمایش داده می‌شود که حس کنجکاوی و پاداش متغیر را تقویت می‌کند.
+const skillMessages = [
+  "تسلط کامل بر این مهارت.",
+  "تجربه گسترده در این حوزه.",
+  "راه حل‌های نوآورانه با این تکنولوژی.",
+  "در حال کاوش عمیق‌تر در این زمینه.",
+  "ابزاری کلیدی برای خلاقیت.",
+  "پیشرفت چشمگیر از ابتدا تا کنون.",
+  "پروژه‌های بزرگتری در راه است.",
+  "چالش‌های این مهارت را دوست دارم.",
+  "یادگیری مستمر در این تخصص.",
+  "این مهارت بخشی از توانمندی‌های اصلی من است."
+];
+
+document.querySelectorAll("#skills .skills-list li").forEach(skillItem => {
+  const messageSpan = document.createElement('span');
+  messageSpan.className = 'skill-hover-message';
+  skillItem.appendChild(messageSpan);
+
+  skillItem.addEventListener('mouseenter', () => {
+    const randomMessage = skillMessages[Math.floor(Math.random() * skillMessages.length)];
+    messageSpan.textContent = randomMessage;
+    messageSpan.style.opacity = '1';
+    messageSpan.style.transform = 'translateY(-5px)';
+  });
+
+  skillItem.addEventListener('mouseleave', () => {
+    messageSpan.style.opacity = '0';
+    messageSpan.style.transform = 'translateY(0)';
+  });
+});
+
+// 9. انیمیشن تایم‌لاین با پیشرفت (اصل پیشرفت قابل مشاهده، اصل حس موفقیت، اصل داستان‌پردازی)
+// این بخش انیمیشن‌های ورود عناصر تایم‌لاین را کنترل می‌کند تا حس پیشرفت در داستان زندگی را القا کند.
+const timelineItems = document.querySelectorAll('.timeline li');
+
+const timelineObserverOptions = {
+  root: null,
+  rootMargin: '0px',
+  threshold: 0.2
+};
+
+const timelineObserver = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('timeline-item-visible');
+      // حذف نمایش پیام toast برای هر نقطه عطف برای حفظ حرفه‌ای بودن و جلوگیری از شلوغی
+      // showToastNotification(`نقطه عطف: ${entry.target.querySelector('h3').textContent}`);
+      observer.unobserve(entry.target);
+    }
+  });
+}, timelineObserverOptions);
+
+timelineItems.forEach(item => {
+  timelineObserver.observe(item);
+});
+
+// 10. بازخورد برای باز شدن FAQ (اصل بازخورد آنی، اصل کشف و پیش‌بینی)
+document.querySelectorAll('.faq-item summary').forEach(summary => {
+  summary.addEventListener('click', () => {
+    const parentDetails = summary.closest('details');
+    if (parentDetails) {
+      parentDetails.classList.toggle('faq-opened');
+    }
+  });
+});
+
+// 11. پیام خوش‌آمدگویی برای کاربران جدید/بازگشتی (اصل شخصی‌سازی، اصل تعلق و ارتباط)
+const welcomeToast = document.createElement('div');
+welcomeToast.id = 'welcome-toast';
+welcomeToast.setAttribute('role', 'status');
+welcomeToast.setAttribute('aria-live', 'polite');
+document.body.appendChild(welcomeToast);
+
+window.addEventListener('load', () => {
+  const hasVisited = localStorage.getItem('hasVisited');
+  let message = '';
+
+  if (hasVisited) {
+    message = 'خوش آمدید! از بازگشت شما خرسندیم.';
+  } else {
+    message = 'به وبسایت رسمی رسول آنلیمیتد خوش آمدید.';
+    localStorage.setItem('hasVisited', 'true');
+  }
+
+  if (message) {
+    welcomeToast.textContent = message;
+    welcomeToast.classList.add('show');
+    setTimeout(() => {
+      welcomeToast.classList.remove('show');
+    }, 3500); // کمی کوتاه‌تر برای حس حرفه‌ای‌تر
+  }
+});
+
+// 12. جشن اتمام صفحه (اصل اثر پایان خوش، اصل حس موفقیت)
+const endOfPageToast = document.createElement('div');
+endOfPageToast.id = 'end-of-page-toast';
+endOfPageToast.setAttribute('role', 'status');
+endOfPageToast.setAttribute('aria-live', 'polite');
+document.body.appendChild(endOfPageToast);
+
+let hasReachedEnd = false;
+window.addEventListener('scroll', () => {
+  if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && !hasReachedEnd) {
+    endOfPageToast.textContent = 'شما به انتهای صفحه رسیدید. از بازدید شما سپاسگزارم. 🎉';
+    endOfPageToast.classList.add('show');
+    hasReachedEnd = true;
+    setTimeout(() => {
+      endOfPageToast.classList.remove('show');
+      createConfetti(); // ایجاد افکت کنفتی
+    }, 4000); // مدت زمان کوتاه‌تر برای حس حرفه‌ای‌تر
+  }
+});
+
+// 13. بازخورد برای کپی ایمیل (اصل بازخورد آنی، اصل پاداش فوری)
+const emailLink = document.querySelector('.contact-info a[href^="mailto:"]');
+if (emailLink) {
+  emailLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    const email = emailLink.href.replace('mailto:', '');
+
+    const tempInput = document.createElement('input');
+    tempInput.value = email;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempInput);
+
+    showToastNotification('ایمیل کپی شد. ✅');
+  });
 }
+
+// تابع کمکی برای نمایش پیام‌های Toast (اصل بازخورد آنی)
+function showToastNotification(message, duration = 3000) {
+  const dynamicToast = document.createElement('div');
+  dynamicToast.className = 'dynamic-toast';
+  dynamicToast.textContent = message;
+  document.body.appendChild(dynamicToast);
+
+  setTimeout(() => {
+    dynamicToast.classList.add('show');
+  }, 100);
+
+  setTimeout(() => {
+    dynamicToast.classList.remove('show');
+    dynamicToast.addEventListener('transitionend', () => dynamicToast.remove());
+  }, duration);
+}
+
+// 14. افکت کنفتی (اصل اثر پایان خوش، اصل حس موفقیت، اصل جذابیت بصری و ظاهری)
+// این تابع افکت بصری کنفتی را برای جشن گرفتن اتمام صفحه ایجاد می‌کند.
+function createConfetti() {
+  const confettiContainer = document.createElement('div');
+  confettiContainer.id = 'confetti-container';
+  document.body.appendChild(confettiContainer);
+
+  const confettiCount = 30; // کاهش تعداد کنفتی برای حس حرفه‌ای‌تر
+  const colors = ['#ffc107', '#007acc', '#005a9e', '#f0f0f0']; // رنگ‌های تم سایت
+
+  for (let i = 0; i < confettiCount; i++) {
+    const confetti = document.createElement('div');
+    confetti.classList.add('confetti');
+    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    confetti.style.left = Math.random() * 100 + 'vw';
+    confetti.style.top = Math.random() * 100 + 'vh';
+    confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+    confettiContainer.appendChild(confetti);
+
+    confetti.animate([
+      { transform: `translateY(0) rotate(${Math.random() * 360}deg)`, opacity: 1 },
+      { transform: `translateY(${window.innerHeight * 1.2}px) rotate(${Math.random() * 720}deg)`, opacity: 0 } // سقوط کمتر
+    ], {
+      duration: Math.random() * 2000 + 1500, // 1.5 تا 3.5 ثانیه
+      easing: 'ease-out',
+      delay: Math.random() * 300,
+      fill: 'forwards'
+    });
+
+    confetti.addEventListener('animationend', () => {
+      confetti.remove();
+    });
+  }
+
+  setTimeout(() => {
+    confettiContainer.remove();
+  }, 3600); // کمی بیشتر از طولانی‌ترین انیمیشن کنفتی
+}
+
+// 15. پیام‌های "دانستنی جالب" (Fun Fact) (اصل کنجکاوی و رمزآلود بودن، اصل تضاد و تنوع حسی، اصل تأخیر معنادار پاداش)
+// این بخش پیام‌های تصادفی با دانستنی‌های جالب را در زمان‌های غیرقابل پیش‌بینی نمایش می‌دهد.
+const funFacts = [
+  "اولین ربات فارسی دیسکورد توسط من در ۱۴ سالگی توسعه یافت.",
+  "من در کاراته دان ۱ رسمی فدراسیون هستم.",
+  "فلسفه 'آنلیمیتد' به معنای به چالش کشیدن محدودیت‌هاست.",
+  "من دانشجوی مهندسی پزشکی دانشگاه تهران هستم.",
+  "پروژه‌های برنامه‌نویسی من در Zenodo نمایه شده‌اند و دارای DOI هستند."
+];
+
+let funFactToastElement = null;
+let funFactInterval = null;
+
+function showFunFact() {
+  if (funFactToastElement) {
+    funFactToastElement.remove();
+  }
+
+  const randomFact = funFacts[Math.floor(Math.random() * funFacts.length)];
+  funFactToastElement = document.createElement('div');
+  funFactToastElement.className = 'fun-fact-toast';
+  funFactToastElement.innerHTML = `
+    <span class="fun-fact-text">دانستنی: ${randomFact}</span>
+    <button class="fun-fact-close" aria-label="بستن پیام دانستنی"><i class="fas fa-times"></i></button>
+  `;
+  document.body.appendChild(funFactToastElement);
+
+  setTimeout(() => {
+    funFactToastElement.classList.add('show');
+  }, 100);
+
+  funFactToastElement.querySelector('.fun-fact-close').addEventListener('click', () => {
+    funFactToastElement.classList.remove('show');
+    funFactToastElement.addEventListener('transitionend', () => funFactToastElement.remove());
+    funFactToastElement = null;
+  });
+
+  setTimeout(() => {
+    if (funFactToastElement) {
+      funFactToastElement.classList.remove('show');
+      funFactToastElement.addEventListener('transitionend', () => funFactToastElement.remove());
+      funFactToastElement = null;
+    }
+  }, 8000); // نمایش برای 8 ثانیه
+}
+
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    showFunFact();
+    funFactInterval = setInterval(() => {
+      showFunFact();
+    }, Math.random() * 60000 + 60000); // بین 60 تا 120 ثانیه (کاهش فرکانس)
+  }, 20000); // شروع نمایش دانستنی‌ها پس از 20 ثانیه (تأخیر بیشتر)
+});
+
+window.addEventListener('beforeunload', () => {
+  if (funFactInterval) {
+    clearInterval(funFactInterval);
+  }
+});
+
+// 16. بازخورد کشف بخش‌ها (اصل پیشرفت قابل مشاهده، اصل پاداش فوری، اصل حس موفقیت)
+// این تابع یک پیام toast را هنگام ورود به یک بخش جدید نمایش می‌دهد.
+// این بخش برای حفظ حرفه‌ای بودن و جلوگیری از شلوغی، حذف شده است.
+// AOS به تنهایی برای انتقال حس پیشرفت کافی است.
+/*
+const sectionTitles = {
+  'hero': 'صفحه اصلی',
+  'about': 'درباره من',
+  'timeline': 'مسیر من',
+  'skills': 'مهارت‌ها و تکنولوژی‌ها',
+  'projects': 'پروژه‌ها',
+  'content': 'محتوای منتخب',
+  'mentions': 'حضور در رسانه‌ها و افتخارات',
+  'faq': 'سوالات متداول',
+  'testimonials': 'نظرات',
+  'connect': 'تماس و پیوندهای من'
+};
+
+const visitedSections = new Set();
+
+const sectionObserverOptions = {
+  root: null,
+  rootMargin: '0px',
+  threshold: 0.3
+};
+
+const sectionObserver = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !visitedSections.has(entry.target.id)) {
+      const sectionId = entry.target.id;
+      const title = sectionTitles[sectionId];
+      if (title) {
+        // showToastNotification(`شما وارد بخش "${title}" شدید! 🌟`); // حذف این خط
+        visitedSections.add(sectionId);
+      }
+    }
+  });
+}, sectionObserverOptions);
+
+document.querySelectorAll('section').forEach(section => {
+  if (section.id) {
+    sectionObserver.observe(section);
+  }
+});
 */

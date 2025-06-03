@@ -310,7 +310,7 @@ textarea:focus:not(:focus-visible) {
 .skills-list li:focus-within,
 .timeline li:focus-within .timeline-content,
 .contact-info a:focus-visible,
-.connect-links-block ul li a:focus-visible,
+.connect-links-block ul li:focus-within, /* Changed to li:focus-within for better touch target */
 .testimonial-item:focus-within,
 .empty-testimonials-state:focus-within,
 .faq-item summary:focus-visible {
@@ -936,7 +936,7 @@ section h2::after {
     var(--transition-easing-springy);
 }
 .card:hover .mention-icon-placeholder i {
-  transform: scale(1.2) rotate(8deg); /* حس پاداش بصری قوی‌تر */
+  transform: scale(1.15) rotate(4deg); /* حس پاداش بصری قوی‌تر و حرفه‌ای‌تر */
 }
 
 /* Skills Section (اصل رهایی از بار شناختی، اصل لذت از تسلط) */
@@ -1030,8 +1030,14 @@ section h2::after {
   width: 50%;
   outline: none;
 
+  opacity: 0; /* Initial state for JS animation */
+  transform: translateY(50px); /* Initial state for JS animation */
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out; /* Transition for JS animation */
+}
+
+.timeline li.timeline-item-visible { /* Class added by JS */
   opacity: 1;
-  transform: none;
+  transform: translateY(0);
 }
 
 .timeline li:nth-child(odd) {
@@ -1214,6 +1220,18 @@ section h2::after {
   transform: translateY(-5px); /* اصل پاداش فوری */
   box-shadow: 0 8px 25px var(--shadow-color-medium); /* سایه قوی‌تر */
 }
+
+/* Animation for FAQ item opening (اصل بازخورد آنی, اصل نشانه‌های تعاملی) */
+.faq-item.faq-opened {
+  animation: faqOpen 0.4s var(--transition-easing-springy);
+}
+
+@keyframes faqOpen {
+  0% { transform: scaleY(1); }
+  50% { transform: scaleY(1.02); } /* کمی بزرگ‌تر شود */
+  100% { transform: scaleY(1); }
+}
+
 
 .faq-item summary {
   display: block; /* Ensures full clickable area */
@@ -1453,7 +1471,7 @@ section h2::after {
 .contact-info a:focus-visible {
   color: var(--accent-color);
   text-decoration: underline;
-  transform: translateX(8px); /* اصل پاداش فوری قوی‌تر */
+  transform: translateX(4px); /* اصل پاداش فوری قوی‌تر و حرفه‌ای‌تر */
   box-shadow: 0 4px 10px var(--shadow-color-medium); /* سایه قوی‌تر */
 }
 .contact-info i {
@@ -1634,11 +1652,166 @@ section h2::after {
   transition: transform 0.5s var(--transition-easing-springy), opacity 0.5s ease-out; /* انیمیشن فنری برای ظاهر شدن */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   white-space: nowrap; /* جلوگیری از شکستن متن */
+  border-right: 4px solid var(--highlight-color); /* اضافه شدن خط کناری برای زیبایی و تمایز */
 }
 
 #theme-toast.show {
   transform: translateX(-50%) translateY(20px); /* نمایش با کمی فاصله از بالا */
   opacity: 1;
+}
+
+/* Explore Hint CSS (اصل کشف و پیش‌بینی، اصل کنجکاوی و رمزآلود بودن، اصل انتظارات مثبت) */
+#explore-hint {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+  cursor: pointer;
+  animation: pulse 2s infinite; /* انیمیشن پالس برای جلب توجه */
+  direction: rtl; /* برای متن فارسی */
+  text-align: right;
+}
+
+#explore-hint i {
+  margin-left: 8px;
+  margin-right: 0;
+}
+
+#explore-hint .hint-text {
+  white-space: nowrap;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 90, 158, 0.7); }
+  70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(0, 90, 158, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 90, 158, 0); }
+}
+
+/* Skill Hover Message CSS (اصل تأخیر معنادار پاداش، اصل کنجکاوی و رمزآلود بودن، اصل لذت از تسلط) */
+.skill-hover-message {
+  position: absolute;
+  bottom: 100%; /* بالای المان مهارت */
+  left: 50%;
+  transform: translateX(-50%) translateY(0);
+  background-color: var(--accent-color);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+  pointer-events: none; /* اجازه می‌دهد روی المان زیرین کلیک شود */
+  z-index: 10;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  margin-bottom: 5px; /* فاصله از المان مهارت */
+  direction: rtl;
+  text-align: center;
+}
+
+#skills .skills-list li {
+  position: relative; /* برای موقعیت‌دهی absolute پیام */
+}
+
+/* Confetti Styles (اصل اثر پایان خوش، اصل حس موفقیت، اصل جذابیت بصری و ظاهری) */
+#confetti-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 9998;
+}
+
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  opacity: 0;
+}
+
+/* Dynamic Toast Notifications (Welcome, End of Page, General) (اصل بازخورد آنی، اصل روان‌روانی و سهولت جریان) */
+.dynamic-toast, #welcome-toast, #end-of-page-toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100%);
+  background-color: var(--primary-color);
+  color: white;
+  padding: 12px 25px;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+  z-index: 1003;
+  opacity: 0;
+  transition: transform 0.5s var(--transition-easing-springy), opacity 0.5s ease-out;
+  white-space: nowrap;
+  font-size: 1.05rem;
+  direction: rtl;
+  text-align: center;
+  border-left: 4px solid var(--highlight-color); /* اضافه شدن خط کناری برای زیبایی و تمایز */
+}
+
+.dynamic-toast.show, #welcome-toast.show, #end-of-page-toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* Fun Fact Toast Notification (اصل کنجکاوی و رمزآلود بودن، اصل تضاد و تنوع حسی، اصل تأخیر معنادار پاداش) */
+.fun-fact-toast {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100%);
+  background-color: var(--highlight-color);
+  color: var(--secondary-color);
+  padding: 12px 25px;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+  z-index: 1004;
+  opacity: 0;
+  transition: transform 0.5s var(--transition-easing-springy), opacity 0.5s ease-out;
+  white-space: nowrap;
+  font-size: 1.05rem;
+  direction: rtl;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-right: 4px solid var(--primary-color); /* اضافه شدن خط کناری برای زیبایی و تمایز */
+}
+
+.fun-fact-toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+.fun-fact-close {
+  background: none;
+  border: none;
+  color: var(--secondary-color);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  transition: transform 0.2s ease-in-out;
+}
+
+.fun-fact-close:hover {
+  transform: rotate(90deg);
 }
 
 
