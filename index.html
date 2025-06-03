@@ -146,11 +146,11 @@
       content="کاوش در حضور دیجیتال محمد رسول سهرابی (Rasoul Unlimited)، مهندس پزشکی، توسعه‌دهنده فول‌استک و استراتژیست محتوا. شامل پروژه‌های نوآورانه، مقالات تخصصی و مسیر حرفه‌ای در سلامت دیجیتال و برندینگ شخصی."
     />
     <meta
-      name="twitter:image"
+      property="twitter:image"
       content="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp"
     />
     <meta
-      name="twitter:image:alt"
+      property="twitter:image:alt"
       content="Mohammad Rasoul Sohrabi (Rasoul Unlimited) Profile Image"
     />
 
@@ -172,6 +172,7 @@
       content="#0f172a"
     />
 
+    <!-- Schema.org Structured Data for AEO Enhancement -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -218,7 +219,7 @@
             "url": "https://www.linkedin.com/in/rasoulunlimited/"
           }
         ],
-        "disambiguatingDescription": "توسعه‌دهنده وب خلاق، طراح UI/UX، سازنده محتوا و دانشجوی مهندسی پزشکی ایرانی، همچنین خالق اولین ربات فارسی دیسکورد، Rasoul Unlimited.",
+        "disambiguatingDescription": "توسعه‌دهنده وب خلاق، طراح UI/UX، سازنده محتوا و دانشجوی مهندسی پزشکی ایرانی، همچنین خالق اولین ربات فارسی دیسکورد، Rasoul Unlimited. او در زمینه سلامت دیجیتال و برندینگ شخصی تخصص دارد.",
         "description": "محمد رسول سهرابی (Rasoul Unlimited)، مهندس پزشکی و توسعه‌دهنده فول‌استک، متخصص در سلامت دیجیتال و برندینگ شخصی. کاوش در پروژه‌های نوآورانه، مقالات سئو محور و مسیر حرفه‌ای او.",
         "birthDate": "2005-09-06",
         "birthPlace": {
@@ -289,6 +290,42 @@
           "استراتژیست محتوا",
           "توسعه‌دهنده فول‌استک"
         ],
+        "hasOccupation": [
+          {
+            "@type": "Occupation",
+            "name": "دانشجوی مهندسی پزشکی",
+            "startDate": "2023-09",
+            "endDate": "Present",
+            "educationRequirements": {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "کارشناسی"
+            },
+            "occupationalCategory": "مهندسی"
+          },
+          {
+            "@type": "Occupation",
+            "name": "توسعه‌دهنده نرم‌افزار",
+            "startDate": "2020",
+            "endDate": "Present",
+            "occupationalCategory": "فناوری اطلاعات",
+            "responsibilities": [
+              "توسعه ربات دیسکورد",
+              "برنامه‌نویسی پایتون و C",
+              "توسعه وب"
+            ]
+          },
+          {
+            "@type": "Occupation",
+            "name": "استراتژیست محتوا",
+            "startDate": "2025-05",
+            "endDate": "Present",
+            "occupationalCategory": "بازاریابی و ارتباطات",
+            "responsibilities": [
+              "تولید محتوای سئو محور",
+              "مدیریت برند شخصی"
+            ]
+          }
+        ],
         "alumniOf": {
           "@type": "EducationalOrganization",
           "name": "دانشگاه تهران مرکز",
@@ -335,12 +372,15 @@
           "بهینه سازی موتور پاسخگو (AEO)",
           "تجزیه و تحلیل داده",
           "امنیت سایبری (مفاهیم پایه)",
-          "مدیریت پروژه"
+          "مدیریت پروژه",
+          "هوش مصنوعی",
+          "پردازش زبان طبیعی"
         ],
         "memberOf": [
           {
             "@type": "Organization",
-            "name": "انجمن علمی مهندسی پزشکی (دانشگاه تهران مرکز)"
+            "name": "انجمن علمی مهندسی پزشکی (دانشگاه تهران مرکز)",
+            "description": "عضو فعال انجمن علمی مهندسی پزشکی در دانشگاه تهران مرکز، مشارکت در رویدادها و پروژه‌های علمی."
           }
         ],
         "funder": {
@@ -421,7 +461,9 @@
           "توسعه وب",
           "پایتون",
           "جاوااسکریپت",
-          "UI/UX"
+          "UI/UX",
+          "سئو",
+          "AEO"
         ],
         "hasPart": [
           {
@@ -430,7 +472,7 @@
             "description": "اولین ربات مستقل فارسی‌زبان دیسکورد که رسماً توسط دیسکورد تأیید شده است. این ربات تعامل جامعه برای فارسی‌زبانان را افزایش می‌دهد.",
             "url": "https://top.gg/bot/735403725132136510",
             "programmingLanguage": "Python",
-            "applicationCategory": "Community Bot",
+            "applicationCategory": "SocialNetworkingApp",
             "operatingSystem": "Any",
             "softwareRequirements": "Discord Account",
             "offers": {
@@ -762,14 +804,20 @@
           "cssSelector": [
             "#hero h1",
             "#about p",
-            "#faq h3",
-            "#projects h3",
-            "#content h3",
-            "#mentions h3",
             "#timeline h3",
+            "#timeline p",
             "#skills li",
+            "#projects h3",
+            "#projects p",
+            "#content h3",
+            "#content p",
+            "#mentions h3",
+            "#mentions p",
+            "#faq h3",
+            "#faq p",
             "#testimonials h2",
-            "#connect h2"
+            "#connect h2",
+            "#connect p"
           ]
         }
       }
