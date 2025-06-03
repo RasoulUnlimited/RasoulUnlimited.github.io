@@ -18,11 +18,11 @@ document.getElementById("current-year").textContent = new Date().getFullYear();
 // انیمیشن‌ها حس "کشف و پیش‌بینی" را تقویت می‌کنند، زیرا عناصر به شکلی پویا ظاهر می‌شوند.
 // همچنین، حرکت‌های روان و جذاب، "پاداش فوری و مثبت" بصری را برای کاربر فراهم می‌آورند.
 // تنظیمات پیش‌فرض:
-//   - disable: false (انیمیشن‌ها فعال هستند)
-//   - startEvent: "DOMContentLoaded" (شروع انیمیشن‌ها پس از بارگذاری کامل DOM)
-//   - duration: 800 (مدت زمان انیمیشن به میلی‌ثانیه)
-//   - once: false (انیمیشن‌ها هر بار که عنصر وارد viewport شود، اجرا می‌شوند)
-//   - mirror: false (انیمیشن‌ها هنگام اسکرول به بالا، معکوس نمی‌شوند)
+//    - disable: false (انیمیشن‌ها فعال هستند)
+//    - startEvent: "DOMContentLoaded" (شروع انیمیشن‌ها پس از بارگذاری کامل DOM)
+//    - duration: 800 (مدت زمان انیمیشن به میلی‌ثانیه)
+//    - once: false (انیمیشن‌ها هر بار که عنصر وارد viewport شود، اجرا می‌شوند)
+//    - mirror: false (انیمیشن‌ها هنگام اسکرول به بالا، معکوس نمی‌شوند)
 AOS.init({
   disable: false, // انیمیشن‌ها فعال هستند
   startEvent: "DOMContentLoaded", // شروع انیمیشن‌ها پس از بارگذاری کامل DOM
@@ -50,18 +50,26 @@ AOS.init({
 const themeToggleInput = document.getElementById("theme-toggle"); // المان ورودی برای تغییر تم
 const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches; // بررسی ترجیح سیستم کاربر برای حالت تاریک
 const savedTheme = localStorage.getItem("theme"); // بازیابی تم ذخیره شده از Local Storage (پیش‌فرض هوشمند)
+const themeToast = document.getElementById("theme-toast"); // المان برای نمایش پیام تغییر تم
 
 // تابع applyTheme: تم را بر اساس ورودی اعمال می‌کند و وضعیت دکمه را به‌روز می‌کند.
 // این تابع از Local Storage برای حفظ انتخاب کاربر بین بازدیدها استفاده می‌کند.
-function applyTheme(theme) {
+function applyTheme(theme, showToast = false) {
   // افزودن یا حذف کلاس 'dark-mode' از بدنه HTML
   document.body.classList.toggle("dark-mode", theme === "dark");
   // افزودن یا حذف کلاس 'light-mode' از بدنه HTML (اختیاری، برای وضوح بیشتر)
   document.body.classList.toggle("light-mode", theme === "light");
   // به‌روزرسانی وضعیت دکمه (چک‌باکس) بر اساس تم اعمال شده
   themeToggleInput.checked = theme === "dark";
-  // اینجا می‌توان یک بازخورد صوتی یا ویژوال کوچک (مثلاً یک پاپ‌آپ محو شونده) اضافه کرد
-  // تا حس "پاداش فوری" را تقویت کند، اما در حال حاضر فقط تغییر بصری انجام می‌شود.
+
+  // نمایش پیام تغییر تم (اصل پاداش فوری و مثبت، اصل بازخورد آنی)
+  if (showToast && themeToast) {
+    themeToast.textContent = `تم به حالت ${theme === 'dark' ? 'تاریک' : 'روشن'} تغییر یافت!`;
+    themeToast.classList.add("show");
+    setTimeout(() => {
+      themeToast.classList.remove("show");
+    }, 3000); // پیام پس از 3 ثانیه محو می‌شود
+  }
 }
 
 // بررسی تم ذخیره شده یا ترجیح سیستم در هنگام بارگذاری صفحه
@@ -78,8 +86,8 @@ if (savedTheme) {
 themeToggleInput.addEventListener("change", () => {
   // تعیین تم جدید بر اساس وضعیت فعلی دکمه
   const newTheme = themeToggleInput.checked ? "dark" : "light";
-  // اعمال تم جدید
-  applyTheme(newTheme);
+  // اعمال تم جدید و نمایش پیام
+  applyTheme(newTheme, true);
   // ذخیره تم جدید در Local Storage برای بازدیدهای بعدی
   localStorage.setItem("theme", newTheme);
 });
@@ -105,7 +113,7 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   });
 });
 
-// 5. بازخورد بصری برای کلیک روی کارت‌ها (پاداش فوری و مثبت، کشف و پیش‌بینی)
+// 5. بازخورد بصری برای کلیک روی کارت‌ها (اصل پاداش فوری و مثبت، اصل کشف و پیش‌بینی)
 // این بخش یک بازخورد بصری کوچک (مثلاً یک انیمیشن پاپ) را هنگام کلیک روی کارت‌ها اضافه می‌کند.
 // این کار حس "پاداش فوری" را تقویت کرده و تعامل را جذاب‌تر می‌کند.
 document.querySelectorAll(".card").forEach((card) => {
@@ -119,15 +127,63 @@ document.querySelectorAll(".card").forEach((card) => {
   });
 });
 
-// این کلاس CSS باید در فایل main-style-fa.css اضافه شود تا انیمیشن کار کند:
+// 6. نوار پیشرفت اسکرول (اصل پیشرفت قابل مشاهده، اصل حس موفقیت)
+// این بخش یک نوار در بالای صفحه ایجاد می‌کند که میزان پیشرفت کاربر در اسکرول صفحه را نشان می‌دهد.
+// این کار به کاربر حس پیشرفت می‌دهد و او را برای ادامه اسکرول و کشف محتوای بیشتر تشویق می‌کند.
+const scrollProgressBar = document.createElement('div');
+scrollProgressBar.id = 'scroll-progress-bar';
+document.body.prepend(scrollProgressBar); // اضافه کردن به ابتدای بدنه
+
+window.addEventListener('scroll', () => {
+  const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const scrolled = window.scrollY;
+  const progress = (scrolled / totalHeight) * 100;
+  scrollProgressBar.style.width = progress + '%';
+
+  // تغییر رنگ نوار پیشرفت بر اساس میزان پیشرفت برای حس پاداش متغیر
+  if (progress > 90) {
+    scrollProgressBar.style.backgroundColor = 'var(--highlight-color)'; // نزدیک به پایان
+  } else if (progress > 50) {
+    scrollProgressBar.style.backgroundColor = 'var(--accent-color)'; // نیمه راه
+  } else {
+    scrollProgressBar.style.backgroundColor = 'var(--primary-color)'; // شروع
+  }
+});
+
+// CSS برای نوار پیشرفت اسکرول باید به فایل main-style-fa.css اضافه شود:
 /*
-.card.clicked-pop {
-  animation: cardPop 0.3s ease-out;
+#scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  background-color: var(--primary-color);
+  width: 0%;
+  z-index: 1001;
+  transition: background-color 0.3s ease-in-out;
+}
+*/
+
+// CSS برای پیام تغییر تم (Toast Notification) باید به فایل main-style-fa.css اضافه شود:
+/*
+#theme-toast {
+  position: fixed;
+  top: var(--navbar-height); // زیر نوار ناوبری
+  left: 50%;
+  transform: translateX(-50%) translateY(-100%); // پنهان در ابتدا
+  background-color: var(--primary-color);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  z-index: 1002;
+  opacity: 0;
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  white-space: nowrap; // جلوگیری از شکستن متن
 }
 
-@keyframes cardPop {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.01); } // یک بزرگنمایی کوچک
-  100% { transform: scale(1); }
+#theme-toast.show {
+  transform: translateX(-50%) translateY(20px); // نمایش با کمی فاصله از بالا
+  opacity: 1;
 }
 */

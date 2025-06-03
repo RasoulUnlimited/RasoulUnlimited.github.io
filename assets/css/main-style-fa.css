@@ -9,38 +9,38 @@
  */
 
  :root {
-  --primary-color: #005a9e; /* آبی تیره: برای اعتماد، ثبات و عناصر اصلی تعاملی */
-  --secondary-color: #1a1a1a; /* سیاه تیره: برای تیترها و متن‌های مهم */
-  --accent-color: #007acc; /* آبی روشن: برای تاکیدات، لینک‌ها و بازخورد‌های مثبت */
-  --highlight-color: #ffc107; /* زرد/طلایی: برای برجسته‌سازی، پاداش‌ها و عناصر ویژه (Featured) */
+  --primary-color: #005a9e; /* آبی تیره: برای اعتماد، ثبات و عناصر اصلی تعاملی (اصل کنترل و انتخاب، اصل زیبایی‌شناسی) */
+  --secondary-color: #1a1a1a; /* سیاه تیره: برای تیترها و متن‌های مهم (اصل روان‌روانی و سهولت جریان) */
+  --accent-color: #007acc; /* آبی روشن: برای تاکیدات، لینک‌ها و بازخورد‌های مثبت (اصل بازخورد آنی، اصل انتظارات مثبت) */
+  --highlight-color: #ffc107; /* زرد/طلایی: برای برجسته‌سازی، پاداش‌ها و عناصر ویژه (Featured) (اصل پاداش فوری، اصل جذابیت بصری و ظاهری) */
 
-  --background-start-color: #f4f7f6; /* رنگ شروع گرادیان پس‌زمینه (روشن) */
-  --background-end-color: #e0e7e9; /* رنگ پایان گرادیان پس‌زمینه (روشن) */
-  --container-bg: #ffffff; /* پس‌زمینه کانتینرهای اصلی */
-  --card-bg: #ffffff; /* پس‌زمینه کارت‌ها */
-  --navbar-bg: rgba(255, 255, 255, 0.98); /* پس‌زمینه نوار ناوبری با شفافیت */
-  --giscus-bg: var(--card-bg); /* پس‌زمینه بخش نظرات Giscus */
-  --skills-bg: #e9ecef; /* پس‌زمینه برچسب‌های مهارت‌ها */
+  --background-start-color: #f4f7f6; /* رنگ شروع گرادیان پس‌زمینه (روشن) (اصل زیبایی‌شناسی) */
+  --background-end-color: #e0e7e9; /* رنگ پایان گرادیان پس‌زمینه (روشن) (اصل زیبایی‌شناسی) */
+  --container-bg: #ffffff; /* پس‌زمینه کانتینرهای اصلی (اصل رهایی از بار شناختی) */
+  --card-bg: #ffffff; /* پس‌زمینه کارت‌ها (اصل رهایی از بار شناختی) */
+  --navbar-bg: rgba(255, 255, 255, 0.98); /* پس‌زمینه نوار ناوبری با شفافیت (اصل رهایی از بار شناختی) */
+  --giscus-bg: var(--card-bg); /* پس‌زمینه بخش نظرات Giscus (اصل رهایی از بار شناختی) */
+  --skills-bg: #e9ecef; /* پس‌زمینه برچسب‌های مهارت‌ها (اصل رهایی از بار شناختی) */
 
-  --shadow-color-light: rgba(0, 0, 0, 0.05); /* سایه ملایم برای عمق بصری */
-  --shadow-color-medium: rgba(0, 0, 0, 0.1); /* سایه متوسط */
-  --shadow-color-strong: rgba(0, 0, 0, 0.15); /* سایه قوی برای عناصر برجسته */
+  --shadow-color-light: rgba(0, 0, 0, 0.05); /* سایه ملایم برای عمق بصری (اصل زیبایی‌شناسی) */
+  --shadow-color-medium: rgba(0, 0, 0, 0.1); /* سایه متوسط (اصل زیبایی‌شناسی) */
+  --shadow-color-strong: rgba(0, 0, 0, 0.15); /* سایه قوی برای عناصر برجسته (اصل زیبایی‌شناسی) */
 
-  --text-color: #333333; /* رنگ متن اصلی برای خوانایی بالا (Figure-Ground) */
-  --text-color-light: #555555; /* رنگ متن کمرنگ‌تر برای اطلاعات فرعی */
-  --text-color-link: var(--accent-color); /* رنگ لینک‌ها برای قابلیت پیش‌بینی */
-  --heading-color: var(--secondary-color); /* رنگ تیترها */
-  --tagline-color: #4a4a4a; /* رنگ شعار اصلی */
-  --footer-color: #555555; /* رنگ متن فوتر */
-  --lang-switcher-active-color: #000; /* رنگ زبان فعال در سوئیچر */
+  --text-color: #333333; /* رنگ متن اصلی برای خوانایی بالا (Figure-Ground) (اصل روان‌روانی و سهولت جریان) */
+  --text-color-light: #555555; /* رنگ متن کمرنگ‌تر برای اطلاعات فرعی (اصل رهایی از بار شناختی) */
+  --text-color-link: var(--accent-color); /* رنگ لینک‌ها برای قابلیت پیش‌بینی (اصل کشف و پیش‌بینی) */
+  --heading-color: var(--secondary-color); /* رنگ تیترها (اصل روان‌روانی و سهولت جریان) */
+  --tagline-color: #4a4a4a; /* رنگ شعار اصلی (اصل روان‌روانی و سهولت جریان) */
+  --footer-color: #555555; /* رنگ متن فوتر (اصل رهایی از بار شناختی) */
+  --lang-switcher-active-color: #000; /* رنگ زبان فعال در سوئیچر (اصل کنترل و انتخاب) */
 
-  --border-color: #e0e0e0; /* رنگ حاشیه عناصر */
-  --timeline-line-color: var(--primary-color); /* رنگ خط زمانی */
-  --timeline-dot-border-color: var(--primary-color); /* رنگ حاشیه دایره‌های زمانی */
-  --timeline-content-border-color: var(--border-color); /* رنگ حاشیه محتوای زمانی */
-  --giscus-border: none; /* حاشیه بخش Giscus (در حالت روشن) */
+  --border-color: #e0e0e0; /* رنگ حاشیه عناصر (اصل رهایی از بار شناختی) */
+  --timeline-line-color: var(--primary-color); /* رنگ خط زمانی (اصل پیشرفت قابل مشاهده) */
+  --timeline-dot-border-color: var(--primary-color); /* رنگ حاشیه دایره‌های زمانی (اصل پیشرفت قابل مشاهده) */
+  --timeline-content-border-color: var(--border-color); /* رنگ حاشیه محتوای زمانی (اصل رهایی از بار شناختی) */
+  --giscus-border: none; /* حاشیه بخش Giscus (در حالت روشن) (اصل رهایی از بار شناختی) */
 
-  --space-unit: 8px; /* واحد پایه برای فواصل (Whitespace) */
+  --space-unit: 8px; /* واحد پایه برای فواصل (Whitespace) (اصل رهایی از بار شناختی) */
   --space-xxs: calc(var(--space-unit) * 0.5); /* 4px */
   --space-xs: var(--space-unit); /* 8px */
   --space-sm: calc(var(--space-unit) * 1.5); /* 12px */
@@ -52,25 +52,25 @@
   --section-v-padding: var(--space-xxl); /* پدینگ عمودی بخش‌ها */
   --section-margin-bottom: var(--space-xxxl); /* فاصله بین بخش‌ها */
 
-  --border-radius-sm: 4px; /* شعاع گردی کوچک */
-  --border-radius-md: 8px; /* شعاع گردی متوسط */
-  --border-radius-lg: 12px; /* شعاع گردی بزرگ */
-  --border-radius-xl: 16px; /* شعاع گردی برای نظرات */
-  --border-radius-full: 50%; /* شعاع گردی کامل (دایره) */
+  --border-radius-sm: 4px; /* شعاع گردی کوچک (اصل زیبایی‌شناسی) */
+  --border-radius-md: 8px; /* شعاع گردی متوسط (اصل زیبایی‌شناسی) */
+  --border-radius-lg: 12px; /* شعاع گردی بزرگ (اصل زیبایی‌شناسی) */
+  --border-radius-xl: 16px; /* شعاع گردی برای نظرات (اصل زیبایی‌شناسی) */
+  --border-radius-full: 50%; /* شعاع گردی کامل (دایره) (اصل زیبایی‌شناسی) */
 
-  --transition-duration-short: 0.2s; /* مدت زمان انتقال کوتاه */
-  --transition-duration-medium: 0.4s; /* مدت زمان انتقال متوسط */
-  --transition-duration-long: 0.6s; /* مدت زمان انتقال طولانی */
-  --transition-easing-standard: ease-in-out; /* نوع easing استاندارد */
-  --transition-easing-springy: cubic-bezier(0.68, -0.55, 0.27, 1.55); /* نوع easing فنری برای حس پاداش */
+  --transition-duration-short: 0.2s; /* مدت زمان انتقال کوتاه (اصل بازخورد آنی) */
+  --transition-duration-medium: 0.4s; /* مدت زمان انتقال متوسط (اصل بازخورد آنی) */
+  --transition-duration-long: 0.6s; /* مدت زمان انتقال طولانی (اصل بازخورد آنی) */
+  --transition-easing-standard: ease-in-out; /* نوع easing استاندارد (اصل روان‌روانی و سهولت جریان) */
+  --transition-easing-springy: cubic-bezier(0.68, -0.55, 0.27, 1.55); /* نوع easing فنری برای حس پاداش (اصل پاداش فوری، اصل نشانه‌های تعاملی) */
 
-  --max-content-width: 1200px; /* حداکثر عرض محتوا برای کاهش بار شناختی */
-  --max-paragraph-width: 75ch; /* عرض بهینه پاراگراف برای خوانایی فارسی */
+  --max-content-width: 1200px; /* حداکثر عرض محتوا برای کاهش بار شناختی (اصل رهایی از بار شناختی) */
+  --max-paragraph-width: 75ch; /* عرض بهینه پاراگراف برای خوانایی فارسی (اصل روان‌روانی و سهولت جریان) */
 
   --navbar-height: 80px; /* ارتفاع نوار ناوبری */
 }
 
-/* Skip Link for Accessibility (قابلیت پیش‌بینی، حس کنترل) */
+/* Skip Link for Accessibility (اصل رهایی از بار شناختی، اصل کنترل و انتخاب) */
 .skip-link {
   position: absolute;
   top: -40px;
@@ -89,14 +89,14 @@
   top: 0;
 }
 
-/* Footer Links (قابلیت پیش‌بینی) */
+/* Footer Links (اصل کشف و پیش‌بینی) */
 .footer-links {
   margin-top: 1rem;
   text-align: center;
 }
 
 .footer-link {
-  color: var(--faq-link-color, #555);
+  color: #bbb; /* رنگ خاص برای لینک‌های فوتر */
   font-size: 0.9rem;
   text-decoration: none;
   padding: 4px 8px;
@@ -109,7 +109,7 @@
   color: var(--faq-link-hover-color, #0f172a);
 }
 
-/* Micro Profile in Footer (هویت‌سازی، قابلیت پیش‌بینی) */
+/* Micro Profile in Footer (اصل هویت و شأن فردی، اصل اعتبار و اثبات اجتماعی) */
 .micro-profile {
   font-size: 0.75rem;
   color: #555;
@@ -138,7 +138,7 @@
   text-decoration: underline;
 }
 
-/* Theme Switch (Dark/Light Mode Toggle) (حس کنترل، زیبایی تعاملی) */
+/* Theme Switch (Dark/Light Mode Toggle) (اصل کنترل و انتخاب، اصل زیبایی‌شناسی، اصل بازخورد آنی) */
 .theme-switch {
   position: relative;
   display: inline-block;
@@ -201,7 +201,7 @@ input:checked + .slider:before {
   color: white;
 }
 
-/* Dark Mode Specific Styles (زیبایی تعاملی، حس کنترل) */
+/* Dark Mode Specific Styles (اصل کنترل و انتخاب، اصل زیبایی‌شناسی، اصل تضاد و تنوع حسی) */
 .dark-mode {
   --primary-color: #61dafb;
   --secondary-color: #f0f0f0;
@@ -235,7 +235,7 @@ input:checked + .slider:before {
   --giscus-border: 1px solid var(--border-color);
 }
 
-/* Base Styles (کاهش بار شناختی، پیش‌زمینه و زمینه) */
+/* Base Styles (اصل روان‌روانی و سهولت جریان، اصل رهایی از بار شناختی، اصل زیبایی‌شناسی) */
 *,
 *::before,
 *::after {
@@ -243,7 +243,7 @@ input:checked + .slider:before {
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: smooth; /* اصل روان‌روانی و سهولت جریان */
   scroll-padding-top: var(--navbar-height);
   overflow-x: hidden;
 }
@@ -258,14 +258,14 @@ body {
   margin: 0;
   padding: 0;
   color: var(--text-color);
-  line-height: 2.0; /* Adjusted for better Persian readability - کاهش بار شناختی */
+  line-height: 2.0; /* Adjusted for better Persian readability - اصل رهایی از بار شناختی */
   position: relative;
   padding-top: var(--navbar-height);
   min-height: 100vh;
   overflow-x: hidden;
-  animation: backgroundGradient 20s ease infinite;
+  animation: backgroundGradient 20s ease infinite; /* اصل تضاد و تنوع حسی */
   background-size: 200% 200%;
-  direction: rtl; /* Changed from ltr to rtl for consistency with html tag - زبان و فرهنگ */
+  direction: rtl; /* Changed from ltr to rtl for consistency with html tag - اصل هم‌ذات‌پنداری */
 
   transition: background-color var(--transition-duration-medium)
     var(--transition-easing-standard),
@@ -286,7 +286,7 @@ body {
   }
 }
 
-/* Accessibility Focus Styles (حس کنترل، قابلیت پیش‌بینی) */
+/* Accessibility Focus Styles (اصل کنترل و انتخاب، اصل بازخورد آنی) */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
@@ -332,7 +332,7 @@ textarea:focus:not(:focus-visible) {
   box-shadow: none;
 }
 
-/* Layout Container (کاهش بار شناختی، سلسله‌مراتب بصری) */
+/* Layout Container (اصل رهایی از بار شناختی، اصل زیبایی‌شناسی) */
 .container {
   max-width: var(--max-content-width);
   width: 100%;
@@ -355,7 +355,7 @@ textarea:focus:not(:focus-visible) {
     var(--transition-easing-standard);
 }
 
-/* Breadcrumb Navigation (کاهش بار شناختی، قابلیت پیش‌بینی) */
+/* Breadcrumb Navigation (اصل رهایی از بار شناختی، اصل پیشرفت قابل مشاهده) */
 .breadcrumb-nav {
   max-width: var(--max-content-width);
   width: 100%;
@@ -395,153 +395,7 @@ textarea:focus:not(:focus-visible) {
   text-decoration: underline;
 }
 
-/* Footer Link Styles (قابلیت پیش‌بینی) */
-.footer-links {
-  margin-top: 1rem;
-  text-align: center;
-}
-
-.footer-link {
-  color: #bbb; /* Specific color for footer links */
-  font-size: 0.9rem;
-  text-decoration: none;
-  padding: 4px 8px;
-  border-radius: 6px;
-  transition: color 0.3s ease, background-color 0.3s ease;
-}
-
-.footer-link:hover {
-  background-color: rgba(100, 100, 100, 0.1);
-  color: var(--faq-link-hover-color, #0f172a);
-}
-
-/* Micro Profile in Footer (هویت‌سازی، قابلیت پیش‌بینی) */
-.micro-profile {
-  font-size: 0.75rem;
-  color: #555;
-  opacity: 0.6;
-  text-align: center;
-  max-width: 400px;
-  margin: 2rem auto 0;
-  padding: 0.5rem 1rem;
-  border-top: 1px dashed #ccc;
-}
-.micro-profile img.u-photo {
-  width: 60px;
-  height: 60px;
-  object-fit: cover;
-  border-radius: 50%;
-  margin: 0.5rem auto;
-  display: block;
-}
-.micro-profile a.u-url {
-  display: inline-block;
-  color: #0066cc;
-  font-weight: bold;
-  text-decoration: none;
-}
-.micro-profile a.u-url:hover {
-  text-decoration: underline;
-}
-
-/* Theme Switch (Dark/Light Mode Toggle) (حس کنترل، زیبایی تعاملی) */
-.theme-switch {
-  position: relative;
-  display: inline-block;
-  width: 48px;
-  height: 24px;
-  margin-left: var(--space-md);
-  vertical-align: middle;
-}
-
-.theme-switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: var(--text-color-light);
-  transition: var(--transition-duration-short);
-  border-radius: 24px;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 18px;
-  width: 18px;
-  left: 3px;
-  bottom: 3px;
-  background-color: var(--card-bg);
-  transition: var(--transition-duration-short);
-  border-radius: 50%;
-
-  font-family: "Font Awesome 6 Free";
-  font-weight: 900;
-  content: "\f185"; /* Sun icon for light mode */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--primary-color);
-  font-size: 0.8em;
-}
-
-input:checked + .slider {
-  background-color: var(--primary-color);
-}
-
-input:focus + .slider {
-  box-shadow: 0 0 1px var(--primary-color);
-}
-
-input:checked + .slider:before {
-  transform: translateX(24px);
-  content: "\f186"; /* Moon icon for dark mode */
-  color: white;
-}
-
-/* Dark Mode Specific Styles (زیبایی تعاملی، حس کنترل) */
-.dark-mode {
-  --primary-color: #61dafb;
-  --secondary-color: #f0f0f0;
-  --accent-color: #a0a0a0;
-  --highlight-color: #fdd835;
-
-  --background-start-color: #2b2d42;
-  --background-end-color: #232533;
-  --container-bg: #1e1e1e;
-  --card-bg: #282828;
-  --navbar-bg: rgba(30, 30, 30, 0.98);
-  --giscus-bg: #1e1e1e;
-  --skills-bg: #3a3a3a;
-
-  --shadow-color-light: rgba(0, 0, 0, 0.15);
-  --shadow-color-medium: rgba(0, 0, 0, 0.3);
-  --shadow-color-strong: rgba(0, 0, 0, 0.45);
-
-  --text-color: #c0c0c0;
-  --text-color-light: #a0a0a0;
-  --text-color-link: var(--primary-color);
-  --heading-color: var(--secondary-color);
-  --tagline-color: #b0b0b0;
-  --footer-color: #a0a0a0;
-  --lang-switcher-active-color: #c0c0c0;
-
-  --border-color: #3a3a3a;
-  --timeline-line-color: #555555;
-  --timeline-dot-border-color: var(--primary-color);
-  --timeline-content-border-color: #4a4a4a;
-  --giscus-border: 1px solid var(--border-color);
-}
-
-/* Navbar (Fixed Header) (کاهش بار شناختی، قابلیت پیش‌بینی) */
+/* Navbar (Fixed Header) (اصل رهایی از بار شناختی، اصل پیشرفت قابل مشاهده) */
 .navbar {
   position: fixed;
   top: 0;
@@ -552,7 +406,8 @@ input:checked + .slider:before {
   padding: var(--space-sm) 0;
   z-index: 1000;
   text-align: center;
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px); /* اصل زیبایی‌شناسی */
+
   border-bottom: 1px solid var(--border-color);
   height: var(--navbar-height);
   display: flex;
@@ -575,7 +430,8 @@ input:checked + .slider:before {
   font-size: 1.05rem;
   transition: color var(--transition-duration-short)
     var(--transition-easing-standard),
-    transform var(--transition-duration-short) var(--transition-easing-springy);
+    transform var(--transition-duration-short) var(--transition-easing-springy),
+    box-shadow var(--transition-duration-short) var(--transition-easing-standard); /* اضافه شدن box-shadow برای پاداش بصری */
   position: relative;
   padding-bottom: var(--space-xs);
   display: inline-block;
@@ -585,7 +441,8 @@ input:checked + .slider:before {
 .navbar nav a:hover,
 .navbar nav a:focus-visible {
   color: var(--primary-color);
-  transform: translateY(-3px); /* حس پاداش فوری */
+  transform: translateY(-3px); /* اصل پاداش فوری */
+  box-shadow: 0 2px 5px var(--shadow-color-light); /* اصل نشانه‌های تعاملی */
 }
 
 .navbar nav a::after {
@@ -603,10 +460,10 @@ input:checked + .slider:before {
 
 .navbar nav a:hover::after,
 .navbar nav a:focus-visible::after {
-  width: 100%; /* بازخورد بصری واضح */
+  width: 100%; /* اصل بازخورد آنی */
 }
 
-/* Hero Section (Main Introduction) (سلسله‌مراتب بصری، هویت‌سازی) */
+/* Hero Section (Main Introduction) (اصل جذابیت بصری و ظاهری، اصل هویت و شأن فردی) */
 #hero {
   position: relative;
   padding-top: var(--section-v-padding);
@@ -661,7 +518,7 @@ input:checked + .slider:before {
   margin-right: auto;
 }
 .profile-image:hover {
-  transform: scale(1.05) rotate(1deg); /* حس پاداش فوری، زیبایی تعاملی */
+  transform: scale(1.05) rotate(1deg); /* اصل پاداش فوری، اصل نشانه‌های تعاملی، اصل جذابیت بصری و ظاهری */
   box-shadow: 0 20px 50px var(--shadow-color-strong);
 }
 
@@ -687,7 +544,7 @@ h1 {
   margin-top: 0;
 }
 
-/* General Section Styles (سلسله‌مراتب بصری, کاهش بار شناختی) */
+/* General Section Styles (اصل رهایی از بار شناختی, اصل زیبایی‌شناسی) */
 section {
   margin-bottom: var(--section-margin-bottom);
   padding-top: var(--section-v-padding);
@@ -742,7 +599,7 @@ section h2::after {
   border-radius: 2.5px;
 }
 
-/* About Section Paragraphs (کاهش بار شناختی، زبان و فرهنگ) */
+/* About Section Paragraphs (اصل رهایی از بار شناختی، اصل هم‌ذات‌پنداری) */
 #about p {
   text-align: justify; /* Keeps original justify */
   max-width: var(--max-paragraph-width); /* Changed to ch units */
@@ -755,7 +612,7 @@ section h2::after {
   text-align: right;
 }
 
-/* General Link Styles within Content Area (قابلیت پیش‌بینی) */
+/* General Link Styles within Content Area (اصل کشف و پیش‌بینی) */
 .content-area
   a:not(.navbar nav a):not(.card .card-links a):not(.contact-info a):not(
     .connect-links-block ul li a
@@ -775,7 +632,7 @@ section h2::after {
   text-decoration: none;
 }
 
-/* Grid Container for Cards (کاهش بار شناختی، قانون گشتالت) */
+/* Grid Container for Cards (اصل رهایی از بار شناختی، اصل زیبایی‌شناسی) */
 .grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -784,7 +641,7 @@ section h2::after {
   align-items: stretch;
 }
 
-/* Card Styles (for Projects and Content) (زیبایی تعاملی، حس پاداش فوری) */
+/* Card Styles (for Projects and Content) (اصل پاداش فوری، اصل نشانه‌های تعاملی) */
 .card {
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
@@ -814,10 +671,10 @@ section h2::after {
 }
 
 .card:hover {
-  transform: translateY(-8px); /* حس پاداش فوری */
-  box-shadow: 0 15px 40px var(--shadow-color-strong);
+  transform: translateY(-8px); /* اصل پاداش فوری */
+  box-shadow: 0 18px 50px var(--shadow-color-strong); /* سایه قوی‌تر برای حس پاداش بیشتر */
   z-index: 2;
-  filter: brightness(1.05) saturate(1.05); /* افزایش جزئی روشنایی و اشباع رنگ */
+  filter: brightness(1.05) saturate(1.05); /* افزایش جزئی روشنایی و اشباع رنگ (اصل جذابیت بصری و ظاهری) */
 }
 
 .card::before {
@@ -835,10 +692,10 @@ section h2::after {
   z-index: 2;
 }
 .card:hover::before {
-  transform: translateY(0); /* بازخورد بصری کشف */
+  transform: translateY(0); /* اصل بازخورد آنی، اصل کشف و پیش‌بینی */
 }
 
-/* Animation for card click feedback (پاداش فوری و مثبت) */
+/* Animation for card click feedback (اصل پاداش فوری و مثبت، اصل نشانه‌های تعاملی) */
 .card.clicked-pop {
   animation: cardPop 0.3s var(--transition-easing-springy);
 }
@@ -850,7 +707,7 @@ section h2::after {
 }
 
 
-/* Image Placeholders within Cards (کاهش بار شناختی) */
+/* Image Placeholders within Cards (اصل رهایی از بار شناختی) */
 .project-image-placeholder,
 .content-image-placeholder {
   width: calc(100% + var(--space-md) * 2);
@@ -879,10 +736,10 @@ section h2::after {
 }
 .card:hover .project-image-placeholder img,
 .card:hover .content-image-placeholder img {
-  transform: scale(1.05); /* حس پاداش بصری */
+  transform: scale(1.05); /* اصل پاداش فوری، اصل جذابیت بصری و ظاهری */
 }
 
-/* Language Switcher (قابلیت پیش‌بینی) */
+/* Language Switcher (اصل کنترل و انتخاب، اصل هم‌ذات‌پنداری) */
 .lang-switcher {
   text-align: center;
   margin: 10px 0;
@@ -909,7 +766,7 @@ section h2::after {
   color: var(--lang-switcher-active-color);
 }
 
-/* Card Headings and Paragraphs (کاهش بار شناختی، قانون گشتالت) */
+/* Card Headings and Paragraphs (اصل رهایی از بار شناختی، اصل روان‌روانی و سهولت جریان) */
 .card h3 {
   font-family: "Montserrat", sans-serif;
   margin-top: 0;
@@ -933,7 +790,7 @@ section h2::after {
   text-align: right;
 }
 
-/* Dopamine Microcopy (نمایش پاداش‌ها، کشف و پیش‌بینی) */
+/* Dopamine Microcopy (اصل پاداش فوری، اصل کشف و پیش‌بینی، اصل جذابیت بصری و ظاهری) */
 .dopamine-microcopy {
   font-size: 0.9rem;
   color: var(--primary-color); /* استفاده از رنگ اصلی برای تاکید */
@@ -946,7 +803,7 @@ section h2::after {
   opacity: 0; /* ابتدا پنهان */
   transform: translateY(10px) scale(0.95); /* شروع کمی پایین‌تر و کوچک‌تر */
   transition: opacity 0.5s var(--transition-easing-springy),
-              transform 0.5s var(--transition-easing-springy); /* انیمیشن فنری */
+               transform 0.5s var(--transition-easing-springy); /* انیمیشن فنری */
 }
 
 /* Show microcopy on card hover */
@@ -956,7 +813,7 @@ section h2::after {
 }
 
 
-/* Card Meta Information (e.g., programming language, team size) (کاهش بار شناختی) */
+/* Card Meta Information (e.g., programming language, team size) (اصل رهایی از بار شناختی) */
 .card .card-meta {
   font-size: 0.95rem;
   color: var(--text-color-light);
@@ -978,7 +835,7 @@ section h2::after {
   text-align: center;
 }
 
-/* Card Links (e.g., GitHub, Zenodo) (قابلیت پیش‌بینی، حس کنترل، نمایش پاداش‌ها) */
+/* Card Links (e.g., GitHub, Zenodo) (اصل کشف و پیش‌بینی، اصل پاداش فوری، اصل نشانه‌های تعاملی) */
 .card .card-links {
   margin-top: var(--space-sm);
   padding-top: var(--space-sm);
@@ -1001,7 +858,8 @@ section h2::after {
   transition: background-color var(--transition-duration-short)
     var(--transition-easing-standard),
     color var(--transition-duration-short) var(--transition-easing-standard),
-    transform var(--transition-duration-short) var(--transition-easing-springy);
+    transform var(--transition-duration-short) var(--transition-easing-springy),
+    box-shadow var(--transition-duration-short) var(--transition-easing-standard); /* اضافه شدن box-shadow */
   outline: none;
   flex-direction: row; /* Ensure icon is to the left of text */
   direction: ltr; /* Force LTR for links with icons */
@@ -1015,9 +873,9 @@ section h2::after {
 .card .card-links a:focus-visible {
   background-color: var(--primary-color);
   color: white;
-  transform: translateY(-2px); /* حس پاداش فوری */
+  transform: translateY(-2px); /* اصل پاداش فوری */
   text-decoration: none;
-  box-shadow: 0 2px 5px var(--shadow-color-light);
+  box-shadow: 0 4px 8px var(--shadow-color-medium); /* سایه قوی‌تر روی هاور */
 }
 .card .card-links a:hover i,
 .card .card-links a:focus-visible i {
@@ -1033,7 +891,7 @@ section h2::after {
     var(--transition-easing-standard);
 }
 
-/* Featured Card Styles (توجه جهت‌دار، نمایش پاداش‌ها) */
+/* Featured Card Styles (اصل جذابیت بصری و ظاهری، اصل پاداش فوری) */
 .card.is-featured {
   border-color: var(--highlight-color);
   box-shadow: 0 8px 25px var(--shadow-color-medium),
@@ -1047,16 +905,16 @@ section h2::after {
 }
 
 .card.is-featured:hover {
-  transform: translateY(-10px); /* حس پاداش فوری قوی‌تر */
-  box-shadow: 0 18px 50px var(--shadow-color-strong),
-    0 0 15px var(--highlight-color);
+  transform: translateY(-10px); /* اصل پاداش فوری قوی‌تر */
+  box-shadow: 0 20px 60px var(--shadow-color-strong), /* سایه قوی‌تر */
+    0 0 20px var(--highlight-color); /* درخشش قوی‌تر */
 }
 .card.is-featured:focus-within {
   box-shadow: 0 0 0 3px var(--highlight-color),
     0 0 0 6px var(--shadow-color-light), 0 8px 25px var(--shadow-color-medium);
 }
 
-/* Mention Card Icon Placeholder (زیبایی تعاملی، حس پاداش) */
+/* Mention Card Icon Placeholder (اصل جذابیت بصری و ظاهری، اصل پاداش فوری) */
 .mention-icon-placeholder {
   width: calc(100% + var(--space-md) * 2);
   margin: calc(-1 * var(--space-md)) calc(-1 * var(--space-md)) var(--space-md)
@@ -1078,10 +936,10 @@ section h2::after {
     var(--transition-easing-springy);
 }
 .card:hover .mention-icon-placeholder i {
-  transform: scale(1.1) rotate(5deg); /* حس پاداش بصری */
+  transform: scale(1.2) rotate(8deg); /* حس پاداش بصری قوی‌تر */
 }
 
-/* Skills Section (کاهش بار شناختی، قابلیت پیش‌بینی) */
+/* Skills Section (اصل رهایی از بار شناختی، اصل لذت از تسلط) */
 #skills .skills-list {
   list-style: none;
   padding: 0;
@@ -1118,8 +976,8 @@ section h2::after {
 #skills .skills-list li:focus-visible {
   background-color: var(--primary-color);
   color: white;
-  transform: translateY(-3px); /* حس پاداش فوری */
-  box-shadow: 0 3px 8px var(--shadow-color-light);
+  transform: translateY(-5px); /* اصل پاداش فوری قوی‌تر */
+  box-shadow: 0 5px 15px var(--shadow-color-medium); /* سایه قوی‌تر */
 }
 #skills .skills-list li i {
   /* Increased space to push text away from icon */
@@ -1135,10 +993,10 @@ section h2::after {
 #skills .skills-list li:hover i,
 #skills .skills-list li:focus-visible i {
   color: white;
-  transform: scale(1.1); /* حس پاداش بصری */
+  transform: scale(1.2); /* اصل پاداش فوری، اصل نشانه‌های تعاملی */
 }
 
-/* Timeline Section (پیشرفت و دستاورد، کاهش بار شناختی) */
+/* Timeline Section (اصل پیشرفت قابل مشاهده، اصل داستان‌پردازی) */
 #timeline {
   position: relative;
 }
@@ -1215,7 +1073,8 @@ section h2::after {
 .timeline li:focus-within::after {
   background-color: var(--primary-color);
   border-color: var(--accent-color);
-  transform: scale(1.2); /* حس پاداش بصری */
+  transform: scale(1.3); /* اصل پاداش فوری، اصل نشانه‌های تعاملی */
+  box-shadow: 0 0 10px var(--accent-color); /* درخشش بیشتر */
 }
 
 .timeline-content {
@@ -1240,8 +1099,8 @@ section h2::after {
 }
 .timeline li:hover .timeline-content,
 .timeline li:focus-within .timeline-content {
-  transform: translateY(-5px); /* حس پاداش فوری */
-  box-shadow: 0 6px 20px var(--shadow-color-medium);
+  transform: translateY(-8px); /* اصل پاداش فوری قوی‌تر */
+  box-shadow: 0 8px 25px var(--shadow-color-strong); /* سایه قوی‌تر */
 }
 
 .timeline-icon {
@@ -1331,7 +1190,7 @@ section h2::after {
   text-align: left;
 }
 
-/* FAQ Section Styling (کشف و پیش‌بینی، حس کنترل) */
+/* FAQ Section Styling (اصل کشف و پیش‌بینی، اصل کنترل و انتخاب، اصل رهایی از بار شناختی) */
 .faq-container {
   display: flex;
   flex-direction: column;
@@ -1352,8 +1211,8 @@ section h2::after {
 }
 
 .faq-item:hover {
-  transform: translateY(-5px); /* حس پاداش بصری */
-  box-shadow: 0 6px 20px var(--shadow-color-medium);
+  transform: translateY(-5px); /* اصل پاداش فوری */
+  box-shadow: 0 8px 25px var(--shadow-color-medium); /* سایه قوی‌تر */
 }
 
 .faq-item summary {
@@ -1371,7 +1230,7 @@ section h2::after {
   min-height: 44px; /* Ensure touch target size is adequate */
 }
 
-/* Custom marker for details summary (کشف و پیش‌بینی) */
+/* Custom marker for details summary (اصل کشف و پیش‌بینی) */
 .faq-item summary::after {
   content: "\25c0"; /* Left-pointing triangle */
   position: absolute;
@@ -1395,7 +1254,7 @@ section h2::after {
   text-align: justify;
 }
 
-/* Testimonials Section (تایید اجتماعی) */
+/* Testimonials Section (اصل اعتبار و اثبات اجتماعی، اصل تعلق و ارتباط) */
 .testimonial-item {
   background-color: var(--card-bg);
   padding: var(--space-lg);
@@ -1414,8 +1273,8 @@ section h2::after {
 
 .testimonial-item:hover,
 .testimonial-item:focus-within {
-  transform: translateY(-10px); /* حس پاداش بصری */
-  box-shadow: 0 15px 40px var(--shadow-color-medium);
+  transform: translateY(-12px); /* اصل پاداش فوری قوی‌تر */
+  box-shadow: 0 20px 50px var(--shadow-color-strong); /* سایه قوی‌تر */
   border-color: var(--primary-color);
 }
 
@@ -1483,7 +1342,7 @@ section h2::after {
 }
 
 .giscus-container:hover {
-  box-shadow: 0 10px 35px var(--shadow-color-strong);
+  box-shadow: 0 15px 45px var(--shadow-color-strong); /* سایه قوی‌تر روی هاور */
 }
 
 .giscus-container iframe {
@@ -1512,7 +1371,7 @@ section h2::after {
   margin-top: 0.5rem;
 }
 
-/* Connect Section (توجه جهت‌دار، قابلیت پیش‌بینی) */
+/* Connect Section (اصل مشارکت فعال، اصل تعلق و ارتباط، اصل کنترل و انتخاب) */
 #connect {
   text-align: center;
   background: linear-gradient(
@@ -1575,7 +1434,8 @@ section h2::after {
   text-decoration: none;
   transition: color var(--transition-duration-short)
     var(--transition-easing-standard),
-    transform var(--transition-duration-short) var(--transition-easing-springy);
+    transform var(--transition-duration-short) var(--transition-easing-springy),
+    box-shadow var(--transition-duration-short) var(--transition-easing-standard); /* اضافه شدن box-shadow */
   display: inline-flex;
   align-items: center;
   padding: var(--space-xs) 0;
@@ -1593,7 +1453,8 @@ section h2::after {
 .contact-info a:focus-visible {
   color: var(--accent-color);
   text-decoration: underline;
-  transform: translateX(5px); /* حس پاداش فوری */
+  transform: translateX(8px); /* اصل پاداش فوری قوی‌تر */
+  box-shadow: 0 4px 10px var(--shadow-color-medium); /* سایه قوی‌تر */
 }
 .contact-info i {
   margin-right: var(--space-sm); /* Adjust for LTR */
@@ -1607,7 +1468,7 @@ section h2::after {
 }
 .contact-info a:hover i,
 .contact-info a:focus-visible i {
-  transform: scale(1.1); /* حس پاداش بصری */
+  transform: scale(1.2); /* اصل پاداش فوری، اصل نشانه‌های تعاملی */
   color: var(--primary-color);
 }
 
@@ -1680,8 +1541,8 @@ section h2::after {
 .connect-links-block ul li:hover,
 .connect-links-block ul li:focus-within {
   background-color: var(--card-bg);
-  transform: translateY(-3px); /* حس پاداش فوری */
-  box-shadow: 0 4px 12px var(--shadow-color-medium);
+  transform: translateY(-5px); /* اصل پاداش فوری قوی‌تر */
+  box-shadow: 0 6px 18px var(--shadow-color-medium); /* سایه قوی‌تر */
 }
 
 .connect-links-block ul li a {
@@ -1722,7 +1583,7 @@ section h2::after {
   color: var(--primary-color);
 }
 
-/* Footer Styles (قابلیت پیش‌بینی) */
+/* Footer Styles (اصل رهایی از بار شناختی) */
 .footer {
   margin-top: var(--space-md);
   font-size: 0.95rem;
@@ -1745,6 +1606,41 @@ section h2::after {
   direction: ltr; /* Default LTR for footer paragraphs */
   text-align: center;
 }
+
+/* Scroll Progress Bar CSS (اصل پیشرفت قابل مشاهده، اصل حس موفقیت، اصل پاداش فوری) */
+#scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  background-color: var(--primary-color); /* رنگ شروعی */
+  width: 0%;
+  z-index: 1001;
+  transition: background-color 0.3s ease-in-out; /* تغییر رنگ نرم */
+}
+
+/* Theme Toast Notification CSS (اصل بازخورد آنی، اصل پاداش فوری) */
+#theme-toast {
+  position: fixed;
+  top: var(--navbar-height); /* زیر نوار ناوبری */
+  left: 50%;
+  transform: translateX(-50%) translateY(-100%); /* پنهان در ابتدا */
+  background-color: var(--primary-color);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  z-index: 1002;
+  opacity: 0;
+  transition: transform 0.5s var(--transition-easing-springy), opacity 0.5s ease-out; /* انیمیشن فنری برای ظاهر شدن */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  white-space: nowrap; /* جلوگیری از شکستن متن */
+}
+
+#theme-toast.show {
+  transform: translateX(-50%) translateY(20px); /* نمایش با کمی فاصله از بالا */
+  opacity: 1;
+}
+
 
 /* Responsive Adjustments */
 @media (max-width: 1200px) {
