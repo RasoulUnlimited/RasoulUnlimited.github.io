@@ -321,30 +321,57 @@
           {
             "@type": "Occupation",
             "name": "دانشجوی مهندسی پزشکی",
+            "description": "دانشجوی کارشناسی مهندسی پزشکی در دانشگاه تهران مرکز.",
             "educationRequirements": {
               "@type": "EducationalOccupationalCredential",
               "credentialCategory": "کارشناسی"
             },
-            "occupationalCategory": "مهندسی"
+            "occupationalCategory": "مهندسی",
+            "occupationLocation": {
+              "@type": "Place",
+              "name": "تهران، ایران"
+            },
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "https://rasoulunlimited.ir"
+            }
           },
           {
             "@type": "Occupation",
             "name": "توسعه‌دهنده نرم‌افزار",
+            "description": "توسعه‌دهنده ربات دیسکورد، برنامه‌نویس پایتون و C، و توسعه‌دهنده وب.",
             "occupationalCategory": "فناوری اطلاعات",
             "responsibilities": [
               "توسعه ربات دیسکورد",
               "برنامه‌نویسی پایتون و C",
               "توسعه وب"
-            ]
+            ],
+            "occupationLocation": {
+              "@type": "Place",
+              "name": "Remote"
+            },
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "https://rasoulunlimited.ir"
+            }
           },
           {
             "@type": "Occupation",
             "name": "استراتژیست محتوا",
+            "description": "متخصص در تولید محتوای سئو محور و مدیریت برند شخصی در پلتفرم‌های مختلف.",
             "occupationalCategory": "بازاریابی و ارتباطات",
             "responsibilities": [
               "تولید محتوای سئو محور",
               "مدیریت برند شخصی"
-            ]
+            ],
+            "occupationLocation": {
+              "@type": "Place",
+              "name": "Remote"
+            },
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "https://rasoulunlimited.ir"
+            }
           }
         ],
         "alumniOf": {
@@ -512,7 +539,7 @@
             "name": "ربات فارسی (اولین ربات فارسی دیسکورد)",
             "description": "اولین ربات مستقل فارسی‌زبان دیسکورد که رسماً توسط دیسکورد تأیید شده است. این ربات تعامل جامعه برای فارسی‌زبانان را افزایش می‌دهد.",
             "url": "https://top.gg/bot/735403725132136510",
-            // "programmingLanguage": "Python", // Removed to address validator warning
+            "programmingLanguage": "Python", // Re-added as it's a valid property for SoftwareApplication
             "applicationCategory": "SocialNetworkingApp",
             "operatingSystem": "Any",
             "softwareRequirements": "Discord Account",
@@ -1001,32 +1028,30 @@
           <section id="timeline" data-aos="fade-up">
             <h2>⏳ مسیر من</h2>
             <ul class="timeline" aria-label="نمای کلی آموزشی و حرفه‌ای">
-              <li data-aos="fade-up" itemscope itemtype="https://schema.org/Event">
+              <li data-aos="fade-up">
                 <div class="timeline-content">
                   <div class="timeline-icon">
                     <i class="fas fa-birthday-cake" aria-hidden="true"></i>
                   </div>
-                  <h3 class="date" itemprop="startDate" content="2005-09-06">
+                  <h3 class="date">
                     <time datetime="2005-09-06">۱۵ شهریور ۱۳۸۴ (September 6, 2005)</time>
                   </h3>
-                  <h3 itemprop="name">تولد</h3>
-                  <p itemprop="description">نقطه آغازین زندگی و مسیر من در این جهان.</p>
+                  <h3>تولد</h3>
+                  <p>نقطه آغازین زندگی و مسیر من در این جهان.</p>
                 </div>
               </li>
-              <li data-aos="fade-up" itemscope itemtype="https://schema.org/Event">
+              <li data-aos="fade-up">
                 <div class="timeline-content">
                   <div class="timeline-icon">
                     <i class="fas fa-medal" aria-hidden="true"></i>
                   </div>
-                  <h3 class="date" itemprop="startDate">سنین پایین</h3>
-                  <h3 itemprop="name">شروع ورزش قهرمانی کاراته و کسب دان ۱</h3>
-                  <p itemprop="description">
+                  <h3 class="date">سنین پایین</h3>
+                  <h3>شروع ورزش قهرمانی کاراته و کسب دان ۱</h3>
+                  <p>
                     شروع جدی ورزش کاراته و کسب روحیه سخت‌کوشی و نظم از طریق حضور
                     در مسابقات ملی و دریافت دان ۱ رسمی فدراسیون کاراته جمهوری
                     اسلامی ایران.
                   </p>
-                  <meta itemprop="eventStatus" content="https://schema.org/EventCompleted" />
-                  <meta itemprop="location" content="ایران" />
                 </div>
               </li>
               <li data-aos="fade-up" itemscope itemtype="https://schema.org/SoftwareApplication">
@@ -1069,21 +1094,20 @@
                   </div>
                 </div>
               </li>
-              <li data-aos="fade-up" itemscope itemtype="https://schema.org/Event">
+              <li data-aos="fade-up">
                 <div class="timeline-content">
                   <div class="timeline-icon">
                     <i class="fas fa-graduation-cap" aria-hidden="true"></i>
                   </div>
-                  <h3 class="date" itemprop="startDate" content="2023-09">
+                  <h3 class="date">
                     <time datetime="2023-09">پاییز ۱۴۰۲ (Fall 2023)</time>
                   </h3>
-                  <h3 itemprop="name">آغاز تحصیل در مهندسی پزشکی دانشگاه تهران</h3>
-                  <p itemprop="description">
+                  <h3>آغاز تحصیل در مهندسی پزشکی دانشگاه تهران</h3>
+                  <p>
                     ورود به دانشگاه تهران (واحد مرکزی) برای تحصیل در رشته مهندسی
                     پزشکی و تمرکز بر ترکیب دانش مهندسی و برنامه‌نویسی برای
                     حوزه سلامت دیجیتال.
                   </p>
-                  <!-- Removed educationalLevel and provider as they are not direct properties of Event -->
                 </div>
               </li>
               <li data-aos="fade-up" itemscope itemtype="https://schema.org/SoftwareSourceCode">
@@ -1199,12 +1223,12 @@
                   <meta itemprop="inLanguage" content="fa" />
                 </div>
               </li>
-              <li data-aos="fade-up" itemscope itemtype="https://schema.org/Event">
+              <li data-aos="fade-up">
                 <div class="timeline-content">
                   <div class="fas fa-stream" aria-hidden="true"></div>
-                  <h3 class="date" itemprop="startDate">حال حاضر</h3>
-                  <h3 itemprop="name">تمرکز بر سلامت دیجیتال، توسعه و مدیریت محتوا</h3>
-                  <p itemprop="description">
+                  <h3 class="date">حال حاضر</h3>
+                  <h3>تمرکز بر سلامت دیجیتال، توسعه و مدیریت محتوا</h3>
+                  <p>
                     ادامه فعالیت و تمرکز بر ترکیب دانش مهندسی پزشکی و
                     برنامه‌نویسی برای ایجاد تحول در حوزه سلامت دیجیتال، همراه با
                     تولید محتوا و مدیریت شبکه‌های اجتماعی برای تاثیرگذاری بیشتر.
