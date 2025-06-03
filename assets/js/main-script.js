@@ -240,11 +240,11 @@ document.body.appendChild(welcomeToast);
 
 function getGreetingBasedOnTime() {
   const hour = new Date().getHours();
-  if (hour >= 5 && hour < 12) {
+  if (hour >= 5 && hour < 10) {
     return 'صبح بخیر! به وبسایت رسمی رسول آنلیمیتد خوش آمدید.';
-  } else if (hour >= 12 && hour < 18) {
+  } else if (hour >= 10 && hour < 16) {
     return 'ظهر بخیر! به وبسایت رسمی رسول آنلیمیتد خوش آمدید.';
-  } else if (hour >= 18 && hour < 22) {
+  } else if (hour >= 16 && hour < 20) {
     return 'عصر بخیر! به وبسایت رسمی رسول آنلیمیتد خوش آمدید.';
   } else {
     return 'شب بخیر! به وبسایت رسمی رسول آنلیمیتد خوش آمدید.';
