@@ -12,6 +12,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
     <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <!-- DNS prefetch for external resources like Giscus for faster loading -->
+    <link rel="dns-prefetch" href="https://giscus.app" />
 
     <link rel="icon" type="image/png" href="assets/images/favicon.png" />
 
@@ -57,7 +59,7 @@
     />
     <meta
       name="keywords"
-      content="محمد رسول سهرابی, رسول آنلیمیتد, مهندسی پزشکی, دانشگاه تهران, توسعه‌دهنده پایتون, ربات دیسکورد, ربات فارسی, برندینگ شخصی, کرج, تهران, مهندس نرم‌افزار, استراتژیست محتوا, اشارات رسانه‌ای, گیت‌هاب, ویرگول, لینکدین, تلگرام, MIT License, AOS, انیمیشن اسکرول, ویکی‌دیتا, dev.to, ORCID, About.me, یوتیوب, سلامت دیجیتال, سئو, بهینه سازی موتور جستجو"
+      content="محمد رسول سهرابی, رسول آنلیمیتد, مهندسی پزشکی, دانشگاه تهران, توسعه‌دهنده پایتون, ربات دیسکورد, ربات فارسی, برندینگ شخصی, کرج, تهران, مهندس نرم‌افزار, استراتژیست محتوا, اشارات رسانه‌ای, گیت‌هاب, ویرگول, لینکدین, تلگرام, MIT License, AOS, انیمیشن اسکرول, ویکی‌دیتا, dev.to, ORCID, About.me, یوتیوب, سلامت دیجیتال, سئو, بهینه سازی موتور جستجو, بهینه سازی موتور پاسخگو, AEO"
     />
     <link rel="alternate" href="https://rasoulunlimited.ir" hreflang="fa-IR" />
     <link
@@ -172,7 +174,7 @@
       content="#0f172a"
     />
 
-    <!-- Schema.org Structured Data for AEO Enhancement -->
+    <!-- Schema.org Structured Data for AEO/SEO Enhancement -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -393,6 +395,14 @@
           "@id": "https://rasoulunlimited.ir",
           "url": "https://rasoulunlimited.ir",
           "name": "صفحه رسمی محمد رسول سهرابی (Rasoul Unlimited)"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+98-912-XXXXXXX",
+          "contactType": "customer service",
+          "email": "rasoul.unlimited@gmail.com",
+          "areaServed": "IR",
+          "availableLanguage": ["Persian", "English"]
         }
       }
     </script>
@@ -408,7 +418,17 @@
           "@type": "SearchAction",
           "target": "https://rasoulunlimited.ir/?q={search_term_string}",
           "query-input": "required name=search_term_string"
-        }
+        },
+        "about": [
+          {
+            "@type": "Person",
+            "@id": "https://rasoulunlimited.ir/#person"
+          },
+          {
+            "@type": "Organization",
+            "@id": "https://rasoulunlimited.ir/#organization"
+          }
+        ]
       }
     </script>
 
@@ -463,7 +483,9 @@
           "جاوااسکریپت",
           "UI/UX",
           "سئو",
-          "AEO"
+          "AEO",
+          "هوش مصنوعی",
+          "پردازش زبان طبیعی"
         ],
         "hasPart": [
           {
@@ -494,6 +516,11 @@
             "mainEntityOfPage": {
               "@type": "WebPage",
               "@id": "https://rasoulunlimited.ir/projects/persian-bot/"
+            },
+            "softwareHelp": {
+              "@type": "CreativeWork",
+              "name": "پشتیبانی ربات فارسی",
+              "url": "https://discord.gg/your-support-server-invite"
             }
           },
           {
@@ -721,6 +748,14 @@
           "@id": "https://rasoulunlimited.ir",
           "url": "https://rasoulunlimited.ir",
           "name": "صفحه رسمی محمد رسول سهرابی (Rasoul Unlimited)"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+98-912-XXXXXXX",
+          "contactType": "customer service",
+          "email": "rasoul.unlimited@gmail.com",
+          "areaServed": "IR",
+          "availableLanguage": ["Persian", "English"]
         }
       }
     </script>
@@ -950,7 +985,9 @@
                   <div class="timeline-icon">
                     <i class="fas fa-birthday-cake" aria-hidden="true"></i>
                   </div>
-                  <h3 class="date" itemprop="startDate" content="2005-09-06">۱۵ شهریور ۱۳۸۴ (September 6, 2005)</h3>
+                  <h3 class="date" itemprop="startDate" content="2005-09-06">
+                    <time datetime="2005-09-06">۱۵ شهریور ۱۳۸۴ (September 6, 2005)</time>
+                  </h3>
                   <h3 itemprop="name">تولد</h3>
                   <p itemprop="description">نقطه آغازین زندگی و مسیر من در این جهان.</p>
                 </div>
@@ -976,7 +1013,9 @@
                   <div class="timeline-icon">
                     <i class="fab fa-discord" aria-hidden="true"></i>
                   </div>
-                  <h3 class="date" itemprop="dateCreated" content="2020">سال 2020 (14 سالگی)</h3>
+                  <h3 class="date" itemprop="dateCreated" content="2020">
+                    <time datetime="2020">سال 2020 (14 سالگی)</time>
+                  </h3>
                   <h3 itemprop="name">توسعه اولین ربات فارسی‌زبان دیسکورد (Persian Bot)</h3>
                   <p itemprop="description">
                     نخستین ربات مستقل فارسی‌زبان در پلتفرم دیسکورد که با مشارکت
@@ -1011,6 +1050,10 @@
                     <meta itemprop="ratingValue" content="4.5" />
                     <meta itemprop="reviewCount" content="100" />
                   </div>
+                  <div itemprop="softwareHelp" itemscope itemtype="https://schema.org/CreativeWork">
+                    <meta itemprop="name" content="پشتیبانی ربات فارسی" />
+                    <meta itemprop="url" content="https://discord.gg/your-support-server-invite" /> <!-- Placeholder for support server invite -->
+                  </div>
                 </div>
               </li>
               <li data-aos="fade-up" itemscope itemtype="https://schema.org/EducationalOccupationalExperience">
@@ -1018,7 +1061,9 @@
                   <div class="timeline-icon">
                     <i class="fas fa-graduation-cap" aria-hidden="true"></i>
                   </div>
-                  <h3 class="date" itemprop="startDate" content="2023-09">پاییز ۱۴۰۲ (Fall 2023)</h3>
+                  <h3 class="date" itemprop="startDate" content="2023-09">
+                    <time datetime="2023-09">پاییز ۱۴۰۲ (Fall 2023)</time>
+                  </h3>
                   <h3 itemprop="name">آغاز تحصیل در مهندسی پزشکی دانشگاه تهران</h3>
                   <p itemprop="description">
                     ورود به دانشگاه تهران (واحد مرکزی) برای تحصیل در رشته مهندسی
@@ -1040,7 +1085,9 @@
                   <div class="timeline-icon">
                     <i class="fas fa-code" aria-hidden="true"></i>
                   </div>
-                  <h3 class="date" itemprop="dateCreated" content="2023-11-16">۱۵ آبان ۱۴۰۲ (2023 November 16)</h3>
+                  <h3 class="date" itemprop="dateCreated" content="2023-11-16">
+                    <time datetime="2023-11-16">۱۵ آبان ۱۴۰۲ (2023 November 16)</time>
+                  </h3>
                   <h3 itemprop="name">توسعه پروژه‌های برنامه‌نویسی با زبان C (دانشگاهی)</h3>
                   <p itemprop="description">
                     مجموعه‌ای از پروژه‌های برنامه‌نویسی کوچک که در چارچوب دروس
@@ -1074,7 +1121,9 @@
                   <div class="timeline-icon">
                     <i class="fab fa-python" aria-hidden="true"></i>
                   </div>
-                  <h3 class="date" itemprop="dateCreated" content="2024-03-12">۲۲ اسفند ۱۴۰۲ (2024 March 12)</h3>
+                  <h3 class="date" itemprop="dateCreated" content="2024-03-12">
+                    <time datetime="2024-03-12">۲۲ اسفند ۱۴۰۲ (2024 March 12)</time>
+                  </h3>
                   <h3 itemprop="name">
                     توسعه پروژه‌های برنامه‌نویسی با زبان پایتون (دانشگاهی)
                   </h3>
@@ -1110,7 +1159,9 @@
                   <div class="timeline-icon">
                     <i class="fas fa-feather-alt" aria-hidden="true"></i>
                   </div>
-                  <h3 class="date" itemprop="datePublished" content="2025-05-10">۲۰ اردیبهشت ۱۴۰۴ (2025 May 10)</h3>
+                  <h3 class="date" itemprop="datePublished" content="2025-05-10">
+                    <time datetime="2025-05-10">۲۰ اردیبهشت ۱۴۰۴ (2025 May 10)</time>
+                  </h3>
                   <h3 itemprop="name">انتشار اولین مقاله معرفی در ویرگول</h3>
                   <p itemprop="articleBody">
                     نشر مقاله "<a href="https://vrgl.ir/9D6Hy" target="_blank" rel="noopener noreferrer" title="خواندن مقاله 'از tatami تا تکنولوژی' در ویرگول">محمد رسول سهرابی (آنلیمیتد) – از tatami تا تکنولوژی</a>" به عنوان اولین معرفی جامع من در فضای دیجیتال.
@@ -1127,7 +1178,9 @@
                   <div class="timeline-icon">
                     <i class="fas fa-feather-alt" aria-hidden="true"></i>
                   </div>
-                  <h3 class="date" itemprop="datePublished" content="2025-05-13">۲۳ اردیبهشت ۱۴۰۴ (2025 May 13)</h3>
+                  <h3 class="date" itemprop="datePublished" content="2025-05-13">
+                    <time datetime="2025-05-13">۲۳ اردیبهشت ۱۴۰۴ (2025 May 13)</time>
+                  </h3>
                   <h3 itemprop="name">انتشار مقاله برند شخصی در ویرگول</h3>
                   <p itemprop="articleBody">
                     نشر مقاله "<a href="https://vrgl.ir/cUmcv" target="_blank" rel="noopener noreferrer" title="خواندن مقاله 'چطور توی دنیای شلوغ امروز، یه برند شخصی واقعی بسازیم؟' در ویرگول">چطور توی دنیای شلوغ امروز، یه برند شخصی واقعی بسازیم؟ | داستان Rasoul Unlimited</a>" که به فلسفه‌ی شخصی من
