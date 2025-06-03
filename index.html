@@ -322,7 +322,7 @@
             "@type": "Occupation",
             "name": "دانشجوی مهندسی پزشکی",
             "startDate": "2023-09",
-            "endDate": "Present",
+            "endDate": "9999-12-31",
             "educationRequirements": {
               "@type": "EducationalOccupationalCredential",
               "credentialCategory": "کارشناسی"
@@ -333,7 +333,7 @@
             "@type": "Occupation",
             "name": "توسعه‌دهنده نرم‌افزار",
             "startDate": "2020",
-            "endDate": "Present",
+            "endDate": "9999-12-31",
             "occupationalCategory": "فناوری اطلاعات",
             "responsibilities": [
               "توسعه ربات دیسکورد",
@@ -345,7 +345,7 @@
             "@type": "Occupation",
             "name": "استراتژیست محتوا",
             "startDate": "2025-05",
-            "endDate": "Present",
+            "endDate": "9999-12-31",
             "occupationalCategory": "بازاریابی و ارتباطات",
             "responsibilities": [
               "تولید محتوای سئو محور",
@@ -1064,10 +1064,11 @@
                       در Top.gg</a
                     >
                   </div>
-                  <meta itemprop="programmingLanguage" content="Python" />
-                  <meta itemprop="applicationCategory" content="SocialNetworkingApp" />
-                  <meta itemprop="operatingSystem" content="Any" />
-                  <meta itemprop="softwareRequirements" content="Discord Account" />
+                  <!-- Removed properties already defined in JSON-LD for SoftwareSourceCode -->
+                  <!-- <meta itemprop="programmingLanguage" content="Python" /> -->
+                  <!-- <meta itemprop="applicationCategory" content="SocialNetworkingApp" /> -->
+                  <!-- <meta itemprop="operatingSystem" content="Any" /> -->
+                  <!-- <meta itemprop="softwareRequirements" content="Discord Account" /> -->
                   <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
                     <meta itemprop="price" content="0" />
                     <meta itemprop="priceCurrency" content="USD" />
@@ -1077,13 +1078,14 @@
                     <meta itemprop="ratingValue" content="4.5" />
                     <meta itemprop="reviewCount" content="100" />
                   </div>
-                  <div itemprop="softwareHelp" itemscope itemtype="https://schema.org/CreativeWork">
+                  <!-- Removed softwareHelp as it's for SoftwareApplication, not SoftwareSourceCode in HTML -->
+                  <!-- <div itemprop="softwareHelp" itemscope itemtype="https://schema.org/CreativeWork">
                     <meta itemprop="name" content="پشتیبانی ربات فارسی" />
-                    <meta itemprop="url" content="https://discord.gg/your-support-server-invite" /> <!-- Placeholder for support server invite -->
-                  </div>
+                    <meta itemprop="url" content="https://discord.gg/your-support-server-invite" />
+                  </div> -->
                 </div>
               </li>
-              <li data-aos="fade-up" itemscope itemtype="https://schema.org/EducationalOccupationalExperience">
+              <li data-aos="fade-up" itemscope itemtype="https://schema.org/Event">
                 <div class="timeline-content">
                   <div class="timeline-icon">
                     <i class="fas fa-graduation-cap" aria-hidden="true"></i>
@@ -1098,9 +1100,10 @@
                     حوزه سلامت دیجیتال.
                   </p>
                   <meta itemprop="educationalLevel" content="کارشناسی" />
-                  <div itemprop="educationalProgram" itemscope itemtype="https://schema.org/EducationalProgram">
+                  <!-- Removed educationalProgram as it's not a direct property of Event -->
+                  <!-- <div itemprop="educationalProgram" itemscope itemtype="https://schema.org/EducationalProgram">
                     <meta itemprop="name" content="مهندسی پزشکی" />
-                  </div>
+                  </div> -->
                   <div itemprop="provider" itemscope itemtype="https://schema.org/EducationalOrganization">
                     <meta itemprop="name" content="دانشگاه تهران" />
                     <meta itemprop="url" content="https://ut.ac.ir" />
