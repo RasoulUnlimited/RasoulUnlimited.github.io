@@ -328,9 +328,12 @@
             },
             "occupationalCategory": "مهندسی",
             "occupationLocation": {
-              "@type": "PostalAddress",
-              "addressLocality": "تهران",
-              "addressCountry": "ایران"
+              "@type": "Place",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "تهران",
+                "addressCountry": "ایران"
+              }
             }
           },
           {
@@ -344,9 +347,12 @@
               "توسعه وب"
             ],
             "occupationLocation": {
-              "@type": "PostalAddress",
-              "addressLocality": "Remote",
-              "addressCountry": "Worldwide"
+              "@type": "Place",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Remote",
+                "addressCountry": "Worldwide"
+              }
             }
           },
           {
@@ -359,9 +365,12 @@
               "مدیریت برند شخصی"
             ],
             "occupationLocation": {
-              "@type": "PostalAddress",
-              "addressLocality": "Remote",
-              "addressCountry": "Worldwide"
+              "@type": "Place",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Remote",
+                "addressCountry": "Worldwide"
+              }
             }
           }
         ],
@@ -530,7 +539,7 @@
             "name": "ربات فارسی (اولین ربات فارسی دیسکورد)",
             "description": "اولین ربات مستقل فارسی‌زبان دیسکورد که رسماً توسط دیسکورد تأیید شده است. این ربات تعامل جامعه برای فارسی‌زبانان را افزایش می‌دهد.",
             "url": "https://top.gg/bot/735403725132136510",
-            "programmingLanguage": "Python", // The validator might flag this, but it's a valid Schema.org property for SoftwareApplication.
+            "programmingLanguage": "Python",
             "applicationCategory": "SocialNetworkingApp",
             "operatingSystem": "Any",
             "softwareRequirements": "Discord Account",
@@ -1912,7 +1921,7 @@
             </div>
           </section>
 
-          <section id="faq" data-aos="fade-up" itemscope itemtype="https://schema.org/FAQPage">
+          <section id="faq" data-aos="fade-up">
             <h2>❓ سوالات متداول (FAQ)</h2>
             <div class="faq-container">
               <details class="faq-item" itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
