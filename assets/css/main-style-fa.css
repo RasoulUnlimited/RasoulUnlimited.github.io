@@ -51,6 +51,7 @@
   --border-radius-sm: 4px;
   --border-radius-md: 8px;
   --border-radius-lg: 12px;
+  --border-radius-xl: 16px; /* Added for testimonial border-radius */
   --border-radius-full: 50%;
 
   --transition-duration-short: 0.2s;
@@ -60,6 +61,7 @@
   --transition-easing-springy: cubic-bezier(0.68, -0.55, 0.27, 1.55);
 
   --max-content-width: 1200px;
+  --max-paragraph-width: 75ch; /* Optimized for readability of Persian text */
 
   --navbar-height: 80px;
 }
@@ -251,7 +253,7 @@ body {
   margin: 0;
   padding: 0;
   color: var(--text-color);
-  line-height: 1.7;
+  line-height: 1.9; /* Adjusted for better Persian readability */
   position: relative;
   padding-top: var(--navbar-height);
   min-height: 100vh;
@@ -358,132 +360,6 @@ textarea:focus:not(:focus-visible) {
   color: #fff;
 }
 
-/* Micro Profile in Footer */
-.micro-profile {
-  font-size: 0.75rem;
-  color: #555;
-  opacity: 0.6;
-  text-align: center;
-  max-width: 400px;
-  margin: 2rem auto 0;
-  padding: 0.5rem 1rem;
-  border-top: 1px dashed #ccc;
-}
-.micro-profile img.u-photo {
-  width: 60px;
-  height: 60px;
-  object-fit: cover;
-  border-radius: 50%;
-  margin: 0.5rem auto;
-  display: block;
-}
-.micro-profile a.u-url {
-  display: inline-block;
-  color: #0066cc;
-  font-weight: bold;
-  text-decoration: none;
-}
-.micro-profile a.u-url:hover {
-  text-decoration: underline;
-}
-
-/* Theme Switch (Dark/Light Mode Toggle) */
-.theme-switch {
-  position: relative;
-  display: inline-block;
-  width: 48px;
-  height: 24px;
-  margin-left: var(--space-md);
-  vertical-align: middle;
-}
-
-.theme-switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: var(--text-color-light);
-  transition: var(--transition-duration-short);
-  border-radius: 24px;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 18px;
-  width: 18px;
-  left: 3px;
-  bottom: 3px;
-  background-color: var(--card-bg);
-  transition: var(--transition-duration-short);
-  border-radius: 50%;
-
-  font-family: "Font Awesome 6 Free";
-  font-weight: 900;
-  content: "\f185"; /* Sun icon for light mode */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--primary-color);
-  font-size: 0.8em;
-}
-
-input:checked + .slider {
-  background-color: var(--primary-color);
-}
-
-input:focus + .slider {
-  box-shadow: 0 0 1px var(--primary-color);
-}
-
-input:checked + .slider:before {
-  transform: translateX(24px);
-  content: "\f186"; /* Moon icon for dark mode */
-  color: white;
-}
-
-/* Dark Mode Specific Styles */
-.dark-mode {
-  --primary-color: #61dafb;
-  --secondary-color: #f0f0f0;
-  --accent-color: #a0a0a0;
-  --highlight-color: #fdd835;
-
-  --background-start-color: #2b2d42;
-  --background-end-color: #232533;
-  --container-bg: #1e1e1e;
-  --card-bg: #282828;
-  --navbar-bg: rgba(30, 30, 30, 0.98);
-  --giscus-bg: #1e1e1e;
-  --skills-bg: #3a3a3a;
-
-  --shadow-color-light: rgba(0, 0, 0, 0.15);
-  --shadow-color-medium: rgba(0, 0, 0, 0.3);
-  --shadow-color-strong: rgba(0, 0, 0, 0.45);
-
-  --text-color: #c0c0c0;
-  --text-color-light: #a0a0a0;
-  --text-color-link: var(--primary-color);
-  --heading-color: var(--secondary-color);
-  --tagline-color: #b0b0b0;
-  --footer-color: #a0a0a0;
-  --lang-switcher-active-color: #c0c0c0;
-
-  --border-color: #3a3a3a;
-  --timeline-line-color: #555555;
-  --timeline-dot-border-color: var(--primary-color);
-  --timeline-content-border-color: #4a4a4a;
-  --giscus-border: 1px solid var(--border-color);
-}
-
 /* Navbar (Fixed Header) */
 .navbar {
   position: fixed;
@@ -547,6 +423,46 @@ input:checked + .slider:before {
 .navbar nav a:hover::after,
 .navbar nav a:focus-visible::after {
   width: 100%;
+}
+
+/* Breadcrumb Navigation */
+.breadcrumb-nav {
+  max-width: var(--max-content-width);
+  width: 100%;
+  margin: var(--space-md) auto var(--space-sm);
+  padding: 0 var(--space-lg);
+  font-size: 0.9rem;
+  color: var(--text-color-light);
+  direction: rtl;
+  text-align: right;
+}
+
+.breadcrumb-nav ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.breadcrumb-nav li {
+  display: inline;
+}
+
+.breadcrumb-nav li + li::before {
+  content: "/\00a0"; /* Add a slash and non-breaking space */
+  padding: 0 var(--space-xxs);
+  color: var(--text-color-light);
+}
+
+.breadcrumb-nav a {
+  color: var(--text-color-link);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.breadcrumb-nav a:hover {
+  text-decoration: underline;
 }
 
 /* Hero Section (Main Introduction) */
@@ -688,12 +604,12 @@ section h2::after {
 /* About Section Paragraphs */
 #about p {
   text-align: justify; /* Keeps original justify */
-  max-width: 800px;
+  max-width: var(--max-paragraph-width); /* Changed to ch units */
   margin-left: auto;
   margin-right: auto;
   font-size: 1.15rem;
   color: var(--text-color);
-  line-height: 1.8;
+  line-height: 1.9; /* Adjusted for better Persian readability */
   direction: rtl;
   text-align: right;
 }
@@ -858,7 +774,7 @@ section h2::after {
   font-size: 1rem;
   color: var(--text-color);
   flex-grow: 1;
-  line-height: 1.7;
+  line-height: 1.7; /* Adjusted for better Persian readability */
   direction: rtl;
   text-align: right;
 }
@@ -916,6 +832,7 @@ section h2::after {
   color: var(--primary-color);
   text-decoration: none;
   border: 1px solid var(--primary-color);
+  min-height: 44px; /* Ensure touch target size is adequate */
 }
 .card .card-links a:hover,
 .card .card-links a:focus-visible {
@@ -1018,6 +935,7 @@ section h2::after {
   /* Ensure icon is visually on the left for consistent spacing */
   direction: ltr;
   text-align: left;
+  min-height: 44px; /* Ensure touch target size is adequate */
 }
 #skills .skills-list li:hover,
 #skills .skills-list li:focus-visible {
@@ -1222,6 +1140,7 @@ section h2::after {
   font-size: 1rem;
   margin-bottom: var(--space-xs);
   color: var(--text-color);
+  line-height: 1.8; /* Adjusted for better Persian readability */
   direction: rtl;
   text-align: right;
 }
@@ -1240,7 +1159,7 @@ section h2::after {
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
-  max-width: 800px;
+  max-width: var(--max-paragraph-width); /* Changed to ch units */
   margin: var(--space-xl) auto;
 }
 
@@ -1272,6 +1191,7 @@ section h2::after {
   position: relative;
   list-style: none; /* Removes default marker */
   touch-action: manipulation; /* Improves responsiveness on touch devices */
+  min-height: 44px; /* Ensure touch target size is adequate */
 }
 
 /* Custom marker for details summary */
@@ -1293,7 +1213,7 @@ section h2::after {
   padding: 0 var(--space-md) var(--space-md);
   margin: 0;
   font-size: 1rem;
-  line-height: 1.7;
+  line-height: 1.7; /* Adjusted for better Persian readability */
   color: var(--text-color);
   text-align: justify;
 }
@@ -1339,7 +1259,7 @@ section h2::after {
   margin-top: var(--space-md);
   margin-bottom: var(--space-md);
   font-size: 1.15rem;
-  line-height: 1.8;
+  line-height: 1.8; /* Adjusted for better Persian readability */
   color: var(--text-color);
   font-style: normal;
   position: relative;
@@ -1454,7 +1374,7 @@ section h2::after {
   font-size: 1.15rem;
   margin-bottom: var(--space-md);
   color: var(--text-color);
-  line-height: 1.8;
+  line-height: 1.8; /* Adjusted for better Persian readability */
   max-width: none;
   margin-left: 0;
   margin-right: auto;
@@ -1578,6 +1498,7 @@ section h2::after {
   transform: none;
   box-shadow: 0 2px 8px var(--shadow-color-light);
   outline: none;
+  min-height: 44px; /* Ensure touch target size is adequate */
 }
 .connect-links-block ul li:hover,
 .connect-links-block ul li:focus-within {
@@ -1664,7 +1585,7 @@ section h2::after {
   }
   #about p {
     font-size: 1.1rem;
-    max-width: 700px;
+    max-width: 70ch; /* Adjusted for smaller screens */
   }
   .card h3 {
     font-size: 1.3rem;

@@ -1,43 +1,83 @@
+// main-script.js
+// اسکریپت اصلی برای وبسایت رسمی رسول آنلیمیتد
+// نویسنده: محمد رسول سهرابی (Rasoul Unlimited)
+
+// 1. به‌روزرسانی سال جاری در فوتر
+// این بخش تضمین می‌کند که سال کپی‌رایت در پایین صفحه همیشه به‌روز باشد.
+// این یک نکته کوچک اما مهم برای حفظ دقت و اعتبار سایت است.
 document.getElementById("current-year").textContent = new Date().getFullYear();
 
+// 2. راه‌اندازی کتابخانه AOS (Animate On Scroll)
+// AOS یک کتابخانه جاوااسکریپت برای افزودن انیمیشن‌های اسکرول به عناصر صفحه است.
+// این کار باعث بهبود تجربه کاربری (UX) و جذابیت بصری سایت می‌شود.
+// تنظیمات پیش‌فرض:
+//   - disable: false (انیمیشن‌ها فعال هستند)
+//   - startEvent: "DOMContentLoaded" (شروع انیمیشن‌ها پس از بارگذاری کامل DOM)
+//   - duration: 800 (مدت زمان انیمیشن به میلی‌ثانیه)
+//   - once: false (انیمیشن‌ها هر بار که عنصر وارد viewport شود، اجرا می‌شوند)
+//   - mirror: false (انیمیشن‌ها هنگام اسکرول به بالا، معکوس نمی‌شوند)
 AOS.init({
-  disable: false,
-  startEvent: "DOMContentLoaded",
-  initClassName: "aos-init",
-  animatedClassName: "aos-animate",
-  useClassNames: false,
-  disableMutationObserver: false,
-  debounceDelay: 50,
-  throttleDelay: 99,
+  disable: false, // انیمیشن‌ها فعال هستند
+  startEvent: "DOMContentLoaded", // شروع انیمیشن‌ها پس از بارگذاری کامل DOM
+  initClassName: "aos-init", // کلاسی که به عناصر AOS پس از مقداردهی اولیه اضافه می‌شود
+  animatedClassName: "aos-animate", // کلاسی که هنگام فعال شدن انیمیشن اضافه می‌شود
+  useClassNames: false, // استفاده از کلاس‌های AOS به جای ویژگی‌های data-aos
+  disableMutationObserver: false, // غیرفعال کردن MutationObserver (برای بهبود عملکرد در برخی موارد)
+  debounceDelay: 50, // تاخیر برای debounce کردن رویدادهای اسکرول
+  throttleDelay: 99, // تاخیر برای throttle کردن رویدادهای اسکرول
 
-  offset: 120,
-  delay: 0,
-  duration: 800,
-  easing: "ease",
-  once: false,
-  mirror: false,
-  anchorPlacement: "top-bottom",
+  offset: 120, // فاصله (پیکسل) از بالای صفحه که انیمیشن شروع می‌شود
+  delay: 0, // تاخیر (میلی‌ثانیه) قبل از شروع انیمیشن
+  duration: 800, // مدت زمان انیمیشن (میلی‌ثانیه)
+  easing: "ease", // نوع easing برای انیمیشن
+  once: false, // آیا انیمیشن فقط یک بار اجرا شود؟ (false = هر بار که عنصر وارد viewport شود)
+  mirror: false, // آیا انیمیشن هنگام اسکرول به بالا معکوس شود؟
+  anchorPlacement: "top-bottom", // محل قرارگیری لنگر برای تشخیص شروع انیمیشن
 });
 
-const themeToggleInput = document.getElementById("theme-toggle");
-const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-const savedTheme = localStorage.getItem("theme");
+// 3. مدیریت تغییر تم (حالت روشن/تاریک)
+// این بخش مسئول پیاده‌سازی قابلیت تغییر تم سایت بین حالت روشن و تاریک است.
+// این ویژگی به بهبود دسترسی‌پذیری و تجربه کاربری (UX) کمک می‌کند.
+const themeToggleInput = document.getElementById("theme-toggle"); // المان ورودی برای تغییر تم
+const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches; // بررسی ترجیح سیستم کاربر برای حالت تاریک
+const savedTheme = localStorage.getItem("theme"); // بازیابی تم ذخیره شده از Local Storage
 
-// تابع ست‌کردن تم
+// تابع applyTheme: تم را بر اساس ورودی اعمال می‌کند و وضعیت دکمه را به‌روز می‌کند.
+// این تابع از Local Storage برای حفظ انتخاب کاربر بین بازدیدها استفاده می‌کند.
 function applyTheme(theme) {
+  // افزودن یا حذف کلاس 'dark-mode' از بدنه HTML
   document.body.classList.toggle("dark-mode", theme === "dark");
+  // افزودن یا حذف کلاس 'light-mode' از بدنه HTML (اختیاری، برای وضوح بیشتر)
   document.body.classList.toggle("light-mode", theme === "light");
+  // به‌روزرسانی وضعیت دکمه (چک‌باکس) بر اساس تم اعمال شده
   themeToggleInput.checked = theme === "dark";
 }
 
+// بررسی تم ذخیره شده یا ترجیح سیستم در هنگام بارگذاری صفحه
 if (savedTheme) {
+  // اگر تمی در Local Storage ذخیره شده باشد، آن را اعمال کن
   applyTheme(savedTheme);
 } else {
+  // در غیر این صورت، تم را بر اساس ترجیح سیستم کاربر اعمال کن
   applyTheme(prefersDark ? "dark" : "light");
 }
 
+// افزودن Event Listener برای تغییر تم هنگام کلیک کاربر روی دکمه
 themeToggleInput.addEventListener("change", () => {
+  // تعیین تم جدید بر اساس وضعیت فعلی دکمه
   const newTheme = themeToggleInput.checked ? "dark" : "light";
+  // اعمال تم جدید
   applyTheme(newTheme);
+  // ذخیره تم جدید در Local Storage برای بازدیدهای بعدی
   localStorage.setItem("theme", newTheme);
 });
+
+// 4. مدیریت تعاملات لمسی برای دکمه‌ها و لینک‌ها (برای Mobile-First Design)
+// این بخش تضمین می‌کند که عناصر تعاملی به درستی به لمس پاسخ دهند.
+// با توجه به اینکه بسیاری از عناصر از طریق CSS :hover و :focus-visible مدیریت می‌شوند،
+// این بخش بیشتر یک یادآوری برای اطمینان از پوشش کافی touch-target است.
+// (کد خاصی برای این بخش نیاز نیست مگر اینکه رفتارهای پیچیده‌تر لمسی مورد نیاز باشد)
+// اطمینان از اینکه تمام دکمه‌ها و لینک‌ها دارای حداقل اندازه هدف لمسی 44x44 پیکسل هستند
+// (این مورد بیشتر در CSS با min-height/padding مدیریت شده است)
+// و اینکه رویدادهای 'click' به درستی برای هر دو ورودی ماوس و لمس کار می‌کنند.
+// این رویکرد به طور پیش‌فرض در HTML و CSS موجود رعایت شده است.

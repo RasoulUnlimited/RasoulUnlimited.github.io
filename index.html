@@ -737,20 +737,21 @@
 
     <div class="navbar">
       <nav data-aos="fade-down" role="navigation" aria-label="منوی اصلی سایت">
-        <a href="#hero">صفحه اصلی</a>
-        <a href="#about">درباره من</a>
-        <a href="#timeline">مسیر من</a>
-        <a href="#skills">مهارت‌ها</a>
-        <a href="#projects">پروژه‌ها</a>
-        <a href="#content">محتوا</a>
-        <a href="#mentions">اشارات</a>
-        <a href="#faq">سوالات متداول</a>
-        <a href="#testimonials">نظرات</a>
-        <a href="#connect">ارتباط</a>
+        <a href="#hero" title="بازگشت به صفحه اصلی">صفحه اصلی</a>
+        <a href="#about" title="درباره محمد رسول سهرابی بیشتر بدانید">درباره من</a>
+        <a href="#timeline" title="مسیر تحصیلی و حرفه‌ای من">مسیر من</a>
+        <a href="#skills" title="مهارت‌ها و تکنولوژی‌های من">مهارت‌ها</a>
+        <a href="#projects" title="پروژه‌های توسعه نرم‌افزار من">پروژه‌ها</a>
+        <a href="#content" title="محتوا و مقالات من">محتوا</a>
+        <a href="#mentions" title="حضور در رسانه‌ها و افتخارات">اشارات</a>
+        <a href="#faq" title="سوالات متداول درباره من و فعالیت‌هایم">سوالات متداول</a>
+        <a href="#testimonials" title="نظرات دیگران درباره من و پروژه‌هایم">نظرات</a>
+        <a href="#connect" title="راه‌های ارتباط با محمد رسول سهرابی">ارتباط</a>
         <a
           href="https://rasoulunlimited.ir/en/"
           class="lang-switcher"
           aria-label="تغییر زبان وبسایت به انگلیسی"
+          title="Switch website language to English"
           ><i class="fas fa-language" aria-hidden="true"></i> English</a
         >
         <label class="theme-switch" aria-label="تغییر تم سایت (روشن/تاریک)">
@@ -759,6 +760,23 @@
         </label>
       </nav>
     </div>
+
+    <nav aria-label="مسیر‌یابی" class="breadcrumb-nav">
+      <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a itemprop="item" href="https://rasoulunlimited.ir/">
+            <span itemprop="name">صفحه اصلی</span>
+          </a>
+          <meta itemprop="position" content="1" />
+        </li>
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          <a itemprop="item" href="https://rasoulunlimited.ir/#about">
+            <span itemprop="name">درباره من</span>
+          </a>
+          <meta itemprop="position" content="2" />
+        </li>
+        </ol>
+    </nav>
 
     <div class="container">
       <div class="content-area" data-aos="fade-up">
@@ -775,6 +793,8 @@
               alt="تصویر پروفایل محمد رسول سهرابی - رسول آنلیمیتد، دانشجوی مهندسی پزشکی و توسعه‌دهنده نرم‌افزار"
               class="profile-image"
               aria-label="عکس پروفایل محمد رسول سهرابی"
+              width="220"
+              height="220"
             />
             <h1>Rasoul Unlimited | محمد رسول سهرابی</h1>
             <p class="tagline">دانشجوی مهندسی پزشکی، توسعه‌دهنده و استراتژیست برند</p>
@@ -791,14 +811,14 @@
             </p>
             <p>
               با انگیزه‌ی درونی برای تاثیرگذاری و ذهنیت «نامحدود»، از
-              راه‌اندازی پروژه <a href="#projects">اولین ربات فارسی‌زبان دیسکورد</a> با تایید رسمی
+              راه‌اندازی پروژه <a href="#projects" title="مشاهده پروژه‌های من">اولین ربات فارسی‌زبان دیسکورد</a> با تایید رسمی
               دیسکورد در ۱۴ سالگی، تا انتشار مقالات در ویرگول و مشارکت در
               پروژه‌های دانشگاهی، در هر کاری سعی کرده امضای خودش را بگذارد.
             </p>
             <p>
               او باور دارد در دنیای شلوغ امروز، فقط صدای واقعی شنیده
               می‌شود. هدف اصلی او ترکیب خلاقانه‌ مهندسی پزشکی و برنامه‌نویسی برای ایجاد
-              تحول در حوزه <a href="#skills">سلامت دیجیتال</a> است و همواره فراتر از سن‌وسالش گام برمی‌دارد.
+              تحول در حوزه <a href="#skills" title="مشاهده مهارت‌های من در سلامت دیجیتال">سلامت دیجیتال</a> است و همواره فراتر از سن‌وسالش گام برمی‌دارد.
             </p>
           </section>
 
@@ -843,6 +863,18 @@
                     را برای اولین‌بار در میان توسعه‌دهندگان رسمی این پلتفرم قرار
                     داد.
                   </p>
+                  <div class="card-links card-links-clean">
+                    <a
+                      href="https://github.com/RasoulUnlimited/Small-projects-with-c"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="مشاهده پروژه‌های C در GitHub"
+                      title="مشاهده کد ربات فارسی در گیت‌هاب"
+                      role="button"
+                      ><i class="fab fa-github" aria-hidden="true"></i> مشاهده
+                      در GitHub</a
+                    >
+                  </div>
                 </div>
               </li>
               <li data-aos="fade-up">
@@ -878,6 +910,8 @@
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="مشاهده پروژه‌های C در GitHub"
+                      title="مشاهده پروژه‌های برنامه‌نویسی C در گیت‌هاب"
+                      role="button"
                       ><i class="fab fa-github" aria-hidden="true"></i> مشاهده
                       در GitHub</a
                     >
@@ -905,6 +939,8 @@
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="مشاهده پروژه‌های پایتون در GitHub"
+                      title="مشاهده پروژه‌های برنامه‌نویسی پایتون در گیت‌هاب"
+                      role="button"
                       ><i class="fab fa-python" aria-hidden="true"></i> مشاهده در
                       GitHub</a
                     >
@@ -919,7 +955,7 @@
                   <h3 class="date">۲۰ اردیبهشت ۱۴۰۴ (2025 May 10)</h3>
                   <h3>انتشار اولین مقاله معرفی در ویرگول</h3>
                   <p>
-                    نشر مقاله "<a href="https://vrgl.ir/9D6Hy" target="_blank" rel="noopener noreferrer">محمد رسول سهرابی (آنلیمیتد) – از tatami تا تکنولوژی</a>" به عنوان اولین معرفی جامع من در فضای دیجیتال.
+                    نشر مقاله "<a href="https://vrgl.ir/9D6Hy" target="_blank" rel="noopener noreferrer" title="خواندن مقاله 'از tatami تا تکنولوژی' در ویرگول">محمد رسول سهرابی (آنلیمیتد) – از tatami تا تکنولوژی</a>" به عنوان اولین معرفی جامع من در فضای دیجیتال.
                   </p>
                 </div>
               </li>
@@ -931,7 +967,7 @@
                   <h3 class="date">۲۳ اردیبهشت ۱۴۰۴ (2025 May 13)</h3>
                   <h3>انتشار مقاله برند شخصی در ویرگول</h3>
                   <p>
-                    نشر مقاله "<a href="https://vrgl.ir/cUmcv" target="_blank" rel="noopener noreferrer">چطور توی دنیای شلوغ امروز، یه برند شخصی واقعی بسازیم؟ | داستان Rasoul Unlimited</a>" که به فلسفه‌ی شخصی من
+                    نشر مقاله "<a href="https://vrgl.ir/cUmcv" target="_blank" rel="noopener noreferrer" title="خواندن مقاله 'چطور توی دنیای شلوغ امروز، یه برند شخصی واقعی بسازیم؟' در ویرگول">چطور توی دنیای شلوغ امروز، یه برند شخصی واقعی بسازیم؟ | داستان Rasoul Unlimited</a>" که به فلسفه‌ی شخصی من
                     درباره‌ی برند شخصی و معنای لقب «آنلیمیتد» می‌پردازد.
                   </p>
                 </div>
@@ -1038,6 +1074,8 @@
                     src="assets/images/placeholder-project.webp"
                     loading="lazy"
                     alt="تصویر پیش‌نمایش پروژه اولین ربات فارسی دیسکورد"
+                    width="400"
+                    height="225"
                   />
                 </div>
                 <h3>اولین ربات فارسی‌زبان دیسکورد (Persian Bot)</h3>
@@ -1073,6 +1111,8 @@
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="مشاهده ربات فارسی در Top.gg"
+                      title="مشاهده ربات فارسی در Top.gg"
+                      role="button"
                       >Top.gg</a
                     >
                     <a
@@ -1080,6 +1120,8 @@
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="درباره ربات فارسی در Discordweb.ir بخوانید"
+                      title="درباره ربات فارسی در Discordweb.ir بخوانید"
+                      role="button"
                       >Discordweb.ir</a
                     >
                     <a
@@ -1087,6 +1129,8 @@
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="مشاهده ویدئو درباره ربات فارسی در آپارات"
+                      title="مشاهده ویدئو درباره ربات فارسی در آپارات"
+                      role="button"
                       >آپارات (ویدئو)</a
                     >
                     <a
@@ -1094,6 +1138,8 @@
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="مشاهده ربات فارسی در Alternative.me"
+                      title="مشاهده ربات فارسی در Alternative.me"
+                      role="button"
                       >Alternative.me</a
                     >
                   </div>
@@ -1109,6 +1155,8 @@
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="مقاله معرفی پروژه ربات دیسکورد را بخوانید"
+                    title="خواندن مقاله معرفی پروژه ربات دیسکورد در ویرگول"
+                    role="button"
                     ><i class="fas fa-book-open" aria-hidden="true"></i> معرفی
                     پروژه (مقاله ویرگول)</a
                   >
@@ -1121,6 +1169,8 @@
                     src="assets/images/placeholder-code-c.webp"
                     loading="lazy"
                     alt="تصویر پیش‌نمایش پروژه‌های برنامه‌نویسی با زبان C"
+                    width="400"
+                    height="225"
                   />
                 </div>
 
@@ -1163,6 +1213,8 @@
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="مشاهده پروژه‌های C در GitHub"
+                    title="مشاهده پروژه‌های برنامه‌نویسی C در گیت‌هاب"
+                    role="button"
                   >
                     <i class="fab fa-github" aria-hidden="true"></i>
                     مشاهده در GitHub
@@ -1173,6 +1225,8 @@
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="دریافت نسخه رسمی علمی از Zenodo"
+                    title="دریافت نسخه رسمی علمی پروژه‌های C از Zenodo"
+                    role="button"
                   >
                     <i class="fas fa-university" aria-hidden="true"></i>
                     دریافت از Zenodo
@@ -1186,6 +1240,8 @@
                     src="assets/images/placeholder-code-python.webp"
                     loading="lazy"
                     alt="تصویر پیش‌نمایش پروژه‌های برنامه‌نویسی با زبان پایتون"
+                    width="400"
+                    height="225"
                   />
                 </div>
                 <h3>پروژه‌های برنامه‌نویسی با زبان پایتون (دانشگاهی)</h3>
@@ -1226,6 +1282,8 @@
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="مشاهده پروژه‌های پایتون در GitHub"
+                    title="مشاهده پروژه‌های برنامه‌نویسی پایتون در گیت‌هاب"
+                    role="button"
                     ><i class="fab fa-python" aria-hidden="true"></i> مشاهده در
                     GitHub</a
                   >
@@ -1235,6 +1293,8 @@
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="دریافت نسخه رسمی علمی از Zenodo"
+                    title="دریافت نسخه رسمی علمی پروژه‌های پایتون از Zenodo"
+                    role="button"
                   >
                     <i class="fas fa-university" aria-hidden="true"></i>
                     دریافت از Zenodo
@@ -1254,6 +1314,8 @@
                     src="assets/images/placeholder-content-virgool1.webp"
                     loading="lazy"
                     alt="تصویر پیش‌نمایش مقاله ویرگول با عنوان 'محمد رسول سهرابی (آنلیمیتد) – از Tatami تا تکنولوژی'"
+                    width="400"
+                    height="225"
                   />
                 </div>
                 <h3>محمد رسول سهرابی (آنلیمیتد) – از tatami تا تکنولوژی</h3>
@@ -1280,6 +1342,8 @@
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="مقاله 'از tatami تا تکنولوژی' را در ویرگول بخوانید"
+                    title="خواندن مقاله 'از tatami تا تکنولوژی' در ویرگول"
+                    role="button"
                     ><i class="fas fa-book-open" aria-hidden="true"></i> مطالعه
                     مقاله در ویرگول</a
                   >
@@ -1292,6 +1356,8 @@
                     src="assets/images/placeholder-content-virgool2.webp"
                     loading="lazy"
                     alt="تصویر پیش‌نمایش مقاله ویرگول با عنوان 'چطور توی دنیای شلوغ امروز، یه برند شخصی واقعی بسازیم؟'"
+                    width="400"
+                    height="225"
                   />
                 </div>
                 <h3>
@@ -1321,6 +1387,8 @@
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="مقاله 'چطور توی دنیای شلوغ امروز، یه برند شخصی واقعی بسازیم؟' را در ویرگول بخوانید"
+                    title="خواندن مقاله 'چطور توی دنیای شلوغ امروز، یه برند شخصی واقعی بسازیم؟' در ویرگول"
+                    role="button"
                     ><i class="fas fa-book-open" aria-hidden="true"></i> مطالعه
                     مقاله در ویرگول</a
                   >
@@ -1333,6 +1401,8 @@
                     src="assets/images/placeholder-content-virgool3.webp"
                     loading="lazy"
                     alt="تصویر پیش‌نمایش مقاله ویرگول با عنوان 'من برند نیستم، یک مسیرم'"
+                    width="400"
+                    height="225"
                   />
                 </div>
                 <h3>
@@ -1361,6 +1431,8 @@
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="مقاله 'من برند نیستم، یک مسیرم» | نگاهی متفاوت به مفهوم برند شخصی در عصر توجه‌های لحظه‌ای' را در ویرگول بخوانید"
+                    title="خواندن مقاله 'من برند نیستم، یک مسیرم' در ویرگول"
+                    role="button"
                     ><i class="fas fa-book-open" aria-hidden="true"></i> مطالعه
                     مقاله در ویرگول</a
                   >
@@ -1373,6 +1445,8 @@
                     src="assets/images/placeholder-content-medium.webp"
                     loading="lazy"
                     alt="تصویر پیش‌نمایش مقاله مدیوم با عنوان 'How to Build a Genuine Personal Brand in Today’s Noisy World'"
+                    width="400"
+                    height="225"
                   />
                 </div>
                 <h3>
@@ -1400,6 +1474,8 @@
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="مقاله را در مدیوم بخوانید"
+                    title="Read the article on Medium"
+                    role="button"
                     ><i class="fab fa-medium" aria-hidden="true"></i> Read on
                     Medium</a
                   >
@@ -1411,6 +1487,8 @@
                     src="assets/images/placeholder-content-devto.webp"
                     loading="lazy"
                     alt="تصویر پیش‌نمایش مقاله dev.to با عنوان 'How to Build a Genuine Personal Brand in Today’s Noisy World'"
+                    width="400"
+                    height="225"
                   />
                 </div>
                 <h3>
@@ -1439,6 +1517,8 @@
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="مقاله را در dev.to بخوانید"
+                    title="Read the article on dev.to"
+                    role="button"
                     ><i class="fab fa-dev" aria-hidden="true"></i> Read on
                     dev.to</a
                   >
@@ -1479,6 +1559,8 @@
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="مشاهده منبع تأیید دیسکورد (منبع: مقاله ویرگول)"
+                    title="مشاهده منبع تأیید دیسکورد در مقاله ویرگول"
+                    role="button"
                     ><i class="fas fa-book-open" aria-hidden="true"></i> مشاهده
                     منبع (مقاله ویرگول)</a
                   >
@@ -1586,6 +1668,7 @@
                   <a
                     href="mailto:rasoul.unlimited@gmail.com"
                     aria-label="ارسال ایمیل به رسول آنلیمیتد"
+                    title="ارسال ایمیل به محمد رسول سهرابی"
                     ><i class="fas fa-envelope" aria-hidden="true"></i>
                     rasoul.unlimited [at] gmail [dot] com</a
                   >
@@ -1609,6 +1692,8 @@
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="مشاهده رسول آنلیمیتد در اینستاگرام"
+                      title="مشاهده پروفایل اینستاگرام"
+                      role="button"
                       ><i class="fab fa-instagram" aria-hidden="true"></i>
                       اینستاگرام</a
                     >
@@ -1619,6 +1704,8 @@
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="مشاهده رسول آنلیمیتد در ویرگول"
+                      title="مشاهده مقالات در ویرگول"
+                      role="button"
                       ><i class="fas fa-pen-fancy" aria-hidden="true"></i>
                       ویرگول</a
                     >
@@ -1629,6 +1716,8 @@
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="مشاهده رسول آنلیمیتد در لینکدین"
+                      title="مشاهده پروفایل لینکدین"
+                      role="button"
                       ><i class="fab fa-linkedin" aria-hidden="true"></i>
                       لینکدین</a
                     >
@@ -1639,6 +1728,8 @@
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="مشاهده رسول آنلیمیتد در گیت‌هاب"
+                      title="مشاهده پروژه‌ها در گیت‌هاب"
+                      role="button"
                       ><i class="fab fa-github" aria-hidden="true"></i>
                       گیت‌هاب</a
                     >
@@ -1649,6 +1740,8 @@
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="مشاهده آیتم رسول آنلیمیتد در ویکی‌دیتا"
+                      title="مشاهده آیتم من در ویکی‌دیتا"
+                      role="button"
                       ><i class="fas fa-database" aria-hidden="true"></i>
                       ویکی‌دیتا</a
                     >
@@ -1659,6 +1752,8 @@
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="مشاهده رسول آنلیمیتد در مدیوم"
+                      title="مشاهده مقالات در مدیوم"
+                      role="button"
                       ><i class="fab fa-medium" aria-hidden="true"></i> مدیوم</a
                     >
                   </li>
@@ -1668,6 +1763,8 @@
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="مشاهده رسول آنلیمیتد در dev.to"
+                      title="مشاهده مقالات در dev.to"
+                      role="button"
                       ><i class="fab fa-dev" aria-hidden="true"></i> dev.to</a
                     >
                   </li>
@@ -1677,6 +1774,8 @@
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="عضویت در کانال تلگرام رسول آنلیمیتد"
+                      title="عضویت در کانال تلگرام"
+                      role="button"
                       ><i class="fab fa-telegram-plane" aria-hidden="true"></i>
                       کانال تلگرام</a
                     >
@@ -1687,6 +1786,8 @@
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="مشاهده رسول آنلیمیتد در ORCID"
+                      title="مشاهده پروفایل ORCID"
+                      role="button"
                       ><i class="fab fa-orcid" aria-hidden="true"></i> ORCID</a
                     >
                   </li>
@@ -1696,6 +1797,8 @@
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="مشاهده رسول آنلیمیتد در About.me"
+                      title="مشاهده پروفایل About.me"
+                      role="button"
                       ><i class="fas fa-user-circle" aria-hidden="true"></i>
                       About.me</a
                     >
@@ -1706,6 +1809,8 @@
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="مشاهده رسول آنلیمیتد در یوتیوب"
+                      title="مشاهده کانال یوتیوب"
+                      role="button"
                       ><i class="fab fa-youtube" aria-hidden="true"></i>
                       یوتیوب</a
                     >
@@ -1716,6 +1821,8 @@
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="مشاهده رسول آنلیمیتد در Researchgate"
+                      title="مشاهده پروفایل Researchgate"
+                      role="button"
                       ><i class="fab fa-researchgate" aria-hidden="true"></i>
                       Researchgate</a
                     >
@@ -1730,30 +1837,32 @@
     <footer class="footer">
       <div class="footer-top">
         <div class="lang-switcher">
-          <a href="https://rasoulunlimited.ir" class="lang-link active">فارسی</a>
+          <a href="https://rasoulunlimited.ir" class="lang-link active" title="تغییر زبان به فارسی">فارسی</a>
           <span>|</span>
-          <a href="https://rasoulunlimited.ir/en" class="lang-link">English</a>
+          <a href="https://rasoulunlimited.ir/en" class="lang-link" title="Switch language to English">English</a>
         </div>
         <nav class="footer-links" role="navigation" aria-label="لینک‌های فوتر">
-          <a href="/faq" class="footer-link">سؤالات متداول</a>
-          <a href="#connect" class="footer-link">ارتباط با من</a>
-          <a href="#about" class="footer-link">درباره من</a>
+          <a href="/faq" class="footer-link" title="سوالات متداول">سؤالات متداول</a>
+          <a href="#connect" class="footer-link" title="ارتباط با من">ارتباط با من</a>
+          <a href="#about" class="footer-link" title="درباره محمد رسول سهرابی">درباره من</a>
         </nav>
       </div>
       <div class="footer-bottom">
         <div class="footer-profile h-card micro-profile">
-          <a class="p-name u-url" href="https://rasoulunlimited.ir/">Mohammad Rasoul Sohrabi</a>
+          <a class="p-name u-url" href="https://rasoulunlimited.ir/" title="وبسایت رسمی محمد رسول سهرابی">Mohammad Rasoul Sohrabi</a>
           <img
             class="u-photo"
             src="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp"
             alt="تصویر پروفایل محمد رسول سهرابی"
             loading="lazy"
+            width="60"
+            height="60"
           />
           <p class="p-note">
             Biomedical Engineering student, open-source developer, and digital strategist from Iran.
           </p>
           <span class="p-role">Developer</span>
-          <a class="u-email" href="mailto:rasoul.unlimited@gmail.com">rasoul.unlimited@gmail.com</a>
+          <a class="u-email" href="mailto:rasoul.unlimited@gmail.com" title="ارسال ایمیل">rasoul.unlimited@gmail.com</a>
           <span class="p-country-name">Iran</span>
         </div>
         <p class="copyright">
@@ -1762,7 +1871,7 @@
       </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js" defer></script>
     <script src="assets/js/main-script.js" defer></script>
   </body>
 </html>
