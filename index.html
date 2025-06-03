@@ -14,6 +14,10 @@
     <link rel="preconnect" href="https://cdn.jsdelivr.net" />
     <!-- DNS prefetch for external resources like Giscus for faster loading -->
     <link rel="dns-prefetch" href="https://giscus.app" />
+    <!-- Preconnect to Google Fonts and Font Awesome for faster resource loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
 
     <link rel="icon" type="image/png" href="assets/images/favicon.png" />
 
@@ -59,7 +63,7 @@
     />
     <meta
       name="keywords"
-      content="محمد رسول سهرابی, رسول آنلیمیتد, مهندسی پزشکی, دانشگاه تهران, توسعه‌دهنده پایتون, ربات دیسکورد, ربات فارسی, برندینگ شخصی, کرج, تهران, مهندس نرم‌افزار, استراتژیست محتوا, اشارات رسانه‌ای, گیت‌هاب, ویرگول, لینکدین, تلگرام, MIT License, AOS, انیمیشن اسکرول, ویکی‌دیتا, dev.to, ORCID, About.me, یوتیوب, سلامت دیجیتال, سئو, بهینه سازی موتور جستجو, بهینه سازی موتور پاسخگو, AEO"
+      content="محمد رسول سهرابی, رسول آنلیمیتد, مهندسی پزشکی, دانشگاه تهران, توسعه‌دهنده پایتون, ربات دیسکورد, ربات فارسی, برندینگ شخصی, کرج, تهران, مهندس نرم‌افزار, استراتژیست محتوا, اشارات رسانه‌ای, گیت‌هاب, ویرگول, لینکدین, تلگرام, MIT License, AOS, انیمیشن اسکرول, ویکی‌دیتا, dev.to, ORCID, About.me, یوتیوب, سلامت دیجیتال, سئو, بهینه سازی موتور جستجو, بهینه سازی موتور پاسخگو, AEO, توسعه وب، برنامه نویسی، مهارت‌های فنی، پورتفولیو، رزومه"
     />
     <link rel="alternate" href="https://rasoulunlimited.ir" hreflang="fa-IR" />
     <link
@@ -82,6 +86,7 @@
 
     <meta http-equiv="Content-Language" content="fa-IR" />
 
+    <!-- Open Graph Meta Tags for Social Sharing -->
     <meta property="og:type" content="profile" />
     <meta property="og:url" content="https://rasoulunlimited.ir" />
     <meta
@@ -100,11 +105,24 @@
       property="og:image:alt"
       content="Mohammad Rasoul Sohrabi (Rasoul Unlimited) Profile Image"
     />
+    <meta property="og:locale" content="fa_IR" />
+    <meta property="og:site_name" content="Rasoul Unlimited" />
 
     <meta property="profile:first_name" content="Mohammad Rasoul" />
     <meta property="profile:last_name" content="Sohrabi" />
-    <meta name="robots" content="index, follow" />
+    <!-- Robots meta tag for granular control over indexing and snippets -->
+    <meta
+      name="robots"
+      content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+    />
 
+    <!-- Geo Meta Tags for Local SEO (if applicable) -->
+    <meta name="geo.region" content="IR-23" />
+    <meta name="geo.placename" content="Karaj" />
+    <meta name="geo.position" content="35.8398;50.9912" />
+    <meta name="ICBM" content="35.8398, 50.9912" />
+
+    <!-- Webmention for indie web integration -->
     <link
       rel="alternate"
       type="application/ld+json"
@@ -135,10 +153,15 @@
     <link rel="me" href="https://gravatar.com/rasoulunlimited" />
     <link rel="me" href="https://keybase.io/RasoulUnlimited" />
 
-    <link rel="webmention" href="https://webmention.io/rasoulunlimited.ir/webmention" />
+    <link
+      rel="webmention"
+      href="https://webmention.io/rasoulunlimited.ir/webmention"
+    />
 
+    <!-- Twitter Card Meta Tags for Social Sharing -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@rasoulunlimited" />
+    <meta name="twitter:creator" content="@rasoulunlimited" />
     <meta
       name="twitter:title"
       content="Rasoul Unlimited | محمد رسول سهرابی - Official Website"
@@ -156,12 +179,14 @@
       content="Mohammad Rasoul Sohrabi (Rasoul Unlimited) Profile Image"
     />
 
+    <!-- FOAF (Friend of a Friend) for Semantic Web -->
     <link
       rel="alternate"
       type="application/rdf+xml"
       href="https://rasoulunlimited.ir/foaf.rdf"
     />
 
+    <!-- Theme Color for Progressive Web App (PWA) experience -->
     <meta name="color-scheme" content="light dark" />
     <meta
       name="theme-color"
@@ -930,7 +955,7 @@
 
     <div class="container">
       <div class="content-area" data-aos="fade-up">
-        <main id="main-content" role="main">
+        <main id="main-content" role="main" itemscope itemtype="https://schema.org/WebPage">
           <section
             id="hero"
             data-aos="fade-zoom-in"
@@ -942,6 +967,7 @@
             <img
               src="assets/images/RasoulUnlimited.webp"
               loading="eager"
+              decoding="async"
               alt="تصویر پروفایل محمد رسول سهرابی - رسول آنلیمیتد، دانشجوی مهندسی پزشکی و توسعه‌دهنده نرم‌افزار"
               class="profile-image"
               aria-label="عکس پروفایل محمد رسول سهرابی"
@@ -951,9 +977,10 @@
             />
             <h1 itemprop="name">Rasoul Unlimited | محمد رسول سهرابی</h1>
             <p class="tagline" itemprop="jobTitle">دانشجوی مهندسی پزشکی، توسعه‌دهنده و استراتژیست برند</p>
+            <link itemprop="url" href="https://rasoulunlimited.ir" />
           </section>
 
-          <section id="about" data-aos="fade-right">
+          <section id="about" data-aos="fade-right" itemprop="about" itemscope itemtype="https://schema.org/Person">
             <h2>درباره من</h2>
             <p itemprop="description">
               محمد رسول سهرابی، متولد ۱۵ شهریور ۱۳۸۴ و ملقب به «آنلیمیتد»،
@@ -1310,6 +1337,7 @@
                   <img
                     src="assets/images/placeholder-project.webp"
                     loading="lazy"
+                    decoding="async"
                     alt="تصویر پیش‌نمایش پروژه اولین ربات فارسی دیسکورد"
                     width="400"
                     height="225"
@@ -1413,6 +1441,7 @@
                   <img
                     src="assets/images/placeholder-code-c.webp"
                     loading="lazy"
+                    decoding="async"
                     alt="تصویر پیش‌نمایش پروژه‌های برنامه‌نویسی با زبان C"
                     width="400"
                     height="225"
@@ -1496,6 +1525,7 @@
                   <img
                     src="assets/images/placeholder-code-python.webp"
                     loading="lazy"
+                    decoding="async"
                     alt="تصویر پیش‌نمایش پروژه‌های برنامه‌نویسی با زبان پایتون"
                     width="400"
                     height="225"
@@ -1586,6 +1616,7 @@
                   <img
                     src="assets/images/placeholder-content-virgool1.webp"
                     loading="lazy"
+                    decoding="async"
                     alt="تصویر پیش‌نمایش مقاله ویرگول با عنوان 'محمد رسول سهرابی (آنلیمیتد) – از Tatami تا تکنولوژی'"
                     width="400"
                     height="225"
@@ -1635,6 +1666,7 @@
                   <img
                     src="assets/images/placeholder-content-virgool2.webp"
                     loading="lazy"
+                    decoding="async"
                     alt="تصویر پیش‌نمایش مقاله ویرگول با عنوان 'چطور توی دنیای شلوغ امروز، یه برند شخصی واقعی بسازیم؟'"
                     width="400"
                     height="225"
@@ -1688,6 +1720,7 @@
                   <img
                     src="assets/images/placeholder-content-virgool3.webp"
                     loading="lazy"
+                    decoding="async"
                     alt="تصویر پیش‌نمایش مقاله ویرگول با عنوان 'من برند نیستم، یک مسیرم'"
                     width="400"
                     height="225"
@@ -1740,6 +1773,7 @@
                   <img
                     src="assets/images/placeholder-content-medium.webp"
                     loading="lazy"
+                    decoding="async"
                     alt="تصویر پیش‌نمایش مقاله مدیوم با عنوان 'How to Build a Genuine Personal Brand in Today’s Noisy World'"
                     width="400"
                     height="225"
@@ -1789,6 +1823,7 @@
                   <img
                     src="assets/images/placeholder-content-devto.webp"
                     loading="lazy"
+                    decoding="async"
                     alt="تصویر پیش‌نمایش مقاله dev.to با عنوان 'How to Build a Genuine Personal Brand in Today’s Noisy World'"
                     width="400"
                     height="225"
