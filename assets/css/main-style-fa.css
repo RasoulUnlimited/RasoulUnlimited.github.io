@@ -63,6 +63,8 @@
   --transition-duration-long: 0.6s; /* مدت زمان انتقال طولانی (اصل بازخورد آنی) */
   --transition-easing-standard: ease-in-out; /* نوع easing استاندارد (اصل روان‌روانی و سهولت جریان) */
   --transition-easing-springy: cubic-bezier(0.68, -0.55, 0.27, 1.55); /* نوع easing فنری برای حس پاداش (اصل پاداش فوری، اصل نشانه‌های تعاملی) */
+  --transition-easing-smooth: cubic-bezier(0.25, 0.8, 0.25, 1); /* نوع easing نرم و حرفه‌ای */
+
 
   --max-content-width: 1200px; /* حداکثر عرض محتوا برای کاهش بار شناختی (اصل رهایی از بار شناختی) */
   --max-paragraph-width: 75ch; /* عرض بهینه پاراگراف برای خوانایی فارسی (اصل روان‌روانی و سهولت جریان) */
@@ -1756,7 +1758,7 @@ section h2::after {
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
   z-index: 1003;
   opacity: 0;
-  transition: transform 0.5s var(--transition-easing-springy), opacity 0.5s ease-out;
+  transition: transform 0.5s var(--transition-easing-smooth), opacity 0.5s ease-out; /* استفاده از easing نرم‌تر */
   white-space: nowrap;
   font-size: 1.05rem;
   direction: rtl;
@@ -1782,7 +1784,7 @@ section h2::after {
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
   z-index: 1004;
   opacity: 0;
-  transition: transform 0.5s var(--transition-easing-springy), opacity 0.5s ease-out;
+  transition: transform 0.5s var(--transition-easing-smooth), opacity 0.5s ease-out; /* استفاده از easing نرم‌تر */
   white-space: nowrap;
   font-size: 1.05rem;
   direction: rtl;
