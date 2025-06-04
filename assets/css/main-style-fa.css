@@ -1,7 +1,9 @@
 /* main-style.css */
 /* این فایل CSS برای وبسایت رسمی رسول آنلیمیتد، با تمرکز بر اصول روان‌شناسی تجربه کاربری،
    علوم شناختی، اقتصاد رفتاری، انسان‌شناسی دیجیتال، تحلیل رفتار مصرف‌کننده،
-   نورومارکتینگ، روان‌شناسی هیجانی، روان‌شناسی زیبایی‌شناسی و متقاعدسازی بهینه شده است. */
+   نورومارکتینگ، روان‌شناسی هیجانی، روان‌شناسی زیبایی‌شناسی و متقاعدسازی بهینه شده است.
+   هدف، ایجاد یک تجربه کاربری جذاب، قابل پیش‌بینی و پاداش‌دهنده است.
+*/
 
 /* --- متغیرهای CSS برای تم روشن و تاریک (روان‌شناسی رنگ و برندینگ، سادگی شناختی) --- */
 /* این متغیرها امکان تغییر آسان تم سایت را فراهم می‌کنند و به حفظ هارمونی بصری کمک می‌کنند. */
@@ -708,7 +710,9 @@ section h2::after {
     background-color var(--transition-duration-medium)
       var(--transition-easing-standard),
     border-color var(--transition-duration-medium)
-      var(--transition-easing-standard);
+      var(--transition-easing-standard),
+    filter var(--transition-duration-medium)
+      var(--transition-easing-standard); /* اضافه شدن filter برای انیمیشن */
   text-align: left;
   overflow: hidden;
   position: relative;
@@ -718,7 +722,7 @@ section h2::after {
 
   overflow: hidden;
   /* بهینه‌سازی: افزودن will-change برای ویژگی‌هایی که تغییر می‌کنند */
-  will-change: transform, box-shadow, background-color, border-color;
+  will-change: transform, box-shadow, background-color, border-color, filter;
 }
 
 .card:hover {
@@ -1062,6 +1066,10 @@ img.loaded {
   min-height: 44px; /* Ensure touch target size is adequate */
   /* بهینه‌سازی: افزودن will-change برای ویژگی‌هایی که تغییر می‌کنند */
   will-change: background-color, transform, box-shadow, color;
+}
+#skills .skills-list li.skill-hover-effect { /* اضافه شده برای فعال‌سازی از JS */
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 6px 12px rgba(var(--primary-rgb), 0.3);
 }
 #skills .skills-list li:hover,
 #skills .skills-list li:focus-visible {
@@ -2175,6 +2183,27 @@ img.loaded {
   transform: rotate(90deg);
 }
 
+/* --- ویژگی جدید: انیمیشن برای عنوان بخش در "لحظه لذت" (نورواستتیک، غافلگیری مثبت) --- */
+@keyframes sectionDelight {
+  0% {
+    transform: translateY(10px) scale(0.95);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(0) scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.section-delight-effect {
+  animation: sectionDelight 0.8s ease-out forwards;
+}
+
+
 /* Responsive Adjustments */
 @media (max-width: 1200px) {
   .container {
@@ -2241,6 +2270,7 @@ img.loaded {
     font-size: 1rem;
   }
   .connect-links-block ul li a {
+    justify-content: center;
     direction: ltr;
     text-align: left;
   }
