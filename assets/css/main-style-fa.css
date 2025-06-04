@@ -8,7 +8,7 @@
  * هدف، ایجاد یک تجربه کاربری جذاب، قابل پیش‌بینی و پاداش‌دهنده است.
  */
 
- :root {
+:root {
   --primary-color: #005a9e; /* آبی تیره: برای اعتماد، ثبات و عناصر اصلی تعاملی (اصل کنترل و انتخاب، اصل زیبایی‌شناسی) */
   --secondary-color: #1a1a1a; /* سیاه تیره: برای تیترها و متن‌های مهم (اصل روان‌روانی و سهولت جریان) */
   --accent-color: #007acc; /* آبی روشن: برای تاکیدات، لینک‌ها و بازخورد‌های مثبت (اصل بازخورد آنی، اصل انتظارات مثبت) */
@@ -18,26 +18,53 @@
   --background-end-color: #e0e7e9; /* رنگ پایان گرادیان پس‌زمینه (روشن) (اصل زیبایی‌شناسی) */
   --container-bg: #ffffff; /* پس‌زمینه کانتینرهای اصلی (اصل رهایی از بار شناختی) */
   --card-bg: #ffffff; /* پس‌زمینه کارت‌ها (اصل رهایی از بار شناختی) */
-  --navbar-bg: rgba(255, 255, 255, 0.98); /* پس‌زمینه نوار ناوبری با شفافیت (اصل رهایی از بار شناختی) */
-  --giscus-bg: var(--card-bg); /* پس‌زمینه بخش نظرات Giscus (اصل رهایی از بار شناختی) */
+  --navbar-bg: rgba(
+    255,
+    255,
+    255,
+    0.98
+  ); /* پس‌زمینه نوار ناوبری با شفافیت (اصل رهایی از بار شناختی) */
+  --giscus-bg: var(
+    --card-bg
+  ); /* پس‌زمینه بخش نظرات Giscus (اصل رهایی از بار شناختی) */
   --skills-bg: #e9ecef; /* پس‌زمینه برچسب‌های مهارت‌ها (اصل رهایی از بار شناختی) */
 
-  --shadow-color-light: rgba(0, 0, 0, 0.05); /* سایه ملایم برای عمق بصری (اصل زیبایی‌شناسی) */
+  --shadow-color-light: rgba(
+    0,
+    0,
+    0,
+    0.05
+  ); /* سایه ملایم برای عمق بصری (اصل زیبایی‌شناسی) */
   --shadow-color-medium: rgba(0, 0, 0, 0.1); /* سایه متوسط (اصل زیبایی‌شناسی) */
-  --shadow-color-strong: rgba(0, 0, 0, 0.15); /* سایه قوی برای عناصر برجسته (اصل زیبایی‌شناسی) */
+  --shadow-color-strong: rgba(
+    0,
+    0,
+    0,
+    0.15
+  ); /* سایه قوی برای عناصر برجسته (اصل زیبایی‌شناسی) */
 
   --text-color: #333333; /* رنگ متن اصلی برای خوانایی بالا (Figure-Ground) (اصل روان‌روانی و سهولت جریان) */
   --text-color-light: #555555; /* رنگ متن کمرنگ‌تر برای اطلاعات فرعی (اصل رهایی از بار شناختی) */
-  --text-color-link: var(--accent-color); /* رنگ لینک‌ها برای قابلیت پیش‌بینی (اصل کشف و پیش‌بینی) */
-  --heading-color: var(--secondary-color); /* رنگ تیترها (اصل روان‌روانی و سهولت جریان) */
+  --text-color-link: var(
+    --accent-color
+  ); /* رنگ لینک‌ها برای قابلیت پیش‌بینی (اصل کشف و پیش‌بینی) */
+  --heading-color: var(
+    --secondary-color
+  ); /* رنگ تیترها (اصل روان‌روانی و سهولت جریان) */
   --tagline-color: #4a4a4a; /* رنگ شعار اصلی (اصل روان‌روانی و سهولت جریان) */
   --footer-color: #555555; /* رنگ متن فوتر (اصل رهایی از بار شناختی) */
   --lang-switcher-active-color: #000; /* رنگ زبان فعال در سوئیچر (اصل کنترل و انتخاب) */
 
   --border-color: #e0e0e0; /* رنگ حاشیه عناصر (اصل رهایی از بار شناختی) */
-  --timeline-line-color: var(--primary-color); /* رنگ خط زمانی (اصل پیشرفت قابل مشاهده) */
-  --timeline-dot-border-color: var(--primary-color); /* رنگ حاشیه دایره‌های زمانی (اصل پیشرفت قابل مشاهده) */
-  --timeline-content-border-color: var(--border-color); /* رنگ حاشیه محتوای زمانی (اصل رهایی از بار شناختی) */
+  --timeline-line-color: var(
+    --primary-color
+  ); /* رنگ خط زمانی (اصل پیشرفت قابل مشاهده) */
+  --timeline-dot-border-color: var(
+    --primary-color
+  ); /* رنگ حاشیه دایره‌های زمانی (اصل پیشرفت قابل مشاهده) */
+  --timeline-content-border-color: var(
+    --border-color
+  ); /* رنگ حاشیه محتوای زمانی (اصل رهایی از بار شناختی) */
   --giscus-border: none; /* حاشیه بخش Giscus (در حالت روشن) (اصل رهایی از بار شناختی) */
 
   --space-unit: 8px; /* واحد پایه برای فواصل (Whitespace) (اصل رهایی از بار شناختی) */
@@ -62,33 +89,23 @@
   --transition-duration-medium: 0.4s; /* مدت زمان انتقال متوسط (اصل بازخورد آنی) */
   --transition-duration-long: 0.6s; /* مدت زمان انتقال طولانی (اصل بازخورد آنی) */
   --transition-easing-standard: ease-in-out; /* نوع easing استاندارد (اصل روان‌روانی و سهولت جریان) */
-  --transition-easing-springy: cubic-bezier(0.68, -0.55, 0.27, 1.55); /* نوع easing فنری برای حس پاداش (اصل پاداش فوری، اصل نشانه‌های تعاملی) */
-  --transition-easing-smooth: cubic-bezier(0.25, 0.8, 0.25, 1); /* نوع easing نرم و حرفه‌ای */
-
+  --transition-easing-springy: cubic-bezier(
+    0.68,
+    -0.55,
+    0.27,
+    1.55
+  ); /* نوع easing فنری برای حس پاداش (اصل پاداش فوری، اصل نشانه‌های تعاملی) */
+  --transition-easing-smooth: cubic-bezier(
+    0.25,
+    0.8,
+    0.25,
+    1
+  ); /* نوع easing نرم و حرفه‌ای */
 
   --max-content-width: 1200px; /* حداکثر عرض محتوا برای کاهش بار شناختی (اصل رهایی از بار شناختی) */
   --max-paragraph-width: 75ch; /* عرض بهینه پاراگراف برای خوانایی فارسی (اصل روان‌روانی و سهولت جریان) */
 
   --navbar-height: 80px; /* ارتفاع نوار ناوبری */
-}
-
-/* Skip Link for Accessibility (اصل رهایی از بار شناختی، اصل کنترل و انتخاب) */
-.skip-link {
-  position: absolute;
-  top: -40px;
-  left: 0;
-  background: var(--primary-color);
-  color: white;
-  padding: 8px;
-  z-index: 9999;
-  text-decoration: none;
-  font-weight: bold;
-  transition: top 0.3s ease-in-out;
-  /* بازخورد بصری واضح هنگام فوکوس */
-}
-
-.skip-link:focus {
-  top: 0;
 }
 
 /* Footer Links (اصل کشف و پیش‌بینی) */
@@ -260,7 +277,7 @@ body {
   margin: 0;
   padding: 0;
   color: var(--text-color);
-  line-height: 2.0; /* Adjusted for better Persian readability - اصل رهایی از بار شناختی */
+  line-height: 2; /* Adjusted for better Persian readability - اصل رهایی از بار شناختی */
   position: relative;
   padding-top: var(--navbar-height);
   min-height: 100vh;
@@ -270,7 +287,7 @@ body {
   direction: rtl; /* Changed from ltr to rtl for consistency with html tag - اصل هم‌ذات‌پنداری */
 
   transition: background-color var(--transition-duration-medium)
-    var(--transition-easing-standard),
+      var(--transition-easing-standard),
     color var(--transition-duration-medium) var(--transition-easing-standard),
     background var(--transition-duration-medium)
       var(--transition-easing-standard);
@@ -350,11 +367,11 @@ textarea:focus:not(:focus-visible) {
   border: 1px solid var(--border-color);
 
   transition: background var(--transition-duration-medium)
-    var(--transition-easing-standard),
+      var(--transition-easing-standard),
     box-shadow var(--transition-duration-medium)
-    var(--transition-easing-standard),
+      var(--transition-easing-standard),
     border-color var(--transition-duration-medium)
-    var(--transition-easing-standard);
+      var(--transition-easing-standard);
 }
 
 /* Breadcrumb Navigation (اصل رهایی از بار شناختی، اصل پیشرفت قابل مشاهده) */
@@ -417,11 +434,11 @@ textarea:focus:not(:focus-visible) {
   justify-content: center;
 
   transition: background-color var(--transition-duration-medium)
-    var(--transition-easing-standard),
+      var(--transition-easing-standard),
     box-shadow var(--transition-duration-medium)
-    var(--transition-easing-standard),
+      var(--transition-easing-standard),
     border-color var(--transition-duration-medium)
-    var(--transition-easing-standard);
+      var(--transition-easing-standard);
 }
 
 .navbar nav a {
@@ -431,9 +448,10 @@ textarea:focus:not(:focus-visible) {
   font-weight: 500;
   font-size: 1.05rem;
   transition: color var(--transition-duration-short)
-    var(--transition-easing-standard),
+      var(--transition-easing-standard),
     transform var(--transition-duration-short) var(--transition-easing-springy),
-    box-shadow var(--transition-duration-short) var(--transition-easing-standard); /* اضافه شدن box-shadow برای پاداش بصری */
+    box-shadow var(--transition-duration-short)
+      var(--transition-easing-standard); /* اضافه شدن box-shadow برای پاداش بصری */
   position: relative;
   padding-bottom: var(--space-xs);
   display: inline-block;
@@ -506,11 +524,11 @@ textarea:focus:not(:focus-visible) {
   border: 8px solid var(--accent-color);
   box-shadow: 0 15px 35px var(--shadow-color-medium);
   transition: transform var(--transition-duration-medium)
-    var(--transition-easing-springy),
+      var(--transition-easing-springy),
     box-shadow var(--transition-duration-medium)
-    var(--transition-easing-standard),
+      var(--transition-easing-standard),
     border-color var(--transition-duration-medium)
-    var(--transition-easing-standard);
+      var(--transition-easing-standard);
   z-index: 1;
   position: relative;
   max-width: 90%;
@@ -609,7 +627,7 @@ section h2::after {
   margin-right: auto;
   font-size: 1.15rem;
   color: var(--text-color);
-  line-height: 2.0; /* Adjusted for better Persian readability */
+  line-height: 2; /* Adjusted for better Persian readability */
   direction: rtl;
   text-align: right;
 }
@@ -655,13 +673,13 @@ section h2::after {
   justify-content: space-between;
 
   transition: transform var(--transition-duration-medium)
-    var(--transition-easing-standard),
+      var(--transition-easing-standard),
     box-shadow var(--transition-duration-medium)
-    var(--transition-easing-standard),
+      var(--transition-easing-standard),
     background-color var(--transition-duration-medium)
-    var(--transition-easing-standard),
+      var(--transition-easing-standard),
     border-color var(--transition-duration-medium)
-    var(--transition-easing-standard);
+      var(--transition-easing-standard);
   text-align: left;
   overflow: hidden;
   position: relative;
@@ -702,11 +720,16 @@ section h2::after {
 }
 
 @keyframes cardPop {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.01); } /* یک بزرگنمایی کوچک برای حس "پاپ" */
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.01);
+  } /* یک بزرگنمایی کوچک برای حس "پاپ" */
+  100% {
+    transform: scale(1);
+  }
 }
-
 
 /* Image Placeholders within Cards (اصل رهایی از بار شناختی) */
 .project-image-placeholder,
@@ -751,8 +774,6 @@ img.loaded {
     opacity: 1;
   }
 }
-
-
 
 /* Language Switcher (اصل کنترل و انتخاب، اصل هم‌ذات‌پنداری) */
 .lang-switcher {
@@ -818,7 +839,7 @@ img.loaded {
   opacity: 0; /* ابتدا پنهان */
   transform: translateY(10px) scale(0.95); /* شروع کمی پایین‌تر و کوچک‌تر */
   transition: opacity 0.5s var(--transition-easing-springy),
-              transform 0.5s var(--transition-easing-springy); /* انیمیشن فنری */
+    transform 0.5s var(--transition-easing-springy); /* انیمیشن فنری */
 }
 
 /* Show microcopy on card hover */
@@ -826,7 +847,6 @@ img.loaded {
   opacity: 1;
   transform: translateY(0) scale(1); /* ظاهر شدن و بزرگ شدن به حالت عادی */
 }
-
 
 /* Card Meta Information (e.g., programming language, team size) (اصل رهایی از بار شناختی) */
 .card .card-meta {
@@ -871,10 +891,11 @@ img.loaded {
   padding: var(--space-xs) var(--space-sm);
   border-radius: var(--border-radius-sm);
   transition: background-color var(--transition-duration-short)
-    var(--transition-easing-standard),
+      var(--transition-easing-standard),
     color var(--transition-duration-short) var(--transition-easing-standard),
     transform var(--transition-duration-short) var(--transition-easing-springy),
-    box-shadow var(--transition-duration-short) var(--transition-easing-standard); /* اضافه شدن box-shadow */
+    box-shadow var(--transition-duration-short)
+      var(--transition-easing-standard); /* اضافه شدن box-shadow */
   outline: none;
   flex-direction: row; /* Ensure icon is to the left of text */
   direction: ltr; /* Force LTR for links with icons */
@@ -921,8 +942,8 @@ img.loaded {
 
 .card.is-featured:hover {
   transform: translateY(-10px); /* اصل پاداش فوری قوی‌تر */
-  box-shadow: 0 20px 60px var(--shadow-color-strong), /* سایه قوی‌تر */
-    0 0 20px var(--highlight-color); /* درخشش قوی‌تر */
+  box-shadow: 0 20px 60px var(--shadow-color-strong),
+    /* سایه قوی‌تر */ 0 0 20px var(--highlight-color); /* درخشش قوی‌تر */
 }
 .card.is-featured:focus-within {
   box-shadow: 0 0 0 3px var(--highlight-color),
@@ -973,10 +994,10 @@ img.loaded {
   font-weight: 500;
   border: 1px solid var(--border-color);
   transition: background-color var(--transition-duration-short)
-    var(--transition-easing-standard),
+      var(--transition-easing-standard),
     transform var(--transition-duration-short) var(--transition-easing-springy),
     box-shadow var(--transition-duration-short)
-    var(--transition-easing-standard),
+      var(--transition-easing-standard),
     color var(--transition-duration-short) var(--transition-easing-standard);
   cursor: pointer;
   display: inline-flex;
@@ -1002,7 +1023,7 @@ img.loaded {
   width: 1em;
   text-align: center;
   transition: color var(--transition-duration-short)
-    var(--transition-easing-standard),
+      var(--transition-easing-standard),
     transform var(--transition-duration-short) var(--transition-easing-springy);
 }
 #skills .skills-list li:hover i,
@@ -1050,7 +1071,8 @@ img.loaded {
   transition: opacity 0.6s ease-out, transform 0.6s ease-out; /* Transition for JS animation */
 }
 
-.timeline li.timeline-item-visible { /* Class added by JS */
+.timeline li.timeline-item-visible {
+  /* Class added by JS */
   opacity: 1;
   transform: translateY(0);
 }
@@ -1079,9 +1101,9 @@ img.loaded {
   border-radius: var(--border-radius-full);
   z-index: 1;
   transition: background-color var(--transition-duration-short)
-    var(--transition-easing-standard),
+      var(--transition-easing-standard),
     border-color var(--transition-duration-short)
-    var(--transition-easing-standard),
+      var(--transition-easing-standard),
     transform var(--transition-duration-short) var(--transition-easing-springy);
 }
 
@@ -1105,13 +1127,13 @@ img.loaded {
   border-radius: var(--border-radius-md);
   box-shadow: 0 4px 15px var(--shadow-color-light);
   transition: transform var(--transition-duration-short)
-    var(--transition-easing-springy),
+      var(--transition-easing-springy),
     box-shadow var(--transition-duration-short)
-    var(--transition-easing-standard),
+      var(--transition-easing-standard),
     background-color var(--transition-duration-short)
-    var(--transition-easing-standard),
+      var(--transition-easing-standard),
     border-color var(--transition-duration-short)
-    var(--transition-easing-standard);
+      var(--transition-easing-standard);
   z-index: 1;
   outline: none;
   direction: rtl; /* Force RTL for content within timeline items */
@@ -1276,7 +1298,8 @@ img.loaded {
   cursor: pointer;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out, transform 0.3s var(--transition-easing-springy);
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out,
+    transform 0.3s var(--transition-easing-springy);
   z-index: 999;
 }
 
@@ -1323,11 +1346,16 @@ img.loaded {
 }
 
 @keyframes faqOpen {
-  0% { transform: scaleY(1); }
-  50% { transform: scaleY(1.02); } /* کمی بزرگ‌تر شود */
-  100% { transform: scaleY(1); }
+  0% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(1.02);
+  } /* کمی بزرگ‌تر شود */
+  100% {
+    transform: scaleY(1);
+  }
 }
-
 
 .faq-item summary {
   display: block; /* Ensures full clickable area */
@@ -1547,9 +1575,10 @@ img.loaded {
   color: var(--primary-color);
   text-decoration: none;
   transition: color var(--transition-duration-short)
-    var(--transition-easing-standard),
+      var(--transition-easing-standard),
     transform var(--transition-duration-short) var(--transition-easing-springy),
-    box-shadow var(--transition-duration-short) var(--transition-easing-standard); /* اضافه شدن box-shadow */
+    box-shadow var(--transition-duration-short)
+      var(--transition-easing-standard); /* اضافه شدن box-shadow */
   display: inline-flex;
   align-items: center;
   padding: var(--space-xs) 0;
@@ -1577,7 +1606,7 @@ img.loaded {
   width: 1em;
   text-align: center;
   transition: transform var(--transition-duration-short)
-    var(--transition-easing-springy),
+      var(--transition-easing-springy),
     color var(--transition-duration-short) var(--transition-easing-standard);
 }
 .contact-info a:hover i,
@@ -1641,10 +1670,10 @@ img.loaded {
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius-sm);
   transition: background-color var(--transition-duration-short)
-    var(--transition-easing-standard),
+      var(--transition-easing-standard),
     transform var(--transition-duration-short) var(--transition-easing-springy),
     box-shadow var(--transition-duration-short)
-    var(--transition-easing-standard);
+      var(--transition-easing-standard);
 
   opacity: 1;
   transform: none;
@@ -1708,9 +1737,9 @@ img.loaded {
   direction: ltr; /* Default LTR for footer */
 
   transition: color var(--transition-duration-medium)
-    var(--transition-easing-standard),
+      var(--transition-easing-standard),
     border-color var(--transition-duration-medium)
-    var(--transition-easing-standard);
+      var(--transition-easing-standard);
 }
 .footer p {
   margin-top: var(--space-sm);
@@ -1771,9 +1800,18 @@ img.loaded {
 }
 
 @keyframes pulse {
-  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 90, 158, 0.7); }
-  70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(0, 90, 158, 0); }
-  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 90, 158, 0); }
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 90, 158, 0.7);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 15px rgba(0, 90, 158, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 90, 158, 0);
+  }
 }
 
 /* Skill Hover Message CSS (اصل تأخیر معنادار پاداش، اصل کنجکاوی و رمزآلود بودن، اصل لذت از تسلط) */
@@ -1792,7 +1830,7 @@ img.loaded {
   transition: opacity 0.3s ease-out, transform 0.3s ease-out;
   pointer-events: none; /* اجازه می‌دهد روی المان زیرین کلیک شود */
   z-index: 10;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   margin-bottom: 5px; /* فاصله از المان مهارت */
   direction: rtl;
   text-align: center;
@@ -1835,7 +1873,8 @@ img.loaded {
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4); /* سایه قوی‌تر */
   z-index: 1003;
   opacity: 0;
-  transition: transform 0.6s var(--transition-easing-springy), opacity 0.6s ease-out; /* انیمیشن فنری برای ظاهر شدن */
+  transition: transform 0.6s var(--transition-easing-springy),
+    opacity 0.6s ease-out; /* انیمیشن فنری برای ظاهر شدن */
   white-space: nowrap;
   font-size: 1.1rem; /* فونت بزرگتر */
   font-weight: 600; /* وزن فونت بیشتر */
@@ -1855,103 +1894,124 @@ img.loaded {
 
 /* استایل برای متن داخل Toast */
 .dynamic-toast .toast-message {
-    flex-grow: 1; /* اجازه می‌دهد متن فضای موجود را پر کند */
+  flex-grow: 1; /* اجازه می‌دهد متن فضای موجود را پر کند */
 }
 
 /* آیکون برای Dynamic Toast */
 .dynamic-toast i {
-    font-family: "Font Awesome 6 Free";
-    font-weight: 900;
-    margin-left: 10px; /* فاصله از متن */
-    font-size: 1.2em;
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  margin-left: 10px; /* فاصله از متن */
+  font-size: 1.2em;
 }
 
 /* استایل‌های اختصاصی برای انواع Toast */
 
 /* Welcome Toast */
 .welcome-toast {
-    background-color: var(--primary-color);
-    color: white;
-    border-left: 6px solid var(--highlight-color);
+  background-color: var(--primary-color);
+  color: white;
+  border-left: 6px solid var(--highlight-color);
 }
 .welcome-toast i {
-    color: var(--highlight-color);
+  color: var(--highlight-color);
 }
 
 /* End of Page Toast */
 .end-of-page-toast {
-    background-color: var(--primary-color);
-    color: white;
-    border-left: 6px solid var(--highlight-color);
+  background-color: var(--primary-color);
+  color: white;
+  border-left: 6px solid var(--highlight-color);
 }
 .end-of-page-toast i {
-    color: var(--highlight-color);
+  color: var(--highlight-color);
 }
 
 /* Email Copy Toast */
 .email-copy-toast {
-    background-color: var(--accent-color); /* رنگ متفاوت برای تاکید */
-    color: white;
-    border-left: 6px solid var(--highlight-color);
+  background-color: var(--accent-color); /* رنگ متفاوت برای تاکید */
+  color: white;
+  border-left: 6px solid var(--highlight-color);
 }
 .email-copy-toast i {
-    color: var(--highlight-color);
+  color: var(--highlight-color);
 }
 
 /* Social Link Copy Toast (می‌تواند شبیه email-copy-toast باشد یا متفاوت) */
 .social-link-copy-toast {
-    background-color: var(--accent-color);
-    color: white;
-    border-left: 6px solid var(--highlight-color);
+  background-color: var(--accent-color);
+  color: white;
+  border-left: 6px solid var(--highlight-color);
 }
 .social-link-copy-toast i {
-    color: var(--highlight-color);
+  color: var(--highlight-color);
 }
-
 
 /* Styling for Exploration Progress Toasts (اصل پیشرفت قابل مشاهده، اصل حس موفقیت) */
 .exploration-toast {
-    background-color: var(--primary-color); /* رنگ اصلی */
-    color: white;
-    border-left: 6px solid var(--accent-color); /* خط کناری با رنگ تاکیدی */
+  background-color: var(--primary-color); /* رنگ اصلی */
+  color: white;
+  border-left: 6px solid var(--accent-color); /* خط کناری با رنگ تاکیدی */
 }
 
 .exploration-toast i {
-    color: var(--accent-color); /* رنگ آیکون */
+  color: var(--accent-color); /* رنگ آیکون */
 }
 
 /* Styling for Final Exploration Toast (اصل اثر پایان خوش، اصل حس موفقیت) */
 .final-exploration-toast {
-    background: linear-gradient(135deg, var(--highlight-color) 0%, var(--accent-color) 100%); /* گرادیان جذاب */
-    color: var(--secondary-color); /* متن تیره روی پس‌زمینه روشن */
-    border-left: 6px solid var(--primary-color); /* خط کناری با رنگ اصلی */
-    animation: celebrationPulse 2s infinite ease-in-out; /* انیمیشن پالس برای جشن */
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 20px var(--highlight-color); /* سایه و درخشش قوی‌تر */
-    transform: translateX(-50%) translateY(150%) scale(0.9); /* شروع کمی کوچک‌تر و پایین‌تر */
+  background: linear-gradient(
+    135deg,
+    var(--highlight-color) 0%,
+    var(--accent-color) 100%
+  ); /* گرادیان جذاب */
+  color: var(--secondary-color); /* متن تیره روی پس‌زمینه روشن */
+  border-left: 6px solid var(--primary-color); /* خط کناری با رنگ اصلی */
+  animation: celebrationPulse 2s infinite ease-in-out; /* انیمیشن پالس برای جشن */
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 20px var(--highlight-color); /* سایه و درخشش قوی‌تر */
+  transform: translateX(-50%) translateY(150%) scale(0.9); /* شروع کمی کوچک‌تر و پایین‌تر */
 }
 
 .final-exploration-toast.show {
-    transform: translateX(-50%) translateY(0) scale(1); /* بزرگ شدن به حالت عادی */
+  transform: translateX(-50%) translateY(0) scale(1); /* بزرگ شدن به حالت عادی */
 }
 
 .final-exploration-toast i {
-    color: var(--primary-color); /* رنگ آیکون */
-    animation: bounceIn 1s ease-out; /* انیمیشن ورود آیکون */
+  color: var(--primary-color); /* رنگ آیکون */
+  animation: bounceIn 1s ease-out; /* انیمیشن ورود آیکون */
 }
 
 @keyframes celebrationPulse {
-  0% { transform: translateX(-50%) scale(1); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 20px var(--highlight-color); }
-  50% { transform: translateX(-50%) scale(1.03); box-shadow: 0 12px 50px rgba(0, 0, 0, 0.6), 0 0 30px var(--highlight-color); }
-  100% { transform: translateX(-50%) scale(1); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 20px var(--highlight-color); }
+  0% {
+    transform: translateX(-50%) scale(1);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 20px var(--highlight-color);
+  }
+  50% {
+    transform: translateX(-50%) scale(1.03);
+    box-shadow: 0 12px 50px rgba(0, 0, 0, 0.6), 0 0 30px var(--highlight-color);
+  }
+  100% {
+    transform: translateX(-50%) scale(1);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 20px var(--highlight-color);
+  }
 }
 
 @keyframes bounceIn {
-    0% { transform: scale(0.3); opacity: 0; }
-    50% { transform: scale(1.1); opacity: 1; }
-    70% { transform: scale(0.9); }
-    100% { transform: scale(1); }
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
-
 
 /* Fun Fact Toast Notification (اصل کنجکاوی و رمزآلود بودن، اصل تضاد و تنوع حسی، اصل تأخیر معنادار پاداش) */
 .fun-fact-toast {
@@ -1961,7 +2021,7 @@ img.loaded {
 }
 
 .fun-fact-toast i {
-    color: var(--primary-color);
+  color: var(--primary-color);
 }
 
 .fun-fact-close {
@@ -1980,7 +2040,6 @@ img.loaded {
 .fun-fact-close:hover {
   transform: rotate(90deg);
 }
-
 
 /* Responsive Adjustments */
 @media (max-width: 1200px) {
@@ -2174,9 +2233,9 @@ img.loaded {
     transform: none !important;
     box-shadow: 0 6px 20px var(--shadow-color-medium);
     transition: transform var(--transition-duration-short)
-      var(--transition-easing-springy),
+        var(--transition-easing-springy),
       box-shadow var(--transition-duration-short)
-      var(--transition-easing-standard);
+        var(--transition-easing-standard);
     text-align: left;
   }
   .card:hover {
