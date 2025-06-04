@@ -498,6 +498,8 @@ featuredCards.forEach(card => {
 // 17. پیام پیشرفت "بخش‌های کاوش شده" (اصل پیشرفت قابل مشاهده، اصل حس موفقیت، انگیزه درونی)
 // این قابلیت به کاربر حس پیشرفت و موفقیت در کاوش سایت را می‌دهد و انگیزه او را برای ادامه افزایش می‌دهد.
 const sections = document.querySelectorAll('section[id]');
+// تعداد کل بخش‌های سایت را به 10 تغییر می‌دهیم
+const totalSections = 10; 
 const sectionsVisited = new Set();
 
 // نقاط عطف برای نمایش پیام پیشرفت
@@ -505,7 +507,6 @@ const explorationMilestones = [
     { count: 3, message: 'شما ۳ بخش از سایت را کاوش کرده‌اید! عالیه! ✨ ادامه دهید!' },
     { count: 6, message: 'نصف راه را پیمودید! شما ۶ بخش را کاوش کرده‌اید! فوق‌العاده! 🚀' },
     { count: 9, message: 'به ۹ بخش رسیدید! کم‌کم داریم به پایان می‌رسیم! 🌟' },
-    // نقطه عطف 12 حذف شد تا پیام نهایی به صورت جداگانه مدیریت شود.
 ];
 
 // یک آرایه برای پیگیری اینکه کدام نقاط عطف قبلاً اعلام شده‌اند
@@ -524,25 +525,28 @@ const sectionProgressObserver = new IntersectionObserver((entries) => {
             const currentSectionsCount = sectionsVisited.size;
             const now = Date.now();
 
-            // بررسی نقاط عطف عمومی
-            for (let i = 0; i < explorationMilestones.length; i++) {
-                if (!milestonesAnnounced[i] && currentSectionsCount >= explorationMilestones[i].count) {
-                    if (now - lastExplorationToastTime > explorationToastCooldown) {
-                        showToastNotification(explorationMilestones[i].message, 5000, 'exploration-toast');
-                        milestonesAnnounced[i] = true; // این نقطه عطف اعلام شد
-                        lastExplorationToastTime = now; // به‌روزرسانی زمان آخرین نمایش
-                    }
-                }
-            }
-
-            // بررسی پیام نهایی "تمام بخش‌ها کاوش شد"
-            // این پیام تنها یک بار و زمانی که تمام بخش‌ها دیده شده باشند نمایش داده می‌شود.
-            if (currentSectionsCount === sections.length && !allSectionsExploredAnnounced) {
+            // ابتدا بررسی می‌کنیم که آیا تمام بخش‌ها کاوش شده‌اند یا خیر
+            // از totalSections به جای sections.length استفاده می‌کنیم تا با تعداد واقعی بخش‌ها هماهنگ باشد
+            if (currentSectionsCount >= totalSections && !allSectionsExploredAnnounced) {
                 // اطمینان از اینکه این پیام با پیام‌های دیگر تداخل نداشته باشد
                 if (now - lastExplorationToastTime > explorationToastCooldown || lastExplorationToastTime === 0) {
-                    showToastNotification(`تبریک! شما تمام ${sections.length} بخش سایت را کاوش کرده‌اید! شما یک کاوشگر واقعی هستید! 🎉`, 5000, 'exploration-toast final-exploration-toast');
+                    showToastNotification(`تبریک! شما تمام ${totalSections} بخش سایت را کاوش کرده‌اید! شما یک کاوشگر واقعی هستید! 🎉`, 5000, 'exploration-toast final-exploration-toast');
                     allSectionsExploredAnnounced = true; // پیام نهایی اعلام شد
                     lastExplorationToastTime = now; // به‌روزرسانی زمان آخرین نمایش
+                }
+                return; // پس از نمایش پیام نهایی، دیگر نیازی به بررسی نقاط عطف دیگر نیست
+            }
+
+            // سپس نقاط عطف عمومی را بررسی می‌کنیم، تنها در صورتی که پیام نهایی هنوز نمایش داده نشده باشد
+            if (!allSectionsExploredAnnounced) {
+                for (let i = 0; i < explorationMilestones.length; i++) {
+                    if (!milestonesAnnounced[i] && currentSectionsCount >= explorationMilestones[i].count) {
+                        if (now - lastExplorationToastTime > explorationToastCooldown) {
+                            showToastNotification(explorationMilestones[i].message, 5000, 'exploration-toast');
+                            milestonesAnnounced[i] = true; // این نقطه عطف اعلام شد
+                            lastExplorationToastTime = now; // به‌روزرسانی زمان آخرین نمایش
+                        }
+                    }
                 }
             }
         }
