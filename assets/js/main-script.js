@@ -499,16 +499,22 @@ featuredCards.forEach(card => {
 // این قابلیت به کاربر حس پیشرفت و موفقیت در کاوش سایت را می‌دهد و انگیزه او را برای ادامه افزایش می‌دهد.
 const sections = document.querySelectorAll('section[id]');
 const sectionsVisited = new Set();
+
 // نقاط عطف برای نمایش پیام پیشرفت
 const explorationMilestones = [
     { count: 3, message: 'شما ۳ بخش از سایت را کاوش کرده‌اید! عالیه! ✨ ادامه دهید!' },
     { count: 6, message: 'نصف راه را پیمودید! شما ۶ بخش را کاوش کرده‌اید! فوق‌العاده! 🚀' },
     { count: 9, message: 'به ۹ بخش رسیدید! کم‌کم داریم به پایان می‌رسیم! 🌟' },
-    { count: 12, message: '۱۲ بخش کاوش شد! شما یک کاوشگر حرفه‌ای هستید! 🗺️' },
-    // می‌توانید نقاط عطف بیشتری اضافه کنید
+    // نقطه عطف 12 حذف شد تا پیام نهایی به صورت جداگانه مدیریت شود.
 ];
-let nextMilestoneIndex = 0; // شاخص برای نقطه عطف بعدی که باید به آن رسید
-let lastExplorationToastTime = 0; // زمان آخرین نمایش toast برای جلوگیری از نمایش سریع
+
+// یک آرایه برای پیگیری اینکه کدام نقاط عطف قبلاً اعلام شده‌اند
+const milestonesAnnounced = new Array(explorationMilestones.length).fill(false);
+let allSectionsExploredAnnounced = false; // پرچم جداگانه برای پیام نهایی تمام بخش‌ها
+
+// زمان آخرین نمایش پیام پیشرفت برای جلوگیری از نمایش‌های پشت سر هم
+let lastExplorationToastTime = 0;
+const explorationToastCooldown = 10000; // 10 ثانیه مکث بین پیام‌های پیشرفت
 
 const sectionProgressObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -518,28 +524,26 @@ const sectionProgressObserver = new IntersectionObserver((entries) => {
             const currentSectionsCount = sectionsVisited.size;
             const now = Date.now();
 
-            // بررسی کنید آیا به نقطه عطف جدیدی رسیده‌ایم و زمان کافی از آخرین پیام گذشته است
-            if (nextMilestoneIndex < explorationMilestones.length &&
-                currentSectionsCount >= explorationMilestones[nextMilestoneIndex].count &&
-                (now - lastExplorationToastTime > 10000)) { // 10 ثانیه مکث بین پیام‌ها
-
-                const milestoneData = explorationMilestones[nextMilestoneIndex];
-                let messageToShow = milestoneData.message;
-
-                // اگر تمام بخش‌ها کاوش شده باشند، پیام نهایی را نمایش بده
-                if (currentSectionsCount === sections.length) {
-                    messageToShow = `تبریک! شما تمام ${sections.length} بخش سایت را کاوش کرده‌اید! شما یک کاوشگر واقعی هستید! 🎉`;
+            // بررسی نقاط عطف عمومی
+            for (let i = 0; i < explorationMilestones.length; i++) {
+                if (!milestonesAnnounced[i] && currentSectionsCount >= explorationMilestones[i].count) {
+                    if (now - lastExplorationToastTime > explorationToastCooldown) {
+                        showToastNotification(explorationMilestones[i].message, 5000, 'exploration-toast');
+                        milestonesAnnounced[i] = true; // این نقطه عطف اعلام شد
+                        lastExplorationToastTime = now; // به‌روزرسانی زمان آخرین نمایش
+                    }
                 }
+            }
 
-                showToastNotification(messageToShow, 5000, 'exploration-toast'); // استفاده از کلاس سفارشی
-                lastExplorationToastTime = now;
-                nextMilestoneIndex++; // به نقطه عطف بعدی برو
-            } else if (currentSectionsCount === sections.length && !hasReachedEnd) {
-                // اگر کاربر تمام بخش‌ها را کاوش کرده و پیام پایان صفحه هنوز نمایش داده نشده است
-                // این شرط برای اطمینان از نمایش پیام نهایی حتی اگر تعداد بخش‌ها دقیقاً با نقطه عطف آخر همخوانی نداشته باشد
-                // از hasReachedEnd برای جلوگیری از تکرار استفاده می‌کنیم
-                showToastNotification(`تبریک! شما تمام ${sections.length} بخش سایت را کاوش کرده‌اید! شما یک کاوشگر واقعی هستید! 🎉`, 5000, 'exploration-toast');
-                hasReachedEnd = true; // این پرچم را تنظیم می‌کنیم تا پیام تکرار نشود
+            // بررسی پیام نهایی "تمام بخش‌ها کاوش شد"
+            // این پیام تنها یک بار و زمانی که تمام بخش‌ها دیده شده باشند نمایش داده می‌شود.
+            if (currentSectionsCount === sections.length && !allSectionsExploredAnnounced) {
+                // اطمینان از اینکه این پیام با پیام‌های دیگر تداخل نداشته باشد
+                if (now - lastExplorationToastTime > explorationToastCooldown || lastExplorationToastTime === 0) {
+                    showToastNotification(`تبریک! شما تمام ${sections.length} بخش سایت را کاوش کرده‌اید! شما یک کاوشگر واقعی هستید! 🎉`, 5000, 'exploration-toast final-exploration-toast');
+                    allSectionsExploredAnnounced = true; // پیام نهایی اعلام شد
+                    lastExplorationToastTime = now; // به‌روزرسانی زمان آخرین نمایش
+                }
             }
         }
     });
@@ -625,7 +629,7 @@ document.querySelectorAll('.connect-links-block ul li a').forEach(socialLink => 
             tempInput.value = linkToCopy;
             document.body.appendChild(tempInput);
             tempInput.select();
-            document.execCommand('copy');
+            document.execCommand('copy'); // کپی کردن متن
             document.body.removeChild(tempInput);
 
             let linkName = socialLink.textContent.trim();
