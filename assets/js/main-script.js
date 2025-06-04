@@ -477,18 +477,14 @@ const faqItems = document.querySelectorAll(".faq-item"); // Get all FAQ items
 if (faqContainer) {
   faqItems.forEach((item) => {
     const summary = item.querySelector("summary");
-    // We assume the answer content is directly within a <p> tag inside <details>
-    // If you have a different structure, adjust this selector.
-    const answer = item.querySelector("p");
+    const answer = item.querySelector("p"); // Assuming answer content is directly within a <p> tag inside <details>
     const questionId =
       item.dataset.questionId || summary.textContent.trim().substring(0, 50); // Fallback ID
 
     // Initial state for smooth animation
     if (answer) {
-      // Ensure answer element exists
       answer.style.maxHeight = "0px";
       answer.style.overflow = "hidden";
-      // Using a custom cubic-bezier for a springy/smooth effect
       answer.style.transition =
         "max-height 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), padding 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.4s ease-out";
       answer.style.paddingTop = "0";
@@ -497,9 +493,9 @@ if (faqContainer) {
 
       // Check initial open state (for cases where details is open on load or after search)
       if (item.open) {
-        answer.style.maxHeight = answer.scrollHeight + "px";
-        answer.style.paddingTop = "1.6rem"; // Ensure these match your desired open padding
-        answer.style.paddingBottom = "2.8rem"; // Ensure these match your desired open padding
+        answer.style.maxHeight = "1000px"; // Set to a large value to ensure content fits
+        answer.style.paddingTop = "1.6rem";
+        answer.style.paddingBottom = "2.8rem";
         answer.style.opacity = "1";
       }
     }
@@ -527,7 +523,6 @@ if (faqContainer) {
         if (otherItem !== item && otherItem.open) {
           const otherAnswer = otherItem.querySelector("p");
           if (otherAnswer) {
-            // Ensure otherAnswer exists
             otherAnswer.style.maxHeight = "0px";
             otherAnswer.style.paddingTop = "0";
             otherAnswer.style.paddingBottom = "0";
@@ -599,10 +594,9 @@ if (faqContainer) {
         // If it was closed and user clicked to open it
         item.open = true; // Set open immediately to apply summary styles
         if (answer) {
-          // Temporarily set maxHeight to scrollHeight to allow transition
-          answer.style.maxHeight = answer.scrollHeight + "px";
-          answer.style.paddingTop = "1.6rem"; // Ensure these match your desired open padding
-          answer.style.paddingBottom = "2.8rem"; // Ensure these match your desired open padding
+          answer.style.maxHeight = "1000px"; // Set to a large value to ensure content fits
+          answer.style.paddingTop = "1.6rem";
+          answer.style.paddingBottom = "2.8rem";
           answer.style.opacity = "1";
         }
 
