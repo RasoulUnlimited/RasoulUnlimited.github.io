@@ -13,7 +13,7 @@
  * - کاهش رندرینگ و بازسازی DOM با بهینه‌سازی‌های CSS.
  */
 
- :root {
+:root {
   --primary-color: #005a9e; /* آبی تیره: برای اعتماد، ثبات و عناصر اصلی تعاملی (اصل کنترل و انتخاب، اصل زیبایی‌شناسی) */
   --secondary-color: #1a1a1a; /* سیاه تیره: برای تیترها و متن‌های مهم (اصل روان‌روانی و سهولت جریان) */
   --accent-color: #007acc; /* آبی روشن: برای تاکیدات، لینک‌ها و بازخورد‌های مثبت (اصل بازخورد آنی، اصل انتظارات مثبت) */
@@ -1399,16 +1399,37 @@ img.loaded {
 .faq-item.faq-opened {
   animation: faqOpen 0.4s var(--transition-easing-springy);
   /* بهینه‌سازی: افزودن will-change برای ویژگی‌ای که تغییر می‌کند */
-  will-change: transform;
+  will-change: transform, opacity;
 }
 
 @keyframes faqOpen {
   0% {
-    transform: scaleY(1);
+    transform: scaleY(0.98); /* Start slightly compressed vertically */
+    opacity: 0.8; /* Start slightly faded */
   }
   50% {
-    transform: scaleY(1.02);
-  } /* کمی بزرگ‌تر شود */
+    transform: scaleY(1.01); /* Overshoot slightly */
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+/* Animation for FAQ summary click feedback */
+.faq-item summary.faq-summary-clicked {
+  animation: faqSummaryPop 0.3s var(--transition-easing-springy);
+  will-change: transform;
+}
+
+@keyframes faqSummaryPop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.01);
+  }
   100% {
     transform: scale(1);
   }
@@ -1427,6 +1448,8 @@ img.loaded {
   list-style: none; /* Removes default marker */
   touch-action: manipulation; /* Improves responsiveness on touch devices */
   min-height: 44px; /* Ensure touch target size is adequate */
+  /* بهینه‌سازی: افزودن will-change برای ویژگی‌ای که تغییر می‌کند */
+  will-change: transform;
 }
 
 /* Custom marker for details summary (اصل کشف و پیش‌بینی) */
@@ -1700,7 +1723,7 @@ img.loaded {
   text-align: left;
 }
 #connect .location-edu i:last-child {
-  margin-right: var(--space-md); /* Adjust for RTL */
+  margin-right: var(--space-md);
   margin-left: 0;
 }
 
@@ -2568,6 +2591,8 @@ img.loaded {
   }
 
   .connect-links-block {
+    flex: 1;
+    min-width: 250px;
     direction: ltr;
     text-align: left;
   }
