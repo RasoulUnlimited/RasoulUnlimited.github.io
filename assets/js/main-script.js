@@ -475,11 +475,18 @@ const faqContainer = document.querySelector(".faq-container");
 const faqItems = document.querySelectorAll(".faq-item"); // Get all FAQ items
 
 if (faqContainer) {
-  faqItems.forEach((item) => {
+  faqItems.forEach((item, index) => {
     const summary = item.querySelector("summary");
     const answer = item.querySelector("p"); // Assuming answer content is directly within a <p> tag inside <details>
     const questionId =
-      item.dataset.questionId || summary.textContent.trim().substring(0, 50); // Fallback ID
+      item.dataset.questionId || `faq-q-${index + 1}`; // Fallback ID
+
+    // Set ARIA attributes
+    summary.setAttribute("aria-expanded", item.open ? "true" : "false");
+    if (answer) {
+      answer.id = `faq-answer-${questionId}`;
+      summary.setAttribute("aria-controls", answer.id);
+    }
 
     // Initial state for smooth animation
     if (answer) {
@@ -493,10 +500,13 @@ if (faqContainer) {
 
       // Check initial open state (for cases where details is open on load or after search)
       if (item.open) {
-        answer.style.maxHeight = "1000px"; // Set to a large value to ensure content fits
+        // Temporarily set overflow to visible to measure height
+        answer.style.overflow = "visible";
+        answer.style.maxHeight = `${answer.scrollHeight}px`; // Set to actual content height
         answer.style.paddingTop = "1.6rem";
         answer.style.paddingBottom = "2.8rem";
         answer.style.opacity = "1";
+        answer.style.overflow = "hidden"; // Reset overflow after measurement
       }
     }
 
@@ -521,18 +531,22 @@ if (faqContainer) {
       faqItems.forEach((otherItem) => {
         // Close other items if they are currently open AND not the clicked item
         if (otherItem !== item && otherItem.open) {
+          const otherSummary = otherItem.querySelector("summary");
           const otherAnswer = otherItem.querySelector("p");
           if (otherAnswer) {
             otherAnswer.style.maxHeight = "0px";
             otherAnswer.style.paddingTop = "0";
             otherAnswer.style.paddingBottom = "0";
             otherAnswer.style.opacity = "0";
+            otherSummary.setAttribute("aria-expanded", "false"); // Update ARIA
+
             // Set open to false after transition for smooth closing
             setTimeout(() => {
               otherItem.open = false;
             }, 400); // Match CSS transition duration
           } else {
             otherItem.open = false; // Fallback if no answer element
+            otherSummary.setAttribute("aria-expanded", "false"); // Update ARIA
           }
           // Optional: Track auto-collapse for analytics
           if (typeof gtag === "function") {
@@ -572,11 +586,13 @@ if (faqContainer) {
           answer.style.paddingTop = "0";
           answer.style.paddingBottom = "0";
           answer.style.opacity = "0";
+          summary.setAttribute("aria-expanded", "false"); // Update ARIA
           setTimeout(() => {
             item.open = false;
           }, 400); // Match CSS transition duration
         } else {
           item.open = false; // Fallback if no answer element
+          summary.setAttribute("aria-expanded", "false"); // Update ARIA
         }
 
         // GA4 Event: Track FAQ collapse
@@ -594,10 +610,14 @@ if (faqContainer) {
         // If it was closed and user clicked to open it
         item.open = true; // Set open immediately to apply summary styles
         if (answer) {
-          answer.style.maxHeight = "1000px"; // Set to a large value to ensure content fits
+          // Temporarily set overflow to visible to measure height
+          answer.style.overflow = "visible";
+          answer.style.maxHeight = `${answer.scrollHeight}px`; // Dynamically set height
           answer.style.paddingTop = "1.6rem";
           answer.style.paddingBottom = "2.8rem";
           answer.style.opacity = "1";
+          answer.style.overflow = "hidden"; // Reset overflow after measurement
+          summary.setAttribute("aria-expanded", "true"); // Update ARIA
         }
 
         // For accessibility and better UX, scroll to the opened item if it's off-screen
@@ -613,8 +633,7 @@ if (faqContainer) {
               behavior: "smooth",
             });
           }
-        }, 450); // Delay slightly after animation starts
-
+        }, 600); // Increased delay from 450ms to 600ms
         // GA4 Event: Track FAQ expand
         if (typeof gtag === "function") {
           gtag("event", "faq_expand", {
@@ -628,6 +647,62 @@ if (faqContainer) {
         }
       }
     });
+  });
+
+  // Handle URL hash to open specific FAQ on load
+  window.addEventListener('DOMContentLoaded', () => {
+    const hash = window.location.hash;
+    if (hash) {
+      const targetElement = document.querySelector(hash);
+      if (targetElement && targetElement.classList.contains('faq-item')) {
+        const targetSummary = targetElement.querySelector('summary');
+        const targetAnswer = targetElement.querySelector('p');
+
+        // Close all other FAQs first
+        faqItems.forEach(item => {
+          if (item !== targetElement && item.open) {
+            item.open = false;
+            const answer = item.querySelector('p');
+            const summary = item.querySelector('summary');
+            if (answer) {
+              answer.style.maxHeight = '0px';
+              answer.style.paddingTop = '0';
+              answer.style.paddingBottom = '0';
+              answer.style.opacity = '0';
+            }
+            if (summary) {
+              summary.setAttribute('aria-expanded', 'false');
+            }
+          }
+        });
+
+        // Open the target FAQ
+        if (targetElement.open === false) { // Only open if not already open
+          targetElement.open = true;
+          if (targetAnswer) {
+            // Temporarily set overflow to visible to measure height
+            targetAnswer.style.overflow = "visible";
+            targetAnswer.style.maxHeight = `${targetAnswer.scrollHeight}px`;
+            targetAnswer.style.paddingTop = "1.6rem";
+            targetAnswer.style.paddingBottom = "2.8rem";
+            targetAnswer.style.opacity = "1";
+            targetAnswer.style.overflow = "hidden"; // Reset overflow after measurement
+          }
+          if (targetSummary) {
+            targetSummary.setAttribute('aria-expanded', 'true');
+          }
+
+          // Scroll to the opened FAQ after a short delay to allow rendering
+          setTimeout(() => {
+            const navbarHeight = document.querySelector(".navbar")?.offsetHeight || 0;
+            window.scrollTo({
+              top: targetElement.offsetTop - navbarHeight - 20,
+              behavior: "smooth",
+            });
+          }, 100); // Small delay to ensure layout is ready
+        }
+      }
+    }
   });
 }
 
@@ -715,7 +790,7 @@ function copyTextUsingExecCommand(text, toastId) {
   document.execCommand("copy"); // کپی کردن متن
   document.body.removeChild(tempInput);
 
-  createToast("ایمیل کپی شد. ✅", {
+  createToast("کپی شد. ✅", { // Changed message to be more generic for social links too
     id: toastId, // ID یکتا
     iconClass: "fas fa-check-circle",
     iconColor: "var(--highlight-color)",
