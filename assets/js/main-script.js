@@ -38,23 +38,105 @@ AOS.init({
 const themeToggleInput = document.getElementById("theme-toggle");
 const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 const savedTheme = localStorage.getItem("theme");
-const themeToast = document.createElement('div');
-themeToast.id = 'theme-toast';
-themeToast.setAttribute('role', 'status');
-themeToast.setAttribute('aria-live', 'polite');
-document.body.appendChild(themeToast);
 
+// تابع مرکزی برای نمایش پیام‌های Toast (اصل بازخورد آنی، اصل روان‌روانی و سهولت جریان، اصل بار شناختی پایین)
+// این تابع به صورت مرکزی برای نمایش پیام‌های کوتاه و غیرمزاحم استفاده می‌شود.
+// پیام‌های کوتاه و واضح، بار شناختی را کم کرده و جریان کاربری را حفظ می‌کنند.
+// همچنین از تکرار پیام‌ها جلوگیری می‌کند و مدیریت بهتری برای موقعیت و ظاهر دارد.
+function createToast(message, options = {}) {
+    const defaultOptions = {
+        duration: 3000,
+        customClass: '',
+        iconClass: '', // مثال: 'fas fa-info-circle'
+        iconColor: '',
+        position: 'bottom', // 'top', 'bottom'
+        isPersistent: false, // اگر true باشد، به صورت خودکار حذف نمی‌شود
+        id: '' // برای شناسایی یکتای Toast و جلوگیری از تکرار
+    };
+    const settings = { ...defaultOptions, ...options };
+
+    // اگر یک Toast با همین ID قبلاً نمایش داده شده و هنوز فعال است، آن را حذف نکن
+    if (settings.id) {
+        const existingToast = document.getElementById(settings.id);
+        if (existingToast && existingToast.classList.contains('show')) {
+            return; // Toast قبلاً نمایش داده شده و فعال است، پس تکرار نمی‌کنیم
+        }
+    }
+    
+    // حذف هر Toast دینامیک دیگری که ممکن است در حال نمایش باشد (غیر از persistent)
+    document.querySelectorAll('.dynamic-toast:not(.persistent-toast)').forEach(toast => {
+        if (toast.id !== settings.id) { // فقط Toastهای دیگر را حذف کن
+            toast.classList.remove('show');
+            toast.addEventListener('transitionend', () => toast.remove(), { once: true });
+        }
+    });
+
+    const dynamicToast = document.createElement('div');
+    dynamicToast.className = `dynamic-toast ${settings.customClass}`;
+    dynamicToast.setAttribute('role', 'status');
+    dynamicToast.setAttribute('aria-live', 'polite');
+    if (settings.id) {
+        dynamicToast.id = settings.id;
+    }
+
+    let iconHtml = '';
+    if (settings.iconClass) {
+        iconHtml = `<i class="${settings.iconClass}" style="color: ${settings.iconColor || 'inherit'};"></i>`;
+    }
+
+    dynamicToast.innerHTML = `${iconHtml} <span class="toast-message">${message}</span>`;
+    document.body.appendChild(dynamicToast);
+
+    // موقعیت‌دهی Toast
+    if (settings.position === 'top') {
+        dynamicToast.style.top = '20px';
+        dynamicToast.style.bottom = 'auto';
+        dynamicToast.style.transform = 'translateX(-50%) translateY(-150%)'; // شروع از بالا
+    } else { // پیش‌فرض 'bottom'
+        dynamicToast.style.bottom = '20px';
+        dynamicToast.style.top = 'auto';
+        dynamicToast.style.transform = 'translateX(-50%) translateY(150%)'; // شروع از پایین
+    }
+
+    // انیمیشن نمایش
+    setTimeout(() => {
+        dynamicToast.classList.add('show');
+        dynamicToast.style.transform = 'translateX(-50%) translateY(0)'; // حرکت به موقعیت نهایی
+    }, 100);
+
+    // پنهان شدن خودکار مگر اینکه isPersistent باشد
+    if (!settings.isPersistent) {
+        setTimeout(() => {
+            if (settings.position === 'top') {
+                dynamicToast.style.transform = 'translateX(-50%) translateY(-150%)';
+            } else {
+                dynamicToast.style.transform = 'translateX(-50%) translateY(150%)';
+            }
+            dynamicToast.classList.remove('show');
+            dynamicToast.addEventListener('transitionend', () => dynamicToast.remove(), { once: true });
+        }, settings.duration);
+    } else {
+        dynamicToast.classList.add('persistent-toast'); // علامت‌گذاری به عنوان persistent
+    }
+
+    return dynamicToast; // برگرداندن المنت Toast برای مدیریت دستی در صورت نیاز
+}
+
+
+// اعمال تم بر اساس تنظیمات ذخیره شده یا پیش‌فرض سیستم
 function applyTheme(theme, showToast = false) {
     document.body.classList.toggle("dark-mode", theme === "dark");
     document.body.classList.toggle("light-mode", theme === "light");
     themeToggleInput.checked = theme === "dark";
 
     if (showToast) {
-        themeToast.textContent = `تم به حالت ${theme === 'dark' ? 'تاریک' : 'روشن'} تغییر یافت.`;
-        themeToast.classList.add("show");
-        setTimeout(() => {
-            themeToast.classList.remove("show");
-        }, 3000);
+        createToast(`تم به حالت ${theme === 'dark' ? 'تاریک' : 'روشن'} تغییر یافت.`, {
+            id: 'theme-change-toast', // ID یکتا برای این Toast
+            customClass: 'theme-toast',
+            iconClass: theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun',
+            iconColor: theme === 'dark' ? 'white' : 'var(--highlight-color)',
+            position: 'top'
+        });
     }
 }
 
@@ -232,25 +314,7 @@ document.querySelectorAll('.faq-item summary').forEach(summary => {
 // 11. پیام خوش‌آمدگویی برای کاربران جدید/بازگشتی (اصل شخصی‌سازی، اصل تعلق و ارتباط، اصل هویت و شأن فردی، اصل هم‌ذات‌پنداری)
 // این پیام برای ایجاد حس شخصی‌سازی و تعلق خاطر در کاربر طراحی شده است.
 // تشخیص کاربر جدید/بازگشتی، حس احترام و درک متقابل را منتقل می‌کند.
-const welcomeToast = document.createElement('div');
-welcomeToast.id = 'welcome-toast';
-welcomeToast.setAttribute('role', 'status');
-welcomeToast.setAttribute('aria-live', 'polite');
-document.body.appendChild(welcomeToast);
-
-function getGreetingBasedOnTime() {
-    const hour = new Date().getHours();
-    if (hour >= 5 && hour < 10) {
-        return 'صبح بخیر! به وبسایت رسمی رسول آنلیمیتد خوش آمدید.';
-    } else if (hour >= 10 && hour < 16) {
-        return 'ظهر بخیر! به وبسایت رسمی رسول آنلیمیتد خوش آمدید.';
-    } else if (hour >= 16 && hour < 20) {
-        return 'عصر بخیر! به وبسایت رسمی رسول آنلیمیتد خوش آمدید.';
-    } else {
-        return 'شب بخیر! به وبسایت رسمی رسول آنلیمیتد خوش آمدید.';
-    }
-}
-
+// از createToast برای نمایش پیام استفاده می‌شود.
 window.addEventListener('load', () => {
     const hasVisited = localStorage.getItem('hasVisited');
     let message = '';
@@ -258,36 +322,46 @@ window.addEventListener('load', () => {
     if (hasVisited) {
         message = 'خوش آمدید! از بازگشت شما خرسندیم.'; // پیام دلنشین‌تر برای بازگشتی‌ها
     } else {
-        message = getGreetingBasedOnTime(); // پیام جذاب‌تر برای جدیدها با شخصی‌سازی زمانی
+        const hour = new Date().getHours();
+        if (hour >= 5 && hour < 10) {
+            message = 'صبح بخیر! به وبسایت رسمی رسول آنلیمیتد خوش آمدید.';
+        } else if (hour >= 10 && hour < 16) {
+            message = 'ظهر بخیر! به وبسایت رسمی رسول آنلیمیتد خوش آمدید.';
+        } else if (hour >= 16 && hour < 20) {
+            message = 'عصر بخیر! به وبسایت رسمی رسول آنلیمیتد خوش آمدید.';
+        } else {
+            message = 'شب بخیر! به وبسایت رسمی رسول آنلیمیتد خوش آمدید.';
+        }
         localStorage.setItem('hasVisited', 'true');
     }
 
     if (message) {
-        welcomeToast.textContent = message;
-        welcomeToast.classList.add('show');
-        setTimeout(() => {
-            welcomeToast.classList.remove('show');
-        }, 3500); // کمی کوتاه‌تر برای حس حرفه‌ای‌تر
+        createToast(message, {
+            id: 'welcome-toast', // ID یکتا
+            customClass: 'welcome-toast',
+            iconClass: 'fas fa-hand-sparkles', // آیکون خوش‌آمدگویی
+            iconColor: 'var(--highlight-color)',
+            duration: 3500
+        });
     }
 });
 
 // 12. جشن اتمام صفحه (اصل اثر پایان خوش، اصل حس موفقیت، اصل جذابیت بصری و ظاهری، اصل پاداش دوپامینی)
 // این بخش یک حس مثبت قوی در پایان تجربه کاربری ایجاد می‌کند و با افکت کنفتی، یک پاداش بصری و هیجانی ارائه می‌دهد.
 // این کار باعث می‌شود کاربر با حس خوبی صفحه را ترک کند و احتمال بازگشتش بیشتر شود.
-const endOfPageToast = document.createElement('div');
-endOfPageToast.id = 'end-of-page-toast';
-endOfPageToast.setAttribute('role', 'status');
-endOfPageToast.setAttribute('aria-live', 'polite');
-document.body.appendChild(endOfPageToast);
-
-// این پرچم برای اطمینان از اینکه پیام پایان صفحه فقط یک بار در هر جلسه نمایش داده می‌شود
-let hasReachedEndOfPageSession = false;
+// هماهنگ شده با سیستم ردیابی پیشرفت بخش ۱۷.
+let hasReachedEndOfPageSession = false; // پرچم برای اطمینان از نمایش یک بار در هر جلسه
 
 window.addEventListener('scroll', () => {
     // اگر کاربر به انتهای صفحه رسیده باشد و پیام پایان صفحه هنوز در این جلسه نمایش داده نشده باشد
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && !hasReachedEndOfPageSession) {
-        endOfPageToast.textContent = 'شما به انتهای صفحه رسیدید. از بازدید شما سپاسگزارم. �';
-        endOfPageToast.classList.add('show');
+        createToast('شما به انتهای صفحه رسیدید. از بازدید شما سپاسگزارم. 🎉', {
+            id: 'end-of-page-toast', // ID یکتا
+            customClass: 'end-of-page-toast',
+            iconClass: 'fas fa-flag-checkered', // آیکون پایان
+            iconColor: 'var(--highlight-color)',
+            duration: 4000
+        });
         hasReachedEndOfPageSession = true; // پیام پایان صفحه برای این جلسه نمایش داده شد
 
         // وقتی کاربر به انتهای صفحه می‌رسد، مطمئن می‌شویم که نقطه عطف نهایی کاوش نیز ثبت و اعلام شود
@@ -295,13 +369,14 @@ window.addEventListener('scroll', () => {
         if (!announcedMilestones.has(totalSections)) {
             announcedMilestones.add(totalSections);
             localStorage.setItem('announcedMilestones', JSON.stringify(Array.from(announcedMilestones)));
-            sections.forEach(sec => sectionProgressObserver.unobserve(sec)); // توقف ردیابی بخش‌ها
+            // از unobserve کردن در اینجا مطمئن می‌شویم تا دیگر پیام‌های پیشرفت ظاهر نشوند
+            sections.forEach(sec => sectionProgressObserver.unobserve(sec));
         }
 
+        // ایجاد افکت کنفتی پس از کمی تأخیر برای هماهنگی با Toast
         setTimeout(() => {
-            endOfPageToast.classList.remove("show");
-            createConfetti(); // ایجاد افکت کنفتی
-        }, 4000); // مدت زمان کوتاه‌تر برای حس حرفه‌ای‌تر
+            createConfetti();
+        }, 3500); // کمی قبل از ناپدید شدن Toast
     }
 });
 
@@ -322,33 +397,15 @@ if (emailLink) {
         document.execCommand('copy'); // کپی کردن متن
         document.body.removeChild(tempInput);
 
-        showToastNotification('ایمیل کپی شد. ✅');
+        createToast('ایمیل کپی شد. ✅', {
+            id: 'email-copy-toast', // ID یکتا
+            iconClass: 'fas fa-check-circle',
+            iconColor: 'var(--highlight-color)'
+        });
     });
 }
 
-// تابع کمکی برای نمایش پیام‌های Toast (اصل بازخورد آنی، اصل روان‌روانی و سهولت جریان، اصل بار شناختی پایین)
-// این تابع به صورت مرکزی برای نمایش پیام‌های کوتاه و غیرمزاحم استفاده می‌شود.
-// پیام‌های کوتاه و واضح، بار شناختی را کم کرده و جریان کاربری را حفظ می‌کنند.
-function showToastNotification(message, duration = 3000, customClass = '') {
-    const dynamicToast = document.createElement('div');
-    dynamicToast.className = 'dynamic-toast';
-    if (customClass) {
-        dynamicToast.classList.add(customClass);
-    }
-    dynamicToast.textContent = message;
-    document.body.appendChild(dynamicToast);
-
-    setTimeout(() => {
-        dynamicToast.classList.add('show');
-    }, 100);
-
-    setTimeout(() => {
-        dynamicToast.classList.remove('show');
-        dynamicToast.addEventListener('transitionend', () => dynamicToast.remove());
-    }, duration);
-}
-
-// 14. افکت کنفتی (اصل اثر پایان خوش، اصل حس موفقیت، اصل جذابیت بصری و ظاهری، اصل برانگیختگی هیجانی)
+// 14. افکت کنفتی (اصل اثر پایان خوش، اصل حس موفقیت، اصل جذابیت بصری و ظاهری)
 // این تابع افکت بصری کنفتی را برای جشن گرفتن اتمام صفحه ایجاد می‌کند.
 // این یک پاداش هیجانی قوی است که تجربه کاربری را به یاد ماندنی می‌کند.
 function createConfetti() {
@@ -399,17 +456,14 @@ const funFacts = [
     "پروژه‌های برنامه‌نویسی من در Zenodo نمایه شده‌اند و دارای DOI هستند."
 ];
 
-let funFactToastElement = null;
-let funFactInterval = null;
-let userIsIdle = false;
+let funFactToastInstance = null; // برای نگهداری رفرنس Toast دانستنی
 let idleTimeout;
 
 function resetIdleTimer() {
     clearTimeout(idleTimeout);
-    userIsIdle = false;
     idleTimeout = setTimeout(() => {
-        userIsIdle = true;
-        if (!funFactToastElement) { // فقط اگر پیام دانستنی نمایش داده نشده باشد
+        // فقط اگر Toast دانستنی فعال نیست، آن را نمایش بده
+        if (!funFactToastInstance || !funFactToastInstance.classList.contains('show')) {
             showFunFact();
         }
     }, 30000); // کاربر پس از 30 ثانیه عدم فعالیت، بیکار محسوب می‌شود
@@ -423,40 +477,32 @@ function resetIdleTimer() {
 // شروع اولیه تایمر بیکاری
 resetIdleTimer();
 
-
 function showFunFact() {
-    if (funFactToastElement) {
-        funFactToastElement.remove();
-    }
-
     const randomFact = funFacts[Math.floor(Math.random() * funFacts.length)];
-    funFactToastElement = document.createElement('div');
-    funFactToastElement.className = 'fun-fact-toast';
-    funFactToastElement.innerHTML = `
-        <span class="fun-fact-text">دانستنی: ${randomFact}</span>
-        <button class="fun-fact-close" aria-label="بستن پیام دانستنی"><i class="fas fa-times"></i></button>
-    `;
-    document.body.appendChild(funFactToastElement);
-
-    setTimeout(() => {
-        funFactToastElement.classList.add('show');
-    }, 100);
-
-    funFactToastElement.querySelector('.fun-fact-close').addEventListener('click', () => {
-        funFactToastElement.classList.remove('show');
-        funFactToastElement.addEventListener('transitionend', () => funFactToastElement.remove());
-        funFactToastElement = null;
-        resetIdleTimer(); // پس از بستن دستی، تایمر بیکاری را ریست کن
+    funFactToastInstance = createToast(`دانستنی: ${randomFact}`, {
+        id: 'fun-fact-toast', // ID یکتا
+        customClass: 'fun-fact-toast',
+        iconClass: 'fas fa-lightbulb',
+        iconColor: 'var(--primary-color)',
+        position: 'top',
+        duration: 8000
     });
 
-    setTimeout(() => {
-        if (funFactToastElement) {
-            funFactToastElement.classList.remove('show');
-            funFactToastElement.addEventListener('transitionend', () => funFactToastElement.remove());
-            funFactToastElement = null;
-        }
-    }, 8000); // نمایش برای 8 ثانیه
+    // افزودن دکمه بستن به صورت دستی (چون innerHTML مستقیم نیست)
+    const closeButton = document.createElement('button');
+    closeButton.className = 'fun-fact-close';
+    closeButton.setAttribute('aria-label', 'بستن پیام دانستنی');
+    closeButton.innerHTML = '<i class="fas fa-times"></i>';
+    funFactToastInstance.appendChild(closeButton);
+
+    closeButton.addEventListener('click', () => {
+        funFactToastInstance.classList.remove('show');
+        funFactToastInstance.addEventListener('transitionend', () => funFactToastInstance.remove(), { once: true });
+        funFactToastInstance = null; // پاک کردن رفرنس
+        resetIdleTimer(); // پس از بستن دستی، تایمر بیکاری را ریست کن
+    }, { once: true });
 }
+
 
 // 16. فعال‌سازی افکت "جرقه" برای کارت‌های برجسته (روان‌شناسی توجه، پاداش دوپامینی، لذت زیبایی‌شناختی)
 // این افکت بصری ظریف، توجه کاربر را به محتوای مهم‌تر جلب می‌کند و یک پاداش بصری کوچک ارائه می‌دهد.
@@ -510,7 +556,7 @@ featuredCards.forEach(card => {
 // 17. پیام پیشرفت "بخش‌های کاوش شده" (اصل پیشرفت قابل مشاهده، اصل حس موفقیت، انگیزه درونی)
 // این قابلیت به کاربر حس پیشرفت و موفقیت در کاوش سایت را می‌دهد و انگیزه او را برای ادامه افزایش می‌دهد.
 const sections = document.querySelectorAll('section[id]');
-const totalSections = sections.length; // تعداد کل بخش‌های سایت بر اساس المنت‌های موجود
+const totalSections = sections.length; // تعداد کل بخش‌های سایت بر اساس المنت‌های موجود در DOM
 
 // بارگذاری وضعیت از localStorage برای پایداری
 let sectionsVisited = new Set(JSON.parse(localStorage.getItem('sectionsVisited') || '[]'));
@@ -518,10 +564,10 @@ let announcedMilestones = new Set(JSON.parse(localStorage.getItem('announcedMile
 
 // نقاط عطف برای نمایش پیام پیشرفت
 const explorationMilestones = [
-    { count: 3, message: 'شما ۳ بخش از سایت را کاوش کرده‌اید! عالیه! ✨ ادامه دهید!' },
-    { count: 6, message: 'نصف راه را پیمودید! شما ۶ بخش را کاوش کرده‌اید! فوق‌العاده! 🚀' },
-    { count: 9, message: 'به ۹ بخش رسیدید! کم‌کم داریم به پایان می‌رسیم! 🌟' },
-    { count: totalSections, message: `تبریک! شما تمام ${totalSections} بخش سایت را کاوش کرده‌اید! شما یک کاوشگر واقعی هستید! 🎉`, isFinal: true }
+    { count: 3, message: 'شما ۳ بخش از سایت را کاوش کرده‌اید! عالیه! ✨ ادامه دهید!', icon: 'fas fa-map-marker-alt' },
+    { count: 6, message: 'نصف راه را پیمودید! شما ۶ بخش را کاوش کرده‌اید! فوق‌العاده! 🚀', icon: 'fas fa-rocket' },
+    { count: 9, message: 'به ۹ بخش رسیدید! کم‌کم داریم به پایان می‌رسیم! 🌟', icon: 'fas fa-star' },
+    { count: totalSections, message: `تبریک! شما تمام ${totalSections} بخش سایت را کاوش کرده‌اید! شما یک کاوشگر واقعی هستید! 🎉`, isFinal: true, icon: 'fas fa-trophy' }
 ];
 
 let lastExplorationToastTime = 0;
@@ -547,10 +593,19 @@ const sectionProgressObserver = new IntersectionObserver((entries) => {
                 // و زمان کافی از آخرین نمایش پیام گذشته باشد
                 if (currentSectionsCount >= milestone.count && !announcedMilestones.has(milestone.count) && (now - lastExplorationToastTime > explorationToastCooldown)) {
                     let customClass = 'exploration-toast';
+                    let iconColor = 'var(--accent-color)'; // رنگ پیش‌فرض آیکون
                     if (milestone.isFinal) {
                         customClass += ' final-exploration-toast';
+                        iconColor = 'var(--primary-color)'; // رنگ آیکون برای پیام نهایی
                     }
-                    showToastNotification(milestone.message, 5000, customClass);
+                    
+                    createToast(milestone.message, {
+                        id: `exploration-milestone-${milestone.count}`, // ID یکتا برای هر نقطه عطف
+                        customClass: customClass,
+                        iconClass: milestone.icon,
+                        iconColor: iconColor,
+                        duration: 5000
+                    });
                     
                     announcedMilestones.add(milestone.count); 
                     localStorage.setItem('announcedMilestones', JSON.stringify(Array.from(announcedMilestones)));
@@ -578,9 +633,15 @@ if (!isAllSectionsExploredPreviously) {
     });
 } else {
     // اگر قبلاً تمام بخش‌ها کاوش شده‌اند، می‌توانیم یک پیام خوش‌آمدگویی متفاوت نمایش دهیم
-    // یا هیچ پیامی نمایش ندهیم. در اینجا، برای سادگی، فرض می‌کنیم نیازی به اعلام مجدد نیست.
+    // یا هیچ پیامی نمایش ندهیم. در اینجا، فرض می‌کنیم نیازی به اعلام مجدد نیست.
     // اگر می‌خواهید هر بار که کاربر برمی‌گردد پیام نهایی را ببیند، می‌توانید خط زیر را فعال کنید:
-    // showToastNotification(`خوش آمدید! شما قبلاً تمام ${totalSections} بخش سایت را کاوش کرده‌اید! 🎉`, 5000, 'exploration-toast final-exploration-toast');
+    // createToast(`خوش آمدید! شما قبلاً تمام ${totalSections} بخش سایت را کاوش کرده‌اید! 🎉`, {
+    //     id: 're-welcome-explored-toast',
+    //     customClass: 'exploration-toast final-exploration-toast',
+    //     iconClass: 'fas fa-trophy',
+    //     iconColor: 'var(--primary-color)',
+    //     duration: 5000
+    // });
 }
 
 
@@ -667,7 +728,11 @@ document.querySelectorAll('.connect-links-block ul li a').forEach(socialLink => 
             if (socialLink.querySelector('i')) {
                 linkName = socialLink.querySelector('i').nextSibling.textContent.trim(); // گرفتن متن بعد از آیکون
             }
-            showToastNotification(`لینک ${linkName} کپی شد! ✅`);
+            createToast(`لینک ${linkName} کپی شد! ✅`, {
+                id: `social-link-copy-${linkName.replace(/\s/g, '')}`, // ID یکتا
+                iconClass: 'fas fa-clipboard-check',
+                iconColor: 'var(--highlight-color)'
+            });
         }
     });
 });
