@@ -280,14 +280,26 @@ endOfPageToast.setAttribute('role', 'status');
 endOfPageToast.setAttribute('aria-live', 'polite');
 document.body.appendChild(endOfPageToast);
 
-let hasReachedEnd = false;
+// این پرچم برای اطمینان از اینکه پیام پایان صفحه فقط یک بار در هر جلسه نمایش داده می‌شود
+let hasReachedEndOfPageSession = false;
+
 window.addEventListener('scroll', () => {
-    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && !hasReachedEnd) {
-        endOfPageToast.textContent = 'شما به انتهای صفحه رسیدید. از بازدید شما سپاسگزارم. 🎉';
+    // اگر کاربر به انتهای صفحه رسیده باشد و پیام پایان صفحه هنوز در این جلسه نمایش داده نشده باشد
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && !hasReachedEndOfPageSession) {
+        endOfPageToast.textContent = 'شما به انتهای صفحه رسیدید. از بازدید شما سپاسگزارم. �';
         endOfPageToast.classList.add('show');
-        hasReachedEnd = true;
+        hasReachedEndOfPageSession = true; // پیام پایان صفحه برای این جلسه نمایش داده شد
+
+        // وقتی کاربر به انتهای صفحه می‌رسد، مطمئن می‌شویم که نقطه عطف نهایی کاوش نیز ثبت و اعلام شود
+        // این کار از تکرار پیام‌های میانی پیشرفت جلوگیری می‌کند
+        if (!announcedMilestones.has(totalSections)) {
+            announcedMilestones.add(totalSections);
+            localStorage.setItem('announcedMilestones', JSON.stringify(Array.from(announcedMilestones)));
+            sections.forEach(sec => sectionProgressObserver.unobserve(sec)); // توقف ردیابی بخش‌ها
+        }
+
         setTimeout(() => {
-            endOfPageToast.classList.remove('show');
+            endOfPageToast.classList.remove("show");
             createConfetti(); // ایجاد افکت کنفتی
         }, 4000); // مدت زمان کوتاه‌تر برای حس حرفه‌ای‌تر
     }
@@ -498,58 +510,58 @@ featuredCards.forEach(card => {
 // 17. پیام پیشرفت "بخش‌های کاوش شده" (اصل پیشرفت قابل مشاهده، اصل حس موفقیت، انگیزه درونی)
 // این قابلیت به کاربر حس پیشرفت و موفقیت در کاوش سایت را می‌دهد و انگیزه او را برای ادامه افزایش می‌دهد.
 const sections = document.querySelectorAll('section[id]');
-// تعداد کل بخش‌های سایت را به 10 تغییر می‌دهیم
-const totalSections = 10; 
-const sectionsVisited = new Set();
+const totalSections = sections.length; // تعداد کل بخش‌های سایت بر اساس المنت‌های موجود
+
+// بارگذاری وضعیت از localStorage برای پایداری
+let sectionsVisited = new Set(JSON.parse(localStorage.getItem('sectionsVisited') || '[]'));
+let announcedMilestones = new Set(JSON.parse(localStorage.getItem('announcedMilestones') || '[]'));
 
 // نقاط عطف برای نمایش پیام پیشرفت
 const explorationMilestones = [
     { count: 3, message: 'شما ۳ بخش از سایت را کاوش کرده‌اید! عالیه! ✨ ادامه دهید!' },
     { count: 6, message: 'نصف راه را پیمودید! شما ۶ بخش را کاوش کرده‌اید! فوق‌العاده! 🚀' },
     { count: 9, message: 'به ۹ بخش رسیدید! کم‌کم داریم به پایان می‌رسیم! 🌟' },
-    // اضافه کردن نقطه عطف نهایی به لیست، با پرچم isFinal
     { count: totalSections, message: `تبریک! شما تمام ${totalSections} بخش سایت را کاوش کرده‌اید! شما یک کاوشگر واقعی هستید! 🎉`, isFinal: true }
 ];
 
-// یک متغیر برای پیگیری بالاترین نقطه عطف که قبلاً اعلام شده است
-let lastAnnouncedMilestoneCount = 0;
-
-// زمان آخرین نمایش پیام پیشرفت برای جلوگیری از نمایش‌های پشت سر هم
 let lastExplorationToastTime = 0;
 const explorationToastCooldown = 10000; // 10 ثانیه مکث بین پیام‌های پیشرفت
 
 const sectionProgressObserver = new IntersectionObserver((entries) => {
+    const now = Date.now();
+
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             sectionsVisited.add(entry.target.id);
+            localStorage.setItem('sectionsVisited', JSON.stringify(Array.from(sectionsVisited)));
 
             const currentSectionsCount = sectionsVisited.size;
-            const now = Date.now();
 
-            // پیمایش از طریق نقاط عطف برای یافتن بالاترین نقطه عطف جدید که باید اعلام شود
-            // از آخرین نقطه عطف اعلام شده (lastAnnouncedMilestoneCount) شروع می‌کنیم
+            // بررسی نقاط عطف
+            // پیمایش از کوچکترین نقطه عطف تا بزرگترین
             for (let i = 0; i < explorationMilestones.length; i++) {
                 const milestone = explorationMilestones[i];
 
                 // اگر تعداد بخش‌های کاوش شده به این نقطه عطف رسیده باشد
-                // و این نقطه عطف بالاتر از آخرین نقطه عطف اعلام شده باشد
+                // و این نقطه عطف هنوز اعلام نشده باشد (در announcedMilestones نباشد)
                 // و زمان کافی از آخرین نمایش پیام گذشته باشد
-                if (currentSectionsCount >= milestone.count && milestone.count > lastAnnouncedMilestoneCount) {
-                    if (now - lastExplorationToastTime > explorationToastCooldown) {
-                        let customClass = 'exploration-toast';
-                        if (milestone.isFinal) {
-                            customClass += ' final-exploration-toast';
-                        }
-                        showToastNotification(milestone.message, 5000, customClass);
-                        lastAnnouncedMilestoneCount = milestone.count; // به‌روزرسانی بالاترین نقطه عطف اعلام شده
-                        lastExplorationToastTime = now; // به‌روزرسانی زمان آخرین نمایش
-                        
-                        // اگر این نقطه عطف نهایی باشد، دیگر نیازی به بررسی نقاط عطف بعدی نیست
-                        if (milestone.isFinal) {
-                            // در صورت تمایل، می‌توانید اینجا Observer را از تمام بخش‌ها جدا کنید
-                            // sections.forEach(sec => sectionProgressObserver.unobserve(sec));
-                            return; // از حلقه و از تابع callback خارج می‌شویم
-                        }
+                if (currentSectionsCount >= milestone.count && !announcedMilestones.has(milestone.count) && (now - lastExplorationToastTime > explorationToastCooldown)) {
+                    let customClass = 'exploration-toast';
+                    if (milestone.isFinal) {
+                        customClass += ' final-exploration-toast';
+                    }
+                    showToastNotification(milestone.message, 5000, customClass);
+                    
+                    announcedMilestones.add(milestone.count); 
+                    localStorage.setItem('announcedMilestones', JSON.stringify(Array.from(announcedMilestones)));
+
+                    lastExplorationToastTime = now; 
+                    
+                    // اگر این نقطه عطف نهایی باشد، Observer را از تمام بخش‌ها جدا می‌کنیم
+                    // این کار باعث می‌شود پس از اتمام کاوش، دیگر نیازی به ردیابی نباشد.
+                    if (milestone.isFinal) {
+                        sections.forEach(sec => sectionProgressObserver.unobserve(sec));
+                        return; // از حلقه و از تابع callback خارج می‌شویم
                     }
                 }
             }
@@ -557,9 +569,20 @@ const sectionProgressObserver = new IntersectionObserver((entries) => {
     });
 }, { threshold: 0.3 }); // وقتی 30% از بخش قابل مشاهده باشد
 
-sections.forEach(section => {
-    sectionProgressObserver.observe(section);
-});
+// در زمان بارگذاری صفحه، Observer را به تمام بخش‌ها متصل می‌کنیم
+// اما فقط در صورتی که پیام نهایی کاوش قبلاً نمایش داده نشده باشد.
+const isAllSectionsExploredPreviously = announcedMilestones.has(totalSections);
+if (!isAllSectionsExploredPreviously) {
+    sections.forEach(section => {
+        sectionProgressObserver.observe(section);
+    });
+} else {
+    // اگر قبلاً تمام بخش‌ها کاوش شده‌اند، می‌توانیم یک پیام خوش‌آمدگویی متفاوت نمایش دهیم
+    // یا هیچ پیامی نمایش ندهیم. در اینجا، برای سادگی، فرض می‌کنیم نیازی به اعلام مجدد نیست.
+    // اگر می‌خواهید هر بار که کاربر برمی‌گردد پیام نهایی را ببیند، می‌توانید خط زیر را فعال کنید:
+    // showToastNotification(`خوش آمدید! شما قبلاً تمام ${totalSections} بخش سایت را کاوش کرده‌اید! 🎉`, 5000, 'exploration-toast final-exploration-toast');
+}
+
 
 // 18. افکت پالس/گلو برای دکمه‌های CTA اصلی (روان‌شناسی توجه، پاداش دوپامینی)
 // این انیمیشن‌های ظریف، دکمه‌های اصلی را برجسته‌تر کرده و کاربر را به کلیک تشویق می‌کنند.
