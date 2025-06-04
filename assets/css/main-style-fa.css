@@ -13,7 +13,7 @@
  * - کاهش رندرینگ و بازسازی DOM با بهینه‌سازی‌های CSS.
  */
 
-:root {
+ :root {
   --primary-color: #005a9e; /* آبی تیره: برای اعتماد، ثبات و عناصر اصلی تعاملی (اصل کنترل و انتخاب، اصل زیبایی‌شناسی) */
   --secondary-color: #1a1a1a; /* سیاه تیره: برای تیترها و متن‌های مهم (اصل روان‌روانی و سهولت جریان) */
   --accent-color: #007acc; /* آبی روشن: برای تاکیدات، لینک‌ها و بازخورد‌های مثبت (اصل بازخورد آنی، اصل انتظارات مثبت) */
@@ -126,6 +126,8 @@
   padding: 4px 8px;
   border-radius: 6px;
   transition: color 0.3s ease, background-color 0.3s ease;
+  /* بهینه‌سازی: افزودن will-change */
+  will-change: color, background-color;
 }
 
 .footer-link:hover {
@@ -143,6 +145,8 @@
   margin: 2rem auto 0;
   padding: 0.5rem 1rem;
   border-top: 1px dashed #ccc;
+  /* بهینه‌سازی: افزودن will-change */
+  will-change: opacity;
 }
 .micro-profile img.u-photo {
   width: 60px;
@@ -327,6 +331,8 @@ textarea:focus-visible {
   box-shadow: 0 0 0 4px var(--shadow-color-light);
   z-index: 10;
   position: relative;
+  /* بهینه‌سازی: افزودن will-change */
+  will-change: outline, box-shadow;
 }
 a:focus:not(:focus-visible),
 button:focus:not(:focus-visible),
@@ -348,10 +354,14 @@ textarea:focus:not(:focus-visible) {
   box-shadow: 0 0 0 3px var(--accent-color), 0 0 0 6px var(--shadow-color-light);
   z-index: 5;
   position: relative;
+  /* بهینه‌سازی: افزودن will-change */
+  will-change: box-shadow;
 }
 .card.is-featured:focus-within {
   box-shadow: 0 0 0 3px var(--highlight-color),
     0 0 0 6px var(--shadow-color-medium), 0 8px 25px var(--shadow-color-medium);
+  /* بهینه‌سازی: افزودن will-change */
+  will-change: box-shadow;
 }
 
 .card:focus-within > *,
@@ -532,6 +542,8 @@ textarea:focus:not(:focus-visible) {
     );
   z-index: 0;
   pointer-events: none;
+  /* بهینه‌سازی: افزودن will-change */
+  will-change: background;
 }
 
 .profile-image {
@@ -614,6 +626,8 @@ section::after {
   );
   z-index: 0;
   pointer-events: none;
+  /* بهینه‌سازی: افزودن will-change */
+  will-change: width, transform;
 }
 section:last-of-type::after {
   display: none;
@@ -663,6 +677,8 @@ section h2::after {
   transition: color var(--transition-duration-short) ease,
     text-decoration var(--transition-duration-short) ease;
   font-weight: 500;
+  /* بهینه‌سازی: افزودن will-change */
+  will-change: color, text-decoration;
 }
 
 .content-area
@@ -820,6 +836,8 @@ img.loaded {
   color: var(--primary-color);
   padding: 4px 8px;
   transition: all 0.2s ease-in-out;
+  /* بهینه‌سازی: افزودن will-change */
+  will-change: color, text-decoration;
 }
 
 .lang-switcher .lang-link:hover {
@@ -960,6 +978,8 @@ img.loaded {
   text-align: center;
   transition: color var(--transition-duration-short)
     var(--transition-easing-standard);
+  /* بهینه‌سازی: افزودن will-change برای ویژگی‌ای که تغییر می‌کند */
+  will-change: color;
 }
 
 /* Featured Card Styles (اصل جذابیت بصری و ظاهری، اصل پاداش فوری) */
@@ -1800,6 +1820,8 @@ img.loaded {
   min-height: 44px; /* WCAG recommendation for touch targets */
   padding-left: var(--space-sm);
   padding-right: var(--space-sm);
+  /* بهینه‌سازی: افزودن will-change */
+  will-change: color;
 }
 .connect-links-block ul li a:hover,
 .connect-links-block ul li a:focus-visible {
@@ -1814,6 +1836,8 @@ img.loaded {
   text-align: center;
   transition: color var(--transition-duration-short)
     var(--transition-easing-standard);
+  /* بهینه‌سازی: افزودن will-change */
+  will-change: color;
 }
 .connect-links-block ul li a:hover i,
 .connect-links-block ul li a:focus-visible i {
