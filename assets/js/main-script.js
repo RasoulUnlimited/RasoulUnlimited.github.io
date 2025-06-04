@@ -62,8 +62,8 @@ AOS.init({
   debounceDelay: 50,
   throttleDelay: 99,
   offset: 120,
-  duration: 650, // کمی کوتاه‌تر برای حس سریع‌تر و پاسخگویی بیشتر
-  easing: "ease-out", // کمی نرم‌تر
+  duration: 600, // کمی کوتاه‌تر برای حس سریع‌تر و پاسخگویی بیشتر (روان‌شناسی ادراک)
+  easing: "ease-out",
   once: false,
   mirror: false,
   anchorPlacement: "top-bottom",
@@ -81,7 +81,7 @@ const savedTheme = localStorage.getItem("theme");
  */
 function createToast(message, options = {}) {
   const defaultOptions = {
-    duration: 2800, // مدت زمان پیش‌فرض کمی کوتاه‌تر برای حس پاسخگویی بیشتر
+    duration: 2500, // مدت زمان پیش‌فرض کمی کوتاه‌تر برای حس پاسخگویی بیشتر (روان‌شناسی ادراک، پاداش فوری)
     customClass: "",
     iconClass: "",
     iconColor: "",
@@ -214,18 +214,18 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   });
 });
 
-// 5. بازخورد بصری برای کلیک روی کارت‌ها
+// 5. بازخورد بصری برای کلیک روی کارت‌ها (روان‌شناسی ادراک، تحریک دوپامین)
 document.addEventListener("click", function (event) {
   const card = event.target.closest(".card");
   if (card) {
     card.classList.add("clicked-pop");
     setTimeout(() => {
       card.classList.remove("clicked-pop");
-    }, 300);
+    }, 300); // مدت زمان کوتاه برای بازخورد آنی
   }
 });
 
-// 6. نوار پیشرفت اسکرول
+// 6. نوار پیشرفت اسکرول (روان‌شناسی ادراک، حس پیشرفت، انگیزش درونی)
 const scrollProgressBar = document.createElement("div");
 scrollProgressBar.id = "scroll-progress-bar";
 document.body.prepend(scrollProgressBar);
@@ -250,13 +250,25 @@ function updateScrollProgressAndButton() {
     scrollProgressBar.style.backgroundColor = "var(--primary-color)";
   }
 
+  // دکمه بازگشت به بالا با انیمیشن ظریف (زیبایی‌شناسی تعاملی)
   if (lastScrollY > 300) {
-    scrollToTopButton.classList.add("show");
+    if (!scrollToTopButton.classList.contains("show")) {
+      scrollToTopButton.classList.add("show");
+      scrollToTopButton.style.opacity = "1";
+      scrollToTopButton.style.transform = "translateY(0)";
+    }
   } else {
-    scrollToTopButton.classList.remove("show");
+    if (scrollToTopButton.classList.contains("show")) {
+      scrollToTopButton.style.opacity = "0";
+      scrollToTopButton.style.transform = "translateY(20px)";
+      scrollToTopButton.addEventListener('transitionend', function handler() {
+        scrollToTopButton.classList.remove("show");
+        scrollToTopButton.removeEventListener('transitionend', handler);
+      }, {once: true});
+    }
   }
 
-  // 12. جشن اتمام صفحه
+  // 12. جشن اتمام صفحه (اثر پایان خوش، تحریک دوپامین، غافلگیری مثبت)
   if (
     window.innerHeight + lastScrollY >= document.body.offsetHeight &&
     !hasReachedEndOfPageSession
@@ -298,7 +310,7 @@ window.addEventListener(
   { passive: true }
 );
 
-// 7. Hint برای کاوش بیشتر
+// 7. Hint برای کاوش بیشتر (تلنگر رفتاری، توجه انتخابی، روان‌شناسی کنجکاوی)
 const exploreHint = document.createElement("a");
 exploreHint.href = "#projects";
 exploreHint.id = "explore-hint";
@@ -322,14 +334,16 @@ const heroObserver = new IntersectionObserver(
               "opacity 0.5s ease-out, transform 0.5s ease-out";
             exploreHint.style.opacity = "1";
             exploreHint.style.transform = "translateY(0)";
+            exploreHint.classList.add('pulse-animation'); // افزودن انیمیشن پالس
             hintVisible = true;
-          }, 6000); // کمی کوتاه‌تر برای ترغیب سریع‌تر
+          }, 5000); // کمی کوتاه‌تر برای ترغیب سریع‌تر
         }
       } else {
         clearTimeout(hintTimeout);
         if (hintVisible) {
           exploreHint.style.opacity = "0";
           exploreHint.style.transform = "translateY(20px)";
+          exploreHint.classList.remove('pulse-animation'); // حذف انیمیشن پالس
           hintVisible = false;
         }
       }
@@ -346,6 +360,7 @@ exploreHint.addEventListener("click", (e) => {
   e.preventDefault();
   exploreHint.style.opacity = "0";
   exploreHint.style.transform = "translateY(20px)";
+  exploreHint.classList.remove('pulse-animation'); // حذف انیمیشن پالس
   hintVisible = false;
   window.scrollTo({
     top:
@@ -355,7 +370,7 @@ exploreHint.addEventListener("click", (e) => {
   });
 });
 
-// 8. پیام‌های پاداش متغیر برای مهارت‌ها
+// 8. پیام‌های پاداش متغیر برای مهارت‌ها (تحریک دوپامین، غافلگیری مثبت)
 const skillsList = document.querySelector("#skills .skills-list");
 const skillMessages = [
   "تسلط کامل بر این مهارت.",
@@ -401,6 +416,9 @@ if (skillsList) {
       messageSpan.textContent = randomMessage;
       messageSpan.style.opacity = "1";
       messageSpan.style.transform = "translateY(-5px)";
+
+      // افکت بصری ظریف روی آیتم مهارت (نورواستتیک، واکنش مغزی به جذابیت بصری)
+      skillItem.classList.add('skill-hover-effect');
     }
   });
 
@@ -417,11 +435,12 @@ if (skillsList) {
           }
         }, 200);
       }
+      skillItem.classList.remove('skill-hover-effect');
     }
   });
 }
 
-// 10. بازخورد برای باز شدن FAQ
+// 10. بازخورد برای باز شدن FAQ (روان‌شناسی کاربردپذیری، بار شناختی پایین)
 const faqContainer = document.querySelector(".faq-container");
 const faqItems = document.querySelectorAll(".faq-item");
 
@@ -658,7 +677,7 @@ if (faqContainer) {
   });
 }
 
-// 11. پیام خوش‌آمدگویی برای کاربران جدید/بازگشتی
+// 11. پیام خوش‌آمدگویی برای کاربران جدید/بازگشتی (همدلی، القای تعلق، هویت اجتماعی)
 window.addEventListener("load", () => {
   const hasVisited = localStorage.getItem("hasVisited");
   let message = "";
@@ -690,7 +709,7 @@ window.addEventListener("load", () => {
   }
 });
 
-// 13. بازخورد برای کپی ایمیل
+// 13. بازخورد برای کپی ایمیل (پاداش فوری، روان‌شناسی ادراک)
 const emailLink = document.querySelector('.contact-info a[href^="mailto:"]');
 if (emailLink) {
   emailLink.addEventListener("click", (e) => {
@@ -707,7 +726,7 @@ if (emailLink) {
             id: "email-copy-toast",
             iconClass: "fas fa-check-circle",
             iconColor: "var(--highlight-color)",
-            duration: 2000, // مدت زمان کوتاه‌تر برای بازخورد سریع
+            duration: 1800, // مدت زمان کوتاه‌تر برای بازخورد سریع‌تر (روان‌شناسی ادراک)
           });
         })
         .catch((err) => {
@@ -737,18 +756,18 @@ function copyTextUsingExecCommand(text, toastId) {
     id: toastId,
     iconClass: "fas fa-check-circle",
     iconColor: "var(--highlight-color)",
-    duration: 2000, // مدت زمان کوتاه‌تر برای بازخورد سریع
+    duration: 1800, // مدت زمان کوتاه‌تر برای بازخورد سریع‌تر (روان‌شناسی ادراک)
   });
 }
 
-// 14. افکت کنفتی
+// 14. افکت کنفتی (نورومارکتینگ، روان‌شناسی هیجانی، اثر پایان خوش)
 function createConfetti() {
   const confettiContainer = document.createElement("div");
   confettiContainer.id = "confetti-container";
   document.body.appendChild(confettiContainer);
 
-  const confettiCount = 30;
-  const colors = ["#ffc107", "#007acc", "#005a9e", "#f0f0f0"];
+  const confettiCount = 40; // افزایش تعداد کنفتی برای حس جشن بیشتر (تحریک دوپامین)
+  const colors = ["#ffc107", "#007acc", "#005a9e", "#f0f0f0", "#e0a800"]; // افزودن رنگ‌های بیشتر
   const fragment = document.createDocumentFragment();
 
   for (let i = 0; i < confettiCount; i++) {
@@ -793,7 +812,7 @@ function createConfetti() {
   }, 3600);
 }
 
-// 15. پیام‌های "دانستنی جالب" (Fun Fact)
+// 15. پیام‌های "دانستنی جالب" (Fun Fact) (غافلگیری مثبت، تحریک دوپامین، حفظ توجه)
 const funFacts = [
   "اولین ربات فارسی دیسکورد توسط من در ۱۴ سالگی توسعه یافت.",
   "من در کاراته دان ۱ رسمی فدراسیون هستم.",
@@ -816,7 +835,7 @@ function resetIdleTimer() {
     ) {
       showFunFact();
     }
-  }, 30000);
+  }, 25000); // کمی کوتاه‌تر برای حفظ تازگی و جلوگیری از خستگی (روان‌شناسی توجه)
 }
 
 ["mousemove", "keydown", "scroll", "touchstart"].forEach((event) => {
@@ -837,7 +856,7 @@ function showFunFact() {
     iconClass: "fas fa-lightbulb",
     iconColor: "var(--primary-color)",
     position: "top",
-    duration: 6000, // مدت زمان کوتاه‌تر برای حفظ تازگی و جلوگیری از خستگی
+    duration: 5000, // مدت زمان کوتاه‌تر برای حفظ تازگی و جلوگیری از خستگی
   });
 
   const closeButton = document.createElement("button");
@@ -862,7 +881,7 @@ function showFunFact() {
   );
 }
 
-// 16. فعال‌سازی افکت "جرقه" برای کارت‌های برجسته
+// 16. فعال‌سازی افکت "جرقه" برای کارت‌های برجسته (نورواستتیک، توجه انتخابی)
 function createSparkle(element) {
   const sparkle = document.createElement("div");
   sparkle.className = "sparkle-effect";
@@ -891,7 +910,7 @@ function createSparkle(element) {
       { opacity: 0, transform: "scale(0.5) rotate(360deg)" },
     ],
     {
-      duration: 800,
+      duration: 700, // کمی کوتاه‌تر برای حس زنده‌تر
       easing: "ease-out",
       fill: "forwards",
     }
@@ -917,7 +936,7 @@ featuredCards.forEach((card) => {
   featuredCardObserver.observe(card);
 });
 
-// 17. پیام پیشرفت "بخش‌های کاوش شده"
+// 17. پیام پیشرفت "بخش‌های کاوش شده" (تحریک دوپامین، تعهد و ثبات، نقشه سفر کاربر)
 const sections = document.querySelectorAll("section[id]");
 const totalSections = sections.length;
 
@@ -930,18 +949,18 @@ let announcedMilestones = new Set(
 
 const explorationMilestones = [
   {
-    count: 3,
-    message: "شما ۳ بخش از سایت را کاوش کرده‌اید! عالیه! ✨ ادامه دهید!",
+    count: Math.ceil(totalSections * 0.25), // 25%
+    message: "شما ۲۵٪ از سایت را کاوش کرده‌اید! عالیه! ✨ ادامه دهید!",
     icon: "fas fa-map-marker-alt",
   },
   {
-    count: 6,
-    message: "نصف راه را پیمودید! شما ۶ بخش را کاوش کرده‌اید! فوق‌العاده! 🚀",
+    count: Math.ceil(totalSections * 0.5), // 50%
+    message: "نصف راه را پیمودید! شما ۵۰٪ از سایت را کاوش کرده‌اید! فوق‌العاده! 🚀",
     icon: "fas fa-rocket",
   },
   {
-    count: 9,
-    message: "به ۹ بخش رسیدید! کم‌کم داریم به پایان می‌رسیم! 🌟",
+    count: Math.ceil(totalSections * 0.75), // 75%
+    message: "به ۷۵٪ رسیدید! کم‌کم داریم به پایان می‌رسیم! 🌟",
     icon: "fas fa-star",
   },
   {
@@ -952,8 +971,21 @@ const explorationMilestones = [
   },
 ];
 
+// فیلتر کردن نقاط عطف تکراری یا نامعتبر
+const uniqueExplorationMilestones = [];
+const counts = new Set();
+explorationMilestones.forEach(milestone => {
+  if (milestone.count > 0 && !counts.has(milestone.count)) {
+    uniqueExplorationMilestones.push(milestone);
+    counts.add(milestone.count);
+  }
+});
+// اطمینان از اینکه نقاط عطف به ترتیب صعودی هستند
+uniqueExplorationMilestones.sort((a, b) => a.count - b.count);
+
+
 let lastExplorationToastTime = 0;
-const explorationToastCooldown = 10000;
+const explorationToastCooldown = 8000; // کمی کوتاه‌تر برای حفظ انگیزه
 
 const sectionProgressObserver = new IntersectionObserver(
   (entries) => {
@@ -969,8 +1001,8 @@ const sectionProgressObserver = new IntersectionObserver(
 
         const currentSectionsCount = sectionsVisited.size;
 
-        for (let i = 0; i < explorationMilestones.length; i++) {
-          const milestone = explorationMilestones[i];
+        for (let i = 0; i < uniqueExplorationMilestones.length; i++) {
+          const milestone = uniqueExplorationMilestones[i];
 
           if (
             currentSectionsCount >= milestone.count &&
@@ -1019,14 +1051,14 @@ if (!isAllSectionsExploredPreviously) {
   });
 }
 
-// 18. افکت پالس/گلو برای دکمه‌های CTA اصلی
+// 18. افکت پالس/گلو برای دکمه‌های CTA اصلی (نورومارکتینگ، روان‌شناسی متقاعدسازی)
 const mainCTAs = document.querySelectorAll(".main-cta-button");
 
 mainCTAs.forEach((button) => {
   button.classList.add("cta-pulse-effect");
 });
 
-// 19. بارگذاری تنبل تصاویر (Lazy Loading)
+// 19. بارگذاری تنبل تصاویر (روان‌شناسی ادراک، بار شناختی پایین)
 document.addEventListener("DOMContentLoaded", function () {
   const lazyImages = document.querySelectorAll("img[data-src]");
 
@@ -1057,12 +1089,18 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// 20. دکمه بازگشت به بالا (Scroll-to-Top Button)
+// 20. دکمه بازگشت به بالا (روان‌شناسی کاربردپذیری، کاهش هزینه فرصت روانی)
 const scrollToTopButton = document.createElement("button");
 scrollToTopButton.id = "scroll-to-top";
 scrollToTopButton.innerHTML = '<i class="fas fa-arrow-up"></i>';
 scrollToTopButton.setAttribute("aria-label", "بازگشت به بالای صفحه");
 document.body.appendChild(scrollToTopButton);
+
+// تنظیمات اولیه برای انیمیشن
+scrollToTopButton.style.opacity = "0";
+scrollToTopButton.style.transform = "translateY(20px)";
+scrollToTopButton.style.transition = "opacity 0.3s ease-out, transform 0.3s ease-out";
+
 
 scrollToTopButton.addEventListener("click", () => {
   window.scrollTo({
@@ -1071,7 +1109,7 @@ scrollToTopButton.addEventListener("click", () => {
   });
 });
 
-// 21. قابلیت کپی کردن لینک شبکه‌های اجتماعی
+// 21. قابلیت کپی کردن لینک شبکه‌های اجتماعی (پاداش فوری، روان‌شناسی تعامل)
 const connectLinksBlock = document.querySelector(".connect-links-block ul");
 if (connectLinksBlock) {
   connectLinksBlock.addEventListener("click", function (e) {
@@ -1107,7 +1145,7 @@ if (connectLinksBlock) {
                 id: `social-link-copy-${linkName.replace(/\s/g, "")}`,
                 iconClass: "fas fa-clipboard-check",
                 iconColor: "var(--highlight-color)",
-                duration: 2000, // مدت زمان کوتاه‌تر برای بازخورد سریع
+                duration: 1800, // مدت زمان کوتاه‌تر برای بازخورد سریع
               });
             })
             .catch((err) => {
@@ -1134,3 +1172,139 @@ if (connectLinksBlock) {
     }
   });
 }
+
+// --- ویژگی جدید: لحظه لذت در ورود به بخش جدید (Positive Surprise, Dopaminergic Activation, Neuroaesthetics) ---
+// این ویژگی با ایجاد یک افکت بصری ظریف هنگام ورود کاربر به یک بخش جدید (برای اولین بار)،
+// حس غافلگیری مثبت و پاداش دوپامینی را در او فعال می‌کند. این به تقویت حافظه و افزایش درگیری ذهنی کمک می‌کند.
+const sectionsDelighted = new Set(
+  JSON.parse(localStorage.getItem("sectionsDelighted") || "[]")
+);
+
+const sectionDelightObserver = new IntersectionObserver(
+  (entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && !sectionsDelighted.has(entry.target.id)) {
+        const sectionTitle = entry.target.querySelector('h2, h3'); // عنوان بخش را پیدا کن
+        if (sectionTitle) {
+          // ایجاد یک افکت بصری کوچک، مثلاً یک پالس یا تغییر رنگ ظریف
+          sectionTitle.classList.add('section-delight-effect');
+          setTimeout(() => {
+            sectionTitle.classList.remove('section-delight-effect');
+          }, 1000); // مدت زمان افکت
+
+          // می‌توان اینجا یک Toast کوچک و بسیار ظریف هم اضافه کرد
+          // createToast(`بخش ${sectionTitle.textContent.trim()} را کشف کردید!`, {
+          //   customClass: 'subtle-discovery-toast',
+          //   duration: 1500,
+          //   position: 'top',
+          //   iconClass: 'fas fa-sparkles'
+          // });
+
+          sectionsDelighted.add(entry.target.id);
+          localStorage.setItem('sectionsDelighted', JSON.stringify(Array.from(sectionsDelighted)));
+        }
+        observer.unobserve(entry.target); // فقط یک بار برای هر بخش
+      }
+    });
+  },
+  { threshold: 0.4 } // وقتی 40% از بخش قابل مشاهده شد
+);
+
+// مشاهده تمام بخش‌ها برای فعال‌سازی ویژگی "لحظه لذت"
+sections.forEach(section => {
+  if (!sectionsDelighted.has(section.id)) {
+    sectionDelightObserver.observe(section);
+  }
+});
+
+
+// --- ویژگی جدید: بازخورد بصری برای اسکرول به بالا (روان‌شناسی ادراک، زیبایی‌شناسی تعاملی) ---
+// این CSS برای انیمیشن دکمه بازگشت به بالا است.
+// این کد باید در فایل CSS شما باشد.
+/*
+#scroll-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+  z-index: 1000;
+}
+
+#scroll-to-top.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+*/
+
+// --- ویژگی جدید: انیمیشن پالس برای Explore Hint (روان‌شناسی توجه انتخابی، تلنگر رفتاری) ---
+// این CSS برای انیمیشن پالس است که به explore-hint اضافه می‌شود.
+// این کد باید در فایل CSS شما باشد.
+/*
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+#explore-hint.pulse-animation {
+  animation: pulse 1.5s infinite ease-in-out;
+}
+*/
+
+// --- ویژگی جدید: افکت هاور روی آیتم‌های مهارت (نورواستتیک، واکنش مغزی به جذابیت بصری) ---
+// این CSS برای افکت هاور روی آیتم‌های مهارت است.
+// این کد باید در فایل CSS شما باشد.
+/*
+.skills-list li.skill-hover-effect {
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 6px 12px rgba(var(--primary-rgb), 0.3);
+}
+*/
+
+// --- ویژگی جدید: انیمیشن برای عنوان بخش در "لحظه لذت" (نورواستتیک، غافلگیری مثبت) ---
+// این CSS برای افکت "لحظه لذت" روی عنوان بخش است.
+// این کد باید در فایل CSS شما باشد.
+/*
+@keyframes sectionDelight {
+  0% {
+    transform: translateY(10px) scale(0.95);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(0) scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.section-delight-effect {
+  animation: sectionDelight 0.8s ease-out forwards;
+}
+*/
