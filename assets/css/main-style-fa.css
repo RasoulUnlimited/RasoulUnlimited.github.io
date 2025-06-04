@@ -819,7 +819,7 @@ img.loaded {
   opacity: 0; /* ابتدا پنهان */
   transform: translateY(10px) scale(0.95); /* شروع کمی پایین‌تر و کوچک‌تر */
   transition: opacity 0.5s var(--transition-easing-springy),
-               transform 0.5s var(--transition-easing-springy); /* انیمیشن فنری */
+              transform 0.5s var(--transition-easing-springy); /* انیمیشن فنری */
 }
 
 /* Show microcopy on card hover */
@@ -1841,58 +1841,136 @@ img.loaded {
 }
 
 /* Dynamic Toast Notifications (Welcome, End of Page, General) (اصل بازخورد آنی، اصل روان‌روانی و سهولت جریان) */
+/* بهبود یافته برای ظاهر حرفه‌ای و انیمیشن‌های جذاب‌تر */
 .dynamic-toast, #welcome-toast, #end-of-page-toast {
   position: fixed;
   bottom: 20px;
   left: 50%;
-  transform: translateX(-50%) translateY(100%);
+  transform: translateX(-50%) translateY(150%); /* پنهان در ابتدا، از پایین وارد می‌شود */
   background-color: var(--primary-color);
   color: white;
-  padding: 12px 25px;
-  border-radius: 10px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+  padding: 15px 30px; /* پدینگ بیشتر */
+  border-radius: 12px; /* گردی بیشتر */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4); /* سایه قوی‌تر */
   z-index: 1003;
   opacity: 0;
-  transition: transform 0.5s var(--transition-easing-smooth), opacity 0.5s ease-out; /* استفاده از easing نرم‌تر */
+  transition: transform 0.6s var(--transition-easing-springy), opacity 0.6s ease-out; /* انیمیشن فنری برای ظاهر شدن */
   white-space: nowrap;
-  font-size: 1.05rem;
+  font-size: 1.1rem; /* فونت بزرگتر */
+  font-weight: 600; /* وزن فونت بیشتر */
   direction: rtl;
   text-align: center;
-  border-left: 4px solid var(--highlight-color); /* اضافه شدن خط کناری برای زیبایی و تمایز */
+  border-left: 6px solid var(--highlight-color); /* خط کناری برجسته‌تر */
+  display: flex; /* برای چیدمان آیکون و متن */
+  align-items: center;
+  gap: 10px; /* فاصله بین آیکون و متن */
 }
 
 .dynamic-toast.show, #welcome-toast.show, #end-of-page-toast.show {
-  transform: translateX(-50%) translateY(0);
+  transform: translateX(-50%) translateY(0); /* نمایش در موقعیت نهایی */
   opacity: 1;
 }
+
+/* آیکون برای Dynamic Toast */
+.dynamic-toast::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    margin-left: 10px; /* فاصله از متن */
+    font-size: 1.2em;
+    color: var(--highlight-color); /* رنگ آیکون */
+}
+/* آیکون برای پیام‌های عمومی (مثلاً کپی شد) */
+.dynamic-toast:not(.exploration-toast):not(.final-exploration-toast)::before {
+    content: "\f05a"; /* fa-info-circle */
+}
+
+
+/* Styling for Exploration Progress Toasts (اصل پیشرفت قابل مشاهده، اصل حس موفقیت) */
+.exploration-toast {
+    background-color: var(--primary-color); /* رنگ اصلی */
+    color: white;
+    border-left: 6px solid var(--accent-color); /* خط کناری با رنگ تاکیدی */
+}
+
+.exploration-toast::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    content: "\f002"; /* fa-search - برای حس کاوش */
+    color: var(--accent-color); /* رنگ آیکون */
+}
+
+/* Styling for Final Exploration Toast (اصل اثر پایان خوش، اصل حس موفقیت) */
+.final-exploration-toast {
+    background: linear-gradient(135deg, var(--highlight-color) 0%, var(--accent-color) 100%); /* گرادیان جذاب */
+    color: var(--secondary-color); /* متن تیره روی پس‌زمینه روشن */
+    border-left: 6px solid var(--primary-color); /* خط کناری با رنگ اصلی */
+    animation: celebrationPulse 2s infinite ease-in-out; /* انیمیشن پالس برای جشن */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 20px var(--highlight-color); /* سایه و درخشش قوی‌تر */
+    transform: translateX(-50%) translateY(150%) scale(0.9); /* شروع کمی کوچک‌تر و پایین‌تر */
+}
+
+.final-exploration-toast.show {
+    transform: translateX(-50%) translateY(0) scale(1); /* بزرگ شدن به حالت عادی */
+}
+
+.final-exploration-toast::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    content: "\f091"; /* fa-trophy - برای حس موفقیت */
+    color: var(--primary-color); /* رنگ آیکون */
+    animation: bounceIn 1s ease-out; /* انیمیشن ورود آیکون */
+}
+
+@keyframes celebrationPulse {
+  0% { transform: translateX(-50%) scale(1); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 20px var(--highlight-color); }
+  50% { transform: translateX(-50%) scale(1.03); box-shadow: 0 12px 50px rgba(0, 0, 0, 0.6), 0 0 30px var(--highlight-color); }
+  100% { transform: translateX(-50%) scale(1); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 20px var(--highlight-color); }
+}
+
+@keyframes bounceIn {
+    0% { transform: scale(0.3); opacity: 0; }
+    50% { transform: scale(1.1); opacity: 1; }
+    70% { transform: scale(0.9); }
+    100% { transform: scale(1); }
+}
+
 
 /* Fun Fact Toast Notification (اصل کنجکاوی و رمزآلود بودن، اصل تضاد و تنوع حسی، اصل تأخیر معنادار پاداش) */
 .fun-fact-toast {
   position: fixed;
   top: 20px;
   left: 50%;
-  transform: translateX(-50%) translateY(-100%);
+  transform: translateX(-50%) translateY(-150%); /* از بالا وارد می‌شود */
   background-color: var(--highlight-color);
   color: var(--secondary-color);
-  padding: 12px 25px;
-  border-radius: 10px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+  padding: 15px 30px; /* پدینگ بیشتر */
+  border-radius: 12px; /* گردی بیشتر */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4); /* سایه قوی‌تر */
   z-index: 1004;
   opacity: 0;
-  transition: transform 0.5s var(--transition-easing-smooth), opacity 0.5s ease-out; /* استفاده از easing نرم‌تر */
+  transition: transform 0.6s var(--transition-easing-springy), opacity 0.6s ease-out; /* انیمیشن فنری */
   white-space: nowrap;
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   direction: rtl;
   text-align: center;
   display: flex;
   align-items: center;
   gap: 10px;
-  border-right: 4px solid var(--primary-color); /* اضافه شدن خط کناری برای زیبایی و تمایز */
+  border-right: 6px solid var(--primary-color); /* خط کناری برجسته‌تر */
 }
 
 .fun-fact-toast.show {
   transform: translateX(-50%) translateY(0);
   opacity: 1;
+}
+
+.fun-fact-toast::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    content: "\f0eb"; /* fa-lightbulb */
+    margin-left: 10px;
+    font-size: 1.2em;
+    color: var(--primary-color);
 }
 
 .fun-fact-close {
