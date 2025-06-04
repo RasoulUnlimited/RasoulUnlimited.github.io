@@ -17,44 +17,44 @@
  * @returns {Function} - تابع محدود شده.
  */
 function throttle(func, limit) {
-    let inThrottle;
-    let lastFunc;
-    let lastRan;
-    return function() {
-        const context = this;
-        const args = arguments;
-        if (!inThrottle) {
-            func.apply(context, args);
-            lastRan = Date.now();
-            inThrottle = true;
-        } else {
-            clearTimeout(lastFunc);
-            lastFunc = setTimeout(function() {
-                if ((Date.now() - lastRan) >= limit) {
-                    func.apply(context, args);
-                    lastRan = Date.now();
-                }
-            }, limit - (Date.now() - lastRan));
-        }
-    };
+  let inThrottle;
+  let lastFunc;
+  let lastRan;
+  return function() {
+      const context = this;
+      const args = arguments;
+      if (!inThrottle) {
+          func.apply(context, args);
+          lastRan = Date.now();
+          inThrottle = true;
+      } else {
+          clearTimeout(lastFunc);
+          lastFunc = setTimeout(function() {
+              if ((Date.now() - lastRan) >= limit) {
+                  func.apply(context, args);
+                  lastRan = Date.now();
+              }
+          }, limit - (Date.now() - lastRan));
+      }
+  };
 }
 
 /**
- * تابع debounce برای به تأخیر انداختن اجرای یک تابع تا زمانی که یک رویداد متوقف شود.
- * این به بهبود عملکرد در رویدادهایی مانند تغییر اندازه پنجره یا ورودی‌های تایپ شده کمک می‌کند.
- * (اصل روان‌روانی و سهولت جریان، اصل بار شناختی پایین)
- * @param {Function} func - تابعی که باید به تأخیر انداخته شود.
- * @param {number} delay - مدت زمان تأخیر (میلی‌ثانیه).
- * @returns {Function} - تابع به تأخیر افتاده.
- */
+* تابع debounce برای به تأخیر انداختن اجرای یک تابع تا زمانی که یک رویداد متوقف شود.
+* این به بهبود عملکرد در رویدادهایی مانند تغییر اندازه پنجره یا ورودی‌های تایپ شده کمک می‌کند.
+* (اصل روان‌روانی و سهولت جریان، اصل بار شناختی پایین)
+* @param {Function} func - تابعی که باید به تأخیر انداخته شود.
+* @param {number} delay - مدت زمان تأخیر (میلی‌ثانیه).
+* @returns {Function} - تابع به تأخیر افتاده.
+*/
 function debounce(func, delay) {
-    let timeout;
-    return function() {
-        const context = this;
-        const args = arguments;
-        clearTimeout(timeout);
-        timeout = setTimeout(() => func.apply(context, args), delay);
-    };
+  let timeout;
+  return function() {
+      const context = this;
+      const args = arguments;
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func.apply(context, args), delay);
+  };
 }
 
 
@@ -68,20 +68,20 @@ document.getElementById("current-year").textContent = new Date().getFullYear();
 // این کار باعث بهبود تجربه کاربری (UX) و جذابیت بصری سایت می‌شود.
 // انیمیشن‌ها حس کشف و پاداش بصری را ایجاد می‌کنند و با تنوع حسی، توجه کاربر را جلب می‌کنند.
 AOS.init({
-    disable: false,
-    startEvent: "DOMContentLoaded",
-    initClassName: "aos-init",
-    animatedClassName: "aos-animate",
-    useClassNames: false,
-    disableMutationObserver: false,
-    debounceDelay: 50,
-    throttleDelay: 99,
-    offset: 120,
-    duration: 800,
-    easing: "ease",
-    once: false,
-    mirror: false,
-    anchorPlacement: "top-bottom",
+  disable: false,
+  startEvent: "DOMContentLoaded",
+  initClassName: "aos-init",
+  animatedClassName: "aos-animate",
+  useClassNames: false,
+  disableMutationObserver: false,
+  debounceDelay: 50,
+  throttleDelay: 99,
+  offset: 120,
+  duration: 800,
+  easing: "ease",
+  once: false,
+  mirror: false,
+  anchorPlacement: "top-bottom",
 });
 
 // 3. مدیریت تغییر تم (حالت روشن/تاریک) (اصل کنترل و انتخاب، اصل شخصی‌سازی، اصل پاداش فوری، اصل بازخورد آنی، اصل زیبایی‌شناسی، اصل انعکاس شخصیت کاربر)
@@ -96,146 +96,146 @@ const savedTheme = localStorage.getItem("theme");
 // پیام‌های کوتاه و واضح، بار شناختی را کم کرده و جریان کاربری را حفظ می‌کنند.
 // همچنین از تکرار پیام‌ها جلوگیری می‌کند و مدیریت بهتری برای موقعیت و ظاهر دارد.
 function createToast(message, options = {}) {
-    const defaultOptions = {
-        duration: 3000,
-        customClass: "",
-        iconClass: "", // مثال: 'fas fa-info-circle'
-        iconColor: "",
-        position: "bottom", // 'top', 'bottom'
-        isPersistent: false, // اگر true باشد، به صورت خودکار حذف نمی‌شود
-        id: "", // برای شناسایی یکتای Toast و جلوگیری از تکرار
-    };
-    const settings = { ...defaultOptions, ...options };
+  const defaultOptions = {
+      duration: 3000,
+      customClass: "",
+      iconClass: "", // مثال: 'fas fa-info-circle'
+      iconColor: "",
+      position: "bottom", // 'top', 'bottom'
+      isPersistent: false, // اگر true باشد، به صورت خودکار حذف نمی‌شود
+      id: "", // برای شناسایی یکتای Toast و جلوگیری از تکرار
+  };
+  const settings = { ...defaultOptions, ...options };
 
-    // اگر یک Toast با همین ID قبلاً نمایش داده شده و هنوز فعال است، آن را حذف نکن
-    if (settings.id) {
-        const existingToast = document.getElementById(settings.id);
-        if (existingToast && existingToast.classList.contains("show")) {
-            return; // Toast قبلاً نمایش داده شده و فعال است، پس تکرار نمی‌کنیم
-        }
-    }
+  // اگر یک Toast با همین ID قبلاً نمایش داده شده و هنوز فعال است، آن را حذف نکن
+  if (settings.id) {
+      const existingToast = document.getElementById(settings.id);
+      if (existingToast && existingToast.classList.contains("show")) {
+          return; // Toast قبلاً نمایش داده شده و فعال است، پس تکرار نمی‌کنیم
+      }
+  }
 
-    // حذف هر Toast دینامیک دیگری که ممکن است در حال نمایش باشد (غیر از persistent)
-    document
-        .querySelectorAll(".dynamic-toast:not(.persistent-toast)")
-        .forEach((toast) => {
-            if (toast.id !== settings.id) {
-                // فقط Toastهای دیگر را حذف کن
-                toast.classList.remove("show");
-                toast.addEventListener("transitionend", () => toast.remove(), {
-                    once: true,
-                });
-            }
-        });
+  // حذف هر Toast دینامیک دیگری که ممکن است در حال نمایش باشد (غیر از persistent)
+  document
+      .querySelectorAll(".dynamic-toast:not(.persistent-toast)")
+      .forEach((toast) => {
+          if (toast.id !== settings.id) {
+              // فقط Toastهای دیگر را حذف کن
+              toast.classList.remove("show");
+              toast.addEventListener("transitionend", () => toast.remove(), {
+                  once: true,
+              });
+          }
+      });
 
-    const dynamicToast = document.createElement("div");
-    dynamicToast.className = `dynamic-toast ${settings.customClass}`;
-    dynamicToast.setAttribute("role", "status");
-    dynamicToast.setAttribute("aria-live", "polite");
-    if (settings.id) {
-        dynamicToast.id = settings.id;
-    }
+  const dynamicToast = document.createElement("div");
+  dynamicToast.className = `dynamic-toast ${settings.customClass}`;
+  dynamicToast.setAttribute("role", "status");
+  dynamicToast.setAttribute("aria-live", "polite");
+  if (settings.id) {
+      dynamicToast.id = settings.id;
+  }
 
-    let iconHtml = "";
-    if (settings.iconClass) {
-        iconHtml = `<i class="${settings.iconClass}" style="color: ${
-            settings.iconColor || "inherit"
-        };"></i>`;
-    }
+  let iconHtml = "";
+  if (settings.iconClass) {
+      iconHtml = `<i class="${settings.iconClass}" style="color: ${
+          settings.iconColor || "inherit"
+      };"></i>`;
+  }
 
-    dynamicToast.innerHTML = `${iconHtml} <span class="toast-message">${message}</span>`;
-    document.body.appendChild(dynamicToast);
+  dynamicToast.innerHTML = `${iconHtml} <span class="toast-message">${message}</span>`;
+  document.body.appendChild(dynamicToast);
 
-    // موقعیت‌دهی Toast
-    if (settings.position === "top") {
-        dynamicToast.style.top = "20px";
-        dynamicToast.style.bottom = "auto";
-        dynamicToast.style.transform = "translateX(-50%) translateY(-150%)"; // شروع از بالا
-    } else {
-        // پیش‌فرض 'bottom'
-        dynamicToast.style.bottom = "20px";
-        dynamicToast.style.top = "auto";
-        dynamicToast.style.transform = "translateX(-50%) translateY(150%)"; // شروع از پایین
-    }
+  // موقعیت‌دهی Toast
+  if (settings.position === "top") {
+      dynamicToast.style.top = "20px";
+      dynamicToast.style.bottom = "auto";
+      dynamicToast.style.transform = "translateX(-50%) translateY(-150%)"; // شروع از بالا
+  } else {
+      // پیش‌فرض 'bottom'
+      dynamicToast.style.bottom = "20px";
+      dynamicToast.style.top = "auto";
+      dynamicToast.style.transform = "translateX(-50%) translateY(150%)"; // شروع از پایین
+  }
 
-    // انیمیشن نمایش
-    setTimeout(() => {
-        dynamicToast.classList.add("show");
-        dynamicToast.style.transform = "translateX(-50%) translateY(0)"; // حرکت به موقعیت نهایی
-    }, 100);
+  // انیمیشن نمایش
+  setTimeout(() => {
+      dynamicToast.classList.add("show");
+      dynamicToast.style.transform = "translateX(-50%) translateY(0)"; // حرکت به موقعیت نهایی
+  }, 100);
 
-    // پنهان شدن خودکار مگر اینکه isPersistent باشد
-    if (!settings.isPersistent) {
-        setTimeout(() => {
-            if (settings.position === "top") {
-                dynamicToast.style.transform = "translateX(-50%) translateY(-150%)";
-            } else {
-                dynamicToast.style.transform = "translateX(-50%) translateY(150%)";
-            }
-            dynamicToast.classList.remove("show");
-            dynamicToast.addEventListener(
-                "transitionend",
-                () => dynamicToast.remove(),
-                { once: true }
-            );
-        }, settings.duration);
-    } else {
-        dynamicToast.classList.add("persistent-toast"); // علامت‌گذاری به عنوان persistent
-    }
+  // پنهان شدن خودکار مگر اینکه isPersistent باشد
+  if (!settings.isPersistent) {
+      setTimeout(() => {
+          if (settings.position === "top") {
+              dynamicToast.style.transform = "translateX(-50%) translateY(-150%)";
+          } else {
+              dynamicToast.style.transform = "translateX(-50%) translateY(150%)";
+          }
+          dynamicToast.classList.remove("show");
+          dynamicToast.addEventListener(
+              "transitionend",
+              () => dynamicToast.remove(),
+              { once: true }
+          );
+      }, settings.duration);
+  } else {
+      dynamicToast.classList.add("persistent-toast"); // علامت‌گذاری به عنوان persistent
+  }
 
-    return dynamicToast; // برگرداندن المنت Toast برای مدیریت دستی در صورت نیاز
+  return dynamicToast; // برگرداندن المنت Toast برای مدیریت دستی در صورت نیاز
 }
 
 // اعمال تم بر اساس تنظیمات ذخیره شده یا پیش‌فرض سیستم
 function applyTheme(theme, showToast = false) {
-    document.body.classList.toggle("dark-mode", theme === "dark");
-    document.body.classList.toggle("light-mode", theme === "light");
-    themeToggleInput.checked = theme === "dark";
+  document.body.classList.toggle("dark-mode", theme === "dark");
+  document.body.classList.toggle("light-mode", theme === "light");
+  themeToggleInput.checked = theme === "dark";
 
-    if (showToast) {
-        createToast(
-            `تم به حالت ${theme === "dark" ? "تاریک" : "روشن"} تغییر یافت.`,
-            {
-                id: "theme-change-toast", // ID یکتا برای این Toast
-                customClass: "theme-toast",
-                iconClass: theme === "dark" ? "fas fa-moon" : "fas fa-sun",
-                iconColor: theme === "dark" ? "white" : "var(--highlight-color)",
-                position: "top",
-            }
-        );
-    }
+  if (showToast) {
+      createToast(
+          `تم به حالت ${theme === "dark" ? "تاریک" : "روشن"} تغییر یافت.`,
+          {
+              id: "theme-change-toast", // ID یکتا برای این Toast
+              customClass: "theme-toast",
+              iconClass: theme === "dark" ? "fas fa-moon" : "fas fa-sun",
+              iconColor: theme === "dark" ? "white" : "var(--highlight-color)",
+              position: "top",
+          }
+      );
+  }
 }
 
 if (savedTheme) {
-    applyTheme(savedTheme);
+  applyTheme(savedTheme);
 } else {
-    applyTheme(prefersDark ? "dark" : "light");
+  applyTheme(prefersDark ? "dark" : "light");
 }
 
 themeToggleInput.addEventListener("change", () => {
-    const newTheme = themeToggleInput.checked ? "dark" : "light";
-    applyTheme(newTheme, true);
-    localStorage.setItem("theme", newTheme);
+  const newTheme = themeToggleInput.checked ? "dark" : "light";
+  applyTheme(newTheme, true);
+  localStorage.setItem("theme", newTheme);
 });
 
 // 4. مدیریت اسکرول صاف برای لینک‌های ناوبری (Smooth Scroll) (اصل روان‌روانی و سهولت جریان، اصل زیبایی‌شناسی، اصل تلاش کم)
 // اسکرول نرم، حرکت را طبیعی‌تر و دلپذیرتر می‌کند و بار شناختی را کاهش می‌دهد، زیرا کاربر نیازی به پردازش پرش‌های ناگهانی ندارد.
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", function (e) {
-        e.preventDefault();
+  anchor.addEventListener("click", function (e) {
+      e.preventDefault();
 
-        const targetId = this.getAttribute("href");
-        const targetElement = document.querySelector(targetId);
+      const targetId = this.getAttribute("href");
+      const targetElement = document.querySelector(targetId);
 
-        if (targetElement) {
-            window.scrollTo({
-                top:
-                    targetElement.offsetTop -
-                    (document.querySelector(".navbar")?.offsetHeight || 0),
-                behavior: "smooth",
-            });
-        }
-    });
+      if (targetElement) {
+          window.scrollTo({
+              top:
+                  targetElement.offsetTop -
+                  (document.querySelector(".navbar")?.offsetHeight || 0),
+              behavior: "smooth",
+          });
+      }
+  });
 });
 
 // 5. بازخورد بصری برای کلیک روی کارت‌ها (اصل پاداش فوری و مثبت، اصل نشانه‌های تعاملی، اصل جذابیت بصری و ظاهری، اصل برانگیختگی هیجانی)
@@ -243,13 +243,13 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 // به جای افزودن شنونده رویداد به هر کارت، یک شنونده به والد مشترک اضافه می‌کنیم.
 // این کار تعداد شنونده‌های رویداد در DOM را کاهش می‌دهد و حافظه را بهینه‌سازی می‌کند.
 document.addEventListener("click", function(event) {
-    const card = event.target.closest(".card");
-    if (card) {
-        card.classList.add("clicked-pop");
-        setTimeout(() => {
-            card.classList.remove("clicked-pop");
-        }, 300);
-    }
+  const card = event.target.closest(".card");
+  if (card) {
+      card.classList.add("clicked-pop");
+      setTimeout(() => {
+          card.classList.remove("clicked-pop");
+      }, 300);
+  }
 });
 
 
@@ -264,74 +264,75 @@ let lastScrollY = 0;
 let ticking = false;
 
 function updateScrollProgressAndButton() {
-    const totalHeight =
-        document.documentElement.scrollHeight - window.innerHeight;
-    const scrolled = lastScrollY;
-    const progress = (scrolled / totalHeight) * 100;
+  const totalHeight =
+      document.documentElement.scrollHeight - window.innerHeight;
+  const scrolled = lastScrollY;
+  const progress = (scrolled / totalHeight) * 100;
 
-    scrollProgressBar.style.width = progress + "%";
+  scrollProgressBar.style.width = progress + "%";
 
-    if (progress > 90) {
-        scrollProgressBar.style.backgroundColor = "var(--highlight-color)";
-    } else if (progress > 50) {
-        scrollProgressBar.style.backgroundColor = "var(--accent-color)";
-    } else {
-        scrollProgressBar.style.backgroundColor = "var(--primary-color)";
-    }
+  if (progress > 90) {
+      scrollProgressBar.style.backgroundColor = "var(--highlight-color)";
+  } else if (progress > 50) {
+      scrollProgressBar.style.backgroundColor = "var(--accent-color)";
+  } else {
+      scrollProgressBar.style.backgroundColor = "var(--primary-color)";
+  }
 
-    // به‌روزرسانی وضعیت دکمه بازگشت به بالا
-    if (lastScrollY > 300) {
-        scrollToTopButton.classList.add("show");
-    } else {
-        scrollToTopButton.classList.remove("show");
-    }
+  // به‌روزرسانی وضعیت دکمه بازگشت به بالا
+  if (lastScrollY > 300) {
+      scrollToTopButton.classList.add("show");
+  } else {
+      scrollToTopButton.classList.remove("show");
+  }
 
-    // 12. جشن اتمام صفحه (اصل اثر پایان خوش، اصل حس موفقیت، اصل جذابیت بصری و ظاهری، اصل پاداش دوپامینی)
-    // این بخش یک حس مثبت قوی در پایان تجربه کاربری ایجاد می‌کند و با افکت کنفتی، یک پاداش بصری و هیجانی ارائه می‌دهد.
-    // این کار باعث می‌شود کاربر با حس خوبی صفحه را ترک کند و احتمال بازگشتش بیشتر شود.
-    // هماهنگ شده با سیستم ردیابی پیشرفت بخش ۱۷.
-    // اگر کاربر به انتهای صفحه رسیده باشد و پیام پایان صفحه هنوز در این جلسه نمایش داده نشده باشد
-    if (
-        window.innerHeight + lastScrollY >= document.body.offsetHeight &&
-        !hasReachedEndOfPageSession
-    ) {
-        createToast("شما به انتهای صفحه رسیدید. از بازدید شما سپاسگزارم. 🎉", {
-            id: "end-of-page-toast", // ID یکتا
-            customClass: "end-of-page-toast",
-            iconClass: "fas fa-flag-checkered", // آیکون پایان
-            iconColor: "var(--highlight-color)",
-            duration: 4000,
-        });
-        hasReachedEndOfPageSession = true; // پیام پایان صفحه برای این جلسه نمایش داده شد
+  // 12. جشن اتمام صفحه (اصل اثر پایان خوش، اصل حس موفقیت، اصل جذابیت بصری و ظاهری، اصل پاداش دوپامینی)
+  // این بخش یک حس مثبت قوی در پایان تجربه کاربری ایجاد می‌کند و با افکت کنفتی، یک پاداش بصری و هیجانی ارائه می‌دهد.
+  // این کار باعث می‌شود کاربر با حس خوبی صفحه را ترک کند و احتمال بازگشتش بیشتر شود.
+  // هماهنگ شده با سیستم ردیابی پیشرفت بخش ۱۷.
+  // اگر کاربر به انتهای صفحه رسیده باشد و پیام پایان صفحه هنوز در این جلسه نمایش داده نشده باشد
+  if (
+      window.innerHeight + lastScrollY >= document.body.offsetHeight &&
+      !hasReachedEndOfPageSession
+  ) {
+      createToast("شما به انتهای صفحه رسیدید. از بازدید شما سپاسگزارم. 🎉", {
+          id: "end-of-page-toast", // ID یکتا
+          customClass: "end-of-page-toast",
+          iconClass: "fas fa-flag-checkered", // آیکون پایان
+          iconColor: "var(--highlight-color)",
+          duration: 4000,
+      });
+      hasReachedEndOfPageSession = true; // پیام پایان صفحه برای این جلسه نمایش داده شد
 
-        // وقتی کاربر به انتهای صفحه می‌رسد، مطمئن می‌شویم که نقطه عطف نهایی کاوش نیز ثبت و اعلام شود
-        // این کار از تکرار پیام‌های میانی پیشرفت جلوگیری می‌کند
-        if (!announcedMilestones.has(totalSections)) {
-            announcedMilestones.add(totalSections);
-            localStorage.setItem(
-                "announcedMilestones",
-                JSON.stringify(Array.from(announcedMilestones))
-            );
-            // از unobserve کردن در اینجا مطمئن می‌شویم تا دیگر پیام‌های پیشرفت ظاهر نشوند
-            sections.forEach((sec) => sectionProgressObserver.unobserve(sec));
-        }
+      // وقتی کاربر به انتهای صفحه می‌رسد، مطمئن می‌شویم که نقطه عطف نهایی کاوش نیز ثبت و اعلام شود
+      // این کار از تکرار پیام‌های میانی پیشرفت جلوگیری می‌کند
+      if (!announcedMilestones.has(totalSections)) {
+          announcedMilestones.add(totalSections);
+          localStorage.setItem(
+              "announcedMilestones",
+              JSON.stringify(Array.from(announcedMilestones))
+          );
+          // از unobserve کردن در اینجا مطمئن می‌شویم تا دیگر پیام‌های پیشرفت ظاهر نشوند
+          sections.forEach((sec) => sectionProgressObserver.unobserve(sec));
+      }
 
-        // ایجاد افکت کنفتی پس از کمی تأخیر برای هماهنگی با Toast
-        setTimeout(() => {
-            createConfetti();
-        }, 3500); // کمی قبل از ناپدید شدن Toast
-    }
-    ticking = false;
+      // ایجاد افکت کنفتی پس از کمی تأخیر برای هماهنگی با Toast
+      setTimeout(() => {
+          createConfetti();
+      }, 3500); // کمی قبل از ناپدید شدن Toast
+  }
+  ticking = false;
 }
 
-// بهینه‌سازی: استفاده از requestAnimationFrame برای رویداد اسکرول
+// بهینه‌سازی: استفاده از requestAnimationFrame برای رویداد اسکرول و افزودن passive listener
 window.addEventListener("scroll", () => {
-    lastScrollY = window.scrollY;
-    if (!ticking) {
-        window.requestAnimationFrame(updateScrollProgressAndButton);
-        ticking = true;
-    }
-});
+  lastScrollY = window.scrollY;
+  if (!ticking) {
+      window.requestAnimationFrame(updateScrollProgressAndButton);
+      ticking = true;
+  }
+}, { passive: true }); // افزودن { passive: true }
+
 
 let hasReachedEndOfPageSession = false; // پرچم برای اطمینان از نمایش یک بار در هر جلسه
 
@@ -342,7 +343,7 @@ const exploreHint = document.createElement("a");
 exploreHint.href = "#projects";
 exploreHint.id = "explore-hint";
 exploreHint.innerHTML =
-    '<i class="fas fa-lightbulb"></i> <span class="hint-text">پروژه‌های من را کشف کنید.</span>';
+  '<i class="fas fa-lightbulb"></i> <span class="hint-text">پروژه‌های من را کشف کنید.</span>';
 exploreHint.style.opacity = "0";
 exploreHint.style.transform = "translateY(20px)";
 document.body.appendChild(exploreHint);
@@ -352,48 +353,48 @@ let hintVisible = false;
 
 const heroSection = document.getElementById("hero");
 const heroObserver = new IntersectionObserver(
-    (entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                // اگر کاربر وارد بخش Hero شد، تایمر را برای نمایش hint شروع کن
-                if (!hintVisible) {
-                    hintTimeout = setTimeout(() => {
-                        exploreHint.style.transition =
-                            "opacity 0.5s ease-out, transform 0.5s ease-out";
-                        exploreHint.style.opacity = "1";
-                        exploreHint.style.transform = "translateY(0)";
-                        hintVisible = true;
-                    }, 8000); // نمایش پس از 8 ثانیه در بخش Hero
-                }
-            } else {
-                // اگر کاربر از بخش Hero خارج شد، hint را پنهان کن و تایمر را پاک کن
-                clearTimeout(hintTimeout);
-                if (hintVisible) {
-                    exploreHint.style.opacity = "0";
-                    exploreHint.style.transform = "translateY(20px)";
-                    hintVisible = false;
-                }
-            }
-        });
-    },
-    { threshold: 0.5 }
+  (entries) => {
+      entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+              // اگر کاربر وارد بخش Hero شد، تایمر را برای نمایش hint شروع کن
+              if (!hintVisible) {
+                  hintTimeout = setTimeout(() => {
+                      exploreHint.style.transition =
+                          "opacity 0.5s ease-out, transform 0.5s ease-out";
+                      exploreHint.style.opacity = "1";
+                      exploreHint.style.transform = "translateY(0)";
+                      hintVisible = true;
+                  }, 8000); // نمایش پس از 8 ثانیه در بخش Hero
+              }
+          } else {
+              // اگر کاربر از بخش Hero خارج شد، hint را پنهان کن و تایمر را پاک کن
+              clearTimeout(hintTimeout);
+              if (hintVisible) {
+                  exploreHint.style.opacity = "0";
+                  exploreHint.style.transform = "translateY(20px)";
+                  hintVisible = false;
+              }
+          }
+      });
+  },
+  { threshold: 0.5 }
 ); // وقتی 50% از Hero قابل مشاهده باشد
 
 if (heroSection) {
-    heroObserver.observe(heroSection);
+  heroObserver.observe(heroSection);
 }
 
 exploreHint.addEventListener("click", (e) => {
-    e.preventDefault();
-    exploreHint.style.opacity = "0";
-    exploreHint.style.transform = "translateY(20px)";
-    hintVisible = false; // Reset state
-    window.scrollTo({
-        top:
-            document.querySelector("#projects").offsetTop -
-            (document.querySelector(".navbar")?.offsetHeight || 0),
-        behavior: "smooth",
-    });
+  e.preventDefault();
+  exploreHint.style.opacity = "0";
+  exploreHint.style.transform = "translateY(20px)";
+  hintVisible = false; // Reset state
+  window.scrollTo({
+      top:
+          document.querySelector("#projects").offsetTop -
+          (document.querySelector(".navbar")?.offsetHeight || 0),
+      behavior: "smooth",
+  });
 });
 
 // 8. پیام‌های پاداش متغیر برای مهارت‌ها (اصل تأخیر معنادار پاداش، اصل کنجکاوی و رمزآلود بودن، اصل لذت از تسلط، اصل پاداش دوپامینی)
@@ -401,66 +402,66 @@ exploreHint.addEventListener("click", (e) => {
 // به جای افزودن شنونده رویداد به هر آیتم مهارت، یک شنونده به والد مشترک (#skills .skills-list) اضافه می‌کنیم.
 const skillsList = document.querySelector("#skills .skills-list");
 const skillMessages = [
-    "تسلط کامل بر این مهارت.",
-    "تجربه گسترده در این حوزه.",
-    "راه حل‌های نوآورانه با این تکنولوژی.",
-    "در حال کاوش عمیق‌تر در این زمینه.",
-    "ابزاری کلیدی برای خلاقیت.",
-    "پیشرفت چشمگیر از ابتدا تا کنون.",
-    "پروژه‌های بزرگتری در راه است.",
-    "چالش‌های این مهارت را دوست دارم.",
-    "یادگیری مستمر در این تخصص.",
-    "این مهارت بخشی از توانمندی‌های اصلی من است.",
+  "تسلط کامل بر این مهارت.",
+  "تجربه گسترده در این حوزه.",
+  "راه حل‌های نوآورانه با این تکنولوژی.",
+  "در حال کاوش عمیق‌تر در این زمینه.",
+  "ابزاری کلیدی برای خلاقیت.",
+  "پیشرفت چشمگیر از ابتدا تا کنون.",
+  "پروژه‌های بزرگتری در راه است.",
+  "چالش‌های این مهارت را دوست دارم.",
+  "یادگیری مستمر در این تخصص.",
+  "این مهارت بخشی از توانمندی‌های اصلی من است.",
 ];
 
 if (skillsList) {
-    let currentSkillMessageSpan = null;
-    let hideTimeoutForSkill;
+  let currentSkillMessageSpan = null;
+  let hideTimeoutForSkill;
 
-    skillsList.addEventListener("mouseover", function(event) {
-        const skillItem = event.target.closest("li");
-        if (skillItem && skillsList.contains(skillItem)) {
-            // اگر پیام قبلی وجود دارد و برای یک آیتم دیگر است، آن را پنهان کن
-            if (currentSkillMessageSpan && currentSkillMessageSpan.parentElement !== skillItem) {
-                clearTimeout(hideTimeoutForSkill);
-                currentSkillMessageSpan.style.opacity = "0";
-                currentSkillMessageSpan.style.transform = "translateY(0)";
-                currentSkillMessageSpan = null;
-            }
+  skillsList.addEventListener("mouseover", function(event) {
+      const skillItem = event.target.closest("li");
+      if (skillItem && skillsList.contains(skillItem)) {
+          // اگر پیام قبلی وجود دارد و برای یک آیتم دیگر است، آن را پنهان کن
+          if (currentSkillMessageSpan && currentSkillMessageSpan.parentElement !== skillItem) {
+              clearTimeout(hideTimeoutForSkill);
+              currentSkillMessageSpan.style.opacity = "0";
+              currentSkillMessageSpan.style.transform = "translateY(0)";
+              currentSkillMessageSpan = null;
+          }
 
-            // اگر آیتم فعلی هنوز پیام ندارد، آن را ایجاد کن
-            let messageSpan = skillItem.querySelector(".skill-hover-message");
-            if (!messageSpan) {
-                messageSpan = document.createElement("span");
-                messageSpan.className = "skill-hover-message";
-                skillItem.appendChild(messageSpan);
-            }
-            currentSkillMessageSpan = messageSpan;
+          // اگر آیتم فعلی هنوز پیام ندارد، آن را ایجاد کن
+          let messageSpan = skillItem.querySelector(".skill-hover-message");
+          if (!messageSpan) {
+              messageSpan = document.createElement("span");
+              messageSpan.className = "skill-hover-message";
+              skillItem.appendChild(messageSpan);
+          }
+          currentSkillMessageSpan = messageSpan;
 
-            clearTimeout(hideTimeoutForSkill); // Clear any pending hide
-            const randomMessage =
-                skillMessages[Math.floor(Math.random() * skillMessages.length)];
-            messageSpan.textContent = randomMessage;
-            messageSpan.style.opacity = "1";
-            messageSpan.style.transform = "translateY(-5px)";
-        }
-    });
+          clearTimeout(hideTimeoutForSkill); // Clear any pending hide
+          const randomMessage =
+              skillMessages[Math.floor(Math.random() * skillMessages.length)];
+          messageSpan.textContent = randomMessage;
+          messageSpan.style.opacity = "1";
+          messageSpan.style.transform = "translateY(-5px)";
+      }
+  });
 
-    skillsList.addEventListener("mouseout", function(event) {
-        const skillItem = event.target.closest("li");
-        if (skillItem && skillsList.contains(skillItem)) {
-            const messageSpan = skillItem.querySelector(".skill-hover-message");
-            if (messageSpan) {
-                hideTimeoutForSkill = setTimeout(() => {
-                    messageSpan.style.opacity = "0";
-                    messageSpan.style.transform = "translateY(0)";
-                    if (currentSkillMessageSpan === messageSpan) {
-                        currentSkillMessageSpan = null;
-                    }
-                }, 200); // Small delay, e.g., 200ms
-            }
-        }
-    });
+  skillsList.addEventListener("mouseout", function(event) {
+      const skillItem = event.target.closest("li");
+      if (skillItem && skillsList.contains(skillItem)) {
+          const messageSpan = skillItem.querySelector(".skill-hover-message");
+          if (messageSpan) {
+              hideTimeoutForSkill = setTimeout(() => {
+                  messageSpan.style.opacity = "0";
+                  messageSpan.style.transform = "translateY(0)";
+                  if (currentSkillMessageSpan === messageSpan) {
+                      currentSkillMessageSpan = null;
+                  }
+              }, 200); // Small delay, e.g., 200ms
+          }
+      }
+  });
 }
 
 
@@ -469,15 +470,15 @@ if (skillsList) {
 // به جای افزودن شنونده رویداد به هر summary، یک شنونده به والد مشترک (.faq-container) اضافه می‌کنیم.
 const faqContainer = document.querySelector(".faq-container");
 if (faqContainer) {
-    faqContainer.addEventListener("click", function(event) {
-        const summary = event.target.closest("summary");
-        if (summary && faqContainer.contains(summary)) {
-            const parentDetails = summary.closest("details");
-            if (parentDetails) {
-                parentDetails.classList.toggle("faq-opened");
-            }
-        }
-    });
+  faqContainer.addEventListener("click", function(event) {
+      const summary = event.target.closest("summary");
+      if (summary && faqContainer.contains(summary)) {
+          const parentDetails = summary.closest("details");
+          if (parentDetails) {
+              parentDetails.classList.toggle("faq-opened");
+          }
+      }
+  });
 }
 
 
@@ -486,34 +487,34 @@ if (faqContainer) {
 // تشخیص کاربر جدید/بازگشتی، حس احترام و درک متقابل را منتقل می‌کند.
 // از createToast برای نمایش پیام استفاده می‌شود.
 window.addEventListener("load", () => {
-    const hasVisited = localStorage.getItem("hasVisited");
-    let message = "";
+  const hasVisited = localStorage.getItem("hasVisited");
+  let message = "";
 
-    if (hasVisited) {
-        message = "خوش آمدید! از بازگشت شما خرسندیم."; // پیام دلنشین‌تر برای بازگشتی‌ها
-    } else {
-        const hour = new Date().getHours();
-        if (hour >= 5 && hour < 10) {
-            message = "صبح بخیر! به وبسایت رسمی رسول آنلیمیتد خوش آمدید.";
-        } else if (hour >= 10 && hour < 16) {
-            message = "ظهر بخیر! به وبسایت رسمی رسول آنلیمیتد خوش آمدید.";
-        } else if (hour >= 16 && hour < 20) {
-            message = "عصر بخیر! به وبسایت رسمی رسول آنلیمیتد خوش آمدید.";
-        } else {
-            message = "شب بخیر! به وبسایت رسمی رسول آنلیمیتد خوش آمدید.";
-        }
-        localStorage.setItem("hasVisited", "true");
-    }
+  if (hasVisited) {
+      message = "خوش آمدید! از بازگشت شما خرسندیم."; // پیام دلنشین‌تر برای بازگشتی‌ها
+  } else {
+      const hour = new Date().getHours();
+      if (hour >= 5 && hour < 10) {
+          message = "صبح بخیر! به وبسایت رسمی رسول آنلیمیتد خوش آمدید.";
+      } else if (hour >= 10 && hour < 16) {
+          message = "ظهر بخیر! به وبسایت رسمی رسول آنلیمیتد خوش آمدید.";
+      } else if (hour >= 16 && hour < 20) {
+          message = "عصر بخیر! به وبسایت رسمی رسول آنلیمیتد خوش آمدید.";
+      } else {
+          message = "شب بخیر! به وبسایت رسمی رسول آنلیمیتد خوش آمدید.";
+      }
+      localStorage.setItem("hasVisited", "true");
+  }
 
-    if (message) {
-        createToast(message, {
-            id: "welcome-toast", // ID یکتا
-            customClass: "welcome-toast",
-            iconClass: "fas fa-hand-sparkles", // آیکون خوش‌آمدگویی
-            iconColor: "var(--highlight-color)",
-            duration: 3500,
-        });
-    }
+  if (message) {
+      createToast(message, {
+          id: "welcome-toast", // ID یکتا
+          customClass: "welcome-toast",
+          iconClass: "fas fa-hand-sparkles", // آیکون خوش‌آمدگویی
+          iconColor: "var(--highlight-color)",
+          duration: 3500,
+      });
+  }
 });
 
 
@@ -522,45 +523,45 @@ window.addEventListener("load", () => {
 // این کار بار شناختی را کاهش می‌دهد و حس کارآمدی را منتقل می‌کند.
 const emailLink = document.querySelector('.contact-info a[href^="mailto:"]');
 if (emailLink) {
-    emailLink.addEventListener("click", (e) => {
-        e.preventDefault(); // جلوگیری از باز شدن ایمیل کلاینت
-        const email = emailLink.href.replace("mailto:", "");
+  emailLink.addEventListener("click", (e) => {
+      e.preventDefault(); // جلوگیری از باز شدن ایمیل کلاینت
+      const email = emailLink.href.replace("mailto:", "");
 
-        // استفاده از Clipboard API برای کپی کردن متن (مدرن‌تر و امن‌تر)
-        // در محیط‌های iframe ممکن است نیاز به fallback به execCommand باشد.
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(email).then(() => {
-                createToast("ایمیل کپی شد. ✅", {
-                    id: "email-copy-toast", // ID یکتا
-                    iconClass: "fas fa-check-circle",
-                    iconColor: "var(--highlight-color)",
-                });
-            }).catch(err => {
-                console.error('Failed to copy email using Clipboard API:', err);
-                // Fallback به execCommand در صورت عدم موفقیت
-                copyTextUsingExecCommand(email, "email-copy-toast");
-            });
-        } else {
-            // Fallback برای مرورگرهای قدیمی‌تر یا محیط‌های محدود
-            copyTextUsingExecCommand(email, "email-copy-toast");
-        }
-    });
+      // استفاده از Clipboard API برای کپی کردن متن (مدرن‌تر و امن‌تر)
+      // در محیط‌های iframe ممکن است نیاز به fallback به execCommand باشد.
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(email).then(() => {
+              createToast("ایمیل کپی شد. ✅", {
+                  id: "email-copy-toast", // ID یکتا
+                  iconClass: "fas fa-check-circle",
+                  iconColor: "var(--highlight-color)",
+              });
+          }).catch(err => {
+              console.error('Failed to copy email using Clipboard API:', err);
+              // Fallback به execCommand در صورت عدم موفقیت
+              copyTextUsingExecCommand(email, "email-copy-toast");
+          });
+      } else {
+          // Fallback برای مرورگرهای قدیمی‌تر یا محیط‌های محدود
+          copyTextUsingExecCommand(email, "email-copy-toast");
+      }
+  });
 }
 
 // تابع کمکی برای کپی کردن متن با execCommand
 function copyTextUsingExecCommand(text, toastId) {
-    const tempInput = document.createElement("input");
-    tempInput.value = text;
-    document.body.appendChild(tempInput);
-    tempInput.select();
-    document.execCommand("copy"); // کپی کردن متن
-    document.body.removeChild(tempInput);
+  const tempInput = document.createElement("input");
+  tempInput.value = text;
+  document.body.appendChild(tempInput);
+  tempInput.select();
+  document.execCommand("copy"); // کپی کردن متن
+  document.body.removeChild(tempInput);
 
-    createToast("ایمیل کپی شد. ✅", {
-        id: toastId, // ID یکتا
-        iconClass: "fas fa-check-circle",
-        iconColor: "var(--highlight-color)",
-    });
+  createToast("ایمیل کپی شد. ✅", {
+      id: toastId, // ID یکتا
+      iconClass: "fas fa-check-circle",
+      iconColor: "var(--highlight-color)",
+  });
 }
 
 
@@ -569,65 +570,65 @@ function copyTextUsingExecCommand(text, toastId) {
 // این یک پاداش هیجانی قوی است که تجربه کاربری را به یاد ماندنی می‌کند.
 // بهینه‌سازی: استفاده از DocumentFragment برای کاهش دستکاری‌های DOM
 function createConfetti() {
-    const confettiContainer = document.createElement("div");
-    confettiContainer.id = "confetti-container";
-    document.body.appendChild(confettiContainer);
+  const confettiContainer = document.createElement("div");
+  confettiContainer.id = "confetti-container";
+  document.body.appendChild(confettiContainer);
 
-    const confettiCount = 30; // کاهش تعداد کنفتی برای حس حرفه‌ای‌تر و ظریف‌تر
-    const colors = ["#ffc107", "#007acc", "#005a9e", "#f0f0f0"]; // رنگ‌های تم سایت
-    const fragment = document.createDocumentFragment(); // ایجاد DocumentFragment
+  const confettiCount = 30; // کاهش تعداد کنفتی برای حس حرفه‌ای‌تر و ظریف‌تر
+  const colors = ["#ffc107", "#007acc", "#005a9e", "#f0f0f0"]; // رنگ‌های تم سایت
+  const fragment = document.createDocumentFragment(); // ایجاد DocumentFragment
 
-    for (let i = 0; i < confettiCount; i++) {
-        const confetti = document.createElement("div");
-        confetti.classList.add("confetti");
-        confetti.style.backgroundColor =
-            colors[Math.floor(Math.random() * colors.length)];
-        confetti.style.left = Math.random() * 100 + "vw";
-        confetti.style.top = Math.random() * 100 + "vh";
-        confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
-        fragment.appendChild(confetti); // اضافه کردن به DocumentFragment
+  for (let i = 0; i < confettiCount; i++) {
+      const confetti = document.createElement("div");
+      confetti.classList.add("confetti");
+      confetti.style.backgroundColor =
+          colors[Math.floor(Math.random() * colors.length)];
+      confetti.style.left = Math.random() * 100 + "vw";
+      confetti.style.top = Math.random() * 100 + "vh";
+      confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+      fragment.appendChild(confetti); // اضافه کردن به DocumentFragment
 
-        confetti.animate(
-            [
-                {
-                    transform: `translateY(0) rotate(${Math.random() * 360}deg)`,
-                    opacity: 1,
-                },
-                {
-                    transform: `translateY(${window.innerHeight * 1.2}px) rotate(${
-                        Math.random() * 720
-                    }deg)`,
-                    opacity: 0,
-                }, // سقوط کمتر
-            ],
-            {
-                duration: Math.random() * 2000 + 1500, // 1.5 تا 3.5 ثانیه
-                easing: "ease-out",
-                delay: Math.random() * 300,
-                fill: "forwards",
-            }
-        );
+      confetti.animate(
+          [
+              {
+                  transform: `translateY(0) rotate(${Math.random() * 360}deg)`,
+                  opacity: 1,
+              },
+              {
+                  transform: `translateY(${window.innerHeight * 1.2}px) rotate(${
+                      Math.random() * 720
+                  }deg)`,
+                  opacity: 0,
+              }, // سقوط کمتر
+          ],
+          {
+              duration: Math.random() * 2000 + 1500, // 1.5 تا 3.5 ثانیه
+              easing: "ease-out",
+              delay: Math.random() * 300,
+              fill: "forwards",
+          }
+      );
 
-        confetti.addEventListener("animationend", () => {
-            confetti.remove();
-        });
-    }
-    confettiContainer.appendChild(fragment); // یک بار اضافه کردن تمام کنفتی‌ها به DOM
+      confetti.addEventListener("animationend", () => {
+          confetti.remove();
+      });
+  }
+  confettiContainer.appendChild(fragment); // یک بار اضافه کردن تمام کنفتی‌ها به DOM
 
-    setTimeout(() => {
-        confettiContainer.remove();
-    }, 3600); // کمی بیشتر از طولانی‌ترین انیمیشن کنفتی
+  setTimeout(() => {
+      confettiContainer.remove();
+  }, 3600); // کمی بیشتر از طولانی‌ترین انیمیشن کنفتی
 }
 
 // 15. پیام‌های "دانستنی جالب" (Fun Fact) (اصل کنجکاوی و رمزآلود بودن، اصل تضاد و تنوع حسی، اصل تأخیر معنادار پاداش، اصل توجه، اصل حافظه هیجانی)
 // این بخش پیام‌های تصادفی با دانستنی‌های جالب را در زمان‌های غیرقابل پیش‌بینی و با فرکانس کمتر نمایش می‌دهد.
 // این عناصر غیرمنتظره، کنجکاوی را برمی‌انگیزند و به دلیل تازگی، توجه را جلب می‌کنند و به ماندگاری در حافظه کمک می‌کنند.
 const funFacts = [
-    "اولین ربات فارسی دیسکورد توسط من در ۱۴ سالگی توسعه یافت.",
-    "من در کاراته دان ۱ رسمی فدراسیون هستم.",
-    "فلسفه 'آنلیمیتد' به معنای به چالش کشیدن محدودیت‌هاست.",
-    "من دانشجوی مهندسی پزشکی دانشگاه تهران هستم.",
-    "پروژه‌های برنامه‌نویسی من در Zenodo نمایه شده‌اند و دارای DOI هستند.",
+  "اولین ربات فارسی دیسکورد توسط من در ۱۴ سالگی توسعه یافت.",
+  "من در کاراته دان ۱ رسمی فدراسیون هستم.",
+  "فلسفه 'آنلیمیتد' به معنای به چالش کشیدن محدودیت‌هاست.",
+  "من دانشجوی مهندسی پزشکی دانشگاه تهران هستم.",
+  "پروژه‌های برنامه‌نویسی من در Zenodo نمایه شده‌اند و دارای DOI هستند.",
 ];
 
 let funFactToastInstance = null; // برای نگهداری رفرنس Toast دانستنی
@@ -637,116 +638,121 @@ let idleTimeout;
 const debouncedResetIdleTimer = debounce(resetIdleTimer, 500); // 500ms تأخیر برای ریست تایمر
 
 function resetIdleTimer() {
-    clearTimeout(idleTimeout);
-    idleTimeout = setTimeout(() => {
-        // فقط اگر Toast دانستنی فعال نیست، آن را نمایش بده
-        if (
-            !funFactToastInstance ||
-            !funFactToastInstance.classList.contains("show")
-        ) {
-            showFunFact();
-        }
-    }, 30000); // کاربر پس از 30 ثانیه عدم فعالیت، بیکار محسوب می‌شود
+  clearTimeout(idleTimeout);
+  idleTimeout = setTimeout(() => {
+      // فقط اگر Toast دانستنی فعال نیست، آن را نمایش بده
+      if (
+          !funFactToastInstance ||
+          !funFactToastInstance.classList.contains("show")
+      ) {
+          showFunFact();
+      }
+  }, 30000); // کاربر پس از 30 ثانیه عدم فعالیت، بیکار محسوب می‌شود
 }
 
 // رویدادهای فعالیت کاربر
 ["mousemove", "keydown", "scroll", "touchstart"].forEach((event) => {
-    window.addEventListener(event, debouncedResetIdleTimer); // استفاده از debouncedResetIdleTimer
+  // بهینه‌سازی: افزودن { passive: true } به رویدادهای scroll و touchstart
+  if (event === "scroll" || event === "touchstart") {
+      window.addEventListener(event, debouncedResetIdleTimer, { passive: true });
+  } else {
+      window.addEventListener(event, debouncedResetIdleTimer);
+  }
 });
 
 // شروع اولیه تایمر بیکاری
 resetIdleTimer();
 
 function showFunFact() {
-    const randomFact = funFacts[Math.floor(Math.random() * funFacts.length)];
-    funFactToastInstance = createToast(`دانستنی: ${randomFact}`, {
-        id: "fun-fact-toast", // ID یکتا
-        customClass: "fun-fact-toast",
-        iconClass: "fas fa-lightbulb",
-        iconColor: "var(--primary-color)",
-        position: "top",
-        duration: 8000,
-    });
+  const randomFact = funFacts[Math.floor(Math.random() * funFacts.length)];
+  funFactToastInstance = createToast(`دانستنی: ${randomFact}`, {
+      id: "fun-fact-toast", // ID یکتا
+      customClass: "fun-fact-toast",
+      iconClass: "fas fa-lightbulb",
+      iconColor: "var(--primary-color)",
+      position: "top",
+      duration: 8000,
+  });
 
-    // افزودن دکمه بستن به صورت دستی (چون innerHTML مستقیم نیست)
-    const closeButton = document.createElement("button");
-    closeButton.className = "fun-fact-close";
-    closeButton.setAttribute("aria-label", "بستن پیام دانستنی");
-    closeButton.innerHTML = '<i class="fas fa-times"></i>';
-    funFactToastInstance.appendChild(closeButton);
+  // افزودن دکمه بستن به صورت دستی (چون innerHTML مستقیم نیست)
+  const closeButton = document.createElement("button");
+  closeButton.className = "fun-fact-close";
+  closeButton.setAttribute("aria-label", "بستن پیام دانستنی");
+  closeButton.innerHTML = '<i class="fas fa-times"></i>';
+  funFactToastInstance.appendChild(closeButton);
 
-    closeButton.addEventListener(
-        "click",
-        () => {
-            funFactToastInstance.classList.remove("show");
-            funFactToastInstance.addEventListener(
-                "transitionend",
-                () => funFactToastInstance.remove(),
-                { once: true }
-            );
-            funFactToastInstance = null; // پاک کردن رفرنس
-            resetIdleTimer(); // پس از بستن دستی، تایمر بیکاری را ریست کن
-        },
-        { once: true }
-    );
+  closeButton.addEventListener(
+      "click",
+      () => {
+          funFactToastInstance.classList.remove("show");
+          funFactToastInstance.addEventListener(
+              "transitionend",
+              () => funFactToastInstance.remove(),
+              { once: true }
+          );
+          funFactToastInstance = null; // پاک کردن رفرنس
+          resetIdleTimer(); // پس از بستن دستی، تایمر بیکاری را ریست کن
+      },
+      { once: true }
+  );
 }
 
 // 16. فعال‌سازی افکت "جرقه" برای کارت‌های برجسته (روان‌شناسی توجه، پاداش دوپامینی، لذت زیبایی‌شناختی)
 // این افکت بصری ظریف، توجه کاربر را به محتوای مهم‌تر جلب می‌کند و یک پاداش بصری کوچک ارائه می‌دهد.
 function createSparkle(element) {
-    const sparkle = document.createElement("div");
-    sparkle.className = "sparkle-effect";
-    const size = Math.random() * 10 + 5; // اندازه بین 5 تا 15 پیکسل
-    sparkle.style.width = `${size}px`;
-    sparkle.style.height = `${size}px`;
-    sparkle.style.left = `${Math.random() * 100}%`;
-    sparkle.style.top = `${Math.random() * 100}%`;
-    sparkle.style.backgroundColor = "white"; // رنگ درخشش
-    sparkle.style.opacity = 0;
-    sparkle.style.position = "absolute";
-    sparkle.style.borderRadius = "50%";
-    sparkle.style.boxShadow = `0 0 ${size / 2}px ${
-        size / 4
-    }px var(--highlight-color)`; // درخشش اطراف
-    sparkle.style.zIndex = 10;
-    sparkle.style.pointerEvents = "none"; // برای اینکه روی کلیک تداخلی ایجاد نکند
+  const sparkle = document.createElement("div");
+  sparkle.className = "sparkle-effect";
+  const size = Math.random() * 10 + 5; // اندازه بین 5 تا 15 پیکسل
+  sparkle.style.width = `${size}px`;
+  sparkle.style.height = `${size}px`;
+  sparkle.style.left = `${Math.random() * 100}%`;
+  sparkle.style.top = `${Math.random() * 100}%`;
+  sparkle.style.backgroundColor = "white"; // رنگ درخشش
+  sparkle.style.opacity = 0;
+  sparkle.style.position = "absolute";
+  sparkle.style.borderRadius = "50%";
+  sparkle.style.boxShadow = `0 0 ${size / 2}px ${
+      size / 4
+  }px var(--highlight-color)`; // درخشش اطراف
+  sparkle.style.zIndex = 10;
+  sparkle.style.pointerEvents = "none"; // برای اینکه روی کلیک تداخلی ایجاد نکند
 
-    element.style.position = "relative"; // اطمینان از موقعیت‌دهی صحیح
-    element.appendChild(sparkle);
+  element.style.position = "relative"; // اطمینان از موقعیت‌دهی صحیح
+  element.appendChild(sparkle);
 
-    sparkle.animate(
-        [
-            { opacity: 0, transform: "scale(0) rotate(0deg)" },
-            { opacity: 1, transform: "scale(1) rotate(180deg)" },
-            { opacity: 0, transform: "scale(0.5) rotate(360deg)" },
-        ],
-        {
-            duration: 800, // مدت زمان انیمیشن
-            easing: "ease-out",
-            fill: "forwards",
-        }
-    ).onfinish = () => sparkle.remove();
+  sparkle.animate(
+      [
+          { opacity: 0, transform: "scale(0) rotate(0deg)" },
+          { opacity: 1, transform: "scale(1) rotate(180deg)" },
+          { opacity: 0, transform: "scale(0.5) rotate(360deg)" },
+      ],
+      {
+          duration: 800, // مدت زمان انیمیشن
+          easing: "ease-out",
+          fill: "forwards",
+      }
+  ).onfinish = () => sparkle.remove();
 }
 
 const featuredCards = document.querySelectorAll(".card.is-featured");
 const featuredCardObserver = new IntersectionObserver(
-    (entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                // ایجاد چند جرقه در نقاط مختلف کارت
-                for (let i = 0; i < 3; i++) {
-                    // 3 جرقه برای هر کارت
-                    setTimeout(() => createSparkle(entry.target), i * 150); // با کمی تأخیر
-                }
-                featuredCardObserver.unobserve(entry.target); // فقط یک بار جرقه بزند
-            }
-        });
-    },
-    { threshold: 0.5 }
+  (entries) => {
+      entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+              // ایجاد چند جرقه در نقاط مختلف کارت
+              for (let i = 0; i < 3; i++) {
+                  // 3 جرقه برای هر کارت
+                  setTimeout(() => createSparkle(entry.target), i * 150); // با کمی تأخیر
+              }
+              featuredCardObserver.unobserve(entry.target); // فقط یک بار جرقه بزند
+          }
+      });
+  },
+  { threshold: 0.5 }
 ); // وقتی 50% از کارت قابل مشاهده باشد
 
 featuredCards.forEach((card) => {
-    featuredCardObserver.observe(card);
+  featuredCardObserver.observe(card);
 });
 
 // 17. پیام پیشرفت "بخش‌های کاوش شده" (اصل پیشرفت قابل مشاهده، اصل حس موفقیت، انگیزه درونی)
@@ -756,122 +762,122 @@ const totalSections = sections.length; // تعداد کل بخش‌های سای
 
 // بارگذاری وضعیت از localStorage برای پایداری
 let sectionsVisited = new Set(
-    JSON.parse(localStorage.getItem("sectionsVisited") || "[]")
+  JSON.parse(localStorage.getItem("sectionsVisited") || "[]")
 );
 let announcedMilestones = new Set(
-    JSON.parse(localStorage.getItem("announcedMilestones") || "[]")
+  JSON.parse(localStorage.getItem("announcedMilestones") || "[]")
 );
 
 // نقاط عطف برای نمایش پیام پیشرفت
 const explorationMilestones = [
-    {
-        count: 3,
-        message: "شما ۳ بخش از سایت را کاوش کرده‌اید! عالیه! ✨ ادامه دهید!",
-        icon: "fas fa-map-marker-alt",
-    },
-    {
-        count: 6,
-        message: "نصف راه را پیمودید! شما ۶ بخش را کاوش کرده‌اید! فوق‌العاده! 🚀",
-        icon: "fas fa-rocket",
-    },
-    {
-        count: 9,
-        message: "به ۹ بخش رسیدید! کم‌کم داریم به پایان می‌رسیم! 🌟",
-        icon: "fas fa-star",
-    },
-    {
-        count: totalSections,
-        message: `تبریک! شما تمام ${totalSections} بخش سایت را کاوش کرده‌اید! شما یک کاوشگر واقعی هستید! 🎉`,
-        isFinal: true,
-        icon: "fas fa-trophy",
-    },
+  {
+      count: 3,
+      message: "شما ۳ بخش از سایت را کاوش کرده‌اید! عالیه! ✨ ادامه دهید!",
+      icon: "fas fa-map-marker-alt",
+  },
+  {
+      count: 6,
+      message: "نصف راه را پیمودید! شما ۶ بخش را کاوش کرده‌اید! فوق‌العاده! 🚀",
+      icon: "fas fa-rocket",
+  },
+  {
+      count: 9,
+      message: "به ۹ بخش رسیدید! کم‌کم داریم به پایان می‌رسیم! 🌟",
+      icon: "fas fa-star",
+  },
+  {
+      count: totalSections,
+      message: `تبریک! شما تمام ${totalSections} بخش سایت را کاوش کرده‌اید! شما یک کاوشگر واقعی هستید! 🎉`,
+      isFinal: true,
+      icon: "fas fa-trophy",
+  },
 ];
 
 let lastExplorationToastTime = 0;
 const explorationToastCooldown = 10000; // 10 ثانیه مکث بین پیام‌های پیشرفت
 
 const sectionProgressObserver = new IntersectionObserver(
-    (entries) => {
-        const now = Date.now();
+  (entries) => {
+      const now = Date.now();
 
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                sectionsVisited.add(entry.target.id);
-                localStorage.setItem(
-                    "sectionsVisited",
-                    JSON.stringify(Array.from(sectionsVisited))
-                );
+      entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+              sectionsVisited.add(entry.target.id);
+              localStorage.setItem(
+                  "sectionsVisited",
+                  JSON.stringify(Array.from(sectionsVisited))
+              );
 
-                const currentSectionsCount = sectionsVisited.size;
+              const currentSectionsCount = sectionsVisited.size;
 
-                // بررسی نقاط عطف
-                // پیمایش از کوچکترین نقطه عطف تا بزرگترین
-                for (let i = 0; i < explorationMilestones.length; i++) {
-                    const milestone = explorationMilestones[i];
+              // بررسی نقاط عطف
+              // پیمایش از کوچکترین نقطه عطف تا بزرگترین
+              for (let i = 0; i < explorationMilestones.length; i++) {
+                  const milestone = explorationMilestones[i];
 
-                    // اگر تعداد بخش‌های کاوش شده به این نقطه عطف رسیده باشد
-                    // و این نقطه عطف هنوز اعلام نشده باشد (در announcedMilestones نباشد)
-                    // و زمان کافی از آخرین نمایش پیام گذشته باشد
-                    if (
-                        currentSectionsCount >= milestone.count &&
-                        !announcedMilestones.has(milestone.count) &&
-                        now - lastExplorationToastTime > explorationToastCooldown
-                    ) {
-                        let customClass = "exploration-toast";
-                        let iconColor = "var(--accent-color)"; // رنگ پیش‌فرض آیکون
-                        if (milestone.isFinal) {
-                            customClass += " final-exploration-toast";
-                            iconColor = "var(--primary-color)"; // رنگ آیکون برای پیام نهایی
-                        }
+                  // اگر تعداد بخش‌های کاوش شده به این نقطه عطف رسیده باشد
+                  // و این نقطه عطف هنوز اعلام نشده باشد (در announcedMilestones نباشد)
+                  // و زمان کافی از آخرین نمایش پیام گذشته باشد
+                  if (
+                      currentSectionsCount >= milestone.count &&
+                      !announcedMilestones.has(milestone.count) &&
+                      now - lastExplorationToastTime > explorationToastCooldown
+                  ) {
+                      let customClass = "exploration-toast";
+                      let iconColor = "var(--accent-color)"; // رنگ پیش‌فرض آیکون
+                      if (milestone.isFinal) {
+                          customClass += " final-exploration-toast";
+                          iconColor = "var(--primary-color)"; // رنگ آیکون برای پیام نهایی
+                      }
 
-                        createToast(milestone.message, {
-                            id: `exploration-milestone-${milestone.count}`, // ID یکتا برای هر نقطه عطف
-                            customClass: customClass,
-                            iconClass: milestone.icon,
-                            iconColor: iconColor,
-                            duration: 5000,
-                        });
+                      createToast(milestone.message, {
+                          id: `exploration-milestone-${milestone.count}`, // ID یکتا برای هر نقطه عطف
+                          customClass: customClass,
+                          iconClass: milestone.icon,
+                          iconColor: iconColor,
+                          duration: 5000,
+                      });
 
-                        announcedMilestones.add(milestone.count);
-                        localStorage.setItem(
-                            "announcedMilestones",
-                            JSON.stringify(Array.from(announcedMilestones))
-                        );
+                      announcedMilestones.add(milestone.count);
+                      localStorage.setItem(
+                          "announcedMilestones",
+                          JSON.stringify(Array.from(announcedMilestones))
+                      );
 
-                        lastExplorationToastTime = now;
+                      lastExplorationToastTime = now;
 
-                        // اگر این نقطه عطف نهایی باشد، Observer را از تمام بخش‌ها جدا می‌کنیم
-                        // این کار باعث می‌شود پس از اتمام کاوش، دیگر نیازی به ردیابی نباشد.
-                        if (milestone.isFinal) {
-                            sections.forEach((sec) => sectionProgressObserver.unobserve(sec));
-                            return; // از حلقه و از تابع callback خارج می‌شویم
-                        }
-                    }
-                }
-            }
-        });
-    },
-    { threshold: 0.3 }
+                      // اگر این نقطه عطف نهایی باشد، Observer را از تمام بخش‌ها جدا می‌کنیم
+                      // این کار باعث می‌شود پس از اتمام کاوش، دیگر نیازی به ردیابی نباشد.
+                      if (milestone.isFinal) {
+                          sections.forEach((sec) => sectionProgressObserver.unobserve(sec));
+                          return; // از حلقه و از تابع callback خارج می‌شویم
+                      }
+                  }
+              }
+          }
+      });
+  },
+  { threshold: 0.3 }
 ); // وقتی 30% از بخش قابل مشاهده باشد
 
 // در زمان بارگذاری صفحه، Observer را به تمام بخش‌ها متصل می‌کنیم
 // اما فقط در صورتی که پیام نهایی کاوش قبلاً نمایش داده نشده باشد.
 const isAllSectionsExploredPreviously = announcedMilestones.has(totalSections);
 if (!isAllSectionsExploredPreviously) {
-    sections.forEach((section) => {
-        sectionProgressObserver.observe(section);
-    });
+  sections.forEach((section) => {
+      sectionProgressObserver.observe(section);
+  });
 } else {
-    // اگر قبلاً تمام بخش‌ها کاوش شده‌اند، می‌توانیم یک پیام خوش‌آمدگویی متفاوت نمایش دهیم
-    // یا هیچ پیامی نمایش ندهیم. در اینجا، فرض می‌کنیم نیازی به اعلام مجدد نیست.
-    // اگر می‌خواهید هر بار که کاربر برمی‌گردد پیام نهایی را ببیند، می‌توانید خط زیر را فعال کنید:
-    // createToast(`خوش آمدید! شما قبلاً تمام ${totalSections} بخش سایت را کاوش کرده‌اید! 🎉`, {
-    //    id: 're-welcome-explored-toast',
-    //    customClass: 'exploration-toast final-exploration-toast',
-    //    iconClass: 'fas fa-trophy',
-    //    iconColor: 'var(--primary-color)',
-    //    duration: 5000
-    // });
+  // اگر قبلاً تمام بخش‌ها کاوش شده‌اند، می‌توانیم یک پیام خوش‌آمدگویی متفاوت نمایش دهیم
+  // یا هیچ پیامی نمایش ندهیم. در اینجا، فرض می‌کنیم نیازی به اعلام مجدد نیست.
+  // اگر می‌خواهید هر بار که کاربر برمی‌گردد پیام نهایی را ببیند، می‌توانید خط زیر را فعال کنید:
+  // createToast(`خوش آمدید! شما قبلاً تمام ${totalSections} بخش سایت را کاوش کرده‌اید! 🎉`, {
+  //    id: 're-welcome-explored-toast',
+  //    customClass: 'exploration-toast final-exploration-toast',
+  //    iconClass: 'fas fa-trophy',
+  //    iconColor: 'var(--primary-color)',
+  //    duration: 5000
+  // });
 }
 
 // 18. افکت پالس/گلو برای دکمه‌های CTA اصلی (روان‌شناسی توجه، پاداش دوپامینی)
@@ -880,40 +886,40 @@ if (!isAllSectionsExploredPreviously) {
 const mainCTAs = document.querySelectorAll(".main-cta-button"); // فرض بر وجود کلاسی به این نام برای دکمه‌های اصلی
 
 mainCTAs.forEach((button) => {
-    // اضافه کردن یک کلاس برای انیمیشن CSS
-    button.classList.add("cta-pulse-effect");
+  // اضافه کردن یک کلاس برای انیمیشن CSS
+  button.classList.add("cta-pulse-effect");
 });
 
 // 19. بارگذاری تنبل تصاویر (Lazy Loading) (اصل بار شناختی پایین، اصل سرعت بارگذاری، اصل روان‌روانی)
 // این بخش تصاویر را تنها زمانی بارگذاری می‌کند که به viewport نزدیک شوند تا عملکرد و تجربه کاربری بهبود یابد.
 document.addEventListener("DOMContentLoaded", function () {
-    const lazyImages = document.querySelectorAll("img[data-src]");
+  const lazyImages = document.querySelectorAll("img[data-src]");
 
-    const imageObserver = new IntersectionObserver(
-        (entries, observer) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.dataset.src;
-                    if (img.dataset.srcset) {
-                        img.srcset = img.dataset.srcset;
-                    }
-                    img.removeAttribute("data-src");
-                    img.removeAttribute("data-srcset");
-                    img.classList.add("loaded"); // اضافه کردن کلاس برای انیمیشن یا استایل پس از بارگذاری
-                    observer.unobserve(img);
-                }
-            });
-        },
-        {
-            rootMargin: "0px 0px 100px 0px", // بارگذاری 100px قبل از رسیدن به viewport
-            threshold: 0.01, // حتی اگر 1% از تصویر قابل مشاهده باشد
-        }
-    );
+  const imageObserver = new IntersectionObserver(
+      (entries, observer) => {
+          entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                  const img = entry.target;
+                  img.src = img.dataset.src;
+                  if (img.dataset.srcset) {
+                      img.srcset = img.dataset.srcset;
+                  }
+                  img.removeAttribute("data-src");
+                  img.removeAttribute("data-srcset");
+                  img.classList.add("loaded"); // اضافه کردن کلاس برای انیمیشن یا استایل پس از بارگذاری
+                  observer.unobserve(img);
+              }
+          });
+      },
+      {
+          rootMargin: "0px 0px 100px 0px", // بارگذاری 100px قبل از رسیدن به viewport
+          threshold: 0.01, // حتی اگر 1% از تصویر قابل مشاهده باشد
+      }
+  );
 
-    lazyImages.forEach((img) => {
-        imageObserver.observe(img);
-    });
+  lazyImages.forEach((img) => {
+      imageObserver.observe(img);
+  });
 });
 
 // 20. دکمه بازگشت به بالا (Scroll-to-Top Button) (اصل سهولت و تلاش کم، اصل قابلیت پیش‌بینی)
@@ -925,10 +931,10 @@ scrollToTopButton.setAttribute("aria-label", "بازگشت به بالای صف�
 document.body.appendChild(scrollToTopButton);
 
 scrollToTopButton.addEventListener("click", () => {
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-    });
+  window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+  });
 });
 
 // 21. قابلیت کپی کردن لینک شبکه‌های اجتماعی (اصل بازخورد آنی، اصل تلاش کم)
@@ -937,39 +943,39 @@ scrollToTopButton.addEventListener("click", () => {
 // بهینه‌سازی: استفاده از Event Delegation برای مدیریت کلیک روی لینک‌های شبکه‌های اجتماعی
 const connectLinksBlock = document.querySelector(".connect-links-block ul");
 if (connectLinksBlock) {
-    connectLinksBlock.addEventListener("click", function(e) {
-        const socialLink = e.target.closest("a");
-        if (socialLink && connectLinksBlock.contains(socialLink)) {
-            // فقط در صورتی که لینک به یک صفحه خارجی باشد و نه یک # (لینک داخلی)
-            if (socialLink.href && socialLink.href.startsWith("http")) {
-                e.preventDefault(); // جلوگیری از باز شدن لینک در تب جدید
+  connectLinksBlock.addEventListener("click", function(e) {
+      const socialLink = e.target.closest("a");
+      if (socialLink && connectLinksBlock.contains(socialLink)) {
+          // فقط در صورتی که لینک به یک صفحه خارجی باشد و نه یک # (لینک داخلی)
+          if (socialLink.href && socialLink.href.startsWith("http")) {
+              e.preventDefault(); // جلوگیری از باز شدن لینک در تب جدید
 
-                const linkToCopy = socialLink.href;
+              const linkToCopy = socialLink.href;
 
-                // استفاده از Clipboard API برای کپی کردن متن (مدرن‌تر و امن‌تر)
-                if (navigator.clipboard && navigator.clipboard.writeText) {
-                    navigator.clipboard.writeText(linkToCopy).then(() => {
-                        let linkName = socialLink.textContent.trim();
-                        if (socialLink.querySelector("i")) {
-                            linkName = socialLink
-                                .querySelector("i")
-                                .nextSibling.textContent.trim(); // گرفتن متن بعد از آیکون
-                        }
-                        createToast(`لینک ${linkName} کپی شد! ✅`, {
-                            id: `social-link-copy-${linkName.replace(/\s/g, "")}`, // ID یکتا
-                            iconClass: "fas fa-clipboard-check",
-                            iconColor: "var(--highlight-color)",
-                        });
-                    }).catch(err => {
-                        console.error('Failed to copy social link using Clipboard API:', err);
-                        // Fallback به execCommand در صورت عدم موفقیت
-                        copyTextUsingExecCommand(linkToCopy, `social-link-copy-${linkName.replace(/\s/g, "")}`);
-                    });
-                } else {
-                    // Fallback برای مرورگرهای قدیمی‌تر یا محیط‌های محدود
-                    copyTextUsingExecCommand(linkToCopy, `social-link-copy-${linkName.replace(/\s/g, "")}`);
-                }
-            }
-        }
-    });
+              // استفاده از Clipboard API برای کپی کردن متن (مدرن‌تر و امن‌تر)
+              if (navigator.clipboard && navigator.clipboard.writeText) {
+                  navigator.clipboard.writeText(linkToCopy).then(() => {
+                      let linkName = socialLink.textContent.trim();
+                      if (socialLink.querySelector("i")) {
+                          linkName = socialLink
+                              .querySelector("i")
+                              .nextSibling.textContent.trim(); // گرفتن متن بعد از آیکون
+                      }
+                      createToast(`لینک ${linkName} کپی شد! ✅`, {
+                          id: `social-link-copy-${linkName.replace(/\s/g, "")}`, // ID یکتا
+                          iconClass: "fas fa-clipboard-check",
+                          iconColor: "var(--highlight-color)",
+                      });
+                  }).catch(err => {
+                      console.error('Failed to copy social link using Clipboard API:', err);
+                      // Fallback به execCommand در صورت عدم موفقیت
+                      copyTextUsingExecCommand(linkToCopy, `social-link-copy-${linkName.replace(/\s/g, "")}`);
+                  });
+              } else {
+                  // Fallback برای مرورگرهای قدیمی‌تر یا محیط‌های محدود
+                  copyTextUsingExecCommand(linkToCopy, `social-link-copy-${linkName.replace(/\s/g, "")}`);
+              }
+          }
+      }
+  });
 }
