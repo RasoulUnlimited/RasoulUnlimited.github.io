@@ -675,7 +675,6 @@ section h2::after {
 .card:hover {
   transform: translateY(-8px); /* اصل پاداش فوری */
   box-shadow: 0 18px 50px var(--shadow-color-strong); /* سایه قوی‌تر برای حس پاداش بیشتر */
-  z-index: 2;
   filter: brightness(1.05) saturate(1.05); /* افزایش جزئی روشنایی و اشباع رنگ (اصل جذابیت بصری و ظاهری) */
 }
 
@@ -998,7 +997,7 @@ img.loaded {
 #skills .skills-list li i {
   /* Increased space to push text away from icon */
   margin-right: var(--space-sm);
-  margin-left: 0; /* Ensure no conflicting margin */
+  margin-left: 0;
   color: var(--primary-color);
   width: 1em;
   text-align: center;
@@ -1735,26 +1734,9 @@ img.loaded {
 }
 
 /* Theme Toast Notification CSS (اصل بازخورد آنی، اصل پاداش فوری) */
-#theme-toast {
-  position: fixed;
-  top: var(--navbar-height); /* زیر نوار ناوبری */
-  left: 50%;
-  transform: translateX(-50%) translateY(-100%); /* پنهان در ابتدا */
-  background-color: var(--primary-color);
-  color: white;
-  padding: 10px 20px;
-  border-radius: 8px;
-  z-index: 1002;
-  opacity: 0;
-  transition: transform 0.5s var(--transition-easing-springy), opacity 0.5s ease-out; /* انیمیشن فنری برای ظاهر شدن */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  white-space: nowrap; /* جلوگیری از شکستن متن */
+/* این استایل‌ها به تابع createToast منتقل شده‌اند و id: 'theme-change-toast' را هدف قرار می‌دهند */
+.theme-toast {
   border-right: 4px solid var(--highlight-color); /* اضافه شدن خط کناری برای زیبایی و تمایز */
-}
-
-#theme-toast.show {
-  transform: translateX(-50%) translateY(20px); /* نمایش با کمی فاصله از بالا */
-  opacity: 1;
 }
 
 /* Explore Hint CSS (اصل کشف و پیش‌بینی، اصل کنجکاوی و رمزآلود بودن، اصل انتظارات مثبت) */
@@ -1842,11 +1824,10 @@ img.loaded {
 
 /* Dynamic Toast Notifications (Welcome, End of Page, General) (اصل بازخورد آنی، اصل روان‌روانی و سهولت جریان) */
 /* بهبود یافته برای ظاهر حرفه‌ای و انیمیشن‌های جذاب‌تر */
-.dynamic-toast, #welcome-toast, #end-of-page-toast {
+.dynamic-toast {
   position: fixed;
-  bottom: 20px;
   left: 50%;
-  transform: translateX(-50%) translateY(150%); /* پنهان در ابتدا، از پایین وارد می‌شود */
+  transform: translateX(-50%) translateY(150%); /* پیش‌فرض: از پایین وارد می‌شود */
   background-color: var(--primary-color);
   color: white;
   padding: 15px 30px; /* پدینگ بیشتر */
@@ -1866,22 +1847,65 @@ img.loaded {
   gap: 10px; /* فاصله بین آیکون و متن */
 }
 
-.dynamic-toast.show, #welcome-toast.show, #end-of-page-toast.show {
-  transform: translateX(-50%) translateY(0); /* نمایش در موقعیت نهایی */
+/* حالت نمایش برای Toastها */
+.dynamic-toast.show {
+  transform: translateX(-50%) translateY(0); /* حرکت به موقعیت نهایی */
   opacity: 1;
 }
 
+/* استایل برای متن داخل Toast */
+.dynamic-toast .toast-message {
+    flex-grow: 1; /* اجازه می‌دهد متن فضای موجود را پر کند */
+}
+
 /* آیکون برای Dynamic Toast */
-.dynamic-toast::before {
+.dynamic-toast i {
     font-family: "Font Awesome 6 Free";
     font-weight: 900;
     margin-left: 10px; /* فاصله از متن */
     font-size: 1.2em;
-    color: var(--highlight-color); /* رنگ آیکون */
 }
-/* آیکون برای پیام‌های عمومی (مثلاً کپی شد) */
-.dynamic-toast:not(.exploration-toast):not(.final-exploration-toast)::before {
-    content: "\f05a"; /* fa-info-circle */
+
+/* استایل‌های اختصاصی برای انواع Toast */
+
+/* Welcome Toast */
+.welcome-toast {
+    background-color: var(--primary-color);
+    color: white;
+    border-left: 6px solid var(--highlight-color);
+}
+.welcome-toast i {
+    color: var(--highlight-color);
+}
+
+/* End of Page Toast */
+.end-of-page-toast {
+    background-color: var(--primary-color);
+    color: white;
+    border-left: 6px solid var(--highlight-color);
+}
+.end-of-page-toast i {
+    color: var(--highlight-color);
+}
+
+/* Email Copy Toast */
+.email-copy-toast {
+    background-color: var(--accent-color); /* رنگ متفاوت برای تاکید */
+    color: white;
+    border-left: 6px solid var(--highlight-color);
+}
+.email-copy-toast i {
+    color: var(--highlight-color);
+}
+
+/* Social Link Copy Toast (می‌تواند شبیه email-copy-toast باشد یا متفاوت) */
+.social-link-copy-toast {
+    background-color: var(--accent-color);
+    color: white;
+    border-left: 6px solid var(--highlight-color);
+}
+.social-link-copy-toast i {
+    color: var(--highlight-color);
 }
 
 
@@ -1892,10 +1916,7 @@ img.loaded {
     border-left: 6px solid var(--accent-color); /* خط کناری با رنگ تاکیدی */
 }
 
-.exploration-toast::before {
-    font-family: "Font Awesome 6 Free";
-    font-weight: 900;
-    content: "\f002"; /* fa-search - برای حس کاوش */
+.exploration-toast i {
     color: var(--accent-color); /* رنگ آیکون */
 }
 
@@ -1913,10 +1934,7 @@ img.loaded {
     transform: translateX(-50%) translateY(0) scale(1); /* بزرگ شدن به حالت عادی */
 }
 
-.final-exploration-toast::before {
-    font-family: "Font Awesome 6 Free";
-    font-weight: 900;
-    content: "\f091"; /* fa-trophy - برای حس موفقیت */
+.final-exploration-toast i {
     color: var(--primary-color); /* رنگ آیکون */
     animation: bounceIn 1s ease-out; /* انیمیشن ورود آیکون */
 }
@@ -1937,39 +1955,12 @@ img.loaded {
 
 /* Fun Fact Toast Notification (اصل کنجکاوی و رمزآلود بودن، اصل تضاد و تنوع حسی، اصل تأخیر معنادار پاداش) */
 .fun-fact-toast {
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%) translateY(-150%); /* از بالا وارد می‌شود */
   background-color: var(--highlight-color);
   color: var(--secondary-color);
-  padding: 15px 30px; /* پدینگ بیشتر */
-  border-radius: 12px; /* گردی بیشتر */
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4); /* سایه قوی‌تر */
-  z-index: 1004;
-  opacity: 0;
-  transition: transform 0.6s var(--transition-easing-springy), opacity 0.6s ease-out; /* انیمیشن فنری */
-  white-space: nowrap;
-  font-size: 1.1rem;
-  direction: rtl;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  gap: 10px;
   border-right: 6px solid var(--primary-color); /* خط کناری برجسته‌تر */
 }
 
-.fun-fact-toast.show {
-  transform: translateX(-50%) translateY(0);
-  opacity: 1;
-}
-
-.fun-fact-toast::before {
-    font-family: "Font Awesome 6 Free";
-    font-weight: 900;
-    content: "\f0eb"; /* fa-lightbulb */
-    margin-left: 10px;
-    font-size: 1.2em;
+.fun-fact-toast i {
     color: var(--primary-color);
 }
 
@@ -1983,6 +1974,7 @@ img.loaded {
   margin: 0;
   line-height: 1;
   transition: transform 0.2s ease-in-out;
+  margin-right: 10px; /* فاصله از متن Toast */
 }
 
 .fun-fact-close:hover {
@@ -2102,9 +2094,9 @@ img.loaded {
     height: auto;
     padding: var(--space-xxs) 0;
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
   }
 
   .navbar nav {
