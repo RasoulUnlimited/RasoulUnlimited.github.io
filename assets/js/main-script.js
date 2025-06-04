@@ -11,7 +11,7 @@
 /**
  * تابع throttle برای محدود کردن تعداد دفعات اجرای یک تابع در یک بازه زمانی مشخص.
  * این به بهبود عملکرد در رویدادهایی مانند اسکرول یا تغییر اندازه پنجره کمک می‌کند.
- * (اصل روان‌روانی و سهولت جریان، اصل بار شناختی پایین)
+ * (اصل روان‌روانی و سهولت جریان، اصل بار شناختی پایین)ف
  * @param {Function} func - تابعی که باید محدود شود.
  * @param {number} limit - حداقل زمان (میلی‌ثانیه) بین دو اجرای متوالی تابع.
  * @returns {Function} - تابع محدود شده.
@@ -622,18 +622,33 @@ if (faqContainer) {
 
         // For accessibility and better UX, scroll to the opened item if it's off-screen
         setTimeout(() => {
+          const navbarHeight = document.querySelector(".navbar")?.offsetHeight || 0;
+          const offset = navbarHeight + 20; // Combined offset for navbar and breathing room
+
           const rect = item.getBoundingClientRect();
-          // Check if top is above viewport OR bottom is below viewport (partially or fully off screen)
-          // Consider navbar height for accurate scrolling
-          const navbarHeight =
-            document.querySelector(".navbar")?.offsetHeight || 0;
-          if (rect.top < navbarHeight || rect.bottom > window.innerHeight) {
-            window.scrollTo({
-              top: item.offsetTop - navbarHeight - 20, // Add a small offset for breathing room
-              behavior: "smooth",
-            });
+          const isTopObscured = rect.top < offset;
+          const isBottomObscured = rect.bottom > window.innerHeight;
+
+          if (isTopObscured || isBottomObscured) {
+            // Scroll the item into view, aligning its top with the viewport top
+            item.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            // After a short delay, adjust the scroll position to account for the fixed header.
+            // This second setTimeout is crucial because scrollIntoView is asynchronous.
+            setTimeout(() => {
+              const currentScrollY = window.scrollY;
+              const currentRect = item.getBoundingClientRect();
+
+              // If the item's top is still obscured by the navbar after the initial scrollIntoView
+              if (currentRect.top < offset) {
+                window.scrollTo({
+                  top: currentScrollY - (offset - currentRect.top),
+                  behavior: 'smooth'
+                });
+              }
+            }, 100); // Small delay to allow initial scrollIntoView to start
           }
-        }, 600); // Increased delay from 450ms to 600ms
+        }, 600); // Original delay for opening animation
         // GA4 Event: Track FAQ expand
         if (typeof gtag === "function") {
           gtag("event", "faq_expand", {
@@ -695,10 +710,26 @@ if (faqContainer) {
           // Scroll to the opened FAQ after a short delay to allow rendering
           setTimeout(() => {
             const navbarHeight = document.querySelector(".navbar")?.offsetHeight || 0;
-            window.scrollTo({
-              top: targetElement.offsetTop - navbarHeight - 20,
-              behavior: "smooth",
-            });
+            const offset = navbarHeight + 20; // Combined offset for navbar and breathing room
+
+            const rect = targetElement.getBoundingClientRect();
+            const isTopObscured = rect.top < offset;
+            const isBottomObscured = rect.bottom > window.innerHeight;
+
+            if (isTopObscured || isBottomObscured) {
+              targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+              setTimeout(() => {
+                const currentScrollY = window.scrollY;
+                const currentRect = targetElement.getBoundingClientRect();
+                if (currentRect.top < offset) {
+                  window.scrollTo({
+                    top: currentScrollY - (offset - currentRect.top),
+                    behavior: 'smooth'
+                  });
+                }
+              }, 100);
+            }
           }, 100); // Small delay to ensure layout is ready
         }
       }
