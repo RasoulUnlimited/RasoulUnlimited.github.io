@@ -39,6 +39,24 @@ function throttle(func, limit) {
   };
 }
 
+/**
+* تابع debounce برای به تأخیر انداختن اجرای یک تابع تا زمانی که یک رویداد متوقف شود.
+* این به بهبود عملکرد در رویدادهایی مانند تغییر اندازه پنجره یا ورودی‌های تایپ شده کمک می‌کند.
+* (اصل روان‌روانی و سهولت جریان، اصل بار شناختی پایین)
+* @param {Function} func - تابعی که باید به تأخیر انداخته شود.
+* @param {number} delay - مدت زمان تأخیر (میلی‌ثانیه).
+* @returns {Function} - تابع به تأخیر افتاده.
+*/
+function debounce(func, delay) {
+  let timeout;
+  return function() {
+      const context = this;
+      const args = arguments;
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func.apply(context, args), delay);
+  };
+}
+
 
 // 1. به‌روزرسانی سال جاری در فوتر (اصل قابلیت پیش‌بینی، اصل کنترل و انتخاب)
 // این بخش تضمین می‌کند که سال کپی‌رایت در پایین صفحه همیشه به‌روز باشد.
@@ -221,16 +239,19 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 });
 
 // 5. بازخورد بصری برای کلیک روی کارت‌ها (اصل پاداش فوری و مثبت، اصل نشانه‌های تعاملی، اصل جذابیت بصری و ظاهری، اصل برانگیختگی هیجانی)
-// انیمیشن کوچک پس از کلیک، یک پاداش بصری فوری و مثبت است که تعامل کاربر را تقویت می‌کند.
-// این کار حس لذت و تعامل را افزایش می‌دهد.
-document.querySelectorAll(".card").forEach((card) => {
-  card.addEventListener("click", function () {
-      this.classList.add("clicked-pop");
+// بهینه‌سازی: استفاده از Event Delegation برای مدیریت کلیک روی کارت‌ها
+// به جای افزودن شنونده رویداد به هر کارت، یک شنونده به والد مشترک اضافه می‌کنیم.
+// این کار تعداد شنونده‌های رویداد در DOM را کاهش می‌دهد و حافظه را بهینه‌سازی می‌کند.
+document.addEventListener("click", function(event) {
+  const card = event.target.closest(".card");
+  if (card) {
+      card.classList.add("clicked-pop");
       setTimeout(() => {
-          this.classList.remove("clicked-pop");
+          card.classList.remove("clicked-pop");
       }, 300);
-  });
+  }
 });
+
 
 // 6. نوار پیشرفت اسکرول (اصل پیشرفت قابل مشاهده، اصل حس موفقیت، اصل تأخیر معنادار پاداش، اصل بار شناختی پایین)
 // نوار پیشرفت، وضعیت کاربر را به صورت بصری نشان می‌دهد و حس پیشرفت را القا می‌کند.
@@ -356,8 +377,9 @@ exploreHint.addEventListener("click", (e) => {
 });
 
 // 8. پیام‌های پاداش متغیر برای مهارت‌ها (اصل تأخیر معنادار پاداش، اصل کنجکاوی و رمزآلود بودن، اصل لذت از تسلط، اصل پاداش دوپامینی)
-// هنگام هاور روی هر مهارت، یک پیام تصادفی و جذاب نمایش داده می‌شود که حس کنجکاوی و پاداش متغیر را تقویت می‌کند.
-// این پاداش‌های غیرقابل پیش‌بینی، ترشح دوپامین را تحریک کرده و تجربه را جذاب‌تر می‌کنند.
+// بهینه‌سازی: استفاده از Event Delegation برای مدیریت هاور روی مهارت‌ها
+// به جای افزودن شنونده رویداد به هر آیتم مهارت، یک شنونده به والد مشترک (#skills .skills-list) اضافه می‌کنیم.
+const skillsList = document.querySelector("#skills .skills-list");
 const skillMessages = [
   "تسلط کامل بر این مهارت.",
   "تجربه گسترده در این حوزه.",
@@ -371,42 +393,73 @@ const skillMessages = [
   "این مهارت بخشی از توانمندی‌های اصلی من است.",
 ];
 
-document.querySelectorAll("#skills .skills-list li").forEach((skillItem) => {
-  const messageSpan = document.createElement("span");
-  messageSpan.className = "skill-hover-message";
-  skillItem.appendChild(messageSpan);
+if (skillsList) {
+  let currentSkillMessageSpan = null;
+  let hideTimeoutForSkill;
 
-  let hideTimeout; // To store the timeout for hiding
+  skillsList.addEventListener("mouseover", function(event) {
+      const skillItem = event.target.closest("li");
+      if (skillItem && skillsList.contains(skillItem)) {
+          // اگر پیام قبلی وجود دارد و برای یک آیتم دیگر است، آن را پنهان کن
+          if (currentSkillMessageSpan && currentSkillMessageSpan.parentElement !== skillItem) {
+              clearTimeout(hideTimeoutForSkill);
+              currentSkillMessageSpan.style.opacity = "0";
+              currentSkillMessageSpan.style.transform = "translateY(0)";
+              currentSkillMessageSpan = null;
+          }
 
-  skillItem.addEventListener("mouseenter", () => {
-      clearTimeout(hideTimeout); // Clear any pending hide
-      const randomMessage =
-          skillMessages[Math.floor(Math.random() * skillMessages.length)];
-      messageSpan.textContent = randomMessage;
-      messageSpan.style.opacity = "1";
-      messageSpan.style.transform = "translateY(-5px)";
-  });
+          // اگر آیتم فعلی هنوز پیام ندارد، آن را ایجاد کن
+          let messageSpan = skillItem.querySelector(".skill-hover-message");
+          if (!messageSpan) {
+              messageSpan = document.createElement("span");
+              messageSpan.className = "skill-hover-message";
+              skillItem.appendChild(messageSpan);
+          }
+          currentSkillMessageSpan = messageSpan;
 
-  skillItem.addEventListener("mouseleave", () => {
-      // Add a slight delay before hiding to allow for "delayed meaningful reward"
-      hideTimeout = setTimeout(() => {
-          messageSpan.style.opacity = "0";
-          messageSpan.style.transform = "translateY(0)";
-      }, 200); // Small delay, e.g., 200ms
-  });
-});
-
-// 10. بازخورد برای باز شدن FAQ (اصل بازخورد آنی، اصل کشف و پیش‌بینی، اصل تلاش کم)
-// بازخورد بصری هنگام باز و بسته شدن آیتم‌های FAQ، تعامل را واضح‌تر و دلپذیرتر می‌کند.
-// این کار به کاربر اطمینان می‌دهد که عملش نتیجه داشته است.
-document.querySelectorAll(".faq-item summary").forEach((summary) => {
-  summary.addEventListener("click", () => {
-      const parentDetails = summary.closest("details");
-      if (parentDetails) {
-          parentDetails.classList.toggle("faq-opened");
+          clearTimeout(hideTimeoutForSkill); // Clear any pending hide
+          const randomMessage =
+              skillMessages[Math.floor(Math.random() * skillMessages.length)];
+          messageSpan.textContent = randomMessage;
+          messageSpan.style.opacity = "1";
+          messageSpan.style.transform = "translateY(-5px)";
       }
   });
-});
+
+  skillsList.addEventListener("mouseout", function(event) {
+      const skillItem = event.target.closest("li");
+      if (skillItem && skillsList.contains(skillItem)) {
+          const messageSpan = skillItem.querySelector(".skill-hover-message");
+          if (messageSpan) {
+              hideTimeoutForSkill = setTimeout(() => {
+                  messageSpan.style.opacity = "0";
+                  messageSpan.style.transform = "translateY(0)";
+                  if (currentSkillMessageSpan === messageSpan) {
+                      currentSkillMessageSpan = null;
+                  }
+              }, 200); // Small delay, e.g., 200ms
+          }
+      }
+  });
+}
+
+
+// 10. بازخورد برای باز شدن FAQ (اصل بازخورد آنی، اصل کشف و پیش‌بینی، اصل تلاش کم)
+// بهینه‌سازی: استفاده از Event Delegation برای مدیریت باز شدن FAQ
+// به جای افزودن شنونده رویداد به هر summary، یک شنونده به والد مشترک (.faq-container) اضافه می‌کنیم.
+const faqContainer = document.querySelector(".faq-container");
+if (faqContainer) {
+  faqContainer.addEventListener("click", function(event) {
+      const summary = event.target.closest("summary");
+      if (summary && faqContainer.contains(summary)) {
+          const parentDetails = summary.closest("details");
+          if (parentDetails) {
+              parentDetails.classList.toggle("faq-opened");
+          }
+      }
+  });
+}
+
 
 // 11. پیام خوش‌آمدگویی برای کاربران جدید/بازگشتی (اصل شخصی‌سازی، اصل تعلق و ارتباط، اصل هویت و شأن فردی، اصل هم‌ذات‌پنداری)
 // این پیام برای ایجاد حس شخصی‌سازی و تعلق خاطر در کاربر طراحی شده است.
@@ -453,25 +506,48 @@ if (emailLink) {
       e.preventDefault(); // جلوگیری از باز شدن ایمیل کلاینت
       const email = emailLink.href.replace("mailto:", "");
 
-      // ایجاد یک المان موقت برای کپی کردن متن
-      const tempInput = document.createElement("input");
-      tempInput.value = email;
-      document.body.appendChild(tempInput);
-      tempInput.select();
-      document.execCommand("copy"); // کپی کردن متن
-      document.body.removeChild(tempInput);
-
-      createToast("ایمیل کپی شد. ✅", {
-          id: "email-copy-toast", // ID یکتا
-          iconClass: "fas fa-check-circle",
-          iconColor: "var(--highlight-color)",
-      });
+      // استفاده از Clipboard API برای کپی کردن متن (مدرن‌تر و امن‌تر)
+      // در محیط‌های iframe ممکن است نیاز به fallback به execCommand باشد.
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(email).then(() => {
+              createToast("ایمیل کپی شد. ✅", {
+                  id: "email-copy-toast", // ID یکتا
+                  iconClass: "fas fa-check-circle",
+                  iconColor: "var(--highlight-color)",
+              });
+          }).catch(err => {
+              console.error('Failed to copy email using Clipboard API:', err);
+              // Fallback به execCommand در صورت عدم موفقیت
+              copyTextUsingExecCommand(email, "email-copy-toast");
+          });
+      } else {
+          // Fallback برای مرورگرهای قدیمی‌تر یا محیط‌های محدود
+          copyTextUsingExecCommand(email, "email-copy-toast");
+      }
   });
 }
+
+// تابع کمکی برای کپی کردن متن با execCommand
+function copyTextUsingExecCommand(text, toastId) {
+  const tempInput = document.createElement("input");
+  tempInput.value = text;
+  document.body.appendChild(tempInput);
+  tempInput.select();
+  document.execCommand("copy"); // کپی کردن متن
+  document.body.removeChild(tempInput);
+
+  createToast("ایمیل کپی شد. ✅", {
+      id: toastId, // ID یکتا
+      iconClass: "fas fa-check-circle",
+      iconColor: "var(--highlight-color)",
+  });
+}
+
 
 // 14. افکت کنفتی (اصل اثر پایان خوش، اصل حس موفقیت، اصل جذابیت بصری و ظاهری)
 // این تابع افکت بصری کنفتی را برای جشن گرفتن اتمام صفحه ایجاد می‌کند.
 // این یک پاداش هیجانی قوی است که تجربه کاربری را به یاد ماندنی می‌کند.
+// بهینه‌سازی: استفاده از DocumentFragment برای کاهش دستکاری‌های DOM
 function createConfetti() {
   const confettiContainer = document.createElement("div");
   confettiContainer.id = "confetti-container";
@@ -479,6 +555,7 @@ function createConfetti() {
 
   const confettiCount = 30; // کاهش تعداد کنفتی برای حس حرفه‌ای‌تر و ظریف‌تر
   const colors = ["#ffc107", "#007acc", "#005a9e", "#f0f0f0"]; // رنگ‌های تم سایت
+  const fragment = document.createDocumentFragment(); // ایجاد DocumentFragment
 
   for (let i = 0; i < confettiCount; i++) {
       const confetti = document.createElement("div");
@@ -488,7 +565,7 @@ function createConfetti() {
       confetti.style.left = Math.random() * 100 + "vw";
       confetti.style.top = Math.random() * 100 + "vh";
       confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
-      confettiContainer.appendChild(confetti);
+      fragment.appendChild(confetti); // اضافه کردن به DocumentFragment
 
       confetti.animate(
           [
@@ -515,6 +592,7 @@ function createConfetti() {
           confetti.remove();
       });
   }
+  confettiContainer.appendChild(fragment); // یک بار اضافه کردن تمام کنفتی‌ها به DOM
 
   setTimeout(() => {
       confettiContainer.remove();
@@ -535,6 +613,9 @@ const funFacts = [
 let funFactToastInstance = null; // برای نگهداری رفرنس Toast دانستنی
 let idleTimeout;
 
+// بهینه‌سازی: استفاده از debounce برای resetIdleTimer
+const debouncedResetIdleTimer = debounce(resetIdleTimer, 500); // 500ms تأخیر برای ریست تایمر
+
 function resetIdleTimer() {
   clearTimeout(idleTimeout);
   idleTimeout = setTimeout(() => {
@@ -550,7 +631,7 @@ function resetIdleTimer() {
 
 // رویدادهای فعالیت کاربر
 ["mousemove", "keydown", "scroll", "touchstart"].forEach((event) => {
-  window.addEventListener(event, resetIdleTimer);
+  window.addEventListener(event, debouncedResetIdleTimer); // استفاده از debouncedResetIdleTimer
 });
 
 // شروع اولیه تایمر بیکاری
@@ -842,33 +923,42 @@ scrollToTopButton.addEventListener("click", () => {
 // 21. قابلیت کپی کردن لینک شبکه‌های اجتماعی (اصل بازخورد آنی، اصل تلاش کم)
 // این قابلیت به کاربر اجازه می‌دهد تا با یک کلیک، لینک شبکه‌های اجتماعی را کپی کند،
 // که باعث افزایش راحتی و کاهش تلاش برای به اشتراک‌گذاری می‌شود.
-document
-  .querySelectorAll(".connect-links-block ul li a")
-  .forEach((socialLink) => {
-      socialLink.addEventListener("click", (e) => {
+// بهینه‌سازی: استفاده از Event Delegation برای مدیریت کلیک روی لینک‌های شبکه‌های اجتماعی
+const connectLinksBlock = document.querySelector(".connect-links-block ul");
+if (connectLinksBlock) {
+  connectLinksBlock.addEventListener("click", function(e) {
+      const socialLink = e.target.closest("a");
+      if (socialLink && connectLinksBlock.contains(socialLink)) {
           // فقط در صورتی که لینک به یک صفحه خارجی باشد و نه یک # (لینک داخلی)
           if (socialLink.href && socialLink.href.startsWith("http")) {
               e.preventDefault(); // جلوگیری از باز شدن لینک در تب جدید
 
               const linkToCopy = socialLink.href;
-              const tempInput = document.createElement("input");
-              tempInput.value = linkToCopy;
-              document.body.appendChild(tempInput);
-              tempInput.select();
-              document.execCommand("copy"); // کپی کردن متن
-              document.body.removeChild(tempInput);
 
-              let linkName = socialLink.textContent.trim();
-              if (socialLink.querySelector("i")) {
-                  linkName = socialLink
-                      .querySelector("i")
-                      .nextSibling.textContent.trim(); // گرفتن متن بعد از آیکون
+              // استفاده از Clipboard API برای کپی کردن متن (مدرن‌تر و امن‌تر)
+              if (navigator.clipboard && navigator.clipboard.writeText) {
+                  navigator.clipboard.writeText(linkToCopy).then(() => {
+                      let linkName = socialLink.textContent.trim();
+                      if (socialLink.querySelector("i")) {
+                          linkName = socialLink
+                              .querySelector("i")
+                              .nextSibling.textContent.trim(); // گرفتن متن بعد از آیکون
+                      }
+                      createToast(`لینک ${linkName} کپی شد! ✅`, {
+                          id: `social-link-copy-${linkName.replace(/\s/g, "")}`, // ID یکتا
+                          iconClass: "fas fa-clipboard-check",
+                          iconColor: "var(--highlight-color)",
+                      });
+                  }).catch(err => {
+                      console.error('Failed to copy social link using Clipboard API:', err);
+                      // Fallback به execCommand در صورت عدم موفقیت
+                      copyTextUsingExecCommand(linkToCopy, `social-link-copy-${linkName.replace(/\s/g, "")}`);
+                  });
+              } else {
+                  // Fallback برای مرورگرهای قدیمی‌تر یا محیط‌های محدود
+                  copyTextUsingExecCommand(linkToCopy, `social-link-copy-${linkName.replace(/\s/g, "")}`);
               }
-              createToast(`لینک ${linkName} کپی شد! ✅`, {
-                  id: `social-link-copy-${linkName.replace(/\s/g, "")}`, // ID یکتا
-                  iconClass: "fas fa-clipboard-check",
-                  iconColor: "var(--highlight-color)",
-              });
           }
-      });
+      }
   });
+}
