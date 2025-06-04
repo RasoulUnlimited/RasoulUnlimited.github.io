@@ -62,7 +62,7 @@ AOS.init({
   debounceDelay: 50,
   throttleDelay: 99,
   offset: 120,
-  duration: 700, // کمی کوتاه‌تر برای حس سریع‌تر
+  duration: 650, // کمی کوتاه‌تر برای حس سریع‌تر و پاسخگویی بیشتر
   easing: "ease-out", // کمی نرم‌تر
   once: false,
   mirror: false,
@@ -81,7 +81,7 @@ const savedTheme = localStorage.getItem("theme");
  */
 function createToast(message, options = {}) {
   const defaultOptions = {
-    duration: 3000,
+    duration: 2800, // مدت زمان پیش‌فرض کمی کوتاه‌تر برای حس پاسخگویی بیشتر
     customClass: "",
     iconClass: "",
     iconColor: "",
@@ -323,7 +323,7 @@ const heroObserver = new IntersectionObserver(
             exploreHint.style.opacity = "1";
             exploreHint.style.transform = "translateY(0)";
             hintVisible = true;
-          }, 8000);
+          }, 6000); // کمی کوتاه‌تر برای ترغیب سریع‌تر
         }
       } else {
         clearTimeout(hintTimeout);
@@ -707,6 +707,7 @@ if (emailLink) {
             id: "email-copy-toast",
             iconClass: "fas fa-check-circle",
             iconColor: "var(--highlight-color)",
+            duration: 2000, // مدت زمان کوتاه‌تر برای بازخورد سریع
           });
         })
         .catch((err) => {
@@ -736,6 +737,7 @@ function copyTextUsingExecCommand(text, toastId) {
     id: toastId,
     iconClass: "fas fa-check-circle",
     iconColor: "var(--highlight-color)",
+    duration: 2000, // مدت زمان کوتاه‌تر برای بازخورد سریع
   });
 }
 
@@ -835,7 +837,7 @@ function showFunFact() {
     iconClass: "fas fa-lightbulb",
     iconColor: "var(--primary-color)",
     position: "top",
-    duration: 8000,
+    duration: 6000, // مدت زمان کوتاه‌تر برای حفظ تازگی و جلوگیری از خستگی
   });
 
   const closeButton = document.createElement("button");
@@ -1105,6 +1107,7 @@ if (connectLinksBlock) {
                 id: `social-link-copy-${linkName.replace(/\s/g, "")}`,
                 iconClass: "fas fa-clipboard-check",
                 iconColor: "var(--highlight-color)",
+                duration: 2000, // مدت زمان کوتاه‌تر برای بازخورد سریع
               });
             })
             .catch((err) => {
