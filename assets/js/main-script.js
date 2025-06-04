@@ -475,7 +475,13 @@ if (faqContainer) {
       if (summary && faqContainer.contains(summary)) {
           const parentDetails = summary.closest("details");
           if (parentDetails) {
-              parentDetails.classList.toggle("faq-opened");
+              parentDetails.classList.toggle("faq-opened"); // این کلاس انیمیشن باز شدن را در CSS فعال می‌کند
+
+              // اضافه کردن یک کلاس موقت برای بازخورد فوری روی summary
+              summary.classList.add("faq-summary-clicked");
+              setTimeout(() => {
+                  summary.classList.remove("faq-summary-clicked");
+              }, 300); // مدت زمان مطابق با انیمیشن cardPop
           }
       }
   });
