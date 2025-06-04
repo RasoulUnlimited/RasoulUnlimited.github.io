@@ -1,19 +1,11 @@
-/*
- * Style Sheet for Rasoul Unlimited's Official Digital Hub
- * Author: Mohammad Rasoul Sohrabi (Rasoul Unlimited)
- * Custom styles and variable definitions
- *
- * این فایل CSS بر اساس اصول روان‌شناسی تجربه کاربری، علوم شناختی،
- * اقتصاد رفتاری، انسان‌شناسی دیجیتال و تحلیل رفتار مصرف‌کننده بهینه‌سازی شده است.
- * هدف، ایجاد یک تجربه کاربری جذاب، قابل پیش‌بینی و پاداش‌دهنده است.
- *
- * بهینه‌سازی‌های عملکرد (Performance Optimizations):
- * - استفاده از will-change برای اطلاع‌رسانی به مرورگر در مورد تغییرات آتی المنت‌ها.
- * - تمرکز بر انیمیشن‌ها و ترنزیشن‌های مبتنی بر transform و opacity برای شتاب‌دهی GPU.
- * - کاهش رندرینگ و بازسازی DOM با بهینه‌سازی‌های CSS.
- */
+/* main-style.css */
+/* این فایل CSS برای وبسایت رسمی رسول آنلیمیتد، با تمرکز بر اصول روان‌شناسی تجربه کاربری،
+   علوم شناختی، اقتصاد رفتاری، انسان‌شناسی دیجیتال، تحلیل رفتار مصرف‌کننده،
+   نورومارکتینگ، روان‌شناسی هیجانی، روان‌شناسی زیبایی‌شناسی و متقاعدسازی بهینه شده است. */
 
- :root {
+/* --- متغیرهای CSS برای تم روشن و تاریک (روان‌شناسی رنگ و برندینگ، سادگی شناختی) --- */
+/* این متغیرها امکان تغییر آسان تم سایت را فراهم می‌کنند و به حفظ هارمونی بصری کمک می‌کنند. */
+:root {
   --primary-color: #005a9e; /* آبی تیره: برای اعتماد، ثبات و عناصر اصلی تعاملی (اصل کنترل و انتخاب، اصل زیبایی‌شناسی) */
   --secondary-color: #1a1a1a; /* سیاه تیره: برای تیترها و متن‌های مهم (اصل روان‌روانی و سهولت جریان) */
   --accent-color: #007acc; /* آبی روشن: برای تاکیدات، لینک‌ها و بازخورد‌های مثبت (اصل بازخورد آنی، اصل انتظارات مثبت) */
@@ -304,7 +296,7 @@ body {
     color var(--transition-duration-medium) var(--transition-easing-standard),
     background var(--transition-duration-medium)
       var(--transition-easing-standard);
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌هایی که در طول انیمیشن تغییر می‌کنند */
+  /* بهینه‌سازی: افزودن will-change برای ویژگی‌هایی که تغییر می‌کنند */
   will-change: background-color, color, background;
 }
 
@@ -919,6 +911,10 @@ img.loaded {
   color: var(--primary-color);
   width: 1em;
   text-align: center;
+  transition: color var(--transition-duration-short)
+    var(--transition-easing-standard);
+  /* بهینه‌سازی: افزودن will-change برای ویژگی‌ای که تغییر می‌کند */
+  will-change: color;
 }
 
 /* Card Links (e.g., GitHub, Zenodo) (اصل کشف و پیش‌بینی، اصل پاداش فوری، اصل نشانه‌های تعاملی) */
