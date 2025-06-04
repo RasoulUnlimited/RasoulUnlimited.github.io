@@ -500,13 +500,10 @@ if (faqContainer) {
 
       // Check initial open state (for cases where details is open on load or after search)
       if (item.open) {
-        // Temporarily set overflow to visible to measure height
-        answer.style.overflow = "visible";
-        answer.style.maxHeight = `${answer.scrollHeight}px`; // Set to actual content height
+        answer.style.maxHeight = "2000px"; // Set to a large value to ensure content fits
         answer.style.paddingTop = "1.6rem";
         answer.style.paddingBottom = "2.8rem";
         answer.style.opacity = "1";
-        answer.style.overflow = "hidden"; // Reset overflow after measurement
       }
     }
 
@@ -610,13 +607,10 @@ if (faqContainer) {
         // If it was closed and user clicked to open it
         item.open = true; // Set open immediately to apply summary styles
         if (answer) {
-          // Temporarily set overflow to visible to measure height
-          answer.style.overflow = "visible";
-          answer.style.maxHeight = `${answer.scrollHeight}px`; // Dynamically set height
+          answer.style.maxHeight = "2000px"; // Set to a sufficiently large value
           answer.style.paddingTop = "1.6rem";
           answer.style.paddingBottom = "2.8rem";
           answer.style.opacity = "1";
-          answer.style.overflow = "hidden"; // Reset overflow after measurement
           summary.setAttribute("aria-expanded", "true"); // Update ARIA
         }
 
@@ -695,13 +689,10 @@ if (faqContainer) {
         if (targetElement.open === false) { // Only open if not already open
           targetElement.open = true;
           if (targetAnswer) {
-            // Temporarily set overflow to visible to measure height
-            targetAnswer.style.overflow = "visible";
-            targetAnswer.style.maxHeight = `${targetAnswer.scrollHeight}px`;
+            targetAnswer.style.maxHeight = "2000px"; // Set to a sufficiently large value
             targetAnswer.style.paddingTop = "1.6rem";
             targetAnswer.style.paddingBottom = "2.8rem";
             targetAnswer.style.opacity = "1";
-            targetAnswer.style.overflow = "hidden"; // Reset overflow after measurement
           }
           if (targetSummary) {
             targetSummary.setAttribute('aria-expanded', 'true');
