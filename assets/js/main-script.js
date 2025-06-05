@@ -445,7 +445,8 @@ if (skillsList) {
   let currentSkillMessageSpan = null;
   let hideTimeoutForSkill;
 
-  skillsList.addEventListener("mouseover", function (event) {
+  // استفاده از mouseenter به جای mouseover برای جلوگیری از باگ تغییر متن هنگام حرکت روی حاشیه
+  skillsList.addEventListener("mouseenter", function (event) {
     const skillItem = event.target.closest("li");
     if (skillItem && skillsList.contains(skillItem)) {
       if (
@@ -476,9 +477,10 @@ if (skillsList) {
       // افکت بصری ظریف روی آیتم مهارت (Aesthetic Psychology: Neuroaesthetics)
       skillItem.classList.add("skill-hover-effect");
     }
-  });
+  }, true); // افزودن `true` برای استفاده از Event Capturing
 
-  skillsList.addEventListener("mouseout", function (event) {
+  // استفاده از mouseleave به جای mouseout برای جلوگیری از باگ
+  skillsList.addEventListener("mouseleave", function (event) {
     const skillItem = event.target.closest("li");
     if (skillItem && skillsList.contains(skillItem)) {
       const messageSpan = skillItem.querySelector(".skill-hover-message");
@@ -493,7 +495,7 @@ if (skillsList) {
       }
       skillItem.classList.remove("skill-hover-effect");
     }
-  });
+  }, true); // افزودن `true` برای استفاده از Event Capturing
 }
 
 // 10. بازخورد برای باز شدن FAQ
