@@ -182,7 +182,8 @@ input:checked + .slider:before {
   --primary-color: #61dafb;
   --primary-rgb: 97, 218, 251;
   --secondary-color: #f0f0f0;
-  --accent-color: #a0a0a0;
+  /* IMPROVEMENT: Changed accent-color for better contrast in dark mode */
+  --accent-color: #a0e0ff; /* Lighter blue for interactive elements */
   --highlight-color: #fdd835;
   --highlight-rgb: 253, 216, 53;
   --highlight-darker: #c7a700;
