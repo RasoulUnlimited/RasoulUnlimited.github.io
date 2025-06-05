@@ -442,60 +442,55 @@ const skillMessages = [
 ];
 
 if (skillsList) {
-  let currentSkillMessageSpan = null;
-  let hideTimeoutForSkill;
+  const skillItems = skillsList.querySelectorAll("li"); // انتخاب تمامی آیتم‌های مهارت
 
-  // استفاده از mouseenter به جای mouseover برای جلوگیری از باگ تغییر متن هنگام حرکت روی حاشیه
-  skillsList.addEventListener("mouseenter", function (event) {
-    const skillItem = event.target.closest("li");
-    if (skillItem && skillsList.contains(skillItem)) {
-      if (
-        currentSkillMessageSpan &&
-        currentSkillMessageSpan.parentElement !== skillItem
-      ) {
-        clearTimeout(hideTimeoutForSkill);
-        currentSkillMessageSpan.style.opacity = "0";
-        currentSkillMessageSpan.style.transform = "translateY(0)";
-        currentSkillMessageSpan = null;
+  skillItems.forEach(skillItem => {
+    let hideTimeoutForSkill;
+    
+    // تابعی برای دریافت یا ایجاد span پیام شناور برای یک آیتم مهارت خاص
+    function getOrCreateMessageSpan(item) {
+      let span = item.querySelector(".skill-hover-message");
+      if (!span) {
+        span = document.createElement("span");
+        span.className = "skill-hover-message";
+        item.appendChild(span);
       }
-
-      let messageSpan = skillItem.querySelector(".skill-hover-message");
-      if (!messageSpan) {
-        messageSpan = document.createElement("span");
-        messageSpan.className = "skill-hover-message";
-        skillItem.appendChild(messageSpan);
-      }
-      currentSkillMessageSpan = messageSpan;
-
-      clearTimeout(hideTimeoutForSkill);
-      const randomMessage =
-        skillMessages[Math.floor(Math.random() * skillMessages.length)];
-      messageSpan.textContent = randomMessage;
-      messageSpan.style.opacity = "1";
-      messageSpan.style.transform = "translateY(-5px)";
-
-      // افکت بصری ظریف روی آیتم مهارت (Aesthetic Psychology: Neuroaesthetics)
-      skillItem.classList.add("skill-hover-effect");
+      return span;
     }
-  }, true); // افزودن `true` برای استفاده از Event Capturing
 
-  // استفاده از mouseleave به جای mouseout برای جلوگیری از باگ
-  skillsList.addEventListener("mouseleave", function (event) {
-    const skillItem = event.target.closest("li");
-    if (skillItem && skillsList.contains(skillItem)) {
-      const messageSpan = skillItem.querySelector(".skill-hover-message");
-      if (messageSpan) {
+    // گوش‌دهنده برای ورود موس به آیتم مهارت
+    skillItem.addEventListener("mouseenter", function () {
+      clearTimeout(hideTimeoutForSkill); // پاک کردن هرگونه زمان‌بندی پنهان‌سازی قبلی
+      
+      const currentMessageSpan = getOrCreateMessageSpan(this);
+      
+      // فقط در صورتی متن را به‌روزرسانی کنید که متن فعالی وجود نداشته باشد یا هنوز نمایش داده نشده باشد
+      if (!currentMessageSpan.classList.contains('show-message')) { 
+        const randomMessage = skillMessages[Math.floor(Math.random() * skillMessages.length)];
+        currentMessageSpan.textContent = randomMessage;
+        currentMessageSpan.style.opacity = "1";
+        currentMessageSpan.style.transform = "translateY(-5px)";
+        currentMessageSpan.classList.add('show-message'); // اضافه کردن کلاس برای نشان دادن نمایش
+      }
+
+      // اضافه کردن افکت بصری به آیتم مهارت
+      this.classList.add('skill-hover-effect');
+    });
+
+    // گوش‌دهنده برای خروج موس از آیتم مهارت
+    skillItem.addEventListener("mouseleave", function () {
+      const currentMessageSpan = this.querySelector(".skill-hover-message");
+      if (currentMessageSpan) {
         hideTimeoutForSkill = setTimeout(() => {
-          messageSpan.style.opacity = "0";
-          messageSpan.style.transform = "translateY(0)";
-          if (currentSkillMessageSpan === messageSpan) {
-            currentSkillMessageSpan = null;
-          }
+          currentMessageSpan.style.opacity = "0";
+          currentMessageSpan.style.transform = "translateY(0)";
+          currentMessageSpan.classList.remove('show-message'); // حذف کلاس نمایش
         }, 200);
       }
-      skillItem.classList.remove("skill-hover-effect");
-    }
-  }, true); // افزودن `true` برای استفاده از Event Capturing
+      // حذف افکت بصری از آیتم مهارت
+      this.classList.remove('skill-hover-effect');
+    });
+  });
 }
 
 // 10. بازخورد برای باز شدن FAQ
@@ -1066,7 +1061,7 @@ const explorationToastCooldown = 8000; // زمان خنک‌کننده برای 
 
 const sectionProgressObserver = new IntersectionObserver(
   (entries) => {
-    const now = Date.now();
+    const now = Date.Date();
 
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
@@ -1131,7 +1126,7 @@ if (!isAllSectionsExploredPreviously) {
 }
 
 // 18. افکت پالس/گلو برای دکمه‌های CTA اصلی
-// (نورومارکتینگ: Cortical Arousal Response; روان‌شناسی متقاعدسازی: Nudge Theory in Design)
+// (نورومارکتینگ: Cortical Arousal Response; روان‌شناسی متقناع‌سازی: Nudge Theory in Design)
 const mainCTAs = document.querySelectorAll(".main-cta-button");
 
 mainCTAs.forEach((button) => {
