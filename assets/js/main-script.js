@@ -1,14 +1,3 @@
-// main-script.js
-// اسکریپت اصلی برای وبسایت رسمی رسول آنلیمیتد
-
-// --- ابزارهای کمکی برای بهبود عملکرد ---
-
-/**
- * تابع throttle برای محدود کردن تعداد دفعات اجرای یک تابع در یک بازه زمانی مشخص.
- * @param {Function} func - تابعی که باید محدود شود.
- * @param {number} limit - حداقل زمان (میلی‌ثانیه) بین دو اجرای متوالی تابع.
- * @returns {Function} - تابع محدود شده.
- */
 function throttle(func, limit) {
   let inThrottle;
   let lastFunc;
@@ -32,12 +21,6 @@ function throttle(func, limit) {
   };
 }
 
-/**
- * تابع debounce برای به تأخیر انداختن اجرای یک تابع تا زمانی که یک رویداد متوقف شود.
- * @param {Function} func - تابعی که باید به تأخیر انداخته شود.
- * @param {number} delay - مدت زمان تأخیر (میلی‌ثانیه).
- * @returns {Function} - تابع به تأخیر افتاده.
- */
 function debounce(func, delay) {
   let timeout;
   return function () {
@@ -48,45 +31,50 @@ function debounce(func, delay) {
   };
 }
 
-// Global AudioContext for subtle sound effects (Multisensory Mapping: Synesthetic Design, Audio Feedback Pairing)
 let audioContext;
 let clickBuffer;
 let toastBuffer;
 
-// تابع برای ایجاد صدای کلیک ساده
 function createClickSound() {
-  const duration = 0.05; // ثانیه
-  const frequency = 440; // هرتز (نت A4)
+  const duration = 0.05;
+  const frequency = 440;
   const gain = 0.1;
 
-  const buffer = audioContext.createBuffer(1, audioContext.sampleRate * duration, audioContext.sampleRate);
+  const buffer = audioContext.createBuffer(
+    1,
+    audioContext.sampleRate * duration,
+    audioContext.sampleRate
+  );
   const data = buffer.getChannelData(0);
 
   for (let i = 0; i < data.length; i++) {
-    data[i] = Math.sin(2 * Math.PI * frequency * (i / audioContext.sampleRate)) * gain;
+    data[i] =
+      Math.sin(2 * Math.PI * frequency * (i / audioContext.sampleRate)) * gain;
   }
   return buffer;
 }
 
-// تابع برای ایجاد صدای توست (نمایش اعلان)
 function createToastSound() {
-  const duration = 0.1; // ثانیه
-  const startFrequency = 880; // هرتز (نت A5)
-  const endFrequency = 1200; // هرتز
+  const duration = 0.1;
+  const startFrequency = 880;
+  const endFrequency = 1200;
   const gain = 0.15;
 
-  const buffer = audioContext.createBuffer(1, audioContext.sampleRate * duration, audioContext.sampleRate);
+  const buffer = audioContext.createBuffer(
+    1,
+    audioContext.sampleRate * duration,
+    audioContext.sampleRate
+  );
   const data = buffer.getChannelData(0);
 
   for (let i = 0; i < data.length; i++) {
     const t = i / audioContext.sampleRate;
     const frequency = startFrequency + (endFrequency - startFrequency) * (t / duration);
-    data[i] = Math.sin(2 * Math.PI * frequency * t) * gain * (1 - t / duration); // کاهش تدریجی صدا (decay)
+    data[i] = Math.sin(2 * Math.PI * frequency * t) * gain * (1 - t / duration);
   }
   return buffer;
 }
 
-// بارگذاری صداها در بافرها
 async function loadSounds() {
   if (audioContext) {
     clickBuffer = createClickSound();
@@ -94,13 +82,12 @@ async function loadSounds() {
   }
 }
 
-// پخش صدا بر اساس نوع
 function playSound(type) {
-  if (!audioContext || audioContext.state === 'suspended') return;
+  if (!audioContext || audioContext.state === "suspended") return;
 
   let bufferToPlay;
-  if (type === 'click' && clickBuffer) bufferToPlay = clickBuffer;
-  if (type === 'toast' && toastBuffer) bufferToPlay = toastBuffer;
+  if (type === "click" && clickBuffer) bufferToPlay = clickBuffer;
+  if (type === "toast" && toastBuffer) bufferToPlay = toastBuffer;
 
   if (bufferToPlay) {
     const source = audioContext.createBufferSource();
@@ -110,17 +97,14 @@ function playSound(type) {
   }
 }
 
-// تابع برای فعال‌سازی بازخورد لمسی (Haptic Feedback)
-function triggerHapticFeedback(pattern = [50]) { // الگو پیش‌فرض: لرزش کوتاه 50 میلی‌ثانیه
+function triggerHapticFeedback(pattern = [50]) {
   if (navigator.vibrate) {
     navigator.vibrate(pattern);
   }
 }
 
-// 1. به‌روزرسانی سال جاری در فوتر (روان‌شناسی ادراک، سهولت شناختی)
 document.getElementById("current-year").textContent = new Date().getFullYear();
 
-// 2. راه‌اندازی کتابخانه AOS (Animate On Scroll) (روان‌شناسی ادراک، زیبایی‌شناسی تعاملی)
 AOS.init({
   disable: false,
   startEvent: "DOMContentLoaded",
@@ -131,34 +115,26 @@ AOS.init({
   debounceDelay: 50,
   throttleDelay: 99,
   offset: 120,
-  duration: 600, // کمی کوتاه‌تر برای حس سریع‌تر و پاسخگویی بیشتر
+  duration: 600,
   easing: "ease-out",
   once: false,
   mirror: false,
   anchorPlacement: "top-bottom",
 });
 
-/**
- * تابع مرکزی برای نمایش پیام‌های Toast.
- * (بازخورد آنی، پاداش فوری، روان‌شناسی ادراک، نورومارکتینگ: Mesolimbic Reward Pathway Activation)
- * این تابع برای ارائه بازخورد سریع و دلپذیر به کاربر طراحی شده است.
- * @param {string} message - متن پیام.
- * @param {object} options - گزینه‌های نمایش Toast.
- */
 function createToast(message, options = {}) {
   const defaultOptions = {
-    duration: 2500, // مدت زمان پیش‌فرض برای نمایش
+    duration: 2500,
     customClass: "",
     iconClass: "",
     iconColor: "",
     position: "bottom",
-    isPersistent: false, // آیا توست باید در صفحه بماند؟
-    id: "", // شناسه منحصر به فرد برای جلوگیری از توست‌های تکراری
-    closeButton: false, // آیا دکمه بستن داشته باشد؟
+    isPersistent: false,
+    id: "",
+    closeButton: false,
   };
   const settings = { ...defaultOptions, ...options };
 
-  // جلوگیری از ایجاد توست تکراری
   if (settings.id) {
     const existingToast = document.getElementById(settings.id);
     if (existingToast && existingToast.classList.contains("show")) {
@@ -166,7 +142,6 @@ function createToast(message, options = {}) {
     }
   }
 
-  // حذف توست‌های قبلی غیر Persistent برای جلوگیری از انباشتگی
   document
     .querySelectorAll(".dynamic-toast:not(.persistent-toast)")
     .forEach((toast) => {
@@ -196,7 +171,6 @@ function createToast(message, options = {}) {
   dynamicToast.innerHTML = `${iconHtml} <span class="toast-message">${message}</span>`;
   document.body.appendChild(dynamicToast);
 
-  // تنظیم موقعیت ورود توست
   if (settings.position === "top") {
     dynamicToast.style.top = "20px";
     dynamicToast.style.bottom = "auto";
@@ -207,14 +181,12 @@ function createToast(message, options = {}) {
     dynamicToast.style.transform = "translateX(-50%) translateY(150%)";
   }
 
-  // اعمال انیمیشن ورود
   setTimeout(() => {
     dynamicToast.classList.add("show");
     dynamicToast.style.transform = "translateX(-50%) translateY(0)";
-    playSound('toast'); // پخش صدای توست
+    playSound("toast");
   }, 100);
 
-  // افزودن دکمه بستن (برای Fun Fact Toast)
   if (settings.closeButton) {
     const closeBtn = document.createElement("button");
     closeBtn.className = "fun-fact-close";
@@ -236,10 +208,9 @@ function createToast(message, options = {}) {
     });
   }
 
-  // حذف خودکار توست (اگر Persistent نباشد)
   if (!settings.isPersistent) {
     setTimeout(() => {
-      if (dynamicToast.classList.contains("show")) { // اطمینان از اینکه هنوز در حال نمایش است
+      if (dynamicToast.classList.contains("show")) {
         if (settings.position === "top") {
           dynamicToast.style.transform = "translateX(-50%) translateY(-150%)";
         } else {
@@ -260,13 +231,10 @@ function createToast(message, options = {}) {
   return dynamicToast;
 }
 
-// 3. مدیریت تغییر تم (حالت روشن/تاریک)
-// (روان‌شناسی تجربه کاربری: Perceived Control, بازخورد آنی; زیبایی‌شناسی: Color Psychology)
 const themeToggleInput = document.getElementById("theme-toggle");
 const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 const savedTheme = localStorage.getItem("theme");
 
-// اعمال تم بر اساس تنظیمات ذخیره شده یا پیش‌فرض سیستم
 function applyTheme(theme, showToast = false) {
   document.body.classList.toggle("dark-mode", theme === "dark");
   document.body.classList.toggle("light-mode", theme === "light");
@@ -284,28 +252,23 @@ function applyTheme(theme, showToast = false) {
         duration: 2800,
       }
     );
-    // افزودن افکت جرقه به هنگام تغییر تم (Microinteraction Psychology, Neuroaesthetics)
     createSparkle(themeToggleInput.parentElement);
-    triggerHapticFeedback([30]); // بازخورد لمسی برای تغییر تم
+    triggerHapticFeedback([30]);
   }
 }
 
-// لود اولیه تم
 if (savedTheme) {
   applyTheme(savedTheme);
 } else {
   applyTheme(prefersDark ? "dark" : "light");
 }
 
-// گوش دادن به تغییرات تم
 themeToggleInput.addEventListener("change", () => {
   const newTheme = themeToggleInput.checked ? "dark" : "light";
   applyTheme(newTheme, true);
   localStorage.setItem("theme", newTheme);
 });
 
-// 4. مدیریت اسکرول صاف برای لینک‌های ناوبری
-// (روان‌شناسی تجربه کاربری: Cognitive Ease Principle; علوم شناختی: Information Processing Theory)
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   anchor.addEventListener("click", function (e) {
     e.preventDefault();
@@ -319,66 +282,63 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         top: targetElement.offsetTop - navbarHeight - 10,
         behavior: "smooth",
       });
-      triggerHapticFeedback([20]); // بازخورد لمسی برای اسکرول صاف
+      triggerHapticFeedback([20]);
     }
   });
 });
 
-// 5. بازخورد بصری برای کلیک روی کارت‌ها
-// (روان‌شناسی تجربه کاربری: Microinteraction Psychology, Temporal Feedback Loops; نورومارکتینگ: Dopaminergic Activation)
 document.addEventListener("click", function (event) {
   const card = event.target.closest(".card");
   if (card) {
     card.classList.add("clicked-pop");
     setTimeout(() => {
       card.classList.remove("clicked-pop");
-    }, 300); // مدت زمان کوتاه برای بازخورد آنی
-    triggerHapticFeedback([40]); // بازخورد لمسی برای کلیک روی کارت
+    }, 300);
+    triggerHapticFeedback([40]);
   }
 });
 
-// --- ویژگی جدید: بازخورد بصری عمومی برای کلیک بر روی عناصر تعاملی ---
-// (Neuro-Cognitive Microprocesses: Dopaminergic Phasic Bursts, Temporal Feedback Loops; Behavioral Conditioning Architecture: Operant Conditioning)
-document.body.addEventListener('click', (event) => {
+document.body.addEventListener("click", (event) => {
   const target = event.target;
-  // بررسی کنید آیا عنصر کلیک شده یا والد نزدیک آن یک عنصر تعاملی است
-  const interactiveElement = target.closest('button, a:not([href^="#"]), input[type="submit"], [role="button"], [tabindex="0"]');
+  const interactiveElement = target.closest(
+    'button, a:not([href^="#"]), input[type="submit"], [role="button"], [tabindex="0"]'
+  );
 
-  // استثنا کردن لینک‌های داخلی که اسکرول صاف دارند چون بازخوردشان قبلاً مدیریت شده
-  if (interactiveElement && !interactiveElement.classList.contains('no-click-feedback') && !interactiveElement.matches('a[href^="#"]')) {
-    // افزودن یک کلاس موقت برای انیمیشن بازخورد
-    interactiveElement.classList.add('click-feedback-effect');
+  if (
+    interactiveElement &&
+    !interactiveElement.classList.contains("no-click-feedback") &&
+    !interactiveElement.matches('a[href^="#"]')
+  ) {
+    interactiveElement.classList.add("click-feedback-effect");
 
-    // حذف کلاس پس از اتمام انیمیشن
-    interactiveElement.addEventListener('animationend', () => {
-      interactiveElement.classList.remove('click-feedback-effect');
-    }, { once: true });
-    
-    triggerHapticFeedback([10]); // بازخورد لمسی ظریف برای کلیک عمومی
-    playSound('click'); // پخش صدای کلیک
+    interactiveElement.addEventListener(
+      "animationend",
+      () => {
+        interactiveElement.classList.remove("click-feedback-effect");
+      },
+      { once: true }
+    );
+
+    triggerHapticFeedback([10]);
+    playSound("click");
   }
 });
 
-
-// 6. نوار پیشرفت اسکرول
-// (روان‌شناسی تجربه کاربری: Goal Gradient Effect, Peak-End Rule; علوم شناختی: Predictive Coding)
 const scrollProgressBar = document.createElement("div");
 scrollProgressBar.id = "scroll-progress-bar";
 document.body.prepend(scrollProgressBar);
 
 let lastScrollY = 0;
 let ticking = false;
-let hasReachedEndOfPageSession = false; // اطمینان از نمایش تنها یکبار توست پایان صفحه
+let hasReachedEndOfPageSession = false;
 
 function updateScrollProgressAndButton() {
-  const totalHeight =
-    document.documentElement.scrollHeight - window.innerHeight;
+  const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
   const scrolled = lastScrollY;
   const progress = (scrolled / totalHeight) * 100;
 
   scrollProgressBar.style.width = progress + "%";
 
-  // تغییر رنگ نوار پیشرفت بر اساس میزان پیشرفت (Aesthetic Psychology: Color Psychology & Affective Mapping)
   if (progress > 90) {
     scrollProgressBar.style.backgroundColor = "var(--highlight-color)";
   } else if (progress > 50) {
@@ -387,7 +347,6 @@ function updateScrollProgressAndButton() {
     scrollProgressBar.style.backgroundColor = "var(--primary-color)";
   }
 
-  // دکمه بازگشت به بالا با انیمیشن ظریف (User Experience Psychology: Affordance Recognition, Perceived Control)
   if (lastScrollY > 300) {
     if (!scrollToTopButton.classList.contains("show")) {
       scrollToTopButton.classList.add("show");
@@ -409,8 +368,6 @@ function updateScrollProgressAndButton() {
     }
   }
 
-  // 12. جشن اتمام صفحه
-  // (روان‌شناسی هیجانی: Positive Surprise Effect, Affective Forecasting Errors; نورومارکتینگ: Reward Prediction Error Encoding)
   if (
     window.innerHeight + lastScrollY >= document.body.offsetHeight - 50 &&
     !hasReachedEndOfPageSession
@@ -424,7 +381,6 @@ function updateScrollProgressAndButton() {
     });
     hasReachedEndOfPageSession = true;
 
-    // بررسی اتمام کاوش سایت
     if (!announcedMilestones.has(totalSections)) {
       announcedMilestones.add(totalSections);
       localStorage.setItem(
@@ -434,7 +390,6 @@ function updateScrollProgressAndButton() {
       sections.forEach((sec) => sectionProgressObserver.unobserve(sec));
     }
 
-    // ایجاد کنفتی با کمی تأخیر برای حس جشن
     setTimeout(() => {
       createConfetti();
     }, 3500);
@@ -442,7 +397,6 @@ function updateScrollProgressAndButton() {
   ticking = false;
 }
 
-// گوش دادن به رویداد اسکرول با throttle برای بهینه‌سازی عملکرد
 window.addEventListener(
   "scroll",
   () => {
@@ -455,8 +409,6 @@ window.addEventListener(
   { passive: true }
 );
 
-// 7. Hint برای کاوش بیشتر
-// (اقتصاد رفتاری: Behavioral Nudging; روان‌شناسی توجه: Selective Attention Psychology; روان‌شناسی هیجانی: Anticipated Emotion Modeling)
 const exploreHint = document.createElement("a");
 exploreHint.href = "#projects";
 exploreHint.id = "explore-hint";
@@ -480,9 +432,9 @@ const heroObserver = new IntersectionObserver(
               "opacity 0.5s ease-out, transform 0.5s ease-out";
             exploreHint.style.opacity = "1";
             exploreHint.style.transform = "translateY(0)";
-            exploreHint.classList.add("pulse-animation"); // افزودن انیمیشن پالس برای جلب توجه بیشتر
+            exploreHint.classList.add("pulse-animation");
             hintVisible = true;
-          }, 4000); // کمی کوتاه‌تر برای ترغیب سریع‌تر
+          }, 4000);
         }
       } else {
         clearTimeout(hintTimeout);
@@ -502,7 +454,6 @@ if (heroSection) {
   heroObserver.observe(heroSection);
 }
 
-// هنگام کلیک روی hint، آن را پنهان کرده و به بخش مورد نظر اسکرول کنید
 exploreHint.addEventListener("click", (e) => {
   e.preventDefault();
   exploreHint.style.opacity = "0";
@@ -515,11 +466,9 @@ exploreHint.addEventListener("click", (e) => {
       (document.querySelector(".navbar")?.offsetHeight || 0),
     behavior: "smooth",
   });
-  triggerHapticFeedback([20]); // بازخورد لمسی برای کلیک روی hint
+  triggerHapticFeedback([20]);
 });
 
-// 8. پیام‌های پاداش متغیر برای مهارت‌ها
-// (نورومارکتینگ: Dopaminergic Activation, Neurological Novelty Response; روان‌شناسی هیجانی: Positive Surprise Effect)
 const skillsList = document.querySelector("#skills .skills-list");
 const skillMessages = [
   "تسلط کامل بر این مهارت.",
@@ -539,12 +488,11 @@ const skillMessages = [
 ];
 
 if (skillsList) {
-  const skillItems = skillsList.querySelectorAll("li"); // انتخاب تمامی آیتم‌های مهارت
+  const skillItems = skillsList.querySelectorAll("li");
 
-  skillItems.forEach(skillItem => {
+  skillItems.forEach((skillItem) => {
     let hideTimeoutForSkill;
-    
-    // تابعی برای دریافت یا ایجاد span پیام شناور برای یک آیتم مهارت خاص
+
     function getOrCreateMessageSpan(item) {
       let span = item.querySelector(".skill-hover-message");
       if (!span) {
@@ -555,43 +503,37 @@ if (skillsList) {
       return span;
     }
 
-    // گوش‌دهنده برای ورود موس به آیتم مهارت
     skillItem.addEventListener("mouseenter", function () {
-      clearTimeout(hideTimeoutForSkill); // پاک کردن هرگونه زمان‌بندی پنهان‌سازی قبلی
-      
+      clearTimeout(hideTimeoutForSkill);
+
       const currentMessageSpan = getOrCreateMessageSpan(this);
-      
-      // فقط در صورتی متن را به‌روزرسانی کنید که متن فعالی وجود نداشته باشد یا هنوز نمایش داده نشده باشد
-      if (!currentMessageSpan.classList.contains('show-message')) { 
-        const randomMessage = skillMessages[Math.floor(Math.random() * skillMessages.length)];
+
+      if (!currentMessageSpan.classList.contains("show-message")) {
+        const randomMessage =
+          skillMessages[Math.floor(Math.random() * skillMessages.length)];
         currentMessageSpan.textContent = randomMessage;
         currentMessageSpan.style.opacity = "1";
         currentMessageSpan.style.transform = "translateY(-5px)";
-        currentMessageSpan.classList.add('show-message'); // اضافه کردن کلاس برای نشان دادن نمایش
+        currentMessageSpan.classList.add("show-message");
       }
 
-      // اضافه کردن افکت بصری به آیتم مهارت
-      this.classList.add('skill-hover-effect');
+      this.classList.add("skill-hover-effect");
     });
 
-    // گوش‌دهنده برای خروج موس از آیتم مهارت
     skillItem.addEventListener("mouseleave", function () {
       const currentMessageSpan = this.querySelector(".skill-hover-message");
       if (currentMessageSpan) {
         hideTimeoutForSkill = setTimeout(() => {
           currentMessageSpan.style.opacity = "0";
           currentMessageSpan.style.transform = "translateY(0)";
-          currentMessageSpan.classList.remove('show-message'); // حذف کلاس نمایش
+          currentMessageSpan.classList.remove("show-message");
         }, 200);
       }
-      // حذف افکت بصری از آیتم مهارت
-      this.classList.remove('skill-hover-effect');
+      this.classList.remove("skill-hover-effect");
     });
   });
 }
 
-// 10. بازخورد برای باز شدن FAQ
-// (روان‌شناسی تجربه کاربری: Cognitive Ease Principle, Perceived Control; Microinteraction Psychology)
 const faqContainer = document.querySelector(".faq-container");
 const faqItems = document.querySelectorAll(".faq-item");
 
@@ -607,7 +549,6 @@ if (faqContainer) {
       summary.setAttribute("aria-controls", answer.id);
     }
 
-    // تنظیمات اولیه CSS برای انیمیشن باز و بسته شدن
     if (answer) {
       answer.style.maxHeight = "0px";
       answer.style.overflow = "hidden";
@@ -636,15 +577,13 @@ if (faqContainer) {
 
       const wasAlreadyOpen = item.open;
 
-      // افزودن افکت کلیک و جرقه
       summary.classList.add("faq-summary-clicked");
-      createSparkle(summary); // Microinteraction, Dopaminergic Activation
+      createSparkle(summary);
 
       setTimeout(() => {
         summary.classList.remove("faq-summary-clicked");
       }, 300);
 
-      // بستن تمام FAQهای دیگر (Cognitive Load Theory: Chunking Mechanisms)
       faqItems.forEach((otherItem) => {
         if (otherItem !== item && otherItem.open) {
           const otherSummary = otherItem.querySelector("summary");
@@ -663,7 +602,6 @@ if (faqContainer) {
             otherItem.open = false;
             otherSummary.setAttribute("aria-expanded", "false");
           }
-          // ردیابی رویداد با gtag و hj (در صورت وجود)
           if (typeof gtag === "function") {
             gtag("event", "faq_auto_collapse", {
               event_category: "FAQ Interaction",
@@ -694,7 +632,6 @@ if (faqContainer) {
         }
       });
 
-      // باز یا بسته کردن FAQ کلیک شده
       if (wasAlreadyOpen) {
         if (answer) {
           answer.style.maxHeight = "0px";
@@ -730,7 +667,6 @@ if (faqContainer) {
           summary.setAttribute("aria-expanded", "true");
         }
 
-        // اسکرول به FAQ باز شده برای اطمینان از دید کامل آن (Usability Psychology)
         setTimeout(() => {
           const navbarHeight =
             document.querySelector(".navbar")?.offsetHeight || 0;
@@ -771,7 +707,6 @@ if (faqContainer) {
     });
   });
 
-  // مدیریت لینک‌های هش در FAQها هنگام بارگذاری صفحه
   window.addEventListener("DOMContentLoaded", () => {
     const hash = window.location.hash;
     if (hash) {
@@ -839,8 +774,6 @@ if (faqContainer) {
   });
 }
 
-// 11. پیام خوش‌آمدگویی برای کاربران جدید/بازگشتی
-// (روان‌شناسی هیجانی: Cognitive & Emotional Empathy, Induced Belongingness; روان‌شناسی شناخت اجتماعی: Perceived Social Presence)
 window.addEventListener("load", () => {
   const hasVisited = localStorage.getItem("hasVisited");
   let message = "";
@@ -872,37 +805,33 @@ window.addEventListener("load", () => {
   }
 });
 
-// 13. بازخورد برای کپی ایمیل
-// (روان‌شناسی تجربه کاربری: Temporal Feedback Loops; اقتصاد رفتاری: Immediate Reward Principle)
 const emailLink = document.querySelector('.contact-info a[href^="mailto:"]');
 if (emailLink) {
-  emailLink.addEventListener("click", (e) => {
+  emailLink.addEventListener("click", async (e) => {
     e.preventDefault();
     const email = emailLink.href.replace("mailto:", "");
 
-    if (document.execCommand) {
-      copyTextUsingExecCommand(email, "email-copy-toast", "ایمیل کپی شد. ✅");
-    } else if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard
-        .writeText(email)
-        .then(() => {
-          createToast("ایمیل کپی شد. ✅", {
-            id: "email-copy-toast",
-            iconClass: "fas fa-check-circle",
-            iconColor: "var(--highlight-color)",
-            duration: 1800,
-          });
-          triggerHapticFeedback([50]); // بازخورد لمسی برای کپی موفق
-        })
-        .catch((err) => {
-          console.error("Failed to copy email using Clipboard API:", err);
-          createToast("کپی ایمیل با خطا مواجه شد.", {
-            id: "copy-error-toast",
-            iconClass: "fas fa-exclamation-triangle",
-            iconColor: "red",
-            duration: 3000,
-          });
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      try {
+        await navigator.clipboard.writeText(email);
+        createToast("ایمیل کپی شد. ✅", {
+          id: "email-copy-toast",
+          iconClass: "fas fa-check-circle",
+          iconColor: "var(--highlight-color)",
+          duration: 1800,
         });
+        triggerHapticFeedback([50]);
+      } catch (err) {
+        console.error("Failed to copy email using Clipboard API:", err);
+        createToast("کپی ایمیل با خطا مواجه شد.", {
+          id: "copy-error-toast",
+          iconClass: "fas fa-exclamation-triangle",
+          iconColor: "red",
+          duration: 3000,
+        });
+      }
+    } else if (document.execCommand) {
+      copyTextUsingExecCommand(email, "email-copy-toast", "ایمیل کپی شد. ✅");
     } else {
       createToast("مرورگر شما از کپی کردن پشتیبانی نمی‌کند.", {
         id: "copy-error-toast",
@@ -914,7 +843,6 @@ if (emailLink) {
   });
 }
 
-// تابع کمکی برای کپی کردن متن با execCommand
 function copyTextUsingExecCommand(text, toastId, successMessage) {
   const tempInput = document.createElement("input");
   tempInput.value = text;
@@ -929,11 +857,9 @@ function copyTextUsingExecCommand(text, toastId, successMessage) {
     iconColor: "var(--highlight-color)",
     duration: 1800,
   });
-  triggerHapticFeedback([50]); // بازخورد لمسی برای کپی موفق
+  triggerHapticFeedback([50]);
 }
 
-// 14. افکت کنفتی
-// (نورومارکتینگ: Mesolimbic Reward Pathway Activation; روان‌شناسی هیجانی: Positive Surprise Effect)
 function createConfetti() {
   const confettiContainer = document.createElement("div");
   confettiContainer.id = "confetti-container";
@@ -985,8 +911,6 @@ function createConfetti() {
   }, 4500);
 }
 
-// 15. پیام‌های "دانستنی جالب" (Fun Fact)
-// (روان‌شناسی هیجانی: Positive Surprise Effect; نورومارکتینگ: Neurological Novelty Response; Cognitive Science: Predictive Coding)
 const funFacts = [
   "اولین ربات فارسی دیسکورد توسط من در ۱۴ سالگی توسعه یافت.",
   "من در کاراته دان ۱ رسمی فدراسیون هستم.",
@@ -1013,10 +937,9 @@ function resetIdleTimer() {
     ) {
       showFunFact();
     }
-  }, 20000); // کمی کوتاه‌تر برای حفظ تازگی و جلوگیری از خستگی
+  }, 20000);
 }
 
-// گوش دادن به رویدادهای تعامل کاربر برای ریست کردن تایمر عدم فعالیت
 ["mousemove", "keydown", "scroll", "touchstart"].forEach((event) => {
   if (event === "scroll" || event === "touchstart") {
     window.addEventListener(event, debouncedResetIdleTimer, { passive: true });
@@ -1040,17 +963,14 @@ function showFunFact() {
   });
 }
 
-// 16. فعال‌سازی افکت "جرقه"
-// (روان‌شناسی زیبایی‌شناسی: Neuroaesthetics of Minimalism; نورومارکتینگ: Cortical Arousal Response)
 function createSparkle(element) {
   const sparkle = document.createElement("div");
   sparkle.className = "sparkle-effect";
-  const size = Math.random() * 10 + 5; // اندازه تصادفی بین 5 تا 15 پیکسل
+  const size = Math.random() * 10 + 5;
   sparkle.style.width = `${size}px`;
   sparkle.style.height = `${size}px`;
   sparkle.style.left = `${Math.random() * 100}%`;
   sparkle.style.top = `${Math.random() * 100}%`;
-  // استفاده از رنگ‌های تم سایت برای جرقه (Neuroaesthetics, Color Psychology)
   const colors = ["var(--primary-color)", "var(--accent-color)", "var(--highlight-color)"];
   sparkle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
   sparkle.style.opacity = 0;
@@ -1080,7 +1000,6 @@ function createSparkle(element) {
 }
 
 const featuredCards = document.querySelectorAll(".card.is-featured");
-// IntersectionObserver برای فعال‌سازی جرقه زمانی که کارت‌های ویژه وارد دید می‌شوند
 featuredCards.forEach((card) => {
   const featuredCardObserver = new IntersectionObserver(
     (entries) => {
@@ -1089,7 +1008,6 @@ featuredCards.forEach((card) => {
           for (let i = 0; i < 3; i++) {
             setTimeout(() => createSparkle(entry.target), i * 150);
           }
-          // توقف مشاهده پس از فعال‌سازی
           featuredCardObserver.unobserve(entry.target);
         }
       });
@@ -1099,13 +1017,9 @@ featuredCards.forEach((card) => {
   featuredCardObserver.observe(card);
 });
 
-
-// 17. پیام پیشرفت "بخش‌های کاوش شده"
-// (روان‌شناسی تجربه کاربری: Goal Gradient Effect; روان‌شناسی متقاعدسازی: Commitment & Consistency)
 const sections = document.querySelectorAll("section[id]");
 const totalSections = sections.length;
 
-// استفاده از localStorage برای حفظ وضعیت بازدید بخش‌ها و نقاط عطف
 let sectionsVisited = new Set(
   JSON.parse(localStorage.getItem("sectionsVisited") || "[]")
 );
@@ -1113,7 +1027,6 @@ let announcedMilestones = new Set(
   JSON.parse(localStorage.getItem("announcedMilestones") || "[]")
 );
 
-// تعریف نقاط عطف کاوش سایت
 const explorationMilestones = [
   {
     count: Math.max(1, Math.ceil(totalSections * 0.25)),
@@ -1125,7 +1038,7 @@ const explorationMilestones = [
       Math.ceil(totalSections * 0.25) + 1,
       Math.ceil(totalSections * 0.5)
     ),
-    message: "نصف راه را پیمودید! شما ۵۰٪ از سایت را کاوش کرده‌اید! فوق‌العاده! �",
+    message: "نصف راه را پیمودید! شما ۵۰٪ از سایت را کاوش کرده‌اید! فوق‌العاده! 🚀",
     icon: "fas fa-rocket",
   },
   {
@@ -1144,7 +1057,6 @@ const explorationMilestones = [
   },
 ];
 
-// فیلتر کردن و مرتب‌سازی نقاط عطف برای جلوگیری از تکرار و اطمینان از ترتیب صحیح
 const uniqueExplorationMilestones = [];
 const counts = new Set();
 explorationMilestones.forEach((milestone) => {
@@ -1156,11 +1068,11 @@ explorationMilestones.forEach((milestone) => {
 uniqueExplorationMilestones.sort((a, b) => a.count - b.count);
 
 let lastExplorationToastTime = 0;
-const explorationToastCooldown = 8000; // زمان خنک‌کننده برای توست‌های پیشرفت
+const explorationToastCooldown = 8000;
 
 const sectionProgressObserver = new IntersectionObserver(
   (entries) => {
-    const now = Date.now(); // اصلاح خطای Date.Date() به Date.now()
+    const now = Date.now();
 
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
@@ -1172,7 +1084,6 @@ const sectionProgressObserver = new IntersectionObserver(
 
         const currentSectionsCount = sectionsVisited.size;
 
-        // بررسی و نمایش توست‌های نقاط عطف
         for (let i = 0; i < uniqueExplorationMilestones.length; i++) {
           const milestone = uniqueExplorationMilestones[i];
 
@@ -1216,7 +1127,6 @@ const sectionProgressObserver = new IntersectionObserver(
   { threshold: 0.3 }
 );
 
-// مشاهده بخش‌ها فقط در صورتی که کاوش سایت هنوز کامل نشده باشد
 const isAllSectionsExploredPreviously = announcedMilestones.has(totalSections);
 if (!isAllSectionsExploredPreviously) {
   sections.forEach((section) => {
@@ -1224,16 +1134,12 @@ if (!isAllSectionsExploredPreviously) {
   });
 }
 
-// 18. افکت پالس/گلو برای دکمه‌های CTA اصلی
-// (نورومارکتینگ: Cortical Arousal Response; روان‌شناسی متقناع‌سازی: Nudge Theory in Design)
 const mainCTAs = document.querySelectorAll(".main-cta-button");
 
 mainCTAs.forEach((button) => {
   button.classList.add("cta-pulse-effect");
 });
 
-// 19. بارگذاری تنبل تصاویر
-// (روان‌شناسی تجربه کاربری: Cognitive Ease Principle; علوم شناختی: Pre-attentive Processing)
 document.addEventListener("DOMContentLoaded", function () {
   const lazyImages = document.querySelectorAll("img[data-src]");
 
@@ -1242,23 +1148,22 @@ document.addEventListener("DOMContentLoaded", function () {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const img = entry.target;
-          img.classList.add('is-loading'); // افزودن کلاس بارگذاری
+          img.classList.add("is-loading");
           img.src = img.dataset.src;
           if (img.dataset.srcset) {
             img.srcset = img.dataset.srcset;
           }
-          img.onload = () => { // حذف کلاس بارگذاری پس از اتمام بارگذاری
-            img.classList.remove('is-loading');
+          img.onload = () => {
+            img.classList.remove("is-loading");
             img.classList.add("loaded");
             img.removeAttribute("data-src");
             img.removeAttribute("data-srcset");
           };
-          // برای مدیریت خطا در بارگذاری تصویر
           img.onerror = () => {
-            console.error('Failed to load image:', img.src);
-            img.classList.remove('is-loading'); // حذف کلاس حتی در صورت خطا
-            img.classList.add('load-error'); // اضافه کردن یک کلاس برای نمایش خطا
-            img.src = 'https://placehold.co/400x300/cccccc/000000?text=Error'; // Fallback image
+            console.error("Failed to load image:", img.src);
+            img.classList.remove("is-loading");
+            img.classList.add("load-error");
+            img.src = "https://placehold.co/400x300/cccccc/000000?text=Error";
           };
           observer.unobserve(img);
         }
@@ -1275,15 +1180,12 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// 20. دکمه بازگشت به بالا
-// (روان‌شناسی تجربه کاربری: Usability Psychology; اقتصاد رفتاری: Psychological Opportunity Cost)
 const scrollToTopButton = document.createElement("button");
 scrollToTopButton.id = "scroll-to-top";
 scrollToTopButton.innerHTML = '<i class="fas fa-arrow-up"></i>';
 scrollToTopButton.setAttribute("aria-label", "بازگشت به بالای صفحه");
 document.body.appendChild(scrollToTopButton);
 
-// تنظیمات اولیه برای انیمیشن (مخفی بودن)
 scrollToTopButton.style.opacity = "0";
 scrollToTopButton.style.transform = "translateY(20px)";
 scrollToTopButton.style.transition =
@@ -1294,14 +1196,12 @@ scrollToTopButton.addEventListener("click", () => {
     top: 0,
     behavior: "smooth",
   });
-  triggerHapticFeedback([20]); // بازخورد لمسی برای دکمه بازگشت به بالا
+  triggerHapticFeedback([20]);
 });
 
-// 21. قابلیت کپی کردن لینک شبکه‌های اجتماعی
-// (روان‌شناسی تجربه کاربری: Temporal Feedback Loops; روان‌شناسی شناخت اجتماعی: Social Proof Principle)
 const connectLinksBlock = document.querySelector(".connect-links-block ul");
 if (connectLinksBlock) {
-  connectLinksBlock.addEventListener("click", function (e) {
+  connectLinksBlock.addEventListener("click", async function (e) {
     const socialLink = e.target.closest("a");
     if (socialLink && connectLinksBlock.contains(socialLink)) {
       if (socialLink.href && socialLink.href.startsWith("http")) {
@@ -1315,33 +1215,31 @@ if (connectLinksBlock) {
             : linkName;
         }
 
-        if (document.execCommand) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          try {
+            await navigator.clipboard.writeText(linkToCopy);
+            createToast(`لینک ${linkName} کپی شد! ✅`, {
+              id: `social-link-copy-${linkName.replace(/\s/g, "")}`,
+              iconClass: "fas fa-clipboard-check",
+              iconColor: "var(--highlight-color)",
+              duration: 1800,
+            });
+            triggerHapticFeedback([50]);
+          } catch (err) {
+            console.error("Failed to copy social link using Clipboard API:", err);
+            createToast(`کپی لینک ${linkName} با خطا مواجه شد.`, {
+              id: `social-link-copy-error-${linkName.replace(/\s/g, "")}`,
+              iconClass: "fas fa-exclamation-triangle",
+              iconColor: "red",
+              duration: 3000,
+            });
+          }
+        } else if (document.execCommand) {
           copyTextUsingExecCommand(
             linkToCopy,
             `social-link-copy-${linkName.replace(/\s/g, "")}`,
             `لینک ${linkName} کپی شد! ✅`
           );
-        } else if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard
-            .writeText(linkToCopy)
-            .then(() => {
-              createToast(`لینک ${linkName} کپی شد! ✅`, {
-                id: `social-link-copy-${linkName.replace(/\s/g, "")}`,
-                iconClass: "fas fa-clipboard-check",
-                iconColor: "var(--highlight-color)",
-                duration: 1800,
-              });
-              triggerHapticFeedback([50]); // بازخورد لمسی برای کپی موفق
-            })
-            .catch((err) => {
-              console.error("Failed to copy social link using Clipboard API:", err);
-              createToast(`کپی لینک ${linkName} با خطا مواجه شد.`, {
-                id: `social-link-copy-error-${linkName.replace(/\s/g, "")}`,
-                iconClass: "fas fa-exclamation-triangle",
-                iconColor: "red",
-                duration: 3000,
-              });
-            });
         } else {
           createToast(
             `مرورگر شما از کپی کردن لینک ${linkName} پشتیبانی نمی‌کند.`,
@@ -1358,21 +1256,18 @@ if (connectLinksBlock) {
   });
 }
 
-// --- ویژگی جدید: دکمه و قابلیت اشتراک‌گذاری صفحه
-// (روان‌شناسی شناخت اجتماعی: Perceived Social Presence, Emotional Contagion; اقتصاد رفتاری: Psychological Opportunity Cost)
 const sharePageButton = document.createElement("button");
 sharePageButton.id = "share-page-button";
 sharePageButton.innerHTML = '<i class="fas fa-share-alt"></i>';
 sharePageButton.setAttribute("aria-label", "اشتراک‌گذاری صفحه");
 document.body.appendChild(sharePageButton);
 
-// تنظیمات اولیه برای انیمیشن (مخفی بودن)
 sharePageButton.style.opacity = "0";
 sharePageButton.style.transform = "translateY(20px)";
 sharePageButton.style.transition =
   "opacity 0.3s ease-out, transform 0.3s ease-out";
 sharePageButton.style.position = "fixed";
-sharePageButton.style.bottom = "140px"; // کمی بالاتر از دکمه اسکرول به بالا
+sharePageButton.style.bottom = "140px";
 sharePageButton.style.right = "20px";
 sharePageButton.style.backgroundColor = "var(--accent-color)";
 sharePageButton.style.color = "white";
@@ -1389,7 +1284,6 @@ sharePageButton.style.cursor = "pointer";
 sharePageButton.style.zIndex = "999";
 sharePageButton.classList.add("cta-pulse-effect");
 
-// نمایش/پنهان کردن دکمه اشتراک‌گذاری بر اساس اسکرول
 window.addEventListener("scroll", () => {
   if (window.scrollY > 500) {
     if (!sharePageButton.classList.contains("show")) {
@@ -1413,40 +1307,36 @@ window.addEventListener("scroll", () => {
   }
 });
 
-sharePageButton.addEventListener("click", () => {
+sharePageButton.addEventListener("click", async () => {
   const pageUrl = window.location.href;
 
   if (navigator.share) {
-    // استفاده از Web Share API اگر پشتیبانی شود
-    navigator.share({
-      title: document.title,
-      url: pageUrl,
-    })
-      .then(() => {
-        createToast("لینک صفحه با موفقیت به اشتراک گذاشته شد! ✅", {
-          id: "share-success-toast",
-          iconClass: "fas fa-check-circle",
-          iconColor: "var(--highlight-color)",
-          duration: 2000,
-        });
-        triggerHapticFeedback([50]); // بازخورد لمسی برای اشتراک‌گذاری موفق
-      })
-      .catch((error) => {
-        if (error.name !== 'AbortError') {
-          console.error("Failed to share:", error);
-          createToast("اشتراک‌گذاری با خطا مواجه شد. 😔", {
-            id: "share-error-toast",
-            iconClass: "fas fa-exclamation-triangle",
-            iconColor: "red",
-            duration: 3000,
-          });
-        }
+    try {
+      await navigator.share({
+        title: document.title,
+        url: pageUrl,
       });
+      createToast("لینک صفحه با موفقیت به اشتراک گذاشته شد! ✅", {
+        id: "share-success-toast",
+        iconClass: "fas fa-check-circle",
+        iconColor: "var(--highlight-color)",
+        duration: 2000,
+      });
+      triggerHapticFeedback([50]);
+    } catch (error) {
+      if (error.name !== "AbortError") {
+        console.error("Failed to share:", error);
+        createToast("اشتراک‌گذاری با خطا مواجه شد. 😔", {
+          id: "share-error-toast",
+          iconClass: "fas fa-exclamation-triangle",
+          iconColor: "red",
+          duration: 3000,
+        });
+      }
+    }
   } else if (document.execCommand) {
-    // Fallback برای کپی کردن لینک
     copyTextUsingExecCommand(pageUrl, "share-copy-toast", "لینک صفحه کپی شد! ✅");
   } else {
-    // Fallback نهایی: اطلاع به کاربر که کپی پشتیبانی نمی‌شود
     createToast("مرورگر شما از اشتراک‌گذاری یا کپی کردن پشتیبانی نمی‌کند.", {
       id: "share-unsupported-toast",
       iconClass: "fas fa-exclamation-triangle",
@@ -1456,9 +1346,6 @@ sharePageButton.addEventListener("click", () => {
   }
 });
 
-
-// --- ویژگی جدید: لحظه لذت در ورود به بخش جدید
-// (روان‌شناسی هیجانی: Positive Surprise Effect; نورومارکتینگ: Dopaminergic Activation, Neuroaesthetics)
 const sectionsDelighted = new Set(
   JSON.parse(localStorage.getItem("sectionsDelighted") || "[]")
 );
@@ -1487,23 +1374,24 @@ const sectionDelightObserver = new IntersectionObserver(
   { threshold: 0.4 }
 );
 
-// مشاهده تمام بخش‌ها برای فعال‌سازی ویژگی "لحظه لذت"
 sections.forEach((section) => {
   if (!sectionsDelighted.has(section.id)) {
     sectionDelightObserver.observe(section);
   }
 });
 
-// فعال‌سازی AudioContext با اولین تعامل کاربر (برای رعایت سیاست‌های مرورگر)
-document.addEventListener('DOMContentLoaded', () => {
-  document.body.addEventListener('click', () => {
-    if (!audioContext) {
-      audioContext = new (window.AudioContext || window.webkitAudioContext)();
-      loadSounds(); // بارگذاری صداها پس از ایجاد AudioContext
-      // اگر AudioContext در حالت suspended باشد، آن را resume می‌کنیم
-      if (audioContext.state === 'suspended') {
+document.addEventListener("DOMContentLoaded", () => {
+  document.body.addEventListener(
+    "click",
+    () => {
+      if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        loadSounds();
+        if (audioContext.state === "suspended") {
           audioContext.resume();
+        }
       }
-    }
-  }, { once: true }); // این گوش‌دهنده فقط یک بار فعال می‌شود
+    },
+    { once: true }
+  );
 });
