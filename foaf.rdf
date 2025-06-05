@@ -15,10 +15,19 @@
     <foaf:workplaceHomepage rdf:resource="https://ctb.iau.ir" />
     <foaf:schoolHomepage rdf:resource="https://ctb.iau.ir" />
 
+    <foaf:mbox_sha1sum>95de239e4e15e3209e9d1874e5881f5c7a10b930</foaf:mbox_sha1sum>
+
+    <foaf:based_near>
+      <foaf:SpatialThing>
+        <rdfs:label>Tehran, Iran</rdfs:label>
+      </foaf:SpatialThing>
+    </foaf:based_near>
+
     <foaf:topic_interest rdf:resource="http://dbpedia.org/resource/Biomedical_engineering" />
     <foaf:topic_interest rdf:resource="http://dbpedia.org/resource/Open-source_software" />
     <foaf:topic_interest rdf:resource="http://dbpedia.org/resource/Discord_(software)" />
 
+    <!-- Social Accounts -->
     <foaf:account>
       <foaf:OnlineAccount>
         <foaf:accountServiceHomepage rdf:resource="https://github.com" />
@@ -26,8 +35,99 @@
       </foaf:OnlineAccount>
     </foaf:account>
 
+    <foaf:account>
+      <foaf:OnlineAccount>
+        <foaf:accountServiceHomepage rdf:resource="https://orcid.org" />
+        <foaf:accountName>0009-0004-7177-2080</foaf:accountName>
+      </foaf:OnlineAccount>
+    </foaf:account>
+
+    <foaf:account>
+      <foaf:OnlineAccount>
+        <foaf:accountServiceHomepage rdf:resource="https://linkedin.com" />
+        <foaf:accountName>rasoulunlimited</foaf:accountName>
+      </foaf:OnlineAccount>
+    </foaf:account>
+
+    <foaf:account>
+      <foaf:OnlineAccount>
+        <foaf:accountServiceHomepage rdf:resource="https://medium.com" />
+        <foaf:accountName>rasoulunlimited</foaf:accountName>
+      </foaf:OnlineAccount>
+    </foaf:account>
+
+    <foaf:account>
+      <foaf:OnlineAccount>
+        <foaf:accountServiceHomepage rdf:resource="https://dev.to" />
+        <foaf:accountName>rasoulunlimited</foaf:accountName>
+      </foaf:OnlineAccount>
+    </foaf:account>
+
+    <foaf:account>
+      <foaf:OnlineAccount>
+        <foaf:accountServiceHomepage rdf:resource="https://virgool.io" />
+        <foaf:accountName>rasoulunlimited</foaf:accountName>
+      </foaf:OnlineAccount>
+    </foaf:account>
+
+    <foaf:account>
+      <foaf:OnlineAccount>
+        <foaf:accountServiceHomepage rdf:resource="https://instagram.com" />
+        <foaf:accountName>Rasoul.Unlimited</foaf:accountName>
+      </foaf:OnlineAccount>
+    </foaf:account>
+
+    <foaf:account>
+      <foaf:OnlineAccount>
+        <foaf:accountServiceHomepage rdf:resource="https://t.me" />
+        <foaf:accountName>Rasoul_Unlimited</foaf:accountName>
+      </foaf:OnlineAccount>
+    </foaf:account>
+
+    <foaf:account>
+      <foaf:OnlineAccount>
+        <foaf:accountServiceHomepage rdf:resource="https://www.youtube.com" />
+        <foaf:accountName>rasoulunlimited</foaf:accountName>
+      </foaf:OnlineAccount>
+    </foaf:account>
+
+    <foaf:account>
+      <foaf:OnlineAccount>
+        <foaf:accountServiceHomepage rdf:resource="https://about.me" />
+        <foaf:accountName>rasoulunlimited</foaf:accountName>
+      </foaf:OnlineAccount>
+    </foaf:account>
+
+    <foaf:account>
+      <foaf:OnlineAccount>
+        <foaf:accountServiceHomepage rdf:resource="https://gravatar.com" />
+        <foaf:accountName>rasoulunlimited</foaf:accountName>
+      </foaf:OnlineAccount>
+    </foaf:account>
+
+    <foaf:account>
+      <foaf:OnlineAccount>
+        <foaf:accountServiceHomepage rdf:resource="https://keybase.io" />
+        <foaf:accountName>RasoulUnlimited</foaf:accountName>
+      </foaf:OnlineAccount>
+    </foaf:account>
+
+    <foaf:account>
+      <foaf:OnlineAccount>
+        <foaf:accountServiceHomepage rdf:resource="https://mastodon.social" />
+        <foaf:accountName>RasoulUnlimited</foaf:accountName>
+      </foaf:OnlineAccount>
+    </foaf:account>
+
+    <!-- See Also -->
     <rdfs:seeAlso rdf:resource="https://orcid.org/0009-0004-7177-2080" />
     <rdfs:seeAlso rdf:resource="https://www.wikidata.org/wiki/Q134619124" />
-  </foaf:Person>
+    <rdfs:seeAlso rdf:resource="https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi" />
 
+    <!-- Metadata -->
+    <dc:creator>Mohammad Rasoul Sohrabi</dc:creator>
+    <dc:description>Personal FOAF profile of Mohammad Rasoul Sohrabi (aka Rasoul Unlimited), a biomedical engineering student and open-source contributor from Tehran, Iran.</dc:description>
+    <dc:date>2025-06-05</dc:date>
+
+  </foaf:Person>
 </rdf:RDF>
