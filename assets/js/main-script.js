@@ -302,7 +302,7 @@ function updateScrollProgressAndButton() {
     if (scrollToTopButton.classList.contains("show")) {
       scrollToTopButton.style.opacity = "0";
       scrollToTopButton.style.transform = "translateY(20px)";
-      scrollToTo pButton.addEventListener(
+      scrollToTopButton.addEventListener(
         "transitionend",
         function handler() {
           scrollToTopButton.classList.remove("show");
@@ -954,7 +954,9 @@ function createSparkle(element) {
   sparkle.style.height = `${size}px`;
   sparkle.style.left = `${Math.random() * 100}%`;
   sparkle.style.top = `${Math.random() * 100}%`;
-  sparkle.style.backgroundColor = "white";
+  // استفاده از رنگ‌های تم سایت برای جرقه (Neuroaesthetics, Color Psychology)
+  const colors = ["var(--primary-color)", "var(--accent-color)", "var(--highlight-color)"];
+  sparkle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
   sparkle.style.opacity = 0;
   sparkle.style.position = "absolute";
   sparkle.style.borderRadius = "50%";
@@ -969,9 +971,9 @@ function createSparkle(element) {
 
   sparkle.animate(
     [
-      { opacity: 0, transform: "scale(0) rotate(0deg)" },
-      { opacity: 1, transform: "scale(1) rotate(180deg)" },
-      { opacity: 0, transform: "scale(0.5) rotate(360deg)" },
+      { opacity: 0, transform: `scale(0) rotate(${Math.random() * 360}deg)` },
+      { opacity: 1, transform: `scale(1) rotate(${360 + Math.random() * 360}deg)` },
+      { opacity: 0, transform: `scale(0.5) rotate(${720 + Math.random() * 360}deg)` },
     ],
     {
       duration: 700,
