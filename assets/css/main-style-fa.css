@@ -2,68 +2,43 @@
 /* این فایل CSS برای وبسایت رسمی رسول آنلیمیتد، با تمرکز بر اصول روان‌شناسی تجربه کاربری،
    علوم شناختی، اقتصاد رفتاری، انسان‌شناسی دیجیتال، تحلیل رفتار مصرف‌کننده،
    نورومارکتینگ، روان‌شناسی هیجانی، روان‌شناسی زیبایی‌شناسی و متقاعدسازی بهینه شده است.
-   هدف، ایجاد یک تجربه کاربری جذاب، قابل پیش‌بینی و پاداش‌دهنده است.
+   هدف، ایجاد یک تجربه کاربری جذاب, قابل پیش‌بینی و پاداش‌دهنده است.
 */
 
 /* --- متغیرهای CSS برای تم روشن و تاریک (روان‌شناسی رنگ و برندینگ، سادگی شناختی) --- */
 /* این متغیرها امکان تغییر آسان تم سایت را فراهم می‌کنند و به حفظ هارمونی بصری کمک می‌کنند. */
 :root {
   --primary-color: #005a9e; /* آبی تیره: برای اعتماد، ثبات و عناصر اصلی تعاملی (اصل کنترل و انتخاب، اصل زیبایی‌شناسی) */
+  --primary-rgb: 0, 90, 158; /* RGB برای استفاده در شفافیت (مثلاً سایه‌ها) */
   --secondary-color: #1a1a1a; /* سیاه تیره: برای تیترها و متن‌های مهم (اصل روان‌روانی و سهولت جریان) */
   --accent-color: #007acc; /* آبی روشن: برای تاکیدات، لینک‌ها و بازخورد‌های مثبت (اصل بازخورد آنی، اصل انتظارات مثبت) */
   --highlight-color: #ffc107; /* زرد/طلایی: برای برجسته‌سازی، پاداش‌ها و عناصر ویژه (Featured) (اصل پاداش فوری، اصل جذابیت بصری و ظاهری) */
+  --highlight-darker: #e0a800; /* کمی تیره‌تر از highlight-color برای سایه‌ها و حاشیه‌ها */
 
   --background-start-color: #f4f7f6; /* رنگ شروع گرادیان پس‌زمینه (روشن) (اصل زیبایی‌شناسی) */
   --background-end-color: #e0e7e9; /* رنگ پایان گرادیان پس‌زمینه (روشن) (اصل زیبایی‌شناسی) */
   --container-bg: #ffffff; /* پس‌زمینه کانتینرهای اصلی (اصل رهایی از بار شناختی) */
   --card-bg: #ffffff; /* پس‌زمینه کارت‌ها (اصل رهایی از بار شناختی) */
-  --navbar-bg: rgba(
-    255,
-    255,
-    255,
-    0.98
-  ); /* پس‌زمینه نوار ناوبری با شفافیت (اصل رهایی از بار شناختی) */
-  --giscus-bg: var(
-    --card-bg
-  ); /* پس‌زمینه بخش نظرات Giscus (اصل رهایی از بار شناختی) */
+  --navbar-bg: rgba(255, 255, 255, 0.98); /* پس‌زمینه نوار ناوبری با شفافیت (اصل رهایی از بار شناختی) */
+  --giscus-bg: var(--card-bg); /* پس‌زمینه بخش نظرات Giscus (اصل رهایی از بار شناختی) */
   --skills-bg: #e9ecef; /* پس‌زمینه برچسب‌های مهارت‌ها (اصل رهایی از بار شناختی) */
 
-  --shadow-color-light: rgba(
-    0,
-    0,
-    0,
-    0.05
-  ); /* سایه ملایم برای عمق بصری (اصل زیبایی‌شناسی) */
+  --shadow-color-light: rgba(0, 0, 0, 0.05); /* سایه ملایم برای عمق بصری (اصل زیبایی‌شناسی) */
   --shadow-color-medium: rgba(0, 0, 0, 0.1); /* سایه متوسط (اصل زیبایی‌شناسی) */
-  --shadow-color-strong: rgba(
-    0,
-    0,
-    0,
-    0.15
-  ); /* سایه قوی برای عناصر برجسته (اصل زیبایی‌شناسی) */
+  --shadow-color-strong: rgba(0, 0, 0, 0.15); /* سایه قوی برای عناصر برجسته (اصل زیبایی‌شناسی) */
 
   --text-color: #333333; /* رنگ متن اصلی برای خوانایی بالا (Figure-Ground) (اصل روان‌روانی و سهولت جریان) */
   --text-color-light: #555555; /* رنگ متن کمرنگ‌تر برای اطلاعات فرعی (اصل رهایی از بار شناختی) */
-  --text-color-link: var(
-    --accent-color
-  ); /* رنگ لینک‌ها برای قابلیت پیش‌بینی (اصل کشف و پیش‌بینی) */
-  --heading-color: var(
-    --secondary-color
-  ); /* رنگ تیترها (اصل روان‌روانی و سهولت جریان) */
+  --text-color-link: var(--accent-color); /* رنگ لینک‌ها برای قابلیت پیش‌بینی (اصل کشف و پیش‌بینی) */
+  --heading-color: var(--secondary-color); /* رنگ تیترها (اصل روان‌روانی و سهولت جریان) */
   --tagline-color: #4a4a4a; /* رنگ شعار اصلی (اصل روان‌روانی و سهولت جریان) */
   --footer-color: #555555; /* رنگ متن فوتر (اصل رهایی از بار شناختی) */
   --lang-switcher-active-color: #000; /* رنگ زبان فعال در سوئیچر (اصل کنترل و انتخاب) */
 
   --border-color: #e0e0e0; /* رنگ حاشیه عناصر (اصل رهایی از بار شناختی) */
-  --timeline-line-color: var(
-    --primary-color
-  ); /* رنگ خط زمانی (اصل پیشرفت قابل مشاهده) */
-  --timeline-dot-border-color: var(
-    --primary-color
-  ); /* رنگ حاشیه دایره‌های زمانی (اصل پیشرفت قابل مشاهده) */
-  --timeline-content-border-color: var(
-    --border-color
-  ); /* رنگ حاشیه محتوای زمانی (اصل رهایی از بار شناختی) */
+  --timeline-line-color: var(--primary-color); /* رنگ خط زمانی (اصل پیشرفت قابل مشاهده) */
+  --timeline-dot-border-color: var(--primary-color); /* رنگ حاشیه دایره‌های زمانی (اصل پیشرفت قابل مشاهده) */
+  --timeline-content-border-color: var(--border-color); /* رنگ حاشیه محتوای زمانی (اصل رهایی از بار شناختی) */
   --giscus-border: none; /* حاشیه بخش Giscus (در حالت روشن) (اصل رهایی از بار شناختی) */
 
   --space-unit: 8px; /* واحد پایه برای فواصل (Whitespace) (اصل رهایی از بار شناختی) */
@@ -88,18 +63,8 @@
   --transition-duration-medium: 0.4s; /* مدت زمان انتقال متوسط (اصل بازخورد آنی) */
   --transition-duration-long: 0.6s; /* مدت زمان انتقال طولانی (اصل بازخورد آنی) */
   --transition-easing-standard: ease-in-out; /* نوع easing استاندارد (اصل روان‌روانی و سهولت جریان) */
-  --transition-easing-springy: cubic-bezier(
-    0.68,
-    -0.55,
-    0.27,
-    1.55
-  ); /* نوع easing فنری برای حس پاداش (اصل پاداش فوری، اصل نشانه‌های تعاملی) */
-  --transition-easing-smooth: cubic-bezier(
-    0.25,
-    0.8,
-    0.25,
-    1
-  ); /* نوع easing نرم و حرفه‌ای */
+  --transition-easing-springy: cubic-bezier(0.68, -0.55, 0.27, 1.55); /* نوع easing فنری برای حس پاداش (اصل پاداش فوری، اصل نشانه‌های تعاملی) */
+  --transition-easing-smooth: cubic-bezier(0.25, 0.8, 0.25, 1); /* نوع easing نرم و حرفه‌ای */
 
   --max-content-width: 1200px; /* حداکثر عرض محتوا برای کاهش بار شناختی (اصل رهایی از بار شناختی) */
   --max-paragraph-width: 75ch; /* عرض بهینه پاراگراف برای خوانایی فارسی (اصل روان‌روانی و سهولت جریان) */
@@ -119,14 +84,13 @@
   text-decoration: none;
   padding: 4px 8px;
   border-radius: 6px;
-  transition: color 0.3s ease, background-color 0.3s ease;
-  /* بهینه‌سازی: افزودن will-change */
+  transition: color var(--transition-duration-short) ease, background-color var(--transition-duration-short) ease;
   will-change: color, background-color;
 }
 
 .footer-link:hover {
   background-color: rgba(100, 100, 100, 0.1);
-  color: var(--faq-link-hover-color, #0f172a);
+  color: var(--faq-link-hover-color, #0f172a); /* Fallback to a dark color if var not defined */
 }
 
 /* Micro Profile in Footer (اصل هویت و شأن فردی، اصل اعتبار و اثبات اجتماعی) */
@@ -139,7 +103,6 @@
   margin: 2rem auto 0;
   padding: 0.5rem 1rem;
   border-top: 1px dashed #ccc;
-  /* بهینه‌سازی: افزودن will-change */
   will-change: opacity;
 }
 .micro-profile img.u-photo {
@@ -184,9 +147,8 @@
   right: 0;
   bottom: 0;
   background-color: var(--text-color-light);
-  transition: var(--transition-duration-short);
+  transition: background-color var(--transition-duration-short) var(--transition-easing-standard);
   border-radius: 24px;
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌هایی که تغییر می‌کنند */
   will-change: background-color;
 }
 
@@ -198,7 +160,7 @@
   left: 3px;
   bottom: 3px;
   background-color: var(--card-bg);
-  transition: var(--transition-duration-short);
+  transition: transform var(--transition-duration-short) var(--transition-easing-standard), content var(--transition-duration-short) var(--transition-easing-standard), color var(--transition-duration-short) var(--transition-easing-standard), background-color var(--transition-duration-short) var(--transition-easing-standard);
   border-radius: 50%;
 
   font-family: "Font Awesome 6 Free";
@@ -209,7 +171,6 @@
   justify-content: center;
   color: var(--primary-color);
   font-size: 0.8em;
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌هایی که تغییر می‌کنند */
   will-change: transform, content, color, background-color;
 }
 
@@ -230,9 +191,11 @@ input:checked + .slider:before {
 /* Dark Mode Specific Styles (اصل کنترل و انتخاب، اصل زیبایی‌شناسی، اصل تضاد و تنوع حسی) */
 .dark-mode {
   --primary-color: #61dafb;
+  --primary-rgb: 97, 218, 251;
   --secondary-color: #f0f0f0;
   --accent-color: #a0a0a0;
   --highlight-color: #fdd835;
+  --highlight-darker: #c7a700;
 
   --background-start-color: #2b2d42;
   --background-end-color: #232533;
@@ -277,10 +240,10 @@ html {
 body {
   font-family: "Roboto", sans-serif;
   background: linear-gradient(
-    135deg,
-    var(--background-start-color) 0%,
-    var(--background-end-color) 100%
-  );
+      135deg,
+      var(--background-start-color) 0%,
+      var(--background-end-color) 100%
+    );
   margin: 0;
   padding: 0;
   color: var(--text-color);
@@ -298,7 +261,6 @@ body {
     color var(--transition-duration-medium) var(--transition-easing-standard),
     background var(--transition-duration-medium)
       var(--transition-easing-standard);
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌هایی که تغییر می‌کنند */
   will-change: background-color, color, background;
 }
 
@@ -325,7 +287,6 @@ textarea:focus-visible {
   box-shadow: 0 0 0 4px var(--shadow-color-light);
   z-index: 10;
   position: relative;
-  /* بهینه‌سازی: افزودن will-change */
   will-change: outline, box-shadow;
 }
 a:focus:not(:focus-visible),
@@ -348,13 +309,11 @@ textarea:focus:not(:focus-visible) {
   box-shadow: 0 0 0 3px var(--accent-color), 0 0 0 6px var(--shadow-color-light);
   z-index: 5;
   position: relative;
-  /* بهینه‌سازی: افزودن will-change */
   will-change: box-shadow;
 }
 .card.is-featured:focus-within {
   box-shadow: 0 0 0 3px var(--highlight-color),
     0 0 0 6px var(--shadow-color-medium), 0 8px 25px var(--shadow-color-medium);
-  /* بهینه‌سازی: افزودن will-change */
   will-change: box-shadow;
 }
 
@@ -387,7 +346,6 @@ textarea:focus:not(:focus-visible) {
       var(--transition-easing-standard),
     border-color var(--transition-duration-medium)
       var(--transition-easing-standard);
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌هایی که تغییر می‌کنند */
   will-change: background, box-shadow, border-color;
 }
 
@@ -456,7 +414,6 @@ textarea:focus:not(:focus-visible) {
       var(--transition-easing-standard),
     border-color var(--transition-duration-medium)
       var(--transition-easing-standard);
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌هایی که تغییر می‌کنند */
   will-change: background-color, box-shadow, border-color, backdrop-filter;
 }
 
@@ -475,7 +432,6 @@ textarea:focus:not(:focus-visible) {
   padding-bottom: var(--space-xs);
   display: inline-block;
   outline: none;
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌هایی که تغییر می‌کنند */
   will-change: color, transform, box-shadow;
 }
 
@@ -485,6 +441,12 @@ textarea:focus:not(:focus-visible) {
   transform: translateY(-3px); /* اصل پاداش فوری */
   box-shadow: 0 2px 5px var(--shadow-color-light); /* اصل نشانه‌های تعاملی */
 }
+.navbar nav a:active {
+  transform: translateY(0px); /* Slightly depress on active */
+  box-shadow: none; /* Remove shadow on active */
+  color: var(--primary-color); /* Maintain primary color */
+}
+
 
 .navbar nav a::after {
   content: "";
@@ -497,7 +459,6 @@ textarea:focus:not(:focus-visible) {
   background-color: var(--accent-color);
   transition: width var(--transition-duration-medium)
     var(--transition-easing-standard);
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌ای که تغییر می‌کند */
   will-change: width;
 }
 
@@ -536,7 +497,6 @@ textarea:focus:not(:focus-visible) {
     );
   z-index: 0;
   pointer-events: none;
-  /* بهینه‌سازی: افزودن will-change */
   will-change: background;
 }
 
@@ -561,7 +521,6 @@ textarea:focus:not(:focus-visible) {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌هایی که تغییر می‌کنند */
   will-change: transform, box-shadow, border-color;
 }
 .profile-image:hover {
@@ -614,13 +573,12 @@ section::after {
   height: 3px;
   background: linear-gradient(
     to right,
-    rgba(0, 90, 158, 0) 0%,
+    rgba(var(--primary-rgb), 0) 0%,
     var(--primary-color) 50%,
-    rgba(0, 90, 158, 0) 100%
-  );
+    rgba(var(--primary-rgb), 0) 100%
+  ); /* Using --primary-rgb for transparent gradient */
   z-index: 0;
   pointer-events: none;
-  /* بهینه‌سازی: افزودن will-change */
   will-change: width, transform;
 }
 section:last-of-type::after {
@@ -671,7 +629,6 @@ section h2::after {
   transition: color var(--transition-duration-short) ease,
     text-decoration var(--transition-duration-short) ease;
   font-weight: 500;
-  /* بهینه‌سازی: افزودن will-change */
   will-change: color, text-decoration;
 }
 
@@ -682,6 +639,13 @@ section h2::after {
   color: var(--primary-color);
   text-decoration: none;
 }
+.content-area
+  a:not(.navbar nav a):not(.card .card-links a):not(.contact-info a):not(
+    .connect-links-block ul li a
+  ):not(.footer a):active {
+  filter: brightness(0.9);
+}
+
 
 /* Grid Container for Cards (اصل رهایی از بار شناختی، اصل زیبایی‌شناسی) */
 .grid-container {
@@ -720,7 +684,6 @@ section h2::after {
   outline: none;
 
   overflow: hidden;
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌هایی که تغییر می‌کنند */
   will-change: transform, box-shadow, background-color, border-color, filter;
 }
 
@@ -729,6 +692,12 @@ section h2::after {
   box-shadow: 0 18px 50px var(--shadow-color-strong); /* سایه قوی‌تر برای حس پاداش بیشتر */
   filter: brightness(1.05) saturate(1.05); /* افزایش جزئی روشنایی و اشباع رنگ (اصل جذابیت بصری و ظاهری) */
 }
+.card:active {
+  transform: translateY(-2px); /* Slight depress on active */
+  box-shadow: 0 10px 30px var(--shadow-color-medium); /* Reduced shadow on active */
+  filter: brightness(1) saturate(1); /* Reset filter on active */
+}
+
 
 .card::before {
   content: "";
@@ -743,7 +712,6 @@ section h2::after {
   transition: transform var(--transition-duration-medium)
     var(--transition-easing-standard);
   z-index: 2;
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌ای که تغییر می‌کند */
   will-change: transform;
 }
 .card:hover::before {
@@ -753,7 +721,6 @@ section h2::after {
 /* Animation for card click feedback (اصل پاداش فوری و مثبت، اصل نشانه‌های تعاملی) */
 .card.clicked-pop {
   animation: cardPop 0.3s var(--transition-easing-springy);
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌ای که تغییر می‌کند */
   will-change: transform;
 }
 
@@ -795,7 +762,6 @@ section h2::after {
   object-fit: cover;
   transition: transform var(--transition-duration-medium)
     var(--transition-easing-standard);
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌ای که تغییر می‌کند */
   will-change: transform;
 }
 .card:hover .project-image-placeholder img,
@@ -807,7 +773,6 @@ section h2::after {
 img.loaded {
   opacity: 0;
   animation: fadeInImage 0.5s ease-out forwards;
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌ای که تغییر می‌کند */
   will-change: opacity;
 }
 
@@ -830,14 +795,16 @@ img.loaded {
   text-decoration: none;
   color: var(--primary-color);
   padding: 4px 8px;
-  transition: all 0.2s ease-in-out;
-  /* بهینه‌سازی: افزودن will-change */
+  transition: all var(--transition-duration-short) ease-in-out;
   will-change: color, text-decoration;
 }
 
 .lang-switcher .lang-link:hover {
   color: var(--accent-color);
   text-decoration: underline;
+}
+.lang-switcher .lang-link:active {
+  filter: brightness(0.9);
 }
 
 .lang-switcher .active {
@@ -884,7 +851,6 @@ img.loaded {
   transform: translateY(10px) scale(0.95); /* شروع کمی پایین‌تر و کوچک‌تر */
   transition: opacity 0.5s var(--transition-easing-springy),
     transform 0.5s var(--transition-easing-springy); /* انیمیشن فنری */
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌هایی که تغییر می‌کنند */
   will-change: opacity, transform;
 }
 
@@ -916,7 +882,6 @@ img.loaded {
   text-align: center;
   transition: color var(--transition-duration-short)
     var(--transition-easing-standard);
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌ای که تغییر می‌کند */
   will-change: color;
 }
 
@@ -954,7 +919,6 @@ img.loaded {
   text-decoration: none;
   border: 1px solid var(--primary-color);
   min-height: 44px; /* Ensure touch target size is adequate */
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌هایی که تغییر می‌کنند */
   will-change: background-color, color, transform, box-shadow;
 }
 .card .card-links a:hover,
@@ -965,10 +929,12 @@ img.loaded {
   text-decoration: none;
   box-shadow: 0 4px 8px var(--shadow-color-medium); /* سایه قوی‌تر روی هاور */
 }
-.card .card-links a:hover i,
-.card .card-links a:focus-visible i {
-  color: white;
+.card .card-links a:active {
+  filter: brightness(0.9);
+  transform: translateY(0px); /* Reset transform on active */
+  box-shadow: none; /* Remove shadow on active */
 }
+
 .card .card-links a i {
   margin-right: var(--space-xs); /* Adjust for LTR link text */
   margin-left: 0;
@@ -977,7 +943,6 @@ img.loaded {
   text-align: center;
   transition: color var(--transition-duration-short)
     var(--transition-easing-standard);
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌ای که تغییر می‌کند */
   will-change: color;
 }
 
@@ -985,7 +950,7 @@ img.loaded {
 .card.is-featured {
   border-color: var(--highlight-color);
   box-shadow: 0 8px 25px var(--shadow-color-medium),
-    0 0 10px var(--highlight-color); /* برجسته‌سازی با رنگ خاص */
+    0 0 10px rgba(var(--highlight-color-rgb), 0.7); /* برجسته‌سازی با رنگ خاص */
 
   transform: translateY(0);
   background-color: var(--card-bg);
@@ -997,7 +962,12 @@ img.loaded {
 .card.is-featured:hover {
   transform: translateY(-10px); /* اصل پاداش فوری قوی‌تر */
   box-shadow: 0 20px 60px var(--shadow-color-strong),
-    /* سایه قوی‌تر */ 0 0 20px var(--highlight-color); /* درخشش قوی‌تر */
+    /* سایه قوی‌تر */ 0 0 20px rgba(var(--highlight-color-rgb), 0.9); /* درخشش قوی‌تر */
+}
+.card.is-featured:active {
+  transform: translateY(-4px); /* Slightly depress on active */
+  box-shadow: 0 12px 40px var(--shadow-color-medium),
+    0 0 15px rgba(var(--highlight-color-rgb), 0.7); /* Reduced shadow on active */
 }
 .card.is-featured:focus-within {
   box-shadow: 0 0 0 3px var(--highlight-color),
@@ -1024,7 +994,6 @@ img.loaded {
 .mention-icon-placeholder i {
   transition: transform var(--transition-duration-medium)
     var(--transition-easing-springy);
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌ای که تغییر می‌کند */
   will-change: transform;
 }
 .card:hover .mention-icon-placeholder i {
@@ -1059,11 +1028,9 @@ img.loaded {
   display: inline-flex;
   align-items: center;
   outline: none;
-  /* Ensure icon is visually on the left for consistent spacing */
-  direction: ltr;
+  direction: ltr; /* Ensure icon is visually on the left for consistent spacing */
   text-align: left;
   min-height: 44px; /* Ensure touch target size is adequate */
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌هایی که تغییر می‌کنند */
   will-change: background-color, transform, box-shadow, color;
 }
 #skills .skills-list li.skill-hover-effect {
@@ -1078,6 +1045,12 @@ img.loaded {
   transform: translateY(-5px); /* اصل پاداش فوری قوی‌تر */
   box-shadow: 0 5px 15px var(--shadow-color-medium); /* سایه قوی‌تر */
 }
+#skills .skills-list li:active {
+  transform: translateY(0px); /* Slightly depress on active */
+  box-shadow: 0 2px 8px var(--shadow-color-light); /* Reduced shadow */
+  background-color: var(--secondary-color); /* Darker on active */
+}
+
 #skills .skills-list li i {
   /* Increased space to push text away from icon */
   margin-right: var(--space-sm);
@@ -1088,7 +1061,6 @@ img.loaded {
   transition: color var(--transition-duration-short)
       var(--transition-easing-standard),
     transform var(--transition-duration-short) var(--transition-easing-springy);
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌ای که تغییر می‌کند */
   will-change: color, transform;
 }
 #skills .skills-list li:hover i,
@@ -1134,7 +1106,6 @@ img.loaded {
   opacity: 0; /* Initial state for JS animation */
   transform: translateY(50px); /* Initial state for JS animation */
   transition: opacity 0.6s ease-out, transform 0.6s ease-out; /* Transition for JS animation */
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌هایی که تغییر می‌کنند */
   will-change: opacity, transform;
 }
 
@@ -1172,7 +1143,6 @@ img.loaded {
     border-color var(--transition-duration-short)
       var(--transition-easing-standard),
     transform var(--transition-duration-short) var(--transition-easing-springy);
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌هایی که تغییر می‌کنند */
   will-change: background-color, border-color, transform;
 }
 
@@ -1188,6 +1158,11 @@ img.loaded {
   transform: scale(1.3); /* اصل پاداش فوری، اصل نشانه‌های تعاملی */
   box-shadow: 0 0 10px var(--accent-color); /* درخشش بیشتر */
 }
+.timeline li:active::after {
+  transform: scale(1.1); /* Slightly depress on active */
+  box-shadow: none;
+}
+
 
 .timeline-content {
   padding: var(--space-md);
@@ -1208,7 +1183,6 @@ img.loaded {
   direction: rtl; /* Force RTL for content within timeline items */
   text-align: right;
   border: 1px solid var(--timeline-content-border-color);
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌هایی که تغییر می‌کنند */
   will-change: transform, box-shadow, background-color, border-color;
 }
 .timeline li:hover .timeline-content,
@@ -1216,6 +1190,11 @@ img.loaded {
   transform: translateY(-8px); /* اصل پاداش فوری قوی‌تر */
   box-shadow: 0 8px 25px var(--shadow-color-strong); /* سایه قوی‌تر */
 }
+.timeline li:active .timeline-content {
+  transform: translateY(-2px); /* Slightly depress on active */
+  box-shadow: 0 4px 15px var(--shadow-color-light); /* Reset shadow on active */
+}
+
 
 .timeline-icon {
   position: absolute;
@@ -1263,8 +1242,7 @@ img.loaded {
   top: var(--space-md);
   border-width: 9px;
   border-style: solid;
-  border-color: transparent transparent transparent
-    var(--timeline-content-border-color);
+  border-color: transparent transparent transparent var(--timeline-content-border-color);
   right: -18px; /* Adjust for RTL */
   left: auto;
   z-index: -1;
@@ -1313,7 +1291,6 @@ img.loaded {
   pointer-events: none;
   opacity: 0;
   animation: sparkle-fade-in-out 0.8s ease-out forwards;
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌هایی که تغییر می‌کنند */
   will-change: opacity, transform;
 }
 
@@ -1335,22 +1312,21 @@ img.loaded {
 /* CTA Pulse Effect (روان‌شناسی توجه، پاداش دوپامینی) */
 .cta-pulse-effect {
   animation: ctaPulse 2s infinite ease-in-out;
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌هایی که تغییر می‌کنند */
   will-change: transform, box-shadow;
 }
 
 @keyframes ctaPulse {
   0% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(0, 90, 158, 0.7);
+    box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0.7);
   }
   70% {
     transform: scale(1.02);
-    box-shadow: 0 0 0 10px rgba(0, 90, 158, 0);
+    box-shadow: 0 0 0 10px rgba(var(--primary-rgb), 0);
   }
   100% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(0, 90, 158, 0);
+    box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0);
   }
 }
 
@@ -1374,9 +1350,9 @@ img.loaded {
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out,
-    transform 0.3s var(--transition-easing-springy);
+    transform 0.3s var(--transition-easing-springy),
+    background-color 0.3s ease, box-shadow 0.3s ease;
   z-index: 999;
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌هایی که تغییر می‌کنند */
   will-change: opacity, visibility, transform, background-color, box-shadow;
 }
 
@@ -1390,6 +1366,11 @@ img.loaded {
   transform: translateY(-5px);
   background-color: var(--accent-color);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+#scroll-to-top:active {
+  transform: translateY(0px); /* Slight depress on active */
+  background-color: var(--secondary-color); /* Darker on active */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Reduced shadow on active */
 }
 
 /* FAQ Section Styling (اصل کشف و پیش‌بینی، اصل کنترل و انتخاب، اصل رهایی از بار شناختی) */
@@ -1410,7 +1391,6 @@ img.loaded {
   overflow: hidden;
   direction: rtl;
   text-align: right;
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌هایی که تغییر می‌کنند */
   will-change: transform, box-shadow;
 }
 
@@ -1418,11 +1398,14 @@ img.loaded {
   transform: translateY(-5px); /* اصل پاداش فوری */
   box-shadow: 0 8px 25px var(--shadow-color-medium); /* سایه قوی‌تر */
 }
+.faq-item:active {
+  transform: translateY(0px); /* Slight depress on active */
+  box-shadow: 0 4px 15px var(--shadow-color-light); /* Reset shadow on active */
+}
 
 /* Animation for FAQ item opening (اصل بازخورد آنی, اصل نشانه‌های تعاملی) */
 .faq-item.faq-opened {
   animation: faqOpen 0.4s var(--transition-easing-springy);
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌ای که تغییر می‌کند */
   will-change: transform, opacity;
 }
 
@@ -1472,7 +1455,6 @@ img.loaded {
   list-style: none; /* Removes default marker */
   touch-action: manipulation; /* Improves responsiveness on touch devices */
   min-height: 44px; /* Ensure touch target size is adequate */
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌ای که تغییر می‌کند */
   will-change: transform;
 }
 
@@ -1485,7 +1467,6 @@ img.loaded {
   transform: translateY(-50%) rotate(0deg);
   transition: transform 0.2s ease-in-out;
   color: var(--primary-color);
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌ای که تغییر می‌کند */
   will-change: transform;
 }
 
@@ -1517,7 +1498,6 @@ img.loaded {
   text-align: right;
   border-left: 6px solid var(--accent-color);
   margin-bottom: var(--space-lg);
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌هایی که تغییر می‌کنند */
   will-change: transform, box-shadow, border-color;
 }
 
@@ -1527,6 +1507,11 @@ img.loaded {
   box-shadow: 0 20px 50px var(--shadow-color-strong); /* سایه قوی‌تر */
   border-color: var(--primary-color);
 }
+.testimonial-item:active {
+  transform: translateY(-4px); /* Slight depress on active */
+  box-shadow: 0 10px 30px var(--shadow-color-medium); /* Reduced shadow on active */
+}
+
 
 .testimonial-item::before {
   content: "\201C"; /* Left double quotation mark */
@@ -1589,13 +1574,16 @@ img.loaded {
   box-shadow: 0 6px 25px var(--shadow-color-medium);
   transition: background 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
   overflow: hidden;
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌هایی که تغییر می‌کنند */
   will-change: background, box-shadow, border;
 }
 
 .giscus-container:hover {
   box-shadow: 0 15px 45px var(--shadow-color-strong); /* سایه قوی‌تر روی هاور */
 }
+.giscus-container:active {
+  box-shadow: 0 8px 30px var(--shadow-color-medium); /* Reduced shadow on active */
+}
+
 
 .giscus-container iframe {
   width: 100%;
@@ -1637,7 +1625,6 @@ img.loaded {
 
   transition: background var(--transition-duration-medium)
     var(--transition-easing-standard);
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌ای که تغییر می‌کند */
   will-change: background;
 }
 #connect h2 {
@@ -1699,11 +1686,9 @@ img.loaded {
   flex-direction: row; /* Ensure icon is to the left of text */
   direction: ltr; /* Force LTR */
   text-align: left;
-  /* Ensure touch target size is adequate */
   min-height: 44px; /* WCAG recommendation for touch targets */
   padding-left: var(--space-sm);
   padding-right: var(--space-sm);
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌هایی که تغییر می‌کنند */
   will-change: color, transform, box-shadow;
 }
 .contact-info a:hover,
@@ -1713,6 +1698,12 @@ img.loaded {
   transform: translateX(4px); /* اصل پاداش فوری قوی‌تر و حرفه‌ای‌تر */
   box-shadow: 0 4px 10px var(--shadow-color-medium); /* سایه قوی‌تر */
 }
+.contact-info a:active {
+  transform: translateX(0px); /* Slightly depress on active */
+  box-shadow: none; /* Remove shadow on active */
+  color: var(--primary-color); /* Maintain primary color */
+}
+
 .contact-info i {
   margin-right: var(--space-sm); /* Adjust for LTR */
   margin-left: 0;
@@ -1722,7 +1713,6 @@ img.loaded {
   transition: transform var(--transition-duration-short)
       var(--transition-easing-springy),
     color var(--transition-duration-short) var(--transition-easing-standard);
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌هایی که تغییر می‌کنند */
   will-change: transform, color;
 }
 .contact-info a:hover i,
@@ -1796,7 +1786,6 @@ img.loaded {
   box-shadow: 0 2px 8px var(--shadow-color-light);
   outline: none;
   min-height: 44px; /* Ensure touch target size is adequate */
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌هایی که تغییر می‌کنند */
   will-change: background-color, transform, box-shadow;
 }
 .connect-links-block ul li:hover,
@@ -1804,6 +1793,11 @@ img.loaded {
   background-color: var(--card-bg);
   transform: translateY(-5px); /* اصل پاداش فوری قوی‌تر */
   box-shadow: 0 6px 18px var(--shadow-color-medium); /* سایه قوی‌تر */
+}
+.connect-links-block ul li:active {
+  transform: translateY(0px); /* Slight depress on active */
+  box-shadow: 0 2px 8px var(--shadow-color-light); /* Reset shadow */
+  background-color: var(--hover-color); /* Darker on active */
 }
 
 .connect-links-block ul li a {
@@ -1820,11 +1814,9 @@ img.loaded {
   padding: 0;
   direction: ltr; /* Force LTR for link text */
   text-align: center;
-  /* Ensure touch target size is adequate */
   min-height: 44px; /* WCAG recommendation for touch targets */
   padding-left: var(--space-sm);
   padding-right: var(--space-sm);
-  /* بهینه‌سازی: افزودن will-change */
   will-change: color;
 }
 .connect-links-block ul li a:hover,
@@ -1840,7 +1832,6 @@ img.loaded {
   text-align: center;
   transition: color var(--transition-duration-short)
     var(--transition-easing-standard);
-  /* بهینه‌سازی: افزودن will-change */
   will-change: color;
 }
 .connect-links-block ul li a:hover i,
@@ -1862,7 +1853,6 @@ img.loaded {
       var(--transition-easing-standard),
     border-color var(--transition-duration-medium)
       var(--transition-easing-standard);
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌هایی که تغییر می‌کنند */
   will-change: color, border-color;
 }
 .footer p {
@@ -1884,7 +1874,6 @@ img.loaded {
   width: 0%;
   z-index: 1001;
   transition: background-color 0.3s ease-in-out; /* تغییر رنگ نرم */
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌هایی که تغییر می‌کنند */
   will-change: width, background-color;
 }
 
@@ -1914,7 +1903,6 @@ img.loaded {
   animation: pulse 2s infinite; /* انیمیشن پالس برای جلب توجه */
   direction: rtl; /* برای متن فارسی */
   text-align: right;
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌هایی که تغییر می‌کنند */
   will-change: transform, box-shadow, opacity;
 }
 
@@ -1930,17 +1918,22 @@ img.loaded {
 @keyframes pulse {
   0% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(0, 90, 158, 0.7);
+    box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0.7);
   }
   70% {
     transform: scale(1.05);
-    box-shadow: 0 0 0 15px rgba(0, 90, 158, 0);
+    box-shadow: 0 0 0 15px rgba(var(--primary-rgb), 0);
   }
   100% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(0, 90, 158, 0);
+    box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0);
   }
 }
+#explore-hint:active {
+  transform: scale(0.98); /* Subtle squeeze on active */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2); /* Reduced shadow */
+}
+
 
 /* Skill Hover Message CSS (اصل تأخیر معنادار پاداش، اصل کنجکاوی و رمزآلود بودن، اصل لذت از تسلط) */
 .skill-hover-message {
@@ -1962,7 +1955,6 @@ img.loaded {
   margin-bottom: 5px; /* فاصله از المان مهارت */
   direction: rtl;
   text-align: center;
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌هایی که تغییر می‌کنند */
   will-change: opacity, transform;
 }
 
@@ -1988,7 +1980,6 @@ img.loaded {
   height: 10px;
   border-radius: 50%;
   opacity: 0;
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌هایی که تغییر می‌کنند */
   will-change: opacity, transform;
 }
 
@@ -2016,7 +2007,6 @@ img.loaded {
   display: flex; /* برای چیدمان آیکون و متن */
   align-items: center;
   gap: 10px; /* فاصله بین آیکون و متن */
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌هایی که تغییر می‌کنند */
   will-change: transform, opacity;
 }
 
@@ -2104,7 +2094,6 @@ img.loaded {
   animation: celebrationPulse 2s infinite ease-in-out; /* انیمیشن پالس برای جشن */
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 20px var(--highlight-color); /* سایه و درخشش قوی‌تر */
   transform: translateX(-50%) translateY(150%) scale(0.9); /* شروع کمی کوچک‌تر و پایین‌تر */
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌هایی که تغییر می‌کنند */
   will-change: transform, box-shadow, background;
 }
 
@@ -2115,7 +2104,6 @@ img.loaded {
 .final-exploration-toast i {
   color: var(--primary-color); /* رنگ آیکون */
   animation: bounceIn 1s ease-out; /* انیمیشن ورود آیکون */
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌ای که تغییر می‌کند */
   will-change: transform;
 }
 
@@ -2156,7 +2144,6 @@ img.loaded {
   background-color: var(--highlight-color);
   color: var(--secondary-color);
   border-right: 6px solid var(--primary-color); /* خط کناری برجسته‌تر */
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌هایی که تغییر می‌کنند */
   will-change: background-color, color, border-right;
 }
 
@@ -2175,13 +2162,16 @@ img.loaded {
   line-height: 1;
   transition: transform 0.2s ease-in-out;
   margin-right: 10px; /* فاصله از متن Toast */
-  /* بهینه‌سازی: افزودن will-change برای ویژگی‌ای که تغییر می‌کند */
   will-change: transform;
 }
 
 .fun-fact-close:hover {
   transform: rotate(90deg);
 }
+.fun-fact-close:active {
+  transform: rotate(90deg) scale(0.9); /* Slightly depress on active */
+}
+
 
 /* --- ویژگی جدید: انیمیشن برای عنوان بخش در "لحظه لذت" (نورواستتیک، غافلگیری مثبت) --- */
 @keyframes sectionDelight {
@@ -2279,12 +2269,19 @@ img.loaded {
   }
 
   #connect .location-edu {
-    direction: rtl;
+    margin-top: var(--space-md);
+    font-size: 1rem;
+    color: var(--text-color-light);
+    font-weight: 400;
+    direction: rtl; /* Force RTL for location/education text */
     text-align: right;
   }
   #connect .location-edu i {
-    margin-right: var(--space-xs);
+    margin-right: var(--space-xs); /* Adjust for RTL */
     margin-left: 0;
+    color: var(--text-color-light);
+    width: auto;
+    text-align: left;
   }
   #connect .location-edu i:last-child {
     margin-right: var(--space-md);
@@ -2689,4 +2686,195 @@ img.loaded {
   .giscus-container iframe {
     min-height: 280px;
   }
+}
+
+/* High-DPI Screen Optimization */
+@media (min-resolution: 192dpi), (min-resolution: 2dppx) {
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  #explore-hint.pulse-animation,
+  .cta-pulse-effect {
+    animation: none !important;
+  }
+  .dynamic-toast,
+  #scroll-to-top,
+  #share-page-button,
+  .skill-hover-message,
+  .project-card,
+  .skills-list li,
+  .faq-item,
+  .faq-item summary,
+  .faq-item summary::after,
+  .section-delight-effect,
+  .theme-switch .slider,
+  .theme-switch .slider:before,
+  .theme-switch .sun-icon,
+  .theme-switch .moon-icon,
+  .cta-button,
+  .navbar-links a,
+  .connect-links-block ul li,
+  .card,
+  .timeline li,
+  .timeline li::after,
+  .timeline-content,
+  .testimonial-item,
+  .giscus-container,
+  .faq-item summary.faq-summary-clicked,
+  .card.clicked-pop,
+  .card.is-featured,
+  .project-image-placeholder img,
+  .content-image-placeholder img,
+  .mention-icon-placeholder i,
+  .card .card-links a,
+  .card .card-links a i,
+  #skills .skills-list li i,
+  .timeline li:hover::after,
+  .timeline li:focus-within::after,
+  .timeline li:active::after,
+  .timeline-content::before,
+  .timeline-content::after,
+  .timeline-content h3,
+  .timeline-content p,
+  .timeline-content .date,
+  .contact-info a,
+  .contact-info i,
+  .connect-links-block ul li a,
+  .connect-links-block ul li i,
+  .footer,
+  #scroll-progress-bar,
+  .theme-toast,
+  #explore-hint i,
+  .sparkle-effect,
+  .dynamic-toast i,
+  .fun-fact-close,
+  .final-exploration-toast,
+  .final-exploration-toast i,
+  img.is-loading,
+  img.loaded {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+    box-shadow: none !important; /* Remove box-shadows that rely on transition/animation */
+    outline: none !important; /* Remove outlines if not desired for static display */
+  }
+  /* Specific override for FAQ item content */
+  .faq-item p {
+    max-height: fit-content !important;
+    padding-top: var(--space-md) !important;
+    padding-bottom: var(--space-md) !important;
+    opacity: 1 !important;
+  }
+}
+
+/* Hover Capability Detection for touch devices */
+@media (hover: none) and (pointer: coarse) {
+  /* Touch-specific adjustments */
+  .skills-list li:hover {
+    transform: none; /* حذف افکت hover برای دستگاه‌های لمسی */
+    box-shadow: 0 4px 15px var(--shadow-color);
+    border-color: var(--border-color);
+  }
+  .project-card:hover {
+    transform: none;
+    box-shadow: 0 5px 20px var(--shadow-color);
+    border-color: var(--border-color); /* Reset border color */
+  }
+  .cta-button:hover,
+  #scroll-to-top:hover,
+  #share-page-button:hover,
+  .connect-links-block ul li:hover,
+  .faq-item:hover,
+  .navbar nav a:hover,
+  .card .card-links a:hover,
+  .contact-info a:hover,
+  .testimonial-item:hover,
+  .giscus-container:hover,
+  #explore-hint:hover {
+    transform: none; /* حذف ترنسفورم در hover برای دکمه‌ها و لینک‌ها */
+    background-color: inherit; /* برگشت به حالت عادی */
+    box-shadow: none; /* Remove hover shadows */
+    border-color: var(--border-color); /* Reset border color */
+    filter: none; /* Reset filter */
+  }
+  /* Specific hover reset for icons */
+  #skills .skills-list li:hover i,
+  .card .card-links a:hover i,
+  .contact-info a:hover i,
+  .navbar nav a:hover i {
+    transform: none;
+    color: inherit; /* Reset color */
+  }
+
+  /* Adjust tap target size for touch */
+  .cta-button,
+  .navbar-links a,
+  .theme-switch,
+  .faq-item summary,
+  .connect-links-block ul li a,
+  #scroll-to-top,
+  #explore-hint,
+  #share-page-button {
+    min-height: 48px;
+    min-width: 48px;
+    padding: 0.6rem; /* افزایش پدینگ برای هدف لمسی بزرگتر */
+  }
+  .skills-list li {
+    min-height: 48px; /* Ensure skill tags are also larger tap targets */
+  }
+
+  /* Ensure skill hover message is not a persistent distraction on touch */
+  .skill-hover-message {
+    display: none; /* ممکن است در حالت لمسی ناخواسته باشد */
+  }
+}
+
+
+/* Add styling for general click feedback effect */
+@keyframes clickFeedbackPop {
+  0% {
+    transform: scale(1);
+    box-shadow: inherit; /* Reset to parent's box-shadow */
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(0.98);
+    box-shadow: 0 0 0 2px var(--highlight-color), inherit; /* Add a subtle pop-out border, keep original shadow */
+    filter: brightness(0.9); /* Slightly dim during press */
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: inherit;
+    filter: brightness(1);
+  }
+}
+
+.click-feedback-effect {
+  animation: clickFeedbackPop 0.15s ease-out;
+}
+
+/* Ensure consistent active state for all interactive elements */
+button:active,
+a:active:not([href^="#"]):not(.navbar nav a):not(.card .card-links a):not(.contact-info a):not(.connect-links-block ul li a),
+summary:active,
+[role="button"]:active,
+[tabindex="0"]:active {
+  filter: brightness(0.9); /* Slightly dim on press */
+  transform: scale(0.99); /* Slight press down */
+  transition: filter 0.1s ease-out, transform 0.05s ease-out;
 }
