@@ -264,6 +264,25 @@ document.addEventListener("click", function (event) {
   }
 });
 
+// --- ویژگی جدید: بازخورد بصری عمومی برای کلیک بر روی عناصر تعاملی ---
+// (Neuro-Cognitive Microprocesses: Dopaminergic Phasic Bursts, Temporal Feedback Loops; Behavioral Conditioning Architecture: Operant Conditioning)
+document.body.addEventListener('click', (event) => {
+  const target = event.target;
+  // بررسی کنید آیا عنصر کلیک شده یا والد نزدیک آن یک عنصر تعاملی است
+  const interactiveElement = target.closest('button, a, input[type="submit"], [role="button"], [tabindex="0"]');
+
+  if (interactiveElement && !interactiveElement.classList.contains('no-click-feedback')) {
+    // افزودن یک کلاس موقت برای انیمیشن بازخورد
+    interactiveElement.classList.add('click-feedback-effect');
+
+    // حذف کلاس پس از اتمام انیمیشن
+    interactiveElement.addEventListener('animationend', () => {
+      interactiveElement.classList.remove('click-feedback-effect');
+    }, { once: true });
+  }
+});
+
+
 // 6. نوار پیشرفت اسکرول
 // (روان‌شناسی تجربه کاربری: Goal Gradient Effect, Peak-End Rule; علوم شناختی: Predictive Coding)
 const scrollProgressBar = document.createElement("div");
@@ -1061,7 +1080,7 @@ const explorationToastCooldown = 8000; // زمان خنک‌کننده برای 
 
 const sectionProgressObserver = new IntersectionObserver(
   (entries) => {
-    const now = Date.Date();
+    const now = Date.now();
 
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
@@ -1143,13 +1162,24 @@ document.addEventListener("DOMContentLoaded", function () {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const img = entry.target;
+          img.classList.add('is-loading'); // افزودن کلاس بارگذاری
           img.src = img.dataset.src;
           if (img.dataset.srcset) {
             img.srcset = img.dataset.srcset;
           }
-          img.removeAttribute("data-src");
-          img.removeAttribute("data-srcset");
-          img.classList.add("loaded");
+          img.onload = () => { // حذف کلاس بارگذاری پس از اتمام بارگذاری
+            img.classList.remove('is-loading');
+            img.classList.add("loaded");
+            img.removeAttribute("data-src");
+            img.removeAttribute("data-srcset");
+          };
+          // برای مدیریت خطا در بارگذاری تصویر
+          img.onerror = () => {
+            console.error('Failed to load image:', img.src);
+            img.classList.remove('is-loading'); // حذف کلاس حتی در صورت خطا
+            img.classList.add('load-error'); // اضافه کردن یک کلاس برای نمایش خطا
+            img.src = 'https://placehold.co/400x300/cccccc/000000?text=Error'; // Fallback image
+          };
           observer.unobserve(img);
         }
       });
