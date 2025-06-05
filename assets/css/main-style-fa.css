@@ -13,6 +13,7 @@
   --secondary-color: #1a1a1a; /* سیاه تیره: برای تیترها و متن‌های مهم (اصل روان‌روانی و سهولت جریان) */
   --accent-color: #007acc; /* آبی روشن: برای تاکیدات، لینک‌ها و بازخورد‌های مثبت (اصل بازخورد آنی، اصل انتظارات مثبت) */
   --highlight-color: #ffc107; /* زرد/طلایی: برای برجسته‌سازی، پاداش‌ها و عناصر ویژه (Featured) (اصل پاداش فوری، اصل جذابیت بصری و ظاهری) */
+  --highlight-rgb: 255, 193, 7; /* RGB برای استفاده در شفافیت (مثلاً سایه‌ها) */
   --highlight-darker: #e0a800; /* کمی تیره‌تر از highlight-color برای سایه‌ها و حاشیه‌ها */
 
   --background-start-color: #f4f7f6; /* رنگ شروع گرادیان پس‌زمینه (روشن) (اصل زیبایی‌شناسی) */
@@ -92,6 +93,9 @@
   background-color: rgba(100, 100, 100, 0.1);
   color: var(--faq-link-hover-color, #0f172a); /* Fallback to a dark color if var not defined */
 }
+.footer-link:active {
+  filter: brightness(0.9);
+}
 
 /* Micro Profile in Footer (اصل هویت و شأن فردی، اصل اعتبار و اثبات اجتماعی) */
 .micro-profile {
@@ -122,6 +126,9 @@
 .micro-profile a.u-url:hover {
   text-decoration: underline;
 }
+.micro-profile a.u-url:active {
+  filter: brightness(0.9);
+}
 
 /* Theme Switch (Dark/Light Mode Toggle) (اصل کنترل و انتخاب، اصل زیبایی‌شناسی، اصل بازخورد آنی) */
 .theme-switch {
@@ -131,6 +138,9 @@
   height: 24px;
   margin-left: var(--space-md);
   vertical-align: middle;
+  min-height: 44px; /* Ensure sufficient touch target */
+  min-width: 48px;
+  cursor: pointer;
 }
 
 .theme-switch input {
@@ -187,6 +197,9 @@ input:checked + .slider:before {
   content: "\f186"; /* Moon icon for dark mode */
   color: white;
 }
+.theme-switch:active .slider {
+  filter: brightness(0.9);
+}
 
 /* Dark Mode Specific Styles (اصل کنترل و انتخاب، اصل زیبایی‌شناسی، اصل تضاد و تنوع حسی) */
 .dark-mode {
@@ -195,6 +208,7 @@ input:checked + .slider:before {
   --secondary-color: #f0f0f0;
   --accent-color: #a0a0a0;
   --highlight-color: #fdd835;
+  --highlight-rgb: 253, 216, 53;
   --highlight-darker: #c7a700;
 
   --background-start-color: #2b2d42;
@@ -388,6 +402,9 @@ textarea:focus:not(:focus-visible) {
 .breadcrumb-nav a:hover {
   text-decoration: underline;
 }
+.breadcrumb-nav a:active {
+  filter: brightness(0.9);
+}
 
 /* Navbar (Fixed Header) (اصل رهایی از بار شناختی، اصل پیشرفت قابل مشاهده) */
 .navbar {
@@ -432,6 +449,8 @@ textarea:focus:not(:focus-visible) {
   padding-bottom: var(--space-xs);
   display: inline-block;
   outline: none;
+  min-height: 44px; /* Ensure touch target */
+  padding-top: var(--space-xs); /* Align with padding-bottom */
   will-change: color, transform, box-shadow;
 }
 
@@ -445,6 +464,7 @@ textarea:focus:not(:focus-visible) {
   transform: translateY(0px); /* Slightly depress on active */
   box-shadow: none; /* Remove shadow on active */
   color: var(--primary-color); /* Maintain primary color */
+  filter: brightness(0.9);
 }
 
 
@@ -526,6 +546,10 @@ textarea:focus:not(:focus-visible) {
 .profile-image:hover {
   transform: scale(1.05) rotate(1deg); /* اصل پاداش فوری، اصل نشانه‌های تعاملی، اصل جذابیت بصری و ظاهری */
   box-shadow: 0 20px 50px var(--shadow-color-strong);
+}
+.profile-image:active {
+  transform: scale(1.02) rotate(0deg); /* Slight depress on active */
+  box-shadow: 0 15px 35px var(--shadow-color-medium); /* Reset shadow on active */
 }
 
 h1 {
@@ -768,6 +792,11 @@ section h2::after {
 .card:hover .content-image-placeholder img {
   transform: scale(1.05); /* اصل پاداش فوری، اصل جذابیت بصری و ظاهری */
 }
+.card:active .project-image-placeholder img,
+.card:active .content-image-placeholder img {
+  transform: scale(1.02); /* Slight depress on active */
+}
+
 
 /* Lazy Loaded Images (اصل بار شناختی پایین، اصل سرعت بارگذاری، اصل روان‌روانی) */
 img.loaded {
@@ -950,7 +979,7 @@ img.loaded {
 .card.is-featured {
   border-color: var(--highlight-color);
   box-shadow: 0 8px 25px var(--shadow-color-medium),
-    0 0 10px rgba(var(--highlight-color-rgb), 0.7); /* برجسته‌سازی با رنگ خاص */
+    0 0 10px rgba(var(--highlight-rgb), 0.7); /* برجسته‌سازی با رنگ خاص */
 
   transform: translateY(0);
   background-color: var(--card-bg);
@@ -962,12 +991,12 @@ img.loaded {
 .card.is-featured:hover {
   transform: translateY(-10px); /* اصل پاداش فوری قوی‌تر */
   box-shadow: 0 20px 60px var(--shadow-color-strong),
-    /* سایه قوی‌تر */ 0 0 20px rgba(var(--highlight-color-rgb), 0.9); /* درخشش قوی‌تر */
+    /* سایه قوی‌تر */ 0 0 20px rgba(var(--highlight-rgb), 0.9); /* درخشش قوی‌تر */
 }
 .card.is-featured:active {
   transform: translateY(-4px); /* Slightly depress on active */
   box-shadow: 0 12px 40px var(--shadow-color-medium),
-    0 0 15px rgba(var(--highlight-color-rgb), 0.7); /* Reduced shadow on active */
+    0 0 15px rgba(var(--highlight-rgb), 0.7); /* Reduced shadow on active */
 }
 .card.is-featured:focus-within {
   box-shadow: 0 0 0 3px var(--highlight-color),
@@ -999,6 +1028,10 @@ img.loaded {
 .card:hover .mention-icon-placeholder i {
   transform: scale(1.15) rotate(4deg); /* حس پاداش بصری قوی‌تر و حرفه‌ای‌تر */
 }
+.card:active .mention-icon-placeholder i {
+  transform: scale(1.05) rotate(0deg); /* Slight depress on active */
+}
+
 
 /* Skills Section (اصل رهایی از بار شناختی، اصل لذت از تسلط) */
 #skills .skills-list {
@@ -1049,6 +1082,7 @@ img.loaded {
   transform: translateY(0px); /* Slightly depress on active */
   box-shadow: 0 2px 8px var(--shadow-color-light); /* Reduced shadow */
   background-color: var(--secondary-color); /* Darker on active */
+  filter: brightness(0.9);
 }
 
 #skills .skills-list li i {
@@ -1068,6 +1102,10 @@ img.loaded {
   color: white;
   transform: scale(1.2); /* اصل پاداش فوری، اصل نشانه‌های تعاملی */
 }
+#skills .skills-list li:active i {
+  transform: scale(1.05); /* Slight depress on active */
+}
+
 
 /* Timeline Section (اصل پیشرفت قابل مشاهده، اصل داستان‌پردازی) */
 #timeline {
@@ -1161,6 +1199,7 @@ img.loaded {
 .timeline li:active::after {
   transform: scale(1.1); /* Slightly depress on active */
   box-shadow: none;
+  filter: brightness(0.9);
 }
 
 
@@ -1193,6 +1232,7 @@ img.loaded {
 .timeline li:active .timeline-content {
   transform: translateY(-2px); /* Slightly depress on active */
   box-shadow: 0 4px 15px var(--shadow-color-light); /* Reset shadow on active */
+  filter: brightness(0.9);
 }
 
 
@@ -1371,6 +1411,7 @@ img.loaded {
   transform: translateY(0px); /* Slight depress on active */
   background-color: var(--secondary-color); /* Darker on active */
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Reduced shadow on active */
+  filter: brightness(0.9);
 }
 
 /* FAQ Section Styling (اصل کشف و پیش‌بینی، اصل کنترل و انتخاب، اصل رهایی از بار شناختی) */
@@ -1401,6 +1442,7 @@ img.loaded {
 .faq-item:active {
   transform: translateY(0px); /* Slight depress on active */
   box-shadow: 0 4px 15px var(--shadow-color-light); /* Reset shadow on active */
+  filter: brightness(0.9);
 }
 
 /* Animation for FAQ item opening (اصل بازخورد آنی, اصل نشانه‌های تعاملی) */
@@ -1473,6 +1515,10 @@ img.loaded {
 .faq-item[open] summary::after {
   transform: translateY(-50%) rotate(-90deg); /* Down-pointing triangle when open */
 }
+.faq-item summary:active {
+  filter: brightness(0.9);
+}
+
 
 .faq-item p {
   padding: 0 var(--space-md) var(--space-md);
@@ -1510,6 +1556,7 @@ img.loaded {
 .testimonial-item:active {
   transform: translateY(-4px); /* Slight depress on active */
   box-shadow: 0 10px 30px var(--shadow-color-medium); /* Reduced shadow on active */
+  filter: brightness(0.9);
 }
 
 
@@ -1582,6 +1629,7 @@ img.loaded {
 }
 .giscus-container:active {
   box-shadow: 0 8px 30px var(--shadow-color-medium); /* Reduced shadow on active */
+  filter: brightness(0.9);
 }
 
 
@@ -1702,6 +1750,7 @@ img.loaded {
   transform: translateX(0px); /* Slightly depress on active */
   box-shadow: none; /* Remove shadow on active */
   color: var(--primary-color); /* Maintain primary color */
+  filter: brightness(0.9);
 }
 
 .contact-info i {
@@ -1720,6 +1769,10 @@ img.loaded {
   transform: scale(1.2); /* اصل پاداش فوری، اصل نشانه‌های تعاملی */
   color: var(--primary-color);
 }
+.contact-info a:active i {
+  transform: scale(1.05); /* Slight depress on active */
+}
+
 
 #connect .location-edu {
   margin-top: var(--space-md);
@@ -1798,6 +1851,7 @@ img.loaded {
   transform: translateY(0px); /* Slight depress on active */
   box-shadow: 0 2px 8px var(--shadow-color-light); /* Reset shadow */
   background-color: var(--hover-color); /* Darker on active */
+  filter: brightness(0.9);
 }
 
 .connect-links-block ul li a {
@@ -1838,6 +1892,10 @@ img.loaded {
 .connect-links-block ul li a:focus-visible i {
   color: var(--primary-color);
 }
+.connect-links-block ul li a:active i {
+  filter: brightness(0.9);
+}
+
 
 /* Footer Styles (اصل رهایی از بار شناختی) */
 .footer {
@@ -1932,6 +1990,7 @@ img.loaded {
 #explore-hint:active {
   transform: scale(0.98); /* Subtle squeeze on active */
   box-shadow: 0 2px 8px rgba(0,0,0,0.2); /* Reduced shadow */
+  filter: brightness(0.9);
 }
 
 
@@ -2028,6 +2087,10 @@ img.loaded {
   margin-left: 10px; /* فاصله از متن */
   font-size: 1.2em;
 }
+.dynamic-toast:active {
+  filter: brightness(0.9);
+}
+
 
 /* استایل‌های اختصاصی برای انواع Toast */
 
@@ -2100,6 +2163,11 @@ img.loaded {
 .final-exploration-toast.show {
   transform: translateX(-50%) translateY(0) scale(1); /* بزرگ شدن به حالت عادی */
 }
+.final-exploration-toast:active {
+  transform: translateX(-50%) translateY(5px) scale(0.98); /* Slight depress on active */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 15px var(--highlight-color); /* Reduced shadow */
+}
+
 
 .final-exploration-toast i {
   color: var(--primary-color); /* رنگ آیکون */
@@ -2170,6 +2238,7 @@ img.loaded {
 }
 .fun-fact-close:active {
   transform: rotate(90deg) scale(0.9); /* Slightly depress on active */
+  filter: brightness(0.9);
 }
 
 
@@ -2869,6 +2938,7 @@ img.loaded {
 }
 
 /* Ensure consistent active state for all interactive elements */
+/* This general rule applies to elements not covered by more specific active states above */
 button:active,
 a:active:not([href^="#"]):not(.navbar nav a):not(.card .card-links a):not(.contact-info a):not(.connect-links-block ul li a),
 summary:active,
