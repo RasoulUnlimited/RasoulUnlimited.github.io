@@ -711,8 +711,7 @@ section h2::after {
       var(--transition-easing-standard),
     border-color var(--transition-duration-medium)
       var(--transition-easing-standard),
-    filter var(--transition-duration-medium)
-      var(--transition-easing-standard); /* اضافه شدن filter برای انیمیشن */
+    filter var(--transition-duration-medium) var(--transition-easing-standard); /* اضافه شدن filter برای انیمیشن */
   text-align: left;
   overflow: hidden;
   position: relative;
@@ -1067,7 +1066,8 @@ img.loaded {
   /* بهینه‌سازی: افزودن will-change برای ویژگی‌هایی که تغییر می‌کنند */
   will-change: background-color, transform, box-shadow, color;
 }
-#skills .skills-list li.skill-hover-effect { /* اضافه شده برای فعال‌سازی از JS */
+#skills .skills-list li.skill-hover-effect {
+  /* اضافه شده برای فعال‌سازی از JS */
   transform: translateY(-3px) scale(1.02);
   box-shadow: 0 6px 12px rgba(var(--primary-rgb), 0.3);
 }
@@ -2202,7 +2202,6 @@ img.loaded {
 .section-delight-effect {
   animation: sectionDelight 0.8s ease-out forwards;
 }
-
 
 /* Responsive Adjustments */
 @media (max-width: 1200px) {
