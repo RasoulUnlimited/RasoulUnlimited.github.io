@@ -13,7 +13,7 @@
       {
         "rel": "self",
         "type": "application/json",
-        "href": "https://rasoulunlimited.ir/.well-known/identity"
+        "href": "https://rasoulunlimited.ir/.well-known/identity.json"
       },
       {
         "rel": "http://openid.net/specs/connect/1.0/issuer",

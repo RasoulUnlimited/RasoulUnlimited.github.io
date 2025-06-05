@@ -63,7 +63,7 @@
     </url>
 
     <url>
-        <loc>https://rasoulunlimited.com/.well-known/identity</loc>
+        <loc>https://rasoulunlimited.com/.well-known/identity.json</loc>
         <lastmod>2025-06-03</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
