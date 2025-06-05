@@ -48,6 +48,75 @@ function debounce(func, delay) {
   };
 }
 
+// Global AudioContext for subtle sound effects (Multisensory Mapping: Synesthetic Design, Audio Feedback Pairing)
+let audioContext;
+let clickBuffer;
+let toastBuffer;
+
+// تابع برای ایجاد صدای کلیک ساده
+function createClickSound() {
+  const duration = 0.05; // ثانیه
+  const frequency = 440; // هرتز (نت A4)
+  const gain = 0.1;
+
+  const buffer = audioContext.createBuffer(1, audioContext.sampleRate * duration, audioContext.sampleRate);
+  const data = buffer.getChannelData(0);
+
+  for (let i = 0; i < data.length; i++) {
+    data[i] = Math.sin(2 * Math.PI * frequency * (i / audioContext.sampleRate)) * gain;
+  }
+  return buffer;
+}
+
+// تابع برای ایجاد صدای توست (نمایش اعلان)
+function createToastSound() {
+  const duration = 0.1; // ثانیه
+  const startFrequency = 880; // هرتز (نت A5)
+  const endFrequency = 1200; // هرتز
+  const gain = 0.15;
+
+  const buffer = audioContext.createBuffer(1, audioContext.sampleRate * duration, audioContext.sampleRate);
+  const data = buffer.getChannelData(0);
+
+  for (let i = 0; i < data.length; i++) {
+    const t = i / audioContext.sampleRate;
+    const frequency = startFrequency + (endFrequency - startFrequency) * (t / duration);
+    data[i] = Math.sin(2 * Math.PI * frequency * t) * gain * (1 - t / duration); // کاهش تدریجی صدا (decay)
+  }
+  return buffer;
+}
+
+// بارگذاری صداها در بافرها
+async function loadSounds() {
+  if (audioContext) {
+    clickBuffer = createClickSound();
+    toastBuffer = createToastSound();
+  }
+}
+
+// پخش صدا بر اساس نوع
+function playSound(type) {
+  if (!audioContext || audioContext.state === 'suspended') return;
+
+  let bufferToPlay;
+  if (type === 'click' && clickBuffer) bufferToPlay = clickBuffer;
+  if (type === 'toast' && toastBuffer) bufferToPlay = toastBuffer;
+
+  if (bufferToPlay) {
+    const source = audioContext.createBufferSource();
+    source.buffer = bufferToPlay;
+    source.connect(audioContext.destination);
+    source.start(0);
+  }
+}
+
+// تابع برای فعال‌سازی بازخورد لمسی (Haptic Feedback)
+function triggerHapticFeedback(pattern = [50]) { // الگو پیش‌فرض: لرزش کوتاه 50 میلی‌ثانیه
+  if (navigator.vibrate) {
+    navigator.vibrate(pattern);
+  }
+}
+
 // 1. به‌روزرسانی سال جاری در فوتر (روان‌شناسی ادراک، سهولت شناختی)
 document.getElementById("current-year").textContent = new Date().getFullYear();
 
@@ -142,6 +211,7 @@ function createToast(message, options = {}) {
   setTimeout(() => {
     dynamicToast.classList.add("show");
     dynamicToast.style.transform = "translateX(-50%) translateY(0)";
+    playSound('toast'); // پخش صدای توست
   }, 100);
 
   // افزودن دکمه بستن (برای Fun Fact Toast)
@@ -216,6 +286,7 @@ function applyTheme(theme, showToast = false) {
     );
     // افزودن افکت جرقه به هنگام تغییر تم (Microinteraction Psychology, Neuroaesthetics)
     createSparkle(themeToggleInput.parentElement);
+    triggerHapticFeedback([30]); // بازخورد لمسی برای تغییر تم
   }
 }
 
@@ -248,6 +319,7 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         top: targetElement.offsetTop - navbarHeight - 10,
         behavior: "smooth",
       });
+      triggerHapticFeedback([20]); // بازخورد لمسی برای اسکرول صاف
     }
   });
 });
@@ -261,6 +333,7 @@ document.addEventListener("click", function (event) {
     setTimeout(() => {
       card.classList.remove("clicked-pop");
     }, 300); // مدت زمان کوتاه برای بازخورد آنی
+    triggerHapticFeedback([40]); // بازخورد لمسی برای کلیک روی کارت
   }
 });
 
@@ -269,9 +342,10 @@ document.addEventListener("click", function (event) {
 document.body.addEventListener('click', (event) => {
   const target = event.target;
   // بررسی کنید آیا عنصر کلیک شده یا والد نزدیک آن یک عنصر تعاملی است
-  const interactiveElement = target.closest('button, a, input[type="submit"], [role="button"], [tabindex="0"]');
+  const interactiveElement = target.closest('button, a:not([href^="#"]), input[type="submit"], [role="button"], [tabindex="0"]');
 
-  if (interactiveElement && !interactiveElement.classList.contains('no-click-feedback')) {
+  // استثنا کردن لینک‌های داخلی که اسکرول صاف دارند چون بازخوردشان قبلاً مدیریت شده
+  if (interactiveElement && !interactiveElement.classList.contains('no-click-feedback') && !interactiveElement.matches('a[href^="#"]')) {
     // افزودن یک کلاس موقت برای انیمیشن بازخورد
     interactiveElement.classList.add('click-feedback-effect');
 
@@ -279,6 +353,9 @@ document.body.addEventListener('click', (event) => {
     interactiveElement.addEventListener('animationend', () => {
       interactiveElement.classList.remove('click-feedback-effect');
     }, { once: true });
+    
+    triggerHapticFeedback([10]); // بازخورد لمسی ظریف برای کلیک عمومی
+    playSound('click'); // پخش صدای کلیک
   }
 });
 
@@ -438,6 +515,7 @@ exploreHint.addEventListener("click", (e) => {
       (document.querySelector(".navbar")?.offsetHeight || 0),
     behavior: "smooth",
   });
+  triggerHapticFeedback([20]); // بازخورد لمسی برای کلیک روی hint
 });
 
 // 8. پیام‌های پاداش متغیر برای مهارت‌ها
@@ -814,6 +892,7 @@ if (emailLink) {
             iconColor: "var(--highlight-color)",
             duration: 1800,
           });
+          triggerHapticFeedback([50]); // بازخورد لمسی برای کپی موفق
         })
         .catch((err) => {
           console.error("Failed to copy email using Clipboard API:", err);
@@ -850,6 +929,7 @@ function copyTextUsingExecCommand(text, toastId, successMessage) {
     iconColor: "var(--highlight-color)",
     duration: 1800,
   });
+  triggerHapticFeedback([50]); // بازخورد لمسی برای کپی موفق
 }
 
 // 14. افکت کنفتی
@@ -1045,7 +1125,7 @@ const explorationMilestones = [
       Math.ceil(totalSections * 0.25) + 1,
       Math.ceil(totalSections * 0.5)
     ),
-    message: "نصف راه را پیمودید! شما ۵۰٪ از سایت را کاوش کرده‌اید! فوق‌العاده! 🚀",
+    message: "نصف راه را پیمودید! شما ۵۰٪ از سایت را کاوش کرده‌اید! فوق‌العاده! �",
     icon: "fas fa-rocket",
   },
   {
@@ -1080,7 +1160,7 @@ const explorationToastCooldown = 8000; // زمان خنک‌کننده برای 
 
 const sectionProgressObserver = new IntersectionObserver(
   (entries) => {
-    const now = Date.now();
+    const now = Date.now(); // اصلاح خطای Date.Date() به Date.now()
 
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
@@ -1214,6 +1294,7 @@ scrollToTopButton.addEventListener("click", () => {
     top: 0,
     behavior: "smooth",
   });
+  triggerHapticFeedback([20]); // بازخورد لمسی برای دکمه بازگشت به بالا
 });
 
 // 21. قابلیت کپی کردن لینک شبکه‌های اجتماعی
@@ -1250,6 +1331,7 @@ if (connectLinksBlock) {
                 iconColor: "var(--highlight-color)",
                 duration: 1800,
               });
+              triggerHapticFeedback([50]); // بازخورد لمسی برای کپی موفق
             })
             .catch((err) => {
               console.error("Failed to copy social link using Clipboard API:", err);
@@ -1347,6 +1429,7 @@ sharePageButton.addEventListener("click", () => {
           iconColor: "var(--highlight-color)",
           duration: 2000,
         });
+        triggerHapticFeedback([50]); // بازخورد لمسی برای اشتراک‌گذاری موفق
       })
       .catch((error) => {
         if (error.name !== 'AbortError') {
@@ -1409,4 +1492,18 @@ sections.forEach((section) => {
   if (!sectionsDelighted.has(section.id)) {
     sectionDelightObserver.observe(section);
   }
+});
+
+// فعال‌سازی AudioContext با اولین تعامل کاربر (برای رعایت سیاست‌های مرورگر)
+document.addEventListener('DOMContentLoaded', () => {
+  document.body.addEventListener('click', () => {
+    if (!audioContext) {
+      audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      loadSounds(); // بارگذاری صداها پس از ایجاد AudioContext
+      // اگر AudioContext در حالت suspended باشد، آن را resume می‌کنیم
+      if (audioContext.state === 'suspended') {
+          audioContext.resume();
+      }
+    }
+  }, { once: true }); // این گوش‌دهنده فقط یک بار فعال می‌شود
 });
