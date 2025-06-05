@@ -214,6 +214,34 @@ input:checked + .slider:before {
   --giscus-border: 1px solid var(--border-color);
 }
 
+/* Specific Dark Mode Adjustments for Contrast */
+.dark-mode .fun-fact-toast {
+  background-color: var(--card-bg); /* Use darker card background for contrast */
+  color: var(--text-color); /* Use lighter text color for contrast */
+  border-right: 6px solid var(--primary-color); /* Use primary color for border */
+}
+
+.dark-mode .fun-fact-toast i {
+  color: var(--primary-color); /* Ensure icon color contrasts */
+}
+
+.dark-mode .email-copy-toast,
+.dark-mode .social-link-copy-toast {
+  background-color: var(--card-bg); /* Use darker card background for contrast */
+  color: var(--text-color); /* Use lighter text color for contrast */
+  border-left: 6px solid var(--accent-color); /* Keep accent color for border */
+}
+
+.dark-mode .email-copy-toast i,
+.dark-mode .social-link-copy-toast i {
+  color: var(--accent-color); /* Ensure icon color contrasts */
+}
+
+.dark-mode .skill-hover-message {
+  background-color: var(--card-bg); /* Darker background */
+  color: var(--text-color); /* Lighter text */
+}
+
 *,
 *::before,
 *::after {
