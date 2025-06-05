@@ -430,6 +430,7 @@ textarea:focus:not(:focus-visible) {
   transform: translateY(0px);
   box-shadow: none;
   color: var(--primary-color);
+  filter: brightness(0.9);
 }
 
 
@@ -939,7 +940,7 @@ img.loaded {
 }
 .card.is-featured:focus-within {
   box-shadow: 0 0 0 3px var(--highlight-color),
-    0 0 0 6px var(--shadow-color-light), 0 8px 25px var(--shadow-color-medium);
+    0 0 0 6px var(--shadow-color-medium), 0 8px 25px var(--shadow-color-medium);
 }
 
 .mention-icon-placeholder {
@@ -1187,15 +1188,15 @@ img.loaded {
   top: var(--space-md);
   border-width: 8px;
   border-style: solid;
-  left: -16px;
-  right: auto;
-  border-color: transparent var(--card-bg) transparent transparent;
-}
-
-.timeline li:nth-child(even) .timeline-content::before {
   right: -16px;
   left: auto;
   border-color: transparent transparent transparent var(--card-bg);
+}
+
+.timeline li:nth-child(even) .timeline-content::before {
+  left: -16px;
+  right: auto;
+  border-color: transparent var(--card-bg) transparent transparent;
 }
 
 .timeline-content::after {
@@ -1204,16 +1205,16 @@ img.loaded {
   top: var(--space-md);
   border-width: 9px;
   border-style: solid;
-  left: -18px;
-  right: auto;
-  border-color: transparent var(--timeline-content-border-color) transparent transparent;
+  right: -18px;
+  left: auto;
+  border-color: transparent transparent transparent var(--timeline-content-border-color);
   z-index: -1;
 }
 
 .timeline li:nth-child(even) .timeline-content::after {
-  right: -18px;
-  left: auto;
-  border-color: transparent transparent transparent var(--timeline-content-border-color);
+  left: -18px;
+  right: auto;
+  border-color: transparent var(--timeline-content-border-color) transparent transparent;
   z-index: -1;
 }
 
@@ -2447,28 +2448,28 @@ img.loaded {
   }
 
   .timeline-content::before {
-    left: -16px;
-    right: auto;
-    border-color: transparent var(--card-bg) transparent transparent;
-  }
-
-  .timeline li:nth-child(even) .timeline-content::before {
     right: -16px;
     left: auto;
     border-color: transparent transparent transparent var(--card-bg);
   }
 
-  .timeline-content::after {
-    left: -18px;
+  .timeline li:nth-child(even) .timeline-content::before {
+    left: -16px;
     right: auto;
-    border-color: transparent var(--border-color) transparent transparent;
+    border-color: transparent var(--card-bg) transparent transparent;
+  }
+
+  .timeline-content::after {
+    right: -18px;
+    left: auto;
+    border-color: transparent transparent transparent var(--timeline-content-border-color);
     z-index: -1;
   }
 
   .timeline li:nth-child(even) .timeline-content::after {
-    right: -18px;
-    left: auto;
-    border-color: transparent transparent transparent var(--border-color);
+    left: -18px;
+    right: auto;
+    border-color: transparent var(--timeline-content-border-color) transparent transparent;
     z-index: -1;
   }
   .timeline-content h3 {
