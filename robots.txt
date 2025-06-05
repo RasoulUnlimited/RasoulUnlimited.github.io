@@ -14,4 +14,3 @@ Allow: /foaf.rdf
 
 Sitemap: https://rasoulunlimited.ir/sitemap.xml
 Host: rasoulunlimited.ir
-Identity: https://rasoulunlimited.ir/.well-known/identity.json
