@@ -2614,6 +2614,19 @@ img.loaded {
 }
 
 @media (max-width: 480px) {
+  .dynamic-toast {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    max-width: calc(100% - 30px);
+    white-space: normal;
+  }
+  .dynamic-toast i {
+    font-size: 1em;
+    margin-left: 6px;
+  }
+  .fun-fact-close {
+    font-size: 1rem;
+  }
   .giscus-container iframe {
     min-height: 280px;
   }
