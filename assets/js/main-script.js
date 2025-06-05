@@ -157,71 +157,66 @@ function createToast(message, options = {}) {
   dynamicToast.className = `dynamic-toast ${settings.customClass}`;
   dynamicToast.setAttribute("role", "status");
   dynamicToast.setAttribute("aria-live", "polite");
-  if (settings.id) {
-    dynamicToast.id = settings.id;
-  }
+  if (settings.id) dynamicToast.id = settings.id;
 
-  let iconHtml = "";
-  if (settings.iconClass) {
-    iconHtml = `<i class="${settings.iconClass}" style="color: ${
-      settings.iconColor || "inherit"
-    };"></i>`;
-  }
-
-  dynamicToast.innerHTML = `${iconHtml} <span class="toast-message">${message}</span>`;
-  document.body.appendChild(dynamicToast);
-
+  // موقعیت
+  dynamicToast.style.position = "fixed";
+  dynamicToast.style.left = "50%";
+  dynamicToast.style.transform = "translateX(-50%)";
   if (settings.position === "top") {
     dynamicToast.style.top = "20px";
-    dynamicToast.style.bottom = "auto";
-    dynamicToast.style.transform = "translateX(-50%) translateY(-150%)";
   } else {
     dynamicToast.style.bottom = "20px";
-    dynamicToast.style.top = "auto";
-    dynamicToast.style.transform = "translateX(-50%) translateY(150%)";
   }
 
-  setTimeout(() => {
-    dynamicToast.classList.add("show");
-    dynamicToast.style.transform = "translateX(-50%) translateY(0)";
-    playSound("toast");
-  }, 100);
+  // محتوای آیکون و پیام
+  if (settings.iconClass) {
+    const icon = document.createElement("i");
+    icon.className = settings.iconClass;
+    if (settings.iconColor) {
+      icon.style.color = settings.iconColor;
+    }
+    dynamicToast.appendChild(icon);
+  }
 
+  const text = document.createElement("span");
+  text.className = "toast-message";
+  text.textContent = message;
+  dynamicToast.appendChild(text);
+
+  // دکمه بستن
   if (settings.closeButton) {
     const closeBtn = document.createElement("button");
     closeBtn.className = "fun-fact-close";
     closeBtn.setAttribute("aria-label", "بستن پیام");
-    closeBtn.innerHTML = '<i class="fas fa-times"></i>';
+    const icon = document.createElement("i");
+    icon.className = "fas fa-times";
+    closeBtn.appendChild(icon);
     dynamicToast.appendChild(closeBtn);
     closeBtn.addEventListener("click", () => {
-      if (settings.position === "top") {
-        dynamicToast.style.transform = "translateX(-50%) translateY(-150%)";
-      } else {
-        dynamicToast.style.transform = "translateX(-50%) translateY(150%)";
-      }
       dynamicToast.classList.remove("show");
-      dynamicToast.addEventListener(
-        "transitionend",
-        () => dynamicToast.remove(),
-        { once: true }
-      );
+      dynamicToast.addEventListener("transitionend", () => dynamicToast.remove(), {
+        once: true,
+      });
     });
   }
 
+  document.body.appendChild(dynamicToast);
+
+  // انیمیشن نمایش
+  setTimeout(() => {
+    dynamicToast.classList.add("show");
+    playSound("toast");
+  }, 100);
+
+  // حذف خودکار
   if (!settings.isPersistent) {
     setTimeout(() => {
       if (dynamicToast.classList.contains("show")) {
-        if (settings.position === "top") {
-          dynamicToast.style.transform = "translateX(-50%) translateY(-150%)";
-        } else {
-          dynamicToast.style.transform = "translateX(-50%) translateY(150%)";
-        }
         dynamicToast.classList.remove("show");
-        dynamicToast.addEventListener(
-          "transitionend",
-          () => dynamicToast.remove(),
-          { once: true }
-        );
+        dynamicToast.addEventListener("transitionend", () => dynamicToast.remove(), {
+          once: true,
+        });
       }
     }, settings.duration);
   } else {
