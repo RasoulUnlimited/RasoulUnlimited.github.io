@@ -8,6 +8,8 @@
       content="sI3YvXPMuU3icAsGNq50ESbsjBsZqBxuw_cA_pag7GU"
     />
 
+    <!-- Preconnect hints برای برقراری سریع‌تر اتصال به منابع خارجی -->
+    <!-- این تگ‌ها کمک می‌کنند تا مرورگر زودتر با دامنه‌هایی که منابع مهمی از آن‌ها بارگیری می‌شوند، ارتباط برقرار کند. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
@@ -17,35 +19,60 @@
 
     <link rel="icon" type="image/png" href="assets/images/favicon.png" />
 
+    <!--
+      بهینه‌سازی بارگذاری فونت‌ها و CSS:
+      از 'preload' با 'as="style"' و سپس 'onload="this.onload=null;this.rel='stylesheet'' استفاده شده است.
+      این روش باعث می‌شود که CSS به صورت غیرمسدودکننده (non-render-blocking) بارگیری شود.
+      'noscript' نیز برای اطمینان از بارگیری CSS در مرورگرهایی که جاوااسکریپت غیرفعال است، اضافه شده است.
+      همچنین، لینک تکراری Google Fonts حذف شده است.
+    -->
     <link
       rel="preload"
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap"
-      as="style"
-    />
-    <link
-      rel="preload"
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
-      as="style"
-    />
-    <link
-      rel="preload"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-      as="style"
-    />
-
-    <link rel="stylesheet" href="assets/css/main-style-fa.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
-    />
-    <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;700&display=swap"
-      rel="stylesheet"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;700&display=swap"
+      />
+    </noscript>
+
+    <!-- preload کردن Font Awesome CSS به صورت غیرمسدودکننده -->
     <link
-      rel="stylesheet"
+      rel="preload"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      />
+    </noscript>
+
+    <!-- preload کردن AOS CSS به صورت غیرمسدودکننده -->
+    <link
+      rel="preload"
+      href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
+      />
+    </noscript>
+
+    <!--
+      استایل اصلی سایت:
+      این فایل به دلیل اهمیت برای نمایش اولیه صفحه، همچنان به صورت استاندارد بارگذاری می‌شود.
+      توصیه می‌شود این فایل (main-style-fa.css) را به صورت کامل minify کنید.
+    -->
+    <link rel="stylesheet" href="assets/css/main-style-fa.css" />
 
     <meta name="referrer" content="strict-origin-when-cross-origin" />
 
@@ -634,7 +661,7 @@
           {
             "@type": "Article",
             "name": "محمد رسول سهرابی (آنلیمیتد) – از Tatami تا تکنولوژی",
-            "headline": "محمد رسول سهرabi (آنلیمیتد) – از Tatami تا تکنولوژی",
+            "headline": "محمد رسول سهرابی (آنلیمیتد) – از Tatami تا تکنولوژی",
             "image": [
               "https://rasoulunlimited.ir/assets/images/placeholder-content-virgool1.webp"
             ],
@@ -981,7 +1008,9 @@
         <a href="#testimonials" title="نظرات دیگران درباره من و پروژه‌هایم"
           >نظرات</a
         >
-        <a href="#connect" title="راه‌های ارتباط با محمد رسول سهرابی">ارتباط</a>
+        <a href="#connect" title="راه‌های ارتباط با محمد رسول سهرابی"
+          >ارتباط</a
+        >
         <a
           href="https://rasoulunlimited.ir/en/"
           class="lang-switcher"
@@ -1255,8 +1284,8 @@
                       title="مشاهده پروژه‌های برنامه‌نویسی پایتون در گیت‌هاب"
                       role="button"
                       itemprop="codeRepository"
-                      ><i class="fab fa-python" aria-hidden="true"></i> مشاهده
-                      در GitHub</a
+                      ><i class="fab fa-python" aria-hidden="true"></i> مشاهده در
+                      GitHub</a
                     >
                   </div>
                   <meta itemprop="programmingLanguage" content="Python" />
@@ -1490,8 +1519,8 @@
                   اولین ربات فارسی‌زبان دیسکورد (Persian Bot)
                 </h3>
                 <div class="card-meta">
-                  <span
-                    ><i class="fas fa-microchip" aria-hidden="true"></i> زبان
+                  <span>
+                    <i class="fas fa-microchip" aria-hidden="true"></i> زبان
                     برنامه‌نویسی: پایتون</span
                   >
                   <span
@@ -2557,10 +2586,23 @@
       </div>
     </footer>
 
+    <!-- اضافه کردن defer به اسکریپت‌های غیرضروری برای مسدود نکردن رندر -->
+    <!-- این اسکریپت نیز به تأخیر می‌افتد تا رندر اولیه صفحه را مسدود نکند. -->
     <script
       src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"
       defer
     ></script>
     <script src="assets/js/main-script.js" defer></script>
+    <!--
+      اگر 'email-decode.min.js' به صورت دستی در HTML شما وجود دارد،
+      حتماً تگ <script> آن را به صورت زیر تغییر دهید:
+      <script src="assets/cloudflare-static/email-decode.min.js" defer></script>
+      این اسکریپت احتمالاً توسط Cloudflare تزریق می‌شود و نیازی به تغییر دستی آن ندارید.
+    -->
+
+    <script>
+      // تابع برای به‌روزرسانی سال جاری در فوتر
+      document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
   </body>
 </html>
