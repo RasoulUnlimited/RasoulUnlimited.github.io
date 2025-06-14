@@ -8,24 +8,14 @@
       content="sI3YvXPMuU3icAsGNq50ESbsjBsZqBxuw_cA_pag7GU"
     />
 
-    <!-- Preconnect hints برای برقراری سریع‌تر اتصال به منابع خارجی -->
-    <!-- این تگ‌ها کمک می‌کنند تا مرورگر زودتر با دامنه‌هایی که منابع مهمی از آن‌ها بارگیری می‌شوند، ارتباط برقرار کند. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
     <link rel="preconnect" href="https://cdn.jsdelivr.net" />
-    <!-- DNS prefetch for external resources like Giscus for faster loading -->
     <link rel="dns-prefetch" href="https://giscus.app" />
 
     <link rel="icon" type="image/png" href="assets/images/favicon.png" />
 
-    <!--
-      بهینه‌سازی بارگذاری فونت‌ها و CSS:
-      از 'preload' با 'as="style"' و سپس 'onload="this.onload=null;this.rel='stylesheet'' استفاده شده است.
-      این روش باعث می‌شود که CSS به صورت غیرمسدودکننده (non-render-blocking) بارگیری شود.
-      'noscript' نیز برای اطمینان از بارگیری CSS در مرورگرهایی که جاوااسکریپت غیرفعال است، اضافه شده است.
-      همچنین، لینک تکراری Google Fonts حذف شده است.
-    -->
     <link
       rel="preload"
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;700&display=swap"
@@ -39,7 +29,6 @@
       />
     </noscript>
 
-    <!-- preload کردن Font Awesome CSS به صورت غیرمسدودکننده -->
     <link
       rel="preload"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -53,7 +42,6 @@
       />
     </noscript>
 
-    <!-- preload کردن AOS CSS به صورت غیرمسدودکننده -->
     <link
       rel="preload"
       href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
@@ -67,12 +55,7 @@
       />
     </noscript>
 
-    <!--
-      استایل اصلی سایت:
-      این فایل به دلیل اهمیت برای نمایش اولیه صفحه، همچنان به صورت استاندارد بارگذاری می‌شود.
-      توصیه می‌شود این فایل (main-style-fa.css) را به صورت کامل minify کنید.
-    -->
-    <link rel="stylesheet" href="assets/css/main-style-fa.css" />
+    <link rel="stylesheet" href="assets/css/main-style-fa.min.css" />
 
     <meta name="referrer" content="strict-origin-when-cross-origin" />
 
@@ -109,7 +92,6 @@
 
     <meta http-equiv="Content-Language" content="fa-IR" />
 
-    <!-- Open Graph Meta Tags for Social Sharing -->
     <meta property="og:type" content="profile" />
     <meta property="og:url" content="https://rasoulunlimited.ir" />
     <meta
@@ -133,19 +115,16 @@
 
     <meta property="profile:first_name" content="Mohammad Rasoul" />
     <meta property="profile:last_name" content="Sohrabi" />
-    <!-- Robots meta tag for granular control over indexing and snippets -->
     <meta
       name="robots"
       content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
     />
 
-    <!-- Geo Meta Tags for Local SEO (if applicable) -->
     <meta name="geo.region" content="IR-23" />
     <meta name="geo.placename" content="Karaj" />
     <meta name="geo.position" content="35.8398;50.9912" />
     <meta name="ICBM" content="35.8398, 50.9912" />
 
-    <!-- Webmention for indie web integration -->
     <link
       rel="alternate"
       type="application/ld+json"
@@ -181,7 +160,6 @@
       href="https://webmention.io/rasoulunlimited.ir/webmention"
     />
 
-    <!-- Twitter Card Meta Tags for Social Sharing -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@rasoulunlimited" />
     <meta name="twitter:creator" content="@rasoulunlimited" />
@@ -202,14 +180,12 @@
       content="Mohammad Rasoul Sohrabi (Rasoul Unlimited) Profile Image"
     />
 
-    <!-- FOAF (Friend of a Friend) for Semantic Web -->
     <link
       rel="alternate"
       type="application/rdf+xml"
       href="https://rasoulunlimited.ir/foaf.rdf"
     />
 
-    <!-- Theme Color for Progressive Web App (PWA) experience -->
     <meta name="color-scheme" content="light dark" />
     <meta
       name="theme-color"
@@ -222,7 +198,6 @@
       content="#0f172a"
     />
 
-    <!-- Schema.org Structured Data for AEO/SEO Enhancement -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -1157,7 +1132,6 @@
                       در Top.gg</a
                     >
                   </div>
-                  <!-- Added missing Schema.org properties for SoftwareApplication -->
                   <meta
                     itemprop="applicationCategory"
                     content="SocialNetworkingApp"
@@ -1542,7 +1516,6 @@
                   اولین‌بار در میان توسعه‌دهندگان رسمی این پلتفرم قرار داد.
                 </p>
 
-                <!-- Added Schema.org properties directly to the HTML element for SoftwareApplication -->
                 <meta
                   itemprop="applicationCategory"
                   content="SocialNetworkingApp"
@@ -2586,22 +2559,13 @@
       </div>
     </footer>
 
-    <!-- اضافه کردن defer به اسکریپت‌های غیرضروری برای مسدود نکردن رندر -->
-    <!-- این اسکریپت نیز به تأخیر می‌افتد تا رندر اولیه صفحه را مسدود نکند. -->
     <script
       src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"
       defer
     ></script>
-    <script src="assets/js/main-script.js" defer></script>
-    <!--
-      اگر 'email-decode.min.js' به صورت دستی در HTML شما وجود دارد،
-      حتماً تگ <script> آن را به صورت زیر تغییر دهید:
-      <script src="assets/cloudflare-static/email-decode.min.js" defer></script>
-      این اسکریپت احتمالاً توسط Cloudflare تزریق می‌شود و نیازی به تغییر دستی آن ندارید.
-    -->
+    <script src="assets/js/main-script.min.js" defer></script>
 
     <script>
-      // تابع برای به‌روزرسانی سال جاری در فوتر
       document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>
   </body>
