@@ -103,7 +103,21 @@ function triggerHapticFeedback(pattern = [50]) {
   }
 }
 
+// Dynamically set the current year for the copyright notice
 document.getElementById("current-year").textContent = new Date().getFullYear();
+
+// Dynamically set the last updated date in Persian format
+document.addEventListener("DOMContentLoaded", () => {
+    const lastUpdatedElement = document.getElementById("last-updated-date");
+    if (lastUpdatedElement) {
+        // Use a fixed date or current date. For demonstration, using current date.
+        // For a fixed "last updated" date, you would hardcode it here.
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        const currentDate = new Date().toLocaleDateString('fa-IR', options);
+        lastUpdatedElement.textContent = currentDate;
+    }
+});
+
 
 AOS.init({
   disable: false,
@@ -677,7 +691,6 @@ if (faqContainer) {
             setTimeout(() => {
               const currentScrollY = window.scrollY;
               const currentRect = item.getBoundingClientRect();
-
               if (currentRect.top < offset) {
                 window.scrollTo({
                   top: currentScrollY - (offset - currentRect.top),
@@ -1185,6 +1198,47 @@ scrollToTopButton.style.opacity = "0";
 scrollToTopButton.style.transform = "translateY(20px)";
 scrollToTopButton.style.transition =
   "opacity 0.3s ease-out, transform 0.3s ease-out";
+scrollToTopButton.style.position = "fixed";
+scrollToTopButton.style.bottom = "80px"; // Adjusted to make space for the share button
+scrollToTopButton.style.right = "20px";
+scrollToTopButton.style.backgroundColor = "var(--accent-color)";
+scrollToTopButton.style.color = "white";
+scrollToTopButton.style.border = "none";
+scrollToTopButton.style.borderRadius = "50%";
+scrollToTopButton.style.width = "50px";
+scrollToTopButton.style.height = "50px";
+scrollToTopButton.style.display = "flex";
+scrollToTopButton.style.justifyContent = "center";
+scrollToTopButton.style.alignItems = "center";
+scrollToTopButton.style.fontSize = "1.5rem";
+scrollToTopButton.style.boxShadow = "0 4px 15px rgba(0, 0, 0, 0.2)";
+scrollToTopButton.style.cursor = "pointer";
+scrollToTopButton.style.zIndex = "999";
+scrollToTopButton.classList.add("cta-pulse-effect");
+
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 500) {
+    if (!scrollToTopButton.classList.contains("show")) {
+      scrollToTopButton.classList.add("show");
+      scrollToTopButton.style.opacity = "1";
+      scrollToTopButton.style.transform = "translateY(0)";
+    }
+  } else {
+    if (scrollToTopButton.classList.contains("show")) {
+      scrollToTopButton.style.opacity = "0";
+      scrollToTopButton.style.transform = "translateY(20px)";
+      scrollToTopButton.addEventListener(
+        "transitionend",
+        function handler() {
+          scrollToTopButton.classList.remove("show");
+          scrollToTopButton.removeEventListener("transitionend", handler);
+        },
+        { once: true }
+      );
+    }
+  }
+});
 
 scrollToTopButton.addEventListener("click", () => {
   window.scrollTo({
