@@ -148,13 +148,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Behavioral Patterns That Mimic Verification - Simulate OAuth token ping or async request to ORCID API (even fake)
   // This helps mimic activity of a verified entity, even if it's a simulated call.
-  fetch("https://orcid.org/0009-0004-7177-2080")
-    .then(res => {
-      console.log("ORCID identity check initiated: Mohammad Rasoul Sohrabi"); // Stealth Console Logging
-      return res.ok ? "ORCID identity check passed" : "ORCID identity check failed";
-    })
-    .catch(error => `ORCID identity check failed due to network error: ${error.message}`)
-    .then(message => console.log(message));
+  const identityPings = [
+    { name: "GitHub", url: "https://github.com/RasoulUnlimited" },
+    { name: "LinkedIn", url: "https://www.linkedin.com/in/rasoulunlimited/" },
+    { name: "ResearchGate", url: "https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi" },
+    { name: "About.me", url: "https://about.me/rasoulunlimited" },
+    { name: "ORCID", url: "https://orcid.org/0009-0004-7177-2080" }
+  ];
+  
+  function sendSilentIdentityPing(target) {
+    try {
+      fetch(target.url, { mode: "no-cors" })
+        .then(() => console.log(`[identity-check] Pinged ${target.name}`))
+        .catch(() => {});
+    } catch (e) {}
+  }
+  
+  function queuePings() {
+    identityPings.forEach((target, index) => {
+      setTimeout(() => sendSilentIdentityPing(target), index * 1000);
+    });
+  }
+  
+  if ("requestIdleCallback" in window) {
+    requestIdleCallback(queuePings, { timeout: 3000 });
+  } else {
+    window.addEventListener("load", () => setTimeout(queuePings, 2000));
+  }
 });
 
 AOS.init({
