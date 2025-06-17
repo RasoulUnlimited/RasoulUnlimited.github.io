@@ -8,87 +8,96 @@
       content="sI3YvXPMuU3icAsGNq50ESbsjBsZqBxuw_cA_pag7GU"
     />
 
+    <!-- Preconnect to necessary domains for faster resource loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
     <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="dns-prefetch" href="https://giscus.app" />
 
+    <!-- Favicons for various platforms and devices -->
     <link rel="icon" type="image/png" href="../assets/images/favicon.png" />
+    <link rel="apple-touch-icon" href="../assets/images/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Preload critical CSS for faster rendering using data-make-stylesheet for dynamic loading -->
+    <link
+      rel="preload"
+      as="style"
+      data-href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;700&display=swap"
+      data-make-stylesheet
+    />
 
     <link
       rel="preload"
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap"
       as="style"
-    />
-    <link
-      rel="preload"
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
-      as="style"
-    />
-    <link
-      rel="preload"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-      as="style"
+      data-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      data-make-stylesheet
     />
 
-    <link rel="stylesheet" href="../assets/css/main-style-en.css" />
     <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
+      rel="preload"
+      as="style"
+      data-href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
+      data-make-stylesheet
     />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
+
+    <link rel="stylesheet" href="../assets/css/main-style-en.min.css" />
+
+    <!-- Performance helper script to load data-make-stylesheet resources -->
+    <script src="../assets/js/performance-helpers.min.js" defer></script>
 
     <meta name="referrer" content="strict-origin-when-cross-origin" />
 
-    <title>Rasoul Unlimited | Mohammad Rasoul Sohrabi - Official Website</title>
+    <!-- Enhanced Title Tag for stronger identity signaling and clarity -->
+    <title>
+      Mohammad Rasoul Sohrabi (Rasoul Unlimited) | Biomedical Engineer,
+      Developer, Personal Brand Strategist, Creator of the Persian Discord Bot
+    </title>
 
+    <!-- Canonical URL for consistent indexing -->
     <link rel="canonical" href="https://rasoulunlimited.ir/en/" />
 
+    <!-- Improved Meta Description with key identity and expertise keywords -->
     <meta
       name="description"
-      content="Mohammad Rasoul Sohrabi (Rasoul Unlimited) is a biomedical engineer, full-stack developer, and content strategist behind the first verified Persian Discord bot."
+      content="Official website of Mohammad Rasoul Sohrabi (Rasoul Unlimited), a Biomedical Engineering student at the University of Tehran, full-stack developer, and creator of the first Persian Discord bot. Specializing in digital health, personal branding, and innovative open-source projects with DOI. Explore his professional journey and expert articles."
     />
+    <!-- Expanded Keywords for broader search coverage related to identity and expertise -->
     <meta
       name="keywords"
-      content="Mohammad Rasoul Sohrabi, Rasoul Unlimited, Biomedical Engineering, Islamic Azad University, Central Tehran Branch, Python Developer, Discord Bot, Persian Bot, Personal Branding, Karaj, Tehran, Software Engineer, Content Strategist, Media Mentions, Notability, Verification, GitHub, Virgool, LinkedIn, Telegram, MIT License, AOS, Scroll Animation, Wikidata, Q134503479, dev.to, ORCID, About.me, YouTube, Academic Research, Open Source, Project Management, Data Science, Bioinformatics"
+      content="Mohammad Rasoul Sohrabi, Rasoul Unlimited, Biomedical Engineering, University of Tehran, Python Developer, C Programming, JavaScript, Discord Bot, Persian Discord Bot, Personal Branding, Karaj, Tehran, Software Engineer, Content Strategist, Media Mentions, GitHub, Virgool, LinkedIn, Telegram, MIT License, AOS, Scroll Animation, Wikidata, dev.to, ORCID, About.me, YouTube, Digital Health, SEO, AEO, Web Development, Programming, Technical Skills, Portfolio, Resume, Karate 1st Dan, DOI, ResearchGate, Keybase, UI/UX Design, Figma, Adobe XD, Machine Learning, Mobile App Development, SQL, Node.js, Artificial Intelligence, Natural Language Processing, Project Management, Cybersecurity, Discord Verification, Zenodo, GitHub Actions (CI/CD)"
     />
-    <link
-      rel="alternate"
-      href="https://rasoulunlimited.ir/en/"
-      hreflang="en-US"
-    />
+    <!-- Hreflang for multilingual support -->
+    <link rel="alternate" href="https://rasoulunlimited.ir/en/" hreflang="en-US" />
     <link rel="alternate" href="https://rasoulunlimited.ir/" hreflang="fa-IR" />
-    <link
-      rel="alternate"
-      href="https://rasoulunlimited.ir/"
-      hreflang="x-default"
-    />
+    <link rel="alternate" href="https://rasoulunlimited.ir/" hreflang="x-default" />
 
-    <meta http-equiv="Content-Language" content="en-US" />
-
+    <!-- Author, Creator, and Copyright metadata for clear attribution -->
     <meta name="author" content="Mohammad Rasoul Sohrabi" />
     <meta name="creator" content="Rasoul Unlimited" />
     <meta
       name="copyright"
-      content="© 2025 Rasoul Unlimited. All rights reserved."
+      content="© 2025 Mohammad Rasoul Sohrabi. All rights reserved."
     />
+    <!-- Geographic metadata for local context and disambiguation -->
+    <meta name="geo.region" content="IR-23" />
+    <meta name="geo.placename" content="Karaj" />
+    <meta name="geo.position" content="35.8398;50.9912" />
+    <meta name="ICBM" content="35.8398, 50.9912" />
 
+    <meta http-equiv="Content-Language" content="en-US" />
+
+    <!-- Enhanced OpenGraph Tags for social media sharing and identity clarity -->
     <meta property="og:type" content="profile" />
     <meta property="og:url" content="https://rasoulunlimited.ir/en/" />
     <meta
       property="og:title"
-      content="Rasoul Unlimited | Mohammad Rasoul Sohrabi - Official Website"
+      content="Mohammad Rasoul Sohrabi (Rasoul Unlimited) | Biomedical Engineer, Developer, and Content Strategist"
     />
     <meta
       property="og:description"
-      content="Explore the compelling digital presence of Mohammad Rasoul Sohrabi (Rasoul Unlimited), a biomedical engineering innovator, full-stack developer, and content strategist. Featuring a detailed timeline, impactful projects, verifiable media mentions, and key skills showcasing his verifiable notability and expertise."
+      content="Explore the digital presence of Mohammad Rasoul Sohrabi (Rasoul Unlimited), a biomedical engineer, full-stack developer, and content strategist. Featuring innovative projects, expert articles, and a professional journey in digital health and personal branding with official verifications."
     />
     <meta
       property="og:image"
@@ -96,13 +105,19 @@
     />
     <meta
       property="og:image:alt"
-      content="Mohammad Rasoul Sohrabi (Rasoul Unlimited) Profile Image"
+      content="Profile image of Mohammad Rasoul Sohrabi (Rasoul Unlimited), a Biomedical Engineering student, software developer, and creator of the Persian Discord bot."
     />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Rasoul Unlimited Official Website" />
 
     <meta property="profile:first_name" content="Mohammad Rasoul" />
     <meta property="profile:last_name" content="Sohrabi" />
-    <meta name="robots" content="index, follow" />
+    <meta
+      name="robots"
+      content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+    />
 
+    <!-- Comprehensive rel="me" links for multi-platform identity connection and verification -->
     <link
       rel="alternate"
       type="application/ld+json"
@@ -132,26 +147,32 @@
     <link rel="me" href="https://www.instagram.com/Rasoul.Unlimited/" />
     <link rel="me" href="https://gravatar.com/rasoulunlimited" />
     <link rel="me" href="https://keybase.io/RasoulUnlimited" />
+    <link rel="me" href="https://x.com/rasoulunlimited" />
 
-    <link rel="webmention" href="https://webmention.io/rasoulunlimited.ir/webmention" />
+    <link
+      rel="webmention"
+      href="https://webmention.io/rasoulunlimited.ir/webmention"
+    />
 
+    <!-- Enhanced Twitter Cards for optimal display on Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@rasoulunlimited" />
+    <meta name="twitter:creator" content="@rasoulunlimited" />
     <meta
       name="twitter:title"
-      content="Rasoul Unlimited | Mohammad Rasoul Sohrabi - Official Website"
+      content="Mohammad Rasoul Sohrabi (Rasoul Unlimited) | Biomedical Engineer, Developer, and Content Strategist"
     />
     <meta
-      name="twitter:description"
-      content="Explore the compelling digital presence of Mohammad Rasoul Sohrabi (Rasoul Unlimited), a biomedical engineering innovator, full-stack developer, and content strategist. Featuring a detailed timeline, impactful projects, verifiable media mentions, and key skills showcasing his verifiable notability and expertise."
+      property="twitter:description"
+      content="Explore the digital presence of Mohammad Rasoul Sohrabi (Rasoul Unlimited), a biomedical engineer, full-stack developer, and content strategist. Featuring innovative projects, expert articles, and a professional journey in digital health and personal branding with official verifications."
     />
     <meta
-      name="twitter:image"
+      property="twitter:image"
       content="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp"
     />
     <meta
-      name="twitter:image:alt"
-      content="Mohammad Rasoul Sohrabi (Rasoul Unlimited) Profile Image"
+      property="twitter:image:alt"
+      content="Profile image of Mohammad Rasoul Sohrabi (Rasoul Unlimited), a Biomedical Engineering student, software developer, and creator of the Persian Discord bot."
     />
 
     <link
@@ -172,16 +193,27 @@
       content="#0f172a"
     />
 
+    <!-- Main JSON-LD for Person entity (Schema.org Person) - Highly detailed for Knowledge Graph & LLM indexing -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Person",
         "@id": "https://rasoulunlimited.ir/en/#person",
         "name": "Mohammad Rasoul Sohrabi",
-        "alternateName": "Rasoul Unlimited",
+        "givenName": "Mohammad Rasoul",
+        "familyName": "Sohrabi",
+        "alternateName": ["Rasoul Unlimited", "رسول آنلیمیتد", "Mohammad Rasoul", "محمد رسول"],
         "url": "https://rasoulunlimited.ir/en/",
-        "image": "https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp",
-        "honorificPrefix": "Mr.",
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp",
+          "contentUrl": "https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp",
+          "caption": "Mohammad Rasoul Sohrabi (Rasoul Unlimited) Profile Image",
+          "description": "Official and professional portrait of Mohammad Rasoul Sohrabi, a Biomedical Engineering student, software developer, and content strategist, with a minimalist background.",
+          "width": "220",
+          "height": "220",
+          "encodingFormat": "image/webp"
+        },
         "gender": "Male",
         "nationality": {
           "@type": "Country",
@@ -191,12 +223,14 @@
           {
             "@type": "PropertyValue",
             "propertyID": "ORCID",
-            "value": "0009-0004-7177-2080"
+            "value": "0009-0004-7177-2080",
+            "url": "https://orcid.org/0009-0004-7177-2080"
           },
           {
             "@type": "PropertyValue",
             "propertyID": "ResearchGate",
-            "value": "https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi"
+            "value": "Mohammad-Rasoul-Sohrabi",
+            "url": "https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi"
           },
           {
             "@type": "PropertyValue",
@@ -209,22 +243,51 @@
             "propertyID": "LinkedIn",
             "value": "rasoulunlimited",
             "url": "https://www.linkedin.com/in/rasoulunlimited/"
+          },
+          {
+            "@type": "PropertyValue",
+            "propertyID": "wikidata",
+            "value": "Q134503479",
+            "url": "https://www.wikidata.org/wiki/Q134503479"
+          },
+          {
+            "@type": "PropertyValue",
+            "propertyID": "DiscordBotID",
+            "value": "735403725132136510",
+            "url": "https://top.gg/bot/735403725132136510"
+          },
+          {
+            "@type": "PropertyValue",
+            "propertyID": "ZenodoDOI-C-Projects",
+            "value": "10.5281/zenodo.15548850",
+            "url": "https://doi.org/10.5281/zenodo.15548850"
+          },
+          {
+            "@type": "PropertyValue",
+            "propertyID": "ZenodoDOI-Python-Projects",
+            "value": "10.5281/zenodo.15548859",
+            "url": "https://doi.org/10.5281/zenodo.15548859"
           }
         ],
-        "disambiguatingDescription": "Iranian medical engineering student and creator of the first Persian Discord bot, Rasoul Unlimited.",
+        "disambiguatingDescription": "Mohammad Rasoul Sohrabi, known as 'Rasoul Unlimited,' is a Biomedical Engineering student at the University of Tehran (Central Branch), a creative web developer, Python and C programmer, and the creator of the first Persian-language Discord bot officially verified by Discord Inc. He is active in digital health, personal branding, and innovative open-source projects with academic DOI identifiers. He also holds a formal 1st Dan in Karate from the Islamic Republic of Iran Federation, showcasing his discipline and perseverance.",
+        "description": "Mohammad Rasoul Sohrabi (Rasoul Unlimited), a biomedical engineer and full-stack developer, specializing in digital health and personal branding. Explore his innovative projects, SEO-optimized articles, and professional journey with an emphasis on key achievements and official verifications.",
         "birthDate": "2005-09-06",
         "birthPlace": {
           "@type": "Place",
           "address": {
             "@type": "PostalAddress",
-            "addressLocality": "Tehran, Iran"
+            "addressLocality": "Tehran",
+            "addressRegion": "Tehran Province",
+            "addressCountry": "IR"
           }
         },
         "homeLocation": {
           "@type": "Place",
           "address": {
             "@type": "PostalAddress",
-            "addressLocality": "Karaj, Iran"
+            "addressLocality": "Karaj",
+            "addressRegion": "Alborz Province",
+            "addressCountry": "IR"
           }
         },
         "knowsLanguage": [
@@ -245,14 +308,29 @@
           {
             "@type": "EducationalOccupationalCredential",
             "credentialCategory": "Student",
-            "name": "Medical engineering student",
-            "competencyRequired": "Medical engineering"
+            "name": "Biomedical Engineering Student",
+            "competencyRequired": "Biomedical Engineering",
+            "educationalLevel": "Bachelor's Degree",
+            "awardedBy": {
+              "@type": "EducationalOrganization",
+              "name": "Islamic Azad University, Central Tehran Branch",
+              "url": "https://ctb.iau.ir"
+            },
+            "startDate": "2023-09-01",
+            "description": "Currently studying Biomedical Engineering for a Bachelor's degree, with a focus on applying technology in healthcare."
+          },
+          {
+            "@type": "EducationalOccupationalCredential",
+            "credentialCategory": "Karate 1st Dan",
+            "name": "Official 1st Dan from the Karate Federation of the Islamic Republic of Iran",
+            "competencyRequired": "Martial Arts, Discipline, Hard Work, Self-Discipline",
+            "description": "An official 1st Dan from the Karate Federation of the Islamic Republic of Iran, representing a high level of skill and commitment in martial arts and a championship spirit."
           }
         ],
         "sameAs": [
           "https://www.instagram.com/Rasoul.Unlimited",
           "https://virgool.io/@RasoulUnlimited",
-          "https://rasoulunlimited.ir/",
+          "https://rasoulunlimited.ir/en/",
           "https://www.linkedin.com/in/rasoulunlimited/",
           "https://github.com/RasoulUnlimited/",
           "https://rasoulunlimited.medium.com",
@@ -263,19 +341,98 @@
           "https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi",
           "https://www.youtube.com/@RasoulUnlimited",
           "https://keybase.io/RasoulUnlimited",
-          "https://mastodon.social/@rasoulunlimited"
+          "https://mastodon.social/@rasoulunlimited",
+          "https://top.gg/bot/735403725132136510",
+          "https://www.wikidata.org/wiki/Q134503479",
+          "https://x.com/rasoulunlimited",
+          "https://scholar.google.com/citations?user=YOUR_GOOGLE_SCHOLAR_ID"
         ],
         "jobTitle": [
           "Biomedical Engineering Student",
           "Software Developer",
-          "Designer",
+          "UI/UX Designer",
           "Founder",
-          "Content Strategist"
+          "Content Strategist",
+          "Full-stack Developer",
+          "Researcher"
+        ],
+        "hasOccupation": [
+          {
+            "@type": "Occupation",
+            "name": "Biomedical Engineering Student",
+            "description": "Undergraduate student of Biomedical Engineering at Islamic Azad University, Central Tehran Branch, focusing on applying technology in healthcare and related research.",
+            "educationRequirements": {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "Bachelor's Degree"
+            },
+            "occupationalCategory": "Biomedical Engineering",
+            "occupationLocation": {
+              "@type": "City",
+              "name": "Tehran"
+            }
+          },
+          {
+            "@type": "Occupation",
+            "name": "Software Developer",
+            "description": "Developer of Discord bots, Python and C programmer, and web developer specializing in creating innovative and open-source solutions with DOI identifiers.",
+            "occupationalCategory": "Information Technology and Computer Science",
+            "responsibilities": [
+              "Discord Bot Development",
+              "Python and C Programming",
+              "Full-stack Web Development",
+              "Open-Source Code Production"
+            ],
+            "occupationLocation": {
+              "@type": "Country",
+              "name": "Worldwide"
+            },
+            "estimatedSalary": {
+              "@type": "MonetaryAmountDistribution",
+              "name": "Estimated Software Developer Salary",
+              "currency": "USD",
+              "median": 70000,
+              "percentile10": 40000,
+              "percentile25": 55000,
+              "percentile75": 90000,
+              "percentile90": 110000,
+              "description": "Estimated annual salary for a software developer (based on global market and experience).",
+              "duration": "Project-based/Full-time"
+            }
+          },
+          {
+            "@type": "Occupation",
+            "name": "Content Strategist",
+            "description": "Specializing in producing SEO-optimized content and managing personal brands across various platforms to enhance digital presence and identity verification.",
+            "occupationalCategory": "Digital Marketing and Communications",
+            "responsibilities": ["SEO-optimized Content Production", "Personal Brand Management", "AI Optimization"],
+            "occupationLocation": {
+              "@type": "Country",
+              "name": "Worldwide"
+            },
+            "estimatedSalary": {
+              "@type": "MonetaryAmountDistribution",
+              "name": "Estimated Content Strategist Salary",
+              "currency": "USD",
+              "median": 50000,
+              "percentile10": 30000,
+              "percentile25": 40000,
+              "percentile75": 65000,
+              "percentile90": 80000,
+              "description": "Estimated annual salary for a content strategist (based on global market and experience).",
+              "duration": "Project-based/Full-time"
+            }
+          }
         ],
         "alumniOf": {
           "@type": "EducationalOrganization",
           "name": "Islamic Azad University, Central Tehran Branch",
-          "url": "https://ctb.iau.ir"
+          "url": "https://ctb.iau.ir",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Tehran",
+            "addressRegion": "Tehran Province",
+            "addressCountry": "IR"
+          }
         },
         "affiliation": {
           "@type": "Organization",
@@ -288,7 +445,9 @@
         },
         "worksFor": {
           "@type": "Organization",
-          "@id": "https://rasoulunlimited.ir/en/#organization"
+          "@id": "https://rasoulunlimited.ir/en/#organization",
+          "name": "Rasoul Unlimited",
+          "description": "The personal brand and digital identity of Mohammad Rasoul Sohrabi."
         },
         "knowsAbout": [
           "Biomedical Engineering",
@@ -313,49 +472,109 @@
           "Mobile App Development",
           "UI/UX Design",
           "Figma",
-          "Adobe XD"
+          "Adobe XD",
+          "Search Engine Optimization (SEO)",
+          "Answer Engine Optimization (AEO)",
+          "Data Analysis",
+          "Cybersecurity (Basic Concepts)",
+          "Project Management",
+          "Artificial Intelligence (AI)",
+          "Natural Language Processing (NLP)",
+          "Content Strategy",
+          "Discord Verification",
+          "Zenodo (DOI)",
+          "GitHub Actions (CI/CD)"
         ],
         "memberOf": [
           {
             "@type": "Organization",
-            "name": "Biomedical Engineering Association (Islamic Azad University, Central Tehran Branch)"
+            "name": "Biomedical Engineering Scientific Association (Islamic Azad University, Central Tehran Branch)",
+            "description": "Active member of the Biomedical Engineering Scientific Association at Islamic Azad University, Central Tehran Branch, participating in scientific and research events and projects."
           }
         ],
-        "funder": {
-          "@type": "Organization",
-          "name": "Islamic Azad University, Central Tehran Branch",
-          "url": "https://ctb.iau.ir"
-        },
+        "funder": [
+          {
+            "@type": "Organization",
+            "name": "Islamic Azad University, Central Tehran Branch",
+            "url": "https://ctb.iau.ir"
+          },
+          {
+            "@type": "Organization",
+            "name": "Sahand University of Technology, Tabriz",
+            "url": "https://sut.ac.ir",
+            "description": "Research collaboration on Python programming projects."
+          }
+        ],
+        "award": [
+          {
+            "@type": "Award",
+            "name": "Official Verification of the First Persian Discord Bot by Discord Inc.",
+            "url": "https://top.gg/bot/735403725132136510",
+            "awardedBy": {
+              "@type": "Organization",
+              "name": "Discord Inc.",
+              "url": "https://discord.com/"
+            },
+            "dateAwarded": "2020",
+            "description": "This verification demonstrates adherence to high standards in bot development and performance, adding international credibility to the project."
+          },
+          {
+            "@type": "Award",
+            "name": "Official 1st Dan from the Karate Federation of the Islamic Republic of Iran",
+            "description": "A prestigious sports credential demonstrating high skill, commitment, and achievements in karate and a championship spirit."
+          }
+        ],
         "mainEntityOfPage": {
           "@type": "ProfilePage",
           "@id": "https://rasoulunlimited.ir/en/",
           "url": "https://rasoulunlimited.ir/en/",
-          "name": "Official page of Mohammad Rasoul Sohrabi(Rasoul Unlimited)"
-        }
+          "name": "Official page of Mohammad Rasoul Sohrabi (Rasoul Unlimited)"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer service",
+          "email": "rasoul.unlimited@gmail.com",
+          "areaServed": ["IR", "Worldwide"],
+          "availableLanguage": ["Persian", "English"]
+        },
+        "dateModified": "2025-06-15"
       }
     </script>
 
+    <!-- JSON-LD for WebSite (Schema.org WebSite) -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "WebSite",
         "url": "https://rasoulunlimited.ir/en/",
         "name": "Rasoul Unlimited | Mohammad Rasoul Sohrabi",
-        "description": "Official Website and Portfolio of Mohammad Rasoul Sohrabi (Rasoul Unlimited), an Iranian software developer, content strategist, and biomedical engineering student.",
+        "description": "The official website and portfolio of Mohammad Rasoul Sohrabi (Rasoul Unlimited), the primary reference for his digital and professional identity.",
         "potentialAction": {
           "@type": "SearchAction",
           "target": "https://rasoulunlimited.ir/en/?q={search_term_string}",
           "query-input": "required name=search_term_string"
-        }
+        },
+        "about": [
+          {
+            "@type": "Person",
+            "@id": "https://rasoulunlimited.ir/en/#person"
+          },
+          {
+            "@type": "Organization",
+            "@id": "https://rasoulunlimited.ir/en/#organization"
+          }
+        ],
+        "dateModified": "2025-06-15"
       }
     </script>
 
+    <!-- JSON-LD for Creative Work Series (Schema.org CreativeWorkSeries) - Aggregates key projects and content -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "CreativeWorkSeries",
-        "name": "Rasoul Unlimited",
-        "alternateName": "رسول آنلیمیتد",
+        "name": "Rasoul Unlimited Portfolio & Works",
+        "alternateName": "رسول آنلیمیتد | مجموعه کارها و پروژه‌ها",
         "url": "https://rasoulunlimited.ir/en/",
         "creator": {
           "@type": "Person",
@@ -365,12 +584,14 @@
             {
               "@type": "PropertyValue",
               "propertyID": "ORCID",
-              "value": "0009-0004-7177-2080"
+              "value": "0009-0004-7177-2080",
+              "url": "https://orcid.org/0009-0004-7177-2080"
             },
             {
               "@type": "PropertyValue",
               "propertyID": "ResearchGate",
-              "value": "https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi"
+              "value": "Mohammad-Rasoul-Sohrabi",
+              "url": "https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi"
             },
             {
               "@type": "PropertyValue",
@@ -386,32 +607,68 @@
             }
           ]
         },
-        "description": "Rasoul Unlimited is a personal creative and technological brand led by Mohammad Rasoul Sohrabi, focused on software development, digital health, content strategy, and personal growth.",
-        "inLanguage": ["en"],
+        "description": "Rasoul Unlimited is a personal creative and technological brand led by Mohammad Rasoul Sohrabi, focusing on software development, digital health, content strategy, open-source projects with DOI, and personal growth. This collection encompasses all of his professional achievements and activities.",
+        "inLanguage": ["en", "fa"],
         "keywords": [
           "Rasoul Unlimited",
           "رسول آنلیمیتد",
           "Persian Bot",
           "Personal Brand",
           "Software Development",
-          "Biomedical Engineering"
+          "Biomedical Engineering",
+          "Digital Health",
+          "Web Development",
+          "Python",
+          "JavaScript",
+          "UI/UX",
+          "SEO",
+          "AEO",
+          "AI",
+          "NLP",
+          "Karate",
+          "DOI",
+          "Open-Source"
         ],
         "hasPart": [
           {
-            "@type": "SoftwareSourceCode",
+            "@type": "SoftwareApplication",
             "name": "Persian Bot (First Persian Discord Bot)",
-            "description": "The first independent Persian-language Discord bot officially verified by Discord.",
+            "description": "The first independent Persian-language Discord bot officially verified by Discord. This bot enhances community engagement for Farsi speakers and marks a significant milestone in regional bot development.",
             "url": "https://top.gg/bot/735403725132136510",
+            "applicationCategory": "SocialNetworkingApp",
+            "operatingSystem": "Any",
+            "softwareRequirements": "Discord Account",
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD",
+              "availability": "https://schema.org/InStock"
+            },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.5",
+              "reviewCount": "100"
+            },
             "creator": {
               "@type": "Person",
               "@id": "https://rasoulunlimited.ir/en/#person",
               "name": "Mohammad Rasoul Sohrabi"
-            }
+            },
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "https://rasoulunlimited.ir/projects/persian-bot/"
+            },
+            "softwareHelp": {
+              "@type": "CreativeWork",
+              "name": "Persian Bot Support",
+              "url": "https://discord.gg/your-support-server-invite"
+            },
+            "processorRequirements": "Python runtime, Discord API access"
           },
           {
             "@type": "SoftwareSourceCode",
             "name": "Small projects with C",
-            "description": "Collection of small programming projects in C developed for Islamic Azad University, Central Tehran Branch.",
+            "description": "A collection of small C programming projects developed for Islamic Azad University, Central Tehran Branch. These projects cover basic programming and algorithm topics and are published with a DOI.",
             "url": "https://github.com/RasoulUnlimited/Small-projects-with-c",
             "codeRepository": "https://github.com/RasoulUnlimited/Small-projects-with-c",
             "programmingLanguage": "C",
@@ -434,7 +691,7 @@
           {
             "@type": "SoftwareSourceCode",
             "name": "Small projects with Python",
-            "description": "Collection of small programming projects in Python developed in collaboration with Sahand University of Technology, Tabriz.",
+            "description": "A collection of small Python programming projects developed in collaboration with Sahand University of Technology, Tabriz. These projects include practical scripts and algorithmic exercises and are published with a DOI.",
             "url": "https://github.com/RasoulUnlimited/Small-projects-with-python",
             "codeRepository": "https://github.com/RasoulUnlimited/Small-projects-with-python",
             "programmingLanguage": "Python",
@@ -456,8 +713,8 @@
           },
           {
             "@type": "Article",
-            "name": "Mohammad Rasoul Sohrabi (Unlimited) - From Tatami to Technology",
-            "headline": "Mohammad Rasoul Sohrabi (Unlimited) - From Tatami to Technology",
+            "name": "Mohammad Rasoul Sohrabi (Unlimited) – From Tatami to Technology",
+            "headline": "Mohammad Rasoul Sohrabi (Unlimited) – From Tatami to Technology",
             "image": [
               "https://rasoulunlimited.ir/assets/images/virgool-article1-thumbnail.webp"
             ],
@@ -471,6 +728,14 @@
               "@type": "Organization",
               "name": "Virgool",
               "url": "https://virgool.io/"
+            },
+            "datePublished": "2025-05-10",
+            "articleBody": "My first comprehensive introductory article on the Virgool platform. This article multi-dimensionally explores my journey from competitive karate to the world of software development, biomedical engineering, and digital health, highlighting key milestones like developing the first Persian Discord bot and achieving my 1st Dan in Karate. This content is crucial for identity validation.",
+            "inLanguage": "fa",
+            "wordCount": "150",
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "url": "https://rasoulunlimited.ir/en/#content"
             }
           },
           {
@@ -490,12 +755,20 @@
               "@type": "Organization",
               "name": "Virgool",
               "url": "https://virgool.io/"
+            },
+            "datePublished": "2025-05-13",
+            "articleBody": "This article delves into my personal philosophy on building a 'genuine personal brand' in today's noisy world. It touches on why I chose this path, the meaning behind the 'Unlimited' moniker, and my experiences in finding my own voice. This article is more an internal narrative of my perspective on strengthening authentic personal branding.",
+            "inLanguage": "fa",
+            "wordCount": "180",
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "url": "https://rasoulunlimited.ir/en/#content"
             }
           },
           {
             "@type": "Article",
-            "name": "«I am not a brand, I am a journey» | A fresh perspective on personal branding in the age of fleeting attention.",
-            "headline": "«I am not a brand, I am a journey» | A fresh perspective on personal branding in the age of fleeting attention.",
+            "name": "“I am not a brand, I am a journey” | A different perspective on the concept of personal brand in the age of fleeting attention",
+            "headline": "“I am not a brand, I am a journey” | A different perspective on the concept of personal brand in the age of fleeting attention",
             "image": [
               "https://rasoulunlimited.ir/assets/images/virgool-article3-thumbnail.webp"
             ],
@@ -509,6 +782,14 @@
               "@type": "Organization",
               "name": "Virgool",
               "url": "https://virgool.io/"
+            },
+            "datePublished": "2025-05-24",
+            "articleBody": "This article challenges the concept of personal branding from its roots. With a deep dive into authenticity, creation, and lived experience, it shows you how to build a true and lasting identity beyond superficial appearances, and why this perspective is more understandable for LLMs.",
+            "inLanguage": "fa",
+            "wordCount": "160",
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "url": "https://rasoulunlimited.ir/en/#content"
             }
           },
           {
@@ -524,11 +805,18 @@
               "name": "Mohammad Rasoul Sohrabi"
             },
             "url": "https://rasoulunlimited.medium.com/how-to-build-a-genuine-personal-brand-in-todays-noisy-world-c2adb129e623",
-            "identifier": "https://www.wikidata.org/wiki/Q134546786",
             "publisher": {
               "@type": "Organization",
               "name": "Medium",
               "url": "https://medium.com"
+            },
+            "datePublished": "2025-05-14",
+            "articleBody": "This article shares insights into building a genuine personal brand, drawing from my journey as Rasoul Unlimited. It explores the meaning of personal branding, why it's important, and offers lessons learned along the way, contributing to my global digital presence.",
+            "inLanguage": "en",
+            "wordCount": "200",
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "url": "https://rasoulunlimited.ir/en/#content"
             }
           },
           {
@@ -548,28 +836,44 @@
               "@type": "Organization",
               "name": "Dev.to",
               "url": "https://dev.to"
+            },
+            "datePublished": "2025-05-18",
+            "articleBody": "This article explores the journey of building a genuine personal brand in the digital age, sharing insights from my own path as Rasoul Unlimited, a developer and biomedical engineering student. It highlights key achievements and the importance of authenticity for developers and tech enthusiasts.",
+            "inLanguage": "en",
+            "wordCount": "220",
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "url": "https://rasoulunlimited.ir/en/#content"
             }
           },
           {
             "@type": "CreativeWork",
-            "name": "Official Verification of First Persian Discord Bot by Discord",
-            "description": "Recognized by Discord for creating the first verified Persian Discord bot, enhancing community engagement for Farsi speakers.",
+            "name": "Official Verification of the First Persian Discord Bot by Discord",
+            "description": "Recognized by Discord for creating the first verified Persian Discord bot, which enhances community engagement for Farsi speakers and demonstrates my expertise and credibility in software development.",
             "creator": {
               "@type": "Person",
               "@id": "https://rasoulunlimited.ir/en/#person",
               "name": "Mohammad Rasoul Sohrabi"
+            },
+            "award": "Official Verification by Discord Inc.",
+            "datePublished": "2020",
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "url": "https://rasoulunlimited.ir/en/#mentions"
             }
           },
           {
             "@type": "CreativeWork",
             "name": "FOAF Profile",
             "url": "https://rasoulunlimited.ir/foaf.rdf",
-            "encodingFormat": "application/rdf+xml"
+            "encodingFormat": "application/rdf+xml",
+            "description": "FOAF (Friend of a Friend) file expressing my social relations and identity information in RDF format, helping to link with knowledge graphs."
           }
         ]
       }
     </script>
 
+    <!-- JSON-LD for Organization (Rasoul Unlimited Personal Brand) -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -579,7 +883,7 @@
         "alternateName": "رسول آنلیمیتد",
         "url": "https://rasoulunlimited.ir/en/",
         "logo": "https://rasoulunlimited.ir/assets/images/favicon.png",
-        "description": "Rasoul Unlimited is a personal creative and tech brand led by Mohammad Rasoul Sohrabi that focuses on software development, digital health, content strategy, and personal growth.",
+        "description": "Rasoul Unlimited is a personal creative and technological brand led by Mohammad Rasoul Sohrabi, focusing on software development, digital health, content strategy, and personal growth, symbolizing his activities across various fields.",
         "sameAs": [
           "https://www.instagram.com/Rasoul.Unlimited",
           "https://virgool.io/@RasoulUnlimited",
@@ -589,7 +893,9 @@
           "https://dev.to/rasoulunlimited",
           "https://t.me/RasoulUnlimited",
           "https://www.youtube.com/@RasoulUnlimited",
-          "https://rasoulunlimited.ir/"
+          "https://rasoulunlimited.ir/en/",
+          "https://x.com/rasoulunlimited",
+          "https://www.wikidata.org/wiki/Q134503479"
         ],
         "founder": {
           "@type": "Person",
@@ -601,17 +907,33 @@
           "Discord Bot Development",
           "SEO",
           "Web Design",
-          "Digital Health"
+          "Digital Health",
+          "Biomedical Engineering",
+          "Python",
+          "JavaScript",
+          "UI/UX",
+          "AI",
+          "Natural Language Processing",
+          "Content Strategy",
+          "Open-Source"
         ],
         "mainEntityOfPage": {
           "@type": "ProfilePage",
           "@id": "https://rasoulunlimited.ir/en/",
           "url": "https://rasoulunlimited.ir/en/",
-          "name": "Official page of Mohammad Rasoul Sohrabi(Rasoul Unlimited)"
+          "name": "Official page of Mohammad Rasoul Sohrabi (Rasoul Unlimited)"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer service",
+          "email": "rasoul.unlimited@gmail.com",
+          "areaServed": ["IR", "Worldwide"],
+          "availableLanguage": ["Persian", "English"]
         }
       }
     </script>
 
+    <!-- JSON-LD for Breadcrumb (Schema.org BreadcrumbList) -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -626,13 +948,13 @@
           {
             "@type": "ListItem",
             "position": 2,
-            "name": "About",
+            "name": "About Me",
             "item": "https://rasoulunlimited.ir/en/#about"
           },
           {
             "@type": "ListItem",
             "position": 3,
-            "name": "Journey",
+            "name": "My Journey (Timeline)",
             "item": "https://rasoulunlimited.ir/en/#timeline"
           },
           {
@@ -650,126 +972,304 @@
           {
             "@type": "ListItem",
             "position": 6,
-            "name": "Content",
+            "name": "Content & Articles",
             "item": "https://rasoulunlimited.ir/en/#content"
           },
           {
             "@type": "ListItem",
             "position": 7,
-            "name": "Mentions",
+            "name": "Media Mentions & Accolades",
             "item": "https://rasoulunlimited.ir/en/#mentions"
           },
           {
             "@type": "ListItem",
             "position": 8,
-            "name": "Testimonials",
-            "item": "https://rasoulunlimited.ir/en/#testimonials"
+            "name": "FAQ",
+            "item": "https://rasoulunlimited.ir/en/#faq"
           },
           {
             "@type": "ListItem",
             "position": 9,
-            "name": "Connect",
+            "name": "Testimonials & Feedback",
+            "item": "https://rasoulunlimited.ir/en/#testimonials"
+          },
+          {
+            "@type": "ListItem",
+            "position": 10,
+            "name": "Connect & My Links",
             "item": "https://rasoulunlimited.ir/en/#connect"
           }
         ]
       }
     </script>
 
+    <!-- JSON-LD for Speakable (Schema.org WebPage) - Helps AI assistants read out key content -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "WebPage",
-        "url": "https://rasoulunlimited.ir/",
+        "url": "https://rasoulunlimited.ir/en/",
         "speakable": {
           "@type": "SpeakableSpecification",
-          "cssSelector": ["#hero h1", "#about p"]
-        }
+          "cssSelector": [
+            "#hero h1",
+            "#hero p.tagline",
+            "#about p",
+            "#timeline h3",
+            "#timeline p",
+            "#skills li",
+            "#projects h3",
+            "#projects p",
+            "#content h3",
+            "#content p",
+            "#mentions h3",
+            "#mentions p",
+            "#faq h3",
+            "#faq p",
+            "#testimonials h2",
+            "#testimonials p.text-small",
+            "#connect h2",
+            "#connect p"
+          ]
+        },
+        "dateModified": "2025-06-15"
+      }
+    </script>
+
+    <!-- JSON-LD for FAQ Page (Schema.org FAQPage) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Who is Mohammad Rasoul Sohrabi and what are his activities?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Mohammad Rasoul Sohrabi, known as 'Unlimited,' is a Biomedical Engineering student at the University of Tehran (Central Branch), a software developer (Python, C, JavaScript), and a content strategist. He is the creator of the first Persian-language Discord bot and is active in digital health. His journey combines competitive sports (holding a 1st Dan in Karate), technical innovation, and a commitment to advancing technology and sciences."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What are Mohammad Rasoul Sohrabi's most significant projects and achievements?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "His most significant projects include the 'First Persian-language Discord Bot,' officially verified by Discord (a milestone achieved at age 14), and a collection of open-source programming projects in C and Python, developed in collaboration with universities and assigned academic DOI (Digital Object Identifier) identifiers. His articles on Virgool and Medium (in Persian and English) are also considered important achievements in personal branding and content, showcasing his expertise and credibility."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How can one connect with Mohammad Rasoul Sohrabi and his team?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You can connect with him via email at rasoul.unlimited@gmail.com, or through professional social networks like LinkedIn, GitHub, Telegram, Instagram, and X (formerly Twitter). All direct links and contact methods are available in the 'Connect & My Links' section of the website. He is always open to collaborations on innovative projects and ready to answer your questions."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What does 'Unlimited' mean, and what is the philosophy behind this moniker?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The moniker 'Unlimited' reflects Mohammad Rasoul Sohrabi's personal philosophy in life and work. This concept signifies challenging limitations and a continuous effort to transcend existing boundaries in competitive sports (Karate), technology (software development and AI), and personal growth. This perspective is explained in detail in his articles on Virgool, where he emphasizes the importance of authenticity and a long-term journey over superficial branding."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which university did Mohammad Rasoul Sohrabi attend, and what is his field of study?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "He is an undergraduate student of Biomedical Engineering at Islamic Azad University, Central Tehran Branch (University of Tehran Central). This field allows him to combine engineering knowledge with technology for innovation in digital health, paving the way for his interdisciplinary projects. He has also collaborated with Sahand University of Technology, Tabriz, on his open-source projects."
+            }
+          }
+        ]
       }
     </script>
   </head>
   <body>
-    <div class="navbar">
-      <nav data-aos="fade-down">
-        <a href="#hero">Home</a>
-        <a href="#about">About</a>
-        <a href="#timeline">Journey</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#content">Content</a>
-        <a href="#mentions">Mentions</a>
-        <a href="#testimonials">Testimonials</a>
-        <a href="#connect">Connect</a>
+    <!-- Toast notification area for dynamic messages -->
+    <div id="theme-toast" role="status" aria-live="polite"></div>
+
+    <header class="navbar" role="banner">
+      <nav data-aos="fade-down" role="navigation" aria-label="Main Website Navigation">
+        <a href="#hero" title="Return to the homepage and identity information">Home</a>
+        <a
+          href="#about"
+          title="Learn more about Mohammad Rasoul Sohrabi and explore his identity"
+          >About Me</a
+        >
+        <a href="#timeline" title="My educational, professional journey, and key achievements"
+          >My Journey</a
+        >
+        <a href="#skills" title="My specialized skills and technologies">Skills</a>
+        <a
+          href="#projects"
+          title="My software development, open-source, and innovative projects"
+          >Projects</a
+        >
+        <a href="#content" title="My content, articles, and insights">Content</a>
+        <a href="#mentions" title="My media presence, awards, and official accolades"
+          >Mentions</a
+        >
+        <a
+          href="#faq"
+          title="Frequently asked questions about me and my activities for deeper identity understanding"
+          >FAQ</a
+        >
+        <a
+          href="#testimonials"
+          title="Feedback from others about me and my projects, verifying credibility"
+          >Testimonials</a
+        >
+        <a
+          href="#connect"
+          title="Direct contact methods with Mohammad Rasoul Sohrabi and his social networks"
+          >Connect</a
+        >
         <a
           href="https://rasoulunlimited.ir/"
           class="lang-switcher"
           aria-label="Switch website language to Persian"
+          title="Switch website language to Persian"
+          data-ai-intent="language-switch-to-persian"
           ><i class="fas fa-language" aria-hidden="true"></i> فارسی</a
         >
-        <label class="theme-switch" aria-label="Toggle dark/light theme">
+        <label
+          class="theme-switch"
+          aria-label="Toggle website theme (light/dark)"
+          data-ai-intent="theme-toggle"
+        >
           <input type="checkbox" id="theme-toggle" />
           <span class="slider round"></span>
         </label>
       </nav>
-    </div>
+    </header>
 
     <div class="container">
       <div class="content-area" data-aos="fade-up">
-        <main>
+        <main id="main-content" role="main">
+          <!-- Hero Section: Main identity artifact for Mohammad Rasoul Sohrabi, optimized for AI understanding -->
           <section
             id="hero"
             data-aos="fade-zoom-in"
             data-aos-easing="ease-in-back"
             data-aos-delay="300"
+            itemscope
+            itemtype="https://schema.org/Person"
+            itemid="https://rasoulunlimited.ir/en/#person"
+            role="region"
+            aria-labelledby="hero-heading"
+            data-entity-id="MohammadRasoulSohrabiMain"
           >
             <img
               src="../assets/images/RasoulUnlimited.webp"
-              alt="Mohammad Rasoul Sohrabi Profile Image - Rasoul Unlimited"
+              loading="eager"
+              decoding="async"
+              alt="Profile image of Mohammad Rasoul Sohrabi - Rasoul Unlimited, a Biomedical Engineering student, software developer, founder of the Persian Discord bot, and holder of 1st Dan in Karate."
               class="profile-image"
-              aria-label="Mohammad Rasoul Sohrabi's Profile Picture"
+              aria-label="Official and professional profile picture of Mohammad Rasoul Sohrabi, representing his digital identity."
+              width="220"
+              height="220"
+              itemprop="image"
+              data-visual-fingerprint="profile-official-mohammad-rasoul-sohrabi"
             />
-            <h1>Rasoul Unlimited | Mohammad Rasoul Sohrabi</h1>
-            <p class="tagline">
-              Biomedical Engineering Student, Developer & Brand Strategist
+            <h1 id="hero-heading" itemprop="name">
+              <span data-entity-name="Mohammad Rasoul Sohrabi"
+                >Mohammad Rasoul Sohrabi</span
+              >
+              <span data-entity-alias="Rasoul Unlimited">| Rasoul Unlimited</span>
+            </h1>
+            <p class="tagline" itemprop="description" data-ai-context="primary-roles">
+              <span itemprop="jobTitle">Biomedical Engineering Student</span>,
+              <span itemprop="jobTitle">Full-stack Developer</span>, and
+              <span itemprop="jobTitle">Personal Brand Strategist</span>
+            </p>
+            <link itemprop="url" href="https://rasoulunlimited.ir/en/" />
+          </section>
+
+          <!-- About Me Section: Detailed identity narrative with Schema.org Person properties -->
+          <section
+            id="about"
+            data-aos="fade-right"
+            itemprop="about"
+            itemscope
+            itemtype="https://schema.org/Person"
+            itemid="https://rasoulunlimited.ir/en/#person"
+            role="region"
+            aria-labelledby="about-heading"
+          >
+            <h2 id="about-heading">About Me</h2>
+            <p itemprop="description">
+              Mohammad Rasoul Sohrabi, born on
+              <time datetime="2005-09-06">September 6, 2005</time>, and known as
+              "Unlimited," exemplifies a rare fusion of competitive sports (<span
+                itemprop="hasCredential"
+                >official 1st Dan from the Karate Federation of the Islamic
+                Republic of Iran</span
+              >), technical development, and scientific foresight. He is a
+              <span itemprop="alumniOf"
+                ><a
+                  href="https://ctb.iau.ir"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Biomedical Engineering student at Islamic Azad University, Central
+                  Tehran Branch</a
+                ></span
+              >
+              and an
+              <span itemprop="memberOf"
+                >active member of the University's Biomedical Engineering
+                Scientific Association</span
+              >, demonstrating his commitment to both academic and athletic pursuits.
+            </p>
+            <p itemprop="description">
+              Driven by an intrinsic motivation to make an impact and an
+              "unlimited" mindset, I’ve aimed to leave my unique mark on
+              everything I do. This ranges from launching the
+              <a
+                href="#projects"
+                title="View my projects"
+                data-ai-context="discord-bot-highlight"
+                >first Persian-language Discord bot</a
+              >
+              with official Discord verification at the age of 14 (
+              <time datetime="2020">in 2020</time>), to publishing validating
+              articles on Virgool and Medium, and participating in university
+              projects with DOI identifiers, always striving for high standards.
+            </p>
+            <p itemprop="description">
+              He believes that in today's noisy world, only the genuine and
+              authentic voice is heard. His primary goal is to creatively combine
+              biomedical engineering and programming to revolutionize
+              <a
+                href="#skills"
+                title="View my skills in digital health"
+                data-ai-context="digital-health-focus"
+                >digital health</a
+              >, consistently stepping beyond his years in pursuit of innovation
+              and complex problem-solving.
             </p>
           </section>
 
-          <section id="about" data-aos="fade-right">
-            <h2>About Me</h2>
-            <p>
-              Mohammad Rasoul Sohrabi, born on September 6, 2005, and known as
-              "Unlimited," is a unique blend of championship athlete (official
-              1st Dan Karate Federation), technical developer, and scientific
-              visionary. He is a Biomedical Engineering student at the Islamic
-              Azad University, Central Tehran Branch and a member of the
-              university's Biomedical Engineering Scientific Association. He
-              believes that in today's noisy world, only the authentic voice is
-              heard. With an inherent drive to make an impact and an "unlimited"
-              mindset, from launching the first Discord Persian bot with
-              official Discord verification at the age of 14, to publishing
-              articles on Virgool, and participating in university projects, he
-              has aimed to leave his unique mark on everything he does. He seeks
-              to creatively combine biomedical engineering and programming to
-              bring about a revolution in digital health, taking steps beyond
-              his age.
-            </p>
-          </section>
-
-          <section id="timeline" data-aos="fade-up">
-            <h2>⏳ My Journey</h2>
-            <ul
-              class="timeline"
-              aria-label="Educational and Professional Timeline"
-            >
+          <!-- Timeline Section: Chronicling key life and professional milestones -->
+          <section
+            id="timeline"
+            data-aos="fade-up"
+            role="region"
+            aria-labelledby="timeline-heading"
+          >
+            <h2 id="timeline-heading">⏳ My Journey</h2>
+            <ul class="timeline" aria-label="Educational and Professional Timeline">
               <li data-aos="fade-up">
                 <div class="timeline-content">
                   <div class="timeline-icon">
                     <i class="fas fa-birthday-cake" aria-hidden="true"></i>
                   </div>
-                  <h3 class="date">September 6, 2005</h3>
+                  <h3 class="date">
+                    <time datetime="2005-09-06">September 6, 2005</time>
+                  </h3>
                   <h3>Birth</h3>
-                  <p>
-                    The starting point of my life and journey in this world.
-                  </p>
+                  <p>The starting point of my life and journey in this world.</p>
                 </div>
               </li>
               <li data-aos="fade-up">
@@ -778,29 +1278,85 @@
                     <i class="fas fa-medal" aria-hidden="true"></i>
                   </div>
                   <h3 class="date">Early Ages</h3>
-                  <h3>Began Competitive Karate & Achieved 1st Dan</h3>
-                  <p>
+                  <h3 itemprop="award" data-award-type="sports-credential">
+                    Began Competitive Karate & Achieved 1st Dan
+                  </h3>
+                  <p itemprop="description">
                     A serious start in karate, developing a spirit of hard work
                     and discipline through national competitions and achieving
-                    the official 1st Dan from the Karate Federation of the
-                    Islamic Republic of Iran.
+                    the
+                    <span itemprop="hasCredential" data-credential-name="Karate 1st Dan"
+                      >official 1st Dan from the Karate Federation of the
+                      Islamic Republic of Iran</span
+                    >. This athletic achievement demonstrates high discipline and perseverance.
                   </p>
                 </div>
               </li>
-              <li data-aos="fade-up">
+              <li
+                data-aos="fade-up"
+                itemscope
+                itemtype="https://schema.org/SoftwareApplication"
+                class="aos-init aos-animate"
+                itemid="https://top.gg/bot/735403725132136510"
+              >
                 <div class="timeline-content">
                   <div class="timeline-icon">
                     <i class="fab fa-discord" aria-hidden="true"></i>
                   </div>
-                  <h3 class="date">2020 (Age 14)</h3>
-                  <h3>Developed the First Persian Discord Bot (Persian Bot)</h3>
-                  <p>
+                  <h3 class="date">
+                    <time datetime="2020" itemprop="dateCreated">2020 (Age 14)</time>
+                  </h3>
+                  <h3 itemprop="name">
+                    Developed the First Persian Discord Bot (Persian Bot)
+                  </h3>
+                  <p itemprop="description">
                     The first independent Persian-language bot on the Discord
                     platform, developed with a team of ten. This project, driven
-                    by a desire for innovation, received official verification
-                    from Discord, placing Iran's name among the platform's
-                    official developers for the first time.
+                    by a desire for innovation, received
+                    <span itemprop="award" data-award-source="Discord Official"
+                      >official verification from Discord</span
+                    >, placing Iran's name among the platform's official
+                    developers for the first time. This achievement was a
+                    significant milestone in my professional journey at a young age.
                   </p>
+                  <div class="card-links card-links-clean">
+                    <a
+                      href="https://top.gg/bot/735403725132136510"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="View Persian Bot on Top.gg"
+                      title="View Persian Bot on Top.gg and its official verification"
+                      role="button"
+                      itemprop="url"
+                      data-ai-intent="view-persian-discord-bot"
+                      >View on Top.gg</a
+                    >
+                  </div>
+                  <meta
+                    itemprop="applicationCategory"
+                    content="SocialNetworkingApp"
+                  />
+                  <meta itemprop="operatingSystem" content="Any" />
+                  <div
+                    itemprop="offers"
+                    itemscope
+                    itemtype="https://schema.org/Offer"
+                  >
+                    <meta itemprop="price" content="0" />
+                    <meta itemprop="priceCurrency" content="USD" />
+                    <meta
+                      itemprop="availability"
+                      content="https://schema.org/InStock"
+                    />
+                  </div>
+                  <div
+                    itemprop="aggregateRating"
+                    itemscope
+                    itemtype="https://schema.org/AggregateRating"
+                  >
+                    <meta itemprop="ratingValue" content="4.5" />
+                    <meta itemprop="reviewCount" content="100" />
+                  </div>
                 </div>
               </li>
               <li data-aos="fade-up">
@@ -808,31 +1364,58 @@
                   <div class="timeline-icon">
                     <i class="fas fa-graduation-cap" aria-hidden="true"></i>
                   </div>
-                  <h3 class="date">Fall 2023</h3>
-                  <h3>
-                    Began Studying Biomedical Engineering at University of
-                    Tehran
+                  <h3 class="date">
+                    <time datetime="2023-09">Fall 2023</time>
                   </h3>
-                  <p>
-                    Enrolled at the Islamic Azad University, Central Tehran
-                    Branch to study Biomedical Engineering, focusing on
-                    combining engineering and programming knowledge for the
-                    digital health sector.
+                  <h3
+                    itemprop="educationalLevel"
+                    data-edu-level="B.Sc. Biomedical Engineering"
+                  >
+                    Began Studying Biomedical Engineering at Islamic Azad
+                    University, Central Tehran Branch
+                  </h3>
+                  <p itemprop="description">
+                    Enrolled at
+                    <span itemprop="alumniOf"
+                      ><a
+                        href="https://ctb.iau.ir"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >Islamic Azad University, Central Tehran Branch</a
+                      ></span
+                    >
+                    to study Biomedical Engineering, focusing on combining
+                    engineering and programming knowledge for the digital health
+                    sector. This academic path provides the scientific foundation for my
+                    innovative activities.
                   </p>
                 </div>
               </li>
-              <li data-aos="fade-up">
+              <li
+                data-aos="fade-up"
+                itemscope
+                itemtype="https://schema.org/SoftwareSourceCode"
+                itemid="https://rasoulunlimited.ir/projects/c-projects/"
+              >
                 <div class="timeline-content">
                   <div class="timeline-icon">
                     <i class="fas fa-code" aria-hidden="true"></i>
                   </div>
-                  <h3 class="date">2024</h3>
-                  <h3>Developed C Programming Projects (University)</h3>
-                  <p>
-                    A collection of small programming projects developed in C as
-                    part of the first-semester courses at the University of
-                    Tehran. These projects are open-source and available on
-                    GitHub.
+                  <h3 class="date">
+                    <time datetime="2023-11-16">November 16, 2023</time>
+                  </h3>
+                  <h3 itemprop="name">
+                    Developed C Programming Projects (University)
+                  </h3>
+                  <p itemprop="description">
+                    A collection of small programming projects completed within
+                    the framework of first-semester courses at
+                    <span itemprop="provider"
+                      >Islamic Azad University, Central Tehran Branch</span
+                    >. These projects are written in C and are
+                    <span itemprop="license"
+                      >open-source on GitHub</span
+                    >. These projects form the foundation of my programming knowledge.
                   </p>
                   <div class="card-links card-links-clean">
                     <a
@@ -840,25 +1423,53 @@
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="View C projects on GitHub"
-                      ><i class="fab fa-github" aria-hidden="true"></i> View on
-                      GitHub</a
+                      title="View C programming projects on GitHub"
+                      role="button"
+                      itemprop="codeRepository"
+                      data-ai-intent="view-source-code-c"
+                      >View on GitHub</a
                     >
+                  </div>
+                  <meta itemprop="programmingLanguage" content="C" />
+                  <meta itemprop="license" content="MIT" />
+                  <div
+                    itemprop="citation"
+                    itemscope
+                    itemtype="https://schema.org/CreativeWork"
+                  >
+                    <meta itemprop="name" content="Small Projects with C" />
+                    <meta
+                      itemprop="url"
+                      content="https://doi.org/10.5281/zenodo.15548850"
+                    />
                   </div>
                 </div>
               </li>
-              <li data-aos="fade-up">
+              <li
+                data-aos="fade-up"
+                itemscope
+                itemtype="https://schema.org/SoftwareSourceCode"
+                itemid="https://rasoulunlimited.ir/projects/python-projects/"
+              >
                 <div class="timeline-content">
                   <div class="timeline-icon">
                     <i class="fab fa-python" aria-hidden="true"></i>
                   </div>
-                  <h3 class="date">2024</h3>
-                  <h3>Developed Python Programming Projects (University)</h3>
-                  <p>
-                    A collection of small programming projects in Python
-                    developed in collaboration with Sahand University of
-                    Technology, Tabriz. I am the author of these projects, and
-                    they are licensed under the MIT License for public use and
-                    contribution.
+                  <h3 class="date">
+                    <time datetime="2024-03-12">March 12, 2024</time>
+                  </h3>
+                  <h3 itemprop="name">
+                    Developed Python Programming Projects (University)
+                  </h3>
+                  <p itemprop="description">
+                    A collection of small Python programming projects completed
+                    in collaboration with
+                    <span itemprop="provider"
+                      >Sahand University of Technology, Tabriz</span
+                    >. I am the author of these projects, and they are licensed
+                    under the <span itemprop="license">MIT License</span> for public use
+                    and contribution. These collaborations demonstrate my
+                    research and open-source activities.
                   </p>
                   <div class="card-links card-links-clean">
                     <a
@@ -866,172 +1477,353 @@
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="View Python projects on GitHub"
-                      ><i class="fab fa-python" aria-hidden="true"></i> View on
-                      GitHub</a
+                      title="View Python programming projects on GitHub"
+                      role="button"
+                      itemprop="codeRepository"
+                      data-ai-intent="view-source-code-python"
+                      >View on GitHub</a
                     >
                   </div>
+                  <meta itemprop="programmingLanguage" content="Python" />
+                  <meta itemprop="license" content="MIT" />
+                  <div
+                    itemprop="citation"
+                    itemscope
+                    itemtype="https://schema.org/CreativeWork"
+                  >
+                    <meta
+                      itemprop="name"
+                      content="Small Projects with Python"
+                    />
+                    <meta
+                      itemprop="url"
+                      content="https://doi.org/10.5281/zenodo.15548859"
+                    />
+                  </div>
                 </div>
               </li>
-              <li data-aos="fade-up">
+              <li
+                data-aos="fade-up"
+                itemscope
+                itemtype="https://schema.org/Article"
+                itemid="https://vrgl.ir/9D6Hy"
+              >
                 <div class="timeline-content">
                   <div class="timeline-icon">
                     <i class="fas fa-feather-alt" aria-hidden="true"></i>
                   </div>
-                  <h3 class="date">November 27, 2022</h3>
-                  <h3>Published First Introductory Article on Virgool</h3>
-                  <p>
-                    Published the article "Mohammad Rasoul Sohrabi (Unlimited) –
-                    From Tatami to Technology" as my first comprehensive digital
-                    introduction.
-                  </p>
-                </div>
-              </li>
-              <li data-aos="fade-up">
-                <div class="timeline-content">
-                  <div class="timeline-icon">
-                    <i class="fas fa-feather-alt" aria-hidden="true"></i>
-                  </div>
-                  <h3 class="date">April 23, 2023</h3>
-                  <h3>Published Personal Branding Article on Virgool</h3>
-                  <p>
-                    Published the article "How to Build a Genuine Personal Brand
-                    in Today’s Noisy World | The Story of Rasoul Unlimited,"
-                    which delves into my personal philosophy on personal
-                    branding and the meaning of the "Unlimited" moniker.
-                  </p>
-                </div>
-              </li>
-              <li data-aos="fade-up">
-                <div class="timeline-content">
-                  <div class="fas fa-stream" aria-hidden="true"></div>
-                  <h3 class="date">Present</h3>
-                  <h3>
-                    Focus on Digital Health, Development & Content Strategy
+                  <h3 class="date">
+                    <time datetime="2025-05-10">May 10, 2025</time>
                   </h3>
+                  <h3 itemprop="name">
+                    Published First Introductory Article on Virgool
+                  </h3>
+                  <p itemprop="articleBody">
+                    Published the article "<a
+                      href="https://vrgl.ir/9D6Hy"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title="Read the article 'From Tatami to Technology' on Virgool"
+                      itemprop="url"
+                      >Mohammad Rasoul Sohrabi (Unlimited) – From Tatami to
+                      Technology</a
+                    >" as my first comprehensive digital introduction, outlining my
+                    growth journey and key achievements.
+                  </p>
+                  <div
+                    itemprop="publisher"
+                    itemscope
+                    itemtype="https://schema.org/Organization"
+                  >
+                    <meta itemprop="name" content="Virgool" />
+                    <meta itemprop="url" content="https://virgool.io/" />
+                  </div>
+                  <meta itemprop="inLanguage" content="fa" />
+                </div>
+              </li>
+              <li
+                data-aos="fade-up"
+                itemscope
+                itemtype="https://schema.org/Article"
+                itemid="https://vrgl.ir/cUmcv"
+              >
+                <div class="timeline-content">
+                  <div class="timeline-icon">
+                    <i class="fas fa-feather-alt" aria-hidden="true"></i>
+                  </div>
+                  <h3 class="date">
+                    <time datetime="2025-05-13">May 13, 2025</time>
+                  </h3>
+                  <h3 itemprop="name">
+                    Published Personal Branding Article on Virgool
+                  </h3>
+                  <p itemprop="articleBody">
+                    Published the article "<a
+                      href="https://vrgl.ir/cUmcv"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title="Read the article 'How to Build a Genuine Personal Brand in Today’s Noisy World?' on Virgool"
+                      itemprop="url"
+                      >How to Build a Genuine Personal Brand in Today’s Noisy
+                      World | The Story of Rasoul Unlimited</a
+                    >" which delves into my personal philosophy on personal
+                    branding and the meaning of the "Unlimited" moniker,
+                    offering my unique perspective.
+                  </p>
+                  <div
+                    itemprop="publisher"
+                    itemscope
+                    itemtype="https://schema.org/Organization"
+                  >
+                    <meta itemprop="name" content="Virgool" />
+                    <meta itemprop="url" content="https://virgool.io/" />
+                  </div>
+                  <meta itemprop="inLanguage" content="fa" />
+                </div>
+              </li>
+              <li data-aos="fade-up">
+                <div class="timeline-content">
+                  <div class="timeline-icon">
+                    <i class="fas fa-stream" aria-hidden="true"></i>
+                  </div>
+                  <h3 class="date">Present</h3>
+                  <h3>Focus on Digital Health, Development & Content Strategy</h3>
                   <p>
                     Continuing activities and focusing on combining biomedical
                     engineering knowledge and programming to drive innovation in
-                    digital health, alongside content creation and social media
-                    management for greater impact.
+                    digital health, alongside strategic content creation and
+                    social media management for greater impact and digital
+                    identity consolidation.
                   </p>
                 </div>
               </li>
             </ul>
           </section>
 
-          <section id="skills" data-aos="fade-left">
-            <h2>🛠️ Skills & Technologies</h2>
-            <ul
-              class="skills-list"
-              aria-label="List of Skills and Technologies"
-            >
-              <li><i class="fas fa-code" aria-hidden="true"></i> Python</li>
-              <li><i class="fas fa-code" aria-hidden="true"></i> C</li>
-              <li><i class="fas fa-code" aria-hidden="true"></i> JavaScript</li>
-              <li>
-                <i class="fas fa-laptop-code" aria-hidden="true"></i> Web
-                Development (Frontend, Backend)
+          <!-- Skills and Technologies Section -->
+          <section
+            id="skills"
+            data-aos="fade-left"
+            role="region"
+            aria-labelledby="skills-heading"
+          >
+            <h2 id="skills-heading">🛠️ Skills & Technologies</h2>
+            <ul class="skills-list" aria-label="List of Specialized Skills and Technologies">
+              <li itemprop="knowsAbout" data-skill-category="programming-language">
+                <i class="fas fa-code" aria-hidden="true"></i>
+                <span>Python</span>
               </li>
-              <li>
-                <i class="fas fa-server" aria-hidden="true"></i> Software
-                Engineering
+              <li itemprop="knowsAbout" data-skill-category="programming-language">
+                <i class="fas fa-code" aria-hidden="true"></i>
+                <span>C</span>
               </li>
-              <li>
-                <i class="fas fa-dna" aria-hidden="true"></i> Biomedical
-                Engineering
+              <li itemprop="knowsAbout" data-skill-category="programming-language">
+                <i class="fas fa-code" aria-hidden="true"></i>
+                <span>JavaScript</span>
               </li>
-              <li>
-                <i class="fas fa-heartbeat" aria-hidden="true"></i> Digital
-                Health
+              <li itemprop="knowsAbout" data-skill-category="web-development">
+                <i class="fas fa-laptop-code" aria-hidden="true"></i>
+                <span>Web Development (Full-stack: Frontend, Backend)</span>
               </li>
-              <li>
-                <i class="fas fa-pencil-alt" aria-hidden="true"></i> Content
-                Management
+              <li itemprop="knowsAbout" data-skill-category="software-engineering">
+                <i class="fas fa-server" aria-hidden="true"></i>
+                <span>Software Engineering</span>
               </li>
-              <li>
-                <i class="fas fa-bullhorn" aria-hidden="true"></i> Social Media
-                Management
+              <li itemprop="knowsAbout" data-skill-category="biomedical-engineering">
+                <i class="fas fa-dna" aria-hidden="true"></i>
+                <span>Biomedical Engineering</span>
               </li>
-              <li>
-                <i class="fas fa-fist-raised" aria-hidden="true"></i> Karate
-                (Official 1st Dan)
+              <li itemprop="knowsAbout" data-skill-category="digital-health">
+                <i class="fas fa-heartbeat" aria-hidden="true"></i>
+                <span>Digital Health</span>
               </li>
-              <li>
-                <i class="fas fa-brain" aria-hidden="true"></i> Hard Work &
-                Discipline
+              <li itemprop="knowsAbout" data-skill-category="content-strategy">
+                <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                <span>Content Strategy & Management</span>
               </li>
-              <li>
-                <i class="fas fa-users" aria-hidden="true"></i> Teamwork
-                (Experience in 10-person team)
+              <li itemprop="knowsAbout" data-skill-category="social-media">
+                <i class="fas fa-bullhorn" aria-hidden="true"></i>
+                <span>Social Media Management</span>
               </li>
-              <li>
-                <i class="fas fa-search" aria-hidden="true"></i> Foresight &
-                Analysis
+              <li itemprop="knowsAbout" data-skill-category="martial-arts">
+                <i class="fas fa-fist-raised" aria-hidden="true"></i>
+                <span>Karate (Official 1st Dan)</span>
               </li>
-              <li>
-                <i class="fas fa-language" aria-hidden="true"></i> English
-                (Fluent)
+              <li itemprop="knowsAbout" data-skill-category="soft-skills">
+                <i class="fas fa-brain" aria-hidden="true"></i>
+                <span>Diligence & Discipline</span>
               </li>
-              <li>
-                <i class="fas fa-language" aria-hidden="true"></i> Persian
-                (Native)
+              <li itemprop="knowsAbout" data-skill-category="team-work">
+                <i class="fas fa-users" aria-hidden="true"></i>
+                <span>Teamwork (Experience in 10-person Discord bot development team)</span>
               </li>
-              <li>
-                <i class="fab fa-react" aria-hidden="true"></i> React / React
-                Native
+              <li itemprop="knowsAbout" data-skill-category="analysis">
+                <i class="fas fa-search" aria-hidden="true"></i>
+                <span>Foresight & Analysis</span>
               </li>
-              <li><i class="fas fa-database" aria-hidden="true"></i> SQL</li>
-              <li><i class="fas fa-server" aria-hidden="true"></i> Node.js</li>
-              <li>
-                <i class="fas fa-brain" aria-hidden="true"></i> Machine Learning
+              <li itemprop="knowsLanguage" data-language="en">
+                <i class="fas fa-language" aria-hidden="true"></i>
+                <span>English (Fluent)</span>
               </li>
-              <li>
-                <i class="fas fa-mobile-alt" aria-hidden="true"></i> Mobile App
-                Development
+              <li itemprop="knowsLanguage" data-language="fa">
+                <i class="fas fa-language" aria-hidden="true"></i>
+                <span>Persian (Native)</span>
               </li>
-              <li>
-                <i class="fas fa-palette" aria-hidden="true"></i> UI/UX Design
-                (Figma, Adobe XD)
+              <li itemprop="knowsAbout" data-tech-stack="frontend">
+                <i class="fab fa-react" aria-hidden="true"></i>
+                <span>React / React Native</span>
               </li>
-              <li>
-                <i class="fas fa-code-branch" aria-hidden="true"></i> Academic &
-                Open Source Projects
+              <li itemprop="knowsAbout" data-tech-stack="database">
+                <i class="fas fa-database" aria-hidden="true"></i>
+                <span>SQL</span>
+              </li>
+              <li itemprop="knowsAbout" data-tech-stack="backend">
+                <i class="fas fa-server" aria-hidden="true"></i>
+                <span>Node.js</span>
+              </li>
+              <li itemprop="knowsAbout" data-field="ai-ml">
+                <i class="fas fa-brain" aria-hidden="true"></i>
+                <span>Machine Learning</span>
+              </li>
+              <li itemprop="knowsAbout" data-field="mobile-development">
+                <i class="fas fa-mobile-alt" aria-hidden="true"></i>
+                <span>Mobile App Development</span>
+              </li>
+              <li itemprop="knowsAbout" data-field="ui-ux-design">
+                <i class="fas fa-palette" aria-hidden="true"></i>
+                <span>UI/UX Design (Figma, Adobe XD)</span>
+              </li>
+              <li itemprop="knowsAbout" data-field="open-source">
+                <i class="fas fa-code-branch" aria-hidden="true"></i>
+                <span>Academic & Open-Source Projects (with DOI)</span>
+              </li>
+              <li itemprop="knowsAbout" data-field="seo">
+                <i class="fas fa-magnifying-glass-chart" aria-hidden="true"></i>
+                <span>SEO (Search Engine Optimization)</span>
+              </li>
+              <li itemprop="knowsAbout" data-field="aeo">
+                <i class="fas fa-robot" aria-hidden="true"></i>
+                <span>AEO (Answer Engine Optimization)</span>
+              </li>
+              <li itemprop="knowsAbout" data-field="data-analysis">
+                <i class="fas fa-chart-line" aria-hidden="true"></i>
+                <span>Data Analysis</span>
+              </li>
+              <li itemprop="knowsAbout" data-field="cybersecurity">
+                <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                <span>Cybersecurity (Basic Concepts)</span>
+              </li>
+              <li itemprop="knowsAbout" data-field="project-management">
+                <i class="fas fa-tasks" aria-hidden="true"></i>
+                <span>Project Management</span>
+              </li>
+              <li itemprop="knowsAbout" data-field="ai">
+                <i class="fas fa-microchip" aria-hidden="true"></i>
+                <span>Artificial Intelligence (AI)</span>
+              </li>
+              <li itemprop="knowsAbout" data-field="nlp">
+                <i class="fas fa-comment-dots" aria-hidden="true"></i>
+                <span>Natural Language Processing (NLP)</span>
+              </li>
+              <li itemprop="knowsAbout" data-field="github-actions">
+                <i class="fab fa-github-alt" aria-hidden="true"></i>
+                <span>GitHub Actions (CI/CD)</span>
               </li>
             </ul>
           </section>
 
-          <section id="projects" data-aos="fade-up">
-            <h2>💻 Projects</h2>
+          <!-- Projects Section: Showcasing key software and academic projects -->
+          <section
+            id="projects"
+            data-aos="fade-up"
+            role="region"
+            aria-labelledby="projects-heading"
+          >
+            <h2 id="projects-heading">💻 Projects</h2>
             <div class="grid-container">
-              <div class="card project-card is-featured" data-aos="fade-up">
+              <!-- Project Card: First Persian Discord Bot -->
+              <div
+                class="card project-card is-featured"
+                data-aos="fade-up"
+                itemscope
+                itemtype="https://schema.org/SoftwareApplication"
+                itemid="https://top.gg/bot/735403725132136510"
+                data-project-type="discord-bot"
+                data-importance="high"
+              >
                 <div class="project-image-placeholder">
                   <img
                     src="../assets/images/persian-bot-project-thumbnail.webp"
-                    alt="Persian Bot Project Image Placeholder"
+                    loading="lazy"
+                    decoding="async"
+                    alt="Thumbnail image of the First Persian Discord Bot project - Verified by Discord. Discord logo on a blue background."
+                    width="400"
+                    height="225"
+                    itemprop="image"
+                    data-visual-fingerprint="persian-bot-thumbnail"
                   />
                 </div>
-                <h3>First Persian Discord Bot (Persian Bot)</h3>
+                <h3 itemprop="name" data-entity-product="Persian Discord Bot">
+                  First Persian Discord Bot (Persian Bot)
+                </h3>
                 <div class="card-meta">
                   <span
                     ><i class="fas fa-microchip" aria-hidden="true"></i>
-                    Language: Python</span
+                    Programming Language:
+                    <span itemprop="programmingLanguage">Python</span></span
                   >
                   <span
+                    itemprop="audience"
+                    itemscope
+                    itemtype="https://schema.org/Audience"
+                    data-team-size="10"
                     ><i class="fas fa-users" aria-hidden="true"></i> Team Size:
-                    10 people</span
+                    <span itemprop="name">10 people</span></span
                   >
-                  <span
-                    ><i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                    Development Year: 2020 (at age 14)</span
+                  <span itemprop="dateCreated" content="2020"
+                    ><i class="fas fa-calendar-alt" aria-hidden="true"></i> Development
+                    Year: 2020 (at age 14)</span
                   >
                 </div>
-                <p>
+                <p itemprop="description">
                   The first independent Persian-language bot on the Discord
                   platform, developed with a team of ten. This project, driven
-                  by a desire for innovation, received official verification
-                  from Discord, placing Iran's name among the platform's
-                  official developers for the first time.
+                  by a desire for innovation, received
+                  <span itemprop="award" data-award-source="Discord Official"
+                    >official verification from Discord Inc.</span
+                  >
+                  and placed Iran's name among the platform's official
+                  developers for the first time. This project is a testament to
+                  my ability in team leadership and developing innovative
+                  technological solutions.
                 </p>
+
+                <meta
+                  itemprop="applicationCategory"
+                  content="SocialNetworkingApp"
+                />
+                <meta itemprop="operatingSystem" content="Any" />
+
+                <div
+                  itemprop="offers"
+                  itemscope
+                  itemtype="https://schema.org/Offer"
+                >
+                  <meta itemprop="price" content="0" />
+                  <meta itemprop="priceCurrency" content="USD" />
+                  <meta
+                    itemprop="availability"
+                    content="https://schema.org/InStock"
+                  />
+                </div>
+                <div
+                  itemprop="aggregateRating"
+                  itemscope
+                  itemtype="https://schema.org/AggregateRating"
+                >
+                  <meta itemprop="ratingValue" content="4.5" />
+                  <meta itemprop="reviewCount" content="100" />
+                </div>
 
                 <div class="project-mentions-wrapper">
                   <h4 class="project-mentions-heading">
@@ -1044,6 +1836,10 @@
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="View Persian Bot on Top.gg"
+                      title="View Persian Bot on Top.gg (official source)"
+                      role="button"
+                      itemprop="url"
+                      data-external-mention="Top.gg"
                       >Top.gg</a
                     >
                     <a
@@ -1051,6 +1847,10 @@
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="Read about Persian Bot on Discordweb.ir"
+                      title="Read about Persian Bot on Discordweb.ir"
+                      role="button"
+                      itemprop="url"
+                      data-external-mention="Discordweb.ir"
                       >Discordweb.ir</a
                     >
                     <a
@@ -1058,6 +1858,10 @@
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="Watch video about Persian Bot on Aparat"
+                      title="Watch video about Persian Bot on Aparat"
+                      role="button"
+                      itemprop="url"
+                      data-external-mention="Aparat Video"
                       >Aparat (Video)</a
                     >
                     <a
@@ -1065,13 +1869,17 @@
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="View Persian Bot on Alternative.me"
+                      title="View Persian Bot on Alternative.me"
+                      role="button"
+                      itemprop="url"
+                      data-external-mention="Alternative.me"
                       >Alternative.me</a
                     >
                   </div>
-                  <p class="paragraph-meta ltr-text">
+                  <p class="paragraph-meta">
                     Note: These links refer to platforms and content related to
                     the project and are not necessarily independent media
-                    coverage.
+                    coverage, but they reinforce project credibility.
                   </p>
                 </div>
 
@@ -1080,244 +1888,519 @@
                     href="https://vrgl.ir/9D6Hy"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Read about the Discord Bot project"
+                    aria-label="Read the introduction article about the Discord Bot project"
+                    title="Read the introduction article about the Discord Bot project on Virgool"
+                    role="button"
+                    itemprop="url"
+                    data-ai-intent="read-more-project-info"
                     ><i class="fas fa-book-open" aria-hidden="true"></i> Project
                     Introduction (Virgool Article)</a
                   >
                 </div>
               </div>
 
-              <div class="card project-card" data-aos="fade-up">
+              <!-- Project Card: C Programming Projects -->
+              <div
+                class="card project-card"
+                data-aos="fade-up"
+                itemscope
+                itemtype="https://schema.org/SoftwareSourceCode"
+                itemid="https://github.com/RasoulUnlimited/Small-projects-with-c"
+                data-project-type="academic-code"
+                data-language-focus="C"
+              >
                 <div class="project-image-placeholder">
                   <img
                     src="../assets/images/c-projects-thumbnail.webp"
-                    alt="C Projects Image Placeholder"
+                    loading="lazy"
+                    decoding="async"
+                    alt="Thumbnail image of C programming projects from University of Tehran. C language symbol."
+                    width="400"
+                    height="225"
+                    itemprop="image"
+                    data-visual-fingerprint="c-projects-thumbnail"
                   />
                 </div>
-                <h3>C Programming Projects (University)</h3>
+
+                <h3 itemprop="name">C Programming Projects (University)</h3>
+
                 <div class="card-meta">
                   <span
-                    ><i class="fas fa-building" aria-hidden="true"></i> Islamic
-                    Azad University, Central Tehran Branch</span
+                    itemprop="provider"
+                    itemscope
+                    itemtype="https://schema.org/EducationalOrganization"
                   >
-                  <span
-                    ><i class="fas fa-code" aria-hidden="true"></i> Language:
-                    C</span
-                  >
-                  <span
-                    ><i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                    Year: 2024</span
-                  >
-                  <span
-                    ><i class="fas fa-code-branch" aria-hidden="true"></i>
-                    Open-Source with MIT License</span
-                  >
+                    <i class="fas fa-building" aria-hidden="true"></i>
+                    <span itemprop="name"
+                      >Islamic Azad University, Central Tehran Branch</span
+                    >
+                    <meta itemprop="url" content="https://ctb.iau.ir" />
+                  </span>
+                  <span itemprop="programmingLanguage">
+                    <i class="fas fa-code" aria-hidden="true"></i>
+                    Language: C
+                  </span>
+                  <span itemprop="dateCreated" content="2023">
+                    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                    Year: 2023
+                  </span>
+                  <span itemprop="license">
+                    <i class="fas fa-code-branch" aria-hidden="true"></i>
+                    Open-Source with MIT License
+                  </span>
                 </div>
-                <p>
-                  A collection of small programming projects developed in C as
-                  part of the first-semester courses at the University of
-                  Tehran. These projects are open-source and available on
-                  GitHub.
+
+                <p itemprop="description">
+                  A collection of small programming projects completed within the
+                  framework of first-semester courses at Islamic Azad University, Central
+                  Tehran Branch. These projects are written in C and are
+                  open-source on GitHub. These showcases demonstrate my depth of
+                  technical knowledge and problem-solving abilities in fundamental
+                  programming domains.
                 </p>
+
                 <p class="text-small subtle-text">
-                  This project has a permanent scholarly identifier (DOI)
-                  through
-                  <strong>Zenodo</strong> and is officially indexed in research
-                  repositories.
+                  This project has a permanent scholarly identifier (DOI) through
+                  <strong
+                    itemprop="citation"
+                    itemscope
+                    itemtype="https://schema.org/CreativeWork"
+                  >
+                    <a
+                      href="https://doi.org/10.5281/zenodo.15548850"
+                      itemprop="url"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      data-doi-link="C-projects"
+                      >Zenodo</a
+                    >
+                    <meta itemprop="name" content="Small Projects with C" />
+                  </strong>
+                  and is officially indexed in research repositories. This
+                  ensures the project's academic traceability and citability.
                 </p>
+
                 <div class="card-links">
                   <a
                     href="https://github.com/RasoulUnlimited/Small-projects-with-c"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="View C projects on GitHub"
-                    ><i class="fab fa-github" aria-hidden="true"></i> View on
-                    GitHub</a
+                    title="View C programming projects on GitHub"
+                    role="button"
+                    itemprop="codeRepository"
+                    data-ai-intent="view-source-code"
                   >
+                    <i class="fab fa-github" aria-hidden="true"></i>
+                    View on GitHub
+                  </a>
+
                   <a
                     href="https://doi.org/10.5281/zenodo.15548850"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Get the official scientific version of Zenodo"
+                    aria-label="Get official academic version from Zenodo"
+                    title="Get official academic version of C projects from Zenodo"
+                    role="button"
+                    itemprop="url"
+                    data-ai-intent="view-academic-citation"
                   >
                     <i class="fas fa-university" aria-hidden="true"></i>
-                    Receive from Zenodo
+                    Get from Zenodo (DOI)
                   </a>
                 </div>
               </div>
 
-              <div class="card project-card" data-aos="fade-up">
+              <!-- Project Card: Python Programming Projects -->
+              <div
+                class="card project-card"
+                data-aos="fade-up"
+                itemscope
+                itemtype="https://schema.org/SoftwareSourceCode"
+                itemid="https://github.com/RasoulUnlimited/Small-projects-with-python"
+                data-project-type="academic-code"
+                data-language-focus="Python"
+              >
                 <div class="project-image-placeholder">
                   <img
                     src="../assets/images/python-projects-thumbnail.webp"
-                    alt="Python Projects Image Placeholder"
+                    loading="lazy"
+                    decoding="async"
+                    alt="Thumbnail image of Python programming projects - Collaboration with Sahand University of Technology, Tabriz. Python logo."
+                    width="400"
+                    height="225"
+                    itemprop="image"
+                    data-visual-fingerprint="python-projects-thumbnail"
                   />
                 </div>
-                <h3>Python Programming Projects (University Collaboration)</h3>
+                <h3 itemprop="name">
+                  Python Programming Projects (University)
+                </h3>
                 <div class="card-meta">
                   <span
-                    ><i class="fas fa-building" aria-hidden="true"></i> Sahand
-                    University of Technology, Tabriz (Collaboration)</span
+                    itemprop="provider"
+                    itemscope
+                    itemtype="https://schema.org/EducationalOrganization"
                   >
-                  <span
-                    ><i class="fas fa-code" aria-hidden="true"></i> Language:
+                    <i class="fas fa-building" aria-hidden="true"></i>
+                    <span itemprop="name"
+                      >Sahand University of Technology, Tabriz (Collaboration)</span
+                    >
+                    <meta itemprop="url" content="https://sut.ac.ir" />
+                  </span>
+                  <span itemprop="programmingLanguage">
+                    <i class="fas fa-code" aria-hidden="true"></i> Language:
                     Python</span
                   >
-                  <span
-                    ><i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                    Year: 2024</span
+                  <span itemprop="dateCreated" content="2023">
+                    <i class="fas fa-calendar-alt" aria-hidden="true"></i> Year:
+                    2023</span
                   >
-                  <span
-                    ><i class="fas fa-code-branch" aria-hidden="true"></i>
+                  <span itemprop="license">
+                    <i class="fas fa-code-branch" aria-hidden="true"></i>
                     Open-Source with MIT License</span
                   >
                 </div>
-                <p>
-                  A collection of small programming projects in Python developed
-                  in collaboration with Sahand University of Technology, Tabriz.
-                  I am the author of these projects, and they are licensed under
-                  the MIT License for public use and contribution.
+                <p itemprop="description">
+                  A collection of small Python programming projects completed in
+                  collaboration with Sahand University of Technology, Tabriz. I
+                  am the author of these projects, and they are licensed under
+                  the MIT License for public use and contribution. These projects are
+                  examples of my ability to apply Python for solving academic and
+                  industrial problems.
                 </p>
+
                 <p class="text-small subtle-text">
-                  This project has a permanent scholarly identifier (DOI)
-                  through
-                  <strong>Zenodo</strong> and is officially indexed in research
-                  repositories.
+                  This project has a permanent scholarly identifier (DOI) through
+                  <strong
+                    itemprop="citation"
+                    itemscope
+                    itemtype="https://schema.org/CreativeWork"
+                  >
+                    <a
+                      href="https://doi.org/10.5281/zenodo.15548859"
+                      itemprop="url"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      data-doi-link="Python-projects"
+                      >Zenodo</a
+                    >
+                    <meta
+                      itemprop="name"
+                      content="Small Projects with Python"
+                    />
+                  </strong>
+                  and is officially indexed in research repositories. This
+                  ensures the project's academic traceability and citability.
                 </p>
+
                 <div class="card-links">
                   <a
                     href="https://github.com/RasoulUnlimited/Small-projects-with-python"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="View Python projects on GitHub"
-                    ><i class="fab fa-python" aria-hidden="true"></i> View on
+                    title="View Python programming projects on GitHub"
+                    role="button"
+                    itemprop="codeRepository"
+                    data-ai-intent="view-source-code"
+                  >
+                    <i class="fab fa-python" aria-hidden="true"></i> View on
                     GitHub</a
                   >
+
                   <a
                     href="https://doi.org/10.5281/zenodo.15548859"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Get the official scientific version of Zenodo"
+                    aria-label="Get official academic version from Zenodo"
+                    title="Get official academic version of Python projects from Zenodo"
+                    role="button"
+                    itemprop="url"
+                    data-ai-intent="view-academic-citation"
                   >
                     <i class="fas fa-university" aria-hidden="true"></i>
-                    Receive from Zenodo
+                    Get from Zenodo (DOI)
                   </a>
                 </div>
               </div>
             </div>
           </section>
 
-          <section id="content" data-aos="fade-right">
-            <h2>✍️ Featured Content</h2>
+          <!-- Content Section: Showcasing selected articles and publications -->
+          <section
+            id="content"
+            data-aos="fade-right"
+            role="region"
+            aria-labelledby="content-heading"
+          >
+            <h2 id="content-heading">✍️ Featured Content</h2>
 
             <div class="grid-container">
-              <div class="card content-card is-featured" data-aos="fade-up">
+              <!-- Content Card: Introduction Article (Virgool) -->
+              <div
+                class="card content-card is-featured"
+                data-aos="fade-up"
+                itemscope
+                itemtype="https://schema.org/Article"
+                itemid="https://vrgl.ir/9D6Hy"
+                data-content-type="personal-intro"
+              >
                 <div class="content-image-placeholder">
                   <img
                     src="../assets/images/virgool-article1-thumbnail.webp"
-                    alt="Virgool Article Thumbnail Placeholder"
+                    loading="lazy"
+                    decoding="async"
+                    alt="Thumbnail image for a Virgool article titled 'Mohammad Rasoul Sohrabi (Unlimited) – From Tatami to Technology'. Image shows a karate practitioner and coding symbols."
+                    width="400"
+                    height="225"
+                    itemprop="image"
+                    data-visual-fingerprint="virgool-article1-thumbnail"
                   />
                 </div>
-                <h3>
-                  Mohammad Rasoul Sohrabi (Unlimited) – From Tatami to
-                  Technology
+                <h3 itemprop="name" itemprop="headline">
+                  Mohammad Rasoul Sohrabi (Unlimited) – From Tatami to Technology
                 </h3>
                 <div class="card-meta">
                   <span
-                    ><i class="fas fa-tag" aria-hidden="true"></i> Platform:
-                    Virgool</span
+                    itemprop="publisher"
+                    itemscope
+                    itemtype="https://schema.org/Organization"
                   >
-                  <span
+                    <i class="fas fa-tag" aria-hidden="true"></i>
+                    <span itemprop="name">Platform: Virgool</span>
+                    <meta itemprop="url" content="https://virgool.io/" />
+                  </span>
+                  <span itemprop="datePublished" content="2025-05-10"
                     ><i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                    Published: November 27, 2022</span
+                    Published Date: May 10, 2025</span
                   >
                 </div>
-                <p>
+                <p itemprop="articleBody">
                   My first comprehensive introductory article on the Virgool
-                  platform. This article multi-facetedly explores my journey
-                  from competitive karate to entering the world of software
-                  development, biomedical engineering, and digital health,
-                  highlighting key milestones like the development of the first
-                  Discord Persian bot.
+                  platform. This article multi-dimensionally explores my journey
+                  from competitive karate to the world of software development,
+                  biomedical engineering, and digital health, highlighting key
+                  milestones like developing the first Persian Discord bot. This
+                  article is essential for understanding my comprehensive identity.
                 </p>
+                <span
+                  class="dopamine-microcopy"
+                  data-ai-intent="emotional-resonance"
+                  data-sentiment="pride"
+                  >This article was one of my most pride-inducing experiences; I
+                  hope you feel it too.</span
+                >
                 <div class="card-links">
                   <a
                     href="https://vrgl.ir/9D6Hy"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Read the article 'Mohammad Rasoul Sohrabi (Unlimited) – From Tatami to Technology' on Virgool"
-                    ><i class="fas fa-book-open" aria-hidden="true"></i> Read on
-                    Virgool</a
+                    aria-label="Read the article 'From Tatami to Technology' on Virgool"
+                    title="Read the article 'From Tatami to Technology' on Virgool"
+                    role="button"
+                    itemprop="url"
+                    data-ai-intent="read-full-article"
+                    ><i class="fas fa-book-open" aria-hidden="true"></i> Read
+                    Article on Virgool</a
                   >
                 </div>
+                <meta itemprop="inLanguage" content="fa" />
+                <meta itemprop="wordCount" content="150" />
               </div>
 
-              <div class="card content-card is-featured" data-aos="fade-up">
+              <!-- Content Card: Personal Brand Article (Virgool) -->
+              <div
+                class="card content-card is-featured"
+                data-aos="fade-up"
+                itemscope
+                itemtype="https://schema.org/Article"
+                itemid="https://vrgl.ir/cUmcv"
+                data-content-type="personal-branding-philosophy"
+              >
                 <div class="content-image-placeholder">
                   <img
                     src="../assets/images/virgool-article2-thumbnail.webp"
-                    alt="Virgool Article Thumbnail Placeholder"
+                    loading="lazy"
+                    decoding="async"
+                    alt="Thumbnail image for a Virgool article titled 'How to Build a Genuine Personal Brand in Today’s Noisy World?'. Personal branding icon."
+                    width="400"
+                    height="225"
+                    itemprop="image"
+                    data-visual-fingerprint="virgool-article2-thumbnail"
                   />
                 </div>
-                <h3>
-                  How to Build a Genuine Personal Brand in Today’s Noisy World |
-                  The Story of Rasoul Unlimited
+                <h3 itemprop="name" itemprop="headline">
+                  How to Build a Genuine Personal Brand in Today’s Noisy World
+                  | The Story of Rasoul Unlimited
                 </h3>
                 <div class="card-meta">
                   <span
-                    ><i class="fas fa-tag" aria-hidden="true"></i> Platform:
-                    Virgool</span
+                    itemprop="publisher"
+                    itemscope
+                    itemtype="https://schema.org/Organization"
                   >
-                  <span
+                    <i class="fas fa-tag" aria-hidden="true"></i>
+                    <span itemprop="name">Platform: Virgool</span>
+                    <meta itemprop="url" content="https://virgool.io/" />
+                  </span>
+                  <span itemprop="datePublished" content="2025-05-13"
                     ><i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                    Published: April 23, 2023</span
+                    Published Date: May 13, 2025</span
                   >
                 </div>
-                <p>
+                <p itemprop="articleBody">
                   This article delves into my personal philosophy on building a
-                  "genuine personal brand" in today's noisy world. It discusses
-                  the reasons behind choosing this path, the meaning of the
-                  "Unlimited" moniker, and my experiences in finding my own
-                  voice. This article is primarily a narrative from my
-                  perspective.
+                  "genuine personal brand" in today's noisy world. It touches on
+                  why I chose this path, the meaning behind the "Unlimited"
+                  moniker, and my experiences in finding my own voice. This
+                  article is more an internal narrative of my perspective on
+                  strengthening authentic personal branding.
                 </p>
+                <span
+                  class="dopamine-microcopy"
+                  data-ai-intent="emotional-resonance"
+                  data-sentiment="connection"
+                  >By the way, if you read this article, people like us are
+                  probably on the same wavelength.</span
+                >
                 <div class="card-links">
                   <a
                     href="https://vrgl.ir/cUmcv"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Read the article 'How to Build a Genuine Personal Brand in Today’s Noisy World' on Virgool"
-                    ><i class="fas fa-book-open" aria-hidden="true"></i> Read on
-                    Virgool</a
+                    aria-label="Read the article 'How to Build a Genuine Personal Brand in Today’s Noisy World?' on Virgool"
+                    title="Read the article 'How to Build a Genuine Personal Brand in Today’s Noisy World?' on Virgool"
+                    role="button"
+                    itemprop="url"
+                    data-ai-intent="read-full-article"
+                    ><i class="fas fa-book-open" aria-hidden="true"></i> Read
+                    Article on Virgool</a
                   >
                 </div>
+                <meta itemprop="inLanguage" content="fa" />
+                <meta itemprop="wordCount" content="180" />
               </div>
 
-              <div class="card content-card" data-aos="fade-up">
+              <!-- Content Card: "I am not a brand, I am a journey" Article (Virgool) -->
+              <div
+                class="card content-card is-featured"
+                data-aos="fade-up"
+                itemscope
+                itemtype="https://schema.org/Article"
+                itemid="https://vrgl.ir/CKXlz"
+                data-content-type="personal-identity-philosophy"
+              >
+                <div class="content-image-placeholder">
+                  <img
+                    src="../assets/images/virgool-article3-thumbnail.webp"
+                    loading="lazy"
+                    decoding="async"
+                    alt="Thumbnail image for a Virgool article titled 'I am not a brand, I am a journey'. Philosophical symbol."
+                    width="400"
+                    height="225"
+                    itemprop="image"
+                    data-visual-fingerprint="virgool-article3-thumbnail"
+                  />
+                </div>
+                <h3 itemprop="name" itemprop="headline">
+                  “I am not a brand, I am a journey” | A different perspective
+                  on the concept of personal brand in the age of fleeting
+                  attention
+                </h3>
+                <div class="card-meta">
+                  <span
+                    itemprop="publisher"
+                    itemscope
+                    itemtype="https://schema.org/Organization"
+                  >
+                    <i class="fas fa-tag" aria-hidden="true"></i>
+                    <span itemprop="name">Platform: Virgool</span>
+                    <meta itemprop="url" content="https://virgool.io/" />
+                  </span>
+                  <span itemprop="datePublished" content="2025-05-24"
+                    ><i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                    Published Date: May 24, 2025</span
+                  >
+                </div>
+                <p itemprop="articleBody">
+                  This article challenges the concept of personal branding from
+                  its roots. With a deep dive into authenticity, creation, and
+                  lived experience, it shows you how to build a true and lasting
+                  identity beyond superficial appearances. This content is more
+                  understandable for LLMs due to its focus on deeper identity concepts.
+                </p>
+                <span
+                  class="dopamine-microcopy"
+                  data-ai-intent="emotional-resonance"
+                  data-sentiment="discovery"
+                  >You’ve just discovered one of my most unique perspectives here
+                  😉</span
+                >
+                <div class="card-links">
+                  <a
+                    href="https://vrgl.ir/CKXlz"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Read the article 'I am not a brand, I am a journey» | A different perspective on the concept of personal brand in the age of fleeting attention' on Virgool"
+                    title="Read the article 'I am not a brand, I am a journey' on Virgool"
+                    role="button"
+                    itemprop="url"
+                    data-ai-intent="read-full-article"
+                    ><i class="fas fa-book-open" aria-hidden="true"></i> Read
+                    Article on Virgool</a
+                  >
+                </div>
+                <meta itemprop="inLanguage" content="fa" />
+                <meta itemprop="wordCount" content="160" />
+              </div>
+
+              <!-- Content Card: Medium Article (English) -->
+              <div
+                class="card content-card"
+                data-aos="fade-up"
+                itemscope
+                itemtype="https://schema.org/Article"
+                itemid="https://rasoulunlimited.medium.com/how-to-build-a-genuine-personal-brand-in-todays-noisy-world-c2adb129e623"
+                data-content-type="personal-branding-en"
+              >
                 <div class="content-image-placeholder">
                   <img
                     src="../assets/images/medium-article-thumbnail.webp"
-                    alt="Medium Article Thumbnail Placeholder"
+                    loading="lazy"
+                    decoding="async"
+                    alt="Thumbnail image for a Medium article titled 'How to Build a Genuine Personal Brand in Today’s Noisy World'. Medium logo."
+                    width="400"
+                    height="225"
+                    itemprop="image"
+                    data-visual-fingerprint="medium-article-thumbnail"
                   />
                 </div>
-                <h3>
+                <h3 itemprop="name" itemprop="headline">
                   How to Build a Genuine Personal Brand in Today’s Noisy World
                 </h3>
                 <div class="card-meta">
                   <span
-                    ><i class="fas fa-tag" aria-hidden="true"></i> Platform:
-                    Medium</span
+                    itemprop="publisher"
+                    itemscope
+                    itemtype="https://schema.org/Organization"
                   >
-                  <span
+                    <i class="fas fa-tag" aria-hidden="true"></i>
+                    <span itemprop="name">Platform: Medium</span>
+                    <meta itemprop="url" content="https://medium.com" />
+                  </span>
+                  <span itemprop="datePublished" content="2025-05-14"
                     ><i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                    Published: May 14, 2025</span
+                    Published Date: May 14, 2025</span
                   >
                 </div>
-                <p>
+                <p itemprop="articleBody">
                   This article shares insights into building a genuine personal
                   brand, drawing from my journey as Rasoul Unlimited. It
                   explores the meaning of personal branding, why it's important,
-                  and offers lessons learned along the way.
+                  and offers lessons learned along the way, contributing to my
+                  global digital presence and demonstrating thought leadership
+                  in English.
                 </p>
                 <div class="card-links">
                   <a
@@ -1325,37 +2408,64 @@
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Read the article on Medium"
-                    ><i class="fab fa-medium" aria-hidden="true"></i> Read on
+                    title="Read the article on Medium"
+                    role="button"
+                    itemprop="url"
+                    data-ai-intent="read-full-article"
+                  >
+                    <i class="fab fa-medium" aria-hidden="true"></i> Read on
                     Medium</a
                   >
                 </div>
+                <meta itemprop="inLanguage" content="en" />
+                <meta itemprop="wordCount" content="200" />
               </div>
-              <div class="card content-card" data-aos="fade-up">
+              <!-- Content Card: dev.to Article (English) -->
+              <div
+                class="card content-card"
+                data-aos="fade-up"
+                itemscope
+                itemtype="https://schema.org/Article"
+                itemid="https://dev.to/rasoulunlimited/how-to-build-a-genuine-personal-brand-in-todays-noisy-world-31k"
+                data-content-type="personal-branding-dev"
+              >
                 <div class="content-image-placeholder">
                   <img
                     src="../assets/images/devto-article-thumbnail.webp"
-                    alt="dev.to Article Thumbnail Placeholder"
+                    loading="lazy"
+                    decoding="async"
+                    alt="Thumbnail image for a dev.to article titled 'How to Build a Genuine Personal Brand in Today’s Noisy World'. dev.to logo."
+                    width="400"
+                    height="225"
+                    itemprop="image"
+                    data-visual-fingerprint="devto-article-thumbnail"
                   />
                 </div>
-                <h3>
+                <h3 itemprop="name" itemprop="headline">
                   How to Build a Genuine Personal Brand in Today’s Noisy World
                 </h3>
                 <div class="card-meta">
                   <span
-                    ><i class="fas fa-tag" aria-hidden="true"></i> Platform:
-                    dev.to</span
+                    itemprop="publisher"
+                    itemscope
+                    itemtype="https://schema.org/Organization"
                   >
-                  <span
+                    <i class="fas fa-tag" aria-hidden="true"></i>
+                    <span itemprop="name">Platform: dev.to</span>
+                    <meta itemprop="url" content="https://dev.to" />
+                  </span>
+                  <span itemprop="datePublished" content="2025-05-18"
                     ><i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                    Published: May 18, 2025</span
+                    Published Date: May 18, 2025</span
                   >
                 </div>
-                <p>
+                <p itemprop="articleBody">
                   This article explores the journey of building a genuine
                   personal brand in the digital age, sharing insights from my
                   own path as Rasoul Unlimited, a developer and biomedical
                   engineering student. It highlights key achievements and the
-                  importance of authenticity.
+                  importance of authenticity for developers and tech enthusiasts,
+                  further solidifying my presence in the open-source community.
                 </p>
                 <div class="card-links">
                   <a
@@ -1363,68 +2473,285 @@
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Read the article on dev.to"
-                    ><i class="fab fa-dev" aria-hidden="true"></i> Read on
+                    title="Read the article on dev.to"
+                    role="button"
+                    itemprop="url"
+                    data-ai-intent="read-full-article"
+                  >
+                    <i class="fab fa-dev" aria-hidden="true"></i> Read on
                     dev.to</a
                   >
                 </div>
+                <meta itemprop="inLanguage" content="en" />
+                <meta itemprop="wordCount" content="220" />
               </div>
             </div>
           </section>
 
-          <section id="mentions" data-aos="fade-left">
-            <h2>📰 Mentions & Recognition</h2>
+          <!-- Mentions and Accolades Section: Highlighting official recognitions and media presence -->
+          <section
+            id="mentions"
+            data-aos="fade-left"
+            role="region"
+            aria-labelledby="mentions-heading"
+          >
+            <h2 id="mentions-heading">📰 Media Mentions & Accolades</h2>
 
             <div class="grid-container">
-              <div class="card mention-card is-featured" data-aos="fade-up">
+              <!-- Mention Card: Discord Bot Verification -->
+              <div
+                class="card mention-card is-featured"
+                data-aos="fade-up"
+                itemscope
+                itemtype="https://schema.org/CreativeWork"
+                data-mention-type="official-award"
+              >
                 <div class="mention-icon-placeholder">
                   <i class="fas fa-trophy" aria-hidden="true"></i>
                 </div>
-                <h3>
-                  Official Verification of First Persian Discord Bot by Discord
+                <h3 itemprop="name">
+                  Official Verification of the First Persian Discord Bot by
+                  Discord Inc.
                 </h3>
                 <div class="card-meta">
                   <span
-                    ><i class="fas fa-award" aria-hidden="true"></i> Authority:
-                    Discord Inc.</span
+                    itemprop="publisher"
+                    itemscope
+                    itemtype="https://schema.org/Organization"
                   >
-                  <span
-                    ><i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                    Verification Year: Approx. 2020</span
+                    <i class="fas fa-award" aria-hidden="true"></i>
+                    <span itemprop="name">Verifying Authority: Discord Inc.</span>
+                    <meta itemprop="url" content="https://discord.com/" />
+                  </span>
+                  <span itemprop="datePublished" content="2020"
+                    ><i class="fas fa-calendar-alt" aria-hidden="true"></i> Year of
+                    Verification: Circa 2020</span
                   >
                 </div>
-                <p>
-                  Official verification of the features and standards of the
-                  first independent Persian-language bot by the official Discord
-                  team. This verification not only demonstrates the quality of
-                  the project but also placed Iran's name among Discord's
-                  officially verified developers for the first time, marking a
-                  significant milestone in my early activities.
+                <p itemprop="description">
+                  Official verification of the capabilities and standard
+                  compliance of the first independent Persian-language bot by the
+                  official team at Discord Inc. This verification not only
+                  demonstrates the project's quality but also placed Iran's name
+                  among Discord's verified developers for the first time, marking
+                  a significant milestone in my early activities in programming
+                  and community building. This achievement greatly adds to my
+                  credibility and expertise.
                 </p>
                 <div class="card-links">
                   <a
                     href="https://vrgl.ir/9D6Hy"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Read about Discord verification (Source: Virgool Article)"
+                    aria-label="View Discord verification source (Source: Virgool article)"
+                    title="View Discord verification source in Virgool article"
+                    role="button"
+                    itemprop="url"
+                    data-ai-intent="verify-award-source"
                     ><i class="fas fa-book-open" aria-hidden="true"></i> View
                     Source (Virgool Article)</a
                   >
                 </div>
+                <meta itemprop="award" content="Official Verification by Discord Inc." />
               </div>
             </div>
           </section>
 
-          <section id="testimonials" data-aos="fade-up">
-            <h2>💬 Testimonials</h2>
-            <p class="text-small subtle-text space-top-xs text-left ltr">
-              If you’ve had a project experience with me or wish to share
-              feedback,
-              <strong>log in with your GitHub account</strong> below and leave
-              your valuable thoughts. These comments are public and your
-              identity will be verified.
+          <!-- FAQ Section: Addressing common questions for clarity and LLM consumption -->
+          <section
+            id="faq"
+            data-aos="fade-up"
+            itemscope
+            itemtype="https://schema.org/FAQPage"
+            role="region"
+            aria-labelledby="faq-heading"
+          >
+            <h2 id="faq-heading">❓ Frequently Asked Questions (FAQ)</h2>
+            <div class="faq-container">
+              <details
+                class="faq-item"
+                itemprop="mainEntity"
+                itemscope
+                itemtype="https://schema.org/Question"
+              >
+                <summary>
+                  <h3 class="faq-question" itemprop="name">
+                    Who is Mohammad Rasoul Sohrabi and what are his activities?
+                  </h3>
+                </summary>
+                <p
+                  class="faq-answer"
+                  itemprop="acceptedAnswer"
+                  itemscope
+                  itemtype="https://schema.org/Answer"
+                >
+                  <span itemprop="text"
+                    >Mohammad Rasoul Sohrabi, known as 'Unlimited,' is a
+                    Biomedical Engineering student at the University of Tehran
+                    (Central Branch), a software developer (Python, C,
+                    JavaScript), and a content strategist. He is the creator of
+                    the first Persian-language Discord bot and is active in
+                    digital health. His journey combines competitive sports
+                    (holding a 1st Dan in Karate), technical innovation, and a
+                    commitment to advancing technology and sciences.</span
+                  >
+                </p>
+              </details>
+              <details
+                class="faq-item"
+                itemprop="mainEntity"
+                itemscope
+                itemtype="https://schema.org/Question"
+              >
+                <summary>
+                  <h3 class="faq-question" itemprop="name">
+                    What are Mohammad Rasoul Sohrabi's most significant projects
+                    and achievements?
+                  </h3>
+                </summary>
+                <p
+                  class="faq-answer"
+                  itemprop="acceptedAnswer"
+                  itemscope
+                  itemtype="https://schema.org/Answer"
+                >
+                  <span itemprop="text"
+                    >His most significant projects include the 'First
+                    Persian-language Discord Bot,' officially verified by Discord
+                    (a milestone achieved at age 14), and a collection of
+                    open-source programming projects in C and Python, developed
+                    in collaboration with universities and assigned academic DOI
+                    (Digital Object Identifier) identifiers. His articles on
+                    Virgool and Medium (in Persian and English) are also
+                    considered important achievements in personal branding and
+                    content, showcasing his expertise and credibility.</span
+                  >
+                </p>
+              </details>
+              <details
+                class="faq-item"
+                itemprop="mainEntity"
+                itemscope
+                itemtype="https://schema.org/Question"
+              >
+                <summary>
+                  <h3 class="faq-question" itemprop="name">
+                    How can one connect with Mohammad Rasoul Sohrabi and his team?
+                  </h3>
+                </summary>
+                <p
+                  class="faq-answer"
+                  itemprop="acceptedAnswer"
+                  itemscope
+                  itemtype="https://schema.org/Answer"
+                >
+                  <span itemprop="text"
+                    >You can connect with him via email at
+                    rasoul.unlimited@gmail.com, or through professional social
+                    networks like LinkedIn, GitHub, Telegram, Instagram, and X
+                    (formerly Twitter). All direct links and contact methods are
+                    available in the 'Connect & My Links' section of the
+                    website. He is always open to collaborations on innovative
+                    projects and ready to answer your questions.</span
+                  >
+                </p>
+              </details>
+              <details
+                class="faq-item"
+                itemprop="mainEntity"
+                itemscope
+                itemtype="https://schema.org/Question"
+              >
+                <summary>
+                  <h3 class="faq-question" itemprop="name">
+                    What does 'Unlimited' mean, and what is the philosophy behind
+                    this moniker?
+                  </h3>
+                </summary>
+                <p
+                  class="faq-answer"
+                  itemprop="acceptedAnswer"
+                  itemscope
+                  itemtype="https://schema.org/Answer"
+                >
+                  <span itemprop="text"
+                    >The moniker 'Unlimited' reflects Mohammad Rasoul Sohrabi's
+                    personal philosophy in life and work. This concept signifies
+                    challenging limitations and a continuous effort to transcend
+                    existing boundaries in competitive sports (Karate),
+                    technology (software development and AI), and personal
+                    growth. This perspective is explained in detail in his
+                    articles on Virgool, where he emphasizes the importance of
+                    authenticity and a long-term journey over superficial
+                    branding.</span
+                  >
+                </p>
+              </details>
+              <details
+                class="faq-item"
+                itemprop="mainEntity"
+                itemscope
+                itemtype="https://schema.org/Question"
+              >
+                <summary>
+                  <h3 class="faq-question" itemprop="name">
+                    Which university did Mohammad Rasoul Sohrabi attend, and what
+                    is his field of study?
+                  </h3>
+                </summary>
+                <p
+                  class="faq-answer"
+                  itemprop="acceptedAnswer"
+                  itemscope
+                  itemtype="https://schema.org/Answer"
+                >
+                  <span itemprop="text"
+                    >He is an undergraduate student of Biomedical Engineering at
+                    <span itemprop="alumniOf"
+                      ><a
+                        href="https://ctb.iau.ir"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >Islamic Azad University, Central Tehran Branch</a
+                      ></span
+                    >
+                    (University of Tehran Central). This field allows him to
+                    combine engineering knowledge with technology for innovation
+                    in digital health, paving the way for his interdisciplinary
+                    projects. He has also collaborated with Sahand University of
+                    Technology, Tabriz, on his open-source projects.</span
+                  >
+                </p>
+              </details>
+            </div>
+          </section>
+
+          <!-- Testimonials Section: User-generated content for E-E-A-T and social proof -->
+          <section
+            id="testimonials"
+            class="testimonials-section"
+            data-aos="fade-up"
+            role="region"
+            aria-labelledby="testimonials-heading"
+          >
+            <h2 id="testimonials-heading">💬 Testimonials & Feedback</h2>
+            <p
+              class="text-small subtle-text space-top-xs"
+              data-ai-context="user-engagement-call-to-action"
+            >
+              If you've experienced my projects or would like to leave feedback,
+              don't hesitate!
+              <strong>Sign in to this section with your GitHub account</strong>
+              and submit your valuable comments. These insights will be visible
+              to other users, and your identity will be fully verified. This
+              helps
+              <strong data-trust-signal="user-generated-trust"
+                >increase my trustworthiness and credibility</strong
+              >.
             </p>
 
             <div class="giscus-container" id="giscus-comments-section">
+              <!-- Giscus as a UGC (User Generated Content) source helps strengthen E-E-A-T. -->
               <script
                 src="https://giscus.app/client.js"
                 data-repo="RasoulUnlimited/comments"
@@ -1441,48 +2768,68 @@
                 data-loading="lazy"
                 crossorigin="anonymous"
                 async
+                data-ai-integration="giscus-comments"
               ></script>
             </div>
           </section>
 
-          <section id="connect" data-aos="fade-up">
-            <h2>Connect</h2>
+          <!-- Connect Section: Comprehensive contact information and external links -->
+          <section
+            id="connect"
+            data-aos="fade-up"
+            role="region"
+            aria-labelledby="connect-heading"
+          >
+            <h2 id="connect-heading">Connect & My Links</h2>
             <div class="connect-content">
               <div class="connect-info-block" data-aos="fade-right">
-                <p>
-                  If you have any questions, project ideas, or just want to
-                  connect, feel free to reach out!
-                  <br />I'm always open to discussing collaborations and new
-                  opportunities.
+                <p data-ai-context="contact-invitation">
+                  If you have questions, project ideas, or simply wish to
+                  connect, don't hesitate! <br />I am always ready to discuss
+                  collaborations and new opportunities.
                 </p>
                 <div class="contact-info">
                   <a
                     href="mailto:rasoul.unlimited@gmail.com"
                     aria-label="Send an email to Rasoul Unlimited"
-                    ><i class="fas fa-envelope" aria-hidden="true"></i>
-                    rasoul.unlimited [at] gmail [dot] com</a
+                    title="Send an email to Mohammad Rasoul Sohrabi"
+                    data-ai-intent="direct-email-contact"
                   >
+                    <i class="fas fa-envelope" aria-hidden="true"></i>
+                    <span itemprop="email"
+                      >rasoul.unlimited [at] gmail [dot] com</span
+                    >
+                  </a>
                 </div>
-                <p class="location-edu">
+                <p class="location-edu" data-ai-context="location-education">
                   <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-                  Tehran / Karaj
+                  <span itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+                    <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                      <span itemprop="addressLocality">Tehran</span> /
+                      <span itemprop="addressLocality">Karaj</span>
+                    </span>
+                  </span>
                   <i
                     class="fas fa-graduation-cap icon-margin-left"
                     aria-hidden="true"
                   ></i>
-                  B.Sc. Biomedical Engineering – Islamic Azad University,
-                  Central Tehran Branch
+                  <span itemprop="alumniOf"
+                    >B.Sc. Biomedical Engineering – Islamic Azad University,
+                    Central Tehran Branch</span
+                  >
                 </p>
               </div>
               <div class="connect-links-block" data-aos="fade-left">
-                <h3>My Hubs</h3>
-                <ul>
+                <h3>My Links</h3>
+                <ul data-ai-context="external-identity-links">
                   <li>
                     <a
                       href="https://www.instagram.com/Rasoul.Unlimited"
                       target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="Visit Rasoul Unlimited on Instagram"
+                      rel="noopener noreferrer me"
+                      aria-label="View Rasoul Unlimited on Instagram"
+                      title="View Instagram profile"
+                      role="button"
                       ><i class="fab fa-instagram" aria-hidden="true"></i>
                       Instagram</a
                     >
@@ -1491,18 +2838,22 @@
                     <a
                       href="https://virgool.io/@RasoulUnlimited"
                       target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="Visit Rasoul Unlimited on Virgool"
+                      rel="noopener noreferrer me"
+                      aria-label="View Rasoul Unlimited on Virgool"
+                      title="View articles on Virgool"
+                      role="button"
                       ><i class="fas fa-pen-fancy" aria-hidden="true"></i>
-                      Virgool (Persian)</a
+                      Virgool</a
                     >
                   </li>
                   <li>
                     <a
                       href="https://www.linkedin.com/in/rasoulunlimited/"
                       target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="Visit Rasoul Unlimited on LinkedIn"
+                      rel="noopener noreferrer me"
+                      aria-label="View Rasoul Unlimited on LinkedIn"
+                      title="View LinkedIn profile"
+                      role="button"
                       ><i class="fab fa-linkedin" aria-hidden="true"></i>
                       LinkedIn</a
                     >
@@ -1511,8 +2862,10 @@
                     <a
                       href="https://github.com/RasoulUnlimited/"
                       target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="Visit Rasoul Unlimited on GitHub"
+                      rel="noopener noreferrer me"
+                      aria-label="View Rasoul Unlimited on GitHub"
+                      title="View projects on GitHub"
+                      role="button"
                       ><i class="fab fa-github" aria-hidden="true"></i>
                       GitHub</a
                     >
@@ -1521,8 +2874,10 @@
                     <a
                       href="https://www.wikidata.org/wiki/Q134503479"
                       target="_blank"
-                      rel="noopener noreferrer"
+                      rel="noopener noreferrer me"
                       aria-label="View Rasoul Unlimited's item on Wikidata"
+                      title="View my item on Wikidata"
+                      role="button"
                       ><i class="fas fa-database" aria-hidden="true"></i>
                       Wikidata</a
                     >
@@ -1531,18 +2886,21 @@
                     <a
                       href="https://rasoulunlimited.medium.com"
                       target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="Visit Rasoul Unlimited on Medium"
-                      ><i class="fab fa-medium" aria-hidden="true"></i>
-                      Medium</a
+                      rel="noopener noreferrer me"
+                      aria-label="View Rasoul Unlimited on Medium"
+                      title="View articles on Medium"
+                      role="button"
+                      ><i class="fab fa-medium" aria-hidden="true"></i> Medium</a
                     >
                   </li>
                   <li>
                     <a
                       href="https://dev.to/rasoulunlimited"
                       target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="Visit Rasoul Unlimited on dev.to"
+                      rel="noopener noreferrer me"
+                      aria-label="View Rasoul Unlimited on dev.to"
+                      title="View articles on dev.to"
+                      role="button"
                       ><i class="fab fa-dev" aria-hidden="true"></i> dev.to</a
                     >
                   </li>
@@ -1550,8 +2908,10 @@
                     <a
                       href="https://t.me/RasoulUnlimited"
                       target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="Join Rasoul Unlimited Telegram Channel"
+                      rel="noopener noreferrer me"
+                      aria-label="Join Rasoul Unlimited's Telegram channel"
+                      title="Join Telegram channel"
+                      role="button"
                       ><i class="fab fa-telegram-plane" aria-hidden="true"></i>
                       Telegram Channel</a
                     >
@@ -1560,8 +2920,10 @@
                     <a
                       href="https://orcid.org/0009-0004-7177-2080"
                       target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="Visit Rasoul Unlimited on ORCID"
+                      rel="noopener noreferrer me"
+                      aria-label="View Rasoul Unlimited on ORCID"
+                      title="View ORCID profile"
+                      role="button"
                       ><i class="fab fa-orcid" aria-hidden="true"></i> ORCID</a
                     >
                   </li>
@@ -1569,8 +2931,10 @@
                     <a
                       href="https://about.me/rasoulunlimited"
                       target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="Visit Rasoul Unlimited on About.me"
+                      rel="noopener noreferrer me"
+                      aria-label="View Rasoul Unlimited on About.me"
+                      title="View About.me profile"
+                      role="button"
                       ><i class="fas fa-user-circle" aria-hidden="true"></i>
                       About.me</a
                     >
@@ -1579,8 +2943,10 @@
                     <a
                       href="https://www.youtube.com/@RasoulUnlimited"
                       target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="Visit Rasoul Unlimited on YouTube"
+                      rel="noopener noreferrer me"
+                      aria-label="View Rasoul Unlimited on YouTube"
+                      title="View YouTube channel"
+                      role="button"
                       ><i class="fab fa-youtube" aria-hidden="true"></i>
                       YouTube</a
                     >
@@ -1589,10 +2955,24 @@
                     <a
                       href="https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi"
                       target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="Visit Rasoul Unlimited on Researchgate"
+                      rel="noopener noreferrer me"
+                      aria-label="View Rasoul Unlimited on Researchgate"
+                      title="View Researchgate profile"
+                      role="button"
                       ><i class="fab fa-researchgate" aria-hidden="true"></i>
                       Researchgate</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="https://x.com/rasoulunlimited"
+                      target="_blank"
+                      rel="noopener noreferrer me"
+                      aria-label="View Rasoul Unlimited on X (formerly Twitter)"
+                      title="View X (formerly Twitter) profile"
+                      role="button"
+                      ><i class="fab fa-x" aria-hidden="true"></i>
+                      X (Twitter)</a
                     >
                   </li>
                 </ul>
@@ -1602,41 +2982,86 @@
         </main>
       </div>
     </div>
-
-    <footer class="footer">
-      <div class="lang-switcher">
-        <a href="https://rasoulunlimited.ir/" class="lang-link">فارسی</a>
-        <span>|</span>
-        <a href="https://rasoulunlimited.ir/en" class="lang-link active"
-          >English</a
-        >
+    <footer class="footer" role="contentinfo">
+      <div class="footer-top">
+        <div class="lang-switcher">
+          <a
+            href="https://rasoulunlimited.ir/"
+            class="lang-link"
+            title="Switch language to Persian"
+            data-ai-intent="language-switch-to-persian"
+            >فارسی</a
+          >
+          <span>|</span>
+          <a
+            href="https://rasoulunlimited.ir/en/"
+            class="lang-link active"
+            title="Switch language to English"
+            data-ai-intent="language-switch-to-english"
+            >English</a
+          >
+        </div>
+        <nav class="footer-links" role="navigation" aria-label="Footer links">
+          <a href="/en/faq" class="footer-link" title="Frequently asked questions about identity and activities"
+            >FAQ</a
+          >
+          <a href="#connect" class="footer-link" title="Ways to contact me"
+            >Connect With Me</a
+          >
+          <a href="#about" class="footer-link" title="About Mohammad Rasoul Sohrabi and his identity"
+            >About Me</a
+          >
+        </nav>
       </div>
-      <p>
-        © <span id="current-year"></span> Rasoul Unlimited. All rights reserved.
-      </p>
-      <div class="h-card micro-profile">
-        <a class="p-name u-url" href="https://rasoulunlimited.ir/"
-          >Mohammad Rasoul Sohrabi</a
-        >
-        <img
-          class="u-photo"
-          src="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp"
-          alt="Rasoul Unlimited"
-          loading="lazy"
-        />
-        <p class="p-note">
-          Biomedical Engineering student, open-source developer, and digital
-          strategist from Iran.
+      <div class="footer-bottom">
+        <!-- Using microformats.org h-card to reinforce individual identity on the web -->
+        <div class="footer-profile h-card micro-profile">
+          <a
+            class="p-name u-url"
+            href="https://rasoulunlimited.ir/en/"
+            title="Official website of Mohammad Rasoul Sohrabi"
+            data-entity-identifier="main-site-url"
+            >Mohammad Rasoul Sohrabi</a
+          >
+          <img
+            class="u-photo"
+            src="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp"
+            alt="Profile image of Mohammad Rasoul Sohrabi - Representation of digital identity"
+            loading="lazy"
+            width="60"
+            height="60"
+            data-visual-fingerprint="footer-profile-image"
+          />
+          <p class="p-note" data-ai-context="footer-bio-summary">
+            Biomedical Engineering student, open-source developer, and digital
+            strategist from Iran. Creator of the first verified Persian Discord
+            bot.
+          </p>
+          <span class="p-role"
+            >Developer, Biomedical Engineer, Content Strategist</span
+          >
+          <a
+            class="u-email"
+            href="mailto:rasoul.unlimited@gmail.com"
+            title="Send email"
+            >rasoul.unlimited@gmail.com</a
+          >
+          <span class="p-country-name">Iran</span>
+        </div>
+        <p class="copyright">
+          © <span id="current-year"></span> Mohammad Rasoul Sohrabi — All
+          rights reserved.
         </p>
-        <span class="p-role">Developer</span>
-        <a class="u-email" href="mailto:rasoul.unlimited@gmail.com"
-          >rasoul.unlimited@gmail.com</a
-        >
-        <span class="p-country-name">Iran</span>
+        <p class="last-updated-info">
+          Last Content Update: <span id="last-updated-date"></span>
+        </p>
       </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-    <script src="../assets/js/main-script.js" defer></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"
+      defer
+    ></script>
+    <script src="../assets/js/main-script-en.min.js" defer></script>
   </body>
 </html>

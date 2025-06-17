@@ -2,8 +2,6 @@
 
 User-agent: *
 Allow: /
-
-# === Preferred content structure ===
 Allow: /en/
 Allow: /projects/
 Allow: /projects/c-projects/
@@ -11,13 +9,10 @@ Allow: /projects/python-projects/
 Allow: /assets/css/
 Allow: /assets/images/
 Allow: /assets/js/
-
-# === Allow human-readable and machine-readable identity files ===
 Allow: /humans.txt
 Allow: /foaf.rdf
 Allow: /.well-known/
 
-# === Block non-content and sensitive directories (if exist) ===
 Disallow: /admin/
 Disallow: /login/
 Disallow: /register/
@@ -26,28 +21,19 @@ Disallow: /private/
 Disallow: /tmp/
 Disallow: /backup/
 
-# === Structured data and profile ===
-Allow: /profile/
-Allow: /about/
-Allow: /schema/
-Allow: /schema.jsonld
-
-# === Specialized crawlers (if you want to target them) ===
 User-agent: Googlebot-Image
 Allow: /assets/images/
-
-User-agent: Googlebot-News
-Allow: /blog/
-Allow: /articles/
 
 User-agent: Googlebot
 Allow: /
 
-# === Sitemap and Crawl Coordination ===
+User-agent: bingbot
+Allow: /
+
 Sitemap: https://rasoulunlimited.ir/sitemap.xml
 
-# === Comments for Search Engines and Humans ===
-# FOAF: Machine-readable social relationships → /foaf.rdf
-# humans.txt: Developer credit and site purpose → /humans.txt
-# identity.json / .well-known/: Decentralized identity or WebID
-# schema.jsonld: Linked data for Google Knowledge Graph
+# Comments
+# Structured data: /schema.jsonld
+# Decentralized ID: /.well-known/did.json or /identity.json
+# Social links: Inside schema.jsonld -> sameAs
+# Verified identity sources: /foaf.rdf, /humans.txt
