@@ -7,7 +7,7 @@
     "build": "gulp"
   },
   "keywords": [],
-  "author": "",
+  "author": "Mohammad Rasoul Sohrabi",
   "license": "ISC",
   "devDependencies": {
     "gulp": "^5.0.1",
