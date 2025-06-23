@@ -90,9 +90,15 @@
         <changefreq>yearly</changefreq>
         <priority>0.6</priority>
     </url>
+    <url>
+        <loc>https://rasoulunlimited.ir/contact.html</loc>
+        <lastmod>2025-06-03</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
 
     <url>
-        <loc>https://rasoulunlimited.ir/.well-known/identity</loc>
+        <loc>https://rasoulunlimited.ir/.well-known/identity.json</loc>
         <lastmod>2025-06-03</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>

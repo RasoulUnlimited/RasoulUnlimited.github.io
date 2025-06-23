@@ -8,6 +8,7 @@ Allow: /en/
 Allow: /projects/
 Allow: /projects/c-projects/
 Allow: /projects/python-projects/
+Allow: /contact.html
 Allow: /assets/css/
 Allow: /assets/images/
 Allow: /assets/js/
