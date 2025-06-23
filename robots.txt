@@ -45,3 +45,4 @@ Sitemap: https://rasoulunlimited.ir/sitemap.xml
 # humans.txt: Developer credit and site purpose → /humans.txt
 # identity.json / .well-known/: Decentralized identity or WebID
 # schema.jsonld: Linked data for Google Knowledge Graph
+# security.txt: Responsible disclosure policy → /.well-known/security.txt
