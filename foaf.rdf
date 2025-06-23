@@ -126,7 +126,8 @@
 
     <!-- Metadata -->
     <dc:creator>Mohammad Rasoul Sohrabi</dc:creator>
-    <dc:description>Personal FOAF profile of Mohammad Rasoul Sohrabi (aka Rasoul Unlimited), a biomedical engineering student and open-source contributor from Tehran, Iran.</dc:description>
+    <dc:description>Personal FOAF profile of Mohammad Rasoul Sohrabi (aka Rasoul Unlimited), a
+      biomedical engineering student and open-source contributor from Tehran, Iran.</dc:description>
     <dc:date>2025-06-05</dc:date>
 
   </foaf:Person>

@@ -76,7 +76,8 @@
   text-decoration: none;
   padding: 4px 8px;
   border-radius: 6px;
-  transition: color var(--transition-duration-short) ease, background-color var(--transition-duration-short) ease;
+  transition: color var(--transition-duration-short) ease,
+    background-color var(--transition-duration-short) ease;
   will-change: color, background-color;
 }
 
@@ -137,7 +138,8 @@
   right: 0;
   bottom: 0;
   background-color: var(--text-color-light);
-  transition: background-color var(--transition-duration-short) var(--transition-easing-standard);
+  transition: background-color var(--transition-duration-short)
+    var(--transition-easing-standard);
   border-radius: 24px;
   will-change: background-color;
 }
@@ -150,7 +152,12 @@
   left: 3px;
   bottom: 3px;
   background-color: var(--card-bg);
-  transition: transform var(--transition-duration-short) var(--transition-easing-standard), content var(--transition-duration-short) var(--transition-easing-standard), color var(--transition-duration-short) var(--transition-easing-standard), background-color var(--transition-duration-short) var(--transition-easing-standard);
+  transition: transform var(--transition-duration-short)
+      var(--transition-easing-standard),
+    content var(--transition-duration-short) var(--transition-easing-standard),
+    color var(--transition-duration-short) var(--transition-easing-standard),
+    background-color var(--transition-duration-short)
+      var(--transition-easing-standard);
   border-radius: 50%;
 
   font-family: "Font Awesome 6 Free";
@@ -217,7 +224,9 @@ input:checked + .slider:before {
 
 /* Specific Dark Mode Adjustments for Contrast */
 .dark-mode .fun-fact-toast {
-  background-color: var(--card-bg); /* Use darker card background for contrast */
+  background-color: var(
+    --card-bg
+  ); /* Use darker card background for contrast */
   color: var(--text-color); /* Use lighter text color for contrast */
   border-right: 6px solid var(--primary-color); /* Use primary color for border */
 }
@@ -228,7 +237,9 @@ input:checked + .slider:before {
 
 .dark-mode .email-copy-toast,
 .dark-mode .social-link-copy-toast {
-  background-color: var(--card-bg); /* Use darker card background for contrast */
+  background-color: var(
+    --card-bg
+  ); /* Use darker card background for contrast */
   color: var(--text-color); /* Use lighter text color for contrast */
   border-left: 6px solid var(--accent-color); /* Keep accent color for border */
 }
@@ -258,10 +269,10 @@ html {
 body {
   font-family: "Roboto", sans-serif;
   background: linear-gradient(
-      135deg,
-      var(--background-start-color) 0%,
-      var(--background-end-color) 100%
-    );
+    135deg,
+    var(--background-start-color) 0%,
+    var(--background-end-color) 100%
+  );
   margin: 0;
   padding: 0;
   color: var(--text-color);
@@ -462,7 +473,6 @@ textarea:focus:not(:focus-visible) {
   filter: brightness(0.9);
 }
 
-
 .navbar nav a::after {
   content: "";
   position: absolute;
@@ -585,11 +595,11 @@ section::after {
   width: 200px;
   height: 3px;
   background: linear-gradient(
-      to right,
-      rgba(var(--primary-rgb), 0) 0%,
-      var(--primary-color) 50%,
-      rgba(var(--primary-rgb), 0) 100%
-    );
+    to right,
+    rgba(var(--primary-rgb), 0) 0%,
+    var(--primary-color) 50%,
+    rgba(var(--primary-rgb), 0) 100%
+  );
   z-index: 0;
   pointer-events: none;
   will-change: width, transform;
@@ -656,7 +666,6 @@ section h2::after {
   filter: brightness(0.9);
 }
 
-
 .grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -705,7 +714,6 @@ section h2::after {
   box-shadow: 0 10px 30px var(--shadow-color-medium);
   filter: brightness(1) saturate(1);
 }
-
 
 .card::before {
   content: "";
@@ -1155,7 +1163,6 @@ img.loaded {
   box-shadow: none;
 }
 
-
 .timeline-content {
   padding: var(--space-md);
   background-color: var(--card-bg);
@@ -1186,7 +1193,6 @@ img.loaded {
   transform: translateY(-2px);
   box-shadow: 0 4px 15px var(--shadow-color-light);
 }
-
 
 .timeline-icon {
   position: absolute;
@@ -1236,14 +1242,16 @@ img.loaded {
   border-style: solid;
   right: -18px;
   left: auto;
-  border-color: transparent transparent transparent var(--timeline-content-border-color);
+  border-color: transparent transparent transparent
+    var(--timeline-content-border-color);
   z-index: -1;
 }
 
 .timeline li:nth-child(even) .timeline-content::after {
   left: -18px;
   right: auto;
-  border-color: transparent var(--timeline-content-border-color) transparent transparent;
+  border-color: transparent var(--timeline-content-border-color) transparent
+    transparent;
   z-index: -1;
 }
 
@@ -1338,8 +1346,8 @@ img.loaded {
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out,
-    transform 0.3s var(--transition-easing-springy),
-    background-color 0.3s ease, box-shadow 0.3s ease;
+    transform 0.3s var(--transition-easing-springy), background-color 0.3s ease,
+    box-shadow 0.3s ease;
   z-index: 999;
   will-change: opacity, visibility, transform, background-color, box-shadow;
 }
@@ -1495,7 +1503,6 @@ img.loaded {
   box-shadow: 0 10px 30px var(--shadow-color-medium);
 }
 
-
 .testimonial-item::before {
   content: "\201C";
   font-size: 5em;
@@ -1567,7 +1574,6 @@ img.loaded {
   box-shadow: 0 8px 30px var(--shadow-color-medium);
 }
 
-
 .giscus-container iframe {
   width: 100%;
   min-height: 400px;
@@ -1596,10 +1602,10 @@ img.loaded {
 #connect {
   text-align: center;
   background: linear-gradient(
-      135deg,
-      var(--background-end-color) 0%,
-      var(--background-start-color) 100%
-    );
+    135deg,
+    var(--background-end-color) 0%,
+    var(--background-start-color) 100%
+  );
   padding-top: var(--section-v-padding);
   padding-bottom: var(--section-v-padding);
   margin-bottom: 0;
@@ -1907,9 +1913,8 @@ img.loaded {
 }
 #explore-hint:active {
   transform: scale(0.98);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
-
 
 .skill-hover-message {
   position: absolute;
@@ -2046,10 +2051,10 @@ img.loaded {
 
 .final-exploration-toast {
   background: linear-gradient(
-      135deg,
-      var(--highlight-color) 0%,
-      var(--accent-color) 100%
-    );
+    135deg,
+    var(--highlight-color) 0%,
+    var(--accent-color) 100%
+  );
   color: var(--secondary-color);
   border-left: 6px solid var(--primary-color);
   animation: celebrationPulse 2s infinite ease-in-out;
@@ -2131,7 +2136,6 @@ img.loaded {
 .fun-fact-close:active {
   transform: rotate(90deg) scale(0.9);
 }
-
 
 @keyframes sectionDelight {
   0% {
@@ -2491,14 +2495,16 @@ img.loaded {
   .timeline-content::after {
     right: -18px;
     left: auto;
-    border-color: transparent transparent transparent var(--timeline-content-border-color);
+    border-color: transparent transparent transparent
+      var(--timeline-content-border-color);
     z-index: -1;
   }
 
   .timeline li:nth-child(even) .timeline-content::after {
     left: -18px;
     right: auto;
-    border-color: transparent var(--timeline-content-border-color) transparent transparent;
+    border-color: transparent var(--timeline-content-border-color) transparent
+      transparent;
     z-index: -1;
   }
   .timeline-content h3 {
@@ -2809,7 +2815,6 @@ img.loaded {
   }
 }
 
-
 @keyframes clickFeedbackPop {
   0% {
     transform: scale(1);
@@ -2833,7 +2838,9 @@ img.loaded {
 }
 
 button:active,
-a:active:not([href^="#"]):not(.navbar nav a):not(.card .card-links a):not(.contact-info a):not(.connect-links-block ul li a),
+a:active:not([href^="#"]):not(.navbar nav a):not(.card .card-links a):not(
+    .contact-info a
+  ):not(.connect-links-block ul li a),
 summary:active,
 [role="button"]:active,
 [tabindex="0"]:active {

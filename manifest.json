@@ -1,12 +1,17 @@
 {
-    "name": "Rasoul Unlimited",
-    "short_name": "Rasoul",
-    "icons": [
-      {
-        "src": "/assets/images/favicon.png",
-        "sizes": "512x512",
-        "type": "image/png"
-      }
-    ],
-    "start_url": "/"
-  }
+  "name": "Rasoul Unlimited",
+  "short_name": "Rasoul",
+  "icons": [
+    {
+      "src": "/assets/images/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#ffffff",
+  "background_color": "#0f172a",
+  "lang": "fa",
+  "description": "Personal website of Mohammad Rasoul Sohrabi — Developer, Designer, Content Creator, and Biomedical Engineering student."
+}

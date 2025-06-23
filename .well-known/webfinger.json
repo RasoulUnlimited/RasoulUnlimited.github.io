@@ -1,23 +1,23 @@
 {
-    "subject": "acct:rasoulunlimited@rasoulunlimited.ir",
-    "aliases": [
-      "https://rasoulunlimited.ir/",
-      "https://rasoulunlimited.ir/#person"
-    ],
-    "links": [
-      {
-        "rel": "http://webfinger.net/rel/profile-page",
-        "type": "text/html",
-        "href": "https://rasoulunlimited.ir/"
-      },
-      {
-        "rel": "self",
-        "type": "application/json",
-        "href": "https://rasoulunlimited.ir/.well-known/identity"
-      },
-      {
-        "rel": "http://openid.net/specs/connect/1.0/issuer",
-        "href": "https://rasoulunlimited.ir/"
-      }
-    ]
-  }
+  "subject": "acct:rasoulunlimited@rasoulunlimited.ir",
+  "aliases": [
+    "https://rasoulunlimited.ir/",
+    "https://rasoulunlimited.ir/#person"
+  ],
+  "links": [
+    {
+      "rel": "http://webfinger.net/rel/profile-page",
+      "type": "text/html",
+      "href": "https://rasoulunlimited.ir/"
+    },
+    {
+      "rel": "self",
+      "type": "application/json",
+      "href": "https://rasoulunlimited.ir/.well-known/identity"
+    },
+    {
+      "rel": "http://openid.net/specs/connect/1.0/issuer",
+      "href": "https://rasoulunlimited.ir/"
+    }
+  ]
+}

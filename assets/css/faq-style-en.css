@@ -1,704 +1,752 @@
 /* Custom CSS Variables for easier theme management and consistency */
 :root {
-    --primary-blue: #3498db; /* A vibrant, professional blue */
-    --dark-blue: #2980b9;    /* Darker shade of blue for accents */
-    --accent-red: #e74c3c;   /* Striking red for emphasis, like minus icon */
-    --text-dark: #263238;    /* Very dark blue-gray for main headings and strong text */
-    --text-muted: #546e7a;   /* Muted blue-gray for paragraph text */
-    --bg-light: #f8fbfd;     /* Very light, cool background for the body */
-    --bg-section: #ffffff;  /* Pure white for main content sections */
-    --bg-header-gradient-start: #eef5fb; /* Light blue start for header gradient */
-    --bg-summary-open: #eaf6fc; /* Very light blue for open FAQ summary */
-    --border-light: #e1e7ed; /* Light border for subtle separation */
-    --border-faq-item: #eef2f7; /* Even lighter border for FAQ items */
-    --shadow-light: rgba(0, 0, 0, 0.05); /* Subtle general shadow */
-    --shadow-medium: rgba(0, 0, 0, 0.12); /* Medium shadow for sections */
-    --shadow-hover: rgba(0, 0, 0, 0.2);   /* Stronger shadow on hover for depth */
-    --shadow-faq-item: rgba(0, 0, 0, 0.08); /* Shadow for FAQ items */
-    --shadow-faq-item-hover: rgba(0, 0, 0, 0.15); /* Stronger shadow for FAQ items on hover */
-    --border-radius-section: 32px; /* More pronounced rounded corners for sections */
-    --border-radius-item: 24px;    /* Rounded corners for FAQ items */
-    --transition-speed-slow: 0.6s;
-    --transition-speed-medium: 0.45s;
-    --transition-speed-fast: 0.35s;
-    --ease-bezier: cubic-bezier(0.25, 0.8, 0.25, 1); /* Custom cubic-bezier for smooth, professional transitions */
+  --primary-blue: #3498db; /* A vibrant, professional blue */
+  --dark-blue: #2980b9; /* Darker shade of blue for accents */
+  --accent-red: #e74c3c; /* Striking red for emphasis, like minus icon */
+  --text-dark: #263238; /* Very dark blue-gray for main headings and strong text */
+  --text-muted: #546e7a; /* Muted blue-gray for paragraph text */
+  --bg-light: #f8fbfd; /* Very light, cool background for the body */
+  --bg-section: #ffffff; /* Pure white for main content sections */
+  --bg-header-gradient-start: #eef5fb; /* Light blue start for header gradient */
+  --bg-summary-open: #eaf6fc; /* Very light blue for open FAQ summary */
+  --border-light: #e1e7ed; /* Light border for subtle separation */
+  --border-faq-item: #eef2f7; /* Even lighter border for FAQ items */
+  --shadow-light: rgba(0, 0, 0, 0.05); /* Subtle general shadow */
+  --shadow-medium: rgba(0, 0, 0, 0.12); /* Medium shadow for sections */
+  --shadow-hover: rgba(0, 0, 0, 0.2); /* Stronger shadow on hover for depth */
+  --shadow-faq-item: rgba(0, 0, 0, 0.08); /* Shadow for FAQ items */
+  --shadow-faq-item-hover: rgba(
+    0,
+    0,
+    0,
+    0.15
+  ); /* Stronger shadow for FAQ items on hover */
+  --border-radius-section: 32px; /* More pronounced rounded corners for sections */
+  --border-radius-item: 24px; /* Rounded corners for FAQ items */
+  --transition-speed-slow: 0.6s;
+  --transition-speed-medium: 0.45s;
+  --transition-speed-fast: 0.35s;
+  --ease-bezier: cubic-bezier(
+    0.25,
+    0.8,
+    0.25,
+    1
+  ); /* Custom cubic-bezier for smooth, professional transitions */
 
-    /* Variables for Behavioral Economics elements */
-    --social-proof-bg: #e6f7ff; /* Light blue for social proof */
-    --social-proof-text: #2a7da1; /* Darker blue text for social proof */
-    --urgency-bg: #fff0e6; /* Light orange for urgency */
-    --urgency-text: #d66800; /* Darker orange text for urgency */
-    --call-to-action-bg: #dff0d8; /* Light green for general CTA */
-    --call-to-action-text: #3c763d; /* Darker green text for general CTA */
-    --highlight-number-color: var(--accent-red); /* Highlighting numbers */
+  /* Variables for Behavioral Economics elements */
+  --social-proof-bg: #e6f7ff; /* Light blue for social proof */
+  --social-proof-text: #2a7da1; /* Darker blue text for social proof */
+  --urgency-bg: #fff0e6; /* Light orange for urgency */
+  --urgency-text: #d66800; /* Darker orange text for urgency */
+  --call-to-action-bg: #dff0d8; /* Light green for general CTA */
+  --call-to-action-text: #3c763d; /* Darker green text for general CTA */
+  --highlight-number-color: var(--accent-red); /* Highlighting numbers */
 
-    /* New variables for Search Bar */
-    --search-border: #ccd6e0;
-    --search-focus-shadow: rgba(52, 152, 219, 0.3);
+  /* New variables for Search Bar */
+  --search-border: #ccd6e0;
+  --search-focus-shadow: rgba(52, 152, 219, 0.3);
 }
 
 /* Base Styles & Global Setup */
 body {
-    font-family: 'Roboto', sans-serif;
-    background-color: var(--bg-light);
-    color: var(--text-dark);
-    direction: ltr;
-    text-align: left; /* Left-aligned for LTR */
-    line-height: 1.9; /* Enhanced line height for superior readability */
-    margin: 0;
-    padding: 0;
-    font-size: 17px; /* Slightly larger base font for modern feel */
-    -webkit-font-smoothing: antialiased; /* Smoother font rendering for WebKit */
-    -moz-osx-font-smoothing: grayscale; /* Smoother font rendering for Firefox */
-    overflow-x: hidden; /* Prevent horizontal scroll for clean layout */
+  font-family: "Roboto", sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+  direction: ltr;
+  text-align: left; /* Left-aligned for LTR */
+  line-height: 1.9; /* Enhanced line height for superior readability */
+  margin: 0;
+  padding: 0;
+  font-size: 17px; /* Slightly larger base font for modern feel */
+  -webkit-font-smoothing: antialiased; /* Smoother font rendering for WebKit */
+  -moz-osx-font-smoothing: grayscale; /* Smoother font rendering for Firefox */
+  overflow-x: hidden; /* Prevent horizontal scroll for clean layout */
 }
 
 /* General Layout & Spacing */
 .content-area {
-    max-width: 1100px; /* Even wider content for a truly expansive feel */
-    margin: 0 auto;
-    padding: 0 3rem; /* Generous horizontal padding */
+  max-width: 1100px; /* Even wider content for a truly expansive feel */
+  margin: 0 auto;
+  padding: 0 3rem; /* Generous horizontal padding */
 }
 
 /* Header Section Styling */
 .page-header {
-    text-align: center; /* Center align all content within the header */
-    padding: 8rem 3rem 6rem; /* More vertical space for a grand header */
-    background: linear-gradient(150deg, var(--bg-header-gradient-start) 0%, var(--bg-section) 100%); /* Elegant, soft gradient */
-    border-bottom: 1px solid var(--border-light); /* Crisp, clean border at the bottom */
-    margin-bottom: 4rem; /* More space below header */
-    box-shadow: 0 8px 25px var(--shadow-light); /* Deeper, subtle shadow for prominence */
-    position: relative;
-    overflow: hidden;
-    border-radius: 0 0 var(--border-radius-section) var(--border-radius-section); /* Slightly rounded bottom corners */
+  text-align: center; /* Center align all content within the header */
+  padding: 8rem 3rem 6rem; /* More vertical space for a grand header */
+  background: linear-gradient(
+    150deg,
+    var(--bg-header-gradient-start) 0%,
+    var(--bg-section) 100%
+  ); /* Elegant, soft gradient */
+  border-bottom: 1px solid var(--border-light); /* Crisp, clean border at the bottom */
+  margin-bottom: 4rem; /* More space below header */
+  box-shadow: 0 8px 25px var(--shadow-light); /* Deeper, subtle shadow for prominence */
+  position: relative;
+  overflow: hidden;
+  border-radius: 0 0 var(--border-radius-section) var(--border-radius-section); /* Slightly rounded bottom corners */
 }
 
 .page-header h1 {
-    font-size: 4.2rem; /* Dominant, commanding heading */
-    color: var(--text-dark);
-    margin-bottom: 1.5rem;
-    font-weight: 900; /* Extra bold for ultimate impact */
-    letter-spacing: -0.05em; /* Tighter for modern typography */
-    text-shadow: 0 3px 8px rgba(0, 0, 0, 0.08); /* More pronounced, soft text shadow */
-    line-height: 1.2; /* Tighter line height for large headings */
+  font-size: 4.2rem; /* Dominant, commanding heading */
+  color: var(--text-dark);
+  margin-bottom: 1.5rem;
+  font-weight: 900; /* Extra bold for ultimate impact */
+  letter-spacing: -0.05em; /* Tighter for modern typography */
+  text-shadow: 0 3px 8px rgba(0, 0, 0, 0.08); /* More pronounced, soft text shadow */
+  line-height: 1.2; /* Tighter line height for large headings */
 }
 
 .intro-text {
-    font-size: 1.55rem; /* Larger intro text for effortless reading */
-    color: var(--text-muted);
-    max-width: 950px;
-    margin: 0 auto 3rem; /* More space below intro text, before search */
-    line-height: 1.8;
-    font-weight: 400;
+  font-size: 1.55rem; /* Larger intro text for effortless reading */
+  color: var(--text-muted);
+  max-width: 950px;
+  margin: 0 auto 3rem; /* More space below intro text, before search */
+  line-height: 1.8;
+  font-weight: 400;
 }
 
 /* Main Content Area */
 .main-content {
-    padding-bottom: 7rem; /* Ample space at the bottom */
+  padding-bottom: 7rem; /* Ample space at the bottom */
 }
 
 /* FAQ Section Styling */
 .faq-section {
-    background-color: var(--bg-section);
-    padding: 4.5rem; /* Even more generous padding within sections */
-    margin-bottom: 4rem; /* More space between sections for visual distinctiveness */
-    border-radius: var(--border-radius-section); /* More pronounced rounded corners for a truly premium feel */
-    box-shadow: 0 25px 80px var(--shadow-medium); /* Deeper, softer shadow for a floating, luxurious effect */
-    border: 1px solid var(--border-light); /* Very light, crisp border */
-    transition: transform var(--transition-speed-slow) var(--ease-bezier), box-shadow var(--transition-speed-slow) var(--ease-bezier); /* Slower, custom ease transition for a smoother feel */
-    position: relative;
-    overflow: hidden;
+  background-color: var(--bg-section);
+  padding: 4.5rem; /* Even more generous padding within sections */
+  margin-bottom: 4rem; /* More space between sections for visual distinctiveness */
+  border-radius: var(
+    --border-radius-section
+  ); /* More pronounced rounded corners for a truly premium feel */
+  box-shadow: 0 25px 80px var(--shadow-medium); /* Deeper, softer shadow for a floating, luxurious effect */
+  border: 1px solid var(--border-light); /* Very light, crisp border */
+  transition: transform var(--transition-speed-slow) var(--ease-bezier),
+    box-shadow var(--transition-speed-slow) var(--ease-bezier); /* Slower, custom ease transition for a smoother feel */
+  position: relative;
+  overflow: hidden;
 }
 
 .faq-section:hover {
-    transform: translateY(-10px); /* More significant lift on hover */
-    box-shadow: 0 30px 90px var(--shadow-hover); /* Enhanced, captivating shadow on hover */
+  transform: translateY(-10px); /* More significant lift on hover */
+  box-shadow: 0 30px 90px var(--shadow-hover); /* Enhanced, captivating shadow on hover */
 }
 
 .section-title {
-    font-size: 3.2rem; /* Larger, impactful section titles */
-    color: var(--text-dark);
-    margin-bottom: 3.5rem; /* More space below title */
-    text-align: center;
-    position: relative;
-    padding-bottom: 1.5rem; /* More space for dynamic underline */
-    font-weight: 700;
-    letter-spacing: -0.03em;
+  font-size: 3.2rem; /* Larger, impactful section titles */
+  color: var(--text-dark);
+  margin-bottom: 3.5rem; /* More space below title */
+  text-align: center;
+  position: relative;
+  padding-bottom: 1.5rem; /* More space for dynamic underline */
+  font-weight: 700;
+  letter-spacing: -0.03em;
 }
 
 /* Dynamic & Animated Underline for H2 (Section Title) */
 .section-title::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    right: 50%;
-    transform: translateX(50%);
-    width: 120px; /* Wider underline */
-    height: 8px; /* Thicker, more substantial underline */
-    background: linear-gradient(90deg, var(--primary-blue) 0%, var(--dark-blue) 100%); /* Vibrant gradient for the underline */
-    border-radius: 5px;
-    opacity: 0.9;
-    transition: width var(--transition-speed-slow) var(--ease-bezier), opacity var(--transition-speed-slow) ease-in-out; /* Slower, custom ease transition */
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 50%;
+  transform: translateX(50%);
+  width: 120px; /* Wider underline */
+  height: 8px; /* Thicker, more substantial underline */
+  background: linear-gradient(
+    90deg,
+    var(--primary-blue) 0%,
+    var(--dark-blue) 100%
+  ); /* Vibrant gradient for the underline */
+  border-radius: 5px;
+  opacity: 0.9;
+  transition: width var(--transition-speed-slow) var(--ease-bezier),
+    opacity var(--transition-speed-slow) ease-in-out; /* Slower, custom ease transition */
 }
 
 .faq-section:hover .section-title::after {
-    width: 180px; /* Expand significantly on section hover */
-    opacity: 1;
-    box-shadow: 0 2px 10px rgba(52, 152, 219, 0.4); /* Subtle glow effect on hover */
+  width: 180px; /* Expand significantly on section hover */
+  opacity: 1;
+  box-shadow: 0 2px 10px rgba(52, 152, 219, 0.4); /* Subtle glow effect on hover */
 }
 
 /* FAQ Item (Accordion) Styling */
 .faq-group {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem; /* Ample space between FAQ items for superior visual separation */
+  display: flex;
+  flex-direction: column;
+  gap: 2rem; /* Ample space between FAQ items for superior visual separation */
 }
 
 .faq-item {
-    background-color: #fcfdff; /* Very light, pristine background for items */
-    border: 1px solid var(--border-faq-item); /* Very light, crisp border */
-    border-radius: var(--border-radius-item); /* Generous rounded corners for a soft, modern look */
-    overflow: hidden;
-    transition: all var(--transition-speed-medium) var(--ease-bezier); /* Slower, custom ease transition */
-    box-shadow: 0 10px 30px var(--shadow-faq-item); /* Soft, prominent shadow */
+  background-color: #fcfdff; /* Very light, pristine background for items */
+  border: 1px solid var(--border-faq-item); /* Very light, crisp border */
+  border-radius: var(
+    --border-radius-item
+  ); /* Generous rounded corners for a soft, modern look */
+  overflow: hidden;
+  transition: all var(--transition-speed-medium) var(--ease-bezier); /* Slower, custom ease transition */
+  box-shadow: 0 10px 30px var(--shadow-faq-item); /* Soft, prominent shadow */
 }
 
 .faq-item:hover {
-    border-color: var(--primary-blue); /* Primary blue border on hover */
-    box-shadow: 0 15px 45px var(--shadow-faq-item-hover); /* More prominent, captivating shadow on hover */
-    transform: translateY(-5px); /* Noticeable, elegant lift effect */
+  border-color: var(--primary-blue); /* Primary blue border on hover */
+  box-shadow: 0 15px 45px var(--shadow-faq-item-hover); /* More prominent, captivating shadow on hover */
+  transform: translateY(-5px); /* Noticeable, elegant lift effect */
 }
 
 .faq-item summary {
-    display: flex;
-    align-items: center;
-    padding: 2.2rem 2.8rem; /* Even more generous padding for summary */
-    font-weight: 600; /* Semi-bold for clarity */
-    color: var(--text-dark);
-    cursor: pointer;
-    outline: none;
-    position: relative;
-    user-select: none;
-    font-size: 1.4rem; /* Larger font size for questions for effortless reading */
-    background-color: var(--bg-section); /* Pristine white background for summary */
-    border-bottom: 1px solid transparent; /* Prepare for border on open */
-    transition: all var(--transition-speed-fast) ease-in-out;
-    letter-spacing: -0.02em; /* Slightly tighter letter spacing */
+  display: flex;
+  align-items: center;
+  padding: 2.2rem 2.8rem; /* Even more generous padding for summary */
+  font-weight: 600; /* Semi-bold for clarity */
+  color: var(--text-dark);
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  user-select: none;
+  font-size: 1.4rem; /* Larger font size for questions for effortless reading */
+  background-color: var(
+    --bg-section
+  ); /* Pristine white background for summary */
+  border-bottom: 1px solid transparent; /* Prepare for border on open */
+  transition: all var(--transition-speed-fast) ease-in-out;
+  letter-spacing: -0.02em; /* Slightly tighter letter spacing */
 }
 
 .faq-item details[open] summary {
-    background-color: var(--bg-summary-open); /* Lighter blue background when open */
-    border-bottom-color: #d8e8f5; /* Subtle border when open */
-    color: var(--dark-blue);
-    border-radius: var(--border-radius-item) var(--border-radius-item) 0 0; /* Rounded top, sharp bottom when open */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.06); /* Inner shadow for open summary */
+  background-color: var(
+    --bg-summary-open
+  ); /* Lighter blue background when open */
+  border-bottom-color: #d8e8f5; /* Subtle border when open */
+  color: var(--dark-blue);
+  border-radius: var(--border-radius-item) var(--border-radius-item) 0 0; /* Rounded top, sharp bottom when open */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.06); /* Inner shadow for open summary */
 }
 
 /* Custom Expand/Collapse Icon */
 .faq-item summary::marker,
 .faq-item summary::-webkit-details-marker {
-    display: none; /* Hide default marker */
+  display: none; /* Hide default marker */
 }
 
 .faq-item summary::before {
-    content: '+';
-    font-family: 'Montserrat', sans-serif;
-    font-size: 2.8rem; /* Larger, more dominant icon */
-    line-height: 1;
-    color: var(--primary-blue); /* Primary blue color for icon */
-    margin-right: 2rem; /* More space */
-    flex-shrink: 0;
-    transition: transform var(--transition-speed-medium) var(--ease-bezier), color var(--transition-speed-medium) ease-out; /* Smooth, custom ease transition */
+  content: "+";
+  font-family: "Montserrat", sans-serif;
+  font-size: 2.8rem; /* Larger, more dominant icon */
+  line-height: 1;
+  color: var(--primary-blue); /* Primary blue color for icon */
+  margin-right: 2rem; /* More space */
+  flex-shrink: 0;
+  transition: transform var(--transition-speed-medium) var(--ease-bezier),
+    color var(--transition-speed-medium) ease-out; /* Smooth, custom ease transition */
 }
 
 .faq-item details[open] summary::before {
-    content: '−';
-    transform: rotate(0deg); /* No rotation needed for minus */
-    color: var(--accent-red); /* Striking red for minus sign when open */
+  content: "−";
+  transform: rotate(0deg); /* No rotation needed for minus */
+  color: var(--accent-red); /* Striking red for minus sign when open */
 }
 
 .faq-answer {
-    padding: 0 2.8rem 2.8rem 2.8rem; /* Generous padding for the answer text */
-    margin: 0;
-    color: var(--text-muted);
-    border-top: 1px solid #f0f4f7; /* Very light, clean separator */
-    font-size: 1.2rem; /* Slightly larger answer text for superior readability */
-    line-height: 1.8;
-    background-color: var(--bg-section); /* Consistent white background for answer content */
+  padding: 0 2.8rem 2.8rem 2.8rem; /* Generous padding for the answer text */
+  margin: 0;
+  color: var(--text-muted);
+  border-top: 1px solid #f0f4f7; /* Very light, clean separator */
+  font-size: 1.2rem; /* Slightly larger answer text for superior readability */
+  line-height: 1.8;
+  background-color: var(
+    --bg-section
+  ); /* Consistent white background for answer content */
 }
 
 .faq-answer p {
-    margin-top: 1.6rem; /* More space above paragraph */
-    margin-bottom: 0;
+  margin-top: 1.6rem; /* More space above paragraph */
+  margin-bottom: 0;
 }
 
 /* Link Styling within answers */
 .text-link {
-    color: var(--primary-blue);
-    text-decoration: none;
-    border-bottom: 2px solid rgba(52, 152, 219, 0.7); /* More prominent, slightly transparent underline */
-    transition: all var(--transition-speed-fast) var(--ease-bezier); /* Smooth, custom ease transition */
-    font-weight: 500;
+  color: var(--primary-blue);
+  text-decoration: none;
+  border-bottom: 2px solid rgba(52, 152, 219, 0.7); /* More prominent, slightly transparent underline */
+  transition: all var(--transition-speed-fast) var(--ease-bezier); /* Smooth, custom ease transition */
+  font-weight: 500;
 }
 
 .text-link:hover {
-    color: var(--dark-blue);
-    border-bottom-color: var(--dark-blue);
-    background-color: rgba(52, 152, 219, 0.15); /* More noticeable, elegant background highlight on hover */
-    border-radius: 8px; /* More rounded highlight */
-    padding: 0 0.5rem; /* More padding for the highlight */
+  color: var(--dark-blue);
+  border-bottom-color: var(--dark-blue);
+  background-color: rgba(
+    52,
+    152,
+    219,
+    0.15
+  ); /* More noticeable, elegant background highlight on hover */
+  border-radius: 8px; /* More rounded highlight */
+  padding: 0 0.5rem; /* More padding for the highlight */
 }
 
 /* FAQ Navigation (Table of Contents for FAQ) */
 .faq-navigation {
-    margin-bottom: 4rem; /* Ample space below the navigation */
-    background-color: var(--bg-section);
-    border-radius: var(--border-radius-section);
-    box-shadow: 0 15px 50px var(--shadow-light); /* Softer shadow for navigation */
-    padding: 2rem 3rem; /* Generous padding */
-    border: 1px solid var(--border-light);
-    text-align: center; /* Center the navigation links */
+  margin-bottom: 4rem; /* Ample space below the navigation */
+  background-color: var(--bg-section);
+  border-radius: var(--border-radius-section);
+  box-shadow: 0 15px 50px var(--shadow-light); /* Softer shadow for navigation */
+  padding: 2rem 3rem; /* Generous padding */
+  border: 1px solid var(--border-light);
+  text-align: center; /* Center the navigation links */
 }
 
 .faq-navigation h2 {
-    color: var(--text-dark);
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
-    font-weight: 600;
+  color: var(--text-dark);
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
 }
 
 .faq-navigation ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex; /* Arrange links horizontally */
-    justify-content: center; /* Center links */
-    flex-wrap: wrap; /* Allow wrapping on smaller screens */
-    gap: 1.5rem 2.5rem; /* More space between links */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex; /* Arrange links horizontally */
+  justify-content: center; /* Center links */
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  gap: 1.5rem 2.5rem; /* More space between links */
 }
 
 .faq-navigation li a {
-    text-decoration: none;
-    color: var(--primary-blue);
-    font-weight: 500;
-    font-size: 1.25rem; /* Larger font size for nav links */
-    padding: 0.8rem 1.8rem; /* Generous padding for clickable area */
-    border: 2px solid var(--primary-blue); /* Clear button-like border */
-    border-radius: 12px; /* Rounded corners for links */
-    transition: all var(--transition-speed-fast) var(--ease-bezier);
-    white-space: nowrap; /* Prevent breaking of links */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
+  text-decoration: none;
+  color: var(--primary-blue);
+  font-weight: 500;
+  font-size: 1.25rem; /* Larger font size for nav links */
+  padding: 0.8rem 1.8rem; /* Generous padding for clickable area */
+  border: 2px solid var(--primary-blue); /* Clear button-like border */
+  border-radius: 12px; /* Rounded corners for links */
+  transition: all var(--transition-speed-fast) var(--ease-bezier);
+  white-space: nowrap; /* Prevent breaking of links */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
 }
 
 .faq-navigation li a:hover,
 .faq-navigation li a:focus {
-    background-color: var(--primary-blue);
-    color: var(--bg-section); /* White text on hover */
-    box-shadow: 0 6px 15px rgba(52, 152, 219, 0.4); /* Enhanced shadow on hover */
-    transform: translateY(-3px); /* Subtle lift */
-    border-color: var(--dark-blue);
+  background-color: var(--primary-blue);
+  color: var(--bg-section); /* White text on hover */
+  box-shadow: 0 6px 15px rgba(52, 152, 219, 0.4); /* Enhanced shadow on hover */
+  transform: translateY(-3px); /* Subtle lift */
+  border-color: var(--dark-blue);
 }
 
 /* Visually hidden utility class for accessibility */
 .visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
 
 /* Section Description Styling */
 .section-description {
-    font-size: 1.25rem; /* Clear, concise description */
-    color: var(--text-muted);
-    text-align: center;
-    max-width: 800px;
-    margin: -2.5rem auto 4.5rem; /* Adjust margin to sit closer to title but maintain separation */
-    line-height: 1.7;
+  font-size: 1.25rem; /* Clear, concise description */
+  color: var(--text-muted);
+  text-align: center;
+  max-width: 800px;
+  margin: -2.5rem auto 4.5rem; /* Adjust margin to sit closer to title but maintain separation */
+  line-height: 1.7;
 }
 
 /* --- Styles for Behavioral Economics Elements --- */
 
 /* General Call to Action Box */
 .call-to-action-box {
-    background-color: var(--call-to-action-bg);
-    color: var(--call-to-action-text);
-    padding: 1.8rem;
-    margin-top: 2rem;
-    border-radius: 16px;
-    border: 1px solid rgba(60, 118, 61, 0.3); /* Subtle border matching text color */
-    text-align: center;
-    font-size: 1.1rem;
-    font-weight: 500;
-    line-height: 1.6;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  background-color: var(--call-to-action-bg);
+  color: var(--call-to-action-text);
+  padding: 1.8rem;
+  margin-top: 2rem;
+  border-radius: 16px;
+  border: 1px solid rgba(60, 118, 61, 0.3); /* Subtle border matching text color */
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 500;
+  line-height: 1.6;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
 }
 
 .call-to-action-box p {
-    margin: 0 0 1rem 0;
+  margin: 0 0 1rem 0;
 }
 
 .call-to-action-box .button-link {
-    display: inline-block;
-    background-color: var(--call-to-action-text); /* Green button */
-    color: #ffffff;
-    padding: 0.8rem 1.8rem;
-    border-radius: 10px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  background-color: var(--call-to-action-text); /* Green button */
+  color: #ffffff;
+  padding: 0.8rem 1.8rem;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .call-to-action-box .button-link:hover {
-    background-color: #2e5c2e; /* Darker green on hover */
-    transform: translateY(-2px);
+  background-color: #2e5c2e; /* Darker green on hover */
+  transform: translateY(-2px);
 }
 
 /* Social Proof Message */
 .social-proof-message {
-    background-color: var(--social-proof-bg);
-    color: var(--social-proof-text);
-    padding: 1.6rem;
-    margin-top: 2rem;
-    border-radius: 16px;
-    border: 1px solid rgba(42, 125, 161, 0.3); /* Subtle border matching text color */
-    text-align: center;
-    font-size: 1.1rem;
-    font-weight: 500;
-    line-height: 1.6;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  background-color: var(--social-proof-bg);
+  color: var(--social-proof-text);
+  padding: 1.6rem;
+  margin-top: 2rem;
+  border-radius: 16px;
+  border: 1px solid rgba(42, 125, 161, 0.3); /* Subtle border matching text color */
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 500;
+  line-height: 1.6;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
 }
 
 .social-proof-message p {
-    margin: 0;
+  margin: 0;
 }
 
 .social-proof-message .highlight-number {
-    font-size: 1.4em; /* Larger number to stand out */
-    font-weight: 800;
-    color: var(--highlight-number-color); /* Striking color for numbers */
-    margin: 0 0.4rem;
-    display: inline-block; /* Ensure it stays together */
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  font-size: 1.4em; /* Larger number to stand out */
+  font-weight: 800;
+  color: var(--highlight-number-color); /* Striking color for numbers */
+  margin: 0 0.4rem;
+  display: inline-block; /* Ensure it stays together */
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 /* Urgency/Scarcity Message */
-.urgency-message, .scarcity-call-to-action {
-    background-color: var(--urgency-bg);
-    color: var(--urgency-text);
-    padding: 1.6rem;
-    margin-top: 2rem;
-    border-radius: 16px;
-    border: 1px solid rgba(214, 104, 0, 0.3); /* Subtle border matching text color */
-    text-align: center;
-    font-size: 1.1rem;
-    font-weight: 600; /* Bolder for urgency */
-    line-height: 1.6;
-    animation: pulse 2s infinite ease-in-out; /* Subtle pulse animation */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+.urgency-message,
+.scarcity-call-to-action {
+  background-color: var(--urgency-bg);
+  color: var(--urgency-text);
+  padding: 1.6rem;
+  margin-top: 2rem;
+  border-radius: 16px;
+  border: 1px solid rgba(214, 104, 0, 0.3); /* Subtle border matching text color */
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600; /* Bolder for urgency */
+  line-height: 1.6;
+  animation: pulse 2s infinite ease-in-out; /* Subtle pulse animation */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
 }
 
-.urgency-message p, .scarcity-call-to-action p {
-    margin: 0;
+.urgency-message p,
+.scarcity-call-to-action p {
+  margin: 0;
 }
 
 /* Pulse animation for urgency/scarcity */
 @keyframes pulse {
-    0% {
-        transform: scale(1);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-    }
-    50% {
-        transform: scale(1.01);
-        box-shadow: 0 7px 20px rgba(0, 0, 0, 0.15);
-    }
-    100% {
-        transform: scale(1);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-    }
+  0% {
+    transform: scale(1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  }
+  50% {
+    transform: scale(1.01);
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.15);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  }
 }
 
 /* --- New Styles for Search Bar (Cognitive Science: Information Foraging) --- */
 .search-faq-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    max-width: 700px; /* Optimal width for readability and usability */
-    margin: 2rem auto 0; /* Centered with some space below */
-    position: relative; /* For positioning clear button */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 700px; /* Optimal width for readability and usability */
+  margin: 2rem auto 0; /* Centered with some space below */
+  position: relative; /* For positioning clear button */
 }
 
 .search-faq-container input[type="text"] {
-    width: 100%;
-    padding: 1.2rem 2rem; /* Generous padding for comfort */
-    border: 2px solid var(--search-border);
-    border-radius: 18px; /* Slightly more rounded than common inputs */
-    font-size: 1.2rem;
-    color: var(--text-dark);
-    background-color: var(--bg-section);
-    transition: all 0.3s var(--ease-bezier);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); /* Subtle shadow */
-    text-align: left; /* For LTR */
-    padding-right: 4rem; /* Space for clear button */
+  width: 100%;
+  padding: 1.2rem 2rem; /* Generous padding for comfort */
+  border: 2px solid var(--search-border);
+  border-radius: 18px; /* Slightly more rounded than common inputs */
+  font-size: 1.2rem;
+  color: var(--text-dark);
+  background-color: var(--bg-section);
+  transition: all 0.3s var(--ease-bezier);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+  text-align: left; /* For LTR */
+  padding-right: 4rem; /* Space for clear button */
 }
 
 .search-faq-container input[type="text"]::placeholder {
-    color: var(--text-muted);
-    opacity: 0.8;
+  color: var(--text-muted);
+  opacity: 0.8;
 }
 
 .search-faq-container input[type="text"]:focus {
-    border-color: var(--primary-blue);
-    box-shadow: 0 0 0 4px var(--search-focus-shadow); /* Clear focus indicator */
-    outline: none;
-    background-color: #ffffff;
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 4px var(--search-focus-shadow); /* Clear focus indicator */
+  outline: none;
+  background-color: #ffffff;
 }
 
 .search-faq-container button#clear-search {
-    position: absolute;
-    right: 1.5rem; /* Position on the right for LTR */
-    background: none;
-    border: none;
-    font-size: 1.8rem; /* Larger icon */
-    color: var(--text-muted);
-    cursor: pointer;
-    padding: 0.5rem;
-    display: none; /* Hidden by default */
-    transition: color 0.2s ease-in-out;
+  position: absolute;
+  right: 1.5rem; /* Position on the right for LTR */
+  background: none;
+  border: none;
+  font-size: 1.8rem; /* Larger icon */
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0.5rem;
+  display: none; /* Hidden by default */
+  transition: color 0.2s ease-in-out;
 }
 
 .search-faq-container button#clear-search:hover {
-    color: var(--accent-red); /* Red on hover for clear */
+  color: var(--accent-red); /* Red on hover for clear */
 }
-
 
 /* Responsive Adjustments (The Ultimate Refinement) */
 @media (max-width: 1100px) {
-    .content-area {
-        padding: 0 2.5rem;
-    }
+  .content-area {
+    padding: 0 2.5rem;
+  }
 }
 
 @media (max-width: 992px) {
-    .page-header h1 {
-        font-size: 3.5rem;
-    }
-    .intro-text {
-        font-size: 1.4rem;
-    }
-    .faq-section {
-        padding: 3.5rem 2.5rem;
-    }
-    .section-title {
-        font-size: 2.8rem;
-    }
-    .section-title::after {
-        width: 100px;
-        height: 7px;
-    }
-    .faq-section:hover .section-title::after {
-        width: 160px;
-    }
-    .faq-item summary {
-        padding: 2rem 2.2rem;
-        font-size: 1.3rem;
-    }
-    .faq-item summary::before {
-        font-size: 2.4rem;
-    }
-    .faq-answer {
-        padding: 0 2.2rem 2.2rem 2.2rem;
-        font-size: 1.15rem;
-    }
-    .faq-navigation ul {
-        gap: 1rem 2rem;
-    }
-    .faq-navigation li a {
-        font-size: 1.15rem;
-        padding: 0.7rem 1.2rem;
-    }
-    .section-description {
-        font-size: 1.15rem;
-        margin: -2rem auto 3.5rem;
-    }
-    /* Behavioral elements responsive */
-    .call-to-action-box, .social-proof-message, .urgency-message, .scarcity-call-to-action {
-        padding: 1.5rem;
-        font-size: 1.05rem;
-    }
-    .search-faq-container input[type="text"] {
-        padding: 1rem 1.8rem;
-        font-size: 1.1rem;
-        padding-right: 3.5rem;
-    }
-    .search-faq-container button#clear-search {
-        right: 1.2rem;
-        font-size: 1.6rem;
-    }
+  .page-header h1 {
+    font-size: 3.5rem;
+  }
+  .intro-text {
+    font-size: 1.4rem;
+  }
+  .faq-section {
+    padding: 3.5rem 2.5rem;
+  }
+  .section-title {
+    font-size: 2.8rem;
+  }
+  .section-title::after {
+    width: 100px;
+    height: 7px;
+  }
+  .faq-section:hover .section-title::after {
+    width: 160px;
+  }
+  .faq-item summary {
+    padding: 2rem 2.2rem;
+    font-size: 1.3rem;
+  }
+  .faq-item summary::before {
+    font-size: 2.4rem;
+  }
+  .faq-answer {
+    padding: 0 2.2rem 2.2rem 2.2rem;
+    font-size: 1.15rem;
+  }
+  .faq-navigation ul {
+    gap: 1rem 2rem;
+  }
+  .faq-navigation li a {
+    font-size: 1.15rem;
+    padding: 0.7rem 1.2rem;
+  }
+  .section-description {
+    font-size: 1.15rem;
+    margin: -2rem auto 3.5rem;
+  }
+  /* Behavioral elements responsive */
+  .call-to-action-box,
+  .social-proof-message,
+  .urgency-message,
+  .scarcity-call-to-action {
+    padding: 1.5rem;
+    font-size: 1.05rem;
+  }
+  .search-faq-container input[type="text"] {
+    padding: 1rem 1.8rem;
+    font-size: 1.1rem;
+    padding-right: 3.5rem;
+  }
+  .search-faq-container button#clear-search {
+    right: 1.2rem;
+    font-size: 1.6rem;
+  }
 }
 
 @media (max-width: 768px) {
-    .content-area {
-        padding: 0 1.5rem;
-    }
-    .page-header {
-        padding: 5rem 1.5rem 3.5rem;
-        border-radius: 0 0 24px 24px;
-    }
-    .page-header h1 {
-        font-size: 2.8rem;
-    }
-    .intro-text {
-        font-size: 1.2rem;
-    }
-    .faq-section {
-        padding: 2.5rem 1.8rem;
-        margin-bottom: 2.5rem;
-        border-radius: var(--border-radius-item); /* Smaller border-radius for smaller screens */
-    }
-    .section-title {
-        font-size: 2.2rem;
-        margin-bottom: 2rem;
-    }
-    .section-title::after {
-        width: 80px;
-        height: 6px;
-    }
-    .faq-section:hover .section-title::after {
-        width: 120px;
-    }
-    .faq-group {
-        gap: 1.5rem; /* Reduced gap for tighter layout on smaller screens */
-    }
-    .faq-item summary {
-        padding: 1.8rem 1.8rem;
-        font-size: 1.15rem;
-    }
-    .faq-item summary::before {
-        font-size: 2.2rem;
-    }
-    .faq-answer {
-        padding: 0 1.8rem 1.8rem 1.8rem;
-        font-size: 1.05rem;
-    }
-    .faq-item {
-        border-radius: 16px;
-    }
-    .faq-navigation {
-        padding: 1.5rem 2rem;
-        margin-bottom: 3rem;
-    }
-    .faq-navigation li a {
-        font-size: 1.05rem;
-        padding: 0.6rem 1rem;
-    }
-    .section-description {
-        font-size: 1.05rem;
-        margin: -1.5rem auto 2.5rem;
-    }
-    /* Behavioral elements responsive */
-    .call-to-action-box, .social-proof-message, .urgency-message, .scarcity-call-to-action {
-        padding: 1.2rem;
-        font-size: 1rem;
-    }
-    .search-faq-container input[type="text"] {
-        padding: 0.9rem 1.5rem;
-        font-size: 1rem;
-        padding-right: 3.2rem;
-    }
-    .search-faq-container button#clear-search {
-        right: 1rem;
-        font-size: 1.4rem;
-    }
+  .content-area {
+    padding: 0 1.5rem;
+  }
+  .page-header {
+    padding: 5rem 1.5rem 3.5rem;
+    border-radius: 0 0 24px 24px;
+  }
+  .page-header h1 {
+    font-size: 2.8rem;
+  }
+  .intro-text {
+    font-size: 1.2rem;
+  }
+  .faq-section {
+    padding: 2.5rem 1.8rem;
+    margin-bottom: 2.5rem;
+    border-radius: var(
+      --border-radius-item
+    ); /* Smaller border-radius for smaller screens */
+  }
+  .section-title {
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+  }
+  .section-title::after {
+    width: 80px;
+    height: 6px;
+  }
+  .faq-section:hover .section-title::after {
+    width: 120px;
+  }
+  .faq-group {
+    gap: 1.5rem; /* Reduced gap for tighter layout on smaller screens */
+  }
+  .faq-item summary {
+    padding: 1.8rem 1.8rem;
+    font-size: 1.15rem;
+  }
+  .faq-item summary::before {
+    font-size: 2.2rem;
+  }
+  .faq-answer {
+    padding: 0 1.8rem 1.8rem 1.8rem;
+    font-size: 1.05rem;
+  }
+  .faq-item {
+    border-radius: 16px;
+  }
+  .faq-navigation {
+    padding: 1.5rem 2rem;
+    margin-bottom: 3rem;
+  }
+  .faq-navigation li a {
+    font-size: 1.05rem;
+    padding: 0.6rem 1rem;
+  }
+  .section-description {
+    font-size: 1.05rem;
+    margin: -1.5rem auto 2.5rem;
+  }
+  /* Behavioral elements responsive */
+  .call-to-action-box,
+  .social-proof-message,
+  .urgency-message,
+  .scarcity-call-to-action {
+    padding: 1.2rem;
+    font-size: 1rem;
+  }
+  .search-faq-container input[type="text"] {
+    padding: 0.9rem 1.5rem;
+    font-size: 1rem;
+    padding-right: 3.2rem;
+  }
+  .search-faq-container button#clear-search {
+    right: 1rem;
+    font-size: 1.4rem;
+  }
 }
 
 @media (max-width: 480px) {
-    .content-area {
-        padding: 0 1rem;
-    }
-    .page-header {
-        padding: 3.5rem 1rem 2.5rem;
-        border-radius: 0 0 18px 18px;
-    }
-    .page-header h1 {
-        font-size: 2.2rem;
-        letter-spacing: -0.03em;
-    }
-    .intro-text {
-        font-size: 1rem;
-    }
-    .faq-section {
-        padding: 2rem 1.2rem;
-        border-radius: 16px;
-        margin-bottom: 2rem;
-    }
-    .section-title {
-        font-size: 1.8rem;
-        margin-bottom: 1.5rem;
-    }
-    .section-title::after {
-        width: 60px;
-        height: 5px;
-    }
-    .faq-section:hover .section-title::after {
-        width: 90px;
-    }
-    .faq-group {
-        gap: 1.5rem;
-    }
-    .faq-item summary {
-        padding: 1.5rem 1.5rem;
-        font-size: 1.05rem;
-    }
-    .faq-item summary::before {
-        font-size: 1.8rem;
-        margin-right: 1rem;
-    }
-    .faq-answer {
-        padding: 0 1.5rem 1.5rem 1.5rem;
-        font-size: 0.95rem;
-    }
-    .faq-item {
-        border-radius: 16px;
-    }
-    .faq-navigation {
-        padding: 1rem 1.5rem;
-        margin-bottom: 2rem;
-    }
-    .faq-navigation ul {
-        flex-direction: column; /* Stack links vertically on very small screens */
-        gap: 1rem;
-    }
-    .faq-navigation li a {
-        font-size: 1rem;
-        padding: 0.5rem 0.8rem;
-        width: 100%; /* Full width for stacked links */
-    }
-    .section-description {
-        font-size: 0.95rem;
-        margin: -1rem auto 2rem;
-    }
-    /* Behavioral elements responsive */
-    .call-to-action-box, .social-proof-message, .urgency-message, .scarcity-call-to-action {
-        padding: 1rem;
-        font-size: 0.95rem;
-    }
-    .social-proof-message .highlight-number {
-        font-size: 1.2em;
-    }
-    .search-faq-container input[type="text"] {
-        padding: 0.8rem 1.2rem;
-        font-size: 0.95rem;
-        padding-right: 2.8rem;
-    }
-    .search-faq-container button#clear-search {
-        right: 0.8rem;
-        font-size: 1.2rem;
-    }
+  .content-area {
+    padding: 0 1rem;
+  }
+  .page-header {
+    padding: 3.5rem 1rem 2.5rem;
+    border-radius: 0 0 18px 18px;
+  }
+  .page-header h1 {
+    font-size: 2.2rem;
+    letter-spacing: -0.03em;
+  }
+  .intro-text {
+    font-size: 1rem;
+  }
+  .faq-section {
+    padding: 2rem 1.2rem;
+    border-radius: 16px;
+    margin-bottom: 2rem;
+  }
+  .section-title {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+  .section-title::after {
+    width: 60px;
+    height: 5px;
+  }
+  .faq-section:hover .section-title::after {
+    width: 90px;
+  }
+  .faq-group {
+    gap: 1.5rem;
+  }
+  .faq-item summary {
+    padding: 1.5rem 1.5rem;
+    font-size: 1.05rem;
+  }
+  .faq-item summary::before {
+    font-size: 1.8rem;
+    margin-right: 1rem;
+  }
+  .faq-answer {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+    font-size: 0.95rem;
+  }
+  .faq-item {
+    border-radius: 16px;
+  }
+  .faq-navigation {
+    padding: 1rem 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .faq-navigation ul {
+    flex-direction: column; /* Stack links vertically on very small screens */
+    gap: 1rem;
+  }
+  .faq-navigation li a {
+    font-size: 1rem;
+    padding: 0.5rem 0.8rem;
+    width: 100%; /* Full width for stacked links */
+  }
+  .section-description {
+    font-size: 0.95rem;
+    margin: -1rem auto 2rem;
+  }
+  /* Behavioral elements responsive */
+  .call-to-action-box,
+  .social-proof-message,
+  .urgency-message,
+  .scarcity-call-to-action {
+    padding: 1rem;
+    font-size: 0.95rem;
+  }
+  .social-proof-message .highlight-number {
+    font-size: 1.2em;
+  }
+  .search-faq-container input[type="text"] {
+    padding: 0.8rem 1.2rem;
+    font-size: 0.95rem;
+    padding-right: 2.8rem;
+  }
+  .search-faq-container button#clear-search {
+    right: 0.8rem;
+    font-size: 1.2rem;
+  }
 }
