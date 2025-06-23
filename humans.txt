@@ -8,4 +8,4 @@ Email: contact@rasoulunlimited.ir
 Location: Karaj, Iran
 
 /* THANKS */
-Tools: Visual Studio Code, Figma, Python, C, HTML/CSS, Git
+Tools: Visual Studio Code, Figma, Python, C, HTML/CSS, Git, Node.js, GitHub Pages, Cloudflare
