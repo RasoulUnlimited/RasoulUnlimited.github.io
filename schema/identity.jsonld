@@ -363,7 +363,9 @@
           "English"
         ]
       },
-      "dateModified": "2025-06-15"
+      "publishingPrinciples": "https://rasoulunlimited.ir/proof.html",
+      "correctionsPolicy": "https://rasoulunlimited.ir/security.html",
+      "dateModified": "2025-06-24"
     },
     {
       "@type": "Organization",
@@ -424,7 +426,9 @@
           "Persian",
           "English"
         ]
-      }
+      },
+      "publishingPrinciples": "https://rasoulunlimited.ir/proof.html",
+      "correctionsPolicy": "https://rasoulunlimited.ir/security.html"
     },
     {
       "@type": "WebSite",
@@ -446,7 +450,7 @@
           "@id": "https://rasoulunlimited.ir/#organization"
         }
       ],
-      "dateModified": "2025-06-15"
+      "dateModified": "2025-06-24"
     }
   ]
 }
