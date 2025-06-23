@@ -91,6 +91,34 @@
         <priority>0.6</priority>
     </url>
     <url>
+        <loc>https://rasoulunlimited.ir/faq/</loc>
+        <lastmod>2025-06-03</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+        <xhtml:link
+            rel="alternate"
+            hreflang="en-US"
+            href="https://rasoulunlimited.ir/en/faq/" />
+        <xhtml:link
+            rel="alternate"
+            hreflang="fa-IR"
+            href="https://rasoulunlimited.ir/faq/" />
+    </url>
+    <url>
+        <loc>https://rasoulunlimited.ir/en/faq/</loc>
+        <lastmod>2025-06-03</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+        <xhtml:link
+            rel="alternate"
+            hreflang="fa-IR"
+            href="https://rasoulunlimited.ir/faq/" />
+        <xhtml:link
+            rel="alternate"
+            hreflang="en-US"
+            href="https://rasoulunlimited.ir/en/faq/" />
+    </url>
+    <url>
         <loc>https://rasoulunlimited.ir/contact.html</loc>
         <lastmod>2025-06-03</lastmod>
         <changefreq>yearly</changefreq>
