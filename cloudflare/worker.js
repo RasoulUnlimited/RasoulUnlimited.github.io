@@ -10,11 +10,26 @@ export default {
         return response;
       }
   
-      const headers = new Headers(response.headers);
-      headers.set("X-Crawler-Handled", "true");
-  
-      if (headers.get("content-type")?.includes("text/html")) {
-        const crawlerScript = `<script nonce="RasoulCSP" type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Mohammad Rasoul Sohrabi","url":"https://rasoulunlimited.ir"}</script>`;
+      const contentType = response.headers.get("content-type") || "";
+      if (isCrawler && contentType.includes("text/html")) {
+        const headers = new Headers(response.headers);
+        headers.set("X-Crawler-Handled", "true");
+        const payload = {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Person",
+              "name": "Mohammad Rasoul Sohrabi",
+              "url": "https://rasoulunlimited.ir"
+            },
+            {
+              "@type": "WebSite",
+              "name": "Rasoul Unlimited",
+              "url": "https://rasoulunlimited.ir"
+            }
+          ]
+        };
+        const crawlerScript = `<script nonce="RasoulCSP" type="application/ld+json">${JSON.stringify(payload)}</script>`;
         const html = (await response.text()).replace("</head>", `${crawlerScript}</head>`);
         return new Response(html, {
           status: response.status,
@@ -23,11 +38,7 @@ export default {
         });
       }
   
-      return new Response(response.body, {
-        status: response.status,
-        statusText: response.statusText,
-        headers,
-      });
+      return response;
     },
   };
   

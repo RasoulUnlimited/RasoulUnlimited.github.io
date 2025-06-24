@@ -45,5 +45,7 @@ Sitemap: https://rasoulunlimited.ir/sitemap.xml
 # FOAF: Machine-readable social relationships → /foaf.rdf
 # humans.txt: Developer credit and site purpose → /humans.txt
 # identity.json / .well-known/: Decentralized identity or WebID
+# entity.rdf and entity.ttl: RDF/Turtle Person schema → /.well-known/
 # schema.jsonld: Linked data for Google Knowledge Graph
 # security.txt: Responsible disclosure policy → /.well-known/security.txt
+# links.txt: Quick reference to key URLs → /links.txt
