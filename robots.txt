@@ -9,6 +9,7 @@ Allow: /projects/
 Allow: /projects/c-projects/
 Allow: /projects/python-projects/
 Allow: /contact.html
+Allow: /press-kit/
 Allow: /assets/css/
 Allow: /assets/images/
 Allow: /assets/js/
