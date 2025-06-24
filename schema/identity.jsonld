@@ -346,8 +346,8 @@
       ],
       "mainEntityOfPage": {
         "@type": "ProfilePage",
-        "@id": "https://rasoulunlimited.ir",
-        "url": "https://rasoulunlimited.ir",
+        "@id": "https://rasoulunlimited.ir/about.html",
+        "url": "https://rasoulunlimited.ir/about.html",
         "name": "صفحه رسمی محمد رسول سهرابی (Rasoul Unlimited)"
       },
       "contactPoint": {

@@ -17,6 +17,17 @@ The `build` script compiles and minifies static assets using Gulp.
 ## Deployment notes
 The site is hosted on **GitHub Pages** and served through **Cloudflare** for improved performance and security. Update the `CNAME` file when changing the custom domain.
 
+## Cloudflare Worker
+A small Worker inspects the `User-Agent` header of each request. When a request
+comes from **Googlebot**, **Twitterbot**, or **Facebook**, the Worker injects a
+secondary JSON‑LD snippet and adds an `X-Crawler-Handled` header to the response.
+
+### Deployment
+1. Open the Cloudflare dashboard and create a new **Worker**.
+2. Copy the code from [`cloudflare/worker.js`](cloudflare/worker.js) into the editor.
+3. Assign the Worker to your GitHub Pages domain and deploy.
+
+
 ## Structured data and profiles
 - [`foaf.rdf`](foaf.rdf) – FOAF profile in RDF
 - [`manifest.json`](manifest.json) – Web app manifest
