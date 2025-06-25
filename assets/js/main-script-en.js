@@ -61,6 +61,11 @@ function debounce(func, delay) {
 let audioContext;
 let clickBuffer;
 let toastBuffer;
+const prefersReducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+let prefersReducedMotion = prefersReducedMotionQuery.matches;
+prefersReducedMotionQuery.addEventListener("change", (e) => {
+  prefersReducedMotion = e.matches;
+});
 
 /**
  * Creates a short, sharp click sound using Web Audio API.
@@ -150,6 +155,7 @@ function playSound(type) {
  * @param {number[]} pattern An array of numbers that describes a vibration pattern.
  */
 function triggerHapticFeedback(pattern = [50]) {
+  if (prefersReducedMotion) return;
   if (navigator.vibrate) {
     navigator.vibrate(pattern);
   }
@@ -437,7 +443,9 @@ function applyTheme(theme, showToast = false) {
         duration: 2800,
       }
     );
-    createSparkle(themeToggleInput.parentElement); // Add a sparkle effect to the toggle
+    if (!prefersReducedMotion) {
+      createSparkle(themeToggleInput.parentElement); // Add a sparkle effect to the toggle
+    }
     triggerHapticFeedback([30]); // Short haptic feedback
   }
 }
@@ -663,7 +671,9 @@ const heroObserver = new IntersectionObserver(
               "opacity 0.5s ease-out, transform 0.5s ease-out";
             exploreHint.style.opacity = "1";
             exploreHint.style.transform = "translateY(0)";
-            exploreHint.classList.add("pulse-animation"); // Add pulse animation
+            if (!prefersReducedMotion) {
+              exploreHint.classList.add("pulse-animation"); // Add pulse animation
+            }
             hintVisible = true;
           }, 4000); // Show after 4 seconds
         }
@@ -836,7 +846,9 @@ if (faqContainer) {
 
       // Add click animation and sparkle
       summary.classList.add("faq-summary-clicked");
-      createSparkle(summary);
+      if (!prefersReducedMotion) {
+        exploreHint.classList.add("pulse-animation"); // Add pulse animation
+      }
       setTimeout(() => {
         summary.classList.remove("faq-summary-clicked");
       }, 300);
@@ -1292,6 +1304,26 @@ function showFunFact() {
  * @param {HTMLElement} element The element around which sparkles will appear.
  */
 function createSparkle(element) {
+  if (prefersReducedMotion) {
+    const fade = document.createElement("div");
+    fade.className = "sparkle-effect";
+    fade.style.width = "6px";
+    fade.style.height = "6px";
+    fade.style.left = "50%";
+    fade.style.top = "50%";
+    fade.style.position = "absolute";
+    fade.style.borderRadius = "50%";
+    fade.style.backgroundColor = "var(--highlight-color)";
+    fade.style.opacity = 0;
+    element.style.position = "relative";
+    element.appendChild(fade);
+    fade.animate([
+      { opacity: 0 },
+      { opacity: 1 },
+      { opacity: 0 },
+    ], { duration: 400, easing: "linear" }).onfinish = () => fade.remove();
+    return;
+  }
   const sparkle = document.createElement("div");
   sparkle.className = "sparkle-effect";
   sparkle.setAttribute(
@@ -1352,8 +1384,10 @@ featuredCards.forEach((card) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           // Trigger multiple sparkles
-          for (let i = 0; i < 3; i++) {
-            setTimeout(() => createSparkle(entry.target), i * 150);
+          if (!prefersReducedMotion) {
+            for (let i = 0; i < 3; i++) {
+              setTimeout(() => createSparkle(entry.target), i * 150);
+            }
           }
           featuredCardObserver.unobserve(entry.target); // Stop observing after first intersection
         }
