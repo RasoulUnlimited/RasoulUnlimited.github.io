@@ -783,3 +783,20 @@ body {
   box-shadow: 0 3px 8px var(--shadow-light);
   font-weight: 500;
 }
+
+/* Link to English FAQ */
+.language-note {
+  text-align: center;
+  margin: 1rem 0 2rem;
+  font-size: 0.95rem;
+}
+
+.language-note a {
+  color: var(--primary-blue);
+  text-decoration: none;
+}
+
+.language-note a:hover,
+.language-note a:focus {
+  text-decoration: underline;
+}

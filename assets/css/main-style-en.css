@@ -1813,3 +1813,7 @@ section h2::after {
     min-height: 280px;
   }
 }
+
+/* Credential list styles */
+.credential-item{display:flex;align-items:center;gap:var(--space-xs);}
+.credential-item img{width:24px;height:24px;}
