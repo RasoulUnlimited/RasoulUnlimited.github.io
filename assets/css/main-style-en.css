@@ -144,8 +144,8 @@ input:checked + .slider {
   background-color: var(--primary-color);
 }
 
-input:focus + .slider {
-  box-shadow: 0 0 1px var(--primary-color);
+input:focus-visible + .slider {
+  box-shadow: 0 0 0 3px var(--accent-color), 0 0 0 6px var(--shadow-color-light);
 }
 
 input:checked + .slider:before {
@@ -247,6 +247,29 @@ textarea:focus-visible {
   box-shadow: 0 0 0 4px var(--shadow-color-light);
   z-index: 10;
   position: relative;
+}
+a.skip-link {
+  position: absolute;
+  left: -999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+a.skip-link:focus,
+a.skip-link:focus-visible {
+  left: var(--space-sm);
+  top: var(--space-sm);
+  width: auto;
+  height: auto;
+  clip: auto;
+  padding: var(--space-xs) var(--space-sm);
+  background-color: var(--accent-color);
+  color: #fff;
+  border-radius: var(--border-radius-sm);
+  text-decoration: none;
+  z-index: 1000;
 }
 a:focus:not(:focus-visible),
 button:focus:not(:focus-visible),
@@ -370,6 +393,14 @@ textarea:focus:not(:focus-visible) {
 
 .navbar nav a:hover::after,
 .navbar nav a:focus-visible::after {
+  width: 100%;
+}
+
+.navbar nav .active {
+  color: var(--primary-color);
+}
+
+.navbar nav .active::after {
   width: 100%;
 }
 

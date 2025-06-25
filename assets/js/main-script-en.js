@@ -430,6 +430,10 @@ function createToast(message, options = {}) {
 }
 
 const themeToggleInput = document.getElementById("theme-toggle");
+const toggleLabelText =
+  document.querySelector(".theme-switch")?.getAttribute("aria-label") ||
+  "Toggle website theme";
+themeToggleInput.setAttribute("aria-label", toggleLabelText);
 const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 const savedTheme = localStorage.getItem("theme");
 
@@ -475,6 +479,16 @@ themeToggleInput.addEventListener("change", () => {
   const newTheme = themeToggleInput.checked ? "dark" : "light";
   applyTheme(newTheme, true); // Apply theme and show toast
   localStorage.setItem("theme", newTheme); // Save theme preference
+});
+
+themeToggleInput.addEventListener("keydown", (event) => {
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    themeToggleInput.checked = !themeToggleInput.checked;
+    const newTheme = themeToggleInput.checked ? "dark" : "light";
+    applyTheme(newTheme, true);
+    localStorage.setItem("theme", newTheme);
+  }
 });
 
 // Smooth scrolling for anchor links within the page

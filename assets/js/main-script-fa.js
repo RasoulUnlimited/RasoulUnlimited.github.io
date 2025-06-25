@@ -337,6 +337,10 @@ function createToast(message, options = {}) {
 }
 
 const themeToggleInput = document.getElementById("theme-toggle");
+const toggleLabelText =
+  document.querySelector(".theme-switch")?.getAttribute("aria-label") ||
+  "تغییر تم سایت";
+themeToggleInput.setAttribute("aria-label", toggleLabelText);
 const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 const savedTheme = localStorage.getItem("theme");
 
@@ -372,6 +376,16 @@ themeToggleInput.addEventListener("change", () => {
   const newTheme = themeToggleInput.checked ? "dark" : "light";
   applyTheme(newTheme, true);
   localStorage.setItem("theme", newTheme);
+});
+
+themeToggleInput.addEventListener("keydown", (event) => {
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    themeToggleInput.checked = !themeToggleInput.checked;
+    const newTheme = themeToggleInput.checked ? "dark" : "light";
+    applyTheme(newTheme, true);
+    localStorage.setItem("theme", newTheme);
+  }
 });
 
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
