@@ -750,3 +750,36 @@ body {
     font-size: 1.2rem;
   }
 }
+
+/* Footer for FAQ pages */
+.faq-footer {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  border-top: 1px solid var(--border-light);
+  background-color: var(--bg-section);
+  font-size: 1rem;
+  margin-top: 4rem;
+}
+
+.faq-footer a {
+  color: var(--primary-blue);
+  margin: 0 0.5rem;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.faq-footer a:hover,
+.faq-footer a:focus {
+  text-decoration: underline;
+}
+
+/* Highlight box for notable answers */
+.highlight-box {
+  background-color: var(--bg-summary-open);
+  border-left: 4px solid var(--primary-blue);
+  padding: 1rem 1.5rem;
+  margin-top: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 3px 8px var(--shadow-light);
+  font-weight: 500;
+}

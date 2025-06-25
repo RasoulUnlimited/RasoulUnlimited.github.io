@@ -451,6 +451,42 @@
         }
       ],
       "dateModified": "2025-06-24"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://rasoulunlimited.ir/press.html",
+      "name": "Press & Media – Rasoul Unlimited",
+      "url": "https://rasoulunlimited.ir/press.html",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://rasoulunlimited.ir/press.html",
+        "url": "https://rasoulunlimited.ir/press.html"
+      },
+      "dateModified": "2025-06-24"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://rasoulunlimited.ir/proof.html",
+      "name": "Verifiable Credentials & DOIs – Rasoul Unlimited",
+      "url": "https://rasoulunlimited.ir/proof.html",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://rasoulunlimited.ir/proof.html",
+        "url": "https://rasoulunlimited.ir/proof.html"
+      },
+      "dateModified": "2025-06-24"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://rasoulunlimited.ir/faq/",
+      "name": "Frequently Asked Questions – Rasoul Unlimited",
+      "url": "https://rasoulunlimited.ir/faq/",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://rasoulunlimited.ir/faq/",
+        "url": "https://rasoulunlimited.ir/faq/"
+      },
+      "dateModified": "2025-06-24"
     }
   ]
 }
