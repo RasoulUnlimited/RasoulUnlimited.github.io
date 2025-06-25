@@ -213,6 +213,9 @@ document.addEventListener("DOMContentLoaded", () => {
     { name: "ORCID", url: "https://orcid.org/0009-0004-7177-2080" },
   ];
 
+  // Configuration flag for identity pings
+  window.enableIdentityPings = window.enableIdentityPings || false;
+
   /**
    * Sends a silent fetch request to an external URL to mimic identity verification.
    * Uses `no-cors` mode to avoid CORS issues for cross-origin pings.
@@ -237,12 +240,24 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Use requestIdleCallback for background pings if available, otherwise fallback to setTimeout on load
-  if ("requestIdleCallback" in window) {
-    requestIdleCallback(queuePings, { timeout: 3000 });
-  } else {
-    window.addEventListener("load", () => setTimeout(queuePings, 2000));
+
+  // Only run identity pings after user interaction and if explicitly enabled
+  let identityPingsStarted = false;
+  function startIdentityPings() {
+    if (identityPingsStarted || !window.enableIdentityPings) return;
+    identityPingsStarted = true;
+    ["click", "keydown"].forEach((evt) =>
+      window.removeEventListener(evt, startIdentityPings)
+    );
+    if ("requestIdleCallback" in window) {
+      requestIdleCallback(queuePings, { timeout: 3000 });
+    } else {
+      setTimeout(queuePings, 2000);
+    }
   }
+  ["click", "keydown"].forEach((evt) =>
+    window.addEventListener(evt, startIdentityPings)
+  );
 });
 
 // Initialize AOS (Animate On Scroll) library with specified settings.

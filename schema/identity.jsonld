@@ -487,6 +487,44 @@
         "url": "https://rasoulunlimited.ir/faq/"
       },
       "dateModified": "2025-06-24"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://rasoulunlimited.ir/press-kit/",
+      "name": "Press Kit – Rasoul Unlimited",
+      "url": "https://rasoulunlimited.ir/press-kit/",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://rasoulunlimited.ir/press-kit/",
+        "url": "https://rasoulunlimited.ir/press-kit/"
+      },
+      "dateModified": "2025-06-24"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://rasoulunlimited.ir/contact.html",
+      "name": "Contact – Rasoul Unlimited",
+      "url": "https://rasoulunlimited.ir/contact.html",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://rasoulunlimited.ir/contact.html",
+        "url": "https://rasoulunlimited.ir/contact.html"
+      },
+      "dateModified": "2025-06-24"
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://rasoulunlimited.ir/#page-sequence",
+      "name": "Page Navigation Sequence",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "url": "https://rasoulunlimited.ir/about.html"},
+        {"@type": "ListItem", "position": 2, "url": "https://rasoulunlimited.ir/proof.html"},
+        {"@type": "ListItem", "position": 3, "url": "https://rasoulunlimited.ir/press.html"},
+        {"@type": "ListItem", "position": 4, "url": "https://rasoulunlimited.ir/faq/"},
+        {"@type": "ListItem", "position": 5, "url": "https://rasoulunlimited.ir/en/faq/"},
+        {"@type": "ListItem", "position": 6, "url": "https://rasoulunlimited.ir/about.html"}
+      ],
+      "description": "Navigation loop across main pages. Hosted on GitHub Pages with Cloudflare."
     }
   ]
 }
