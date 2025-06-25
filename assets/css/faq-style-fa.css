@@ -240,6 +240,15 @@ body {
     color var(--transition-speed-medium) ease-out; /* Smooth, custom ease transition */
 }
 
+/* Icon displayed before each question text */
+.faq-item summary .faq-icon {
+  width: 1.4rem;
+  height: 1.4rem;
+  margin-left: 1rem;
+  fill: var(--primary-blue);
+  flex-shrink: 0;
+}
+
 .faq-item details[open] summary::before {
   content: "−";
   transform: rotate(0deg); /* No rotation needed for minus */

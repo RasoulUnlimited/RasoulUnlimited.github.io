@@ -1817,3 +1817,81 @@ section h2::after {
 /* Credential list styles */
 .credential-item{display:flex;align-items:center;gap:var(--space-xs);}
 .credential-item img{width:24px;height:24px;}
+
+/* Credential cards grid */
+.credential-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-lg);
+  margin: var(--space-lg) 0;
+  padding: 0;
+  list-style: none;
+}
+
+.credential-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  padding: var(--space-md);
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  grid-template-rows: auto auto;
+  align-items: center;
+  column-gap: var(--space-md);
+  row-gap: var(--space-xs);
+  box-shadow: 0 2px 6px var(--shadow-color-light);
+  transition: transform var(--transition-duration-medium) var(--transition-easing-standard),
+    box-shadow var(--transition-duration-medium) var(--transition-easing-standard);
+}
+
+.credential-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px var(--shadow-color-medium);
+}
+
+.credential-card img {
+  width: 48px;
+  height: 48px;
+  grid-row: span 2;
+}
+
+.credential-card h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--secondary-color);
+}
+
+.credential-card p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--text-color);
+}
+
+.credential-card a {
+  color: var(--accent-color);
+  text-decoration: none;
+}
+
+.credential-card a:hover {
+  text-decoration: underline;
+}
+
+/* Press card styles */
+.press-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  transition: box-shadow var(--transition-duration-short) var(--transition-easing-standard);
+}
+.press-card:hover {
+  box-shadow: 0 4px 12px var(--shadow-color-medium);
+}
+.press-card img {
+  width: 48px;
+  height: 48px;
+}

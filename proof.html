@@ -90,30 +90,33 @@
     <link rel="entity-profile" href="/.well-known/entity-profile.json" />
   </head>
   <body>
+    <div data-include-html="includes/header.html"></div>
     <h1>Verifiable Credentials & DOIs</h1>
     <p data-person="rasoul-unlimited">This page lists official DOIs and certificates that verify Rasoul's contributions. You can use these references for citation or background checks.</p>
     <p>Each DOI provides a permanent reference for work that has been publicly archived. They ensure long-term discoverability and recognition of Rasoul's projects.</p>
-    <ul class="credential-list">
-      <li>
-        <article class="credential-item" itemscope itemtype="https://schema.org/CreativeWork">
-          <img src="assets/images/zenodo-badge.svg" alt="Zenodo logo" width="24" height="24" loading="lazy" />
-          <a itemprop="identifier" href="projects/c-projects/">DOI: Small Projects with C</a>
-        </article>
-      </li>
-      <li>
-        <article class="credential-item" itemscope itemtype="https://schema.org/CreativeWork">
-          <img src="assets/images/zenodo-badge.svg" alt="Zenodo logo" width="24" height="24" loading="lazy" />
-          <a itemprop="identifier" href="projects/python-projects/">DOI: Small Projects with Python</a>
-        </article>
-      </li>
-      <li>
-        <article class="credential-item" itemscope itemtype="https://schema.org/CreativeWork">
-          <img src="assets/images/certificate-badge.svg" alt="Certificate badge" width="24" height="24" loading="lazy" />
-          <a itemprop="identifier" href="https://vrgl.ir/9D6Hy" target="_blank">Official Discord Bot Verification Certificate</a>
-        </article>
-      </li>
-    </ul>
+    <div class="credential-grid">
+      <div class="credential-card" itemscope itemtype="https://schema.org/CreativeWork">
+        <img src="assets/images/zenodo-badge.svg" alt="Zenodo logo" width="48" height="48" loading="lazy" />
+        <h3 itemprop="name">Small Projects with C</h3>
+        <p class="credential-summary">Open-source C projects from Tehran Azad University.</p>
+        <a itemprop="identifier" href="projects/c-projects/">View DOI</a>
+      </div>
+      <div class="credential-card" itemscope itemtype="https://schema.org/CreativeWork">
+        <img src="assets/images/zenodo-badge.svg" alt="Zenodo logo" width="48" height="48" loading="lazy" />
+        <h3 itemprop="name">Small Projects with Python</h3>
+        <p class="credential-summary">Collection of Python exercises from Sahand University of Technology.</p>
+        <a itemprop="identifier" href="projects/python-projects/">View DOI</a>
+      </div>
+      <div class="credential-card" itemscope itemtype="https://schema.org/CreativeWork">
+        <img src="assets/images/certificate-badge.svg" alt="Certificate badge" width="48" height="48" loading="lazy" />
+        <h3 itemprop="name">Discord Bot Verification</h3>
+        <p class="credential-summary">Official certificate confirming Rasoul's Discord bot.</p>
+        <a itemprop="identifier" href="https://vrgl.ir/9D6Hy" target="_blank" rel="noopener">View Certificate</a>
+      </div>
+    </div>
     <p><a href="press.html">Press</a> | <a href="contact.html">Contact</a></p>
     <p>Learn more <a href="about.html">about Rasoul</a> or explore the <a href="press.html">press kit</a>.</p>
+    <div data-include-html="includes/footer.html"></div>
+    <script src="assets/js/include.min.js" defer></script>
   </body>
 </html>
