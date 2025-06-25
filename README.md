@@ -36,3 +36,6 @@ secondary JSON‑LD snippet and adds an `X-Crawler-Handled` header to the respon
 - [`humans.txt`](humans.txt) – Project and contact details
 
 Additional identity links: [GitHub](https://github.com/RasoulUnlimited), [ORCID](https://orcid.org/0009-0004-7177-2080), [LinkedIn](https://www.linkedin.com/in/rasoulunlimited).
+
+## License
+All content is provided under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License](https://creativecommons.org/licenses/by-nc-nd/4.0/). See the [LICENSE](LICENSE) file for details.
