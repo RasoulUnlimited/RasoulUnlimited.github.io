@@ -37,6 +37,12 @@ function debounce(func, delay) {
 let audioContext;
 let clickBuffer;
 let toastBuffer;
+const prefersReducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+let prefersReducedMotion = prefersReducedMotionQuery.matches;
+prefersReducedMotionQuery.addEventListener("change", (e) => {
+  prefersReducedMotion = e.matches;
+  handleMotionPreference();
+});
 
 function createClickSound() {
   const duration = 0.05;
@@ -102,8 +108,39 @@ function playSound(type) {
 }
 
 function triggerHapticFeedback(pattern = [50]) {
+  if (prefersReducedMotion) return;
   if (navigator.vibrate) {
     navigator.vibrate(pattern);
+  }
+}
+
+function handleMotionPreference() {
+  if (prefersReducedMotion) {
+    document.querySelectorAll('[data-aos]').forEach((el) => {
+      Array.from(el.attributes).forEach((attr) => {
+        if (attr.name.startsWith('data-aos')) {
+          el.removeAttribute(attr.name);
+        }
+      });
+      el.classList.remove('aos-init', 'aos-animate');
+    });
+  } else if (window.AOS && typeof AOS.init === 'function') {
+    AOS.init({
+      disable: false,
+      startEvent: 'DOMContentLoaded',
+      initClassName: 'aos-init',
+      animatedClassName: 'aos-animate',
+      useClassNames: false,
+      disableMutationObserver: false,
+      debounceDelay: 50,
+      throttleDelay: 99,
+      offset: 120,
+      duration: 600,
+      easing: 'ease-out',
+      once: false,
+      mirror: false,
+      anchorPlacement: 'top-bottom',
+    });
   }
 }
 
@@ -186,22 +223,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-AOS.init({
-  disable: false,
-  startEvent: "DOMContentLoaded",
-  initClassName: "aos-init",
-  animatedClassName: "aos-animate",
-  useClassNames: false,
-  disableMutationObserver: false,
-  debounceDelay: 50,
-  throttleDelay: 99,
-  offset: 120,
-  duration: 600,
-  easing: "ease-out",
-  once: false,
-  mirror: false,
-  anchorPlacement: "top-bottom",
-});
+document.addEventListener("DOMContentLoaded", handleMotionPreference);
 
 function createToast(message, options = {}) {
   const defaultOptions = {

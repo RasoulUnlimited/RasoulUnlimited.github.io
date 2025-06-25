@@ -65,6 +65,7 @@ const prefersReducedMotionQuery = window.matchMedia("(prefers-reduced-motion: re
 let prefersReducedMotion = prefersReducedMotionQuery.matches;
 prefersReducedMotionQuery.addEventListener("change", (e) => {
   prefersReducedMotion = e.matches;
+  handleMotionPreference();
 });
 
 /**
@@ -158,6 +159,36 @@ function triggerHapticFeedback(pattern = [50]) {
   if (prefersReducedMotion) return;
   if (navigator.vibrate) {
     navigator.vibrate(pattern);
+  }
+}
+
+function handleMotionPreference() {
+  if (prefersReducedMotion) {
+    document.querySelectorAll('[data-aos]').forEach((el) => {
+      Array.from(el.attributes).forEach((attr) => {
+        if (attr.name.startsWith('data-aos')) {
+          el.removeAttribute(attr.name);
+        }
+      });
+      el.classList.remove('aos-init', 'aos-animate');
+    });
+  } else if (window.AOS && typeof AOS.init === 'function') {
+    AOS.init({
+      disable: false,
+      startEvent: 'DOMContentLoaded',
+      initClassName: 'aos-init',
+      animatedClassName: 'aos-animate',
+      useClassNames: false,
+      disableMutationObserver: false,
+      debounceDelay: 50,
+      throttleDelay: 99,
+      offset: 120,
+      duration: 600,
+      easing: 'ease-out',
+      once: false,
+      mirror: false,
+      anchorPlacement: 'top-bottom',
+    });
   }
 }
 
@@ -266,24 +297,8 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 });
 
-// Initialize AOS (Animate On Scroll) library with specified settings.
-// These settings control how animations appear as elements scroll into view.
-AOS.init({
-  disable: false, // Enables AOS animations
-  startEvent: "DOMContentLoaded", // Event that triggers AOS initialization
-  initClassName: "aos-init", // Class applied to elements before animation
-  animatedClassName: "aos-animate", // Class applied when element is animating
-  useClassNames: false, // Whether to add the `animatedClassName` on scroll
-  disableMutationObserver: false, // Disables mutation observer (for performance if not needed)
-  debounceDelay: 50, // Delay for debouncing scroll event
-  throttleDelay: 99, // Delay for throttling scroll event
-  offset: 120, // Offset (in px) from the top of the screen to trigger animations
-  duration: 600, // Duration of the animation (in ms)
-  easing: "ease-out", // Easing function for the animation
-  once: false, // Whether animation should only happen once
-  mirror: false, // Whether elements should animate out while scrolling past them
-  anchorPlacement: "top-bottom", // Defines which position of the element should trigger the animation
-});
+// Initialize or disable animations based on user preference
+document.addEventListener("DOMContentLoaded", handleMotionPreference);
 
 /**
  * Creates and displays a dynamic toast notification.
