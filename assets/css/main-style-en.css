@@ -325,6 +325,15 @@ textarea:focus:not(:focus-visible) {
       var(--transition-easing-standard);
 }
 
+.navbar nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .navbar nav a {
   color: var(--secondary-color);
   text-decoration: none;
@@ -1464,14 +1473,16 @@ section h2::after {
     flex-wrap: wrap;
   }
 
-  .navbar nav {
+  .navbar nav ul {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     width: 100%;
     gap: var(--space-xxs) var(--space-xs);
-    margin: 0 auto;
   }
 
   .navbar nav a {
