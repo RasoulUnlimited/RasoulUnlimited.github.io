@@ -14,6 +14,9 @@ export default {
       if (isCrawler && contentType.includes("text/html")) {
         const headers = new Headers(response.headers);
         headers.set("X-Crawler-Handled", "true");
+        const cacheControl =
+          response.headers.get("cache-control") || "public, max-age=600";
+        headers.set("cache-control", cacheControl);
         const payload = {
           "@context": "https://schema.org",
           "@graph": [

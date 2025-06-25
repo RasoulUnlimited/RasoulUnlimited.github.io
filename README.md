@@ -5,11 +5,13 @@ A minimal personal site for Mohammad Rasoul Sohrabi (Rasoul Unlimited) built wit
 
 ## Prerequisites
 - **Node.js** 18 or later
-- **Gulp** 5 (installed via `npm`)
+- **Gulp** 5 (requires the CLI; install with `npm install gulp-cli` or run via `npx gulp`)
 
 ## Build instructions
 ```bash
 npm install
+# optional: install Gulp CLI if you want the `gulp` command
+npm install gulp-cli
 npm run build
 ```
 The `build` script compiles and minifies static assets using Gulp.

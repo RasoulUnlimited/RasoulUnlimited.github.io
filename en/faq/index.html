@@ -161,6 +161,18 @@
     <link rel="entity-profile" href="/.well-known/entity-profile.json" />
   </head>
   <body>
+    <noscript>
+      <header class="navbar" role="banner">
+        <nav role="navigation" aria-label="Main site links">
+          <a href="/index.html">Home</a>
+          <a href="/about.html">About</a>
+          <a href="/proof.html">Proof</a>
+          <a href="/press.html">Press</a>
+          <a href="/faq/">FAQ</a>
+          <a href="/contact.html">Contact</a>
+        </nav>
+      </header>
+    </noscript>
     <div data-include-html="../../includes/header.html"></div>
     <header class="page-header content-area">
       <h1>
@@ -600,6 +612,11 @@
   
         <p class="cta"><a href="/proof.html">See the verified credentials &rarr;</a></p>
 
+        <noscript>
+          <footer class="footer">
+            <p>&copy; <span id="footer-year"></span> Rasoul Unlimited</p>
+          </footer>
+        </noscript>
     <div data-include-html="../../includes/footer.html"></div>
     <script src="../../assets/js/include.min.js" defer></script>
 
