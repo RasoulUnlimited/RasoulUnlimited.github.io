@@ -1629,6 +1629,10 @@ img.loaded {
   direction: rtl;
 }
 
+.ltr {
+  direction: ltr;
+}
+
 .subtle-text {
   color: var(--text-color-light);
   font-size: 0.9rem;
