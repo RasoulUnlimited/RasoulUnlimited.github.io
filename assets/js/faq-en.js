@@ -1,16 +1,29 @@
 document.addEventListener("DOMContentLoaded", () => {
   const faqItems = document.querySelectorAll(".faq-item");
-  const navLinks = document.querySelectorAll(".faq-navigation a");
+  const faqNavigation = document.querySelector(".faq-navigation");
   const searchInput = document.getElementById("faq-search");
   const clearSearchButton = document.getElementById("clear-search");
   const allSections = document.querySelectorAll(".faq-section");
+
+  // Utility: simple debounce helper
+  function debounce(func, delay) {
+    let timeout;
+    return function () {
+      const context = this;
+      const args = arguments;
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func.apply(context, args), delay);
+    };
+  }
 
   // --- GA4 & Hotjar Event Tracking Integration ---
   // (Behavioral Data Analysis: Hotjar for heatmaps/recordings, GA4 for structured events)
 
   // Track clicks on navigation links
-  navLinks.forEach((link) => {
-    link.addEventListener("click", () => {
+  if (faqNavigation) {
+    faqNavigation.addEventListener("click", (event) => {
+      const link = event.target.closest("a");
+      if (!link) return;
       const category = link.dataset.category;
       if (typeof gtag === "function") {
         gtag("event", "faq_nav_click", {
@@ -28,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
         );
       }
     });
-  });
+  }
 
   // Track Clicks on Call-to-Action Buttons
   document.querySelectorAll(".button-link").forEach((button) => {
@@ -65,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // --- FAQ Search Functionality (Cognitive Load Reduction - Information Foraging) ---
-  searchInput.addEventListener("input", () => {
+  const handleSearch = () => {
     const searchTerm = searchInput.value.trim().toLowerCase();
 
     if (searchTerm.length > 0) {
@@ -152,7 +165,10 @@ document.addEventListener("DOMContentLoaded", () => {
         `faq_searched_${searchTerm.replace(/\s/g, "_").toLowerCase()}`
       );
     }
-  });
+  };
+
+  const debouncedSearch = debounce(handleSearch, 200);
+  searchInput.addEventListener("input", debouncedSearch);
 
   clearSearchButton.addEventListener("click", () => {
     searchInput.value = ""; // Clear input

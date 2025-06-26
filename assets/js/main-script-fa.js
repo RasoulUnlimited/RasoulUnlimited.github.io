@@ -1568,28 +1568,37 @@ sharePageButton.style.cursor = "pointer";
 sharePageButton.style.zIndex = "999";
 sharePageButton.classList.add("cta-pulse-effect");
 
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 500) {
-    if (!sharePageButton.classList.contains("show")) {
-      sharePageButton.classList.add("show");
-      sharePageButton.style.opacity = "1";
-      sharePageButton.style.transform = "translateY(0)";
+let shareScrollScheduled = false;
+window.addEventListener(
+  "scroll",
+  () => {
+    if (!shareScrollScheduled) {
+      shareScrollScheduled = true;
+      requestAnimationFrame(() => {
+        shareScrollScheduled = false;
+        if (window.scrollY > 500) {
+          if (!sharePageButton.classList.contains("show")) {
+            sharePageButton.classList.add("show");
+            sharePageButton.style.opacity = "1";
+            sharePageButton.style.transform = "translateY(0)";
+          }
+        } else if (sharePageButton.classList.contains("show")) {
+          sharePageButton.style.opacity = "0";
+          sharePageButton.style.transform = "translateY(20px)";
+          sharePageButton.addEventListener(
+            "transitionend",
+            function handler() {
+              sharePageButton.classList.remove("show");
+              sharePageButton.removeEventListener("transitionend", handler);
+            },
+            { once: true }
+          );
+        }
+      });
     }
-  } else {
-    if (sharePageButton.classList.contains("show")) {
-      sharePageButton.style.opacity = "0";
-      sharePageButton.style.transform = "translateY(20px)";
-      sharePageButton.addEventListener(
-        "transitionend",
-        function handler() {
-          sharePageButton.classList.remove("show");
-          sharePageButton.removeEventListener("transitionend", handler);
-        },
-        { once: true }
-      );
-    }
-  }
-});
+  },
+  { passive: true }
+);
 
 sharePageButton.addEventListener("click", async () => {
   const pageUrl = window.location.href;
