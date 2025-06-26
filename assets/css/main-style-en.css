@@ -5,27 +5,27 @@
   */
 
 :root {
-  --primary-color: #0066b8;
+  --primary-color: #005fa3;
   --secondary-color: #1a1a1a;
   --accent-color: #0d6efd;
   --highlight-color: #ffb300;
   --font-body: "Roboto", sans-serif;
   --font-heading: "Montserrat", sans-serif;
 
-  --background-start-color: #f5f8fb;
-  --background-end-color: #e8eff5;
+  --background-start-color: #f7f9fc;
+  --background-end-color: #eef3f8;
   --container-bg: #ffffff;
-  --card-bg: #fdfdfd;
+  --card-bg: #ffffff;
   --navbar-bg: rgba(255, 255, 255, 0.95);
   --giscus-bg: var(--card-bg);
   --skills-bg: #e9ecef;
 
   --shadow-color-light: rgba(0, 0, 0, 0.05);
-  --shadow-color-medium: rgba(0, 0, 0, 0.1);
-  --shadow-color-strong: rgba(0, 0, 0, 0.15);
+  --shadow-color-medium: rgba(0, 0, 0, 0.12);
+  --shadow-color-strong: rgba(0, 0, 0, 0.18);
 
   --text-color: #2f2f2f;
-  --text-color-light: #606060;
+  --text-color-light: #555555;
   --text-color-link: var(--accent-color);
   --heading-color: var(--secondary-color);
   --tagline-color: #555555;
@@ -54,7 +54,7 @@
 
   --border-radius-sm: 6px;
   --border-radius-md: 10px;
-  --border-radius-lg: 16px;
+  --border-radius-lg: 18px;
   --border-radius-full: 50%;
 
   --transition-duration-short: 0.2s;
@@ -639,8 +639,15 @@ section h2::after {
 
 .card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 15px 40px var(--shadow-color-strong);
+  box-shadow: 0 18px 50px var(--shadow-color-strong);
+  filter: brightness(1.05) saturate(1.05);
   z-index: 2;
+}
+
+.card:active {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px var(--shadow-color-medium);
+  filter: brightness(1) saturate(1);
 }
 
 .card::before {
