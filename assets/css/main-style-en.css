@@ -35,6 +35,8 @@
   --timeline-dot-border-color: var(--primary-color);
   --timeline-content-border-color: var(--border-color);
   --giscus-border: none;
+  --search-border: #ccd6e0;
+  --search-focus-shadow: rgba(52, 152, 219, 0.3);
 
   --space-unit: 8px;
   --space-xxs: calc(var(--space-unit) * 0.5);
@@ -1936,4 +1938,56 @@ section h2::after {
 .press-card img {
   width: 48px;
   height: 48px;
+}
+
+.search-faq-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 700px;
+  margin: 2rem auto 0;
+  position: relative;
+}
+
+.search-faq-container input[type="text"] {
+  width: 100%;
+  padding: 1.2rem 2rem;
+  border: 2px solid var(--search-border);
+  border-radius: 18px;
+  font-size: 1.2rem;
+  color: var(--text-color);
+  background-color: var(--container-bg);
+  transition: all 0.3s var(--transition-easing-smooth);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  padding-right: 4rem;
+}
+
+.search-faq-container input[type="text"]::placeholder {
+  color: var(--text-color-light);
+  opacity: 0.8;
+}
+
+.search-faq-container input[type="text"]:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px var(--search-focus-shadow);
+  outline: none;
+  background-color: #ffffff;
+}
+
+.search-faq-container button#clear-search {
+  position: absolute;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: var(--text-color-light);
+  cursor: pointer;
+  padding: 0.5rem;
+  display: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.search-faq-container button#clear-search:hover {
+  color: var(--accent-color);
 }

@@ -37,5 +37,13 @@ secondary JSON‑LD snippet and adds an `X-Crawler-Handled` header to the respon
 
 Additional identity links: [GitHub](https://github.com/RasoulUnlimited), [ORCID](https://orcid.org/0009-0004-7177-2080), [LinkedIn](https://www.linkedin.com/in/rasoulunlimited).
 
+## Contribution guidelines
+To keep the history clear and useful, please write descriptive commit messages that quickly explain the intent of each change.
+
+- Summarize the change in a short sentence using the imperative mood (e.g., "Add contact form" or "Fix build script").
+- Avoid generic subjects like "Update" or "Fix" without context.
+- Limit the summary line to around 50 characters when possible.
+- Include additional details in the body when a change requires more
+
 ## License
 All content is provided under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License](https://creativecommons.org/licenses/by-nc-nd/4.0/). See the [LICENSE](LICENSE) file for details.

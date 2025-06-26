@@ -2685,6 +2685,15 @@
             aria-labelledby="faq-heading"
           >
             <h2 id="faq-heading">❓ Frequently Asked Questions (FAQ)</h2>
+            <div class="search-faq-container">
+              <input
+                type="text"
+                id="faq-search"
+                placeholder="What are you looking for? (e.g., Discord, C project)"
+                aria-label="Search the FAQs"
+              />
+              <button id="clear-search" aria-label="Clear search">✖</button>
+            </div>
             <div class="faq-container">
               <details id="faq-item-en-1" aria-labelledby="faq-question-en-1"
                 class="faq-item"
@@ -2875,24 +2884,43 @@
 
             <div class="giscus-container" id="giscus-comments-section">
               <!-- Giscus as a UGC (User Generated Content) source helps strengthen E-E-A-T. -->
-              <script
-                src="https://giscus.app/client.js"
-                data-repo="RasoulUnlimited/comments"
-                data-repo-id="R_kgDOOx48HQ"
-                data-category="Q&A"
-                data-category-id="DIC_kwDOOx48Hc4Cqrc1"
-                data-mapping="pathname"
-                data-lang="en"
-                data-strict="1"
-                data-reactions-enabled="1"
-                data-emit-metadata="0"
-                data-input-position="top"
-                data-theme="preferred_color_scheme"
-                data-loading="lazy"
-                crossorigin="anonymous"
-                async
-                data-ai-integration="giscus-comments"
-              ></script>
+              <script nonce="RasoulCSP">
+                (function () {
+                  function loadGiscus() {
+                    const s = document.createElement("script");
+                    s.src = "https://giscus.app/client.js";
+                    s.setAttribute("data-repo", "RasoulUnlimited/comments");
+                    s.setAttribute("data-repo-id", "R_kgDOOx48HQ");
+                    s.setAttribute("data-category", "Q&A");
+                    s.setAttribute("data-category-id", "DIC_kwDOOx48Hc4Cqrc1");
+                    s.setAttribute("data-mapping", "pathname");
+                    s.setAttribute("data-lang", "en");
+                    s.setAttribute("data-strict", "1");
+                    s.setAttribute("data-reactions-enabled", "1");
+                    s.setAttribute("data-emit-metadata", "0");
+                    s.setAttribute("data-input-position", "top");
+                    s.setAttribute("data-theme", "preferred_color_scheme");
+                    s.setAttribute("data-loading", "lazy");
+                    s.setAttribute("crossorigin", "anonymous");
+                    s.async = true;
+                    s.setAttribute("data-ai-integration", "giscus-comments");
+                    s.setAttribute("nonce", "RasoulCSP");
+                    document
+                      .getElementById("giscus-comments-section")
+                      .appendChild(s);
+                  }
+                  if (
+                    document.readyState === "complete" ||
+                    document.readyState === "interactive"
+                  ) {
+                    loadGiscus();
+                  } else {
+                    document.addEventListener("DOMContentLoaded", loadGiscus, {
+                      once: true,
+                    });
+                  }
+                })();
+              </script>
             </div>
           </section>
 
@@ -3212,6 +3240,7 @@
       src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"
       defer
     ></script>
+    <script src="../assets/js/faq-search.min.js" defer></script>
     <script src="../assets/js/main-script-en.min.js" defer></script>
   </body>
 </html>
