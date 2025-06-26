@@ -5,13 +5,13 @@
   */
 
 :root {
-  --primary-color: #005a9e;
+  --primary-color: #0066b8;
   --secondary-color: #1a1a1a;
-  --accent-color: #007acc;
+  --accent-color: #0091ff;
   --highlight-color: #ffc107;
 
-  --background-start-color: #f4f7f6;
-  --background-end-color: #e0e7e9;
+  --background-start-color: #f5f8fb;
+  --background-end-color: #e8eff5;
   --container-bg: #ffffff;
   --card-bg: #ffffff;
   --navbar-bg: rgba(255, 255, 255, 0.98);
@@ -22,11 +22,11 @@
   --shadow-color-medium: rgba(0, 0, 0, 0.1);
   --shadow-color-strong: rgba(0, 0, 0, 0.15);
 
-  --text-color: #333333;
-  --text-color-light: #555555;
+  --text-color: #2f2f2f;
+  --text-color-light: #606060;
   --text-color-link: var(--accent-color);
   --heading-color: var(--secondary-color);
-  --tagline-color: #4a4a4a;
+  --tagline-color: #555555;
   --footer-color: #555555;
   --lang-switcher-active-color: #000;
 
@@ -60,8 +60,10 @@
   --transition-duration-long: 0.6s;
   --transition-easing-standard: ease-in-out;
   --transition-easing-springy: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  --transition-easing-smooth: cubic-bezier(0.25, 0.8, 0.25, 1);
 
   --max-content-width: 1200px;
+  --max-paragraph-width: 70ch;
 
   --navbar-height: 80px;
 }
@@ -160,11 +162,11 @@ input:checked + .slider:before {
 .dark-mode {
   --primary-color: #61dafb;
   --secondary-color: #f0f0f0;
-  --accent-color: #a0a0a0;
+  --accent-color: #a0e0ff;
   --highlight-color: #fdd835;
 
-  --background-start-color: #2b2d42;
-  --background-end-color: #232533;
+  --background-start-color: #1f2631;
+  --background-end-color: #151a24;
   --container-bg: #1e1e1e;
   --card-bg: #282828;
   --navbar-bg: rgba(30, 30, 30, 0.98);
@@ -175,11 +177,11 @@ input:checked + .slider:before {
   --shadow-color-medium: rgba(0, 0, 0, 0.3);
   --shadow-color-strong: rgba(0, 0, 0, 0.45);
 
-  --text-color: #c0c0c0;
-  --text-color-light: #a0a0a0;
+  --text-color: #d0d0d0;
+  --text-color-light: #a9a9a9;
   --text-color-link: var(--primary-color);
   --heading-color: var(--secondary-color);
-  --tagline-color: #b0b0b0;
+  --tagline-color: #bcbcbc;
   --footer-color: #a0a0a0;
   --lang-switcher-active-color: #c0c0c0;
 
@@ -542,7 +544,7 @@ section h2::after {
 
 #about p {
   text-align: justify;
-  max-width: 800px;
+  max-width: var(--max-paragraph-width);
   margin-left: auto;
   margin-right: auto;
   font-size: 1.15rem;
@@ -1405,7 +1407,7 @@ section h2::after {
   }
   #about p {
     font-size: 1.1rem;
-    max-width: 700px;
+    max-width: var(--max-paragraph-width);
   }
   .card h3 {
     font-size: 1.3rem;
@@ -1990,4 +1992,89 @@ section h2::after {
 
 .search-faq-container button#clear-search:hover {
   color: var(--accent-color);
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  #explore-hint.pulse-animation,
+  .cta-pulse-effect {
+    animation: none !important;
+  }
+  .dynamic-toast,
+  #scroll-to-top,
+  #share-page-button,
+  .skill-hover-message,
+  .project-card,
+  .skills-list li,
+  .faq-item,
+  .faq-item summary,
+  .faq-item summary::after,
+  .section-delight-effect,
+  .theme-switch .slider,
+  .theme-switch .slider:before,
+  .theme-switch .sun-icon,
+  .theme-switch .moon-icon,
+  .cta-button,
+  .navbar-links a,
+  .connect-links-block ul li,
+  .card,
+  .timeline li,
+  .timeline li::after,
+  .timeline-content,
+  .testimonial-item,
+  .giscus-container,
+  .faq-item summary.faq-summary-clicked,
+  .card.clicked-pop,
+  .card.is-featured,
+  .project-image-placeholder img,
+  .content-image-placeholder img,
+  .mention-icon-placeholder i,
+  .card .card-links a,
+  .card .card-links a i,
+  #skills .skills-list li i,
+  .timeline li:hover::after,
+  .timeline li:focus-within::after,
+  .timeline li:active::after,
+  .timeline-content::before,
+  .timeline-content::after,
+  .timeline-content h3,
+  .timeline-content p,
+  .timeline-content .date,
+  .contact-info a,
+  .contact-info i,
+  .connect-links-block ul li a,
+  .connect-links-block ul li i,
+  .footer,
+  #scroll-progress-bar,
+  .theme-toast,
+  #explore-hint i,
+  .sparkle-effect,
+  .dynamic-toast i,
+  .fun-fact-close,
+  .final-exploration-toast,
+  .final-exploration-toast i,
+  img.is-loading,
+  img.loaded {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+  .faq-item p {
+    max-height: fit-content !important;
+    padding-top: var(--space-md) !important;
+    padding-bottom: var(--space-md) !important;
+    opacity: 1 !important;
+  }
 }
