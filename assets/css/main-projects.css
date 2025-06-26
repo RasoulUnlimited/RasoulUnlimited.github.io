@@ -11,15 +11,16 @@ h1 {
   font-size: 1.8rem;
 }
 a {
-  color: #0056b3;
+  color: #007bff;
   text-decoration: none;
 }
 a:hover {
   text-decoration: underline;
+  color: #0056d2;
 }
 .card {
   background: #f8f8f8;
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 1rem 1.5rem;
   margin: 1.5rem 0;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);

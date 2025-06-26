@@ -7,7 +7,7 @@
 :root {
   --primary-color: #0066b8;
   --secondary-color: #1a1a1a;
-  --accent-color: #0091ff;
+  --accent-color: #007bff;
   --highlight-color: #ffc107;
 
   --background-start-color: #f5f8fb;
@@ -50,9 +50,9 @@
   --section-v-padding: var(--space-xxl);
   --section-margin-bottom: var(--space-xxxl);
 
-  --border-radius-sm: 4px;
-  --border-radius-md: 8px;
-  --border-radius-lg: 12px;
+  --border-radius-sm: 6px;
+  --border-radius-md: 10px;
+  --border-radius-lg: 16px;
   --border-radius-full: 50%;
 
   --transition-duration-short: 0.2s;
@@ -162,7 +162,7 @@ input:checked + .slider:before {
 .dark-mode {
   --primary-color: #61dafb;
   --secondary-color: #f0f0f0;
-  --accent-color: #a0e0ff;
+  --accent-color: #65cfff;
   --highlight-color: #fdd835;
 
   --background-start-color: #1f2631;
@@ -468,7 +468,7 @@ textarea:focus:not(:focus-visible) {
 
 h1 {
   font-family: "Montserrat", sans-serif;
-  font-size: 4.5rem;
+  font-size: clamp(2.8rem, 6vw, 4.5rem);
   color: var(--heading-color);
   margin-top: 0;
   margin-bottom: var(--space-xs);
@@ -481,7 +481,8 @@ h1 {
 
 .tagline {
   font-family: "Montserrat", sans-serif;
-  font-size: 1.6rem;
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  letter-spacing: 0.3px;
   font-weight: 700;
   color: var(--tagline-color);
   margin-bottom: var(--space-xxl);
@@ -523,7 +524,8 @@ section:last-of-type::after {
 
 section h2 {
   font-family: "Montserrat", sans-serif;
-  font-size: 2.8rem;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  letter-spacing: 0.5px;
   color: var(--heading-color);
   margin-top: 0;
   margin-bottom: var(--space-xl);
@@ -671,7 +673,7 @@ section h2::after {
   text-decoration: none;
   color: var(--primary-color);
   padding: 4px 8px;
-  transition: all 0.2s ease-in-out;
+  transition: color var(--transition-duration-short) var(--transition-easing-standard);
 }
 
 .lang-switcher .lang-link:hover {
