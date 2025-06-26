@@ -1023,6 +1023,41 @@ async function copyTextUsingClipboard(text, toastId, successMessage) {
   }
 }
 
+async function copyToClipboard(
+  text,
+  successToastId,
+  errorToastId,
+  successMessage
+) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    try {
+      await navigator.clipboard.writeText(text);
+      createToast(successMessage, {
+        id: successToastId,
+        iconClass: "fas fa-check-circle",
+        iconColor: "var(--highlight-color)",
+        duration: 1800,
+      });
+      triggerHapticFeedback([50]);
+    } catch (err) {
+      console.error("Failed to copy text using Clipboard API:", err);
+      createToast("کپی با خطا مواجه شد.", {
+        id: errorToastId,
+        iconClass: "fas fa-exclamation-triangle",
+        iconColor: "red",
+        duration: 3000,
+      });
+    }
+  } else {
+    createToast("مرورگر شما از کپی کردن پشتیبانی نمی‌کند.", {
+      id: errorToastId,
+      iconClass: "fas fa-exclamation-triangle",
+      iconColor: "red",
+      duration: 3000,
+    });
+  }
+}
+
 function createConfetti() {
   if (prefersReducedMotion) return;
 
@@ -1480,61 +1515,12 @@ if (connectLinksBlock) {
             : linkName;
         }
 
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          try {
-            await navigator.clipboard.writeText(linkToCopy);
-            createToast(`لینک ${linkName} کپی شد! ✅`, {
-              id: `social-link-copy-${linkName.replace(/\s/g, "")}`,
-              iconClass: "fas fa-clipboard-check",
-              iconColor: "var(--highlight-color)",
-              duration: 1800,
-            });
-            triggerHapticFeedback([50]);
-          } catch (err) {
-            console.error(
-              "Failed to copy social link using Clipboard API:",
-              err
-            );
-            createToast(`کپی لینک ${linkName} با خطا مواجه شد.`, {
-              id: `social-link-copy-error-${linkName.replace(/\s/g, "")}`,
-              iconClass: "fas fa-exclamation-triangle",
-              iconColor: "red",
-              duration: 3000,
-            });
-          }
-        } else if (navigator.clipboard && navigator.clipboard.writeText) {
-          try {
-            await navigator.clipboard.writeText(linkToCopy);
-            createToast(`لینک ${linkName} کپی شد! ✅`, {
-              id: `social-link-copy-${linkName.replace(/\s/g, "")}`,
-              iconClass: "fas fa-clipboard-check",
-              iconColor: "var(--highlight-color)",
-              duration: 1800,
-            });
-            triggerHapticFeedback([50]);
-          } catch (err) {
-            console.error(
-              "Failed to copy social link using Clipboard API:",
-              err
-            );
-            createToast(`کپی لینک ${linkName} با خطا مواجه شد.`, {
-              id: `social-link-copy-error-${linkName.replace(/\s/g, "")}`,
-              iconClass: "fas fa-exclamation-triangle",
-              iconColor: "red",
-              duration: 3000,
-            });
-          }
-        } else {
-          createToast(
-            `مرورگر شما از کپی کردن لینک ${linkName} پشتیبانی نمی‌کند.`,
-            {
-              id: `social-link-copy-error-${linkName.replace(/\s/g, "")}`,
-              iconClass: "fas fa-exclamation-triangle",
-              iconColor: "red",
-              duration: 3000,
-            }
-          );
-        }
+        await copyToClipboard(
+          linkToCopy,
+          `social-link-copy-${linkName.replace(/\s/g, "")}`,
+          `social-link-copy-error-${linkName.replace(/\s/g, "")}`,
+          `لینک ${linkName} کپی شد! ✅`
+        );
       }
     }
   });
@@ -1632,32 +1618,14 @@ sharePageButton.addEventListener("click", async () => {
         });
       }
     }
-  } else if (navigator.clipboard && navigator.clipboard.writeText) {
-    try {
-      await navigator.clipboard.writeText(pageUrl);
-      createToast("لینک صفحه کپی شد! ✅", {
-        id: "share-copy-toast",
-        iconClass: "fas fa-check-circle",
-        iconColor: "var(--highlight-color)",
-        duration: 1800,
-      });
-      triggerHapticFeedback([50]);
-    } catch (err) {
-      console.error("Failed to copy page URL using Clipboard API:", err);
-      createToast("کپی لینک صفحه با خطا مواجه شد.", {
-        id: "share-error-toast",
-        iconClass: "fas fa-exclamation-triangle",
-        iconColor: "red",
-        duration: 3000,
-      });
-    }
+
   } else {
-    createToast("مرورگر شما از اشتراک‌گذاری یا کپی کردن پشتیبانی نمی‌کند.", {
-      id: "share-unsupported-toast",
-      iconClass: "fas fa-exclamation-triangle",
-      iconColor: "red",
-      duration: 3000,
-    });
+    await copyToClipboard(
+      pageUrl,
+      "share-copy-toast",
+      "share-error-toast",
+      "لینک صفحه کپی شد! ✅"
+    );
   }
 });
 

@@ -1448,7 +1448,8 @@ img.loaded {
   font-size: 1.2rem;
   color: var(--text-color);
   background-color: var(--container-bg);
-  transition: all 0.3s var(--transition-easing-smooth);
+  transition: border-color 0.3s var(--transition-easing-smooth),
+    box-shadow 0.3s var(--transition-easing-smooth);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
   padding-left: 4rem;
 }
@@ -1588,7 +1589,8 @@ img.loaded {
   font-style: italic;
   color: var(--text-color);
   position: relative;
-  transition: all 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out,
+    box-shadow 0.3s ease-in-out;
   outline: none;
   direction: rtl;
   text-align: right;
