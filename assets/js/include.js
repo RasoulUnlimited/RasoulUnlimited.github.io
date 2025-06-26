@@ -1,27 +1,25 @@
 async function includeHTML(callback) {
   const elements = document.querySelectorAll('[data-include-html]');
   const fetches = [];
-  elements.forEach((el) => {
+  for (const el of elements) {
     const file = el.getAttribute('data-include-html');
-    if (file) {
-      const fetchPromise = (async () => {
-        try {
-          const resp = await fetch(file);
-          const html = await resp.text();
-          el.innerHTML = html;
-          if (file.includes('footer.html')) {
-            const yearSpan = el.querySelector('#footer-year');
-            if (yearSpan) {
-              yearSpan.textContent = new Date().getFullYear();
-            }
+    if (!file) continue;
+
+    const fetchPromise = fetch(file)
+      .then((resp) => resp.text())
+      .then((html) => {
+        el.innerHTML = html;
+        if (file.includes('footer.html')) {
+          const yearSpan = el.querySelector('#footer-year');
+          if (yearSpan) {
+            yearSpan.textContent = new Date().getFullYear();
           }
-        } catch (err) {
-          console.error('Include error:', err);
         }
-      })();
-      fetches.push(fetchPromise);
-    }
-  });
+      })
+      .catch((err) => console.error('Include error:', err));
+
+    fetches.push(fetchPromise);
+  }
   await Promise.all(fetches);
   if (typeof callback === 'function') {
     callback();

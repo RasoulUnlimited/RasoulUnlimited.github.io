@@ -42,15 +42,33 @@
     }
   
     let endOfPageShown = false;
-    window.addEventListener('scroll', () => {
-      if (endOfPageShown) return;
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 50) {
+    let lastScrollY = 0;
+    let ticking = false;
+
+    function checkPageEnd() {
+      if (
+        !endOfPageShown &&
+        window.innerHeight + lastScrollY >= document.body.offsetHeight - 50
+      ) {
         endOfPageShown = true;
         if (window.langStrings.endOfPage) {
           createToast(window.langStrings.endOfPage);
         }
       }
-    }, { passive: true });
+      ticking = false;
+    }
+
+    window.addEventListener(
+      'scroll',
+      () => {
+        lastScrollY = window.scrollY;
+        if (!ticking) {
+          window.requestAnimationFrame(checkPageEnd);
+          ticking = true;
+        }
+      },
+      { passive: true }
+    );
   
     document.getElementById('current-year').textContent = new Date().getFullYear();
   })();

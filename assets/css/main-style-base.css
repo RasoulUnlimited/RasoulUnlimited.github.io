@@ -8,8 +8,8 @@ body {
     bottom: 1rem;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(0,0,0,0.8);
-    color: #fff;
+    background: var(--toast-bg, rgba(0,0,0,0.8));
+    color: var(--toast-color, #fff);
     padding: 0.5rem 1rem;
     border-radius: 4px;
     z-index: 1000;

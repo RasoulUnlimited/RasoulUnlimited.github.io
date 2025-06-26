@@ -19,6 +19,8 @@
   --navbar-bg: rgba(255, 255, 255, 0.95);
   --giscus-bg: var(--card-bg);
   --skills-bg: #e9ecef;
+  --toast-bg: var(--primary-color);
+  --toast-color: #fff;
 
   --shadow-color-light: rgba(0, 0, 0, 0.05);
   --shadow-color-medium: rgba(0, 0, 0, 0.12);
@@ -199,6 +201,8 @@ input:checked + .slider:before {
   --skills-bg: #3a3a3a;
 
   --shadow-color-light: rgba(0, 0, 0, 0.15);
+  --toast-bg: var(--primary-color);
+  --toast-color: #fff;
   --shadow-color-medium: rgba(0, 0, 0, 0.3);
   --shadow-color-strong: rgba(0, 0, 0, 0.45);
 
