@@ -2,16 +2,18 @@
   --primary-color: #0066b8;
   --primary-rgb: 0, 90, 158;
   --secondary-color: #1a1a1a;
-  --accent-color: #007bff;
-  --highlight-color: #ffc107;
+  --accent-color: #0d6efd;
+  --highlight-color: #ffb300;
   --highlight-rgb: 255, 193, 7;
   --highlight-darker: #e0a800;
 
+  --font-body: "Vazirmatn", "Roboto", sans-serif;
+  --font-heading: "Montserrat", sans-serif;
   --background-start-color: #f5f8fb;
   --background-end-color: #e8eff5;
   --container-bg: #ffffff;
-  --card-bg: #ffffff;
-  --navbar-bg: rgba(255, 255, 255, 0.98);
+  --card-bg: #fdfdfd;
+  --navbar-bg: rgba(255, 255, 255, 0.95);
   --giscus-bg: var(--card-bg);
   --skills-bg: #e9ecef;
 
@@ -83,7 +85,8 @@
   will-change: color, background-color;
 }
 
-.footer-link:hover {
+.footer-link:hover,
+.footer-link:focus-visible {
   background-color: rgba(100, 100, 100, 0.1);
   color: var(--faq-link-hover-color);
 }
@@ -192,16 +195,16 @@ input:checked + .slider:before {
   --primary-rgb: 97, 218, 251;
   --secondary-color: #f0f0f0;
   /* IMPROVEMENT: Changed accent-color for better contrast in dark mode */
-  --accent-color: #65cfff; /* Lighter blue for interactive elements */
-  --highlight-color: #fdd835;
+  --accent-color: #5ab0f5; /* Lighter blue for interactive elements */
+  --highlight-color: #ffca28;
   --highlight-rgb: 253, 216, 53;
   --highlight-darker: #c7a700;
 
   --background-start-color: #1f2631;
   --background-end-color: #151a24;
   --container-bg: #1e1e1e;
-  --card-bg: #282828;
-  --navbar-bg: rgba(30, 30, 30, 0.98);
+  --card-bg: #242424;
+  --navbar-bg: rgba(30, 30, 30, 0.95);
   --giscus-bg: #1e1e1e;
   --skills-bg: #3a3a3a;
 
@@ -269,7 +272,7 @@ html {
 }
 
 body {
-  font-family: "Vazirmatn", "Roboto", sans-serif;
+  font-family: var(--font-body);
   background: linear-gradient(
     135deg,
     var(--background-start-color) 0%,
@@ -282,6 +285,8 @@ body {
   position: relative;
   padding-top: var(--navbar-height);
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
   overflow-x: hidden;
   animation: backgroundGradient 20s ease infinite;
   background-size: 200% 200%;
@@ -595,7 +600,7 @@ textarea:focus:not(:focus-visible) {
 }
 
 h1 {
-  font-family: "Montserrat", sans-serif;
+  font-family: var(--font-heading);
   font-size: clamp(2.8rem, 6vw, 4.5rem);
   color: var(--heading-color);
   margin-top: 0;
@@ -608,7 +613,7 @@ h1 {
 }
 
 .tagline {
-  font-family: "Montserrat", sans-serif;
+  font-family: var(--font-heading);
   font-size: clamp(1.2rem, 3vw, 1.6rem);
   letter-spacing: 0.3px;
   font-weight: 700;
@@ -652,7 +657,7 @@ section:last-of-type::after {
 }
 
 section h2 {
-  font-family: "Montserrat", sans-serif;
+  font-family: var(--font-heading);
   font-size: clamp(1.8rem, 4vw, 2.8rem);
   letter-spacing: 0.5px;
   color: var(--heading-color);
@@ -721,7 +726,7 @@ section h2::after {
 .card {
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
-  border-radius: var(--border-radius-md);
+  border-radius: var(--border-radius-lg);
   padding: var(--space-md);
   box-shadow: 0 8px 25px var(--shadow-color-medium);
   display: flex;
@@ -842,7 +847,7 @@ img.loaded {
 .lang-switcher {
   text-align: center;
   margin: 10px 0;
-  font-family: "Vazirmatn", sans-serif;
+  font-family: var(--font-body);
   font-size: 14px;
   color: var(--text-color-light);
 }
@@ -870,7 +875,7 @@ img.loaded {
 }
 
 .card h3 {
-  font-family: "Montserrat", sans-serif;
+  font-family: var(--font-heading);
   margin-top: 0;
   margin-bottom: var(--space-sm);
   color: var(--secondary-color);
@@ -1211,7 +1216,7 @@ img.loaded {
   padding: var(--space-md);
   background-color: var(--card-bg);
   position: relative;
-  border-radius: var(--border-radius-md);
+  border-radius: var(--border-radius-lg);
   box-shadow: 0 4px 15px var(--shadow-color-light);
   transition: transform var(--transition-duration-short)
       var(--transition-easing-springy),
@@ -1300,7 +1305,7 @@ img.loaded {
 }
 
 .timeline-content h3 {
-  font-family: "Montserrat", sans-serif;
+  font-family: var(--font-heading);
   margin-top: var(--space-sm);
   margin-bottom: var(--space-xs);
   color: var(--secondary-color);
@@ -1476,7 +1481,7 @@ img.loaded {
 .faq-item {
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
-  border-radius: var(--border-radius-md);
+  border-radius: var(--border-radius-lg);
   box-shadow: 0 4px 15px var(--shadow-color-light);
   transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
   overflow: hidden;
@@ -1534,7 +1539,7 @@ img.loaded {
 .faq-item summary {
   display: block;
   padding: var(--space-md);
-  font-family: "Montserrat", sans-serif;
+  font-family: var(--font-heading);
   font-size: 1.2rem;
   font-weight: 700;
   color: var(--secondary-color);
@@ -1835,7 +1840,7 @@ img.loaded {
   text-align: left;
 }
 .connect-links-block h3 {
-  font-family: "Montserrat", sans-serif;
+  font-family: var(--font-heading);
   font-size: 1.4rem;
   color: var(--secondary-color);
   margin-top: 0;
