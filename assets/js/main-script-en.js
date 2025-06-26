@@ -831,11 +831,17 @@ if (faqContainer) {
     const questionId = item.dataset.questionId || `faq-q-${index + 1}`;
     summary.setAttribute("data-faq-author", "Mohammad Rasoul Sohrabi"); 
 
-    // Set initial ARIA attributes
-    summary.setAttribute("aria-expanded", item.open ? "true" : "false");
+    // Set initial ARIA attributes only if missing
+    if (!summary.hasAttribute("aria-expanded")) {
+      summary.setAttribute("aria-expanded", item.open ? "true" : "false");
+    }
     if (answer) {
-      answer.id = `faq-answer-${questionId}`;
-      summary.setAttribute("aria-controls", answer.id);
+      if (!answer.id) {
+        answer.id = `faq-answer-${questionId}`;
+      }
+      if (!summary.hasAttribute("aria-controls")) {
+        summary.setAttribute("aria-controls", answer.id);
+      }
     }
 
     // Apply initial inline styles for smooth height transition
