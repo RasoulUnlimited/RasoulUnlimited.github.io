@@ -1024,18 +1024,28 @@ async function copyTextUsingClipboard(text, toastId, successMessage) {
 }
 
 function createConfetti() {
-  if (prefersReducedMotion) {
-    return;
-  }
-  const confettiContainer = document.createElement("div");
-  confettiContainer.id = "confetti-container";
-  document.body.appendChild(confettiContainer);
-  confettiContainer.setAttribute(
+  if (prefersReducedMotion) return;
+
+  const canvas = document.createElement("canvas");
+  canvas.id = "confetti-canvas";
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  Object.assign(canvas.style, {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100vw",
+    height: "100vh",
+    pointerEvents: "none",
+    zIndex: 9998,
+  });
+  canvas.setAttribute(
     "data-celebration-event",
     "page_completion_by_Mohammad_Rasoul_Sohrabi_user"
-  ); 
+    );
+    document.body.appendChild(canvas);
 
-  const confettiCount = 50;
+    const ctx = canvas.getContext("2d");
   const colors = [
     "#ffc107",
     "#007acc",
@@ -1045,48 +1055,43 @@ function createConfetti() {
     "#FF4081",
     "#64FFDA",
   ];
-  const fragment = document.createDocumentFragment();
+  const pieces = [];
 
-  for (let i = 0; i < confettiCount; i++) {
-    const confetti = document.createElement("div");
-    confetti.classList.add("confetti");
-    confetti.style.backgroundColor =
-      colors[Math.floor(Math.random() * colors.length)];
-    confetti.style.left = Math.random() * 100 + "vw";
-    confetti.style.top = -Math.random() * 20 + "vh";
-    confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
-    fragment.appendChild(confetti);
-
-    confetti.animate(
-      [
-        {
-          transform: `translateY(0) rotate(${Math.random() * 360}deg)`,
-          opacity: 1,
-        },
-        {
-          transform: `translateY(${window.innerHeight * 1.2}px) rotate(${
-            Math.random() * 720
-          }deg)`,
-          opacity: 0,
-        },
-      ],
-      {
-        duration: Math.random() * 2000 + 2000,
-        easing: "ease-out",
-        delay: Math.random() * 500,
-        fill: "forwards",
-      }
-    );
-
-    confetti.addEventListener("animationend", () => {
-      confetti.remove();
+  for (let i = 0; i < 50; i++) {
+    pieces.push({
+      x: Math.random() * canvas.width,
+      y: -Math.random() * canvas.height,
+      size: Math.random() * 8 + 4,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      angle: Math.random() * 360,
+      speed: Math.random() * 2 + 1,
+      drift: Math.random() * 2 - 1,
     });
   }
-  confettiContainer.appendChild(fragment);
+  const start = performance.now();
+  (function update() {
+    const elapsed = performance.now() - start;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  setTimeout(() => {
-    confettiContainer.remove();
-  }, 4500);
+    pieces.forEach((p) => {
+      p.y += p.speed;
+      p.x += p.drift;
+      p.angle += 2;
+
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate((p.angle * Math.PI) / 180);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+      ctx.restore();
+    });
+
+    if (elapsed < 4000) {
+      requestAnimationFrame(update);
+    } else {
+      canvas.remove();
+    }
+  })();
 }
 
 const funFacts = [

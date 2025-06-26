@@ -2047,26 +2047,6 @@ img.loaded {
   position: relative;
 }
 
-#confetti-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 9998;
-}
-
-.confetti {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  opacity: 0;
-  will-change: opacity, transform;
-}
-
 .dynamic-toast {
   position: fixed;
   left: 50%;

@@ -118,27 +118,13 @@ document.addEventListener("DOMContentLoaded", () => {
           if (!item.open && !item.hasAttribute("data-opened-by-user")) {
             item.open = true;
             item.setAttribute("data-opened-by-search", "true");
-            const answerContent = item.querySelector(".faq-answer");
-            if (answerContent) {
-              answerContent.style.maxHeight = answerContent.scrollHeight + "px";
-              answerContent.style.paddingTop = "1.6rem";
-              answerContent.style.paddingBottom = "2.8rem";
-              answerContent.style.opacity = "1";
-            }
           }
         } else {
           item.style.display = "none";
           // If hiding, and it was opened by search, close it
           if (item.open && item.hasAttribute("data-opened-by-search")) {
             item.open = false;
-            const answerContent = item.querySelector(".faq-answer");
-            if (answerContent) {
-              answerContent.style.maxHeight = "0px";
-              answerContent.style.paddingTop = "0";
-              answerContent.style.paddingBottom = "0";
-              answerContent.style.opacity = "0";
-            }
-            item.removeAttribute("data-opened-by-search"); // Remove the flag
+            item.removeAttribute("data-opened-by-search");
           }
         }
       });
@@ -177,17 +163,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // Show all FAQ items and sections again and collapse items that were opened by search
     faqItems.forEach((item) => {
       item.style.display = "block";
-      // Only close items that were opened by search, not manually opened ones
       if (item.open && item.hasAttribute("data-opened-by-search")) {
         item.open = false;
-        const answerContent = item.querySelector(".faq-answer");
-        if (answerContent) {
-          answerContent.style.maxHeight = "0px";
-          answerContent.style.paddingTop = "0";
-          answerContent.style.paddingBottom = "0";
-          answerContent.style.opacity = "0";
-        }
-        item.removeAttribute("data-opened-by-search"); // Remove the flag
+        item.removeAttribute("data-opened-by-search");
       }
     });
     allSections.forEach((section) => {
@@ -206,92 +184,35 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // --- Accordion Logic & Cognitive Psychology Principles ---
-  faqItems.forEach((item) => {
-    const summary = item.querySelector("summary");
-    const answer = item.querySelector(".faq-answer");
-    const questionId = item.dataset.questionId;
+  // --- Accordion Logic ---
+  const faqContainer = document.querySelector(".main-content");
 
-    // Initial state for smooth animation
-    if (answer) {
-      // Ensure answer element exists
-      answer.style.maxHeight = "0px";
-      answer.style.overflow = "hidden";
-      answer.style.transition =
-        "max-height 0.4s var(--ease-bezier), padding 0.4s var(--ease-bezier), opacity 0.4s ease-out";
-      answer.style.paddingTop = "0";
-      answer.style.paddingBottom = "0";
-      answer.style.opacity = "0";
+  if (faqContainer) {
+    faqContainer.addEventListener("click", (event) => {
+      const summary = event.target.closest(".faq-item summary");
+      if (!summary) return;
 
-      // Check initial open state (for cases where details is open on load or after search)
-      if (item.open) {
-        answer.style.maxHeight = answer.scrollHeight + "px";
-        answer.style.paddingTop = "1.6rem";
-        answer.style.paddingBottom = "2.8rem";
-        answer.style.opacity = "1";
-      }
-    }
-
-    summary.addEventListener("click", (event) => {
-      // Prevent default toggle behavior if it's an interactive element inside summary (e.g., a link)
       if (event.target.tagName === "A") {
         event.preventDefault();
         window.location.href = event.target.href;
         return;
       }
 
-      event.preventDefault(); // Prevent default details toggle
+      event.preventDefault(); 
 
-      const wasAlreadyOpen = item.open; // Check current state BEFORE toggling
+      const item = summary.parentElement;
+      const questionId = item.dataset.questionId;
+      const wasAlreadyOpen = item.open;
 
       faqItems.forEach((otherItem) => {
-        // Only close other items if they are currently open AND they were not opened by the search
-        if (
-          otherItem !== item &&
-          otherItem.open &&
-          !otherItem.hasAttribute("data-opened-by-search")
-        ) {
+        if (otherItem !== item) {
           otherItem.open = false;
-          otherItem.removeAttribute("data-opened-by-user"); // Remove the flag
-          const otherAnswer = otherItem.querySelector(".faq-answer");
-          if (otherAnswer) {
-            // Ensure otherAnswer exists
-            otherAnswer.style.maxHeight = "0px";
-            otherAnswer.style.paddingTop = "0";
-            otherAnswer.style.paddingBottom = "0";
-            otherAnswer.style.opacity = "0";
-          }
-          // Track collapse of other items if they were opened by user
-          if (typeof gtag === "function") {
-            gtag("event", "faq_auto_collapse", {
-              event_category: "FAQ Interaction",
-              event_label: `Question auto-collapsed: ${otherItem.dataset.questionId}`,
-              question_text: otherItem
-                .querySelector("summary")
-                .textContent.trim(),
-            });
-          }
-          if (typeof hj === "function") {
-            hj("event", `faq_auto_collapsed_${otherItem.dataset.questionId}`);
-          }
+          otherItem.removeAttribute("data-opened-by-user");
         }
       });
 
       if (wasAlreadyOpen) {
-        // If it was open and user clicked to close it
-        if (answer) {
-          answer.style.maxHeight = "0px";
-          answer.style.paddingTop = "0";
-          answer.style.paddingBottom = "0";
-          answer.style.opacity = "0";
-          setTimeout(() => {
-            item.open = false;
-          }, 400); // Match CSS transition duration
-        } else {
-          item.open = false; // Fallback if no answer element
-        }
-
-        // GA4 Event: Track FAQ collapse
+        item.open = false;
         if (typeof gtag === "function") {
           gtag("event", "faq_collapse", {
             event_category: "FAQ Interaction",
@@ -302,28 +223,18 @@ document.addEventListener("DOMContentLoaded", () => {
         if (typeof hj === "function") {
           hj("event", `faq_collapsed_${questionId}`);
         }
-        item.removeAttribute("data-opened-by-search"); // Reset flag if manually closed
-        item.removeAttribute("data-opened-by-user"); // Reset flag if manually closed
+        item.removeAttribute("data-opened-by-search");
+        item.removeAttribute("data-opened-by-user");
       } else {
-        // If it was closed and user clicked to open it
-        item.open = true; // Set open immediately to apply summary styles
-        if (answer) {
-          answer.style.maxHeight = answer.scrollHeight + "px";
-          answer.style.paddingTop = "1.6rem";
-          answer.style.paddingBottom = "2.8rem";
-          answer.style.opacity = "1";
-        }
+        item.open = true;
 
-        // For accessibility and better UX, scroll to the opened item if it's off-screen
         setTimeout(() => {
           const rect = item.getBoundingClientRect();
-          // Check if top is above viewport OR bottom is below viewport (partially or fully off screen)
           if (rect.top < 0 || rect.bottom > window.innerHeight) {
             item.scrollIntoView({ behavior: "smooth", block: "nearest" });
           }
-        }, 450); // Delay slightly after animation starts
+        }, 450); 
 
-        // GA4 Event: Track FAQ expand
         if (typeof gtag === "function") {
           gtag("event", "faq_expand", {
             event_category: "FAQ Interaction",
@@ -334,13 +245,14 @@ document.addEventListener("DOMContentLoaded", () => {
         if (typeof hj === "function") {
           hj("event", `faq_expanded_${questionId}`);
         }
-        // Mark this item as opened by user
         item.setAttribute("data-opened-by-user", "true");
-        item.removeAttribute("data-opened-by-search"); // Ensure it's not marked as opened by search if user interacts
+        item.removeAttribute("data-opened-by-search"); 
       }
     });
+  }
 
-    // Add a visual indicator for keyboard focus (Cognitive Psychology: Affordance)
+  faqItems.forEach((item) => {
+    const summary = item.querySelector("summary");
     summary.addEventListener("focus", () => {
       summary.style.outline = `3px solid ${getComputedStyle(
         document.documentElement

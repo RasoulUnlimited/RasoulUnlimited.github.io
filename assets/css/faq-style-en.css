@@ -256,15 +256,28 @@ body {
 }
 
 .faq-answer {
-  padding: 0 2.8rem 2.8rem 2.8rem; /* Generous padding for the answer text */
+  padding: 0 2.8rem; /* Horizontal padding maintained */
   margin: 0;
   color: var(--text-muted);
   border-top: 1px solid #f0f4f7; /* Very light, clean separator */
   font-size: 1.2rem; /* Slightly larger answer text for superior readability */
   line-height: 1.8;
-  background-color: var(
-    --bg-section
-  ); /* Consistent white background for answer content */
+  background-color: var(--bg-section); /* Consistent white background */
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  transition: max-height 0.4s var(--ease-bezier),
+    padding 0.4s var(--ease-bezier),
+    opacity 0.4s ease-out;
+}
+
+.faq-item[open] > .faq-answer {
+  max-height: 1000px;
+  opacity: 1;
+  padding-top: 1.6rem;
+  padding-bottom: 2.8rem;
 }
 
 .faq-answer p {

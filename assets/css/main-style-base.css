@@ -1,0 +1,27 @@
+body {
+    margin: 0;
+    font-family: var(--font-body, sans-serif);
+  }
+  
+  .dynamic-toast {
+    position: fixed;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.8);
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    z-index: 1000;
+    font-size: 0.875rem;
+  }
+  
+  .dark-mode {
+    background: #0f172a;
+    color: #fff;
+  }
+  
+  .light-mode {
+    background: #ffffff;
+    color: #0f172a;
+  }
