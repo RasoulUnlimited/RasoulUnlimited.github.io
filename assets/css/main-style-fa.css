@@ -756,7 +756,7 @@ section h2::after {
 .card:hover {
   transform: translateY(-8px);
   box-shadow: 0 18px 50px var(--shadow-color-strong);
-  filter: brightness(1.05) saturate(1.05);
+  filter: saturate(1.05);
 }
 .card:active {
   transform: translateY(-2px);
@@ -979,8 +979,8 @@ img.loaded {
 }
 .card .card-links a:hover,
 .card .card-links a:focus-visible {
-  background-color: var(--primary-color);
-  color: white;
+  background-color: var(--accent-color);
+  color: #fff;
   transform: translateY(-2px);
   text-decoration: none;
   box-shadow: 0 4px 8px var(--shadow-color-medium);
