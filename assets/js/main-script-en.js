@@ -570,6 +570,12 @@ document.body.prepend(scrollProgressBar);
 let lastScrollY = 0;
 let ticking = false; // Flag to optimize scroll event handling with requestAnimationFrame
 let hasReachedEndOfPageSession = false; // Flag to prevent multiple "end of page" toasts
+let docHeight = document.documentElement.scrollHeight;
+
+// Update document height on resize to keep progress accurate
+window.addEventListener("resize", () => {
+  docHeight = document.documentElement.scrollHeight;
+});
 
 /**
  * Updates the scroll progress bar width and color, and controls the visibility
@@ -577,8 +583,7 @@ let hasReachedEndOfPageSession = false; // Flag to prevent multiple "end of page
  * Uses requestAnimationFrame for smoother updates.
  */
 function updateScrollProgressAndButton() {
-  const totalHeight =
-    document.documentElement.scrollHeight - window.innerHeight;
+  const totalHeight = docHeight - window.innerHeight;
   const scrolled = lastScrollY;
   const progress = (scrolled / totalHeight) * 100;
 
@@ -1606,50 +1611,14 @@ scrollToTopButton.className += " sohrabi-nav-button"; // Semantic DOM Hook
 document.body.appendChild(scrollToTopButton);
 
 // Initial styling and positioning
-scrollToTopButton.style.opacity = "0";
-scrollToTopButton.style.transform = "translateY(20px)";
-scrollToTopButton.style.transition =
-  "opacity 0.3s ease-out, transform 0.3s ease-out";
-scrollToTopButton.style.position = "fixed";
-scrollToTopButton.style.bottom = "80px"; // Adjusted to make space for the share button
-scrollToTopButton.style.right = "20px";
-scrollToTopButton.style.backgroundColor = "var(--accent-color)";
-scrollToTopButton.style.color = "white";
-scrollToTopButton.style.border = "none";
-scrollToTopButton.style.borderRadius = "50%";
-scrollToTopButton.style.width = "50px";
-scrollToTopButton.style.height = "50px";
-scrollToTopButton.style.display = "flex";
-scrollToTopButton.style.justifyContent = "center";
-scrollToTopButton.style.alignItems = "center";
-scrollToTopButton.style.fontSize = "1.5rem";
-scrollToTopButton.style.boxShadow = "0 4px 15px rgba(0, 0, 0, 0.2)";
-scrollToTopButton.style.cursor = "pointer";
-scrollToTopButton.style.zIndex = "999";
-scrollToTopButton.classList.add("cta-pulse-effect"); // Add pulse effect
+scrollToTopButton.classList.add("scroll-action", "cta-pulse-effect");
 
 // Show/hide scroll to top button on scroll
 window.addEventListener("scroll", () => {
   if (window.scrollY > 500) {
-    // Show if scrolled down more than 500px
-    if (!scrollToTopButton.classList.contains("show")) {
-      scrollToTopButton.classList.add("show");
-      scrollToTopButton.style.opacity = "1";
-      scrollToTopButton.style.transform = "translateY(0)";
-    }
+    scrollToTopButton.classList.add("show");
   } else {
-    if (scrollToTopButton.classList.contains("show")) {
-      scrollToTopButton.style.opacity = "0";
-      scrollToTopButton.style.transform = "translateY(20px)";
-      scrollToTopButton.addEventListener(
-        "transitionend",
-        function handler() {
-          scrollToTopButton.classList.remove("show");
-          scrollToTopButton.removeEventListener("transitionend", handler);
-        },
-        { once: true }
-      );
-    }
+    scrollToTopButton.classList.remove("show");
   }
 });
 
