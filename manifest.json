@@ -13,5 +13,6 @@
   "theme_color": "#ffffff",
   "background_color": "#0f172a",
   "lang": "fa",
+  "dir": "rtl",
   "description": "Personal website of Mohammad Rasoul Sohrabi — Developer, Designer, Content Creator, and Biomedical Engineering student."
 }

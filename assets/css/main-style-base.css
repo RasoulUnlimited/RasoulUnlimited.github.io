@@ -25,3 +25,7 @@ body {
     background: #ffffff;
     color: #0f172a;
   }
+
+.hidden {
+    display: none;
+}
