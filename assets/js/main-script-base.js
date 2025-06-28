@@ -76,5 +76,10 @@
       { passive: true }
     );
   
-    document.getElementById('current-year').textContent = new Date().getFullYear();
+    const yearEl =
+      document.getElementById('current-year') ||
+      document.getElementById('footer-year');
+    if (yearEl) {
+      yearEl.textContent = new Date().getFullYear();
+    }
   })();

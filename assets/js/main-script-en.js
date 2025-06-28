@@ -193,7 +193,12 @@ function handleMotionPreference() {
 }
 
 // Dynamically set the current year for the copyright notice
-document.getElementById("current-year").textContent = new Date().getFullYear();
+const yearElEn =
+  document.getElementById("current-year") ||
+  document.getElementById("footer-year");
+if (yearElEn) {
+  yearElEn.textContent = new Date().getFullYear();
+}
 
 // Dynamically set the last updated date in English format
 document.addEventListener("DOMContentLoaded", () => {
@@ -565,6 +570,9 @@ document.body.addEventListener("click", (event) => {
 const scrollProgressBar = document.createElement("div");
 scrollProgressBar.id = "scroll-progress-bar";
 scrollProgressBar.className = "sohrabi-progress"; // Semantic DOM Hook
+scrollProgressBar.setAttribute("role", "progressbar");
+scrollProgressBar.setAttribute("aria-valuemin", "0");
+scrollProgressBar.setAttribute("aria-valuemax", "100");
 document.body.prepend(scrollProgressBar);
 
 let lastScrollY = 0;
