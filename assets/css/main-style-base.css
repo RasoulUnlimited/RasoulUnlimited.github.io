@@ -76,3 +76,23 @@ body {
 .mb-6 {
   margin-bottom: 1.5rem;
 }
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--accent-color);
+  outline-offset: var(--space-xs);
+  box-shadow: 0 0 0 4px var(--shadow-color-light);
+  z-index: 10;
+  position: relative;
+}
+
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible),
+input:focus:not(:focus-visible),
+select:focus:not(:focus-visible),
+textarea:focus:not(:focus-visible) {
+  outline: none;
+}
