@@ -539,9 +539,18 @@ textarea:focus:not(:focus-visible) {
   color: var(--primary-color);
 }
 
+.navbar nav a[aria-current="page"] {
+  color: var(--primary-color);
+}
+
 .navbar nav .active::after {
   width: 100%;
 }
+
+.navbar nav a[aria-current="page"]::after {
+  width: 100%;
+}
+
 
 #hero {
   position: relative;

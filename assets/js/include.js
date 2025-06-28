@@ -34,6 +34,11 @@ function setActiveNavLink() {
     const linkPath = normalize(new URL(link.href).pathname);
     const isActive = linkPath === current;
     link.classList.toggle('active', isActive);
+    if (isActive) {
+      link.setAttribute('aria-current', 'page');
+    } else {
+      link.removeAttribute('aria-current');
+    }
     if (link.parentElement && link.parentElement.tagName === 'LI') {
       link.parentElement.classList.toggle('active', isActive);
     }
