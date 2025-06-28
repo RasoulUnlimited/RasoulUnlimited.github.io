@@ -40,7 +40,7 @@
   --search-border: #ccd6e0;
   --search-focus-shadow: rgba(52, 152, 219, 0.3);
 
-  --space-unit: 8px;
+  --space-unit: 0.5rem;
   --space-xxs: calc(var(--space-unit) * 0.5);
   --space-xs: var(--space-unit);
   --space-sm: calc(var(--space-unit) * 1.5);

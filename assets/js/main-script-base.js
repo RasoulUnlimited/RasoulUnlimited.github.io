@@ -12,6 +12,8 @@
   
     function createToast(message) {
       const toast = document.createElement('div');
+      toast.setAttribute('role', 'status');
+      toast.setAttribute('aria-live', 'polite');
       toast.className = 'dynamic-toast';
       toast.textContent = message;
       document.body.appendChild(toast);
@@ -21,7 +23,10 @@
     function applyTheme(theme, showToast) {
       document.body.classList.toggle('dark-mode', theme === 'dark');
       document.body.classList.toggle('light-mode', theme === 'light');
-      if (themeToggleInput) themeToggleInput.checked = theme === 'dark';
+      if (themeToggleInput) {
+        themeToggleInput.checked = theme === 'dark';
+        themeToggleInput.setAttribute('aria-checked', theme === 'dark');
+      }
       if (showToast && window.langStrings.themeChanged) {
         createToast(window.langStrings.themeChanged(theme));
       }
@@ -34,6 +39,7 @@
     }
   
     if (themeToggleInput) {
+      themeToggleInput.setAttribute('aria-checked', themeToggleInput.checked);
       themeToggleInput.addEventListener('change', () => {
         const newTheme = themeToggleInput.checked ? 'dark' : 'light';
         applyTheme(newTheme, true);
