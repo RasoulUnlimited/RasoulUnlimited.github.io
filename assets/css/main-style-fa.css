@@ -2021,7 +2021,7 @@ img.loaded {
   right: 20px;
   background-color: var(--toast-bg);
   color: var(--toast-color);
-  padding: 10px 15px;
+  padding: var(--space-sm) var(--space-md);
   border-radius: 50px;
   font-size: 0.9rem;
   font-weight: bold;
@@ -2046,7 +2046,7 @@ img.loaded {
 }
 
 #explore-hint i {
-  margin-left: 8px;
+  margin-left: var(--space-xs);
   margin-right: 0;
 }
 
@@ -2105,7 +2105,7 @@ img.loaded {
   transform: translateX(-50%) translateY(150%);
   background-color: var(--toast-bg);
   color: var(--toast-color);
-  padding: 15px 30px;
+  padding: var(--space-md) var(--space-xl);
   border-radius: 12px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
   z-index: 1003;
@@ -2136,7 +2136,7 @@ img.loaded {
 .dynamic-toast i {
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
-  margin-left: 10px;
+  margin-left: var(--space-sm);
   font-size: 1.2em;
 }
 
@@ -2263,7 +2263,7 @@ img.loaded {
   margin: 0;
   line-height: 1;
   transition: transform 0.2s ease-in-out;
-  margin-right: 10px;
+  margin-right: var(--space-sm);
   will-change: transform;
 }
 
@@ -2789,14 +2789,14 @@ img.loaded {
 
 @media (max-width: 480px) {
   .dynamic-toast {
-    padding: 10px 15px;
+    padding: var(--space-sm) var(--space-md);
     font-size: 0.9rem;
     max-width: calc(100% - 30px);
     white-space: normal;
   }
   .dynamic-toast i {
     font-size: 1em;
-    margin-left: 6px;
+    margin-left: var(--space-xs);
   }
   .fun-fact-close {
     font-size: 1rem;
