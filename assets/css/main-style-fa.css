@@ -1365,6 +1365,18 @@ img.loaded {
   will-change: transform, box-shadow;
 }
 
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+}
+
+.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
 @keyframes ctaPulse {
   0% {
     transform: scale(1);
@@ -1396,8 +1408,6 @@ img.loaded {
   font-size: 1.5rem;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   cursor: pointer;
-  opacity: 0;
-  visibility: hidden;
   transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out,
     transform 0.3s var(--transition-easing-springy), background-color 0.3s ease,
     box-shadow 0.3s ease;
@@ -1405,7 +1415,35 @@ img.loaded {
   will-change: opacity, visibility, transform, background-color, box-shadow;
 }
 
-#scroll-to-top.show {
+#share-page-button {
+  position: fixed;
+  bottom: 140px;
+  right: 20px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out,
+    visibility 0.3s ease-out;
+  z-index: 999;
+  will-change: opacity, visibility, transform, background-color, box-shadow;
+}
+
+#share-page-button.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+#scroll-to-top.visible {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
@@ -1996,7 +2034,15 @@ img.loaded {
   animation: pulse 2s infinite;
   direction: rtl;
   text-align: right;
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out,
+    visibility 0.5s ease-out;
   will-change: transform, box-shadow, opacity;
+}
+
+#explore-hint.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
 #explore-hint i {
@@ -2838,7 +2884,6 @@ img.loaded {
     transition: none !important;
     animation: none !important;
     transform: none !important;
-    opacity: 1 !important;
     filter: none !important;
     box-shadow: none !important;
     outline: none !important;
