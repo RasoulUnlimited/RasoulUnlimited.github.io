@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+function activatePreloadedStyles() {
   document
     .querySelectorAll('link[rel="preload"][as="style"][data-make-stylesheet]')
     .forEach((preloadLink) => {
@@ -10,4 +10,10 @@ document.addEventListener("DOMContentLoaded", function () {
       newLink.referrerPolicy = preloadLink.referrerPolicy || "no-referrer";
       preloadLink.parentNode.insertBefore(newLink, preloadLink.nextSibling);
     });
-});
+  }
+
+  if ("requestIdleCallback" in window) {
+    window.requestIdleCallback(activatePreloadedStyles);
+  } else {
+    window.addEventListener("load", activatePreloadedStyles);
+  }

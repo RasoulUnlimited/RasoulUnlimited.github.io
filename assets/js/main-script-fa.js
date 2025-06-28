@@ -428,6 +428,16 @@ document.addEventListener("click", function (event) {
   }
 });
 
+document.addEventListener("keydown", function (event) {
+  if (event.key === "Enter" || event.key === " ") {
+    const card = event.target.closest(".card");
+    if (card) {
+      event.preventDefault();
+      card.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+    }
+  }
+});
+
 document.body.addEventListener("click", (event) => {
   const target = event.target;
   const interactiveElement = target.closest(
