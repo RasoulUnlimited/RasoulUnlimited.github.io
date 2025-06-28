@@ -14,12 +14,10 @@ npm install
 npm install gulp-cli
 npm run build
 ```
-The `build` script compiles and minifies static assets using Gulp. Generated
-`*.min.css` and `*.min.js` files are not tracked in Git, so run this command
-before deploying locally or rely on the automated GitHub Actions workflow.
+The `build` script compiles and minifies static assets using Gulp.
 
 ## Deployment notes
-The site is hosted on **GitHub Pages** and served through **Cloudflare** for improved performance and security. A GitHub Actions workflow automatically builds the minified assets and deploys the site on every push to `main`. Update the `CNAME` file when changing the custom domain.
+The site is hosted on **GitHub Pages** and served through **Cloudflare** for improved performance and security. Update the `CNAME` file when changing the custom domain.
 
 ## Cloudflare Worker
 A small Worker inspects the `User-Agent` header of each request. When a request

@@ -1,5 +1,1 @@
 node_modules/
-
-# Ignore minified assets
-assets/**/*.min.css
-assets/**/*.min.js
