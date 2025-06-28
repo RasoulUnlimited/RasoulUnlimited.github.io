@@ -59,15 +59,30 @@
     <link rel="entity-profile" href="/.well-known/entity-profile.json" />
   </head>
   <body class="min-h-screen flex flex-col items-center justify-center text-center p-8">
-    <header>
-      <nav aria-label="بازگشت به صفحه اصلی">
-        <a href="/" class="cta-button">صفحه اصلی</a>
-      </nav>
-    </header>
+    <noscript>
+      <header class="navbar" role="banner">
+        <nav role="navigation" aria-label="پیوندهای اصلی سایت">
+          <a href="/index.html">صفحه اصلی</a>
+          <a href="/about.html">درباره</a>
+          <a href="/proof.html">گواهی‌ها</a>
+          <a href="/press.html">رسانه</a>
+          <a href="/faq/">سوالات متداول</a>
+          <a href="/contact.html">تماس</a>
+        </nav>
+      </header>
+    </noscript>
+    <div data-include-html="includes/header-fa.html"></div>
     <main id="main-content">
-    <h1 class="text-4xl font-bold mb-4">۴۰۴</h1>
-    <p class="text-lg mb-6">متأسفانه صفحه مورد نظر شما پیدا نشد.</p>
-    <a href="/" class="cta-button">بازگشت به صفحه اصلی</a>
-  </main>
+      <h1 class="text-4xl font-bold mb-4">۴۰۴</h1>
+      <p class="text-lg mb-6">متأسفانه صفحه مورد نظر شما پیدا نشد.</p>
+      <a href="/" class="cta-button">بازگشت به صفحه اصلی</a>
+    </main>
+    <noscript>
+      <footer class="footer">
+        <p>&copy; <span id="footer-year"></span> Rasoul Unlimited</p>
+      </footer>
+    </noscript>
+    <div data-include-html="includes/footer.html"></div>
+    <script src="assets/js/include.min.js" defer></script>
   </body>
 </html>

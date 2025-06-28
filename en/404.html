@@ -60,15 +60,30 @@
     <link rel="entity-profile" href="/.well-known/entity-profile.json" />
   </head>
   <body class="min-h-screen flex flex-col items-center justify-center text-center p-8">
-    <header>
-      <nav aria-label="Back to home page">
-        <a href="/en/" hreflang="en-US" class="cta-button">Home</a>
-      </nav>
-    </header>
+    <noscript>
+      <header class="navbar" role="banner">
+        <nav role="navigation" aria-label="Main site links">
+          <a href="/en/index.html">Home</a>
+          <a href="/en/about.html">About</a>
+          <a href="/en/proof.html">Proof</a>
+          <a href="/en/press.html">Press</a>
+          <a href="/en/faq/">FAQ</a>
+          <a href="/en/contact.html">Contact</a>
+        </nav>
+      </header>
+    </noscript>
+    <div data-include-html="../includes/header-en.html"></div>
     <main id="main-content">
-    <h1 class="text-4xl font-bold mb-4">404</h1>
-    <p class="text-lg mb-6">Unfortunately, the page you requested could not be found.</p>
-    <a href="/en/" hreflang="en-US" class="cta-button">Back to Home</a>
-  </main>
+      <h1 class="text-4xl font-bold mb-4">404</h1>
+      <p class="text-lg mb-6">Unfortunately, the page you requested could not be found.</p>
+      <a href="/en/" hreflang="en-US" class="cta-button">Back to Home</a>
+    </main>
+    <noscript>
+      <footer class="footer">
+        <p>&copy; <span id="footer-year"></span> Rasoul Unlimited</p>
+      </footer>
+    </noscript>
+    <div data-include-html="../includes/footer.html"></div>
+    <script src="../assets/js/include.min.js" defer></script>
   </body>
 </html>
