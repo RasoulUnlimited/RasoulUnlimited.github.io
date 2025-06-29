@@ -15,5 +15,5 @@ function activatePreloadedStyles() {
 if ("requestIdleCallback" in window) {
   window.requestIdleCallback(activatePreloadedStyles);
 } else {
-  window.addEventListener("load", activatePreloadedStyles);
+  setTimeout(activatePreloadedStyles, 1);
 }
