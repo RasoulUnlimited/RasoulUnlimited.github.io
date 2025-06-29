@@ -69,13 +69,19 @@
   padding: var(--space-xxl) var(--space-lg);
 }
 
-.not-found-hero svg,
 .not-found-hero h1,
 .not-found-hero p,
 .not-found-hero nav {
   opacity: 0;
   animation: fadeIn404 var(--transition-duration-long)
     var(--transition-easing-standard) forwards;
+}
+
+.not-found-hero svg {
+  opacity: 0;
+  animation: fadeIn404 var(--transition-duration-long)
+      var(--transition-easing-standard) forwards,
+    float404 8s ease-in-out infinite;
 }
 
 .not-found-hero h1 {
@@ -96,6 +102,18 @@
 @keyframes fadeIn404 {
   to {
     opacity: 1;
+  }
+}
+
+@keyframes float404 {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
   }
 }
 
@@ -246,4 +264,30 @@
   margin: 0 auto var(--space-lg);
   color: var(--text-color-light);
   font-size: 1.125rem;
+}
+
+/* Contact form */
+.contact-form {
+  display: grid;
+  gap: var(--space-sm);
+  max-width: 480px;
+  margin: var(--space-lg) auto;
+}
+.contact-form label {
+  font-weight: 500;
+}
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: var(--space-xs);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  font: inherit;
+}
+.contact-form textarea {
+  min-height: 6rem;
+  resize: vertical;
+}
+.contact-form button {
+  width: fit-content;
 }

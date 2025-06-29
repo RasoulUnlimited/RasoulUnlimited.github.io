@@ -199,7 +199,7 @@
         <main id="main-content">
           <section
             id="hero"
-            class="fade-in"
+            class="hero section fade-in"
             role="region"
             aria-labelledby="hero-tagline"
           >
@@ -227,8 +227,13 @@
             این اشاره‌ها نشان می‌دهد پروژه‌های تأییدشدهٔ او چگونه بر جامعه
             فناوری اثر گذاشته و اعتبارش را افزایش داده‌اند.
           </p>
+          <nav class="filter-bar">
+            <button data-filter="all">همه</button>
+            <button data-filter="interview">مصاحبه‌ها</button>
+            <button data-filter="article">مقالات</button>
+          </nav>
           <section class="grid grid-3">
-            <div class="presskit-card">
+            <div class="presskit-card" data-category="interview">
               <img
                 src="assets/images/logo-virgool.svg"
                 alt="لوگوی ویرگول – مقاله دربارهٔ رسول آنلیمیتد"
@@ -243,7 +248,7 @@
                 <p>Virgool, May 12, 2020</p>
               </article>
             </div>
-            <div class="presskit-card">
+            <div class="presskit-card" data-category="article">
               <img
                 src="assets/images/logo-sut.svg"
                 alt="لوگوی دانشگاه صنعتی سهند – معرفی رسول آنلیمیتد"
@@ -257,7 +262,7 @@
                 <p>Sahand University of Technology, March 18, 2024</p>
               </article>
             </div>
-            <div class="presskit-card">
+            <div class="presskit-card" data-category="interview">
               <img
                 src="assets/images/logo-ut.svg"
                 alt="لوگوی دانشگاه تهران – مصاحبه با رسول آنلیمیتد"
@@ -291,5 +296,6 @@
     <div data-include-html="includes/footer.html"></div>
     <script src="assets/js/include.min.js" defer></script>
     <script src="assets/js/main-script-fa.min.js" defer></script>
+    <script src="assets/js/gallery-filter.min.js" defer></script>
   </body>
 </html>

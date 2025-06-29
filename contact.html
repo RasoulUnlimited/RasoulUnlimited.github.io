@@ -231,6 +231,20 @@
                 </p>
               </div>
             </div>
+            <form
+              id="contact-form"
+              action="https://formspree.io/f/yourID"
+              method="POST"
+              class="contact-form"
+            >
+              <label for="name">نام</label>
+              <input id="name" name="name" required />
+              <label for="email">ایمیل</label>
+              <input id="email" name="_replyto" type="email" required />
+              <label for="message">پیام</label>
+              <textarea id="message" name="message" required></textarea>
+              <button type="submit" class="cta-button">ارسال</button>
+            </form>
           </section>
         </main>
       </div>
