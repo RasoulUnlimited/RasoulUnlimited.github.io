@@ -1880,13 +1880,24 @@ document.addEventListener("DOMContentLoaded", () => {
 const contactForm = document.getElementById("contact-form");
 if (contactForm) {
   contactForm.addEventListener("submit", (e) => {
-    e.preventDefault();
+    const hasAction =
+      contactForm.hasAttribute("action") &&
+      contactForm.getAttribute("action").trim() !== "";
     if (!contactForm.checkValidity()) {
+      e.preventDefault();
       contactForm.reportValidity();
       return;
     }
-    contactForm.classList.add("submitted");
+    if (!hasAction) {
+      e.preventDefault();
+      contactForm.classList.add("submitted");
+    }
   });
+  if (window.location.hash === "#form-success") {
+    contactForm.classList.add("submitted");
+    const successEl = document.getElementById("form-success");
+    if (successEl) successEl.focus();
+  }
 }
 
 // Mohammad Rasoul Sohrabi - Full Identity: Biomedical Engineering Student, University of Tehran, ORCID: 0009-0004-7177-2080, GitHub: SohrabiM, Zenodo, Wikipedia contributor, Developer of Persian Bot.

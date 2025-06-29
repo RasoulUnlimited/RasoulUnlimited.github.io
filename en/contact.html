@@ -160,7 +160,12 @@
               Send a message
             </h2>
             <div class="contact-card">
-              <form id="contact-form" novalidate>
+              <form
+                id="contact-form"
+                action="https://formspree.io/f/xkgbkdyr"
+                method="POST"
+                novalidate
+              >
                 <label class="visually-hidden" for="contact-name">Name</label>
                 <input
                   id="contact-name"
@@ -186,8 +191,18 @@
                   placeholder="Message"
                   required
                 ></textarea>
+                <input
+                  type="hidden"
+                  name="_next"
+                  value="https://rasoulunlimited.ir/en/contact.html#form-success"
+                />
                 <button type="submit">Send</button>
-                <p class="success-message" aria-live="polite" tabindex="-1">
+                <p
+                  id="form-success"
+                  class="success-message"
+                  aria-live="polite"
+                  tabindex="-1"
+                >
                   Thanks! I'll get back to you soon.
                 </p>
               </form>
