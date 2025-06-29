@@ -28,6 +28,7 @@ export default {
         "</head>",
         `${crawlerScript}</head>`
       );
+      headers.set("Cache-Control", "public, max-age=600");
       return new Response(html, {
         status: response.status,
         statusText: response.statusText,

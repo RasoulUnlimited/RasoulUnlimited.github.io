@@ -24,7 +24,7 @@
   color: #bbb;
   font-size: 0.9rem;
   text-decoration: none;
-  padding: 4px 8px;
+  padding: var(--space-1) var(--space-2);
   border-radius: 6px;
   transition: color var(--transition-duration-short) ease,
     background-color var(--transition-duration-short) ease;
@@ -691,7 +691,7 @@ section h2::after {
 }
 
 .card:hover {
-  transform: translateY(-8px);
+  transform: translateY(calc(var(--space-2) * -1));
   box-shadow: 0 18px 50px var(--shadow-color-strong);
   filter: saturate(1.05);
 }
@@ -792,7 +792,7 @@ img.loaded {
 .lang-switcher .lang-link {
   text-decoration: none;
   color: var(--primary-color);
-  padding: 4px 8px;
+  padding: var(--space-1) var(--space-2);
   transition: color var(--transition-duration-short)
     var(--transition-easing-standard);
   will-change: color, text-decoration;

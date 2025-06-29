@@ -36,6 +36,9 @@ secondary JSON‑LD snippet and adds an `X-Crawler-Handled` header to the respon
 2. Copy the code from [`cloudflare/worker.js`](cloudflare/worker.js) into the editor.
 3. Assign the Worker to your GitHub Pages domain and deploy.
 
+The Worker also adds a `Cache-Control: public, max-age=600` header so
+responses are cached for up to 10 minutes.
+
 ## Structured data and profiles
 
 - [`foaf.rdf`](foaf.rdf) – FOAF profile in RDF
