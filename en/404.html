@@ -6,6 +6,7 @@
     <meta name="robots" content="noindex" />
     <title>404 - Page Not Found</title>
     <meta name="description" content="Page not found" />
+    <link rel="stylesheet" href="../assets/css/design-system.min.css" />
     <link rel="stylesheet" href="../assets/css/main-style-en.min.css" />
     <link rel="author" href="https://rasoulunlimited.ir/#person" data-person="rasoul-unlimited" />
     <link rel="alternate" type="application/ld+json" href="/schema/identity.jsonld" />
@@ -57,6 +58,24 @@
         ]
       }
     </script>
+    <style nonce="RasoulCSP">
+      #not-found-illustration,
+      .fade-in-button {
+        opacity: 0;
+        animation: fadeIn404 var(--transition-duration-long)
+          var(--transition-easing-standard) forwards;
+      }
+
+      .fade-in-button {
+        animation-delay: 0.2s;
+      }
+
+      @keyframes fadeIn404 {
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
     <link rel="entity-profile" href="/.well-known/entity-profile.json" />
   </head>
   <body class="min-h-screen flex flex-col items-center justify-center text-center p-8">
@@ -74,9 +93,39 @@
     </noscript>
     <div data-include-html="../includes/header-en.html"></div>
     <main id="main-content">
+      <svg
+      id="not-found-illustration"
+      class="mb-6"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 200 200"
+      width="200"
+      height="200"
+      aria-hidden="true"
+    >
+      <circle
+        cx="100"
+        cy="100"
+        r="90"
+        fill="var(--container-bg)"
+        stroke="var(--accent-color)"
+        stroke-width="4"
+      />
+      <text
+        x="100"
+        y="115"
+        text-anchor="middle"
+        font-size="72"
+        font-family="var(--font-heading)"
+        fill="var(--text-color)"
+      >404</text>
+    </svg>
       <h1 class="text-4xl font-bold mb-4">404</h1>
       <p class="text-lg mb-6">Unfortunately, the page you requested could not be found.</p>
-      <a href="/en/" hreflang="en-US" class="cta-button">Back to Home</a>
+      <nav class="flex flex-col gap-4">
+        <a href="/en/index.html" class="cta-button fade-in-button" hreflang="en-US">Home</a>
+        <a href="/en/about.html" class="cta-button fade-in-button">About</a>
+        <a href="/en/contact.html" class="cta-button fade-in-button">Contact</a>
+      </nav>
     </main>
     <noscript>
       <footer class="footer">

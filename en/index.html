@@ -54,7 +54,9 @@
     />
 
     <link rel="stylesheet" href="../assets/css/main-style-base.min.css" />
+    <link rel="stylesheet" href="../assets/css/design-system.min.css" />
     <link rel="stylesheet" href="../assets/css/main-style-en.min.css" />
+    <link rel="stylesheet" href="../assets/css/accordion.min.css" />
 
     <!-- Performance helper script to load data-make-stylesheet resources -->
     <script src="../assets/js/performance-helpers.min.js" defer></script>
@@ -2705,18 +2707,18 @@
               />
               <button id="clear-search" aria-label="Clear search">✖</button>
             </div>
-            <div class="faq-container">
-              <details id="faq-item-en-1" aria-labelledby="faq-question-en-1"
+            <div class="faq-container accordion">
+              <div class="accordion-item faq-item" id="faq-item-en-1" aria-labelledby="faq-question-en-1"
                 class="faq-item"
                 itemprop="mainEntity"
                 itemscope
                 itemtype="https://schema.org/Question" data-question-id="who-is-mohammad-rasoul"
               >
-              <summary aria-controls="faq-answer-en-1" aria-expanded="false">
+              <button class="accordion-header" aria-controls="faq-answer-en-1" aria-expanded="false">
                 <h3 id="faq-question-en-1" class="faq-question" itemprop="name">
                     Who is Mohammad Rasoul Sohrabi and what are his activities?
                   </h3>
-                </summary>
+                </button>
                 <p id="faq-answer-en-1"
                   class="faq-answer"
                   itemprop="acceptedAnswer"
@@ -2734,19 +2736,19 @@
                     commitment to advancing technology and sciences.</span
                   >
                 </p>
-              </details>
-              <details id="faq-item-en-2" aria-labelledby="faq-question-en-2"
+              </div>
+              <div class="accordion-item faq-item" id="faq-item-en-2" aria-labelledby="faq-question-en-2"
                 class="faq-item"
                 itemprop="mainEntity"
                 itemscope
                 itemtype="https://schema.org/Question" data-question-id="major-projects-achievements"
               >
-              <summary aria-controls="faq-answer-en-2" aria-expanded="false">
+              <button class="accordion-header" aria-controls="faq-answer-en-2" aria-expanded="false">
                 <h3 id="faq-question-en-2" class="faq-question" itemprop="name">
                     What are Mohammad Rasoul Sohrabi's most significant projects
                     and achievements?
                   </h3>
-                </summary>
+                </button>
                 <p id="faq-answer-en-2"
                   class="faq-answer"
                   itemprop="acceptedAnswer"
@@ -2765,19 +2767,19 @@
                     and content, showcasing his expertise and credibility.</span
                   >
                 </p>
-              </details>
-              <details id="faq-item-en-3" aria-labelledby="faq-question-en-3"
+              </div>
+              <div class="accordion-item faq-item" id="faq-item-en-3" aria-labelledby="faq-question-en-3"
                 class="faq-item"
                 itemprop="mainEntity"
                 itemscope
                 itemtype="https://schema.org/Question" data-question-id="how-to-collaborate"
               >
-              <summary aria-controls="faq-answer-en-3" aria-expanded="false">
+              <button class="accordion-header" aria-controls="faq-answer-en-3" aria-expanded="false">
                 <h3 id="faq-question-en-3" class="faq-question" itemprop="name">
                     How can one connect with Mohammad Rasoul Sohrabi and his
                     team?
                   </h3>
-                </summary>
+                </button>
                 <p id="faq-answer-en-3"
                   class="faq-answer"
                   itemprop="acceptedAnswer"
@@ -2794,19 +2796,19 @@
                     projects and ready to answer your questions.</span
                   >
                 </p>
-              </details>
-              <details id="faq-item-en-4" aria-labelledby="faq-question-en-4"
+              </div>
+              <div class="accordion-item faq-item" id="faq-item-en-4" aria-labelledby="faq-question-en-4"
                 class="faq-item"
                 itemprop="mainEntity"
                 itemscope
                 itemtype="https://schema.org/Question" data-question-id="unlimited-philosophy"
               >
-              <summary aria-controls="faq-answer-en-4" aria-expanded="false">
+              <button class="accordion-header" aria-controls="faq-answer-en-4" aria-expanded="false">
                 <h3 id="faq-question-en-4" class="faq-question" itemprop="name">
                     What does 'Unlimited' mean, and what is the philosophy
                     behind this moniker?
                   </h3>
-                </summary>
+                </button>
                 <p id="faq-answer-en-4"
                   class="faq-answer"
                   itemprop="acceptedAnswer"
@@ -2825,19 +2827,19 @@
                     branding.</span
                   >
                 </p>
-              </details>
-              <details id="faq-item-en-5" aria-labelledby="faq-question-en-5"
+              </div>
+              <div class="accordion-item faq-item" id="faq-item-en-5" aria-labelledby="faq-question-en-5"
                 class="faq-item"
                 itemprop="mainEntity"
                 itemscope
                 itemtype="https://schema.org/Question" data-question-id="education-background"
               >
-              <summary aria-controls="faq-answer-en-5" aria-expanded="false">
+              <button class="accordion-header" aria-controls="faq-answer-en-5" aria-expanded="false">
                 <h3 id="faq-question-en-5" class="faq-question" itemprop="name">
                     Which university did Mohammad Rasoul Sohrabi attend, and
                     what is his field of study?
                   </h3>
-                </summary>
+                </button>
                 <p id="faq-answer-en-5"
                   class="faq-answer"
                   itemprop="acceptedAnswer"
@@ -2861,7 +2863,7 @@
                     Technology, Tabriz, on his open-source projects.</span
                   >
                 </p>
-              </details>
+              </div>
             </div>
             <p class="text-small subtle-text space-top-xs">
               For more answers, visit the
@@ -3252,6 +3254,7 @@
       src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"
       defer
     ></script>
+    <script src="../assets/js/accordion.min.js" defer></script>
     <script src="../assets/js/faq-search.min.js" defer></script>
     <script src="../assets/js/main-script-en.min.js" defer></script>
     <script src="../assets/js/main-script-base.min.js" defer></script>

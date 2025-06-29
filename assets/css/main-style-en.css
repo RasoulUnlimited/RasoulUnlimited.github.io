@@ -5,71 +5,74 @@
   */
 
 :root {
-  --primary-color: #005fa3;
-  --secondary-color: #1a1a1a;
-  --accent-color: #0d6efd;
-  --highlight-color: #ffb300;
   --font-body: "Roboto", sans-serif;
-  --font-heading: "Montserrat", sans-serif;
+}
 
-  --background-start-color: #f7f9fc;
-  --background-end-color: #eef3f8;
-  --container-bg: #ffffff;
-  --card-bg: #ffffff;
-  --navbar-bg: rgba(255, 255, 255, 0.95);
-  --giscus-bg: var(--card-bg);
-  --skills-bg: #e9ecef;
-  --toast-bg: var(--primary-color);
-  --toast-color: #fff;
+/* Contact form styles */
+.contact-card {
+  max-width: 460px;
+  margin: var(--space-lg) auto;
+  padding: var(--space-lg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  background-color: var(--card-bg);
+  box-shadow: 0 4px 20px var(--shadow-color-medium);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  transition: transform var(--transition-duration-medium) var(--transition-easing-standard);
+}
 
-  --shadow-color-light: rgba(0, 0, 0, 0.05);
-  --shadow-color-medium: rgba(0, 0, 0, 0.12);
-  --shadow-color-strong: rgba(0, 0, 0, 0.18);
+.contact-card:focus-within {
+  transform: translateY(-4px);
+}
 
-  --text-color: #2f2f2f;
-  --text-color-light: #555555;
-  --text-color-link: var(--accent-color);
-  --heading-color: var(--secondary-color);
-  --tagline-color: #555555;
-  --footer-color: #555555;
-  --lang-switcher-active-color: #000;
+.contact-card input,
+.contact-card textarea {
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  font-size: 1rem;
+  background-color: var(--container-bg);
+  color: var(--text-color);
+}
 
-  --border-color: #e0e0e0;
-  --timeline-line-color: var(--primary-color);
-  --timeline-dot-border-color: var(--primary-color);
-  --timeline-content-border-color: var(--border-color);
-  --giscus-border: none;
-  --search-border: #ccd6e0;
-  --search-focus-shadow: rgba(52, 152, 219, 0.3);
+.contact-card textarea {
+  resize: vertical;
+  min-height: 120px;
+}
 
-  --space-unit: 0.5rem;
-  --space-xxs: calc(var(--space-unit) * 0.5);
-  --space-xs: var(--space-unit);
-  --space-sm: calc(var(--space-unit) * 1.5);
-  --space-md: calc(var(--space-unit) * 2);
-  --space-lg: calc(var(--space-unit) * 3);
-  --space-xl: calc(var(--space-unit) * 4);
-  --space-xxl: calc(var(--space-unit) * 6);
-  --space-xxxl: calc(var(--space-unit) * 10);
-  --section-v-padding: var(--space-xxl);
-  --section-margin-bottom: var(--space-xxxl);
+.contact-card button {
+  align-self: flex-end;
+  padding: var(--space-sm) var(--space-lg);
+  background-color: var(--accent-color);
+  color: #fff;
+  border: none;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  transition: background-color var(--transition-duration-short) var(--transition-easing-standard),
+    transform var(--transition-duration-short) var(--transition-easing-springy);
+}
 
-  --border-radius-sm: 6px;
-  --border-radius-md: 10px;
-  --border-radius-lg: 18px;
-  --border-radius-full: 50%;
+.contact-card button:hover,
+.contact-card button:focus-visible {
+  background-color: var(--primary-color);
+  transform: translateY(-2px);
+}
 
-  --transition-duration-short: 0.2s;
-  --transition-duration-medium: 0.4s;
-  --transition-duration-long: 0.6s;
-  --transition-easing-standard: ease-in-out;
-  --transition-easing-springy: cubic-bezier(0.68, -0.55, 0.27, 1.55);
-  --transition-easing-smooth: cubic-bezier(0.25, 0.8, 0.25, 1);
+.success-message {
+  color: var(--primary-color);
+  text-align: center;
+  font-weight: 600;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
 
-  --max-content-width: 1200px;
-  --max-paragraph-width: 70ch;
-
-  --navbar-height: 80px;
+#contact-form.submitted .success-message {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .micro-profile {
@@ -514,6 +517,14 @@ h1 {
   margin-top: 0;
 }
 
+.hero-icon {
+  width: 1em;
+  height: 1em;
+  margin-inline-start: 0.3rem;
+  fill: currentColor;
+  vertical-align: middle;
+}
+
 section {
   margin-bottom: var(--section-margin-bottom);
   padding-top: var(--section-v-padding);
@@ -630,6 +641,19 @@ section h2::after {
   position: relative;
   z-index: 1;
   outline: none;
+}
+
+.policy-card {
+  border: 2px solid var(--primary-color);
+  transition: box-shadow var(--transition-duration-short)
+      var(--transition-easing-standard),
+    border-color var(--transition-duration-short)
+      var(--transition-easing-standard);
+}
+
+.policy-card:hover,
+.policy-card:focus-within {
+  box-shadow: 0 8px 25px var(--shadow-color-medium);
 }
 
 .card:hover {
@@ -1955,6 +1979,59 @@ section h2::after {
 
 .credential-card a:hover {
   text-decoration: underline;
+}
+
+/* Download card styles */
+.download-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  padding: var(--space-md);
+  display: grid;
+  grid-template-columns: 48px 1fr auto;
+  align-items: center;
+  column-gap: var(--space-md);
+  row-gap: var(--space-xs);
+  box-shadow: 0 2px 6px var(--shadow-color-light);
+  transition: transform var(--transition-duration-medium) var(--transition-easing-standard),
+    box-shadow var(--transition-duration-medium) var(--transition-easing-standard);
+}
+
+.download-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px var(--shadow-color-medium);
+}
+
+.download-card i,
+.download-card img {
+  width: 48px;
+  height: 48px;
+}
+
+.download-card h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--secondary-color);
+}
+
+.download-card .download-btn {
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--border-radius-sm);
+  background-color: var(--accent-color);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  border: none;
+  transition: background-color var(--transition-duration-short) var(--transition-easing-standard),
+    transform var(--transition-duration-short) var(--transition-easing-springy);
+}
+
+.download-card .download-btn:hover,
+.download-card .download-btn:focus-visible {
+  background-color: var(--primary-color);
+  transform: translateY(-2px);
+  text-decoration: none;
+  color: #fff;
 }
 
 /* Press card styles */

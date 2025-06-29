@@ -1,0 +1,65 @@
+:root {
+    --primary-color: #005fa3;
+    --secondary-color: #1a1a1a;
+    --accent-color: #0d6efd;
+    --highlight-color: #ffb300;
+    --background-start-color: #f7f9fc;
+    --background-end-color: #eef3f8;
+    --container-bg: #ffffff;
+    --card-bg: #ffffff;
+    --navbar-bg: rgba(255, 255, 255, 0.95);
+    --giscus-bg: var(--card-bg);
+    --skills-bg: #e9ecef;
+    --toast-bg: var(--primary-color);
+    --toast-color: #fff;
+  
+    --shadow-color-light: rgba(0, 0, 0, 0.05);
+    --shadow-color-medium: rgba(0, 0, 0, 0.12);
+    --shadow-color-strong: rgba(0, 0, 0, 0.18);
+  
+    --text-color: #2f2f2f;
+    --text-color-light: #555555;
+    --text-color-link: var(--accent-color);
+    --heading-color: var(--secondary-color);
+    --tagline-color: #555555;
+    --footer-color: #555555;
+    --lang-switcher-active-color: #000;
+  
+    --border-color: #e0e0e0;
+    --timeline-line-color: var(--primary-color);
+    --timeline-dot-border-color: var(--primary-color);
+    --timeline-content-border-color: var(--border-color);
+    --giscus-border: none;
+    --search-border: #ccd6e0;
+    --search-focus-shadow: rgba(52, 152, 219, 0.3);
+  
+    --space-unit: 0.5rem;
+    --space-xxs: calc(var(--space-unit) * 0.5);
+    --space-xs: var(--space-unit);
+    --space-sm: calc(var(--space-unit) * 1.5);
+    --space-md: calc(var(--space-unit) * 2);
+    --space-lg: calc(var(--space-unit) * 3);
+    --space-xl: calc(var(--space-unit) * 4);
+    --space-xxl: calc(var(--space-unit) * 6);
+    --space-xxxl: calc(var(--space-unit) * 10);
+    --section-v-padding: var(--space-xxl);
+    --section-margin-bottom: var(--space-xxxl);
+  
+    --border-radius-sm: 6px;
+    --border-radius-md: 10px;
+    --border-radius-lg: 18px;
+    --border-radius-full: 50%;
+  
+    --transition-duration-short: 0.2s;
+    --transition-duration-medium: 0.4s;
+    --transition-duration-long: 0.6s;
+    --transition-easing-standard: ease-in-out;
+    --transition-easing-springy: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    --transition-easing-smooth: cubic-bezier(0.25, 0.8, 0.25, 1);
+  
+    --max-content-width: 1200px;
+    --max-paragraph-width: 70ch;
+  
+    --navbar-height: 80px;
+    --font-heading: "Montserrat", sans-serif;
+  }

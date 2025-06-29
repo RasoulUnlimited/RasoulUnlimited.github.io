@@ -96,3 +96,25 @@ select:focus:not(:focus-visible),
 textarea:focus:not(:focus-visible) {
   outline: none;
 }
+
+/* Press card styles */
+.press-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  transition: box-shadow var(--transition-duration-short) var(--transition-easing-standard);
+}
+
+.press-card:hover {
+  box-shadow: 0 4px 12px var(--shadow-color-medium);
+}
+
+.press-card img {
+  width: 48px;
+  height: 48px;
+}
