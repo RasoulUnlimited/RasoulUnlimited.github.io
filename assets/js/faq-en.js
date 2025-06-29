@@ -250,7 +250,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
-  
+
   faqItems.forEach((item) => {
     const summary = item.querySelector("summary");
     summary.addEventListener("focus", () => {

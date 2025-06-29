@@ -3,20 +3,75 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Preconnect to necessary domains for faster resource loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+
+    <!-- Preload critical CSS for faster rendering -->
+    <link
+      rel="preload"
+      as="style"
+      data-href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;700&display=swap"
+      data-make-stylesheet
+    />
+    <link
+      rel="preload"
+      as="style"
+      data-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      data-make-stylesheet
+    />
+    <link
+      rel="preload"
+      as="style"
+      data-href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
+      data-make-stylesheet
+    />
     <title>اعتبارنامه‌ها و DOIها – رسول آنلیمیتد</title>
-    <meta name="description" content="فهرست DOIها و گواهی‌های رسمی تاییدکنندهٔ کارهای محمد رسول سهرابی." />
+    <meta
+      name="description"
+      content="فهرست DOIها و گواهی‌های رسمی تاییدکنندهٔ کارهای محمد رسول سهرابی."
+    />
     <link rel="stylesheet" href="assets/css/design-system.min.css" />
     <link rel="stylesheet" href="assets/css/main-style-fa.min.css" />
+    <script src="assets/js/performance-helpers.min.js" defer></script>
     <link rel="canonical" href="https://rasoulunlimited.ir/proof.html" />
-    <link rel="author" href="https://rasoulunlimited.ir/#person" data-person="rasoul-unlimited" />
+    <link
+      rel="author"
+      href="https://rasoulunlimited.ir/#person"
+      data-person="rasoul-unlimited"
+    />
     <meta name="robots" content="index, follow" />
-    <meta name="citation_title" content="اعتبارنامه‌ها و DOIها – رسول آنلیمیتد" />
+    <meta
+      name="citation_title"
+      content="اعتبارنامه‌ها و DOIها – رسول آنلیمیتد"
+    />
     <meta name="dcterms.creator" content="Mohammad Rasoul Sohrabi" />
-    <meta name="dc.identifier" content="https://rasoulunlimited.ir/proof.html" />
-    <link rel="alternate" href="https://rasoulunlimited.ir/proof.html" hreflang="fa-IR" />
-    <link rel="alternate" href="https://rasoulunlimited.ir/en/proof.html" hreflang="en-US" />
-    <link rel="alternate" href="https://rasoulunlimited.ir/proof.html" hreflang="x-default" />
-    <link rel="alternate" type="application/ld+json" href="/schema/identity.jsonld" />
+    <meta
+      name="dc.identifier"
+      content="https://rasoulunlimited.ir/proof.html"
+    />
+    <link
+      rel="alternate"
+      href="https://rasoulunlimited.ir/proof.html"
+      hreflang="fa-IR"
+    />
+    <link
+      rel="alternate"
+      href="https://rasoulunlimited.ir/en/proof.html"
+      hreflang="en-US"
+    />
+    <link
+      rel="alternate"
+      href="https://rasoulunlimited.ir/proof.html"
+      hreflang="x-default"
+    />
+    <link
+      rel="alternate"
+      type="application/ld+json"
+      href="/schema/identity.jsonld"
+    />
     <meta name="color-scheme" content="light dark" />
     <meta
       name="theme-color"
@@ -30,24 +85,49 @@
     />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="اعتبارنامه‌ها و DOIها – رسول آنلیمیتد" />
-    <meta property="og:description" content="فهرست DOIها و گواهی‌های رسمی تاییدکنندهٔ کارهای محمد رسول سهرابی." />
-    <meta property="og:image" content="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp" />
-    <meta property="og:image:alt" content="Portrait of Mohammad Rasoul Sohrabi" />
+    <meta
+      property="og:description"
+      content="فهرست DOIها و گواهی‌های رسمی تاییدکنندهٔ کارهای محمد رسول سهرابی."
+    />
+    <meta
+      property="og:image"
+      content="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp"
+    />
+    <meta
+      property="og:image:alt"
+      content="Portrait of Mohammad Rasoul Sohrabi"
+    />
     <meta property="og:url" content="https://rasoulunlimited.ir/proof.html" />
     <meta property="og:site_name" content="Rasoul Unlimited" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@rasoulunlimited" />
-    <meta name="twitter:title" content="اعتبارنامه‌ها و DOIها – رسول آنلیمیتد" />
-    <meta name="twitter:description" content="فهرست DOIها و گواهی‌های رسمی تاییدکنندهٔ کارهای محمد رسول سهرابی." />
-    <meta name="twitter:image" content="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp" />
-    <meta name="twitter:image:alt" content="Portrait of Mohammad Rasoul Sohrabi" />
+    <meta
+      name="twitter:title"
+      content="اعتبارنامه‌ها و DOIها – رسول آنلیمیتد"
+    />
+    <meta
+      name="twitter:description"
+      content="فهرست DOIها و گواهی‌های رسمی تاییدکنندهٔ کارهای محمد رسول سهرابی."
+    />
+    <meta
+      name="twitter:image"
+      content="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp"
+    />
+    <meta
+      name="twitter:image:alt"
+      content="Portrait of Mohammad Rasoul Sohrabi"
+    />
     <script type="application/ld+json" nonce="RasoulCSP">
       {
         "@context": "https://schema.org",
         "@type": "Dataset",
         "name": "Verifiable Credentials",
         "description": "Collection of DOIs and certificates for Rasoul Unlimited's projects and achievements.",
-        "creator": {"@type": "Person", "name": "Mohammad Rasoul Sohrabi", "url": "https://rasoulunlimited.ir"},
+        "creator": {
+          "@type": "Person",
+          "name": "Mohammad Rasoul Sohrabi",
+          "url": "https://rasoulunlimited.ir"
+        },
         "hasPart": [
           {
             "@type": "CreativeWork",
@@ -117,46 +197,116 @@
       </header>
     </noscript>
     <div data-include-html="includes/header-fa.html"></div>
-        <div class="container">
+    <div class="container">
       <div class="content-area">
         <main id="main-content">
-          <section id="hero" role="region" aria-labelledby="hero-tagline">
-            <img src="assets/images/RasoulUnlimited.webp" loading="eager" decoding="async" alt="تصویر پرترهٔ محمد رسول سهرابی" class="profile-image" width="220" height="220" />
-            <p class="tagline" id="hero-tagline">گواهی‌ها و DOIهای معتبر</p>
+          <section
+            id="hero"
+            class="fade-in"
+            role="region"
+            aria-labelledby="hero-tagline"
+          >
+            <img
+              src="assets/images/RasoulUnlimited.webp"
+              loading="eager"
+              decoding="async"
+              alt="تصویر پرترهٔ محمد رسول سهرابی"
+              class="profile-image"
+              width="220"
+              height="220"
+            />
+            <p class="tagline hero-tagline" id="hero-tagline">
+              گواهی‌ها و DOIهای معتبر
+            </p>
           </section>
-    <h1>اعتبارنامه‌ها و DOIهای قابل راستی‌آزمایی</h1>
-    <p data-person="rasoul-unlimited">
-      در این صفحه DOIها و گواهی‌هایی فهرست شده که صحت دستاوردهای رسول را اثبات می‌کنند.
-      وب‌سایت بر بستر GitHub Pages میزبانی شده و با کلودفلر ایمن شده است تا شفافیت و اعتماد را نشان دهد.
-      از این منابع می‌توانید برای استناد یا بررسی سوابق استفاده کنید.
-    </p>
-    <p>
-      هر DOI مرجعی دائمی برای کاری است که به صورت عمومی بایگانی و توسط نهادهای علمی ارجاع شده است و شناسایی طولانی‌مدت پروژه‌های رسول را تضمین می‌کند.
-    </p>
-    <div class="credential-grid">
-      <div class="credential-card" itemscope itemtype="https://schema.org/CreativeWork">
-        <img src="assets/images/zenodo-badge.svg" alt="لوگوی زنودو" width="48" height="48" loading="lazy" />
-        <h3 itemprop="name">Small Projects with C</h3>
-        <p class="credential-summary">Open-source C projects from Tehran Azad University.</p>
-        <a itemprop="identifier" href="projects/c-projects/">View DOI</a>
-      </div>
-      <div class="credential-card" itemscope itemtype="https://schema.org/CreativeWork">
-        <img src="assets/images/zenodo-badge.svg" alt="لوگوی زنودو" width="48" height="48" loading="lazy" />
-        <h3 itemprop="name">Small Projects with Python</h3>
-        <p class="credential-summary">Collection of Python exercises from Sahand University of Technology.</p>
-        <a itemprop="identifier" href="projects/python-projects/">View DOI</a>
-      </div>
-      <div class="credential-card" itemscope itemtype="https://schema.org/CreativeWork">
-        <img src="assets/images/certificate-badge.svg" alt="نشان گواهی" width="48" height="48" loading="lazy" />
-        <h3 itemprop="name">Discord Bot Verification</h3>
-        <p class="credential-summary">Official certificate confirming Rasoul's Discord bot.</p>
-        <a itemprop="identifier" href="https://vrgl.ir/9D6Hy" target="_blank" rel="noopener noreferrer">View Certificate</a>
-      </div>
-    </div>
-    <p><a href="press.html">رسانه‌ها</a> | <a href="contact.html">تماس</a></p>
-    <p>برای آشنایی بیشتر <a href="about.html">درباره رسول</a> بخوانید یا <a href="press.html">پک رسانه‌ای</a> را ببینید.</p>
-    <p class="cta"><a href="press.html">مشاهده پوشش رسانه‌ای &rarr;</a></p>
-  </main>
+          <h1>اعتبارنامه‌ها و DOIهای قابل راستی‌آزمایی</h1>
+          <p data-person="rasoul-unlimited">
+            در این صفحه DOIها و گواهی‌هایی فهرست شده که صحت دستاوردهای رسول را
+            اثبات می‌کنند. وب‌سایت بر بستر GitHub Pages میزبانی شده و با کلودفلر
+            ایمن شده است تا شفافیت و اعتماد را نشان دهد. از این منابع می‌توانید
+            برای استناد یا بررسی سوابق استفاده کنید.
+          </p>
+          <p>
+            هر DOI مرجعی دائمی برای کاری است که به صورت عمومی بایگانی و توسط
+            نهادهای علمی ارجاع شده است و شناسایی طولانی‌مدت پروژه‌های رسول را
+            تضمین می‌کند.
+          </p>
+          <div class="credential-grid">
+            <div
+              class="credential-card"
+              itemscope
+              itemtype="https://schema.org/CreativeWork"
+            >
+              <img
+                src="assets/images/zenodo-badge.svg"
+                alt="لوگوی زنودو"
+                width="48"
+                height="48"
+                loading="lazy"
+              />
+              <h3 itemprop="name">Small Projects with C</h3>
+              <p class="credential-summary">
+                Open-source C projects from Tehran Azad University.
+              </p>
+              <a itemprop="identifier" href="projects/c-projects/">View DOI</a>
+            </div>
+            <div
+              class="credential-card"
+              itemscope
+              itemtype="https://schema.org/CreativeWork"
+            >
+              <img
+                src="assets/images/zenodo-badge.svg"
+                alt="لوگوی زنودو"
+                width="48"
+                height="48"
+                loading="lazy"
+              />
+              <h3 itemprop="name">Small Projects with Python</h3>
+              <p class="credential-summary">
+                Collection of Python exercises from Sahand University of
+                Technology.
+              </p>
+              <a itemprop="identifier" href="projects/python-projects/"
+                >View DOI</a
+              >
+            </div>
+            <div
+              class="credential-card"
+              itemscope
+              itemtype="https://schema.org/CreativeWork"
+            >
+              <img
+                src="assets/images/certificate-badge.svg"
+                alt="نشان گواهی"
+                width="48"
+                height="48"
+                loading="lazy"
+              />
+              <h3 itemprop="name">Discord Bot Verification</h3>
+              <p class="credential-summary">
+                Official certificate confirming Rasoul's Discord bot.
+              </p>
+              <a
+                itemprop="identifier"
+                href="https://vrgl.ir/9D6Hy"
+                target="_blank"
+                rel="noopener noreferrer"
+                >View Certificate</a
+              >
+            </div>
+          </div>
+          <p>
+            <a href="press.html">رسانه‌ها</a> | <a href="contact.html">تماس</a>
+          </p>
+          <p>
+            برای آشنایی بیشتر <a href="about.html">درباره رسول</a> بخوانید یا
+            <a href="press.html">پک رسانه‌ای</a> را ببینید.
+          </p>
+          <p class="cta">
+            <a href="press.html">مشاهده پوشش رسانه‌ای &rarr;</a>
+          </p>
+        </main>
       </div>
     </div>
     <noscript>

@@ -99,6 +99,20 @@
   }
 }
 
+@keyframes fadeInHero {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.hero.fade-in {
+  animation: fadeInHero var(--transition-duration-medium)
+    var(--transition-easing-standard) forwards;
+}
+
 /* Press kit grid layout */
 .presskit-grid {
   display: grid;

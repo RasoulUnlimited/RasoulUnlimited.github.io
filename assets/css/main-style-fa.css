@@ -1,4 +1,4 @@
-:root{
+:root {
   --primary-rgb: 0, 90, 158;
 
   --highlight-rgb: 255, 193, 7;
@@ -6,12 +6,13 @@
 
   --font-body: "Vazirmatn", "Roboto", sans-serif;
 
+  --font-heading: "Vazirmatn", "Montserrat", sans-serif;
+
   --faq-link-hover-color: #0f172a;
 
   --border-radius-xl: 20px;
 
   --max-paragraph-width: 75ch;
-
 }
 
 .footer-links {
@@ -467,7 +468,6 @@ a.skip-link:focus-visible {
   width: 100%;
 }
 
-
 #hero {
   position: relative;
   padding-top: var(--section-v-padding);
@@ -793,7 +793,8 @@ img.loaded {
   text-decoration: none;
   color: var(--primary-color);
   padding: 4px 8px;
-  transition: color var(--transition-duration-short) var(--transition-easing-standard);
+  transition: color var(--transition-duration-short)
+    var(--transition-easing-standard);
   will-change: color, text-decoration;
 }
 
@@ -1423,8 +1424,10 @@ img.loaded {
   column-gap: var(--space-md);
   row-gap: var(--space-xs);
   box-shadow: 0 2px 6px var(--shadow-color-light);
-  transition: transform var(--transition-duration-medium) var(--transition-easing-standard),
-    box-shadow var(--transition-duration-medium) var(--transition-easing-standard);
+  transition: transform var(--transition-duration-medium)
+      var(--transition-easing-standard),
+    box-shadow var(--transition-duration-medium)
+      var(--transition-easing-standard);
 }
 
 .credential-card:hover {
@@ -1469,7 +1472,8 @@ img.loaded {
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius-lg);
-  transition: box-shadow var(--transition-duration-short) var(--transition-easing-standard);
+  transition: box-shadow var(--transition-duration-short)
+    var(--transition-easing-standard);
 }
 .press-card:hover {
   box-shadow: 0 4px 12px var(--shadow-color-medium);
@@ -1491,8 +1495,10 @@ img.loaded {
   column-gap: var(--space-md);
   row-gap: var(--space-xs);
   box-shadow: 0 2px 6px var(--shadow-color-light);
-  transition: transform var(--transition-duration-medium) var(--transition-easing-standard),
-    box-shadow var(--transition-duration-medium) var(--transition-easing-standard);
+  transition: transform var(--transition-duration-medium)
+      var(--transition-easing-standard),
+    box-shadow var(--transition-duration-medium)
+      var(--transition-easing-standard);
 }
 
 .download-card:hover {
@@ -1520,7 +1526,8 @@ img.loaded {
   text-decoration: none;
   font-weight: 500;
   border: none;
-  transition: background-color var(--transition-duration-short) var(--transition-easing-standard),
+  transition: background-color var(--transition-duration-short)
+      var(--transition-easing-standard),
     transform var(--transition-duration-short) var(--transition-easing-springy);
 }
 
@@ -1716,8 +1723,7 @@ img.loaded {
   font-style: italic;
   color: var(--text-color);
   position: relative;
-  transition: transform 0.3s ease-in-out,
-    box-shadow 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   outline: none;
   direction: rtl;
   text-align: right;

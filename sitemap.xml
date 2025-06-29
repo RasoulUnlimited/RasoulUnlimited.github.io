@@ -40,13 +40,13 @@
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
         <xhtml:link
-        rel="alternate"
-        hreflang="fa-IR"
-        href="https://rasoulunlimited.ir/projects/c-projects/" />
-    <xhtml:link
-        rel="alternate"
-        hreflang="en-US"
-        href="https://rasoulunlimited.ir/projects/c-projects/" />
+            rel="alternate"
+            hreflang="fa-IR"
+            href="https://rasoulunlimited.ir/projects/c-projects/" />
+        <xhtml:link
+            rel="alternate"
+            hreflang="en-US"
+            href="https://rasoulunlimited.ir/projects/c-projects/" />
     </url>
 
     <url>
@@ -55,13 +55,13 @@
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
         <xhtml:link
-        rel="alternate"
-        hreflang="fa-IR"
-        href="https://rasoulunlimited.ir/projects/python-projects/" />
-    <xhtml:link
-        rel="alternate"
-        hreflang="en-US"
-        href="https://rasoulunlimited.ir/projects/python-projects/" />
+            rel="alternate"
+            hreflang="fa-IR"
+            href="https://rasoulunlimited.ir/projects/python-projects/" />
+        <xhtml:link
+            rel="alternate"
+            hreflang="en-US"
+            href="https://rasoulunlimited.ir/projects/python-projects/" />
     </url>
 
     <url>

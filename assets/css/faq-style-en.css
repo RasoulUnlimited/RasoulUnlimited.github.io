@@ -269,8 +269,7 @@ body {
   padding-top: 0;
   padding-bottom: 0;
   transition: max-height 0.4s var(--ease-bezier),
-    padding 0.4s var(--ease-bezier),
-    opacity 0.4s ease-out;
+    padding 0.4s var(--ease-bezier), opacity 0.4s ease-out;
 }
 
 .faq-item[open] > .faq-answer {

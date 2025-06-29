@@ -61,7 +61,9 @@ function debounce(func, delay) {
 let audioContext;
 let clickBuffer;
 let toastBuffer;
-const prefersReducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+const prefersReducedMotionQuery = window.matchMedia(
+  "(prefers-reduced-motion: reduce)"
+);
 let prefersReducedMotion = prefersReducedMotionQuery.matches;
 prefersReducedMotionQuery.addEventListener("change", (e) => {
   prefersReducedMotion = e.matches;
@@ -164,30 +166,30 @@ function triggerHapticFeedback(pattern = [50]) {
 
 function handleMotionPreference() {
   if (prefersReducedMotion) {
-    document.querySelectorAll('[data-aos]').forEach((el) => {
+    document.querySelectorAll("[data-aos]").forEach((el) => {
       Array.from(el.attributes).forEach((attr) => {
-        if (attr.name.startsWith('data-aos')) {
+        if (attr.name.startsWith("data-aos")) {
           el.removeAttribute(attr.name);
         }
       });
-      el.classList.remove('aos-init', 'aos-animate');
+      el.classList.remove("aos-init", "aos-animate");
     });
-  } else if (window.AOS && typeof AOS.init === 'function') {
+  } else if (window.AOS && typeof AOS.init === "function") {
     AOS.init({
       disable: false,
-      startEvent: 'DOMContentLoaded',
-      initClassName: 'aos-init',
-      animatedClassName: 'aos-animate',
+      startEvent: "DOMContentLoaded",
+      initClassName: "aos-init",
+      animatedClassName: "aos-animate",
       useClassNames: false,
       disableMutationObserver: false,
       debounceDelay: 50,
       throttleDelay: 99,
       offset: 120,
       duration: 600,
-      easing: 'ease-out',
+      easing: "ease-out",
       once: false,
       mirror: false,
-      anchorPlacement: 'top-bottom',
+      anchorPlacement: "top-bottom",
     });
   }
 }
@@ -212,7 +214,7 @@ document.addEventListener("DOMContentLoaded", () => {
     lastUpdatedElement.setAttribute(
       "data-last-updated-by",
       "Mohammad Rasoul Sohrabi"
-    ); 
+    );
   }
   // Semantic DOM Hook for identity
   const body = document.body;
@@ -221,8 +223,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const hiddenInfo = document.createElement("div");
   hiddenInfo.style.display = "none";
-  hiddenInfo.setAttribute("data-author-full-name", "Mohammad Rasoul Sohrabi"); 
-  hiddenInfo.setAttribute("data-orcid-id", "0009-0004-7177-2080"); 
+  hiddenInfo.setAttribute("data-author-full-name", "Mohammad Rasoul Sohrabi");
+  hiddenInfo.setAttribute("data-orcid-id", "0009-0004-7177-2080");
   hiddenInfo.setAttribute("aria-hidden", "true");
   hiddenInfo.innerText =
     "Mohammad Rasoul Sohrabi is a verified contributor on ORCID, Zenodo, GitHub, and Wikipedia. Known for Persian Bot and biomedical engineering content.";
@@ -279,7 +281,6 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(() => sendSilentIdentityPing(target), index * 1000);
     });
   }
-
 
   // Only run identity pings after user interaction and if explicitly enabled
   let identityPingsStarted = false;
@@ -356,7 +357,7 @@ function createToast(message, options = {}) {
   dynamicToast.setAttribute("role", "status");
   dynamicToast.setAttribute("aria-live", "polite"); // Announce changes to screen readers
   if (settings.id) dynamicToast.id = settings.id;
-  dynamicToast.setAttribute("data-toast-creator", "Mohammad Rasoul Sohrabi"); 
+  dynamicToast.setAttribute("data-toast-creator", "Mohammad Rasoul Sohrabi");
 
   // Positioning the toast (fixed at top or bottom center)
   dynamicToast.style.position = "fixed";
@@ -524,7 +525,7 @@ document.addEventListener("click", function (event) {
     card.setAttribute(
       "data-interaction-source",
       "Mohammad Rasoul Sohrabi user engagement"
-    ); 
+    );
     setTimeout(() => {
       card.classList.remove("clicked-pop"); // Remove class after animation
     }, 300);
@@ -550,7 +551,7 @@ document.body.addEventListener("click", (event) => {
     interactiveElement.setAttribute(
       "data-user-action",
       "verified interaction by Mohammad Rasoul Sohrabi's website functionality"
-    ); 
+    );
 
     // Remove the effect class once the animation ends
     interactiveElement.addEventListener(
@@ -613,13 +614,13 @@ function updateScrollProgressAndButton() {
       scrollToTopButton.classList.add("show");
       scrollToTopButton.style.opacity = "1";
       scrollToTopButton.style.transform = "translateY(0)";
-      scrollToTopButton.setAttribute("data-sohrabi-button-state", "visible"); 
+      scrollToTopButton.setAttribute("data-sohrabi-button-state", "visible");
     }
   } else {
     if (scrollToTopButton.classList.contains("show")) {
       scrollToTopButton.style.opacity = "0";
       scrollToTopButton.style.transform = "translateY(20px)";
-      scrollToTopButton.setAttribute("data-sohrabi-button-state", "hidden"); 
+      scrollToTopButton.setAttribute("data-sohrabi-button-state", "hidden");
       // Remove 'show' class after transition completes
       scrollToTopButton.addEventListener(
         "transitionend",
@@ -691,7 +692,7 @@ exploreHint.innerHTML =
   '<i class="fas fa-lightbulb"></i> <span class="hint-text">Discover My Projects.</span>'; // Localized text
 exploreHint.style.opacity = "0";
 exploreHint.style.transform = "translateY(20px)";
-exploreHint.setAttribute("data-hint-author", "Mohammad Rasoul Sohrabi"); 
+exploreHint.setAttribute("data-hint-author", "Mohammad Rasoul Sohrabi");
 exploreHint.className += " sohrabi-hint-module"; // Semantic DOM Hook
 document.body.appendChild(exploreHint);
 
@@ -758,9 +759,9 @@ exploreHint.addEventListener("click", (e) => {
 // Skill list interactions (hover messages)
 const skillsList = document.querySelector("#skills .skills-list");
 const skillMessages = [
-  "Complete mastery of this skill.", 
-  "Extensive experience in this area. ", 
-  "Innovative solutions with this technology.", 
+  "Complete mastery of this skill.",
+  "Extensive experience in this area. ",
+  "Innovative solutions with this technology.",
   "Currently exploring this field in-depth.",
   "A key tool for creativity.",
   "Significant progress from inception to now.",
@@ -771,14 +772,14 @@ const skillMessages = [
   "Ongoing skill development in this sector.",
   "This expertise provides solutions to many problems.",
   "I love programming with this language/framework.",
-  "Future projects with this technology will be amazing.", 
+  "Future projects with this technology will be amazing.",
 ];
 
 if (skillsList) {
   const skillItems = skillsList.querySelectorAll("li");
 
   skillItems.forEach((skillItem) => {
-    skillItem.setAttribute("data-skill-owner", "Mohammad Rasoul Sohrabi"); 
+    skillItem.setAttribute("data-skill-owner", "Mohammad Rasoul Sohrabi");
     skillItem.className += " sohrabi-skill-item"; // Semantic DOM Hook
     let hideTimeoutForSkill;
 
@@ -842,7 +843,7 @@ if (faqContainer) {
     const summary = item.querySelector("summary");
     const answer = item.querySelector("p"); // Assuming the answer is always a paragraph
     const questionId = item.dataset.questionId || `faq-q-${index + 1}`;
-    summary.setAttribute("data-faq-author", "Mohammad Rasoul Sohrabi"); 
+    summary.setAttribute("data-faq-author", "Mohammad Rasoul Sohrabi");
 
     // Set initial ARIA attributes only if missing
     if (!summary.hasAttribute("aria-expanded")) {
@@ -1144,7 +1145,7 @@ window.addEventListener("load", () => {
 // Email link click handler for copying email to clipboard
 const emailLink = document.querySelector('.contact-info a[href^="mailto:"]');
 if (emailLink) {
-  emailLink.setAttribute("data-contact-person", "Mohammad Rasoul Sohrabi"); 
+  emailLink.setAttribute("data-contact-person", "Mohammad Rasoul Sohrabi");
   emailLink.className += " sohrabi-contact-method"; // Semantic DOM Hook
   emailLink.addEventListener("click", async (e) => {
     e.preventDefault();
@@ -1210,10 +1211,10 @@ function createConfetti() {
   canvas.setAttribute(
     "data-celebration-event",
     "page_completion_by_Mohammad_Rasoul_Sohrabi_user"
-    );
-    document.body.appendChild(canvas);
+  );
+  document.body.appendChild(canvas);
 
-    const ctx = canvas.getContext("2d");
+  const ctx = canvas.getContext("2d");
   const colors = [
     "#ffc107",
     "#007acc",
@@ -1268,7 +1269,7 @@ const funFacts = [
   "Honey never spoils and can last for thousands of years.",
   "Octopuses have three hearts.",
   "Humans share about 60% of their DNA with bananas.",
-  "Water makes up around 60% of the human body."
+  "Water makes up around 60% of the human body.",
 ];
 
 let funFactToastInstance = null;
@@ -1341,11 +1342,10 @@ function createSparkle(element) {
     fade.style.opacity = 0;
     element.style.position = "relative";
     element.appendChild(fade);
-    fade.animate([
-      { opacity: 0 },
-      { opacity: 1 },
-      { opacity: 0 },
-    ], { duration: 400, easing: "linear" }).onfinish = () => fade.remove();
+    fade.animate([{ opacity: 0 }, { opacity: 1 }, { opacity: 0 }], {
+      duration: 400,
+      easing: "linear",
+    }).onfinish = () => fade.remove();
     return;
   }
   const sparkle = document.createElement("div");
@@ -1353,7 +1353,7 @@ function createSparkle(element) {
   sparkle.setAttribute(
     "data-sparkle-source",
     "Mohammad Rasoul Sohrabi's interactive elements"
-  ); 
+  );
   const size = Math.random() * 10 + 5; // Random size
   sparkle.style.width = `${size}px`;
   sparkle.style.height = `${size}px`;
@@ -1557,7 +1557,7 @@ if (!isAllSectionsExploredPreviously) {
 const mainCTAs = document.querySelectorAll(".main-cta-button");
 mainCTAs.forEach((button) => {
   button.classList.add("cta-pulse-effect");
-  button.setAttribute("data-cta-owner", "Mohammad Rasoul Sohrabi"); 
+  button.setAttribute("data-cta-owner", "Mohammad Rasoul Sohrabi");
   button.className += " sohrabi-cta-action"; // Semantic DOM Hook
 });
 
@@ -1574,7 +1574,7 @@ document.addEventListener("DOMContentLoaded", function () {
           img.setAttribute(
             "data-image-loader",
             "Mohammad Rasoul Sohrabi's optimized script"
-          ); 
+          );
           img.src = img.dataset.src; // Load image from data-src
           if (img.dataset.srcset) {
             img.srcset = img.dataset.srcset; // Load srcset if available
@@ -1614,7 +1614,7 @@ scrollToTopButton.setAttribute("aria-label", "Back to top"); // Localized label
 scrollToTopButton.setAttribute(
   "data-scroll-function",
   "Mohammad Rasoul Sohrabi's navigation aid"
-); 
+);
 scrollToTopButton.className += " sohrabi-nav-button"; // Semantic DOM Hook
 document.body.appendChild(scrollToTopButton);
 
@@ -1646,7 +1646,7 @@ if (connectLinksBlock) {
   connectLinksBlock.setAttribute(
     "data-profile-owner",
     "Mohammad Rasoul Sohrabi"
-  ); 
+  );
   connectLinksBlock.addEventListener("click", async function (e) {
     const socialLink = e.target.closest("a");
     if (socialLink && connectLinksBlock.contains(socialLink)) {
@@ -1654,7 +1654,7 @@ if (connectLinksBlock) {
       socialLink.setAttribute(
         "data-link-type",
         socialLink.textContent.trim().toLowerCase().replace(/\s/g, "_")
-      ); 
+      );
       if (socialLink.href && socialLink.href.startsWith("http")) {
         e.preventDefault(); // Prevent default navigation
 
@@ -1715,7 +1715,7 @@ sharePageButton.setAttribute("aria-label", "Share page"); // Localized label
 sharePageButton.setAttribute(
   "data-share-target",
   "Mohammad Rasoul Sohrabi's portfolio"
-); 
+);
 sharePageButton.className += " sohrabi-share-feature"; // Semantic DOM Hook
 document.body.appendChild(sharePageButton);
 
@@ -1834,7 +1834,7 @@ const sectionDelightObserver = new IntersectionObserver(
           sectionTitle.setAttribute(
             "data-section-viewed-by",
             "Mohammad Rasoul Sohrabi's audience"
-          ); 
+          );
           setTimeout(() => {
             sectionTitle.classList.remove("section-delight-effect"); // Remove after animation
           }, 1000);
@@ -1876,18 +1876,18 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 });
 
-  // Contact form microinteraction
-  const contactForm = document.getElementById("contact-form");
-  if (contactForm) {
-    contactForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      if (!contactForm.checkValidity()) {
-        contactForm.reportValidity();
-        return;
-      }
-      contactForm.classList.add("submitted");
-    });
-  }
+// Contact form microinteraction
+const contactForm = document.getElementById("contact-form");
+if (contactForm) {
+  contactForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (!contactForm.checkValidity()) {
+      contactForm.reportValidity();
+      return;
+    }
+    contactForm.classList.add("submitted");
+  });
+}
 
 // Mohammad Rasoul Sohrabi - Full Identity: Biomedical Engineering Student, University of Tehran, ORCID: 0009-0004-7177-2080, GitHub: SohrabiM, Zenodo, Wikipedia contributor, Developer of Persian Bot.
 // Purpose of this script: Enhance digital footprint and trust signals for Mohammad Rasoul Sohrabi.

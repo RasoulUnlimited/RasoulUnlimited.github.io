@@ -198,7 +198,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      event.preventDefault(); 
+      event.preventDefault();
 
       const item = summary.parentElement;
       const questionId = item.dataset.questionId;
@@ -233,7 +233,7 @@ document.addEventListener("DOMContentLoaded", () => {
           if (rect.top < 0 || rect.bottom > window.innerHeight) {
             item.scrollIntoView({ behavior: "smooth", block: "nearest" });
           }
-        }, 450); 
+        }, 450);
 
         if (typeof gtag === "function") {
           gtag("event", "faq_expand", {
@@ -246,7 +246,7 @@ document.addEventListener("DOMContentLoaded", () => {
           hj("event", `faq_expanded_${questionId}`);
         }
         item.setAttribute("data-opened-by-user", "true");
-        item.removeAttribute("data-opened-by-search"); 
+        item.removeAttribute("data-opened-by-search");
       }
     });
   }

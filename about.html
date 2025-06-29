@@ -3,22 +3,77 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Preconnect to necessary domains for faster resource loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+
+    <!-- Preload critical CSS for faster rendering -->
+    <link
+      rel="preload"
+      as="style"
+      data-href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;700&display=swap"
+      data-make-stylesheet
+    />
+    <link
+      rel="preload"
+      as="style"
+      data-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      data-make-stylesheet
+    />
+    <link
+      rel="preload"
+      as="style"
+      data-href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
+      data-make-stylesheet
+    />
     <title>درباره رسول آنلیمیتد</title>
-    <meta name="description" content="زندگینامهٔ محمد رسول سهرابی (رسول آنلیمیتد)." />
+    <meta
+      name="description"
+      content="زندگینامهٔ محمد رسول سهرابی (رسول آنلیمیتد)."
+    />
     <meta name="author" content="Mohammad Rasoul Sohrabi" />
-    <meta name="keywords" content="محمد رسول سهرابی, رسول آنلیمیتد, مهندسی پزشکی, توسعه متن‌باز, سلامت دیجیتال" />
+    <meta
+      name="keywords"
+      content="محمد رسول سهرابی, رسول آنلیمیتد, مهندسی پزشکی, توسعه متن‌باز, سلامت دیجیتال"
+    />
     <link rel="stylesheet" href="assets/css/design-system.min.css" />
     <link rel="stylesheet" href="assets/css/main-style-fa.min.css" />
     <link rel="canonical" href="https://rasoulunlimited.ir/about.html" />
-    <link rel="author" href="https://rasoulunlimited.ir/#person" data-person="rasoul-unlimited" />
+    <link
+      rel="author"
+      href="https://rasoulunlimited.ir/#person"
+      data-person="rasoul-unlimited"
+    />
+    <script src="assets/js/performance-helpers.min.js" defer></script>
     <meta name="robots" content="index, follow" />
     <meta name="citation_title" content="درباره رسول آنلیمیتد" />
     <meta name="dcterms.creator" content="Mohammad Rasoul Sohrabi" />
-    <meta name="dc.identifier" content="https://rasoulunlimited.ir/about.html" />
-    <link rel="alternate" href="https://rasoulunlimited.ir/about.html" hreflang="fa-IR" />
-    <link rel="alternate" href="https://rasoulunlimited.ir/en/about.html" hreflang="en-US" />
-    <link rel="alternate" href="https://rasoulunlimited.ir/about.html" hreflang="x-default" />
-    <link rel="alternate" type="application/ld+json" href="/schema/identity.jsonld" />
+    <meta
+      name="dc.identifier"
+      content="https://rasoulunlimited.ir/about.html"
+    />
+    <link
+      rel="alternate"
+      href="https://rasoulunlimited.ir/about.html"
+      hreflang="fa-IR"
+    />
+    <link
+      rel="alternate"
+      href="https://rasoulunlimited.ir/en/about.html"
+      hreflang="en-US"
+    />
+    <link
+      rel="alternate"
+      href="https://rasoulunlimited.ir/about.html"
+      hreflang="x-default"
+    />
+    <link
+      rel="alternate"
+      type="application/ld+json"
+      href="/schema/identity.jsonld"
+    />
     <meta name="color-scheme" content="light dark" />
     <meta
       name="theme-color"
@@ -32,17 +87,35 @@
     />
     <meta property="og:type" content="profile" />
     <meta property="og:title" content="درباره رسول آنلیمیتد" />
-    <meta property="og:description" content="زندگینامهٔ محمد رسول سهرابی (رسول آنلیمیتد)." />
-    <meta property="og:image" content="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp" />
-    <meta property="og:image:alt" content="Portrait of Mohammad Rasoul Sohrabi" />
+    <meta
+      property="og:description"
+      content="زندگینامهٔ محمد رسول سهرابی (رسول آنلیمیتد)."
+    />
+    <meta
+      property="og:image"
+      content="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp"
+    />
+    <meta
+      property="og:image:alt"
+      content="Portrait of Mohammad Rasoul Sohrabi"
+    />
     <meta property="og:url" content="https://rasoulunlimited.ir/about.html" />
     <meta property="og:site_name" content="Rasoul Unlimited" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@rasoulunlimited" />
     <meta name="twitter:title" content="درباره رسول آنلیمیتد" />
-    <meta name="twitter:description" content="زندگینامهٔ محمد رسول سهرابی (رسول آنلیمیتد)." />
-    <meta name="twitter:image" content="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp" />
-    <meta name="twitter:image:alt" content="Portrait of Mohammad Rasoul Sohrabi" />
+    <meta
+      name="twitter:description"
+      content="زندگینامهٔ محمد رسول سهرابی (رسول آنلیمیتد)."
+    />
+    <meta
+      name="twitter:image"
+      content="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp"
+    />
+    <meta
+      name="twitter:image:alt"
+      content="Portrait of Mohammad Rasoul Sohrabi"
+    />
     <script type="application/ld+json" nonce="RasoulCSP">
       {
         "@context": "https://schema.org",
@@ -110,60 +183,71 @@
       </header>
     </noscript>
     <div data-include-html="includes/header-fa.html"></div>
-        <div class="container">
+    <div class="container">
       <div class="content-area">
         <main id="main-content">
-    <section id="hero" role="region" aria-labelledby="hero-tagline">
-      <img
-        src="assets/images/RasoulUnlimited.webp"
-        loading="eager"
-        decoding="async"
-        alt="تصویر پرترهٔ محمد رسول سهرابی"
-        class="profile-image"
-        width="220"
-        height="220"
-      />
-      <p class="tagline" id="hero-tagline">
-        نوآوری در سلامت دیجیتال با متن‌باز
-      </p>
-    </section>
-    <h1 data-person="rasoul-unlimited">درباره رسول آنلیمیتد</h1>
-    <span class="visually-hidden">Mohammad Rasoul Sohrabi – Rasoul Unlimited</span>
-    <section>
-      <h2>آغاز راه</h2>
-      <p>
-        محمد رسول سهرابی با نام مستعار «رسول آنلیمیتد» دانشجوی مهندسی پزشکی
-        دانشگاه آزاد اسلامی واحد تهران مرکزی و برنامه‌نویس فول‌استک است. او از دوران دبیرستان کدنویسی
-        را آغاز کرد و پروژه‌های اولیه خود را در گیت‌هاب منتشر نمود. این وب‌سایت
-        را روی گیت‌هاب پیجز راه‌اندازی کرد و با کلودفلر سرعت و امنیت آن را
-        ارتقا داد. همین شروع‌ها باعث جلب توجه جامعه دانشگاهی و فعالان متن‌باز
-        شد.
-      </p>
-    </section>
-    <section>
-      <h2>فعالیت‌های متن‌باز</h2>
-      <p>
-        او در چهارده سالگی اولین ربات فارسی دیسکورد را با تایید رسمی عرضه کرد.
-        از آن زمان پروژه‌های متن‌باز متعددی در پایتون و C منتشر کرده که در
-        همکاری‌های دانشگاهی مورد استفاده قرار گرفته‌اند.
-      </p>
-      <ul>
-        <li>ایجاد اولین ربات فارسی دیسکورد با تایید رسمی</li>
-        <li>نگهداری چندین پروژه متن‌باز پرکاربرد</li>
-        <li>انتشار مقالات پژوهشی با DOI معتبر</li>
-      </ul>
-    </section>
-    <section>
-      <h2>تمرکز فعلی</h2>
-      <p>
-        مقالات او در حوزه سلامت دیجیتال و برند شخصی دارای DOI هستند و
-        نشان‌دهنده تعهد به کیفیت پژوهشی‌اند. جزئیات بیشتر در
-        <a href="https://rasoulunlimited.ir/#person">پروفایل رسمی او</a>
-        در دسترس است.
-      </p>
-    </section>
-    <p class="cta"><a href="proof.html">مشاهده گواهی‌های تایید شده &rarr;</a></p>
-  </main>
+          <section
+            id="hero"
+            class="fade-in"
+            role="region"
+            aria-labelledby="hero-tagline"
+          >
+            <img
+              src="assets/images/RasoulUnlimited.webp"
+              loading="eager"
+              decoding="async"
+              alt="تصویر پرترهٔ محمد رسول سهرابی"
+              class="profile-image"
+              width="220"
+              height="220"
+            />
+            <p class="tagline hero-tagline" id="hero-tagline">
+              نوآوری در سلامت دیجیتال با متن‌باز
+            </p>
+          </section>
+          <h1 data-person="rasoul-unlimited">درباره رسول آنلیمیتد</h1>
+          <span class="visually-hidden"
+            >Mohammad Rasoul Sohrabi – Rasoul Unlimited</span
+          >
+          <section>
+            <h2>آغاز راه</h2>
+            <p>
+              محمد رسول سهرابی با نام مستعار «رسول آنلیمیتد» دانشجوی مهندسی
+              پزشکی دانشگاه آزاد اسلامی واحد تهران مرکزی و برنامه‌نویس فول‌استک
+              است. او از دوران دبیرستان کدنویسی را آغاز کرد و پروژه‌های اولیه
+              خود را در گیت‌هاب منتشر نمود. این وب‌سایت را روی گیت‌هاب پیجز
+              راه‌اندازی کرد و با کلودفلر سرعت و امنیت آن را ارتقا داد. همین
+              شروع‌ها باعث جلب توجه جامعه دانشگاهی و فعالان متن‌باز شد.
+            </p>
+          </section>
+          <section>
+            <h2>فعالیت‌های متن‌باز</h2>
+            <p>
+              او در چهارده سالگی اولین ربات فارسی دیسکورد را با تایید رسمی عرضه
+              کرد. از آن زمان پروژه‌های متن‌باز متعددی در پایتون و C منتشر کرده
+              که در همکاری‌های دانشگاهی مورد استفاده قرار گرفته‌اند.
+            </p>
+            <ul>
+              <li>ایجاد اولین ربات فارسی دیسکورد با تایید رسمی</li>
+              <li>نگهداری چندین پروژه متن‌باز پرکاربرد</li>
+              <li>انتشار مقالات پژوهشی با DOI معتبر</li>
+            </ul>
+          </section>
+          <section>
+            <h2>تمرکز فعلی</h2>
+            <p>
+              مقالات او در حوزه سلامت دیجیتال و برند شخصی دارای DOI هستند و
+              نشان‌دهنده تعهد به کیفیت پژوهشی‌اند. جزئیات بیشتر در
+              <a href="https://rasoulunlimited.ir/#person">پروفایل رسمی او</a>
+              در دسترس است.
+            </p>
+          </section>
+          <p class="cta">
+            <a href="proof.html" class="cta-button"
+              >مشاهده گواهی‌های تایید شده &rarr;</a
+            >
+          </p>
+        </main>
       </div>
     </div>
     <noscript>

@@ -3,20 +3,72 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Preconnect to necessary domains for faster resource loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+
+    <!-- Preload critical CSS for faster rendering -->
+    <link
+      rel="preload"
+      as="style"
+      data-href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;700&display=swap"
+      data-make-stylesheet
+    />
+    <link
+      rel="preload"
+      as="style"
+      data-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      data-make-stylesheet
+    />
+    <link
+      rel="preload"
+      as="style"
+      data-href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
+      data-make-stylesheet
+    />
     <title>رسانه‌ها و مطبوعات – رسول آنلیمیتد</title>
-    <meta name="description" content="گزیده‌ای از مصاحبه‌ها و مقالات درباره رسول آنلیمیتد." />
+    <meta
+      name="description"
+      content="گزیده‌ای از مصاحبه‌ها و مقالات درباره رسول آنلیمیتد."
+    />
     <link rel="stylesheet" href="assets/css/design-system.min.css" />
     <link rel="stylesheet" href="assets/css/main-style-fa.min.css" />
+    <script src="assets/js/performance-helpers.min.js" defer></script>
     <link rel="canonical" href="https://rasoulunlimited.ir/press.html" />
-    <link rel="author" href="https://rasoulunlimited.ir/#person" data-person="rasoul-unlimited" />
+    <link
+      rel="author"
+      href="https://rasoulunlimited.ir/#person"
+      data-person="rasoul-unlimited"
+    />
     <meta name="robots" content="index, follow" />
     <meta name="citation_title" content="رسانه‌ها و مطبوعات – رسول آنلیمیتد" />
     <meta name="dcterms.creator" content="Mohammad Rasoul Sohrabi" />
-    <meta name="dc.identifier" content="https://rasoulunlimited.ir/press.html" />
-    <link rel="alternate" href="https://rasoulunlimited.ir/press.html" hreflang="fa-IR" />
-    <link rel="alternate" href="https://rasoulunlimited.ir/en/press.html" hreflang="en-US" />
-    <link rel="alternate" href="https://rasoulunlimited.ir/press.html" hreflang="x-default" />
-    <link rel="alternate" type="application/ld+json" href="/schema/identity.jsonld" />
+    <meta
+      name="dc.identifier"
+      content="https://rasoulunlimited.ir/press.html"
+    />
+    <link
+      rel="alternate"
+      href="https://rasoulunlimited.ir/press.html"
+      hreflang="fa-IR"
+    />
+    <link
+      rel="alternate"
+      href="https://rasoulunlimited.ir/en/press.html"
+      hreflang="en-US"
+    />
+    <link
+      rel="alternate"
+      href="https://rasoulunlimited.ir/press.html"
+      hreflang="x-default"
+    />
+    <link
+      rel="alternate"
+      type="application/ld+json"
+      href="/schema/identity.jsonld"
+    />
     <meta name="color-scheme" content="light dark" />
     <meta
       name="theme-color"
@@ -30,17 +82,35 @@
     />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="رسانه‌ها و مطبوعات – رسول آنلیمیتد" />
-    <meta property="og:description" content="گزیده‌ای از مصاحبه‌ها و مقالات درباره رسول آنلیمیتد." />
-    <meta property="og:image" content="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp" />
-    <meta property="og:image:alt" content="Portrait of Mohammad Rasoul Sohrabi" />
+    <meta
+      property="og:description"
+      content="گزیده‌ای از مصاحبه‌ها و مقالات درباره رسول آنلیمیتد."
+    />
+    <meta
+      property="og:image"
+      content="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp"
+    />
+    <meta
+      property="og:image:alt"
+      content="Portrait of Mohammad Rasoul Sohrabi"
+    />
     <meta property="og:url" content="https://rasoulunlimited.ir/press.html" />
     <meta property="og:site_name" content="Rasoul Unlimited" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@rasoulunlimited" />
     <meta name="twitter:title" content="رسانه‌ها و مطبوعات – رسول آنلیمیتد" />
-    <meta name="twitter:description" content="گزیده‌ای از مصاحبه‌ها و مقالات درباره رسول آنلیمیتد." />
-    <meta name="twitter:image" content="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp" />
-    <meta name="twitter:image:alt" content="Portrait of Mohammad Rasoul Sohrabi" />
+    <meta
+      name="twitter:description"
+      content="گزیده‌ای از مصاحبه‌ها و مقالات درباره رسول آنلیمیتد."
+    />
+    <meta
+      name="twitter:image"
+      content="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp"
+    />
+    <meta
+      name="twitter:image:alt"
+      content="Portrait of Mohammad Rasoul Sohrabi"
+    />
     <script type="application/ld+json" nonce="RasoulCSP">
       {
         "@context": "https://schema.org",
@@ -52,21 +122,27 @@
             "url": "https://virgool.io/@RasoulUnlimited/discord-bot-verification",
             "headline": "Interview: First Persian Discord Bot Verified",
             "datePublished": "2020-05-12",
-            "publisher": {"@type": "Organization", "name": "Virgool"}
+            "publisher": { "@type": "Organization", "name": "Virgool" }
           },
           {
             "@type": "NewsArticle",
             "url": "https://sut.ac.ir/news/rasoulunlimited-collaboration",
             "headline": "University Collaboration on Open Source Projects",
             "datePublished": "2024-03-18",
-            "publisher": {"@type": "Organization", "name": "Sahand University of Technology"}
+            "publisher": {
+              "@type": "Organization",
+              "name": "Sahand University of Technology"
+            }
           },
           {
             "@type": "NewsArticle",
             "url": "https://radio.ut.ac.ir/interview-rasoul-unlimited",
             "headline": "Radio UT Interview with Rasoul Unlimited",
             "datePublished": "2023-11-09",
-            "publisher": {"@type": "Organization", "name": "University of Tehran"}
+            "publisher": {
+              "@type": "Organization",
+              "name": "University of Tehran"
+            }
           }
         ]
       }
@@ -118,48 +194,93 @@
       </header>
     </noscript>
     <div data-include-html="includes/header-fa.html"></div>
-        <div class="container">
+    <div class="container">
       <div class="content-area">
         <main id="main-content">
-          <section id="hero" role="region" aria-labelledby="hero-tagline">
-            <img src="assets/images/RasoulUnlimited.webp" loading="eager" decoding="async" alt="تصویر پرترهٔ محمد رسول سهرابی" class="profile-image" width="220" height="220" />
-            <p class="tagline" id="hero-tagline">پوشش رسانه‌ای و مصاحبه‌ها</p>
+          <section
+            id="hero"
+            class="fade-in"
+            role="region"
+            aria-labelledby="hero-tagline"
+          >
+            <img
+              src="assets/images/RasoulUnlimited.webp"
+              loading="eager"
+              decoding="async"
+              alt="تصویر پرترهٔ محمد رسول سهرابی"
+              class="profile-image"
+              width="220"
+              height="220"
+            />
+            <p class="tagline hero-tagline" id="hero-tagline">
+              پوشش رسانه‌ای و مصاحبه‌ها
+            </p>
           </section>
-    <h1>برگزیده‌های رسانه‌ای</h1>
-    <p data-person="rasoul-unlimited">
-      از آزمایش‌های متن‌باز اولیه در گیت‌هاب تا میزبانی همین سایت روی GitHub Pages
-      و پشتیبانی کلودفلر، رسول آنلیمیتد مورد توجه رسانه‌های فناوری و دانشگاه‌ها قرار گرفته است.
-      در ادامه، چند گزارش با لینک به منبع اصلی را مشاهده می‌کنید.
-    </p>
-    <p>
-      این اشاره‌ها نشان می‌دهد پروژه‌های تأییدشدهٔ او چگونه بر جامعه فناوری اثر گذاشته و اعتبارش را افزایش داده‌اند.
-    </p>
-    <section class="press-list">
-      <div class="press-card">
-        <img src="assets/images/logo-virgool.svg" alt="لوگوی ویرگول – مقاله دربارهٔ رسول آنلیمیتد" />
-        <article itemscope itemtype="https://schema.org/NewsArticle">
-          <h3><a href="https://virgool.io/@RasoulUnlimited/discord-bot-verification">Interview: First Persian Discord Bot Verified</a></h3>
-          <p>Virgool, May 12, 2020</p>
-        </article>
-      </div>
-      <div class="press-card">
-        <img src="assets/images/logo-sut.svg" alt="لوگوی دانشگاه صنعتی سهند – معرفی رسول آنلیمیتد" />
-        <article itemscope itemtype="https://schema.org/NewsArticle">
-          <h3><a href="https://sut.ac.ir/news/rasoulunlimited-collaboration">University Collaboration on Open Source Projects</a></h3>
-          <p>Sahand University of Technology, March 18, 2024</p>
-        </article>
-      </div>
-      <div class="press-card">
-        <img src="assets/images/logo-ut.svg" alt="لوگوی دانشگاه تهران – مصاحبه با رسول آنلیمیتد" />
-        <article itemscope itemtype="https://schema.org/NewsArticle">
-          <h3><a href="https://radio.ut.ac.ir/interview-rasoul-unlimited">Radio UT Interview with Rasoul Unlimited</a></h3>
-          <p>University of Tehran, November 9, 2023</p>
-        </article>
-      </div>
-    </section>
-        <p>برای انتشار مطلب درباره رسول آنلیمیتد، به <a href="press-kit/fa/">پک رسانه‌ای</a> سر بزنید یا <a href="contact.html">در ارتباط باشید</a>.</p>
-    <p class="cta"><a href="proof.html">مشاهده گواهی‌های تایید شده &rarr;</a></p>
-  </main>
+          <h1>برگزیده‌های رسانه‌ای</h1>
+          <p data-person="rasoul-unlimited">
+            از آزمایش‌های متن‌باز اولیه در گیت‌هاب تا میزبانی همین سایت روی
+            GitHub Pages و پشتیبانی کلودفلر، رسول آنلیمیتد مورد توجه رسانه‌های
+            فناوری و دانشگاه‌ها قرار گرفته است. در ادامه، چند گزارش با لینک به
+            منبع اصلی را مشاهده می‌کنید.
+          </p>
+          <p>
+            این اشاره‌ها نشان می‌دهد پروژه‌های تأییدشدهٔ او چگونه بر جامعه
+            فناوری اثر گذاشته و اعتبارش را افزایش داده‌اند.
+          </p>
+          <section class="grid grid-3">
+            <div class="presskit-card">
+              <img
+                src="assets/images/logo-virgool.svg"
+                alt="لوگوی ویرگول – مقاله دربارهٔ رسول آنلیمیتد"
+              />
+              <article itemscope itemtype="https://schema.org/NewsArticle">
+                <h3>
+                  <a
+                    href="https://virgool.io/@RasoulUnlimited/discord-bot-verification"
+                    >Interview: First Persian Discord Bot Verified</a
+                  >
+                </h3>
+                <p>Virgool, May 12, 2020</p>
+              </article>
+            </div>
+            <div class="presskit-card">
+              <img
+                src="assets/images/logo-sut.svg"
+                alt="لوگوی دانشگاه صنعتی سهند – معرفی رسول آنلیمیتد"
+              />
+              <article itemscope itemtype="https://schema.org/NewsArticle">
+                <h3>
+                  <a href="https://sut.ac.ir/news/rasoulunlimited-collaboration"
+                    >University Collaboration on Open Source Projects</a
+                  >
+                </h3>
+                <p>Sahand University of Technology, March 18, 2024</p>
+              </article>
+            </div>
+            <div class="presskit-card">
+              <img
+                src="assets/images/logo-ut.svg"
+                alt="لوگوی دانشگاه تهران – مصاحبه با رسول آنلیمیتد"
+              />
+              <article itemscope itemtype="https://schema.org/NewsArticle">
+                <h3>
+                  <a href="https://radio.ut.ac.ir/interview-rasoul-unlimited"
+                    >Radio UT Interview with Rasoul Unlimited</a
+                  >
+                </h3>
+                <p>University of Tehran, November 9, 2023</p>
+              </article>
+            </div>
+          </section>
+          <p>
+            برای انتشار مطلب درباره رسول آنلیمیتد، به
+            <a href="press-kit/fa/">پک رسانه‌ای</a> سر بزنید یا
+            <a href="contact.html">در ارتباط باشید</a>.
+          </p>
+          <p class="cta">
+            <a href="proof.html">مشاهده گواهی‌های تایید شده &rarr;</a>
+          </p>
+        </main>
       </div>
     </div>
     <noscript>

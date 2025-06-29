@@ -3,20 +3,72 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Preconnect to necessary domains for faster resource loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+
+    <!-- Preload critical CSS for faster rendering -->
+    <link
+      rel="preload"
+      as="style"
+      data-href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;700&display=swap"
+      data-make-stylesheet
+    />
+    <link
+      rel="preload"
+      as="style"
+      data-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      data-make-stylesheet
+    />
+    <link
+      rel="preload"
+      as="style"
+      data-href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
+      data-make-stylesheet
+    />
     <title>تماس با رسول آنلیمیتد</title>
-    <meta name="description" content="راه‌های ارتباط با محمد رسول سهرابی برای همکاری یا پرسش‌های حرفه‌ای." />
+    <meta
+      name="description"
+      content="راه‌های ارتباط با محمد رسول سهرابی برای همکاری یا پرسش‌های حرفه‌ای."
+    />
     <link rel="stylesheet" href="assets/css/design-system.min.css" />
     <link rel="stylesheet" href="assets/css/main-style-fa.min.css" />
+    <script src="assets/js/performance-helpers.min.js" defer></script>
     <link rel="canonical" href="https://rasoulunlimited.ir/contact.html" />
-    <link rel="author" href="https://rasoulunlimited.ir/#person" data-person="rasoul-unlimited" />
+    <link
+      rel="author"
+      href="https://rasoulunlimited.ir/#person"
+      data-person="rasoul-unlimited"
+    />
     <meta name="robots" content="index, follow" />
     <meta name="citation_title" content="تماس با رسول آنلیمیتد" />
     <meta name="dcterms.creator" content="Mohammad Rasoul Sohrabi" />
-    <meta name="dc.identifier" content="https://rasoulunlimited.ir/contact.html" />
-    <link rel="alternate" href="https://rasoulunlimited.ir/contact.html" hreflang="fa-IR" />
-    <link rel="alternate" href="https://rasoulunlimited.ir/en/contact.html" hreflang="en-US" />
-    <link rel="alternate" href="https://rasoulunlimited.ir/contact.html" hreflang="x-default" />
-    <link rel="alternate" type="application/ld+json" href="/schema/identity.jsonld" />
+    <meta
+      name="dc.identifier"
+      content="https://rasoulunlimited.ir/contact.html"
+    />
+    <link
+      rel="alternate"
+      href="https://rasoulunlimited.ir/contact.html"
+      hreflang="fa-IR"
+    />
+    <link
+      rel="alternate"
+      href="https://rasoulunlimited.ir/en/contact.html"
+      hreflang="en-US"
+    />
+    <link
+      rel="alternate"
+      href="https://rasoulunlimited.ir/contact.html"
+      hreflang="x-default"
+    />
+    <link
+      rel="alternate"
+      type="application/ld+json"
+      href="/schema/identity.jsonld"
+    />
     <meta name="color-scheme" content="light dark" />
     <meta
       name="theme-color"
@@ -31,16 +83,34 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://rasoulunlimited.ir/contact.html" />
     <meta property="og:title" content="تماس با رسول آنلیمیتد" />
-    <meta property="og:description" content="راه‌های ارتباط با محمد رسول سهرابی برای همکاری یا پرسش‌های حرفه‌ای." />
-    <meta property="og:image" content="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp" />
-    <meta property="og:image:alt" content="Portrait of Mohammad Rasoul Sohrabi" />
+    <meta
+      property="og:description"
+      content="راه‌های ارتباط با محمد رسول سهرابی برای همکاری یا پرسش‌های حرفه‌ای."
+    />
+    <meta
+      property="og:image"
+      content="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp"
+    />
+    <meta
+      property="og:image:alt"
+      content="Portrait of Mohammad Rasoul Sohrabi"
+    />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@rasoulunlimited" />
     <meta name="twitter:creator" content="@rasoulunlimited" />
     <meta name="twitter:title" content="تماس با رسول آنلیمیتد" />
-    <meta name="twitter:description" content="راه‌های ارتباط با محمد رسول سهرابی برای همکاری یا پرسش‌های حرفه‌ای." />
-    <meta name="twitter:image" content="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp" />
-    <meta name="twitter:image:alt" content="Portrait of Mohammad Rasoul Sohrabi" />
+    <meta
+      name="twitter:description"
+      content="راه‌های ارتباط با محمد رسول سهرابی برای همکاری یا پرسش‌های حرفه‌ای."
+    />
+    <meta
+      name="twitter:image"
+      content="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp"
+    />
+    <meta
+      name="twitter:image:alt"
+      content="Portrait of Mohammad Rasoul Sohrabi"
+    />
     <script type="application/ld+json" nonce="RasoulCSP">
       {
         "@context": "https://schema.org",
@@ -55,17 +125,17 @@
       }
     </script>
     <script type="application/ld+json" nonce="RasoulCSP">
-        {
-          "@context": "https://schema.org",
-          "@type": "WebPage",
-          "url": "https://rasoulunlimited.ir/contact.html",
-          "speakable": {
-            "@type": "SpeakableSpecification",
-            "cssSelector": ["h1", "p"]
-          }
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "url": "https://rasoulunlimited.ir/contact.html",
+        "speakable": {
+          "@type": "SpeakableSpecification",
+          "cssSelector": ["h1", "p"]
         }
-      </script>
-      <link rel="entity-profile" href="/.well-known/entity-profile.json" />
+      }
+    </script>
+    <link rel="entity-profile" href="/.well-known/entity-profile.json" />
   </head>
   <body>
     <noscript>
@@ -81,35 +151,88 @@
       </header>
     </noscript>
     <div data-include-html="includes/header-fa.html"></div>
-        <div class="container">
+    <div class="container">
       <div class="content-area">
         <main id="main-content">
-          <section id="hero" role="region" aria-labelledby="hero-tagline">
-            <img src="assets/images/RasoulUnlimited.webp" loading="eager" decoding="async" alt="تصویر پرترهٔ محمد رسول سهرابی" class="profile-image" width="220" height="220" />
-            <p class="tagline" id="hero-tagline">برای همکاری یا پرسش‌های حرفه‌ای در تماس باشید</p>
+          <section
+            id="hero"
+            class="fade-in"
+            role="region"
+            aria-labelledby="hero-tagline"
+          >
+            <img
+              src="assets/images/RasoulUnlimited.webp"
+              loading="eager"
+              decoding="async"
+              alt="تصویر پرترهٔ محمد رسول سهرابی"
+              class="profile-image"
+              width="220"
+              height="220"
+            />
+            <p class="tagline hero-tagline" id="hero-tagline">
+              برای همکاری یا پرسش‌های حرفه‌ای در تماس باشید
+            </p>
           </section>
-    <h1 data-person="rasoul-unlimited">تماس با رسول آنلیمیتد</h1>
-    <section id="contact-info" aria-labelledby="contact-info-heading">
-      <h2 id="contact-info-heading">اطلاعات تماس</h2>
-      <div class="credential-grid">
-        <div class="credential-card">
-          <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIyIiB5PSI0IiB3aWR0aD0iMjAiIGhlaWdodD0iMTYiIHJ4PSIyIiByeT0iMiIvPjxwb2x5bGluZSBwb2ludHM9IjIyLDQgMTIsMTMgMiw0Ii8+PC9zdmc+" alt="ایمیل" width="48" height="48" loading="lazy" />
-          <h3>ایمیل</h3>
-          <p class="credential-summary"><a data-person="rasoul-unlimited" href="mailto:rasoul.unlimited@gmail.com">rasoul.unlimited@gmail.com</a></p>
-        </div>
-        <div class="credential-card">
-          <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iY3VycmVudENvbG9yIj48cGF0aCBkPSJNMTIgLjVhMTIgMTIgMCAwMC0zLjc5IDIzLjRjLjYuMS44Mi0uMjYuODItLjU4di0yLjAyYy0zLjM0LjczLTQuMDQtMS42NC00LjA0LTEuNjQtLjU1LTEuNC0xLjM0LTEuNzctMS4zNC0xLjc3LTEuMS0uNzUuMDgtLjc0LjA4LS43NCAxLjIyLjA5IDEuODYgMS4yNiAxLjg2IDEuMjYgMS4wOCAxLjg2IDIuODMgMS4zMiAzLjUyIDEgLjExLS43OC40Mi0xLjMyLjc2LTEuNjMtMi42Ni0uMy01LjQ3LTEuMzMtNS40Ny01LjkzIDAtMS4zMS40Ny0yLjM4IDEuMjQtMy4yMi0uMTItLjMtLjU0LTEuNTIuMTItMy4xNyAwIDAgMS4wMS0uMzIgMy4zIDEuMjNhMTEuNSAxMS41IDAgMDE2IDBjMi4yOS0xLjU1IDMuMy0xLjIzIDMuMy0xLjIzLjY2IDEuNjUuMjQgMi44Ny4xMiAzLjE3Ljc3Ljg0IDEuMjQgMS45MSAxLjI0IDMuMjIgMCA0LjYxLTIuODEgNS42My01LjQ5IDUuOTMuNDMuMzcuODIgMS4xLjgyIDIuMjJ2My4yOWMwIC4zMi4yMi42OS44Mi41OEExMiAxMiAwIDAwMTIgLjV6Ii8+PC9zdmc+" alt="GitHub" width="48" height="48" loading="lazy" />
-          <h3>GitHub</h3>
-          <p class="credential-summary"><a href="https://github.com/RasoulUnlimited" target="_blank" rel="noopener noreferrer">github.com/RasoulUnlimited</a></p>
-        </div>
-        <div class="credential-card">
-          <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iY3VycmVudENvbG9yIj48cGF0aCBkPSJNNC45OCAzLjVDNC45OCA0Ljg4IDMuODYgNiAyLjUgNlMwIDQuODggMCAzLjUgMS4xMiAxIDIuNSAxczIuNDggMS4xMiAyLjQ4IDIuNXpNLjUgOC41aDRWMjNoLTR6TTguNSA4LjVoMy43OXYyLjFoLjA1Yy41My0xIDEuODMtMi4wNSAzLjc3LTIuMDUgNC4wMyAwIDQuNzggMi42NSA0Ljc4IDYuMVYyM2gtNFYxNS4xYzAtMS44OC0uMDMtNC4zLTIuNjItNC4zLTIuNjIgMC0zLjAyIDIuMDUtMy4wMiA0LjE3VjIzaC00eiIvPjwvc3ZnPg==" alt="LinkedIn" width="48" height="48" loading="lazy" />
-          <h3>LinkedIn</h3>
-          <p class="credential-summary"><a href="https://www.linkedin.com/in/rasoulunlimited/" target="_blank" rel="noopener noreferrer">linkedin.com/in/rasoulunlimited</a></p>
-        </div>
-      </div>
-    </section>
-    </main>
+          <h1 data-person="rasoul-unlimited">تماس با رسول آنلیمیتد</h1>
+          <section id="contact-info" aria-labelledby="contact-info-heading">
+            <h2 id="contact-info-heading">اطلاعات تماس</h2>
+            <div class="grid grid-3">
+              <div class="card-basic">
+                <img
+                  src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIyIiB5PSI0IiB3aWR0aD0iMjAiIGhlaWdodD0iMTYiIHJ4PSIyIiByeT0iMiIvPjxwb2x5bGluZSBwb2ludHM9IjIyLDQgMTIsMTMgMiw0Ii8+PC9zdmc+"
+                  alt="ایمیل"
+                  width="48"
+                  height="48"
+                  loading="lazy"
+                />
+                <h3>ایمیل</h3>
+                <p class="credential-summary">
+                  <a
+                    data-person="rasoul-unlimited"
+                    href="mailto:rasoul.unlimited@gmail.com"
+                    >rasoul.unlimited@gmail.com</a
+                  >
+                </p>
+              </div>
+              <div class="card-basic">
+                <img
+                  src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iY3VycmVudENvbG9yIj48cGF0aCBkPSJNMTIgLjVhMTIgMTIgMCAwMC0zLjc5IDIzLjRjLjYuMS44Mi0uMjYuODItLjU4di0yLjAyYy0zLjM0LjczLTQuMDQtMS42NC00LjA0LTEuNjQtLjU1LTEuNC0xLjM0LTEuNzctMS4zNC0xLjc3LTEuMS0uNzUuMDgtLjc0LjA4LS43NCAxLjIyLjA5IDEuODYgMS4yNiAxLjg2IDEuMjYgMS4wOCAxLjg2IDIuODMgMS4zMiAzLjUyIDEgLjExLS43OC40Mi0xLjMyLjc2LTEuNjMtMi42Ni0uMy01LjQ3LTEuMzMtNS40Ny01LjkzIDAtMS4zMS40Ny0yLjM4IDEuMjQtMy4yMi0uMTItLjMtLjU0LTEuNTIuMTItMy4xNyAwIDAgMS4wMS0uMzIgMy4zIDEuMjNhMTEuNSAxMS41IDAgMDE2IDBjMi4yOS0xLjU1IDMuMy0xLjIzIDMuMy0xLjIzLjY2IDEuNjUuMjQgMi44Ny4xMiAzLjE3Ljc3Ljg0IDEuMjQgMS45MSAxLjI0IDMuMjIgMCA0LjYxLTIuODEgNS42My01LjQ5IDUuOTMuNDMuMzcuODIgMS4xLjgyIDIuMjJ2My4yOWMwIC4zMi4yMi42OS44Mi41OEExMiAxMiAwIDAwMTIgLjV6Ii8+PC9zdmc+"
+                  alt="GitHub"
+                  width="48"
+                  height="48"
+                  loading="lazy"
+                />
+                <h3>GitHub</h3>
+                <p class="credential-summary">
+                  <a
+                    href="https://github.com/RasoulUnlimited"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >github.com/RasoulUnlimited</a
+                  >
+                </p>
+              </div>
+              <div class="card-basic">
+                <img
+                  src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iY3VycmVudENvbG9yIj48cGF0aCBkPSJNNC45OCAzLjVDNC45OCA0Ljg4IDMuODYgNiAyLjUgNlMwIDQuODggMCAzLjUgMS4xMiAxIDIuNSAxczIuNDggMS4xMiAyLjQ4IDIuNXpNLjUgOC41aDRWMjNoLTR6TTguNSA4LjVoMy43OXYyLjFoLjA1Yy41My0xIDEuODMtMi4wNSAzLjc3LTIuMDUgNC4wMyAwIDQuNzggMi42NSA0Ljc4IDYuMVYyM2gtNFYxNS4xYzAtMS44OC0uMDMtNC4zLTIuNjItNC4zLTIuNjIgMC0zLjAyIDIuMDUtMy4wMiA0LjE3VjIzaC00eiIvPjwvc3ZnPg=="
+                  alt="LinkedIn"
+                  width="48"
+                  height="48"
+                  loading="lazy"
+                />
+                <h3>LinkedIn</h3>
+                <p class="credential-summary">
+                  <a
+                    href="https://www.linkedin.com/in/rasoulunlimited/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >linkedin.com/in/rasoulunlimited</a
+                  >
+                </p>
+              </div>
+            </div>
+          </section>
+        </main>
       </div>
     </div>
     <noscript>

@@ -6,8 +6,8 @@
   <schema:Person rdf:about="https://rasoulunlimited.ir/#person">
     <schema:name>Mohammad Rasoul Sohrabi</schema:name>
     <schema:alternateName>Rasoul Unlimited, رسول آنلیمیتد, محمد رسول سهرابی</schema:alternateName>
-    <schema:url rdf:resource="https://rasoulunlimited.ir/"/>
-    <schema:image rdf:resource="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp"/>
+    <schema:url rdf:resource="https://rasoulunlimited.ir/" />
+    <schema:image rdf:resource="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp" />
     <schema:honorificPrefix>Mr.</schema:honorificPrefix>
     <schema:gender>Male</schema:gender>
     <schema:nationality>
@@ -31,17 +31,18 @@
       <schema:PropertyValue>
         <schema:propertyID>GitHub</schema:propertyID>
         <schema:value>RasoulUnlimited</schema:value>
-        <schema:url rdf:resource="https://github.com/RasoulUnlimited"/>
+        <schema:url rdf:resource="https://github.com/RasoulUnlimited" />
       </schema:PropertyValue>
     </schema:identifier>
     <schema:identifier>
       <schema:PropertyValue>
         <schema:propertyID>LinkedIn</schema:propertyID>
         <schema:value>rasoulunlimited</schema:value>
-        <schema:url rdf:resource="https://www.linkedin.com/in/rasoulunlimited/"/>
+        <schema:url rdf:resource="https://www.linkedin.com/in/rasoulunlimited/" />
       </schema:PropertyValue>
     </schema:identifier>
-    <schema:disambiguatingDescription>Iranian medical engineering student and creator of the first Persian Discord bot, Rasoul Unlimited.</schema:disambiguatingDescription>
+    <schema:disambiguatingDescription>Iranian medical engineering student and creator of the first
+      Persian Discord bot, Rasoul Unlimited.</schema:disambiguatingDescription>
     <schema:birthDate>2005-09-06</schema:birthDate>
     <schema:birthPlace>
       <schema:Place>
@@ -80,24 +81,24 @@
         <schema:competencyRequired>Medical engineering</schema:competencyRequired>
       </schema:EducationalOccupationalCredential>
     </schema:hasCredential>
-    <schema:sameAs rdf:resource="https://www.instagram.com/Rasoul.Unlimited"/>
-    <schema:sameAs rdf:resource="https://virgool.io/@RasoulUnlimited"/>
-    <schema:sameAs rdf:resource="https://rasoulunlimited.ir/"/>
-    <schema:sameAs rdf:resource="https://rasoulunlimited.ir/en/"/>
-    <schema:sameAs rdf:resource="https://www.linkedin.com/in/rasoulunlimited/"/>
-    <schema:sameAs rdf:resource="https://github.com/RasoulUnlimited/"/>
-    <schema:sameAs rdf:resource="https://rasoulunlimited.medium.com"/>
-    <schema:sameAs rdf:resource="https://dev.to/rasoulunlimited"/>
-    <schema:sameAs rdf:resource="https://t.me/RasoulUnlimited"/>
-    <schema:sameAs rdf:resource="https://orcid.org/0009-0004-7177-2080"/>
-    <schema:sameAs rdf:resource="https://about.me/rasoulunlimited"/>
-    <schema:sameAs rdf:resource="https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi"/>
-    <schema:sameAs rdf:resource="https://www.youtube.com/@RasoulUnlimited"/>
-    <schema:sameAs rdf:resource="https://keybase.io/RasoulUnlimited"/>
-    <schema:sameAs rdf:resource="https://mastodon.social/@rasoulunlimited"/>
-    <schema:sameAs rdf:resource="https://top.gg/bot/735403725132136510"/>
-    <schema:sameAs rdf:resource="https://www.wikidata.org/wiki/Q134503479"/>
-    <schema:sameAs rdf:resource="https://x.com/rasoulunlimited"/>
+    <schema:sameAs rdf:resource="https://www.instagram.com/Rasoul.Unlimited" />
+    <schema:sameAs rdf:resource="https://virgool.io/@RasoulUnlimited" />
+    <schema:sameAs rdf:resource="https://rasoulunlimited.ir/" />
+    <schema:sameAs rdf:resource="https://rasoulunlimited.ir/en/" />
+    <schema:sameAs rdf:resource="https://www.linkedin.com/in/rasoulunlimited/" />
+    <schema:sameAs rdf:resource="https://github.com/RasoulUnlimited/" />
+    <schema:sameAs rdf:resource="https://rasoulunlimited.medium.com" />
+    <schema:sameAs rdf:resource="https://dev.to/rasoulunlimited" />
+    <schema:sameAs rdf:resource="https://t.me/RasoulUnlimited" />
+    <schema:sameAs rdf:resource="https://orcid.org/0009-0004-7177-2080" />
+    <schema:sameAs rdf:resource="https://about.me/rasoulunlimited" />
+    <schema:sameAs rdf:resource="https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi" />
+    <schema:sameAs rdf:resource="https://www.youtube.com/@RasoulUnlimited" />
+    <schema:sameAs rdf:resource="https://keybase.io/RasoulUnlimited" />
+    <schema:sameAs rdf:resource="https://mastodon.social/@rasoulunlimited" />
+    <schema:sameAs rdf:resource="https://top.gg/bot/735403725132136510" />
+    <schema:sameAs rdf:resource="https://www.wikidata.org/wiki/Q134503479" />
+    <schema:sameAs rdf:resource="https://x.com/rasoulunlimited" />
     <schema:jobTitle>Biomedical Engineering Student</schema:jobTitle>
     <schema:jobTitle>Software Developer</schema:jobTitle>
     <schema:jobTitle>Designer</schema:jobTitle>
@@ -106,13 +107,13 @@
     <schema:alumniOf>
       <schema:EducationalOrganization>
         <schema:name>Islamic Azad University, Central Tehran Branch</schema:name>
-        <schema:url rdf:resource="https://ctb.iau.ir"/>
+        <schema:url rdf:resource="https://ctb.iau.ir" />
       </schema:EducationalOrganization>
     </schema:alumniOf>
     <schema:affiliation>
       <schema:Organization>
         <schema:name>Islamic Azad University, Central Tehran Branch</schema:name>
-        <schema:url rdf:resource="https://ctb.iau.ir"/>
+        <schema:url rdf:resource="https://ctb.iau.ir" />
         <schema:location>
           <schema:Place>
             <schema:name>Tehran, Iran</schema:name>
@@ -123,7 +124,7 @@
     <schema:worksFor>
       <schema:Organization>
         <schema:name>Rasoul Unlimited</schema:name>
-        <schema:url rdf:resource="https://rasoulunlimited.ir/"/>
+        <schema:url rdf:resource="https://rasoulunlimited.ir/" />
       </schema:Organization>
     </schema:worksFor>
     <schema:knowsAbout>Biomedical Engineering</schema:knowsAbout>
@@ -151,16 +152,17 @@
     <schema:knowsAbout>Adobe XD</schema:knowsAbout>
     <schema:memberOf>
       <schema:Organization>
-        <schema:name>Biomedical Engineering Association (Islamic Azad University, Central Tehran Branch)</schema:name>
+        <schema:name>Biomedical Engineering Association (Islamic Azad University, Central Tehran
+          Branch)</schema:name>
       </schema:Organization>
     </schema:memberOf>
     <schema:funder>
       <schema:Organization>
         <schema:name>Islamic Azad University, Central Tehran Branch</schema:name>
-        <schema:url rdf:resource="https://ctb.iau.ir"/>
+        <schema:url rdf:resource="https://ctb.iau.ir" />
       </schema:Organization>
     </schema:funder>
-    <schema:mainEntityOfPage rdf:resource="https://rasoulunlimited.ir/"/>
+    <schema:mainEntityOfPage rdf:resource="https://rasoulunlimited.ir/" />
   </schema:Person>
 
   <schema:ProfilePage rdf:about="https://rasoulunlimited.ir/">
