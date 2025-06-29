@@ -8,8 +8,16 @@
     <meta name="description" content="صفحه پیدا نشد" />
     <link rel="stylesheet" href="assets/css/design-system.min.css" />
     <link rel="stylesheet" href="assets/css/main-style-fa.min.css" />
-    <link rel="author" href="https://rasoulunlimited.ir/#person" data-person="rasoul-unlimited" />
-    <link rel="alternate" type="application/ld+json" href="/schema/identity.jsonld" />
+    <link
+      rel="author"
+      href="https://rasoulunlimited.ir/#person"
+      data-person="rasoul-unlimited"
+    />
+    <link
+      rel="alternate"
+      type="application/ld+json"
+      href="/schema/identity.jsonld"
+    />
     <meta name="color-scheme" content="light dark" />
     <meta
       name="theme-color"
@@ -21,21 +29,45 @@
       media="(prefers-color-scheme: dark)"
       content="#0f172a"
     />
-    <link rel="alternate" href="https://rasoulunlimited.ir/404.html" hreflang="fa-IR" />
-    <link rel="alternate" href="https://rasoulunlimited.ir/en/404.html" hreflang="en-US" />
-    <link rel="alternate" href="https://rasoulunlimited.ir/404.html" hreflang="x-default" />
+    <link
+      rel="alternate"
+      href="https://rasoulunlimited.ir/404.html"
+      hreflang="fa-IR"
+    />
+    <link
+      rel="alternate"
+      href="https://rasoulunlimited.ir/en/404.html"
+      hreflang="en-US"
+    />
+    <link
+      rel="alternate"
+      href="https://rasoulunlimited.ir/404.html"
+      hreflang="x-default"
+    />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="۴۰۴ - صفحه پیدا نشد" />
     <meta property="og:description" content="صفحه مورد نظر شما پیدا نشد." />
-    <meta property="og:image" content="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp" />
-    <meta property="og:image:alt" content="Portrait of Mohammad Rasoul Sohrabi" />
+    <meta
+      property="og:image"
+      content="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp"
+    />
+    <meta
+      property="og:image:alt"
+      content="Portrait of Mohammad Rasoul Sohrabi"
+    />
     <meta property="og:url" content="https://rasoulunlimited.ir/404.html" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@rasoulunlimited" />
     <meta name="twitter:title" content="۴۰۴ - صفحه پیدا نشد" />
     <meta name="twitter:description" content="صفحه مورد نظر شما پیدا نشد." />
-    <meta name="twitter:image" content="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp" />
-    <meta name="twitter:image:alt" content="Portrait of Mohammad Rasoul Sohrabi" />
+    <meta
+      name="twitter:image"
+      content="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp"
+    />
+    <meta
+      name="twitter:image:alt"
+      content="Portrait of Mohammad Rasoul Sohrabi"
+    />
     <script src="assets/js/performance-helpers.min.js" defer></script>
     <script type="application/ld+json" nonce="RasoulCSP">
       {
@@ -57,27 +89,10 @@
         ]
       }
     </script>
-    <style nonce="RasoulCSP">
-      #not-found-illustration,
-      .fade-in-button {
-        opacity: 0;
-        animation: fadeIn404 var(--transition-duration-long)
-          var(--transition-easing-standard) forwards;
-      }
-
-      .fade-in-button {
-        animation-delay: 0.2s;
-      }
-
-      @keyframes fadeIn404 {
-        to {
-          opacity: 1;
-        }
-      }
-    </style>
+    <style nonce="RasoulCSP"></style>
     <link rel="entity-profile" href="/.well-known/entity-profile.json" />
   </head>
-  <body class="min-h-screen flex flex-col items-center justify-center text-center p-8">
+  <body>
     <noscript>
       <header class="navbar" role="banner">
         <nav role="navigation" aria-label="پیوندهای اصلی سایت">
@@ -91,41 +106,54 @@
       </header>
     </noscript>
     <div data-include-html="includes/header-fa.html"></div>
-    <main id="main-content">
-      <svg
-      id="not-found-illustration"
-      class="mb-6"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 200 200"
-      width="200"
-      height="200"
-      aria-hidden="true"
-    >
-      <circle
-        cx="100"
-        cy="100"
-        r="90"
-        fill="var(--container-bg)"
-        stroke="var(--accent-color)"
-        stroke-width="4"
-      />
-      <text
-        x="100"
-        y="115"
-        text-anchor="middle"
-        font-size="72"
-        font-family="var(--font-heading)"
-        fill="var(--text-color)"
-      >۴۰۴</text>
-    </svg>
-      <h1 class="text-4xl font-bold mb-4">۴۰۴</h1>
-      <p class="text-lg mb-6">متأسفانه صفحه مورد نظر شما پیدا نشد.</p>
-      <nav class="flex flex-col gap-4">
-        <a href="/index.html" class="cta-button fade-in-button">صفحه اصلی</a>
-        <a href="/about.html" class="cta-button fade-in-button">درباره</a>
-        <a href="/contact.html" class="cta-button fade-in-button">تماس</a>
-      </nav>
-    </main>
+    <div class="container">
+      <div class="content-area">
+        <main id="main-content">
+          <section
+            class="not-found-hero"
+            role="alert"
+            aria-labelledby="not-found-heading"
+          >
+            <svg
+              id="not-found-illustration"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 200 200"
+              width="200"
+              height="200"
+              aria-hidden="true"
+            >
+              <circle
+                cx="100"
+                cy="100"
+                r="90"
+                fill="var(--container-bg)"
+                stroke="var(--accent-color)"
+                stroke-width="4"
+              />
+              <text
+                x="100"
+                y="115"
+                text-anchor="middle"
+                font-size="72"
+                font-family="var(--font-heading)"
+                fill="var(--text-color)"
+              >
+                ۴۰۴
+              </text>
+            </svg>
+            <h1 id="not-found-heading">۴۰۴</h1>
+            <p>متأسفانه صفحه مورد نظر شما پیدا نشد.</p>
+            <nav aria-label="پیوندهای ضروری">
+              <a href="/index.html" class="cta-button fade-in-button"
+                >صفحه اصلی</a
+              >
+              <a href="/about.html" class="cta-button fade-in-button">درباره</a>
+              <a href="/contact.html" class="cta-button fade-in-button">تماس</a>
+            </nav>
+          </section>
+        </main>
+      </div>
+    </div>
     <noscript>
       <footer class="footer">
         <p>&copy; <span id="footer-year"></span> Rasoul Unlimited</p>

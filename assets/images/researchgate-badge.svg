@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-labelledby="rgTitle" role="img">
+    <title id="rgTitle">ResearchGate</title>
+    <rect width="24" height="24" rx="4" fill="#00CCBB"/>
+    <path d="M7 7h7.5a3.5 3.5 0 0 1 0 7H9v3H7V7zm7.4 5a1.5 1.5 0 0 0 0-3H9v3h5.4z" fill="#ffffff"/>
+  </svg>

@@ -107,7 +107,8 @@ textarea:focus:not(:focus-visible) {
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius-lg);
-  transition: box-shadow var(--transition-duration-short) var(--transition-easing-standard);
+  transition: box-shadow var(--transition-duration-short)
+    var(--transition-easing-standard);
 }
 
 .press-card:hover {
@@ -117,4 +118,19 @@ textarea:focus:not(:focus-visible) {
 .press-card img {
   width: 48px;
   height: 48px;
+}
+
+/* Download button transitions */
+.download-button {
+  transition: background-color var(--transition-duration-short)
+      var(--transition-easing-standard),
+    transform var(--transition-duration-short) var(--transition-easing-springy);
+}
+
+.download-button:hover,
+.download-button:focus-visible {
+  background-color: var(--primary-color);
+  transform: translateY(-2px);
+  text-decoration: none;
+  color: #fff;
 }
