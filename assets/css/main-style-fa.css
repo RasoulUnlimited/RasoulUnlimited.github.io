@@ -88,10 +88,8 @@
   right: 0;
   bottom: 0;
   background-color: var(--text-color-light);
-  transition: background-color var(--transition-duration-short)
-    var(--transition-easing-standard);
+  transition: var(--transition-duration-short);
   border-radius: 24px;
-  will-change: background-color;
 }
 
 .slider:before {
@@ -102,12 +100,7 @@
   left: 3px;
   bottom: 3px;
   background-color: var(--card-bg);
-  transition: transform var(--transition-duration-short)
-      var(--transition-easing-standard),
-    content var(--transition-duration-short) var(--transition-easing-standard),
-    color var(--transition-duration-short) var(--transition-easing-standard),
-    background-color var(--transition-duration-short)
-      var(--transition-easing-standard);
+  transition: var(--transition-duration-short);
   border-radius: 50%;
 
   font-family: "Font Awesome 6 Free";
@@ -118,11 +111,10 @@
   justify-content: center;
   color: var(--primary-color);
   font-size: 0.8em;
-  will-change: transform, content, color, background-color;
 }
 
 input:checked + .slider {
-  background-color: var(--toast-bg);
+  background-color: var(--primary-color);
 }
 
 input:focus-visible + .slider {
@@ -132,7 +124,7 @@ input:focus-visible + .slider {
 input:checked + .slider:before {
   transform: translateX(24px);
   content: "\f186";
-  color: var(--toast-color);
+  color: white;
 }
 
 .dark-mode {

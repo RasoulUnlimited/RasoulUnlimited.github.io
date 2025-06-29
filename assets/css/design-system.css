@@ -149,3 +149,87 @@
   text-decoration: none;
   border: none;
 }
+
+/* Utility sections */
+.section {
+  padding: var(--section-v-padding) var(--space-lg);
+  margin-bottom: var(--section-margin-bottom);
+}
+.section:last-of-type {
+  margin-bottom: var(--space-xl);
+}
+
+/* Hero layout */
+.hero {
+  text-align: center;
+  padding-top: var(--section-v-padding);
+  padding-bottom: var(--space-xxxl);
+  margin-bottom: var(--section-margin-bottom);
+}
+.hero-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin: 0 0 var(--space-sm);
+  color: var(--heading-color);
+}
+.hero-tagline {
+  font-size: 1.25rem;
+  color: var(--tagline-color);
+  margin-bottom: var(--space-xl);
+}
+
+/* Basic card */
+.card-basic {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  padding: var(--space-md);
+  box-shadow: 0 2px 6px var(--shadow-color-light);
+  transition: transform var(--transition-duration-medium)
+      var(--transition-easing-standard),
+    box-shadow var(--transition-duration-medium)
+      var(--transition-easing-standard);
+}
+.card-basic:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px var(--shadow-color-medium);
+}
+
+/* Grid helpers */
+.grid {
+  display: grid;
+  gap: var(--space-lg);
+}
+.grid-2 {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+.grid-3 {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+.grid-4 {
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+/* Typography */
+.text-center {
+  text-align: center;
+}
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
+}
+.section-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  margin-bottom: var(--space-md);
+  color: var(--heading-color);
+  text-align: center;
+}
+.section-lead {
+  max-width: var(--max-paragraph-width);
+  margin: 0 auto var(--space-lg);
+  color: var(--text-color-light);
+  font-size: 1.125rem;
+}
