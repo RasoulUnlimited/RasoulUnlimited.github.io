@@ -9,17 +9,13 @@
   border: 1px solid var(--border-faq-item, #eef2f7);
   border-radius: var(--border-radius-item, 12px);
   overflow: hidden;
-  transition: all var(--transition-speed-medium, 0.3s) var(--ease-bezier, ease);
+  transition: border-color var(--transition-speed-medium, 0.3s) var(--ease-bezier, ease), box-shadow var(--transition-speed-medium, 0.3s) var(--ease-bezier, ease), background-color var(--transition-speed-medium, 0.3s) var(--ease-bezier, ease);
   box-shadow: 0 10px 30px var(--shadow-faq-item, rgba(0, 0, 0, 0.08));
 }
 
 .accordion-item:hover {
   border-color: var(--primary-blue, #3498db);
   box-shadow: 0 15px 45px var(--shadow-faq-item-hover, rgba(0, 0, 0, 0.12));
-}
-
-.accordion-item:not(.expanded):hover {
-  transform: translateY(-5px);
 }
 
 .accordion-item.expanded {
