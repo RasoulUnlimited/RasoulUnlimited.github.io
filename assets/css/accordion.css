@@ -16,8 +16,16 @@
 .accordion-item:hover {
   border-color: var(--primary-blue, #3498db);
   box-shadow: 0 15px 45px var(--shadow-faq-item-hover, rgba(0, 0, 0, 0.12));
+}
+
+.accordion-item:not(.expanded):hover {
   transform: translateY(-5px);
 }
+
+.accordion-item.expanded {
+  transform: none;
+}
+
 
 .accordion-header {
   display: flex;
