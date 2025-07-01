@@ -507,12 +507,14 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 
     if (targetElement) {
       const navbarHeight = document.querySelector(".navbar")?.offsetHeight || 0;
-      // Scroll to the target element, accounting for fixed navbar height
-      window.scrollTo({
-        top: targetElement.offsetTop - navbarHeight - 10, // Adjust by navbar height and a small offset
-        behavior: "smooth", // Smooth scroll animation
-      });
-      triggerHapticFeedback([20]); // Light haptic feedback
+      const progressHeight =
+        document.getElementById("scroll-progress-bar")?.offsetHeight || 0;
+      const paddingTop =
+        parseFloat(getComputedStyle(targetElement).paddingTop) || 0;
+      const scrollPosition =
+        targetElement.offsetTop + paddingTop - navbarHeight - progressHeight;
+      window.scrollTo({ top: scrollPosition, behavior: "smooth" });
+      triggerHapticFeedback([20]);
     }
   });
 });
@@ -747,12 +749,17 @@ exploreHint.addEventListener("click", (e) => {
   exploreHint.classList.remove("pulse-animation");
   hintVisible = false;
   // Smooth scroll to projects section
-  window.scrollTo({
-    top:
-      document.querySelector("#projects").offsetTop -
-      (document.querySelector(".navbar")?.offsetHeight || 0), // Adjust for navbar
-    behavior: "smooth",
-  });
+  const targetElement = document.querySelector("#projects");
+  if (targetElement) {
+    const navbarHeight = document.querySelector(".navbar")?.offsetHeight || 0;
+    const progressHeight =
+      document.getElementById("scroll-progress-bar")?.offsetHeight || 0;
+    const paddingTop =
+      parseFloat(getComputedStyle(targetElement).paddingTop) || 0;
+    const scrollPosition =
+      targetElement.offsetTop + paddingTop - navbarHeight - progressHeight;
+    window.scrollTo({ top: scrollPosition, behavior: "smooth" });
+  }
   triggerHapticFeedback([20]); // Light haptic feedback
 });
 

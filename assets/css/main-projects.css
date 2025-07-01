@@ -82,7 +82,9 @@ ul {
   box-shadow: 0 4px 12px var(--shadow-color-medium);
   text-decoration: none;
 }
-
+.dark-mode .badge:hover {
+  color: #000;
+}
 .badge img {
   width: 24px;
   height: 24px;

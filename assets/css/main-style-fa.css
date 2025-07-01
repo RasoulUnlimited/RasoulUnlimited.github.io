@@ -937,7 +937,7 @@ img.loaded {
 .card .card-links a:hover,
 .card .card-links a:focus-visible {
   background-color: var(--accent-color);
-  color: #fff;
+  color: #000;
   transform: translateY(-2px);
   text-decoration: none;
   box-shadow: 0 4px 8px var(--shadow-color-medium);

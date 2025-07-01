@@ -408,8 +408,14 @@
       if (targetElement) {
         const navbarHeight =
           document.querySelector(".navbar")?.offsetHeight || 0;
+        const progressHeight =
+          document.getElementById("scroll-progress-bar")?.offsetHeight || 0;
+        const paddingTop =
+          parseFloat(getComputedStyle(targetElement).paddingTop) || 0;
+        const scrollPosition =
+          targetElement.offsetTop + paddingTop - navbarHeight - progressHeight;
         window.scrollTo({
-          top: targetElement.offsetTop - navbarHeight - 10,
+          top: scrollPosition,
           behavior: "smooth",
         });
         triggerHapticFeedback([20]);
@@ -603,12 +609,17 @@
     exploreHint.classList.add("hidden");
     exploreHint.classList.remove("visible", "pulse-animation");
     hintVisible = false;
-    window.scrollTo({
-      top:
-        document.querySelector("#projects").offsetTop -
-        (document.querySelector(".navbar")?.offsetHeight || 0),
-      behavior: "smooth",
-    });
+    const targetElement = document.querySelector("#projects");
+    if (targetElement) {
+      const navbarHeight = document.querySelector(".navbar")?.offsetHeight || 0;
+      const progressHeight =
+        document.getElementById("scroll-progress-bar")?.offsetHeight || 0;
+      const paddingTop =
+        parseFloat(getComputedStyle(targetElement).paddingTop) || 0;
+      const scrollPosition =
+        targetElement.offsetTop + paddingTop - navbarHeight - progressHeight;
+      window.scrollTo({ top: scrollPosition, behavior: "smooth" });
+    }
     triggerHapticFeedback([20]);
   });
 
