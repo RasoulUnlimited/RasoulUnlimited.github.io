@@ -25,7 +25,7 @@
 
 .accordion-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   padding: 2.2rem 2.8rem;
   font-weight: 600;
   color: var(--text-dark, #263238);
@@ -37,6 +37,14 @@
   font-size: 1.4rem;
   border-bottom: 1px solid transparent;
   transition: all var(--transition-speed-fast, 0.3s) ease-in-out;
+}
+
+.accordion-header .faq-question {
+  flex: 1 1 100%;
+  margin: 0;
+  line-height: 1.5;
+  text-align: right;
+  word-break: break-word;
 }
 
 .accordion-header::before {
