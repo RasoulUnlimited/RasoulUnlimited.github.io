@@ -942,6 +942,10 @@ img.loaded {
   text-decoration: none;
   box-shadow: 0 4px 8px var(--shadow-color-medium);
 }
+.dark-mode .card .card-links a:hover,
+.dark-mode .card .card-links a:focus-visible {
+  color: #000; /* or another dark text color with adequate contrast */
+}
 .card .card-links a:active {
   filter: brightness(0.9);
   transform: translateY(0px);

@@ -869,6 +869,10 @@ section h2::after {
   text-decoration: none;
   box-shadow: 0 2px 5px var(--shadow-color-light);
 }
+.dark-mode .card .card-links a:hover,
+.dark-mode .card .card-links a:focus-visible {
+  color: #000; /* or another dark text color with adequate contrast */
+}
 .card .card-links a:hover i,
 .card .card-links a:focus-visible i {
   color: white;
