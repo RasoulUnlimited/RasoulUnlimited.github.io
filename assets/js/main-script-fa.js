@@ -473,7 +473,9 @@
         { once: true }
       );
 
-      triggerHapticFeedback([10]);
+      if (!interactiveElement.closest(".faq-item")) {
+        triggerHapticFeedback([10]);
+      }
       playSound("click");
     }
   });
