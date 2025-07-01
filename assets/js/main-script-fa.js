@@ -741,12 +741,7 @@
 
         const wasAlreadyOpen = item.open;
 
-        summary.classList.add("faq-summary-clicked");
         createSparkle(summary);
-
-        setTimeout(() => {
-          summary.classList.remove("faq-summary-clicked");
-        }, 300);
 
         faqItems.forEach((otherItem) => {
           if (otherItem !== item && otherItem.open) {

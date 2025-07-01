@@ -235,6 +235,7 @@ input:checked + .slider:before {
   --timeline-dot-border-color: var(--primary-color);
   --timeline-content-border-color: #4a4a4a;
   --giscus-border: 1px solid var(--border-color);
+  --card-link-hover-text-color: #000;
 }
 
 .dark-mode .micro-profile {
@@ -864,14 +865,10 @@ section h2::after {
 .card .card-links a:hover,
 .card .card-links a:focus-visible {
   background-color: var(--accent-color);
-  color: #fff;
+  color: var(--card-link-hover-text-color);
   transform: translateY(-2px);
   text-decoration: none;
   box-shadow: 0 2px 5px var(--shadow-color-light);
-}
-.dark-mode .card .card-links a:hover,
-.dark-mode .card .card-links a:focus-visible {
-  color: #000; /* or another dark text color with adequate contrast */
 }
 .card .card-links a:hover i,
 .card .card-links a:focus-visible i {

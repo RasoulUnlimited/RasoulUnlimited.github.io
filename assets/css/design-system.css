@@ -32,6 +32,7 @@
   --giscus-border: none;
   --search-border: #ccd6e0;
   --search-focus-shadow: rgba(52, 152, 219, 0.3);
+  --card-link-hover-text-color: #fff;
 
   --space-unit: 0.5rem;
   --space-xxs: calc(var(--space-unit) * 0.5);
