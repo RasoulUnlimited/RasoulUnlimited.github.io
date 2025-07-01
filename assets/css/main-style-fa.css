@@ -2809,6 +2809,7 @@ img.loaded {
   .connect-content {
     flex-direction: column;
     gap: var(--space-lg);
+    align-items: center;
     text-align: center;
   }
   .connect-info-block,
@@ -2844,9 +2845,9 @@ img.loaded {
 
   .connect-links-block {
     flex: 1;
-    min-width: 250px;
+    min-width: 100%;
     direction: ltr;
-    text-align: left;
+    text-align: center;
   }
   .connect-links-block h3 {
     text-align: center;
@@ -2854,6 +2855,7 @@ img.loaded {
   }
   .connect-links-block ul {
     gap: var(--space-xs);
+    margin: 0 auto;
   }
   .connect-links-block ul li {
     font-size: 0.9rem;
@@ -3045,6 +3047,12 @@ img.loaded {
     min-height: 48px;
     min-width: 48px;
     padding: 0.6rem;
+  }
+  /* keep toggle rectangular on touch devices */
+  .theme-switch {
+    min-height: 24px;
+    min-width: 48px;
+    padding: 0;
   }
   .skills-list li {
     min-height: 48px;
