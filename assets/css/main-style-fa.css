@@ -2200,7 +2200,7 @@ img.loaded {
   transform: translateX(-50%) translateY(150%);
   background-color: var(--toast-bg);
   color: var(--toast-color);
-  padding: var(--space-md) var(--space-xl);
+  padding: var(--space-sm) var(--space-lg);
   border-radius: 12px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
   z-index: 1003;
@@ -2208,8 +2208,9 @@ img.loaded {
   transition: transform 0.6s var(--transition-easing-springy),
     opacity 0.6s ease-out;
   white-space: nowrap;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
+  line-height: 1.3;
   direction: rtl;
   text-align: center;
   border-left: 6px solid var(--highlight-color);
@@ -2886,6 +2887,7 @@ img.loaded {
   .dynamic-toast {
     padding: var(--space-sm) var(--space-md);
     font-size: 0.9rem;
+    line-height: 1.3;
     max-width: calc(100% - 30px);
     white-space: normal;
   }
