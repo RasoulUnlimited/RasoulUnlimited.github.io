@@ -5,7 +5,7 @@
     xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
 
     <url>
-        <loc>https://rasoulunlimited.ir</loc>
+        <loc>https://rasoulunlimited.ir/</loc>
         <lastmod>2025-06-27</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
@@ -42,7 +42,7 @@
         <xhtml:link
             rel="alternate"
             hreflang="fa-IR"
-            href="https://rasoulunlimited.ir/projects/c-projects/" />
+            href="https://rasoulunlimited.ir/projects/c-projects/fa/" />
         <xhtml:link
             rel="alternate"
             hreflang="en-US"
@@ -57,7 +57,7 @@
         <xhtml:link
             rel="alternate"
             hreflang="fa-IR"
-            href="https://rasoulunlimited.ir/projects/python-projects/" />
+            href="https://rasoulunlimited.ir/projects/python-projects/fa/" />
         <xhtml:link
             rel="alternate"
             hreflang="en-US"
@@ -148,7 +148,56 @@
     </url>
 
     <url>
+        <loc>https://rasoulunlimited.ir/security.html</loc>
+        <lastmod>2025-06-27</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
         <loc>https://rasoulunlimited.ir/.well-known/identity.json</loc>
+        <lastmod>2025-06-27</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+
+    <url>
+        <loc>https://rasoulunlimited.ir/schema/identity.jsonld</loc>
+        <lastmod>2025-06-27</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+
+    <url>
+        <loc>https://rasoulunlimited.ir/.well-known/entity.rdf</loc>
+        <lastmod>2025-06-27</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+
+    <url>
+        <loc>https://rasoulunlimited.ir/.well-known/entity.ttl</loc>
+        <lastmod>2025-06-27</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+
+    <url>
+        <loc>https://rasoulunlimited.ir/.well-known/webfinger.json</loc>
+        <lastmod>2025-06-27</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+
+    <url>
+        <loc>https://rasoulunlimited.ir/.well-known/entity-profile.json</loc>
+        <lastmod>2025-06-27</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+
+    <url>
+        <loc>https://rasoulunlimited.ir/.well-known/security.txt</loc>
         <lastmod>2025-06-27</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>

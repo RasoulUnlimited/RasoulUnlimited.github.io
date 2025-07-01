@@ -1269,6 +1269,10 @@ section h2::after {
 .ltr {
   direction: ltr;
 }
+.nowrap {
+  white-space: nowrap;
+}
+
 
 .subtle-text {
   color: var(--text-color-light);

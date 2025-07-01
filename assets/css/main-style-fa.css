@@ -1835,6 +1835,9 @@ img.loaded {
 .ltr {
   direction: ltr;
 }
+.nowrap {
+  white-space: nowrap;
+}
 
 .subtle-text {
   color: var(--text-color-light);
