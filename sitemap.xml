@@ -24,7 +24,7 @@
         <xhtml:link
             rel="alternate"
             hreflang="fa-IR"
-            href="https://rasoulunlimited.ir" />
+            href="https://rasoulunlimited.ir/" />
     </url>
 
     <url>
@@ -39,7 +39,7 @@
         <xhtml:link
             rel="alternate"
             hreflang="fa-IR"
-            href="https://rasoulunlimited.ir" />
+            href="https://rasoulunlimited.ir/" />
         <xhtml:link
             rel="alternate"
             hreflang="en-US"
@@ -357,4 +357,31 @@
         <priority>0.3</priority>
     </url>
 
+    <url>
+        <loc>https://rasoulunlimited.ir/links.txt</loc>
+        <lastmod>2025-07-01</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+
+    <url>
+        <loc>https://rasoulunlimited.ir/manifest.json</loc>
+        <lastmod>2025-07-01</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+
+    <url>
+        <loc>https://rasoulunlimited.ir/manifest-en.json</loc>
+        <lastmod>2025-07-01</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+
+    <url>
+        <loc>https://rasoulunlimited.ir/.well-known/keybase.txt</loc>
+        <lastmod>2025-07-01</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
 </urlset>
