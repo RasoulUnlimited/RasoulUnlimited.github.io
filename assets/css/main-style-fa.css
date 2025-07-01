@@ -65,7 +65,15 @@
 .micro-profile a.u-url:hover {
   text-decoration: underline;
 }
-
+.micro-profile a.u-email {
+  display: inline-block;
+  color: #0066cc;
+  font-weight: bold;
+  text-decoration: none;
+}
+.micro-profile a.u-email:hover {
+  text-decoration: underline;
+}
 .theme-switch {
   position: relative;
   display: inline-block;
@@ -165,6 +173,7 @@ input:checked + .slider:before {
   --timeline-dot-border-color: var(--primary-color);
   --timeline-content-border-color: #4a4a4a;
   --giscus-border: 1px solid var(--border-color);
+  --faq-link-hover-color: var(--primary-color);
 }
 
 /* Specific Dark Mode Adjustments for Contrast */
@@ -199,6 +208,16 @@ input:checked + .slider:before {
   color: var(--text-color); /* Lighter text */
 }
 
+.dark-mode .micro-profile {
+  opacity: 1;
+  color: var(--text-color);
+}
+.dark-mode .micro-profile .u-email {
+  color: var(--text-color-link);
+}
+.dark-mode .micro-profile a.u-url {
+  color: var(--text-color-link);
+}
 *,
 *::before,
 *::after {
@@ -2202,12 +2221,14 @@ img.loaded {
   color: var(--toast-color);
   padding: var(--space-sm) var(--space-lg);
   border-radius: 12px;
+  box-sizing: border-box;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  max-width: 90vw;
   z-index: 1003;
   opacity: 0;
   transition: transform 0.6s var(--transition-easing-springy),
     opacity 0.6s ease-out;
-  white-space: nowrap;
+  white-space: normal;
   font-size: 1rem;
   font-weight: 600;
   line-height: 1.3;

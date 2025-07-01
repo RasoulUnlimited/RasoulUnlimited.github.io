@@ -105,7 +105,15 @@
 .micro-profile a.u-url:hover {
   text-decoration: underline;
 }
-
+.micro-profile a.u-email {
+  display: inline-block;
+  color: #0066cc;
+  font-weight: bold;
+  text-decoration: none;
+}
+.micro-profile a.u-email:hover {
+  text-decoration: underline;
+}
 .footer-links {
   margin-top: 1rem;
   text-align: center;
@@ -227,6 +235,27 @@ input:checked + .slider:before {
   --timeline-dot-border-color: var(--primary-color);
   --timeline-content-border-color: #4a4a4a;
   --giscus-border: 1px solid var(--border-color);
+}
+
+.dark-mode .micro-profile {
+  opacity: 1;
+  color: var(--text-color);
+}
+.dark-mode .micro-profile .u-email {
+  color: var(--text-color-link);
+}
+.dark-mode .micro-profile a.u-url {
+  color: var(--text-color-link);
+}
+/* Specific Dark Mode Adjustments for Contrast */
+.dark-mode .fun-fact-toast {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border-right: 6px solid var(--primary-color);
+}
+
+.dark-mode .fun-fact-toast i {
+  color: var(--primary-color);
 }
 
 *,
@@ -2159,6 +2188,32 @@ section h2::after {
 .scroll-action.show {
   opacity: 1;
   transform: translateY(0);
+}
+
+@media (max-width: 480px) {
+  .dynamic-toast {
+    padding: var(--space-sm) var(--space-md);
+    font-size: 0.9rem;
+    line-height: 1.3;
+    max-width: calc(100% - 30px);
+    white-space: normal;
+  }
+  .dynamic-toast i { font-size: 1em; }
+}
+
+.theme-toast {
+  border-right: 4px solid var(--highlight-color);
+}
+
+.fun-fact-toast {
+  background-color: var(--highlight-color);
+  color: var(--secondary-color);
+  border-right: 6px solid var(--primary-color);
+  will-change: background-color, color, border-right;
+}
+
+.fun-fact-toast i {
+  color: var(--primary-color);
 }
 
 @media (prefers-reduced-motion: reduce) {
