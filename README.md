@@ -19,11 +19,7 @@
 
 ## Overview
 
-Rasoul Unlimited is the personal website of **Mohammad Rasoul Sohrabi**. It is a
-clean, fast loading site that highlights his work and writing in both Persian
-and English. The pages are fully static, built with Node and Gulp, then
-deployed on **GitHub Pages** and accelerated through **Cloudflare** for global
-performance and security.
+Rasoul Unlimited is the personal website of **Mohammad Rasoul Sohrabi**. Designed with a minimal, elegant aesthetic, it highlights his work and writing in both Persian and English. Each page is statically generated with Node and Gulp, then hosted on **GitHub Pages** and served through **Cloudflare** for fast, secure delivery. The architecture is built to load quickly and provide a smooth experience. The mission is to present Rasoul's expertise professionally and simply, letting the content speak for itself.
 
 Key features:
 
