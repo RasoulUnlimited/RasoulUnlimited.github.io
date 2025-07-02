@@ -20,19 +20,7 @@ Key features:
 Example CSP:
 
 ```
-default-src 'self' blob:;
-script-src 'self' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://static.cloudflareinsights.com https://giscus.app 'nonce-RasoulCSP';
-style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net 'nonce-RasoulCSP';
-style-src-attr 'none';
-style-src-elem 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://giscus.app;
-font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;
-img-src 'self' data:;
-connect-src 'self' https://static.cloudflareinsights.com https://giscus.app https://api.github.com https://orcid.org https://about.me https://www.researchgate.net https://www.linkedin.com https://github.com;
-frame-src https://giscus.app;
-object-src 'none';
-base-uri 'self';
-form-action 'self';
-frame-ancestors 'self';
+default-src 'self' blob:; script-src 'self' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://static.cloudflareinsights.com https://giscus.app 'nonce-RasoulCSP'; style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net 'nonce-RasoulCSP'; style-src-attr 'none'; style-src-elem 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://giscus.app; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self' https://static.cloudflareinsights.com https://giscus.app https://api.github.com https://orcid.org https://about.me https://www.researchgate.net https://www.linkedin.com https://github.com; frame-src https://giscus.app; object-src 'none'; base-uri 'self'; form-action https://formspree.io 'self'; frame-ancestors 'self';;
 ```
 
 ## Prerequisites
