@@ -1,10 +1,49 @@
-# Key Links
+# Main Persian Pages
 Homepage: https://rasoulunlimited.ir/
 About: https://rasoulunlimited.ir/about.html
+FAQ: https://rasoulunlimited.ir/faq/
 Contact: https://rasoulunlimited.ir/contact.html
 Proof & Credentials: https://rasoulunlimited.ir/proof.html
 Press: https://rasoulunlimited.ir/press.html
 Media: https://rasoulunlimited.ir/media.html
+Security Policy: https://rasoulunlimited.ir/security.html
+
+# English Pages
+Homepage (EN): https://rasoulunlimited.ir/en/
+About (EN): https://rasoulunlimited.ir/en/about.html
+FAQ (EN): https://rasoulunlimited.ir/en/faq/
+Contact (EN): https://rasoulunlimited.ir/en/contact.html
+Proof & Credentials (EN): https://rasoulunlimited.ir/en/proof.html
+Press (EN): https://rasoulunlimited.ir/en/press.html
+Media (EN): https://rasoulunlimited.ir/en/media.html
+Security Policy (EN): https://rasoulunlimited.ir/en/security.html
+
+# Project Overviews
+Projects Home: https://rasoulunlimited.ir/projects/
+C Projects: https://rasoulunlimited.ir/projects/c-projects/
+Python Projects: https://rasoulunlimited.ir/projects/python-projects/
+
+# Press Kit
+Press Kit: https://rasoulunlimited.ir/press-kit/
+Press Kit (FA): https://rasoulunlimited.ir/press-kit/fa/
+
+# Security & Metadata
+Security Policy: https://rasoulunlimited.ir/security.html
+humans.txt: https://rasoulunlimited.ir/humans.txt
+FOAF: https://rasoulunlimited.ir/foaf.rdf
+Well-Known Security: https://rasoulunlimited.ir/.well-known/security.txt
+Well-Known Identity: https://rasoulunlimited.ir/.well-known/identity.json
+
+# Social Accounts
 GitHub: https://github.com/RasoulUnlimited
+LinkedIn: https://www.linkedin.com/in/rasoulunlimited/
+ResearchGate: https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi
 ORCID: https://orcid.org/0009-0004-7177-2080
+About.me: https://about.me/rasoulunlimited
+Telegram: https://t.me/RasoulUnlimited
+Instagram: https://www.instagram.com/Rasoul.Unlimited
+YouTube: https://www.youtube.com/@RasoulUnlimited
+
+# Sitemap & Robots
 Sitemap: https://rasoulunlimited.ir/sitemap.xml
+Robots: https://rasoulunlimited.ir/robots.txt

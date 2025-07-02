@@ -1,5 +1,17 @@
 # rasoulunlimited.ir
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Prerequisites](#prerequisites)
+- [Build instructions](#build-instructions)
+- [Deployment notes](#deployment-notes)
+- [Cloudflare Worker](#cloudflare-worker)
+- [Structured data and profiles](#structured-data-and-profiles)
+- [Contribution guidelines](#contribution-guidelines)
+- [License](#license)
+
+
 ## Overview
 
 Rasoul Unlimited is the personal website of **Mohammad Rasoul Sohrabi**. It is a
@@ -10,7 +22,9 @@ performance and security.
 
 Key features:
 
-- Minimal responsive design with light and dark themes
+- Minimal, elegant design with light and dark themes for fast loading
+- Persian and English pages for wider accessibility
+- Hosted on GitHub Pages and integrated with Cloudflare for performance and security
 - Structured data (JSON‑LD) to help Google build a Knowledge Panel
 - [FOAF profile](foaf.rdf) and other identity links for knowledge graphs
 - Cloudflare Worker that injects crawler‑specific JSON‑LD
@@ -53,7 +67,9 @@ The `build` script compiles and minifies static assets using Gulp.
 
 ## Deployment notes
 
-The site is hosted on **GitHub Pages** and served through **Cloudflare** for improved performance and security. Update the `CNAME` file when changing the custom domain.
+The site is hosted on **GitHub Pages** and served through **Cloudflare** for improved performance and security. The `CNAME` file defines the custom domain; editing this file updates the domain that GitHub Pages responds to. After changing it, make sure your Cloudflare DNS records point the domain to GitHub Pages.
+
+When a domain change occurs, update the route for the Cloudflare Worker so it attaches to the new hostname. Review the security headers injected by Cloudflare—including the `Content‑Security‑Policy`—and adjust any domain‑specific directives accordingly.
 
 ## Cloudflare Worker
 
