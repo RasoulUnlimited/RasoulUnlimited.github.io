@@ -136,7 +136,7 @@ To keep the history clear and useful, please write descriptive commit messages t
 - Summarize the change in a short sentence using the imperative mood (e.g., "Add contact form" or "Fix build script").
 - Avoid generic subjects like "Update" or "Fix" without context.
 - Limit the summary line to around 50 characters when possible.
-- Include additional details in the body when a change requires more
+- Include additional details in the body when a change requires more context or explanation.
 
 ## License
 
