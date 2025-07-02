@@ -8,6 +8,12 @@
   <foaf:Person rdf:about="https://rasoulunlimited.ir/#person">
     <foaf:name>Mohammad Rasoul Sohrabi</foaf:name>
     <foaf:nick>Rasoul Unlimited</foaf:nick>
+    <foaf:givenName>Mohammad Rasoul</foaf:givenName>
+    <foaf:familyName>Sohrabi</foaf:familyName>
+    <foaf:gender>Male</foaf:gender>
+    <foaf:birthday>2005-09-06</foaf:birthday>
+    <foaf:page rdf:resource="https://rasoulunlimited.ir/about.html" />
+    <foaf:openid rdf:resource="https://rasoulunlimited.ir" />
     <foaf:title>Biomedical Engineering Student, Software Developer</foaf:title>
 
     <foaf:homepage rdf:resource="https://rasoulunlimited.ir" />
@@ -128,7 +134,7 @@
     <dc:creator>Mohammad Rasoul Sohrabi</dc:creator>
     <dc:description>Personal FOAF profile of Mohammad Rasoul Sohrabi (aka Rasoul Unlimited), a
       biomedical engineering student and open-source contributor from Tehran, Iran.</dc:description>
-    <dc:date>2025-06-05</dc:date>
+    <dc:date>2025-06-24</dc:date>
 
   </foaf:Person>
 </rdf:RDF>
