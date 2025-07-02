@@ -19,9 +19,9 @@
             <video:title>معرفی ربات فارسی دیسکورد</video:title>
             <video:description>ویدئویی کوتاه درباره اولین ربات فارسی‌زبان دیسکورد تایید‌شده توسط
                 Discord.</video:description>
-                <video:player_loc allow_embed="yes" autoplay="ap=1">
-                    https://www.aparat.com/video/video/embed/videohash/AxQyY/vt/frame
-                  </video:player_loc>
+            <video:player_loc allow_embed="yes" autoplay="ap=1">
+                https://www.aparat.com/video/video/embed/videohash/AxQyY/vt/frame
+            </video:player_loc>
         </video:video>
         <xhtml:link
             rel="alternate"
@@ -48,7 +48,8 @@
             <video:title>Persian Discord Bot introduction</video:title>
             <video:description>A short video introducing the first Persian-language Discord bot
                 officially verified by Discord.</video:description>
-            <video:player_loc>https://www.aparat.com/v/AxQyY</video:player_loc>
+            <video:player_loc allow_embed="yes" autoplay="ap=1">
+                https://www.aparat.com/video/video/embed/videohash/AxQyY/vt/frame</video:player_loc>
         </video:video>
         <xhtml:link
             rel="alternate"
@@ -245,10 +246,6 @@
             rel="alternate"
             hreflang="fa-IR"
             href="https://rasoulunlimited.ir/about.html" />
-        <xhtml:link
-            rel="alternate"
-            hreflang="en-US"
-            href="https://rasoulunlimited.ir/en/about.html" />
         <xhtml:link
             rel="alternate"
             hreflang="en-US"
@@ -451,10 +448,6 @@
             rel="alternate"
             hreflang="fa-IR"
             href="https://rasoulunlimited.ir/security.html" />
-        <xhtml:link
-            rel="alternate"
-            hreflang="en-US"
-            href="https://rasoulunlimited.ir/en/security.html" />
         <xhtml:link
             rel="alternate"
             hreflang="en-US"
