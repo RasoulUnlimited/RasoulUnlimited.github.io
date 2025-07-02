@@ -12,6 +12,7 @@
         <image:image>
             <image:loc>https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp</image:loc>
             <image:caption>Profile photo of Rasoul Unlimited</image:caption>
+            <image:title>Rasoul Unlimited</image:title>
         </image:image>
         <video:video>
             <video:thumbnail_loc>
