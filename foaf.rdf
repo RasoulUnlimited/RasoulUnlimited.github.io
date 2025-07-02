@@ -3,7 +3,8 @@
   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
   xmlns:foaf="http://xmlns.com/foaf/0.1/"
   xmlns:dc="http://purl.org/dc/elements/1.1/"
-  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+  xmlns:owl="http://www.w3.org/2002/07/owl#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:cc="http://creativecommons.org/ns#">
 
   <foaf:Person rdf:about="https://rasoulunlimited.ir/#person">
     <foaf:name>Mohammad Rasoul Sohrabi</foaf:name>
@@ -38,6 +39,7 @@
       <foaf:OnlineAccount>
         <foaf:accountServiceHomepage rdf:resource="https://github.com" />
         <foaf:accountName>RasoulUnlimited</foaf:accountName>
+        <owl:sameAs rdf:resource="https://github.com/RasoulUnlimited" />
       </foaf:OnlineAccount>
     </foaf:account>
 
@@ -45,6 +47,7 @@
       <foaf:OnlineAccount>
         <foaf:accountServiceHomepage rdf:resource="https://orcid.org" />
         <foaf:accountName>0009-0004-7177-2080</foaf:accountName>
+        <owl:sameAs rdf:resource="https://orcid.org/0009-0004-7177-2080" />
       </foaf:OnlineAccount>
     </foaf:account>
 
@@ -52,6 +55,7 @@
       <foaf:OnlineAccount>
         <foaf:accountServiceHomepage rdf:resource="https://linkedin.com" />
         <foaf:accountName>rasoulunlimited</foaf:accountName>
+        <owl:sameAs rdf:resource="https://www.linkedin.com/in/rasoulunlimited/" />
       </foaf:OnlineAccount>
     </foaf:account>
 
@@ -59,6 +63,7 @@
       <foaf:OnlineAccount>
         <foaf:accountServiceHomepage rdf:resource="https://medium.com" />
         <foaf:accountName>rasoulunlimited</foaf:accountName>
+        <owl:sameAs rdf:resource="https://rasoulunlimited.medium.com" />
       </foaf:OnlineAccount>
     </foaf:account>
 
@@ -66,6 +71,7 @@
       <foaf:OnlineAccount>
         <foaf:accountServiceHomepage rdf:resource="https://dev.to" />
         <foaf:accountName>rasoulunlimited</foaf:accountName>
+        <owl:sameAs rdf:resource="https://dev.to/rasoulunlimited" />
       </foaf:OnlineAccount>
     </foaf:account>
 
@@ -73,6 +79,7 @@
       <foaf:OnlineAccount>
         <foaf:accountServiceHomepage rdf:resource="https://virgool.io" />
         <foaf:accountName>rasoulunlimited</foaf:accountName>
+        <owl:sameAs rdf:resource="https://virgool.io/@RasoulUnlimited" />
       </foaf:OnlineAccount>
     </foaf:account>
 
@@ -80,6 +87,7 @@
       <foaf:OnlineAccount>
         <foaf:accountServiceHomepage rdf:resource="https://instagram.com" />
         <foaf:accountName>Rasoul.Unlimited</foaf:accountName>
+        <owl:sameAs rdf:resource="https://www.instagram.com/Rasoul.Unlimited/" />
       </foaf:OnlineAccount>
     </foaf:account>
 
@@ -87,6 +95,7 @@
       <foaf:OnlineAccount>
         <foaf:accountServiceHomepage rdf:resource="https://t.me" />
         <foaf:accountName>Rasoul_Unlimited</foaf:accountName>
+        <owl:sameAs rdf:resource="https://t.me/RasoulUnlimited" />
       </foaf:OnlineAccount>
     </foaf:account>
 
@@ -94,6 +103,7 @@
       <foaf:OnlineAccount>
         <foaf:accountServiceHomepage rdf:resource="https://www.youtube.com" />
         <foaf:accountName>rasoulunlimited</foaf:accountName>
+        <owl:sameAs rdf:resource="https://www.youtube.com/@RasoulUnlimited" />
       </foaf:OnlineAccount>
     </foaf:account>
 
@@ -101,6 +111,7 @@
       <foaf:OnlineAccount>
         <foaf:accountServiceHomepage rdf:resource="https://about.me" />
         <foaf:accountName>rasoulunlimited</foaf:accountName>
+        <owl:sameAs rdf:resource="https://about.me/rasoulunlimited" />
       </foaf:OnlineAccount>
     </foaf:account>
 
@@ -108,6 +119,7 @@
       <foaf:OnlineAccount>
         <foaf:accountServiceHomepage rdf:resource="https://gravatar.com" />
         <foaf:accountName>rasoulunlimited</foaf:accountName>
+        <owl:sameAs rdf:resource="https://gravatar.com/rasoulunlimited" />
       </foaf:OnlineAccount>
     </foaf:account>
 
@@ -115,6 +127,7 @@
       <foaf:OnlineAccount>
         <foaf:accountServiceHomepage rdf:resource="https://keybase.io" />
         <foaf:accountName>RasoulUnlimited</foaf:accountName>
+        <owl:sameAs rdf:resource="https://keybase.io/RasoulUnlimited" />
       </foaf:OnlineAccount>
     </foaf:account>
 
@@ -122,6 +135,28 @@
       <foaf:OnlineAccount>
         <foaf:accountServiceHomepage rdf:resource="https://mastodon.social" />
         <foaf:accountName>RasoulUnlimited</foaf:accountName>
+        <owl:sameAs rdf:resource="https://mastodon.social/@rasoulunlimited" />
+      </foaf:OnlineAccount>
+    </foaf:account>
+
+    <foaf:account>
+      <foaf:OnlineAccount>
+        <foaf:accountServiceHomepage rdf:resource="https://www.researchgate.net" />
+        <foaf:accountName>Mohammad-Rasoul-Sohrabi</foaf:accountName>
+      </foaf:OnlineAccount>
+    </foaf:account>
+
+    <foaf:account>
+      <foaf:OnlineAccount>
+        <foaf:accountServiceHomepage rdf:resource="https://twitter.com" />
+        <foaf:accountName>RasoulUnlimited</foaf:accountName>
+      </foaf:OnlineAccount>
+    </foaf:account>
+
+    <foaf:account>
+      <foaf:OnlineAccount>
+        <foaf:accountServiceHomepage rdf:resource="https://top.gg" />
+        <foaf:accountName>735403725132136510</foaf:accountName>
       </foaf:OnlineAccount>
     </foaf:account>
 
@@ -129,12 +164,18 @@
     <rdfs:seeAlso rdf:resource="https://orcid.org/0009-0004-7177-2080" />
     <rdfs:seeAlso rdf:resource="https://www.wikidata.org/wiki/Q134619124" />
     <rdfs:seeAlso rdf:resource="https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi" />
+    <rdfs:seeAlso rdf:resource="https://rasoulunlimited.ir/manifest.json" />
+    <rdfs:seeAlso rdf:resource="https://rasoulunlimited.ir/schema/identity.jsonld" />
+    <rdfs:seeAlso rdf:resource="https://github.com/RasoulUnlimited" />
+    <rdfs:seeAlso rdf:resource="https://www.linkedin.com/in/rasoulunlimited/" />
+    <rdfs:seeAlso rdf:resource="https://twitter.com/RasoulUnlimited" />
 
     <!-- Metadata -->
     <dc:creator>Mohammad Rasoul Sohrabi</dc:creator>
     <dc:description>Personal FOAF profile of Mohammad Rasoul Sohrabi (aka Rasoul Unlimited), a
       biomedical engineering student and open-source contributor from Tehran, Iran.</dc:description>
     <dc:date>2025-06-24</dc:date>
+    <cc:license rdf:resource="https://creativecommons.org/licenses/by-nc-nd/4.0/" />
 
   </foaf:Person>
 </rdf:RDF>

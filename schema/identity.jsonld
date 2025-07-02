@@ -82,6 +82,7 @@
       ],
       "disambiguatingDescription": "محمد رسول سهرابی، معروف به «رسول آنلیمیتد»، دانشجوی مهندسی پزشکی از دانشگاه تهران، توسعه‌دهنده وب خلاق، برنامه‌نویس پایتون و C، و خالق اولین ربات فارسی‌زبان دیسکورد است که رسماً توسط Discord Inc. تأیید شده. او در حوزه‌های سلامت دیجیتال، برندینگ شخصی و پروژه‌های نوآورانه متن‌باز با شناسه‌های علمی DOI فعالیت دارد. او همچنین دارنده دان ۱ رسمی کاراته از فدراسیون جمهوری اسلامی ایران است که نمایانگر نظم و پشتکار اوست.",
       "description": "محمد رسول سهرابی (Rasoul Unlimited)، مهندس پزشکی و توسعه‌دهنده فول‌استک، متخصص در سلامت دیجیتال و برندینگ شخصی. کاوش در پروژه‌های نوآورانه، مقالات سئو محور و مسیر حرفه‌ای او با تأکید بر دستاوردهای کلیدی و تأییدیه‌های رسمی.",
+      "keywords": "biomedical engineering, full-stack development, content strategy",
       "birthDate": "2005-09-06",
       "birthPlace": {
         "@type": "Place",
@@ -344,6 +345,9 @@
           }
         }
       ],
+      "subjectOf": {
+        "@id": "https://rasoulunlimited.ir/press.html"
+      },
       "mainEntityOfPage": {
         "@type": "ProfilePage",
         "@id": "https://rasoulunlimited.ir/about.html",
@@ -435,6 +439,8 @@
       "url": "https://rasoulunlimited.ir",
       "name": "Rasoul Unlimited | محمد رسول سهرابی",
       "description": "صفحه رسمی و پورتفولیوی محمد رسول سهرابی (Rasoul Unlimited)، مرجع اصلی هویت دیجیتال و حرفه‌ای او.",
+      "inLanguage": "fa",
+      "license": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
       "potentialAction": {
         "@type": "SearchAction",
         "target": "https://rasoulunlimited.ir/?q={search_term_string}",
@@ -450,6 +456,10 @@
           "@id": "https://rasoulunlimited.ir/#organization"
         }
       ],
+      "publisher": {
+        "@id": "https://rasoulunlimited.ir/#organization"
+      },
+      "datePublished": "2025-05-16",
       "dateModified": "2025-06-24"
     },
     {
@@ -457,11 +467,13 @@
       "@id": "https://rasoulunlimited.ir/press.html",
       "name": "Press & Media – Rasoul Unlimited",
       "url": "https://rasoulunlimited.ir/press.html",
+      "inLanguage": "fa",
       "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "https://rasoulunlimited.ir/press.html",
         "url": "https://rasoulunlimited.ir/press.html"
       },
+      "datePublished": "2025-06-23",
       "dateModified": "2025-06-24"
     },
     {
@@ -469,11 +481,13 @@
       "@id": "https://rasoulunlimited.ir/proof.html",
       "name": "Verifiable Credentials & DOIs – Rasoul Unlimited",
       "url": "https://rasoulunlimited.ir/proof.html",
+      "inLanguage": "fa",
       "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "https://rasoulunlimited.ir/proof.html",
         "url": "https://rasoulunlimited.ir/proof.html"
       },
+      "datePublished": "2025-06-23",
       "dateModified": "2025-06-24"
     },
     {
@@ -481,11 +495,13 @@
       "@id": "https://rasoulunlimited.ir/faq/",
       "name": "Frequently Asked Questions – Rasoul Unlimited",
       "url": "https://rasoulunlimited.ir/faq/",
+      "inLanguage": "fa",
       "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "https://rasoulunlimited.ir/faq/",
         "url": "https://rasoulunlimited.ir/faq/"
       },
+      "datePublished": "2025-06-02",
       "dateModified": "2025-06-24"
     },
     {
@@ -493,11 +509,13 @@
       "@id": "https://rasoulunlimited.ir/press-kit/",
       "name": "Press Kit – Rasoul Unlimited",
       "url": "https://rasoulunlimited.ir/press-kit/",
+      "inLanguage": "fa",
       "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "https://rasoulunlimited.ir/press-kit/",
         "url": "https://rasoulunlimited.ir/press-kit/"
       },
+      "datePublished": "2025-06-24",
       "dateModified": "2025-06-24"
     },
     {
@@ -505,11 +523,13 @@
       "@id": "https://rasoulunlimited.ir/contact.html",
       "name": "Contact – Rasoul Unlimited",
       "url": "https://rasoulunlimited.ir/contact.html",
+      "inLanguage": "fa",
       "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "https://rasoulunlimited.ir/contact.html",
         "url": "https://rasoulunlimited.ir/contact.html"
       },
+      "datePublished": "2025-06-23",
       "dateModified": "2025-06-24"
     },
     {
