@@ -1,3 +1,7 @@
+# Rasoul Unlimited – Key site links
+# Static pages served via GitHub Pages and secured through Cloudflare
+# Updated: 2025-07-02
+
 # Main Persian Pages
 Homepage: https://rasoulunlimited.ir/
 About: https://rasoulunlimited.ir/about.html
@@ -6,7 +10,6 @@ Contact: https://rasoulunlimited.ir/contact.html
 Proof & Credentials: https://rasoulunlimited.ir/proof.html
 Press: https://rasoulunlimited.ir/press.html
 Media: https://rasoulunlimited.ir/media.html
-Security Policy: https://rasoulunlimited.ir/security.html
 
 # English Pages
 Homepage (EN): https://rasoulunlimited.ir/en/
@@ -22,10 +25,14 @@ Security Policy (EN): https://rasoulunlimited.ir/en/security.html
 Projects Home: https://rasoulunlimited.ir/projects/
 C Projects: https://rasoulunlimited.ir/projects/c-projects/
 Python Projects: https://rasoulunlimited.ir/projects/python-projects/
+C Projects (FA): https://rasoulunlimited.ir/projects/c-projects/fa/
+Python Projects (FA): https://rasoulunlimited.ir/projects/python-projects/fa/
 
 # Press Kit
 Press Kit: https://rasoulunlimited.ir/press-kit/
 Press Kit (FA): https://rasoulunlimited.ir/press-kit/fa/
+Rasoul Unlimited Bio (EN): https://rasoulunlimited.ir/press-kit/rasoul-unlimited-bio.txt
+Rasoul Unlimited Bio (FA): https://rasoulunlimited.ir/press-kit/fa/rasoul-unlimited-bio.txt
 
 # Security & Metadata
 Security Policy: https://rasoulunlimited.ir/security.html
@@ -33,6 +40,14 @@ humans.txt: https://rasoulunlimited.ir/humans.txt
 FOAF: https://rasoulunlimited.ir/foaf.rdf
 Well-Known Security: https://rasoulunlimited.ir/.well-known/security.txt
 Well-Known Identity: https://rasoulunlimited.ir/.well-known/identity.json
+Entity Profile: https://rasoulunlimited.ir/.well-known/entity-profile.json
+Entity RDF: https://rasoulunlimited.ir/.well-known/entity.rdf
+Entity Turtle: https://rasoulunlimited.ir/.well-known/entity.ttl
+Keybase Proof: https://rasoulunlimited.ir/.well-known/keybase.txt
+WebFinger: https://rasoulunlimited.ir/.well-known/webfinger.json
+Manifest (FA): https://rasoulunlimited.ir/manifest.json
+Manifest (EN): https://rasoulunlimited.ir/manifest-en.json
+Structured Data (JSON-LD): https://rasoulunlimited.ir/schema/identity.jsonld
 
 # Social Accounts
 GitHub: https://github.com/RasoulUnlimited
