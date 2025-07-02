@@ -1,5 +1,7 @@
 # Rasoul Unlimited – [rasoulunlimited.ir](https://rasoulunlimited.ir)
 
+> A modern personal website powered by **GitHub Pages** and **Cloudflare**
+
 ## Table of Contents
 
 - [Overview](#overview)
@@ -31,8 +33,28 @@ Key features:
 - Cloudflare Worker that injects crawler‑specific JSON‑LD and adds caching
 - Strict Content‑Security‑Policy enforced through Cloudflare (see example policy)
 
+## Design philosophy
 
-Example CSP:
+The interface follows a minimal and elegant approach so that content stands out
+without distractions. Animations and scripts are kept light to ensure a fast,
+smooth experience across devices. Every visual element supports clarity and
+usability rather than decoration.
+
+## Project structure
+
+```
+assets/        # CSS, images and JavaScript
+cloudflare/    # Worker code for dynamic headers
+en/            # English pages
+faq/           # Persian FAQ
+includes/      # Shared header and footer snippets
+press-kit/     # Media resources and bio files
+projects/      # Project descriptions
+schema/        # Structured data in JSON-LD
+```
+
+
+Content‑Security‑Policy example:
 
 ```
   default-src 'self' blob:;
