@@ -1,8 +1,39 @@
 # rasoulunlimited.ir
 
-## Project description and purpose
+## Overview
 
-A minimal personal site for Mohammad Rasoul Sohrabi (Rasoul Unlimited) built with GitHub Pages. The project showcases work, writing, and contact information in both Persian and English.
+Rasoul Unlimited is the personal website of **Mohammad Rasoul Sohrabi**. It is a
+clean, fast loading site that highlights his work and writing in both Persian
+and English. The pages are fully static, built with Node and Gulp, then
+deployed on **GitHub Pages** and accelerated through **Cloudflare** for global
+performance and security.
+
+Key features:
+
+- Minimal responsive design with light and dark themes
+- Structured data (JSON‑LD) to help Google build a Knowledge Panel
+- [FOAF profile](foaf.rdf) and other identity links for knowledge graphs
+- Cloudflare Worker that injects crawler‑specific JSON‑LD
+- Strict Content‑Security‑Policy enforced by Cloudflare (see example policy)
+
+
+Example CSP:
+
+```
+default-src 'self' blob:;
+script-src 'self' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://static.cloudflareinsights.com https://giscus.app 'nonce-RasoulCSP';
+style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net 'nonce-RasoulCSP';
+style-src-attr 'none';
+style-src-elem 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://giscus.app;
+font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;
+img-src 'self' data:;
+connect-src 'self' https://static.cloudflareinsights.com https://giscus.app https://api.github.com https://orcid.org https://about.me https://www.researchgate.net https://www.linkedin.com https://github.com;
+frame-src https://giscus.app;
+object-src 'none';
+base-uri 'self';
+form-action 'self';
+frame-ancestors 'self';
+```
 
 ## Prerequisites
 
