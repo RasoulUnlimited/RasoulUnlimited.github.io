@@ -1,9 +1,12 @@
-# Author: Mohammad Rasoul Sohrabi
+# Robots.txt for https://rasoulunlimited.ir
+# Maintainer: Mohammad Rasoul Sohrabi
+# Site served via GitHub Pages and proxied through Cloudflare
 
+# ----- General Rules -----
 User-agent: *
 Allow: /
 
-# === Preferred content structure ===
+# Preferred public content
 Allow: /en/
 Allow: /projects/
 Allow: /projects/c-projects/
@@ -26,7 +29,7 @@ Allow: /assets/vendor/
 Allow: /faq/
 Allow: /en/faq/
 
-# === Allow human-readable and machine-readable identity files ===
+# Identity and verification files
 Allow: /humans.txt
 Allow: /foaf.rdf
 Allow: /.well-known/
@@ -40,7 +43,7 @@ Allow: /.well-known/keybase.txt
 Allow: /schema/
 Allow: /schema/identity.jsonld
 
-# === Block non-content and sensitive directories (if exist) ===
+# Block non-content or sensitive paths
 Disallow: /admin/
 Disallow: /login/
 Disallow: /register/
@@ -49,8 +52,15 @@ Disallow: /private/
 Disallow: /tmp/
 Disallow: /backup/
 Disallow: /404.html
+Disallow: /includes/
+Disallow: /cloudflare/
+Disallow: /gulpfile.js
+Disallow: /package.json
+Disallow: /package-lock.json
+Disallow: /README.md
+Disallow: /LICENSE
 
-# === Specialized crawlers (if you want to target them) ===
+# ----- Specialized Crawlers -----
 User-agent: Googlebot-Image
 Allow: /assets/images/
 
@@ -60,18 +70,18 @@ Allow: /
 User-agent: bingbot
 Allow: /
 
-# === Sitemap and Crawl Coordination ===
+# ----- Sitemap and Host -----
 Sitemap: https://rasoulunlimited.ir/sitemap.xml
 Host: rasoulunlimited.ir
 
-# === Comments for Search Engines and Humans ===
-# FOAF: Machine-readable social relationships → /foaf.rdf
-# humans.txt: Developer credit and site purpose → /humans.txt
-# identity.json / .well-known/: Decentralized identity or WebID
-# entity.rdf and entity.ttl: RDF/Turtle Person schema → /.well-known/
-# schema/identity.jsonld: Linked data for Google Knowledge Graph
-# security.txt: Responsible disclosure policy → /.well-known/security.txt
-# links.txt: Quick reference to key URLs → /links.txt
-# entity-profile.json: Extended cross-platform profile → /.well-known/entity-profile.json
-# webfinger.json: WebFinger alias data → /.well-known/webfinger.json
-# keybase.txt: Keybase identity verification → /.well-known/keybase.txt
+# ----- Reference -----
+# FOAF: /foaf.rdf
+# humans.txt: /humans.txt
+# identity.json: /.well-known/identity.json
+# entity.rdf / entity.ttl: /.well-known/
+# schema: /schema/identity.jsonld
+# security.txt: /.well-known/security.txt
+# links.txt: /links.txt
+# entity-profile.json: /.well-known/entity-profile.json
+# webfinger.json: /.well-known/webfinger.json
+# keybase.txt: /.well-known/keybase.txt
