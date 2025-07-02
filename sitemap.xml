@@ -33,6 +33,11 @@
             rel="alternate"
             hreflang="fa-IR"
             href="https://rasoulunlimited.ir/" />
+        <xhtml:link
+            rel="alternate"
+            type="application/ld+json"
+            hreflang="x-default"
+            href="https://rasoulunlimited.ir/schema/identity.jsonld" />
     </url>
 
     <url>
@@ -193,12 +198,28 @@
         <lastmod>2025-07-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.6</priority>
+        <xhtml:link
+            rel="alternate"
+            hreflang="x-default"
+            href="https://rasoulunlimited.ir/proof.html" />
+        <xhtml:link
+            rel="alternate"
+            hreflang="fa-IR"
+            href="https://rasoulunlimited.ir/proof.html" />
+        <xhtml:link
+            rel="alternate"
+            hreflang="en-US"
+            href="https://rasoulunlimited.ir/en/proof.html" />
     </url>
     <url>
         <loc>https://rasoulunlimited.ir/en/proof.html</loc>
         <lastmod>2025-07-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.6</priority>
+        <xhtml:link
+            rel="alternate"
+            hreflang="x-default"
+            href="https://rasoulunlimited.ir/proof.html" />
         <xhtml:link
             rel="alternate"
             hreflang="fa-IR"
@@ -221,6 +242,18 @@
         </image:image>
         <xhtml:link
             rel="alternate"
+            hreflang="x-default"
+            href="https://rasoulunlimited.ir/about.html" />
+        <xhtml:link
+            rel="alternate"
+            hreflang="fa-IR"
+            href="https://rasoulunlimited.ir/about.html" />
+        <xhtml:link
+            rel="alternate"
+            hreflang="en-US"
+            href="https://rasoulunlimited.ir/en/about.html" />
+        <xhtml:link
+            rel="alternate"
             hreflang="en-US"
             href="https://rasoulunlimited.ir/en/about.html" />
     </url>
@@ -234,6 +267,10 @@
             <image:caption>Portrait of Mohammad Rasoul Sohrabi</image:caption>
             <image:title>Rasoul Unlimited</image:title>
         </image:image>
+        <xhtml:link
+            rel="alternate"
+            hreflang="x-default"
+            href="https://rasoulunlimited.ir/about.html" />
         <xhtml:link
             rel="alternate"
             hreflang="fa-IR"
@@ -254,6 +291,18 @@
             <image:caption>تصویر پرترهٔ محمد رسول سهرابی</image:caption>
             <image:title>محمد رسول سهرابی</image:title>
         </image:image>
+        <xhtml:link
+            rel="alternate"
+            hreflang="x-default"
+            href="https://rasoulunlimited.ir/press.html" />
+        <xhtml:link
+            rel="alternate"
+            hreflang="fa-IR"
+            href="https://rasoulunlimited.ir/press.html" />
+        <xhtml:link
+            rel="alternate"
+            hreflang="en-US"
+            href="https://rasoulunlimited.ir/en/press.html" />
     </url>
     <url>
         <loc>https://rasoulunlimited.ir/en/press.html</loc>
@@ -265,6 +314,10 @@
             <image:caption>Portrait of Mohammad Rasoul Sohrabi</image:caption>
             <image:title>Rasoul Unlimited</image:title>
         </image:image>
+        <xhtml:link
+            rel="alternate"
+            hreflang="x-default"
+            href="https://rasoulunlimited.ir/press.html" />
         <xhtml:link
             rel="alternate"
             hreflang="fa-IR"
@@ -361,6 +414,18 @@
         <lastmod>2025-07-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.6</priority>
+        <xhtml:link
+            rel="alternate"
+            hreflang="x-default"
+            href="https://rasoulunlimited.ir/contact.html" />
+        <xhtml:link
+            rel="alternate"
+            hreflang="fa-IR"
+            href="https://rasoulunlimited.ir/contact.html" />
+        <xhtml:link
+            rel="alternate"
+            hreflang="en-US"
+            href="https://rasoulunlimited.ir/en/contact.html" />
     </url>
     <url>
         <loc>https://rasoulunlimited.ir/en/contact.html</loc>
@@ -381,6 +446,18 @@
         <lastmod>2025-07-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.6</priority>
+        <xhtml:link
+            rel="alternate"
+            hreflang="x-default"
+            href="https://rasoulunlimited.ir/security.html" />
+        <xhtml:link
+            rel="alternate"
+            hreflang="fa-IR"
+            href="https://rasoulunlimited.ir/security.html" />
+        <xhtml:link
+            rel="alternate"
+            hreflang="en-US"
+            href="https://rasoulunlimited.ir/en/security.html" />
         <xhtml:link
             rel="alternate"
             hreflang="en-US"
