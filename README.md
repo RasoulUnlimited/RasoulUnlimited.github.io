@@ -1,10 +1,11 @@
-# rasoulunlimited.ir
+# Rasoul Unlimited – [rasoulunlimited.ir](https://rasoulunlimited.ir)
 
 ## Table of Contents
 
 - [Overview](#overview)
 - [Prerequisites](#prerequisites)
 - [Build instructions](#build-instructions)
+- [Local development](#local-development)
 - [Deployment notes](#deployment-notes)
 - [Cloudflare Worker](#cloudflare-worker)
 - [Structured data and profiles](#structured-data-and-profiles)
@@ -22,13 +23,13 @@ performance and security.
 
 Key features:
 
-- Minimal, elegant design with light and dark themes for fast loading
-- Persian and English pages for wider accessibility
-- Hosted on GitHub Pages and integrated with Cloudflare for performance and security
-- Structured data (JSON‑LD) to help Google build a Knowledge Panel
-- [FOAF profile](foaf.rdf) and other identity links for knowledge graphs
-- Cloudflare Worker that injects crawler‑specific JSON‑LD
-- Strict Content‑Security‑Policy enforced by Cloudflare (see example policy)
+- Minimal and elegant design with optional dark mode
+- Fully bilingual (Persian and English) to reach a wider audience
+- Hosted on GitHub Pages and accelerated via Cloudflare for speed and security
+- Structured data (JSON‑LD) for stronger SEO and knowledge graph coverage
+- [FOAF profile](foaf.rdf) plus other identity links for knowledge graphs
+- Cloudflare Worker that injects crawler‑specific JSON‑LD and adds caching
+- Strict Content‑Security‑Policy enforced through Cloudflare (see example policy)
 
 
 Example CSP:
@@ -64,6 +65,18 @@ npm run build
 ```
 
 The `build` script compiles and minifies static assets using Gulp.
+
+## Local development
+
+After running the build, you can preview the site locally with any static server.
+
+```bash
+npx serve -l 8080 .
+# or
+python3 -m http.server 8080
+```
+
+Then open <http://localhost:8080> in your browser.
 
 ## Deployment notes
 
