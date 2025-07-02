@@ -6,6 +6,13 @@
   xmlns:owl="http://www.w3.org/2002/07/owl#"
   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:cc="http://creativecommons.org/ns#">
 
+  <foaf:PersonalProfileDocument rdf:about="">
+    <foaf:primaryTopic rdf:resource="https://rasoulunlimited.ir/#person" />
+    <foaf:maker rdf:resource="https://rasoulunlimited.ir/#person" />
+    <dc:title>Mohammad Rasoul Sohrabi FOAF Profile</dc:title>
+    <dc:language>en</dc:language>
+  </foaf:PersonalProfileDocument>
+
   <foaf:Person rdf:about="https://rasoulunlimited.ir/#person">
     <foaf:name>Mohammad Rasoul Sohrabi</foaf:name>
     <foaf:nick>Rasoul Unlimited</foaf:nick>
@@ -23,6 +30,7 @@
     <foaf:schoolHomepage rdf:resource="https://ctb.iau.ir" />
 
     <foaf:mbox_sha1sum>95de239e4e15e3209e9d1874e5881f5c7a10b930</foaf:mbox_sha1sum>
+    <foaf:mbox rdf:resource="mailto:rasoul.unlimited@gmail.com" />
 
     <foaf:based_near>
       <foaf:SpatialThing>
@@ -169,6 +177,8 @@
     <rdfs:seeAlso rdf:resource="https://github.com/RasoulUnlimited" />
     <rdfs:seeAlso rdf:resource="https://www.linkedin.com/in/rasoulunlimited/" />
     <rdfs:seeAlso rdf:resource="https://twitter.com/RasoulUnlimited" />
+    <rdfs:seeAlso rdf:resource="https://rasoulunlimited.ir/humans.txt" />
+    <rdfs:seeAlso rdf:resource="https://rasoulunlimited.ir/links.txt" />
 
     <!-- Metadata -->
     <dc:creator>Mohammad Rasoul Sohrabi</dc:creator>
