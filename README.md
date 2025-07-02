@@ -13,6 +13,7 @@
 - [Deployment notes](#deployment-notes)
 - [Cloudflare Worker](#cloudflare-worker)
 - [Structured data and profiles](#structured-data-and-profiles)
+- [Resources](#resources)
 - [Contribution guidelines](#contribution-guidelines)
 - [License](#license)
 
@@ -100,9 +101,15 @@ Then open <http://localhost:8080> in your browser.
 
 ## Deployment notes
 
-The site is hosted on **GitHub Pages** and served through **Cloudflare** for improved performance and security. The `CNAME` file defines the custom domain; editing this file updates the domain that GitHub Pages responds to. After changing it, make sure your Cloudflare DNS records point the domain to GitHub Pages.
+The site is hosted on **GitHub Pages** and served through **Cloudflare** for improved performance and security.
 
-When a domain change occurs, update the route for the Cloudflare Worker so it attaches to the new hostname. Review the security headers injected by Cloudflare—including the `Content‑Security‑Policy`—and adjust any domain‑specific directives accordingly.
+Deployment steps:
+
+1. Edit the `CNAME` file so it matches your domain.
+2. Update Cloudflare DNS **A/AAAA** records to point to GitHub Pages.
+3. Adjust the Worker route and security headers for the new domain.
+
+Whenever the domain or any external resources change, review the `Content‑Security‑Policy` to ensure it still references only the required sources.
 
 ## Cloudflare Worker
 
@@ -127,6 +134,10 @@ responses are cached for up to 10 minutes.
 
 Additional identity links: [GitHub](https://github.com/RasoulUnlimited), [ORCID](https://orcid.org/0009-0004-7177-2080), [LinkedIn](https://www.linkedin.com/in/rasoulunlimited).
 
+## Resources
+
+For a quick reference to all main pages and social links, see [links.txt](links.txt).
+
 ## Contribution guidelines
 
 To keep the history clear and useful, please write descriptive commit messages that quickly explain the intent of each change.
@@ -135,6 +146,10 @@ To keep the history clear and useful, please write descriptive commit messages t
 - Avoid generic subjects like "Update" or "Fix" without context.
 - Limit the summary line to around 50 characters when possible.
 - Include additional details in the body when a change requires more context or explanation.
+
+## Questions
+
+Feel free to contact me via email with any questions. The [humans.txt](humans.txt) file lists the developer's email address and profiles.
 
 ## License
 
