@@ -19,7 +19,9 @@
             <video:title>معرفی ربات فارسی دیسکورد</video:title>
             <video:description>ویدئویی کوتاه درباره اولین ربات فارسی‌زبان دیسکورد تایید‌شده توسط
                 Discord.</video:description>
-            <video:player_loc>https://www.aparat.com/v/AxQyY</video:player_loc>
+                <video:player_loc allow_embed="yes" autoplay="ap=1">
+                    https://www.aparat.com/video/video/embed/videohash/AxQyY/vt/frame
+                  </video:player_loc>
         </video:video>
         <xhtml:link
             rel="alternate"
@@ -33,11 +35,6 @@
             rel="alternate"
             hreflang="fa-IR"
             href="https://rasoulunlimited.ir/" />
-        <xhtml:link
-            rel="alternate"
-            type="application/ld+json"
-            hreflang="x-default"
-            href="https://rasoulunlimited.ir/schema/identity.jsonld" />
     </url>
 
     <url>
