@@ -32,7 +32,7 @@ Example CSP:
   object-src 'none';
   base-uri 'self';
   form-action https://formspree.io 'self';
-  frame-ancestors 'self';;
+  frame-ancestors 'self';
 ```
 
 ## Prerequisites
