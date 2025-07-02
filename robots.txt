@@ -10,6 +10,14 @@ Allow: /projects/c-projects/
 Allow: /projects/python-projects/
 Allow: /contact.html
 Allow: /press-kit/
+Allow: /press.html
+Allow: /about.html
+Allow: /media.html
+Allow: /proof.html
+Allow: /security.html
+Allow: /links.txt
+Allow: /manifest.json
+Allow: /manifest-en.json
 Allow: /assets/css/
 Allow: /assets/images/
 Allow: /assets/js/
@@ -18,6 +26,10 @@ Allow: /assets/js/
 Allow: /humans.txt
 Allow: /foaf.rdf
 Allow: /.well-known/
+Allow: /.well-known/identity.json
+Allow: /.well-known/entity.rdf
+Allow: /.well-known/entity.ttl
+Allow: /.well-known/security.txt
 Allow: /schema/
 Allow: /schema/identity.jsonld
 
