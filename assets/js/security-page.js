@@ -10,6 +10,24 @@
         : "Your browser does not support copying.",
     };
 
+    const DAY_MS = 86400000;
+    function cachedFetch(url, key, ttl, parser) {
+      try {
+        const cached = JSON.parse(localStorage.getItem(key) || "null");
+        if (cached && Date.now() - cached.t < ttl) {
+          return Promise.resolve(cached.d);
+        }
+      } catch (e) {}
+      return fetch(url)
+        .then((res) => parser(res))
+        .then((data) => {
+          try {
+            localStorage.setItem(key, JSON.stringify({ t: Date.now(), d: data }));
+          } catch (e) {}
+          return data;
+        });
+    }
+
     function handleCopyClick(event) {
       const btn = event.currentTarget;
       let text = btn.dataset.copyText || "";
@@ -44,9 +62,12 @@
 
       const timelineList = document.getElementById("security-timeline-list");
       if (timelineList) {
-        fetch("/assets/data/security-timeline.json")
-          .then((res) => res.json())
-          .then((events) => {
+        cachedFetch(
+          "/assets/data/security-timeline.json",
+          "security-timeline",
+          DAY_MS,
+          (res) => res.json()
+        ).then((events) => {
             events.forEach((ev) => {
               const li = document.createElement("li");
               li.dataset.aos = "fade-up";
@@ -104,8 +125,12 @@
       const expirationEl = document.getElementById("policy-expiration");
       const progressEl = document.getElementById("policy-expiration-progress");
       if (expirationEl) {
-        fetch("/.well-known/security.txt")
-          .then((res) => res.text())
+        cachedFetch(
+          "/.well-known/security.txt",
+          "security-txt",
+          DAY_MS,
+          (res) => res.text()
+        )
           .then((text) => {
             const match = text.match(/^Expires:\s*(.+)$/m);
             if (match) {
@@ -156,8 +181,7 @@
       if (lastUpdatedEl) {
         const apiUrl =
           "https://api.github.com/repos/RasoulUnlimited/RasoulUnlimited.github.io/commits?path=security.html&page=1&per_page=1";
-        fetch(apiUrl)
-          .then((res) => res.json())
+        cachedFetch(apiUrl, "security-last", DAY_MS, (res) => res.json())
           .then((data) => {
             if (Array.isArray(data) && data.length > 0) {
               const commitDate = new Date(data[0].commit.committer.date);
