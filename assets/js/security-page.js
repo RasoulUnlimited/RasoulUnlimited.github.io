@@ -41,7 +41,49 @@
       document.querySelectorAll(".copy-button").forEach((btn) => {
         btn.addEventListener("click", handleCopyClick);
       });
-      const timelineItems = document.querySelectorAll(".timeline li");
+
+      const timelineList = document.getElementById("security-timeline-list");
+      if (timelineList) {
+        fetch("/assets/data/security-timeline.json")
+          .then((res) => res.json())
+          .then((events) => {
+            events.forEach((ev) => {
+              const li = document.createElement("li");
+              li.dataset.aos = "fade-up";
+
+              const content = document.createElement("div");
+              content.className = "timeline-content";
+
+              const iconWrap = document.createElement("div");
+              iconWrap.className = "timeline-icon";
+              iconWrap.innerHTML = `<i class="fas ${ev.icon}" aria-hidden="true"></i>`;
+              content.appendChild(iconWrap);
+
+              const dateEl = document.createElement("h3");
+              dateEl.className = "date";
+              dateEl.innerHTML = `<time datetime="${ev.date}">${ev.date}</time>`;
+              content.appendChild(dateEl);
+
+              const titleEl = document.createElement("h3");
+              titleEl.textContent = lang.startsWith("fa") ? ev.title_fa : ev.title_en;
+              content.appendChild(titleEl);
+
+              const descEl = document.createElement("p");
+              descEl.textContent = lang.startsWith("fa") ? ev.desc_fa : ev.desc_en;
+              content.appendChild(descEl);
+
+              li.appendChild(content);
+              timelineList.appendChild(li);
+            });
+            initializeTimeline();
+          })
+          .catch(() => initializeTimeline());
+      } else {
+        initializeTimeline();
+      }
+
+      function initializeTimeline() {
+        const timelineItems = document.querySelectorAll(".timeline li");
       if ("IntersectionObserver" in window) {
         const observer = new IntersectionObserver(
           (entries, obs) => {
@@ -88,5 +130,5 @@
               : "Failed to load expiration date.";
           });
       }
-  });
+  }});
 })();

@@ -1,0 +1,26 @@
+[
+  {
+    "date": "2025-05-16",
+    "icon": "fa-rocket",
+    "title_fa": "شروع وب‌سایت",
+    "title_en": "Website launched",
+    "desc_fa": "انتشار اولیه سایت با نگاه به امنیت و عملکرد.",
+    "desc_en": "Initial release with a focus on performance and safety."
+  },
+  {
+    "date": "2025-05-25",
+    "icon": "fa-cloud",
+    "title_fa": "ادغام با Cloudflare",
+    "title_en": "Integrated with Cloudflare",
+    "desc_fa": "بهبود سرعت و امنیت از طریق شبکه توزیع کلودفلر.",
+    "desc_en": "Enhanced speed and security via Cloudflare CDN."
+  },
+  {
+    "date": "2025-06-01",
+    "icon": "fa-shield-alt",
+    "title_fa": "اعمال CSP سخت‌گیرانه",
+    "title_en": "Strict CSP enforced",
+    "desc_fa": "اجرای سیاست‌های دقیق برای جلوگیری از حملات وب.",
+    "desc_en": "Implemented tighter policies to prevent web attacks."
+  }
+]

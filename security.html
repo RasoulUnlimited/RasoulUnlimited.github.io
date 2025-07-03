@@ -346,44 +346,47 @@
             aria-labelledby="security-timeline-heading"
           >
             <h2 id="security-timeline-heading">مسیر امنیتی</h2>
-            <ul class="timeline" aria-label="رویدادهای مهم امنیتی">
-              <li data-aos="fade-up">
-                <div class="timeline-content">
-                  <div class="timeline-icon">
-                    <i class="fas fa-rocket" aria-hidden="true"></i>
+            <ul id="security-timeline-list" class="timeline" aria-label="رویدادهای مهم امنیتی"></ul>
+            <noscript>
+              <ul class="timeline" aria-label="رویدادهای مهم امنیتی">
+                <li>
+                  <div class="timeline-content">
+                    <div class="timeline-icon">
+                      <i class="fas fa-rocket" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="date">
+                      <time datetime="2025-05-16">2025-05-16</time>
+                    </h3>
+                    <h3>شروع وب‌سایت</h3>
+                    <p>انتشار اولیه سایت با نگاه به امنیت و عملکرد.</p>
                   </div>
-                  <h3 class="date">
-                    <time datetime="2025-05-16">2025-05-16</time>
-                  </h3>
-                  <h3>شروع وب‌سایت</h3>
-                  <p>انتشار اولیه سایت با نگاه به امنیت و عملکرد.</p>
-                </div>
-              </li>
-              <li data-aos="fade-up">
-                <div class="timeline-content">
-                  <div class="timeline-icon">
-                    <i class="fas fa-cloud" aria-hidden="true"></i>
+                </li>
+                <li>
+                  <div class="timeline-content">
+                    <div class="timeline-icon">
+                      <i class="fas fa-cloud" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="date">
+                      <time datetime="2025-05-25">2025-05-25</time>
+                    </h3>
+                    <h3>ادغام با Cloudflare</h3>
+                    <p>بهبود سرعت و امنیت از طریق شبکه توزیع کلودفلر.</p>
                   </div>
-                  <h3 class="date">
-                    <time datetime="2025-05-25">2025-05-25</time>
-                  </h3>
-                  <h3>ادغام با Cloudflare</h3>
-                  <p>بهبود سرعت و امنیت از طریق شبکه توزیع کلودفلر.</p>
-                </div>
-              </li>
-              <li data-aos="fade-up">
-                <div class="timeline-content">
-                  <div class="timeline-icon">
-                    <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                </li>
+                <li>
+                  <div class="timeline-content">
+                    <div class="timeline-icon">
+                      <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="date">
+                      <time datetime="2025-06-01">2025-06-01</time>
+                    </h3>
+                    <h3>اعمال CSP سخت‌گیرانه</h3>
+                    <p>اجرای سیاست‌های دقیق برای جلوگیری از حملات وب.</p>
                   </div>
-                  <h3 class="date">
-                    <time datetime="2025-06-1">2025-06-1</time>
-                  </h3>
-                  <h3>اعمال CSP سخت‌گیرانه</h3>
-                  <p>اجرای سیاست‌های دقیق برای جلوگیری از حملات وب.</p>
-                </div>
-              </li>
-            </ul>
+                </li>
+              </ul>
+            </noscript>
           </section>
             <section
               id="navigation"
@@ -417,6 +420,6 @@
     <script src="assets/vendor/aos/aos.min.js" defer></script>
     <script src="assets/js/main-script-fa.min.js" defer></script>
     <script src="assets/js/main-script-base.min.js" defer></script>
-    <script src="assets/js/security-page.min.js" defer></script>
+    <script src="assets/js/security-page.js" defer></script>
   </body>
 </html>
