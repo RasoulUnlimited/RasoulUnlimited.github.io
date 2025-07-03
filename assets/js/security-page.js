@@ -40,6 +40,36 @@
   
       document.querySelectorAll(".copy-button").forEach((btn) => {
         btn.addEventListener("click", handleCopyClick);
-    });
+      });
+
+      const expirationEl = document.getElementById("policy-expiration");
+      if (expirationEl) {
+        fetch("/.well-known/security.txt")
+          .then((res) => res.text())
+          .then((text) => {
+            const match = text.match(/^Expires:\s*(.+)$/m);
+            if (match) {
+              const expireDate = new Date(match[1].trim());
+              const locale = lang.startsWith("fa") ? "fa-IR" : "en-US";
+              const opts = { year: "numeric", month: "long", day: "numeric" };
+              const label = lang.startsWith("fa")
+                ? `اعتبار سیاست تا ${expireDate.toLocaleDateString(locale, opts)}`
+                : `Policy valid until ${expireDate.toLocaleDateString(locale, opts)}`;
+              expirationEl.textContent = label;
+              if (expireDate <= new Date()) {
+                expirationEl.classList.add("expired");
+              }
+            } else {
+              expirationEl.textContent = lang.startsWith("fa")
+                ? "تاریخ اعتبار در دسترس نیست."
+                : "Expiration date unavailable.";
+            }
+          })
+          .catch(() => {
+            expirationEl.textContent = lang.startsWith("fa")
+              ? "خطا در دریافت تاریخ اعتبار."
+              : "Failed to load expiration date.";
+          });
+      }
   });
 })();
