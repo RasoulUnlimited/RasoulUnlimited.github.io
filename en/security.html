@@ -193,7 +193,7 @@
             <section id="csp-policy" class="security-section" data-aos="fade-up" aria-labelledby="csp-heading">
               <h2 id="csp-heading">Content Security Policy</h2>
               <p>A sample CSP configuration enforced via Cloudflare:</p>
-              <pre class="security-code-block"><code>default-src 'self' blob:;
+              <pre class="security-code-block"><code id="csp-code">default-src 'self' blob:;
             script-src 'self' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://static.cloudflareinsights.com https://giscus.app 'nonce-RasoulCSP';
             style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net 'nonce-RasoulCSP';
             style-src-attr 'self' 'nonce-RasoulCSP';
@@ -206,6 +206,7 @@
             base-uri 'self';
             form-action https://formspree.io 'self';
             frame-ancestors 'self';</code></pre>
+            <button class="copy-button" data-copy-target="csp-code" aria-label="Copy CSP">Copy</button>
             </section>
             <section
               id="reporting-method"
@@ -218,8 +219,9 @@
                 <a
                   data-person="rasoul-unlimited"
                   href="mailto:rasoul.unlimited@gmail.com"
-                  >rasoul.unlimited@gmail.com</a
-                >.
+                  id="security-email"
+                  >rasoul.unlimited@gmail.com</a>
+                <button class="copy-button" data-copy-text="rasoul.unlimited@gmail.com" aria-label="Copy email">Copy</button>.
               </p>
               <p>
                 Allow reasonable time for investigation before any public
@@ -261,8 +263,8 @@
                   <a
                     data-person="rasoul-unlimited"
                     href="mailto:rasoul.unlimited@gmail.com"
-                    >rasoul.unlimited@gmail.com</a
-                  >.
+                    >rasoul.unlimited@gmail.com</a>
+                  <button class="copy-button" data-copy-text="rasoul.unlimited@gmail.com" aria-label="Copy email">Copy</button>.
                 </li>
               </ul>
             </section>
