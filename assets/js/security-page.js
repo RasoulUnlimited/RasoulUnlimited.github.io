@@ -102,6 +102,7 @@
       }
 
       const expirationEl = document.getElementById("policy-expiration");
+      const progressEl = document.getElementById("policy-expiration-progress");
       if (expirationEl) {
         fetch("/.well-known/security.txt")
           .then((res) => res.text())
@@ -117,10 +118,21 @@
               expirationEl.textContent = label;
               const now = new Date();
               const diffDays = (expireDate - now) / (1000 * 60 * 60 * 24);
+              if (progressEl) {
+                const totalDays = 365;
+                const percent = Math.min(
+                  100,
+                  Math.max(0, ((totalDays - diffDays) / totalDays) * 100)
+                );
+                progressEl.value = percent;
+                progressEl.setAttribute("aria-valuenow", percent.toFixed(0));
+              }
               if (diffDays <= 0) {
                 expirationEl.classList.add("expired");
+                progressEl && progressEl.classList.add("expired");
               } else if (diffDays <= 30) {
                 expirationEl.classList.add("expiring");
+                progressEl && progressEl.classList.add("expiring");
               }
             } else {
               expirationEl.textContent = lang.startsWith("fa")
@@ -138,6 +150,26 @@
       const domainEl = document.getElementById("scope-domain");
       if (domainEl) {
         domainEl.innerHTML = `<code>${location.hostname}</code>`;
+      }
+
+      const lastUpdatedEl = document.getElementById("last-updated-date");
+      if (lastUpdatedEl) {
+        const apiUrl =
+          "https://api.github.com/repos/RasoulUnlimited/RasoulUnlimited.github.io/commits?path=security.html&page=1&per_page=1";
+        fetch(apiUrl)
+          .then((res) => res.json())
+          .then((data) => {
+            if (Array.isArray(data) && data.length > 0) {
+              const commitDate = new Date(data[0].commit.committer.date);
+              const locale = lang.startsWith("fa") ? "fa-IR" : "en-US";
+              const opts = { year: "numeric", month: "long", day: "numeric" };
+              lastUpdatedEl.textContent = commitDate.toLocaleDateString(
+                locale,
+                opts
+              );
+            }
+          })
+          .catch(() => {});
       }
   }});
 })();

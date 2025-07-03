@@ -519,3 +519,32 @@
   color: #ff8800;
   font-weight: 500;
 }
+
+.policy-expiration-progress {
+  width: 100%;
+  height: 6px;
+  margin-top: var(--space-xs);
+  background-color: var(--background-start-color);
+  border-radius: var(--border-radius-md);
+  appearance: none;
+}
+.policy-expiration-progress::-webkit-progress-bar {
+  background-color: var(--background-start-color);
+  border-radius: var(--border-radius-md);
+}
+.policy-expiration-progress::-webkit-progress-value {
+  background-color: var(--primary-color);
+  border-radius: var(--border-radius-md);
+}
+.policy-expiration-progress::-moz-progress-bar {
+  background-color: var(--primary-color);
+  border-radius: var(--border-radius-md);
+}
+.policy-expiration-progress.expiring::-webkit-progress-value,
+.policy-expiration-progress.expiring::-moz-progress-bar {
+  background-color: #ff8800;
+}
+.policy-expiration-progress.expired::-webkit-progress-value,
+.policy-expiration-progress.expired::-moz-progress-bar {
+  background-color: var(--accent-color);
+}
