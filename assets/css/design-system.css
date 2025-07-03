@@ -548,3 +548,26 @@
 .policy-expiration-progress.expired::-moz-progress-bar {
   background-color: var(--accent-color);
 }
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+.skeleton {
+  color: transparent;
+  pointer-events: none;
+  user-select: none;
+  background: linear-gradient(90deg, var(--background-start-color), var(--background-end-color), var(--background-start-color));
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+.skeleton-text {
+  height: 1em;
+  border-radius: var(--border-radius-sm);
+}

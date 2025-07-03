@@ -156,6 +156,7 @@
       ];
 
       function renderTimeline(events) {
+        timelineList.innerHTML = "";
         events.forEach((ev) => {
           const li = document.createElement("li");
           li.dataset.aos = "fade-up";
@@ -310,6 +311,7 @@
 
       const advisoriesList = document.getElementById("advisories-list");
       if (advisoriesList) {
+        advisoriesList.innerHTML = "";
         const advUrl =
           "https://api.github.com/repos/RasoulUnlimited/RasoulUnlimited.github.io/security-advisories?per_page=3";
         cachedFetch(advUrl, "security-advisories", DAY_MS, (res) => res.json())
