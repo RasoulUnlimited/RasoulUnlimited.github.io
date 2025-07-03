@@ -492,3 +492,13 @@
     box-shadow: none;
   }
 }
+/* Code block style for security policy */
+.security-code-block {
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Monaco, "Liberation Mono", monospace;
+  background-color: var(--container-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  padding: var(--space-md);
+  overflow-x: auto;
+  font-size: 0.875rem;
+}

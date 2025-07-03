@@ -190,6 +190,23 @@
               strict <span lang="en">Content Security Policy</span> is enforced
               via Cloudflare to keep visitors safe.
             </p>
+            <section id="csp-policy" class="security-section" data-aos="fade-up" aria-labelledby="csp-heading">
+              <h2 id="csp-heading">Content Security Policy</h2>
+              <p>A sample CSP configuration enforced via Cloudflare:</p>
+              <pre class="security-code-block"><code>default-src 'self' blob:;
+            script-src 'self' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://static.cloudflareinsights.com https://giscus.app 'nonce-RasoulCSP';
+            style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net 'nonce-RasoulCSP';
+            style-src-attr 'self' 'nonce-RasoulCSP';
+            style-src-elem 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://giscus.app;
+            font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;
+            img-src 'self' data: https://avatars.githubusercontent.com;
+            connect-src 'self' https://static.cloudflareinsights.com https://giscus.app https://api.github.com https://orcid.org https://about.me https://www.researchgate.net https://www.linkedin.com https://github.com;
+            frame-src https://giscus.app;
+            object-src 'none';
+            base-uri 'self';
+            form-action https://formspree.io 'self';
+            frame-ancestors 'self';</code></pre>
+            </section>
             <section
               id="reporting-method"
               class="security-section" data-aos="fade-up"
