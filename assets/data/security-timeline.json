@@ -22,5 +22,21 @@
     "title_en": "Strict CSP enforced",
     "desc_fa": "اجرای سیاست‌های دقیق برای جلوگیری از حملات وب.",
     "desc_en": "Implemented tighter policies to prevent web attacks."
+  },
+  {
+    "date": "2025-07-10",
+    "icon": "fa-key",
+    "title_fa": "انتشار کلید عمومی PGP",
+    "title_en": "PGP key published",
+    "desc_fa": "امکان ارتباط رمزنگاری‌شده فراهم شد.",
+    "desc_en": "Secure encrypted communication enabled."
+  },
+  {
+    "date": "2025-07-20",
+    "icon": "fa-bell",
+    "title_fa": "راه‌اندازی اعلان‌های امنیتی",
+    "title_en": "Security advisories live",
+    "desc_fa": "به‌روزرسانی‌های امنیتی از طریق GitHub در دسترس قرار گرفت.",
+    "desc_en": "Security updates now published via GitHub advisories."
   }
 ]

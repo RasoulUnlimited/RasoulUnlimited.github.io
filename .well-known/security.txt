@@ -2,4 +2,5 @@
 Contact: mailto:rasoul.unlimited@gmail.com
 Policy: https://rasoulunlimited.ir/security.html
 Preferred-Languages: en, fa
+Encryption: https://rasoulunlimited.ir/assets/keys/rasoulunlimited_pgp.asc
 Expires: 2025-12-31T23:59:00Z

@@ -515,3 +515,7 @@
   color: var(--accent-color);
   font-weight: 500;
 }
+.policy-expiration.expiring {
+  color: #ff8800;
+  font-weight: 500;
+}

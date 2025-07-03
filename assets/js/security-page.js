@@ -115,8 +115,12 @@
                 ? `اعتبار سیاست تا ${expireDate.toLocaleDateString(locale, opts)}`
                 : `Policy valid until ${expireDate.toLocaleDateString(locale, opts)}`;
               expirationEl.textContent = label;
-              if (expireDate <= new Date()) {
+              const now = new Date();
+              const diffDays = (expireDate - now) / (1000 * 60 * 60 * 24);
+              if (diffDays <= 0) {
                 expirationEl.classList.add("expired");
+              } else if (diffDays <= 30) {
+                expirationEl.classList.add("expiring");
               }
             } else {
               expirationEl.textContent = lang.startsWith("fa")
