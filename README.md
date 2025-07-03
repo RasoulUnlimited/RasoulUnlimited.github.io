@@ -164,4 +164,12 @@ Feel free to contact me via email with any questions. The [humans.txt](humans.tx
 
 ## License
 
-All content is provided under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License](https://creativecommons.org/licenses/by-nc-nd/4.0/). See the [LICENSE](LICENSE) file for details.
+All content is released under the
+[Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International
+License](https://creativecommons.org/licenses/by-nc-nd/4.0/). You may copy and
+redistribute the material so long as you give appropriate credit, but commercial
+use and derivative works are not allowed. Licenses for third-party code are
+documented in the new [NOTICE](NOTICE) file. For commercial or derivative
+requests, please contact `rasoul.unlimited@gmail.com`.
+
+[![License: CC BY-NC-ND 4.0](https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-nd/4.0/)
