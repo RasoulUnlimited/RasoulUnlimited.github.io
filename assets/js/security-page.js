@@ -130,5 +130,10 @@
               : "Failed to load expiration date.";
           });
       }
+
+      const domainEl = document.getElementById("scope-domain");
+      if (domainEl) {
+        domainEl.innerHTML = `<code>${location.hostname}</code>`;
+      }
   }});
 })();

@@ -215,7 +215,7 @@
               تشویق همکاری مسئولانه و رسیدگی سریع به آسیب‌پذیری‌ها تدوین شده
               است.
             </p>
-            <p id="policy-expiration" class="policy-expiration">
+            <p id="policy-expiration" class="policy-expiration" role="status">
               در حال بارگذاری تاریخ اعتبار…
             </p>
             <section id="csp-policy" class="security-section" data-aos="fade-up" aria-labelledby="csp-heading">
@@ -252,6 +252,15 @@
                 >
                 <button class="copy-button" data-copy-text="rasoul.unlimited@gmail.com" aria-label="کپی ایمیل">کپی</button>
                 ایمیل بزنید.
+              </p>
+              <p>
+                یا از طریق
+                <a
+                  href="https://github.com/RasoulUnlimited/RasoulUnlimited.github.io/issues/new?labels=security&title=Security+report"
+                  target="_blank" rel="noopener" class="cta-button"
+                  >گزارش در GitHub</a
+                >
+                اقدام کنید.
               </p>
               <p>پیش از انتشار عمومی، زمان کافی برای بررسی در نظر بگیرید.</p>
               <ul>
@@ -306,7 +315,7 @@
               <h2 id="scope-heading">محدوده‌ی تست</h2>
               <p>آزمایش‌های امنیتی تنها بر روی دامنه‌های زیر مجاز است:</p>
               <ul>
-                <li><code>rasoulunlimited.ir</code></li>
+                <li id="scope-domain"><code>rasoulunlimited.ir</code></li>
               </ul>
             </section>
             <section
@@ -319,7 +328,17 @@
               <li>گزارش‌ها معمولاً ظرف ۴۸ ساعت تأیید دریافت می‌شوند.</li>
               <li>بر اساس شدت مشکل، رفع یا برنامه‌ریزی آن حداکثر ظرف ۳۰ روز اطلاع‌رسانی می‌شود.</li>
               <li>در صورت تمایل، نام شما در بخش تقدیر از پژوهشگران امنیتی ذکر خواهد شد.</li>
-              <li>جزئیات کامل سیاست در <a href="/.well-known/security.txt">security.txt</a> موجود است.</li>
+              <li>
+                جزئیات کامل سیاست در
+                <a href="/.well-known/security.txt">security.txt</a>
+                موجود است.
+                <a
+                  href="/.well-known/security.txt"
+                  download
+                  class="cta-button"
+                  >دانلود فایل</a
+                >
+              </li>
             </ul>
             </section>
             <section
