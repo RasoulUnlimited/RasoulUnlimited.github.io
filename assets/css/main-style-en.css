@@ -686,6 +686,15 @@ section h2::after {
   outline: none;
 }
 
+.policy-container {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  padding: var(--space-lg);
+  box-shadow: 0 2px 6px var(--shadow-color-light);
+  margin-bottom: var(--space-lg);
+}
+
 .policy-card {
   border: 2px solid var(--primary-color);
   transition: box-shadow var(--transition-duration-short)
@@ -697,6 +706,9 @@ section h2::after {
 .policy-card:hover,
 .policy-card:focus-within {
   box-shadow: 0 8px 25px var(--shadow-color-medium);
+}
+.policy-container h2:first-child {
+  margin-top: 0;
 }
 
 .card:hover {
