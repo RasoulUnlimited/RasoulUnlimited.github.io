@@ -35,12 +35,29 @@
           });
         } else if (typeof createToast === "function") {
           createToast(messages.unsupported);
-        }
       }
+    }
   
       document.querySelectorAll(".copy-button").forEach((btn) => {
         btn.addEventListener("click", handleCopyClick);
       });
+      const timelineItems = document.querySelectorAll(".timeline li");
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(
+          (entries, obs) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("timeline-item-visible");
+                obs.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.3 }
+        );
+        timelineItems.forEach((item) => observer.observe(item));
+      } else {
+        timelineItems.forEach((item) => item.classList.add("timeline-item-visible"));
+      }
 
       const expirationEl = document.getElementById("policy-expiration");
       if (expirationEl) {

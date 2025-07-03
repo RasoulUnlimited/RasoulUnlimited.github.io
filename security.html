@@ -173,7 +173,7 @@
           >
             <img
               src="assets/images/RasoulUnlimited.webp"
-              loading="eager"
+              loading="lazy"
               decoding="async"
               alt="تصویر پرترهٔ محمد رسول سهرابی"
               class="profile-image"
@@ -283,7 +283,7 @@
                   <code id="pgp-fingerprint" dir="ltr"
                     >D483 4991 882E 7EC4 4187 40AC 1CAF 52B8 DB95 F6FE</code
                   >
-                  <button id="copy-fingerprint" type="button" aria-label="کپی اثر انگشت PGP">کپی</button>
+                  <button id="copy-fingerprint" class="copy-button" data-copy-target="pgp-fingerprint" type="button" aria-label="کپی اثر انگشت PGP">کپی</button>
                   را تطبیق دهید.
                 </li>
                 <li>
@@ -396,6 +396,10 @@
                 <a href="/en/security.html" class="cta-button"
                   >English version</a
                 >
+              </p>
+              <p class="last-updated-info">
+                آخرین به‌روزرسانی صفحه:
+                <span id="last-updated-date"></span>
               </p>
             </section>
           </div>
