@@ -1,11 +1,20 @@
 /* TEAM */
-Developer: Mohammad Rasoul Sohrabi (Rasoul Unlimited)
+Developer & Designer: Mohammad Rasoul Sohrabi (Rasoul Unlimited)
+Role: Biomedical engineering student & full-stack developer
 Website: https://rasoulunlimited.ir
-GitHub: https://github.com/RasoulUnlimited
-ORCID: https://orcid.org/0009-0004-7177-2080
-Wikidata: https://www.wikidata.org/wiki/Q135116816
+Source Code: https://github.com/RasoulUnlimited/RasoulUnlimited.github.io
 Email: rasoul.unlimited@gmail.com
 Location: Karaj, Iran
+GitHub: https://github.com/RasoulUnlimited
+LinkedIn: https://www.linkedin.com/in/rasoulunlimited
+ORCID: https://orcid.org/0009-0004-7177-2080
+Wikidata: https://www.wikidata.org/wiki/Q135116816
+
+/* SITE */
+Built with Node.js and Gulp
+Hosted on GitHub Pages, accelerated and secured via Cloudflare
+Strict Content-Security-Policy enforced at the edge
+License: CC BY-NC-ND 4.0
 
 /* THANKS */
-Tools: Visual Studio Code, Figma, Python, C, HTML/CSS, Git, Node.js, GitHub Pages, Cloudflare
+Tools: Visual Studio Code, Figma, Tailwind CSS, Python, C, HTML/CSS, Git, Node.js, GitHub Pages, Cloudflare, Cloudflare Workers
