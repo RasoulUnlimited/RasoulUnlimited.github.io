@@ -11,21 +11,36 @@
     };
 
     const DAY_MS = 86400000;
-    function cachedFetch(url, key, ttl, parser) {
+
+    function storageAvailable() {
       try {
-        const cached = JSON.parse(localStorage.getItem(key) || "null");
-        if (cached && Date.now() - cached.t < ttl) {
-          return Promise.resolve(cached.d);
-        }
-      } catch (e) {}
-      return fetch(url)
-        .then((res) => parser(res))
-        .then((data) => {
-          try {
-            localStorage.setItem(key, JSON.stringify({ t: Date.now(), d: data }));
-          } catch (e) {}
-          return data;
-        });
+        const test = "__test";
+        localStorage.setItem(test, test);
+        localStorage.removeItem(test);
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }
+
+    async function cachedFetch(url, key, ttl, parser) {
+      if (storageAvailable()) {
+        try {
+          const cached = JSON.parse(localStorage.getItem(key) || "null");
+          if (cached && Date.now() - cached.t < ttl) {
+            return cached.d;
+          }
+        } catch (e) {}
+      }
+
+      const res = await fetch(url);
+      const data = await parser(res);
+      if (storageAvailable()) {
+        try {
+          localStorage.setItem(key, JSON.stringify({ t: Date.now(), d: data }));
+        } catch (e) {}
+      }
+      return data;
     }
 
     function copyTextToClipboard(text) {
@@ -44,8 +59,26 @@
               createToast(messages.fail);
             }
           });
-      } else if (typeof createToast === "function") {
-        createToast(messages.unsupported);
+        } else {
+          const hidden = document.createElement("textarea");
+          hidden.value = text;
+          hidden.setAttribute("readonly", "");
+          hidden.style.position = "absolute";
+          hidden.style.left = "-9999px";
+          document.body.appendChild(hidden);
+          hidden.select();
+          try {
+            const successful = document.execCommand("copy");
+            if (typeof createToast === "function") {
+              createToast(successful ? messages.success : messages.fail);
+            }
+          } catch (err) {
+            console.error("execCommand copy failed:", err);
+            if (typeof createToast === "function") {
+              createToast(messages.fail);
+            }
+          }
+          document.body.removeChild(hidden);
       }
     }
 
@@ -76,6 +109,80 @@
         });
       });
 
+      const DEFAULT_TIMELINE = [
+        {
+          date: "2025-05-16",
+          icon: "fa-rocket",
+          title_fa: "شروع وب‌سایت",
+          title_en: "Website launched",
+          desc_fa: "انتشار اولیه سایت با نگاه به امنیت و عملکرد.",
+          desc_en: "Initial release with a focus on performance and safety.",
+        },
+        {
+          date: "2025-05-25",
+          icon: "fa-cloud",
+          title_fa: "ادغام با Cloudflare",
+          title_en: "Integrated with Cloudflare",
+          desc_fa: "بهبود سرعت و امنیت از طریق شبکه توزیع کلودفلر.",
+          desc_en: "Enhanced speed and security via Cloudflare CDN.",
+        },
+        {
+          date: "2025-06-01",
+          icon: "fa-shield-alt",
+          title_fa: "اعمال CSP سخت‌گیرانه",
+          title_en: "Strict CSP enforced",
+          desc_fa: "اجرای سیاست‌های دقیق برای جلوگیری از حملات وب.",
+          desc_en: "Implemented tighter policies to prevent web attacks.",
+        },
+        {
+          date: "2025-07-10",
+          icon: "fa-key",
+          title_fa: "انتشار کلید عمومی PGP",
+          title_en: "PGP key published",
+          desc_fa: "امکان ارتباط رمزنگاری‌شده فراهم شد.",
+          desc_en: "Secure encrypted communication enabled.",
+        },
+        {
+          date: "2025-07-20",
+          icon: "fa-bell",
+          title_fa: "راه‌اندازی اعلان‌های امنیتی",
+          title_en: "Security advisories live",
+          desc_fa: "به‌روزرسانی‌های امنیتی از طریق GitHub در دسترس قرار گرفت.",
+          desc_en: "Security updates now published via GitHub advisories.",
+        },
+      ];
+
+      function renderTimeline(events) {
+        events.forEach((ev) => {
+          const li = document.createElement("li");
+          li.dataset.aos = "fade-up";
+
+          const content = document.createElement("div");
+          content.className = "timeline-content";
+
+          const iconWrap = document.createElement("div");
+          iconWrap.className = "timeline-icon";
+          iconWrap.innerHTML = `<i class="fas ${ev.icon}" aria-hidden="true"></i>`;
+          content.appendChild(iconWrap);
+
+          const dateEl = document.createElement("h3");
+          dateEl.className = "date";
+          dateEl.innerHTML = `<time datetime="${ev.date}">${ev.date}</time>`;
+          content.appendChild(dateEl);
+
+          const titleEl = document.createElement("h3");
+          titleEl.textContent = lang.startsWith("fa") ? ev.title_fa : ev.title_en;
+          content.appendChild(titleEl);
+
+          const descEl = document.createElement("p");
+          descEl.textContent = lang.startsWith("fa") ? ev.desc_fa : ev.desc_en;
+          content.appendChild(descEl);
+
+          li.appendChild(content);
+          timelineList.appendChild(li);
+        });
+      }
+
       const timelineList = document.getElementById("security-timeline-list");
       if (timelineList) {
         cachedFetch(
@@ -83,38 +190,15 @@
           "security-timeline",
           DAY_MS,
           (res) => res.json()
-        ).then((events) => {
-            events.forEach((ev) => {
-              const li = document.createElement("li");
-              li.dataset.aos = "fade-up";
-
-              const content = document.createElement("div");
-              content.className = "timeline-content";
-
-              const iconWrap = document.createElement("div");
-              iconWrap.className = "timeline-icon";
-              iconWrap.innerHTML = `<i class="fas ${ev.icon}" aria-hidden="true"></i>`;
-              content.appendChild(iconWrap);
-
-              const dateEl = document.createElement("h3");
-              dateEl.className = "date";
-              dateEl.innerHTML = `<time datetime="${ev.date}">${ev.date}</time>`;
-              content.appendChild(dateEl);
-
-              const titleEl = document.createElement("h3");
-              titleEl.textContent = lang.startsWith("fa") ? ev.title_fa : ev.title_en;
-              content.appendChild(titleEl);
-
-              const descEl = document.createElement("p");
-              descEl.textContent = lang.startsWith("fa") ? ev.desc_fa : ev.desc_en;
-              content.appendChild(descEl);
-
-              li.appendChild(content);
-              timelineList.appendChild(li);
-            });
+        )
+          .then((events) => {
+            renderTimeline(events);
             initializeTimeline();
           })
-          .catch(() => initializeTimeline());
+          .catch(() => {
+            renderTimeline(DEFAULT_TIMELINE);
+            initializeTimeline();
+          });
       } else {
         initializeTimeline();
       }
