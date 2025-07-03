@@ -357,6 +357,28 @@
   font-size: 1.125rem;
 }
 
+/* Security policy sections */
+.security-section {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-lg);
+}
+
+.security-section h2 {
+  margin-top: 0;
+  margin-bottom: var(--space-sm);
+}
+
+.security-section li {
+  margin-bottom: var(--space-xs);
+}
+
+.security-section li:last-child {
+  margin-bottom: 0;
+}
+
 /* Contact form */
 .contact-form {
   display: grid;
