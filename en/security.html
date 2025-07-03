@@ -43,6 +43,16 @@
       type="application/ld+json"
       href="/schema/identity.jsonld"
     />
+    <!-- JSON-LD for WebPage (Schema.org WebPage) -->
+    <script type="application/ld+json" nonce="RasoulCSP">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "@id": "https://rasoulunlimited.ir/security.html",
+        "name": "Security Policy",
+        "description": "Guidelines for reporting security vulnerabilities to Rasoul Unlimited."
+      }
+    </script>
     <meta name="color-scheme" content="light dark" />
     <meta
       name="theme-color"
@@ -155,6 +165,55 @@
                 Allow reasonable time for investigation before any public
                 disclosure.
               </p>
+            </section>
+            <section
+              id="secure-communication"
+              aria-labelledby="secure-communication-heading"
+            >
+              <h2 id="secure-communication-heading">Secure communication</h2>
+              <p>
+                You can obtain my PGP public key from
+                <a href="https://keybase.io/rasoulunlimited" rel="noopener"
+                  >Keybase</a
+                >.
+              </p>
+              <p>
+                Import the key into your PGP software and encrypt the report
+                before emailing it to
+                <a
+                  data-person="rasoul-unlimited"
+                  href="mailto:rasoul.unlimited@gmail.com"
+                  >rasoul.unlimited@gmail.com</a
+                >.
+              </p>
+            </section>
+            <section
+              id="acknowledgment"
+              aria-labelledby="acknowledgment-heading"
+            >
+              <h2 id="acknowledgment-heading">
+                Acknowledgment &amp; Timelines
+              </h2>
+              <p>We aim to reply to all reports within 48 hours.</p>
+              <p>
+                Depending on severity, issues are usually fixed or scheduled
+                within 30 days.
+              </p>
+              <p>
+                See the canonical policy in
+                <a href="/.well-known/security.txt">security.txt</a>.
+              </p>
+            </section>
+            <section
+              id="testing-guidelines"
+              aria-labelledby="testing-guidelines-heading"
+            >
+              <h2 id="testing-guidelines-heading">Testing Guidelines</h2>
+              <p>
+                Only perform non-destructive testing and avoid affecting real
+                data or other users.
+              </p>
+              <p>Please ensure all activity complies with applicable laws.</p>
             </section>
             <section id="navigation" aria-labelledby="navigation-heading">
               <h2 id="navigation-heading">Return</h2>
