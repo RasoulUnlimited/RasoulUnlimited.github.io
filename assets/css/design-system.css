@@ -549,6 +549,13 @@
   background-color: var(--accent-color);
 }
 
+.expiration-days {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-color-light);
+  margin-top: var(--space-xs);
+}
+
 @keyframes skeleton-loading {
   0% {
     background-position: 200% 0;
@@ -570,4 +577,13 @@
 .skeleton-text {
   height: 1em;
   border-radius: var(--border-radius-sm);
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .skeleton {
+    animation: none;
+  }
 }

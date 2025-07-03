@@ -38,5 +38,13 @@
     "title_en": "Security advisories live",
     "desc_fa": "به‌روزرسانی‌های امنیتی از طریق GitHub در دسترس قرار گرفت.",
     "desc_en": "Security updates now published via GitHub advisories."
+  },
+  {
+    "date": "2025-10-01",
+    "icon": "fa-wifi",
+    "title_fa": "افزودن پشتیبانی آفلاین",
+    "title_en": "Offline support added",
+    "desc_fa": "بهبود تجربه کاربر با کش محلی و هشدار وضعیت اتصال.",
+    "desc_en": "Improved user experience with local caching and connection status alerts."
   }
 ]

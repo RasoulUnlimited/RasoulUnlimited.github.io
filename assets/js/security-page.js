@@ -11,6 +11,21 @@
     };
 
     const DAY_MS = 86400000;
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+    function disableMotion() {
+      document.querySelectorAll("[data-aos]").forEach((el) => {
+        el.removeAttribute("data-aos");
+      });
+      document.querySelectorAll(".skeleton").forEach((el) => {
+        el.classList.remove("skeleton");
+      });
+    }
+    if (prefersReduced.matches) {
+      disableMotion();
+    }
+    prefersReduced.addEventListener("change", (e) => {
+      if (e.matches) disableMotion();
+    });
 
     function storageAvailable() {
       try {
@@ -99,7 +114,7 @@
       document.querySelectorAll(".copy-button").forEach((btn) => {
         btn.addEventListener("click", handleCopyClick);
       });
-      
+
       document.querySelectorAll(".copyable").forEach((el) => {
         const handler = () =>
           copyTextToClipboard(el.dataset.copyText || el.textContent.trim());
@@ -232,6 +247,7 @@
 
       const expirationEl = document.getElementById("policy-expiration");
       const progressEl = document.getElementById("policy-expiration-progress");
+      const daysTextEl = document.getElementById("expiration-days");
       if (expirationEl) {
         cachedFetch(
           "/.well-known/security.txt",
@@ -251,6 +267,7 @@
               expirationEl.textContent = label;
               const now = new Date();
               const diffDays = (expireDate - now) / (1000 * 60 * 60 * 24);
+              let daysLabel = "";
               if (progressEl) {
                 const totalDays = 365;
                 const percent = Math.min(
@@ -260,10 +277,15 @@
                 progressEl.value = percent;
                 progressEl.removeAttribute("aria-hidden");
                 progressEl.setAttribute("aria-valuenow", percent.toFixed(0));
-                const daysLabel = lang.startsWith("fa")
+                daysLabel = lang.startsWith("fa")
                   ? `${Math.ceil(diffDays)} روز باقیمانده`
                   : `${Math.ceil(diffDays)} days remaining`;
                 progressEl.setAttribute("aria-valuetext", daysLabel);
+              }
+              if (daysTextEl) {
+                daysTextEl.textContent = daysLabel;
+                daysTextEl.classList.remove("hidden");
+                daysTextEl.setAttribute("aria-hidden", "false");
               }
               if (diffDays <= 0) {
                 expirationEl.classList.add("expired");
@@ -282,6 +304,10 @@
             expirationEl.textContent = lang.startsWith("fa")
               ? "خطا در دریافت تاریخ اعتبار."
               : "Failed to load expiration date.";
+            if (daysTextEl) {
+              daysTextEl.classList.add("hidden");
+              daysTextEl.setAttribute("aria-hidden", "true");
+            }
           });
       }
 
