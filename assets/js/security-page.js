@@ -28,14 +28,7 @@
         });
     }
 
-    function handleCopyClick(event) {
-      const btn = event.currentTarget;
-      let text = btn.dataset.copyText || "";
-      if (!text) {
-        const targetId = btn.dataset.copyTarget;
-        const targetEl = document.getElementById(targetId);
-        if (targetEl) text = targetEl.textContent.trim();
-      }
+    function copyTextToClipboard(text) {
       if (!text) return;
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard
@@ -51,13 +44,36 @@
               createToast(messages.fail);
             }
           });
-        } else if (typeof createToast === "function") {
-          createToast(messages.unsupported);
+      } else if (typeof createToast === "function") {
+        createToast(messages.unsupported);
       }
+    }
+
+    function handleCopyClick(event) {
+      const btn = event.currentTarget;
+      let text = btn.dataset.copyText || "";
+      if (!text) {
+        const targetId = btn.dataset.copyTarget;
+        const targetEl = document.getElementById(targetId);
+        if (targetEl) text = targetEl.textContent.trim();
+      }
+      copyTextToClipboard(text);
     }
   
       document.querySelectorAll(".copy-button").forEach((btn) => {
         btn.addEventListener("click", handleCopyClick);
+      });
+
+      document.querySelectorAll(".copyable").forEach((el) => {
+        const handler = () =>
+          copyTextToClipboard(el.dataset.copyText || el.textContent.trim());
+        el.addEventListener("click", handler);
+        el.addEventListener("keypress", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            handler();
+          }
+        });
       });
 
       const timelineList = document.getElementById("security-timeline-list");
@@ -194,6 +210,36 @@
             }
           })
           .catch(() => {});
+      }
+
+      const advisoriesList = document.getElementById("advisories-list");
+      if (advisoriesList) {
+        const advUrl =
+          "https://api.github.com/repos/RasoulUnlimited/RasoulUnlimited.github.io/security-advisories?per_page=3";
+        cachedFetch(advUrl, "security-advisories", DAY_MS, (res) => res.json())
+          .then((advs) => {
+            if (Array.isArray(advs) && advs.length > 0) {
+              advs.forEach((adv) => {
+                const li = document.createElement("li");
+                const link = document.createElement("a");
+                link.href = adv.html_url;
+                link.target = "_blank";
+                link.rel = "noopener";
+                link.textContent = adv.summary || adv.ghsa_id || adv.id;
+                li.appendChild(link);
+                advisoriesList.appendChild(li);
+              });
+            } else {
+              advisoriesList.textContent = lang.startsWith("fa")
+                ? "موردی یافت نشد."
+                : "No advisories found.";
+            }
+          })
+          .catch(() => {
+            advisoriesList.textContent = lang.startsWith("fa")
+              ? "خطا در دریافت اعلان‌ها."
+              : "Failed to load advisories.";
+          });
       }
   }});
 })();

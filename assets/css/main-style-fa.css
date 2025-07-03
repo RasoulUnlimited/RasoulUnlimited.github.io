@@ -3135,3 +3135,8 @@ summary:active,
 .copy-button:hover {
   background-color: var(--highlight-darker);
 }
+
+.copyable {
+  cursor: pointer;
+  user-select: all;
+}

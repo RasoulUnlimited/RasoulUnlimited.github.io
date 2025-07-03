@@ -228,7 +228,7 @@
             <section id="csp-policy" class="security-section" data-aos="fade-up" aria-labelledby="csp-heading">
               <h2 id="csp-heading">سیاست امنیت محتوا</h2>
               <p>نمونه‌ای از پیکربندی <span lang="en">Content Security Policy</span> که از سوی کلودفلر اعمال می‌شود:</p>
-              <pre class="security-code-block"><code id="csp-code">default-src 'self' blob:;
+                <pre class="security-code-block"><code id="csp-code" class="copyable" tabindex="0" role="button">default-src 'self' blob:;
             script-src 'self' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://static.cloudflareinsights.com https://giscus.app 'nonce-RasoulCSP';
             style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net 'nonce-RasoulCSP';
             style-src-attr 'self' 'nonce-RasoulCSP';
@@ -301,9 +301,9 @@
                 </li>
                 <li>
                   پیش از استفاده، اثر انگشت
-                  <code id="pgp-fingerprint" dir="ltr"
-                    >D483 4991 882E 7EC4 4187 40AC 1CAF 52B8 DB95 F6FE</code
-                  >
+                    <code id="pgp-fingerprint" dir="ltr" class="copyable" tabindex="0" role="button" data-copy-text="D483 4991 882E 7EC4 4187 40AC 1CAF 52B8 DB95 F6FE"
+                      >D483 4991 882E 7EC4 4187 40AC 1CAF 52B8 DB95 F6FE</code
+                    >
                   <button id="copy-fingerprint" class="copy-button" data-copy-target="pgp-fingerprint" type="button" aria-label="کپی اثر انگشت PGP">کپی</button>
                   را تطبیق دهید.
                 </li>
@@ -432,9 +432,10 @@
               target="_blank" rel="noopener" class="cta-button"
               >Security Advisories در GitHub</a
             >
-            منتشر می‌شود.
-          </p>
-        </section>
+              منتشر می‌شود.
+            </p>
+            <ul id="advisories-list" class="advisories-list" aria-live="polite"></ul>
+          </section>
         <section
           id="navigation"
           class="security-section" data-aos="fade-up"
