@@ -50,8 +50,8 @@
   }
 
   initThemeToggle();
-  document.addEventListener("includesLoaded", initThemeToggle);پ
-  
+  document.addEventListener("includesLoaded", initThemeToggle);
+
   let endOfPageShown = false;
   let lastScrollY = 0;
   let ticking = false;
