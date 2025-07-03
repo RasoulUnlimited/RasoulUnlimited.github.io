@@ -143,6 +143,7 @@ input:checked + .slider:before {
   --secondary-color: #f0f0f0;
   /* IMPROVEMENT: Changed accent-color for better contrast in dark mode */
   --accent-color: #5ab0f5; /* Lighter blue for interactive elements */
+  --cta-text-color: #000;
   --highlight-color: #ffca28;
   --highlight-rgb: 253, 216, 53;
   --highlight-darker: #c7a700;
@@ -291,7 +292,7 @@ a.skip-link:focus-visible {
   clip: auto;
   padding: var(--space-xs) var(--space-sm);
   background-color: var(--accent-color);
-  color: #fff;
+  color: var(--cta-text-color);
   border-radius: var(--border-radius-sm);
   text-decoration: none;
   z-index: 1000;
@@ -1543,7 +1544,7 @@ img.loaded {
   padding: var(--space-xs) var(--space-sm);
   border-radius: var(--border-radius-sm);
   background-color: var(--accent-color);
-  color: #fff;
+  color: var(--cta-text-color);
   text-decoration: none;
   font-weight: 500;
   border: none;
@@ -1557,7 +1558,7 @@ img.loaded {
   background-color: var(--primary-color);
   transform: translateY(-2px);
   text-decoration: none;
-  color: #fff;
+  color: var(--cta-text-color);
 }
 
 .policy-container {
@@ -3107,7 +3108,7 @@ summary:active,
   padding: 0.25rem 0.5rem;
   font-size: 0.85rem;
   background-color: var(--accent-color);
-  color: #fff;
+  color: var(--cta-text-color);
   border: none;
   border-radius: 4px;
   cursor: pointer;
