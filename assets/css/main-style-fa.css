@@ -76,10 +76,11 @@
 }
 .theme-switch {
   position: relative;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   width: 48px;
   height: 24px;
-  margin-left: var(--space-md);
+  margin: 0 var(--space-md);
   vertical-align: middle;
 }
 
