@@ -5,9 +5,9 @@
     const messages = {
       success: lang.startsWith("fa") ? "کپی شد! ✅" : "Copied! ✅",
       fail: lang.startsWith("fa") ? "عملیات کپی ناموفق بود." : "Failed to copy.",
-      unsupported: lang.startsWith("fa")
-        ? "مرورگر از کپی پشتیبانی نمی‌کند."
-        : "Your browser does not support copying.",
+      unsupported: lang.startsWith("fa") ? "مرورگر از کپی پشتیبانی نمی‌کند." : "Your browser does not support copying.",
+      offline: lang.startsWith("fa") ? "شما آفلاین هستید." : "You are offline.",
+      online: lang.startsWith("fa") ? "اتصال برقرار شد." : "Back online."
     };
 
     const DAY_MS = 86400000;
@@ -126,6 +126,27 @@
           }
         });
       });
+      const connectionEl = document.getElementById("connection-status");
+      function updateConnection() {
+        if (!connectionEl) return;
+        connectionEl.textContent = navigator.onLine
+          ? lang.startsWith("fa")
+            ? "اتصال اینترنت برقرار است."
+            : "You are online."
+          : lang.startsWith("fa")
+            ? "شما آفلاین هستید. برخی قابلیت‌ها غیرفعال است."
+            : "You are offline. Some features may be unavailable.";
+      }
+      window.addEventListener("online", () => {
+        updateConnection();
+        if (typeof createToast === "function") createToast(messages.online);
+      });
+      window.addEventListener("offline", () => {
+        updateConnection();
+        if (typeof createToast === "function") createToast(messages.offline);
+      });
+      updateConnection();
+
 
       const DEFAULT_TIMELINE = [
         {
