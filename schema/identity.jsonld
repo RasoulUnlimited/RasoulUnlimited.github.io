@@ -156,7 +156,9 @@
         "https://mastodon.social/@rasoulunlimited",
         "https://top.gg/bot/735403725132136510",
         "https://www.wikidata.org/wiki/Q135116816",
-        "https://x.com/rasoulunlimited"
+        "https://x.com/rasoulunlimited",
+        "https://rasoulunlimited.ir/foaf.rdf",
+        "https://rasoulunlimited.ir/humans.txt"
       ],
       "jobTitle": [
         "دانشجوی مهندسی پزشکی",
@@ -369,7 +371,7 @@
       },
       "publishingPrinciples": "https://rasoulunlimited.ir/proof.html",
       "correctionsPolicy": "https://rasoulunlimited.ir/security.html",
-      "dateModified": "2025-06-24"
+      "dateModified": "2025-07-01"
     },
     {
       "@type": "Organization",
@@ -392,6 +394,13 @@
         "https://x.com/rasoulunlimited",
         "https://www.wikidata.org/wiki/Q135116816"
       ],
+      "foundingDate": "2020-05-12",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Karaj",
+        "addressRegion": "Alborz Province",
+        "addressCountry": "IR"
+      },
       "founder": {
         "@type": "Person",
         "@id": "https://rasoulunlimited.ir/#person"
@@ -441,6 +450,18 @@
       "description": "صفحه رسمی و پورتفولیوی محمد رسول سهرابی (Rasoul Unlimited)، مرجع اصلی هویت دیجیتال و حرفه‌ای او.",
       "inLanguage": "fa",
       "license": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+      "provider": [
+        {
+          "@type": "Organization",
+          "name": "GitHub Pages",
+          "url": "https://pages.github.com"
+        },
+        {
+          "@type": "Organization",
+          "name": "Cloudflare",
+          "url": "https://www.cloudflare.com"
+        }
+      ],
       "potentialAction": {
         "@type": "SearchAction",
         "target": "https://rasoulunlimited.ir/?q={search_term_string}",
@@ -460,7 +481,7 @@
         "@id": "https://rasoulunlimited.ir/#organization"
       },
       "datePublished": "2025-05-16",
-      "dateModified": "2025-06-24"
+      "dateModified": "2025-07-01"
     },
     {
       "@type": "WebPage",
@@ -474,7 +495,7 @@
         "url": "https://rasoulunlimited.ir/press.html"
       },
       "datePublished": "2025-06-23",
-      "dateModified": "2025-06-24"
+      "dateModified": "2025-07-01"
     },
     {
       "@type": "WebPage",
@@ -488,7 +509,7 @@
         "url": "https://rasoulunlimited.ir/proof.html"
       },
       "datePublished": "2025-06-23",
-      "dateModified": "2025-06-24"
+      "dateModified": "2025-07-01"
     },
     {
       "@type": "WebPage",
@@ -502,7 +523,7 @@
         "url": "https://rasoulunlimited.ir/faq/"
       },
       "datePublished": "2025-06-02",
-      "dateModified": "2025-06-24"
+      "dateModified": "2025-07-01"
     },
     {
       "@type": "WebPage",
@@ -515,8 +536,8 @@
         "@id": "https://rasoulunlimited.ir/press-kit/",
         "url": "https://rasoulunlimited.ir/press-kit/"
       },
-      "datePublished": "2025-06-24",
-      "dateModified": "2025-06-24"
+      "datePublished": "2025-07-01",
+      "dateModified": "2025-07-01"
     },
     {
       "@type": "WebPage",
@@ -530,7 +551,7 @@
         "url": "https://rasoulunlimited.ir/contact.html"
       },
       "datePublished": "2025-06-23",
-      "dateModified": "2025-06-24"
+      "dateModified": "2025-07-01"
     },
     {
       "@type": "ItemList",
