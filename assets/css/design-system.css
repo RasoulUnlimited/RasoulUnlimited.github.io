@@ -392,6 +392,31 @@
 .security-section li:last-child {
   margin-bottom: 0;
 }
+.security-section ul {
+  list-style: none;
+  padding: 0;
+}
+.security-section li {
+  position: relative;
+  padding-left: 1.6rem;
+}
+[dir="rtl"] .security-section li {
+  padding-right: 1.6rem;
+  padding-left: 0;
+}
+.security-section li::before {
+  content: "\f058";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  color: var(--accent-color);
+  position: absolute;
+  left: 0;
+  top: 0.2em;
+}
+[dir="rtl"] .security-section li::before {
+  left: auto;
+  right: 0;
+}
 
 /* Contact form */
 .contact-form {
