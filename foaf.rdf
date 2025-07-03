@@ -11,6 +11,7 @@
     <foaf:maker rdf:resource="https://rasoulunlimited.ir/#person" />
     <dc:title>Mohammad Rasoul Sohrabi FOAF Profile</dc:title>
     <dc:language>en</dc:language>
+    <dc:creator>Mohammad Rasoul Sohrabi</dc:creator>
   </foaf:PersonalProfileDocument>
 
   <foaf:Person rdf:about="https://rasoulunlimited.ir/#person">
@@ -20,12 +21,18 @@
     <foaf:familyName>Sohrabi</foaf:familyName>
     <foaf:gender>Male</foaf:gender>
     <foaf:birthday>2005-09-06</foaf:birthday>
+    <foaf:knowsLanguage>en</foaf:knowsLanguage>
+    <foaf:knowsLanguage>fa</foaf:knowsLanguage>
     <foaf:page rdf:resource="https://rasoulunlimited.ir/about.html" />
     <foaf:openid rdf:resource="https://rasoulunlimited.ir" />
+    <foaf:isPrimaryTopicOf rdf:resource="https://rasoulunlimited.ir/foaf.rdf" />
     <foaf:title>Biomedical Engineering Student, Software Developer</foaf:title>
 
     <foaf:homepage rdf:resource="https://rasoulunlimited.ir" />
     <foaf:img rdf:resource="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp" />
+    <foaf:depiction rdf:resource="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp" />
+    <foaf:logo rdf:resource="https://rasoulunlimited.ir/assets/images/favicon.png" />
+    <foaf:workInfoHomepage rdf:resource="https://rasoulunlimited.ir/projects/" />
     <foaf:workplaceHomepage rdf:resource="https://ctb.iau.ir" />
     <foaf:schoolHomepage rdf:resource="https://ctb.iau.ir" />
 
@@ -34,13 +41,25 @@
 
     <foaf:based_near>
       <foaf:SpatialThing>
-        <rdfs:label>Tehran, Iran</rdfs:label>
+        <rdfs:label>Karaj, Iran</rdfs:label>
       </foaf:SpatialThing>
     </foaf:based_near>
 
     <foaf:topic_interest rdf:resource="http://dbpedia.org/resource/Biomedical_engineering" />
     <foaf:topic_interest rdf:resource="http://dbpedia.org/resource/Open-source_software" />
     <foaf:topic_interest rdf:resource="http://dbpedia.org/resource/Discord_(software)" />
+    <foaf:topic_interest rdf:resource="http://dbpedia.org/resource/Digital_health" />
+    <foaf:topic_interest rdf:resource="http://dbpedia.org/resource/Personal_branding" />
+    <foaf:topic_interest rdf:resource="http://dbpedia.org/resource/Web_development" />
+    <foaf:topic_interest rdf:resource="http://dbpedia.org/resource/Full_stack_developer" />
+    <foaf:topic_interest rdf:resource="http://dbpedia.org/resource/Content_strategy" />
+
+    <foaf:member>
+      <foaf:Organization>
+        <rdfs:label>Biomedical Engineering Association (Islamic Azad University, Central Tehran
+          Branch)</rdfs:label>
+      </foaf:Organization>
+    </foaf:member>
 
     <!-- Social Accounts -->
     <foaf:account>
@@ -151,13 +170,15 @@
       <foaf:OnlineAccount>
         <foaf:accountServiceHomepage rdf:resource="https://www.researchgate.net" />
         <foaf:accountName>Mohammad-Rasoul-Sohrabi</foaf:accountName>
+        <owl:sameAs rdf:resource="https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi" />
       </foaf:OnlineAccount>
     </foaf:account>
 
     <foaf:account>
       <foaf:OnlineAccount>
-        <foaf:accountServiceHomepage rdf:resource="https://twitter.com" />
+        <foaf:accountServiceHomepage rdf:resource="https://x.com" />
         <foaf:accountName>RasoulUnlimited</foaf:accountName>
+        <owl:sameAs rdf:resource="https://x.com/rasoulunlimited" />
       </foaf:OnlineAccount>
     </foaf:account>
 
@@ -165,6 +186,7 @@
       <foaf:OnlineAccount>
         <foaf:accountServiceHomepage rdf:resource="https://top.gg" />
         <foaf:accountName>735403725132136510</foaf:accountName>
+        <owl:sameAs rdf:resource="https://top.gg/bot/735403725132136510" />
       </foaf:OnlineAccount>
     </foaf:account>
 
@@ -176,15 +198,20 @@
     <rdfs:seeAlso rdf:resource="https://rasoulunlimited.ir/schema/identity.jsonld" />
     <rdfs:seeAlso rdf:resource="https://github.com/RasoulUnlimited" />
     <rdfs:seeAlso rdf:resource="https://www.linkedin.com/in/rasoulunlimited/" />
-    <rdfs:seeAlso rdf:resource="https://twitter.com/RasoulUnlimited" />
+    <rdfs:seeAlso rdf:resource="https://x.com/RasoulUnlimited" />
     <rdfs:seeAlso rdf:resource="https://rasoulunlimited.ir/humans.txt" />
     <rdfs:seeAlso rdf:resource="https://rasoulunlimited.ir/links.txt" />
+    <rdfs:seeAlso rdf:resource="https://doi.org/10.5281/zenodo.15548860" />
+    <rdfs:seeAlso rdf:resource="https://doi.org/10.5281/zenodo.15548850" />
+    <rdfs:seeAlso rdf:resource="https://rasoulunlimited.ir/security.html" />
+    <rdfs:seeAlso rdf:resource="https://rasoulunlimited.ir/.well-known/security.txt" />
+    <rdfs:seeAlso rdf:resource="https://rasoulunlimited.ir/.well-known/entity.rdf" />
 
     <!-- Metadata -->
     <dc:creator>Mohammad Rasoul Sohrabi</dc:creator>
     <dc:description>Personal FOAF profile of Mohammad Rasoul Sohrabi (aka Rasoul Unlimited), a
       biomedical engineering student and open-source contributor from Tehran, Iran.</dc:description>
-    <dc:date>2025-06-24</dc:date>
+    <dc:date>2025-07-02</dc:date>
     <cc:license rdf:resource="https://creativecommons.org/licenses/by-nc-nd/4.0/" />
 
   </foaf:Person>
