@@ -656,7 +656,7 @@ section h2::after {
 .content-area
   a:not(.navbar nav a):not(.card .card-links a):not(.contact-info a):not(
     .connect-links-block ul li a
-  ):not(.footer a) {
+  ):not(.footer a):not(.cta-button) {
   color: var(--text-color-link);
   text-decoration: underline;
   transition: color var(--transition-duration-short) ease,

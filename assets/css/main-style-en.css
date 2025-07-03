@@ -206,7 +206,7 @@ input:checked + .slider:before {
   --primary-color: #61dafb;
   --secondary-color: #f0f0f0;
   --accent-color: #5ab0f5;
-  --cta-text-color: #000;
+  --cta-text-color: #fff;
   --highlight-color: #ffca28;
 
   --background-start-color: #1f2631;
