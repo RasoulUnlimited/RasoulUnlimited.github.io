@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
@@ -116,6 +117,17 @@
       name="twitter:image:alt"
       content="Portrait of Mohammad Rasoul Sohrabi"
     />
+    <script type="application/ld+json" nonce="RasoulCSP">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "url": "https://rasoulunlimited.ir/security.html",
+        "speakable": {
+          "@type": "SpeakableSpecification",
+          "cssSelector": ["h1", "h2", "p"]
+        }
+      }
+    </script>
     <link rel="entity-profile" href="/.well-known/entity-profile.json" />
   </head>
   <body>
