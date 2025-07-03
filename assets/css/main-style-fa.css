@@ -580,6 +580,11 @@ h1 {
   fill: currentColor;
   vertical-align: middle;
 }
+.hero-security {
+  color: var(--accent-color);
+  font-size: 2rem;
+  margin-bottom: var(--space-xl);
+}
 
 section {
   margin-bottom: var(--section-margin-bottom);
