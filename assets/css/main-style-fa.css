@@ -1566,6 +1566,7 @@ img.loaded {
   padding: var(--space-lg);
   box-shadow: 0 2px 6px var(--shadow-color-light);
   margin-bottom: var(--space-lg);
+  text-align: right;
 }
 
 .policy-card {
