@@ -99,14 +99,7 @@
       document.querySelectorAll(".copy-button").forEach((btn) => {
         btn.addEventListener("click", handleCopyClick);
       });
-
-      document.addEventListener("click", (e) => {
-        const btn = e.target.closest(".copy-button");
-        if (btn) {
-          handleCopyClick({ currentTarget: btn });
-        }
-      });
-
+      
       document.querySelectorAll(".copyable").forEach((el) => {
         const handler = () =>
           copyTextToClipboard(el.dataset.copyText || el.textContent.trim());
