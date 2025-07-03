@@ -1,12 +1,18 @@
-# Robots.txt for https://rasoulunlimited.ir
+# robots.txt for https://rasoulunlimited.ir
 # Maintainer: Mohammad Rasoul Sohrabi
-# Site served via GitHub Pages and proxied through Cloudflare
+# Deployed via GitHub Pages and proxied through Cloudflare
+# Contact: rasoul.unlimited@gmail.com
+# Updated: 2025-07-03
 
-# ----- General Rules -----
+Sitemap: https://rasoulunlimited.ir/sitemap.xml
+Host: rasoulunlimited.ir
+
+# ----- General Crawling Policy -----
 User-agent: *
+Crawl-delay: 5
 Allow: /
 
-# Preferred public content
+# ----- Preferred Public Content -----
 Allow: /en/
 Allow: /projects/
 Allow: /projects/c-projects/
@@ -29,7 +35,7 @@ Allow: /assets/vendor/
 Allow: /faq/
 Allow: /en/faq/
 
-# Identity and verification files
+# ----- Identity and Verification Files -----
 Allow: /humans.txt
 Allow: /foaf.rdf
 Allow: /.well-known/
@@ -43,7 +49,7 @@ Allow: /.well-known/keybase.txt
 Allow: /schema/
 Allow: /schema/identity.jsonld
 
-# Block non-content or sensitive paths
+# ----- Blocked Paths -----
 Disallow: /admin/
 Disallow: /login/
 Disallow: /register/
@@ -70,9 +76,18 @@ Allow: /
 User-agent: bingbot
 Allow: /
 
-# ----- Sitemap and Host -----
-Sitemap: https://rasoulunlimited.ir/sitemap.xml
-Host: rasoulunlimited.ir
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
 
 # ----- Reference -----
 # FOAF: /foaf.rdf

@@ -7,6 +7,7 @@
 ## Table of Contents
 
 - [Overview](#overview)
+- [Quick start](#quick-start)
 - [Prerequisites](#prerequisites)
 - [Build instructions](#build-instructions)
 - [Local development](#local-development)
@@ -20,7 +21,7 @@
 
 ## Overview
 
-Rasoul Unlimited is the personal website of **Mohammad Rasoul Sohrabi**. Designed with a minimal, elegant aesthetic, it highlights his work and writing in both Persian and English. Each page is statically generated with Node and Gulp, then hosted on **GitHub Pages** and served through **Cloudflare** for fast, secure delivery. The architecture is built to load quickly and provide a smooth experience. The mission is to present Rasoul's expertise professionally and simply, letting the content speak for itself.
+Rasoul Unlimited is the personal website of **Mohammad Rasoul Sohrabi**. Designed with a minimal, elegant aesthetic, it highlights his work and writing in both Persian and English. Each page is statically generated with Node and Gulp, then hosted on **GitHub Pages** and served through **Cloudflare** for improved speed and security. The architecture is built to load quickly and provide a smooth experience. The mission is to present Rasoul's expertise professionally and simply, letting the content speak for itself.
 
 Key features:
 
@@ -32,12 +33,19 @@ Key features:
 - Cloudflare Worker that injects crawler‑specific JSON‑LD and adds caching
 - Strict Content‑Security‑Policy enforced through Cloudflare (see example policy)
 
+## Quick start
+
+1. Clone the repository.
+2. Run `npm install` to install dependencies.
+3. Build optimized assets with `npm run build`.
+4. Preview locally using `npx serve -l 8080 .` or any static server.
+
 ## Design philosophy
 
 The interface follows a minimal and elegant approach so that content stands out
 without distractions. Animations and scripts are kept light to ensure a fast,
-smooth experience across devices. Every visual element supports clarity and
-usability rather than decoration.
+smooth experience across devices. Every element and motion has a purpose — to
+improve clarity, usability, or engagement — rather than decoration.
 
 ## Project structure
 
@@ -108,6 +116,7 @@ Deployment steps:
 1. Edit the `CNAME` file so it matches your domain.
 2. Update Cloudflare DNS **A/AAAA** records to point to GitHub Pages.
 3. Adjust the Worker route and security headers for the new domain.
+4. Push changes to GitHub; Cloudflare will serve the updated pages from cache.
 
 Whenever the domain or any external resources change, review the `Content‑Security‑Policy` to ensure it still references only the required sources.
 
@@ -116,6 +125,8 @@ Whenever the domain or any external resources change, review the `Content‑Secu
 A small Worker inspects the `User-Agent` header of each request. When a request
 comes from **Googlebot**, **Twitterbot**, or **Facebook**, the Worker injects a
 secondary JSON‑LD snippet and adds an `X-Crawler-Handled` header to the response.
+It also sets a `Cache-Control` header so pages can be served from Cloudflare's
+edge cache for several minutes.
 
 ### Deployment
 
