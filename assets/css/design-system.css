@@ -288,7 +288,11 @@
   color: var(--heading-color);
 }
 .hero-tagline {
-  font-size: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: 1.5rem;
+  font-weight: 600;
   color: var(--tagline-color);
   margin-bottom: var(--space-xl);
 }
@@ -358,12 +362,22 @@
 }
 
 /* Security policy sections */
+.policy-container {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  padding: var(--space-xl);
+  box-shadow: 0 2px 6px var(--shadow-color-light);
+  margin-bottom: var(--space-xl);
+}
+
 .security-section {
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius-md);
-  padding: var(--space-lg);
-  margin-bottom: var(--space-lg);
+  padding: var(--space-xl);
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-xl);
 }
 
 .security-section h2 {
