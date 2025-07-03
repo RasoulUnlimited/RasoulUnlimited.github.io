@@ -21,8 +21,8 @@
         "contentUrl": "https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp",
         "caption": "تصویر پروفایل محمد رسول سهرابی (Rasoul Unlimited)",
         "description": "تصویر پرتره رسمی و حرفه‌ای محمد رسول سهرابی، دانشجوی مهندسی پزشکی، توسعه‌دهنده نرم‌افزار و استراتژیست محتوا، با پس‌زمینه مینیمال.",
-        "width": "220",
-        "height": "220",
+        "width": 220,
+        "height": 220,
         "encodingFormat": "image/webp"
       },
       "gender": "Male",
@@ -264,6 +264,7 @@
         "@type": "Organization",
         "@id": "https://rasoulunlimited.ir/#organization",
         "name": "Rasoul Unlimited",
+        "url": "https://rasoulunlimited.ir",
         "description": "برند شخصی و هویت دیجیتال محمد رسول سهرابی."
       },
       "knowsAbout": [
@@ -379,8 +380,16 @@
       "name": "Rasoul Unlimited",
       "alternateName": "رسول آنلیمیتد",
       "url": "https://rasoulunlimited.ir",
-      "logo": "https://rasoulunlimited.ir/assets/images/favicon.png",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://rasoulunlimited.ir/assets/images/favicon.png",
+        "contentUrl": "https://rasoulunlimited.ir/assets/images/favicon.png",
+        "width": "192",
+        "height": "192"
+      },
       "description": "Rasoul Unlimited یک برند خلاقانه و فناورانه شخصی به رهبری محمد رسول سهرابی است که بر توسعه نرم‌افزار، سلامت دیجیتال، استراتژی محتوا و رشد شخصی تمرکز دارد و نماد فعالیت‌های او در حوزه‌های مختلف است.",
+      "accessibilitySummary": "Optimized for keyboard navigation, high color contrast, descriptive alt text and accessible forms across all pages.",
+      "accessibilityHazard": "noFlashingHazard",
       "sameAs": [
         "https://www.instagram.com/Rasoul.Unlimited",
         "https://virgool.io/@RasoulUnlimited",
@@ -445,11 +454,17 @@
     },
     {
       "@type": "WebSite",
+      "@id": "https://rasoulunlimited.ir/#website",
       "url": "https://rasoulunlimited.ir",
       "name": "Rasoul Unlimited | محمد رسول سهرابی",
       "description": "صفحه رسمی و پورتفولیوی محمد رسول سهرابی (Rasoul Unlimited)، مرجع اصلی هویت دیجیتال و حرفه‌ای او.",
       "inLanguage": "fa",
       "license": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+      "accessibilitySummary": "Keyboard-friendly navigation, strong color contrast and alt text ensure inclusive access across the site.",
+      "accessibilityHazard": "noFlashingHazard",
+      "isAccessibleForFree": true,
+      "creator": {"@id": "https://rasoulunlimited.ir/#person"},
+      "author": {"@id": "https://rasoulunlimited.ir/#person"},
       "provider": [
         {
           "@type": "Organization",
@@ -494,6 +509,11 @@
         "@id": "https://rasoulunlimited.ir/press.html",
         "url": "https://rasoulunlimited.ir/press.html"
       },
+      "description": "گزیده‌ای از مصاحبه‌ها و مقالات درباره رسول آنلیمیتد.",
+      "accessibilitySummary": "Fully keyboard navigable with high color contrast and alt text for all media.",
+      "accessibilityHazard": "noFlashingHazard",
+      "isPartOf": { "@id": "https://rasoulunlimited.ir/#website" },
+      "author": { "@id": "https://rasoulunlimited.ir/#person" },
       "datePublished": "2025-06-23",
       "dateModified": "2025-07-01"
     },
@@ -508,6 +528,11 @@
         "@id": "https://rasoulunlimited.ir/proof.html",
         "url": "https://rasoulunlimited.ir/proof.html"
       },
+      "description": "فهرست DOIها و گواهی‌های رسمی تاییدکنندهٔ کارهای محمد رسول سهرابی.",
+      "accessibilitySummary": "Fully keyboard navigable with high color contrast and alt text for all media.",
+      "accessibilityHazard": "noFlashingHazard",
+      "isPartOf": { "@id": "https://rasoulunlimited.ir/#website" },
+      "author": { "@id": "https://rasoulunlimited.ir/#person" },
       "datePublished": "2025-06-23",
       "dateModified": "2025-07-01"
     },
@@ -522,6 +547,11 @@
         "@id": "https://rasoulunlimited.ir/faq/",
         "url": "https://rasoulunlimited.ir/faq/"
       },
+      "description": "پاسخ‌های جامع و بینش‌بخش به سوالات پرتکرار درباره محمد رسول سهرابی (رسول آنلیمیتد): از عمق تخصص‌های پیشرو در توسعه فول‌استک و طراحی رابط کاربری گرفته تا جزئیات پروژه‌های تاثیرگذار و خدمات حرفه‌ای استثنایی. سفری الهام‌بخش به دنیای تخصص و نوآوری.",
+      "accessibilitySummary": "Fully keyboard navigable with high color contrast and alt text for all media.",
+      "accessibilityHazard": "noFlashingHazard",
+      "isPartOf": { "@id": "https://rasoulunlimited.ir/#website" },
+      "author": { "@id": "https://rasoulunlimited.ir/#person" },
       "datePublished": "2025-06-02",
       "dateModified": "2025-07-01"
     },
@@ -536,6 +566,11 @@
         "@id": "https://rasoulunlimited.ir/press-kit/",
         "url": "https://rasoulunlimited.ir/press-kit/"
       },
+      "description": "Download logos, biographies and screenshots for Rasoul Unlimited.",
+      "accessibilitySummary": "Fully keyboard navigable with high color contrast and alt text for all media.",
+      "accessibilityHazard": "noFlashingHazard",
+      "isPartOf": { "@id": "https://rasoulunlimited.ir/#website" },
+      "author": { "@id": "https://rasoulunlimited.ir/#person" },
       "datePublished": "2025-07-01",
       "dateModified": "2025-07-01"
     },
@@ -550,43 +585,63 @@
         "@id": "https://rasoulunlimited.ir/contact.html",
         "url": "https://rasoulunlimited.ir/contact.html"
       },
+      "description": "راه‌های ارتباط با محمد رسول سهرابی برای همکاری یا پرسش‌های حرفه‌ای.",
+      "accessibilitySummary": "Fully keyboard navigable with high color contrast and alt text for all media.",
+      "accessibilityHazard": "noFlashingHazard",
+      "isPartOf": { "@id": "https://rasoulunlimited.ir/#website" },
+      "author": { "@id": "https://rasoulunlimited.ir/#person" },
       "datePublished": "2025-06-23",
       "dateModified": "2025-07-01"
     },
     {
-      "@type": "ItemList",
+      "@type": "SoftwareApplication",
+      "@id": "https://rasoulunlimited.ir/#worker",
+      "name": "Rasoul Unlimited Cloudflare Worker",
+      "applicationCategory": "Web Service",
+      "operatingSystem": "Cloudflare",
+      "codeRepository": "https://github.com/RasoulUnlimited/RasoulUnlimited.github.io/blob/main/cloudflare/worker.js",
+      "creator": {"@id": "https://rasoulunlimited.ir/#person"}
+    },
+    {
+      "@type": "BreadcrumbList",
       "@id": "https://rasoulunlimited.ir/#page-sequence",
       "name": "Page Navigation Sequence",
       "itemListElement": [
         {
           "@type": "ListItem",
           "position": 1,
-          "url": "https://rasoulunlimited.ir/about.html"
+          "item": "https://rasoulunlimited.ir/about.html",
+          "name": "About Rasoul Unlimited"
         },
         {
           "@type": "ListItem",
           "position": 2,
-          "url": "https://rasoulunlimited.ir/proof.html"
+          "item": "https://rasoulunlimited.ir/proof.html",
+          "name": "Verifiable Credentials & DOIs"
         },
         {
           "@type": "ListItem",
           "position": 3,
-          "url": "https://rasoulunlimited.ir/press.html"
+          "item": "https://rasoulunlimited.ir/press.html",
+          "name": "Press & Media"
         },
         {
           "@type": "ListItem",
           "position": 4,
-          "url": "https://rasoulunlimited.ir/faq/"
+          "item": "https://rasoulunlimited.ir/faq/",
+          "name": "Frequently Asked Questions"
         },
         {
           "@type": "ListItem",
           "position": 5,
-          "url": "https://rasoulunlimited.ir/en/faq/"
+          "item": "https://rasoulunlimited.ir/en/faq/",
+          "name": "English FAQ"
         },
         {
           "@type": "ListItem",
           "position": 6,
-          "url": "https://rasoulunlimited.ir/about.html"
+          "item": "https://rasoulunlimited.ir/about.html",
+          "name": "About Rasoul Unlimited"
         }
       ],
       "description": "Navigation loop across main pages. Hosted on GitHub Pages with Cloudflare."
