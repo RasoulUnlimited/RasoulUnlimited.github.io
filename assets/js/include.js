@@ -46,5 +46,8 @@ function setActiveNavLink() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  includeHTML(setActiveNavLink);
+  includeHTML(() => {
+    setActiveNavLink();
+    document.dispatchEvent(new Event("includesLoaded"));
+  });
 });

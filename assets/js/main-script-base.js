@@ -6,7 +6,6 @@
     window.langStrings = {};
   }
 
-  const themeToggleInput = document.getElementById("theme-toggle");
   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const savedTheme = localStorage.getItem("theme");
 
@@ -23,9 +22,10 @@
   function applyTheme(theme, showToast) {
     document.body.classList.toggle("dark-mode", theme === "dark");
     document.body.classList.toggle("light-mode", theme === "light");
-    if (themeToggleInput) {
-      themeToggleInput.checked = theme === "dark";
-      themeToggleInput.setAttribute("aria-checked", theme === "dark");
+    const toggle = document.getElementById("theme-toggle");
+    if (toggle) {
+      toggle.checked = theme === "dark";
+      toggle.setAttribute("aria-checked", theme === "dark");
     }
     if (showToast && window.langStrings.themeChanged) {
       createToast(window.langStrings.themeChanged(theme));
@@ -38,7 +38,9 @@
     applyTheme(prefersDark ? "dark" : "light");
   }
 
-  if (themeToggleInput) {
+  function initThemeToggle() {
+    const themeToggleInput = document.getElementById("theme-toggle");
+    if (!themeToggleInput) return;
     themeToggleInput.setAttribute("aria-checked", themeToggleInput.checked);
     themeToggleInput.addEventListener("change", () => {
       const newTheme = themeToggleInput.checked ? "dark" : "light";
@@ -47,6 +49,9 @@
     });
   }
 
+  initThemeToggle();
+  document.addEventListener("includesLoaded", initThemeToggle);پ
+  
   let endOfPageShown = false;
   let lastScrollY = 0;
   let ticking = false;
