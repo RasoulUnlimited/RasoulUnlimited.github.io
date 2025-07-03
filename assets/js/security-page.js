@@ -23,7 +23,7 @@
       }
     }
 
-    async function cachedFetch(url, key, ttl, parser) {
+    async function cachedFetch(url, key, ttl, parser, timeout = 5000) {
       if (storageAvailable()) {
         try {
           const cached = JSON.parse(localStorage.getItem(key) || "null");
@@ -33,7 +33,10 @@
         } catch (e) {}
       }
 
-      const res = await fetch(url);
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), timeout);
+      const res = await fetch(url, { signal: controller.signal, cache: "no-store" });
+      clearTimeout(timer);
       const data = await parser(res);
       if (storageAvailable()) {
         try {
@@ -97,6 +100,13 @@
         btn.addEventListener("click", handleCopyClick);
       });
 
+      document.addEventListener("click", (e) => {
+        const btn = e.target.closest(".copy-button");
+        if (btn) {
+          handleCopyClick({ currentTarget: btn });
+        }
+      });
+
       document.querySelectorAll(".copyable").forEach((el) => {
         const handler = () =>
           copyTextToClipboard(el.dataset.copyText || el.textContent.trim());
@@ -156,6 +166,8 @@
         events.forEach((ev) => {
           const li = document.createElement("li");
           li.dataset.aos = "fade-up";
+          li.tabIndex = 0;
+          li.setAttribute("role", "listitem");
 
           const content = document.createElement("div");
           content.className = "timeline-content";
@@ -193,10 +205,12 @@
         )
           .then((events) => {
             renderTimeline(events);
+            timelineList.setAttribute("aria-busy", "false");
             initializeTimeline();
           })
           .catch(() => {
             renderTimeline(DEFAULT_TIMELINE);
+            timelineList.setAttribute("aria-busy", "false");
             initializeTimeline();
           });
       } else {
@@ -250,7 +264,12 @@
                   Math.max(0, ((totalDays - diffDays) / totalDays) * 100)
                 );
                 progressEl.value = percent;
+                progressEl.removeAttribute("aria-hidden");
                 progressEl.setAttribute("aria-valuenow", percent.toFixed(0));
+                const daysLabel = lang.startsWith("fa")
+                  ? `${Math.ceil(diffDays)} روز باقیمانده`
+                  : `${Math.ceil(diffDays)} days remaining`;
+                progressEl.setAttribute("aria-valuetext", daysLabel);
               }
               if (diffDays <= 0) {
                 expirationEl.classList.add("expired");

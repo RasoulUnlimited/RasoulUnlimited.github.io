@@ -215,7 +215,7 @@
               تشویق همکاری مسئولانه و رسیدگی سریع به آسیب‌پذیری‌ها تدوین شده
               است.
             </p>
-            <p id="policy-expiration" class="policy-expiration" role="status">
+            <p id="policy-expiration" class="policy-expiration" role="status" aria-live="polite">
               در حال بارگذاری تاریخ اعتبار…
             </p>
             <progress
@@ -226,6 +226,8 @@
               aria-valuemin="0"
               aria-valuemax="100"
               aria-hidden="true"
+              aria-describedby="policy-expiration"
+              aria-label="زمان باقی‌مانده"
             ></progress>
             <section id="csp-policy" class="security-section" data-aos="fade-up" aria-labelledby="csp-heading">
               <h2 id="csp-heading">سیاست امنیت محتوا</h2>
@@ -379,7 +381,7 @@ frame-ancestors 'self';</code></pre>
             aria-labelledby="security-timeline-heading"
           >
             <h2 id="security-timeline-heading">مسیر امنیتی</h2>
-            <ul id="security-timeline-list" class="timeline" aria-label="رویدادهای مهم امنیتی"></ul>
+            <ul id="security-timeline-list" class="timeline" aria-label="رویدادهای مهم امنیتی" aria-live="polite" aria-busy="true"></ul>
             <noscript>
               <ul class="timeline" aria-label="رویدادهای مهم امنیتی">
                 <li>
