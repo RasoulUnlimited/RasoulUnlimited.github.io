@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const cards = document.querySelectorAll('.credential-card');
-    if (!('IntersectionObserver' in window) || !cards.length) return;
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!('IntersectionObserver' in window) || !cards.length || prefersReduced) return;
   
     cards.forEach((card) => card.classList.add('card-hidden'));
   
@@ -12,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
           obs.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1 });
+    }, { rootMargin: '0px 0px -10%', threshold: 0.1 });
   
     cards.forEach((card) => observer.observe(card));
   });

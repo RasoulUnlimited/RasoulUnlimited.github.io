@@ -3319,13 +3319,38 @@ summary:active,
   .policy-container {
     padding: var(--space-md);
   }
-  .security-code-block {
+.security-code-block {
     font-size: 0.75rem;
     word-break: break-word;
+    overflow-x: auto;
   }
   .copy-button,
   #copy-fingerprint {
     padding: 0.25rem 0.6rem;
     font-size: 0.8rem;
+  }
+}
+@media (max-width: 360px) {
+  .policy-container {
+    padding: var(--space-sm);
+  }
+  .profile-image {
+    width: 80px;
+    height: 80px;
+  }
+  h1 {
+    font-size: 1.9rem;
+  }
+  .tagline {
+    font-size: 1rem;
+  }
+  .cta-button {
+    padding: var(--space-xs) var(--space-sm);
+    font-size: 0.85rem;
+  }
+  .timeline-search-container {
+    margin: var(--space-md) auto;
+    padding: 0 var(--space-xs);
+    max-width: 100%;
   }
 }

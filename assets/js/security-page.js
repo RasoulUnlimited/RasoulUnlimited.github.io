@@ -39,6 +39,15 @@
       if (e.matches) disableMotion();
     });
 
+    function normalizeText(str) {
+      if (!str) return "";
+      const persianDigits = "۰۱۲۳۴۵۶۷۸۹";
+      return str
+        .replace(/[۰-۹]/g, (d) => persianDigits.indexOf(d))
+        .replace(/[\u064B-\u065F\u0670]/g, "")
+        .toLowerCase();
+    }
+
     function getStorage() {
       const test = "__test";
       try {
@@ -293,14 +302,14 @@
       function setupTimelineSearch() {
         if (!timelineSearch) return;
         function filterList(term) {
-          const q = term.trim().toLowerCase();
+          const q = normalizeText(term.trim());
           const reg = new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "gi");
           let count = 0;
           timelineList.querySelectorAll("li").forEach((li) => {
             const contentEl = li.querySelector(".timeline-content");
             if (!contentEl) return;
             if (!li.dataset.orig) li.dataset.orig = contentEl.innerHTML;
-            const text = li.textContent.toLowerCase();
+            const text = normalizeText(li.textContent);
             const match = q && text.includes(q);
             li.style.display = match || !q ? "" : "none";
             if (match) {

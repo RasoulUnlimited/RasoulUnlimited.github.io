@@ -234,13 +234,15 @@
               id="credential-search"
               placeholder="جستجوی گواهی‌ها یا DOI"
               aria-label="جستجوی گواهی‌ها"
+              aria-controls="credential-grid"
+              autocomplete="off"
             />
             <button id="clear-credential-search" aria-label="پاک کردن جستجو">
               ✖
             </button>
           </div>
           <p id="results-info" class="results-info" data-lang="fa" aria-live="polite"></p>
-          <div class="credential-grid">
+          <div id="credential-grid" class="credential-grid">
             <div
               class="credential-card"
               itemscope
@@ -358,7 +360,7 @@
     </noscript>
     <div data-include-html="includes/footer.html"></div>
     <script src="assets/js/include.min.js" defer></script>
-    <script src="assets/js/credential-search.min.js" defer></script>
+    <script src="assets/js/credential-search.js" defer></script>
     <script src="assets/js/credential-reveal.min.js" defer></script>
     <script src="assets/js/main-script-fa.min.js" defer></script>
     <script nonce="RasoulCSP">

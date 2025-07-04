@@ -35,11 +35,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const updateResultsInfo = (count) => {
       if (!resultsInfo) return;
       if (lang.startsWith("fa")) {
-        resultsInfo.textContent = count === 0 ? "موردی یافت نشد" : `${count} نتیجه یافت شد`;
+        resultsInfo.textContent = count === 0
+          ? "موردی یافت نشد"
+          : `${count} نتیجه یافت شد`;
       } else {
-        card.style.display = "none";
-        highlightText(nameEl, "");
-        highlightText(summaryEl, "");
+        const word = count === 1 ? "result" : "results";
+        resultsInfo.textContent = count === 0
+          ? "No results found"
+          : `${count} ${word} found`;
       }
     };
   
@@ -60,14 +63,15 @@ document.addEventListener("DOMContentLoaded", function () {
           highlightText(nameEl, searchTerm);
           highlightText(summaryEl, searchTerm);
           visibleCount++;
-      } else {
-        const word = count === 1 ? "result" : "results";
-        resultsInfo.textContent = count === 0 ? "No results found" : `${count} ${word} found`;
-      }
+        } else {
+            card.style.display = "none";
+            highlightText(nameEl, "");
+            highlightText(summaryEl, "");
+          }
+        });
 
-    });
-    updateResultsInfo(visibleCount);
-  };
+        updateResultsInfo(visibleCount);
+    };
 
   searchInput.addEventListener("input", () => {
     const term = searchInput.value.trim();
@@ -101,6 +105,16 @@ document.addEventListener("DOMContentLoaded", function () {
       voiceButton.style.display = "none";
     }
   }
+
+  document.addEventListener("keydown", (e) => {
+    if (
+      (e.key === "/" || (e.key.toLowerCase() === "k" && (e.ctrlKey || e.metaKey))) &&
+      document.activeElement !== searchInput
+    ) {
+      e.preventDefault();
+      searchInput.focus();
+    }
+  });
 
   filterCards("");
 });
