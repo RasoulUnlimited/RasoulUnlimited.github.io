@@ -242,7 +242,17 @@
               <p class="credential-summary">
                 Open-source C projects from Tehran Azad University.
               </p>
-              <a itemprop="identifier" href="projects/c-projects/">View DOI</a>
+              <div class="card-actions">
+                <a itemprop="identifier" href="projects/c-projects/">View DOI</a>
+                <button
+                  class="copy-btn"
+                  data-copy="https://doi.org/10.5281/zenodo.15548850"
+                  aria-label="کپی DOI"
+                  title="کپی DOI"
+                >
+                  <i class="fas fa-copy" aria-hidden="true"></i>
+                </button>
+              </div>
             </div>
             <div
               class="credential-card"
@@ -261,9 +271,19 @@
                 Collection of Python exercises from Sahand University of
                 Technology.
               </p>
-              <a itemprop="identifier" href="projects/python-projects/"
-                >View DOI</a
-              >
+              <div class="card-actions">
+                <a itemprop="identifier" href="projects/python-projects/"
+                  >View DOI</a
+                >
+                <button
+                  class="copy-btn"
+                  data-copy="https://doi.org/10.5281/zenodo.15548860"
+                  aria-label="کپی DOI"
+                  title="کپی DOI"
+                >
+                  <i class="fas fa-copy" aria-hidden="true"></i>
+                </button>
+              </div>
             </div>
             <div
               class="credential-card"
@@ -281,13 +301,23 @@
               <p class="credential-summary">
                 Official certificate confirming Rasoul's Discord bot.
               </p>
-              <a
-                itemprop="identifier"
-                href="https://vrgl.ir/9D6Hy"
-                target="_blank"
-                rel="noopener noreferrer"
-                >View Certificate</a
-              >
+              <div class="card-actions">
+                <a
+                  itemprop="identifier"
+                  href="https://vrgl.ir/9D6Hy"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >View Certificate</a
+                >
+                <button
+                  class="copy-btn"
+                  data-copy="https://vrgl.ir/9D6Hy"
+                  aria-label="کپی لینک"
+                  title="کپی لینک"
+                >
+                  <i class="fas fa-copy" aria-hidden="true"></i>
+                </button>
+              </div>
             </div>
           </div>
           <p>
@@ -311,5 +341,26 @@
     <div data-include-html="includes/footer.html"></div>
     <script src="assets/js/include.min.js" defer></script>
     <script src="assets/js/main-script-fa.min.js" defer></script>
+    <script nonce="RasoulCSP">
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll(".copy-btn").forEach((btn) => {
+          btn.addEventListener("click", async () => {
+            const text = btn.getAttribute("data-copy");
+            if (window.copyToClipboard) {
+              await window.copyToClipboard(
+                text,
+                `copy-success-${Date.now()}`,
+                `copy-error-${Date.now()}`,
+                "لینک کپی شد! ✅"
+              );
+            } else if (navigator.clipboard && navigator.clipboard.writeText) {
+              try {
+                await navigator.clipboard.writeText(text);
+              } catch (e) {}
+            }
+          });
+        });
+      });
+    </script>
   </body>
 </html>

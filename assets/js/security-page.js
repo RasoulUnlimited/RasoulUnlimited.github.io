@@ -27,21 +27,28 @@
       if (e.matches) disableMotion();
     });
 
-    function storageAvailable() {
+    function getStorage() {
+      const test = "__test";
       try {
-        const test = "__test";
         localStorage.setItem(test, test);
         localStorage.removeItem(test);
-        return true;
+        return localStorage;
       } catch (e) {
-        return false;
+        try {
+          sessionStorage.setItem(test, test);
+          sessionStorage.removeItem(test);
+          return sessionStorage;
+        } catch (err) {
+          return null;
+        }
       }
     }
+    const storage = getStorage();
 
     async function cachedFetch(url, key, ttl, parser, timeout = 5000) {
-      if (storageAvailable()) {
+      if (storage) {
         try {
-          const cached = JSON.parse(localStorage.getItem(key) || "null");
+          const cached = JSON.parse(storage.getItem(key) || "null");
           if (cached && Date.now() - cached.t < ttl) {
             return cached.d;
           }
@@ -53,9 +60,9 @@
       const res = await fetch(url, { signal: controller.signal, cache: "no-store" });
       clearTimeout(timer);
       const data = await parser(res);
-      if (storageAvailable()) {
+      if (storage) {
         try {
-          localStorage.setItem(key, JSON.stringify({ t: Date.now(), d: data }));
+          storage.setItem(key, JSON.stringify({ t: Date.now(), d: data }));
         } catch (e) {}
       }
       return data;
@@ -129,13 +136,15 @@
       const connectionEl = document.getElementById("connection-status");
       function updateConnection() {
         if (!connectionEl) return;
-        connectionEl.textContent = navigator.onLine
+        const online = navigator.onLine;
+        connectionEl.textContent = online
           ? lang.startsWith("fa")
             ? "اتصال اینترنت برقرار است."
             : "You are online."
           : lang.startsWith("fa")
             ? "شما آفلاین هستید. برخی قابلیت‌ها غیرفعال است."
             : "You are offline. Some features may be unavailable.";
+        document.body.classList.toggle("offline", !online);
       }
       window.addEventListener("online", () => {
         updateConnection();
@@ -193,7 +202,10 @@
 
       function renderTimeline(events) {
         timelineList.innerHTML = "";
-        events.forEach((ev) => {
+        events
+          .slice()
+          .sort((a, b) => new Date(b.date) - new Date(a.date))
+          .forEach((ev) => {
           const li = document.createElement("li");
           li.dataset.aos = "fade-up";
           li.tabIndex = 0;

@@ -1489,6 +1489,33 @@ img.loaded {
   text-decoration: underline;
 }
 
+/* Actions area inside credential cards */
+.card-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-xs);
+}
+
+.copy-btn {
+  padding: var(--space-xs);
+  border-radius: var(--border-radius-sm);
+  background-color: var(--accent-color);
+  color: var(--cta-text-color);
+  border: none;
+  cursor: pointer;
+  transition: background-color var(--transition-duration-short)
+      var(--transition-easing-standard),
+    transform var(--transition-duration-short) var(--transition-easing-springy);
+}
+
+.copy-btn:hover,
+.copy-btn:focus-visible {
+  background-color: var(--primary-color);
+  transform: translateY(-2px);
+  color: var(--cta-text-color);
+}
+
 /* Press card styles */
 .press-card {
   display: flex;
