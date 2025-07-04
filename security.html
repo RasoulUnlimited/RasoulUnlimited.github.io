@@ -397,7 +397,11 @@ frame-ancestors 'self';</code></pre>
                 placeholder="جستجو در رویدادها"
                 autocomplete="off"
               />
+              <button id="clear-timeline-search" type="button" class="refresh-button visually-hidden" aria-label="پاک کردن جستجو">
+                پاک کردن
+              </button>
             </div>
+            <p id="timeline-no-results" class="hidden" role="status" aria-live="polite">هیچ رویدادی یافت نشد.</p>
             <ul id="security-timeline-list" class="timeline" aria-label="رویدادهای مهم امنیتی" aria-live="polite" aria-busy="true">
               <li>
                 <div class="timeline-content">
@@ -500,6 +504,9 @@ frame-ancestors 'self';</code></pre>
                 <a href="/en/security.html" class="cta-button"
                   >English version</a
                 >
+              </p>
+              <p>
+                <button id="share-page" type="button" class="cta-button" aria-label="اشتراک‌گذاری این صفحه">اشتراک‌گذاری صفحه</button>
               </p>
               <p class="last-updated-info">
                 آخرین به‌روزرسانی صفحه:

@@ -262,6 +262,9 @@
 
       const timelineList = document.getElementById("security-timeline-list");
       const timelineSearch = document.getElementById("timeline-search");
+      const clearSearchBtn = document.getElementById("clear-timeline-search");
+      const noResultsEl = document.getElementById("timeline-no-results");
+      let timelineData = [];
       if (timelineList) {
         cachedFetch(
           "/assets/data/security-timeline.json",
@@ -270,35 +273,64 @@
           (res) => res.json()
         )
           .then((events) => {
+            timelineData = events;
             renderTimeline(events);
             timelineList.setAttribute("aria-busy", "false");
             initializeTimeline();
-            if (timelineSearch) {
-              timelineSearch.addEventListener("input", () => {
-                const q = timelineSearch.value.trim().toLowerCase();
-                timelineList.querySelectorAll("li").forEach((li) => {
-                  const text = li.textContent.toLowerCase();
-                  li.style.display = text.includes(q) ? "" : "none";
-                });
-              });
-            }
+            setupTimelineSearch();
           })
           .catch(() => {
-            renderTimeline(DEFAULT_TIMELINE);
+            timelineData = DEFAULT_TIMELINE;
+            renderTimeline(timelineData);
             timelineList.setAttribute("aria-busy", "false");
             initializeTimeline();
-            if (timelineSearch) {
-              timelineSearch.addEventListener("input", () => {
-                const q = timelineSearch.value.trim().toLowerCase();
-                timelineList.querySelectorAll("li").forEach((li) => {
-                  const text = li.textContent.toLowerCase();
-                  li.style.display = text.includes(q) ? "" : "none";
-                });
-              });
-            }
+            setupTimelineSearch();
           });
       } else {
         initializeTimeline();
+      }
+
+      function setupTimelineSearch() {
+        if (!timelineSearch) return;
+        function filterList(term) {
+          const q = term.trim().toLowerCase();
+          const reg = new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "gi");
+          let count = 0;
+          timelineList.querySelectorAll("li").forEach((li) => {
+            const contentEl = li.querySelector(".timeline-content");
+            if (!contentEl) return;
+            if (!li.dataset.orig) li.dataset.orig = contentEl.innerHTML;
+            const text = li.textContent.toLowerCase();
+            const match = q && text.includes(q);
+            li.style.display = match || !q ? "" : "none";
+            if (match) {
+              count++;
+              contentEl.innerHTML = li.dataset.orig.replace(reg, '<span class="search-highlight">$1</span>');
+            } else {
+              contentEl.innerHTML = li.dataset.orig;
+            }
+          });
+          if (clearSearchBtn) clearSearchBtn.classList.toggle("visually-hidden", !q);
+          if (noResultsEl) {
+            noResultsEl.classList.toggle("hidden", count !== 0);
+            noResultsEl.classList.toggle("visible", count === 0);
+          }
+        }
+
+        let debounceTimer;
+        timelineSearch.addEventListener("input", () => {
+          const term = timelineSearch.value;
+          clearTimeout(debounceTimer);
+          debounceTimer = setTimeout(() => filterList(term), 200);
+        });
+
+        clearSearchBtn && clearSearchBtn.addEventListener("click", () => {
+          timelineSearch.value = "";
+          clearSearchBtn.classList.add("visually-hidden");
+          filterList("");
+        });
+
+        filterList("");
       }
 
       function initializeTimeline() {
@@ -453,6 +485,19 @@
 
       if (advisoriesList) {
         loadAdvisories();
+      }
+
+      const shareBtn = document.getElementById("share-page");
+      if (shareBtn) {
+        shareBtn.addEventListener("click", () => {
+          if (navigator.share) {
+            navigator
+              .share({ title: document.title, url: location.href })
+              .catch(() => copyTextToClipboard(location.href));
+          } else {
+            copyTextToClipboard(location.href);
+          }
+        });
       }
   }});
 })();
