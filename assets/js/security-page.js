@@ -80,6 +80,7 @@
     }
     const storage = getStorage();
     const TIMELINE_SEARCH_KEY = "timeline-search-term";
+    const TIMELINE_YEAR_KEY = "timeline-year";
 
     let refreshTimelineBtn;
     let refreshAdvisoriesBtn;
@@ -197,6 +198,10 @@
       window.addEventListener("online", () => {
         updateConnection();
         if (typeof createToast === "function") createToast(messages.online);
+        loadTimeline(true);
+        loadAdvisories(true);
+        loadPolicyExpiration(true);
+        loadLastUpdated(true);
       });
       window.addEventListener("offline", () => {
         updateConnection();
@@ -266,6 +271,7 @@
           .forEach((ev) => {
           const li = document.createElement("li");
           li.dataset.aos = "fade-up";
+          li.dataset.date = ev.date;
           li.tabIndex = 0;
           li.setAttribute("role", "listitem");
 
@@ -305,6 +311,7 @@
 
       const timelineList = document.getElementById("security-timeline-list");
       const timelineSearch = document.getElementById("timeline-search");
+      const yearFilter = document.getElementById("timeline-year");
       const clearSearchBtn = document.getElementById("clear-timeline-search");
       refreshTimelineBtn = document.getElementById("refresh-timeline");
       const sortBtn = document.getElementById("sort-timeline");
@@ -345,6 +352,18 @@
         )
           .then((events) => {
             timelineData = events;
+            if (yearFilter) {
+              const years = Array.from(
+                new Set(events.map((ev) => new Date(ev.date).getFullYear()))
+              ).sort((a, b) => b - a);
+              yearFilter.innerHTML =
+                `<option value="">` +
+                (lang.startsWith("fa") ? "همه سال‌ها" : "All years") +
+                `</option>` +
+                years.map((y) => `<option value="${y}">${y}</option>`).join("");
+              const savedYear = storage ? storage.getItem(TIMELINE_YEAR_KEY) || "" : "";
+              yearFilter.value = savedYear;
+            }
             renderTimeline(events);
             timelineList.setAttribute("aria-busy", "false");
             initializeTimeline();
@@ -387,6 +406,10 @@
           if (storage) {
             try { storage.setItem(TIMELINE_SEARCH_KEY, term); } catch (e) {}
           }
+          const yearVal = yearFilter ? yearFilter.value : "";
+          if (storage && yearFilter) {
+            try { storage.setItem(TIMELINE_YEAR_KEY, yearVal); } catch (e) {}
+          }
           const reg = new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "gi");
           let count = 0;
           timelineList.querySelectorAll("li").forEach((li) => {
@@ -395,8 +418,9 @@
             if (!li.dataset.orig) li.dataset.orig = contentEl.innerHTML;
             const text = normalizeText(li.textContent);
             const match = q && text.includes(q);
-            li.style.display = match || !q ? "" : "none";
-            if (match) {
+            const matchYear = !yearVal || (li.dataset.date || "").startsWith(yearVal);
+            li.style.display = (match || !q) && matchYear ? "" : "none";
+            if (match && matchYear) {
               count++;
               contentEl.innerHTML = li.dataset.orig.replace(reg, '<span class="search-highlight">$1</span>');
             } else {
@@ -445,6 +469,11 @@
         const saved = storage ? storage.getItem(TIMELINE_SEARCH_KEY) || "" : "";
         if (saved) {
           timelineSearch.value = saved;
+        }
+        if (yearFilter) {
+          const savedYear = storage ? storage.getItem(TIMELINE_YEAR_KEY) || "" : "";
+          if (savedYear) yearFilter.value = savedYear;
+          yearFilter.addEventListener("change", () => filterList(timelineSearch.value));
         }
         filterList(saved);
         searchInitialized = true;
@@ -512,7 +541,11 @@
         }
       }
 
-      if (expirationEl) {
+      function loadPolicyExpiration(force = false) {
+        if (!expirationEl) return;
+        if (force && storage) {
+          try { storage.removeItem("security-txt"); } catch (e) {}
+        }
         cachedFetch(
           "/.well-known/security.txt",
           "security-txt",
@@ -547,6 +580,9 @@
             }
           });
       }
+      if (expirationEl) {
+        loadPolicyExpiration();
+      }
 
       const domainEl = document.getElementById("scope-domain");
       if (domainEl) {
@@ -554,7 +590,12 @@
       }
 
       const lastUpdatedEl = document.getElementById("last-updated-date");
-      if (lastUpdatedEl) {
+
+      function loadLastUpdated(force = false) {
+        if (!lastUpdatedEl) return;
+        if (force && storage) {
+          try { storage.removeItem("security-last"); } catch (e) {}
+        }
         const apiUrl =
           "https://api.github.com/repos/RasoulUnlimited/RasoulUnlimited.github.io/commits?path=security.html&page=1&per_page=1";
         cachedFetch(apiUrl, "security-last", DAY_MS, (res) => res.json())
@@ -576,6 +617,10 @@
               createToast(msg);
             }
           });
+      }
+
+      if (lastUpdatedEl) {
+        loadLastUpdated();
       }
 
       const advisoriesList = document.getElementById("advisories-list");
@@ -661,7 +706,7 @@
           updateSortButton();
           renderTimeline(timelineData);
           initializeTimeline();
-          if (timelineSearch && timelineSearch.value) {
+          if (timelineSearch) {
             timelineSearch.dispatchEvent(new Event("input"));
           }
         });

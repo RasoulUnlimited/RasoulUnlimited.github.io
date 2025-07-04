@@ -1,37 +1,39 @@
 /* Modern minimalist redesign for Security page */
 
 body.security-page {
-    --primary-color: #1d4ed8;
-    --accent-color: #2563eb;
-    --background-start-color: #ffffff;
-    --background-end-color: #f8fafc;
-    --text-color: #374151;
-    --heading-color: #111827;
-    font-family: var(--base-font-family, 'Roboto', sans-serif);
-    color: var(--text-color);
-  }
-  
-  body.security-page #hero {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: var(--space-lg);
-    background: linear-gradient(to bottom, var(--background-start-color), var(--background-end-color));
-    padding: var(--space-xxl) var(--space-lg);
-  }
-  
-  @media (min-width: 768px) {
-  
+  --primary-color: #1d4ed8;
+  --accent-color: #2563eb;
+  --background-start-color: #ffffff;
+  --background-end-color: #f8fafc;
+  --text-color: #374151;
+  --heading-color: #111827;
+  font-family: var(--base-font-family, "Roboto", sans-serif);
+  color: var(--text-color);
+}
+
+body.security-page #hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-lg);
+  background: linear-gradient(
+    to bottom,
+    var(--background-start-color),
+    var(--background-end-color)
+  );
+  padding: var(--space-xxl) var(--space-lg);
+}
+
+@media (min-width: 768px) {
   body.security-page #hero {
     flex-direction: row-reverse;
     text-align: right;
   }
-  
+
   body.security-page #hero .profile-image {
     margin-right: var(--space-xl);
   }
-  
 }
 
 body.security-page .hero-text {
@@ -42,55 +44,64 @@ body.security-page .hero-text {
   body.security-page .hero-text {
     margin-left: auto;
   }
-  
-  body.security-page .hero-links .cta-button {
-    padding: var(--space-sm) var(--space-lg);
-  }}
 
-  body.security-page .hero-title {
-    font-size: clamp(2rem, 6vw, 3rem);
-    margin-bottom: var(--space-sm);
-  }
-  
-  body.security-page .tagline {
-    font-size: clamp(1rem, 3vw, 1.3rem);
-    margin-bottom: var(--space-lg);
-  }
-  
-  body.security-page .profile-image {
-    border-width: 4px;
-    border-color: var(--primary-color);
-    border-radius: var(--border-radius-full);
-  }
-  
-  body.security-page .policy-container {
-    max-width: 860px;
-    margin: var(--space-xl) auto;
-    padding: var(--space-xl);
-    background: var(--card-bg);
-    border-radius: var(--border-radius-lg);
-    box-shadow: 0 8px 32px var(--shadow-color-light);
-  }
-  
-  body.security-page .security-section {
-    margin-top: var(--space-xxl);
-    margin-bottom: var(--space-xxl);
-    line-height: 1.8;
-  }
-  
-  body.security-page .security-section h2 {
-    margin-top: 0;
-    font-size: 1.5rem;
-    color: var(--heading-color);
-  }
-  
   body.security-page .hero-links .cta-button {
     padding: var(--space-sm) var(--space-lg);
   }
-  
-  body.security-page .timeline-search-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-sm);
-    margin-bottom: var(--space-md);
-  }
+}
+
+body.security-page .hero-title {
+  font-size: clamp(2rem, 6vw, 3rem);
+  margin-bottom: var(--space-sm);
+}
+
+body.security-page .tagline {
+  font-size: clamp(1rem, 3vw, 1.3rem);
+  margin-bottom: var(--space-lg);
+}
+
+body.security-page .profile-image {
+  border-width: 4px;
+  border-color: var(--primary-color);
+  border-radius: var(--border-radius-full);
+}
+
+body.security-page .policy-container {
+  max-width: 860px;
+  margin: var(--space-xl) auto;
+  padding: var(--space-xl);
+  background: var(--card-bg);
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 8px 32px var(--shadow-color-light);
+}
+
+body.security-page .security-section {
+  margin-top: var(--space-xxl);
+  margin-bottom: var(--space-xxl);
+  line-height: 1.8;
+}
+
+body.security-page .security-section h2 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  color: var(--heading-color);
+}
+
+body.security-page .hero-links .cta-button {
+  padding: var(--space-sm) var(--space-lg);
+}
+
+body.security-page .timeline-search-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+body.security-page .timeline-year-filter {
+  padding: var(--space-xs) var(--space-sm);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  background-color: var(--container-bg);
+  color: var(--text-color);
+}
