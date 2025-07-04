@@ -9,7 +9,10 @@
       offline: lang.startsWith("fa") ? "شما آفلاین هستید." : "You are offline.",
       online: lang.startsWith("fa") ? "اتصال برقرار شد." : "Back online.",
       refreshed: lang.startsWith("fa") ? "بروزرسانی شد! ✅" : "Updated! ✅",
-      fetchFail: lang.startsWith("fa") ? "خطا در بارگیری داده." : "Failed to load data."
+      fetchFail: lang.startsWith("fa") ? "خطا در بارگیری داده." : "Failed to load data.",
+      rateLimit: lang.startsWith("fa")
+        ? "محدودیت نرخ GitHub فعال شده است."
+        : "GitHub rate limit exceeded."
     };
 
     const DAY_MS = 86400000;
@@ -94,6 +97,9 @@
       const res = await fetch(url, { signal: controller.signal, cache: "no-store" });
       clearTimeout(timer);
       if (!res.ok) {
+        if (res.status === 403 && res.headers.get("X-RateLimit-Remaining") === "0") {
+          throw new Error("rate-limit");
+        }
         if (cached) return cached.d;
         throw new Error(res.statusText || "fetch error");
       }
@@ -319,9 +325,13 @@
       }
       updateSortButton();
 
-      function loadTimeline(force = false) {
+      function loadTimeline(force = false, btn = null) {
         if (!timelineList) return;
         timelineList.innerHTML = "";
+        if (btn) {
+          btn.classList.add("loading");
+          btn.setAttribute("aria-busy", "true");
+        }
         const key = "security-timeline";
         if (force && storage) {
           try { storage.removeItem(key); } catch (e) {}
@@ -344,15 +354,22 @@
           })
           .catch((err) => {
             if (typeof createToast === "function") {
-              createToast(
-                err && err.message === "offline" ? messages.offline : messages.fetchFail
-              );
+              let msg = messages.fetchFail;
+              if (err && err.message === "offline") msg = messages.offline;
+              else if (err && err.message === "rate-limit") msg = messages.rateLimit;
+              createToast(msg);
             }
             timelineData = DEFAULT_TIMELINE;
             renderTimeline(timelineData);
             timelineList.setAttribute("aria-busy", "false");
             initializeTimeline();
             setupTimelineSearch();
+          })
+          .finally(() => {
+            if (btn) {
+              btn.classList.remove("loading");
+              btn.removeAttribute("aria-busy");
+            }
           });
       }
 
@@ -547,15 +564,26 @@
               lastUpdatedEl.textContent = rel ? `${dateStr} (${rel})` : dateStr;
             }
           })
-          .catch(() => {});
+          .catch((err) => {
+            if (typeof createToast === "function") {
+              let msg = messages.fetchFail;
+              if (err && err.message === "offline") msg = messages.offline;
+              else if (err && err.message === "rate-limit") msg = messages.rateLimit;
+              createToast(msg);
+            }
+          });
       }
 
       const advisoriesList = document.getElementById("advisories-list");
       refreshAdvisoriesBtn = document.getElementById("refresh-advisories");
 
-      function loadAdvisories(force = false) {
+      function loadAdvisories(force = false, btn = null) {
         if (!advisoriesList) return;
         advisoriesList.innerHTML = "";
+        if (btn) {
+          btn.classList.add("loading");
+          btn.setAttribute("aria-busy", "true");
+        }
         const advUrl =
           "https://api.github.com/repos/RasoulUnlimited/RasoulUnlimited.github.io/security-advisories?per_page=3";
         const key = "security-advisories";
@@ -594,19 +622,30 @@
               ? "خطا در دریافت اعلان‌ها."
               : "Failed to load advisories.";
             if (typeof createToast === "function") {
-              createToast(
-                err && err.message === "offline" ? messages.offline : messages.fetchFail
-              );
+              let msg = messages.fetchFail;
+              if (err && err.message === "offline") msg = messages.offline;
+              else if (err && err.message === "rate-limit") msg = messages.rateLimit;
+              createToast(msg);
+            }
+          })
+          .finally(() => {
+            if (btn) {
+              btn.classList.remove("loading");
+              btn.removeAttribute("aria-busy");
             }
           });
       }
 
       if (refreshAdvisoriesBtn) {
-        refreshAdvisoriesBtn.addEventListener("click", () => loadAdvisories(true));
+        refreshAdvisoriesBtn.addEventListener("click", () =>
+          loadAdvisories(true, refreshAdvisoriesBtn)
+        );
       }
 
       if (refreshTimelineBtn) {
-        refreshTimelineBtn.addEventListener("click", () => loadTimeline(true));
+        refreshTimelineBtn.addEventListener("click", () =>
+          loadTimeline(true, refreshTimelineBtn)
+        );
       }
 
       if (sortBtn) {
@@ -626,7 +665,12 @@
       }
 
       if (advisoriesList) {
-        loadAdvisories();
+        const idleLoad = () => loadAdvisories();
+        if ("requestIdleCallback" in window) {
+          requestIdleCallback(idleLoad, { timeout: 2000 });
+        } else {
+          setTimeout(idleLoad, 1000);
+        }
       }
 
 
@@ -643,6 +687,21 @@
           ) {
             e.preventDefault();
             timelineSearch.focus();
+          }
+        });
+        document.addEventListener("keydown", (e) => {
+          const activeTag = document.activeElement.tagName.toLowerCase();
+          if (
+            (e.key === "r" || e.key === "R") &&
+            activeTag !== "input" &&
+            activeTag !== "textarea" &&
+            !e.ctrlKey &&
+            !e.metaKey &&
+            !e.altKey
+          ) {
+            e.preventDefault();
+            loadTimeline(true);
+            loadAdvisories(true);
           }
         });
       }
