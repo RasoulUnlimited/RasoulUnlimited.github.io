@@ -8,7 +8,8 @@
       unsupported: lang.startsWith("fa") ? "مرورگر از کپی پشتیبانی نمی‌کند." : "Your browser does not support copying.",
       offline: lang.startsWith("fa") ? "شما آفلاین هستید." : "You are offline.",
       online: lang.startsWith("fa") ? "اتصال برقرار شد." : "Back online.",
-      refreshed: lang.startsWith("fa") ? "بروزرسانی شد! ✅" : "Updated! ✅"
+      refreshed: lang.startsWith("fa") ? "بروزرسانی شد! ✅" : "Updated! ✅",
+      fetchFail: lang.startsWith("fa") ? "خطا در بارگیری داده." : "Failed to load data."
     };
 
     const DAY_MS = 86400000;
@@ -318,7 +319,12 @@
               createToast(messages.refreshed);
             }
           })
-          .catch(() => {
+          .catch((err) => {
+            if (typeof createToast === "function") {
+              createToast(
+                err && err.message === "offline" ? messages.offline : messages.fetchFail
+              );
+            }
             timelineData = DEFAULT_TIMELINE;
             renderTimeline(timelineData);
             timelineList.setAttribute("aria-busy", "false");
@@ -411,6 +417,43 @@
       const expirationEl = document.getElementById("policy-expiration");
       const progressEl = document.getElementById("policy-expiration-progress");
       const daysTextEl = document.getElementById("expiration-days");
+      let expireDate = null;
+
+      function updateExpirationDisplay() {
+        if (!expireDate) return;
+        const now = new Date();
+        const diffDays = (expireDate - now) / DAY_MS;
+        let daysLabel = "";
+        if (progressEl) {
+          const totalDays = 365;
+          const percent = Math.min(
+            100,
+            Math.max(0, ((totalDays - diffDays) / totalDays) * 100)
+          );
+          progressEl.value = percent;
+          progressEl.removeAttribute("aria-hidden");
+          progressEl.setAttribute("aria-valuenow", percent.toFixed(0));
+          daysLabel = lang.startsWith("fa")
+            ? `${Math.ceil(diffDays)} روز باقیمانده`
+            : `${Math.ceil(diffDays)} days remaining`;
+          progressEl.setAttribute("aria-valuetext", daysLabel);
+        }
+        if (daysTextEl) {
+          daysTextEl.textContent = daysLabel;
+          daysTextEl.classList.remove("hidden");
+          daysTextEl.setAttribute("aria-hidden", "false");
+        }
+        expirationEl.classList.remove("expired", "expiring");
+        progressEl && progressEl.classList.remove("expired", "expiring");
+        if (diffDays <= 0) {
+          expirationEl.classList.add("expired");
+          progressEl && progressEl.classList.add("expired");
+        } else if (diffDays <= 30) {
+          expirationEl.classList.add("expiring");
+          progressEl && progressEl.classList.add("expiring");
+        }
+      }
+
       if (expirationEl) {
         cachedFetch(
           "/.well-known/security.txt",
@@ -421,42 +464,15 @@
           .then((text) => {
             const match = text.match(/^Expires:\s*(.+)$/m);
             if (match) {
-              const expireDate = new Date(match[1].trim());
+              expireDate = new Date(match[1].trim());
               const locale = lang.startsWith("fa") ? "fa-IR" : "en-US";
               const opts = { year: "numeric", month: "long", day: "numeric" };
               const label = lang.startsWith("fa")
                 ? `اعتبار سیاست تا ${expireDate.toLocaleDateString(locale, opts)}`
                 : `Policy valid until ${expireDate.toLocaleDateString(locale, opts)}`;
               expirationEl.textContent = label;
-              const now = new Date();
-              const diffDays = (expireDate - now) / (1000 * 60 * 60 * 24);
-              let daysLabel = "";
-              if (progressEl) {
-                const totalDays = 365;
-                const percent = Math.min(
-                  100,
-                  Math.max(0, ((totalDays - diffDays) / totalDays) * 100)
-                );
-                progressEl.value = percent;
-                progressEl.removeAttribute("aria-hidden");
-                progressEl.setAttribute("aria-valuenow", percent.toFixed(0));
-                daysLabel = lang.startsWith("fa")
-                  ? `${Math.ceil(diffDays)} روز باقیمانده`
-                  : `${Math.ceil(diffDays)} days remaining`;
-                progressEl.setAttribute("aria-valuetext", daysLabel);
-              }
-              if (daysTextEl) {
-                daysTextEl.textContent = daysLabel;
-                daysTextEl.classList.remove("hidden");
-                daysTextEl.setAttribute("aria-hidden", "false");
-              }
-              if (diffDays <= 0) {
-                expirationEl.classList.add("expired");
-                progressEl && progressEl.classList.add("expired");
-              } else if (diffDays <= 30) {
-                expirationEl.classList.add("expiring");
-                progressEl && progressEl.classList.add("expiring");
-              }
+              updateExpirationDisplay();
+              setInterval(updateExpirationDisplay, 3600000);
             } else {
               expirationEl.textContent = lang.startsWith("fa")
                 ? "تاریخ اعتبار در دسترس نیست."
@@ -536,10 +552,15 @@
                 : "No advisories found.";
             }
           })
-          .catch(() => {
+          .catch((err) => {
             advisoriesList.textContent = lang.startsWith("fa")
               ? "خطا در دریافت اعلان‌ها."
               : "Failed to load advisories.";
+            if (typeof createToast === "function") {
+              createToast(
+                err && err.message === "offline" ? messages.offline : messages.fetchFail
+              );
+            }
           });
       }
 

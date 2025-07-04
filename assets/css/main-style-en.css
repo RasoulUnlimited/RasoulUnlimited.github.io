@@ -2543,7 +2543,8 @@ section h2::after {
   .tagline {
     font-size: 1.1rem;
   }
-  .policy-container {
+  .policy-container,
+  .security-section {
     padding: var(--space-md);
   }
   .security-code-block {

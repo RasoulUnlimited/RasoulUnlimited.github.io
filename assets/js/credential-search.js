@@ -22,6 +22,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let debounceTimer;
 
+  const normalizeText = (str) =>
+    (str || "")
+      .normalize("NFC")
+      .replace(/[ي]/g, "ی")
+      .replace(/[ك]/g, "ک")
+      .replace(/[\u064B-\u065F\u0670]/g, "")
+      .replace(/‌/g, "");
+
   const escapeRegExp = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
   cards.forEach((card) => {
@@ -55,22 +63,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const filterCards = (term) => {
     const searchTerm = term !== undefined ? term : searchInput.value.trim();
-    const searchLower = searchTerm.toLowerCase();
+    const searchNormalized = normalizeText(searchTerm).toLowerCase();
     let visibleCount = 0;
 
     cards.forEach((card) => {
       const nameEl = card.querySelector("h3");
       const summaryEl = card.querySelector(".credential-summary");
-      const keywords = card.dataset.keywords
-        ? card.dataset.keywords.toLowerCase()
+      const keywords = normalizeText(card.dataset.keywords || "").toLowerCase();
+      const name = nameEl
+        ? normalizeText(nameEl.dataset.original).toLowerCase()
         : "";
-      const name = nameEl ? nameEl.dataset.original.toLowerCase() : "";
-      const summary = summaryEl ? summaryEl.dataset.original.toLowerCase() : "";
+      const summary = summaryEl
+        ? normalizeText(summaryEl.dataset.original).toLowerCase()
+        : "";
 
       if (
-        name.includes(searchLower) ||
-        summary.includes(searchLower) ||
-        keywords.includes(searchLower)
+        name.includes(searchNormalized) ||
+        summary.includes(searchNormalized) ||
+        keywords.includes(searchNormalized)
       ) {
         card.style.display = "grid";
         highlightText(nameEl, searchTerm);
@@ -109,6 +119,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   searchInput.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
+      searchInput.value = "";
+      clearButton.style.display = "none";
+      localStorage.removeItem(STORAGE_KEY);
+      clearTimeout(debounceTimer);
+      filterCards("");
+    } else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "l") {
+      e.preventDefault();
       searchInput.value = "";
       clearButton.style.display = "none";
       localStorage.removeItem(STORAGE_KEY);
@@ -156,6 +173,12 @@ document.addEventListener("DOMContentLoaded", function () {
       e.preventDefault();
       searchInput.focus();
     } else if (e.key === "Escape" && document.activeElement === searchInput) {
+      searchInput.value = "";
+      clearButton.style.display = "none";
+      localStorage.removeItem(STORAGE_KEY);
+      filterCards("");
+    } else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "l") {
+      e.preventDefault();
       searchInput.value = "";
       clearButton.style.display = "none";
       localStorage.removeItem(STORAGE_KEY);

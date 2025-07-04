@@ -3398,6 +3398,9 @@ summary:active,
     padding: 0 var(--space-xs);
     max-width: 100%;
   }
+  .security-code-block {
+    font-size: 0.65rem;
+  }
 }
 
 /* Adjust timeline layout for smaller screens */
