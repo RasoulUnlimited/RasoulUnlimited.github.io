@@ -1,0 +1,53 @@
+/* Modern minimalist redesign for Security page */
+
+body.security-page {
+    --primary-color: #1d4ed8;
+    --accent-color: #2563eb;
+    --background-start-color: #ffffff;
+    --background-end-color: #f8fafc;
+    --text-color: #374151;
+    --heading-color: #111827;
+  }
+  
+  body.security-page #hero {
+    background: none;
+    padding-top: var(--space-xxl);
+    padding-bottom: var(--space-xl);
+  }
+  
+  body.security-page .hero-title {
+    font-size: clamp(2rem, 6vw, 3rem);
+    margin-bottom: var(--space-sm);
+  }
+  
+  body.security-page .tagline {
+    font-size: clamp(1rem, 3vw, 1.3rem);
+    margin-bottom: var(--space-lg);
+  }
+  
+  body.security-page .profile-image {
+    border-width: 4px;
+  }
+  
+  body.security-page .policy-container {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: var(--space-xl);
+    box-shadow: 0 4px 20px var(--shadow-color-light);
+  }
+  
+  body.security-page .security-section {
+    margin-top: var(--space-xxl);
+    margin-bottom: var(--space-xxl);
+    line-height: 1.7;
+  }
+  
+  body.security-page .security-section h2 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    color: var(--heading-color);
+  }
+  
+  body.security-page .hero-links .cta-button {
+    padding: var(--space-sm) var(--space-lg);
+  }
