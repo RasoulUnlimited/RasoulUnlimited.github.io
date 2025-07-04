@@ -2480,3 +2480,28 @@ section h2::after {
     padding: var(--space-md);
   }
 }
+
+@media (max-width: 360px) {
+  .profile-image {
+    width: 80px;
+    height: 80px;
+    border-width: 3px;
+  }
+  h1 {
+    font-size: 1.9rem;
+  }
+  .tagline {
+    font-size: 1rem;
+  }
+  .policy-container,
+  .security-section {
+    padding: var(--space-sm);
+  }
+  .hero-links .cta-button {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.75rem;
+  }
+  .security-code-block {
+    font-size: 0.65rem;
+  }
+}
