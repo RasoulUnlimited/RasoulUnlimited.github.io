@@ -2479,6 +2479,20 @@ section h2::after {
   .policy-container {
     padding: var(--space-md);
   }
+  .security-code-block {
+    overflow-wrap: anywhere;
+  }
+  #scroll-to-top,
+  #share-page-button {
+    width: 40px;
+    height: 40px;
+  }
+  #scroll-to-top {
+    bottom: 60px;
+  }
+  #share-page-button {
+    bottom: 110px;
+  }
 }
 
 @media (max-width: 360px) {

@@ -585,6 +585,14 @@
   padding: 0 2px;
 }
 
+.relative-time,
+.adv-time {
+  display: inline-block;
+  margin-inline-start: 0.25rem;
+  font-size: 0.8rem;
+  color: var(--text-color-light);
+}
+
 @media (prefers-reduced-motion: reduce) {
   [data-aos] {
     opacity: 1 !important;

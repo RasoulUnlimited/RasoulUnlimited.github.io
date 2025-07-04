@@ -270,6 +270,14 @@
                 >
                   <i class="fas fa-copy" aria-hidden="true"></i>
                 </button>
+                <button
+                  class="share-btn"
+                  data-share="https://doi.org/10.5281/zenodo.15548850"
+                  aria-label="اشتراک‌گذاری"
+                  title="اشتراک‌گذاری"
+                >
+                  <i class="fas fa-share-alt" aria-hidden="true"></i>
+                </button>
               </div>
             </div>
             <div
@@ -301,6 +309,14 @@
                   title="کپی DOI"
                 >
                   <i class="fas fa-copy" aria-hidden="true"></i>
+                </button>
+                <button
+                  class="share-btn"
+                  data-share="https://doi.org/10.5281/zenodo.15548860"
+                  aria-label="اشتراک‌گذاری"
+                  title="اشتراک‌گذاری"
+                >
+                  <i class="fas fa-share-alt" aria-hidden="true"></i>
                 </button>
               </div>
             </div>
@@ -336,6 +352,14 @@
                   title="کپی لینک"
                 >
                   <i class="fas fa-copy" aria-hidden="true"></i>
+                </button>
+                <button
+                  class="share-btn"
+                  data-share="https://vrgl.ir/9D6Hy"
+                  aria-label="اشتراک‌گذاری"
+                  title="اشتراک‌گذاری"
+                >
+                  <i class="fas fa-share-alt" aria-hidden="true"></i>
                 </button>
               </div>
             </div>
@@ -378,6 +402,45 @@
             } else if (navigator.clipboard && navigator.clipboard.writeText) {
               try {
                 await navigator.clipboard.writeText(text);
+              } catch (e) {}
+            }
+          });
+        });
+
+        document.querySelectorAll(".share-btn").forEach((btn) => {
+          btn.addEventListener("click", async () => {
+            const url = btn.getAttribute("data-share");
+            if (navigator.share) {
+              try {
+                await navigator.share({ url });
+                if (window.createToast) {
+                  window.createToast("اشتراک‌گذاری موفق بود! ✅", {
+                    id: `share-success-${Date.now()}`,
+                    iconClass: "fas fa-check-circle",
+                    iconColor: "var(--highlight-color)",
+                    duration: 1800,
+                  });
+                }
+              } catch (err) {
+                if (window.copyToClipboard) {
+                  await window.copyToClipboard(
+                    url,
+                    `share-copy-${Date.now()}`,
+                    `share-error-${Date.now()}`,
+                    "لینک کپی شد! ✅"
+                  );
+                }
+              }
+            } else if (window.copyToClipboard) {
+              await window.copyToClipboard(
+                url,
+                `share-copy-${Date.now()}`,
+                `share-error-${Date.now()}`,
+                "لینک کپی شد! ✅"
+              );
+            } else if (navigator.clipboard && navigator.clipboard.writeText) {
+              try {
+                await navigator.clipboard.writeText(url);
               } catch (e) {}
             }
           });

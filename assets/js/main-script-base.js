@@ -36,6 +36,13 @@
     applyTheme(savedTheme);
   } else {
     applyTheme(prefersDark ? "dark" : "light");
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", (e) => {
+        if (!localStorage.getItem("theme")) {
+          applyTheme(e.matches ? "dark" : "light");
+        }
+      });
   }
 
   function initThemeToggle() {

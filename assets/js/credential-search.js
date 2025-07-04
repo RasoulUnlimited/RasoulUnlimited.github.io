@@ -95,6 +95,12 @@ document.addEventListener("DOMContentLoaded", function () {
       recognition.lang = lang.startsWith("fa") ? "fa-IR" : "en-US";
       recognition.interimResults = false;
       voiceButton.addEventListener("click", () => recognition.start());
+      recognition.addEventListener("start", () => {
+        voiceButton.classList.add("listening");
+      });
+      recognition.addEventListener("end", () => {
+        voiceButton.classList.remove("listening");
+      });
       recognition.addEventListener("result", (e) => {
         const transcript = e.results[0][0].transcript.trim();
         searchInput.value = transcript;

@@ -223,13 +223,20 @@
               ✖
             </button>
           </div>
-          <p id="results-info" class="results-info" data-lang="en" aria-live="polite"></p>
-          <div class="credential-grid">
+          <p
+            id="results-info"
+            class="results-info"
+            data-lang="en"
+            aria-live="polite"
+            role="status"
+          ></p>
+          <div class="credential-grid" role="list">
             <div
               class="credential-card"
               itemscope
               itemtype="https://schema.org/CreativeWork"
               data-keywords="C projects zenodo"
+              role="listitem"
             >
               <img
                 src="../assets/images/zenodo-badge.svg"
@@ -254,6 +261,7 @@
               itemscope
               itemtype="https://schema.org/CreativeWork"
               data-keywords="Python projects zenodo"
+              role="listitem"
             >
               <img
                 src="../assets/images/zenodo-badge.svg"
@@ -279,6 +287,7 @@
               itemscope
               itemtype="https://schema.org/CreativeWork"
               data-keywords="Discord certificate bot"
+              role="listitem"
             >
               <img
                 src="../assets/images/certificate-badge.svg"

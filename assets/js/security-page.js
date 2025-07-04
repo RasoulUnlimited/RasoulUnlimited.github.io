@@ -254,6 +254,14 @@
           const dateEl = document.createElement("h3");
           dateEl.className = "date";
           dateEl.innerHTML = `<time datetime="${ev.date}">${ev.date}</time>`;
+          const relTime = formatRelative(new Date(ev.date));
+          if (relTime) {
+            const relSpan = document.createElement("span");
+            relSpan.className = "relative-time";
+            relSpan.textContent = relTime;
+            dateEl.appendChild(document.createTextNode(" "));
+            dateEl.appendChild(relSpan);
+          }
           content.appendChild(dateEl);
 
           const titleEl = document.createElement("h3");
@@ -273,6 +281,7 @@
       const timelineSearch = document.getElementById("timeline-search");
       const clearSearchBtn = document.getElementById("clear-timeline-search");
       const noResultsEl = document.getElementById("timeline-no-results");
+      const resultsCountEl = document.getElementById("timeline-results-count");
       let timelineData = [];
       if (timelineList) {
         cachedFetch(
@@ -323,6 +332,18 @@
           if (noResultsEl) {
             noResultsEl.classList.toggle("hidden", count !== 0);
             noResultsEl.classList.toggle("visible", count === 0);
+          }
+          if (resultsCountEl) {
+            if (q) {
+              resultsCountEl.textContent = lang.startsWith("fa")
+                ? `${count} مورد یافت شد`
+                : `${count} result${count === 1 ? "" : "s"} found`;
+              resultsCountEl.classList.remove("hidden");
+              resultsCountEl.classList.add("visible");
+            } else {
+              resultsCountEl.classList.add("hidden");
+              resultsCountEl.classList.remove("visible");
+            }
           }
         }
 
@@ -473,6 +494,14 @@
                 link.rel = "noopener";
                 link.textContent = adv.summary || adv.ghsa_id || adv.id;
                 li.appendChild(link);
+                const advTime = adv.published_at || adv.created_at;
+                if (advTime) {
+                  const span = document.createElement("span");
+                  span.className = "adv-time";
+                  span.textContent = formatRelative(new Date(advTime));
+                  li.appendChild(document.createTextNode(" "));
+                  li.appendChild(span);
+                }
                 advisoriesList.appendChild(li);
               });
             } else {
