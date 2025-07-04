@@ -11,6 +11,18 @@
     };
 
     const DAY_MS = 86400000;
+    function formatRelative(date) {
+      if (!date || !window.Intl || !Intl.RelativeTimeFormat) return "";
+      const diff = Date.now() - date.getTime();
+      const units = [["year",31536000000],["month",2592000000],["week",604800000],["day",86400000],["hour",3600000],["minute",60000],["second",1000]];
+      for (const [unit, ms] of units) {
+        if (Math.abs(diff) >= ms || unit === "second") {
+          const rtf = new Intl.RelativeTimeFormat(lang.startsWith("fa") ? "fa" : "en", { numeric: "auto" });
+          return rtf.format(-Math.round(diff / ms), unit);
+        }
+      }
+      return "";
+    }
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)");
     function disableMotion() {
       document.querySelectorAll("[data-aos]").forEach((el) => {
@@ -357,12 +369,11 @@
           .then((data) => {
             if (Array.isArray(data) && data.length > 0) {
               const commitDate = new Date(data[0].commit.committer.date);
-              const locale = lang.startsWith("fa") ? "fa-IR" : "en-US";
-              const opts = { year: "numeric", month: "long", day: "numeric" };
-              lastUpdatedEl.textContent = commitDate.toLocaleDateString(
-                locale,
-                opts
-              );
+              const locale = lang.startsWith('fa') ? 'fa-IR' : 'en-US';
+              const opts = { year: 'numeric', month: 'long', day: 'numeric' };
+              const dateStr = commitDate.toLocaleDateString(locale, opts);
+              const rel = formatRelative(commitDate);
+              lastUpdatedEl.textContent = rel ? `${dateStr} (${rel})` : dateStr;
             }
           })
           .catch(() => {});

@@ -13,7 +13,9 @@ const URLS = [
   '/assets/css/main-style-en.min.css',
   '/assets/vendor/aos/aos.min.css',
   '/assets/vendor/aos/aos.min.js',
-  '/assets/images/RasoulUnlimited.webp'
+  '/assets/images/RasoulUnlimited.webp',
+  '/assets/data/security-timeline.json',
+  '/.well-known/security.txt'
 ];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(URLS)));

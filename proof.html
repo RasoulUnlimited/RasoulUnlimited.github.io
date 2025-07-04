@@ -225,11 +225,23 @@
             نهادهای علمی ارجاع شده است و شناسایی طولانی‌مدت پروژه‌های رسول را
             تضمین می‌کند.
           </p>
+          <div class="search-credential-container">
+            <input
+              type="text"
+              id="credential-search"
+              placeholder="جستجوی گواهی‌ها یا DOI"
+              aria-label="جستجوی گواهی‌ها"
+            />
+            <button id="clear-credential-search" aria-label="پاک کردن جستجو">
+              ✖
+            </button>
+          </div>
           <div class="credential-grid">
             <div
               class="credential-card"
               itemscope
               itemtype="https://schema.org/CreativeWork"
+              data-keywords="C projects zenodo"
             >
               <img
                 src="assets/images/zenodo-badge.svg"
@@ -258,6 +270,7 @@
               class="credential-card"
               itemscope
               itemtype="https://schema.org/CreativeWork"
+              data-keywords="Python projects zenodo"
             >
               <img
                 src="assets/images/zenodo-badge.svg"
@@ -289,6 +302,7 @@
               class="credential-card"
               itemscope
               itemtype="https://schema.org/CreativeWork"
+              data-keywords="Discord certificate bot"
             >
               <img
                 src="assets/images/certificate-badge.svg"
@@ -340,6 +354,7 @@
     </noscript>
     <div data-include-html="includes/footer.html"></div>
     <script src="assets/js/include.min.js" defer></script>
+    <script src="assets/js/credential-search.min.js" defer></script>
     <script src="assets/js/main-script-fa.min.js" defer></script>
     <script nonce="RasoulCSP">
       document.addEventListener("DOMContentLoaded", () => {
