@@ -119,6 +119,22 @@
     }
   }
 
+  function loadAOSScript() {
+    if (window.aosLoading || window.AOS) return Promise.resolve();
+    return new Promise((resolve, reject) => {
+      window.aosLoading = true;
+      const s = document.createElement("script");
+      s.src = "/assets/vendor/aos/aos.min.js";
+      s.defer = true;
+      s.onload = () => {
+        window.aosLoading = false;
+        resolve();
+      };
+      s.onerror = reject;
+      document.head.appendChild(s);
+    });
+  }
+
   function handleMotionPreference() {
     if (prefersReducedMotion) {
       document.querySelectorAll("[data-aos]").forEach((el) => {
@@ -129,22 +145,26 @@
         });
         el.classList.remove("aos-init", "aos-animate");
       });
-    } else if (window.AOS && typeof AOS.init === "function") {
-      AOS.init({
-        disable: false,
-        startEvent: "DOMContentLoaded",
-        initClassName: "aos-init",
-        animatedClassName: "aos-animate",
-        useClassNames: false,
-        disableMutationObserver: false,
-        debounceDelay: 50,
-        throttleDelay: 99,
-        offset: 120,
-        duration: 600,
-        easing: "ease-out",
-        once: false,
-        mirror: false,
-        anchorPlacement: "top-bottom",
+    } else {
+      loadAOSScript().then(() => {
+        if (window.AOS && typeof AOS.init === "function") {
+          AOS.init({
+            disable: false,
+            startEvent: "DOMContentLoaded",
+            initClassName: "aos-init",
+            animatedClassName: "aos-animate",
+            useClassNames: false,
+            disableMutationObserver: false,
+            debounceDelay: 50,
+            throttleDelay: 99,
+            offset: 120,
+            duration: 600,
+            easing: "ease-out",
+            once: false,
+            mirror: false,
+            anchorPlacement: "top-bottom",
+          });
+        }
       });
     }
   }
