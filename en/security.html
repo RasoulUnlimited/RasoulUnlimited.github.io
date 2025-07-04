@@ -318,6 +318,17 @@
             aria-labelledby="security-timeline-heading"
           >
             <h2 id="security-timeline-heading">Security Timeline</h2>
+            <div class="timeline-search-container">
+              <label for="timeline-search" class="visually-hidden"
+                >Search events</label
+              >
+              <input
+                type="text"
+                id="timeline-search"
+                placeholder="Search events"
+                autocomplete="off"
+              />
+            </div>
             <ul id="security-timeline-list" class="timeline" aria-label="Key security milestones"></ul>
             <noscript>
               <ul class="timeline" aria-label="Key security milestones">
@@ -374,6 +385,14 @@
               >GitHub Security Advisories</a
             >.
           </p>
+          <button id="refresh-advisories" type="button" class="refresh-button" aria-label="Refresh advisories">
+            Refresh
+          </button>
+          <ul id="advisories-list" class="advisories-list" aria-live="polite">
+            <li class="skeleton-text" style="height:1rem; width: 60%"></li>
+            <li class="skeleton-text" style="height:1rem; width: 70%"></li>
+            <li class="skeleton-text" style="height:1rem; width: 50%"></li>
+          </ul>
         </section>
         <section
           id="navigation"

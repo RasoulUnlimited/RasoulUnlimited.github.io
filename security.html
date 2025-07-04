@@ -387,6 +387,17 @@ frame-ancestors 'self';</code></pre>
             aria-labelledby="security-timeline-heading"
           >
             <h2 id="security-timeline-heading">مسیر امنیتی</h2>
+            <div class="timeline-search-container">
+              <label for="timeline-search" class="visually-hidden"
+                >جستجو در رویدادها</label
+              >
+              <input
+                type="text"
+                id="timeline-search"
+                placeholder="جستجو در رویدادها"
+                autocomplete="off"
+              />
+            </div>
             <ul id="security-timeline-list" class="timeline" aria-label="رویدادهای مهم امنیتی" aria-live="polite" aria-busy="true">
               <li>
                 <div class="timeline-content">
@@ -469,6 +480,9 @@ frame-ancestors 'self';</code></pre>
             >
               منتشر می‌شود.
             </p>
+            <button id="refresh-advisories" type="button" class="refresh-button" aria-label="بروزرسانی اعلان‌ها">
+              بروزرسانی
+            </button>
             <ul id="advisories-list" class="advisories-list" aria-live="polite">
               <li class="skeleton-text" style="height:1rem; width: 60%"></li>
               <li class="skeleton-text" style="height:1rem; width: 70%"></li>

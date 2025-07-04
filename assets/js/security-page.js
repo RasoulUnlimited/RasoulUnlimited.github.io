@@ -58,19 +58,22 @@
     const storage = getStorage();
 
     async function cachedFetch(url, key, ttl, parser, timeout = 5000) {
+      let cached = null;
       if (storage) {
-        try {
-          const cached = JSON.parse(storage.getItem(key) || "null");
-          if (cached && Date.now() - cached.t < ttl) {
-            return cached.d;
-          }
-        } catch (e) {}
+        try { cached = JSON.parse(storage.getItem(key) || "null"); } catch (e) {}
       }
-
+      if (cached && (Date.now() - cached.t < ttl || !navigator.onLine)) {
+        return cached.d;
+      }
+      if (!navigator.onLine) throw new Error("offline");
       const controller = new AbortController();
       const timer = setTimeout(() => controller.abort(), timeout);
       const res = await fetch(url, { signal: controller.signal, cache: "no-store" });
       clearTimeout(timer);
+      if (!res.ok) {
+        if (cached) return cached.d;
+        throw new Error(res.statusText || "fetch error");
+      }
       const data = await parser(res);
       if (storage) {
         try {
@@ -210,6 +213,14 @@
           desc_fa: "به‌روزرسانی‌های امنیتی از طریق GitHub در دسترس قرار گرفت.",
           desc_en: "Security updates now published via GitHub advisories.",
         },
+        {
+          date: "2025-10-01",
+          icon: "fa-wifi",
+          title_fa: "افزودن پشتیبانی آفلاین",
+          title_en: "Offline support added",
+          desc_fa: "بهبود تجربه کاربر با کش محلی و هشدار وضعیت اتصال.",
+          desc_en: "Improved user experience with local caching and connection status alerts.",
+        },
       ];
 
       function renderTimeline(events) {
@@ -250,6 +261,7 @@
       }
 
       const timelineList = document.getElementById("security-timeline-list");
+      const timelineSearch = document.getElementById("timeline-search");
       if (timelineList) {
         cachedFetch(
           "/assets/data/security-timeline.json",
@@ -261,11 +273,29 @@
             renderTimeline(events);
             timelineList.setAttribute("aria-busy", "false");
             initializeTimeline();
+            if (timelineSearch) {
+              timelineSearch.addEventListener("input", () => {
+                const q = timelineSearch.value.trim().toLowerCase();
+                timelineList.querySelectorAll("li").forEach((li) => {
+                  const text = li.textContent.toLowerCase();
+                  li.style.display = text.includes(q) ? "" : "none";
+                });
+              });
+            }
           })
           .catch(() => {
             renderTimeline(DEFAULT_TIMELINE);
             timelineList.setAttribute("aria-busy", "false");
             initializeTimeline();
+            if (timelineSearch) {
+              timelineSearch.addEventListener("input", () => {
+                const q = timelineSearch.value.trim().toLowerCase();
+                timelineList.querySelectorAll("li").forEach((li) => {
+                  const text = li.textContent.toLowerCase();
+                  li.style.display = text.includes(q) ? "" : "none";
+                });
+              });
+            }
           });
       } else {
         initializeTimeline();
@@ -380,11 +410,18 @@
       }
 
       const advisoriesList = document.getElementById("advisories-list");
-      if (advisoriesList) {
+      const refreshAdvisoriesBtn = document.getElementById("refresh-advisories");
+
+      function loadAdvisories(force = false) {
+        if (!advisoriesList) return;
         advisoriesList.innerHTML = "";
         const advUrl =
           "https://api.github.com/repos/RasoulUnlimited/RasoulUnlimited.github.io/security-advisories?per_page=3";
-        cachedFetch(advUrl, "security-advisories", DAY_MS, (res) => res.json())
+        const key = "security-advisories";
+        if (force && storage) {
+          try { storage.removeItem(key); } catch (e) {}
+        }
+        cachedFetch(advUrl, key, DAY_MS, (res) => res.json())
           .then((advs) => {
             if (Array.isArray(advs) && advs.length > 0) {
               advs.forEach((adv) => {
@@ -408,6 +445,14 @@
               ? "خطا در دریافت اعلان‌ها."
               : "Failed to load advisories.";
           });
+      }
+
+      if (refreshAdvisoriesBtn) {
+        refreshAdvisoriesBtn.addEventListener("click", () => loadAdvisories(true));
+      }
+
+      if (advisoriesList) {
+        loadAdvisories();
       }
   }});
 })();

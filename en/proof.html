@@ -223,6 +223,7 @@
               ✖
             </button>
           </div>
+          <p id="results-info" class="results-info" data-lang="en" aria-live="polite"></p>
           <div class="credential-grid">
             <div
               class="credential-card"
@@ -241,9 +242,12 @@
               <p class="credential-summary">
                 Open-source C projects from Tehran Azad University.
               </p>
-              <a itemprop="identifier" href="../projects/c-projects/"
-                >View DOI</a
-              >
+              <div class="card-actions">
+                <a itemprop="identifier" href="../projects/c-projects/">View DOI</a>
+                <button class="copy-btn" data-copy="https://doi.org/10.5281/zenodo.15548850" aria-label="Copy DOI" title="Copy DOI">
+                  <i class="fas fa-copy" aria-hidden="true"></i>
+                </button>
+              </div>
             </div>
             <div
               class="credential-card"
@@ -263,9 +267,12 @@
                 Collection of Python exercises from Sahand University of
                 Technology.
               </p>
-              <a itemprop="identifier" href="../projects/python-projects/"
-                >View DOI</a
-              >
+              <div class="card-actions">
+                <a itemprop="identifier" href="../projects/python-projects/">View DOI</a>
+                <button class="copy-btn" data-copy="https://doi.org/10.5281/zenodo.15548860" aria-label="Copy DOI" title="Copy DOI">
+                  <i class="fas fa-copy" aria-hidden="true"></i>
+                </button>
+              </div>
             </div>
             <div
               class="credential-card"
@@ -284,13 +291,18 @@
               <p class="credential-summary">
                 Official certificate confirming Rasoul's Discord bot.
               </p>
-              <a
-                itemprop="identifier"
-                href="https://vrgl.ir/9D6Hy"
-                target="_blank"
-                rel="noopener noreferrer"
-                >View Certificate</a
-              >
+              <div class="card-actions">
+                <a
+                  itemprop="identifier"
+                  href="https://vrgl.ir/9D6Hy"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >View Certificate</a
+                >
+                <button class="copy-btn" data-copy="https://vrgl.ir/9D6Hy" aria-label="Copy link" title="Copy link">
+                  <i class="fas fa-copy" aria-hidden="true"></i>
+                </button>
+              </div>
             </div>
           </div>
           <p>
@@ -314,6 +326,7 @@
     <div data-include-html="../includes/footer.html"></div>
     <script src="../assets/js/include.min.js" defer></script>
     <script src="../assets/js/credential-search.min.js" defer></script>
+    <script src="../assets/js/credential-reveal.min.js" defer></script>
     <script src="../assets/js/main-script-en.min.js" defer></script>
   </body>
 </html>
