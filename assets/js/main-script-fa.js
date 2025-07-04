@@ -325,6 +325,19 @@
       playSound("toast");
     }, 100);
 
+    function handleEsc(e) {
+      if (e.key === "Escape") {
+        dynamicToast.classList.remove("show");
+        dynamicToast.addEventListener(
+          "transitionend",
+          () => dynamicToast.remove(),
+          { once: true }
+        );
+        document.removeEventListener("keydown", handleEsc);
+      }
+    }
+    document.addEventListener("keydown", handleEsc);
+
     // حذف خودکار
     if (!settings.isPersistent) {
       setTimeout(() => {

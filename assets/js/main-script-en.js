@@ -414,6 +414,19 @@ function createToast(message, options = {}) {
     playSound("toast"); // Play toast sound
   }, 100);
 
+  function handleEsc(e) {
+    if (e.key === "Escape") {
+      dynamicToast.classList.remove("show");
+      dynamicToast.addEventListener(
+        "transitionend",
+        () => dynamicToast.remove(),
+        { once: true }
+      );
+      document.removeEventListener("keydown", handleEsc);
+    }
+  }
+  document.addEventListener("keydown", handleEsc);
+
   // Auto-hide the toast unless it's persistent
   if (!settings.isPersistent) {
     setTimeout(() => {

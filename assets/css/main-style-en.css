@@ -2342,6 +2342,36 @@ section h2::after {
   color: var(--accent-color);
 }
 
+.search-credential-container button#voice-search-btn {
+  position: absolute;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: var(--text-color-light);
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: color 0.2s ease-in-out;
+}
+
+.search-credential-container button#voice-search-btn:hover {
+  color: var(--accent-color);
+}
+
+.search-credential-container button#voice-search-btn.listening {
+  color: var(--primary-color);
+  animation: voice-pulse 1s infinite alternate;
+}
+
+@keyframes voice-pulse {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.2);
+  }
+}
+
 .results-info {
   margin-top: var(--space-sm);
   text-align: center;

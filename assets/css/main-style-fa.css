@@ -3324,6 +3324,7 @@ summary:active,
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  touch-action: manipulation;
 }
 .copy-button:hover {
   background-color: var(--highlight-darker);

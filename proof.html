@@ -226,7 +226,7 @@
             تضمین می‌کند.
           </p>
           <div class="search-credential-container" role="search">
-            <button id="voice-search-btn" aria-label="جستجوی صوتی" aria-pressed="false">
+            <button type="button" id="voice-search-btn" aria-label="جستجوی صوتی" aria-pressed="false">
               <i class="fas fa-microphone" aria-hidden="true"></i>
             </button>
             <input
@@ -237,14 +237,15 @@
               aria-controls="credential-grid"
               autocomplete="off"
             />
-            <button id="clear-credential-search" aria-label="پاک کردن جستجو">
+            <button type="button" id="clear-credential-search" aria-label="پاک کردن جستجو">
               ✖
             </button>
           </div>
-          <p id="results-info" class="results-info" data-lang="fa" aria-live="polite"></p>
-          <div id="credential-grid" class="credential-grid">
+          <p id="results-info" class="results-info" data-lang="fa" aria-live="polite" role="status"></p>
+          <div id="credential-grid" class="credential-grid" role="list">
             <div
               class="credential-card"
+              role="listitem"
               itemscope
               itemtype="https://schema.org/CreativeWork"
               data-keywords="C projects zenodo"
@@ -282,6 +283,7 @@
             </div>
             <div
               class="credential-card"
+              role="listitem"
               itemscope
               itemtype="https://schema.org/CreativeWork"
               data-keywords="Python projects zenodo"
@@ -322,6 +324,7 @@
             </div>
             <div
               class="credential-card"
+              role="listitem"
               itemscope
               itemtype="https://schema.org/CreativeWork"
               data-keywords="Discord certificate bot"

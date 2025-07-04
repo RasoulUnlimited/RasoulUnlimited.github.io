@@ -212,12 +212,17 @@
             archived and cited by academic institutions, ensuring Rasoul's
             projects remain identifiable over time.
           </p>
-          <div class="search-credential-container">
+          <div class="search-credential-container" role="search">
+            <button id="voice-search-btn" aria-label="Voice search" aria-pressed="false">
+              <i class="fas fa-microphone" aria-hidden="true"></i>
+            </button>
             <input
               type="text"
               id="credential-search"
               placeholder="Search credentials or DOI"
               aria-label="Search credentials"
+              aria-controls="credential-grid"
+              autocomplete="off"
             />
             <button id="clear-credential-search" aria-label="Clear search">
               ✖

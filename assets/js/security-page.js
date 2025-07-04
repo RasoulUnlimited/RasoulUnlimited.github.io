@@ -246,7 +246,9 @@
         timelineList.innerHTML = "";
         events
           .slice()
-          .sort((a, b) => new Date(b.date) - new Date(a.date))
+          .sort((a, b) =>
+            sortAsc ? new Date(a.date) - new Date(b.date) : new Date(b.date) - new Date(a.date)
+          )
           .forEach((ev) => {
           const li = document.createElement("li");
           li.dataset.aos = "fade-up";
@@ -291,10 +293,24 @@
       const timelineSearch = document.getElementById("timeline-search");
       const clearSearchBtn = document.getElementById("clear-timeline-search");
       const refreshTimelineBtn = document.getElementById("refresh-timeline");
+      const sortBtn = document.getElementById("sort-timeline");
       const noResultsEl = document.getElementById("timeline-no-results");
       const resultsCountEl = document.getElementById("timeline-results-count");
       let timelineData = [];
       let searchInitialized = false;
+      let sortAsc = storage ? storage.getItem("timeline-sort") === "asc" : false;
+
+      function updateSortButton() {
+        if (!sortBtn) return;
+        sortBtn.textContent = lang.startsWith("fa")
+          ? sortAsc
+            ? "قدیمی‌ترین"
+            : "جدیدترین"
+          : sortAsc
+          ? "Oldest first"
+          : "Newest first";
+      }
+      updateSortButton();
 
       function loadTimeline(force = false) {
         if (!timelineList) return;
@@ -570,6 +586,22 @@
 
       if (refreshTimelineBtn) {
         refreshTimelineBtn.addEventListener("click", () => loadTimeline(true));
+      }
+
+      if (sortBtn) {
+        sortBtn.addEventListener("click", () => {
+          sortAsc = !sortAsc;
+          if (storage) {
+            try { storage.setItem("timeline-sort", sortAsc ? "asc" : "desc"); } catch (e) {}
+          }
+          updateSortButton();
+          renderTimeline(timelineData);
+          initializeTimeline();
+          if (timelineSearch && timelineSearch.value) {
+            timelineSearch.dispatchEvent(new Event("input"));
+          }
+        });
+        updateSortButton();
       }
 
       if (advisoriesList) {

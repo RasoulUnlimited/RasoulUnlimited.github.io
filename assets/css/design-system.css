@@ -501,6 +501,9 @@
   border-radius: var(--border-radius-md);
   padding: var(--space-md);
   overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: anywhere;
   font-size: 0.875rem;
 }
 
