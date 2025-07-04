@@ -3402,6 +3402,14 @@ summary:active,
   .security-code-block {
     font-size: 0.65rem;
   }
+  .refresh-button {
+    padding: var(--space-xs) var(--space-sm);
+    font-size: 0.8rem;
+  }
+  .timeline li {
+    padding-left: calc(var(--space-lg) * 1.5);
+    padding-right: var(--space-sm);
+  }
 }
 
 /* Adjust timeline layout for smaller screens */
@@ -3445,5 +3453,36 @@ summary:active,
   .timeline li:nth-child(even) .timeline-content::after {
     border-color: transparent transparent transparent
       var(--timeline-content-border-color);
+  }
+}
+
+@media (max-width: 480px) {
+  .security-section {
+    padding: var(--space-md);
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-lg);
+  }
+  .timeline li {
+    padding-left: var(--space-xl);
+  }
+  .timeline-icon {
+    width: var(--space-xl);
+    height: var(--space-xl);
+  }
+  .timeline-content h3 {
+    font-size: 1rem;
+  }
+  .timeline-content p {
+    font-size: 0.85rem;
+  }
+}
+@media (max-width: 360px) {
+  .security-section {
+    padding: var(--space-sm);
+    margin-top: var(--space-md);
+    margin-bottom: var(--space-md);
+  }
+  .timeline li {
+    padding-left: calc(var(--space-lg) * 1.5);
   }
 }

@@ -141,13 +141,17 @@ document.addEventListener("DOMContentLoaded", function () {
       const recognition = new SpeechRecognition();
       recognition.lang = lang.startsWith("fa") ? "fa-IR" : "en-US";
       recognition.interimResults = false;
+
       voiceButton.addEventListener("click", () => recognition.start());
+
       recognition.addEventListener("start", () => {
         voiceButton.classList.add("listening");
       });
+
       recognition.addEventListener("end", () => {
         voiceButton.classList.remove("listening");
       });
+
       recognition.addEventListener("result", (e) => {
         const transcript = e.results[0][0].transcript.trim();
         searchInput.value = transcript;
@@ -159,8 +163,33 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         filterCards(transcript);
       });
+
+      recognition.addEventListener("error", () => {
+        window.createToast?.(
+          lang.startsWith("fa")
+            ? "امکان دریافت صدا نیست."
+            : "Voice recognition unavailable.",
+          {
+            id: `voice-error-${Date.now()}`,
+            iconClass: "fas fa-exclamation-triangle",
+            iconColor: "red",
+            duration: 3000,
+          }
+        );
+      });
     } else {
       voiceButton.style.display = "none";
+      window.createToast?.(
+        lang.startsWith("fa")
+          ? "مرورگر شما از جستجوی صوتی پشتیبانی نمی‌کند."
+          : "Voice search isn't supported.",
+        {
+          id: "voice-unsupported",
+          iconClass: "fas fa-exclamation-triangle",
+          iconColor: "red",
+          duration: 3000,
+        }
+      );
     }
   }
 

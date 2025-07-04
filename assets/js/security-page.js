@@ -75,6 +75,10 @@
       }
     }
     const storage = getStorage();
+    const TIMELINE_SEARCH_KEY = "timeline-search-term";
+
+    let refreshTimelineBtn;
+    let refreshAdvisoriesBtn;
 
     async function cachedFetch(url, key, ttl, parser, timeout = 5000) {
       let cached = null;
@@ -179,6 +183,9 @@
             ? "شما آفلاین هستید. برخی قابلیت‌ها غیرفعال است."
             : "You are offline. Some features may be unavailable.";
         document.body.classList.toggle("offline", !online);
+        [refreshTimelineBtn, refreshAdvisoriesBtn].forEach((btn) => {
+          if (btn) btn.disabled = !online;
+        });
       }
       window.addEventListener("online", () => {
         updateConnection();
@@ -292,7 +299,7 @@
       const timelineList = document.getElementById("security-timeline-list");
       const timelineSearch = document.getElementById("timeline-search");
       const clearSearchBtn = document.getElementById("clear-timeline-search");
-      const refreshTimelineBtn = document.getElementById("refresh-timeline");
+      refreshTimelineBtn = document.getElementById("refresh-timeline");
       const sortBtn = document.getElementById("sort-timeline");
       const noResultsEl = document.getElementById("timeline-no-results");
       const resultsCountEl = document.getElementById("timeline-results-count");
@@ -359,6 +366,9 @@
         if (!timelineSearch || searchInitialized) return;
         function filterList(term) {
           const q = normalizeText(term.trim());
+          if (storage) {
+            try { storage.setItem(TIMELINE_SEARCH_KEY, term); } catch (e) {}
+          }
           const reg = new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "gi");
           let count = 0;
           timelineList.querySelectorAll("li").forEach((li) => {
@@ -400,6 +410,13 @@
           clearTimeout(debounceTimer);
           debounceTimer = setTimeout(() => filterList(term), 200);
         });
+        timelineSearch.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") {
+            timelineSearch.value = "";
+            clearSearchBtn && clearSearchBtn.classList.add("visually-hidden");
+            filterList("");
+          }
+        });
 
         clearSearchBtn && clearSearchBtn.addEventListener("click", () => {
           timelineSearch.value = "";
@@ -407,7 +424,11 @@
           filterList("");
         });
 
-        filterList("");
+        const saved = storage ? storage.getItem(TIMELINE_SEARCH_KEY) || "" : "";
+        if (saved) {
+          timelineSearch.value = saved;
+        }
+        filterList(saved);
         searchInitialized = true;
       }
 
@@ -530,7 +551,7 @@
       }
 
       const advisoriesList = document.getElementById("advisories-list");
-      const refreshAdvisoriesBtn = document.getElementById("refresh-advisories");
+      refreshAdvisoriesBtn = document.getElementById("refresh-advisories");
 
       function loadAdvisories(force = false) {
         if (!advisoriesList) return;

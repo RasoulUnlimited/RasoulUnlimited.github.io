@@ -46,5 +46,13 @@
     "title_en": "Offline support added",
     "desc_fa": "بهبود تجربه کاربر با کش محلی و هشدار وضعیت اتصال.",
     "desc_en": "Improved user experience with local caching and connection status alerts."
+  },
+  {
+    "date": "2025-12-01",
+    "icon": "fa-search",
+    "title_fa": "ذخیره جستجو در زمان‌بندی",
+    "title_en": "Timeline search persistence",
+    "desc_fa": "ذخیره واژه جستجو برای مراجعات بعدی کاربر.",
+    "desc_en": "Remembered search terms for returning visitors."
   }
 ]
