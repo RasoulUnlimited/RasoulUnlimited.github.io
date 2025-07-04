@@ -56,6 +56,7 @@
       if (!str) return "";
       const persianDigits = "۰۱۲۳۴۵۶۷۸۹";
       return str
+        .normalize("NFKD")
         .replace(/[۰-۹]/g, (d) => persianDigits.indexOf(d))
         .replace(/[\u064B-\u065F\u0670]/g, "")
         .toLowerCase();
@@ -497,14 +498,17 @@
           daysTextEl.classList.remove("hidden");
           daysTextEl.setAttribute("aria-hidden", "false");
         }
-        expirationEl.classList.remove("expired", "expiring");
-        progressEl && progressEl.classList.remove("expired", "expiring");
+        expirationEl.classList.remove("expired", "expiring", "warning");
+        progressEl && progressEl.classList.remove("expired", "expiring", "warning");
         if (diffDays <= 0) {
           expirationEl.classList.add("expired");
           progressEl && progressEl.classList.add("expired");
         } else if (diffDays <= 30) {
           expirationEl.classList.add("expiring");
           progressEl && progressEl.classList.add("expiring");
+        } else if (diffDays <= 90) {
+          expirationEl.classList.add("warning");
+          progressEl && progressEl.classList.add("warning");
         }
       }
 

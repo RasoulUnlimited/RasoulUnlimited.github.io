@@ -524,6 +524,11 @@
   font-weight: 500;
 }
 
+.policy-expiration.warning {
+  color: var(--highlight-color);
+  font-weight: 500;
+}
+
 .policy-expiration-progress {
   width: 100%;
   height: 6px;
@@ -547,6 +552,10 @@
 .policy-expiration-progress.expiring::-webkit-progress-value,
 .policy-expiration-progress.expiring::-moz-progress-bar {
   background-color: #ff8800;
+}
+.policy-expiration-progress.warning::-webkit-progress-value,
+.policy-expiration-progress.warning::-moz-progress-bar {
+  background-color: var(--highlight-color);
 }
 .policy-expiration-progress.expired::-webkit-progress-value,
 .policy-expiration-progress.expired::-moz-progress-bar {
