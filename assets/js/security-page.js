@@ -7,7 +7,8 @@
       fail: lang.startsWith("fa") ? "عملیات کپی ناموفق بود." : "Failed to copy.",
       unsupported: lang.startsWith("fa") ? "مرورگر از کپی پشتیبانی نمی‌کند." : "Your browser does not support copying.",
       offline: lang.startsWith("fa") ? "شما آفلاین هستید." : "You are offline.",
-      online: lang.startsWith("fa") ? "اتصال برقرار شد." : "Back online."
+      online: lang.startsWith("fa") ? "اتصال برقرار شد." : "Back online.",
+      refreshed: lang.startsWith("fa") ? "بروزرسانی شد! ✅" : "Updated! ✅"
     };
 
     const DAY_MS = 86400000;
@@ -36,6 +37,14 @@
       disableMotion();
     }
     prefersReduced.addEventListener("change", (e) => {
+      if (e.matches) disableMotion();
+    });
+
+    const smallScreen = window.matchMedia("(max-width: 600px)");
+    if (smallScreen.matches) {
+      disableMotion();
+    }
+    smallScreen.addEventListener("change", (e) => {
       if (e.matches) disableMotion();
     });
 
@@ -280,13 +289,22 @@
       const timelineList = document.getElementById("security-timeline-list");
       const timelineSearch = document.getElementById("timeline-search");
       const clearSearchBtn = document.getElementById("clear-timeline-search");
+      const refreshTimelineBtn = document.getElementById("refresh-timeline");
       const noResultsEl = document.getElementById("timeline-no-results");
       const resultsCountEl = document.getElementById("timeline-results-count");
       let timelineData = [];
-      if (timelineList) {
+      let searchInitialized = false;
+
+      function loadTimeline(force = false) {
+        if (!timelineList) return;
+        timelineList.innerHTML = "";
+        const key = "security-timeline";
+        if (force && storage) {
+          try { storage.removeItem(key); } catch (e) {}
+        }
         cachedFetch(
           "/assets/data/security-timeline.json",
-          "security-timeline",
+          key,
           DAY_MS,
           (res) => res.json()
         )
@@ -296,6 +314,9 @@
             timelineList.setAttribute("aria-busy", "false");
             initializeTimeline();
             setupTimelineSearch();
+            if (force && typeof createToast === "function") {
+              createToast(messages.refreshed);
+            }
           })
           .catch(() => {
             timelineData = DEFAULT_TIMELINE;
@@ -304,12 +325,16 @@
             initializeTimeline();
             setupTimelineSearch();
           });
+      }
+
+      if (timelineList) {
+        loadTimeline();
       } else {
         initializeTimeline();
       }
 
       function setupTimelineSearch() {
-        if (!timelineSearch) return;
+        if (!timelineSearch || searchInitialized) return;
         function filterList(term) {
           const q = normalizeText(term.trim());
           const reg = new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "gi");
@@ -361,6 +386,7 @@
         });
 
         filterList("");
+        searchInitialized = true;
       }
 
       function initializeTimeline() {
@@ -519,6 +545,10 @@
 
       if (refreshAdvisoriesBtn) {
         refreshAdvisoriesBtn.addEventListener("click", () => loadAdvisories(true));
+      }
+
+      if (refreshTimelineBtn) {
+        refreshTimelineBtn.addEventListener("click", () => loadTimeline(true));
       }
 
       if (advisoriesList) {

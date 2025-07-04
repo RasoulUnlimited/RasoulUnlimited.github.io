@@ -3399,3 +3399,47 @@ summary:active,
     max-width: 100%;
   }
 }
+
+/* Adjust timeline layout for smaller screens */
+@media (max-width: 768px) {
+  .timeline::after {
+    left: var(--space-lg);
+  }
+  .timeline li {
+    width: 100%;
+    left: 0;
+    padding-left: calc(var(--space-lg) * 2);
+    padding-right: var(--space-md);
+  }
+  .timeline li:nth-child(even),
+  .timeline li:nth-child(odd) {
+    left: 0;
+  }
+  .timeline li::after,
+  .timeline li:nth-child(even)::after {
+    left: var(--space-lg);
+    right: auto;
+  }
+  .timeline li:nth-child(even) .timeline-icon,
+  .timeline li:nth-child(odd) .timeline-icon {
+    left: var(--space-lg);
+    right: auto;
+    transform: translateY(-50%);
+  }
+  .timeline-content::before,
+  .timeline li:nth-child(even) .timeline-content::before,
+  .timeline-content::after,
+  .timeline li:nth-child(even) .timeline-content::after {
+    left: calc(var(--space-lg) * 2 - var(--space-xs));
+    right: auto;
+  }
+  .timeline-content::before,
+  .timeline li:nth-child(even) .timeline-content::before {
+    border-color: transparent transparent transparent var(--card-bg);
+  }
+  .timeline-content::after,
+  .timeline li:nth-child(even) .timeline-content::after {
+    border-color: transparent transparent transparent
+      var(--timeline-content-border-color);
+  }
+}
