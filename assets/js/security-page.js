@@ -629,9 +629,26 @@
         loadAdvisories();
       }
 
-      const shareBtn = document.getElementById("share-page");
-      if (shareBtn) {
-        shareBtn.addEventListener("click", () => {
+
+      if (timelineSearch) {
+        document.addEventListener("keydown", (e) => {
+          const activeTag = document.activeElement.tagName.toLowerCase();
+          if (
+            e.key === "/" &&
+            activeTag !== "input" &&
+            activeTag !== "textarea" &&
+            !e.ctrlKey &&
+            !e.metaKey &&
+            !e.altKey
+          ) {
+            e.preventDefault();
+            timelineSearch.focus();
+          }
+        });
+      }
+
+      document.querySelectorAll("#share-page, #share-page-button").forEach((btn) => {
+        btn.addEventListener("click", () => {
           if (navigator.share) {
             navigator
               .share({ title: document.title, url: location.href })
@@ -639,6 +656,22 @@
           } else {
             copyTextToClipboard(location.href);
           }
+        });
+      });
+
+      const scrollBtn = document.getElementById("scroll-to-top");
+      const floatingShare = document.getElementById("share-page-button");
+
+      function toggleFloatButtons() {
+        const show = window.scrollY > 200;
+        if (scrollBtn) scrollBtn.classList.toggle("visible", show);
+        if (floatingShare) floatingShare.classList.toggle("visible", show);
+      }
+      window.addEventListener("scroll", toggleFloatButtons);
+      toggleFloatButtons();
+      if (scrollBtn) {
+        scrollBtn.addEventListener("click", () => {
+          window.scrollTo({ top: 0, behavior: "smooth" });
         });
       }
   }});

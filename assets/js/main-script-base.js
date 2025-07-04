@@ -16,7 +16,11 @@
     toast.className = "dynamic-toast";
     toast.textContent = message;
     document.body.appendChild(toast);
-    setTimeout(() => toast.remove(), 3000);
+    requestAnimationFrame(() => toast.classList.add("show"));
+    setTimeout(() => {
+      toast.classList.remove("show");
+      toast.remove();
+    }, 3000);
   }
 
   function applyTheme(theme, showToast) {
