@@ -7,14 +7,46 @@ body.security-page {
     --background-end-color: #f8fafc;
     --text-color: #374151;
     --heading-color: #111827;
+    font-family: var(--base-font-family, 'Roboto', sans-serif);
+    color: var(--text-color);
   }
   
   body.security-page #hero {
-    background: none;
-    padding-top: var(--space-xxl);
-    padding-bottom: var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-lg);
+    background: linear-gradient(to bottom, var(--background-start-color), var(--background-end-color));
+    padding: var(--space-xxl) var(--space-lg);
   }
   
+  @media (min-width: 768px) {
+  
+  body.security-page #hero {
+    flex-direction: row-reverse;
+    text-align: right;
+  }
+  
+  body.security-page #hero .profile-image {
+    margin-right: var(--space-xl);
+  }
+  
+}
+
+body.security-page .hero-text {
+  max-width: 600px;
+}
+
+@media (min-width: 768px) {
+  body.security-page .hero-text {
+    margin-left: auto;
+  }
+  
+  body.security-page .hero-links .cta-button {
+    padding: var(--space-sm) var(--space-lg);
+  }}
+
   body.security-page .hero-title {
     font-size: clamp(2rem, 6vw, 3rem);
     margin-bottom: var(--space-sm);
@@ -27,19 +59,23 @@ body.security-page {
   
   body.security-page .profile-image {
     border-width: 4px;
+    border-color: var(--primary-color);
+    border-radius: var(--border-radius-full);
   }
   
   body.security-page .policy-container {
-    max-width: 850px;
-    margin: 0 auto;
+    max-width: 860px;
+    margin: var(--space-xl) auto;
     padding: var(--space-xl);
-    box-shadow: 0 4px 20px var(--shadow-color-light);
+    background: var(--card-bg);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 8px 32px var(--shadow-color-light);
   }
   
   body.security-page .security-section {
     margin-top: var(--space-xxl);
     margin-bottom: var(--space-xxl);
-    line-height: 1.7;
+    line-height: 1.8;
   }
   
   body.security-page .security-section h2 {
@@ -50,4 +86,11 @@ body.security-page {
   
   body.security-page .hero-links .cta-button {
     padding: var(--space-sm) var(--space-lg);
+  }
+  
+  body.security-page .timeline-search-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
   }
