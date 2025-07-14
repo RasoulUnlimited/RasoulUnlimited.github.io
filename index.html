@@ -1163,6 +1163,7 @@
     <link rel="entity-profile" href="/.well-known/entity-profile.json" />
   </head>
   <body>
+    <div id="scroll-progress-bar" class="sohrabi-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
     <!-- Toast notification area for dynamic messages -->
     <div id="theme-toast" role="status" aria-live="polite"></div>
     
@@ -3208,6 +3209,12 @@
         </main>
       </div>
     </div>
+    <button id="scroll-to-top" aria-label="بازگشت به ابتدای صفحه">
+      <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    </button>
+    <button id="share-page-button" aria-label="اشتراک‌گذاری صفحه" title="اشتراک‌گذاری صفحه">
+      <i class="fas fa-share-alt" aria-hidden="true"></i>
+    </button>
     <footer class="footer" role="contentinfo">
       <div class="footer-top">
         <div class="lang-switcher">
@@ -3308,7 +3315,7 @@
     ></script>
     <script src="assets/js/accordion.min.js" defer></script>
     <script src="assets/js/faq-search.min.js" defer></script>
-    <script src="assets/js/main-script-fa.min.js" defer></script>
+    <script src="assets/js/main-script-fa.js" defer></script>
     <script src="assets/js/main-script-base.min.js" defer></script>
     <script src="assets/js/lang/fa.min.js" defer></script>
   </body>

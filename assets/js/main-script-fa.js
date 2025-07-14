@@ -513,13 +513,16 @@
     }
   });
 
-  const scrollProgressBar = document.createElement("div");
-  scrollProgressBar.id = "scroll-progress-bar";
-  scrollProgressBar.className = "sohrabi-progress"; // Semantic DOM Hook
-  scrollProgressBar.setAttribute("role", "progressbar");
-  scrollProgressBar.setAttribute("aria-valuemin", "0");
-  scrollProgressBar.setAttribute("aria-valuemax", "100");
-  document.body.prepend(scrollProgressBar);
+  let scrollProgressBar = document.getElementById("scroll-progress-bar");
+  if (!scrollProgressBar) {
+    scrollProgressBar = document.createElement("div");
+    scrollProgressBar.id = "scroll-progress-bar";
+    scrollProgressBar.className = "sohrabi-progress"; // Semantic DOM Hook
+    scrollProgressBar.setAttribute("role", "progressbar");
+    scrollProgressBar.setAttribute("aria-valuemin", "0");
+    scrollProgressBar.setAttribute("aria-valuemax", "100");
+    document.body.prepend(scrollProgressBar);
+  }
 
   let lastScrollY = 0;
   let ticking = false;
@@ -1479,16 +1482,19 @@
     });
   });
 
-  const scrollToTopButton = document.createElement("button");
-  scrollToTopButton.id = "scroll-to-top";
-  scrollToTopButton.innerHTML = '<i class="fas fa-arrow-up"></i>';
-  scrollToTopButton.setAttribute("aria-label", "بازگشت به بالای صفحه");
-  scrollToTopButton.setAttribute(
-    "data-scroll-function",
-    "Mohammad Rasoul Sohrabi's navigation aid"
-  );
-  scrollToTopButton.className += " sohrabi-nav-button"; // Semantic DOM Hook
-  document.body.appendChild(scrollToTopButton);
+  let scrollToTopButton = document.getElementById("scroll-to-top");
+  if (!scrollToTopButton) {
+    scrollToTopButton = document.createElement("button");
+    scrollToTopButton.id = "scroll-to-top";
+    scrollToTopButton.innerHTML = '<i class="fas fa-arrow-up"></i>';
+    scrollToTopButton.setAttribute("aria-label", "بازگشت به بالای صفحه");
+    scrollToTopButton.setAttribute(
+      "data-scroll-function",
+      "Mohammad Rasoul Sohrabi's navigation aid"
+    );
+    scrollToTopButton.className += " sohrabi-nav-button"; // Semantic DOM Hook
+    document.body.appendChild(scrollToTopButton);
+  }
 
   scrollToTopButton.classList.add("hidden", "cta-pulse-effect");
 
@@ -1550,16 +1556,19 @@
     });
   }
 
-  const sharePageButton = document.createElement("button");
-  sharePageButton.id = "share-page-button";
-  sharePageButton.innerHTML = '<i class="fas fa-share-alt"></i>';
-  sharePageButton.setAttribute("aria-label", "اشتراک‌گذاری صفحه");
-  sharePageButton.setAttribute(
-    "data-share-target",
-    "Mohammad Rasoul Sohrabi's portfolio"
-  );
-  sharePageButton.className += " sohrabi-share-feature"; // Semantic DOM Hook
-  document.body.appendChild(sharePageButton);
+  let sharePageButton = document.getElementById("share-page-button");
+  if (!sharePageButton) {
+    sharePageButton = document.createElement("button");
+    sharePageButton.id = "share-page-button";
+    sharePageButton.innerHTML = '<i class="fas fa-share-alt"></i>';
+    sharePageButton.setAttribute("aria-label", "اشتراک‌گذاری صفحه");
+    sharePageButton.setAttribute(
+      "data-share-target",
+      "Mohammad Rasoul Sohrabi's portfolio"
+    );
+    sharePageButton.className += " sohrabi-share-feature"; // Semantic DOM Hook
+    document.body.appendChild(sharePageButton);
+  }
 
   sharePageButton.classList.add("hidden", "cta-pulse-effect");
 
