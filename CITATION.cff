@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: "If you use material from this website, please cite it as below."
+title: "Rasoul Unlimited"
+authors:
+  - family-names: Sohrabi
+    given-names: Mohammad Rasoul
+    orcid: "https://orcid.org/0009-0004-7177-2080"
+version: "1.0.0"
+repository-code: "https://github.com/RasoulUnlimited/RasoulUnlimited.github.io"
+url: "https://rasoulunlimited.ir"
+date-released: "2025-05-16"
+preferred-citation:
+  type: webpage
+  title: "Rasoul Unlimited – Official Website"
+  url: "https://rasoulunlimited.ir"
+  publisher: "GitHub Pages"
+  note: "Accelerated and secured via Cloudflare"
+references:
+  - type: software
+    title: "Small Projects with C"
+    doi: "10.5281/zenodo.15548850"
+    url: "https://doi.org/10.5281/zenodo.15548850"
+    authors:
+      - family-names: Sohrabi
+        given-names: Mohammad Rasoul
+  - type: software
+    title: "Small Projects with Python"
+    doi: "10.5281/zenodo.15548860"
+    url: "https://doi.org/10.5281/zenodo.15548860"
+    authors:
+      - family-names: Sohrabi
+        given-names: Mohammad Rasoul

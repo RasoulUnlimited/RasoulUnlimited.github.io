@@ -84,6 +84,12 @@
           "propertyID": "ZenodoDOI-Python-Projects",
           "value": "10.5281/zenodo.15548860",
           "url": "https://doi.org/10.5281/zenodo.15548860"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "PGP",
+          "value": "rasoulunlimited_pgp.asc",
+          "url": "https://rasoulunlimited.ir/assets/keys/rasoulunlimited_pgp.asc"
         }
       ],
       "disambiguatingDescription": "محمد رسول سهرابی، معروف به «رسول آنلیمیتد»، دانشجوی مهندسی پزشکی از دانشگاه تهران، توسعه‌دهنده وب خلاق، برنامه‌نویس پایتون و C، و خالق اولین ربات فارسی‌زبان دیسکورد است که رسماً توسط Discord Inc. تأیید شده. او در حوزه‌های سلامت دیجیتال، برندینگ شخصی و پروژه‌های نوآورانه متن‌باز با شناسه‌های علمی DOI فعالیت دارد. او همچنین دارنده دان ۱ رسمی کاراته از فدراسیون جمهوری اسلامی ایران است که نمایانگر نظم و پشتکار اوست.",
@@ -406,6 +412,8 @@
         "https://dev.to/rasoulunlimited",
         "https://t.me/RasoulUnlimited",
         "https://www.youtube.com/@RasoulUnlimited",
+        "https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi",
+        "https://scholar.google.com/citations?user=kDl5eNUAAAAJ",
         "https://rasoulunlimited.ir/en/",
         "https://x.com/rasoulunlimited",
         "https://www.wikidata.org/wiki/Q135116816"
