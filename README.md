@@ -4,6 +4,8 @@
 
 > A modern personal website powered by **GitHub Pages** and **Cloudflare**
 
+[راهنمای فارسی](README-fa.md)
+
 ## Table of Contents
 
 - [Overview](#overview)
@@ -144,6 +146,17 @@ responses are cached for up to 10 minutes.
 - [`humans.txt`](humans.txt) – Project and contact details
 
 Additional identity links: [GitHub](https://github.com/RasoulUnlimited), [ORCID](https://orcid.org/0009-0004-7177-2080), [LinkedIn](https://www.linkedin.com/in/rasoulunlimited).
+
+## Ownership verification
+
+To confirm that the site and its social profiles are officially connected, each
+page includes a series of `rel="me"` links pointing to Rasoul's accounts on
+GitHub, LinkedIn, ORCID and other platforms. These profiles return the favour by
+linking back to `https://rasoulunlimited.ir`, forming a clear loop of ownership.
+The accompanying [FOAF profile](foaf.rdf) lists the same identities in RDF
+format. Reviewers, such as those evaluating an Instagram verification request,
+can check these reciprocal links to validate that the domain is under Rasoul's
+control.
 
 ## Resources
 

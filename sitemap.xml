@@ -376,6 +376,33 @@
             href="https://rasoulunlimited.ir/press-kit/fa/" />
     </url>
     <url>
+        <loc>https://rasoulunlimited.ir/resume.html</loc>
+        <lastmod>2025-07-01</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+        <image:image>
+            <image:loc>https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp</image:loc>
+            <image:caption>تصویر پرترهٔ محمد رسول سهرابی</image:caption>
+            <image:title>محمد رسول سهرابی</image:title>
+        </image:image>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/resume.html" />
+        <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/resume.html" />
+        <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/en/resume.html" />
+    </url>
+    <url>
+        <loc>https://rasoulunlimited.ir/en/resume.html</loc>
+        <lastmod>2025-07-01</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+        <image:image>
+            <image:loc>https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp</image:loc>
+            <image:caption>Portrait of Mohammad Rasoul Sohrabi</image:caption>
+            <image:title>Rasoul Unlimited</image:title>
+        </image:image>
+        <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/resume.html" />
+        <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/en/resume.html" />
+    </url>
+    <url>
         <loc>https://rasoulunlimited.ir/faq/</loc>
         <lastmod>2025-07-01</lastmod>
         <changefreq>yearly</changefreq>

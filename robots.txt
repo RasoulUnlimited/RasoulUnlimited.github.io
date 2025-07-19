@@ -21,6 +21,8 @@ Allow: /contact.html
 Allow: /press-kit/
 Allow: /press-kit/fa/
 Allow: /press.html
+Allow: /resume.html
+Allow: /en/resume.html
 Allow: /about.html
 Allow: /media.html
 Allow: /proof.html

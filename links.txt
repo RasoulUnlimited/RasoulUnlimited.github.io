@@ -9,6 +9,7 @@ FAQ: https://rasoulunlimited.ir/faq/
 Contact: https://rasoulunlimited.ir/contact.html
 Proof & Credentials: https://rasoulunlimited.ir/proof.html
 Press: https://rasoulunlimited.ir/press.html
+Resume: https://rasoulunlimited.ir/resume.html
 Media: https://rasoulunlimited.ir/media.html
 Security Policy: https://rasoulunlimited.ir/security.html
 404 Page: https://rasoulunlimited.ir/404.html
@@ -20,6 +21,7 @@ FAQ (EN): https://rasoulunlimited.ir/en/faq/
 Contact (EN): https://rasoulunlimited.ir/en/contact.html
 Proof & Credentials (EN): https://rasoulunlimited.ir/en/proof.html
 Press (EN): https://rasoulunlimited.ir/en/press.html
+Resume (EN): https://rasoulunlimited.ir/en/resume.html
 Media (EN): https://rasoulunlimited.ir/en/media.html
 Security Policy (EN): https://rasoulunlimited.ir/en/security.html
 

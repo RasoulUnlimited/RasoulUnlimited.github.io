@@ -18,6 +18,61 @@
     {
       "rel": "http://openid.net/specs/connect/1.0/issuer",
       "href": "https://rasoulunlimited.ir/"
+    },
+    {
+      "rel": "me",
+      "type": "text/html",
+      "href": "https://www.instagram.com/Rasoul.Unlimited"
+    },
+    {
+      "rel": "me",
+      "type": "text/html",
+      "href": "https://github.com/RasoulUnlimited"
+    },
+    {
+      "rel": "me",
+      "type": "text/html",
+      "href": "https://www.linkedin.com/in/rasoulunlimited/"
+    },
+    {
+      "rel": "me",
+      "type": "text/html",
+      "href": "https://t.me/RasoulUnlimited"
+    },
+    {
+      "rel": "me",
+      "type": "text/html",
+      "href": "https://www.youtube.com/@RasoulUnlimited"
+    },
+    {
+      "rel": "me",
+      "type": "text/html",
+      "href": "https://about.me/rasoulunlimited"
+    },
+    {
+      "rel": "me",
+      "type": "text/html",
+      "href": "https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi"
+    },
+    {
+      "rel": "me",
+      "type": "text/html",
+      "href": "https://orcid.org/0009-0004-7177-2080"
+    },
+    {
+      "rel": "me",
+      "type": "text/html",
+      "href": "https://mastodon.social/@rasoulunlimited"
+    },
+    {
+      "rel": "me",
+      "type": "text/html",
+      "href": "https://x.com/rasoulunlimited"
+    },
+    {
+      "rel": "me",
+      "type": "text/html",
+      "href": "https://keybase.io/RasoulUnlimited"
     }
   ]
 }
