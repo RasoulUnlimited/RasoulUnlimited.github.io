@@ -176,6 +176,13 @@
 
     <foaf:account>
       <foaf:OnlineAccount>
+        <foaf:accountServiceHomepage rdf:resource="https://scholar.google.com" />
+        <foaf:accountName>kDl5eNUAAAAJ</foaf:accountName>
+        <owl:sameAs rdf:resource="https://scholar.google.com/citations?user=kDl5eNUAAAAJ" />
+      </foaf:OnlineAccount>
+    </foaf:account>
+    <foaf:account>
+      <foaf:OnlineAccount>
         <foaf:accountServiceHomepage rdf:resource="https://x.com" />
         <foaf:accountName>RasoulUnlimited</foaf:accountName>
         <owl:sameAs rdf:resource="https://x.com/rasoulunlimited" />
@@ -194,6 +201,7 @@
     <rdfs:seeAlso rdf:resource="https://orcid.org/0009-0004-7177-2080" />
     <rdfs:seeAlso rdf:resource="https://www.wikidata.org/wiki/Q134619124" />
     <rdfs:seeAlso rdf:resource="https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi" />
+    <rdfs:seeAlso rdf:resource="https://scholar.google.com/citations?user=kDl5eNUAAAAJ" />
     <rdfs:seeAlso rdf:resource="https://rasoulunlimited.ir/manifest.json" />
     <rdfs:seeAlso rdf:resource="https://rasoulunlimited.ir/schema/identity.jsonld" />
     <rdfs:seeAlso rdf:resource="https://github.com/RasoulUnlimited" />

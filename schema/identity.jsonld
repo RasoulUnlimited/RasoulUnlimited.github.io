@@ -45,6 +45,12 @@
         },
         {
           "@type": "PropertyValue",
+          "propertyID": "GoogleScholar",
+          "value": "kDl5eNUAAAAJ",
+          "url": "https://scholar.google.com/citations?user=kDl5eNUAAAAJ"
+        },
+        {
+          "@type": "PropertyValue",
           "propertyID": "GitHub",
           "value": "RasoulUnlimited",
           "url": "https://github.com/RasoulUnlimited"
@@ -149,6 +155,7 @@
         "https://dev.to/rasoulunlimited",
         "https://t.me/RasoulUnlimited",
         "https://orcid.org/0009-0004-7177-2080",
+        "https://scholar.google.com/citations?user=kDl5eNUAAAAJ",
         "https://about.me/rasoulunlimited",
         "https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi",
         "https://www.youtube.com/@RasoulUnlimited",
