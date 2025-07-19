@@ -158,6 +158,11 @@ format. Reviewers, such as those evaluating an Instagram verification request,
 can check these reciprocal links to validate that the domain is under Rasoul's
 control.
 
+The site also exposes a file at [`.well-known/discord`](.well-known/discord) for
+Discord's domain verification. Discord provides a unique token which must be
+served from this path. When you submit the domain to Discord, it fetches the
+file and compares the token to confirm control of `rasoulunlimited.ir`.
+
 ## Resources
 
 For a quick reference to all main pages and social links, see [links.txt](links.txt).
@@ -170,6 +175,8 @@ To keep the history clear and useful, please write descriptive commit messages t
 - Avoid generic subjects like "Update" or "Fix" without context.
 - Limit the summary line to around 50 characters when possible.
 - Include additional details in the body when a change requires more context or explanation.
+
+By participating in this project, you agree to abide by the [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## Questions
 

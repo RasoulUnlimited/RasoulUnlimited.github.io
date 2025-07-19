@@ -2,3 +2,9 @@ The following third-party assets are included in this repository. These assets r
 
 - AOS (Animate On Scroll) library – MIT License
   Source: https://github.com/michalsnik/aos
+- Font Awesome Free 6.0.0 – Font Awesome Free License (CC BY 4.0, SIL OFL 1.1, MIT)
+  Source: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/
+- Google Fonts – Montserrat (SIL OFL 1.1) and Roboto (Apache 2.0)
+  Source: https://fonts.googleapis.com/ and https://fonts.gstatic.com/
+- Giscus Comment System – MIT License
+  Source: https://giscus.app/client.js

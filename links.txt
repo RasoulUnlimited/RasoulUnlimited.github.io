@@ -48,6 +48,7 @@ Entity RDF: https://rasoulunlimited.ir/.well-known/entity.rdf
 Entity Turtle: https://rasoulunlimited.ir/.well-known/entity.ttl
 Keybase Proof: https://rasoulunlimited.ir/.well-known/keybase.txt
 WebFinger: https://rasoulunlimited.ir/.well-known/webfinger.json
+Discord Verification: https://rasoulunlimited.ir/.well-known/discord
 Manifest (FA): https://rasoulunlimited.ir/manifest.json
 Manifest (EN): https://rasoulunlimited.ir/manifest-en.json
 Structured Data (JSON-LD): https://rasoulunlimited.ir/schema/identity.jsonld
