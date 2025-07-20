@@ -4,10 +4,10 @@
       {
         "@type": "Person",
         "@id": "https://rasoulunlimited.ir/#person",
-        "name": "Rasol Unlimited",
+        "name": "Rasoul Unlimited",
         "alternateName": "Rasoul Unlimited",
         "url": "https://rasoulunlimited.ir",
-        "description": "Digital creator and full-stack developer behind the Rasol Unlimited brand.",
+        "description": "Digital creator and full-stack developer behind the Rasoul Unlimited brand.",
         "affiliation": { "@id": "https://rasoulunlimited.ir/#studio" },
         "sameAs": [
           "https://github.com/RasoulUnlimited",
@@ -20,7 +20,7 @@
       {
         "@type": "Organization",
         "@id": "https://rasoulunlimited.ir/#studio",
-        "name": "Rasol Unlimited Creative Studio",
+        "name": "Rasoul Unlimited Creative Studio",
         "url": "https://rasoulunlimited.ir",
         "founder": { "@id": "https://rasoulunlimited.ir/#person" }
       },
@@ -28,7 +28,7 @@
         "@type": "CreativeWork",
         "@id": "https://rasoulunlimited.ir/#featured-work",
         "url": "https://rasoulunlimited.ir/press.html",
-        "headline": "Press and Media Highlights for Rasol Unlimited",
+        "headline": "Press and Media Highlights for Rasoul Unlimited",
         "creator": { "@id": "https://rasoulunlimited.ir/#person" },
         "publisher": { "@id": "https://rasoulunlimited.ir/#studio" }
       },
@@ -36,7 +36,7 @@
         "@type": "ClaimReview",
         "@id": "https://rasoulunlimited.ir/#claimReview",
         "url": "https://rasoulunlimited.ir/press.html",
-        "claimReviewed": "Rasol Unlimited has been recognized by the Tech Innovators Guild and the Digital Creators Association and has appeared in top publications such as The Creators Chronicle, Innovate Magazine and TechVision Online.",
+        "claimReviewed": "Rasoul Unlimited has been recognized by the Tech Innovators Guild and the Digital Creators Association and has appeared in top publications such as The Creators Chronicle, Innovate Magazine and TechVision Online.",
         "itemReviewed": { "@id": "https://rasoulunlimited.ir/#person" },
         "reviewRating": { "@type": "Rating", "ratingValue": 5, "bestRating": 5 },
         "author": { "@type": "Organization", "name": "Global Creative Review Board" },
@@ -44,4 +44,3 @@
       }
     ]
   }
-  
