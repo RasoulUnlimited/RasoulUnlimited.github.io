@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XRD xmlns="http://docs.oasis-open.org/ns/xri/xrd-1.0">
+  <Subject>https://rasoulunlimited.ir/</Subject>
+  <Alias>https://rasoulunlimited.ir/#person</Alias>
+  <Property type="name">Rasol Unlimited</Property>
+  <Link rel="lrdd" type="application/json" template="https://rasoulunlimited.ir/.well-known/webfinger.json?resource={uri}"/>
+  <Link rel="profile-page" href="https://rasoulunlimited.ir/"/>
+  <Link rel="me" href="https://www.instagram.com/Rasoul.Unlimited"/>
+  <Link rel="me" href="https://x.com/rasoulunlimited"/>
+</XRD>

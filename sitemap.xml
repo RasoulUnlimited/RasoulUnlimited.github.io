@@ -243,7 +243,7 @@
         <priority>0.6</priority>
         <image:image>
             <image:loc>https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp</image:loc>
-            <image:caption>تصویر پرترهٔ محمد رسول سهرابی</image:caption>
+            <image:caption>پرترهٔ تاییدشدهٔ محمد رسول سهرابی</image:caption>
             <image:title>محمد رسول سهرابی</image:title>
         </image:image>
         <xhtml:link
@@ -266,7 +266,7 @@
         <priority>0.6</priority>
         <image:image>
             <image:loc>https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp</image:loc>
-            <image:caption>Portrait of Mohammad Rasoul Sohrabi</image:caption>
+            <image:caption>Verified portrait of influential developer Mohammad Rasoul Sohrabi</image:caption>
             <image:title>Rasoul Unlimited</image:title>
         </image:image>
         <xhtml:link
@@ -290,7 +290,7 @@
         <priority>0.6</priority>
         <image:image>
             <image:loc>https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp</image:loc>
-            <image:caption>تصویر پرترهٔ محمد رسول سهرابی</image:caption>
+            <image:caption>پرترهٔ تاییدشدهٔ محمد رسول سهرابی</image:caption>
             <image:title>محمد رسول سهرابی</image:title>
         </image:image>
         <xhtml:link
@@ -313,7 +313,7 @@
         <priority>0.6</priority>
         <image:image>
             <image:loc>https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp</image:loc>
-            <image:caption>Portrait of Mohammad Rasoul Sohrabi</image:caption>
+            <image:caption>Verified portrait of influential developer Mohammad Rasoul Sohrabi</image:caption>
             <image:title>Rasoul Unlimited</image:title>
         </image:image>
         <xhtml:link
@@ -336,7 +336,7 @@
         <priority>0.6</priority>
         <image:image>
             <image:loc>https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp</image:loc>
-            <image:caption>Portrait of Mohammad Rasoul Sohrabi</image:caption>
+            <image:caption>Verified portrait of influential developer Mohammad Rasoul Sohrabi</image:caption>
             <image:title>Rasoul Unlimited</image:title>
         </image:image>
         <xhtml:link
@@ -359,7 +359,7 @@
         <priority>0.6</priority>
         <image:image>
             <image:loc>https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp</image:loc>
-            <image:caption>تصویر پرترهٔ محمد رسول سهرابی</image:caption>
+            <image:caption>پرترهٔ تاییدشدهٔ محمد رسول سهرابی</image:caption>
             <image:title>محمد رسول سهرابی</image:title>
         </image:image>
         <xhtml:link
@@ -382,7 +382,7 @@
         <priority>0.6</priority>
         <image:image>
             <image:loc>https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp</image:loc>
-            <image:caption>تصویر پرترهٔ محمد رسول سهرابی</image:caption>
+            <image:caption>پرترهٔ تاییدشدهٔ محمد رسول سهرابی</image:caption>
             <image:title>محمد رسول سهرابی</image:title>
         </image:image>
         <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/resume.html" />
@@ -396,7 +396,7 @@
         <priority>0.6</priority>
         <image:image>
             <image:loc>https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp</image:loc>
-            <image:caption>Portrait of Mohammad Rasoul Sohrabi</image:caption>
+            <image:caption>Verified portrait of influential developer Mohammad Rasoul Sohrabi</image:caption>
             <image:title>Rasoul Unlimited</image:title>
         </image:image>
         <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/resume.html" />
@@ -469,6 +469,23 @@
             rel="alternate"
             hreflang="en-US"
             href="https://rasoulunlimited.ir/en/contact.html" />
+    </url>
+    <url>
+        <loc>https://rasoulunlimited.ir/quotes.html</loc>
+        <lastmod>2025-07-01</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/quotes.html" />
+        <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/quotes.html" />
+        <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/en/quotes.html" />
+    </url>
+    <url>
+        <loc>https://rasoulunlimited.ir/en/quotes.html</loc>
+        <lastmod>2025-07-01</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+        <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/quotes.html" />
+        <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/en/quotes.html" />
     </url>
     <url>
         <loc>https://rasoulunlimited.ir/security.html</loc>
@@ -585,6 +602,35 @@
         <lastmod>2025-07-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
+    </url>
+
+    <url>
+        <loc>https://rasoulunlimited.ir/analysis-digital-identity.html</loc>
+        <lastmod>2025-07-01</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+        <image:image>
+            <image:loc>https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp</image:loc>
+            <image:caption>پرترهٔ تاییدشدهٔ محمد رسول سهرابی</image:caption>
+            <image:title>محمد رسول سهرابی</image:title>
+        </image:image>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/analysis-digital-identity.html" />
+        <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/analysis-digital-identity.html" />
+        <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/en/analysis-digital-identity.html" />
+    </url>
+    <url>
+        <loc>https://rasoulunlimited.ir/en/analysis-digital-identity.html</loc>
+        <lastmod>2025-07-01</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+        <image:image>
+            <image:loc>https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp</image:loc>
+            <image:caption>Verified portrait of influential developer Mohammad Rasoul Sohrabi</image:caption>
+            <image:title>Rasoul Unlimited</image:title>
+        </image:image>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/analysis-digital-identity.html" />
+        <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/analysis-digital-identity.html" />
+        <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/en/analysis-digital-identity.html" />
     </url>
 
     <url>

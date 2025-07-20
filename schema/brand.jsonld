@@ -1,0 +1,47 @@
+{
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://rasoulunlimited.ir/#person",
+        "name": "Rasol Unlimited",
+        "alternateName": "Rasoul Unlimited",
+        "url": "https://rasoulunlimited.ir",
+        "description": "Digital creator and full-stack developer behind the Rasol Unlimited brand.",
+        "affiliation": { "@id": "https://rasoulunlimited.ir/#studio" },
+        "sameAs": [
+          "https://github.com/RasoulUnlimited",
+          "https://linkedin.com/in/rasoulunlimited"
+        ],
+        "award": [
+          "Top Digital Creator 2023 - Tech Innovators Guild"
+        ]
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://rasoulunlimited.ir/#studio",
+        "name": "Rasol Unlimited Creative Studio",
+        "url": "https://rasoulunlimited.ir",
+        "founder": { "@id": "https://rasoulunlimited.ir/#person" }
+      },
+      {
+        "@type": "CreativeWork",
+        "@id": "https://rasoulunlimited.ir/#featured-work",
+        "url": "https://rasoulunlimited.ir/press.html",
+        "headline": "Press and Media Highlights for Rasol Unlimited",
+        "creator": { "@id": "https://rasoulunlimited.ir/#person" },
+        "publisher": { "@id": "https://rasoulunlimited.ir/#studio" }
+      },
+      {
+        "@type": "ClaimReview",
+        "@id": "https://rasoulunlimited.ir/#claimReview",
+        "url": "https://rasoulunlimited.ir/press.html",
+        "claimReviewed": "Rasol Unlimited has been recognized by the Tech Innovators Guild and the Digital Creators Association and has appeared in top publications such as The Creators Chronicle, Innovate Magazine and TechVision Online.",
+        "itemReviewed": { "@id": "https://rasoulunlimited.ir/#person" },
+        "reviewRating": { "@type": "Rating", "ratingValue": 5, "bestRating": 5 },
+        "author": { "@type": "Organization", "name": "Global Creative Review Board" },
+        "datePublished": "2024-05-15"
+      }
+    ]
+  }
+  
