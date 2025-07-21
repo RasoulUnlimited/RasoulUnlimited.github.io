@@ -4,7 +4,9 @@
   "description": "Personal website of Mohammad Rasoul Sohrabi (Rasoul Unlimited) — Developer, Designer, Content Creator, and Biomedical Engineering student. Built with GitHub Pages",
   "main": "index.js",
   "scripts": {
-    "build": "gulp"
+    "build": "gulp",
+    "start": "npx serve -l 8080 .",
+    "lint": "npx htmlhint \"**/*.html\" && npx eslint \"**/*.js\""
   },
   "keywords": [],
   "author": "Mohammad Rasoul Sohrabi",
