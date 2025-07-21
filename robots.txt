@@ -36,6 +36,7 @@ Allow: /assets/js/
 Allow: /assets/vendor/
 Allow: /faq/
 Allow: /en/faq/
+Allow: /wiki/
 
 # ----- Identity and Verification Files -----
 Allow: /humans.txt

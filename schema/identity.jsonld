@@ -615,7 +615,11 @@
       "applicationCategory": "Web Service",
       "operatingSystem": "Cloudflare",
       "codeRepository": "https://github.com/RasoulUnlimited/RasoulUnlimited.github.io/blob/main/cloudflare/worker.js",
-      "creator": {"@id": "https://rasoulunlimited.ir/#person"}
+      "creator": {"@id": "https://rasoulunlimited.ir/#person"},
+      "locationCreated": {
+        "@type": "Place",
+        "name": "Karaj, Iran"
+      }
     },
     {
       "@type": "BreadcrumbList",

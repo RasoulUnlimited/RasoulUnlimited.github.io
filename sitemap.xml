@@ -647,6 +647,12 @@
         <priority>0.3</priority>
     </url>
     <url>
+        <loc>https://rasoulunlimited.ir/wiki/rasoul-unlimited/</loc>
+        <lastmod>2025-07-01</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
         <loc>https://rasoulunlimited.ir/feed.xml</loc>
         <lastmod>2025-07-01</lastmod>
         <changefreq>weekly</changefreq>
