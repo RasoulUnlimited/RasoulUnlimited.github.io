@@ -83,8 +83,6 @@
     </schema:hasCredential>
     <schema:sameAs rdf:resource="https://www.instagram.com/Rasoul.Unlimited" />
     <schema:sameAs rdf:resource="https://virgool.io/@RasoulUnlimited" />
-    <schema:sameAs rdf:resource="https://rasoulunlimited.ir/" />
-    <schema:sameAs rdf:resource="https://rasoulunlimited.ir/en/" />
     <schema:sameAs rdf:resource="https://www.linkedin.com/in/rasoulunlimited/" />
     <schema:sameAs rdf:resource="https://github.com/RasoulUnlimited/" />
     <schema:sameAs rdf:resource="https://rasoulunlimited.medium.com" />
