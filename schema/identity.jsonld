@@ -655,8 +655,8 @@
         {
           "@type": "ListItem",
           "position": 6,
-          "item": "https://rasoulunlimited.ir/about.html",
-          "name": "About Rasoul Unlimited"
+          "item": "https://rasoulunlimited.ir/contact.html",
+          "name": "Contact Rasoul Unlimited"
         }
       ],
       "description": "Navigation loop across main pages. Hosted on GitHub Pages with Cloudflare."

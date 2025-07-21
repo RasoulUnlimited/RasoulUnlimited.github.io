@@ -9,8 +9,7 @@
       script.textContent = JSON.stringify(
         {
           "@context": "https://schema.org",
-          "@type": "Person",
-          name: "Mohammad Rasoul Sohrabi",
+          "@type": "Person",          name: "Mohammad Rasoul Sohrabi",
           url: "https://rasoulunlimited.ir",
         },
         null,

@@ -9,7 +9,6 @@ Host: rasoulunlimited.ir
 
 # ----- General Crawling Policy -----
 User-agent: *
-Crawl-delay: 5
 Allow: /
 
 # ----- Preferred Public Content -----
