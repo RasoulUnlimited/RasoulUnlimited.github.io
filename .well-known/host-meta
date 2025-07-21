@@ -5,7 +5,7 @@
   <Property type="name">Rasoul Unlimited</Property>
   <Link rel="lrdd" type="application/json" template="https://rasoulunlimited.ir/.well-known/webfinger.json?resource={uri}"/>
   <Link rel="profile-page" href="https://rasoulunlimited.ir/"/>
-  <Link rel="profile-page" href="https://rasoulunlimited.ir/wiki/rasol-unlimited"/>
+  <Link rel="profile-page" href="https://rasoulunlimited.ir/wiki/rasoul-unlimited"/>
   <Link rel="verification" href="https://rasoulunlimited.ir/proof.html"/>
   <Link rel="me" href="https://www.instagram.com/Rasoul.Unlimited"/>
   <Link rel="me" href="https://x.com/rasoulunlimited"/>
