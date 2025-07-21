@@ -160,8 +160,11 @@ control.
 
 The site also exposes a file at [`.well-known/discord`](.well-known/discord) for
 Discord's domain verification. Discord provides a unique token which must be
-served from this path. When you submit the domain to Discord, it fetches the
-file and compares the token to confirm control of `rasoulunlimited.ir`.
+served from this exact path as a plain‑text file. When you submit the domain to
+Discord, it fetches the file and compares the token to confirm control of
+`rasoulunlimited.ir`. According to Discord's documentation, the filename
+`discord.html` is not required—the platform specifically looks for the
+`.well-known/discord` endpoint, so this repository follows that convention.
 
 ## Resources
 
