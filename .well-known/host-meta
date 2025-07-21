@@ -2,11 +2,16 @@
 <XRD xmlns="http://docs.oasis-open.org/ns/xri/xrd-1.0">
   <Subject>https://rasoulunlimited.ir/</Subject>
   <Alias>https://rasoulunlimited.ir/#person</Alias>
+  <Alias>https://rasoulunlimited.ir/en/</Alias>
   <Property type="name">Rasoul Unlimited</Property>
   <Link rel="lrdd" type="application/json" template="https://rasoulunlimited.ir/.well-known/webfinger.json?resource={uri}"/>
+  <Link rel="acct" href="acct:rasoulunlimited@rasoulunlimited.ir" />
   <Link rel="profile-page" href="https://rasoulunlimited.ir/"/>
   <Link rel="profile-page" href="https://rasoulunlimited.ir/wiki/rasoul-unlimited"/>
   <Link rel="verification" href="https://rasoulunlimited.ir/proof.html"/>
   <Link rel="me" href="https://www.instagram.com/Rasoul.Unlimited"/>
   <Link rel="me" href="https://x.com/rasoulunlimited"/>
+  <Link rel="me" href="https://www.youtube.com/@RasoulUnlimited"/>
+  <Link rel="me" href="https://orcid.org/0009-0004-7177-2080"/>
+  <Link rel="me" href="https://t.me/RasoulUnlimited"/>
 </XRD>

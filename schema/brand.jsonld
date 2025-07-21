@@ -30,8 +30,8 @@
         "url": "https://rasoulunlimited.ir/press.html",
         "headline": "Press and Media Highlights for Rasoul Unlimited",
         "creator": { "@id": "https://rasoulunlimited.ir/#person" },
-        "publisher": { "@id": "https://rasoulunlimited.ir/#studio" }
-        ,"locationCreated": {
+        "publisher": { "@id": "https://rasoulunlimited.ir/#studio" },
+        "locationCreated": {
           "@type": "Place",
           "name": "Karaj, Iran"
         }
