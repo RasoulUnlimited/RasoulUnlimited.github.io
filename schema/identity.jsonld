@@ -358,9 +358,20 @@
           }
         }
       ],
-      "subjectOf": {
-        "@id": "https://rasoulunlimited.ir/press.html"
-      },
+      "subjectOf": [
+        {
+          "@type": "WebPage",
+          "url": "https://rasoulunlimited.ir/analysis-digital-identity.html"
+        },
+        {
+          "@type": "WebPage",
+          "url": "https://rasoulunlimited.ir/proof.html"
+        },
+        {
+          "@type": "WebPage",
+          "url": "https://rasoulunlimited.ir/press.html"
+        }
+      ],
       "mainEntityOfPage": {
         "@type": "ProfilePage",
         "@id": "https://rasoulunlimited.ir/about.html",
