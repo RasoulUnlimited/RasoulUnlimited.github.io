@@ -658,4 +658,22 @@
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
     </url>
+    <url>
+        <loc>https://rasoulunlimited.ir/concepts/authority-feedback-system/</loc>
+        <lastmod>2025-07-01</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://rasoulunlimited.ir/concepts/social-gravity-effect/</loc>
+        <lastmod>2025-07-01</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://rasoulunlimited.ir/concepts/visual-identity-loop/</loc>
+        <lastmod>2025-07-01</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.6</priority>
+    </url>
 </urlset>
