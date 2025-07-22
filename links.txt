@@ -69,7 +69,7 @@ YouTube: https://www.youtube.com/@RasoulUnlimited
 Mastodon: https://mastodon.social/@rasoulunlimited
 X (Twitter): https://x.com/rasoulunlimited
 Keybase: https://keybase.io/RasoulUnlimited
-Wikidata: https://www.wikidata.org/wiki/Q135116816
+Wikidata: https://rasoulunlimited.ir/wiki/rasoul-unlimited/
 
 # Sitemap & Robots
 Sitemap: https://rasoulunlimited.ir/sitemap.xml

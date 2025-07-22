@@ -9,7 +9,7 @@ GitHub: https://github.com/RasoulUnlimited
 LinkedIn: https://www.linkedin.com/in/rasoulunlimited
 Instagram: https://www.instagram.com/Rasoul.Unlimited
 ORCID: https://orcid.org/0009-0004-7177-2080
-Wikidata: https://www.wikidata.org/wiki/Q135116816
+Wikidata: https://rasoulunlimited.ir/wiki/rasoul-unlimited/
 
 /* SITE */
 Built with Node.js and Gulp

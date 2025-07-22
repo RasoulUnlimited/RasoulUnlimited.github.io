@@ -37,7 +37,7 @@
                  <https://keybase.io/RasoulUnlimited>,
                  <https://mastodon.social/@rasoulunlimited>,
                  <https://top.gg/bot/735403725132136510>,
-                 <https://www.wikidata.org/wiki/Q135116816>,
+                 <https://rasoulunlimited.ir/wiki/rasoul-unlimited/>,
                  <https://x.com/rasoulunlimited> ;
     schema:jobTitle "Biomedical Engineering Student", "Software Developer", "Designer", "Founder", "Content Strategist" ;
     schema:alumniOf [ a schema:EducationalOrganization ; schema:name "Islamic Azad University, Central Tehran Branch" ; schema:url <https://ctb.iau.ir> ] ;
