@@ -615,6 +615,28 @@
       }
     },
     {
+      "@type": "Event",
+      "@id": "https://rasoulunlimited.ir/#discord-bot-launch",
+      "name": "Verified Discord Bot Launch",
+      "startDate": "2025-03-01",
+      "location": {
+        "@type": "VirtualLocation",
+        "url": "https://discord.com"
+      },
+      "organizer": { "@id": "https://rasoulunlimited.ir/#person" }
+    },
+    {
+      "@type": "Event",
+      "@id": "https://rasoulunlimited.ir/#community-webinar",
+      "name": "Community Webinar",
+      "startDate": "2025-08-20",
+      "location": {
+        "@type": "VirtualLocation",
+        "url": "https://rasoulunlimited.ir"
+      },
+      "organizer": { "@id": "https://rasoulunlimited.ir/#person" }
+    },
+    {
       "@type": "BreadcrumbList",
       "@id": "https://rasoulunlimited.ir/#page-sequence",
       "name": "Page Navigation Sequence",
