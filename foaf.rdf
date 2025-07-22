@@ -207,14 +207,6 @@
 
     <foaf:account>
       <foaf:OnlineAccount>
-        <foaf:accountServiceHomepage rdf:resource="https://x.com" />
-        <foaf:accountName>rasoulverified</foaf:accountName>
-        <owl:sameAs rdf:resource="https://x.com/rasoulverified" />
-      </foaf:OnlineAccount>
-    </foaf:account>
-
-    <foaf:account>
-      <foaf:OnlineAccount>
         <foaf:accountServiceHomepage rdf:resource="https://www.wikidata.org" />
         <foaf:accountName>Q134619124</foaf:accountName>
         <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q134619124" />
@@ -232,8 +224,6 @@
     <rdfs:seeAlso rdf:resource="https://www.linkedin.com/in/rasoulunlimited/" />
     <rdfs:seeAlso rdf:resource="https://x.com/RasoulUnlimited" />
     <rdfs:seeAlso rdf:resource="https://www.instagram.com/rasol.unlimited/" />
-    <rdfs:seeAlso rdf:resource="https://x.com/rasoulverified" />
-    <rdfs:seeAlso rdf:resource="https://nightgemshop.com/wiki/rasoul-unlimited" />
     <rdfs:seeAlso rdf:resource="https://rasoulunlimited.ir/humans.txt" />
     <rdfs:seeAlso rdf:resource="https://rasoulunlimited.ir/links.txt" />
     <rdfs:seeAlso rdf:resource="https://doi.org/10.5281/zenodo.15548860" />
