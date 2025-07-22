@@ -436,19 +436,6 @@
         "url": "https://rasoulunlimited.ir",
         "name": "صفحه رسمی محمد رسول سهرابی (Rasoul Unlimited)"
       },
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "contactType": "customer service",
-        "email": "rasoul.unlimited@gmail.com",
-        "areaServed": [
-          "IR",
-          "Worldwide"
-        ],
-        "availableLanguage": [
-          "Persian",
-          "English"
-        ]
-      },
       "publishingPrinciples": "https://rasoulunlimited.ir/proof.html",
       "correctionsPolicy": "https://rasoulunlimited.ir/security.html"
     },

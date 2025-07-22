@@ -170,6 +170,12 @@ Discord, it fetches the file and compares the token to confirm control of
 
 For a quick reference to all main pages and social links, see [links.txt](links.txt).
 
+### Data notes
+
+The [trending mentions dataset](assets/data/trending-mentions.json) includes
+fictional examples. Sources and URLs are placeholders provided only for
+illustration.
+
 ## Contribution guidelines
 
 Contribution instructions, including commit message conventions, are summarized in [CONTRIBUTING.md](CONTRIBUTING.md). To keep the history clear and useful, please write descriptive commit messages that quickly explain the intent of each change.
