@@ -47,6 +47,11 @@
       type="application/ld+json"
       href="../../schema/identity.jsonld"
     />
+    <link
+      rel="alternate"
+      type="application/ld+json"
+      href="/schema/brand.jsonld"
+    />
     <meta name="color-scheme" content="light dark" />
     <meta
       name="theme-color"
@@ -108,7 +113,7 @@
     <link rel="icon" href="../../assets/images/favicon.png" />
 
     <!-- ✅ JSON-LD for Google Dataset Search -->
-    <script type="application/ld+json" nonce="RasoulCSP">
+  <script type="application/ld+json" nonce="RasoulCSP">
       {
         "@context": "https://schema.org",
         "@type": "Dataset",
@@ -147,6 +152,19 @@
           "encodingFormat": "application/zip",
           "contentUrl": "https://zenodo.org/records/15548860/files/RasoulUnlimited/Small-projects-with-python-v1.0.0.zip"
         }
+      }
+    </script>
+    <script type="application/ld+json" nonce="RasoulCSP">
+      {
+        "@context": "https://schema.org",
+        "@type": "ClaimReview",
+        "@id": "https://rasoulunlimited.ir/#academic-claim",
+        "url": "https://ctb.iau.ir",
+        "claimReviewed": "Small Projects with Python is an officially recognized academic collaboration with Sahand University of Technology.",
+        "itemReviewed": { "@id": "https://rasoulunlimited.ir/#person" },
+        "reviewRating": { "@type": "Rating", "ratingValue": 5, "bestRating": 5 },
+        "author": { "@type": "EducationalOrganization", "name": "Sahand University of Technology" },
+        "isBasedOn": "/schema/brand.jsonld#academic-claim"
       }
     </script>
 

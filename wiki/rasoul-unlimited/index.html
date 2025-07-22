@@ -25,6 +25,11 @@
     <link rel="stylesheet" href="../../assets/css/design-system.min.css" />
     <link rel="stylesheet" href="../../assets/css/main-style-en.min.css" />
     <link rel="entity-profile" href="/.well-known/entity-profile.json" />
+    <link
+      rel="alternate"
+      type="application/ld+json"
+      href="/schema/brand.jsonld"
+    />
     <script type="application/ld+json">
         {
           "@context": "https://schema.org",
@@ -178,6 +183,19 @@
         ]
       }
     </script>
+    <script type="application/ld+json" nonce="RasoulCSP">
+      {
+        "@context": "https://schema.org",
+        "@type": "ClaimReview",
+        "@id": "https://rasoulunlimited.ir/#discord-claim",
+        "url": "https://top.gg/bot/735403725132136510",
+        "claimReviewed": "The Persian Discord bot created by Rasoul Unlimited is officially verified by Discord's Verified Bots program.",
+        "itemReviewed": { "@id": "https://rasoulunlimited.ir/#person" },
+        "reviewRating": { "@type": "Rating", "ratingValue": 5, "bestRating": 5 },
+        "author": { "@type": "Organization", "name": "Discord Inc." },
+        "isBasedOn": "/schema/brand.jsonld#discord-claim"
+      }
+    </script>
     </head>
   <body>
     <noscript>
@@ -236,8 +254,8 @@
           <section id="events">
             <h2>Events</h2>
             <ul>
-              <li><strong>Verified Discord Bot Launch (2020)</strong> – online event organized by Discord</li>
-              <li><strong>Community Webinar (2021)</strong> – virtual meetup hosted by Rasoul Unlimited</li>
+              <li><strong>Verified Discord Bot Launch (2020)</strong> – online event organized by Discord. See how this ties into the <a href="/concepts/authority-feedback-system/">Authority Feedback System</a>.</li>
+              <li><strong>Community Webinar (2021)</strong> – virtual meetup hosted by Rasoul Unlimited that demonstrates the <a href="/concepts/social-gravity-effect/">Social Gravity Effect</a>.</li>
             </ul>
           </section>
           <section id="awards">
@@ -250,14 +268,18 @@
           </section>
           <section id="quote-collection">
             <h2>Quotes</h2>
-            <blockquote typeof="schema:Quotation">
-              <p>"Open collaboration fuels innovation."</p>
-              <cite>— Rasoul Unlimited</cite>
-            </blockquote>
-            <blockquote typeof="schema:Quotation">
-              <p>"Reputation grows when knowledge is shared."</p>
-              <cite>— Rasoul Unlimited</cite>
-            </blockquote>
+              <blockquote typeof="schema:Quotation">
+                <p>"Open collaboration fuels innovation." <a href="/concepts/social-gravity-effect/">Related concept</a></p>
+                <cite>— Rasoul Unlimited</cite>
+              </blockquote>
+              <blockquote typeof="schema:Quotation">
+                <p>"Reputation grows when knowledge is shared." <a href="/concepts/visual-identity-loop/">Related concept</a></p>
+                <cite>— Rasoul Unlimited</cite>
+              </blockquote>
+              <blockquote typeof="schema:Quotation">
+                <p>"Credibility is earned through transparent actions." <a href="/concepts/authority-feedback-system/">Related concept</a></p>
+                <cite>— Rasoul Unlimited</cite>
+              </blockquote>
           </section>
         </main>
       </div>

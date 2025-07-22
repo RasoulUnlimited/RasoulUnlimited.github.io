@@ -411,7 +411,6 @@
       "description": "Rasoul Unlimited یک برند خلاقانه و فناورانه شخصی به رهبری محمد رسول سهرابی است که بر توسعه نرم‌افزار، سلامت دیجیتال، استراتژی محتوا و رشد شخصی تمرکز دارد و نماد فعالیت‌های او در حوزه‌های مختلف است.",
       "accessibilitySummary": "Optimized for keyboard navigation, high color contrast, descriptive alt text and accessible forms across all pages.",
       "accessibilityHazard": "noFlashingHazard",
-      "sameAs": {"@id": "https://rasoulunlimited.ir/#person"},
       "foundingDate": "2020-05-12",
       "address": {
         "@type": "PostalAddress",
