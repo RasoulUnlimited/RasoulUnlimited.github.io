@@ -1,0 +1,164 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://rasoulunlimited.ir/#person",
+  "name": "Mohammad Rasoul Sohrabi",
+  "alternateName": "Rasoul Unlimited, رسول آنلیمیتد, محمد رسول سهرابی",
+  "url": "https://rasoulunlimited.ir/",
+  "image": "https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp",
+  "honorificPrefix": "Mr.",
+  "gender": "Male",
+  "nationality": {
+    "@type": "Country",
+    "name": "Iran"
+  },
+  "identifier": [
+    {
+      "@type": "PropertyValue",
+      "propertyID": "ORCID",
+      "value": "0009-0004-7177-2080"
+    },
+    {
+      "@type": "PropertyValue",
+      "propertyID": "ResearchGate",
+      "value": "https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi"
+    },
+    {
+      "@type": "PropertyValue",
+      "propertyID": "GitHub",
+      "value": "RasoulUnlimited",
+      "url": "https://github.com/RasoulUnlimited"
+    },
+    {
+      "@type": "PropertyValue",
+      "propertyID": "LinkedIn",
+      "value": "rasoulunlimited",
+      "url": "https://www.linkedin.com/in/rasoulunlimited/"
+    }
+  ],
+  "disambiguatingDescription": "Iranian medical engineering student and creator of the first Persian Discord bot, Rasoul Unlimited.",
+  "birthDate": "2005-09-06",
+  "birthPlace": {
+    "@type": "Place",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Tehran, Iran"
+    }
+  },
+  "homeLocation": {
+    "@type": "Place",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Karaj, Iran"
+    }
+  },
+  "knowsLanguage": [
+    {
+      "@type": "Language",
+      "@id": "https://www.wikidata.org/wiki/Q1860",
+      "name": "English",
+      "alternateName": "en"
+    },
+    {
+      "@type": "Language",
+      "@id": "https://www.wikidata.org/wiki/Q9168",
+      "name": "Persian",
+      "alternateName": "fa"
+    }
+  ],
+  "hasCredential": [
+    {
+      "@type": "EducationalOccupationalCredential",
+      "credentialCategory": "Student",
+      "name": "Medical engineering student",
+      "competencyRequired": "Medical engineering"
+    }
+  ],
+  "sameAs": [
+    "https://www.instagram.com/Rasoul.Unlimited",
+    "https://virgool.io/@RasoulUnlimited",
+    "https://rasoulunlimited.ir/",
+    "https://www.linkedin.com/in/rasoulunlimited/",
+    "https://github.com/RasoulUnlimited",
+    "https://rasoulunlimited.medium.com",
+    "https://dev.to/rasoulunlimited",
+    "https://t.me/RasoulUnlimited",
+    "https://orcid.org/0009-0004-7177-2080",
+    "https://about.me/rasoulunlimited",
+    "https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi",
+    "https://www.youtube.com/@RasoulUnlimited",
+    "https://keybase.io/RasoulUnlimited",
+    "https://mastodon.social/@rasoulunlimited",
+    "https://top.gg/bot/735403725132136510",
+    "https://www.wikidata.org/wiki/Q135116816",
+    "https://x.com/rasoulunlimited"
+  ],
+  "jobTitle": [
+    "Biomedical Engineering Student",
+    "Software Developer",
+    "Designer",
+    "Founder",
+    "Content Strategist"
+  ],
+  "alumniOf": {
+    "@type": "EducationalOrganization",
+    "name": "Islamic Azad University, Central Tehran Branch",
+    "url": "https://ctb.iau.ir"
+  },
+  "affiliation": {
+    "@type": "Organization",
+    "name": "Islamic Azad University, Central Tehran Branch",
+    "url": "https://ctb.iau.ir",
+    "location": {
+      "@type": "Place",
+      "name": "Tehran, Iran"
+    }
+  },
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Rasoul Unlimited",
+    "url": "https://rasoulunlimited.ir/"
+  },
+  "knowsAbout": [
+    "Biomedical Engineering",
+    "Software Development",
+    "Web Development",
+    "Python",
+    "JavaScript",
+    "C Programming",
+    "Digital Health",
+    "Personal Branding",
+    "Karate",
+    "Discord Bot Development",
+    "Persian Bot",
+    "Academic Projects",
+    "Open Source",
+    "MIT License",
+    "React",
+    "React Native",
+    "SQL",
+    "Node.js",
+    "Machine Learning",
+    "Mobile App Development",
+    "UI/UX Design",
+    "Figma",
+    "Adobe XD"
+  ],
+  "memberOf": [
+    {
+      "@type": "Organization",
+      "name": "Biomedical Engineering Association (Islamic Azad University, Central Tehran Branch)"
+    }
+  ],
+  "funder": {
+    "@type": "Organization",
+    "name": "Islamic Azad University, Central Tehran Branch",
+    "url": "https://ctb.iau.ir"
+  },
+  "mainEntityOfPage": {
+    "@type": "ProfilePage",
+    "@id": "https://rasoulunlimited.ir/",
+    "url": "https://rasoulunlimited.ir/",
+    "name": "Official page of Mohammad Rasoul Sohrabi(Rasoul Unlimited)"
+  }
+}

@@ -172,7 +172,7 @@ For a quick reference to all main pages and social links, see [links.txt](links.
 
 ## Contribution guidelines
 
-To keep the history clear and useful, please write descriptive commit messages that quickly explain the intent of each change.
+Contribution instructions, including commit message conventions, are summarized in [CONTRIBUTING.md](CONTRIBUTING.md). To keep the history clear and useful, please write descriptive commit messages that quickly explain the intent of each change.
 
 - Summarize the change in a short sentence using the imperative mood (e.g., "Add contact form" or "Fix build script").
 - Avoid generic subjects like "Update" or "Fix" without context.
