@@ -68,13 +68,13 @@
         },
         {
           "@type": "PropertyValue",
-          "propertyID": "ZenodoDOI-C-Projects",
+          "propertyID": "DOI",
           "value": "10.5281/zenodo.15548850",
           "url": "https://doi.org/10.5281/zenodo.15548850"
         },
         {
           "@type": "PropertyValue",
-          "propertyID": "ZenodoDOI-Python-Projects",
+          "propertyID": "DOI",
           "value": "10.5281/zenodo.15548860",
           "url": "https://doi.org/10.5281/zenodo.15548860"
         },
