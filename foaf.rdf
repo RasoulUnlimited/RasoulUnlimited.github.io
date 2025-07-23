@@ -201,7 +201,7 @@
       <foaf:OnlineAccount>
         <foaf:accountServiceHomepage rdf:resource="https://instagram.com" />
         <foaf:accountName>rasol.unlimited</foaf:accountName>
-        <owl:sameAs rdf:resource="https://www.instagram.com/rasol.unlimited/" />
+        <owl:sameAs rdf:resource="https://www.instagram.com/rasoul.unlimited/" />
       </foaf:OnlineAccount>
     </foaf:account>
 
@@ -223,7 +223,7 @@
     <rdfs:seeAlso rdf:resource="https://github.com/RasoulUnlimited" />
     <rdfs:seeAlso rdf:resource="https://www.linkedin.com/in/rasoulunlimited/" />
     <rdfs:seeAlso rdf:resource="https://x.com/RasoulUnlimited" />
-    <rdfs:seeAlso rdf:resource="https://www.instagram.com/rasol.unlimited/" />
+    <rdfs:seeAlso rdf:resource="https://www.instagram.com/rasoul.unlimited/" />
     <rdfs:seeAlso rdf:resource="https://rasoulunlimited.ir/humans.txt" />
     <rdfs:seeAlso rdf:resource="https://rasoulunlimited.ir/links.txt" />
     <rdfs:seeAlso rdf:resource="https://doi.org/10.5281/zenodo.15548860" />
