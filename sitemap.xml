@@ -13,6 +13,7 @@
             <image:loc>https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp</image:loc>
             <image:caption>Profile photo of Rasoul Unlimited</image:caption>
             <image:title>Rasoul Unlimited</image:title>
+            <image:license>https://rasoulunlimited.ir/license</image:license>
         </image:image>
         <video:video>
             <video:thumbnail_loc>
@@ -25,7 +26,10 @@
             <video:autoplay>ap=1</video:autoplay>
             <video:duration>661</video:duration>
             <video:view_count>1663</video:view_count>
-            <video:publication_date>2021-03-27</video:publication_date>
+            <video:publication_date>2021-03-27T00:00:00+00:00</video:publication_date>
+            <video:family_friendly>yes</video:family_friendly>
+            <video:tag>Discord</video:tag>
+            <video:tag>Persian Bot</video:tag>
         </video:video>
         <xhtml:link
             rel="alternate"
@@ -57,7 +61,10 @@
             <video:autoplay>ap=1</video:autoplay>
             <video:duration>661</video:duration>
             <video:view_count>1663</video:view_count>
-            <video:publication_date>2021-03-27</video:publication_date>
+            <video:publication_date>2021-03-27T00:00:00+00:00</video:publication_date>
+            <video:family_friendly>yes</video:family_friendly>
+            <video:tag>Discord</video:tag>
+            <video:tag>Persian Bot</video:tag>
         </video:video>
         <xhtml:link
             rel="alternate"
@@ -675,5 +682,29 @@
         <lastmod>2025-07-01</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://rasoulunlimited.ir/schema/brand.jsonld</loc>
+        <lastmod>2025-07-22</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    <url>
+        <loc>https://rasoulunlimited.ir/schema/identity.jsonld</loc>
+        <lastmod>2025-07-23</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    <url>
+        <loc>https://rasoulunlimited.ir/.well-known/rasoul-unlimited.json</loc>
+        <lastmod>2025-07-23</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    <url>
+        <loc>https://rasoulunlimited.ir/foaf.rdf</loc>
+        <lastmod>2025-07-23</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
     </url>
 </urlset>
