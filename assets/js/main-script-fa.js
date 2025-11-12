@@ -119,6 +119,13 @@
     }
   }
 
+  function getOffsetHeight(target) {
+    if (!target) return 0;
+    const element =
+      typeof target === "string" ? document.querySelector(target) : target;
+    return element ? element.offsetHeight || 0 : 0;
+  }
+
   function loadAOSScript() {
     if (window.aosLoading || window.AOS) return Promise.resolve();
     return new Promise((resolve, reject) => {
