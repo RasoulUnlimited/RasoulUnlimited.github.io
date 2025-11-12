@@ -161,7 +161,7 @@
 
   const FLAGS = () => {
     const s = ENV.state;
-    const low = s.saveData || s.lowThroughput || s.lowPowerCPU;
+    const low = s.saveData || s.lowThroughput;
     return {
       ENABLE_AOS: !s.coarse && !s.reduced && !low,
       ENABLE_SOUNDS: !s.coarse && !s.reduced && !low,
@@ -429,20 +429,15 @@
   // AOS (Animations) — gated
   // ==========================
   let aosLoaded = false;
-  function stripAOSAttrs() {
-    document.querySelectorAll("[data-aos]").forEach((el) => {
-      [...el.attributes].forEach(
-        (attr) =>
-          attr.name.startsWith("data-aos") && el.removeAttribute(attr.name)
-      );
-      el.classList.remove("aos-init", "aos-animate");
-    });
+  function setAOSDisabledCSS(disabled) {
+    document.documentElement.classList.toggle("aos-disabled", disabled);
   }
   function initAOS() {
-    if (!FLAGS().ENABLE_AOS) {
-      stripAOSAttrs();
-      return;
-    }
+  if (!FLAGS().ENABLE_AOS) {
+    setAOSDisabledCSS(true);
+    return;
+  }
+  setAOSDisabledCSS(false);
     if (aosLoaded && window.AOS?.init) {
       window.AOS.init({
         startEvent: "DOMContentLoaded",

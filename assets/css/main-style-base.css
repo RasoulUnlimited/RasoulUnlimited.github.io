@@ -145,7 +145,6 @@ textarea:focus:not(:focus-visible) {
   color: #fff;
 }
 
-
 .offline-info {
   display: none;
   padding: 0.5rem 1rem;
@@ -160,4 +159,11 @@ textarea:focus:not(:focus-visible) {
 
 body.offline .offline-info {
   display: block;
+}
+
+/* --- Disable AOS hiding when animations are off --- */
+.aos-disabled [data-aos] {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
 }
