@@ -1,0 +1,306 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://rasoulunlimited.ir/#website",
+      "url": "https://rasoulunlimited.ir/",
+      "name": "Rasoul Unlimited",
+      "alternateName": [
+        "محمد رسول سهرابی",
+        "Rasoul Unlimited Official Website"
+      ],
+      "description": "Multilingual hub for Mohammad Rasoul Sohrabi (Rasoul Unlimited) covering biomedical engineering studies, full-stack development projects, and verified digital health initiatives.",
+      "inLanguage": [
+        "fa-IR",
+        "en-US"
+      ],
+      "publisher": {
+        "@id": "https://rasoulunlimited.ir/#person"
+      },
+      "sameAs": [
+        "https://github.com/RasoulUnlimited",
+        "https://www.linkedin.com/in/rasoulunlimited/",
+        "https://scholar.google.com/citations?user=kDl5eNUAAAAJ",
+        "https://orcid.org/0009-0004-7177-2080"
+      ],
+      "potentialAction": [
+        {
+          "@type": "SearchAction",
+          "target": "https://www.google.com/search?q=site%3Arasoulunlimited.ir+{search_term_string}",
+          "query-input": "required name=search_term_string"
+        },
+        {
+          "@type": "AskAction",
+          "name": "Contact Rasoul Unlimited",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://rasoulunlimited.ir/contact.html"
+          }
+        }
+      ],
+      "about": {
+        "@id": "https://rasoulunlimited.ir/#person"
+      }
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": "https://rasoulunlimited.ir/#profile-page",
+      "url": "https://rasoulunlimited.ir/",
+      "name": "محمد رسول سهرابی | Rasoul Unlimited",
+      "inLanguage": "fa-IR",
+      "description": "پروفایل جامع محمد رسول سهرابی با معرفی تخصص‌ها، پروژه‌های متن‌باز، مسیر دانشگاهی مهندسی پزشکی و تأییدیه‌های رسمی.",
+      "isPartOf": {
+        "@id": "https://rasoulunlimited.ir/#website"
+      },
+      "mainEntity": {
+        "@id": "https://rasoulunlimited.ir/#person"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "خانه",
+            "item": "https://rasoulunlimited.ir/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "معرفی",
+            "item": "https://rasoulunlimited.ir/#about"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "پروژه‌ها",
+            "item": "https://rasoulunlimited.ir/projects/"
+          }
+        ]
+      },
+      "about": [
+        {
+          "@id": "https://rasoulunlimited.ir/#services"
+        },
+        {
+          "@id": "https://rasoulunlimited.ir/#person"
+        }
+      ]
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": "https://rasoulunlimited.ir/en/#profile-page",
+      "url": "https://rasoulunlimited.ir/en/",
+      "name": "Mohammad Rasoul Sohrabi | Rasoul Unlimited",
+      "inLanguage": "en-US",
+      "description": "Comprehensive English profile of Mohammad Rasoul Sohrabi with verified biomedical engineering background, full-stack development practice, and personal brand strategy insights.",
+      "isPartOf": {
+        "@id": "https://rasoulunlimited.ir/#website"
+      },
+      "mainEntity": {
+        "@id": "https://rasoulunlimited.ir/#person"
+      }
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://rasoulunlimited.ir/#services",
+      "name": "Core Service Capabilities",
+      "numberOfItems": 3,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "Service",
+            "@id": "https://rasoulunlimited.ir/#service-biomedical-innovation",
+            "name": "Biomedical Innovation Consulting",
+            "serviceType": "Digital health product research and prototyping",
+            "areaServed": "IR",
+            "provider": {
+              "@id": "https://rasoulunlimited.ir/#person"
+            },
+            "description": "Research-backed ideation and prototyping for biomedical engineering initiatives with emphasis on digital therapeutics and wearables."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "Service",
+            "@id": "https://rasoulunlimited.ir/#service-fullstack",
+            "name": "Full-Stack Product Development",
+            "serviceType": "Web and cross-platform software engineering",
+            "areaServed": "Worldwide",
+            "provider": {
+              "@id": "https://rasoulunlimited.ir/#person"
+            },
+            "description": "Design, development, and deployment of performant web applications, Discord automation, and API-driven services."
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "Service",
+            "@id": "https://rasoulunlimited.ir/#service-brand-strategy",
+            "name": "Personal Brand Strategy",
+            "serviceType": "Content architecture and narrative design",
+            "areaServed": "Worldwide",
+            "provider": {
+              "@id": "https://rasoulunlimited.ir/#person"
+            },
+            "description": "Strategic storytelling and content systems for founders and creators seeking verified, research-supported positioning."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://rasoulunlimited.ir/#faq-ai-coverage",
+      "url": "https://rasoulunlimited.ir/faq/",
+      "name": "پرسش‌های متداول درباره Rasoul Unlimited",
+      "inLanguage": "fa-IR",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "رسول آنلیمیتد چه تخصص‌هایی را پوشش می‌دهد؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "محمد رسول سهرابی در حوزه مهندسی پزشکی، توسعه نرم‌افزار فول‌استک و برندینگ شخصی فعالیت دارد و پروژه‌های متن‌باز با شناسه DOI منتشر می‌کند."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "چگونه می‌توان با رسول آنلیمیتد همکاری کرد؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "از طریق صفحه تماس یا ایمیل رسمی درج‌شده در سایت می‌توانید همکاری در پروژه‌های تحقیقاتی، توسعه نرم‌افزار یا استراتژی محتوا را پیشنهاد دهید."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "مهم‌ترین دستاوردهای تاییدشده چیست؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "تایید ربات فارسی دیسکورد توسط Discord Inc.، انتشار پروژه‌های متن‌باز با DOI در Zenodo و ادامه تحصیل در مهندسی پزشکی در دانشگاه آزاد اسلامی واحد تهران مرکزی از جمله دستاوردهای اصلی است."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "CreativeWorkSeries",
+      "@id": "https://rasoulunlimited.ir/#open-source-series",
+      "name": "Rasoul Unlimited Open-Source Portfolio",
+      "inLanguage": "fa-IR",
+      "creator": {
+        "@id": "https://rasoulunlimited.ir/#person"
+      },
+      "hasPart": [
+        {
+          "@type": "CreativeWork",
+          "name": "Rasoul Unlimited Discord Bot",
+          "url": "https://top.gg/bot/735403725132136510",
+          "sameAs": "https://github.com/RasoulUnlimited",
+          "description": "Officially verified Persian-language Discord assistant with community management automations."
+        },
+        {
+          "@type": "CreativeWork",
+          "name": "Digital Identity Analysis",
+          "url": "https://rasoulunlimited.ir/analysis-digital-identity.html",
+          "description": "In-depth analysis of digital identity frameworks for personal brand resilience."
+        }
+      ]
+    },
+    {
+      "@type": "CollectionPage",
+      "@id": "https://rasoulunlimited.ir/#project-directory",
+      "url": "https://rasoulunlimited.ir/projects/",
+      "name": "Project Directory",
+      "isPartOf": {
+        "@id": "https://rasoulunlimited.ir/#website"
+      },
+      "about": {
+        "@id": "https://rasoulunlimited.ir/#open-source-series"
+      },
+      "description": "Curated portfolio of digital health experiments, open-source tooling, and creative technology prototypes."
+    },
+    {
+      "@type": "Dataset",
+      "@id": "https://rasoulunlimited.ir/#verified-records",
+      "name": "Verified Publications and Identifiers",
+      "description": "Persistent identifiers confirming the academic and open-source record for Rasoul Unlimited.",
+      "creator": {
+        "@id": "https://rasoulunlimited.ir/#person"
+      },
+      "distribution": [
+        {
+          "@type": "DataDownload",
+          "name": "Zenodo DOI 10.5281/zenodo.15548850",
+          "encodingFormat": "application/pdf",
+          "contentUrl": "https://doi.org/10.5281/zenodo.15548850"
+        },
+        {
+          "@type": "DataDownload",
+          "name": "Zenodo DOI 10.5281/zenodo.15548860",
+          "encodingFormat": "application/pdf",
+          "contentUrl": "https://doi.org/10.5281/zenodo.15548860"
+        }
+      ],
+      "isPartOf": {
+        "@id": "https://rasoulunlimited.ir/#website"
+      },
+      "temporalCoverage": "2020/2025",
+      "keywords": [
+        "biomedical engineering",
+        "digital health",
+        "open source",
+        "personal branding"
+      ]
+    },
+    {
+      "@type": "DefinedTermSet",
+      "@id": "https://rasoulunlimited.ir/#knowledge-tags",
+      "name": "Knowledge Graph Topics",
+      "hasDefinedTerm": [
+        {
+          "@type": "DefinedTerm",
+          "name": "Digital Health Strategy",
+          "termCode": "digital-health",
+          "inDefinedTermSet": "https://rasoulunlimited.ir/#knowledge-tags"
+        },
+        {
+          "@type": "DefinedTerm",
+          "name": "Personal Branding",
+          "termCode": "personal-branding",
+          "inDefinedTermSet": "https://rasoulunlimited.ir/#knowledge-tags"
+        },
+        {
+          "@type": "DefinedTerm",
+          "name": "Full-Stack Development",
+          "termCode": "full-stack",
+          "inDefinedTermSet": "https://rasoulunlimited.ir/#knowledge-tags"
+        }
+      ],
+      "inDefinedTermSet": "https://rasoulunlimited.ir/#knowledge-tags"
+    },
+    {
+      "@type": "DigitalDocument",
+      "@id": "https://rasoulunlimited.ir/#ai-brief",
+      "name": "AI-ready Summary of Rasoul Unlimited",
+      "inLanguage": "en-US",
+      "creator": {
+        "@id": "https://rasoulunlimited.ir/#person"
+      },
+      "text": "Mohammad Rasoul Sohrabi is a biomedical engineering student and full-stack developer operating as Rasoul Unlimited. The brand combines digital health research, verified community tools such as the first Persian Discord bot, and strategic storytelling for founders. Projects emphasize open science practices with DOI-backed releases and multilingual resources for Iranian innovators.",
+      "about": [
+        {
+          "@id": "https://rasoulunlimited.ir/#person"
+        },
+        {
+          "@id": "https://rasoulunlimited.ir/#services"
+        }
+      ]
+    }
+  ]
+}
