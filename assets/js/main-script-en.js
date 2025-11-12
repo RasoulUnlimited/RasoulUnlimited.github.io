@@ -58,6 +58,23 @@ function debounce(func, delay) {
   };
 }
 
+function safeSetFromStorage(key) {
+  try {
+    const storedValue = localStorage.getItem(key);
+    if (!storedValue) {
+      return new Set();
+    }
+    const parsedValue = JSON.parse(storedValue);
+    if (Array.isArray(parsedValue)) {
+      return new Set(parsedValue);
+    }
+  } catch (error) {
+    console.warn(`Failed to parse stored data for ${key}`, error);
+  }
+  localStorage.removeItem(key);
+  return new Set();
+}
+
 let audioContext;
 let clickBuffer;
 let toastBuffer;
@@ -1466,12 +1483,8 @@ featuredCards.forEach((card) => {
 const sections = document.querySelectorAll("section[id]"); // All sections with an ID
 const totalSections = sections.length;
 
-let sectionsVisited = new Set(
-  JSON.parse(localStorage.getItem("sectionsVisited") || "[]") // Load visited sections from local storage
-);
-let announcedMilestones = new Set(
-  JSON.parse(localStorage.getItem("announcedMilestones") || "[]") // Load announced milestones
-);
+let sectionsVisited = safeSetFromStorage("sectionsVisited"); // Load visited sections from local storage
+let announcedMilestones = safeSetFromStorage("announcedMilestones"); // Load announced milestones
 
 // Define exploration milestones
 const explorationMilestones = [
@@ -1860,9 +1873,7 @@ sharePageButton.addEventListener("click", async () => {
 });
 
 // Logic for "section delight" effect (sparkle on section title when scrolled into view)
-const sectionsDelighted = new Set(
-  JSON.parse(localStorage.getItem("sectionsDelighted") || "[]") // Load delighted sections
-);
+const sectionsDelighted = safeSetFromStorage("sectionsDelighted"); // Load delighted sections
 
 const sectionDelightObserver = new IntersectionObserver(
   (entries, observer) => {

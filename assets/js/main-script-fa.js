@@ -35,6 +35,23 @@
     };
   }
 
+  function safeSetFromStorage(key) {
+    try {
+      const storedValue = localStorage.getItem(key);
+      if (!storedValue) {
+        return new Set();
+      }
+      const parsedValue = JSON.parse(storedValue);
+      if (Array.isArray(parsedValue)) {
+        return new Set(parsedValue);
+      }
+    } catch (error) {
+      console.warn(`Failed to parse stored data for ${key}`, error);
+    }
+    localStorage.removeItem(key);
+    return new Set();
+  }
+
   let audioContext;
   let clickBuffer;
   let toastBuffer;
@@ -1311,12 +1328,8 @@
   const sections = document.querySelectorAll("section[id]");
   const totalSections = sections.length;
 
-  let sectionsVisited = new Set(
-    JSON.parse(localStorage.getItem("sectionsVisited") || "[]")
-  );
-  let announcedMilestones = new Set(
-    JSON.parse(localStorage.getItem("announcedMilestones") || "[]")
-  );
+  let sectionsVisited = safeSetFromStorage("sectionsVisited");
+  let announcedMilestones = safeSetFromStorage("announcedMilestones");
 
   const explorationMilestones = [
     {
@@ -1660,9 +1673,7 @@
     }
   });
 
-  const sectionsDelighted = new Set(
-    JSON.parse(localStorage.getItem("sectionsDelighted") || "[]")
-  );
+  const sectionsDelighted = safeSetFromStorage("sectionsDelighted");
 
   const sectionDelightObserver = new IntersectionObserver(
     (entries, observer) => {
