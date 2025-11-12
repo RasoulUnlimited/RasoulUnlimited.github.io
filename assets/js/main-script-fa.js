@@ -1512,6 +1512,29 @@
     { passive: true }
   );
 
+  // helper: feature-detect smooth scroll
+  function scrollPageToTop() {
+    const supportsSmoothScroll =
+      "scrollBehavior" in document.documentElement.style;
+
+    if (supportsSmoothScroll) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      // fallbacks for older engines
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }
+  }
+
+  // somewhere below, where you wire up the button:
+  scrollToTopButton.addEventListener("click", () => {
+    scrollPageToTop();
+    if (typeof triggerHapticFeedback === "function") {
+      triggerHapticFeedback([20]);
+    }
+  });
+
   scrollToTopButton.addEventListener("click", () => {
     window.scrollTo({
       top: 0,
