@@ -1,9 +1,9 @@
 const gulp = require("gulp");
 const cleanCSS = require("gulp-clean-css");
-const uglify = require("gulp-uglify");
+const terser = require("gulp-terser");
 const rename = require("gulp-rename");
 
-// Minify CSS — فایل‌های .min.css رو نادیده بگیر
+// Minify CSS
 gulp.task("minify-css", function () {
   return gulp
     .src(["assets/css/**/*.css", "!assets/css/**/*.min.css"])
@@ -12,14 +12,27 @@ gulp.task("minify-css", function () {
     .pipe(gulp.dest("assets/css"));
 });
 
-// Minify JS — فایل‌های .min.js رو نادیده بگیر
+// Minify JS
 gulp.task("minify-js", function () {
   return gulp
     .src(["assets/js/**/*.js", "!assets/js/**/*.min.js"])
-    .pipe(uglify())
+    .pipe(
+      terser({
+        ecma: 2020,
+        compress: {
+          toplevel: false,
+          inline: 1, // جلوگیری از inline خطرناک
+          reduce_vars: false,
+          hoist_funs: false,
+          hoist_vars: false,
+        },
+        mangle: { toplevel: false },
+        format: { comments: false },
+      })
+    )
     .pipe(rename({ suffix: ".min" }))
     .pipe(gulp.dest("assets/js"));
 });
 
-// اجرای همزمان هر دو
+// Default
 gulp.task("default", gulp.parallel("minify-css", "minify-js"));

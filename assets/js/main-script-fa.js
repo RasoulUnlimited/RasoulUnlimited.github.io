@@ -407,14 +407,24 @@
   const toggleLabelText =
     document.querySelector(".theme-switch")?.getAttribute("aria-label") ||
     "تغییر تم سایت";
-  themeToggleInput.setAttribute("aria-label", toggleLabelText);
+
+  if (themeToggleInput) {
+    themeToggleInput.setAttribute("aria-label", toggleLabelText);
+  } else {
+    console.warn(
+      "Theme toggle element not found; skipping toggle-specific enhancements."
+    );
+  }
   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const savedTheme = localStorage.getItem("theme");
 
   function applyTheme(theme, showToast = false) {
     document.body.classList.toggle("dark-mode", theme === "dark");
     document.body.classList.toggle("light-mode", theme === "light");
-    themeToggleInput.checked = theme === "dark";
+
+    if (themeToggleInput) {
+      themeToggleInput.checked = theme === "dark";
+    }
 
     if (showToast) {
       createToast(
@@ -428,7 +438,9 @@
           duration: 2800,
         }
       );
-      createSparkle(themeToggleInput.parentElement);
+      if (themeToggleInput?.parentElement) {
+        createSparkle(themeToggleInput.parentElement);
+      }
       triggerHapticFeedback([30]);
     }
   }
@@ -439,21 +451,23 @@
     applyTheme(prefersDark ? "dark" : "light");
   }
 
-  themeToggleInput.addEventListener("change", () => {
-    const newTheme = themeToggleInput.checked ? "dark" : "light";
-    applyTheme(newTheme, true);
-    localStorage.setItem("theme", newTheme);
-  });
-
-  themeToggleInput.addEventListener("keydown", (event) => {
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      themeToggleInput.checked = !themeToggleInput.checked;
+  if (themeToggleInput) {
+    themeToggleInput.addEventListener("change", () => {
       const newTheme = themeToggleInput.checked ? "dark" : "light";
       applyTheme(newTheme, true);
       localStorage.setItem("theme", newTheme);
-    }
-  });
+    });
+
+    themeToggleInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        themeToggleInput.checked = !themeToggleInput.checked;
+        const newTheme = themeToggleInput.checked ? "dark" : "light";
+        applyTheme(newTheme, true);
+        localStorage.setItem("theme", newTheme);
+      }
+    });
+  }
 
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
@@ -761,6 +775,11 @@
       const summary = item.querySelector("summary");
       const answer = item.querySelector("p");
       const questionId = item.dataset.questionId || `faq-q-${index + 1}`;
+
+      if (!summary) {
+        console.warn("FAQ item missing summary element", item);
+        return;
+      }
       summary.setAttribute("data-faq-author", "Mohammad Rasoul Sohrabi");
 
       if (!summary.hasAttribute("aria-expanded")) {
