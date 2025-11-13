@@ -2,87 +2,211 @@
 <html lang="fa-IR" xml:lang="fa" dir="rtl">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+    <!-- Performance & Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
     <link rel="preconnect" href="https://cdn.jsdelivr.net" />
-    <title>نقل قول‌های رسول آنلیمیتد</title>
-    <meta name="description" content="منتخبی از جملات الهام‌بخش محمد رسول سهرابی (Rasoul Unlimited) درباره فرهنگ دیجیتال." />
+    <link rel="preconnect" href="https://api.github.com" />
+
+    <title>نقل‌قول‌های رسول آنلیمیتد</title>
+    <meta
+      name="description"
+      content="منتخبی از جملات الهام‌بخش و کلیدی محمد رسول سهرابی (Rasoul Unlimited) درباره فرهنگ دیجیتال، هویت، رهبری و فناوری."
+    />
+
+    <link
+      rel="preload"
+      as="style"
+      data-href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;700&display=swap"
+      data-make-stylesheet
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;700&display=swap"
+      />
+    </noscript>
+    <link
+      rel="preload"
+      as="style"
+      data-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      data-make-stylesheet
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      />
+    </noscript>
+
     <link rel="stylesheet" href="assets/css/design-system.min.css" />
     <link rel="stylesheet" href="assets/css/main-style-fa.min.css" />
+    <!-- اگر بعداً استایل اختصاصی برای نقل‌قول‌ها داشتی:
+    <link rel="stylesheet" href="assets/css/quotes-style.min.css" /> -->
+    <script src="assets/js/performance-helpers.min.js" defer></script>
+
+    <!-- Canonical & Author -->
     <link rel="canonical" href="https://rasoulunlimited.ir/quotes.html" />
-    <link rel="author" href="https://rasoulunlimited.ir/#person" data-person="rasoul-unlimited" />
+    <link
+      rel="author"
+      href="https://rasoulunlimited.ir/#person"
+      data-person="rasoul-unlimited"
+    />
+
+    <!-- SEO Meta -->
     <meta name="robots" content="index, follow" />
-    <meta name="citation_title" content="نقل قول‌های رسول آنلیمیتد" />
+    <meta name="citation_title" content="نقل‌قول‌های رسول آنلیمیتد" />
     <meta name="dcterms.creator" content="Mohammad Rasoul Sohrabi" />
-    <meta name="dc.identifier" content="https://rasoulunlimited.ir/quotes.html" />
-    <link rel="alternate" href="https://rasoulunlimited.ir/quotes.html" hreflang="fa-IR" />
-    <link rel="alternate" href="https://rasoulunlimited.ir/en/quotes.html" hreflang="en-US" />
-    <link rel="alternate" href="https://rasoulunlimited.ir/quotes.html" hreflang="x-default" />
-    <link rel="alternate" type="application/ld+json" href="/schema/identity.jsonld" />
+    <meta
+      name="dc.identifier"
+      content="https://rasoulunlimited.ir/quotes.html"
+    />
+
+    <!-- Hreflang -->
+    <link
+      rel="alternate"
+      href="https://rasoulunlimited.ir/quotes.html"
+      hreflang="fa-IR"
+    />
+    <link
+      rel="alternate"
+      href="https://rasoulunlimited.ir/en/quotes.html"
+      hreflang="en-US"
+    />
+    <link
+      rel="alternate"
+      href="https://rasoulunlimited.ir/quotes.html"
+      hreflang="x-default"
+    />
+
+    <!-- Identity graph -->
+    <link
+      rel="alternate"
+      type="application/ld+json"
+      href="/schema/identity.jsonld"
+    />
+
+    <!-- Color scheme -->
     <meta name="color-scheme" content="light dark" />
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0f172a" />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: light)"
+      content="#ffffff"
+    />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: dark)"
+      content="#0f172a"
+    />
+
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://rasoulunlimited.ir/quotes.html" />
-    <meta property="og:title" content="نقل قول‌های رسول آنلیمیتد" />
-    <meta property="og:description" content="منتخبی از جملات الهام‌بخش محمد رسول سهرابی درباره فرهنگ دیجیتال." />
-    <meta property="og:image" content="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp" />
-    <meta property="og:image:alt" content="Portrait of Mohammad Rasoul Sohrabi" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@rasoulunlimited" />
+    <meta property="og:title" content="نقل‌قول‌های رسول آنلیمیتد" />
+    <meta
+      property="og:description"
+      content="منتخبی از جملات و ایده‌های کلیدی رسول آنلیمیتد درباره فرهنگ دیجیتال، رهبری و هویت در عصر آنلاین."
+    />
+    <meta
+      property="og:image"
+      content="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp"
+    />
+    <meta
+      property="og:image:alt"
+      content="پرترهٔ تاییدشدهٔ محمد رسول سهرابی"
+    />
     <meta property="og:image:width" content="220" />
     <meta property="og:image:height" content="220" />
     <meta property="og:locale" content="fa_IR" />
     <meta property="og:locale:alternate" content="en_US" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@rasoulunlimited" />
     <meta name="twitter:creator" content="@rasoulunlimited" />
-    <meta name="twitter:title" content="نقل قول‌های رسول آنلیمیتد" />
-    <meta name="twitter:description" content="منتخبی از جملات الهام‌بخش درباره فرهنگ دیجیتال." />
-    <meta name="twitter:image" content="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp" />
-    <meta name="twitter:image:alt" content="Portrait of Mohammad Rasoul Sohrabi" />
+    <meta name="twitter:title" content="نقل‌قول‌های رسول آنلیمیتد" />
+    <meta
+      name="twitter:description"
+      content="جملات الهام‌بخش و کاربردی رسول آنلیمیتد درباره فرهنگ دیجیتال و هویت."
+    />
+    <meta
+      name="twitter:image"
+      content="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp"
+    />
+    <meta
+      name="twitter:image:alt"
+      content="پرترهٔ تاییدشدهٔ محمد رسول سهرابی"
+    />
+
+    <!-- Schema.org: selected quotations -->
     <script type="application/ld+json" nonce="RasoulCSP">
       {
         "@context": "https://schema.org",
         "@graph": [
           {
             "@type": "Quotation",
+            "@id": "https://rasoulunlimited.ir/quotes.html#q-digital-culture",
             "text": "فرهنگ دیجیتال فقط درباره ابزار نیست، بلکه درباره انسان‌هایی است که از آن استفاده می‌کنند.",
             "inLanguage": "fa",
             "creator": { "@id": "https://rasoulunlimited.ir/#person" }
           },
           {
             "@type": "Quotation",
+            "@id": "https://rasoulunlimited.ir/quotes.html#q-technology-power",
             "text": "قدرت فناوری زمانی شکوفا می‌شود که آن را در خدمت همگان قرار دهیم.",
             "inLanguage": "fa",
             "creator": { "@id": "https://rasoulunlimited.ir/#person" }
           },
           {
             "@type": "Quotation",
+            "@id": "https://rasoulunlimited.ir/quotes.html#q-digital-leadership",
             "text": "رهبری در دنیای دیجیتال یعنی الهام‌بخشی برای نوآوری مستمر.",
+            "inLanguage": "fa",
+            "creator": { "@id": "https://rasoulunlimited.ir/#person" }
+          },
+          {
+            "@type": "Quotation",
+            "@id": "https://rasoulunlimited.ir/quotes.html#q-visual-identity-loop",
+            "text": "حلقه هویت بصری تضمین می‌کند که هر بازخورد، تصویر برند را شفاف‌تر می‌کند.",
             "inLanguage": "fa",
             "creator": { "@id": "https://rasoulunlimited.ir/#person" }
           }
         ]
       }
     </script>
+
+    <!-- Schema.org WebPage -->
     <script type="application/ld+json" nonce="RasoulCSP">
       {
         "@context": "https://schema.org",
         "@type": "WebPage",
         "url": "https://rasoulunlimited.ir/quotes.html",
+        "name": "نقل‌قول‌های رسول آنلیمیتد",
         "isPartOf": { "@id": "https://rasoulunlimited.ir/#website" },
         "author": { "@id": "https://rasoulunlimited.ir/#person" },
         "publisher": { "@id": "https://rasoulunlimited.ir/#organization" },
         "mainEntityOfPage": "https://rasoulunlimited.ir/quotes.html",
         "datePublished": "2025-07-20",
         "dateModified": "2025-07-21",
-        "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["h1", "blockquote"] }
+        "headline": "منتخبی از نقل‌قول‌های رسول آنلیمیتد",
+        "speakable": {
+          "@type": "SpeakableSpecification",
+          "cssSelector": ["h1", "blockquote"]
+        }
       }
     </script>
+
     <link rel="entity-profile" href="/.well-known/entity-profile.json" />
   </head>
-  <body>
+  <body class="quotes-page">
+    <!-- ناوبری در صورت غیرفعال بودن جاوااسکریپت -->
     <noscript>
       <header class="navbar" role="banner">
         <nav role="navigation" aria-label="پیوندهای اصلی سایت">
@@ -93,48 +217,220 @@
           <a href="/press.html">رسانه</a>
           <a href="/faq/">سوالات متداول</a>
           <a href="/contact.html">تماس</a>
-          <a href="/quotes.html">نقل قول‌ها</a>
+          <a href="/quotes.html" aria-current="page">نقل‌قول‌ها</a>
         </nav>
       </header>
     </noscript>
+
+    <!-- هدر داینامیک -->
     <div data-include-html="includes/header-fa.html"></div>
+
     <div class="container">
       <div class="content-area">
         <main id="main-content">
-          <section id="quotes" class="fade-in" role="region" aria-labelledby="quotes-heading">
-            <h1 id="quotes-heading">نقل قول‌های منتخب</h1>
-            <p class="more-bio">
-              <a href="/wiki/rasoul-unlimited/" title="مشاهده شرح تفصیلی زندگی رسول آنلیمیتد"
-                >شرح تفصیلی زندگی &rarr;</a
-              >
+          <!-- هرو / معرفی صفحه -->
+          <section
+            id="quotes-hero"
+            class="hero section fade-in"
+            role="region"
+            aria-labelledby="quotes-heading"
+          >
+            <div class="hero-text">
+              <h1 id="quotes-heading" class="hero-title">
+                نقل‌قول‌های رسول آنلیمیتد
+              </h1>
+              <p class="tagline">
+                جملات فشرده‌ای از سال‌ها کلنجار با فرهنگ دیجیتال، هویت و رهبری
+                در عصر آنلاین.
+              </p>
+              <div class="hero-links">
+                <a
+                  href="/wiki/rasoul-unlimited/"
+                  class="cta-button"
+                  title="مشاهده شرح تفصیلی زندگی و مسیر حرفه‌ای رسول آنلیمیتد"
+                >
+                  شرح تفصیلی زندگی &rarr;
+                </a>
+                <a
+                  href="/concepts/visual-identity-loop/"
+                  class="ghost-button"
+                  title="مطالعه مفهوم حلقه هویت بصری"
+                >
+                  مفاهیم کلیدی &rarr;
+                </a>
+              </div>
+            </div>
+            <img
+              src="assets/images/RasoulUnlimited.webp"
+              loading="eager"
+              decoding="async"
+              width="220"
+              height="220"
+              class="profile-image"
+              alt="پرترهٔ تاییدشدهٔ محمد رسول سهرابی (Rasoul Unlimited)"
+            />
+          </section>
+
+          <!-- نقل‌قول‌ها -->
+          <section
+            id="quotes"
+            class="quotes-section fade-in"
+            role="region"
+            aria-label="نقل‌قول‌های منتخب رسول آنلیمیتد"
+          >
+            <p class="section-intro">
+              این صفحه برای
+              <strong>استناد رسانه‌ای، پژوهش و الهام</strong>
+              طراحی شده است. می‌توانید از نقل‌قول‌ها با ذکر نام
+              <span lang="en">Rasoul Unlimited</span>
+              و لینک به این صفحه استفاده کنید.
             </p>
-            <blockquote cite="/quotes.html">
-              <p>فرهنگ دیجیتال فقط درباره ابزار نیست، بلکه درباره انسان‌هایی است که از آن استفاده می‌کنند.</p>
-              <cite>— رسول آنلیمیتد</cite>
-            </blockquote>
-            <blockquote cite="/quotes.html">
-              <p>قدرت فناوری زمانی شکوفا می‌شود که آن را در خدمت همگان قرار دهیم.</p>
-              <cite>— رسول آنلیمیتد</cite>
-            </blockquote>
-            <blockquote cite="/quotes.html">
-              <p>رهبری در دنیای دیجیتال یعنی الهام‌بخشی برای نوآوری مستمر.</p>
-              <cite>— رسول آنلیمیتد</cite>
-            </blockquote>
-            <blockquote cite="/quotes.html">
-              <p><a href="/concepts/visual-identity-loop/" title="فرایند تکراری بهبود عناصر برند بر اساس بازخورد">حلقه هویت بصری</a> تضمین می‌کند که هر بازخورد، تصویر برند را شفاف‌تر می‌کند.</p>
-              <cite>— رسول آنلیمیتد</cite>
-            </blockquote>
-</section>
+
+            <div class="quotes-grid">
+              <figure class="quote-card" id="q-digital-culture">
+                <blockquote cite="/quotes.html">
+                  <p>
+                    فرهنگ دیجیتال فقط درباره ابزار نیست، بلکه درباره انسان‌هایی
+                    است که از آن استفاده می‌کنند.
+                  </p>
+                </blockquote>
+                <figcaption>
+                  <span class="quote-author">— رسول آنلیمیتد</span>
+                  <button
+                    class="icon-button copy-quote-button"
+                    type="button"
+                    data-quote-target="q-digital-culture"
+                    aria-label="کپی این نقل‌قول"
+                    title="کپی نقل‌قول"
+                  >
+                    <i class="fas fa-copy" aria-hidden="true"></i>
+                  </button>
+                </figcaption>
+              </figure>
+
+              <figure class="quote-card" id="q-technology-power">
+                <blockquote cite="/quotes.html">
+                  <p>
+                    قدرت فناوری زمانی شکوفا می‌شود که آن را در خدمت همگان قرار
+                    دهیم.
+                  </p>
+                </blockquote>
+                <figcaption>
+                  <span class="quote-author">— رسول آنلیمیتد</span>
+                  <button
+                    class="icon-button copy-quote-button"
+                    type="button"
+                    data-quote-target="q-technology-power"
+                    aria-label="کپی این نقل‌قول"
+                    title="کپی نقل‌قول"
+                  >
+                    <i class="fas fa-copy" aria-hidden="true"></i>
+                  </button>
+                </figcaption>
+              </figure>
+
+              <figure class="quote-card" id="q-digital-leadership">
+                <blockquote cite="/quotes.html">
+                  <p>
+                    رهبری در دنیای دیجیتال یعنی الهام‌بخشی برای نوآوری مستمر.
+                  </p>
+                </blockquote>
+                <figcaption>
+                  <span class="quote-author">— رسول آنلیمیتد</span>
+                  <button
+                    class="icon-button copy-quote-button"
+                    type="button"
+                    data-quote-target="q-digital-leadership"
+                    aria-label="کپی این نقل‌قول"
+                    title="کپی نقل‌قول"
+                  >
+                    <i class="fas fa-copy" aria-hidden="true"></i>
+                  </button>
+                </figcaption>
+              </figure>
+
+              <figure class="quote-card" id="q-visual-identity-loop">
+                <blockquote cite="/quotes.html">
+                  <p>
+                    <a
+                      href="/concepts/visual-identity-loop/"
+                      title="فرایند تکراری بهبود عناصر برند بر اساس بازخورد"
+                      >حلقه هویت بصری</a
+                    >
+                    تضمین می‌کند که هر بازخورد، تصویر برند را شفاف‌تر می‌کند.
+                  </p>
+                </blockquote>
+                <figcaption>
+                  <span class="quote-author">— رسول آنلیمیتد</span>
+                  <button
+                    class="icon-button copy-quote-button"
+                    type="button"
+                    data-quote-target="q-visual-identity-loop"
+                    aria-label="کپی این نقل‌قول"
+                    title="کپی نقل‌قول"
+                  >
+                    <i class="fas fa-copy" aria-hidden="true"></i>
+                  </button>
+                </figcaption>
+              </figure>
+            </div>
+
+            <p class="quotes-footer-note">
+              در صورت استفاده از این نقل‌قول‌ها در
+              <strong>مقالات، کتاب‌ها یا مستندها</strong>، می‌توانید برای دریافت
+              توضیح تکمیلی یا نسخهٔ دقیق انگلیسی با
+              <a href="/contact.html">خودم در تماس باشید</a>.
+            </p>
+          </section>
         </main>
       </div>
     </div>
+
     <noscript>
       <footer class="footer">
-        <p>&copy; <span id="footer-year"></span> Rasoul Unlimited</p>
+        <p>
+          &copy;
+          <span id="footer-year"></span>
+          Rasoul Unlimited
+        </p>
       </footer>
     </noscript>
+
     <div data-include-html="includes/footer.html"></div>
+
     <script src="assets/js/include.min.js" defer></script>
     <script src="assets/js/main-script-fa.min.js" defer></script>
+    <script>
+      // اسکریپت کوچک برای کپی نقل‌قول‌ها (هماهنگ با CSP: در صورت نیاز می‌توانی به فایل جدا منتقلش کنی)
+      document.addEventListener("DOMContentLoaded", function () {
+        var buttons = document.querySelectorAll(".copy-quote-button");
+        if (!buttons.length || !navigator.clipboard) return;
+
+        buttons.forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            var targetId = btn.getAttribute("data-quote-target");
+            var figure = document.getElementById(targetId);
+            if (!figure) return;
+            var text = figure.querySelector("blockquote p")?.innerText || "";
+            var author = figure.querySelector(".quote-author")?.innerText || "";
+            var fullText = text + "\n" + author + " — rasoulunlimited.ir/quotes.html";
+
+            navigator.clipboard
+              .writeText(fullText.trim())
+              .then(function () {
+                btn.classList.add("copied");
+                btn.setAttribute("aria-label", "کپی شد");
+                setTimeout(function () {
+                  btn.classList.remove("copied");
+                  btn.setAttribute("aria-label", "کپی این نقل‌قول");
+                }, 2000);
+              })
+              .catch(function () {
+                console.warn("Clipboard copy failed");
+              });
+          });
+        });
+      });
+    </script>
   </body>
 </html>

@@ -2,71 +2,175 @@
 <html lang="en-US" xml:lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+    <!-- Performance & Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
     <link rel="preconnect" href="https://cdn.jsdelivr.net" />
-    <link rel="preload" as="style" data-href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;700&display=swap" data-make-stylesheet />
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;700&display=swap" /></noscript>
-    <link rel="preload" as="style" data-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" data-make-stylesheet />
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" /></noscript>
-    <title>Rasoul Unlimited Resume</title>
-    <meta name="description" content="Summary of education, work experience and awards for Mohammad Rasoul Sohrabi." />
+    <link rel="preconnect" href="https://api.github.com" />
+
+    <link
+      rel="preload"
+      as="style"
+      data-href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;700&display=swap"
+      data-make-stylesheet
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;700&display=swap"
+      />
+    </noscript>
+
+    <link
+      rel="preload"
+      as="style"
+      data-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      data-make-stylesheet
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      />
+    </noscript>
+
+    <title>Rasoul Unlimited — Resume</title>
+    <meta
+      name="description"
+      content="Structured overview of the education, skills, professional experience and honors of Mohammad Rasoul Sohrabi (Rasoul Unlimited)."
+    />
+
+    <!-- Styles -->
     <link rel="stylesheet" href="../assets/css/design-system.min.css" />
     <link rel="stylesheet" href="../assets/css/main-style-en.min.css" />
+    <!-- Optional dedicated resume stylesheet -->
+    <!-- <link rel="stylesheet" href="../assets/css/resume-style.min.css" /> -->
+
     <script src="../assets/js/performance-helpers.min.js" defer></script>
+
+    <!-- Canonical & Author -->
     <link rel="canonical" href="https://rasoulunlimited.ir/en/resume.html" />
-    <link rel="author" href="https://rasoulunlimited.ir/#person" data-person="rasoul-unlimited" />
+    <link
+      rel="author"
+      href="https://rasoulunlimited.ir/#person"
+      data-person="rasoul-unlimited"
+    />
+
+    <!-- SEO Meta -->
     <meta name="robots" content="index, follow" />
     <meta name="citation_title" content="Rasoul Unlimited Resume" />
     <meta name="dcterms.creator" content="Mohammad Rasoul Sohrabi" />
-    <meta name="dc.identifier" content="https://rasoulunlimited.ir/en/resume.html" />
-    <link rel="alternate" href="https://rasoulunlimited.ir/resume.html" hreflang="fa-IR" />
-    <link rel="alternate" href="https://rasoulunlimited.ir/en/resume.html" hreflang="en-US" />
-    <link rel="alternate" href="https://rasoulunlimited.ir/resume.html" hreflang="x-default" />
+    <meta
+      name="dc.identifier"
+      content="https://rasoulunlimited.ir/en/resume.html"
+    />
+
+    <!-- Hreflang -->
+    <link
+      rel="alternate"
+      href="https://rasoulunlimited.ir/resume.html"
+      hreflang="fa-IR"
+    />
+    <link
+      rel="alternate"
+      href="https://rasoulunlimited.ir/en/resume.html"
+      hreflang="en-US"
+    />
+    <link
+      rel="alternate"
+      href="https://rasoulunlimited.ir/resume.html"
+      hreflang="x-default"
+    />
+
+    <!-- Color scheme -->
     <meta name="color-scheme" content="light dark" />
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0f172a" />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: light)"
+      content="#ffffff"
+    />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: dark)"
+      content="#0f172a"
+    />
+
+    <!-- Open Graph -->
     <meta property="og:type" content="profile" />
-    <meta property="og:url" content="https://rasoulunlimited.ir/en/resume.html" />
-    <meta property="og:title" content="Rasoul Unlimited Resume" />
-    <meta property="og:description" content="Summary of education, work experience and awards for Mohammad Rasoul Sohrabi." />
-    <meta property="og:image" content="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp" />
-    <meta property="og:image:alt" content="Portrait of Mohammad Rasoul Sohrabi" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@rasoulunlimited" />
+    <meta
+      property="og:url"
+      content="https://rasoulunlimited.ir/en/resume.html"
+    />
+    <meta property="og:title" content="Rasoul Unlimited — Resume" />
+    <meta
+      property="og:description"
+      content="Summary of the education, skills, experience and awards of Mohammad Rasoul Sohrabi (Rasoul Unlimited)."
+    />
+    <meta
+      property="og:image"
+      content="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp"
+    />
+    <meta
+      property="og:image:alt"
+      content="Verified portrait of Mohammad Rasoul Sohrabi"
+    />
     <meta property="og:image:width" content="220" />
     <meta property="og:image:height" content="220" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="fa_IR" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@rasoulunlimited" />
     <meta name="twitter:creator" content="@rasoulunlimited" />
-    <meta name="twitter:title" content="Rasoul Unlimited Resume" />
-    <meta name="twitter:description" content="Summary of education, work experience and awards for Mohammad Rasoul Sohrabi." />
-    <meta name="twitter:image" content="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp" />
-    <meta name="twitter:image:alt" content="Portrait of Mohammad Rasoul Sohrabi" />
+    <meta name="twitter:title" content="Rasoul Unlimited — Resume" />
+    <meta
+      name="twitter:description"
+      content="Structured resume of Mohammad Rasoul Sohrabi (Rasoul Unlimited), full-stack developer and creator of the first officially verified Persian Discord bot."
+    />
+    <meta
+      name="twitter:image"
+      content="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp"
+    />
+    <meta
+      name="twitter:image:alt"
+      content="Verified portrait of Mohammad Rasoul Sohrabi"
+    />
+
+    <!-- Schema.org Person -->
     <script type="application/ld+json" nonce="RasoulCSP">
       {
         "@context": "https://schema.org",
         "@type": "Person",
+        "@id": "https://rasoulunlimited.ir/#person",
         "name": "Mohammad Rasoul Sohrabi",
         "alternateName": "Rasoul Unlimited",
         "url": "https://rasoulunlimited.ir/",
+        "image": "https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp",
         "jobTitle": "Full-stack Developer",
         "worksFor": {
           "@type": "Organization",
+          "@id": "https://rasoulunlimited.ir/#organization",
           "name": "Rasoul Unlimited",
           "url": "https://rasoulunlimited.ir/"
         },
         "alumniOf": {
           "@type": "EducationalOrganization",
+          "@id": "https://ctb.iau.ir",
           "name": "Islamic Azad University, Central Tehran Branch",
           "url": "https://ctb.iau.ir"
         },
         "award": [
           {
             "@type": "Award",
-            "name": "Official Verification of the First Persian Discord Bot by Discord Inc.",
+            "name": "Official verification of the first Persian Discord bot",
             "awardedBy": {
               "@type": "Organization",
               "name": "Discord Inc.",
@@ -76,11 +180,23 @@
           },
           {
             "@type": "Award",
-            "name": "Official 1st Dan from the Karate Federation of the Islamic Republic of Iran"
+            "name": "Official 1st Dan Karate",
+            "awardedBy": {
+              "@type": "Organization",
+              "name": "Karate Federation of the Islamic Republic of Iran",
+              "url": "https://ikf.ir/"
+            }
           }
+        ],
+        "sameAs": [
+          "https://github.com/RasoulUnlimited",
+          "https://keybase.io/rasoulunlimited",
+          "https://x.com/rasoulunlimited"
         ]
       }
     </script>
+
+    <!-- Schema.org EducationalOrganization (University) -->
     <script type="application/ld+json" nonce="RasoulCSP">
       {
         "@context": "https://schema.org",
@@ -96,12 +212,14 @@
         }
       }
     </script>
+
+    <!-- Schema.org WebPage (Resume) -->
     <script type="application/ld+json" nonce="RasoulCSP">
       {
         "@context": "https://schema.org",
         "@type": "WebPage",
         "url": "https://rasoulunlimited.ir/en/resume.html",
-        "name": "Rasoul Unlimited Resume",
+        "name": "Rasoul Unlimited — Resume",
         "isPartOf": { "@id": "https://rasoulunlimited.ir/#website" },
         "author": { "@id": "https://rasoulunlimited.ir/#person" },
         "publisher": { "@id": "https://rasoulunlimited.ir/#organization" },
@@ -114,9 +232,11 @@
         }
       }
     </script>
+
     <link rel="entity-profile" href="/.well-known/entity-profile.json" />
   </head>
-  <body>
+  <body class="resume-page">
+    <!-- Fallback navigation when JS is disabled -->
     <noscript>
       <header class="navbar" role="banner">
         <nav role="navigation" aria-label="Main site links">
@@ -126,36 +246,302 @@
           <a href="/en/press.html">Press</a>
           <a href="/en/faq/">FAQ</a>
           <a href="/en/contact.html">Contact</a>
-          <a href="/en/resume.html">Resume</a>
+          <a href="/en/resume.html" aria-current="page">Resume</a>
         </nav>
       </header>
     </noscript>
+
+    <!-- Dynamic header include -->
     <div data-include-html="../includes/header-en.html"></div>
-    <main id="main-content" class="container">
-      <h1>Rasoul Unlimited’s Resume</h1>
-      <section>
-        <h2>Education</h2>
-        <p>Biomedical engineering student at the Islamic Azad University, Central Tehran Branch.</p>
+
+    <main id="main-content" class="container resume-container">
+      <!-- Hero / Top section -->
+      <section
+        id="resume-hero"
+        class="card resume-hero"
+        role="region"
+        aria-labelledby="resume-title"
+      >
+        <div class="resume-hero-grid">
+          <div class="hero-text-block">
+            <h1 id="resume-title">Rasoul Unlimited — Resume</h1>
+            <p class="resume-subtitle">
+              Mohammad Rasoul Sohrabi — full-stack developer, bot builder and
+              digital identity systems designer.
+            </p>
+            <p class="resume-meta">
+              <span>
+                <i class="fas fa-location-dot" aria-hidden="true"></i>
+                Based in Iran
+              </span>
+              <span>
+                <i class="fas fa-code" aria-hidden="true"></i>
+                Full-stack · Open Source
+              </span>
+            </p>
+            <div class="resume-cta-group">
+              <a
+                href="/en/contact.html"
+                class="cta-button"
+                aria-label="Contact for collaboration or new projects"
+              >
+                Collaboration &amp; projects
+              </a>
+              <a
+                href="mailto:rasoul.unlimited@gmail.com?subject=Collaboration%20Request"
+                class="ghost-button"
+              >
+                Email directly
+              </a>
+            </div>
+          </div>
+          <div class="hero-avatar-block">
+            <img
+              src="../assets/images/RasoulUnlimited.webp"
+              loading="eager"
+              decoding="async"
+              width="220"
+              height="220"
+              class="profile-image"
+              alt="Verified portrait of Mohammad Rasoul Sohrabi (Rasoul Unlimited)"
+            />
+            <ul class="resume-links">
+              <li>
+                <a
+                  href="https://github.com/RasoulUnlimited"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Rasoul Unlimited on GitHub"
+                >
+                  <i class="fab fa-github" aria-hidden="true"></i> GitHub
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://keybase.io/rasoulunlimited"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i class="fas fa-key" aria-hidden="true"></i> Keybase
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://x.com/rasoulunlimited"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i class="fab fa-x-twitter" aria-hidden="true"></i> X (Twitter)
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </section>
-      <section>
-        <h2>Experience</h2>
-        <p>Full-stack developer and content strategist working on open-source and personal projects.</p>
+
+      <!-- Professional Summary -->
+      <section
+        id="summary"
+        class="card resume-section"
+        aria-labelledby="summary-heading"
+      >
+        <h2 id="summary-heading">Professional Summary</h2>
+        <p>
+          Full-stack developer focused on modern web, conversational bots and
+          lightweight infrastructure based on GitHub Pages and Cloudflare.
+          Creator of the first Persian-language Discord bot to be officially
+          verified by <span lang="en">Discord Inc.</span>, enabling Persian
+          communities to use Discord in their native language with an emphasis
+          on safety and moderation. Passionate about open standards, verifiable
+          digital identity and clear technical documentation for developers,
+          journalists and security researchers.
+        </p>
       </section>
-      <section>
-        <h2>Awards</h2>
-        <ul>
-          <li>Official verification of the first Persian Discord bot by Discord in 2020</li>
-          <li>1st Dan certification from the Karate Federation of the Islamic Republic of Iran</li>
+
+      <!-- Education -->
+      <section
+        id="education"
+        class="card resume-section"
+        aria-labelledby="education-heading"
+      >
+        <h2 id="education-heading">Education</h2>
+        <article class="resume-item">
+          <h3>Bachelor’s in Biomedical Engineering (in progress)</h3>
+          <p class="resume-item-meta">
+            Islamic Azad University, Central Tehran Branch
+          </p>
+          <p>
+            Combining engineering, medicine and programming to better understand
+            complex systems, signal processing and the design of software tools
+            related to human performance and digital health.
+          </p>
+        </article>
+      </section>
+
+      <!-- Experience -->
+      <section
+        id="experience"
+        class="card resume-section"
+        aria-labelledby="experience-heading"
+      >
+        <h2 id="experience-heading">Experience</h2>
+
+        <article class="resume-item">
+          <h3>Full-stack Developer &amp; Systems Architect — Rasoul Unlimited</h3>
+          <p class="resume-item-meta">
+            Independent, open-source and personal projects
+          </p>
+          <ul>
+            <li>
+              Designed and built the
+              <strong>first officially verified Persian Discord bot</strong>,
+              including multilingual command handling, server management tools
+              and community-driven features.
+            </li>
+            <li>
+              Implemented a personal web stack based on
+              <span lang="en">GitHub Pages</span> and
+              <span lang="en">Cloudflare</span>
+              with a strong focus on security (strict Content Security Policy,
+              security.txt, PGP, and structured digital identity endpoints).
+            </li>
+            <li>
+              Developed tools, scripts and small libraries for content
+              automation, digital identity analysis and profile optimization for
+              online presence.
+            </li>
+          </ul>
+        </article>
+
+        <article class="resume-item">
+          <h3>Open-source Contributor</h3>
+          <p class="resume-item-meta">
+            GitHub — community-driven and experimental projects
+          </p>
+          <ul>
+            <li>
+              Contributed to public repositories focused on Discord bots, CLI
+              tools and educational examples for Persian-speaking developers.
+            </li>
+            <li>
+              Wrote bilingual (English / Persian) documentation to improve
+              developer experience and knowledge sharing.
+            </li>
+          </ul>
+        </article>
+      </section>
+
+      <!-- Skills -->
+      <section
+        id="skills"
+        class="card resume-section"
+        aria-labelledby="skills-heading"
+      >
+        <h2 id="skills-heading">Skills</h2>
+        <div class="resume-skills-grid">
+          <div>
+            <h3>Languages &amp; Technologies</h3>
+            <ul>
+              <li>Python, C, JavaScript, HTML, CSS</li>
+              <li>Discord bot development and API-driven services</li>
+              <li>Git, GitHub and CI-oriented workflows</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Web &amp; Infrastructure</h3>
+            <ul>
+              <li>GitHub Pages, Cloudflare, DNS and performance tuning</li>
+              <li>
+                Implementation of strict
+                <span lang="en">Content Security Policy (CSP)</span>
+              </li>
+              <li>
+                Digital identity standards
+                (security.txt, JSON-LD, WebFinger and related
+                <code>.well-known</code> endpoints)
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3>Focus Areas</h3>
+            <ul>
+              <li>Design of authority and digital prestige systems</li>
+              <li>Developer-centric UX and technical storytelling</li>
+              <li>Bridging technical depth with personal branding</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Honors & Awards -->
+      <section
+        id="honors"
+        class="card resume-section"
+        aria-labelledby="honors-heading"
+      >
+        <h2 id="honors-heading">Honors &amp; Awards</h2>
+        <ul class="resume-honors-list">
+          <li>
+            Official verification of the
+            <strong>first Persian Discord bot</strong> by
+            <span lang="en">Discord Inc.</span> in 2020 &mdash; later analyzed
+            as a case study in the
+            <a
+              href="/concepts/authority-feedback-system/"
+              rel="bookmark"
+              lang="en"
+              >Authority Feedback System</a
+            >
+            concept.
+          </li>
+          <li>
+            <strong>1st Dan Karate</strong> certification from the Karate
+            Federation of the Islamic Republic of Iran.
+          </li>
+        </ul>
+      </section>
+
+      <!-- Additional Information / Links -->
+      <section
+        id="more-info"
+        class="card resume-section"
+        aria-labelledby="more-info-heading"
+      >
+        <h2 id="more-info-heading">Additional Information</h2>
+        <p>
+          For more context on background, philosophy and long-term projects, see
+          the following resources:
+        </p>
+        <ul class="resume-links-list">
+          <li>
+            <a href="/wiki/rasoul-unlimited/">Professional biography &rarr;</a>
+          </li>
+          <li>
+            <a href="/quotes.html">Selected quotes and key ideas &rarr;</a>
+          </li>
+          <li>
+            <a href="/projects/">Projects and code samples &rarr;</a>
+          </li>
+          <li>
+            <a href="/press.html">Media, interviews and press mentions &rarr;</a>
+          </li>
         </ul>
       </section>
     </main>
-    <p><a href="/wiki/rasoul-unlimited/">Professional biography</a></p>
+
     <noscript>
       <footer class="footer">
-        <p>&copy; <span id="footer-year"></span> Rasoul Unlimited</p>
+        <p>
+          &copy;
+          <span id="footer-year"></span>
+          Rasoul Unlimited
+        </p>
+        <p><a href="/wiki/rasoul-unlimited/">Professional biography</a></p>
       </footer>
     </noscript>
+
     <div data-include-html="../includes/footer.html"></div>
+
     <script src="../assets/js/include.min.js" defer></script>
     <script src="../assets/js/main-script-en.min.js" defer></script>
   </body>
