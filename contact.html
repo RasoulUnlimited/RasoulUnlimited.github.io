@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <!-- Preconnect to necessary domains for faster resource loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,35 +17,47 @@
       data-href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;700&display=swap"
       data-make-stylesheet
     />
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;700&display=swap" /></noscript>
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;700&display=swap"
+      />
+    </noscript>
     <link
       rel="preload"
       as="style"
       data-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
       data-make-stylesheet
     />
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" /></noscript>
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      />
+    </noscript>
+
     <title>تماس با رسول آنلیمیتد</title>
     <meta
       name="description"
-      content="راه‌های ارتباط با محمد رسول سهرابی برای همکاری یا پرسش‌های حرفه‌ای."
+      content="راه‌های ارتباط حرفه‌ای با محمد رسول سهرابی (Rasoul Unlimited) برای همکاری، مشاوره، دعوت به مصاحبه یا پرسش‌های تخصصی."
     />
+
     <link rel="stylesheet" href="assets/css/design-system.min.css" />
     <link rel="stylesheet" href="assets/css/main-style-fa.min.css" />
     <script src="assets/js/performance-helpers.min.js" defer></script>
+
     <link rel="canonical" href="https://rasoulunlimited.ir/contact.html" />
     <link
       rel="author"
       href="https://rasoulunlimited.ir/#person"
       data-person="rasoul-unlimited"
     />
+
     <meta name="robots" content="index, follow" />
     <meta name="citation_title" content="تماس با رسول آنلیمیتد" />
     <meta name="dcterms.creator" content="Mohammad Rasoul Sohrabi" />
-    <meta
-      name="dc.identifier"
-      content="https://rasoulunlimited.ir/contact.html"
-    />
+    <meta name="dc.identifier" content="https://rasoulunlimited.ir/contact.html" />
+
     <link
       rel="alternate"
       href="https://rasoulunlimited.ir/contact.html"
@@ -66,10 +79,11 @@
       href="/schema/identity.jsonld"
     />
     <link
-    rel="alternate"
-    type="application/ld+json"
-    href="/schema/brand.jsonld"
-  />
+      rel="alternate"
+      type="application/ld+json"
+      href="/schema/brand.jsonld"
+    />
+
     <meta name="color-scheme" content="light dark" />
     <meta
       name="theme-color"
@@ -81,12 +95,13 @@
       media="(prefers-color-scheme: dark)"
       content="#0f172a"
     />
+
     <meta property="og:type" content="profile" />
     <meta property="og:url" content="https://rasoulunlimited.ir/contact.html" />
     <meta property="og:title" content="تماس با رسول آنلیمیتد" />
     <meta
       property="og:description"
-      content="راه‌های ارتباط با محمد رسول سهرابی برای همکاری یا پرسش‌های حرفه‌ای."
+      content="مسیرهای مطمئن برای ارتباط با محمد رسول سهرابی (Rasoul Unlimited) جهت همکاری، مصاحبه و پروژه‌های مشترک."
     />
     <meta
       property="og:image"
@@ -100,13 +115,14 @@
     <meta property="og:image:height" content="220" />
     <meta property="og:locale" content="fa_IR" />
     <meta property="og:locale:alternate" content="en_US" />
+
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@rasoulunlimited" />
     <meta name="twitter:creator" content="@rasoulunlimited" />
     <meta name="twitter:title" content="تماس با رسول آنلیمیتد" />
     <meta
       name="twitter:description"
-      content="راه‌های ارتباط با محمد رسول سهرابی برای همکاری یا پرسش‌های حرفه‌ای."
+      content="راه‌های ارتباط حرفه‌ای با محمد رسول سهرابی برای همکاری، مصاحبه و سوالات تخصصی."
     />
     <meta
       name="twitter:image"
@@ -116,19 +132,35 @@
       name="twitter:image:alt"
       content="Portrait of Mohammad Rasoul Sohrabi"
     />
+
+    <!-- Structured Data: ContactPage + Person + ContactPoint -->
     <script type="application/ld+json" nonce="RasoulCSP">
       {
         "@context": "https://schema.org",
         "@type": "ContactPage",
         "url": "https://rasoulunlimited.ir/contact.html",
+        "name": "تماس با رسول آنلیمیتد",
+        "inLanguage": "fa-IR",
         "mainEntity": {
           "@type": "Person",
+          "@id": "https://rasoulunlimited.ir/#person",
           "name": "Mohammad Rasoul Sohrabi",
           "alternateName": "Rasoul Unlimited",
-          "url": "https://rasoulunlimited.ir"
+          "url": "https://rasoulunlimited.ir",
+          "contactPoint": [
+            {
+              "@type": "ContactPoint",
+              "contactType": "business",
+              "email": "rasoul.unlimited@gmail.com",
+              "areaServed": "IR",
+              "availableLanguage": ["fa", "en"]
+            }
+          ]
         }
       }
     </script>
+
+    <!-- WebPage metadata -->
     <script type="application/ld+json" nonce="RasoulCSP">
       {
         "@context": "https://schema.org",
@@ -146,6 +178,7 @@
         }
       }
     </script>
+
     <link rel="entity-profile" href="/.well-known/entity-profile.json" />
   </head>
   <body>
@@ -157,14 +190,17 @@
           <a href="/proof.html">گواهی‌ها</a>
           <a href="/press.html">رسانه</a>
           <a href="/faq/">سوالات متداول</a>
-          <a href="/contact.html">تماس</a>
+          <a href="/contact.html" aria-current="page">تماس</a>
         </nav>
       </header>
     </noscript>
+
     <div data-include-html="includes/header-fa.html"></div>
+
     <div class="container">
       <div class="content-area">
         <main id="main-content">
+          <!-- Hero / Intro -->
           <section
             id="hero"
             class="fade-in"
@@ -182,36 +218,63 @@
               title="Rasoul Unlimited profile image"
             />
             <p class="tagline hero-tagline" id="hero-tagline">
-              برای همکاری یا پرسش‌های حرفه‌ای در تماس باشید
+              برای همکاری‌های جدی، مصاحبه‌ها و سوالات تخصصی در تماس باشید
             </p>
           </section>
+
           <h1 data-person="rasoul-unlimited">تماس با رسول آنلیمیتد</h1>
-          <section id="contact-info" aria-labelledby="contact-info-heading">
-            <h2 id="contact-info-heading">اطلاعات تماس</h2>
+          <p class="intro-text">
+            این صفحه امن‌ترین و رسمی‌ترین راه ارتباط با
+            <strong>Mohammad Rasoul Sohrabi (Rasoul Unlimited)</strong> است. برای
+            همکاری، دعوت به گفتگو، مصاحبه، پروژه‌های متن‌باز، یا پرسش‌های
+            حرفه‌ای در حوزه‌های <span lang="en">software</span>، برند شخصی و
+            <span lang="en">digital health</span> می‌توانید از راه‌های زیر
+            استفاده کنید.
+          </p>
+
+          <!-- Contact Info Cards -->
+          <section
+            id="contact-info"
+            aria-labelledby="contact-info-heading"
+            class="section"
+          >
+            <h2 id="contact-info-heading">اطلاعات تماس و لینک‌های رسمی</h2>
+            <p class="section-lead">
+              برای اعتبارسنجی یا ارتباط مستقیم، از کانال‌های زیر استفاده کنید.
+              همهٔ این حساب‌ها به همین دامنه متصل‌اند و امکان
+              <span lang="en">cross-verification</span> را فراهم می‌کنند.
+            </p>
+
             <div class="grid grid-4">
+              <!-- Email -->
               <div class="card-basic">
                 <img
                   src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJjdXJyZW50Q29sb3IiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIyIiB5PSI0IiB3aWR0aD0iMjAiIGhlaWdodD0iMTYiIHJ4PSIyIiByeT0iMiIvPjxwb2x5bGluZSBwb2ludHM9IjIyLDQgMTIsMTMgMiw0Ii8+PC9zdmc+"
-                  alt="ایمیل"
+                  alt=""
                   width="48"
                   height="48"
                   loading="lazy"
-                  title="Email icon"
+                  title="آیکن ایمیل"
                   aria-hidden="true"
                 />
-                <h3>ایمیل</h3>
+                <h3>ایمیل اصلی</h3>
                 <p class="credential-summary">
+                  برای ارتباط رسمی و مکاتبات قابل استناد:
+                  <br />
                   <a
                     data-person="rasoul-unlimited"
                     href="mailto:rasoul.unlimited@gmail.com"
-                    >rasoul.unlimited@gmail.com</a
                   >
+                    rasoul.unlimited@gmail.com
+                  </a>
                 </p>
               </div>
+
+              <!-- GitHub -->
               <div class="card-basic">
                 <img
                   src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iY3VycmVudENvbG9yIj48cGF0aCBkPSJNMTIgLjVhMTIgMTIgMCAwMC0zLjc5IDIzLjRjLjYuMS44Mi0uMjYuODItLjU4di0yLjAyYy0zLjM0LjczLTQuMDQtMS42NC00LjA0LTEuNjQtLjU1LTEuNC0xLjM0LTEuNzctMS4zNC0xLjc3LTEuMS0uNzUuMDgtLjc0LjA4LS43NCAxLjIyLjA5IDEuODYgMS4yNiAxLjg2IDEuMjYgMS4wOCAxLjg2IDIuODMgMS4zMiAzLjUyIDEgLjExLS43OC40Mi0xLjMyLjc2LTEuNjMtMi42Ni0uMy01LjQ3LTEuMzMtNS40Ny01LjkzIDAtMS4zMS40Ny0yLjM4IDEuMjQtMy4yMi0uMTItLjMtLjU0LTEuNTIuMTItMy4xNyAwIDAgMS4wMS0uMzIgMy4zIDEuMjNhMTEuNSAxMS41IDAgMDE2IDBjMi4yOS0xLjU1IDMuMy0xLjIzIDMuMy0xLjIzLjY2IDEuNjUuMjQgMi44Ny4xMiAzLjE3Ljc3Ljg0IDEuMjQgMS45MSAxLjI0IDMuMjIgMCA0LjYxLTIuODEgNS42My01LjQ5IDUuOTMuNDMuMzcuODIgMS4xLjgyIDIuMjJ2My4yOWMwIC4zMi4yMi42OS44Mi41OEExMiAxMiAwIDAwMTIgLjV6Ii8+PC9zdmc+"
-                  alt="GitHub"
+                  alt=""
                   width="48"
                   height="48"
                   loading="lazy"
@@ -220,18 +283,23 @@
                 />
                 <h3>GitHub</h3>
                 <p class="credential-summary">
+                  ریپازیتوری‌های متن‌باز و کدهای قابل بررسی:
+                  <br />
                   <a
                     href="https://github.com/RasoulUnlimited"
                     target="_blank"
-                    rel="authoritative noopener noreferrer"
-                    >github.com/RasoulUnlimited</a
+                    rel="authoritative noopener noreferrer me"
                   >
+                    github.com/RasoulUnlimited
+                  </a>
                 </p>
               </div>
+
+              <!-- LinkedIn -->
               <div class="card-basic">
                 <img
                   src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iY3VycmVudENvbG9yIj48cGF0aCBkPSJNNC45OCAzLjVDNC45OCA0Ljg4IDMuODYgNiAyLjUgNlMwIDQuODggMCAzLjUgMS4xMiAxIDIuNSAxczIuNDggMS4xMiAyLjQ4IDIuNXpNLjUgOC41aDRWMjNoLTR6TTguNSA4LjVoMy43OXYyLjFoLjA1Yy41My0xIDEuODMtMi4wNSAzLjc3LTIuMDUgNC4wMyAwIDQuNzggMi42NSA0Ljc4IDYuMVYyM2gtNFYxNS4xYzAtMS44OC0uMDMtNC4zLTIuNjItNC4zLTIuNjIgMC0zLjAyIDIuMDUtMy4wMiA0LjE3VjIzaC00eiIvPjwvc3ZnPg=="
-                  alt="LinkedIn"
+                  alt=""
                   width="48"
                   height="48"
                   loading="lazy"
@@ -240,61 +308,145 @@
                 />
                 <h3>LinkedIn</h3>
                 <p class="credential-summary">
+                  برای همکاری‌های حرفه‌ای، پیشنهاد پروژه و شبکه‌سازی:
+                  <br />
                   <a
                     href="https://www.linkedin.com/in/rasoulunlimited/"
                     target="_blank"
-                    rel="authoritative noopener noreferrer"
-                    >linkedin.com/in/rasoulunlimited</a
+                    rel="authoritative noopener noreferrer me"
                   >
+                    linkedin.com/in/rasoulunlimited
+                  </a>
                 </p>
               </div>
+
+              <!-- Instagram -->
               <div class="card-basic">
-                <i class="fab fa-instagram" aria-hidden="true" style="font-size: 48px;"></i>
+                <i
+                  class="fab fa-instagram"
+                  aria-hidden="true"
+                  style="font-size: 48px;"
+                ></i>
                 <h3>Instagram</h3>
                 <p class="credential-summary">
+                  برای دنبال‌کردن پشت‌صحنه‌ها و روایت شخصی:
+                  <br />
                   <a
                     href="https://www.instagram.com/Rasoul.Unlimited"
                     target="_blank"
                     rel="authoritative noopener noreferrer me"
                     aria-label="Follow Rasoul on Instagram"
                     title="Connect on Instagram"
-                    ><i class="fab fa-instagram" aria-hidden="true"></i>
-                    Follow on Instagram</a
                   >
+                    <i class="fab fa-instagram" aria-hidden="true"></i>
+                    دنبال کردن در اینستاگرام
+                  </a>
                 </p>
               </div>
             </div>
+          </section>
+
+          <!-- Contact Form -->
+          <section
+            id="contact-form-section"
+            class="section"
+            aria-labelledby="contact-form-heading"
+          >
+            <h2 id="contact-form-heading">فرم تماس مستقیم</h2>
+            <p class="section-lead">
+              برای پیام‌های جدی، لطفاً فرم زیر را با توضیح شفاف دربارهٔ موضوع
+              همکاری یا سوال خود پر کنید. پاسخ‌ها معمولاً در بازهٔ منطقی و
+              متناسب با حجم درخواست‌ها ارسال می‌شوند.
+            </p>
+
             <form
               id="contact-form"
               action="https://formspree.io/f/xkgbkdyr"
               method="POST"
               class="contact-form"
+              accept-charset="UTF-8"
             >
-              <label for="name">نام</label>
-              <input id="name" name="name" autocomplete="name" required />
-              <label for="email">ایمیل</label>
-              <input id="email" name="_replyto" type="email" autocomplete="email" required />
-              <label for="message">پیام</label>
-              <textarea id="message" name="message" autocomplete="message" required></textarea>
-              <button type="submit" class="cta-button">ارسال</button>
+              <!-- Honeypot anti-spam field -->
+              <div class="visually-hidden" aria-hidden="true">
+                <label for="website">اگر انسان هستید این فیلد را خالی بگذارید</label>
+                <input
+                  id="website"
+                  name="website"
+                  type="text"
+                  tabindex="-1"
+                  autocomplete="off"
+                />
+              </div>
+
+              <input
+                type="hidden"
+                name="_subject"
+                value="New message via RasoulUnlimited.ir (FA Contact Form)"
+              />
+              <input
+                type="hidden"
+                name="source"
+                value="rasoulunlimited.ir/contact.html"
+              />
+
+              <label for="name">نام کامل</label>
+              <input
+                id="name"
+                name="name"
+                autocomplete="name"
+                required
+                inputmode="text"
+              />
+
+              <label for="email">ایمیل برای پاسخ</label>
+              <input
+                id="email"
+                name="_replyto"
+                type="email"
+                autocomplete="email"
+                required
+                inputmode="email"
+              />
+
+              <label for="message">پیام شما</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="6"
+                required
+              ></textarea>
+
+              <p class="form-hint">
+                لطفاً در صورت امکان لینک‌های مرتبط (GitHub، LinkedIn، یا نمونه
+                کار) را هم در متن پیام وارد کنید تا بررسی سریع‌تر انجام شود.
+              </p>
+
+              <button type="submit" class="cta-button">
+                ارسال پیام
+              </button>
             </form>
           </section>
+
+          <!-- Extra CTAs -->
           <p class="cta">
             <a href="/wiki/rasoul-unlimited/">معرفی کامل در ویکی &rarr;</a>
-            <a href="/concepts/authority-feedback-system/" lang="en"
-              >Authority Feedback System &rarr;</a
-            >
+            <a href="/concepts/authority-feedback-system/" lang="en">
+              Authority Feedback System &rarr;
+            </a>
           </p>
         </main>
       </div>
     </div>
+
     <noscript>
       <footer class="footer">
         <p>&copy; <span id="footer-year"></span> Rasoul Unlimited</p>
         <p><a href="/wiki/rasoul-unlimited/">معرفی کامل در ویکی</a></p>
       </footer>
     </noscript>
+
     <div data-include-html="includes/footer.html"></div>
+
     <script src="assets/js/include.min.js" defer></script>
     <script src="assets/js/main-script-fa.min.js" defer></script>
   </body>

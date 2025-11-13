@@ -1,20 +1,59 @@
 cff-version: 1.2.0
-message: "If you use material from this website, please cite it as below."
+message: "If you use material from this website or its codebase, please cite it as described below."
 title: "Rasoul Unlimited"
+type: website
+
+abstract: >
+  Official personal website of Mohammad Rasoul Sohrabi (Rasoul Unlimited) —
+  a biomedical engineering student, full-stack developer, designer, and content
+  creator. The site documents verified credentials, open-source projects, press
+  mentions, and long-form articles on personal branding, software, and digital
+  health.
+
 authors:
   - family-names: Sohrabi
     given-names: Mohammad Rasoul
     orcid: "https://orcid.org/0009-0004-7177-2080"
+    affiliation: "Islamic Azad University, Central Tehran Branch – Biomedical Engineering"
+    email: "rasoul.unlimited@gmail.com"
+
 version: "1.0.0"
+date-released: "2025-05-16"
+
+license: "CC-BY-NC-ND-4.0"
+
 repository-code: "https://github.com/RasoulUnlimited/RasoulUnlimited.github.io"
 url: "https://rasoulunlimited.ir"
-date-released: "2025-05-16"
+
+keywords:
+  - personal website
+  - portfolio
+  - biomedical engineering
+  - software development
+  - open-source
+  - personal branding
+  - digital health
+  - Rasoul Unlimited
+
+identifiers:
+  - type: url
+    value: "https://rasoulunlimited.ir"
+  - type: url
+    description: "Source code repository"
+    value: "https://github.com/RasoulUnlimited/RasoulUnlimited.github.io"
+
 preferred-citation:
   type: webpage
   title: "Rasoul Unlimited – Official Website"
   url: "https://rasoulunlimited.ir"
   publisher: "GitHub Pages"
-  note: "Accelerated and secured via Cloudflare"
+  notes: "Static site accelerated and secured via Cloudflare."
+  authors:
+    - family-names: Sohrabi
+      given-names: Mohammad Rasoul
+      orcid: "https://orcid.org/0009-0004-7177-2080"
+  date-published: "2025-05-16"
+
 references:
   - type: software
     title: "Small Projects with C"
@@ -24,6 +63,7 @@ references:
       - family-names: Sohrabi
         given-names: Mohammad Rasoul
         orcid: "https://orcid.org/0009-0004-7177-2080"
+    notes: "Collection of introductory C projects archived on Zenodo."
   - type: software
     title: "Small Projects with Python"
     doi: "10.5281/zenodo.15548860"
@@ -32,4 +72,4 @@ references:
       - family-names: Sohrabi
         given-names: Mohammad Rasoul
         orcid: "https://orcid.org/0009-0004-7177-2080"
-        
+    notes: "Collection of Python exercises and small utilities archived on Zenodo."

@@ -3,19 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Contact Rasoul Unlimited</title>
     <meta
       name="description"
-      content="How to reach Mohammad Rasoul Sohrabi (Rasoul Unlimited) for professional inquiries or collaboration."
+      content="Official contact page for Mohammad Rasoul Sohrabi (Rasoul Unlimited) — reach out for collaborations, interviews, open-source projects, and professional inquiries."
     />
+
     <link rel="stylesheet" href="../assets/css/design-system.min.css" />
     <link rel="stylesheet" href="../assets/css/main-style-en.min.css" />
+
     <link rel="canonical" href="https://rasoulunlimited.ir/en/contact.html" />
     <link
       rel="author"
       href="https://rasoulunlimited.ir/#person"
       data-person="rasoul-unlimited"
     />
+
     <meta name="robots" content="index, follow" />
     <meta name="citation_title" content="Contact Rasoul Unlimited" />
     <meta name="dcterms.creator" content="Mohammad Rasoul Sohrabi" />
@@ -23,6 +27,7 @@
       name="dc.identifier"
       content="https://rasoulunlimited.ir/en/contact.html"
     />
+
     <link
       rel="alternate"
       href="https://rasoulunlimited.ir/contact.html"
@@ -43,6 +48,7 @@
       type="application/ld+json"
       href="/schema/identity.jsonld"
     />
+
     <meta name="color-scheme" content="light dark" />
     <meta
       name="theme-color"
@@ -54,6 +60,7 @@
       media="(prefers-color-scheme: dark)"
       content="#0f172a"
     />
+
     <meta property="og:type" content="profile" />
     <meta
       property="og:url"
@@ -62,7 +69,7 @@
     <meta property="og:title" content="Contact Rasoul Unlimited" />
     <meta
       property="og:description"
-      content="Get in touch with Mohammad Rasoul Sohrabi for collaborations or questions."
+      content="Secure, verifiable ways to contact Mohammad Rasoul Sohrabi (Rasoul Unlimited) for collaborations, interviews, and professional questions."
     />
     <meta
       property="og:image"
@@ -76,13 +83,14 @@
     <meta property="og:image:height" content="220" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="fa_IR" />
+
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@rasoulunlimited" />
     <meta name="twitter:creator" content="@rasoulunlimited" />
     <meta name="twitter:title" content="Contact Rasoul Unlimited" />
     <meta
       name="twitter:description"
-      content="Get in touch with Mohammad Rasoul Sohrabi for collaborations or questions."
+      content="Reach out to Rasoul Unlimited for meaningful collaborations, serious projects, and expert questions."
     />
     <meta
       name="twitter:image"
@@ -92,19 +100,35 @@
       name="twitter:image:alt"
       content="Portrait of Mohammad Rasoul Sohrabi"
     />
+
+    <!-- Structured Data: ContactPage + Person + ContactPoint -->
     <script type="application/ld+json" nonce="RasoulCSP">
       {
         "@context": "https://schema.org",
         "@type": "ContactPage",
         "url": "https://rasoulunlimited.ir/en/contact.html",
+        "name": "Contact Rasoul Unlimited",
+        "inLanguage": "en-US",
         "mainEntity": {
           "@type": "Person",
+          "@id": "https://rasoulunlimited.ir/#person",
           "name": "Mohammad Rasoul Sohrabi",
           "alternateName": "Rasoul Unlimited",
-          "url": "https://rasoulunlimited.ir"
+          "url": "https://rasoulunlimited.ir",
+          "contactPoint": [
+            {
+              "@type": "ContactPoint",
+              "contactType": "business",
+              "email": "rasoul.unlimited@gmail.com",
+              "areaServed": "IR",
+              "availableLanguage": ["en", "fa"]
+            }
+          ]
         }
       }
     </script>
+
+    <!-- WebPage metadata -->
     <script type="application/ld+json" nonce="RasoulCSP">
       {
         "@context": "https://schema.org",
@@ -121,6 +145,7 @@
         }
       }
     </script>
+
     <link rel="entity-profile" href="/.well-known/entity-profile.json" />
   </head>
   <body>
@@ -132,14 +157,17 @@
           <a href="/en/proof.html">Proof</a>
           <a href="/en/press.html">Press</a>
           <a href="/en/faq/">FAQ</a>
-          <a href="/en/contact.html">Contact</a>
+          <a href="/en/contact.html" aria-current="page">Contact</a>
         </nav>
       </header>
     </noscript>
+
     <div data-include-html="../includes/header-en.html"></div>
+
     <div class="container">
       <div class="content-area">
         <main id="main-content">
+          <!-- Hero -->
           <section
             id="hero"
             class="hero section fade-in"
@@ -157,69 +185,112 @@
               title="Rasoul Unlimited profile image"
             />
             <p class="tagline" id="hero-tagline">
-              Get in touch for collaborations or questions
+              Reach out for serious collaborations, interviews, and expert questions
             </p>
           </section>
+
           <h1 data-person="rasoul-unlimited">Contact Rasoul Unlimited</h1>
+
           <p class="collaboration-message">
-            I'm always open to meaningful collaborations. If you have an idea
-            that could benefit from my expertise, let's connect.
+            This page is the primary and verifiable way to contact
+            <strong>Mohammad Rasoul Sohrabi (Rasoul Unlimited)</strong>. If you
+            want to collaborate, invite me for an interview, discuss open-source
+            projects, or explore ideas around software, personal branding, or
+            digital health, this is where to start.
           </p>
-          <section aria-labelledby="contact-form-heading">
+
+          <!-- Contact Form -->
+          <section
+            aria-labelledby="contact-form-heading"
+            id="contact-form-section"
+            class="section"
+          >
             <h2 id="contact-form-heading" class="visually-hidden">
               Send a message
             </h2>
+
             <div class="contact-card">
               <form
                 id="contact-form"
                 action="https://formspree.io/f/xkgbkdyr"
                 method="POST"
-                novalidate
+                class="contact-form"
+                accept-charset="UTF-8"
               >
+                <!-- Honeypot anti-spam field -->
+                <div class="visually-hidden" aria-hidden="true">
+                  <label for="website">
+                    If you are human, please leave this field empty
+                  </label>
+                  <input
+                    id="website"
+                    name="website"
+                    type="text"
+                    tabindex="-1"
+                    autocomplete="off"
+                  />
+                </div>
+
+                <input
+                  type="hidden"
+                  name="_subject"
+                  value="New message via RasoulUnlimited.ir (EN Contact Form)"
+                />
+                <input
+                  type="hidden"
+                  name="source"
+                  value="rasoulunlimited.ir/en/contact.html"
+                />
+
                 <label class="visually-hidden" for="contact-name">Name</label>
                 <input
                   id="contact-name"
                   type="text"
                   name="name"
-                  placeholder="Name"
+                  placeholder="Full name"
+                  autocomplete="name"
                   required
                 />
+
                 <label class="visually-hidden" for="contact-email">Email</label>
                 <input
                   id="contact-email"
                   type="email"
-                  name="email"
-                  placeholder="Email"
+                  name="_replyto"
+                  placeholder="Email for reply"
+                  autocomplete="email"
                   required
                 />
-                <label class="visually-hidden" for="contact-message"
-                  >Message</label
-                >
+
+                <label class="visually-hidden" for="contact-message">
+                  Message
+                </label>
                 <textarea
                   id="contact-message"
                   name="message"
-                  placeholder="Message"
+                  placeholder="Tell me briefly who you are, what you do, and what you’d like us to work on together."
+                  rows="6"
                   required
                 ></textarea>
-                <input
-                  type="hidden"
-                  name="_next"
-                  value="https://rasoulunlimited.ir/en/contact.html#form-success"
-                />
-                <button type="submit">Send</button>
-                <p
-                  id="form-success"
-                  class="success-message"
-                  aria-live="polite"
-                  tabindex="-1"
-                >
-                  Thanks! I'll get back to you soon.
+
+                <p class="form-hint">
+                  For faster and more precise responses, feel free to include
+                  links to your GitHub, LinkedIn, or any relevant work samples.
                 </p>
+
+                <button type="submit">Send message</button>
               </form>
             </div>
           </section>
-          <section id="contact-info" aria-labelledby="contact-info-heading">
-            <h2 id="contact-info-heading">Contact Information</h2>
+
+          <!-- Contact Info Cards -->
+          <section id="contact-info" aria-labelledby="contact-info-heading" class="section">
+            <h2 id="contact-info-heading">Verified contact channels</h2>
+            <p class="section-lead">
+              All of these accounts link back to this domain and can be used for
+              cross-verification and secure communication.
+            </p>
+
             <div class="grid grid-4">
               <div class="card-basic">
                 <img
@@ -233,13 +304,17 @@
                 />
                 <h3>Email</h3>
                 <p class="credential-summary">
+                  Primary address for formal communication:
+                  <br />
                   <a
                     data-person="rasoul-unlimited"
                     href="mailto:rasoul.unlimited@gmail.com"
-                    >rasoul.unlimited@gmail.com</a
                   >
+                    rasoul.unlimited@gmail.com
+                  </a>
                 </p>
               </div>
+
               <div class="card-basic">
                 <img
                   src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iY3VycmVudENvbG9yIj48cGF0aCBkPSJNMTIgLjVhMTIgMTIgMCAwMC0zLjc5IDIzLjRjLjYuMS44Mi0uMjYuODItLjU4di0yLjAyYy0zLjM0LjczLTQuMDQtMS42NC00LjA0LTEuNjQtLjU1LTEuNC0xLjM0LTEuNzctMS4zNC0xLjc3LTEuMS0uNzUuMDgtLjc0LjA4LS43NCAxLjIyLjA5IDEuODYgMS4yNiAxLjg2IDEuMjYgMS4wOCAxLjg2IDIuODMgMS4zMiAzLjUyIDEgLjExLS43OC40Mi0xLjMyLjc2LTEuNjMtMi42Ni0uMy01LjQ3LTEuMzMtNS40Ny01LjkzIDAtMS4zMS40Ny0yLjM4IDEuMjQtMy4yMi0uMTItLjMtLjU0LTEuNTIuMTItMy4xNyAwIDAgMS4wMS0uMzIgMy4zIDEuMjNhMTEuNSAxMS41IDAgMDE2IDBjMi4yOS0xLjU1IDMuMy0xLjIzIDMuMy0xLjIzLjY2IDEuNjUuMjQgMi44Ny4xMiAzLjE3Ljc3Ljg0IDEuMjQgMS45MSAxLjI0IDMuMjIgMCA0LjYxLTIuODEgNS42My01LjQ5IDUuOTMuNDMuMzcuODIgMS4xLjgyIDIuMjJ2My4yOWMwIC4zMi4yMi42OS44Mi41OEExMiAxMiAwIDAwMTIgLjV6Ii8+PC9zdmc+"
@@ -252,14 +327,18 @@
                 />
                 <h3>GitHub</h3>
                 <p class="credential-summary">
+                  Open-source projects and technical work:
+                  <br />
                   <a
                     href="https://github.com/RasoulUnlimited"
                     target="_blank"
-                    rel="authoritative noopener noreferrer"
-                    >github.com/RasoulUnlimited</a
+                    rel="authoritative noopener noreferrer me"
                   >
+                    github.com/RasoulUnlimited
+                  </a>
                 </p>
               </div>
+
               <div class="card-basic">
                 <img
                   src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iY3VycmVudENvbG9yIj48cGF0aCBkPSJNNC45OCAzLjVDNC45OCA0Ljg4IDMuODYgNiAyLjUgNlMwIDQuODggMCAzLjUgMS4xMiAxIDIuNSAxczIuNDggMS4xMiAyLjQ4IDIuNXpNLjUgOC41aDRWMjNoLTR6TTguNSA4LjVoMy43OXYyLjFoLjA1Yy41My0xIDEuODMtMi4wNSAzLjc3LTIuMDUgNC4wMyAwIDQuNzggMi42NSA0Ljc4IDYuMVYyM2gtNFYxNS4xYzAtMS44OC0uMDMtNC4zLTIuNjItNC4zLTIuNjIgMC0zLjAyIDIuMDUtMy4wMiA0LjE3VjIzaC00eiIvPjwvc3ZnPg=="
@@ -272,40 +351,56 @@
                 />
                 <h3>LinkedIn</h3>
                 <p class="credential-summary">
+                  Professional networking and collaboration:
+                  <br />
                   <a
                     href="https://www.linkedin.com/in/rasoulunlimited/"
                     target="_blank"
-                    rel="authoritative noopener noreferrer"
-                    >linkedin.com/in/rasoulunlimited</a
+                    rel="authoritative noopener noreferrer me"
                   >
+                    linkedin.com/in/rasoulunlimited
+                  </a>
                 </p>
               </div>
+
               <div class="card-basic">
-                <i class="fab fa-instagram" aria-hidden="true" style="font-size: 48px;"></i>
+                <i
+                  class="fab fa-instagram"
+                  aria-hidden="true"
+                  style="font-size: 48px;"
+                ></i>
                 <h3>Instagram</h3>
                 <p class="credential-summary">
+                  More personal and behind-the-scenes content:
+                  <br />
                   <a
                     href="https://www.instagram.com/Rasoul.Unlimited"
                     target="_blank"
                     rel="authoritative noopener noreferrer me"
                     aria-label="Follow Rasoul on Instagram"
                     title="Connect on Instagram"
-                    ><i class="fab fa-instagram" aria-hidden="true"></i>
-                    Follow on Instagram</a
                   >
+                    <i class="fab fa-instagram" aria-hidden="true"></i>
+                    Follow on Instagram
+                  </a>
                 </p>
               </div>
             </div>
           </section>
+
+          <p class="cta">
+            <a href="/wiki/rasoul-unlimited/">Complete profile &rarr;</a>
+          </p>
         </main>
       </div>
     </div>
-    <p><a href="/wiki/rasoul-unlimited/">Complete profile</a></p>
+
     <noscript>
       <footer class="footer">
         <p>&copy; <span id="footer-year"></span> Rasoul Unlimited</p>
       </footer>
     </noscript>
+
     <div data-include-html="../includes/footer.html"></div>
     <script src="../assets/js/include.min.js" defer></script>
     <script src="../assets/js/main-script-en.min.js" defer></script>
