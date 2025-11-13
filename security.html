@@ -70,16 +70,17 @@
       href="/schema/identity.jsonld"
     />
     <link
-    rel="alternate"
-    type="application/ld+json"
-    href="/schema/brand.jsonld"
-  />
-    <!-- JSON-LD for WebPage (Schema.org WebPage) -->
+      rel="alternate"
+      type="application/ld+json"
+      href="/schema/brand.jsonld"
+    />
+    <!-- JSON-LD for WebPage (Schema.org WebPage) - merged definition -->
     <script type="application/ld+json" nonce="RasoulCSP">
       {
         "@context": "https://schema.org",
         "@type": "WebPage",
         "@id": "https://rasoulunlimited.ir/security.html",
+        "url": "https://rasoulunlimited.ir/security.html",
         "name": "Security Policy",
         "description": "Guidelines for reporting security vulnerabilities to Rasoul Unlimited.",
         "isPartOf": { "@id": "https://rasoulunlimited.ir/#website" },
@@ -87,7 +88,11 @@
         "publisher": { "@id": "https://rasoulunlimited.ir/#organization" },
         "mainEntityOfPage": "https://rasoulunlimited.ir/security.html",
         "datePublished": "2025-06-24",
-        "dateModified": "2025-07-20"
+        "dateModified": "2025-07-20",
+        "speakable": {
+          "@type": "SpeakableSpecification",
+          "cssSelector": ["h1", "h2", "p"]
+        }
       }
     </script>
     <meta name="color-scheme" content="light dark" />
@@ -139,23 +144,6 @@
       name="twitter:image:alt"
       content="Verified portrait of influential developer Mohammad Rasoul Sohrabi"
     />
-    <script type="application/ld+json" nonce="RasoulCSP">
-      {
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "url": "https://rasoulunlimited.ir/security.html",
-        "isPartOf": { "@id": "https://rasoulunlimited.ir/#website" },
-        "author": { "@id": "https://rasoulunlimited.ir/#person" },
-        "publisher": { "@id": "https://rasoulunlimited.ir/#organization" },
-        "mainEntityOfPage": "https://rasoulunlimited.ir/security.html",
-        "datePublished": "2025-06-24",
-        "dateModified": "2025-07-20",
-        "speakable": {
-          "@type": "SpeakableSpecification",
-          "cssSelector": ["h1", "h2", "p"]
-        }
-      }
-    </script>
     <script type="application/ld+json" nonce="RasoulCSP">
       {
         "@context": "https://schema.org",
@@ -229,14 +217,13 @@
               fetchpriority="high"
               alt="پرترهٔ تاییدشدهٔ محمد رسول سهرابی، چهرهٔ تأثیرگذار متن‌باز و سلامت دیجیتال"
               title="چهرهٔ تاییدشدهٔ رسول آنلیمیتد"
-              aria-label="تصویر رسمی و معتبر رسول آنلیمیتد"
               class="profile-image"
               width="220"
               height="220"
             />
           </section>
-          <div class="policy-container policy-card modern-card" >
-            <h1>سیاست افشای آسیب‌پذیری</h1>
+          <div class="policy-container policy-card modern-card">
+            <h2>سیاست افشای آسیب‌پذیری</h2>
             <p>
               این وب‌سایت روی
               <b>GitHub Pages</b>
@@ -270,7 +257,8 @@
             <section id="csp-policy" class="security-section" data-aos="fade-up" aria-labelledby="csp-heading">
               <h2 id="csp-heading">سیاست امنیت محتوا</h2>
               <p>نمونه‌ای از پیکربندی <span lang="en">Content Security Policy</span> که از سوی کلودفلر اعمال می‌شود:</p>
-                <pre class="security-code-block"><code id="csp-code" class="copyable" tabindex="0" role="button" dir="ltr">default-src 'self' blob:;
+              <pre class="security-code-block">
+<code id="csp-code" class="copyable" dir="ltr">default-src 'self' blob:;
 script-src 'self' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://static.cloudflareinsights.com https://giscus.app 'nonce-RasoulCSP';
 style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net 'nonce-RasoulCSP';
 style-src-attr 'self' 'nonce-RasoulCSP';
@@ -283,14 +271,15 @@ object-src 'none';
 base-uri 'self';
 form-action https://formspree.io 'self';
 frame-ancestors 'self';</code></pre>
-            <button class="copy-button icon-button" data-copy-target="csp-code" type="button" aria-label="کپی سیاست CSP" title="کپی سیاست CSP"><i class="fas fa-copy" aria-hidden="true"></i></button>
+              <button class="copy-button icon-button" data-copy-target="csp-code" type="button" aria-label="کپی سیاست CSP" title="کپی سیاست CSP"><i class="fas fa-copy" aria-hidden="true"></i></button>
             </section>
             <section
               id="reporting-method"
-              class="security-section" data-aos="fade-up"
+              class="security-section"
+              data-aos="fade-up"
               aria-labelledby="reporting-method-heading"
             >
-            <h2 id="reporting-method-heading">گزارش آسیب‌پذیری <i class="fas fa-bug hero-icon" aria-hidden="true"></i></h2>
+              <h2 id="reporting-method-heading">گزارش آسیب‌پذیری <i class="fas fa-bug hero-icon" aria-hidden="true"></i></h2>
               <p>
                 در صورت یافتن مشکل امنیتی، لطفاً به آدرس
                 <a
@@ -306,7 +295,7 @@ frame-ancestors 'self';</code></pre>
                 یا از طریق
                 <a
                   href="https://github.com/RasoulUnlimited/RasoulUnlimited.github.io/issues/new?labels=security&title=Security+report"
-                    target="_blank" rel="noopener noreferrer ugc" class="cta-button"
+                  target="_blank" rel="noopener noreferrer ugc" class="cta-button"
                   >گزارش در GitHub</a
                 >
                 اقدام کنید.
@@ -323,7 +312,8 @@ frame-ancestors 'self';</code></pre>
             </section>
             <section
               id="secure-communication"
-              class="security-section" data-aos="fade-up"
+              class="security-section"
+              data-aos="fade-up"
               aria-labelledby="secure-communication-heading"
             >
               <h2 id="secure-communication-heading">ارتباط امن</h2>
@@ -343,10 +333,23 @@ frame-ancestors 'self';</code></pre>
                 </li>
                 <li>
                   پیش از استفاده، اثر انگشت
-                    <code id="pgp-fingerprint" dir="ltr" class="copyable" tabindex="0" role="button" data-copy-text="D483 4991 882E 7EC4 4187 40AC 1CAF 52B8 DB95 F6FE"
-                      >D483 4991 882E 7EC4 4187 40AC 1CAF 52B8 DB95 F6FE</code
-                    >
-                  <button id="copy-fingerprint" class="copy-button icon-button" data-copy-target="pgp-fingerprint" type="button" aria-label="کپی اثر انگشت PGP" title="کپی اثر انگشت PGP"><i class="fas fa-copy" aria-hidden="true"></i></button>
+                  <code
+                    id="pgp-fingerprint"
+                    dir="ltr"
+                    class="copyable"
+                    data-copy-text="D483 4991 882E 7EC4 4187 40AC 1CAF 52B8 DB95 F6FE"
+                    >D483 4991 882E 7EC4 4187 40AC 1CAF 52B8 DB95 F6FE</code
+                  >
+                  <button
+                    id="copy-fingerprint"
+                    class="copy-button icon-button"
+                    data-copy-target="pgp-fingerprint"
+                    type="button"
+                    aria-label="کپی اثر انگشت PGP"
+                    title="کپی اثر انگشت PGP"
+                  >
+                    <i class="fas fa-copy" aria-hidden="true"></i>
+                  </button>
                   را تطبیق دهید.
                   <noscript>
                     <p class="fingerprint-fallback">D483 4991 882E 7EC4 4187 40AC 1CAF 52B8 DB95 F6FE</p>
@@ -366,48 +369,57 @@ frame-ancestors 'self';</code></pre>
             </section>
             <section
               id="scope"
-              class="security-section" data-aos="fade-up"
+              class="security-section"
+              data-aos="fade-up"
               aria-labelledby="scope-heading"
             >
               <h2 id="scope-heading">محدوده‌ی تست</h2>
               <p>آزمایش‌های امنیتی تنها بر روی دامنه‌های زیر مجاز است:</p>
               <ul>
                 <li id="scope-domain"><code>rasoulunlimited.ir</code></li>
+                <li><code>www.rasoulunlimited.ir</code></li>
               </ul>
+              <p>
+                سایر دامنه‌ها یا سرویس‌های مرتبط که در اختیار ارائه‌دهندگان ثالث هستند،
+                خارج از این سیاست قرار می‌گیرند.
+              </p>
             </section>
             <section
               id="responsible-disclosure"
-              class="security-section" data-aos="fade-up"
+              class="security-section"
+              data-aos="fade-up"
               aria-labelledby="responsible-disclosure-heading"
             >
-            <h2 id="responsible-disclosure-heading">فرآیند افشای مسئولانه <i class="fas fa-shield-alt hero-icon" aria-hidden="true"></i></h2>
-            <ul>
-              <li>گزارش‌ها معمولاً ظرف ۴۸ ساعت تأیید دریافت می‌شوند.</li>
-              <li>بر اساس شدت مشکل، رفع یا برنامه‌ریزی آن حداکثر ظرف ۳۰ روز اطلاع‌رسانی می‌شود.</li>
-              <li>در صورت تمایل، نام شما در بخش تقدیر از پژوهشگران امنیتی ذکر خواهد شد.</li>
-              <li>
-                جزئیات کامل سیاست در
-                <a href="/.well-known/security.txt">security.txt</a>
-                موجود است.
-                <a
-                  href="/.well-known/security.txt"
-                  download
-                  class="cta-button"
-                  >دانلود فایل</a
-                >
-                <button
+              <h2 id="responsible-disclosure-heading">فرآیند افشای مسئولانه <i class="fas fa-shield-alt hero-icon" aria-hidden="true"></i></h2>
+              <ul>
+                <li>در بیشتر موارد، تلاش می‌کنیم ظرف ۴۸ ساعت دریافت گزارش را تأیید کنیم.</li>
+                <li>بر اساس شدت مشکل، معمولاً برنامهٔ رفع یا کاهش ریسک حداکثر ظرف ۳۰ روز اطلاع‌رسانی می‌شود.</li>
+                <li>در صورت تمایل، نام شما در بخش تقدیر از پژوهشگران امنیتی ذکر خواهد شد.</li>
+                <li>
+                  جزئیات کامل سیاست در
+                  <a href="/.well-known/security.txt">security.txt</a>
+                  موجود است.
+                  <a
+                    href="/.well-known/security.txt"
+                    download
+                    class="cta-button"
+                    >دانلود فایل</a
+                  >
+                  <button
                     class="copy-button icon-button"
                     data-copy-text="https://rasoulunlimited.ir/.well-known/security.txt"
                     type="button"
                     aria-label="کپی لینک security.txt"
                     title="کپی لینک security.txt"
-                    ><i class="fas fa-copy" aria-hidden="true"></i></button>
-              </li>
-            </ul>
+                    ><i class="fas fa-copy" aria-hidden="true"></i
+                  ></button>
+                </li>
+              </ul>
             </section>
             <section
               id="testing-guidelines"
-              class="security-section" data-aos="fade-up"
+              class="security-section"
+              data-aos="fade-up"
               aria-labelledby="testing-guidelines-heading"
             >
               <h2 id="testing-guidelines-heading">راهنمای تست</h2>
@@ -424,126 +436,136 @@ frame-ancestors 'self';</code></pre>
               </p>
             </section>
             <section
-            id="security-timeline"
-            class="security-section" data-aos="fade-up"
-            aria-labelledby="security-timeline-heading"
-          >
-            <h2 id="security-timeline-heading">مسیر امنیتی</h2>
-            <div class="timeline-search-container">
-              <label for="timeline-search" class="visually-hidden"
-                >جستجو در رویدادها</label
+              id="security-timeline"
+              class="security-section"
+              data-aos="fade-up"
+              aria-labelledby="security-timeline-heading"
+            >
+              <h2 id="security-timeline-heading">مسیر امنیتی</h2>
+              <div class="timeline-search-container">
+                <label for="timeline-search" class="visually-hidden"
+                  >جستجو در رویدادها</label
+                >
+                <input
+                  type="text"
+                  id="timeline-search"
+                  placeholder="جستجو در رویدادها"
+                  autocomplete="off"
+                />
+                <label for="timeline-year" class="visually-hidden">فیلتر سال</label>
+                <select id="timeline-year" class="timeline-year-filter">
+                  <option value="">همه سال‌ها</option>
+                </select>
+                <button id="clear-timeline-search" type="button" class="refresh-button visually-hidden" aria-label="پاک کردن جستجو">
+                  پاک کردن
+                </button>
+                <button id="refresh-timeline" type="button" class="refresh-button" aria-label="بروزرسانی رویدادها">
+                  بروزرسانی
+                </button>
+                <button id="sort-timeline" type="button" class="refresh-button" aria-label="تغییر ترتیب">مرتب‌سازی</button>
+              </div>
+              <p id="timeline-results-count" class="hidden" role="status" aria-live="polite"></p>
+              <p id="timeline-no-results" class="hidden" role="status" aria-live="polite">هیچ رویدادی یافت نشد.</p>
+              <ul
+                id="security-timeline-list"
+                class="timeline"
+                aria-label="رویدادهای مهم امنیتی"
+                aria-live="polite"
+                aria-busy="true"
               >
-              <input
-                type="text"
-                id="timeline-search"
-                placeholder="جستجو در رویدادها"
-                autocomplete="off"
-              />
-              <label for="timeline-year" class="visually-hidden">فیلتر سال</label>
-              <select id="timeline-year" class="timeline-year-filter">
-                <option value="">همه سال‌ها</option>
-              </select>
-              <button id="clear-timeline-search" type="button" class="refresh-button visually-hidden" aria-label="پاک کردن جستجو">
-                پاک کردن
-              </button>
-              <button id="refresh-timeline" type="button" class="refresh-button" aria-label="بروزرسانی رویدادها">
-                بروزرسانی
-              </button>
-              <button id="sort-timeline" type="button" class="refresh-button" aria-label="تغییر ترتیب">مرتب‌سازی</button>
-            </div>
-            <p id="timeline-results-count" class="hidden" role="status" aria-live="polite"></p>
-            <p id="timeline-no-results" class="hidden" role="status" aria-live="polite">هیچ رویدادی یافت نشد.</p>
-            <ul id="security-timeline-list" class="timeline" aria-label="رویدادهای مهم امنیتی" aria-live="polite" aria-busy="true">
-              <li>
-                <div class="timeline-content">
-                  <div class="timeline-icon skeleton"></div>
-                  <h3 class="date skeleton-text"></h3>
-                  <h3 class="skeleton-text" style="width: 50%"></h3>
-                  <p class="skeleton-text" style="width: 80%"></p>
-                </div>
-              </li>
-              <li>
-                <div class="timeline-content">
-                  <div class="timeline-icon skeleton"></div>
-                  <h3 class="date skeleton-text"></h3>
-                  <h3 class="skeleton-text" style="width: 50%"></h3>
-                  <p class="skeleton-text" style="width: 80%"></p>
-                </div>
-              </li>
-              <li>
-                <div class="timeline-content">
-                  <div class="timeline-icon skeleton"></div>
-                  <h3 class="date skeleton-text"></h3>
-                  <h3 class="skeleton-text" style="width: 50%"></h3>
-                  <p class="skeleton-text" style="width: 80%"></p>
-                </div>
-              </li>
-            </ul>
-            <noscript>
-              <ul class="timeline" aria-label="رویدادهای مهم امنیتی">
                 <li>
                   <div class="timeline-content">
-                    <div class="timeline-icon">
-                      <i class="fas fa-rocket" aria-hidden="true"></i>
-                    </div>
-                    <h3 class="date">
-                      <time datetime="2025-05-16">2025-05-16</time>
-                    </h3>
-                    <h3>شروع وب‌سایت</h3>
-                    <p>انتشار اولیه سایت با نگاه به امنیت و عملکرد.</p>
+                    <div class="timeline-icon skeleton"></div>
+                    <h3 class="date skeleton-text"></h3>
+                    <h3 class="skeleton-text" style="width: 50%"></h3>
+                    <p class="skeleton-text" style="width: 80%"></p>
                   </div>
                 </li>
                 <li>
                   <div class="timeline-content">
-                    <div class="timeline-icon">
-                      <i class="fas fa-cloud" aria-hidden="true"></i>
-                    </div>
-                    <h3 class="date">
-                      <time datetime="2025-05-25">2025-05-25</time>
-                    </h3>
-                    <h3>ادغام با Cloudflare</h3>
-                    <p>بهبود سرعت و امنیت از طریق شبکه توزیع کلودفلر.</p>
+                    <div class="timeline-icon skeleton"></div>
+                    <h3 class="date skeleton-text"></h3>
+                    <h3 class="skeleton-text" style="width: 50%"></h3>
+                    <p class="skeleton-text" style="width: 80%"></p>
                   </div>
                 </li>
                 <li>
                   <div class="timeline-content">
-                    <div class="timeline-icon">
-                      <i class="fas fa-shield-alt" aria-hidden="true"></i>
-                    </div>
-                    <h3 class="date">
-                      <time datetime="2025-06-01">2025-06-01</time>
-                    </h3>
-                    <h3>اعمال CSP سخت‌گیرانه</h3>
-                    <p>اجرای سیاست‌های دقیق برای جلوگیری از حملات وب.</p>
+                    <div class="timeline-icon skeleton"></div>
+                    <h3 class="date skeleton-text"></h3>
+                    <h3 class="skeleton-text" style="width: 50%"></h3>
+                    <p class="skeleton-text" style="width: 80%"></p>
                   </div>
                 </li>
               </ul>
-          </noscript>
-        </section>
-        <section
-          id="security-advisories"
-          class="security-section" data-aos="fade-up"
-          aria-labelledby="security-advisories-heading"
-        >
-          <h2 id="security-advisories-heading">اعلان‌های امنیتی</h2>
-          <p>
-            آخرین هشدارها و به‌روزرسانی‌های امنیتی در
-            <a
-              href="https://github.com/RasoulUnlimited/RasoulUnlimited.github.io/security/advisories"
-              target="_blank" rel="authoritative noopener noreferrer" class="cta-button"
-              >Security Advisories در GitHub</a
+              <noscript>
+                <ul class="timeline" aria-label="رویدادهای مهم امنیتی">
+                  <li>
+                    <div class="timeline-content">
+                      <div class="timeline-icon">
+                        <i class="fas fa-rocket" aria-hidden="true"></i>
+                      </div>
+                      <h3 class="date">
+                        <time datetime="2025-05-16">2025-05-16</time>
+                      </h3>
+                      <h3>شروع وب‌سایت</h3>
+                      <p>انتشار اولیه سایت با نگاه به امنیت و عملکرد.</p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="timeline-content">
+                      <div class="timeline-icon">
+                        <i class="fas fa-cloud" aria-hidden="true"></i>
+                      </div>
+                      <h3 class="date">
+                        <time datetime="2025-05-25">2025-05-25</time>
+                      </h3>
+                      <h3>ادغام با Cloudflare</h3>
+                      <p>بهبود سرعت و امنیت از طریق شبکه توزیع کلودفلر.</p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="timeline-content">
+                      <div class="timeline-icon">
+                        <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                      </div>
+                      <h3 class="date">
+                        <time datetime="2025-06-01">2025-06-01</time>
+                      </h3>
+                      <h3>اعمال CSP سخت‌گیرانه</h3>
+                      <p>اجرای سیاست‌های دقیق برای جلوگیری از حملات وب.</p>
+                    </div>
+                  </li>
+                </ul>
+              </noscript>
+            </section>
+            <section
+              id="security-advisories"
+              class="security-section"
+              data-aos="fade-up"
+              aria-labelledby="security-advisories-heading"
             >
-              منتشر می‌شود.
-            </p>
-            <button id="refresh-advisories" type="button" class="refresh-button" aria-label="بروزرسانی اعلان‌ها">
-              بروزرسانی
-            </button>
-            <ul id="advisories-list" class="advisories-list" aria-live="polite">
-              <li class="skeleton-text" style="height:1rem; width: 60%"></li>
-              <li class="skeleton-text" style="height:1rem; width: 70%"></li>
-              <li class="skeleton-text" style="height:1rem; width: 50%"></li>
-            </ul>
-          </section>
+              <h2 id="security-advisories-heading">اعلان‌های امنیتی</h2>
+              <p>
+                آخرین هشدارها و به‌روزرسانی‌های امنیتی در
+                <a
+                  href="https://github.com/RasoulUnlimited/RasoulUnlimited.github.io/security/advisories"
+                  target="_blank"
+                  rel="authoritative noopener noreferrer"
+                  class="cta-button"
+                  >Security Advisories در GitHub</a
+                >
+                منتشر می‌شود.
+              </p>
+              <button id="refresh-advisories" type="button" class="refresh-button" aria-label="بروزرسانی اعلان‌ها">
+                بروزرسانی
+              </button>
+              <ul id="advisories-list" class="advisories-list" aria-live="polite">
+                <li class="skeleton-text" style="height:1rem; width: 60%"></li>
+                <li class="skeleton-text" style="height:1rem; width: 70%"></li>
+                <li class="skeleton-text" style="height:1rem; width: 50%"></li>
+              </ul>
+            </section>
             <button id="scroll-to-top" aria-label="بازگشت به ابتدا">
               <i class="fas fa-arrow-up" aria-hidden="true"></i>
             </button>
@@ -551,7 +573,7 @@ frame-ancestors 'self';</code></pre>
               <i class="fas fa-share-alt" aria-hidden="true"></i>
             </button>
           </div>
-            <p class="cta"><a href="/wiki/rasoul-unlimited/">بررسی کامل پیشینه</a></p>
+          <p class="cta"><a href="/wiki/rasoul-unlimited/">بررسی کامل پیشینه</a></p>
         </main>
       </div>
     </div>
@@ -561,7 +583,9 @@ frame-ancestors 'self';</code></pre>
           آخرین به‌روزرسانی صفحه:
           <span id="last-updated-date"></span>
         </p>
-        <p id="connection-status" class="offline-info" role="status" aria-live="polite">این صفحه از کش محلی استفاده می‌کند و در صورت قطع اتصال هشدار می‌دهد.</p>
+        <p id="connection-status" class="offline-info" role="status" aria-live="polite">
+          این صفحه از کش محلی استفاده می‌کند و در صورت قطع اتصال هشدار می‌دهد.
+        </p>
         <p>&copy; <span id="footer-year"></span> Rasoul Unlimited</p>
       </footer>
     </noscript>
