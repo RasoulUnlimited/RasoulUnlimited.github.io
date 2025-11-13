@@ -2,87 +2,219 @@
 <html lang="en-US" xml:lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+    <!-- Performance & Connections -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
     <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="preconnect" href="https://api.github.com" />
+
     <title>Quotes by Rasoul Unlimited</title>
-    <meta name="description" content="Selected original quotes from Rasoul Unlimited on digital culture and innovation." />
+    <meta
+      name="description"
+      content="Selected original quotes from Rasoul Unlimited on digital culture, leadership, branding and innovation."
+    />
+
+    <!-- Fonts & Icons -->
+    <link
+      rel="preload"
+      as="style"
+      data-href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;700&display=swap"
+      data-make-stylesheet
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;700&display=swap"
+      />
+    </noscript>
+    <link
+      rel="preload"
+      as="style"
+      data-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      data-make-stylesheet
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      />
+    </noscript>
+
+    <!-- Styles -->
     <link rel="stylesheet" href="../assets/css/design-system.min.css" />
     <link rel="stylesheet" href="../assets/css/main-style-en.min.css" />
-    <link rel="canonical" href="https://rasoulunlimited.ir/en/quotes.html" />
-    <link rel="author" href="https://rasoulunlimited.ir/#person" data-person="rasoul-unlimited" />
+    <!-- If you add a dedicated quotes stylesheet later:
+    <link rel="stylesheet" href="../assets/css/quotes-style.min.css" /> -->
+    <script src="../assets/js/performance-helpers.min.js" defer></script>
+
+    <!-- Canonical & Author -->
+    <link
+      rel="canonical"
+      href="https://rasoulunlimited.ir/en/quotes.html"
+    />
+    <link
+      rel="author"
+      href="https://rasoulunlimited.ir/#person"
+      data-person="rasoul-unlimited"
+    />
+
+    <!-- SEO Meta -->
     <meta name="robots" content="index, follow" />
     <meta name="citation_title" content="Quotes by Rasoul Unlimited" />
     <meta name="dcterms.creator" content="Mohammad Rasoul Sohrabi" />
-    <meta name="dc.identifier" content="https://rasoulunlimited.ir/en/quotes.html" />
-    <link rel="alternate" href="https://rasoulunlimited.ir/quotes.html" hreflang="fa-IR" />
-    <link rel="alternate" href="https://rasoulunlimited.ir/en/quotes.html" hreflang="en-US" />
-    <link rel="alternate" href="https://rasoulunlimited.ir/quotes.html" hreflang="x-default" />
-    <link rel="alternate" type="application/ld+json" href="/schema/identity.jsonld" />
+    <meta
+      name="dc.identifier"
+      content="https://rasoulunlimited.ir/en/quotes.html"
+    />
+
+    <!-- Hreflang -->
+    <link
+      rel="alternate"
+      href="https://rasoulunlimited.ir/quotes.html"
+      hreflang="fa-IR"
+    />
+    <link
+      rel="alternate"
+      href="https://rasoulunlimited.ir/en/quotes.html"
+      hreflang="en-US"
+    />
+    <link
+      rel="alternate"
+      href="https://rasoulunlimited.ir/quotes.html"
+      hreflang="x-default"
+    />
+
+    <!-- Identity graph -->
+    <link
+      rel="alternate"
+      type="application/ld+json"
+      href="/schema/identity.jsonld"
+    />
+
+    <!-- Color scheme -->
     <meta name="color-scheme" content="light dark" />
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0f172a" />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: light)"
+      content="#ffffff"
+    />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: dark)"
+      content="#0f172a"
+    />
+
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://rasoulunlimited.ir/en/quotes.html" />
+    <meta
+      property="og:url"
+      content="https://rasoulunlimited.ir/en/quotes.html"
+    />
     <meta property="og:title" content="Quotes by Rasoul Unlimited" />
-    <meta property="og:description" content="Original insights highlighting Rasoul's digital leadership." />
-    <meta property="og:image" content="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp" />
-    <meta property="og:image:alt" content="Portrait of Mohammad Rasoul Sohrabi" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@rasoulunlimited" />
+    <meta
+      property="og:description"
+      content="Original insights from Rasoul Unlimited on digital culture, leadership and innovation."
+    />
+    <meta
+      property="og:image"
+      content="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp"
+    />
+    <meta
+      property="og:image:alt"
+      content="Portrait of Mohammad Rasoul Sohrabi"
+    />
     <meta property="og:image:width" content="220" />
     <meta property="og:image:height" content="220" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="fa_IR" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@rasoulunlimited" />
     <meta name="twitter:creator" content="@rasoulunlimited" />
     <meta name="twitter:title" content="Quotes by Rasoul Unlimited" />
-    <meta name="twitter:description" content="Original insights highlighting Rasoul's digital leadership." />
-    <meta name="twitter:image" content="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp" />
-    <meta name="twitter:image:alt" content="Portrait of Mohammad Rasoul Sohrabi" />
+    <meta
+      name="twitter:description"
+      content="Original insights highlighting Rasoul's perspective on the digital era."
+    />
+    <meta
+      name="twitter:image"
+      content="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp"
+    />
+    <meta
+      name="twitter:image:alt"
+      content="Portrait of Mohammad Rasoul Sohrabi"
+    />
+
+    <!-- Schema.org: Quotation entities -->
     <script type="application/ld+json" nonce="RasoulCSP">
       {
         "@context": "https://schema.org",
         "@graph": [
           {
             "@type": "Quotation",
+            "@id": "https://rasoulunlimited.ir/en/quotes.html#q-digital-culture",
             "text": "Digital culture isn't just about tools; it's about the people who use them.",
             "inLanguage": "en",
             "creator": { "@id": "https://rasoulunlimited.ir/#person" }
           },
           {
             "@type": "Quotation",
+            "@id": "https://rasoulunlimited.ir/en/quotes.html#q-technology-power",
             "text": "Technology's power is unleashed when we make it accessible to all.",
             "inLanguage": "en",
             "creator": { "@id": "https://rasoulunlimited.ir/#person" }
           },
           {
             "@type": "Quotation",
+            "@id": "https://rasoulunlimited.ir/en/quotes.html#q-digital-leadership",
             "text": "Leading in the digital world means inspiring constant innovation.",
+            "inLanguage": "en",
+            "creator": { "@id": "https://rasoulunlimited.ir/#person" }
+          },
+          {
+            "@type": "Quotation",
+            "@id": "https://rasoulunlimited.ir/en/quotes.html#q-visual-identity-loop",
+            "text": "The Visual Identity Loop ensures each feedback cycle sharpens how your brand is perceived.",
             "inLanguage": "en",
             "creator": { "@id": "https://rasoulunlimited.ir/#person" }
           }
         ]
       }
     </script>
+
+    <!-- Schema.org: WebPage -->
     <script type="application/ld+json" nonce="RasoulCSP">
       {
         "@context": "https://schema.org",
         "@type": "WebPage",
         "url": "https://rasoulunlimited.ir/en/quotes.html",
+        "name": "Quotes by Rasoul Unlimited",
         "isPartOf": { "@id": "https://rasoulunlimited.ir/#website" },
         "author": { "@id": "https://rasoulunlimited.ir/#person" },
         "publisher": { "@id": "https://rasoulunlimited.ir/#organization" },
         "mainEntityOfPage": "https://rasoulunlimited.ir/en/quotes.html",
         "datePublished": "2025-07-20",
         "dateModified": "2025-07-21",
-        "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["h1", "blockquote"] }
+        "headline": "Selected quotes from Rasoul Unlimited",
+        "speakable": {
+          "@type": "SpeakableSpecification",
+          "cssSelector": ["h1", "blockquote"]
+        }
       }
     </script>
+
     <link rel="entity-profile" href="/.well-known/entity-profile.json" />
   </head>
-  <body>
+  <body class="quotes-page">
+    <!-- Fallback navigation when JS is disabled -->
     <noscript>
       <header class="navbar" role="banner">
         <nav role="navigation" aria-label="Main site links">
@@ -93,44 +225,234 @@
           <a href="/en/press.html">Press</a>
           <a href="/en/faq/">FAQ</a>
           <a href="/en/contact.html">Contact</a>
-          <a href="/en/quotes.html">Quotes</a>
+          <a href="/en/quotes.html" aria-current="page">Quotes</a>
         </nav>
       </header>
     </noscript>
+
+    <!-- Dynamic header include -->
     <div data-include-html="../includes/header-en.html"></div>
+
     <div class="container">
       <div class="content-area">
         <main id="main-content">
-          <section id="quotes" class="fade-in" role="region" aria-labelledby="quotes-heading">
-            <h1 id="quotes-heading">Selected Quotes</h1>
-            <blockquote cite="/quotes.html" typeof="schema:Quotation">
-              <p>Digital culture isn't just about tools; it's about the people who use them.</p>
-              <cite>&mdash; Rasoul Unlimited</cite>
-            </blockquote>
-            <blockquote cite="/quotes.html" typeof="schema:Quotation">
-              <p>Technology's power is unleashed when we make it accessible to all.</p>
-              <cite>&mdash; Rasoul Unlimited</cite>
-            </blockquote>
-            <blockquote cite="/quotes.html" typeof="schema:Quotation">
-              <p>Leading in the digital world means inspiring constant innovation.</p>
-              <cite>&mdash; Rasoul Unlimited</cite>
-            </blockquote>
-            <blockquote cite="/concepts/visual-identity-loop/" typeof="schema:Quotation">
-              <p><a href="/concepts/visual-identity-loop/" title="An iterative process of refining branding elements through ongoing feedback">Visual Identity Loop</a> ensures each feedback cycle sharpens your brand image.</p>
-              <cite>&mdash; Rasoul Unlimited</cite>
-            </blockquote>
-</section>
+          <!-- Hero section -->
+          <section
+            id="quotes-hero"
+            class="hero section fade-in"
+            role="region"
+            aria-labelledby="quotes-heading"
+          >
+            <div class="hero-text">
+              <h1 id="quotes-heading" class="hero-title">
+                Quotes by Rasoul Unlimited
+              </h1>
+              <p class="tagline">
+                Distilled thoughts from years of building in public:
+                digital&nbsp;culture, leadership, identity and product.
+              </p>
+              <div class="hero-links">
+                <a
+                  href="/wiki/rasoul-unlimited/"
+                  class="cta-button"
+                  title="Read the full professional biography"
+                >
+                  Full biography &rarr;
+                </a>
+                <a
+                  href="/concepts/visual-identity-loop/"
+                  class="ghost-button"
+                  title="Learn more about the Visual Identity Loop concept"
+                >
+                  Key concepts &rarr;
+                </a>
+              </div>
+            </div>
+            <img
+              src="../assets/images/RasoulUnlimited.webp"
+              loading="eager"
+              decoding="async"
+              width="220"
+              height="220"
+              class="profile-image"
+              alt="Portrait of Mohammad Rasoul Sohrabi (Rasoul Unlimited)"
+            />
+          </section>
+
+          <!-- Quotes section -->
+          <section
+            id="quotes"
+            class="quotes-section fade-in"
+            role="region"
+            aria-label="Selected quotes by Rasoul Unlimited"
+          >
+            <p class="section-intro">
+              This page is designed for
+              <strong>press, researchers and creators</strong>
+              who want to cite Rasoul’s work accurately. You’re welcome to quote
+              these lines with attribution to
+              <span lang="en">Rasoul Unlimited</span> and a link to this page.
+            </p>
+
+            <div class="quotes-grid">
+              <figure class="quote-card" id="q-digital-culture">
+                <blockquote cite="/quotes.html">
+                  <p>
+                    Digital culture isn't just about tools; it's about the
+                    people who use them.
+                  </p>
+                </blockquote>
+                <figcaption>
+                  <span class="quote-author">— Rasoul Unlimited</span>
+                  <button
+                    class="icon-button copy-quote-button"
+                    type="button"
+                    data-quote-target="q-digital-culture"
+                    aria-label="Copy this quote"
+                    title="Copy quote"
+                  >
+                    <i class="fas fa-copy" aria-hidden="true"></i>
+                  </button>
+                </figcaption>
+              </figure>
+
+              <figure class="quote-card" id="q-technology-power">
+                <blockquote cite="/quotes.html">
+                  <p>
+                    Technology's power is unleashed when we make it accessible
+                    to all.
+                  </p>
+                </blockquote>
+                <figcaption>
+                  <span class="quote-author">— Rasoul Unlimited</span>
+                  <button
+                    class="icon-button copy-quote-button"
+                    type="button"
+                    data-quote-target="q-technology-power"
+                    aria-label="Copy this quote"
+                    title="Copy quote"
+                  >
+                    <i class="fas fa-copy" aria-hidden="true"></i>
+                  </button>
+                </figcaption>
+              </figure>
+
+              <figure class="quote-card" id="q-digital-leadership">
+                <blockquote cite="/quotes.html">
+                  <p>
+                    Leading in the digital world means inspiring constant
+                    innovation.
+                  </p>
+                </blockquote>
+                <figcaption>
+                  <span class="quote-author">— Rasoul Unlimited</span>
+                  <button
+                    class="icon-button copy-quote-button"
+                    type="button"
+                    data-quote-target="q-digital-leadership"
+                    aria-label="Copy this quote"
+                    title="Copy quote"
+                  >
+                    <i class="fas fa-copy" aria-hidden="true"></i>
+                  </button>
+                </figcaption>
+              </figure>
+
+              <figure class="quote-card" id="q-visual-identity-loop">
+                <blockquote
+                  cite="/concepts/visual-identity-loop/"
+                  typeof="schema:Quotation"
+                >
+                  <p>
+                    <a
+                      href="/concepts/visual-identity-loop/"
+                      title="An iterative process of refining branding elements through ongoing feedback"
+                      >Visual Identity Loop</a
+                    >
+                    ensures each feedback cycle sharpens how your brand is
+                    perceived.
+                  </p>
+                </blockquote>
+                <figcaption>
+                  <span class="quote-author">— Rasoul Unlimited</span>
+                  <button
+                    class="icon-button copy-quote-button"
+                    type="button"
+                    data-quote-target="q-visual-identity-loop"
+                    aria-label="Copy this quote"
+                    title="Copy quote"
+                  >
+                    <i class="fas fa-copy" aria-hidden="true"></i>
+                  </button>
+                </figcaption>
+              </figure>
+            </div>
+
+            <p class="quotes-footer-note">
+              If you plan to reference these quotes in
+              <strong>books, articles or documentaries</strong>, you can
+              <a href="/en/contact.html">reach out for additional context</a> or
+              an authoritative English phrasing suitable for publication.
+            </p>
+          </section>
         </main>
-      <p><a href="/wiki/rasoul-unlimited/">See full bio</a></p>
+
+        <p class="more-bio-link">
+          <a href="/wiki/rasoul-unlimited/">See full bio &rarr;</a>
+        </p>
       </div>
     </div>
+
     <noscript>
       <footer class="footer">
         <p>&copy; <span id="footer-year"></span> Rasoul Unlimited</p>
       </footer>
     </noscript>
+
     <div data-include-html="../includes/footer.html"></div>
+
     <script src="../assets/js/include.min.js" defer></script>
     <script src="../assets/js/main-script-en.min.js" defer></script>
+
+    <!-- Tiny helper for copying quotes (allowed via CSP nonce) -->
+    <script nonce="RasoulCSP">
+      document.addEventListener("DOMContentLoaded", function () {
+        var buttons = document.querySelectorAll(".copy-quote-button");
+        if (!buttons.length || !navigator.clipboard) return;
+
+        buttons.forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            var targetId = btn.getAttribute("data-quote-target");
+            var figure = document.getElementById(targetId);
+            if (!figure) return;
+
+            var text =
+              (figure.querySelector("blockquote p") || {}).innerText || "";
+            var author =
+              (figure.querySelector(".quote-author") || {}).innerText || "";
+
+            var fullText =
+              text +
+              "\n" +
+              author +
+              " — https://rasoulunlimited.ir/en/quotes.html";
+
+            navigator.clipboard
+              .writeText(fullText.trim())
+              .then(function () {
+                btn.classList.add("copied");
+                btn.setAttribute("aria-label", "Copied");
+                setTimeout(function () {
+                  btn.classList.remove("copied");
+                  btn.setAttribute("aria-label", "Copy this quote");
+                }, 2000);
+              })
+              .catch(function () {
+                console.warn("Clipboard copy failed");
+              });
+          });
+        });
+      });
+    </script>
   </body>
 </html>
