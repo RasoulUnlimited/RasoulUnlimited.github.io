@@ -2,47 +2,67 @@
 <html lang="fa-IR" xml:lang="fa" dir="rtl">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+    <!-- Performance & Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
     <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="preconnect" href="https://api.github.com" />
+
     <link
       rel="preload"
       as="style"
       data-href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;700&display=swap"
       data-make-stylesheet
     />
-    <noscript
-      ><link
+    <noscript>
+      <link
         rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;700&display=swap"
-    /></noscript>
+      />
+    </noscript>
     <link
       rel="preload"
       as="style"
       data-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
       data-make-stylesheet
     />
-    <noscript
-      ><link
+    <noscript>
+      <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    /></noscript>
+      />
+    </noscript>
+
     <title>رزومه رسول آنلیمیتد</title>
     <meta
       name="description"
-      content="چکیده‌ای از تحصیلات، تجربه کاری و افتخارات محمد رسول سهرابی."
+      content="چکیده‌ای ساخت‌یافته از تحصیلات، مهارت‌ها، تجربه کاری و افتخارات محمد رسول سهرابی (Rasoul Unlimited)."
     />
+
+    <!-- Styles -->
     <link rel="stylesheet" href="assets/css/design-system.min.css" />
     <link rel="stylesheet" href="assets/css/main-style-fa.min.css" />
+    <!-- در صورت داشتن استایل اختصاصی رزومه، این خط را فعال کن -->
+    <!-- <link rel="stylesheet" href="assets/css/resume-style.min.css" /> -->
+
     <script src="assets/js/performance-helpers.min.js" defer></script>
+
+    <!-- Canonical & Author -->
     <link rel="canonical" href="https://rasoulunlimited.ir/resume.html" />
     <link
       rel="author"
       href="https://rasoulunlimited.ir/#person"
       data-person="rasoul-unlimited"
     />
+
+    <!-- SEO Meta -->
     <meta name="robots" content="index, follow" />
     <meta name="citation_title" content="رزومه رسول آنلیمیتد" />
     <meta name="dcterms.creator" content="Mohammad Rasoul Sohrabi" />
@@ -50,6 +70,8 @@
       name="dc.identifier"
       content="https://rasoulunlimited.ir/resume.html"
     />
+
+    <!-- Hreflang -->
     <link
       rel="alternate"
       href="https://rasoulunlimited.ir/resume.html"
@@ -65,6 +87,20 @@
       href="https://rasoulunlimited.ir/resume.html"
       hreflang="x-default"
     />
+
+    <!-- Linked JSON-LD profiles -->
+    <link
+      rel="alternate"
+      type="application/ld+json"
+      href="/schema/identity.jsonld"
+    />
+    <link
+      rel="alternate"
+      type="application/ld+json"
+      href="/schema/brand.jsonld"
+    />
+
+    <!-- Color scheme -->
     <meta name="color-scheme" content="light dark" />
     <meta
       name="theme-color"
@@ -76,29 +112,36 @@
       media="(prefers-color-scheme: dark)"
       content="#0f172a"
     />
+
+    <!-- Open Graph -->
     <meta property="og:type" content="profile" />
     <meta property="og:url" content="https://rasoulunlimited.ir/resume.html" />
     <meta property="og:title" content="رزومه رسول آنلیمیتد" />
     <meta
       property="og:description"
-      content="چکیده‌ای از تحصیلات، تجربه کاری و افتخارات محمد رسول سهرابی."
+      content="چکیده‌ای از تحصیلات، مهارت‌ها، تجربه کاری و افتخارات محمد رسول سهرابی."
     />
     <meta
       property="og:image"
       content="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp"
     />
-    <meta property="og:image:alt" content="پرترهٔ تاییدشدهٔ محمد رسول سهرابی" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@rasoulunlimited" />
+    <meta
+      property="og:image:alt"
+      content="پرترهٔ تاییدشدهٔ محمد رسول سهرابی"
+    />
     <meta property="og:image:width" content="220" />
     <meta property="og:image:height" content="220" />
     <meta property="og:locale" content="fa_IR" />
     <meta property="og:locale:alternate" content="en_US" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@rasoulunlimited" />
     <meta name="twitter:creator" content="@rasoulunlimited" />
     <meta name="twitter:title" content="رزومه رسول آنلیمیتد" />
     <meta
       name="twitter:description"
-      content="چکیده‌ای از تحصیلات، تجربه کاری و افتخارات محمد رسول سهرابی."
+      content="چکیده‌ای از تحصیلات، تجربه کاری، مهارت‌ها و افتخارات محمد رسول سهرابی."
     />
     <meta
       name="twitter:image"
@@ -108,30 +151,43 @@
       name="twitter:image:alt"
       content="پرترهٔ تاییدشدهٔ محمد رسول سهرابی"
     />
+
+    <!-- Schema.org Person -->
     <script type="application/ld+json" nonce="RasoulCSP">
       {
         "@context": "https://schema.org",
         "@type": "Person",
+        "@id": "https://rasoulunlimited.ir/#person",
         "name": "Mohammad Rasoul Sohrabi",
         "alternateName": "Rasoul Unlimited",
         "url": "https://rasoulunlimited.ir/",
+        "image": "https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp",
         "jobTitle": "Full-stack Developer",
         "worksFor": {
           "@type": "Organization",
+          "@id": "https://rasoulunlimited.ir/#organization",
           "name": "Rasoul Unlimited",
           "url": "https://rasoulunlimited.ir/"
         },
         "alumniOf": {
           "@type": "EducationalOrganization",
+          "@id": "https://ctb.iau.ir",
           "name": "Islamic Azad University, Central Tehran Branch",
           "url": "https://ctb.iau.ir"
         },
         "award": [
-          "تأیید رسمی اولین ربات فارسی دیسکورد توسط Discord Inc. در تاریخ 2020-01-01 - لینک: https://top.gg/bot/735403725132136510",
-          "دان ۱ رسمی فدراسیون کاراته جمهوری اسلامی ایران - لینک: https://ikf.ir/"
+          "Official verification of the first Persian Discord bot by Discord Inc. (2020)",
+          "1st Dan Karate – Karate Federation of the Islamic Republic of Iran"
+        ],
+        "sameAs": [
+          "https://github.com/RasoulUnlimited",
+          "https://keybase.io/rasoulunlimited",
+          "https://x.com/rasoulunlimited"
         ]
       }
     </script>
+
+    <!-- Schema.org EducationalOrganization (University) -->
     <script type="application/ld+json" nonce="RasoulCSP">
       {
         "@context": "https://schema.org",
@@ -147,6 +203,8 @@
         }
       }
     </script>
+
+    <!-- Schema.org WebPage (Resume) -->
     <script type="application/ld+json" nonce="RasoulCSP">
       {
         "@context": "https://schema.org",
@@ -165,9 +223,11 @@
         }
       }
     </script>
+
     <link rel="entity-profile" href="/.well-known/entity-profile.json" />
   </head>
-  <body>
+  <body class="resume-page">
+    <!-- Fallback navigation when JS is disabled -->
     <noscript>
       <header class="navbar" role="banner">
         <nav role="navigation" aria-label="پیوندهای اصلی سایت">
@@ -177,47 +237,301 @@
           <a href="/press.html">رسانه</a>
           <a href="/faq/">سوالات متداول</a>
           <a href="/contact.html">تماس</a>
-          <a href="/resume.html">رزومه</a>
+          <a href="/resume.html" aria-current="page">رزومه</a>
         </nav>
       </header>
     </noscript>
+
+    <!-- Dynamic header include -->
     <div data-include-html="includes/header-fa.html"></div>
-    <main id="main-content" class="container">
-      <h1>رزومه رسول آنلیمیتد</h1>
-      <section>
-        <h2>تحصیلات</h2>
-        <p>دانشجوی مهندسی پزشکی دانشگاه آزاد اسلامی واحد تهران مرکزی.</p>
+
+    <main id="main-content" class="container resume-container">
+      <!-- Hero / Summary -->
+      <section
+        id="resume-hero"
+        class="card resume-hero"
+        role="region"
+        aria-labelledby="resume-title"
+      >
+        <div class="resume-hero-grid">
+          <div class="hero-text-block">
+            <h1 id="resume-title">رزومه رسول آنلیمیتد</h1>
+            <p class="resume-subtitle">
+              محمد رسول سهرابی &mdash; توسعه‌دهنده فول‌استک، سازنده ربات‌ها و
+              طراح سیستم‌های هویت دیجیتال.
+            </p>
+            <p class="resume-meta">
+              <span><i class="fas fa-location-dot" aria-hidden="true"></i> ایران</span>
+              <span>
+                <i class="fas fa-code" aria-hidden="true"></i>
+                Full-stack / Open Source
+              </span>
+            </p>
+            <div class="resume-cta-group">
+              <a
+                href="/contact.html"
+                class="cta-button"
+                aria-label="ارتباط برای همکاری یا پروژه"
+              >
+                همکاری و پروژه جدید
+              </a>
+              <a
+                href="mailto:rasoul.unlimited@gmail.com?subject=Collaboration%20Request"
+                class="ghost-button"
+              >
+                ایمیل مستقیم
+              </a>
+            </div>
+          </div>
+          <div class="hero-avatar-block">
+            <img
+              src="assets/images/RasoulUnlimited.webp"
+              loading="eager"
+              decoding="async"
+              width="220"
+              height="220"
+              class="profile-image"
+              alt="پرترهٔ تاییدشدهٔ محمد رسول سهرابی (Rasoul Unlimited)"
+            />
+            <ul class="resume-links">
+              <li>
+                <a
+                  href="https://github.com/RasoulUnlimited"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="پروفایل GitHub Rasoul Unlimited"
+                >
+                  <i class="fab fa-github" aria-hidden="true"></i> GitHub
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://keybase.io/rasoulunlimited"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i class="fas fa-key" aria-hidden="true"></i> Keybase
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://x.com/rasoulunlimited"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i class="fab fa-x-twitter" aria-hidden="true"></i> X (Twitter)
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </section>
-      <section>
-        <h2>تجربه کاری</h2>
+
+      <!-- Summary -->
+      <section
+        id="summary"
+        class="card resume-section"
+        aria-labelledby="summary-heading"
+      >
+        <h2 id="summary-heading">خلاصه حرفه‌ای</h2>
         <p>
-          توسعه‌دهنده فول‌استک و استراتژیست محتوا در پروژه‌های متن‌باز و شخصی.
+          توسعه‌دهندهٔ فول‌استک با تمرکز بر وب مدرن، ربات‌های تعاملی و
+          زیرساخت‌های سبک‌وزن مبتنی بر GitHub Pages و Cloudflare. طراح و
+          پیاده‌ساز «اولین ربات فارسی دیسکورد» که به صورت رسمی توسط
+          <span lang="en">Discord Inc.</span> تأیید شده و به جامعهٔ فارسی‌زبان
+          امکان استفاده امن و بومی از دیسکورد را داده است. علاقه‌مند به
+          استانداردهای باز، هویت دیجیتال قابل‌تأیید و مستندسازی دقیق برای
+          توسعه‌دهندگان و خبرنگاران تکنولوژی.
         </p>
       </section>
-      <section>
-        <h2>افتخارات</h2>
-        <ul>
+
+      <!-- Education -->
+      <section
+        id="education"
+        class="card resume-section"
+        aria-labelledby="education-heading"
+      >
+        <h2 id="education-heading">تحصیلات</h2>
+        <article class="resume-item">
+          <h3>مهندسی پزشکی</h3>
+          <p class="resume-item-meta">
+            دانشگاه آزاد اسلامی واحد تهران مرکزی
+            <span class="separator">|</span>
+            دانشجوی کارشناسی
+          </p>
+          <p>
+            ترکیب دید مهندسی، پزشکی و برنامه‌نویسی برای درک بهتر سیستم‌های
+            پیچیده، پردازش سیگنال و طراحی ابزارهای نرم‌افزاری مرتبط با سلامت و
+            عملکرد انسان.
+          </p>
+        </article>
+      </section>
+
+      <!-- Experience -->
+      <section
+        id="experience"
+        class="card resume-section"
+        aria-labelledby="experience-heading"
+      >
+        <h2 id="experience-heading">تجربهٔ کاری و پروژه‌ای</h2>
+
+        <article class="resume-item">
+          <h3>توسعه‌دهندهٔ فول‌استک و معمار سیستم &mdash; Rasoul Unlimited</h3>
+          <p class="resume-item-meta">
+            پروژه‌های شخصی، متن‌باز و همکاری‌های مستقل
+          </p>
+          <ul>
+            <li>
+              طراحی و توسعهٔ
+              <strong>اولین ربات رسمی فارسی دیسکورد</strong>
+              با تأیید رسمی Discord، شامل سیستم فرمان‌های چندزبانه، مدیریت
+              سرور و قابلیت‌های انجمن‌محور.
+            </li>
+            <li>
+              پیاده‌سازی زیرساخت وب شخصی بر پایهٔ
+              <span lang="en">GitHub Pages</span>
+              و
+              <span lang="en">Cloudflare</span>
+              با تمرکز بر امنیت (CSP سخت‌گیرانه، security.txt، PGP، و
+              استانداردهای هویت دیجیتال).
+            </li>
+            <li>
+              توسعهٔ ابزارها، کتابخانه‌ها و اسکریپت‌های کمکی برای اتوماسیون
+              انتشار محتوا، آنالیز هویت دیجیتال و بهینه‌سازی پروفایل آنلاین.
+            </li>
+          </ul>
+        </article>
+
+        <article class="resume-item">
+          <h3>مشارکت در پروژه‌های متن‌باز</h3>
+          <p class="resume-item-meta">
+            GitHub &mdash; پروژه‌های جامعه‌محور و تجربی
+          </p>
+          <ul>
+            <li>
+              مشارکت در مخازن عمومی با محوریت ربات‌ها، ابزارهای خط فرمان و
+              نمونه‌کدهای آموزشی برای توسعه‌دهندگان فارسی‌زبان.
+            </li>
+            <li>
+              مستندسازی فارسی/انگلیسی برای کمک به بهبود
+              <span lang="en">developer experience</span>
+              و انتقال بهتر مفاهیم.
+            </li>
+          </ul>
+        </article>
+      </section>
+
+      <!-- Skills -->
+      <section
+        id="skills"
+        class="card resume-section"
+        aria-labelledby="skills-heading"
+      >
+        <h2 id="skills-heading">مهارت‌ها</h2>
+        <div class="resume-skills-grid">
+          <div>
+            <h3>زبان‌ها و فناوری‌ها</h3>
+            <ul>
+              <li>Python، C، JavaScript، HTML، CSS</li>
+              <li>توسعهٔ ربات دیسکورد و خدمات API محور</li>
+              <li>Git، GitHub و گردش‌کارهای مبتنی بر <span lang="en">CI</span></li>
+            </ul>
+          </div>
+          <div>
+            <h3>زیرساخت و وب</h3>
+            <ul>
+              <li>GitHub Pages، Cloudflare، DNS و بهینه‌سازی عملکرد</li>
+              <li>پیاده‌سازی <span lang="en">Content Security Policy</span> سخت‌گیرانه</li>
+              <li>استانداردهای هویت دیجیتال (security.txt، JSON-LD، WebFinger)</li>
+            </ul>
+          </div>
+          <div>
+            <h3>حوزه‌های تمرکز</h3>
+            <ul>
+              <li>طراحی سیستم‌های هویت و پرستیژ دیجیتال</li>
+              <li>تجربهٔ کاربری برای توسعه‌دهندگان و خبرنگاران</li>
+              <li>ترکیب دید فنی، محتوا و برندسازی شخصی</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Honors & Achievements -->
+      <section
+        id="honors"
+        class="card resume-section"
+        aria-labelledby="honors-heading"
+      >
+        <h2 id="honors-heading">افتخارات و دستاوردها</h2>
+        <ul class="resume-honors-list">
           <li>
-            تایید رسمی اولین ربات فارسی دیسکورد توسط Discord در سال 2020 —
-            <a href="/concepts/authority-feedback-system/" lang="en"
+            تأیید رسمی
+            <strong>اولین ربات فارسی دیسکورد</strong>
+            توسط
+            <span lang="en">Discord Inc.</span>
+            در سال ۲۰۲۰ &mdash;
+            نمونه موردی در مفهوم
+            <a
+              href="/concepts/authority-feedback-system/"
+              lang="en"
+              rel="bookmark"
               >Authority Feedback System</a
             >
           </li>
-          <li>دریافت دان یک کاراته از فدراسیون کاراته جمهوری اسلامی ایران</li>
+          <li>
+            دریافت
+            <strong>دان یک کاراته</strong>
+            از فدراسیون کاراته جمهوری اسلامی ایران
+          </li>
         </ul>
       </section>
-      <p class="cta">
-        <a href="/wiki/rasoul-unlimited/">بیوگرافی حرفه‌ای در ویکی &rarr;</a>
-        <a href="/quotes.html">نقل قول‌ها &rarr;</a>
-      </p>
+
+      <!-- Selected Links -->
+      <section
+        id="more-info"
+        class="card resume-section"
+        aria-labelledby="more-info-heading"
+      >
+        <h2 id="more-info-heading">اطلاعات بیشتر و منابع تکمیلی</h2>
+        <p>
+          برای بررسی عمیق‌تر پیشینه، فلسفهٔ کاری و پروژه‌ها می‌توانید به
+          منابع زیر مراجعه کنید:
+        </p>
+        <ul class="resume-links-list">
+          <li>
+            <a href="/wiki/rasoul-unlimited/">بیوگرافی حرفه‌ای در ویکی &rarr;</a>
+          </li>
+          <li>
+            <a href="/quotes.html">نقل‌قول‌ها و جملات کلیدی &rarr;</a>
+          </li>
+          <li>
+            <a href="/projects/">فهرست پروژه‌ها و نمونه‌کارها &rarr;</a>
+          </li>
+          <li>
+            <a href="/press.html">رسانه، مصاحبه‌ها و پوشش خبری &rarr;</a>
+          </li>
+        </ul>
+      </section>
     </main>
+
+    <!-- No-JS footer fallback -->
     <noscript>
       <footer class="footer">
-        <p>&copy; <span id="footer-year"></span> Rasoul Unlimited</p>
-        <p><a href="/wiki/rasoul-unlimited/">بیوگرافی حرفه‌ای در ویکی</a></p>
+        <p>
+          &copy;
+          <span id="footer-year"></span>
+          Rasoul Unlimited
+        </p>
+        <p>
+          <a href="/wiki/rasoul-unlimited/">بیوگرافی حرفه‌ای در ویکی</a>
+        </p>
       </footer>
     </noscript>
+
+    <!-- Dynamic footer include -->
     <div data-include-html="includes/footer.html"></div>
+
+    <!-- Scripts -->
     <script src="assets/js/include.min.js" defer></script>
     <script src="assets/js/main-script-fa.min.js" defer></script>
   </body>
