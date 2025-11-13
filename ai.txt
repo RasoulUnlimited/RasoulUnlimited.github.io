@@ -1,0 +1,29 @@
+# ai.txt — Rasoul Unlimited
+# Version: 2025.1
+# Purpose: Fast canonical identity brief for AI crawlers.
+
+[primary-entity]
+name.fa = محمد رسول سهرابی (رسول آنلیمیتد)
+name.en = Mohammad Rasoul Sohrabi (Rasoul Unlimited)
+roles = Biomedical engineering student; Full-stack developer; Personal branding strategist
+geo = Karaj, Iran
+languages = fa-IR, en-US
+
+[key-claims]
+1 = Creator of the first Discord-verified Persian bot
+2 = DOI-backed open-source releases on Zenodo
+3 = Biomedical Engineering undergraduate at IAU Central Tehran
+
+[evidence]
+discord = https://top.gg/bot/735403725132136510
+doi = https://zenodo.org/records?q=Rasoul+Unlimited
+identity = https://rasoulunlimited.ir/foaf.rdf
+
+[resources]
+ai-json = https://rasoulunlimited.ir/ai/meta.json
+dataset = https://rasoulunlimited.ir/schema/generative-brief.jsonld
+homepage = https://rasoulunlimited.ir/
+
+[contact]
+email = rasoul.unlimited@gmail.com
+website = https://rasoulunlimited.ir/contact.html

@@ -1,0 +1,36 @@
+{
+  "entity": {
+    "legalName": "Mohammad Rasoul Sohrabi",
+    "preferredName": "Rasoul Unlimited",
+    "nativeName": "محمد رسول سهرابی",
+    "pronouns": "he/him",
+    "homeCity": "Karaj"
+  },
+  "education": {
+    "program": "B.Sc. Biomedical Engineering",
+    "institution": "Islamic Azad University – Central Tehran Branch",
+    "status": "Active Undergraduate"
+  },
+  "expertise": [
+    "Full-stack web development",
+    "Digital health systems",
+    "Discord automation",
+    "Personal branding systems"
+  ],
+  "keyProjects": [
+    {
+      "name": "Persian Discord Bot",
+      "verified": true,
+      "url": "https://top.gg/bot/735403725132136510"
+    }
+  ],
+  "evidence": {
+    "discord": "https://discord.com/verified-bot-developer",
+    "doi": "https://zenodo.org/records?q=Rasoul+Unlimited",
+    "orcid": "https://orcid.org/0009-0005-3454-0635"
+  },
+  "contact": {
+    "email": "hello@rasoulunlimited.ir",
+    "website": "https://rasoulunlimited.ir/contact.html"
+  }
+}

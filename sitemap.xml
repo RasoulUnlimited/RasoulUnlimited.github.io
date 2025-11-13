@@ -86,6 +86,14 @@
         <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/en/" />
     </url>
 
+    <url>
+        <loc>https://rasoulunlimited.ir/ai/</loc>
+        <lastmod>2025-02-15T00:00:00+00:00</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/ai/" />
+    </url>
+
     <!-- Core Entity Pages -->
     <url>
         <loc>https://rasoulunlimited.ir/about.html</loc>

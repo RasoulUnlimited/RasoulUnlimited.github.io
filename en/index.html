@@ -149,6 +149,41 @@
 
     <meta http-equiv="Content-Language" content="en-US" />
 
+   <link rel="alternate" type="text/plain" href="/ai.txt" />
+   <link rel="alternate" type="application/ld+json" href="/schema/generative-brief.jsonld" />
+
+  <!-- AI Answer Map (English) -->
+  <script type="application/json" id="ai-answer-map-en">
+    {
+      "primaryEntity": "Rasoul Unlimited",
+      "faq": [
+        {
+          "q": "Who is Rasoul Unlimited?",
+          "a": "A biomedical engineering student and full-stack developer."
+        },
+        {
+          "q": "Key verified project?",
+          "a": "The first Discord-verified Persian bot."
+        }
+      ]
+    }
+  </script>
+
+  <!-- FAQ JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What does Rasoul Unlimited do?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Full-stack development, digital health, personal branding." }
+      }
+    ]
+  }
+  </script>
+
     <script type="application/json" id="ai-summary-en">
       {
         "primaryEntity": "Mohammad Rasoul Sohrabi (Rasoul Unlimited)",

@@ -1,0 +1,30 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "Rasoul Unlimited – Generative Engine Brief",
+  "description": "Canonical machine-readable facts for AI engines.",
+  "inLanguage": ["fa-IR", "en-US"],
+  "creator": {
+    "@type": "Person",
+    "name": "Mohammad Rasoul Sohrabi",
+    "alternateName": "Rasoul Unlimited",
+    "url": "https://rasoulunlimited.ir/"
+  },
+  "variableMeasured": [
+    "Discord-verified Persian bot",
+    "DOI-backed open-source releases",
+    "Biomedical engineering studies"
+  ],
+  "distribution": [
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "text/plain",
+      "contentUrl": "https://rasoulunlimited.ir/ai.txt"
+    },
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "application/json",
+      "contentUrl": "https://rasoulunlimited.ir/ai/meta.json"
+    }
+  ]
+}
