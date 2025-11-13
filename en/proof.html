@@ -2,20 +2,73 @@
 <html lang="en-US" xml:lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+
     <title>Verifiable Credentials & DOIs – Rasoul Unlimited</title>
     <meta
       name="description"
-      content="DOIs and official certificates confirming the work of Mohammad Rasoul Sohrabi (Rasoul Unlimited)."
+      content="DOIs and official certificates confirming the work and achievements of Mohammad Rasoul Sohrabi (Rasoul Unlimited)."
     />
+
+    <!-- Performance: preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      type="image/png"
+      href="../assets/images/favicon.png"
+    />
+
+    <!-- Fonts & icons (preload for CLS-friendly render) -->
+    <link
+      rel="preload"
+      as="style"
+      data-href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;700&display=swap"
+      data-make-stylesheet
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;700&display=swap"
+      />
+    </noscript>
+    <link
+      rel="preload"
+      as="style"
+      data-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      data-make-stylesheet
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      />
+    </noscript>
+
+    <!-- Core CSS -->
     <link rel="stylesheet" href="../assets/css/design-system.min.css" />
     <link rel="stylesheet" href="../assets/css/main-style-en.min.css" />
-    <link rel="canonical" href="https://rasoulunlimited.ir/en/proof.html" />
+
+    <!-- Canonical & author -->
+    <link
+      rel="canonical"
+      href="https://rasoulunlimited.ir/en/proof.html"
+    />
     <link
       rel="author"
       href="https://rasoulunlimited.ir/#person"
       data-person="rasoul-unlimited"
     />
+
+    <!-- Indexing / Dublin Core -->
     <meta name="robots" content="index, follow" />
     <meta
       name="citation_title"
@@ -26,6 +79,8 @@
       name="dc.identifier"
       content="https://rasoulunlimited.ir/en/proof.html"
     />
+
+    <!-- Hreflang -->
     <link
       rel="alternate"
       href="https://rasoulunlimited.ir/proof.html"
@@ -41,11 +96,20 @@
       href="https://rasoulunlimited.ir/proof.html"
       hreflang="x-default"
     />
+
+    <!-- Identity / brand graph roots -->
     <link
       rel="alternate"
       type="application/ld+json"
       href="/schema/identity.jsonld"
     />
+    <link
+      rel="alternate"
+      type="application/ld+json"
+      href="/schema/brand.jsonld"
+    />
+
+    <!-- Color scheme -->
     <meta name="color-scheme" content="light dark" />
     <meta
       name="theme-color"
@@ -57,6 +121,8 @@
       media="(prefers-color-scheme: dark)"
       content="#0f172a"
     />
+
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta
       property="og:title"
@@ -64,7 +130,7 @@
     />
     <meta
       property="og:description"
-      content="DOIs and official certificates confirming the work of Mohammad Rasoul Sohrabi (Rasoul Unlimited)."
+      content="DOIs, research identifiers and official certificates that independently verify the work of Mohammad Rasoul Sohrabi (Rasoul Unlimited)."
     />
     <meta
       property="og:image"
@@ -83,6 +149,8 @@
       content="https://rasoulunlimited.ir/en/proof.html"
     />
     <meta property="og:site_name" content="Rasoul Unlimited" />
+
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@rasoulunlimited" />
     <meta name="twitter:creator" content="@rasoulunlimited" />
@@ -92,7 +160,7 @@
     />
     <meta
       name="twitter:description"
-      content="DOIs and official certificates confirming the work of Mohammad Rasoul Sohrabi (Rasoul Unlimited)."
+      content="DOIs, research identifiers and official certificates that independently verify the work of Rasoul Unlimited."
     />
     <meta
       name="twitter:image"
@@ -102,56 +170,60 @@
       name="twitter:image:alt"
       content="Portrait of Mohammad Rasoul Sohrabi"
     />
+
+    <!-- Dataset: verifiable credentials -->
     <script type="application/ld+json" nonce="RasoulCSP">
       {
         "@context": "https://schema.org",
         "@type": "Dataset",
-        "name": "Verifiable Credentials",
-        "description": "Collection of DOIs and certificates for Rasoul Unlimited's projects and achievements.",
+        "name": "Rasoul Unlimited – Verifiable Credentials",
+        "description": "Collection of DOIs and official certificates for projects and achievements by Mohammad Rasoul Sohrabi (Rasoul Unlimited).",
         "creator": {
           "@type": "Person",
           "name": "Mohammad Rasoul Sohrabi",
           "url": "https://rasoulunlimited.ir"
         },
         "sameAs": [
-        "https://scholar.google.com/citations?user=kDl5eNUAAAAJ",
-        "https://orcid.org/0009-0004-7177-2080",
-        "https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi"
-      ],
+          "https://scholar.google.com/citations?user=kDl5eNUAAAAJ",
+          "https://orcid.org/0009-0004-7177-2080",
+          "https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi"
+        ],
         "hasPart": [
           {
             "@type": "CreativeWork",
             "name": "Small Projects with C",
-          "identifier": "https://doi.org/10.5281/zenodo.15548850",
-          "url": "https://doi.org/10.5281/zenodo.15548850",
-          "locationCreated": {
-            "@type": "Place",
-            "name": "Karaj, Iran"
-          }
-        },
+            "identifier": "https://doi.org/10.5281/zenodo.15548850",
+            "url": "https://doi.org/10.5281/zenodo.15548850",
+            "locationCreated": {
+              "@type": "Place",
+              "name": "Karaj, Iran"
+            }
+          },
           {
             "@type": "CreativeWork",
             "name": "Small Projects with Python",
-          "identifier": "https://doi.org/10.5281/zenodo.15548860",
-          "url": "https://doi.org/10.5281/zenodo.15548860",
-          "locationCreated": {
-            "@type": "Place",
-            "name": "Karaj, Iran"
-          }
-        },
+            "identifier": "https://doi.org/10.5281/zenodo.15548860",
+            "url": "https://doi.org/10.5281/zenodo.15548860",
+            "locationCreated": {
+              "@type": "Place",
+              "name": "Karaj, Iran"
+            }
+          },
           {
             "@type": "CreativeWork",
             "name": "Official Discord Bot Verification Certificate",
-          "identifier": "https://vrgl.ir/9D6Hy",
-          "url": "https://vrgl.ir/9D6Hy",
-          "locationCreated": {
-            "@type": "Place",
-            "name": "Karaj, Iran"
+            "identifier": "https://vrgl.ir/9D6Hy",
+            "url": "https://vrgl.ir/9D6Hy",
+            "locationCreated": {
+              "@type": "Place",
+              "name": "Karaj, Iran"
+            }
           }
-        }
-      ]
+        ]
       }
     </script>
+
+    <!-- Breadcrumbs -->
     <script type="application/ld+json" nonce="RasoulCSP">
       {
         "@context": "https://schema.org",
@@ -172,11 +244,15 @@
         ]
       }
     </script>
+
+    <!-- WebPage definition -->
     <script type="application/ld+json" nonce="RasoulCSP">
       {
         "@context": "https://schema.org",
         "@type": "WebPage",
         "url": "https://rasoulunlimited.ir/en/proof.html",
+        "name": "Verifiable Credentials & DOIs – Rasoul Unlimited",
+        "headline": "Verifiable Credentials, DOIs and Official Certificates",
         "isPartOf": { "@id": "https://rasoulunlimited.ir/#website" },
         "author": { "@id": "https://rasoulunlimited.ir/#person" },
         "publisher": { "@id": "https://rasoulunlimited.ir/#organization" },
@@ -189,31 +265,46 @@
         }
       }
     </script>
-    <link rel="entity-profile" href="/.well-known/entity-profile.json" />
+
+    <link
+      rel="entity-profile"
+      href="/.well-known/entity-profile.json"
+    />
   </head>
-  <body>
+  <body class="proof-page">
+    <!-- No-JS fallback navigation -->
     <noscript>
       <header class="navbar" role="banner">
         <nav role="navigation" aria-label="Main site links">
           <a href="/en/index.html">Home</a>
           <a href="/en/about.html">About</a>
-          <a href="/en/proof.html">Proof</a>
+          <a href="/en/proof.html" aria-current="page">Proof</a>
           <a href="/en/press.html">Press</a>
           <a href="/en/faq/">FAQ</a>
           <a href="/en/contact.html">Contact</a>
         </nav>
       </header>
     </noscript>
+
+    <!-- Dynamic header include -->
     <div data-include-html="../includes/header-en.html"></div>
+
     <div class="container">
       <div class="content-area">
         <main id="main-content">
+          <!-- Hero -->
           <section
             id="hero"
             class="hero section fade-in"
             role="region"
-            aria-labelledby="hero-tagline"
+            aria-labelledby="hero-title"
           >
+            <div class="hero-text">
+              <h1 id="hero-title">Verifiable Credentials &amp; DOIs</h1>
+              <p class="tagline" id="hero-tagline">
+                The independent, evidence layer of Rasoul Unlimited’s work.
+              </p>
+            </div>
             <img
               src="../assets/images/RasoulUnlimited.webp"
               loading="eager"
@@ -223,192 +314,464 @@
               width="220"
               height="220"
             />
-            <p class="tagline" id="hero-tagline">
-              Verified credentials and DOIs
+          </section>
+
+          <!-- Intro -->
+          <section aria-labelledby="intro-heading">
+            <h2 id="intro-heading" class="visually-hidden">
+              Overview of verifiable credentials
+            </h2>
+            <p data-person="rasoul-unlimited">
+              This page lists official DOIs and certificates that
+              <strong>independently verify</strong> a selection of Rasoul’s work.
+              The site is hosted on <span lang="en">GitHub Pages</span> and
+              secured through <span lang="en">Cloudflare</span>, reinforcing a
+              product philosophy built on transparency, verifiability and
+              long-term reliability. These references are suitable for citation,
+              due diligence and background checks.
+            </p>
+            <p>
+              Each DOI is a permanent identifier for a publicly archived work,
+              indexed by academic and research platforms (such as
+              <span lang="en">Zenodo</span>) so that Rasoul’s projects remain
+              discoverable and citable over time.
             </p>
           </section>
-          <h1>Verifiable Credentials & DOIs</h1>
-          <p data-person="rasoul-unlimited">
-            This page lists official DOIs and certificates that verify Rasoul's
-            contributions. The website is hosted on GitHub Pages and secured
-            through Cloudflare, reflecting his focus on transparency and
-            reliability. You can use these references for citation or background
-            checks.
-          </p>
-          <p>
-            Each DOI is a permanent reference for a work that has been publicly
-            archived and cited by academic institutions, ensuring Rasoul's
-            projects remain identifiable over time.
-          </p>
-          <div class="search-credential-container" role="search">
-            <button id="voice-search-btn" aria-label="Voice search" aria-pressed="false">
-              <i class="fas fa-microphone" aria-hidden="true"></i>
-            </button>
-            <span id="voice-status" class="visually-hidden" aria-live="polite"></span>
-            <input
-              type="text"
-              id="credential-search"
-              placeholder="Search credentials or DOI"
-              aria-label="Search credentials"
-              aria-controls="credential-grid"
-              autocomplete="off"
-            />
-            <button id="clear-credential-search" aria-label="Clear search">
-              ✖
-            </button>
-          </div>
-          <p
-            id="results-info"
-            class="results-info"
-            data-lang="en"
-            aria-live="polite"
-            role="status"
-          ></p>
-          <div class="credential-grid" role="list">
+
+          <!-- Search & filter -->
+          <section
+            aria-labelledby="credential-search-heading"
+            class="credential-search-section"
+          >
+            <h2 id="credential-search-heading" class="section-title">
+              Search credentials and DOIs
+            </h2>
             <div
-              class="credential-card"
-              itemscope
-              itemtype="https://schema.org/CreativeWork"
-              data-keywords="C projects zenodo"
-              role="listitem"
+              class="search-credential-container"
+              role="search"
+              aria-describedby="search-help"
             >
-              <img
-                src="../assets/images/zenodo-badge.svg"
-                alt="Zenodo logo"
-                width="48"
-                height="48"
-                loading="lazy"
+              <button
+                id="voice-search-btn"
+                type="button"
+                aria-label="Voice search credentials"
+                aria-pressed="false"
+              >
+                <i class="fas fa-microphone" aria-hidden="true"></i>
+              </button>
+              <span
+                id="voice-status"
+                class="visually-hidden"
+                aria-live="polite"
+              ></span>
+
+              <input
+                type="text"
+                id="credential-search"
+                placeholder="Search by C, Python, Discord, Zenodo, DOI…"
+                aria-label="Search credentials"
+                aria-controls="credential-grid"
+                autocomplete="off"
               />
-              <h3 itemprop="name">Small Projects with C</h3>
-              <p class="credential-summary">
-                Open-source C projects from Tehran Azad University.
-              </p>
-              <div class="card-actions">
-                <a itemprop="identifier" href="../projects/c-projects/">View DOI</a>
-                <button class="copy-btn" data-copy="https://doi.org/10.5281/zenodo.15548850" aria-label="Copy DOI" title="Copy DOI">
-                  <i class="fas fa-copy" aria-hidden="true"></i>
-                </button>
-              </div>
+
+              <button
+                id="clear-credential-search"
+                type="button"
+                aria-label="Clear search"
+              >
+                ✖
+              </button>
             </div>
+            <p id="search-help" class="results-helper-text">
+              You can filter by technology (C, Python), platform (Discord) or
+              even fragments of a DOI.
+            </p>
+            <p
+              id="results-info"
+              class="results-info"
+              data-lang="en"
+              aria-live="polite"
+              role="status"
+            ></p>
+          </section>
+
+          <!-- Credential grid -->
+          <section
+            aria-labelledby="credential-grid-heading"
+            class="credential-section"
+          >
+            <h2 id="credential-grid-heading" class="section-title">
+              Credential list
+            </h2>
+
             <div
-              class="credential-card"
-              itemscope
-              itemtype="https://schema.org/CreativeWork"
-              data-keywords="Python projects zenodo"
-              role="listitem"
+              id="credential-grid"
+              class="credential-grid"
+              role="list"
             >
-              <img
-                src="../assets/images/zenodo-badge.svg"
-                alt="Zenodo logo"
-                width="48"
-                height="48"
-                loading="lazy"
-              />
-              <h3 itemprop="name">Small Projects with Python</h3>
-              <p class="credential-summary">
-                Collection of Python exercises from Sahand University of
-                Technology.
-              </p>
-              <div class="card-actions">
-                <a itemprop="identifier" href="../projects/python-projects/">View DOI</a>
-                <button class="copy-btn" data-copy="https://doi.org/10.5281/zenodo.15548860" aria-label="Copy DOI" title="Copy DOI">
-                  <i class="fas fa-copy" aria-hidden="true"></i>
-                </button>
-              </div>
+              <!-- C projects DOI -->
+              <article
+                class="credential-card"
+                itemscope
+                itemtype="https://schema.org/CreativeWork"
+                data-keywords="C projects zenodo university azad"
+                role="listitem"
+              >
+                <img
+                  src="../assets/images/zenodo-badge.svg"
+                  alt="Zenodo archival badge"
+                  width="48"
+                  height="48"
+                  loading="lazy"
+                />
+                <h3 itemprop="name">Small Projects with C</h3>
+                <p class="credential-summary" itemprop="description">
+                  Open-source C projects associated with coursework and
+                  experiments at Islamic Azad University, Central Tehran Branch.
+                </p>
+                <div class="card-meta">
+                  <span class="credential-label">DOI:</span>
+                  <code dir="ltr">10.5281/zenodo.15548850</code>
+                </div>
+                <div class="card-actions">
+                  <a
+                    itemprop="url"
+                    href="../projects/c-projects/"
+                    class="cta-link"
+                  >
+                    View project &amp; DOI
+                  </a>
+                  <button
+                    class="copy-btn"
+                    data-copy="https://doi.org/10.5281/zenodo.15548850"
+                    aria-label="Copy DOI for Small Projects with C"
+                    title="Copy DOI"
+                  >
+                    <i class="fas fa-copy" aria-hidden="true"></i>
+                  </button>
+                  <button
+                    class="share-btn"
+                    data-share="https://doi.org/10.5281/zenodo.15548850"
+                    aria-label="Share DOI for Small Projects with C"
+                    title="Share DOI"
+                  >
+                    <i class="fas fa-share-alt" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </article>
+
+              <!-- Python projects DOI -->
+              <article
+                class="credential-card"
+                itemscope
+                itemtype="https://schema.org/CreativeWork"
+                data-keywords="Python projects zenodo sahand"
+                role="listitem"
+              >
+                <img
+                  src="../assets/images/zenodo-badge.svg"
+                  alt="Zenodo archival badge"
+                  width="48"
+                  height="48"
+                  loading="lazy"
+                />
+                <h3 itemprop="name">Small Projects with Python</h3>
+                <p class="credential-summary" itemprop="description">
+                  A collection of Python exercises and mini-projects inspired by
+                  courses at Sahand University of Technology and personal
+                  experiments.
+                </p>
+                <div class="card-meta">
+                  <span class="credential-label">DOI:</span>
+                  <code dir="ltr">10.5281/zenodo.15548860</code>
+                </div>
+                <div class="card-actions">
+                  <a
+                    itemprop="url"
+                    href="../projects/python-projects/"
+                    class="cta-link"
+                  >
+                    View project &amp; DOI
+                  </a>
+                  <button
+                    class="copy-btn"
+                    data-copy="https://doi.org/10.5281/zenodo.15548860"
+                    aria-label="Copy DOI for Small Projects with Python"
+                    title="Copy DOI"
+                  >
+                    <i class="fas fa-copy" aria-hidden="true"></i>
+                  </button>
+                  <button
+                    class="share-btn"
+                    data-share="https://doi.org/10.5281/zenodo.15548860"
+                    aria-label="Share DOI for Small Projects with Python"
+                    title="Share DOI"
+                  >
+                    <i class="fas fa-share-alt" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </article>
+
+              <!-- Discord verification certificate -->
+              <article
+                class="credential-card"
+                itemscope
+                itemtype="https://schema.org/CreativeWork"
+                data-keywords="Discord certificate bot verification"
+                role="listitem"
+              >
+                <img
+                  src="../assets/images/certificate-badge.svg"
+                  alt="Official certificate badge"
+                  width="48"
+                  height="48"
+                  loading="lazy"
+                />
+                <h3 itemprop="name">Discord Bot Verification</h3>
+                <p class="credential-summary" itemprop="description">
+                  Official certificate confirming Rasoul’s Persian Discord bot
+                  was granted verified status by Discord Inc., with visual
+                  evidence and supporting links.
+                </p>
+                <div class="card-meta">
+                  <span class="credential-label">Certificate link:</span>
+                  <code dir="ltr">https://vrgl.ir/9D6Hy</code>
+                </div>
+                <div class="card-actions">
+                  <a
+                    itemprop="url"
+                    href="https://vrgl.ir/9D6Hy"
+                    target="_blank"
+                    rel="ugc noopener noreferrer nofollow"
+                    class="cta-link"
+                  >
+                    View verification certificate
+                  </a>
+                  <button
+                    class="copy-btn"
+                    data-copy="https://vrgl.ir/9D6Hy"
+                    aria-label="Copy Discord certificate link"
+                    title="Copy link"
+                  >
+                    <i class="fas fa-copy" aria-hidden="true"></i>
+                  </button>
+                  <button
+                    class="share-btn"
+                    data-share="https://vrgl.ir/9D6Hy"
+                    aria-label="Share Discord certificate link"
+                    title="Share link"
+                  >
+                    <i class="fas fa-share-alt" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </article>
             </div>
-            <div
-              class="credential-card"
-              itemscope
-              itemtype="https://schema.org/CreativeWork"
-              data-keywords="Discord certificate bot"
-              role="listitem"
-            >
-              <img
-                src="../assets/images/certificate-badge.svg"
-                alt="Certificate badge"
-                width="48"
-                height="48"
-                loading="lazy"
-              />
-              <h3 itemprop="name">Discord Bot Verification</h3>
-              <p class="credential-summary">
-                Official certificate confirming Rasoul's Discord bot.
-              </p>
-              <div class="card-actions">
-                <a
-                  itemprop="identifier"
-                  href="https://vrgl.ir/9D6Hy"
-                  target="_blank"
-                  rel="ugc noopener noreferrer nofollow"
-                  >View Certificate</a
-                >
-                <button class="copy-btn" data-copy="https://vrgl.ir/9D6Hy" aria-label="Copy link" title="Copy link">
-                  <i class="fas fa-copy" aria-hidden="true"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-          <ul class="profile-links">
-            <li>
-              Google Scholar profile:
-              <a
-                href="https://scholar.google.com/citations?user=kDl5eNUAAAAJ"
-                target="_blank"
-                rel="authoritative noopener noreferrer"
-                >Google Scholar</a
-              >
-            </li>
-            <li>
-              ORCID record:
-              <a
-                href="https://orcid.org/0009-0004-7177-2080"
-                target="_blank"
-                rel="authoritative noopener noreferrer"
-                >ORCID</a
-              >
-            </li>
-            <li>
-              ResearchGate profile:
-              <a
-                href="https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi"
-                target="_blank"
-                rel="authoritative noopener noreferrer"
-                >ResearchGate</a
-              >
-            </li>
-          </ul>
-          <section>
-            <h2 id="official-social-profiles">Official Social Profiles</h2>
-            <p>These accounts link back to this website to confirm their authenticity.</p>
+          </section>
+
+          <!-- Research profiles -->
+          <section
+            aria-labelledby="research-profiles-heading"
+            class="research-profiles"
+          >
+            <h2 id="research-profiles-heading">Research &amp; scholarly IDs</h2>
+            <p>
+              For a broader view of publications, citations and research
+              activity, refer to these profiles, all of which link back to this
+              domain:
+            </p>
             <ul class="profile-links">
-              <li><a href="https://github.com/RasoulUnlimited" target="_blank" rel="authoritative noopener noreferrer">GitHub</a></li>
-              <li><a href="https://www.linkedin.com/in/rasoulunlimited/" target="_blank" rel="authoritative noopener noreferrer">LinkedIn</a></li>
-              <li><a href="https://www.instagram.com/Rasoul.Unlimited" target="_blank" rel="authoritative noopener noreferrer">Instagram</a></li>
+              <li>
+                Google Scholar:
+                <a
+                  href="https://scholar.google.com/citations?user=kDl5eNUAAAAJ"
+                  target="_blank"
+                  rel="authoritative noopener noreferrer"
+                >
+                  View on Google Scholar
+                </a>
+              </li>
+              <li>
+                ORCID:
+                <a
+                  href="https://orcid.org/0009-0004-7177-2080"
+                  target="_blank"
+                  rel="authoritative noopener noreferrer"
+                >
+                  View ORCID record
+                </a>
+              </li>
+              <li>
+                ResearchGate:
+                <a
+                  href="https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi"
+                  target="_blank"
+                  rel="authoritative noopener noreferrer"
+                >
+                  View on ResearchGate
+                </a>
+              </li>
             </ul>
           </section>
-          <p>
-            <a href="press.html">Press</a> | <a href="contact.html">Contact</a>
-          </p>
-          <p>
-            Learn more <a href="about.html">about Rasoul</a>, visit <a href="https://rasoulunlimited.ir/#person">the main profile</a> or explore the
-            <a href="press.html">press kit</a>.
-          </p>
-          <p class="cta">
-            <a href="press.html">Explore press coverage &rarr;</a>
-          </p>
-            <p><a href="/wiki/rasoul-unlimited/">verified biography</a></p>
+
+          <!-- Social profiles -->
+          <section
+            aria-labelledby="official-social-profiles"
+            class="social-proof"
+          >
+            <h2 id="official-social-profiles">Official social profiles</h2>
+            <p>
+              These accounts explicitly link back to this site and can be used
+              to verify Rasoul’s digital identity:
+            </p>
+            <ul class="profile-links">
+              <li>
+                <a
+                  href="https://github.com/RasoulUnlimited"
+                  target="_blank"
+                  rel="authoritative noopener noreferrer"
+                >
+                  GitHub
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.linkedin.com/in/rasoulunlimited/"
+                  target="_blank"
+                  rel="authoritative noopener noreferrer"
+                >
+                  LinkedIn
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.instagram.com/Rasoul.Unlimited"
+                  target="_blank"
+                  rel="authoritative noopener noreferrer"
+                >
+                  Instagram
+                </a>
+              </li>
+            </ul>
+          </section>
+
+          <!-- Navigation / CTAs -->
+          <section
+            aria-labelledby="navigation-proof-links"
+            class="proof-navigation"
+          >
+            <h2 id="navigation-proof-links" class="visually-hidden">
+              Additional proof & navigation
+            </h2>
+            <p>
+              For media use, brand assets and boilerplate copy, see the
+              <a href="press.html">press kit</a>, or use the
+              <a href="contact.html">contact page</a> for verification
+              requests, interviews and speaking invitations.
+            </p>
+            <p>
+              To understand the broader context behind these credentials, you
+              can read more
+              <a href="about.html">about Rasoul</a> or explore the main
+              <a href="https://rasoulunlimited.ir/#person">profile section</a>
+              on the homepage.
+            </p>
+            <p class="cta">
+              <a href="press.html">Explore press coverage &rarr;</a>
+            </p>
+            <p class="cta">
+              <a href="/wiki/rasoul-unlimited/">Verified biography &rarr;</a>
+            </p>
+          </section>
         </main>
       </div>
     </div>
+
+    <!-- No-JS footer fallback -->
     <noscript>
       <footer class="footer">
         <p>&copy; <span id="footer-year"></span> Rasoul Unlimited</p>
       </footer>
     </noscript>
+
+    <!-- Dynamic footer -->
     <div data-include-html="../includes/footer.html"></div>
+
+    <!-- Scripts -->
     <script src="../assets/js/include.min.js" defer></script>
     <script src="../assets/js/credential-search.min.js" defer></script>
     <script src="../assets/js/credential-reveal.min.js" defer></script>
     <script src="../assets/js/main-script-en.min.js" defer></script>
+
+    <!-- Copy / Share helpers (aligned with CSP nonce) -->
+    <script nonce="RasoulCSP">
+      document.addEventListener("DOMContentLoaded", () => {
+        // Copy buttons
+        document.querySelectorAll(".copy-btn").forEach((btn) => {
+          btn.addEventListener("click", async () => {
+            const text = btn.getAttribute("data-copy");
+            const toastMessage = "Link copied! ✅";
+
+            if (window.copyToClipboard) {
+              await window.copyToClipboard(
+                text,
+                `copy-success-${Date.now()}`,
+                `copy-error-${Date.now()}`,
+                toastMessage
+              );
+            } else if (navigator.clipboard && navigator.clipboard.writeText) {
+              try {
+                await navigator.clipboard.writeText(text);
+              } catch (e) {
+                // Silent fallback
+              }
+            }
+          });
+        });
+
+        // Share buttons
+        document.querySelectorAll(".share-btn").forEach((btn) => {
+          btn.addEventListener("click", async () => {
+            const url = btn.getAttribute("data-share");
+            const toastMessage = "Link copied! ✅";
+
+            if (navigator.share) {
+              try {
+                await navigator.share({ url });
+                if (window.createToast) {
+                  window.createToast("Shared successfully! ✅", {
+                    id: `share-success-${Date.now()}`,
+                    iconClass: "fas fa-check-circle",
+                    iconColor: "var(--highlight-color)",
+                    duration: 1800
+                  });
+                }
+              } catch (err) {
+                if (window.copyToClipboard) {
+                  await window.copyToClipboard(
+                    url,
+                    `share-copy-${Date.now()}`,
+                    `share-error-${Date.now()}`,
+                    toastMessage
+                  );
+                }
+              }
+            } else if (window.copyToClipboard) {
+              await window.copyToClipboard(
+                url,
+                `share-copy-${Date.now()}`,
+                `share-error-${Date.now()}`,
+                toastMessage
+              );
+            } else if (navigator.clipboard && navigator.clipboard.writeText) {
+              try {
+                await navigator.clipboard.writeText(url);
+              } catch (e) {
+                // Silent fallback
+              }
+            }
+          });
+        });
+      });
+    </script>
   </body>
 </html>

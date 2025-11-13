@@ -2,42 +2,76 @@
 <html lang="fa-IR" xml:lang="fa" dir="rtl">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Preconnect to necessary domains for faster resource loading -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+    <!-- Performance: preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
     <link rel="preconnect" href="https://cdn.jsdelivr.net" />
 
-    <!-- Preload critical CSS for faster rendering -->
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      type="image/png"
+      href="assets/images/favicon.png"
+    />
+
+    <!-- Preload critical fonts & icons -->
     <link
       rel="preload"
       as="style"
       data-href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;700&display=swap"
       data-make-stylesheet
     />
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;700&display=swap" /></noscript>
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;700&display=swap"
+      />
+    </noscript>
     <link
       rel="preload"
       as="style"
       data-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
       data-make-stylesheet
     />
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" /></noscript>
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      />
+    </noscript>
+
     <title>اعتبارنامه‌ها و DOIها – رسول آنلیمیتد</title>
     <meta
       name="description"
-      content="فهرست DOIها و گواهی‌های رسمی تاییدکنندهٔ کارهای محمد رسول سهرابی."
+      content="فهرست DOIها، گواهی‌ها و اعتبارنامه‌های رسمی که کارهای محمد رسول سهرابی (Rasoul Unlimited) را به‌صورت قابل راستی‌آزمایی تأیید می‌کنند."
     />
+
+    <!-- CSS -->
     <link rel="stylesheet" href="assets/css/design-system.min.css" />
     <link rel="stylesheet" href="assets/css/main-style-fa.min.css" />
+
+    <!-- Performance helpers -->
     <script src="assets/js/performance-helpers.min.js" defer></script>
-    <link rel="canonical" href="https://rasoulunlimited.ir/proof.html" />
+
+    <!-- Canonical & author -->
+    <link
+      rel="canonical"
+      href="https://rasoulunlimited.ir/proof.html"
+    />
     <link
       rel="author"
       href="https://rasoulunlimited.ir/#person"
       data-person="rasoul-unlimited"
     />
+
+    <!-- Basic SEO / Dublin Core -->
     <meta name="robots" content="index, follow" />
     <meta
       name="citation_title"
@@ -48,6 +82,8 @@
       name="dc.identifier"
       content="https://rasoulunlimited.ir/proof.html"
     />
+
+    <!-- Hreflang -->
     <link
       rel="alternate"
       href="https://rasoulunlimited.ir/proof.html"
@@ -63,16 +99,20 @@
       href="https://rasoulunlimited.ir/proof.html"
       hreflang="x-default"
     />
+
+    <!-- Identity graph -->
     <link
       rel="alternate"
       type="application/ld+json"
       href="/schema/identity.jsonld"
     />
     <link
-    rel="alternate"
-    type="application/ld+json"
-    href="/schema/brand.jsonld"
-  />
+      rel="alternate"
+      type="application/ld+json"
+      href="/schema/brand.jsonld"
+    />
+
+    <!-- Color scheme -->
     <meta name="color-scheme" content="light dark" />
     <meta
       name="theme-color"
@@ -84,11 +124,13 @@
       media="(prefers-color-scheme: dark)"
       content="#0f172a"
     />
+
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="اعتبارنامه‌ها و DOIها – رسول آنلیمیتد" />
     <meta
       property="og:description"
-      content="فهرست DOIها و گواهی‌های رسمی تاییدکنندهٔ کارهای محمد رسول سهرابی."
+      content="فهرست DOIها و گواهی‌های رسمی تأییدکنندهٔ دستاوردهای محمد رسول سهرابی."
     />
     <meta
       property="og:image"
@@ -104,6 +146,8 @@
     <meta property="og:locale:alternate" content="en_US" />
     <meta property="og:url" content="https://rasoulunlimited.ir/proof.html" />
     <meta property="og:site_name" content="Rasoul Unlimited" />
+
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@rasoulunlimited" />
     <meta name="twitter:creator" content="@rasoulunlimited" />
@@ -113,7 +157,7 @@
     />
     <meta
       name="twitter:description"
-      content="فهرست DOIها و گواهی‌های رسمی تاییدکنندهٔ کارهای محمد رسول سهرابی."
+      content="فهرست DOIها، گواهی‌ها و منابع رسمی برای راستی‌آزمایی دستاوردهای محمد رسول سهرابی."
     />
     <meta
       name="twitter:image"
@@ -123,56 +167,60 @@
       name="twitter:image:alt"
       content="Portrait of Mohammad Rasoul Sohrabi"
     />
+
+    <!-- Dataset: verifiable credentials -->
     <script type="application/ld+json" nonce="RasoulCSP">
       {
         "@context": "https://schema.org",
         "@type": "Dataset",
-        "name": "Verifiable Credentials",
-        "description": "Collection of DOIs and certificates for Rasoul Unlimited's projects and achievements.",
+        "name": "Rasoul Unlimited – Verifiable Credentials",
+        "description": "Collection of DOIs and official certificates that verify projects and achievements of Mohammad Rasoul Sohrabi (Rasoul Unlimited).",
         "creator": {
           "@type": "Person",
           "name": "Mohammad Rasoul Sohrabi",
           "url": "https://rasoulunlimited.ir"
         },
         "sameAs": [
-        "https://scholar.google.com/citations?user=kDl5eNUAAAAJ",
-        "https://orcid.org/0009-0004-7177-2080",
-        "https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi"
-      ],
+          "https://scholar.google.com/citations?user=kDl5eNUAAAAJ",
+          "https://orcid.org/0009-0004-7177-2080",
+          "https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi"
+        ],
         "hasPart": [
           {
             "@type": "CreativeWork",
             "name": "Small Projects with C",
-          "identifier": "https://doi.org/10.5281/zenodo.15548850",
-          "url": "https://doi.org/10.5281/zenodo.15548850",
-          "locationCreated": {
-            "@type": "Place",
-            "name": "Karaj, Iran"
-          }
-        },
+            "identifier": "https://doi.org/10.5281/zenodo.15548850",
+            "url": "https://doi.org/10.5281/zenodo.15548850",
+            "locationCreated": {
+              "@type": "Place",
+              "name": "Karaj, Iran"
+            }
+          },
           {
             "@type": "CreativeWork",
             "name": "Small Projects with Python",
-          "identifier": "https://doi.org/10.5281/zenodo.15548860",
-          "url": "https://doi.org/10.5281/zenodo.15548860",
-          "locationCreated": {
-            "@type": "Place",
-            "name": "Karaj, Iran"
-          }
-        },
+            "identifier": "https://doi.org/10.5281/zenodo.15548860",
+            "url": "https://doi.org/10.5281/zenodo.15548860",
+            "locationCreated": {
+              "@type": "Place",
+              "name": "Karaj, Iran"
+            }
+          },
           {
             "@type": "CreativeWork",
             "name": "Official Discord Bot Verification Certificate",
-          "identifier": "https://vrgl.ir/9D6Hy",
-          "url": "https://vrgl.ir/9D6Hy",
-          "locationCreated": {
-            "@type": "Place",
-            "name": "Karaj, Iran"
+            "identifier": "https://vrgl.ir/9D6Hy",
+            "url": "https://vrgl.ir/9D6Hy",
+            "locationCreated": {
+              "@type": "Place",
+              "name": "Karaj, Iran"
+            }
           }
-        }
-      ]
+        ]
       }
-      </script>
+    </script>
+
+    <!-- ClaimReview for Discord verification -->
     <script type="application/ld+json" nonce="RasoulCSP">
       {
         "@context": "https://schema.org",
@@ -196,6 +244,8 @@
         }
       }
     </script>
+
+    <!-- Breadcrumbs -->
     <script type="application/ld+json" nonce="RasoulCSP">
       {
         "@context": "https://schema.org",
@@ -204,27 +254,31 @@
           {
             "@type": "ListItem",
             "position": 1,
-            "name": "Home",
+            "name": "خانه",
             "item": "https://rasoulunlimited.ir/"
           },
           {
             "@type": "ListItem",
             "position": 2,
-            "name": "Proof & Credentials",
+            "name": "اعتبارنامه‌ها و DOIها",
             "item": "https://rasoulunlimited.ir/proof.html"
           }
         ]
       }
     </script>
+
+    <!-- WebPage definition -->
     <script type="application/ld+json" nonce="RasoulCSP">
       {
         "@context": "https://schema.org",
         "@type": "WebPage",
         "url": "https://rasoulunlimited.ir/proof.html",
+        "name": "اعتبارنامه‌ها و DOIهای قابل راستی‌آزمایی",
         "isPartOf": { "@id": "https://rasoulunlimited.ir/#website" },
         "author": { "@id": "https://rasoulunlimited.ir/#person" },
         "publisher": { "@id": "https://rasoulunlimited.ir/#organization" },
         "mainEntityOfPage": "https://rasoulunlimited.ir/proof.html",
+        "headline": "اعتبارنامه‌ها، DOIها و گواهی‌های رسمی Rasoul Unlimited",
         "datePublished": "2025-06-23",
         "dateModified": "2025-07-21",
         "speakable": {
@@ -233,287 +287,475 @@
         }
       }
     </script>
-    <link rel="entity-profile" href="/.well-known/entity-profile.json" />
+
+    <link
+      rel="entity-profile"
+      href="/.well-known/entity-profile.json"
+    />
   </head>
-  <body>
+  <body class="proof-page">
+    <!-- Fallback navbar for no-JS -->
     <noscript>
       <header class="navbar" role="banner">
         <nav role="navigation" aria-label="پیوندهای اصلی سایت">
           <a href="/index.html">صفحه اصلی</a>
           <a href="/about.html">درباره</a>
-          <a href="/proof.html">گواهی‌ها</a>
+          <a href="/proof.html" aria-current="page">گواهی‌ها</a>
           <a href="/press.html">رسانه</a>
           <a href="/faq/">سوالات متداول</a>
           <a href="/contact.html">تماس</a>
         </nav>
       </header>
     </noscript>
+
+    <!-- Dynamic header include -->
     <div data-include-html="includes/header-fa.html"></div>
+
     <div class="container">
       <div class="content-area">
         <main id="main-content">
+          <!-- Hero -->
           <section
             id="hero"
             class="hero section fade-in"
             role="region"
-            aria-labelledby="hero-tagline"
+            aria-labelledby="hero-title"
           >
+            <div class="hero-text">
+              <h1 id="hero-title">اعتبارنامه‌ها و DOIهای قابل راستی‌آزمایی</h1>
+              <p class="tagline hero-tagline" id="hero-tagline">
+                لایهٔ رسمی شواهد؛ از DOIهای پژوهشی تا گواهی‌های تأییدشده.
+              </p>
+            </div>
             <img
               src="assets/images/RasoulUnlimited.webp"
               loading="eager"
               decoding="async"
-              alt="تصویر پرترهٔ محمد رسول سهرابی"
+              alt="تصویر پرترهٔ محمد رسول سهرابی (Rasoul Unlimited)"
               class="profile-image"
               width="220"
               height="220"
             />
-            <p class="tagline hero-tagline" id="hero-tagline">
-              گواهی‌ها و DOIهای معتبر
+          </section>
+
+          <!-- Intro copy -->
+          <section aria-labelledby="intro-heading">
+            <h2 id="intro-heading" class="visually-hidden">معرفی اعتبارنامه‌ها</h2>
+            <p data-person="rasoul-unlimited">
+              در این صفحه، DOIها و گواهی‌هایی فهرست شده‌اند که صحت بخشی از
+              دستاوردهای رسول را <strong>به‌صورت عمومی و قابل راستی‌آزمایی</strong>
+              تأیید می‌کنند. وب‌سایت روی <span lang="en">GitHub Pages</span>
+              میزبانی شده و از طریق <span lang="en">Cloudflare</span> ایمن می‌شود
+              تا این زنجیرهٔ شفافیت و اعتماد کامل‌تر شود.
+            </p>
+            <p>
+              هر DOI یک شناسهٔ دائمی برای یک کار منتشرشده است که توسط سامانه‌های
+              علمی و آرشیوهای پژوهشی (مانند <span lang="en">Zenodo</span>)
+              نگهداری می‌شود و امکان استناد بلندمدت و مستقل به پروژه‌های
+              <span lang="en">Rasoul Unlimited</span> را فراهم می‌کند.
             </p>
           </section>
-          <h1>اعتبارنامه‌ها و DOIهای قابل راستی‌آزمایی</h1>
-          <p data-person="rasoul-unlimited">
-            در این صفحه DOIها و گواهی‌هایی فهرست شده که صحت دستاوردهای رسول را
-            اثبات می‌کنند. وب‌سایت بر بستر GitHub Pages میزبانی شده و با کلودفلر
-            ایمن شده است تا شفافیت و اعتماد را نشان دهد. از این منابع می‌توانید
-            برای استناد یا بررسی سوابق استفاده کنید.
-          </p>
-          <p>
-            هر DOI مرجعی دائمی برای کاری است که به صورت عمومی بایگانی و توسط
-            نهادهای علمی ارجاع شده است و شناسایی طولانی‌مدت پروژه‌های رسول را
-            تضمین می‌کند.
-          </p>
-          <div class="search-credential-container" role="search">
-            <button type="button" id="voice-search-btn" aria-label="جستجوی صوتی" aria-pressed="false">
-              <i class="fas fa-microphone" aria-hidden="true"></i>
-            </button>
-            <span id="voice-status" class="visually-hidden" aria-live="polite"></span>
-            <input
-              type="text"
-              id="credential-search"
-              placeholder="جستجوی گواهی‌ها یا DOI"
-              aria-label="جستجوی گواهی‌ها"
-              aria-controls="credential-grid"
-              autocomplete="off"
-            />
-            <button type="button" id="clear-credential-search" aria-label="پاک کردن جستجو">
-              ✖
-            </button>
-          </div>
-          <p id="results-info" class="results-info" data-lang="fa" aria-live="polite" role="status"></p>
-          <div id="credential-grid" class="credential-grid" role="list">
+
+          <!-- Search & filter -->
+          <section
+            aria-labelledby="credential-search-heading"
+            class="credential-search-section"
+          >
+            <h2 id="credential-search-heading" class="section-title">
+              جستجوی سریع گواهی‌ها و DOIها
+            </h2>
             <div
-              class="credential-card"
-              role="listitem"
-              itemscope
-              itemtype="https://schema.org/CreativeWork"
-              data-keywords="C projects zenodo"
+              class="search-credential-container"
+              role="search"
+              aria-describedby="search-help"
             >
-              <img
-                src="assets/images/zenodo-badge.svg"
-                alt="لوگوی زنودو"
-                width="48"
-                height="48"
-                loading="lazy"
+              <button
+                type="button"
+                id="voice-search-btn"
+                aria-label="جستجوی صوتی در میان گواهی‌ها"
+                aria-pressed="false"
+              >
+                <i class="fas fa-microphone" aria-hidden="true"></i>
+              </button>
+              <span
+                id="voice-status"
+                class="visually-hidden"
+                aria-live="polite"
+              ></span>
+
+              <input
+                type="text"
+                id="credential-search"
+                placeholder="مثلاً: Python، Discord، DOI یا Zenodo"
+                aria-label="جستجوی گواهی‌ها و DOIها"
+                aria-controls="credential-grid"
+                autocomplete="off"
               />
-              <h3 itemprop="name">Small Projects with C</h3>
-              <p class="credential-summary">
-                Open-source C projects from Tehran Azad University.
-              </p>
-              <div class="card-actions">
-                <a itemprop="identifier" href="projects/c-projects/">View DOI</a>
-                <button
-                  class="copy-btn"
-                  data-copy="https://doi.org/10.5281/zenodo.15548850"
-                  aria-label="کپی DOI"
-                  title="کپی DOI"
-                >
-                  <i class="fas fa-copy" aria-hidden="true"></i>
-                </button>
-                <button
-                  class="share-btn"
-                  data-share="https://doi.org/10.5281/zenodo.15548850"
-                  aria-label="اشتراک‌گذاری"
-                  title="اشتراک‌گذاری"
-                >
-                  <i class="fas fa-share-alt" aria-hidden="true"></i>
-                </button>
-              </div>
+
+              <button
+                type="button"
+                id="clear-credential-search"
+                aria-label="پاک کردن عبارت جستجو"
+              >
+                ✖
+              </button>
             </div>
+            <p
+              id="search-help"
+              class="results-helper-text"
+            >
+              می‌توانید بر اساس نوع تکنولوژی (C، Python)، پلتفرم (Discord) یا
+              حتی بخشی از DOI جستجو کنید.
+            </p>
+            <p
+              id="results-info"
+              class="results-info"
+              data-lang="fa"
+              aria-live="polite"
+              role="status"
+            ></p>
+          </section>
+
+          <!-- Credential grid -->
+          <section
+            aria-labelledby="credential-grid-heading"
+            class="credential-section"
+          >
+            <h2 id="credential-grid-heading" class="section-title">
+              فهرست اعتبارنامه‌ها و DOIها
+            </h2>
+
             <div
-              class="credential-card"
-              role="listitem"
-              itemscope
-              itemtype="https://schema.org/CreativeWork"
-              data-keywords="Python projects zenodo"
+              id="credential-grid"
+              class="credential-grid"
+              role="list"
             >
-              <img
-                src="assets/images/zenodo-badge.svg"
-                alt="لوگوی زنودو"
-                width="48"
-                height="48"
-                loading="lazy"
-              />
-              <h3 itemprop="name">Small Projects with Python</h3>
-              <p class="credential-summary">
-                Collection of Python exercises from Sahand University of
-                Technology.
-              </p>
-              <div class="card-actions">
-                <a itemprop="identifier" href="projects/python-projects/"
-                  >View DOI</a
-                >
-                <button
-                  class="copy-btn"
-                  data-copy="https://doi.org/10.5281/zenodo.15548860"
-                  aria-label="کپی DOI"
-                  title="کپی DOI"
-                >
-                  <i class="fas fa-copy" aria-hidden="true"></i>
-                </button>
-                <button
-                  class="share-btn"
-                  data-share="https://doi.org/10.5281/zenodo.15548860"
-                  aria-label="اشتراک‌گذاری"
-                  title="اشتراک‌گذاری"
-                >
-                  <i class="fas fa-share-alt" aria-hidden="true"></i>
-                </button>
-              </div>
+              <!-- C Projects DOI -->
+              <article
+                class="credential-card"
+                role="listitem"
+                itemscope
+                itemtype="https://schema.org/CreativeWork"
+                data-keywords="C پروژه سی کوچک دانشگاه آزاد zenodo doi زنودو"
+              >
+                <img
+                  src="assets/images/zenodo-badge.svg"
+                  alt="نشان ثبت در پلتفرم Zenodo"
+                  width="48"
+                  height="48"
+                  loading="lazy"
+                />
+                <h3 itemprop="name">Small Projects with C</h3>
+                <p class="credential-summary" itemprop="description">
+                  مجموعه‌ای از تمرین‌ها و پروژه‌های کوچک زبان C، مرتبط با
+                  فعالیت‌های آموزشی در دانشگاه آزاد اسلامی واحد تهران مرکزی.
+                </p>
+                <div class="card-meta">
+                  <span class="credential-label">DOI:</span>
+                  <code dir="ltr">10.5281/zenodo.15548850</code>
+                </div>
+                <div class="card-actions">
+                  <a
+                    itemprop="url"
+                    href="projects/c-projects/"
+                    class="cta-link"
+                  >
+                    مشاهده جزئیات و DOI
+                  </a>
+                  <button
+                    class="copy-btn"
+                    data-copy="https://doi.org/10.5281/zenodo.15548850"
+                    aria-label="کپی DOI مربوط به Small Projects with C"
+                    title="کپی DOI"
+                  >
+                    <i class="fas fa-copy" aria-hidden="true"></i>
+                  </button>
+                  <button
+                    class="share-btn"
+                    data-share="https://doi.org/10.5281/zenodo.15548850"
+                    aria-label="اشتراک‌گذاری لینک DOI"
+                    title="اشتراک‌گذاری"
+                  >
+                    <i class="fas fa-share-alt" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </article>
+
+              <!-- Python Projects DOI -->
+              <article
+                class="credential-card"
+                role="listitem"
+                itemscope
+                itemtype="https://schema.org/CreativeWork"
+                data-keywords="Python پایتون پروژه کوچک دانشگاه سهند zenodo doi زنودو"
+              >
+                <img
+                  src="assets/images/zenodo-badge.svg"
+                  alt="نشان ثبت در پلتفرم Zenodo"
+                  width="48"
+                  height="48"
+                  loading="lazy"
+                />
+                <h3 itemprop="name">Small Projects with Python</h3>
+                <p class="credential-summary" itemprop="description">
+                  مجموعه‌ای از تمرین‌ها و پروژه‌های کوچک با زبان Python، الهام‌گرفته
+                  از دوره‌ها و تمرین‌های دانشگاه صنعتی سهند و پروژه‌های شخصی.
+                </p>
+                <div class="card-meta">
+                  <span class="credential-label">DOI:</span>
+                  <code dir="ltr">10.5281/zenodo.15548860</code>
+                </div>
+                <div class="card-actions">
+                  <a
+                    itemprop="url"
+                    href="projects/python-projects/"
+                    class="cta-link"
+                  >
+                    مشاهده جزئیات و DOI
+                  </a>
+                  <button
+                    class="copy-btn"
+                    data-copy="https://doi.org/10.5281/zenodo.15548860"
+                    aria-label="کپی DOI مربوط به Small Projects with Python"
+                    title="کپی DOI"
+                  >
+                    <i class="fas fa-copy" aria-hidden="true"></i>
+                  </button>
+                  <button
+                    class="share-btn"
+                    data-share="https://doi.org/10.5281/zenodo.15548860"
+                    aria-label="اشتراک‌گذاری لینک DOI"
+                    title="اشتراک‌گذاری"
+                  >
+                    <i class="fas fa-share-alt" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </article>
+
+              <!-- Discord Verification Certificate -->
+              <article
+                class="credential-card"
+                role="listitem"
+                itemscope
+                itemtype="https://schema.org/CreativeWork"
+                data-keywords="Discord دیسکورد ربات bot bot verification گواهی رسمی"
+              >
+                <img
+                  src="assets/images/certificate-badge.svg"
+                  alt="نشان گواهی رسمی"
+                  width="48"
+                  height="48"
+                  loading="lazy"
+                />
+                <h3 itemprop="name">Discord Bot Verification</h3>
+                <p class="credential-summary" itemprop="description">
+                  گواهی رسمی تأیید نخستین ربات فارسی دیسکوردِ رسول توسط
+                  <span lang="en">Discord Inc.</span>؛ همراه با مستندات تصویری و
+                  پیوندهای تأییدکننده.
+                </p>
+                <div class="card-meta">
+                  <span class="credential-label">لینک گواهی:</span>
+                  <code dir="ltr">https://vrgl.ir/9D6Hy</code>
+                </div>
+                <div class="card-actions">
+                  <a
+                    itemprop="url"
+                    href="https://vrgl.ir/9D6Hy"
+                    target="_blank"
+                    rel="ugc noopener noreferrer nofollow"
+                    class="cta-link"
+                  >
+                    مشاهده گواهی رسمی
+                  </a>
+                  <button
+                    class="copy-btn"
+                    data-copy="https://vrgl.ir/9D6Hy"
+                    aria-label="کپی لینک گواهی Discord"
+                    title="کپی لینک"
+                  >
+                    <i class="fas fa-copy" aria-hidden="true"></i>
+                  </button>
+                  <button
+                    class="share-btn"
+                    data-share="https://vrgl.ir/9D6Hy"
+                    aria-label="اشتراک‌گذاری لینک گواهی Discord"
+                    title="اشتراک‌گذاری"
+                  >
+                    <i class="fas fa-share-alt" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </article>
             </div>
-            <div
-              class="credential-card"
-              role="listitem"
-              itemscope
-              itemtype="https://schema.org/CreativeWork"
-              data-keywords="Discord certificate bot"
-            >
-              <img
-                src="assets/images/certificate-badge.svg"
-                alt="نشان گواهی"
-                width="48"
-                height="48"
-                loading="lazy"
-              />
-              <h3 itemprop="name">Discord Bot Verification</h3>
-              <p class="credential-summary">
-                Official certificate confirming Rasoul's Discord bot.
-              </p>
-              <div class="card-actions">
-                <a
-                  itemprop="identifier"
-                  href="https://vrgl.ir/9D6Hy"
-                  target="_blank"
-                  rel="ugc noopener noreferrer nofollow"
-                  >View Certificate</a
-                >
-                <button
-                  class="copy-btn"
-                  data-copy="https://vrgl.ir/9D6Hy"
-                  aria-label="کپی لینک"
-                  title="کپی لینک"
-                >
-                  <i class="fas fa-copy" aria-hidden="true"></i>
-                </button>
-                <button
-                  class="share-btn"
-                  data-share="https://vrgl.ir/9D6Hy"
-                  aria-label="اشتراک‌گذاری"
-                  title="اشتراک‌گذاری"
-                >
-                  <i class="fas fa-share-alt" aria-hidden="true"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-          <ul class="profile-links">
-            <li>
-              پروفایل Google Scholar:
-              <a
-                href="https://scholar.google.com/citations?user=kDl5eNUAAAAJ"
-                target="_blank"
-                rel="noopener noreferrer"
-                >Google Scholar</a
-              >
-            </li>
-            <li>
-              شناسه ORCID:
-              <a
-                href="https://orcid.org/0009-0004-7177-2080"
-                target="_blank"
-                rel="noopener noreferrer"
-                >ORCID</a
-              >
-            </li>
-            <li>
-              پروفایل ResearchGate:
-              <a
-                href="https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi"
-                target="_blank"
-                rel="authoritative noopener noreferrer"
-                >ResearchGate</a
-              >
-            </li>
-          </ul>
-          <section>
-            <h2 id="official-social-profiles">پروفایل‌های رسمی در شبکه‌های اجتماعی</h2>
-            <p>برای راستی‌آزمایی، این حساب‌ها به همین وب‌سایت پیوند داده‌اند.</p>
+          </section>
+
+          <!-- Research profiles -->
+          <section
+            aria-labelledby="research-profiles-heading"
+            class="research-profiles"
+          >
+            <h2 id="research-profiles-heading">پروفایل‌های پژوهشی رسمی</h2>
+            <p>
+              برای بررسی روند و جزئیات علمی کارها، می‌توانید از پروفایل‌های
+              پژوهشی پیوندخورده به همین دامنه استفاده کنید:
+            </p>
             <ul class="profile-links">
-              <li><a href="https://github.com/RasoulUnlimited" target="_blank" rel="authoritative noopener noreferrer">گیت‌هاب</a></li>
-              <li><a href="https://www.linkedin.com/in/rasoulunlimited/" target="_blank" rel="authoritative noopener noreferrer">لینکدین</a></li>
-              <li><a href="https://www.instagram.com/Rasoul.Unlimited" target="_blank" rel="authoritative noopener noreferrer">اینستاگرام</a></li>
+              <li>
+                پروفایل
+                <span lang="en">Google Scholar</span>:
+                <a
+                  href="https://scholar.google.com/citations?user=kDl5eNUAAAAJ"
+                  target="_blank"
+                  rel="authoritative noopener noreferrer"
+                >
+                  مشاهده در Google Scholar
+                </a>
+              </li>
+              <li>
+                شناسه <span lang="en">ORCID</span>:
+                <a
+                  href="https://orcid.org/0009-0004-7177-2080"
+                  target="_blank"
+                  rel="authoritative noopener noreferrer"
+                >
+                  مشاهده پروفایل ORCID
+                </a>
+              </li>
+              <li>
+                پروفایل
+                <span lang="en">ResearchGate</span>:
+                <a
+                  href="https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi"
+                  target="_blank"
+                  rel="authoritative noopener noreferrer"
+                >
+                  مشاهده در ResearchGate
+                </a>
+              </li>
             </ul>
           </section>
-          <p>
-            <a href="press.html">رسانه‌ها</a> | <a href="contact.html">تماس</a>
-          </p>
-          <p>
-            برای آشنایی بیشتر <a href="about.html">درباره رسول</a> بخوانید یا
-            <a href="press.html">پک رسانه‌ای</a> را ببینید.
-          </p>
-          <p class="cta">
-            <a href="press.html">مشاهده پوشش رسانه‌ای &rarr;</a>
-          </p>
-          <p class="cta">
-            <a href="/wiki/rasoul-unlimited/">سوابق کامل در ویکی &rarr;</a>
-          </p>
+
+          <!-- Social profiles -->
+          <section
+            aria-labelledby="official-social-profiles"
+            class="social-proof"
+          >
+            <h2 id="official-social-profiles">
+              پروفایل‌های رسمی در شبکه‌های اجتماعی
+            </h2>
+            <p>
+              این حساب‌ها به همین وب‌سایت پیوند داده شده‌اند و برای
+              <strong>راستی‌آزمایی هویت دیجیتال</strong> قابل استناد هستند:
+            </p>
+            <ul class="profile-links">
+              <li>
+                <a
+                  href="https://github.com/RasoulUnlimited"
+                  target="_blank"
+                  rel="authoritative noopener noreferrer"
+                >
+                  گیت‌هاب
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.linkedin.com/in/rasoulunlimited/"
+                  target="_blank"
+                  rel="authoritative noopener noreferrer"
+                >
+                  لینکدین
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.instagram.com/Rasoul.Unlimited"
+                  target="_blank"
+                  rel="authoritative noopener noreferrer"
+                >
+                  اینستاگرام
+                </a>
+              </li>
+            </ul>
+          </section>
+
+          <!-- Navigation / CTAs -->
+          <section
+            aria-labelledby="navigation-proof-links"
+            class="proof-navigation"
+          >
+            <h2 id="navigation-proof-links" class="visually-hidden">
+              پیوندهای تکمیلی اعتبارنامه‌ها
+            </h2>
+            <p>
+              برای استفاده رسانه‌ای، لوگو و جزئیات برند را می‌توانید در
+              <a href="press.html">پک رسانه‌ای</a> ببینید، یا برای هماهنگی
+              مصاحبه و استعلام، از طریق
+              <a href="contact.html">صفحهٔ تماس</a> اقدام کنید.
+            </p>
+            <p>
+              برای آشنایی عمیق‌تر با زمینهٔ فعالیت:
+              <a href="about.html">دربارهٔ رسول</a> را بخوانید یا
+              <a href="press.html">پوشش رسانه‌ای</a> را مرور کنید.
+            </p>
+            <p class="cta">
+              <a href="press.html">مشاهده پوشش رسانه‌ای &rarr;</a>
+            </p>
+            <p class="cta">
+              <a href="/wiki/rasoul-unlimited/">سوابق کامل در ویکی &rarr;</a>
+            </p>
+          </section>
         </main>
       </div>
     </div>
+
+    <!-- Fallback footer -->
     <noscript>
       <footer class="footer">
         <p>&copy; <span id="footer-year"></span> Rasoul Unlimited</p>
         <p><a href="/wiki/rasoul-unlimited/">سوابق کامل در ویکی</a></p>
       </footer>
     </noscript>
+
+    <!-- Dynamic footer include -->
     <div data-include-html="includes/footer.html"></div>
+
+    <!-- Scripts -->
     <script src="assets/js/include.min.js" defer></script>
     <script src="assets/js/credential-search.js" defer></script>
     <script src="assets/js/credential-reveal.min.js" defer></script>
     <script src="assets/js/main-script-fa.min.js" defer></script>
+
+    <!-- Copy / Share helpers (CSP-safe) -->
     <script nonce="RasoulCSP">
       document.addEventListener("DOMContentLoaded", () => {
+        // Copy buttons
         document.querySelectorAll(".copy-btn").forEach((btn) => {
           btn.addEventListener("click", async () => {
             const text = btn.getAttribute("data-copy");
+            const toastMessage = "لینک کپی شد! ✅";
+
             if (window.copyToClipboard) {
               await window.copyToClipboard(
                 text,
                 `copy-success-${Date.now()}`,
                 `copy-error-${Date.now()}`,
-                "لینک کپی شد! ✅"
+                toastMessage
               );
             } else if (navigator.clipboard && navigator.clipboard.writeText) {
               try {
                 await navigator.clipboard.writeText(text);
-              } catch (e) {}
+              } catch (e) {
+                // Silent fallback
+              }
             }
           });
         });
 
+        // Share buttons
         document.querySelectorAll(".share-btn").forEach((btn) => {
           btn.addEventListener("click", async () => {
             const url = btn.getAttribute("data-share");
+            const toastMessage = "لینک کپی شد! ✅";
+
             if (navigator.share) {
               try {
                 await navigator.share({ url });
@@ -522,7 +764,7 @@
                     id: `share-success-${Date.now()}`,
                     iconClass: "fas fa-check-circle",
                     iconColor: "var(--highlight-color)",
-                    duration: 1800,
+                    duration: 1800
                   });
                 }
               } catch (err) {
@@ -531,7 +773,7 @@
                     url,
                     `share-copy-${Date.now()}`,
                     `share-error-${Date.now()}`,
-                    "لینک کپی شد! ✅"
+                    toastMessage
                   );
                 }
               }
@@ -540,12 +782,14 @@
                 url,
                 `share-copy-${Date.now()}`,
                 `share-error-${Date.now()}`,
-                "لینک کپی شد! ✅"
+                toastMessage
               );
             } else if (navigator.clipboard && navigator.clipboard.writeText) {
               try {
                 await navigator.clipboard.writeText(url);
-              } catch (e) {}
+              } catch (e) {
+                // Silent fallback
+              }
             }
           });
         });
