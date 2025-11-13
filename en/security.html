@@ -9,10 +9,10 @@
     <meta name="referrer" content="strict-origin-when-cross-origin" />
 
     <!-- Basic identity -->
-    <title>Security Policy</title>
+    <title>Security Policy | Rasoul Unlimited</title>
     <meta
       name="description"
-      content="Guidelines for responsible disclosure and reporting of security vulnerabilities to Rasoul Unlimited."
+      content="Comprehensive security policy, testing scope and responsible disclosure guidelines for reporting vulnerabilities to Rasoul Unlimited."
     />
     <meta name="author" content="Mohammad Rasoul Sohrabi" />
     <meta
@@ -117,7 +117,7 @@
         "@id": "https://rasoulunlimited.ir/en/security.html",
         "url": "https://rasoulunlimited.ir/en/security.html",
         "name": "Security Policy",
-        "description": "Guidelines for reporting security vulnerabilities to Rasoul Unlimited.",
+        "description": "Guidelines and scope for reporting security vulnerabilities to Rasoul Unlimited, including CSP configuration and responsible disclosure workflow.",
         "isPartOf": { "@id": "https://rasoulunlimited.ir/#website" },
         "author": { "@id": "https://rasoulunlimited.ir/#person" },
         "publisher": { "@id": "https://rasoulunlimited.ir/#organization" },
@@ -141,7 +141,7 @@
         "url": "https://rasoulunlimited.ir/en/security.html",
         "creator": { "@id": "https://rasoulunlimited.ir/#organization" },
         "publisher": { "@id": "https://rasoulunlimited.ir/#organization" },
-        "description": "Guidelines for responsibly disclosing security vulnerabilities.",
+        "description": "Responsible disclosure guidelines, approved testing scope and security contact details for Rasoul Unlimited.",
         "inLanguage": ["en", "fa"],
         "mainEntity": {
           "@type": "ContactPoint",
@@ -174,7 +174,7 @@
     <meta property="og:title" content="Security Policy | Rasoul Unlimited" />
     <meta
       property="og:description"
-      content="Guidelines for responsible disclosure and reporting of security vulnerabilities to Rasoul Unlimited."
+      content="Security policy, scope of authorized testing and responsible disclosure process for vulnerabilities reported to Rasoul Unlimited."
     />
     <meta
       property="og:image"
@@ -182,7 +182,7 @@
     />
     <meta
       property="og:image:alt"
-      content="Portrait of Mohammad Rasoul Sohrabi"
+      content="Verified portrait of Mohammad Rasoul Sohrabi"
     />
     <meta property="og:image:width" content="220" />
     <meta property="og:image:height" content="220" />
@@ -197,7 +197,7 @@
     <meta name="twitter:title" content="Security Policy | Rasoul Unlimited" />
     <meta
       name="twitter:description"
-      content="Guidelines for responsible disclosure and reporting of security vulnerabilities to Rasoul Unlimited."
+      content="Guidelines for responsible disclosure, secure communication and scoped security testing for Rasoul Unlimited."
     />
     <meta
       name="twitter:image"
@@ -205,7 +205,7 @@
     />
     <meta
       name="twitter:image:alt"
-      content="Portrait of Mohammad Rasoul Sohrabi"
+      content="Verified portrait of Mohammad Rasoul Sohrabi"
     />
   </head>
   <body class="security-page">
@@ -237,7 +237,7 @@
             <div class="hero-text">
               <h1 class="hero-title">Security Policy | Rasoul Unlimited</h1>
               <p class="tagline hero-tagline" id="hero-tagline">
-                Responsible vulnerability disclosure
+                Formal framework for security, scoped testing and responsible disclosure
                 <svg
                   class="hero-icon"
                   xmlns="http://www.w3.org/2000/svg"
@@ -251,7 +251,10 @@
               </p>
               <div class="hero-links">
                 <a href="#reporting-method" class="cta-button">
-                  Report vulnerability
+                  Report a vulnerability
+                </a>
+                <a href="#scope" class="secondary-link">
+                  View testing scope
                 </a>
               </div>
             </div>
@@ -259,7 +262,9 @@
               src="../assets/images/RasoulUnlimited.webp"
               loading="eager"
               decoding="async"
-              alt="Portrait of Mohammad Rasoul Sohrabi"
+              fetchpriority="high"
+              alt="Verified portrait of Mohammad Rasoul Sohrabi"
+              title="Verified identity of Rasoul Unlimited"
               class="profile-image"
               width="220"
               height="220"
@@ -268,17 +273,20 @@
 
           <!-- Policy card -->
           <div class="policy-container policy-card modern-card">
-            <h2>Security Disclosure Policy</h2>
+            <h2>Security & Responsible Disclosure Policy</h2>
             <p>
               This website is hosted on <b>GitHub Pages</b> and delivered
-              through <b>Cloudflare</b> for enhanced speed and protection. A
-              strict <span lang="en">Content Security Policy</span> is enforced
-              via Cloudflare to protect visitors.
+              through <b>Cloudflare</b> for availability, performance and
+              protection. A strict
+              <span lang="en">Content Security Policy (CSP)</span> is enforced
+              via Cloudflare to reduce attack surface and protect visitors.
             </p>
             <p>
-              Keeping users and data secure is a core priority. This policy is
-              designed to encourage responsible collaboration and timely
-              remediation of vulnerabilities.
+              Protecting the confidentiality, integrity and availability of
+              data is a <strong>non-negotiable commitment</strong>. This
+              document defines the expectations, authorized testing scope and
+              standard disclosure workflow so that security researchers can
+              collaborate in a clear, professional way.
             </p>
 
             <!-- Dynamic validity -->
@@ -288,7 +296,7 @@
               role="status"
               aria-live="polite"
             >
-              Loading policy expiry…
+              Calculating next security policy review…
             </p>
             <progress
               id="policy-expiration-progress"
@@ -299,7 +307,7 @@
               aria-valuemax="100"
               aria-hidden="true"
               aria-describedby="policy-expiration"
-              aria-label="Time remaining until next security policy review"
+              aria-label="Approximate time remaining until the next security policy review"
             ></progress>
             <span
               id="expiration-days"
@@ -317,9 +325,10 @@
               <h2 id="csp-heading">Content Security Policy (CSP)</h2>
               <p>
                 The following sample
-                <span lang="en">Content Security Policy</span> is enforced for
-                this domain via Cloudflare. It may evolve over time as security
-                requirements change:
+                <span lang="en">Content Security Policy</span> is currently
+                enforced for this domain via Cloudflare. It may be updated as
+                security requirements evolve, following the principles of least
+                privilege and defense-in-depth:
               </p>
               <pre class="security-code-block"><code id="csp-code" class="copyable" dir="ltr">default-src 'self' blob:;
 script-src 'self' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://static.cloudflareinsights.com https://giscus.app 'nonce-RasoulCSP';
@@ -343,6 +352,12 @@ frame-ancestors 'self';</code></pre>
               >
                 <i class="fas fa-copy" aria-hidden="true"></i>
               </button>
+              <p class="small-note">
+                <strong>Note:</strong>
+                only strictly necessary origins are whitelisted. Any new
+                dependency is reviewed for security impact before being added to
+                this policy.
+              </p>
             </section>
 
             <!-- Reporting -->
@@ -353,13 +368,20 @@ frame-ancestors 'self';</code></pre>
               aria-labelledby="reporting-method-heading"
             >
               <h2 id="reporting-method-heading">
-                Reporting Issues
+                Reporting Security Issues
                 <i class="fas fa-bug hero-icon" aria-hidden="true"></i>
               </h2>
               <p>
-                If you discover a security issue, please <strong>avoid public
-                disclosure</strong> and use one of the following channels:
+                If you discover a security issue, please
+                <strong>do not publicly disclose</strong> it before giving a
+                reasonable opportunity to investigate and remediate. Use one of
+                the following channels:
               </p>
+              <ol>
+                <li>Collect technical details and reproduction steps</li>
+                <li>Confirm that your testing is within the allowed scope</li>
+                <li>Submit a report using one of the official contacts below</li>
+              </ol>
               <p>
                 Email:
                 <a
@@ -388,18 +410,25 @@ frame-ancestors 'self';</code></pre>
                   >Open a security issue on GitHub</a
                 >
               </p>
-              <p>To help us triage effectively, please include whenever possible:</p>
+              <p>To help triage and fix issues quickly, please include:</p>
               <ul>
-                <li>Brief description and precise location of the issue</li>
-                <li>Steps to reproduce or a proof-of-concept (PoC)</li>
-                <li>Contact information for follow-up</li>
-                <li>Estimated severity/impact</li>
-                <li>Relevant environment or configuration details</li>
-                <li>Links, logs or screenshots if helpful</li>
+                <li>Short description and precise location of the issue</li>
+                <li>Exact steps to reproduce (step-by-step)</li>
+                <li>
+                  A minimal, non-destructive proof-of-concept (PoC), if
+                  available
+                </li>
+                <li>Environment details (browser, OS, version, etc.)</li>
+                <li>Estimated impact or severity</li>
+                <li>Contact details for follow-up (email or handle)</li>
+                <li>
+                  Links, logs or screenshots that make the issue easier to
+                  understand
+                </li>
               </ul>
               <p>
-                Please allow reasonable time for investigation and mitigation
-                before public disclosure.
+                Please refrain from publishing PoC code or technical details
+                that could enable abuse until the issue has been resolved.
               </p>
             </section>
 
@@ -412,8 +441,9 @@ frame-ancestors 'self';</code></pre>
             >
               <h2 id="secure-communication-heading">Secure Communication</h2>
               <p>
-                For sensitive details, encrypt your communication using my PGP
-                public key.
+                For sensitive reports (for example PoCs containing real data or
+                logs), end-to-end encryption using my PGP public key is
+                recommended.
               </p>
               <ul>
                 <li>
@@ -430,7 +460,7 @@ frame-ancestors 'self';</code></pre>
                   </a>
                 </li>
                 <li>
-                  Verify the fingerprint:
+                  Verify this fingerprint before use:
                   <code
                     id="pgp-fingerprint"
                     dir="ltr"
@@ -481,9 +511,10 @@ frame-ancestors 'self';</code></pre>
               data-aos="fade-up"
               aria-labelledby="scope-heading"
             >
-              <h2 id="scope-heading">Scope</h2>
+              <h2 id="scope-heading">Authorized Testing Scope</h2>
               <p>
-                Authorized security testing is strictly limited to the following
+                To respect third-party providers and infrastructure, authorized
+                security testing under this policy is limited to the following
                 domains:
               </p>
               <ul>
@@ -491,11 +522,29 @@ frame-ancestors 'self';</code></pre>
                 <li><code>www.rasoulunlimited.ir</code></li>
               </ul>
               <p>
-                Any testing against third-party services or infrastructure
-                (e.g., hosting providers, payment gateways) is <strong>out of
-                scope</strong> and must follow the respective provider’s own
-                policies and terms.
+                Services, subdomains or infrastructure not directly controlled
+                by Rasoul Unlimited (including hosting providers, payment
+                gateways and other linked platforms) are
+                <strong>out of scope</strong> and must only be tested under the
+                respective provider’s own terms and policies.
               </p>
+              <p class="small-note">
+                Examples of out-of-scope activities:
+              </p>
+              <ul>
+                <li>
+                  Direct penetration testing against Cloudflare or GitHub
+                  infrastructure
+                </li>
+                <li>
+                  Targeting third-party services that are merely linked from
+                  this site
+                </li>
+                <li>
+                  Any form of denial-of-service (DoS / DDoS) attack on any
+                  component
+                </li>
+              </ul>
             </section>
 
             <!-- Responsible disclosure -->
@@ -506,24 +555,26 @@ frame-ancestors 'self';</code></pre>
               aria-labelledby="responsible-disclosure-heading"
             >
               <h2 id="responsible-disclosure-heading">
-                Responsible Disclosure Process
+                Responsible Disclosure & Mutual Commitments
                 <i class="fas fa-shield-alt hero-icon" aria-hidden="true"></i>
               </h2>
               <ul>
                 <li>
-                  In most cases, reports are acknowledged within
+                  In normal circumstances, reports are acknowledged within
                   <strong>48 hours</strong>.
                 </li>
                 <li>
-                  Depending on severity, fixes or mitigation plans are usually
-                  communicated within <strong>30 days</strong>.
+                  Depending on impact and complexity, remediation or mitigation
+                  plans are usually communicated within
+                  <strong>30 days</strong>, with urgent issues prioritized.
                 </li>
                 <li>
-                  If you wish, your name or handle can be added to the security
-                  acknowledgments section.
+                  If you wish, your name or handle (e.g., GitHub or X/Twitter)
+                  can be included in a public list of security acknowledgments,
+                  unless you prefer to remain anonymous.
                 </li>
                 <li>
-                  The canonical, machine-readable policy is published at
+                  The canonical, machine-readable policy is also published at
                   <a href="/.well-known/security.txt">security.txt</a>.
                   <button
                     class="copy-button icon-button"
@@ -536,6 +587,14 @@ frame-ancestors 'self';</code></pre>
                   </button>
                 </li>
               </ul>
+              <p class="small-note">
+                <strong>Informal safe-harbor note:</strong>
+                as long as your security testing is conducted in good faith,
+                within this policy’s scope, without exploiting data or causing
+                harm, the intent is to work with you constructively rather than
+                pursue legal action. This statement is not legal advice and may
+                be refined in future versions of the policy.
+              </p>
             </section>
 
             <!-- Testing guidelines -->
@@ -545,20 +604,40 @@ frame-ancestors 'self';</code></pre>
               data-aos="fade-up"
               aria-labelledby="testing-guidelines-heading"
             >
-              <h2 id="testing-guidelines-heading">Testing Guidelines</h2>
+              <h2 id="testing-guidelines-heading">Practical Testing Guidelines</h2>
               <p>
-                Only perform non-destructive testing and avoid impacting real
-                user data or service availability.
+                To avoid unintended disruption or damage during testing, please
+                follow these guidelines:
               </p>
+              <ul>
+                <li>
+                  Use <strong>non-destructive</strong> techniques and avoid
+                  modifying or deleting real data.
+                </li>
+                <li>
+                  Do <strong>not</strong> perform
+                  <span lang="en">DoS / DDoS</span>
+                  attacks, resource-exhaustion tests or excessive traffic
+                  generation.
+                </li>
+                <li>
+                  Avoid social engineering, phishing or targeted attacks against
+                  individual accounts.
+                </li>
+                <li>
+                  Do not attempt to bypass authentication or authorization
+                  mechanisms of third-party services out of scope.
+                </li>
+                <li>
+                  Where possible, clean up any test data created during your
+                  assessment.
+                </li>
+              </ul>
               <p>
-                Do <strong>not</strong> attempt denial-of-service (DoS / DDoS)
-                attacks, excessive traffic generation, or any testing that could
-                degrade the service.
-              </p>
-              <p>
-                You are responsible for ensuring all activities comply with
-                applicable laws and regulations. By submitting a report, you
-                confirm that your testing was conducted lawfully.
+                You are solely responsible for ensuring that your activities
+                comply with all applicable laws and regulations. By submitting a
+                report, you confirm that your testing was lawful and within this
+                policy’s scope.
               </p>
             </section>
 
@@ -570,6 +649,11 @@ frame-ancestors 'self';</code></pre>
               aria-labelledby="security-timeline-heading"
             >
               <h2 id="security-timeline-heading">Security Timeline</h2>
+              <p>
+                The security timeline highlights key milestones and changes for
+                this website, giving researchers and advanced users a transparent
+                view of its security evolution.
+              </p>
               <div class="timeline-search-container">
                 <label for="timeline-search" class="visually-hidden">
                   Search events
@@ -672,7 +756,10 @@ frame-ancestors 'self';</code></pre>
                         <time datetime="2025-05-16">2025-05-16</time>
                       </h3>
                       <h3>Website launched</h3>
-                      <p>Initial release with a focus on performance and safety.</p>
+                      <p>
+                        Initial release with explicit focus on performance,
+                        security and a minimal attack surface.
+                      </p>
                     </div>
                   </li>
                   <li>
@@ -684,7 +771,10 @@ frame-ancestors 'self';</code></pre>
                         <time datetime="2025-05-25">2025-05-25</time>
                       </h3>
                       <h3>Integrated with Cloudflare</h3>
-                      <p>Enhanced speed and security via Cloudflare CDN.</p>
+                      <p>
+                        Improved speed, availability and protection through the
+                        Cloudflare network.
+                      </p>
                     </div>
                   </li>
                   <li>
@@ -696,7 +786,10 @@ frame-ancestors 'self';</code></pre>
                         <time datetime="2025-06-01">2025-06-01</time>
                       </h3>
                       <h3>Strict CSP enforced</h3>
-                      <p>Implemented tighter policies to prevent web attacks.</p>
+                      <p>
+                        Deployed a hardened Content Security Policy to mitigate
+                        XSS and other client-side attacks.
+                      </p>
                     </div>
                   </li>
                 </ul>
@@ -712,14 +805,16 @@ frame-ancestors 'self';</code></pre>
             >
               <h2 id="security-advisories-heading">Security Advisories</h2>
               <p>
-                The latest security notices and advisories are published on
+                The latest security notices and advisories for this project are
+                published via
                 <a
                   href="https://github.com/RasoulUnlimited/RasoulUnlimited.github.io/security/advisories"
                   target="_blank"
                   rel="authoritative noopener noreferrer"
                   class="cta-button"
                   >GitHub Security Advisories</a
-                >.
+                >. Security researchers are encouraged to review this section
+                before starting new assessments.
               </p>
               <button
                 id="refresh-advisories"
@@ -758,10 +853,10 @@ frame-ancestors 'self';</code></pre>
             >
               <h2 id="navigation-heading">Navigation</h2>
               <p>
-                <a href="/en/index.html" class="cta-button">Return Home</a>
+                <a href="/en/index.html" class="cta-button">Return to homepage</a>
               </p>
               <p>
-                <a href="/security.html" class="cta-button">Persian version</a>
+                <a href="/security.html" class="cta-button">View Persian version</a>
               </p>
               <p class="last-updated-info">
                 Last updated:
@@ -792,7 +887,7 @@ frame-ancestors 'self';</code></pre>
           </div>
 
           <p class="cta">
-            <a href="/wiki/rasoul-unlimited/">Thorough biography</a>
+            <a href="/wiki/rasoul-unlimited/">Thorough biography and track record</a>
           </p>
         </main>
       </div>
