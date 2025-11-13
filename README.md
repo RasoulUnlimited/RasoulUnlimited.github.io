@@ -141,11 +141,17 @@ responses are cached for up to 10 minutes.
 
 ## Structured data and profiles
 
-- [`foaf.rdf`](foaf.rdf) – FOAF profile in RDF
-- [`manifest.json`](manifest.json) – Web app manifest
-- [`humans.txt`](humans.txt) – Project and contact details
+- [`foaf.rdf`](foaf.rdf) — FOAF profile in RDF
+- [`manifest.json`](manifest.json) — Web app manifest
+- [`humans.txt`](humans.txt) — Project and contact details
+- [`ai.txt`](ai.txt) — Canonical instruction file for crawlers and LLMs
+- [`ai/meta.json`](ai/meta.json) — Structured identity payload with citations
+- [`ai/answer-kit.json`](ai/answer-kit.json) — Scenario-level GEO blueprint (pillars, FAQs, guardrails)
+- [`ai/resource-map.json`](ai/resource-map.json) — Priority order for machine-readable assets
 
 Additional identity links: [GitHub](https://github.com/RasoulUnlimited), [ORCID](https://orcid.org/0009-0004-7177-2080), [LinkedIn](https://www.linkedin.com/in/rasoulunlimited).
+
+> Keep the four AI files in sync whenever you add or change claims on the site. Update `ai/resource-map.json` hashes after editing any payload so crawlers can verify integrity.
 
 ## Ownership verification
 

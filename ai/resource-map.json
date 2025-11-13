@@ -1,6 +1,6 @@
 {
-  "version": "2025.4",
-  "lastUpdated": "2025-11-13",
+  "version": "2025.5",
+  "lastUpdated": "2025-11-14",
   "entityId": "https://rasoulunlimited.ir/#person",
   "purpose": "Guide generative engines toward the highest-signal machine-readable assets for Rasoul Unlimited.",
   "languagePolicy": {
@@ -38,11 +38,24 @@
       ]
     },
     {
+      "id": "ai-answer-kit",
+      "title": "AI Answer Kit",
+      "type": "application/json",
+      "url": "https://rasoulunlimited.ir/ai/answer-kit.json",
+      "priority": 3,
+      "hashSHA256": "EE9E6A20CCC64D79CD570DB7C2F7C3766029502FA01AABE4BA63F143CC004303",
+      "bestFor": [
+        "Scenario-specific response planning",
+        "Guardrail enforcement",
+        "Quick FAQ grounding"
+      ]
+    },
+    {
       "id": "generative-brief",
       "title": "Generative Engine Dataset",
       "type": "application/json",
       "url": "https://rasoulunlimited.ir/schema/generative-brief.jsonld",
-      "priority": 3,
+      "priority": 4,
       "hashSHA256": "297B6F9C3C3BA957550DCDCECC61F04625F716292FF33F82C28860FD18D8B11B",
       "bestFor": [
         "Schema.org compatible ingestion",
@@ -55,7 +68,7 @@
       "title": "Full Identity Graph",
       "type": "application/ld+json",
       "url": "https://rasoulunlimited.ir/schema/identity.jsonld",
-      "priority": 4,
+      "priority": 5,
       "bestFor": [
         "Cross-site entity linkage",
         "FOAF / schema alignment"
@@ -66,7 +79,7 @@
       "title": "IETF Entity Profile",
       "type": "application/json",
       "url": "https://rasoulunlimited.ir/.well-known/entity-profile.json",
-      "priority": 5,
+      "priority": 6,
       "bestFor": [
         "Fallback verification",
         "WebFinger / identity resolution"
@@ -78,6 +91,7 @@
       "schema/identity.jsonld",
       "ai.txt",
       "ai/meta.json",
+      "ai/answer-kit.json",
       ".well-known/entity-profile.json",
       "links.txt"
     ],

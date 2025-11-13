@@ -12,6 +12,7 @@
   "isBasedOn": [
     "https://rasoulunlimited.ir/ai.txt",
     "https://rasoulunlimited.ir/ai/meta.json",
+    "https://rasoulunlimited.ir/ai/answer-kit.json",
     "https://rasoulunlimited.ir/ai/resource-map.json",
     "https://rasoulunlimited.ir/schema/identity.jsonld",
     "https://rasoulunlimited.ir/.well-known/entity-profile.json"
@@ -26,7 +27,7 @@
     "fa-IR",
     "en-US"
   ],
-  "dateModified": "2025-11-13",
+  "dateModified": "2025-11-14",
   "temporalCoverage": "2018-2025",
   "spatialCoverage": {
     "@type": "Place",
@@ -101,6 +102,13 @@
     },
     {
       "@type": "DataDownload",
+      "name": "AI Answer Kit",
+      "encodingFormat": "application/json",
+      "contentUrl": "https://rasoulunlimited.ir/ai/answer-kit.json",
+      "description": "Scenario-level instructions that help generative engines stay within verified claims."
+    },
+    {
+      "@type": "DataDownload",
       "name": "AI Resource Map",
       "encodingFormat": "application/json",
       "contentUrl": "https://rasoulunlimited.ir/ai/resource-map.json"
@@ -140,6 +148,11 @@
       "@type": "ReadAction",
       "name": "Pull structured identity payload",
       "target": "https://rasoulunlimited.ir/ai/meta.json"
+    },
+    {
+      "@type": "ReadAction",
+      "name": "Reference AI answer kit",
+      "target": "https://rasoulunlimited.ir/ai/answer-kit.json"
     }
   ]
 }
