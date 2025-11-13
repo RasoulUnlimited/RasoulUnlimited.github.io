@@ -2,6 +2,21 @@
   "id": "/en/",
   "name": "Rasoul Unlimited",
   "short_name": "Rasoul",
+  "description": "Personal website of Mohammad Rasoul Sohrabi — Developer, Designer, Content Creator, and Biomedical Engineering student.",
+  
+  "lang": "en-US",
+  "dir": "ltr",
+
+  "start_url": "/en/?source=pwa",
+  "scope": "/en/",
+
+  "display": "standalone",
+  "display_override": ["standalone", "fullscreen", "minimal-ui"],
+  "orientation": "any",
+
+  "theme_color": "#0f172a",
+  "background_color": "#0f172a",
+
   "icons": [
     {
       "src": "/assets/images/favicon.png",
@@ -15,28 +30,59 @@
       "purpose": "any maskable"
     }
   ],
-  "start_url": "/en/",
-  "scope": "/en/",
-  "display": "standalone",
-  "display_override": ["fullscreen", "standalone"],
-  "orientation": "any",
-  "theme_color": "#ffffff",
-  "background_color": "#0f172a",
-  "lang": "en",
-  "dir": "ltr",
-  "categories": ["portfolio", "blog", "education"],
+
+  "categories": ["portfolio", "blog", "education", "productivity"],
+
   "shortcuts": [
     {
       "name": "About",
+      "short_name": "About",
       "url": "/en/about.html",
-      "icons": [{ "src": "/assets/images/favicon.png", "sizes": "192x192" }]
+      "icons": [
+        {
+          "src": "/assets/images/favicon.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
     },
     {
       "name": "Contact",
+      "short_name": "Contact",
       "url": "/en/contact.html",
-      "icons": [{ "src": "/assets/images/favicon.png", "sizes": "192x192" }]
+      "icons": [
+        {
+          "src": "/assets/images/favicon.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Resume",
+      "short_name": "Resume",
+      "url": "/en/resume.html",
+      "icons": [
+        {
+          "src": "/assets/images/favicon.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Verified Credentials",
+      "short_name": "Proof",
+      "url": "/en/proof.html",
+      "icons": [
+        {
+          "src": "/assets/images/favicon.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
     }
   ],
-  "prefer_related_applications": false,
-  "description": "Personal website of Mohammad Rasoul Sohrabi — Developer, Designer, Content Creator, and Biomedical Engineering student."
+
+  "prefer_related_applications": false
 }

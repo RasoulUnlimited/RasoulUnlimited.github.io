@@ -1,6 +1,12 @@
+/* humanstxt.org */
+/* HUMAN-POWERED BY RASOUL UNLIMITED */
+/* Last updated: 2025-07-21 */
+
+
 /* TEAM */
 Developer & Designer: Mohammad Rasoul Sohrabi (Rasoul Unlimited)
-Role: Biomedical engineering student & full-stack developer
+Role: Biomedical Engineering student & full-stack developer
+Focus: Web development, developer experience, digital identity & content systems
 Website: https://rasoulunlimited.ir
 Source Code: https://github.com/RasoulUnlimited/RasoulUnlimited.github.io
 Email: rasoul.unlimited@gmail.com
@@ -9,13 +15,42 @@ GitHub: https://github.com/RasoulUnlimited
 LinkedIn: https://www.linkedin.com/in/rasoulunlimited
 Instagram: https://www.instagram.com/Rasoul.Unlimited
 ORCID: https://orcid.org/0009-0004-7177-2080
-Wikidata: https://rasoulunlimited.ir/wiki/rasoul-unlimited/
+Wikidata / Knowledge: https://rasoulunlimited.ir/wiki/rasoul-unlimited/
+
 
 /* SITE */
-Built with Node.js and Gulp
-Hosted on GitHub Pages, accelerated and secured via Cloudflare
-Strict Content-Security-Policy enforced at the edge
-License: CC BY-NC-ND 4.0
+Stack: Static HTML, CSS, and JavaScript with a custom design system
+Build tooling: Node.js & Gulp
+Hosting: GitHub Pages
+Edge & CDN: Cloudflare
+Security: Strict Content-Security-Policy enforced at the edge
+Performance: Preconnect, preload, lazy-loading & progressive enhancement
+Privacy: No invasive tracking; minimal, purpose-driven scripts only
+License: Creative Commons BY-NC-ND 4.0 (NonCommercial, NoDerivatives)
+
+
+/* ACCESSIBILITY & STANDARDS */
+Markup: Semantic HTML5, ARIA roles where appropriate
+Directionality: RTL (fa-IR) & LTR (en-US) support
+Best practices: Responsive layout, reduced-motion friendly where possible
+Standards: W3C HTML / CSS, modern browser support
+
 
 /* THANKS */
-Tools: Visual Studio Code, Figma, Tailwind CSS, Python, C, HTML/CSS, Git, Node.js, GitHub Pages, Cloudflare, Cloudflare Workers
+Tools:
+- Visual Studio Code
+- Figma
+- HTML / CSS / JavaScript
+- Python & C
+- Git & GitHub
+- Node.js & Gulp
+- GitHub Pages
+- Cloudflare & Cloudflare Workers
+- Font Awesome, Google Fonts
+- Open-source tooling & community
+
+
+/* CONTACT */
+For security reports: https://rasoulunlimited.ir/security.html
+For press & media:   https://rasoulunlimited.ir/press.html
+For everything else: https://rasoulunlimited.ir/contact.html

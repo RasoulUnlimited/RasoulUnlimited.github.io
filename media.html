@@ -3,51 +3,70 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Preconnect to necessary domains for faster resource loading -->
+
+    <!-- Performance: preconnect to critical origins -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
     <link rel="preconnect" href="https://cdn.jsdelivr.net" />
 
-    <!-- Preload critical CSS for faster rendering -->
+    <!-- Preload critical fonts & icon CSS -->
     <link
       rel="preload"
       as="style"
       data-href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;700&display=swap"
       data-make-stylesheet
     />
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;700&display=swap" /></noscript>
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;700&display=swap"
+      />
+    </noscript>
     <link
       rel="preload"
       as="style"
       data-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
       data-make-stylesheet
     />
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" /></noscript>
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      />
+    </noscript>
+
     <title>اشارات رسانه‌ای و مصاحبه‌ها – رسول آنلیمیتد</title>
     <meta
       name="description"
-      content="منتخب ارجاعات و مصاحبه‌های مربوط به محمد رسول سهرابی."
+      content="منتخبی از ارجاعات رسانه‌ای، گزارش‌ها و مصاحبه‌های منتشرشده دربارهٔ محمد رسول سهرابی (Rasoul Unlimited) در رسانه‌ها و نهادهای معتبر."
     />
+
+    <!-- Core styles -->
     <link rel="stylesheet" href="assets/css/design-system.min.css" />
     <link rel="stylesheet" href="assets/css/main-style-fa.min.css" />
+
+    <!-- Performance helpers -->
     <script src="assets/js/performance-helpers.min.js" defer></script>
+
+    <!-- Canonical & author -->
     <link rel="canonical" href="https://rasoulunlimited.ir/media.html" />
     <link
       rel="author"
       href="https://rasoulunlimited.ir/#person"
       data-person="rasoul-unlimited"
     />
+
+    <!-- Indexing / citations -->
     <meta name="robots" content="index, follow" />
     <meta
       name="citation_title"
       content="اشارات رسانه‌ای و مصاحبه‌ها – رسول آنلیمیتد"
     />
     <meta name="dcterms.creator" content="Mohammad Rasoul Sohrabi" />
-    <meta
-      name="dc.identifier"
-      content="https://rasoulunlimited.ir/media.html"
-    />
+    <meta name="dc.identifier" content="https://rasoulunlimited.ir/media.html" />
+
+    <!-- Hreflang & identity schema -->
     <link
       rel="alternate"
       href="https://rasoulunlimited.ir/media.html"
@@ -69,10 +88,12 @@
       href="/schema/identity.jsonld"
     />
     <link
-    rel="alternate"
-    type="application/ld+json"
-    href="/schema/brand.jsonld"
-  />
+      rel="alternate"
+      type="application/ld+json"
+      href="/schema/brand.jsonld"
+    />
+
+    <!-- Color scheme -->
     <meta name="color-scheme" content="light dark" />
     <meta
       name="theme-color"
@@ -84,6 +105,8 @@
       media="(prefers-color-scheme: dark)"
       content="#0f172a"
     />
+
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta
       property="og:title"
@@ -91,7 +114,7 @@
     />
     <meta
       property="og:description"
-      content="منتخب ارجاعات و مصاحبه‌های مربوط به محمد رسول سهرابی."
+      content="منتخب ارجاعات، گفتگوها و گزارش‌های رسانه‌ای دربارهٔ رسول آنلیمیتد در رسانه‌ها و نهادهای دانشگاهی."
     />
     <meta
       property="og:image"
@@ -99,7 +122,7 @@
     />
     <meta
       property="og:image:alt"
-      content="Portrait of Mohammad Rasoul Sohrabi"
+      content="پرترهٔ تأییدشدهٔ محمد رسول سهرابی (Rasoul Unlimited)"
     />
     <meta property="og:image:width" content="220" />
     <meta property="og:image:height" content="220" />
@@ -107,6 +130,8 @@
     <meta property="og:locale:alternate" content="en_US" />
     <meta property="og:url" content="https://rasoulunlimited.ir/media.html" />
     <meta property="og:site_name" content="Rasoul Unlimited" />
+
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@rasoulunlimited" />
     <meta name="twitter:creator" content="@rasoulunlimited" />
@@ -116,7 +141,7 @@
     />
     <meta
       name="twitter:description"
-      content="منتخب ارجاعات و مصاحبه‌های مربوط به محمد رسول سهرابی."
+      content="منتخبی از ارجاعات و مصاحبه‌های رسانه‌ای دربارهٔ محمد رسول سهرابی (Rasoul Unlimited)."
     />
     <meta
       name="twitter:image"
@@ -124,8 +149,10 @@
     />
     <meta
       name="twitter:image:alt"
-      content="Portrait of Mohammad Rasoul Sohrabi"
+      content="پرترهٔ محمد رسول سهرابی (Rasoul Unlimited)"
     />
+
+    <!-- ItemList of key media mentions -->
     <script type="application/ld+json" nonce="RasoulCSP">
       {
         "@context": "https://schema.org",
@@ -164,7 +191,7 @@
             "datePublished": "2023-11-09",
             "locationCreated": {
               "@type": "Place",
-              "name": "Karaj, Iran"
+              "name": "Tehran, Iran"
             },
             "publisher": {
               "@type": "Organization",
@@ -174,6 +201,8 @@
         ]
       }
     </script>
+
+    <!-- Breadcrumbs -->
     <script type="application/ld+json" nonce="RasoulCSP">
       {
         "@context": "https://schema.org",
@@ -193,14 +222,18 @@
           }
         ]
       }
-  </script>
+    </script>
+
+    <!-- WebPage schema -->
     <script type="application/ld+json" nonce="RasoulCSP">
       {
         "@context": "https://schema.org",
         "@type": "WebPage",
         "url": "https://rasoulunlimited.ir/media.html",
+        "name": "اشارات رسانه‌ای و مصاحبه‌ها – رسول آنلیمیتد",
         "isPartOf": { "@id": "https://rasoulunlimited.ir/#website" },
         "author": { "@id": "https://rasoulunlimited.ir/#person" },
+        "publisher": { "@id": "https://rasoulunlimited.ir/#organization" },
         "mainEntityOfPage": "https://rasoulunlimited.ir/media.html",
         "datePublished": "2025-06-23",
         "dateModified": "2025-07-21",
@@ -210,8 +243,10 @@
         }
       }
     </script>
-</head>
-  <link rel="entity-profile" href="/.well-known/entity-profile.json" />
+
+    <!-- Entity profile -->
+    <link rel="entity-profile" href="/.well-known/entity-profile.json" />
+  </head>
   <body>
     <noscript>
       <header class="navbar" role="banner">
@@ -225,7 +260,9 @@
         </nav>
       </header>
     </noscript>
+
     <div data-include-html="includes/header-fa.html"></div>
+
     <div class="container">
       <div class="content-area">
         <main id="main-content">
@@ -239,87 +276,161 @@
               src="assets/images/RasoulUnlimited.webp"
               loading="eager"
               decoding="async"
-              alt="تصویر پرترهٔ محمد رسول سهرابی"
+              alt="تصویر پرترهٔ محمد رسول سهرابی (Rasoul Unlimited)"
               class="profile-image"
               width="220"
               height="220"
             />
             <p class="tagline hero-tagline" id="hero-tagline">
-              بازتاب‌ها و گفتگوها در رسانه‌های معتبر
+              بازتاب حضور رسول آنلیمیتد در رسانه‌های معتبر
             </p>
           </section>
+
           <h1>اشارات رسانه‌ای و مصاحبه‌ها</h1>
+
           <p data-person="rasoul-unlimited">
-            در این صفحه ارجاعات و گفتگوهای مهم مرتبط با محمد رسول سهرابی (معروف
-            به رسول آنلیمیتد) گردآوری شده است. این موارد بازتاب‌دهندهٔ تأثیر
-            اجتماعی و اعتبار حرفه‌ای اوست.
+            در این صفحه، بخشی از ارجاعات، گفتگوها و گزارش‌های رسانه‌ای مربوط به
+            محمد رسول سهرابی (معروف به «رسول آنلیمیتد») گردآوری شده است؛ مواردی
+            که از مصاحبه‌های رادیویی تا معرفی‌های دانشگاهی و گزارش‌های آنلاین را
+            پوشش می‌دهند.
           </p>
-          <nav class="filter-bar">
-            <button data-filter="all">همه</button>
-            <button data-filter="interview">مصاحبه‌ها</button>
-            <button data-filter="article">مقالات</button>
+          <p>
+            این اشارات نشان می‌دهند چگونه ترکیب
+            <strong>کار متن‌باز، میزبانی شفاف روی GitHub Pages</strong> و
+            <strong>زیرساخت ایمن‌شده با Cloudflare</strong> به ساختن اعتباری
+            کمک کرده که برای دانشگاه‌ها، رسانه‌ها و جامعهٔ فنی قابل استناد است.
+          </p>
+
+          <nav
+            class="filter-bar"
+            aria-label="فیلتر کردن بر اساس نوع پوشش رسانه‌ای"
+          >
+            <button type="button" data-filter="all" aria-pressed="true">
+              همه
+            </button>
+            <button type="button" data-filter="interview" aria-pressed="false">
+              مصاحبه‌ها
+            </button>
+            <button type="button" data-filter="article" aria-pressed="false">
+              مقالات و گزارش‌ها
+            </button>
           </nav>
-          <section class="grid grid-3">
+
+          <section
+            class="grid grid-3"
+            aria-label="فهرست اشارات رسانه‌ای منتخب"
+          >
             <div class="card card--press" data-category="interview">
               <img
                 src="assets/images/logo-virgool.svg"
-                alt="لوگوی ویرگول – مقاله دربارهٔ رسول آنلیمیتد"
+                alt="لوگوی ویرگول – مصاحبه دربارهٔ ربات دیسکورد رسول آنلیمیتد"
                 width="48"
                 height="48"
+                loading="lazy"
               />
-              <article itemscope itemtype="https://schema.org/NewsArticle">
-                <h3>
+              <article
+                itemscope
+                itemtype="https://schema.org/NewsArticle"
+                aria-labelledby="media-virgool-discord-heading"
+              >
+                <h3 id="media-virgool-discord-heading" itemprop="headline">
                   <a
-                    href="https://virgool.io/@RasoulUnlimited/discord-bot-verification" rel="ugc noopener noreferrer"
-                    >Interview: First Persian Discord Bot Verified</a
+                    href="https://virgool.io/@RasoulUnlimited/discord-bot-verification"
+                    rel="ugc noopener noreferrer"
+                    itemprop="url"
                   >
+                    Interview: First Persian Discord Bot Verified
+                  </a>
                 </h3>
-                <p>Virgool, May 12, 2020</p>
+                <p>
+                  <span itemprop="publisher">Virgool</span> –
+                  <time datetime="2020-05-12" itemprop="datePublished">
+                    ۱۲ مه ۲۰۲۰
+                  </time>
+                </p>
               </article>
             </div>
+
             <div class="card card--press" data-category="article">
               <img
                 src="assets/images/logo-sut.svg"
-                alt="لوگوی دانشگاه صنعتی سهند – معرفی رسول آنلیمیتد"
+                alt="لوگوی دانشگاه صنعتی سهند – همکاری در پروژه‌های متن‌باز"
                 width="48"
                 height="48"
+                loading="lazy"
               />
-              <article itemscope itemtype="https://schema.org/NewsArticle">
-                <h3>
-                  <a href="https://sut.ac.ir/news/rasoulunlimited-collaboration" rel="authoritative noopener noreferrer"
-                    >University Collaboration on Open Source Projects</a
+              <article
+                itemscope
+                itemtype="https://schema.org/NewsArticle"
+                aria-labelledby="media-sut-heading"
+              >
+                <h3 id="media-sut-heading" itemprop="headline">
+                  <a
+                    href="https://sut.ac.ir/news/rasoulunlimited-collaboration"
+                    rel="authoritative noopener noreferrer"
+                    itemprop="url"
                   >
+                    University Collaboration on Open Source Projects
+                  </a>
                 </h3>
-                <p>Sahand University of Technology, March 18, 2024</p>
+                <p>
+                  <span itemprop="publisher">
+                    Sahand University of Technology
+                  </span>
+                  –
+                  <time datetime="2024-03-18" itemprop="datePublished">
+                    ۱۸ مارس ۲۰۲۴
+                  </time>
+                </p>
               </article>
             </div>
+
             <div class="card card--press" data-category="interview">
               <img
                 src="assets/images/logo-ut.svg"
-                alt="لوگوی دانشگاه تهران – مصاحبه با رسول آنلیمیتد"
+                alt="لوگوی دانشگاه تهران – مصاحبه رادیو دانشگاه تهران با رسول آنلیمیتد"
                 width="48"
                 height="48"
+                loading="lazy"
               />
-              <article itemscope itemtype="https://schema.org/NewsArticle">
-                <h3>
-                  <a href="https://radio.ut.ac.ir/interview-rasoul-unlimited" rel="authoritative noopener noreferrer"
-                    >Radio UT Interview with Rasoul Unlimited</a
+              <article
+                itemscope
+                itemtype="https://schema.org/NewsArticle"
+                aria-labelledby="media-ut-heading"
+              >
+                <h3 id="media-ut-heading" itemprop="headline">
+                  <a
+                    href="https://radio.ut.ac.ir/interview-rasoul-unlimited"
+                    rel="authoritative noopener noreferrer"
+                    itemprop="url"
                   >
+                    Radio UT Interview with Rasoul Unlimited
+                  </a>
                 </h3>
-                <p>University of Tehran, November 9, 2023</p>
+                <p>
+                  <span itemprop="publisher">University of Tehran</span> –
+                  <time datetime="2023-11-09" itemprop="datePublished">
+                    ۹ نوامبر ۲۰۲۳
+                  </time>
+                </p>
               </article>
             </div>
           </section>
-          <noscript>
-            <footer class="footer">
-              <p>&copy; <span id="footer-year"></span> Rasoul Unlimited</p>
-            </footer>
-          </noscript>
-            <p class="cta"><a href="/wiki/rasoul-unlimited/">زندگی‌نامه مفصل</a></p>
+
+          <p class="cta">
+            <a href="/wiki/rasoul-unlimited/">زندگی‌نامهٔ مفصل Rasoul Unlimited &rarr;</a>
+          </p>
+          <p>
+            برای فهرست کامل‌تر پوشش‌ها و لینک‌های مرتبط، صفحهٔ
+            <a href="press.html">رسانه‌ها و مطبوعات</a> و گواهی‌های
+            <a href="proof.html">اعتبارنامه و DOI</a> را نیز ببینید.
+          </p>
         </main>
       </div>
     </div>
+
     <div data-include-html="includes/footer.html"></div>
+
     <script src="assets/js/include.min.js" defer></script>
     <script src="assets/js/main-script-fa.min.js" defer></script>
     <script src="assets/js/gallery-filter.min.js" defer></script>

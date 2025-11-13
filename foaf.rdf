@@ -4,16 +4,24 @@
   xmlns:foaf="http://xmlns.com/foaf/0.1/"
   xmlns:dc="http://purl.org/dc/elements/1.1/"
   xmlns:owl="http://www.w3.org/2002/07/owl#"
-  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:cc="http://creativecommons.org/ns#">
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:cc="http://creativecommons.org/ns#"
+  xmlns:schema="https://schema.org/"
+  xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
+  xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+  xmlns:prov="http://www.w3.org/ns/prov#">
 
+  <!-- Document Metadata -->
   <foaf:PersonalProfileDocument rdf:about="">
-    <foaf:primaryTopic rdf:resource="https://rasoulunlimited.ir/#person" />
-    <foaf:maker rdf:resource="https://rasoulunlimited.ir/#person" />
-    <dc:title>Mohammad Rasoul Sohrabi FOAF Profile</dc:title>
+    <foaf:primaryTopic rdf:resource="https://rasoulunlimited.ir/#person"/>
+    <foaf:maker rdf:resource="https://rasoulunlimited.ir/#person"/>
+    <dc:title>FOAF Profile – Mohammad Rasoul Sohrabi (Rasoul Unlimited)</dc:title>
     <dc:language>en</dc:language>
     <dc:creator>Mohammad Rasoul Sohrabi</dc:creator>
+    <dc:date>2025-07-21</dc:date>
   </foaf:PersonalProfileDocument>
 
+  <!-- Person Entity -->
   <foaf:Person rdf:about="https://rasoulunlimited.ir/#person">
     <foaf:name>Mohammad Rasoul Sohrabi</foaf:name>
     <foaf:nick>Rasoul Unlimited</foaf:nick>
@@ -21,223 +29,176 @@
     <foaf:familyName>Sohrabi</foaf:familyName>
     <foaf:gender>Male</foaf:gender>
     <foaf:birthday>2005-09-06</foaf:birthday>
-    <foaf:knowsLanguage>en</foaf:knowsLanguage>
-    <foaf:knowsLanguage>fa</foaf:knowsLanguage>
-    <foaf:page rdf:resource="https://rasoulunlimited.ir/about.html" />
-    <foaf:openid rdf:resource="https://rasoulunlimited.ir" />
-    <foaf:isPrimaryTopicOf rdf:resource="https://rasoulunlimited.ir/foaf.rdf" />
-    <foaf:title>Biomedical Engineering Student, Software Developer</foaf:title>
 
-    <foaf:homepage rdf:resource="https://rasoulunlimited.ir" />
-    <foaf:img rdf:resource="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp" />
-    <foaf:depiction rdf:resource="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp" />
-    <foaf:logo rdf:resource="https://rasoulunlimited.ir/assets/images/favicon.png" />
-    <foaf:workInfoHomepage rdf:resource="https://rasoulunlimited.ir/projects/" />
-    <foaf:workplaceHomepage rdf:resource="https://ctb.iau.ir" />
-    <foaf:schoolHomepage rdf:resource="https://ctb.iau.ir" />
+    <!-- Titles & roles -->
+    <foaf:title>Biomedical Engineering Student & Software Developer</foaf:title>
+    <schema:jobTitle>Full-stack Developer</schema:jobTitle>
+    <schema:jobTitle>Digital Identity & Web Systems Designer</schema:jobTitle>
 
+    <!-- Profile & identity -->
+    <foaf:isPrimaryTopicOf rdf:resource="https://rasoulunlimited.ir/foaf.rdf"/>
+    <foaf:openid rdf:resource="https://rasoulunlimited.ir"/>
+    <foaf:homepage rdf:resource="https://rasoulunlimited.ir"/>
+    <foaf:page rdf:resource="https://rasoulunlimited.ir/about.html"/>
+
+    <!-- Images -->
+    <foaf:img rdf:resource="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp"/>
+    <foaf:depiction rdf:resource="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp"/>
+    <foaf:logo rdf:resource="https://rasoulunlimited.ir/assets/images/favicon.png"/>
+
+    <!-- Contact -->
+    <foaf:mbox rdf:resource="mailto:rasoul.unlimited@gmail.com"/>
     <foaf:mbox_sha1sum>95de239e4e15e3209e9d1874e5881f5c7a10b930</foaf:mbox_sha1sum>
-    <foaf:mbox rdf:resource="mailto:rasoul.unlimited@gmail.com" />
 
+    <!-- Location -->
     <foaf:based_near>
-      <foaf:SpatialThing>
+      <geo:Point>
         <rdfs:label>Karaj, Iran</rdfs:label>
-      </foaf:SpatialThing>
+      </geo:Point>
     </foaf:based_near>
 
-    <foaf:topic_interest rdf:resource="http://dbpedia.org/resource/Biomedical_engineering" />
-    <foaf:topic_interest rdf:resource="http://dbpedia.org/resource/Open-source_software" />
-    <foaf:topic_interest rdf:resource="http://dbpedia.org/resource/Discord_(software)" />
-    <foaf:topic_interest rdf:resource="http://dbpedia.org/resource/Digital_health" />
-    <foaf:topic_interest rdf:resource="http://dbpedia.org/resource/Personal_branding" />
-    <foaf:topic_interest rdf:resource="http://dbpedia.org/resource/Web_development" />
-    <foaf:topic_interest rdf:resource="http://dbpedia.org/resource/Full_stack_developer" />
-    <foaf:topic_interest rdf:resource="http://dbpedia.org/resource/Content_strategy" />
+    <!-- Education & Workplace -->
+    <foaf:schoolHomepage rdf:resource="https://ctb.iau.ir"/>
+    <foaf:workplaceHomepage rdf:resource="https://ctb.iau.ir"/>
+    <foaf:workInfoHomepage rdf:resource="https://rasoulunlimited.ir/projects/"/>
 
+    <!-- Languages -->
+    <foaf:knowsLanguage>en</foaf:knowsLanguage>
+    <foaf:knowsLanguage>fa</foaf:knowsLanguage>
+
+    <!-- Interests -->
+    <foaf:topic_interest rdf:resource="http://dbpedia.org/resource/Biomedical_engineering"/>
+    <foaf:topic_interest rdf:resource="http://dbpedia.org/resource/Open-source_software"/>
+    <foaf:topic_interest rdf:resource="http://dbpedia.org/resource/Digital_health"/>
+    <foaf:topic_interest rdf:resource="http://dbpedia.org/resource/Personal_branding"/>
+    <foaf:topic_interest rdf:resource="http://dbpedia.org/resource/Web_development"/>
+    <foaf:topic_interest rdf:resource="http://dbpedia.org/resource/Full_stack_developer"/>
+    <foaf:topic_interest rdf:resource="http://dbpedia.org/resource/Content_strategy"/>
+
+    <!-- Member -->
     <foaf:member>
       <foaf:Organization>
-        <rdfs:label>Biomedical Engineering Association (Islamic Azad University, Central Tehran
-          Branch)</rdfs:label>
+        <rdfs:label>Biomedical Engineering Association – Islamic Azad University (Central Tehran Branch)</rdfs:label>
       </foaf:Organization>
     </foaf:member>
 
-    <!-- Social Accounts -->
+    <!-- Social Accounts (normalized + grouped) -->
+    <!-- GitHub -->
     <foaf:account>
       <foaf:OnlineAccount>
-        <foaf:accountServiceHomepage rdf:resource="https://github.com" />
+        <foaf:accountServiceHomepage rdf:resource="https://github.com"/>
         <foaf:accountName>RasoulUnlimited</foaf:accountName>
-        <owl:sameAs rdf:resource="https://github.com/RasoulUnlimited" />
+        <owl:sameAs rdf:resource="https://github.com/RasoulUnlimited"/>
       </foaf:OnlineAccount>
     </foaf:account>
 
+    <!-- ORCID -->
     <foaf:account>
       <foaf:OnlineAccount>
-        <foaf:accountServiceHomepage rdf:resource="https://orcid.org" />
+        <foaf:accountServiceHomepage rdf:resource="https://orcid.org"/>
         <foaf:accountName>0009-0004-7177-2080</foaf:accountName>
-        <owl:sameAs rdf:resource="https://orcid.org/0009-0004-7177-2080" />
+        <owl:sameAs rdf:resource="https://orcid.org/0009-0004-7177-2080"/>
       </foaf:OnlineAccount>
     </foaf:account>
 
+    <!-- LinkedIn -->
     <foaf:account>
       <foaf:OnlineAccount>
-        <foaf:accountServiceHomepage rdf:resource="https://linkedin.com" />
+        <foaf:accountServiceHomepage rdf:resource="https://linkedin.com"/>
         <foaf:accountName>rasoulunlimited</foaf:accountName>
-        <owl:sameAs rdf:resource="https://www.linkedin.com/in/rasoulunlimited/" />
+        <owl:sameAs rdf:resource="https://www.linkedin.com/in/rasoulunlimited/"/>
       </foaf:OnlineAccount>
     </foaf:account>
 
+    <!-- Dev.to -->
     <foaf:account>
       <foaf:OnlineAccount>
-        <foaf:accountServiceHomepage rdf:resource="https://medium.com" />
+        <foaf:accountServiceHomepage rdf:resource="https://dev.to"/>
         <foaf:accountName>rasoulunlimited</foaf:accountName>
-        <owl:sameAs rdf:resource="https://rasoulunlimited.medium.com" />
+        <owl:sameAs rdf:resource="https://dev.to/rasoulunlimited"/>
       </foaf:OnlineAccount>
     </foaf:account>
 
+    <!-- Instagram -->
     <foaf:account>
       <foaf:OnlineAccount>
-        <foaf:accountServiceHomepage rdf:resource="https://dev.to" />
-        <foaf:accountName>rasoulunlimited</foaf:accountName>
-        <owl:sameAs rdf:resource="https://dev.to/rasoulunlimited" />
-      </foaf:OnlineAccount>
-    </foaf:account>
-
-    <foaf:account>
-      <foaf:OnlineAccount>
-        <foaf:accountServiceHomepage rdf:resource="https://virgool.io" />
-        <foaf:accountName>rasoulunlimited</foaf:accountName>
-        <owl:sameAs rdf:resource="https://virgool.io/@RasoulUnlimited" />
-      </foaf:OnlineAccount>
-    </foaf:account>
-
-    <foaf:account>
-      <foaf:OnlineAccount>
-        <foaf:accountServiceHomepage rdf:resource="https://instagram.com" />
+        <foaf:accountServiceHomepage rdf:resource="https://instagram.com"/>
         <foaf:accountName>Rasoul.Unlimited</foaf:accountName>
-        <owl:sameAs rdf:resource="https://www.instagram.com/Rasoul.Unlimited/" />
+        <owl:sameAs rdf:resource="https://www.instagram.com/Rasoul.Unlimited/"/>
       </foaf:OnlineAccount>
     </foaf:account>
 
+    <!-- Telegram -->
     <foaf:account>
       <foaf:OnlineAccount>
-        <foaf:accountServiceHomepage rdf:resource="https://t.me" />
-        <foaf:accountName>Rasoul_Unlimited</foaf:accountName>
-        <owl:sameAs rdf:resource="https://t.me/RasoulUnlimited" />
-      </foaf:OnlineAccount>
-    </foaf:account>
-
-    <foaf:account>
-      <foaf:OnlineAccount>
-        <foaf:accountServiceHomepage rdf:resource="https://www.youtube.com" />
-        <foaf:accountName>rasoulunlimited</foaf:accountName>
-        <owl:sameAs rdf:resource="https://www.youtube.com/@RasoulUnlimited" />
-      </foaf:OnlineAccount>
-    </foaf:account>
-
-    <foaf:account>
-      <foaf:OnlineAccount>
-        <foaf:accountServiceHomepage rdf:resource="https://about.me" />
-        <foaf:accountName>rasoulunlimited</foaf:accountName>
-        <owl:sameAs rdf:resource="https://about.me/rasoulunlimited" />
-      </foaf:OnlineAccount>
-    </foaf:account>
-
-    <foaf:account>
-      <foaf:OnlineAccount>
-        <foaf:accountServiceHomepage rdf:resource="https://gravatar.com" />
-        <foaf:accountName>rasoulunlimited</foaf:accountName>
-        <owl:sameAs rdf:resource="https://gravatar.com/rasoulunlimited" />
-      </foaf:OnlineAccount>
-    </foaf:account>
-
-    <foaf:account>
-      <foaf:OnlineAccount>
-        <foaf:accountServiceHomepage rdf:resource="https://keybase.io" />
+        <foaf:accountServiceHomepage rdf:resource="https://t.me"/>
         <foaf:accountName>RasoulUnlimited</foaf:accountName>
-        <owl:sameAs rdf:resource="https://keybase.io/RasoulUnlimited" />
+        <owl:sameAs rdf:resource="https://t.me/RasoulUnlimited"/>
       </foaf:OnlineAccount>
     </foaf:account>
 
+    <!-- YouTube -->
     <foaf:account>
       <foaf:OnlineAccount>
-        <foaf:accountServiceHomepage rdf:resource="https://mastodon.social" />
+        <foaf:accountServiceHomepage rdf:resource="https://www.youtube.com"/>
         <foaf:accountName>RasoulUnlimited</foaf:accountName>
-        <owl:sameAs rdf:resource="https://mastodon.social/@rasoulunlimited" />
+        <owl:sameAs rdf:resource="https://www.youtube.com/@RasoulUnlimited"/>
       </foaf:OnlineAccount>
     </foaf:account>
 
+    <!-- Mastodon -->
     <foaf:account>
       <foaf:OnlineAccount>
-        <foaf:accountServiceHomepage rdf:resource="https://www.researchgate.net" />
+        <foaf:accountServiceHomepage rdf:resource="https://mastodon.social"/>
+        <foaf:accountName>rasoulunlimited</foaf:accountName>
+        <owl:sameAs rdf:resource="https://mastodon.social/@rasoulunlimited"/>
+      </foaf:OnlineAccount>
+    </foaf:account>
+
+    <!-- Twitter/X -->
+    <foaf:account>
+      <foaf:OnlineAccount>
+        <foaf:accountServiceHomepage rdf:resource="https://x.com"/>
+        <foaf:accountName>RasoulUnlimited</foaf:accountName>
+        <owl:sameAs rdf:resource="https://x.com/rasoulunlimited"/>
+      </foaf:OnlineAccount>
+    </foaf:account>
+
+    <!-- ResearchGate -->
+    <foaf:account>
+      <foaf:OnlineAccount>
+        <foaf:accountServiceHomepage rdf:resource="https://researchgate.net"/>
         <foaf:accountName>Mohammad-Rasoul-Sohrabi</foaf:accountName>
-        <owl:sameAs rdf:resource="https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi" />
+        <owl:sameAs rdf:resource="https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi"/>
       </foaf:OnlineAccount>
     </foaf:account>
 
+    <!-- Wikidata -->
     <foaf:account>
       <foaf:OnlineAccount>
-        <foaf:accountServiceHomepage rdf:resource="https://scholar.google.com" />
-        <foaf:accountName>kDl5eNUAAAAJ</foaf:accountName>
-        <owl:sameAs rdf:resource="https://scholar.google.com/citations?user=kDl5eNUAAAAJ" />
-      </foaf:OnlineAccount>
-    </foaf:account>
-    <foaf:account>
-      <foaf:OnlineAccount>
-        <foaf:accountServiceHomepage rdf:resource="https://x.com" />
-        <foaf:accountName>RasoulUnlimited</foaf:accountName>
-        <owl:sameAs rdf:resource="https://x.com/rasoulunlimited" />
-      </foaf:OnlineAccount>
-    </foaf:account>
-
-    <foaf:account>
-      <foaf:OnlineAccount>
-        <foaf:accountServiceHomepage rdf:resource="https://top.gg" />
-        <foaf:accountName>735403725132136510</foaf:accountName>
-        <owl:sameAs rdf:resource="https://top.gg/bot/735403725132136510" />
-      </foaf:OnlineAccount>
-    </foaf:account>
-
-    <foaf:account>
-      <foaf:OnlineAccount>
-        <foaf:accountServiceHomepage rdf:resource="https://instagram.com" />
-        <foaf:accountName>rasol.unlimited</foaf:accountName>
-        <owl:sameAs rdf:resource="https://www.instagram.com/rasoul.unlimited/" />
-      </foaf:OnlineAccount>
-    </foaf:account>
-
-    <foaf:account>
-      <foaf:OnlineAccount>
-        <foaf:accountServiceHomepage rdf:resource="https://www.wikidata.org" />
+        <foaf:accountServiceHomepage rdf:resource="https://www.wikidata.org"/>
         <foaf:accountName>Q134619124</foaf:accountName>
-        <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q134619124" />
+        <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q134619124"/>
       </foaf:OnlineAccount>
     </foaf:account>
 
-    <!-- See Also -->
-    <rdfs:seeAlso rdf:resource="https://orcid.org/0009-0004-7177-2080" />
-    <rdfs:seeAlso rdf:resource="https://www.wikidata.org/wiki/Q134619124" />
-    <rdfs:seeAlso rdf:resource="https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi" />
-    <rdfs:seeAlso rdf:resource="https://scholar.google.com/citations?user=kDl5eNUAAAAJ" />
-    <rdfs:seeAlso rdf:resource="https://rasoulunlimited.ir/manifest.json" />
-    <rdfs:seeAlso rdf:resource="https://rasoulunlimited.ir/schema/identity.jsonld" />
-    <rdfs:seeAlso rdf:resource="https://github.com/RasoulUnlimited" />
-    <rdfs:seeAlso rdf:resource="https://www.linkedin.com/in/rasoulunlimited/" />
-    <rdfs:seeAlso rdf:resource="https://x.com/RasoulUnlimited" />
-    <rdfs:seeAlso rdf:resource="https://www.instagram.com/rasoul.unlimited/" />
-    <rdfs:seeAlso rdf:resource="https://rasoulunlimited.ir/humans.txt" />
-    <rdfs:seeAlso rdf:resource="https://rasoulunlimited.ir/links.txt" />
-    <rdfs:seeAlso rdf:resource="https://doi.org/10.5281/zenodo.15548860" />
-    <rdfs:seeAlso rdf:resource="https://doi.org/10.5281/zenodo.15548850" />
-    <rdfs:seeAlso rdf:resource="https://rasoulunlimited.ir/security.html" />
-    <rdfs:seeAlso rdf:resource="https://rasoulunlimited.ir/.well-known/security.txt" />
-    <rdfs:seeAlso rdf:resource="https://rasoulunlimited.ir/.well-known/entity.rdf" />
+    <!-- See Also (semantic links) -->
+    <rdfs:seeAlso rdf:resource="https://rasoulunlimited.ir/security.html"/>
+    <rdfs:seeAlso rdf:resource="https://rasoulunlimited.ir/humans.txt"/>
+    <rdfs:seeAlso rdf:resource="https://rasoulunlimited.ir/links.txt"/>
+    <rdfs:seeAlso rdf:resource="https://rasoulunlimited.ir/schema/identity.jsonld"/>
+    <rdfs:seeAlso rdf:resource="https://rasoulunlimited.ir/.well-known/entity.rdf"/>
+    <rdfs:seeAlso rdf:resource="https://doi.org/10.5281/zenodo.15548860"/>
+    <rdfs:seeAlso rdf:resource="https://doi.org/10.5281/zenodo.15548850"/>
 
-    <!-- Metadata -->
-    <dc:creator>Mohammad Rasoul Sohrabi</dc:creator>
-    <dc:description>Personal FOAF profile of Mohammad Rasoul Sohrabi (aka Rasoul Unlimited), a
-      biomedical engineering student and open-source contributor from Tehran, Iran.</dc:description>
-    <dc:date>2025-07-02</dc:date>
-    <cc:license rdf:resource="https://creativecommons.org/licenses/by-nc-nd/4.0/" />
+    <!-- Description -->
+    <dc:description>
+      FOAF profile for Mohammad Rasoul Sohrabi (Rasoul Unlimited), biomedical engineering student,
+      full-stack developer, open-source contributor, and creator of digital identity systems.
+    </dc:description>
 
+    <!-- License -->
+    <cc:license rdf:resource="https://creativecommons.org/licenses/by-nc-nd/4.0/"/>
   </foaf:Person>
+
 </rdf:RDF>
