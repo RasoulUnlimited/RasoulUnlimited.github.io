@@ -1,0 +1,97 @@
+{
+  "version": "2025.4",
+  "lastUpdated": "2025-11-13",
+  "entityId": "https://rasoulunlimited.ir/#person",
+  "purpose": "Guide generative engines toward the highest-signal machine-readable assets for Rasoul Unlimited.",
+  "languagePolicy": {
+    "default": [
+      "fa-IR",
+      "en-US"
+    ],
+    "notes": "Match the user's language; keep Persian outputs RTL aware."
+  },
+  "resourceCatalog": [
+    {
+      "id": "ai-txt",
+      "title": "LLM Instruction File",
+      "type": "text/plain",
+      "url": "https://rasoulunlimited.ir/ai.txt",
+      "priority": 1,
+      "hashSHA256": "5991FADFDDD942FA20CA267331900BBFD530D5BD6AD52B25DCECBFD7B5E6C90E",
+      "bestFor": [
+        "Fast grounding",
+        "Guardrail awareness",
+        "Language policy lookup"
+      ]
+    },
+    {
+      "id": "ai-meta",
+      "title": "Structured Identity Payload",
+      "type": "application/json",
+      "url": "https://rasoulunlimited.ir/ai/meta.json",
+      "priority": 2,
+      "hashSHA256": "A2570DB62EC753E1AF93F33915BF49BB94DE4078C184154A3C53C0CF7DA93C5F",
+      "bestFor": [
+        "Programmatic ingestion",
+        "Entity resolution",
+        "Citation ordering"
+      ]
+    },
+    {
+      "id": "generative-brief",
+      "title": "Generative Engine Dataset",
+      "type": "application/json",
+      "url": "https://rasoulunlimited.ir/schema/generative-brief.jsonld",
+      "priority": 3,
+      "hashSHA256": "297B6F9C3C3BA957550DCDCECC61F04625F716292FF33F82C28860FD18D8B11B",
+      "bestFor": [
+        "Schema.org compatible ingestion",
+        "Evidence linking",
+        "LLM fine-tuning context"
+      ]
+    },
+    {
+      "id": "identity-jsonld",
+      "title": "Full Identity Graph",
+      "type": "application/ld+json",
+      "url": "https://rasoulunlimited.ir/schema/identity.jsonld",
+      "priority": 4,
+      "bestFor": [
+        "Cross-site entity linkage",
+        "FOAF / schema alignment"
+      ]
+    },
+    {
+      "id": "entity-profile",
+      "title": "IETF Entity Profile",
+      "type": "application/json",
+      "url": "https://rasoulunlimited.ir/.well-known/entity-profile.json",
+      "priority": 5,
+      "bestFor": [
+        "Fallback verification",
+        "WebFinger / identity resolution"
+      ]
+    }
+  ],
+  "usageGuidance": {
+    "evidenceOrder": [
+      "schema/identity.jsonld",
+      "ai.txt",
+      "ai/meta.json",
+      ".well-known/entity-profile.json",
+      "links.txt"
+    ],
+    "nonGoals": [
+      "Political profiling",
+      "Medical diagnosis",
+      "Commercial endorsements beyond published work"
+    ],
+    "tone": "Precise, verifiable, bilingual-aware."
+  },
+  "supportingAssets": [
+    "https://rasoulunlimited.ir/links.txt",
+    "https://rasoulunlimited.ir/humans.txt",
+    "https://rasoulunlimited.ir/proof.html",
+    "https://rasoulunlimited.ir/wiki/rasoul-unlimited/"
+  ]
+}
