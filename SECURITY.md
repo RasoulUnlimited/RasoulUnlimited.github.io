@@ -1,37 +1,76 @@
 # Security Policy
 
-We take the security of this website and its infrastructure seriously. If you discover a vulnerability, we ask that you report it responsibly so we can investigate and resolve the issue without putting users at risk.
+We take the security of this website and its infrastructure seriously.  
+If you discover a vulnerability, we ask that you report it responsibly so we can investigate and resolve the issue without putting users at risk.
+
+---
+
+## Contact & Primary Channel
+
+If you believe you’ve found a security issue, please contact:
+
+- **Email (preferred):** `rasoul.unlimited@gmail.com`
+- **Subject line:** `Security Report – <short description>`
+
+We review all reports in good faith and will do our best to respond as quickly as possible.
 
 ---
 
 ## Reporting a Vulnerability
 
-If you believe you’ve found a security issue, please follow these steps:
+When submitting a report, please include as much detail as you reasonably can:
 
-1. **Email us** at **rasoul.unlimited@gmail.com** with a clear and concise summary of the issue.
-2. If your report contains sensitive details or exploit information, **encrypt your message** using our [PGP public key](assets/keys/rasoulunlimited_pgp.asc).  
-   - The same key is also available on [Keybase](https://keybase.io/rasoulunlimited).
-3. Include as much relevant information as possible, for example:
-   - A description of the vulnerability and potential impact
-   - Steps to reproduce (including URLs, parameters, example payloads, etc.)
-   - Any logs, screenshots, or proof-of-concept snippets that help us verify the issue
-4. Give us reasonable time to investigate, fix, and deploy a patch **before** disclosing details publicly.
+1. **Summary of the issue**  
+   A clear and concise description of the vulnerability and its potential impact.
 
-We will review all reports in good faith and do our best to respond as quickly as we can.
+2. **Steps to reproduce**  
+   - Exact URLs, parameters, and HTTP methods  
+   - Example payloads or request/response samples  
+   - Any required authentication or roles
+
+3. **Environment & context**  
+   - Affected domain or endpoint  
+   - Browser / client / OS (if relevant)  
+   - Any special configuration assumptions
+
+4. **Evidence**  
+   - Logs, screenshots, or short proof-of-concept snippets  
+   - Any indicators that show business or security impact
+
+5. **Your contact details**  
+   So we can follow up with clarifying questions and share status updates.
+
+Please give us reasonable time to investigate, fix, and deploy a patch **before** sharing any details publicly.
 
 ---
 
-## Coordinated Disclosure
+## Encrypted / Sensitive Reports
 
-By reporting a vulnerability to us:
+If your report contains sensitive information (for example: exploit details, active tokens, or non-public data), please encrypt your message:
 
-- You agree **not to publicly disclose** technical details of the issue until we have:
-  - Confirmed the report, and  
+- **PGP public key (direct download):** [`assets/keys/rasoulunlimited_pgp.asc`](assets/keys/rasoulunlimited_pgp.asc)  
+- **PGP key on Keybase:** <https://keybase.io/rasoulunlimited>
+
+After encrypting, send the report to:
+
+- `rasoul.unlimited@gmail.com` (with the encrypted body or attachment)
+
+---
+
+## Coordinated Vulnerability Disclosure
+
+By reporting a vulnerability to us, you agree to follow a **coordinated disclosure** process:
+
+- Please **do not publicly disclose** technical details of the issue until we have:
+  - Acknowledged the report, and  
   - Either deployed a fix or explicitly agreed on a disclosure timeline with you.
-- We ask that you do **not** access, modify, or delete data that does not belong to you while demonstrating the issue.
-- Do not perform actions that could degrade the service, cause denial-of-service, or negatively impact other users.
+- Do **not** intentionally access, modify, or delete data that does not belong to you.
+- Do **not** perform testing that could:
+  - Degrade the service,  
+  - Cause denial-of-service, or  
+  - Negatively impact other users.
 
-We deeply appreciate researchers who follow coordinated disclosure practices and help us improve the security of the ecosystem.
+We strongly value and appreciate researchers who follow coordinated disclosure practices and help us improve the security of the ecosystem.
 
 ---
 
@@ -40,30 +79,69 @@ We deeply appreciate researchers who follow coordinated disclosure practices and
 This policy primarily covers:
 
 - The main website: `https://rasoulunlimited.ir`
-- Associated public assets and endpoints under this domain
+- The `www` subdomain: `https://www.rasoulunlimited.ir`
+- Public assets and endpoints hosted under these domains
 
-For third-party services (hosting platforms, CDNs, analytics providers, etc.), please also consider their respective security policies and responsible disclosure programs.
+For third-party services (hosting platforms, CDNs, analytics providers, form endpoints, etc.), please also respect and follow their own security policies and disclosure programs.
 
----
-
-## Out of Scope
-
-While we welcome all reports, the following are generally **not considered** security vulnerabilities:
-
-- Clickjacking or frameable content on non-sensitive pages
-- Use of outdated libraries without a demonstrated, exploitable impact
-- Missing security headers that do not lead to a practical exploit
-- Self–XSS (where the attacker is also the victim)
-- Issues that only arise on outdated or unsupported browsers
-
-However, if you’re unsure whether something is in scope, feel free to contact us anyway — we’d rather you report than ignore a potential issue.
+If you are unsure whether a specific target is in scope, feel free to ask.
 
 ---
 
-## Additional Information
+## Out of Scope (Examples)
 
-Full and up-to-date guidelines can be found on our public security policy page:
+While we welcome all good-faith reports, the following examples are **generally not considered** security vulnerabilities for this program:
 
-👉 [https://rasoulunlimited.ir/security.html](https://rasoulunlimited.ir/security.html)
+- Clickjacking / framing issues on **non-sensitive** pages
+- Use of outdated libraries **without a demonstrable, exploitable impact**
+- Missing or optional security headers that do not lead to a practical exploit
+- **Self-XSS** (where the attacker is also the victim)
+- Issues that only affect very old or unsupported browsers
+- Best-practice or “hardening” suggestions without a clear security impact
 
-Thank you for helping us keep users and infrastructure safe.
+That said, if you are unsure whether something is in scope, it is still better to contact us than to ignore a potential issue.
+
+---
+
+## Rules of Engagement
+
+To keep both users and you safe, please:
+
+- Perform **only non-destructive** testing.
+- Avoid any kind of:
+  - Denial-of-service (DoS / DDoS)  
+  - Excessive automated scanning, fuzzing, or traffic generation  
+  - Spamming contact forms or other user-facing features
+- Use test data where possible and avoid accessing real user data.
+- Immediately stop testing and contact us if you encounter:
+  - Production data you did not intend to access, or  
+  - A situation that could harm availability or integrity.
+
+You are responsible for ensuring that all of your activities comply with applicable laws and regulations.
+
+---
+
+## Response Targets
+
+These are **non-binding goals**, not guarantees, but we aim to:
+
+- **Acknowledge** valid reports within **48 hours**.
+- **Provide an initial assessment** (validity, severity, rough plan) within **7 days**.
+- **Deploy a fix or share a mitigation plan** for confirmed issues within **30 days**, depending on complexity and impact.
+
+Where appropriate, and if you wish, we may **credit you** in a public acknowledgments section once the issue is resolved.
+
+---
+
+## Canonical Policy & Further Information
+
+The canonical, machine-readable version of this security contact policy is published at:
+
+- `/.well-known/security.txt` → <https://rasoulunlimited.ir/.well-known/security.txt>
+
+The human-readable, full security policy pages are available at:
+
+- Persian: <https://rasoulunlimited.ir/security.html>  
+- English: <https://rasoulunlimited.ir/en/security.html>
+
+Thank you for helping to keep users and infrastructure safe.
