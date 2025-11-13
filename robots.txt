@@ -1,104 +1,110 @@
 # robots.txt for https://rasoulunlimited.ir
-# Maintainer: Mohammad Rasoul Sohrabi
-# Deployed via GitHub Pages and proxied through Cloudflare
+# Maintainer: Mohammad Rasoul Sohrabi (Rasoul Unlimited)
+# Hosting: GitHub Pages (proxied via Cloudflare)
 # Contact: rasoul.unlimited@gmail.com
-# Updated: 2025-07-03
+# Updated: 2025-11-13
 
 Sitemap: https://rasoulunlimited.ir/sitemap.xml
 Host: rasoulunlimited.ir
 
-# ----- General Crawling Policy -----
+# =====================================================================
+# General Crawling Policy
+# =====================================================================
 User-agent: *
+# By default, all public content is allowed unless explicitly disallowed.
 Allow: /
 
-# ----- Preferred Public Content -----
-Allow: /en/
-Allow: /projects/
-Allow: /projects/c-projects/
-Allow: /projects/python-projects/
-Allow: /contact.html
-Allow: /press-kit/
-Allow: /press-kit/fa/
-Allow: /press.html
-Allow: /resume.html
-Allow: /en/resume.html
-Allow: /about.html
-Allow: /media.html
-Allow: /proof.html
-Allow: /security.html
-Allow: /links.txt
-Allow: /manifest.json
-Allow: /manifest-en.json
-Allow: /assets/css/
-Allow: /assets/images/
-Allow: /assets/js/
-Allow: /assets/vendor/
-Allow: /faq/
-Allow: /en/faq/
-Allow: /wiki/
+# =====================================================================
+# High-value Public Sections (navigation / identity / docs)
+# (These are already covered by "Allow: /" – listed here for clarity.)
+# =====================================================================
+# Language roots
+#   - /           : Persian (default)
+#   - /en/        : English section
+#   - /projects/  : Project index and subpages
+#   - /faq/       : Frequently Asked Questions
+#   - /wiki/      : Extended background
+#
+# Core pages
+#   - /about.html
+#   - /resume.html, /en/resume.html
+#   - /press.html, /en/press.html
+#   - /media.html
+#   - /proof.html
+#   - /security.html
+#   - /contact.html
+#
+# Press kit and assets
+#   - /press-kit/, /press-kit/fa/
+#   - /assets/css/
+#   - /assets/images/
+#   - /assets/js/
+#   - /assets/vendor/
+#
+# Identity / machine-readable descriptors
+#   - /humans.txt
+#   - /foaf.rdf
+#   - /.well-known/…
+#   - /schema/identity.jsonld
+#   - /links.txt
+#   - /manifest.json, /manifest-en.json
 
-# ----- Identity and Verification Files -----
-Allow: /humans.txt
-Allow: /foaf.rdf
-Allow: /.well-known/
-Allow: /.well-known/identity.json
-Allow: /.well-known/entity.rdf
-Allow: /.well-known/entity.ttl
-Allow: /.well-known/security.txt
-Allow: /.well-known/entity-profile.json
-Allow: /.well-known/webfinger.json
-Allow: /.well-known/keybase.txt
-Allow: /schema/
-Allow: /schema/identity.jsonld
-
-# ----- Blocked Paths -----
+# =====================================================================
+# Blocked Paths (non-public, internal, or build-related)
+# =====================================================================
+# Generic admin / auth endpoints (not intended for indexing)
 Disallow: /admin/
 Disallow: /login/
 Disallow: /register/
+
+# Server-side or legacy script locations
 Disallow: /cgi-bin/
+
+# Internal storage / non-public areas
 Disallow: /private/
 Disallow: /tmp/
 Disallow: /backup/
-Disallow: /404.html
-Disallow: /includes/
 Disallow: /cloudflare/
+
+# Build / repository meta files that may be present in the root
 Disallow: /gulpfile.js
 Disallow: /package.json
 Disallow: /package-lock.json
 Disallow: /README.md
 Disallow: /LICENSE
 
-# ----- Specialized Crawlers -----
-User-agent: Googlebot-Image
-Allow: /assets/images/
+# Internal include fragments and error pages
+Disallow: /includes/
+Disallow: /404.html
 
-User-agent: Googlebot
-Allow: /
+# =====================================================================
+# Identity and Verification Files (explicitly allowed, if needed)
+# (All already allowed via "Allow: /" – listed for documentation.)
+# =====================================================================
+# Human / semantic identity
+#   /humans.txt
+#   /foaf.rdf
+#   /schema/identity.jsonld
+#
+# Well-known endpoints for security & identity
+#   /.well-known/identity.json
+#   /.well-known/entity.rdf
+#   /.well-known/entity.ttl
+#   /.well-known/security.txt
+#   /.well-known/entity-profile.json
+#   /.well-known/webfinger.json
+#   /.well-known/keybase.txt
+#
+# Navigation / discovery helpers
+#   /links.txt
 
-User-agent: bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
-User-agent: LinkedInBot
-Allow: /
-
-User-agent: DuckDuckBot
-Allow: /
-
-
-# ----- Reference -----
-# FOAF: /foaf.rdf
-# humans.txt: /humans.txt
-# identity.json: /.well-known/identity.json
-# entity.rdf / entity.ttl: /.well-known/
-# schema: /schema/identity.jsonld
-# security.txt: /.well-known/security.txt
-# links.txt: /links.txt
-# entity-profile.json: /.well-known/entity-profile.json
-# webfinger.json: /.well-known/webfinger.json
-# keybase.txt: /.well-known/keybase.txt
+# =====================================================================
+# Notes
+# =====================================================================
+# - This policy is intentionally simple: one unified rule-set for all
+#   major crawlers (Googlebot, Bingbot, social media bots, etc.) to
+#   avoid conflicting user-agent groups.
+# - High-value public sections are documented above but rely on the
+#   global "Allow: /" directive.
+# - Sensitive or non-public areas are explicitly disallowed to reduce
+#   noise in search results and avoid indexing internal artifacts.
