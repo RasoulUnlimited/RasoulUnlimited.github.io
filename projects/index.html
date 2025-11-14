@@ -53,21 +53,74 @@
       {
         "@context": "https://schema.org",
         "@type": "ItemList",
+        "@id": "https://rasoulunlimited.ir/projects/#list",
         "name": "Programming Projects",
         "itemListElement": [
           {
-            "@type": "SiteNavigationElement",
+            "@type": "ListItem",
             "position": 1,
-            "name": "Small Projects with C",
-            "url": "https://rasoulunlimited.ir/projects/c-projects/"
+            "item": {
+              "@type": "CollectionPage",
+              "name": "Small Projects with C",
+              "url": "https://rasoulunlimited.ir/projects/c-projects/"
+            }
           },
           {
-            "@type": "SiteNavigationElement",
+            "@type": "ListItem",
             "position": 2,
-            "name": "Small Projects with Python",
-            "url": "https://rasoulunlimited.ir/projects/python-projects/"
+            "item": {
+              "@type": "CollectionPage",
+              "name": "Small Projects with Python",
+              "url": "https://rasoulunlimited.ir/projects/python-projects/"
+            }
           }
         ]
+      }
+    </script>
+    <script type="application/ld+json" nonce="RasoulCSP">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "@id": "https://rasoulunlimited.ir/projects/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://rasoulunlimited.ir/en/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Projects",
+            "item": "https://rasoulunlimited.ir/projects/"
+          }
+        ]
+      }
+    </script>
+    <script type="application/ld+json" nonce="RasoulCSP">
+      {
+        "@context": "https://schema.org",
+        "@type": ["CollectionPage", "WebPage"],
+        "@id": "https://rasoulunlimited.ir/projects/#page",
+        "name": "Open Source Projects – Rasoul Unlimited",
+        "description": "Overview of Rasoul Unlimited's open-source programming projects across C and Python stacks.",
+        "inLanguage": "en",
+        "url": "https://rasoulunlimited.ir/projects/",
+        "mainEntityOfPage": "https://rasoulunlimited.ir/projects/",
+        "about": {
+          "@type": "Person",
+          "name": "Mohammad Rasoul Sohrabi",
+          "url": "https://rasoulunlimited.ir/"
+        },
+        "isPartOf": {
+          "@type": "WebSite",
+          "name": "Rasoul Unlimited",
+          "url": "https://rasoulunlimited.ir/"
+        },
+        "breadcrumb": {
+          "@id": "https://rasoulunlimited.ir/projects/#breadcrumb"
+        }
       }
     </script>
   </body>
