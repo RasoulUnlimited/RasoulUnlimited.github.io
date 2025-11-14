@@ -1,31 +1,80 @@
 ﻿<header class="navbar" role="banner">
   <a href="#main-content" class="skip-link">پرش به محتوای اصلی</a>
-  <nav role="navigation" aria-label="پیوندهای اصلی سایت">
+  <nav
+    role="navigation"
+    aria-label="پیوندهای اصلی سایت"
+    itemscope
+    itemtype="https://schema.org/SiteNavigationElement"
+  >
     <ul class="nav-list">
       <li class="nav-item">
-        <a class="nav-link" href="/index.html">صفحه اصلی</a>
+        <a class="nav-link" href="/index.html" itemprop="url">
+          <span itemprop="name">صفحه اصلی</span>
+        </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/about.html">درباره</a>
+        <a class="nav-link" href="/about.html" itemprop="url">
+          <span itemprop="name">درباره</span>
+        </a>
       </li>
-      <li class="nav-item"><a class="nav-link" href="/resume.html">رزومه</a></li>
       <li class="nav-item">
-        <a class="nav-link" href="/proof.html">گواهی‌ها</a>
+        <a class="nav-link" href="/resume.html" itemprop="url">
+          <span itemprop="name">رزومه</span>
+        </a>
       </li>
-      <li class="nav-item"><a class="nav-link" href="/press.html">رسانه</a></li>
-      <li class="nav-item"><a class="nav-link" href="/quotes.html">نقل قول‌ها</a></li>
-      <li class="nav-item"><a class="nav-link" href="/wiki/rasoul-unlimited/">بیوگرافی کامل</a></li>
       <li class="nav-item">
-        <a class="nav-link" href="/faq/">سوالات متداول</a>
-      </li>`r`n      <li class="nav-item">`r`n        <a class="nav-link" href="/ai/" data-ai-intent="geo-hub" rel="help">??? ??? ?????? ???</a>`r`n      </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/contact.html">تماس</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="https://github.com/RasoulUnlimited" rel="noopener authoritative">گیت‌هاب</a>
-        </li>
+        <a class="nav-link" href="/proof.html" itemprop="url">
+          <span itemprop="name">گواهی‌ها</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/press.html" itemprop="url">
+          <span itemprop="name">رسانه</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/quotes.html" itemprop="url">
+          <span itemprop="name">نقل قول‌ها</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/wiki/rasoul-unlimited/" itemprop="url">
+          <span itemprop="name">بیوگرافی کامل</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/faq/" itemprop="url">
+          <span itemprop="name">سوالات متداول</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          href="/ai/"
+          data-ai-intent="geo-hub"
+          rel="help"
+          itemprop="url"
+        >
+          <span itemprop="name">هاب هوش مصنوعی</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/contact.html" itemprop="url">
+          <span itemprop="name">تماس</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          href="https://github.com/RasoulUnlimited"
+          rel="noopener authoritative"
+          itemprop="url"
+        >
+          <span itemprop="name">گیت‌هاب</span>
+        </a>
+      </li>
 
-        <li class="nav-item">
+      <li class="nav-item">
         <a
           href="https://rasoulunlimited.ir/en/"
           class="lang-switcher"
@@ -33,8 +82,11 @@
           aria-label="تغییر زبان وبسایت به انگلیسی"
           title="Switch website language to English"
           data-ai-intent="language-switch-to-english"
-          ><i class="fas fa-language" aria-hidden="true"></i> English</a
+          itemprop="url"
         >
+          <i class="fas fa-language" aria-hidden="true"></i>
+          <span itemprop="name">English</span>
+        </a>
       </li>
       <li class="nav-item">
         <label

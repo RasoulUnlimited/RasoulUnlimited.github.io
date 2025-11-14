@@ -187,7 +187,117 @@
     <link rel="alternate" type="application/json" href="/ai/resource-map.json" />
     <link rel="alternate" type="application/json" href="/ai/answer-kit.json" />
 
-   <link rel="alternate" type="application/ld+json" href="/schema/generative-brief.jsonld" />
+    <link rel="alternate" type="application/ld+json" href="/schema/generative-brief.jsonld" />
+
+    <!-- Entity graph (EN) for clearer WebSite/Person/Brand signaling -->
+    <script type="application/ld+json" id="structured-data-entity-en">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": ["Organization", "Brand"],
+            "@id": "https://rasoulunlimited.ir/#brand",
+            "name": "Rasoul Unlimited",
+            "alternateName": ["Rasoul Unlimited Brand"],
+            "url": "https://rasoulunlimited.ir/",
+            "logo": {
+              "@type": "ImageObject",
+              "@id": "https://rasoulunlimited.ir/#logo",
+              "url": "https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp",
+              "width": 220,
+              "height": 220,
+              "caption": "Official Rasoul Unlimited monogram",
+              "contentUrl": "https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp",
+              "representativeOfPage": true
+            },
+            "founder": { "@id": "https://rasoulunlimited.ir/#person" },
+            "foundingLocation": {
+              "@type": "Place",
+              "name": "Karaj, Iran"
+            },
+            "sameAs": [
+              "https://github.com/RasoulUnlimited",
+              "https://x.com/rasoulunlimited",
+              "https://www.linkedin.com/in/rasoulunlimited/",
+              "https://www.youtube.com/@RasoulUnlimited",
+              "https://www.instagram.com/Rasoul.Unlimited",
+              "https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi",
+              "https://orcid.org/0009-0004-7177-2080",
+              "https://mastodon.social/@rasoulunlimited",
+              "https://t.me/RasoulUnlimited"
+            ],
+            "contactPoint": [
+              {
+                "@type": "ContactPoint",
+                "contactType": "general inquiries",
+                "email": "rasoul.unlimited@gmail.com",
+                "availableLanguage": ["fa", "en"]
+              }
+            ]
+          },
+          {
+            "@type": "Person",
+            "@id": "https://rasoulunlimited.ir/#person",
+            "name": "Mohammad Rasoul Sohrabi",
+            "alternateName": ["Rasoul Unlimited", "Mohammad Rasoul"],
+            "url": "https://rasoulunlimited.ir/",
+            "image": { "@id": "https://rasoulunlimited.ir/#logo" },
+            "jobTitle": "Biomedical engineer and full-stack developer",
+            "description": "Biomedical engineering student, full-stack developer, personal brand strategist, and creator of the first verified Persian Discord bot.",
+            "worksFor": { "@id": "https://rasoulunlimited.ir/#brand" },
+            "brand": { "@id": "https://rasoulunlimited.ir/#brand" },
+            "knowsAbout": [
+              "Digital health",
+              "Personal branding",
+              "Community automation",
+              "Open-source software"
+            ],
+            "knowsLanguage": ["fa-IR", "en-US"],
+            "alumniOf": {
+              "@type": "CollegeOrUniversity",
+              "name": "Islamic Azad University, Central Tehran Branch"
+            },
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Karaj",
+              "addressRegion": "Alborz",
+              "addressCountry": "IR"
+            },
+            "sameAs": [
+              "https://github.com/RasoulUnlimited",
+              "https://x.com/rasoulunlimited",
+              "https://www.linkedin.com/in/rasoulunlimited/",
+              "https://www.youtube.com/@RasoulUnlimited",
+              "https://www.instagram.com/Rasoul.Unlimited",
+              "https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi",
+              "https://orcid.org/0009-0004-7177-2080",
+              "https://mastodon.social/@rasoulunlimited",
+              "https://t.me/RasoulUnlimited"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://rasoulunlimited.ir/#website",
+            "url": "https://rasoulunlimited.ir/",
+            "name": "Rasoul Unlimited · Official Website",
+            "alternateName": "Mohammad Rasoul Sohrabi",
+            "inLanguage": "en-US",
+            "publisher": { "@id": "https://rasoulunlimited.ir/#person" }
+          },
+          {
+            "@type": "ProfilePage",
+            "@id": "https://rasoulunlimited.ir/en/#webpage",
+            "url": "https://rasoulunlimited.ir/en/",
+            "name": "Mohammad Rasoul Sohrabi | Rasoul Unlimited",
+            "isPartOf": { "@id": "https://rasoulunlimited.ir/#website" },
+            "about": { "@id": "https://rasoulunlimited.ir/#person" },
+            "primaryImageOfPage": { "@id": "https://rasoulunlimited.ir/#logo" },
+            "inLanguage": "en-US",
+            "description": "Official English profile for Rasoul Unlimited covering digital health initiatives, personal branding work, and open-source projects."
+          }
+        ]
+      }
+    </script>
 
   <!-- AI Answer Map (English) -->
   <script type="application/json" id="ai-answer-map-en">

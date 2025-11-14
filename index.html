@@ -170,6 +170,116 @@
 
     <link rel="alternate" type="application/ld+json" href="/schema/generative-brief.jsonld" />
 
+    <!-- Primary entity graph to help search engines understand the person + brand relationship -->
+    <script type="application/ld+json" id="structured-data-entity-fa">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": ["Organization", "Brand"],
+            "@id": "https://rasoulunlimited.ir/#brand",
+            "name": "Rasoul Unlimited",
+            "alternateName": ["رسول آنلیمیتد"],
+            "url": "https://rasoulunlimited.ir/",
+            "logo": {
+              "@type": "ImageObject",
+              "@id": "https://rasoulunlimited.ir/#logo",
+              "url": "https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp",
+              "width": 220,
+              "height": 220,
+              "caption": "لوگوی رسمی Rasoul Unlimited",
+              "contentUrl": "https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp",
+              "representativeOfPage": true
+            },
+            "founder": { "@id": "https://rasoulunlimited.ir/#person" },
+            "foundingLocation": {
+              "@type": "Place",
+              "name": "Karaj, Iran"
+            },
+            "sameAs": [
+              "https://github.com/RasoulUnlimited",
+              "https://x.com/rasoulunlimited",
+              "https://www.linkedin.com/in/rasoulunlimited/",
+              "https://www.youtube.com/@RasoulUnlimited",
+              "https://www.instagram.com/Rasoul.Unlimited",
+              "https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi",
+              "https://orcid.org/0009-0004-7177-2080",
+              "https://mastodon.social/@rasoulunlimited",
+              "https://t.me/RasoulUnlimited"
+            ],
+            "contactPoint": [
+              {
+                "@type": "ContactPoint",
+                "contactType": "general inquiries",
+                "email": "rasoul.unlimited@gmail.com",
+                "availableLanguage": ["fa", "en"]
+              }
+            ]
+          },
+          {
+            "@type": "Person",
+            "@id": "https://rasoulunlimited.ir/#person",
+            "name": "محمد رسول سهرابی",
+            "alternateName": ["Rasoul Unlimited", "رسول آنلیمیتد"],
+            "url": "https://rasoulunlimited.ir/",
+            "image": { "@id": "https://rasoulunlimited.ir/#logo" },
+            "jobTitle": "مهندس پزشکی و توسعه‌دهنده فول‌استک",
+            "description": "دانشجوی مهندسی پزشکی، توسعه‌دهنده فول‌استک، استراتژیست برند شخصی و خالق اولین ربات فارسی دیسکورد تایید شده.",
+            "worksFor": { "@id": "https://rasoulunlimited.ir/#brand" },
+            "brand": { "@id": "https://rasoulunlimited.ir/#brand" },
+            "knowsAbout": [
+              "سلامت دیجیتال",
+              "برندینگ شخصی",
+              "اتوماسیون جامعه‌محور",
+              "پروژه‌های متن‌باز"
+            ],
+            "knowsLanguage": ["fa-IR", "en-US"],
+            "alumniOf": {
+              "@type": "CollegeOrUniversity",
+              "name": "Islamic Azad University, Central Tehran Branch"
+            },
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Karaj",
+              "addressRegion": "Alborz",
+              "addressCountry": "IR"
+            },
+            "sameAs": [
+              "https://github.com/RasoulUnlimited",
+              "https://x.com/rasoulunlimited",
+              "https://www.linkedin.com/in/rasoulunlimited/",
+              "https://www.youtube.com/@RasoulUnlimited",
+              "https://www.instagram.com/Rasoul.Unlimited",
+              "https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi",
+              "https://orcid.org/0009-0004-7177-2080",
+              "https://mastodon.social/@rasoulunlimited",
+              "https://t.me/RasoulUnlimited"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://rasoulunlimited.ir/#website",
+            "url": "https://rasoulunlimited.ir/",
+            "name": "وبسایت رسمی Rasoul Unlimited",
+            "alternateName": "محمد رسول سهرابی",
+            "inLanguage": "fa-IR",
+            "publisher": { "@id": "https://rasoulunlimited.ir/#person" }
+          },
+          {
+            "@type": "ProfilePage",
+            "@id": "https://rasoulunlimited.ir/#webpage",
+            "url": "https://rasoulunlimited.ir/",
+            "name": "محمد رسول سهرابی | Rasoul Unlimited",
+            "isPartOf": { "@id": "https://rasoulunlimited.ir/#website" },
+            "about": { "@id": "https://rasoulunlimited.ir/#person" },
+            "primaryImageOfPage": { "@id": "https://rasoulunlimited.ir/#logo" },
+            "inLanguage": "fa-IR",
+            "description": "وبسایت رسمی محمد رسول سهرابی برای معرفی پروژه‌های سلامت دیجیتال، برندینگ شخصی و محصولات متن‌باز."
+          }
+        ]
+      }
+    </script>
+
    <!-- AI Answer Map -->
    <script type="application/json" id="ai-answer-map">
      {

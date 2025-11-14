@@ -1,55 +1,108 @@
 <header class="navbar" role="banner">
   <a href="#main-content" class="skip-link">Skip to main content</a>
-  <nav role="navigation" aria-label="Main site links">
+  <nav
+    role="navigation"
+    aria-label="Main site links"
+    itemscope
+    itemtype="https://schema.org/SiteNavigationElement"
+  >
     <ul class="nav-list">
       <li class="nav-item">
-        <a class="nav-link" href="/en/index.html">Home</a>
+        <a class="nav-link" href="/en/index.html" itemprop="url">
+          <span itemprop="name">Home</span>
+        </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/en/about.html">About</a>
-      </li>
-      <li class="nav-item"><a class="nav-link" href="/en/resume.html">Resume</a></li>
-      <li class="nav-item">
-        <a class="nav-link" href="/en/proof.html">Proof</a>
+        <a class="nav-link" href="/en/about.html" itemprop="url">
+          <span itemprop="name">About</span>
+        </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/en/press.html">Press</a>
+        <a class="nav-link" href="/en/resume.html" itemprop="url">
+          <span itemprop="name">Resume</span>
+        </a>
       </li>
-      <li class="nav-item"><a class="nav-link" href="/en/quotes.html">Quotes</a></li>
-      <li class="nav-item"><a class="nav-link" href="/wiki/rasoul-unlimited/">Extended profile</a></li>
-      <li class="nav-item"><a class="nav-link" href="/en/faq/">FAQ</a></li>
       <li class="nav-item">
-        <a class="nav-link" href="/ai/" data-ai-intent="geo-hub" rel="help">AI Hub</a>
+        <a class="nav-link" href="/en/proof.html" itemprop="url">
+          <span itemprop="name">Proof</span>
+        </a>
       </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/en/contact.html">Contact</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="https://github.com/RasoulUnlimited" rel="noopener authoritative">GitHub</a>
-        </li>
-      </ul>
-    <a
-      href="https://rasoulunlimited.ir/"
-      class="lang-switcher"
-      hreflang="fa-IR"
-      aria-label="Switch website language to Persian"
-      title="Switch website language to Persian"
-      data-ai-intent="language-switch-to-persian"
-      ><i class="fas fa-language" aria-hidden="true"></i> فارسی</a
-    >
-    <label
-      class="theme-switch"
-      aria-label="Toggle website theme (light/dark)"
-      data-ai-intent="theme-toggle"
-    >
-      <input
-        type="checkbox"
-        id="theme-toggle"
-        role="switch"
-        aria-label="Toggle website theme (light/dark)"
-      />
-      <span class="slider round"></span>
-    </label>
+      <li class="nav-item">
+        <a class="nav-link" href="/en/press.html" itemprop="url">
+          <span itemprop="name">Press</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/en/quotes.html" itemprop="url">
+          <span itemprop="name">Quotes</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/wiki/rasoul-unlimited/" itemprop="url">
+          <span itemprop="name">Extended profile</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/en/faq/" itemprop="url">
+          <span itemprop="name">FAQ</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          href="/ai/"
+          data-ai-intent="geo-hub"
+          rel="help"
+          itemprop="url"
+        >
+          <span itemprop="name">AI Hub</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/en/contact.html" itemprop="url">
+          <span itemprop="name">Contact</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          href="https://github.com/RasoulUnlimited"
+          rel="noopener authoritative"
+          itemprop="url"
+        >
+          <span itemprop="name">GitHub</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          href="https://rasoulunlimited.ir/"
+          class="lang-switcher"
+          hreflang="fa-IR"
+          aria-label="Switch website language to Persian"
+          title="Switch website language to Persian"
+          data-ai-intent="language-switch-to-persian"
+          itemprop="url"
+        >
+          <i class="fas fa-language" aria-hidden="true"></i>
+          <span itemprop="name">فارسی</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <label
+          class="theme-switch"
+          aria-label="Toggle website theme (light/dark)"
+          data-ai-intent="theme-toggle"
+        >
+          <input
+            type="checkbox"
+            id="theme-toggle"
+            role="switch"
+            aria-label="Toggle website theme (light/dark)"
+          />
+          <span class="slider round"></span>
+        </label>
+      </li>
+    </ul>
     <script src="/assets/js/theme-toggle.min.js" defer></script>
   </nav>
 </header>
