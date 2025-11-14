@@ -34,6 +34,7 @@
   border: none;
   width: 100%;
   text-align: left;
+  text-align: start;
   font-size: 1.4rem;
   border-bottom: 1px solid transparent;
   transition: all var(--transition-speed-fast, 0.3s) ease-in-out;
@@ -43,7 +44,7 @@
   flex: 1 1 100%;
   margin: 0;
   line-height: 1.5;
-  text-align: right;
+  text-align: inherit;
   word-break: break-word;
 }
 
@@ -54,10 +55,17 @@
   line-height: 1;
   color: var(--primary-blue, #3498db);
   margin-right: 2rem;
+  margin-inline-end: 2rem;
+  margin-left: 0;
+  margin-inline-start: 0;
   flex-shrink: 0;
   transition: transform var(--transition-speed-medium, 0.3s)
       var(--ease-bezier, ease),
     color var(--transition-speed-medium, 0.3s) ease-out;
+}
+
+html[dir="rtl"] .accordion-header {
+  text-align: right;
 }
 
 .accordion-item.expanded > .accordion-header {

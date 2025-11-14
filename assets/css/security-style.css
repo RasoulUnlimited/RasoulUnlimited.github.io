@@ -7,7 +7,7 @@ body.security-page {
   --background-end-color: #f8fafc;
   --text-color: #374151;
   --heading-color: #111827;
-  font-family: var(--base-font-family, "Roboto", sans-serif);
+  font-family: var(--font-body, var(--base-font-family, "Roboto", sans-serif));
   color: var(--text-color);
 }
 
@@ -27,12 +27,23 @@ body.security-page #hero {
 
 @media (min-width: 768px) {
   body.security-page #hero {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  html[dir="rtl"] body.security-page #hero {
     flex-direction: row-reverse;
     text-align: right;
   }
 
   body.security-page #hero .profile-image {
-    margin-right: var(--space-xl);
+    margin-inline-end: var(--space-xl);
+    margin-inline-start: 0;
+  }
+
+  html[dir="rtl"] body.security-page #hero .profile-image {
+    margin-inline-end: 0;
+    margin-inline-start: var(--space-xl);
   }
 }
 
@@ -42,7 +53,13 @@ body.security-page .hero-text {
 
 @media (min-width: 768px) {
   body.security-page .hero-text {
-    margin-left: auto;
+    margin-inline-start: auto;
+    margin-inline-end: 0;
+  }
+
+  html[dir="rtl"] body.security-page .hero-text {
+    margin-inline-start: 0;
+    margin-inline-end: auto;
   }
 
   body.security-page .hero-links .cta-button {
