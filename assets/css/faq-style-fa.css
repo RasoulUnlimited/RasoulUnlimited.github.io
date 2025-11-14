@@ -1,5 +1,5 @@
 /* Custom CSS Variables for easier theme management and consistency */
-:root {
+body.faq-page {
   --primary-blue: #3498db; /* A vibrant, professional blue */
   --dark-blue: #2980b9; /* Darker shade of blue for accents */
   --accent-red: #e74c3c; /* Striking red for emphasis, like minus icon */
@@ -48,7 +48,7 @@
 }
 
 /* Base Styles & Global Setup */
-body {
+body.faq-page {
   font-family: "Vazirmatn", sans-serif;
   background-color: var(--bg-light);
   color: var(--text-dark);
