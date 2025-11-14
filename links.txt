@@ -3,7 +3,7 @@
 # Comprehensive reference of all public endpoints, metadata,
 # well-known resources, project sections, and social identities.
 # Hosting: GitHub Pages · Security Layer: Cloudflare
-# Last Updated: 2025-07-03
+# Last Updated: 2025-11-15
 # ============================================================
 
 
@@ -34,6 +34,18 @@ Press (EN):               https://rasoulunlimited.ir/en/press.html
 Media (EN):               https://rasoulunlimited.ir/en/media.html
 Resume (EN):              https://rasoulunlimited.ir/en/resume.html
 Security Policy (EN):     https://rasoulunlimited.ir/en/security.html
+
+
+# ------------------------------------------------------------
+# AI / GEO Resources
+# ------------------------------------------------------------
+Generative Engine Hub:    https://rasoulunlimited.ir/ai/
+ai.txt:                   https://rasoulunlimited.ir/ai.txt
+ai/meta.json:             https://rasoulunlimited.ir/ai/meta.json
+ai/answer-kit.json:       https://rasoulunlimited.ir/ai/answer-kit.json
+ai/resource-map.json:     https://rasoulunlimited.ir/ai/resource-map.json
+Generative Brief:         https://rasoulunlimited.ir/schema/generative-brief.jsonld
+Identity Graph:           https://rasoulunlimited.ir/schema/identity.jsonld
 
 
 # ------------------------------------------------------------

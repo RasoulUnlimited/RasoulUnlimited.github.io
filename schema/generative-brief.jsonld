@@ -9,6 +9,7 @@
   ],
   "description": "Authoritative fact pack for generative engines that summarizes the verifiable work, credentials, and guardrails for Mohammad Rasoul Sohrabi (Rasoul Unlimited).",
   "url": "https://rasoulunlimited.ir/",
+  "mainEntityOfPage": "https://rasoulunlimited.ir/ai/",
   "isBasedOn": [
     "https://rasoulunlimited.ir/ai.txt",
     "https://rasoulunlimited.ir/ai/meta.json",
@@ -27,7 +28,7 @@
     "fa-IR",
     "en-US"
   ],
-  "dateModified": "2025-11-14",
+  "dateModified": "2025-11-15",
   "temporalCoverage": "2018-2025",
   "spatialCoverage": {
     "@type": "Place",
@@ -44,7 +45,8 @@
     "Digital Identity",
     "Generative Engine Optimization",
     "Persian Discord Bot",
-    "Rasoul Unlimited"
+    "Rasoul Unlimited",
+    "Generative Engine Hub"
   ],
   "measurementTechnique": [
     "Manual curation of DOI-backed releases",
@@ -90,6 +92,13 @@
   "distribution": [
     {
       "@type": "DataDownload",
+      "name": "Generative Engine Hub",
+      "encodingFormat": "text/html",
+      "contentUrl": "https://rasoulunlimited.ir/ai/",
+      "description": "Human-readable landing page summarizing all GEO assets."
+    },
+    {
+      "@type": "DataDownload",
       "name": "LLM Instruction File",
       "encodingFormat": "text/plain",
       "contentUrl": "https://rasoulunlimited.ir/ai.txt"
@@ -120,6 +129,7 @@
     "url": "https://rasoulunlimited.ir/ai/resource-map.json"
   },
   "hasPart": [
+    "https://rasoulunlimited.ir/ai/",
     "https://rasoulunlimited.ir/proof.html",
     "https://rasoulunlimited.ir/projects/",
     "https://rasoulunlimited.ir/wiki/rasoul-unlimited/"
