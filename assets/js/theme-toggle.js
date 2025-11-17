@@ -5,8 +5,20 @@ document.addEventListener("DOMContentLoaded", function () {
   const toggle = document.getElementById("theme-toggle");
   if (!toggle) return;
 
+  function getSafeStorage() {
+    const testKey = "__theme_toggle__";
+    try {
+      localStorage.setItem(testKey, testKey);
+      localStorage.removeItem(testKey);
+      return localStorage;
+    } catch (err) {
+      return null;
+    }
+  }
+
+  const storage = getSafeStorage();
   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
-  const savedTheme = localStorage.getItem("theme");
+  const savedTheme = storage?.getItem("theme");
 
   function getInitialTheme() {
     if (savedTheme === "dark" || savedTheme === "light") return savedTheme;
@@ -28,12 +40,16 @@ document.addEventListener("DOMContentLoaded", function () {
   toggle.addEventListener("change", () => {
     const newTheme = toggle.checked ? "dark" : "light";
     applyTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
+    try {
+      storage?.setItem("theme", newTheme);
+    } catch (err) {
+      // ignore storage failures (e.g., private mode)
+    }
   });
 
   // Optional: react to OS theme changes if user نذاشته تو localStorage
   prefersDark.addEventListener("change", (event) => {
-    const hasUserPreference = !!localStorage.getItem("theme");
+    const hasUserPreference = !!storage?.getItem("theme");
     if (hasUserPreference) return;
     applyTheme(event.matches ? "dark" : "light");
   });
@@ -44,7 +60,11 @@ document.addEventListener("DOMContentLoaded", function () {
       toggle.checked = !toggle.checked;
       const newTheme = toggle.checked ? "dark" : "light";
       applyTheme(newTheme);
-      localStorage.setItem("theme", newTheme);
+      try {
+        storage?.setItem("theme", newTheme);
+      } catch (err) {
+        // ignore storage failures (e.g., private mode)
+      }
     }
   });
 });
