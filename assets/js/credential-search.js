@@ -14,7 +14,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const STORAGE_KEY = "credentialSearchTerm";
 
-  const savedTerm = localStorage.getItem(STORAGE_KEY) || "";
+  function getSafeStorage() {
+    const testKey = "__credential_search__";
+    try {
+      localStorage.setItem(testKey, testKey);
+      localStorage.removeItem(testKey);
+      return localStorage;
+    } catch (err) {
+      return null;
+    }
+  }
+
+  const storage = getSafeStorage();
+
+  const savedTerm = storage?.getItem(STORAGE_KEY) || "";
   if (savedTerm) {
     searchInput.value = savedTerm;
     clearButton.style.display = "block";
@@ -99,10 +112,16 @@ document.addEventListener("DOMContentLoaded", function () {
   searchInput.addEventListener("input", () => {
     const term = searchInput.value.trim();
     clearButton.style.display = term ? "block" : "none";
-    if (term) {
-      localStorage.setItem(STORAGE_KEY, term);
-    } else {
-      localStorage.removeItem(STORAGE_KEY);
+    if (storage) {
+      try {
+        if (term) {
+          storage.setItem(STORAGE_KEY, term);
+        } else {
+          storage.removeItem(STORAGE_KEY);
+        }
+      } catch (err) {
+        // ignore storage errors (e.g. Safari private mode)
+      }
     }
 
     clearTimeout(debounceTimer);
@@ -112,7 +131,11 @@ document.addEventListener("DOMContentLoaded", function () {
   clearButton.addEventListener("click", () => {
     searchInput.value = "";
     clearButton.style.display = "none";
-    localStorage.removeItem(STORAGE_KEY);
+    if (storage) {
+      try {
+        storage.removeItem(STORAGE_KEY);
+      } catch (err) {}
+    }
     clearTimeout(debounceTimer);
     filterCards("");
   });
@@ -121,14 +144,22 @@ document.addEventListener("DOMContentLoaded", function () {
     if (e.key === "Escape") {
       searchInput.value = "";
       clearButton.style.display = "none";
-      localStorage.removeItem(STORAGE_KEY);
+      if (storage) {
+        try {
+          storage.removeItem(STORAGE_KEY);
+        } catch (err) {}
+      }
       clearTimeout(debounceTimer);
       filterCards("");
     } else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "l") {
       e.preventDefault();
       searchInput.value = "";
       clearButton.style.display = "none";
-      localStorage.removeItem(STORAGE_KEY);
+      if (storage) {
+        try {
+          storage.removeItem(STORAGE_KEY);
+        } catch (err) {}
+      }
       clearTimeout(debounceTimer);
       filterCards("");
     }
@@ -156,10 +187,14 @@ document.addEventListener("DOMContentLoaded", function () {
         const transcript = e.results[0][0].transcript.trim();
         searchInput.value = transcript;
         clearButton.style.display = transcript ? "block" : "none";
-        if (transcript) {
-          localStorage.setItem(STORAGE_KEY, transcript);
-        } else {
-          localStorage.removeItem(STORAGE_KEY);
+        if (storage) {
+          try {
+            if (transcript) {
+              storage.setItem(STORAGE_KEY, transcript);
+            } else {
+              storage.removeItem(STORAGE_KEY);
+            }
+          } catch (err) {}
         }
         filterCards(transcript);
       });
@@ -204,7 +239,11 @@ document.addEventListener("DOMContentLoaded", function () {
     } else if (e.key === "Escape" && document.activeElement === searchInput) {
       searchInput.value = "";
       clearButton.style.display = "none";
-      localStorage.removeItem(STORAGE_KEY);
+      if (storage) {
+        try {
+          storage.removeItem(STORAGE_KEY);
+        } catch (err) {}
+      }
       filterCards("");
     } else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "l") {
       e.preventDefault();

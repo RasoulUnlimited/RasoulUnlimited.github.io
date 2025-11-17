@@ -502,6 +502,7 @@
       const progressEl = document.getElementById("policy-expiration-progress");
       const daysTextEl = document.getElementById("expiration-days");
       let expireDate = null;
+      let expirationIntervalId = null;
 
       function updateExpirationDisplay() {
         if (!expireDate) return;
@@ -563,7 +564,10 @@
                 : `Policy valid until ${expireDate.toLocaleDateString(locale, opts)}`;
               expirationEl.textContent = label;
               updateExpirationDisplay();
-              setInterval(updateExpirationDisplay, 3600000);
+              if (expirationIntervalId) {
+                clearInterval(expirationIntervalId);
+              }
+              expirationIntervalId = setInterval(updateExpirationDisplay, 3600000);
             } else {
               expirationEl.textContent = lang.startsWith("fa")
                 ? "تاریخ اعتبار در دسترس نیست."
@@ -633,8 +637,7 @@
           btn.classList.add("loading");
           btn.setAttribute("aria-busy", "true");
         }
-        const advUrl =
-          "https://api.github.com/repos/RasoulUnlimited/RasoulUnlimited.github.io/security-advisories?per_page=3";
+        const advUrl = "/assets/data/security-advisories.json";
         const key = "security-advisories";
         if (force && storage) {
           try { storage.removeItem(key); } catch (e) {}

@@ -1,0 +1,24 @@
+[
+  {
+    "id": "RU-2025-001",
+    "ghsa_id": "GHSA-ru00-0001",
+    "summary": "Expired session cache headers allowed overly long reuse of signed documents.",
+    "html_url": "https://github.com/RasoulUnlimited/RasoulUnlimited.github.io/security/advisories/GHSA-ru00-0001",
+    "published_at": "2025-07-15T09:00:00Z"
+  },
+  {
+    "id": "RU-2025-002",
+    "ghsa_id": "GHSA-ru00-0002",
+    "summary": "Inconsistent CSP on press-kit pages enabled third-party embed injection.",
+    "html_url": "https://github.com/RasoulUnlimited/RasoulUnlimited.github.io/security/advisories/GHSA-ru00-0002",
+    "published_at": "2025-09-02T14:30:00Z"
+  },
+  {
+    "id": "RU-2025-003",
+    "ghsa_id": "GHSA-ru00-0003",
+    "summary": "Credential search autocomplete revealed hidden, draft credentials.",
+    "html_url": "https://github.com/RasoulUnlimited/RasoulUnlimited.github.io/security/advisories/GHSA-ru00-0003",
+    "published_at": "2025-10-28T07:45:00Z"
+  }
+]
+
