@@ -249,7 +249,13 @@ document.addEventListener("DOMContentLoaded", function () {
       e.preventDefault();
       searchInput.value = "";
       clearButton.style.display = "none";
-      localStorage.removeItem(STORAGE_KEY);
+      if (storage) {
+        try {
+          storage.removeItem(STORAGE_KEY);
+        } catch (err) {
+          // ignore storage failures (e.g., private mode)
+        }
+      }
       filterCards("");
     }
   });
