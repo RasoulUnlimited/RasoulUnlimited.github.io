@@ -1,3 +1,6 @@
+/* Base utilities shared across FA/EN builds.
+   Keep these selectors as the single source of truth
+   so the design system does not override them. */
 body {
   margin: 0;
   font-family: var(--font-body, sans-serif);
