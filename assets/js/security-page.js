@@ -280,12 +280,23 @@
 
           const iconWrap = document.createElement("div");
           iconWrap.className = "timeline-icon";
-          iconWrap.innerHTML = `<i class="fas ${ev.icon}" aria-hidden="true"></i>`;
+          const iconEl = document.createElement("i");
+          iconEl.classList.add("fas");
+          const iconClass =
+            typeof ev.icon === "string" && /^(fa-[a-z0-9-]+)$/i.test(ev.icon)
+              ? ev.icon
+              : "fa-shield-alt";
+          iconEl.classList.add(iconClass);
+          iconEl.setAttribute("aria-hidden", "true");
+          iconWrap.appendChild(iconEl);
           content.appendChild(iconWrap);
 
           const dateEl = document.createElement("h3");
           dateEl.className = "date";
-          dateEl.innerHTML = `<time datetime="${ev.date}">${ev.date}</time>`;
+          const timeEl = document.createElement("time");
+          timeEl.setAttribute("datetime", ev.date);
+          timeEl.textContent = ev.date;
+          dateEl.appendChild(timeEl);
           const relTime = formatRelative(new Date(ev.date));
           if (relTime) {
             const relSpan = document.createElement("span");
@@ -356,13 +367,30 @@
               const years = Array.from(
                 new Set(events.map((ev) => new Date(ev.date).getFullYear()))
               ).sort((a, b) => b - a);
-              yearFilter.innerHTML =
-                `<option value="">` +
-                (lang.startsWith("fa") ? "همه سال‌ها" : "All years") +
-                `</option>` +
-                years.map((y) => `<option value="${y}">${y}</option>`).join("");
-              const savedYear = storage ? storage.getItem(TIMELINE_YEAR_KEY) || "" : "";
-              yearFilter.value = savedYear;
+              yearFilter.innerHTML = "";
+              const defaultOption = document.createElement("option");
+              defaultOption.value = "";
+              defaultOption.textContent = lang.startsWith("fa")
+                ? "همه سال‌ها"
+                : "All years";
+              yearFilter.appendChild(defaultOption);
+              years.forEach((y) => {
+                const option = document.createElement("option");
+                option.value = String(y);
+                option.textContent = String(y);
+                yearFilter.appendChild(option);
+              });
+              const savedYear = storage
+                ? storage.getItem(TIMELINE_YEAR_KEY) || ""
+                : "";
+              if (
+                savedYear &&
+                Array.from(yearFilter.options).some(
+                  (option) => option.value === savedYear
+                )
+              ) {
+                yearFilter.value = savedYear;
+              }
             }
             renderTimeline(events);
             timelineList.setAttribute("aria-busy", "false");

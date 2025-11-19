@@ -71,8 +71,24 @@ function safeSetFromStorage(key) {
   } catch (error) {
     console.warn(`Failed to parse stored data for ${key}`, error);
   }
-  localStorage.removeItem(key);
+  safeStorageRemove(key);
   return new Set();
+}
+
+function safeStorageSet(key, value) {
+  try {
+    localStorage.setItem(key, value);
+  } catch (error) {
+    console.warn(`Unable to persist ${key} in localStorage`, error);
+  }
+}
+
+function safeStorageRemove(key) {
+  try {
+    localStorage.removeItem(key);
+  } catch (error) {
+    console.warn(`Unable to remove ${key} from localStorage`, error);
+  }
 }
 
 let audioContext;
@@ -534,7 +550,7 @@ if (savedTheme) {
 themeToggleInput.addEventListener("change", () => {
   const newTheme = themeToggleInput.checked ? "dark" : "light";
   applyTheme(newTheme, true); // Apply theme and show toast
-  localStorage.setItem("theme", newTheme); // Save theme preference
+  safeStorageSet("theme", newTheme); // Save theme preference
 });
 
 themeToggleInput.addEventListener("keydown", (event) => {
@@ -543,7 +559,7 @@ themeToggleInput.addEventListener("keydown", (event) => {
     themeToggleInput.checked = !themeToggleInput.checked;
     const newTheme = themeToggleInput.checked ? "dark" : "light";
     applyTheme(newTheme, true);
-    localStorage.setItem("theme", newTheme);
+    safeStorageSet("theme", newTheme);
   }
 });
 
@@ -709,7 +725,7 @@ function updateScrollProgressAndButton() {
     // If all sections are explored when reaching the end, confetti animation
     if (!announcedMilestones.has(totalSections)) {
       announcedMilestones.add(totalSections);
-      localStorage.setItem(
+      safeStorageSet(
         "announcedMilestones",
         JSON.stringify(Array.from(announcedMilestones))
       );
@@ -1182,7 +1198,7 @@ window.addEventListener("load", () => {
     } else {
       message = "Good night! Welcome to Rasoul Unlimited official website."; // Localized message
     }
-    localStorage.setItem("hasVisited", "true"); // Mark as visited
+    safeStorageSet("hasVisited", "true"); // Mark as visited
   }
 
   if (message) {
@@ -1539,7 +1555,7 @@ const sectionProgressObserver = new IntersectionObserver(
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         sectionsVisited.add(entry.target.id); // Add section to visited set
-        localStorage.setItem(
+        safeStorageSet(
           "sectionsVisited",
           JSON.stringify(Array.from(sectionsVisited)) // Save to local storage
         );
@@ -1579,7 +1595,7 @@ const sectionProgressObserver = new IntersectionObserver(
             ); // Stealth Console Logging
 
             announcedMilestones.add(milestone.count); // Mark milestone as announced
-            localStorage.setItem(
+            safeStorageSet(
               "announcedMilestones",
               JSON.stringify(Array.from(announcedMilestones))
             );
@@ -1891,7 +1907,7 @@ const sectionDelightObserver = new IntersectionObserver(
           }, 1000);
 
           sectionsDelighted.add(entry.target.id); // Mark as delighted
-          localStorage.setItem(
+          safeStorageSet(
             "sectionsDelighted",
             JSON.stringify(Array.from(sectionsDelighted))
           );
