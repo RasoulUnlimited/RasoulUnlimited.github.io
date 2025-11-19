@@ -22,23 +22,32 @@
 
       if (!header || !panel) return;
 
-      const headerId =
-        header.id || `accordion-header-${root.dataset.accordionId || "main"}-${index}`;
-      const panelId =
-        panel.id || `accordion-panel-${root.dataset.accordionId || "main"}-${index}`;
+      const accId = root.dataset.accordionId || "main";
+      const headerId = header.id || `accordion-header-${accId}-${index}`;
+      const panelId = panel.id || `accordion-panel-${accId}-${index}`;
 
       header.id = headerId;
       panel.id = panelId;
 
+      // آیا این آیتم در HTML به صورت پیش‌فرض باز است؟
+      const initiallyOpen =
+        item.classList.contains("is-open") || item.hasAttribute("data-open");
+
       // ARIA wiring
       header.setAttribute("role", "button");
       header.setAttribute("aria-controls", panelId);
-      header.setAttribute("aria-expanded", "false");
+      header.setAttribute("aria-expanded", initiallyOpen ? "true" : "false");
       header.setAttribute("tabindex", "0");
 
       panel.setAttribute("role", "region");
       panel.setAttribute("aria-labelledby", headerId);
-      panel.hidden = true;
+      panel.hidden = !initiallyOpen;
+
+      if (initiallyOpen) {
+        item.classList.add("is-open");
+      } else {
+        item.classList.remove("is-open");
+      }
 
       // Click / keyboard handlers
       header.addEventListener("click", () => {
@@ -115,6 +124,14 @@
       header.setAttribute("aria-expanded", "false");
       panel.hidden = true;
       item.classList.remove("is-open");
+
+      // Custom event for hooks / analytics / extra animations
+      item.dispatchEvent(
+        new CustomEvent("accordion:collapse", {
+          bubbles: true,
+          detail: { item, accordionId: root.dataset.accordionId },
+        })
+      );
     }
 
     /**
@@ -129,6 +146,14 @@
       header.setAttribute("aria-expanded", "true");
       panel.hidden = false;
       item.classList.add("is-open");
+
+      // Custom event for hooks / analytics / extra animations
+      item.dispatchEvent(
+        new CustomEvent("accordion:expand", {
+          bubbles: true,
+          detail: { item, accordionId: root.dataset.accordionId },
+        })
+      );
     }
   }
 

@@ -1,9 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const faqItems = document.querySelectorAll(".faq-item");
+  "use strict";
+
+  const faqItems = Array.from(document.querySelectorAll(".faq-item"));
   const faqNavigation = document.querySelector(".faq-navigation");
   const searchInput = document.getElementById("faq-search");
   const clearSearchButton = document.getElementById("clear-search");
-  const allSections = document.querySelectorAll(".faq-section");
+  const allSections = Array.from(document.querySelectorAll(".faq-section"));
+  const faqContainer = document.querySelector(".main-content");
+  const header = document.querySelector(".page-header");
+  const mainContent = document.querySelector(".main-content");
+
+  // اگر کلاً FAQ نداریم، ادامه دادن لازم نیست
+  if (!faqItems.length && !header && !mainContent) return;
 
   // Utility: simple debounce helper
   function debounce(func, delay) {
@@ -17,14 +25,14 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // --- GA4 & Hotjar Event Tracking Integration ---
-  // (Behavioral Data Analysis: Hotjar for heatmaps/recordings, GA4 for structured events)
 
   // Track clicks on navigation links
   if (faqNavigation) {
     faqNavigation.addEventListener("click", (event) => {
       const link = event.target.closest("a");
       if (!link) return;
-      const category = link.dataset.category;
+      const category = link.dataset.category || "unknown";
+
       if (typeof gtag === "function") {
         gtag("event", "faq_nav_click", {
           event_category: "FAQ Navigation",
@@ -35,9 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (typeof hj === "function") {
         hj(
           "event",
-          `faq_nav_clicked_category_${category
-            .replace(/\s/g, "_")
-            .toLowerCase()}`
+          `faq_nav_clicked_category_${category.replace(/\s/g, "_").toLowerCase()}`
         );
       }
     });
@@ -46,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Track Clicks on Call-to-Action Buttons
   document.querySelectorAll(".button-link").forEach((button) => {
     button.addEventListener("click", () => {
-      const ctaType = button.dataset.ctaType;
+      const ctaType = button.dataset.ctaType || "generic";
       if (typeof gtag === "function") {
         gtag("event", "faq_cta_click", {
           event_category: "FAQ Call to Action",
@@ -63,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Track Clicks on Internal Text Links
   document.querySelectorAll(".faq-answer .text-link").forEach((link) => {
     link.addEventListener("click", () => {
-      const linkType = link.dataset.linkType;
+      const linkType = link.dataset.linkType || "generic";
       if (typeof gtag === "function") {
         gtag("event", "faq_text_link_click", {
           event_category: "FAQ Internal Link",
@@ -77,16 +83,43 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  if (searchInput && clearSearchButton && allSections.length > 0) {
-    // --- FAQ Search Functionality (Cognitive Load Reduction - Information Foraging) ---
-    const handleSearch = () => {
-      const searchTerm = searchInput.value.trim().toLowerCase();
+  // --- FAQ Search Functionality (Cognitive Load Reduction - Information Foraging) ---
+  if (searchInput && clearSearchButton && allSections.length) {
+    // live region برای اعلام نتایج سرچ
+    let status = document.getElementById("faq-search-status");
+    if (!status) {
+      status = document.createElement("div");
+      status.id = "faq-search-status";
+      status.setAttribute("aria-live", "polite");
+      status.setAttribute("aria-atomic", "true");
+      status.className = "faq-search-status sr-only";
+      (searchInput.closest("form") || searchInput.parentNode).appendChild(
+        status
+      );
+    }
 
-      if (searchTerm.length > 0) {
-        clearSearchButton.style.display = "block";
+    if (!clearSearchButton.getAttribute("aria-label")) {
+      clearSearchButton.setAttribute("aria-label", "Clear FAQ search");
+    }
+
+    const updateStatus = (term, count) => {
+      const total = faqItems.length;
+      const trimmed = term.trim();
+      if (!trimmed) {
+        status.textContent = `Showing all ${total} questions.`;
+      } else if (!count) {
+        status.textContent = `No results found for “${trimmed}”.`;
       } else {
-        clearSearchButton.style.display = "none";
+        status.textContent = `${count} result${
+          count === 1 ? "" : "s"
+        } found for “${trimmed}”.`;
       }
+    };
+
+    const handleSearch = () => {
+      const rawTerm = searchInput.value || "";
+      const searchTerm = rawTerm.trim().toLowerCase();
+      clearSearchButton.style.display = searchTerm ? "block" : "none";
 
       let visibleItemsCount = 0;
 
@@ -95,47 +128,43 @@ document.addEventListener("DOMContentLoaded", () => {
         const itemsInSection = section.querySelectorAll(".faq-item");
 
         itemsInSection.forEach((item) => {
-          const questionText = item
-            .querySelector("summary")
-            .textContent.toLowerCase();
-          const answerTextElement = item.querySelector(".faq-answer");
-          const answerText = answerTextElement
-            ? answerTextElement.textContent.toLowerCase()
+          const summary = item.querySelector("summary");
+          const questionText = summary
+            ? summary.textContent.toLowerCase()
             : "";
-          const keywords = item.dataset.keywords
-            ? item.dataset.keywords.toLowerCase()
-            : "";
+          const answerEl = item.querySelector(".faq-answer");
+          const answerText = answerEl ? answerEl.textContent.toLowerCase() : "";
+          const keywords = (item.dataset.keywords || "").toLowerCase();
 
-          if (
+          const matches =
+            !searchTerm ||
             questionText.includes(searchTerm) ||
             answerText.includes(searchTerm) ||
-            keywords.includes(searchTerm)
-          ) {
-            item.style.display = "block";
+            keywords.includes(searchTerm);
+
+          if (matches) {
+            item.hidden = false;
             sectionHasVisibleItems = true;
             visibleItemsCount++;
 
-            // If item is not open, and it was NOT opened by user previously, open it and mark it as opened by search
-            if (!item.open && !item.hasAttribute("data-opened-by-user")) {
+            // اگر سرچ فعال است و آیتم توسط یوزر باز نشده، با سرچ بازش کن
+            if (searchTerm && !item.open && !item.dataset.openedByUser) {
               item.open = true;
-              item.setAttribute("data-opened-by-search", "true");
+              item.dataset.openedBySearch = "true";
+              if (summary) summary.setAttribute("aria-expanded", "true");
             }
           } else {
-            item.style.display = "none";
-            // If hiding, and it was opened by search, close it
-            if (item.open && item.hasAttribute("data-opened-by-search")) {
+            item.hidden = true;
+            // اگر با سرچ باز شده بود، الان که می‌ره بیرون نتیجه، ببندش
+            if (item.open && item.dataset.openedBySearch) {
               item.open = false;
-              item.removeAttribute("data-opened-by-search");
+              delete item.dataset.openedBySearch;
+              if (summary) summary.setAttribute("aria-expanded", "false");
             }
           }
         });
 
-        // Show/hide sections based on whether they contain any visible FAQ items
-        if (sectionHasVisibleItems) {
-          section.style.display = "block";
-        } else {
-          section.style.display = "none";
-        }
+        section.hidden = !sectionHasVisibleItems;
       });
 
       // Track search event in GA4
@@ -146,32 +175,50 @@ document.addEventListener("DOMContentLoaded", () => {
           results_count: visibleItemsCount,
         });
       }
-      if (typeof hj === "function") {
+      if (typeof hj === "function" && searchTerm) {
         hj(
           "event",
           `faq_searched_${searchTerm.replace(/\s/g, "_").toLowerCase()}`
         );
       }
+
+      updateStatus(searchTerm, visibleItemsCount);
     };
 
     const debouncedSearch = debounce(handleSearch, 200);
     searchInput.addEventListener("input", debouncedSearch);
 
+    // ESC برای پاک کردن سریع سرچ
+    searchInput.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        searchInput.value = "";
+        clearSearchButton.style.display = "none";
+        handleSearch();
+      }
+    });
+
     clearSearchButton.addEventListener("click", () => {
-      searchInput.value = ""; // Clear input
-      clearSearchButton.style.display = "none"; // Hide clear button
+      searchInput.value = "";
+      clearSearchButton.style.display = "none";
 
       // Show all FAQ items and sections again and collapse items that were opened by search
       faqItems.forEach((item) => {
-        item.style.display = "block";
-        if (item.open && item.hasAttribute("data-opened-by-search")) {
+        item.hidden = false;
+        if (item.open && item.dataset.openedBySearch) {
           item.open = false;
-          item.removeAttribute("data-opened-by-search");
+          delete item.dataset.openedBySearch;
+        }
+        const summary = item.querySelector("summary");
+        if (summary) {
+          summary.setAttribute("aria-expanded", item.open ? "true" : "false");
         }
       });
       allSections.forEach((section) => {
-        section.style.display = "block"; // Show all sections
+        section.hidden = false;
       });
+
+      updateStatus("", faqItems.length);
 
       // Track clear search event in GA4
       if (typeof gtag === "function") {
@@ -183,13 +230,17 @@ document.addEventListener("DOMContentLoaded", () => {
       if (typeof hj === "function") {
         hj("event", "faq_search_cleared");
       }
+
+      searchInput.focus();
     });
+
+    // وضعیت اولیه
+    clearSearchButton.style.display = "none";
+    updateStatus("", faqItems.length);
   }
 
   // --- Accordion Logic ---
-  const faqContainer = document.querySelector(".main-content");
-
-  if (faqContainer) {
+  if (faqContainer && faqItems.length) {
     faqContainer.addEventListener("click", (event) => {
       const summary = event.target.closest(".faq-item summary");
       if (!summary) return;
@@ -203,18 +254,26 @@ document.addEventListener("DOMContentLoaded", () => {
       event.preventDefault();
 
       const item = summary.parentElement;
-      const questionId = item.dataset.questionId;
+      const questionId = item.dataset.questionId || "unknown";
       const wasAlreadyOpen = item.open;
 
+      // بستن بقیه
       faqItems.forEach((otherItem) => {
         if (otherItem !== item) {
           otherItem.open = false;
-          otherItem.removeAttribute("data-opened-by-user");
+          delete otherItem.dataset.openedByUser;
+          delete otherItem.dataset.openedBySearch;
+          const otherSummary = otherItem.querySelector("summary");
+          if (otherSummary) {
+            otherSummary.setAttribute("aria-expanded", "false");
+          }
         }
       });
 
       if (wasAlreadyOpen) {
         item.open = false;
+        summary.setAttribute("aria-expanded", "false");
+
         if (typeof gtag === "function") {
           gtag("event", "faq_collapse", {
             event_category: "FAQ Interaction",
@@ -225,10 +284,13 @@ document.addEventListener("DOMContentLoaded", () => {
         if (typeof hj === "function") {
           hj("event", `faq_collapsed_${questionId}`);
         }
-        item.removeAttribute("data-opened-by-search");
-        item.removeAttribute("data-opened-by-user");
+        delete item.dataset.openedBySearch;
+        delete item.dataset.openedByUser;
       } else {
         item.open = true;
+        summary.setAttribute("aria-expanded", "true");
+        item.dataset.openedByUser = "true";
+        delete item.dataset.openedBySearch;
 
         setTimeout(() => {
           const rect = item.getBoundingClientRect();
@@ -247,18 +309,24 @@ document.addEventListener("DOMContentLoaded", () => {
         if (typeof hj === "function") {
           hj("event", `faq_expanded_${questionId}`);
         }
-        item.setAttribute("data-opened-by-user", "true");
-        item.removeAttribute("data-opened-by-search");
       }
     });
   }
 
+  // Focus outlines + aria-expanded initial sync
   faqItems.forEach((item) => {
     const summary = item.querySelector("summary");
+    if (!summary) return;
+
+    // sync aria-expanded on load
+    summary.setAttribute("aria-expanded", item.open ? "true" : "false");
+
     summary.addEventListener("focus", () => {
-      summary.style.outline = `3px solid ${getComputedStyle(
-        document.documentElement
-      ).getPropertyValue("--primary-blue")}66`;
+      const primary =
+        getComputedStyle(document.documentElement).getPropertyValue(
+          "--primary-blue"
+        ) || "#007bff";
+      summary.style.outline = `3px solid ${primary.trim()}66`;
       summary.style.outlineOffset = "5px";
     });
 
@@ -268,29 +336,31 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Implement a subtle page entry animation for immediate delight and professionalism
-  // (Cognitive Psychology: Primacy Effect, Perceived Performance)
-  const header = document.querySelector(".page-header");
-  const mainContent = document.querySelector(".main-content");
+  // --- Page entry animation (Primacy Effect) با احترام به prefers-reduced-motion ---
+  const prefersReducedMotion = window.matchMedia
+    ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    : false;
 
-  if (header) {
-    header.style.opacity = "0";
-    header.style.transform = "translateY(-20px)";
-    setTimeout(() => {
-      header.style.transition = "opacity 1s ease-out, transform 1s ease-out";
-      header.style.opacity = "1";
-      header.style.transform = "translateY(0)";
-    }, 100);
-  }
+  if (!prefersReducedMotion) {
+    if (header) {
+      header.style.opacity = "0";
+      header.style.transform = "translateY(-20px)";
+      setTimeout(() => {
+        header.style.transition = "opacity 1s ease-out, transform 1s ease-out";
+        header.style.opacity = "1";
+        header.style.transform = "translateY(0)";
+      }, 100);
+    }
 
-  if (mainContent) {
-    mainContent.style.opacity = "0";
-    mainContent.style.transform = "translateY(20px)";
-    setTimeout(() => {
-      mainContent.style.transition =
-        "opacity 1s ease-out, transform 1s ease-out";
-      mainContent.style.opacity = "1";
-      mainContent.style.transform = "translateY(0)";
-    }, 300);
+    if (mainContent) {
+      mainContent.style.opacity = "0";
+      mainContent.style.transform = "translateY(20px)";
+      setTimeout(() => {
+        mainContent.style.transition =
+          "opacity 1s ease-out, transform 1s ease-out";
+        mainContent.style.opacity = "1";
+        mainContent.style.transform = "translateY(0)";
+      }, 300);
+    }
   }
 });
