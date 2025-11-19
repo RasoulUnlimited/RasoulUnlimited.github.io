@@ -151,17 +151,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       clearTimeout(debounceTimer);
       filterCards("");
-    } else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "l") {
-      e.preventDefault();
-      searchInput.value = "";
-      clearButton.style.display = "none";
-      if (storage) {
-        try {
-          storage.removeItem(STORAGE_KEY);
-        } catch (err) {}
-      }
-      clearTimeout(debounceTimer);
-      filterCards("");
     }
   });
 
@@ -243,18 +232,6 @@ document.addEventListener("DOMContentLoaded", function () {
         try {
           storage.removeItem(STORAGE_KEY);
         } catch (err) {}
-      }
-      filterCards("");
-    } else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "l") {
-      e.preventDefault();
-      searchInput.value = "";
-      clearButton.style.display = "none";
-      if (storage) {
-        try {
-          storage.removeItem(STORAGE_KEY);
-        } catch (err) {
-          // ignore storage failures (e.g., private mode)
-        }
       }
       filterCards("");
     }

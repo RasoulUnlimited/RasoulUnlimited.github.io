@@ -440,6 +440,7 @@
         if (!timelineSearch || searchInitialized) return;
         function filterList(term) {
           const q = normalizeText(term.trim());
+          const hasQuery = q.length > 0;
           if (storage) {
             try { storage.setItem(TIMELINE_SEARCH_KEY, term); } catch (e) {}
           }
@@ -447,30 +448,33 @@
           if (storage && yearFilter) {
             try { storage.setItem(TIMELINE_YEAR_KEY, yearVal); } catch (e) {}
           }
-          const reg = new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "gi");
+          const reg = hasQuery
+            ? new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "gi")
+            : null;
           let count = 0;
           timelineList.querySelectorAll("li").forEach((li) => {
             const contentEl = li.querySelector(".timeline-content");
             if (!contentEl) return;
             if (!li.dataset.orig) li.dataset.orig = contentEl.innerHTML;
             const text = normalizeText(li.textContent);
-            const match = q && text.includes(q);
+            const match = hasQuery && text.includes(q);
             const matchYear = !yearVal || (li.dataset.date || "").startsWith(yearVal);
-            li.style.display = (match || !q) && matchYear ? "" : "none";
-            if (match && matchYear) {
+            li.style.display = (match || !hasQuery) && matchYear ? "" : "none";
+            if (match && matchYear && reg) {
               count++;
               contentEl.innerHTML = li.dataset.orig.replace(reg, '<span class="search-highlight">$1</span>');
             } else {
               contentEl.innerHTML = li.dataset.orig;
             }
           });
-          if (clearSearchBtn) clearSearchBtn.classList.toggle("visually-hidden", !q);
+          if (clearSearchBtn)
+            clearSearchBtn.classList.toggle("visually-hidden", !hasQuery);
           if (noResultsEl) {
             noResultsEl.classList.toggle("hidden", count !== 0);
             noResultsEl.classList.toggle("visible", count === 0);
           }
           if (resultsCountEl) {
-            if (q) {
+            if (hasQuery) {
               resultsCountEl.textContent = lang.startsWith("fa")
                 ? `${count} مورد یافت شد`
                 : `${count} result${count === 1 ? "" : "s"} found`;

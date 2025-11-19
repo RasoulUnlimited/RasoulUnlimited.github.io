@@ -35,6 +35,12 @@
     }, 3000);
   }
 
+  // Expose toast helper so other scripts (e.g., security page, SW registration)
+  // can provide user feedback without redefining their own helpers.
+  if (!window.createToast) {
+    window.createToast = createToast;
+  }
+
   function applyTheme(theme, showToast) {
     document.body.classList.toggle("dark-mode", theme === "dark");
     document.body.classList.toggle("light-mode", theme === "light");
