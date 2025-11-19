@@ -91,6 +91,27 @@ function safeStorageRemove(key) {
   }
 }
 
+function safeStorageGet(key, defaultValue = null) {
+  try {
+    const value = localStorage.getItem(key);
+    return value === null ? defaultValue : value;
+  } catch (error) {
+    console.warn(`Unable to read ${key} from localStorage`, error);
+    return defaultValue;
+  }
+}
+
+function addMediaQueryChangeListener(mediaQueryList, handler) {
+  if (!mediaQueryList || typeof handler !== "function") {
+    return;
+  }
+  if (typeof mediaQueryList.addEventListener === "function") {
+    mediaQueryList.addEventListener("change", handler);
+  } else if (typeof mediaQueryList.addListener === "function") {
+    mediaQueryList.addListener(handler);
+  }
+}
+
 let audioContext;
 let clickBuffer;
 let toastBuffer;
@@ -98,7 +119,7 @@ const prefersReducedMotionQuery = window.matchMedia(
   "(prefers-reduced-motion: reduce)"
 );
 let prefersReducedMotion = prefersReducedMotionQuery.matches;
-prefersReducedMotionQuery.addEventListener("change", (e) => {
+addMediaQueryChangeListener(prefersReducedMotionQuery, (e) => {
   prefersReducedMotion = e.matches;
   handleMotionPreference();
 });
@@ -507,7 +528,7 @@ const toggleLabelText =
   "Toggle website theme";
 themeToggleInput.setAttribute("aria-label", toggleLabelText);
 const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-const savedTheme = localStorage.getItem("theme");
+const savedTheme = safeStorageGet("theme");
 
 /**
  * Applies the selected theme (dark or light) to the document body and updates the theme toggle.
@@ -566,12 +587,21 @@ themeToggleInput.addEventListener("keydown", (event) => {
 // Smooth scrolling for anchor links within the page
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   anchor.addEventListener("click", function (e) {
-    e.preventDefault(); // Prevent default jump behavior
-
     const targetId = this.getAttribute("href");
-    const targetElement = document.querySelector(targetId);
+    if (!targetId || targetId === "#" || targetId === "#0") {
+      return;
+    }
+
+    let targetElement = null;
+    try {
+      targetElement = document.querySelector(targetId);
+    } catch (err) {
+      console.warn(`Invalid anchor target selector: ${targetId}`, err);
+      return;
+    }
 
     if (targetElement) {
+      e.preventDefault(); // Prevent default jump behavior only when target exists
       const navbarHeight = document.querySelector(".navbar")?.offsetHeight || 0;
       const progressHeight =
         document.getElementById("scroll-progress-bar")?.offsetHeight || 0;
@@ -1182,7 +1212,7 @@ if (faqContainer) {
 
 // Welcome toast message on page load
 window.addEventListener("load", () => {
-  const hasVisited = localStorage.getItem("hasVisited");
+  const hasVisited = safeStorageGet("hasVisited");
   let message = "";
 
   if (hasVisited) {

@@ -29,6 +29,15 @@
       return "";
     }
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    function addMediaQueryChangeListener(mediaQueryList, handler) {
+      if (!mediaQueryList || typeof handler !== "function") return;
+      if (typeof mediaQueryList.addEventListener === "function") {
+        mediaQueryList.addEventListener("change", handler);
+      } else if (typeof mediaQueryList.addListener === "function") {
+        mediaQueryList.addListener(handler);
+      }
+    }
     function disableMotion() {
       document.querySelectorAll("[data-aos]").forEach((el) => {
         el.removeAttribute("data-aos");
@@ -40,7 +49,7 @@
     if (prefersReduced.matches) {
       disableMotion();
     }
-    prefersReduced.addEventListener("change", (e) => {
+    addMediaQueryChangeListener(prefersReduced, (e) => {
       if (e.matches) disableMotion();
     });
 
@@ -48,7 +57,7 @@
     if (smallScreen.matches) {
       disableMotion();
     }
-    smallScreen.addEventListener("change", (e) => {
+    addMediaQueryChangeListener(smallScreen, (e) => {
       if (e.matches) disableMotion();
     });
 
