@@ -1,19 +1,6 @@
 /*
   Mohammad Rasoul Sohrabi — Site UX Utilities (v2)
   ORCID: 0009-0004-7177-2080
-
-  What’s new vs. your last snippet:
-  - Stronger mobile-first gates: respects Save-Data, effectiveType, reduced data & motion, coarse pointers, low CPU.
-  - One global ENV that live-updates on media query changes (theme / motion / pointer) without reload.
-  - Safer storage + teardown: observers / timers cleaned on page hide/unload, idle work canceled via AbortController.
-  - Lighter main thread: more rAF scheduling; fewer layouts; progressbar updates aria-valuenow.
-  - Robust AOS loader: only inject once, with integrity-ready hook; removes data-aos attrs when disabled.
-  - Scroll/anchor behavior respects reduced motion; smooth-scroll only when allowed.
-  - Idle “fun facts” paused when tab hidden; fully disabled on phones or Save-Data.
-  - Audio: lazy AudioContext with polite resume; auto-suspends on visibilitychange; short GC-safe buffers.
-  - Observers unobserve/disconnect defensively; passive listeners everywhere by default.
-  - Micro a11y: ARIA labels tightened; buttons keyboard-activatable; toast close button focusable.
-  - Small fixes: progress color CSS-var fallback; IO rootMargins tuned; safer clipboard + share fallbacks.
 */
 
 (function () {
@@ -22,21 +9,25 @@
   // ==========================
   // Utilities & Environment
   // ==========================
+
   const noop = () => {};
+
+  // ⚠️ قبلاً همه‌چی passive:true بود؛ الان فقط جایی که لازم داریم passive:true می‌دیم
   const on = (el, evt, fn, opts) =>
     el &&
     el.addEventListener &&
-    el.addEventListener(evt, fn, { passive: true, capture: false, ...opts });
+    el.addEventListener(evt, fn, { capture: false, ...(opts || {}) });
+
   const off = (el, evt, fn, opts) =>
     el &&
     el.removeEventListener &&
-    el.removeEventListener(evt, fn, { passive: true, capture: false, ...opts });
+    el.removeEventListener(evt, fn, { capture: false, ...(opts || {}) });
 
   function throttle(fn, limit) {
     let inThrottle, lastFunc, lastRan;
     return function () {
-      const ctx = this,
-        args = arguments;
+      const ctx = this;
+      const args = arguments;
       if (!inThrottle) {
         fn.apply(ctx, args);
         lastRan = Date.now();
@@ -113,11 +104,13 @@
       window.matchMedia
         ? window.matchMedia(q)
         : { matches: false, addEventListener: noop, removeEventListener: noop };
+
     const mqs = {
       reduced: mq("(prefers-reduced-motion: reduce)"),
       dark: mq("(prefers-color-scheme: dark)"),
       coarse: mq("(pointer: coarse)"),
     };
+
     const conn =
       navigator.connection ||
       navigator.mozConnection ||
@@ -148,13 +141,20 @@
 
     const listeners = [];
     const notify = () => listeners.forEach((l) => l());
-    const bind = (m) =>
-      m.addEventListener &&
-      m.addEventListener("change", notify, { passive: true });
-    bind(mqs.reduced);
-    bind(mqs.dark);
-    bind(mqs.coarse);
-    if (conn && conn.addEventListener) on(conn, "change", notify);
+
+    const bindMQL = (m) => {
+      if (m && m.addEventListener) {
+        m.addEventListener("change", notify);
+      }
+    };
+
+    bindMQL(mqs.reduced);
+    bindMQL(mqs.dark);
+    bindMQL(mqs.coarse);
+
+    if (conn && conn.addEventListener) {
+      on(conn, "change", notify);
+    }
 
     return { state, onChange: (fn) => listeners.push(fn) };
   })();
@@ -222,11 +222,13 @@
   // Audio (click/toast) — lazy, mobile-safe
   // ==========================
   let audioContext, clickBuffer, toastBuffer;
+
   function ensureAudioContext() {
     if (!FLAGS().ENABLE_SOUNDS || audioContext) return;
     const Ctx = window.AudioContext || window.webkitAudioContext;
     if (Ctx) audioContext = new Ctx();
   }
+
   function createToneBuffer(duration, wave) {
     if (!audioContext) return null;
     const sr = audioContext.sampleRate;
@@ -239,6 +241,7 @@
     for (let i = 0; i < data.length; i++) data[i] = wave(i, sr);
     return buffer;
   }
+
   function loadSounds() {
     if (!audioContext) return;
     clickBuffer = createToneBuffer(
@@ -246,22 +249,13 @@
       (i, sr) => Math.sin(2 * Math.PI * 440 * (i / sr)) * 0.08
     );
     toastBuffer = createToneBuffer(0.1, (i, sr) => {
-      const t = i / sr,
-        d = 0.1;
+      const t = i / sr;
+      const d = 0.1;
       const f = 880 + (1200 - 880) * (t / d);
       return Math.sin(2 * Math.PI * f * t) * 0.12 * Math.max(0, 1 - t / d);
     });
   }
-  function playSound(type) {
-    if (!audioContext || audioContext.state === "suspended") return;
-    const buffer =
-      type === "click" ? clickBuffer : type === "toast" ? toastBuffer : null;
-    if (!buffer) return;
-    const node = audioContext.createBufferSource();
-    node.buffer = buffer;
-    node.connect(audioContext.destination);
-    node.start();
-  }
+
   on(
     document,
     "pointerdown",
@@ -272,6 +266,7 @@
     },
     { once: true }
   );
+
   on(document, "visibilitychange", () => {
     if (document.hidden) audioContext?.suspend?.();
     else audioContext?.resume?.();
@@ -283,11 +278,13 @@
   function dismissToast(toast) {
     if (!toast) return;
     toast.classList.remove("show");
-    toast.addEventListener("transitionend", () => toast.remove(), {
-      once: true,
-      passive: true,
-    });
+    toast.addEventListener(
+      "transitionend",
+      () => toast.remove(),
+      { once: true }
+    );
   }
+
   function createToast(message, options = {}) {
     const defaults = {
       duration: 2500,
@@ -299,31 +296,37 @@
       closeButton: false,
     };
     const settings = { ...defaults, ...options };
+
     if (settings.id) {
       const existing = document.getElementById(settings.id);
       if (existing && existing.classList.contains("show")) return existing;
     }
+
     document.querySelectorAll(".dynamic-toast").forEach((t) => {
       if (!settings.id || t.id !== settings.id) {
         t.classList.remove("show");
-        t.addEventListener("transitionend", () => t.remove(), {
-          once: true,
-          passive: true,
-        });
+        t.addEventListener(
+          "transitionend",
+          () => t.remove(),
+          { once: true }
+        );
       }
     });
+
     const toast = document.createElement("div");
     toast.className = `dynamic-toast ${settings.customClass}`.trim();
     toast.role = "status";
     toast.setAttribute("aria-live", "polite");
     toast.tabIndex = -1;
     if (settings.id) toast.id = settings.id;
+
     Object.assign(toast.style, {
       position: "fixed",
       left: "50%",
       transform: "translateX(-50%)",
       [settings.position === "top" ? "top" : "bottom"]: "20px",
     });
+
     if (settings.iconClass) {
       const icon = document.createElement("i");
       icon.className = settings.iconClass;
@@ -331,10 +334,12 @@
       icon.setAttribute("aria-hidden", "true");
       toast.appendChild(icon);
     }
+
     const text = document.createElement("span");
     text.className = "toast-message";
     text.textContent = message;
     toast.appendChild(text);
+
     if (settings.closeButton) {
       const closeBtn = document.createElement("button");
       closeBtn.type = "button";
@@ -344,13 +349,18 @@
       on(closeBtn, "click", () => dismissToast(toast));
       toast.appendChild(closeBtn);
     }
+
     document.body.appendChild(toast);
+
     requestAnimationFrame(() => {
       toast.classList.add("show");
       playSound("toast");
     });
-    if (settings.duration > 0)
+
+    if (settings.duration > 0) {
       setTimeout(() => dismissToast(toast), settings.duration);
+    }
+
     return toast;
   }
 
@@ -362,6 +372,7 @@
       document.getElementById("current-year") ||
       document.getElementById("footer-year");
     if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
     const lastUpdated = document.getElementById("last-updated-date");
     if (lastUpdated) {
       const opts = { year: "numeric", month: "long", day: "numeric" };
@@ -372,6 +383,7 @@
       );
     }
   }
+
   function setIdentityHooks() {
     document.body.id = "sohrabi-verified-identity";
     document.body.classList.add(
@@ -379,6 +391,7 @@
       "github-verified",
       "academic-entity"
     );
+
     const hiddenInfo = document.createElement("div");
     hiddenInfo.style.display = "none";
     hiddenInfo.dataset.authorFullName = "Mohammad Rasoul Sohrabi";
@@ -387,16 +400,19 @@
     hiddenInfo.textContent =
       "Mohammad Rasoul Sohrabi is a verified contributor on ORCID, Zenodo, GitHub, and Wikipedia. Known for Persian Bot and biomedical engineering content.";
     document.body.appendChild(hiddenInfo);
+
     const metaGenerator = document.createElement("meta");
     metaGenerator.name = "generator";
     metaGenerator.content =
       "Mohammad Rasoul Sohrabi - Biomedical Engineering, ORCID Verified";
     document.head.appendChild(metaGenerator);
+
     const metaAuthor = document.createElement("meta");
     metaAuthor.name = "author";
     metaAuthor.content = "Mohammad Rasoul Sohrabi";
     document.head.appendChild(metaAuthor);
   }
+
   function queueIdentityPings() {
     if (
       !FLAGS().ENABLE_IDENTITY_PINGS ||
@@ -404,9 +420,13 @@
       ENV.state.saveData
     )
       return;
+
     const targets = [
       { name: "GitHub", url: "https://github.com/RasoulUnlimited" },
-      { name: "LinkedIn", url: "https://www.linkedin.com/in/rasoulunlimited/" },
+      {
+        name: "LinkedIn",
+        url: "https://www.linkedin.com/in/rasoulunlimited/",
+      },
       {
         name: "ResearchGate",
         url: "https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi",
@@ -414,7 +434,9 @@
       { name: "About.me", url: "https://about.me/rasoulunlimited" },
       { name: "ORCID", url: "https://orcid.org/0009-0004-7177-2080" },
     ];
+
     const ping = (t) => fetch(t.url, { mode: "no-cors" }).catch(() => {});
+
     ric(() =>
       targets.forEach((t, i) =>
         setTimeout(() => {
@@ -429,15 +451,19 @@
   // AOS (Animations) — gated
   // ==========================
   let aosLoaded = false;
+
   function setAOSDisabledCSS(disabled) {
     document.documentElement.classList.toggle("aos-disabled", disabled);
   }
+
   function initAOS() {
-  if (!FLAGS().ENABLE_AOS) {
-    setAOSDisabledCSS(true);
-    return;
-  }
-  setAOSDisabledCSS(false);
+    if (!FLAGS().ENABLE_AOS) {
+      setAOSDisabledCSS(true);
+      return;
+    }
+
+    setAOSDisabledCSS(false);
+
     if (aosLoaded && window.AOS?.init) {
       window.AOS.init({
         startEvent: "DOMContentLoaded",
@@ -454,11 +480,14 @@
       });
       return;
     }
+
     if (window.AOS?.init) {
       aosLoaded = true;
       return initAOS();
     }
+
     if (aosLoaded) return;
+
     const s = document.createElement("script");
     s.src = "/assets/vendor/aos/aos.min.js";
     s.defer = true;
@@ -475,8 +504,10 @@
   function applyTheme(theme, showToast = false) {
     document.body.classList.toggle("dark-mode", theme === "dark");
     document.body.classList.toggle("light-mode", theme === "light");
+
     const toggle = document.getElementById("theme-toggle");
     if (toggle) toggle.checked = theme === "dark";
+
     if (showToast) {
       createToast(
         theme === "dark"
@@ -496,17 +527,22 @@
       vibrate([30]);
     }
   }
+
   function initTheme() {
     const toggle = document.getElementById("theme-toggle");
     if (toggle) toggle.setAttribute("aria-label", STRINGS_FA.aria.themeToggle);
+
     const saved = storage.getRaw("theme");
     applyTheme(saved || (ENV.state.dark ? "dark" : "light"));
+
     if (!toggle) return;
+
     on(toggle, "change", () => {
       const next = toggle.checked ? "dark" : "light";
       applyTheme(next, true);
       storage.setRaw("theme", next);
     });
+
     on(toggle, "keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
@@ -516,6 +552,7 @@
         storage.setRaw("theme", next);
       }
     });
+
     // auto-switch if system theme changes and user hasn't chosen explicitly
     ENV.onChange(() => {
       if (!storage.getRaw("theme"))
@@ -528,19 +565,25 @@
   // ==========================
   function initAnchorScrolling() {
     const smoothAllowed = !ENV.state.reduced;
+
     document.querySelectorAll('a[href^="#"]').forEach((a) => {
       on(a, "click", (e) => {
         const targetId = a.getAttribute("href");
         const el = document.querySelector(targetId);
         if (!el) return;
+
         e.preventDefault();
+
         const navH = document.querySelector(".navbar")?.offsetHeight || 0;
         const progH =
           document.getElementById("scroll-progress-bar")?.offsetHeight || 0;
         const padTop = parseFloat(getComputedStyle(el).paddingTop) || 0;
         const y = Math.max(0, el.offsetTop + padTop - navH - progH);
-        if (smoothAllowed) window.scrollTo({ top: y, behavior: "smooth" });
+
+        if (smoothAllowed)
+          window.scrollTo({ top: y, behavior: "smooth" });
         else window.scrollTo(0, y);
+
         vibrate([20]);
       });
     });
@@ -559,6 +602,7 @@
         setTimeout(() => card.classList.remove("clicked-pop"), 300);
         vibrate([30]);
       }
+
       const interactive = event.target.closest?.(
         'button, a:not([href^="#"]), input[type="submit"], [role="button"], [tabindex="0"]'
       );
@@ -573,12 +617,13 @@
         interactive.addEventListener(
           "animationend",
           () => interactive.classList.remove("click-feedback-effect"),
-          { once: true, passive: true }
+          { once: true }
         );
         if (!interactive.closest(".faq-item")) vibrate([8]);
         playSound("click");
       }
     });
+
     on(document, "keydown", (e) => {
       if (e.key !== "Enter" && e.key !== " ") return;
       const card = e.target.closest?.(".card");
@@ -594,6 +639,7 @@
   // ==========================
   const rafTasks = new Set();
   let rafPending = false;
+
   function scheduleRaf(fn) {
     rafTasks.add(fn);
     if (!rafPending) {
@@ -648,26 +694,28 @@
       );
       const scrolled = window.scrollY;
       const progress = Math.min(1, Math.max(0, scrolled / total));
+
       innerBar.style.transform = `scaleX(${progress})`;
+
+      const rootStyle = getComputedStyle(document.documentElement);
+      const primary =
+        rootStyle.getPropertyValue("--primary-color") || "gray";
+      const accent =
+        rootStyle.getPropertyValue("--accent-color") || "dodgerblue";
+      const highlight =
+        rootStyle.getPropertyValue("--highlight-color") || "gold";
+
       innerBar.style.backgroundColor =
-        progress > 0.9
-          ? getComputedStyle(document.documentElement).getPropertyValue(
-              "--highlight-color"
-            ) || "gold"
-          : progress > 0.5
-          ? getComputedStyle(document.documentElement).getPropertyValue(
-              "--accent-color"
-            ) || "dodgerblue"
-          : getComputedStyle(document.documentElement).getPropertyValue(
-              "--primary-color"
-            ) || "gray";
+        progress > 0.9 ? highlight : progress > 0.5 ? accent : primary;
+
       bar.setAttribute("aria-valuenow", String(Math.round(progress * 100)));
+
       btn.classList.toggle("visible", scrolled > 300);
       btn.classList.toggle("hidden", scrolled <= 300);
     }
 
     const onScrollResize = () => scheduleRaf(update);
-    on(window, "scroll", onScrollResize);
+    on(window, "scroll", onScrollResize, { passive: true });
     on(window, "resize", onScrollResize);
     update();
 
@@ -699,31 +747,48 @@
       const obs = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
-            exploreHint.classList.toggle("visible", entry.isIntersecting);
+            exploreHint.classList.toggle(
+              "visible",
+              entry.isIntersecting
+            );
             exploreHint.classList.toggle(
               "pulse-animation",
               entry.isIntersecting
             );
-            exploreHint.classList.toggle("hidden", !entry.isIntersecting);
+            exploreHint.classList.toggle(
+              "hidden",
+              !entry.isIntersecting
+            );
           });
         },
         { threshold: 0.5 }
       );
       obs.observe(hero);
-      on(window, "beforeunload", () => obs.disconnect(), { once: true });
+      on(
+        window,
+        "beforeunload",
+        () => obs.disconnect(),
+        { once: true }
+      );
     }
 
     on(exploreHint, "click", (e) => {
       e.preventDefault();
       exploreHint.classList.add("hidden");
       exploreHint.classList.remove("visible", "pulse-animation");
+
       const target = document.querySelector("#projects");
       if (target) {
         const navH = document.querySelector(".navbar")?.offsetHeight || 0;
         const progH =
-          document.getElementById("scroll-progress-bar")?.offsetHeight || 0;
-        const padTop = parseFloat(getComputedStyle(target).paddingTop) || 0;
-        const y = Math.max(0, target.offsetTop + padTop - navH - progH);
+          document.getElementById("scroll-progress-bar")?.offsetHeight ||
+          0;
+        const padTop =
+          parseFloat(getComputedStyle(target).paddingTop) || 0;
+        const y = Math.max(
+          0,
+          target.offsetTop + padTop - navH - progH
+        );
         const smooth = !ENV.state.reduced;
         if (smooth) window.scrollTo({ top: y, behavior: "smooth" });
         else window.scrollTo(0, y);
@@ -738,10 +803,13 @@
   function initSkillsHover() {
     const list = document.querySelector("#skills .skills-list");
     if (!list) return;
+
     list.querySelectorAll("li").forEach((li) => {
       li.dataset.skillOwner = "Mohammad Rasoul Sohrabi";
       li.classList.add("sohrabi-skill-item");
+
       let hideTimeout;
+
       function getSpan() {
         let s = li.querySelector(".skill-hover-message");
         if (!s) {
@@ -751,6 +819,7 @@
         }
         return s;
       }
+
       on(li, "mouseenter", () => {
         clearTimeout(hideTimeout);
         const span = getSpan();
@@ -765,6 +834,7 @@
         }
         li.classList.add("skill-hover-effect");
       });
+
       on(li, "mouseleave", () => {
         const span = li.querySelector(".skill-hover-message");
         if (span) {
@@ -785,20 +855,27 @@
   function initFAQ() {
     const container = document.querySelector(".faq-container");
     if (!container) return;
+
     container.id = "sohrabi-faq-verified";
+
     const items = [...document.querySelectorAll(".faq-item")];
+
     items.forEach((item, idx) => {
       const summary = item.querySelector("summary");
       const answer = item.querySelector("p");
       const qId = item.dataset.questionId || `faq-q-${idx + 1}`;
       if (!summary) return;
+
       summary.dataset.faqAuthor = "Mohammad Rasoul Sohrabi";
+
       if (!summary.hasAttribute("aria-expanded"))
         summary.setAttribute("aria-expanded", item.open ? "true" : "false");
+
       if (answer) {
         if (!answer.id) answer.id = `faq-answer-${qId}`;
         if (!summary.hasAttribute("aria-controls"))
           summary.setAttribute("aria-controls", answer.id);
+
         Object.assign(answer.style, {
           maxHeight: item.open ? "2000px" : "0px",
           overflow: "hidden",
@@ -809,40 +886,39 @@
           opacity: item.open ? "1" : "0",
         });
       }
+
       on(summary, "click", (e) => {
         if (e.target.tagName === "A") return;
         e.preventDefault();
         createSparkle(summary);
+
         items.forEach((other) => {
           if (other !== item && other.open) toggleFAQ(other, false);
         });
+
         toggleFAQ(item, !item.open);
       });
     });
-    on(window, "DOMContentLoaded", () => {
-      const hash = window.location.hash;
-      if (!hash) return;
-      const target = document.querySelector(hash);
-      if (target && target.classList.contains("faq-item")) {
-        items.forEach((it) => it !== target && it.open && toggleFAQ(it, false));
-        toggleFAQ(target, true, true);
-      }
-    });
+
     function toggleFAQ(item, open, scrollIntoView = false) {
       item.open = open;
       const summary = item.querySelector("summary");
       const answer = item.querySelector("p");
+
       if (summary)
         summary.setAttribute("aria-expanded", open ? "true" : "false");
+
       if (answer) {
         answer.style.maxHeight = open ? "2000px" : "0px";
         answer.style.paddingTop = open ? "1.6rem" : "0";
         answer.style.paddingBottom = open ? "2.8rem" : "0";
         answer.style.opacity = open ? "1" : "0";
       }
+
       if (scrollIntoView && open) {
         setTimeout(() => {
-          const navH = document.querySelector(".navbar")?.offsetHeight || 0;
+          const navH =
+            document.querySelector(".navbar")?.offsetHeight || 0;
           item.scrollIntoView({
             behavior: ENV.state.reduced ? "auto" : "smooth",
             block: "start",
@@ -858,6 +934,19 @@
         }, 80);
       }
     }
+
+    // deep-link به FAQ با hash (بعد از DOM ready)
+    on(window, "DOMContentLoaded", () => {
+      const hash = window.location.hash;
+      if (!hash) return;
+      const target = document.querySelector(hash);
+      if (target && target.classList.contains("faq-item")) {
+        items.forEach(
+          (it) => it !== target && it.open && toggleFAQ(it, false)
+        );
+        toggleFAQ(target, true, true);
+      }
+    });
   }
 
   // ==========================
@@ -866,6 +955,7 @@
   function showWelcomeToast() {
     const hasVisited = storage.getRaw("hasVisited");
     let msg = "";
+
     if (hasVisited) msg = STRINGS_FA.toasts.welcomeBack;
     else {
       const hour = new Date().getHours();
@@ -879,6 +969,7 @@
           : STRINGS_FA.toasts.welcomeNight;
       storage.setRaw("hasVisited", "true");
     }
+
     if (msg)
       createToast(msg, {
         id: "welcome-toast",
@@ -897,8 +988,11 @@
       '.contact-info a[href^="mailto:"]'
     );
     if (!emailLink) return;
+
     emailLink.dataset.contactPerson = "Mohammad Rasoul Sohrabi";
     emailLink.classList.add("sohrabi-contact-method");
+
+    // ⚠️ اینجا قبلاً passive:true بود ولی preventDefault هم داشتی → باگ
     emailLink.addEventListener(
       "click",
       async (e) => {
@@ -923,7 +1017,7 @@
           });
         }
       },
-      { passive: true }
+      { passive: false }
     );
   }
 
@@ -950,6 +1044,7 @@
       });
     }
   }
+
   window.copyToClipboard = copyToClipboard;
   window.createToast = createToast;
 
@@ -959,37 +1054,50 @@
   function initLazyImages() {
     const lazyImages = document.querySelectorAll("img[data-src]");
     if (!lazyImages.length) return;
+
     const observer = new IntersectionObserver(
       (entries, obs) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
           const img = entry.target;
+
           img.decoding = "async";
           img.loading = "lazy";
           img.classList.add("is-loading");
           img.dataset.imageLoader =
             "Mohammad Rasoul Sohrabi's optimized script";
+
           img.src = img.dataset.src;
           if (img.dataset.srcset) img.srcset = img.dataset.srcset;
+
           img.onload = () => {
             img.classList.remove("is-loading");
             img.classList.add("loaded");
             img.removeAttribute("data-src");
             img.removeAttribute("data-srcset");
           };
+
           img.onerror = () => {
             console.error("Failed to load image:", img.src);
             img.classList.remove("is-loading");
             img.classList.add("load-error");
-            img.src = "https://placehold.co/400x300/cccccc/000000?text=Error";
+            img.src =
+              "https://placehold.co/400x300/cccccc/000000?text=Error";
           };
+
           obs.unobserve(img);
         });
       },
       { rootMargin: "0px 0px 180px 0px", threshold: 0.01 }
     );
+
     lazyImages.forEach((img) => observer.observe(img));
-    on(window, "beforeunload", () => observer.disconnect(), { once: true });
+    on(
+      window,
+      "beforeunload",
+      () => observer.disconnect(),
+      { once: true }
+    );
   }
 
   // ==========================
@@ -1011,13 +1119,16 @@
       );
       document.body.appendChild(shareBtn);
     }
+
     const onScroll = throttle(() => {
       const isVisible = window.scrollY > 500;
       shareBtn.classList.toggle("visible", isVisible);
       shareBtn.classList.toggle("hidden", !isVisible);
     }, 120);
-    on(window, "scroll", onScroll);
+
+    on(window, "scroll", onScroll, { passive: true });
     onScroll();
+
     on(shareBtn, "click", async () => {
       const pageUrl = window.location.href;
       if (navigator.share) {
@@ -1059,8 +1170,10 @@
     const sections = document.querySelectorAll("section[id]");
     const total = sections.length;
     if (!total) return;
+
     let visited = new Set(storage.get("sectionsVisited", []));
     let announced = new Set(storage.get("announcedMilestones", []));
+
     const milestones = [
       {
         count: Math.max(1, Math.ceil(total * 0.25)),
@@ -1068,13 +1181,19 @@
         icon: "fas fa-map-marker-alt",
       },
       {
-        count: Math.max(Math.ceil(total * 0.25) + 1, Math.ceil(total * 0.5)),
+        count: Math.max(
+          Math.ceil(total * 0.25) + 1,
+          Math.ceil(total * 0.5)
+        ),
         message:
           "نصف راه را پیمودید! شما ۵۰٪ از سایت را کاوش کرده‌اید! فوق‌العاده! 🚀",
         icon: "fas fa-rocket",
       },
       {
-        count: Math.max(Math.ceil(total * 0.5) + 1, Math.ceil(total * 0.75)),
+        count: Math.max(
+          Math.ceil(total * 0.5) + 1,
+          Math.ceil(total * 0.75)
+        ),
         message: "به ۷۵٪ رسیدید! کم‌کم داریم به پایان می‌رسیم! 🌟",
         icon: "fas fa-star",
       },
@@ -1097,11 +1216,14 @@
     const observer = new IntersectionObserver(
       (entries) => {
         const now = Date.now();
+
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
+
           visited.add(entry.target.id);
           storage.set("sectionsVisited", [...visited]);
           observer.unobserve(entry.target);
+
           const count = visited.size;
           for (const m of milestones) {
             if (
@@ -1120,11 +1242,14 @@
                   : "var(--accent-color)",
                 duration: 4200,
               });
+
               const bio = document.getElementById("sohrabi-bio");
               bio?.dispatchEvent(new Event("mouseenter"));
+
               announced.add(m.count);
               storage.set("announcedMilestones", [...announced]);
               lastToastAt = now;
+
               if (m.isFinal && FLAGS().ENABLE_CONFETTI)
                 setTimeout(createConfetti, 500);
               break;
@@ -1136,15 +1261,22 @@
     );
 
     sections.forEach((sec) => observer.observe(sec));
-    on(window, "beforeunload", () => observer.disconnect(), { once: true });
+    on(
+      window,
+      "beforeunload",
+      () => observer.disconnect(),
+      { once: true }
+    );
   }
 
   function createConfetti() {
     if (ENV.state.reduced || ENV.state.coarse) return;
+
     const canvas = document.createElement("canvas");
     canvas.id = "confetti-canvas";
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+
     Object.assign(canvas.style, {
       position: "fixed",
       top: 0,
@@ -1154,9 +1286,12 @@
       pointerEvents: "none",
       zIndex: 9998,
     });
+
     canvas.dataset.celebrationEvent =
       "page_completion_by_Mohammad_Rasoul_Sohrabi_user";
+
     document.body.appendChild(canvas);
+
     const ctx = canvas.getContext("2d");
     const colors = [
       "#ffc107",
@@ -1167,6 +1302,7 @@
       "#FF4081",
       "#64FFDA",
     ];
+
     const pieces = Array.from({ length: 48 }, () => ({
       x: Math.random() * canvas.width,
       y: -Math.random() * canvas.height,
@@ -1176,14 +1312,18 @@
       speed: Math.random() * 2 + 1,
       drift: Math.random() * 2 - 1,
     }));
+
     const start = performance.now();
+
     (function loop() {
       const elapsed = performance.now() - start;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+
       for (const p of pieces) {
         p.y += p.speed;
         p.x += p.drift;
         p.angle += 2;
+
         ctx.save();
         ctx.translate(p.x, p.y);
         ctx.rotate((p.angle * Math.PI) / 180);
@@ -1191,6 +1331,7 @@
         ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
         ctx.restore();
       }
+
       if (elapsed < 3400) requestAnimationFrame(loop);
       else canvas.remove();
     })();
@@ -1201,8 +1342,10 @@
   // ==========================
   function initFunFacts() {
     if (ENV.state.coarse || ENV.state.saveData) return; // disable on phones / save-data
+
     let toastRef = null;
     let idleTimeout;
+
     const show = () => {
       const fact = FUN_FACTS_FA[(Math.random() * FUN_FACTS_FA.length) | 0];
       toastRef = createToast(`${STRINGS_FA.funFactsPrefix} ${fact}`, {
@@ -1215,15 +1358,22 @@
         closeButton: true,
       });
     };
+
     const reset = debounce(() => {
       clearTimeout(idleTimeout);
       idleTimeout = setTimeout(() => {
         if (!toastRef || !toastRef.classList.contains("show")) show();
       }, 24000);
     }, 600);
+
     const evs = ["mousemove", "keydown", "scroll", "touchstart"];
-    evs.forEach((ev) => on(window, ev, reset));
+    evs.forEach((ev) => {
+      const opts = ev === "scroll" || ev === "touchstart" ? { passive: true } : {};
+      on(window, ev, reset, opts);
+    });
+
     reset();
+
     on(document, "visibilitychange", () => {
       if (document.hidden) {
         clearTimeout(idleTimeout);
@@ -1239,8 +1389,10 @@
   function initSocialLinksCopy() {
     const block = document.querySelector(".connect-links-block ul");
     if (!block) return;
+
     block.id = "sohrabi-social-links";
     block.dataset.profileOwner = "Mohammad Rasoul Sohrabi";
+
     on(block, "click", async (e) => {
       const link = e.target.closest?.("a");
       if (
@@ -1252,7 +1404,8 @@
         e.preventDefault();
         const txt = link.textContent?.trim() || link.href;
         const name =
-          link.querySelector("i")?.nextSibling?.textContent?.trim() || txt;
+          link.querySelector("i")?.nextSibling?.textContent?.trim() ||
+          txt;
         await copyToClipboard(
           link.href,
           `social-link-copy-${name.replace(/\s/g, "")}`,
@@ -1274,11 +1427,14 @@
       ENV.state.lowPowerCPU
     )
       return;
+
     const sparkle = document.createElement("div");
     sparkle.className = "sparkle-effect";
     sparkle.dataset.sparkleSource =
       "Mohammad Rasoul Sohrabi's interactive elements";
+
     const size = Math.random() * 10 + 5;
+
     Object.assign(sparkle.style, {
       width: `${size}px`,
       height: `${size}px`,
@@ -1296,31 +1452,38 @@
       zIndex: 10,
       pointerEvents: "none",
     });
+
     const cs = getComputedStyle(element);
     if (!cs.position || cs.position === "static")
       element.style.position = "relative";
+
     element.appendChild(sparkle);
-    sparkle.animate(
-      [
-        {
-          opacity: 0,
-          transform: `scale(0) rotate(${(Math.random() * 360).toFixed(1)}deg)`,
-        },
-        {
-          opacity: 1,
-          transform: `scale(1) rotate(${(360 + Math.random() * 360).toFixed(
-            1
-          )}deg)`,
-        },
-        {
-          opacity: 0,
-          transform: `scale(0.5) rotate(${(720 + Math.random() * 360).toFixed(
-            1
-          )}deg)`,
-        },
-      ],
-      { duration: 650, easing: "ease-out", fill: "forwards" }
-    ).onfinish = () => sparkle.remove();
+
+    sparkle
+      .animate(
+        [
+          {
+            opacity: 0,
+            transform: `scale(0) rotate(${(
+              Math.random() * 360
+            ).toFixed(1)}deg)`,
+          },
+          {
+            opacity: 1,
+            transform: `scale(1) rotate(${(
+              360 + Math.random() * 360
+            ).toFixed(1)}deg)`,
+          },
+          {
+            opacity: 0,
+            transform: `scale(0.5) rotate(${(
+              720 + Math.random() * 360
+            ).toFixed(1)}deg)`,
+          },
+        ],
+        { duration: 650, easing: "ease-out", fill: "forwards" }
+      )
+      .addEventListener("finish", () => sparkle.remove());
   }
 
   // ==========================
@@ -1338,10 +1501,12 @@
   // ==========================
   function initEndOfPageToast() {
     let announced = false;
+
     const handler = throttle(() => {
       if (announced) return;
       const nearBottom =
-        window.innerHeight + window.scrollY >= document.body.offsetHeight - 50;
+        window.innerHeight + window.scrollY >=
+        document.body.offsetHeight - 50;
       if (nearBottom) {
         createToast(STRINGS_FA.toasts.reachedEnd, {
           id: "end-of-page-toast",
@@ -1353,7 +1518,8 @@
         announced = true;
       }
     }, 140);
-    on(window, "scroll", handler);
+
+    on(window, "scroll", handler, { passive: true });
   }
 
   // ==========================
