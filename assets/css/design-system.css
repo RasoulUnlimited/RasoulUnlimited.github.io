@@ -95,6 +95,7 @@ html[dir="rtl"] {
   --font-heading: "Vazirmatn", "Montserrat", sans-serif;
 }
 
+/* --- 404 hero --- */
 .not-found-hero {
   text-align: center;
   padding: var(--space-xxl) var(--space-lg);
@@ -110,8 +111,9 @@ html[dir="rtl"] {
 
 .not-found-hero svg {
   opacity: 0;
-  animation: fadeIn404 var(--transition-duration-long)
-      var(--transition-easing-standard) forwards,
+  animation:
+    fadeIn404 var(--transition-duration-long) var(--transition-easing-standard)
+      forwards,
     float404 8s ease-in-out infinite;
 }
 
@@ -148,6 +150,7 @@ html[dir="rtl"] {
   }
 }
 
+/* --- Generic hero fade-in --- */
 @keyframes fadeInHero {
   from {
     opacity: 0;
@@ -162,7 +165,7 @@ html[dir="rtl"] {
     var(--transition-easing-standard) forwards;
 }
 
-/* Press kit grid layout */
+/* --- Press kit grid layout --- */
 .presskit-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -170,7 +173,7 @@ html[dir="rtl"] {
   margin: var(--space-lg) 0;
 }
 
-/* Standard card grid */
+/* --- Standard card grid --- */
 .grid--cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -178,17 +181,16 @@ html[dir="rtl"] {
   margin: var(--space-lg) 0;
 }
 
-/* Generic card layout */
+/* --- Generic card layout --- */
 .card {
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius-lg);
   padding: var(--space-md);
   box-shadow: 0 2px 6px var(--shadow-color-light);
-  transition: transform var(--transition-duration-medium)
-      var(--transition-easing-standard),
-    box-shadow var(--transition-duration-medium)
-      var(--transition-easing-standard);
+  transition:
+    transform var(--transition-duration-medium) var(--transition-easing-standard),
+    box-shadow var(--transition-duration-medium) var(--transition-easing-standard);
 }
 
 .card:hover {
@@ -196,6 +198,13 @@ html[dir="rtl"] {
   box-shadow: 0 8px 20px var(--shadow-color-medium);
 }
 
+/* کارت با فوکوس داخلی (لینک/دکمه) برای کیبورد */
+.card:focus-within {
+  transform: translateY(calc(var(--space-1) * -1));
+  box-shadow: 0 8px 24px var(--shadow-color-medium);
+}
+
+/* Press style variation */
 .card--press {
   text-align: center;
 }
@@ -212,9 +221,10 @@ html[dir="rtl"] {
 }
 
 .card--project {
+  /* reserved for project-specific overrides */
 }
 
-/* Call to action button */
+/* --- Call to action button --- */
 .cta-button {
   display: inline-block;
   padding: var(--space-xs) var(--space-sm);
@@ -223,9 +233,11 @@ html[dir="rtl"] {
   color: var(--cta-text-color);
   text-decoration: none;
   border: none;
-  transition: transform var(--transition-duration-short)
-      var(--transition-easing-standard),
-    box-shadow var(--transition-duration-short)
+  cursor: pointer;
+  transition:
+    transform var(--transition-duration-short) var(--transition-easing-standard),
+    box-shadow var(--transition-duration-short) var(--transition-easing-standard),
+    background-color var(--transition-duration-short)
       var(--transition-easing-standard);
 }
 
@@ -234,7 +246,15 @@ html[dir="rtl"] {
   box-shadow: 0 6px 15px var(--shadow-color-medium);
 }
 
-/* Press kit card */
+/* کیبورد/فوکوس دیداری */
+.cta-button:focus-visible {
+  outline: 3px solid var(--highlight-color);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px rgba(var(--highlight-rgb), 0.3);
+  transform: translateY(-1px);
+}
+
+/* --- Press kit card --- */
 .presskit-card {
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
@@ -242,15 +262,19 @@ html[dir="rtl"] {
   padding: var(--space-md);
   text-align: center;
   box-shadow: 0 2px 6px var(--shadow-color-light);
-  transition: transform var(--transition-duration-medium)
-      var(--transition-easing-standard),
-    box-shadow var(--transition-duration-medium)
-      var(--transition-easing-standard);
+  transition:
+    transform var(--transition-duration-medium) var(--transition-easing-standard),
+    box-shadow var(--transition-duration-medium) var(--transition-easing-standard);
 }
 
 .presskit-card:hover {
   transform: translateY(calc(var(--space-1) * -1));
   box-shadow: 0 8px 20px var(--shadow-color-medium);
+}
+
+.presskit-card:focus-within {
+  transform: translateY(calc(var(--space-1) * -1));
+  box-shadow: 0 8px 24px var(--shadow-color-medium);
 }
 
 .presskit-card i,
@@ -275,6 +299,21 @@ html[dir="rtl"] {
   color: #fff;
   text-decoration: none;
   border: none;
+  cursor: pointer;
+  transition:
+    background-color var(--transition-duration-short)
+      var(--transition-easing-standard),
+    transform var(--transition-duration-short) var(--transition-easing-standard),
+    box-shadow var(--transition-duration-short)
+      var(--transition-easing-standard);
+}
+
+.download-button:hover,
+.download-button:focus-visible {
+  background-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow-color-medium);
+  text-decoration: none;
 }
 
 /* Utility sections */
@@ -324,14 +363,18 @@ html[dir="rtl"] {
   border-radius: var(--border-radius-lg);
   padding: var(--space-md);
   box-shadow: 0 2px 6px var(--shadow-color-light);
-  transition: transform var(--transition-duration-medium)
-      var(--transition-easing-standard),
+  transition:
+    transform var(--transition-duration-medium) var(--transition-easing-standard),
     box-shadow var(--transition-duration-medium)
       var(--transition-easing-standard);
 }
 .card-basic:hover {
   transform: translateY(calc(var(--space-1) * -1));
   box-shadow: 0 8px 20px var(--shadow-color-medium);
+}
+.card-basic:focus-within {
+  transform: translateY(calc(var(--space-1) * -1));
+  box-shadow: 0 8px 24px var(--shadow-color-medium);
 }
 
 /* Grid helpers */
@@ -455,10 +498,9 @@ html[dir="rtl"] {
   line-height: 1.5;
   background-color: var(--container-bg);
   color: var(--text-color);
-  transition: border-color var(--transition-duration-short)
-      var(--transition-easing-standard),
-    box-shadow var(--transition-duration-short)
-      var(--transition-easing-standard);
+  transition:
+    border-color var(--transition-duration-short) var(--transition-easing-standard),
+    box-shadow var(--transition-duration-short) var(--transition-easing-standard);
 }
 .contact-form input:focus,
 .contact-form textarea:focus {
@@ -479,7 +521,8 @@ html[dir="rtl"] {
   border: none;
   border-radius: var(--border-radius-md);
   cursor: pointer;
-  transition: background-color var(--transition-duration-short)
+  transition:
+    background-color var(--transition-duration-short)
       var(--transition-easing-standard),
     transform var(--transition-duration-short) var(--transition-easing-standard);
 }
@@ -489,23 +532,28 @@ html[dir="rtl"] {
   transform: translateY(-2px);
 }
 
+/* motion-reduction */
 @media (prefers-reduced-motion: reduce) {
   .cta-button,
   .presskit-card,
-  .card-basic {
+  .card-basic,
+  .card {
     transition: none;
   }
 
   .cta-button:hover,
   .presskit-card:hover,
-  .card-basic:hover {
+  .card-basic:hover,
+  .card:hover {
     transform: none;
     box-shadow: none;
   }
 }
+
 /* Code block style for security policy */
 .security-code-block {
-  font-family: ui-monospace, "SFMono-Regular", Menlo, Monaco, "Liberation Mono", monospace;
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Monaco,
+    "Liberation Mono", monospace;
   background-color: var(--container-bg);
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius-md);
@@ -592,7 +640,12 @@ html[dir="rtl"] {
   color: transparent;
   pointer-events: none;
   user-select: none;
-  background: linear-gradient(90deg, var(--background-start-color), var(--background-end-color), var(--background-start-color));
+  background: linear-gradient(
+    90deg,
+    var(--background-start-color),
+    var(--background-end-color),
+    var(--background-start-color)
+  );
   background-size: 200% 100%;
   animation: skeleton-loading 1.5s infinite;
 }
@@ -601,6 +654,7 @@ html[dir="rtl"] {
   height: 1em;
   border-radius: var(--border-radius-sm);
 }
+
 .search-highlight {
   background-color: rgba(var(--highlight-rgb), 0.4);
   border-radius: var(--border-radius-sm);
