@@ -16,6 +16,7 @@
     const items = Array.from(root.querySelectorAll(".accordion-item"));
     const headers = [];
 
+    // First pass: Collect all headers and setup ARIA attributes
     items.forEach((item, index) => {
       const header = item.querySelector(".accordion-header");
       const panel = item.querySelector(".accordion-content");
@@ -48,6 +49,17 @@
       } else {
         item.classList.remove("is-open");
       }
+
+      // Add to headers array for keyboard navigation
+      headers.push(header);
+    });
+
+    // Second pass: Attach event listeners using complete headers array
+    items.forEach((item, index) => {
+      const header = item.querySelector(".accordion-header");
+      const panel = item.querySelector(".accordion-content");
+
+      if (!header || !panel) return;
 
       // Click / keyboard handlers
       header.addEventListener("click", () => {
@@ -82,8 +94,6 @@
           headers[headers.length - 1].focus();
         }
       });
-
-      headers.push(header);
     });
 
     /**

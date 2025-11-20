@@ -132,5 +132,10 @@
     // وضعیت اولیه
     clearButton.style.display = "";
     filterFaq("");
+
+    // Cleanup on page unload to prevent memory leaks
+    window.addEventListener("beforeunload", () => {
+      clearTimeout(debounceTimer);
+    });
   });
 })();

@@ -269,4 +269,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Initial filter with saved term (if any)
   filterCards(savedTerm);
+
+  // Cleanup on page unload to prevent memory leaks
+  window.addEventListener("beforeunload", () => {
+    clearTimeout(debounceTimer);
+  });
 });
