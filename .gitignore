@@ -21,24 +21,53 @@ coverage/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 
-# IDE
+# IDE & Editor
 .vscode/
 .idea/
 *.sublime-project
 *.sublime-workspace
 .vim/
 *.bak
+.vscode-test/
+*.code-workspace
 
-# Testing
+# Testing & Quality
 .nyc_output/
 .mocha_output/
+.coverage/
+lcov.info
 
-# Patch files
+# Patch & Backup files
 *.patch
+*.diff
 fix.patch
+*.backup
 
-# Cache
+# Cache & Temp
 .cache/
 .eslintcache
 .htmlhintcache
+.pytest_cache/
+.temp/
+tmp/
+*.tmp
+
+# OS & System
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.Spotlight-V100
+.Trashes
+
+# CI/CD
+.github/workflows/*.log
+.gitlab-ci.local
+
+# Local overrides
+.local/
+local.config.js

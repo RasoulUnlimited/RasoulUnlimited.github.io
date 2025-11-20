@@ -1,7 +1,7 @@
 {
-  "doctype-first": false,
+  "doctype-first": true,
   "doctype-html5": true,
-  "title-require": false,
+  "title-require": true,
   "head-script-disabled": false,
   "style-disabled": false,
   "space-tab-mixed-disabled": "space",
@@ -9,15 +9,19 @@
   "id-unique": true,
   "href-abs-or-rel": false,
   "attr-unsafe-chars": false,
-  "attr-value-double-quotes": false,
+  "attr-value-double-quotes": true,
   "tag-pair": true,
   "tag-self-close": false,
   "tagname-lowercase": true,
-  "attr-lowercase": false,
+  "attr-lowercase": true,
   "empty-tag-not-self-closed": false,
   "src-not-empty": true,
   "attr-no-duplication": true,
   "inline-style-disabled": false,
   "inline-script-disabled": false,
-  "content-too-long": false
+  "content-too-long": false,
+  "spec-char-escape": true,
+  "text-escape-unmapped-char": false,
+  "href-not-empty": true,
+  "element-required-attributes": false
 }

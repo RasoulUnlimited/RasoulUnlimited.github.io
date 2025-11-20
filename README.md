@@ -103,20 +103,31 @@ The `build` script compiles and minifies static assets using Gulp.
 After running the build, you can preview the site locally with any static server.
 
 ```bash
+# Using Node.js serve package
 npx serve -l 8080 .
-# or
+
+# Or using Python
 python3 -m http.server 8080
+
+# Or using PHP
+php -S localhost:8080
 ```
 
 Then open <http://localhost:8080> in your browser.
 
 ## Code Quality
 
-This project uses **ESLint** and **HTMLHint** for code quality checks:
+This project uses **ESLint** and **HTMLHint** for comprehensive code quality checks:
 
 ```bash
-# Run linting checks
+# Run all linting checks
 npm run lint
+
+# Run HTML linting only
+npm run lint:html
+
+# Run JavaScript linting only
+npm run lint:js
 
 # Automatically fix linting issues
 npm run lint:fix

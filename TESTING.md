@@ -13,11 +13,21 @@ Run linting checks to catch syntax and style issues:
 npm run lint
 
 # Run specific linters
-npx eslint "**/*.js" --ignore-pattern="**/node_modules/**" --ignore-pattern="**/*.min.js"
-npx htmlhint "**/*.html"
+npm run lint:html                    # HTML validation
+npm run lint:js                      # JavaScript linting
 
 # Automatically fix fixable issues
 npm run lint:fix
+
+# Fix only JavaScript
+npm run lint:fix:js
+
+# Run tests in strict mode (no warnings allowed)
+npm run test:strict
+
+# Run specific linters manually
+npx eslint "**/*.js" --ignore-pattern="**/node_modules/**" --ignore-pattern="**/*.min.js"
+npx htmlhint --config .htmlhintrc.json "**/*.html"
 ```
 
 ### Security Audit
@@ -25,11 +35,14 @@ npm run lint:fix
 Check for vulnerabilities in dependencies:
 
 ```bash
-# Audit production dependencies
+# Audit production dependencies only
 npm run audit:prod
 
-# Interactive audit with fix recommendations
+# Full audit with fix recommendations
 npm run audit
+
+# Run after updates to verify
+npm run audit:prod
 ```
 
 ## Manual Testing
