@@ -1598,9 +1598,49 @@
   }
 
   // ==========================
+  // Mobile Menu
+  // ==========================
+  function initMobileMenu() {
+    const hamburger = document.querySelector(".hamburger");
+    const navLinks = document.querySelector(".nav-links");
+    const links = document.querySelectorAll(".nav-links a");
+
+    if (!hamburger || !navLinks) return;
+
+    on(hamburger, "click", () => {
+      hamburger.classList.toggle("active");
+      navLinks.classList.toggle("active");
+      const expanded = hamburger.getAttribute("aria-expanded") === "true";
+      hamburger.setAttribute("aria-expanded", !expanded);
+    });
+
+    links.forEach((link) => {
+      on(link, "click", () => {
+        hamburger.classList.remove("active");
+        navLinks.classList.remove("active");
+        hamburger.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    // Close menu when clicking outside
+    on(document, "click", (e) => {
+      if (
+        !hamburger.contains(e.target) &&
+        !navLinks.contains(e.target) &&
+        navLinks.classList.contains("active")
+      ) {
+        hamburger.classList.remove("active");
+        navLinks.classList.remove("active");
+        hamburger.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
+
+  // ==========================
   // Boot & Live Updates
   // ==========================
   function boot() {
+    initMobileMenu();
     initAOS();
     setDynamicDates();
     setIdentityHooks();

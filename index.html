@@ -1610,62 +1610,69 @@
 
     <header class="navbar" role="banner">
       <nav data-aos="fade-down" role="navigation" aria-label="منوی اصلی سایت">
-        <a href="#hero" title="بازگشت به صفحه اصلی و اطلاعات هویتی"
-          >صفحه اصلی</a
-        >
-        <a
-          href="#about"
-          title="درباره محمد رسول سهرابی بیشتر بدانید و هویت او را کاوش کنید"
-          >درباره من</a
-        >
-        <a href="#timeline" title="مسیر تحصیلی، حرفه‌ای و دستاوردهای کلیدی من"
-          >مسیر من</a
-        >
-        <a href="#skills" title="مهارت‌ها و تکنولوژی‌های تخصصی من">مهارت‌ها</a>
-        <a
-          href="#projects"
-          title="پروژه‌های توسعه نرم‌افزار، متن‌باز و نوآورانه من"
-          >پروژه‌ها</a
-        >
-        <a href="#content" title="محتوا، مقالات و دیدگاه‌های من">محتوا</a>
-        <a href="#mentions" title="حضور در رسانه‌ها، جوایز و افتخارات رسمی"
-          >اشارات</a
-        >
-        <a
-          href="#faq"
-          title="سوالات متداول درباره من و فعالیت‌هایم برای درک عمیق‌تر هویت"
-          >سوالات متداول</a
-        >
-        <a
-          href="#testimonials"
-          title="نظرات دیگران درباره من و پروژه‌هایم، تأییدی بر اعتبار"
-          >نظرات</a
-        >
-        <a
-          href="#connect"
-          title="راه‌های ارتباط مستقیم با محمد رسول سهرابی و شبکه‌های اجتماعی او"
-          >ارتباط</a
-        >
-        <a
-          href="https://rasoulunlimited.ir/en/"
-          class="lang-switcher"
-          aria-label="تغییر زبان وبسایت به انگلیسی"
-          title="Switch website language to English"
-          data-ai-intent="language-switch-to-english"
-          ><i class="fas fa-language" aria-hidden="true"></i> English</a
-        >
-        <label
-          class="theme-switch"
-          aria-label="تغییر تم سایت (روشن/تاریک)"
-          data-ai-intent="theme-toggle"
-        >
-          <input
-            type="checkbox"
-            id="theme-toggle"
+        <button class="hamburger" aria-label="منو" aria-expanded="false">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+        <div class="nav-links">
+          <a href="#hero" title="بازگشت به صفحه اصلی و اطلاعات هویتی"
+            >صفحه اصلی</a
+          >
+          <a
+            href="#about"
+            title="درباره محمد رسول سهرابی بیشتر بدانید و هویت او را کاوش کنید"
+            >درباره من</a
+          >
+          <a href="#timeline" title="مسیر تحصیلی، حرفه‌ای و دستاوردهای کلیدی من"
+            >مسیر من</a
+          >
+          <a href="#skills" title="مهارت‌ها و تکنولوژی‌های تخصصی من">مهارت‌ها</a>
+          <a
+            href="#projects"
+            title="پروژه‌های توسعه نرم‌افزار، متن‌باز و نوآورانه من"
+            >پروژه‌ها</a
+          >
+          <a href="#content" title="محتوا، مقالات و دیدگاه‌های من">محتوا</a>
+          <a href="#mentions" title="حضور در رسانه‌ها، جوایز و افتخارات رسمی"
+            >اشارات</a
+          >
+          <a
+            href="#faq"
+            title="سوالات متداول درباره من و فعالیت‌هایم برای درک عمیق‌تر هویت"
+            >سوالات متداول</a
+          >
+          <a
+            href="#testimonials"
+            title="نظرات دیگران درباره من و پروژه‌هایم، تأییدی بر اعتبار"
+            >نظرات</a
+          >
+          <a
+            href="#connect"
+            title="راه‌های ارتباط مستقیم با محمد رسول سهرابی و شبکه‌های اجتماعی او"
+            >ارتباط</a
+          >
+          <a
+            href="https://rasoulunlimited.ir/en/"
+            class="lang-switcher"
+            aria-label="تغییر زبان وبسایت به انگلیسی"
+            title="Switch website language to English"
+            data-ai-intent="language-switch-to-english"
+            ><i class="fas fa-language" aria-hidden="true"></i> English</a
+          >
+          <label
+            class="theme-switch"
             aria-label="تغییر تم سایت (روشن/تاریک)"
-          />
-          <span class="slider round"></span>
-        </label>
+            data-ai-intent="theme-toggle"
+          >
+            <input
+              type="checkbox"
+              id="theme-toggle"
+              aria-label="تغییر تم سایت (روشن/تاریک)"
+            />
+            <span class="slider round"></span>
+          </label>
+        </div>
       </nav>
     </header>
 
@@ -1726,6 +1733,10 @@
             <div class="hero-security" aria-label="وب‌سایت ایمن" role="img">
               <i class="fas fa-shield-alt hero-icon" aria-hidden="true"></i>
               <span class="visually-hidden">وب‌سایت ایمن</span>
+            </div>
+            <div class="hero-cta-group">
+              <a href="#connect" class="hero-btn primary">همکاری با من</a>
+              <a href="#projects" class="hero-btn secondary">مشاهده پروژه‌ها</a>
             </div>
             <link itemprop="url" href="https://rasoulunlimited.ir" />
           </section>
