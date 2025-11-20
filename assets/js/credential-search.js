@@ -89,7 +89,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     const regex = new RegExp(`(${escapeRegExp(term)})`, "gi");
     const parts = el.dataset.original.split(regex);
-    el.innerHTML = "";
+    // Clear safely without using innerHTML to prevent XSS
+    while (el.firstChild) {
+      el.removeChild(el.firstChild);
+    }
     parts.forEach((part, index) => {
       if (index % 2 === 1) {
         const mark = document.createElement("mark");
@@ -121,19 +124,21 @@ document.addEventListener("DOMContentLoaded", function () {
     cards.forEach((card) => {
       const nameEl = card.querySelector("h3");
       const summaryEl = card.querySelector(".credential-summary");
-      const keywords = normalizeText(card.dataset.keywords || "").toLowerCase();
-      const name = nameEl
+      
+      // Cache normalized values to avoid redundant normalization calls
+      const normalizedName = nameEl && nameEl.dataset.original
         ? normalizeText(nameEl.dataset.original).toLowerCase()
         : "";
-      const summary = summaryEl
+      const normalizedSummary = summaryEl && summaryEl.dataset.original
         ? normalizeText(summaryEl.dataset.original).toLowerCase()
         : "";
+      const normalizedKeywords = normalizeText(card.dataset.keywords || "").toLowerCase();
 
       const matches =
         !searchNormalized ||
-        name.includes(searchNormalized) ||
-        summary.includes(searchNormalized) ||
-        keywords.includes(searchNormalized);
+        normalizedName.includes(searchNormalized) ||
+        normalizedSummary.includes(searchNormalized) ||
+        normalizedKeywords.includes(searchNormalized);
 
       if (matches) {
         card.style.display = "grid";

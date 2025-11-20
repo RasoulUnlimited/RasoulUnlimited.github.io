@@ -354,7 +354,10 @@
     function renderTimeline(events) {
       if (!timelineList) return;
 
-      timelineList.innerHTML = "";
+      // Clear safely without using innerHTML to prevent XSS
+      while (timelineList.firstChild) {
+        timelineList.removeChild(timelineList.firstChild);
+      }
       const sorted = events
         .slice()
         .sort((a, b) =>
@@ -595,7 +598,10 @@
     function loadTimeline(force = false, btn = null) {
       if (!timelineList) return;
 
-      timelineList.innerHTML = "";
+      // Clear safely without using innerHTML to prevent XSS
+      while (timelineList.firstChild) {
+        timelineList.removeChild(timelineList.firstChild);
+      }
       timelineList.setAttribute("aria-busy", "true");
 
       if (btn) {
@@ -626,7 +632,11 @@
               )
             ).sort((a, b) => b - a);
 
-            yearFilter.innerHTML = "";
+            // Clear safely without using innerHTML
+            while (yearFilter.firstChild) {
+              yearFilter.removeChild(yearFilter.firstChild);
+            }
+            
             const defaultOption = document.createElement("option");
             defaultOption.value = "";
             defaultOption.textContent = isFa
@@ -884,7 +894,10 @@
     function loadAdvisories(force = false, btn = null) {
       if (!advisoriesList) return;
 
-      advisoriesList.innerHTML = "";
+      // Clear safely without using innerHTML to prevent XSS
+      while (advisoriesList.firstChild) {
+        advisoriesList.removeChild(advisoriesList.firstChild);
+      }
 
       if (btn) {
         btn.classList.add("loading");
