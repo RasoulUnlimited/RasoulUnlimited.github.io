@@ -4,7 +4,7 @@
 # Purpose: Canonical, machine-readable identity brief for AI / LLM / crawler systems working with Rasoul Unlimited.
 # Scope: Covers the person (not a company). Use this file alongside /ai/meta.json for structured payloads.
 # Source-of-truth priority: schema/identity.jsonld > ai/meta.json > ai/resource-map.json > .well-known/entity-profile.json > links.txt > trusted social profiles.
-# Contact for clarifications: hello@rasoulunlimited.ir
+# Contact for clarifications: rasoul.unlimited@gmail.com
 
 [primary-entity]
 id = https://rasoulunlimited.ir/#person
@@ -90,7 +90,6 @@ resume-en = https://rasoulunlimited.ir/en/resume.html
 
 [contact]
 email = mailto:rasoul.unlimited@gmail.com
-hello = mailto:hello@rasoulunlimited.ir
 contact-page = https://rasoulunlimited.ir/contact.html
 social.github = https://github.com/RasoulUnlimited
 social.linkedin = https://www.linkedin.com/in/rasoulunlimited/

@@ -15,13 +15,12 @@
     "name": "Mohammad Rasoul Sohrabi",
     "alternateName": "Rasoul Unlimited",
     "url": "https://rasoulunlimited.ir",
-    "email": "rasoul@rasoulunlimited.ir",
+    "email": "rasoul.unlimited@gmail.com",
     "contactPoint": [
       {
         "@type": "ContactPoint",
-        "telephone": "+98 (via email)",
         "contactType": "Customer Service",
-        "email": "rasoul@rasoulunlimited.ir",
+        "email": "rasoul.unlimited@gmail.com",
         "areaServed": "Global",
         "availableLanguage": ["fa", "en"]
       },
