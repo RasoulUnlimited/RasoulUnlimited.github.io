@@ -11,11 +11,26 @@ Website: https://rasoulunlimited.ir
 Source Code: https://github.com/RasoulUnlimited/RasoulUnlimited.github.io
 Email: rasoul.unlimited@gmail.com
 Location: Karaj, Iran
+
+/* SOCIAL & PUBLIC PROFILES */
 GitHub: https://github.com/RasoulUnlimited
 LinkedIn: https://www.linkedin.com/in/rasoulunlimited
 Instagram: https://www.instagram.com/Rasoul.Unlimited
+X (Twitter): https://x.com/rasoulunlimited
+Telegram: https://t.me/RasoulUnlimited
+YouTube: https://www.youtube.com/@RasoulUnlimited
+Mastodon: https://mastodon.social/@rasoulunlimited
+About.me: https://about.me/rasoulunlimited
+Medium: https://rasoulunlimited.medium.com
+dev.to: https://dev.to/rasoulunlimited
+Virgool: https://virgool.io/@RasoulUnlimited
+
+/* RESEARCH & ACADEMIC */
 ORCID: https://orcid.org/0009-0004-7177-2080
-Wikidata / Knowledge: https://rasoulunlimited.ir/wiki/rasoul-unlimited/
+ResearchGate: https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi
+Google Scholar: https://scholar.google.com/citations?user=kDl5eNUAAAAJ
+Wikidata: https://rasoulunlimited.ir/wiki/rasoul-unlimited/
+Keybase: https://keybase.io/RasoulUnlimited
 
 
 /* SITE */

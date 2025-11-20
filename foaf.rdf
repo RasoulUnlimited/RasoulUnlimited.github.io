@@ -173,12 +173,49 @@
       </foaf:OnlineAccount>
     </foaf:account>
 
-    <!-- Wikidata -->
+
+    <!-- Medium -->
     <foaf:account>
       <foaf:OnlineAccount>
-        <foaf:accountServiceHomepage rdf:resource="https://www.wikidata.org"/>
-        <foaf:accountName>Q134619124</foaf:accountName>
-        <owl:sameAs rdf:resource="https://www.wikidata.org/wiki/Q134619124"/>
+        <foaf:accountServiceHomepage rdf:resource="https://medium.com"/>
+        <foaf:accountName>rasoulunlimited</foaf:accountName>
+        <owl:sameAs rdf:resource="https://rasoulunlimited.medium.com"/>
+      </foaf:OnlineAccount>
+    </foaf:account>
+
+    <!-- Virgool -->
+    <foaf:account>
+      <foaf:OnlineAccount>
+        <foaf:accountServiceHomepage rdf:resource="https://virgool.io"/>
+        <foaf:accountName>RasoulUnlimited</foaf:accountName>
+        <owl:sameAs rdf:resource="https://virgool.io/@RasoulUnlimited"/>
+      </foaf:OnlineAccount>
+    </foaf:account>
+
+    <!-- Keybase -->
+    <foaf:account>
+      <foaf:OnlineAccount>
+        <foaf:accountServiceHomepage rdf:resource="https://keybase.io"/>
+        <foaf:accountName>RasoulUnlimited</foaf:accountName>
+        <owl:sameAs rdf:resource="https://keybase.io/RasoulUnlimited"/>
+      </foaf:OnlineAccount>
+    </foaf:account>
+
+    <!-- Google Scholar -->
+    <foaf:account>
+      <foaf:OnlineAccount>
+        <foaf:accountServiceHomepage rdf:resource="https://scholar.google.com"/>
+        <foaf:accountName>kDl5eNUAAAAJ</foaf:accountName>
+        <owl:sameAs rdf:resource="https://scholar.google.com/citations?user=kDl5eNUAAAAJ"/>
+      </foaf:OnlineAccount>
+    </foaf:account>
+
+    <!-- About.me -->
+    <foaf:account>
+      <foaf:OnlineAccount>
+        <foaf:accountServiceHomepage rdf:resource="https://about.me"/>
+        <foaf:accountName>rasoulunlimited</foaf:accountName>
+        <owl:sameAs rdf:resource="https://about.me/rasoulunlimited"/>
       </foaf:OnlineAccount>
     </foaf:account>
 

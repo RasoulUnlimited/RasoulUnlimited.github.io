@@ -100,7 +100,13 @@ social.mastodon = https://mastodon.social/@rasoulunlimited
 social.telegram = https://t.me/RasoulUnlimited
 social.youtube = https://www.youtube.com/@RasoulUnlimited
 social.about-me = https://about.me/rasoulunlimited
-social.wikidata = https://www.wikidata.org/wiki/Q134619124
+social.medium = https://rasoulunlimited.medium.com
+social.dev-to = https://dev.to/rasoulunlimited
+social.virgool = https://virgool.io/@RasoulUnlimited
+social.keybase = https://keybase.io/RasoulUnlimited
+social.researchgate = https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi
+social.orcid = https://orcid.org/0009-0004-7177-2080
+social.scholar = https://scholar.google.com/citations?user=kDl5eNUAAAAJ
 
 [ai-resource-map]
 catalog = https://rasoulunlimited.ir/ai/resource-map.json
