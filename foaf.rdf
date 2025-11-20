@@ -219,6 +219,123 @@
       </foaf:OnlineAccount>
     </foaf:account>
 
+    <!-- Facebook -->
+    <foaf:account>
+      <foaf:OnlineAccount>
+        <foaf:accountServiceHomepage rdf:resource="https://facebook.com"/>
+        <foaf:accountName>RasoulUnlimited</foaf:accountName>
+        <owl:sameAs rdf:resource="https://www.facebook.com/RasoulUnlimited"/>
+      </foaf:OnlineAccount>
+    </foaf:account>
+
+    <!-- GitLab -->
+    <foaf:account>
+      <foaf:OnlineAccount>
+        <foaf:accountServiceHomepage rdf:resource="https://gitlab.com"/>
+        <foaf:accountName>rasoul.unlimited</foaf:accountName>
+        <owl:sameAs rdf:resource="https://gitlab.com/rasoul.unlimited"/>
+      </foaf:OnlineAccount>
+    </foaf:account>
+
+    <!-- SourceForge -->
+    <foaf:account>
+      <foaf:OnlineAccount>
+        <foaf:accountServiceHomepage rdf:resource="https://sourceforge.net"/>
+        <foaf:accountName>rasoulunlimited</foaf:accountName>
+        <owl:sameAs rdf:resource="https://sourceforge.net/u/rasoulunlimited"/>
+      </foaf:OnlineAccount>
+    </foaf:account>
+
+    <!-- Gravatar -->
+    <foaf:account>
+      <foaf:OnlineAccount>
+        <foaf:accountServiceHomepage rdf:resource="https://gravatar.com"/>
+        <foaf:accountName>rasoulunlimited</foaf:accountName>
+        <owl:sameAs rdf:resource="https://gravatar.com/rasoulunlimited"/>
+      </foaf:OnlineAccount>
+    </foaf:account>
+
+    <!-- Top.gg (Discord Bots) -->
+    <foaf:account>
+      <foaf:OnlineAccount>
+        <foaf:accountServiceHomepage rdf:resource="https://top.gg"/>
+        <foaf:accountName>735403725132136510</foaf:accountName>
+        <owl:sameAs rdf:resource="https://top.gg/bot/735403725132136510"/>
+      </foaf:OnlineAccount>
+    </foaf:account>
+
+    <!-- Web of Science -->
+    <foaf:account>
+      <foaf:OnlineAccount>
+        <foaf:accountServiceHomepage rdf:resource="https://www.webofscience.com"/>
+        <foaf:accountName>NJS-6637-2025</foaf:accountName>
+        <owl:sameAs rdf:resource="https://www.webofscience.com/wos/author/record/NJS-6637-2025"/>
+      </foaf:OnlineAccount>
+    </foaf:account>
+
+    <!-- ISNI -->
+    <foaf:account>
+      <foaf:OnlineAccount>
+        <foaf:accountServiceHomepage rdf:resource="https://isni.org"/>
+        <foaf:accountName>0000000527866581</foaf:accountName>
+        <owl:sameAs rdf:resource="https://isni.org/isni/0000000527866581"/>
+      </foaf:OnlineAccount>
+    </foaf:account>
+
+    <!-- Authenticus -->
+    <foaf:account>
+      <foaf:OnlineAccount>
+        <foaf:accountServiceHomepage rdf:resource="https://www.authenticus.pt"/>
+        <foaf:accountName>R-00M-286</foaf:accountName>
+        <owl:sameAs rdf:resource="https://www.authenticus.pt/R-00M-286"/>
+      </foaf:OnlineAccount>
+    </foaf:account>
+
+    <!-- Academia.edu -->
+    <foaf:account>
+      <foaf:OnlineAccount>
+        <foaf:accountServiceHomepage rdf:resource="https://academia.edu"/>
+        <foaf:accountName>MohammadRasoulSohrabi</foaf:accountName>
+        <owl:sameAs rdf:resource="https://independent.academia.edu/MohammadRasoulSohrabi"/>
+      </foaf:OnlineAccount>
+    </foaf:account>
+
+    <!-- DataCite Commons -->
+    <foaf:account>
+      <foaf:OnlineAccount>
+        <foaf:accountServiceHomepage rdf:resource="https://commons.datacite.org"/>
+        <foaf:accountName>0009-0004-7177-2080</foaf:accountName>
+        <owl:sameAs rdf:resource="https://commons.datacite.org/orcid.org/0009-0004-7177-2080"/>
+      </foaf:OnlineAccount>
+    </foaf:account>
+
+    <!-- Frontier In Research -->
+    <foaf:account>
+      <foaf:OnlineAccount>
+        <foaf:accountServiceHomepage rdf:resource="https://loop.frontiersin.org"/>
+        <foaf:accountName>3130177</foaf:accountName>
+        <owl:sameAs rdf:resource="https://loop.frontiersin.org/people/3130177/overview"/>
+      </foaf:OnlineAccount>
+    </foaf:account>
+
+    <!-- Lens.org -->
+    <foaf:account>
+      <foaf:OnlineAccount>
+        <foaf:accountServiceHomepage rdf:resource="https://www.lens.org"/>
+        <foaf:accountName>rasoulunlimited</foaf:accountName>
+        <owl:sameAs rdf:resource="https://www.lens.org/lens/profile/rasoulunlimited"/>
+      </foaf:OnlineAccount>
+    </foaf:account>
+
+    <!-- Wikimedia Commons -->
+    <foaf:account>
+      <foaf:OnlineAccount>
+        <foaf:accountServiceHomepage rdf:resource="https://commons.wikimedia.org"/>
+        <foaf:accountName>Mohammad_Rasoul_Sohrabi</foaf:accountName>
+        <owl:sameAs rdf:resource="https://commons.wikimedia.org/wiki/File:Mohammad_Rasoul_Sohrabi_(Rasoul_Unlimited),_2025.jpg"/>
+      </foaf:OnlineAccount>
+    </foaf:account>
+
     <!-- See Also (semantic links) -->
     <rdfs:seeAlso rdf:resource="https://rasoulunlimited.ir/security.html"/>
     <rdfs:seeAlso rdf:resource="https://rasoulunlimited.ir/humans.txt"/>
