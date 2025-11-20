@@ -200,12 +200,27 @@
     ticking = false;
   }
 
+  function updateProgressBar() {
+    const progressBar = document.getElementById("scroll-progress-bar");
+    if (!progressBar) return;
+
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrollPercent = (scrollTop / docHeight) * 100;
+
+    progressBar.style.width = scrollPercent + "%";
+    progressBar.setAttribute("aria-valuenow", Math.round(scrollPercent));
+  }
+
   window.addEventListener(
     "scroll",
     () => {
       lastScrollY = window.scrollY || window.pageYOffset || 0;
       if (!ticking) {
-        window.requestAnimationFrame(checkPageEnd);
+        window.requestAnimationFrame(() => {
+          checkPageEnd();
+          updateProgressBar();
+        });
         ticking = true;
       }
     },
