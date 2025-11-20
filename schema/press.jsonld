@@ -1,0 +1,41 @@
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": "https://rasoulunlimited.ir/press.html#page",
+  "name": "Press Kit & Media References – Rasoul Unlimited",
+  "url": "https://rasoulunlimited.ir/press.html",
+  "description": "Collection of media references, interviews, and press coverage featuring Mohammad Rasoul Sohrabi (Rasoul Unlimited). Official resource for journalists and editors.",
+  "inLanguage": "fa-IR",
+  "isPartOf": {
+    "@id": "https://rasoulunlimited.ir/#website"
+  },
+  "about": {
+    "@type": "Person",
+    "@id": "https://rasoulunlimited.ir/#person",
+    "name": "Mohammad Rasoul Sohrabi",
+    "alternateName": "Rasoul Unlimited"
+  },
+  "mainEntity": {
+    "@type": "Organization",
+    "@id": "https://rasoulunlimited.ir/#brand",
+    "name": "Rasoul Unlimited",
+    "url": "https://rasoulunlimited.ir"
+  },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://rasoulunlimited.ir/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Press & Media",
+        "item": "https://rasoulunlimited.ir/press.html"
+      }
+    ]
+  }
+}

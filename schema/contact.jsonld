@@ -1,0 +1,44 @@
+{
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "@id": "https://rasoulunlimited.ir/contact.html#page",
+  "name": "Contact Rasoul Unlimited",
+  "url": "https://rasoulunlimited.ir/contact.html",
+  "description": "Professional ways to get in touch with Mohammad Rasoul Sohrabi (Rasoul Unlimited) for collaboration, consultation, interviews, or technical inquiries.",
+  "inLanguage": "fa-IR",
+  "isPartOf": {
+    "@id": "https://rasoulunlimited.ir/#website"
+  },
+  "mainEntity": {
+    "@type": "Person",
+    "@id": "https://rasoulunlimited.ir/#person",
+    "name": "Mohammad Rasoul Sohrabi",
+    "alternateName": "Rasoul Unlimited",
+    "url": "https://rasoulunlimited.ir",
+    "email": "rasoul@rasoulunlimited.ir",
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "telephone": "+98 (via email)",
+        "contactType": "Customer Service",
+        "email": "rasoul@rasoulunlimited.ir",
+        "areaServed": "Global",
+        "availableLanguage": ["fa", "en"]
+      },
+      {
+        "@type": "ContactPoint",
+        "contactType": "Professional Inquiries",
+        "url": "https://linkedin.com/in/rasoulunlimited",
+        "areaServed": "Global",
+        "availableLanguage": ["fa", "en"]
+      }
+    ],
+    "sameAs": [
+      "https://linkedin.com/in/rasoulunlimited",
+      "https://twitter.com/rasoulunlimited",
+      "https://github.com/RasoulUnlimited",
+      "https://instagram.com/rasoul.unlimited",
+      "https://www.wikidata.org/wiki/Q134619124"
+    ]
+  }
+}

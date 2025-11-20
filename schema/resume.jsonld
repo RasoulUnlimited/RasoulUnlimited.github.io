@@ -1,0 +1,60 @@
+{
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "@id": "https://rasoulunlimited.ir/resume.html#page",
+  "name": "Resume – Mohammad Rasoul Sohrabi (Rasoul Unlimited)",
+  "url": "https://rasoulunlimited.ir/resume.html",
+  "description": "Structured curriculum vitae detailing education, technical skills, professional experience, and achievements of Mohammad Rasoul Sohrabi.",
+  "inLanguage": "fa-IR",
+  "isPartOf": {
+    "@id": "https://rasoulunlimited.ir/#website"
+  },
+  "about": {
+    "@type": "Person",
+    "@id": "https://rasoulunlimited.ir/#person",
+    "name": "Mohammad Rasoul Sohrabi",
+    "alternateName": "Rasoul Unlimited",
+    "url": "https://rasoulunlimited.ir",
+    "jobTitle": [
+      "Biomedical Engineering Student",
+      "Full-Stack Developer",
+      "Open-Source Software Engineer"
+    ],
+    "affiliation": {
+      "@type": "CollegeOrUniversity",
+      "name": "Islamic Azad University Central Tehran Branch",
+      "url": "https://ctb.iau.ir"
+    },
+    "workLocation": {
+      "@type": "Place",
+      "name": "Karaj, Iran"
+    },
+    "skills": [
+      "Python",
+      "JavaScript/TypeScript",
+      "C/C++",
+      "Full-Stack Web Development",
+      "Discord Bot Development",
+      "Git & GitHub",
+      "Biomedical Engineering",
+      "Digital Health"
+    ]
+  },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://rasoulunlimited.ir/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Resume",
+        "item": "https://rasoulunlimited.ir/resume.html"
+      }
+    ]
+  }
+}
