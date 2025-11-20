@@ -59,10 +59,8 @@ self.addEventListener('activate', event => {
             return caches.delete(k);
           })
       )
-    )
+    ).then(() => self.clients.claim()) // Claim clients after cleanup completes
   );
-  // Take control of clients immediately
-  return self.clients.claim();
 });
 
 // Fetch event: implement smart caching strategy

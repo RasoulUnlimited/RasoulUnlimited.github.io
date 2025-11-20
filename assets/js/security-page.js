@@ -155,7 +155,11 @@
       const timer =
         controller &&
         setTimeout(() => {
-          controller.abort();
+          try {
+            controller.abort();
+          } catch (err) {
+            console.warn("Failed to abort fetch request:", err);
+          }
         }, timeout);
 
       try {
@@ -558,6 +562,13 @@
           clearSearchBtn &&
             clearSearchBtn.classList.add("visually-hidden");
           filterList("");
+        }
+      });
+
+      // Cleanup debounce timer on unload to prevent memory leaks
+      window.addEventListener("beforeunload", () => {
+        if (debounceTimer) {
+          clearTimeout(debounceTimer);
         }
       });
 
