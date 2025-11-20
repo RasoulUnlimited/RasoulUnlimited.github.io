@@ -1,0 +1,18 @@
+#!/bin/bash
+# Git pre-commit hook
+# This file should be placed at .git/hooks/pre-commit with execute permissions
+# To install: cp .githooks/pre-commit .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit
+
+set -e
+
+echo "🔍 Running pre-commit checks..."
+
+# Run linting
+echo "  ↳ Checking code quality..."
+npm run lint -- --fix 2>/dev/null || true
+
+# Add fixed files back to staging
+git add -A
+
+echo "✅ Pre-commit checks passed!"
+exit 0

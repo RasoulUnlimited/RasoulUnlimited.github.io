@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.documentElement.lang ||
     "en";
 
-  if (!searchInput || !clearButton || !cards.length) return;
+  if (!searchInput || !clearButton || !cards.length) {return;}
 
   // Make results info a live region for screen readers
   if (resultsInfo) {
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Safe wrapper for createToast (works with 1-arg or 2-arg versions)
   function safeToast(message, options) {
-    if (typeof window.createToast !== "function") return;
+    if (typeof window.createToast !== "function") {return;}
     try {
       return window.createToast(message, options);
     } catch {
@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   const highlightText = (el, term) => {
-    if (!el || !el.dataset.original) return;
+    if (!el || !el.dataset.original) {return;}
     if (!term) {
       // Restore original HTML structure
       if (el.dataset.originalHtml) {
@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   const updateResultsInfo = (count) => {
-    if (!resultsInfo) return;
+    if (!resultsInfo) {return;}
     if (lang.startsWith("fa")) {
       resultsInfo.textContent =
         count === 0 ? "موردی یافت نشد" : `${count} نتیجه یافت شد`;
@@ -131,7 +131,7 @@ document.addEventListener("DOMContentLoaded", function () {
     cards.forEach((card) => {
       const nameEl = card.querySelector("h3");
       const summaryEl = card.querySelector(".credential-summary");
-      
+
       // Cache normalized values to avoid redundant normalization calls
       const normalizedName = nameEl && nameEl.dataset.original
         ? normalizeText(nameEl.dataset.original).toLowerCase()
@@ -163,7 +163,7 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   function persistTerm(term) {
-    if (!storage) return;
+    if (!storage) {return;}
     try {
       if (term) {
         storage.setItem(STORAGE_KEY, term);
@@ -232,7 +232,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const handleError = (err) => {
         // ignore "no-speech" / "aborted" noise
         if (err && (err.error === "no-speech" || err.error === "aborted"))
-          return;
+        {return;}
         safeToast(
           lang.startsWith("fa")
             ? "امکان دریافت صدا نیست."

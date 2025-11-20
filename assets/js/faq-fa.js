@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const header = document.querySelector(".page-header");
 
   // اگر هیچ FAQی نداریم، ادامه نده
-  if (!faqItems.length && !mainContent && !header) return;
+  if (!faqItems.length && !mainContent && !header) {return;}
 
   // Utility: simple debounce helper
   function debounce(func, delay) {
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (faqNavigation) {
     faqNavigation.addEventListener("click", (event) => {
       const link = event.target.closest("a");
-      if (!link) return;
+      if (!link) {return;}
       const category = link.dataset.category || "unknown";
 
       if (typeof gtag === "function") {
@@ -242,7 +242,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (mainContent && faqItems.length) {
     mainContent.addEventListener("click", (event) => {
       const summary = event.target.closest(".faq-item summary");
-      if (!summary) return;
+      if (!summary) {return;}
 
       const clickedLink = event.target.closest("a");
       if (clickedLink && summary.contains(clickedLink)) {
@@ -316,7 +316,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Focus outline برای summary ها (با احترام به CSS vars)
   faqItems.forEach((item) => {
     const summary = item.querySelector("summary");
-    if (!summary) return;
+    if (!summary) {return;}
 
     summary.addEventListener("focus", () => {
       const primary =

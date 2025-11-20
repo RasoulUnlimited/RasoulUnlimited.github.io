@@ -7,7 +7,7 @@
    * @param {HTMLElement} root
    */
   function initAccordion(root) {
-    if (!root) return;
+    if (!root) {return;}
 
     const allowMultiple =
       root.getAttribute("data-allow-multiple") === "true" ||
@@ -21,7 +21,7 @@
       const header = item.querySelector(".accordion-header");
       const panel = item.querySelector(".accordion-content");
 
-      if (!header || !panel) return;
+      if (!header || !panel) {return;}
 
       const accId = root.dataset.accordionId || "main";
       const headerId = header.id || `accordion-header-${accId}-${index}`;
@@ -59,7 +59,7 @@
       const header = item.querySelector(".accordion-header");
       const panel = item.querySelector(".accordion-content");
 
-      if (!header || !panel) return;
+      if (!header || !panel) {return;}
 
       // Click / keyboard handlers
       header.addEventListener("click", () => {
@@ -76,7 +76,7 @@
         }
 
         const currentIndex = headers.indexOf(header);
-        if (currentIndex === -1) return;
+        if (currentIndex === -1) {return;}
 
         if (key === "ArrowDown") {
           e.preventDefault();
@@ -104,13 +104,13 @@
     function toggleItem(item, allowMultiple) {
       const header = item.querySelector(".accordion-header");
       const panel = item.querySelector(".accordion-content");
-      if (!header || !panel) return;
+      if (!header || !panel) {return;}
 
       const isExpanded = header.getAttribute("aria-expanded") === "true";
 
       if (!allowMultiple) {
         items.forEach((otherItem) => {
-          if (otherItem === item) return;
+          if (otherItem === item) {return;}
           collapseItem(otherItem);
         });
       }
@@ -129,7 +129,7 @@
     function collapseItem(item) {
       const header = item.querySelector(".accordion-header");
       const panel = item.querySelector(".accordion-content");
-      if (!header || !panel) return;
+      if (!header || !panel) {return;}
 
       header.setAttribute("aria-expanded", "false");
       panel.hidden = true;
@@ -151,7 +151,7 @@
     function expandItem(item) {
       const header = item.querySelector(".accordion-header");
       const panel = item.querySelector(".accordion-content");
-      if (!header || !panel) return;
+      if (!header || !panel) {return;}
 
       header.setAttribute("aria-expanded", "true");
       panel.hidden = false;

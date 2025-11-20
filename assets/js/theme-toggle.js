@@ -3,7 +3,7 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   const toggle = document.getElementById("theme-toggle");
-  if (!toggle) return;
+  if (!toggle) {return;}
 
   const THEME_KEY = "theme";
   const DARK = "dark";
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
   function getStoredTheme() {
-    if (!storage) return null;
+    if (!storage) {return null;}
     const value = storage.getItem(THEME_KEY);
     return value === DARK || value === LIGHT ? value : null;
   }
@@ -36,9 +36,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function getCurrentTheme() {
     const attr = document.documentElement.getAttribute("data-theme");
-    if (attr === DARK || attr === LIGHT) return attr;
+    if (attr === DARK || attr === LIGHT) {return attr;}
     const stored = getStoredTheme();
-    if (stored) return stored;
+    if (stored) {return stored;}
     return getSystemTheme();
   }
 
@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // واکنش به تغییر تم سیستم، فقط وقتی کاربر چیزی تو localStorage نذاشته
   const handleSystemChange = (event) => {
     const hasUserPreference = !!getStoredTheme();
-    if (hasUserPreference) return;
+    if (hasUserPreference) {return;}
     applyTheme(event.matches ? DARK : LIGHT, { persist: false });
   };
 

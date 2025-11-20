@@ -36,7 +36,7 @@
    * Other scripts can call window.createToast("message").
    */
   function createToast(message) {
-    if (!message) return;
+    if (!message) {return;}
 
     const toast = document.createElement("div");
     toast.setAttribute("role", "status");
@@ -48,7 +48,7 @@
     const existingToasts = document.querySelectorAll(".dynamic-toast");
     if (existingToasts.length > 3) {
       existingToasts.forEach((t, index) => {
-        if (index === 0) t.remove();
+        if (index === 0) {t.remove();}
       });
     }
 
@@ -62,7 +62,7 @@
       toast.classList.remove("show");
       // Wait for CSS transition to finish if any
       setTimeout(() => {
-        if (toast.parentNode) toast.remove();
+        if (toast.parentNode) {toast.remove();}
       }, 300);
     }, 3000);
   }
@@ -95,7 +95,7 @@
     if (showToast && typeof window.langStrings.themeChanged === "function") {
       // themeChanged(theme) → localized message
       const msg = window.langStrings.themeChanged(theme);
-      if (msg) createToast(msg);
+      if (msg) {createToast(msg);}
     }
   }
 
@@ -128,7 +128,7 @@
    */
   function initThemeToggle() {
     const themeToggleInput = document.getElementById("theme-toggle");
-    if (!themeToggleInput) return;
+    if (!themeToggleInput) {return;}
 
     // Sync ARIA
     themeToggleInput.setAttribute(
@@ -194,7 +194,7 @@
         createToast(window.langStrings.endOfPage);
       } else if (typeof window.langStrings.endOfPage === "function") {
         const msg = window.langStrings.endOfPage();
-        if (msg) createToast(msg);
+        if (msg) {createToast(msg);}
       }
     }
     ticking = false;

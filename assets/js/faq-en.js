@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const mainContent = document.querySelector(".main-content");
 
   // اگر کلاً FAQ نداریم، ادامه دادن لازم نیست
-  if (!faqItems.length && !header && !mainContent) return;
+  if (!faqItems.length && !header && !mainContent) {return;}
 
   // Utility: simple debounce helper
   function debounce(func, delay) {
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (faqNavigation) {
     faqNavigation.addEventListener("click", (event) => {
       const link = event.target.closest("a");
-      if (!link) return;
+      if (!link) {return;}
       const category = link.dataset.category || "unknown";
 
       if (typeof gtag === "function") {
@@ -151,7 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (searchTerm && !item.open && !item.dataset.openedByUser) {
               item.open = true;
               item.dataset.openedBySearch = "true";
-              if (summary) summary.setAttribute("aria-expanded", "true");
+              if (summary) {summary.setAttribute("aria-expanded", "true");}
             }
           } else {
             item.hidden = true;
@@ -159,7 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (item.open && item.dataset.openedBySearch) {
               item.open = false;
               delete item.dataset.openedBySearch;
-              if (summary) summary.setAttribute("aria-expanded", "false");
+              if (summary) {summary.setAttribute("aria-expanded", "false");}
             }
           }
         });
@@ -243,7 +243,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (faqContainer && faqItems.length) {
     faqContainer.addEventListener("click", (event) => {
       const summary = event.target.closest(".faq-item summary");
-      if (!summary) return;
+      if (!summary) {return;}
 
       const clickedLink = event.target.closest("a");
       if (clickedLink && summary.contains(clickedLink)) {
@@ -317,7 +317,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Focus outlines + aria-expanded initial sync
   faqItems.forEach((item) => {
     const summary = item.querySelector("summary");
-    if (!summary) return;
+    if (!summary) {return;}
 
     // sync aria-expanded on load
     summary.setAttribute("aria-expanded", item.open ? "true" : "false");

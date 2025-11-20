@@ -3,18 +3,18 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     const filterBar = document.querySelector(".filter-bar");
-    if (!filterBar) return;
+    if (!filterBar) {return;}
 
     const cards = Array.from(document.querySelectorAll(".presskit-card"));
-    if (!cards.length) return;
+    if (!cards.length) {return;}
 
     const buttons = Array.from(
       filterBar.querySelectorAll("button[data-filter]")
     );
-    if (!buttons.length) return;
+    if (!buttons.length) {return;}
 
     // Live region برای اعلام تعداد نتایج
-    let liveRegion = filterBar.querySelector('[data-filter-live="true"]');
+    let liveRegion = filterBar.querySelector("[data-filter-live=\"true\"]");
     if (!liveRegion) {
       liveRegion = document.createElement("span");
       liveRegion.setAttribute("aria-live", "polite");
@@ -43,7 +43,7 @@
 
     function updateLiveRegion(visibleCount) {
       const total = cards.length;
-      if (!liveRegion) return;
+      if (!liveRegion) {return;}
       if (visibleCount === total) {
         liveRegion.textContent = `${visibleCount} item${
           visibleCount === 1 ? "" : "s"
@@ -64,7 +64,7 @@
         const btn = buttons.find(
           (b) => b.getAttribute("data-filter") === filter
         );
-        if (btn) setActiveButton(btn);
+        if (btn) {setActiveButton(btn);}
       }
 
       let visibleCount = 0;
@@ -78,7 +78,7 @@
         // برای انیمیشن، کلاس رو هم می‌تونیم کنترل کنیم
         card.hidden = !show;
         card.classList.toggle("is-filtered-out", !show);
-        if (show) visibleCount += 1;
+        if (show) {visibleCount += 1;}
       });
 
       updateLiveRegion(visibleCount);
@@ -87,7 +87,7 @@
     // کلیک روی filter bar (event delegation)
     filterBar.addEventListener("click", (event) => {
       const button = event.target.closest("button[data-filter]");
-      if (!button) return;
+      if (!button) {return;}
       event.preventDefault();
 
       const filter = button.getAttribute("data-filter") || "all";

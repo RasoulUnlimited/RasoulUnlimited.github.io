@@ -2,78 +2,92 @@
 // Safe, robust Service Worker registration with update notifications
 
 (function () {
-  'use strict';
+  "use strict";
 
-  if (!('serviceWorker' in navigator)) return;
+  if (!("serviceWorker" in navigator)) {
+    return;
+  }
 
-  // SW فقط روی HTTPS (یا localhost) کار می‌کند
+  // SW only works on HTTPS (or localhost)
   if (!window.isSecureContext) {
     console.warn(
-      'Service workers require a secure context (HTTPS or localhost).'
+      "Service workers require a secure context (HTTPS or localhost)."
     );
     return;
   }
 
-  var root = document.documentElement;
-  var lang = (root.getAttribute('lang') || '').toLowerCase();
-  var isFa = lang.indexOf('fa') === 0;
+  const root = document.documentElement;
+  const lang = (root.getAttribute("lang") || "").toLowerCase();
+  const isFa = lang.indexOf("fa") === 0;
 
+  /**
+   * Safely display toast notification
+   * @param {string} message - Message to display
+   */
   function safeToast(message) {
-    if (typeof window.createToast === 'function') {
+    if (typeof window.createToast === "function") {
       window.createToast(message);
     }
   }
 
   function notifyReady() {
     safeToast(
-      isFa ? 'پشتیبانی آفلاین فعال شد' : 'Offline support enabled'
+      isFa ? "پشتیبانی آفلاین فعال شد" : "Offline support enabled"
     );
   }
 
   function notifyUpdate() {
     safeToast(
       isFa
-        ? 'نسخهٔ جدید در دسترس است. برای بروزرسانی صفحه را تازه کنید.'
-        : 'New version available. Refresh to update.'
+        ? "نسخهٔ جدید در دسترس است. برای بروزرسانی صفحه را تازه کنید."
+        : "New version available. Refresh to update."
     );
   }
 
+  /**
+   * Handle Service Worker registration and updates
+   * @param {ServiceWorkerRegistration} reg - Registration object
+   */
   function handleRegistration(reg) {
-    // اگر سرویس‌ورکر فعال است، یعنی می‌توانیم آفلاین کار کنیم
+    // If active worker exists, offline support is enabled
     if (reg.active) {
       notifyReady();
     }
 
-    // اگر در لحظه‌ی رجیستر، worker در حالت waiting است، یعنی آپدیت آماده است
+    // If waiting worker exists, update is available
     if (reg.waiting) {
       notifyUpdate();
     }
 
-    // لیسنر برای آپدیت‌های بعدی
-    reg.addEventListener('updatefound', function () {
-      var newWorker = reg.installing;
-      if (!newWorker) return;
+    // Listen for future updates
+    reg.addEventListener("updatefound", function () {
+      const newWorker = reg.installing;
+      if (!newWorker) {
+        return;
+      }
 
-      newWorker.addEventListener('statechange', function () {
-        if (newWorker.state !== 'installed') return;
+      newWorker.addEventListener("statechange", function () {
+        if (newWorker.state !== "installed") {
+          return;
+        }
 
-        // اگر controller هست، یعنی این یک آپدیت است، نه اولین نصب
+        // If controller exists, this is an update
         if (navigator.serviceWorker.controller) {
           notifyUpdate();
         } else {
-          // اولین نصب: آفلاین فعال شد
+          // First installation: offline support enabled
           notifyReady();
         }
       });
     });
   }
 
-  window.addEventListener('load', function () {
+  window.addEventListener("load", function () {
     navigator.serviceWorker
-      .register('/sw.js')
+      .register("/sw.js")
       .then(handleRegistration)
       .catch(function (err) {
-        console.error('SW registration failed:', err);
+        console.error("Service Worker registration failed:", err);
       });
   });
 })();

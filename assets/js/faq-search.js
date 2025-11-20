@@ -9,7 +9,7 @@
     const clearButton = document.getElementById("clear-search");
     const faqItems = Array.from(document.querySelectorAll(".faq-item"));
 
-    if (!searchInput || !clearButton || !faqItems.length) return;
+    if (!searchInput || !clearButton || !faqItems.length) {return;}
 
     // Live region برای اعلام تعداد نتایج (a11y)
     let status = document.getElementById("faq-search-status");
@@ -76,7 +76,7 @@
           // اگر سرچ داریم، آیتم رو باز کن ولی فقط اگر قبلاً باز نبوده
           if (hasTerm && !item.open) {
             item.open = true;
-            if (summary) summary.setAttribute("aria-expanded", "true");
+            if (summary) {summary.setAttribute("aria-expanded", "true");}
             item.dataset.openedBySearch = "true";
           }
 
@@ -85,7 +85,7 @@
             delete item.dataset.openedBySearch;
             if (item.open) {
               item.open = false;
-              if (summary) summary.setAttribute("aria-expanded", "false");
+              if (summary) {summary.setAttribute("aria-expanded", "false");}
             }
           }
         } else {
@@ -93,7 +93,7 @@
           // اگر در اثر سرچ باز شده بود، ببند
           if (item.open && item.dataset.openedBySearch) {
             item.open = false;
-            if (summary) summary.setAttribute("aria-expanded", "false");
+            if (summary) {summary.setAttribute("aria-expanded", "false");}
             delete item.dataset.openedBySearch;
           }
         }

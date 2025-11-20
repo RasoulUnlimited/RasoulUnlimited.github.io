@@ -52,7 +52,7 @@
     );
 
     function addMediaQueryChangeListener(mediaQueryList, handler) {
-      if (!mediaQueryList || typeof handler !== "function") return;
+      if (!mediaQueryList || typeof handler !== "function") {return;}
       if (typeof mediaQueryList.addEventListener === "function") {
         mediaQueryList.addEventListener("change", handler);
       } else if (typeof mediaQueryList.addListener === "function") {
@@ -74,7 +74,7 @@
       disableMotion();
     }
     addMediaQueryChangeListener(prefersReduced, (e) => {
-      if (e.matches) disableMotion();
+      if (e.matches) {disableMotion();}
     });
 
     // روی موبایل/اسکرین کوچک هم انیمیشن‌ها حذف شوند
@@ -83,11 +83,11 @@
       disableMotion();
     }
     addMediaQueryChangeListener(smallScreen, (e) => {
-      if (e.matches) disableMotion();
+      if (e.matches) {disableMotion();}
     });
 
     function normalizeText(str) {
-      if (!str) return "";
+      if (!str) {return "";}
       const persianDigits = "۰۱۲۳۴۵۶۷۸۹";
       return str
         .normalize("NFKD")
@@ -138,7 +138,7 @@
 
       // Check if cache is valid and not expired
       const cacheIsValid = cached && (Date.now() - cached.t < ttl);
-      
+
       // Return fresh cache if available and valid
       if (cacheIsValid) {
         return cached.d;
@@ -206,11 +206,11 @@
               );
             } catch (cacheErr) {
               // Handle QuotaExceededError by clearing old cache entries
-              if (cacheErr.name === 'QuotaExceededError') {
+              if (cacheErr.name === "QuotaExceededError") {
                 console.warn(`localStorage quota exceeded for ${key}, attempting cleanup...`);
                 try {
                   // Clear oldest cache entries (those starting with our cache keys)
-                  const cacheKeys = ['security-timeline-cache', 'security-advisories-cache'];
+                  const cacheKeys = ["security-timeline-cache", "security-advisories-cache"];
                   for (const oldKey of cacheKeys) {
                     if (oldKey !== key) {
                       storage.removeItem(oldKey);
@@ -232,12 +232,12 @@
         }
         return data;
       } finally {
-        if (timer) clearTimeout(timer);
+        if (timer) {clearTimeout(timer);}
       }
     }
 
     function copyTextToClipboard(text) {
-      if (!text) return;
+      if (!text) {return;}
 
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard
@@ -282,7 +282,7 @@
       if (!text) {
         const targetId = btn.dataset.copyTarget;
         const targetEl = document.getElementById(targetId);
-        if (targetEl) text = targetEl.textContent.trim();
+        if (targetEl) {text = targetEl.textContent.trim();}
       }
       copyTextToClipboard(text);
     }
@@ -307,7 +307,7 @@
     const connectionEl = document.getElementById("connection-status");
 
     function updateConnection() {
-      if (!connectionEl) return;
+      if (!connectionEl) {return;}
       const online = navigator.onLine;
 
       connectionEl.textContent = online
@@ -315,13 +315,13 @@
           ? "اتصال اینترنت برقرار است."
           : "You are online."
         : isFa
-        ? "شما آفلاین هستید. برخی قابلیت‌ها غیرفعال است."
-        : "You are offline. Some features may be unavailable.";
+          ? "شما آفلاین هستید. برخی قابلیت‌ها غیرفعال است."
+          : "You are offline. Some features may be unavailable.";
 
       document.body.classList.toggle("offline", !online);
 
       [refreshTimelineBtn, refreshAdvisoriesBtn].forEach((btn) => {
-        if (btn) btn.disabled = !online;
+        if (btn) {btn.disabled = !online;}
       });
     }
 
@@ -397,13 +397,13 @@
 
     // Strict whitelist of allowed Font Awesome icon classes - defined once outside loop
     const ALLOWED_ICONS = new Set([
-      "fa-rocket", "fa-cloud", "fa-shield-alt", "fa-key", 
-      "fa-bell", "fa-wifi", "fa-lock", "fa-shield", 
+      "fa-rocket", "fa-cloud", "fa-shield-alt", "fa-key",
+      "fa-bell", "fa-wifi", "fa-lock", "fa-shield",
       "fa-check", "fa-star", "fa-bookmark", "fa-award"
     ]);
 
     function renderTimeline(events) {
-      if (!timelineList) return;
+      if (!timelineList) {return;}
 
       // Clear safely without using innerHTML to prevent XSS
       while (timelineList.firstChild) {
@@ -431,7 +431,7 @@
         iconWrap.className = "timeline-icon";
         const iconEl = document.createElement("i");
         iconEl.classList.add("fas");
-        
+
         const iconClass =
           typeof ev.icon === "string" && ALLOWED_ICONS.has(ev.icon)
             ? ev.icon
@@ -472,14 +472,14 @@
     }
 
     function updateSortButton() {
-      if (!sortBtn) return;
+      if (!sortBtn) {return;}
       sortBtn.textContent = isFa
         ? sortAsc
           ? "قدیمی‌ترین"
           : "جدیدترین"
         : sortAsc
-        ? "Oldest first"
-        : "Newest first";
+          ? "Oldest first"
+          : "Newest first";
     }
 
     updateSortButton();
@@ -510,7 +510,7 @@
     let debounceTimer = null;  // Declare at module scope for proper cleanup
 
     function setupTimelineSearch() {
-      if (!timelineList || !timelineSearch || searchInitialized) return;
+      if (!timelineList || !timelineSearch || searchInitialized) {return;}
 
       function filterList(term) {
         const q = normalizeText(term.trim());
@@ -531,19 +531,19 @@
 
         const reg = hasQuery
           ? new RegExp(
-              `(${q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`,
-              "gi"
-            )
+            `(${q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`,
+            "gi"
+          )
           : null;
 
         let count = 0;
 
         timelineList.querySelectorAll("li").forEach((li) => {
           const contentEl = li.querySelector(".timeline-content");
-          if (!contentEl) return;
+          if (!contentEl) {return;}
 
           // Cache text content instead of full HTML to avoid memory bloat
-          if (!li.dataset.origText) li.dataset.origText = contentEl.textContent;
+          if (!li.dataset.origText) {li.dataset.origText = contentEl.textContent;}
 
           const text = normalizeText(li.textContent);
           const match = hasQuery && text.includes(q);
@@ -636,7 +636,7 @@
         const savedYear = storage
           ? storage.getItem(TIMELINE_YEAR_KEY) || ""
           : "";
-        if (savedYear) yearFilter.value = savedYear;
+        if (savedYear) {yearFilter.value = savedYear;}
         yearFilter.addEventListener("change", () =>
           filterList(timelineSearch.value)
         );
@@ -659,7 +659,7 @@
     }
 
     function loadTimeline(force = false, btn = null) {
-      if (!timelineList) return;
+      if (!timelineList) {return;}
 
       // Clear safely without using innerHTML to prevent XSS
       while (timelineList.firstChild) {
@@ -699,7 +699,7 @@
             while (yearFilter.firstChild) {
               yearFilter.removeChild(yearFilter.firstChild);
             }
-            
+
             const defaultOption = document.createElement("option");
             defaultOption.value = "";
             defaultOption.textContent = isFa
@@ -738,9 +738,9 @@
         .catch((err) => {
           if (typeof createToast === "function") {
             let msg = messages.fetchFail;
-            if (err && err.message === "offline") msg = messages.offline;
+            if (err && err.message === "offline") {msg = messages.offline;}
             else if (err && err.message === "rate-limit")
-              msg = messages.rateLimit;
+            {msg = messages.rateLimit;}
             else if (err && err.message === "stale-data") {
               // Silently use stale data without notifying user
               if (err.data && Array.isArray(err.data)) {
@@ -788,7 +788,7 @@
     let expirationIntervalId = null;
 
     function updateExpirationDisplay() {
-      if (!expireDate || !expirationEl) return;
+      if (!expireDate || !expirationEl) {return;}
 
       const now = new Date();
       const diffDays = (expireDate - now) / DAY_MS;
@@ -837,7 +837,7 @@
     }
 
     function loadPolicyExpiration(force = false) {
-      if (!expirationEl) return;
+      if (!expirationEl) {return;}
 
       if (force && storage) {
         try {
@@ -863,13 +863,13 @@
             };
             const label = isFa
               ? `اعتبار سیاست تا ${expireDate.toLocaleDateString(
-                  locale,
-                  opts
-                )}`
+                locale,
+                opts
+              )}`
               : `Policy valid until ${expireDate.toLocaleDateString(
-                  locale,
-                  opts
-                )}`;
+                locale,
+                opts
+              )}`;
             expirationEl.textContent = label;
             updateExpirationDisplay();
 
@@ -914,7 +914,7 @@
     const lastUpdatedEl = document.getElementById("last-updated-date");
 
     function loadLastUpdated(force = false) {
-      if (!lastUpdatedEl) return;
+      if (!lastUpdatedEl) {return;}
 
       if (force && storage) {
         try {
@@ -950,9 +950,9 @@
         .catch((err) => {
           if (typeof createToast === "function") {
             let msg = messages.fetchFail;
-            if (err && err.message === "offline") msg = messages.offline;
+            if (err && err.message === "offline") {msg = messages.offline;}
             else if (err && err.message === "rate-limit")
-              msg = messages.rateLimit;
+            {msg = messages.rateLimit;}
             createToast(msg);
           }
         });
@@ -967,7 +967,7 @@
     refreshAdvisoriesBtn = document.getElementById("refresh-advisories");
 
     function loadAdvisories(force = false, btn = null) {
-      if (!advisoriesList) return;
+      if (!advisoriesList) {return;}
 
       // Clear safely without using innerHTML to prevent XSS
       while (advisoriesList.firstChild) {
@@ -1024,9 +1024,9 @@
             : "Failed to load advisories.";
           if (typeof createToast === "function") {
             let msg = messages.fetchFail;
-            if (err && err.message === "offline") msg = messages.offline;
+            if (err && err.message === "offline") {msg = messages.offline;}
             else if (err && err.message === "rate-limit")
-              msg = messages.rateLimit;
+            {msg = messages.rateLimit;}
             createToast(msg);
           }
         })
@@ -1131,9 +1131,9 @@
 
     function toggleFloatButtons() {
       const show = window.scrollY > 200;
-      if (scrollBtn) scrollBtn.classList.toggle("visible", show);
+      if (scrollBtn) {scrollBtn.classList.toggle("visible", show);}
       if (floatingShare)
-        floatingShare.classList.toggle("visible", show);
+      {floatingShare.classList.toggle("visible", show);}
     }
 
     window.addEventListener("scroll", toggleFloatButtons, {
@@ -1172,7 +1172,7 @@
         clearInterval(expirationIntervalId);
         expirationIntervalId = null;
       }
-      
+
       // Clear debounce timers to prevent race conditions
       if (debounceTimer) {
         clearTimeout(debounceTimer);

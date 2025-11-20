@@ -32,7 +32,7 @@
     ];
 
     function isScriptTrusted(src) {
-      if (!src) return true; // inline scripts from trusted source are OK
+      if (!src) {return true;} // inline scripts from trusted source are OK
       try {
         const url = new URL(src, window.location.origin);
         // Only allow same-origin scripts from trusted directories
@@ -49,7 +49,7 @@
 
     for (const el of elements) {
       const file = el.getAttribute("data-include-html");
-      if (!file) continue;
+      if (!file) {continue;}
 
       // Prevent double-include if function is called again
       el.removeAttribute("data-include-html");
@@ -91,7 +91,7 @@
 
               // Remove potentially dangerous elements/attributes
               const tagName = node.tagName.toLowerCase();
-              
+
               // Block object, embed, and form elements if they're not from trusted sources
               if (["object", "embed", "form"].includes(tagName)) {
                 console.warn(

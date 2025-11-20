@@ -11,21 +11,21 @@
   // ---- 1) Preloaded styles → real stylesheets ----
 
   function activatePreloadedStyles() {
-    if (!document.querySelectorAll) return;
+    if (!document.querySelectorAll) {return;}
 
     document
       .querySelectorAll(
-        'link[rel="preload"][as="style"][data-make-stylesheet]'
+        "link[rel=\"preload\"][as=\"style\"][data-make-stylesheet]"
       )
       .forEach((preloadLink) => {
         // جلوگیری از اجرای دوباره روی یک لینک
-        if (preloadLink.dataset.stylesheetActivated === "true") return;
+        if (preloadLink.dataset.stylesheetActivated === "true") {return;}
 
         const realHref =
           preloadLink.getAttribute("data-href") ||
           preloadLink.getAttribute("href");
 
-        if (!realHref) return;
+        if (!realHref) {return;}
 
         const newLink = document.createElement("link");
         newLink.rel = "stylesheet";
@@ -146,12 +146,12 @@
   };
 
   function ensureMetaTag(name, content) {
-    if (!HEAD || !name || !content) return;
+    if (!HEAD || !name || !content) {return;}
 
     const existing = HEAD.querySelector(`meta[name="${name}"]`);
 
     // اگر متا موجوده و content خالی نیست، دست نمی‌زنیم
-    if (existing && existing.getAttribute("content")) return;
+    if (existing && existing.getAttribute("content")) {return;}
 
     const meta = existing || document.createElement("meta");
     meta.setAttribute("name", name);
@@ -164,28 +164,28 @@
   }
 
   function ensureLinkTag(config) {
-    if (!HEAD || !config || !config.rel) return;
+    if (!HEAD || !config || !config.rel) {return;}
 
     const selectorParts = [`link[rel="${config.rel}"]`];
-    if (config.href) selectorParts.push(`[href="${config.href}"]`);
-    if (config.type) selectorParts.push(`[type="${config.type}"]`);
+    if (config.href) {selectorParts.push(`[href="${config.href}"]`);}
+    if (config.type) {selectorParts.push(`[type="${config.type}"]`);}
 
     const selector = selectorParts.join("");
     const existing = HEAD.querySelector(selector);
-    if (existing) return;
+    if (existing) {return;}
 
     const link = document.createElement("link");
     link.rel = config.rel;
-    if (config.href) link.href = config.href;
-    if (config.type) link.type = config.type;
-    if (config.title) link.title = config.title;
+    if (config.href) {link.href = config.href;}
+    if (config.type) {link.type = config.type;}
+    if (config.title) {link.title = config.title;}
     link.dataset.aiInjected = "true";
 
     HEAD.appendChild(link);
   }
 
   function ensureManifestScript() {
-    if (!HEAD) return;
+    if (!HEAD) {return;}
 
     const scriptId = "ai-signal-manifest";
     const payload = JSON.stringify(AI_SIGNAL_CONFIG.manifest, null, 2);
@@ -214,7 +214,7 @@
   }
 
   function injectAiSignals() {
-    if (!HEAD) return;
+    if (!HEAD) {return;}
 
     Object.entries(AI_SIGNAL_CONFIG.meta).forEach(([name, content]) =>
       ensureMetaTag(name, content)

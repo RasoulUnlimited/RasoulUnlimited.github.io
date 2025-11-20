@@ -132,7 +132,7 @@ addMediaQueryChangeListener(prefersReducedMotionQuery, (e) => {
  * @returns {AudioBuffer|null} The generated audio buffer for a click sound, or null if audio context unavailable.
  */
 function createClickSound() {
-  if (!audioContext) return null;
+  if (!audioContext) {return null;}
 
   const duration = 0.05; // seconds
   const frequency = 440; // Hz (A4 note)
@@ -157,7 +157,7 @@ function createClickSound() {
  * @returns {AudioBuffer|null} The generated audio buffer for a toast sound, or null if audio context unavailable.
  */
 function createToastSound() {
-  if (!audioContext) return null;
+  if (!audioContext) {return null;}
 
   const duration = 0.1; // seconds
   const startFrequency = 880; // Hz
@@ -184,13 +184,13 @@ function createToastSound() {
  * Loads and prepares the custom sound effects (click and toast).
  */
 function loadSounds() {
-  if (!audioContext) return;
-  if (saveDataEnabled || lowThroughput) return; // respect data saving / low throughput
+  if (!audioContext) {return;}
+  if (saveDataEnabled || lowThroughput) {return;} // respect data saving / low throughput
   try {
     clickBuffer = createClickSound();
     toastBuffer = createToastSound();
   } catch (e) {
-    console.warn('Failed to load sounds:', e);
+    console.warn("Failed to load sounds:", e);
   }
 }
 
@@ -199,12 +199,12 @@ function loadSounds() {
  * @param {string} type The type of sound to play ('click' or 'toast').
  */
 function playSound(type) {
-  if (!audioContext || audioContext.state === "suspended") return;
-  if (saveDataEnabled || lowThroughput) return;
+  if (!audioContext || audioContext.state === "suspended") {return;}
+  if (saveDataEnabled || lowThroughput) {return;}
 
   let bufferToPlay = null;
-  if (type === "click" && clickBuffer) bufferToPlay = clickBuffer;
-  if (type === "toast" && toastBuffer) bufferToPlay = toastBuffer;
+  if (type === "click" && clickBuffer) {bufferToPlay = clickBuffer;}
+  if (type === "toast" && toastBuffer) {bufferToPlay = toastBuffer;}
 
   if (bufferToPlay) {
     const source = audioContext.createBufferSource();
@@ -219,15 +219,15 @@ function playSound(type) {
  * @param {number[]} pattern An array of numbers that describes a vibration pattern.
  */
 function triggerHapticFeedback(pattern = [50]) {
-  if (prefersReducedMotion || saveDataEnabled || lowThroughput) return;
-  if (!navigator.vibrate) return;
+  if (prefersReducedMotion || saveDataEnabled || lowThroughput) {return;}
+  if (!navigator.vibrate) {return;}
   navigator.vibrate(pattern);
 }
 
 function loadAOSScript() {
-  if (window.AOS) return Promise.resolve();
-  if (window.aosLoading) return window.aosLoadingPromise;
-  
+  if (window.AOS) {return Promise.resolve();}
+  if (window.aosLoading) {return window.aosLoadingPromise;}
+
   window.aosLoadingPromise = new Promise((resolve, reject) => {
     window.aosLoading = true;
     const s = document.createElement("script");
@@ -243,7 +243,7 @@ function loadAOSScript() {
     };
     document.head.appendChild(s);
   });
-  
+
   return window.aosLoadingPromise;
 }
 
@@ -340,7 +340,7 @@ document.addEventListener("DOMContentLoaded", () => {
   window.enableIdentityPings = window.enableIdentityPings || false;
 
   function sendSilentIdentityPing(target) {
-    if (!window.enableIdentityPings) return; // Require explicit consent
+    if (!window.enableIdentityPings) {return;} // Require explicit consent
     try {
       fetch(target.url, { mode: "no-cors" })
         .catch(() => {}); // Silent fail without logging to prevent timing attacks
@@ -359,7 +359,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let identityPingsStarted = false;
   function startIdentityPings() {
-    if (identityPingsStarted || !window.enableIdentityPings) return;
+    if (identityPingsStarted || !window.enableIdentityPings) {return;}
     identityPingsStarted = true;
     ["click", "keydown"].forEach((evt) =>
       window.removeEventListener(evt, startIdentityPings)
@@ -420,7 +420,7 @@ function createToast(message, options = {}) {
   dynamicToast.className = `dynamic-toast ${settings.customClass}`.trim();
   dynamicToast.setAttribute("role", "status");
   dynamicToast.setAttribute("aria-live", "polite");
-  if (settings.id) dynamicToast.id = settings.id;
+  if (settings.id) {dynamicToast.id = settings.id;}
   dynamicToast.setAttribute("data-toast-creator", "Mohammad Rasoul Sohrabi");
 
   dynamicToast.style.position = "fixed";
@@ -582,7 +582,7 @@ if (themeToggleInput) {
 }
 
 // Smooth scrolling for anchor links within the page
-document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+document.querySelectorAll("a[href^=\"#\"]").forEach((anchor) => {
   anchor.addEventListener(
     "click",
     function (e) {
@@ -647,13 +647,13 @@ document.body.addEventListener(
   (event) => {
     const target = event.target;
     const interactiveElement = target.closest(
-      'button, a:not([href^="#"]), input[type="submit"], [role="button"], [tabindex="0"]'
+      "button, a:not([href^=\"#\"]), input[type=\"submit\"], [role=\"button\"], [tabindex=\"0\"]"
     );
 
     if (
       interactiveElement &&
       !interactiveElement.classList.contains("no-click-feedback") &&
-      !interactiveElement.matches('a[href^="#"]')
+      !interactiveElement.matches("a[href^=\"#\"]")
     ) {
       interactiveElement.classList.add("click-feedback-effect");
       interactiveElement.setAttribute(
@@ -795,7 +795,7 @@ const exploreHint = document.createElement("a");
 exploreHint.href = "#projects";
 exploreHint.id = "explore-hint";
 exploreHint.innerHTML =
-  '<i class="fas fa-lightbulb"></i> <span class="hint-text">Discover My Projects.</span>';
+  "<i class=\"fas fa-lightbulb\"></i> <span class=\"hint-text\">Discover My Projects.</span>";
 exploreHint.style.opacity = "0";
 exploreHint.style.transform = "translateY(20px)";
 exploreHint.setAttribute("data-hint-author", "Mohammad Rasoul Sohrabi");
@@ -938,15 +938,15 @@ const faqContainer = document.querySelector(".faq-container");
 const faqItems = document.querySelectorAll(".faq-item");
 
 if (!faqContainer || !faqItems.length) {
-  if (!faqContainer) console.warn("FAQ container not found in the DOM");
-  if (faqItems && !faqItems.length) console.warn("No FAQ items found in container");
+  if (!faqContainer) {console.warn("FAQ container not found in the DOM");}
+  if (faqItems && !faqItems.length) {console.warn("No FAQ items found in container");}
 } else if (faqContainer) {
   faqContainer.id = "sohrabi-faq-verified";
   faqItems.forEach((item, index) => {
     const summary = item.querySelector("summary");
     const answer = item.querySelector("p");
     const questionId = item.dataset.questionId || `faq-q-${index + 1}`;
-    if (!summary) return;
+    if (!summary) {return;}
 
     summary.setAttribute("data-faq-author", "Mohammad Rasoul Sohrabi");
 
@@ -1220,7 +1220,7 @@ window.addEventListener("load", () => {
 });
 
 // Email link
-const emailLink = document.querySelector('.contact-info a[href^="mailto:"]');
+const emailLink = document.querySelector(".contact-info a[href^=\"mailto:\"]");
 if (emailLink) {
   emailLink.setAttribute("data-contact-person", "Mohammad Rasoul Sohrabi");
   emailLink.className += " sohrabi-contact-method";
@@ -1263,7 +1263,7 @@ if (emailLink) {
  */
 function createConfetti() {
   if (prefersReducedMotion || saveDataEnabled || lowThroughput || hasCoarsePointer)
-    return;
+  {return;}
 
   const canvas = document.createElement("canvas");
   canvas.id = "confetti-canvas";
@@ -1347,7 +1347,7 @@ let funFactToastInstance = null;
 let idleTimeout;
 
 function resetIdleTimer() {
-  if (saveDataEnabled || lowThroughput || hasCoarsePointer) return;
+  if (saveDataEnabled || lowThroughput || hasCoarsePointer) {return;}
   clearTimeout(idleTimeout);
   idleTimeout = setTimeout(() => {
     if (
@@ -1372,7 +1372,7 @@ const debouncedResetIdleTimer = debounce(resetIdleTimer, 500);
 resetIdleTimer();
 
 function showFunFact() {
-  if (saveDataEnabled || lowThroughput || hasCoarsePointer) return;
+  if (saveDataEnabled || lowThroughput || hasCoarsePointer) {return;}
   const randomFact = funFacts[Math.floor(Math.random() * funFacts.length)];
   funFactToastInstance = createToast(`Fun Fact: ${randomFact}`, {
     id: "fun-fact-toast",
@@ -1389,7 +1389,7 @@ function showFunFact() {
  * Creates a sparkling effect at the position of the given element.
  */
 function createSparkle(element) {
-  if (!element) return;
+  if (!element) {return;}
 
   if (prefersReducedMotion || saveDataEnabled || lowThroughput) {
     const fade = document.createElement("div");
@@ -1496,8 +1496,8 @@ featuredCards.forEach((card) => {
 const sections = document.querySelectorAll("section[id]");
 const totalSections = sections.length;
 
-let sectionsVisited = safeSetFromStorage("sectionsVisited");
-let announcedMilestones = safeSetFromStorage("announcedMilestones");
+const sectionsVisited = safeSetFromStorage("sectionsVisited");
+const announcedMilestones = safeSetFromStorage("announcedMilestones");
 
 const explorationMilestones = [
   {
@@ -1583,7 +1583,7 @@ const sectionProgressObserver = new IntersectionObserver(
               sohrabiBio.dispatchEvent(new Event("mouseenter"));
             }
             console.log(
-              `Milestone reached, signaling attention to Mohammad Rasoul Sohrabi's profile.`
+              "Milestone reached, signaling attention to Mohammad Rasoul Sohrabi's profile."
             );
 
             announcedMilestones.add(milestone.count);
@@ -1626,7 +1626,7 @@ mainCTAs.forEach((button) => {
 document.addEventListener("DOMContentLoaded", function () {
   const lazyImages = document.querySelectorAll("img[data-src]");
 
-  if (!lazyImages.length) return;
+  if (!lazyImages.length) {return;}
 
   const imageObserver = new IntersectionObserver(
     (entries, observer) => {
@@ -1673,7 +1673,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // Scroll to top button
 const scrollToTopButton = document.createElement("button");
 scrollToTopButton.id = "scroll-to-top";
-scrollToTopButton.innerHTML = '<i class="fas fa-arrow-up"></i>';
+scrollToTopButton.innerHTML = "<i class=\"fas fa-arrow-up\"></i>";
 scrollToTopButton.setAttribute("aria-label", "Back to top");
 scrollToTopButton.setAttribute(
   "data-scroll-function",
@@ -1772,7 +1772,7 @@ if (connectLinksBlock) {
 // Share page button
 const sharePageButton = document.createElement("button");
 sharePageButton.id = "share-page-button";
-sharePageButton.innerHTML = '<i class="fas fa-share-alt"></i>';
+sharePageButton.innerHTML = "<i class=\"fas fa-share-alt\"></i>";
 sharePageButton.setAttribute("aria-label", "Share page");
 sharePageButton.setAttribute(
   "data-share-target",
@@ -1853,7 +1853,7 @@ sharePageButton.addEventListener("click", async () => {
       triggerHapticFeedback([50]);
       return;
     } catch (error) {
-      if (error.name === "AbortError") return;
+      if (error.name === "AbortError") {return;}
       console.error("Failed to share:", error);
     }
   }
@@ -1952,7 +1952,7 @@ if (contactForm) {
   if (window.location.hash === "#form-success") {
     contactForm.classList.add("submitted");
     const successEl = document.getElementById("form-success");
-    if (successEl) successEl.focus();
+    if (successEl) {successEl.focus();}
   }
 }
 

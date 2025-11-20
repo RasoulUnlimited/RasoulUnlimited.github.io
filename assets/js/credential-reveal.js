@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const cards = document.querySelectorAll(".credential-card");
-  if (!cards.length) return;
+  if (!cards.length) {return;}
 
   const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
   const prefersReduced = motionQuery.matches;
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const observer = new IntersectionObserver(
     (entries, obs) => {
       entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
+        if (!entry.isIntersecting) {return;}
 
         const card = entry.target;
         card.classList.add("card-visible");

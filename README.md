@@ -85,13 +85,14 @@ Content‑Security‑Policy example:
 
 - **Node.js** 18 or later
 - **Gulp** 5 (requires the CLI; install with `npm install gulp-cli` or run via `npx gulp`)
+- **npm** 9 or later
 
 ## Build instructions
 
 ```bash
 npm install
 # optional: install Gulp CLI if you want the `gulp` command
-npm install gulp-cli
+npm install -g gulp-cli
 npm run build
 ```
 
@@ -108,6 +109,27 @@ python3 -m http.server 8080
 ```
 
 Then open <http://localhost:8080> in your browser.
+
+## Code Quality
+
+This project uses **ESLint** and **HTMLHint** for code quality checks:
+
+```bash
+# Run linting checks
+npm run lint
+
+# Automatically fix linting issues
+npm run lint:fix
+
+# Security audit
+npm run audit
+```
+
+Configuration files:
+- `.eslintrc.json` — JavaScript linting rules
+- `.htmlhintrc.json` — HTML validation rules
+- `.editorconfig` — Cross-editor formatting consistency
+- `.prettierrc.json` — Code formatting preferences
 
 ## Deployment notes
 
@@ -138,6 +160,15 @@ edge cache for several minutes.
 
 The Worker also adds a `Cache-Control: public, max-age=600` header so
 responses are cached for up to 10 minutes.
+
+## Service Worker
+
+A custom **Service Worker** (`sw.js`) provides offline support and intelligent caching:
+
+- **HTML documents** use network-first strategy (fresh content with fallback to cache)
+- **Static assets** (CSS, JS, images) use cache-first strategy (faster loading)
+- **Automatic cleanup** of old cache versions on deployment
+- **Offline fallback** page for unavailable content
 
 ## Structured data and profiles
 

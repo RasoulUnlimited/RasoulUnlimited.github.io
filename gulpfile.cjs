@@ -35,7 +35,7 @@ gulp.task("minify-js", function () {
           reduce_vars: false,
           hoist_funs: false,
           hoist_vars: false,
-          drop_console: false // Keep console for debugging; set to true for production
+          drop_console: true // Remove console statements in production
         },
         mangle: { toplevel: false },
         format: { comments: false },
