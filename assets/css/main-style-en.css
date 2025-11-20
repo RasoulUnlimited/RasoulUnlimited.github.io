@@ -476,16 +476,20 @@ section h2::after {
   text-align: left;
 }
 
-.content-area
-  a:not(.navbar nav a):not(.card .card-links a):not(.contact-info a):not(
-    .connect-links-block ul li a
-  ):not(.footer a) {
+/* Generic inline links inside the content (valid selector) */
+.content-area a {
   color: var(--text-color-link);
   text-decoration: underline;
   transition: color var(--transition-duration-short) ease,
     text-decoration var(--transition-duration-short) ease;
   font-weight: 500;
 }
+
+.content-area a:hover {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
 
 .content-area
   a:not(.navbar nav a):not(.card .card-links a):not(.contact-info a):not(

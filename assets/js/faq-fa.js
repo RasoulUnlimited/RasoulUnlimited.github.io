@@ -244,9 +244,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const summary = event.target.closest(".faq-item summary");
       if (!summary) return;
 
-      if (event.target.tagName === "A") {
+      const clickedLink = event.target.closest("a");
+      if (clickedLink && summary.contains(clickedLink)) {
         event.preventDefault();
-        window.location.href = event.target.href;
+        window.location.href = clickedLink.href;
         return;
       }
 
