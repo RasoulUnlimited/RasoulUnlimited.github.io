@@ -120,8 +120,7 @@
               }
 
               // Recursively sanitize child nodes
-              const children = Array.from(node.childNodes);
-              children.forEach(sanitize);
+              Array.from(node.children).forEach(sanitize);
             } else if (
               node.nodeType === Node.COMMENT_NODE ||
               node.nodeType === Node.PROCESSING_INSTRUCTION_NODE
