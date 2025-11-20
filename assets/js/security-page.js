@@ -374,6 +374,13 @@
       ? storage.getItem("timeline-sort") === "asc"
       : false;
 
+    // Strict whitelist of allowed Font Awesome icon classes - defined once outside loop
+    const ALLOWED_ICONS = new Set([
+      "fa-rocket", "fa-cloud", "fa-shield-alt", "fa-key", 
+      "fa-bell", "fa-wifi", "fa-lock", "fa-shield", 
+      "fa-check", "fa-star", "fa-bookmark", "fa-award"
+    ]);
+
     function renderTimeline(events) {
       if (!timelineList) return;
 
@@ -403,13 +410,6 @@
         iconWrap.className = "timeline-icon";
         const iconEl = document.createElement("i");
         iconEl.classList.add("fas");
-        
-        // Strict whitelist of allowed Font Awesome icon classes
-        const ALLOWED_ICONS = new Set([
-          "fa-rocket", "fa-cloud", "fa-shield-alt", "fa-key", 
-          "fa-bell", "fa-wifi", "fa-lock", "fa-shield", 
-          "fa-check", "fa-star", "fa-bookmark", "fa-award"
-        ]);
         
         const iconClass =
           typeof ev.icon === "string" && ALLOWED_ICONS.has(ev.icon)
@@ -487,6 +487,7 @@
 
     let filterDebounceTimer = null;
     let isFilteringInProgress = false;
+    let debounceTimer = null;  // Declare at module scope for proper cleanup
 
     function setupTimelineSearch() {
       if (!timelineList || !timelineSearch || searchInitialized) return;
@@ -578,7 +579,7 @@
         }
       }
 
-      let debounceTimer;
+      // Use debounceTimer at module scope for proper cleanup
       timelineSearch.addEventListener("input", () => {
         const term = timelineSearch.value;
         clearTimeout(debounceTimer);
@@ -1149,6 +1150,14 @@
       updateConnection();
       if (typeof createToast === "function") {
         createToast(messages.offline);
+      }
+    });
+
+    // Cleanup timers and intervals before page unload to prevent memory leaks
+    window.addEventListener("beforeunload", () => {
+      if (expirationIntervalId) {
+        clearInterval(expirationIntervalId);
+        expirationIntervalId = null;
       }
     });
 
