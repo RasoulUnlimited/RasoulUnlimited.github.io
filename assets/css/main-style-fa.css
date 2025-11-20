@@ -3614,3 +3614,27 @@ summary:active,
     text-align: center;
   }
 }
+
+/* About List Styles */
+.about-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.about-list li {
+  margin-bottom: 0.5rem;
+  padding-right: 1.5rem;
+  position: relative;
+  font-weight: 500;
+}
+
+.about-list li::before {
+  content: "\f00c"; /* FontAwesome check icon */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  position: absolute;
+  right: 0;
+  color: var(--primary-color);
+}
+
