@@ -11,7 +11,20 @@
         "affiliation": { "@id": "https://rasoulunlimited.ir/#studio" },
         "sameAs": [
           "https://github.com/RasoulUnlimited",
-          "https://www.linkedin.com/in/rasoulunlimited/"
+          "https://www.linkedin.com/in/rasoulunlimited/",
+          "https://www.instagram.com/Rasoul.Unlimited",
+          "https://x.com/rasoulunlimited",
+          "https://www.youtube.com/@RasoulUnlimited",
+          "https://t.me/RasoulUnlimited",
+          "https://mastodon.social/@rasoulunlimited",
+          "https://rasoulunlimited.medium.com",
+          "https://dev.to/rasoulunlimited",
+          "https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi",
+          "https://virgool.io/@RasoulUnlimited",
+          "https://keybase.io/RasoulUnlimited",
+          "https://scholar.google.com/citations?user=kDl5eNUAAAAJ",
+          "https://about.me/rasoulunlimited",
+          "https://orcid.org/0009-0004-7177-2080"
         ],
         "award": [
           "Top Digital Creator 2023 - Tech Innovators Guild"
