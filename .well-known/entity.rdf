@@ -81,22 +81,34 @@
         <schema:competencyRequired>Medical engineering</schema:competencyRequired>
       </schema:EducationalOccupationalCredential>
     </schema:hasCredential>
-    <schema:sameAs rdf:resource="https://www.instagram.com/Rasoul.Unlimited" />
-    <schema:sameAs rdf:resource="https://virgool.io/@RasoulUnlimited" />
+    <schema:sameAs rdf:resource="https://github.com/RasoulUnlimited" />
+    <schema:sameAs rdf:resource="https://x.com/rasoulunlimited" />
     <schema:sameAs rdf:resource="https://www.linkedin.com/in/rasoulunlimited/" />
-    <schema:sameAs rdf:resource="https://github.com/RasoulUnlimited/" />
+    <schema:sameAs rdf:resource="https://www.instagram.com/Rasoul.Unlimited" />
+    <schema:sameAs rdf:resource="https://www.youtube.com/@RasoulUnlimited" />
+    <schema:sameAs rdf:resource="https://t.me/RasoulUnlimited" />
+    <schema:sameAs rdf:resource="https://mastodon.social/@rasoulunlimited" />
     <schema:sameAs rdf:resource="https://rasoulunlimited.medium.com" />
     <schema:sameAs rdf:resource="https://dev.to/rasoulunlimited" />
-    <schema:sameAs rdf:resource="https://t.me/RasoulUnlimited" />
-    <schema:sameAs rdf:resource="https://orcid.org/0009-0004-7177-2080" />
-    <schema:sameAs rdf:resource="https://about.me/rasoulunlimited" />
     <schema:sameAs rdf:resource="https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi" />
-    <schema:sameAs rdf:resource="https://www.youtube.com/@RasoulUnlimited" />
-    <schema:sameAs rdf:resource="https://keybase.io/RasoulUnlimited" />
-    <schema:sameAs rdf:resource="https://mastodon.social/@rasoulunlimited" />
-    <schema:sameAs rdf:resource="https://top.gg/bot/735403725132136510" />
-    <schema:sameAs rdf:resource="https://x.com/rasoulunlimited" />
+    <schema:sameAs rdf:resource="https://orcid.org/0009-0004-7177-2080" />
     <schema:sameAs rdf:resource="https://scholar.google.com/citations?user=kDl5eNUAAAAJ" />
+    <schema:sameAs rdf:resource="https://virgool.io/@RasoulUnlimited" />
+    <schema:sameAs rdf:resource="https://keybase.io/RasoulUnlimited" />
+    <schema:sameAs rdf:resource="https://about.me/rasoulunlimited" />
+    <schema:sameAs rdf:resource="https://top.gg/bot/735403725132136510" />
+    <schema:sameAs rdf:resource="https://gravatar.com/rasoulunlimited" />
+    <schema:sameAs rdf:resource="https://gitlab.com/rasoul.unlimited" />
+    <schema:sameAs rdf:resource="https://loop.frontiersin.org/people/3130177/overview" />
+    <schema:sameAs rdf:resource="https://www.lens.org/lens/profile/rasoulunlimited" />
+    <schema:sameAs rdf:resource="https://sourceforge.net/u/rasoulunlimited" />
+    <schema:sameAs rdf:resource="https://www.facebook.com/RasoulUnlimited" />
+    <schema:sameAs rdf:resource="https://www.webofscience.com/wos/author/record/NJS-6637-2025" />
+    <schema:sameAs rdf:resource="https://isni.org/isni/0000000527866581" />
+    <schema:sameAs rdf:resource="https://www.authenticus.pt/R-00M-286" />
+    <schema:sameAs rdf:resource="https://independent.academia.edu/MohammadRasoulSohrabi" />
+    <schema:sameAs rdf:resource="https://commons.datacite.org/orcid.org/0009-0004-7177-2080" />
+    <schema:sameAs rdf:resource="https://commons.wikimedia.org/wiki/File:Mohammad_Rasoul_Sohrabi_(Rasoul_Unlimited),_2025.jpg" />
     <schema:jobTitle>Biomedical Engineering Student</schema:jobTitle>
     <schema:jobTitle>Software Developer</schema:jobTitle>
     <schema:jobTitle>Designer</schema:jobTitle>
