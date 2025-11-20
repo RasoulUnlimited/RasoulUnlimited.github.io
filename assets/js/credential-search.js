@@ -69,22 +69,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const escapeRegExp = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
-  // cache original texts
+  // cache original texts and HTML
   cards.forEach((card) => {
     const nameEl = card.querySelector("h3");
     const summaryEl = card.querySelector(".credential-summary");
     if (nameEl && !nameEl.dataset.original) {
       nameEl.dataset.original = nameEl.textContent || "";
+      nameEl.dataset.originalHtml = nameEl.innerHTML || "";
     }
     if (summaryEl && !summaryEl.dataset.original) {
       summaryEl.dataset.original = summaryEl.textContent || "";
+      summaryEl.dataset.originalHtml = summaryEl.innerHTML || "";
     }
   });
 
   const highlightText = (el, term) => {
     if (!el || !el.dataset.original) return;
     if (!term) {
-      el.textContent = el.dataset.original;
+      // Restore original HTML structure
+      if (el.dataset.originalHtml) {
+        el.innerHTML = el.dataset.originalHtml;
+      } else {
+        el.textContent = el.dataset.original;
+      }
       return;
     }
     const regex = new RegExp(`(${escapeRegExp(term)})`, "gi");

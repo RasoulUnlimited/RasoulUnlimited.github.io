@@ -75,6 +75,9 @@
             throw new Error(`Failed to parse HTML for ${file}`);
           }
 
+          // Clear existing content (e.g. "Loading...") before appending
+          el.innerHTML = "";
+
           // Safely append parsed content
           while (doc.body && doc.body.firstChild) {
             el.appendChild(doc.body.firstChild);

@@ -69,7 +69,8 @@
     }
   }
 
-  runWhenReadyAndIdle(activatePreloadedStyles);
+  // Use ready() instead of runWhenReadyAndIdle() to avoid FOUC
+  ready(activatePreloadedStyles);
 
   // ---- 2) AI Signal config ----
 
