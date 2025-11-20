@@ -6,7 +6,8 @@
    * Injects external HTML fragments into elements with [data-include-html].
    * - Returns a Promise so callers can chain on it.
    * - Safely handles fetch errors.
-   * - Re-executes <script> tags inside included HTML.
+   * - Re-executes <script> tags inside included HTML (only from trusted sources).
+   * - Filters scripts from untrusted origins for security.
    * @param {Function} [callback]
    * @returns {Promise<void>}
    */
@@ -21,6 +22,27 @@
         }
       }
       return;
+    }
+
+    // Whitelist of trusted script paths that are allowed to be re-executed
+    const TRUSTED_SCRIPT_PATHS = [
+      "/assets/js/",
+      "/includes/",
+      new URL(window.location.href).origin + "/assets/js/",
+    ];
+
+    function isScriptTrusted(src) {
+      if (!src) return true; // inline scripts from trusted source are OK
+      try {
+        const url = new URL(src, window.location.origin);
+        // Only allow same-origin scripts from trusted directories
+        return url.origin === window.location.origin &&
+          TRUSTED_SCRIPT_PATHS.some((path) =>
+            url.pathname.startsWith(path.replace(window.location.origin, ""))
+          );
+      } catch {
+        return false;
+      }
     }
 
     const fetches = [];
@@ -40,7 +62,7 @@
           return resp.text();
         })
         .then((html) => {
-          // Use DOMParser to safely parse and sanitize HTML
+          // Use DOMParser to safely parse HTML
           const parser = new DOMParser();
           const doc = parser.parseFromString(html, "text/html");
 
@@ -68,21 +90,34 @@
             }
           }
 
-          // Re-execute any <script> tags inside included HTML
+          // Re-execute any <script> tags inside included HTML (with security validation)
           const scripts = el.querySelectorAll("script");
           scripts.forEach((oldScript) => {
+            // Security check: only re-execute trusted scripts
+            if (oldScript.src && !isScriptTrusted(oldScript.src)) {
+              console.warn(
+                "Blocked untrusted external script in included HTML:",
+                oldScript.src
+              );
+              oldScript.remove();
+              return;
+            }
+
             const newScript = document.createElement("script");
 
-            // Copy attributes (type, async, etc.)
+            // Copy only safe attributes
+            const safeAttributes = ["type", "async", "defer", "charset"];
             for (const attr of oldScript.attributes) {
-              newScript.setAttribute(attr.name, attr.value);
+              if (safeAttributes.includes(attr.name)) {
+                newScript.setAttribute(attr.name, attr.value);
+              }
             }
 
             if (oldScript.src) {
-              // External script
+              // External script (already validated as trusted above)
               newScript.src = oldScript.src;
             } else {
-              // Inline script
+              // Inline script - copy text content directly
               newScript.textContent = oldScript.textContent;
             }
 

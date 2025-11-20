@@ -129,9 +129,11 @@ addMediaQueryChangeListener(prefersReducedMotionQuery, (e) => {
 
 /**
  * Creates a short, sharp click sound using Web Audio API.
- * @returns {AudioBuffer} The generated audio buffer for a click sound.
+ * @returns {AudioBuffer|null} The generated audio buffer for a click sound, or null if audio context unavailable.
  */
 function createClickSound() {
+  if (!audioContext) return null;
+
   const duration = 0.05; // seconds
   const frequency = 440; // Hz (A4 note)
   const gain = 0.1;
@@ -152,9 +154,11 @@ function createClickSound() {
 
 /**
  * Creates a rising "toast" notification sound using Web Audio API.
- * @returns {AudioBuffer} The generated audio buffer for a toast sound.
+ * @returns {AudioBuffer|null} The generated audio buffer for a toast sound, or null if audio context unavailable.
  */
 function createToastSound() {
+  if (!audioContext) return null;
+
   const duration = 0.1; // seconds
   const startFrequency = 880; // Hz
   const endFrequency = 1200; // Hz
