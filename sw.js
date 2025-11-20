@@ -50,19 +50,20 @@ self.addEventListener('install', event => {
 // Activate event: clean up old cache versions
 self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(
-        keys
-          .filter(k => k.startsWith('ru-security-') && k !== CACHE_NAME)
-          .map(k => {
-            console.log('Deleting old cache version:', k);
-            return caches.delete(k);
-          })
-      )
-    )
+    Promise.all([
+      caches.keys().then(keys =>
+        Promise.all(
+          keys
+            .filter(k => k.startsWith('ru-security-') && k !== CACHE_NAME)
+            .map(k => {
+              console.log('Deleting old cache version:', k);
+              return caches.delete(k);
+            })
+        )
+      ),
+      self.clients.claim()
+    ])
   );
-  // Take control of clients immediately
-  return self.clients.claim();
 });
 
 // Fetch event: implement smart caching strategy

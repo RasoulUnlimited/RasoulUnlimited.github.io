@@ -403,9 +403,16 @@
         iconWrap.className = "timeline-icon";
         const iconEl = document.createElement("i");
         iconEl.classList.add("fas");
+        
+        // Strict whitelist of allowed Font Awesome icon classes
+        const ALLOWED_ICONS = new Set([
+          "fa-rocket", "fa-cloud", "fa-shield-alt", "fa-key", 
+          "fa-bell", "fa-wifi", "fa-lock", "fa-shield", 
+          "fa-check", "fa-star", "fa-bookmark", "fa-award"
+        ]);
+        
         const iconClass =
-          typeof ev.icon === "string" &&
-          /^(fa-[a-z0-9-]+)$/i.test(ev.icon)
+          typeof ev.icon === "string" && ALLOWED_ICONS.has(ev.icon)
             ? ev.icon
             : "fa-shield-alt";
         iconEl.classList.add(iconClass);
@@ -477,6 +484,9 @@
         );
       }
     }
+
+    let filterDebounceTimer = null;
+    let isFilteringInProgress = false;
 
     function setupTimelineSearch() {
       if (!timelineList || !timelineSearch || searchInitialized) return;
@@ -572,7 +582,16 @@
       timelineSearch.addEventListener("input", () => {
         const term = timelineSearch.value;
         clearTimeout(debounceTimer);
-        debounceTimer = setTimeout(() => filterList(term), 200);
+        // Prevent overlapping filter operations
+        if (isFilteringInProgress) {
+          debounceTimer = setTimeout(() => filterList(term), 300);
+        } else {
+          debounceTimer = setTimeout(() => {
+            isFilteringInProgress = true;
+            filterList(term);
+            isFilteringInProgress = false;
+          }, 200);
+        }
       });
 
       timelineSearch.addEventListener("keydown", (e) => {
@@ -614,7 +633,14 @@
 
       // Cleanup debounce timer on page unload to prevent memory leaks
       window.addEventListener("beforeunload", () => {
-        clearTimeout(debounceTimer);
+        if (filterDebounceTimer) {
+          clearTimeout(filterDebounceTimer);
+          filterDebounceTimer = null;
+        }
+        if (debounceTimer) {
+          clearTimeout(debounceTimer);
+          debounceTimer = null;
+        }
       });
     }
 
