@@ -21,27 +21,27 @@ export default {
         "/schema/identity.jsonld",
         request.url
       ).toString();
-      
+
       try {
         const schemaRes = await fetch(schemaURL);
-        
+
         // Validate the schema response
         if (!schemaRes.ok) {
           console.error(`Failed to fetch schema: ${schemaRes.status}`);
           // Return original response if schema fetch fails
           return response;
         }
-        
+
         // Validate content type
         const schemaContentType = schemaRes.headers.get("content-type") || "";
-        if (!schemaContentType.includes("application/json") && 
+        if (!schemaContentType.includes("application/json") &&
             !schemaContentType.includes("application/ld+json")) {
           console.error(`Invalid schema content-type: ${schemaContentType}`);
           return response;
         }
-        
+
         const payloadText = await schemaRes.text();
-        
+
         // Validate JSON structure before injecting
         try {
           JSON.parse(payloadText);
@@ -49,7 +49,7 @@ export default {
           console.error("Invalid JSON in schema:", jsonErr);
           return response;
         }
-        
+
         // Escape HTML special characters to prevent XSS
         const escapedPayload = payloadText
           .replace(/&/g, "&amp;")
