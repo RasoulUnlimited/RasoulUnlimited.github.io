@@ -74,28 +74,42 @@
       }
     },
     set(key, value) {
-      try {
-        localStorage.setItem(key, JSON.stringify(value));
-      } catch (e) {
-        if (e.name === 'QuotaExceededError') {
-          console.warn(`localStorage quota exceeded. Could not store ${key}`);
-          // Attempt to clear old data
-          try {
+      const maxRetries = 5;
+      let retryCount = 0;
+      
+      const attemptSet = () => {
+        try {
+          localStorage.setItem(key, JSON.stringify(value));
+          return true;
+        } catch (e) {
+          if (e.name === 'QuotaExceededError' && retryCount < maxRetries) {
+            retryCount++;
+            
+            // Get sortable keys (excluding protected ones)
             const oldKeys = Object.keys(localStorage).filter(k => 
               !['theme', 'hasVisited'].includes(k)
             );
+            
             if (oldKeys.length > 0) {
-              localStorage.removeItem(oldKeys[0]);
-              // Retry the set operation
-              localStorage.setItem(key, JSON.stringify(value));
+              try {
+                // Remove oldest key first
+                localStorage.removeItem(oldKeys[0]);
+                return attemptSet(); // Recursive retry
+              } catch (innerE) {
+                console.error(`Failed to recover from quota exceeded for ${key}:`, innerE);
+                return false;
+              }
             }
-          } catch (innerE) {
-            console.error('Failed to recover from quota exceeded:', innerE);
+          } else if (e.name === 'QuotaExceededError') {
+            console.warn(`localStorage quota exceeded. Could not store ${key} after ${maxRetries} retries`);
+          } else {
+            console.error(`Failed to store ${key}:`, e);
           }
-        } else {
-          console.error(`Failed to store ${key}:`, e);
+          return false;
         }
-      }
+      };
+      
+      return attemptSet();
     },
     setRaw(key, value) {
       try {
@@ -1342,8 +1356,16 @@
     }));
 
     const start = performance.now();
+    let rafId = null;
 
-    (function loop() {
+    const cleanup = () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      if (canvas && canvas.parentNode) {
+        canvas.remove();
+      }
+    };
+
+    const loop = () => {
       const elapsed = performance.now() - start;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -1360,9 +1382,24 @@
         ctx.restore();
       }
 
-      if (elapsed < 3400) requestAnimationFrame(loop);
-      else canvas.remove();
-    })();
+      if (elapsed < 3400) {
+        rafId = requestAnimationFrame(loop);
+      } else {
+        cleanup();
+      }
+    };
+
+    rafId = requestAnimationFrame(loop);
+
+    // Cleanup observer for early canvas removal
+    const observer = new MutationObserver(() => {
+      if (!document.body.contains(canvas)) {
+        cleanup();
+        observer.disconnect();
+      }
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
   }
 
   // ==========================

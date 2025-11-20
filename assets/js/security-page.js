@@ -136,16 +136,23 @@
         }
       }
 
-      if (cached && (Date.now() - cached.t < ttl || !navigator.onLine)) {
+      // Check if cache is valid and not expired
+      const cacheIsValid = cached && (Date.now() - cached.t < ttl);
+      
+      // Return fresh cache if available and valid
+      if (cacheIsValid) {
         return cached.d;
       }
 
-      if (!navigator.onLine && !cached) {
+      // If offline and no valid cache, throw immediately
+      if (!navigator.onLine) {
+        if (cached && cached.d) {
+          // Return stale data but indicate it's stale
+          const staleError = new Error("stale-data");
+          staleError.data = cached.d;
+          throw staleError;
+        }
         throw new Error("offline");
-      }
-
-      if (!navigator.onLine && cached) {
-        return cached.d;
       }
 
       const controller =
@@ -171,19 +178,35 @@
           ) {
             throw new Error("rate-limit");
           }
-          if (cached) return cached.d;
+          // Fall back to stale cache if available
+          if (cached && cached.d) {
+            const staleError = new Error("stale-data");
+            staleError.data = cached.d;
+            throw staleError;
+          }
           throw new Error(res.statusText || "fetch error");
         }
 
-        const data = await parser(res);
-        if (storage) {
-          try {
-            storage.setItem(
-              key,
-              JSON.stringify({ t: Date.now(), d: data })
-            );
-          } catch {
-            // ignore storage errors
+        // Validate parser output before caching
+        let data;
+        try {
+          data = await parser(res);
+        } catch (parseErr) {
+          console.error(`Parser error for ${key}:`, parseErr);
+          throw new Error("parse-error");
+        }
+
+        // Only cache valid data
+        if (data != null) {
+          if (storage) {
+            try {
+              storage.setItem(
+                key,
+                JSON.stringify({ t: Date.now(), d: data })
+              );
+            } catch {
+              console.warn(`Failed to cache ${key}, but returning fresh data`);
+            }
           }
         }
         return data;
