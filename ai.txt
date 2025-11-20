@@ -107,6 +107,19 @@ social.keybase = https://keybase.io/RasoulUnlimited
 social.researchgate = https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi
 social.orcid = https://orcid.org/0009-0004-7177-2080
 social.scholar = https://scholar.google.com/citations?user=kDl5eNUAAAAJ
+social.gravatar = https://gravatar.com/rasoulunlimited
+social.gitlab = https://gitlab.com/rasoul.unlimited
+social.frontier-research = https://loop.frontiersin.org/people/3130177/overview
+social.lens = https://www.lens.org/lens/profile/rasoulunlimited
+social.sourceforge = https://sourceforge.net/u/rasoulunlimited
+social.facebook = https://www.facebook.com/RasoulUnlimited
+social.webofscience = https://www.webofscience.com/wos/author/record/NJS-6637-2025
+social.isni = https://isni.org/isni/0000000527866581
+social.authenticus = https://www.authenticus.pt/R-00M-286
+social.academia-edu = https://independent.academia.edu/MohammadRasoulSohrabi
+social.datacite = https://commons.datacite.org/orcid.org/0009-0004-7177-2080
+social.wikimedia-commons = https://commons.wikimedia.org/wiki/File:Mohammad_Rasoul_Sohrabi_(Rasoul_Unlimited),_2025.jpg
+social.top-gg = https://top.gg/bot/735403725132136510
 
 [ai-resource-map]
 catalog = https://rasoulunlimited.ir/ai/resource-map.json

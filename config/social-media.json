@@ -1,0 +1,382 @@
+{
+  "social": [
+    {
+      "platform": "GitHub",
+      "handle": "RasoulUnlimited",
+      "url": "https://github.com/RasoulUnlimited",
+      "type": "technical",
+      "priority": 1,
+      "category": "code-repository"
+    },
+    {
+      "platform": "X",
+      "handle": "rasoulunlimited",
+      "url": "https://x.com/rasoulunlimited",
+      "type": "social",
+      "priority": 2,
+      "category": "microblogging"
+    },
+    {
+      "platform": "LinkedIn",
+      "handle": "rasoulunlimited",
+      "url": "https://www.linkedin.com/in/rasoulunlimited/",
+      "type": "professional",
+      "priority": 3,
+      "category": "professional-network"
+    },
+    {
+      "platform": "Instagram",
+      "handle": "Rasoul.Unlimited",
+      "url": "https://www.instagram.com/Rasoul.Unlimited",
+      "type": "social",
+      "priority": 4,
+      "category": "visual-social"
+    },
+    {
+      "platform": "YouTube",
+      "handle": "RasoulUnlimited",
+      "url": "https://www.youtube.com/@RasoulUnlimited",
+      "type": "content",
+      "priority": 5,
+      "category": "video-platform"
+    },
+    {
+      "platform": "Telegram",
+      "handle": "RasoulUnlimited",
+      "url": "https://t.me/RasoulUnlimited",
+      "type": "messaging",
+      "priority": 6,
+      "category": "instant-messaging"
+    },
+    {
+      "platform": "Mastodon",
+      "handle": "rasoulunlimited@mastodon.social",
+      "url": "https://mastodon.social/@rasoulunlimited",
+      "type": "social",
+      "priority": 7,
+      "category": "decentralized-social"
+    },
+    {
+      "platform": "Medium",
+      "handle": "rasoulunlimited",
+      "url": "https://rasoulunlimited.medium.com",
+      "type": "content",
+      "priority": 8,
+      "category": "blogging"
+    },
+    {
+      "platform": "Dev.to",
+      "handle": "rasoulunlimited",
+      "url": "https://dev.to/rasoulunlimited",
+      "type": "technical",
+      "priority": 9,
+      "category": "developer-community"
+    },
+    {
+      "platform": "ResearchGate",
+      "handle": "Mohammad-Rasoul-Sohrabi",
+      "url": "https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi",
+      "type": "academic",
+      "priority": 10,
+      "category": "research-network"
+    },
+    {
+      "platform": "ORCID",
+      "handle": "0009-0004-7177-2080",
+      "url": "https://orcid.org/0009-0004-7177-2080",
+      "type": "academic",
+      "priority": 11,
+      "category": "research-identifier"
+    },
+    {
+      "platform": "Google Scholar",
+      "handle": "kDl5eNUAAAAJ",
+      "url": "https://scholar.google.com/citations?user=kDl5eNUAAAAJ",
+      "type": "academic",
+      "priority": 12,
+      "category": "research-database"
+    },
+    {
+      "platform": "Virgool",
+      "handle": "RasoulUnlimited",
+      "url": "https://virgool.io/@RasoulUnlimited",
+      "type": "content",
+      "priority": 13,
+      "category": "persian-blogging"
+    },
+    {
+      "platform": "Keybase",
+      "handle": "rasoulunlimited",
+      "url": "https://keybase.io/RasoulUnlimited",
+      "type": "security",
+      "priority": 14,
+      "category": "cryptographic-identity"
+    },
+    {
+      "platform": "About.me",
+      "handle": "rasoulunlimited",
+      "url": "https://about.me/rasoulunlimited",
+      "type": "profile",
+      "priority": 15,
+      "category": "personal-profile"
+    },
+    {
+      "platform": "top.gg",
+      "handle": "735403725132136510",
+      "url": "https://top.gg/bot/735403725132136510",
+      "type": "technical",
+      "priority": 16,
+      "category": "discord-bots"
+    },
+    {
+      "platform": "Gravatar",
+      "handle": "rasoulunlimited",
+      "url": "https://gravatar.com/rasoulunlimited",
+      "type": "profile",
+      "priority": 17,
+      "category": "avatar-service"
+    },
+    {
+      "platform": "GitLab",
+      "handle": "rasoul.unlimited",
+      "url": "https://gitlab.com/rasoul.unlimited",
+      "type": "technical",
+      "priority": 18,
+      "category": "code-repository"
+    },
+    {
+      "platform": "Frontier In Research",
+      "handle": "3130177",
+      "url": "https://loop.frontiersin.org/people/3130177/overview",
+      "type": "academic",
+      "priority": 19,
+      "category": "research-profile"
+    },
+    {
+      "platform": "Lens.org",
+      "handle": "rasoulunlimited",
+      "url": "https://www.lens.org/lens/profile/rasoulunlimited",
+      "type": "academic",
+      "priority": 20,
+      "category": "research-database"
+    },
+    {
+      "platform": "SourceForge",
+      "handle": "rasoulunlimited",
+      "url": "https://sourceforge.net/u/rasoulunlimited",
+      "type": "technical",
+      "priority": 21,
+      "category": "code-repository"
+    },
+    {
+      "platform": "Facebook",
+      "handle": "RasoulUnlimited",
+      "url": "https://www.facebook.com/RasoulUnlimited",
+      "type": "social",
+      "priority": 22,
+      "category": "social-network"
+    },
+    {
+      "platform": "Web of Science",
+      "handle": "NJS-6637-2025",
+      "url": "https://www.webofscience.com/wos/author/record/NJS-6637-2025",
+      "type": "academic",
+      "priority": 23,
+      "category": "research-database"
+    },
+    {
+      "platform": "ISNI",
+      "handle": "0000000527866581",
+      "url": "https://isni.org/isni/0000000527866581",
+      "type": "academic",
+      "priority": 24,
+      "category": "identity-identifier"
+    },
+    {
+      "platform": "Authenticus",
+      "handle": "R-00M-286",
+      "url": "https://www.authenticus.pt/R-00M-286",
+      "type": "academic",
+      "priority": 25,
+      "category": "research-profile"
+    },
+    {
+      "platform": "Academia.edu",
+      "handle": "MohammadRasoulSohrabi",
+      "url": "https://independent.academia.edu/MohammadRasoulSohrabi",
+      "type": "academic",
+      "priority": 26,
+      "category": "academic-network"
+    },
+    {
+      "platform": "DataCite Commons",
+      "handle": "0009-0004-7177-2080",
+      "url": "https://commons.datacite.org/orcid.org/0009-0004-7177-2080",
+      "type": "academic",
+      "priority": 27,
+      "category": "research-identifier"
+    },
+    {
+      "platform": "Wikimedia Commons",
+      "handle": "Mohammad_Rasoul_Sohrabi",
+      "url": "https://commons.wikimedia.org/wiki/File:Mohammad_Rasoul_Sohrabi_(Rasoul_Unlimited),_2025.jpg",
+      "type": "media",
+      "priority": 28,
+      "category": "media-repository"
+    }
+  ],
+  "sameAs": [
+    "https://github.com/RasoulUnlimited",
+    "https://www.linkedin.com/in/rasoulunlimited/",
+    "https://www.instagram.com/Rasoul.Unlimited",
+    "https://x.com/rasoulunlimited",
+    "https://orcid.org/0009-0004-7177-2080",
+    "https://scholar.google.com/citations?user=kDl5eNUAAAAJ",
+    "https://www.youtube.com/@RasoulUnlimited",
+    "https://t.me/RasoulUnlimited",
+    "https://mastodon.social/@rasoulunlimited",
+    "https://rasoulunlimited.medium.com",
+    "https://dev.to/rasoulunlimited",
+    "https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi",
+    "https://virgool.io/@RasoulUnlimited",
+    "https://keybase.io/RasoulUnlimited",
+    "https://about.me/rasoulunlimited",
+    "https://top.gg/bot/735403725132136510",
+    "https://gravatar.com/rasoulunlimited",
+    "https://gitlab.com/rasoul.unlimited",
+    "https://loop.frontiersin.org/people/3130177/overview",
+    "https://www.lens.org/lens/profile/rasoulunlimited",
+    "https://sourceforge.net/u/rasoulunlimited",
+    "https://www.facebook.com/RasoulUnlimited",
+    "https://www.webofscience.com/wos/author/record/NJS-6637-2025",
+    "https://isni.org/isni/0000000527866581",
+    "https://www.authenticus.pt/R-00M-286",
+    "https://independent.academia.edu/MohammadRasoulSohrabi",
+    "https://commons.datacite.org/orcid.org/0009-0004-7177-2080",
+    "https://commons.wikimedia.org/wiki/File:Mohammad_Rasoul_Sohrabi_(Rasoul_Unlimited),_2025.jpg"
+  ],
+  "groupedByType": {
+    "technical": [
+      "https://github.com/RasoulUnlimited",
+      "https://dev.to/rasoulunlimited",
+      "https://top.gg/bot/735403725132136510",
+      "https://gitlab.com/rasoul.unlimited",
+      "https://sourceforge.net/u/rasoulunlimited"
+    ],
+    "professional": [
+      "https://www.linkedin.com/in/rasoulunlimited/"
+    ],
+    "social": [
+      "https://x.com/rasoulunlimited",
+      "https://www.instagram.com/Rasoul.Unlimited",
+      "https://mastodon.social/@rasoulunlimited",
+      "https://www.facebook.com/RasoulUnlimited"
+    ],
+    "content": [
+      "https://www.youtube.com/@RasoulUnlimited",
+      "https://rasoulunlimited.medium.com",
+      "https://virgool.io/@RasoulUnlimited"
+    ],
+    "messaging": [
+      "https://t.me/RasoulUnlimited"
+    ],
+    "academic": [
+      "https://orcid.org/0009-0004-7177-2080",
+      "https://scholar.google.com/citations?user=kDl5eNUAAAAJ",
+      "https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi",
+      "https://loop.frontiersin.org/people/3130177/overview",
+      "https://www.lens.org/lens/profile/rasoulunlimited",
+      "https://www.webofscience.com/wos/author/record/NJS-6637-2025",
+      "https://isni.org/isni/0000000527866581",
+      "https://www.authenticus.pt/R-00M-286",
+      "https://independent.academia.edu/MohammadRasoulSohrabi",
+      "https://commons.datacite.org/orcid.org/0009-0004-7177-2080"
+    ],
+    "security": [
+      "https://keybase.io/RasoulUnlimited"
+    ],
+    "profile": [
+      "https://about.me/rasoulunlimited",
+      "https://gravatar.com/rasoulunlimited"
+    ],
+    "media": [
+      "https://commons.wikimedia.org/wiki/File:Mohammad_Rasoul_Sohrabi_(Rasoul_Unlimited),_2025.jpg"
+    ]
+  },
+  "groupedByCategory": {
+    "code-repository": [
+      "https://github.com/RasoulUnlimited",
+      "https://gitlab.com/rasoul.unlimited",
+      "https://sourceforge.net/u/rasoulunlimited"
+    ],
+    "microblogging": [
+      "https://x.com/rasoulunlimited"
+    ],
+    "professional-network": [
+      "https://www.linkedin.com/in/rasoulunlimited/"
+    ],
+    "visual-social": [
+      "https://www.instagram.com/Rasoul.Unlimited"
+    ],
+    "video-platform": [
+      "https://www.youtube.com/@RasoulUnlimited"
+    ],
+    "instant-messaging": [
+      "https://t.me/RasoulUnlimited"
+    ],
+    "decentralized-social": [
+      "https://mastodon.social/@rasoulunlimited"
+    ],
+    "blogging": [
+      "https://rasoulunlimited.medium.com"
+    ],
+    "developer-community": [
+      "https://dev.to/rasoulunlimited"
+    ],
+    "research-network": [
+      "https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi"
+    ],
+    "research-identifier": [
+      "https://orcid.org/0009-0004-7177-2080",
+      "https://commons.datacite.org/orcid.org/0009-0004-7177-2080"
+    ],
+    "research-database": [
+      "https://scholar.google.com/citations?user=kDl5eNUAAAAJ",
+      "https://www.lens.org/lens/profile/rasoulunlimited",
+      "https://www.webofscience.com/wos/author/record/NJS-6637-2025"
+    ],
+    "persian-blogging": [
+      "https://virgool.io/@RasoulUnlimited"
+    ],
+    "cryptographic-identity": [
+      "https://keybase.io/RasoulUnlimited"
+    ],
+    "personal-profile": [
+      "https://about.me/rasoulunlimited"
+    ],
+    "discord-bots": [
+      "https://top.gg/bot/735403725132136510"
+    ],
+    "avatar-service": [
+      "https://gravatar.com/rasoulunlimited"
+    ],
+    "research-profile": [
+      "https://loop.frontiersin.org/people/3130177/overview",
+      "https://www.authenticus.pt/R-00M-286"
+    ],
+    "identity-identifier": [
+      "https://isni.org/isni/0000000527866581"
+    ],
+    "academic-network": [
+      "https://independent.academia.edu/MohammadRasoulSohrabi"
+    ],
+    "social-network": [
+      "https://www.facebook.com/RasoulUnlimited"
+    ],
+    "media-repository": [
+      "https://commons.wikimedia.org/wiki/File:Mohammad_Rasoul_Sohrabi_(Rasoul_Unlimited),_2025.jpg"
+    ]
+  },
+  "lastUpdated": "2025-11-20T00:00:00Z",
+  "totalPlatforms": 28
+}

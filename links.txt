@@ -114,6 +114,19 @@ Medium:                   https://rasoulunlimited.medium.com
 dev.to:                   https://dev.to/rasoulunlimited
 Virgool:                  https://virgool.io/@RasoulUnlimited
 Keybase:                  https://keybase.io/RasoulUnlimited
+Gravatar:                 https://gravatar.com/rasoulunlimited
+GitLab:                   https://gitlab.com/rasoul.unlimited
+Frontier Research:        https://loop.frontiersin.org/people/3130177/overview
+Lens.org:                 https://www.lens.org/lens/profile/rasoulunlimited
+SourceForge:              https://sourceforge.net/u/rasoulunlimited
+Facebook:                 https://www.facebook.com/RasoulUnlimited
+Web of Science:           https://www.webofscience.com/wos/author/record/NJS-6637-2025
+ISNI:                     https://isni.org/isni/0000000527866581
+Authenticus:              https://www.authenticus.pt/R-00M-286
+Academia.edu:             https://independent.academia.edu/MohammadRasoulSohrabi
+DataCite Commons:         https://commons.datacite.org/orcid.org/0009-0004-7177-2080
+Wikimedia Commons:        https://commons.wikimedia.org/wiki/File:Mohammad_Rasoul_Sohrabi_(Rasoul_Unlimited),_2025.jpg
+Top.gg (Discord Bots):    https://top.gg/bot/735403725132136510
 Wikidata (Local Copy):    https://rasoulunlimited.ir/wiki/rasoul-unlimited/
 
 
