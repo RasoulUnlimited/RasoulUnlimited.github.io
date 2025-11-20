@@ -485,7 +485,8 @@
           const contentEl = li.querySelector(".timeline-content");
           if (!contentEl) return;
 
-          if (!li.dataset.orig) li.dataset.orig = contentEl.innerHTML;
+          // Cache text content instead of full HTML to avoid memory bloat
+          if (!li.dataset.origText) li.dataset.origText = contentEl.textContent;
 
           const text = normalizeText(li.textContent);
           const match = hasQuery && text.includes(q);
@@ -497,9 +498,10 @@
 
           if (visible && match && reg) {
             count++;
-            // Use safe DOM method instead of innerHTML with regex replacement
-            const parts = li.dataset.orig.split(reg);
-            contentEl.innerHTML = "";
+            // Rebuild content from cached text with highlighting
+            const origText = li.dataset.origText;
+            const parts = origText.split(reg);
+            contentEl.textContent = "";
             parts.forEach((part, index) => {
               if (index % 2 === 1) {
                 // This is a match - wrapped in highlight span
@@ -512,7 +514,8 @@
               }
             });
           } else {
-            contentEl.innerHTML = li.dataset.orig;
+            // Restore original text content
+            contentEl.textContent = li.dataset.origText;
           }
         });
 
@@ -816,7 +819,10 @@
     // دامنه‌ی scope
     const domainEl = document.getElementById("scope-domain");
     if (domainEl) {
-      domainEl.innerHTML = `<code>${location.hostname}</code>`;
+      const codeEl = document.createElement("code");
+      codeEl.textContent = location.hostname;
+      domainEl.textContent = "";
+      domainEl.appendChild(codeEl);
     }
 
     // آخرین بروزرسانی از GitHub
