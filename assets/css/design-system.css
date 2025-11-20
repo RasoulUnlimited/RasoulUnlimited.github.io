@@ -1,36 +1,36 @@
 :root {
   --font-body: "Roboto", sans-serif;
-  --primary-color: #005fa3;
-  --primary-rgb: 0, 90, 158;
-  --secondary-color: #1a1a1a;
-  --accent-color: #0d6efd;
+  --primary-color: #004d85;
+  --primary-rgb: 0, 77, 133;
+  --secondary-color: #121212;
+  --accent-color: #0b5ed7;
   --cta-text-color: #fff;
-  --highlight-color: #ffca28;
+  --highlight-color: #ffc107;
   --highlight-rgb: 255, 193, 7;
-  --highlight-darker: #e0a800;
-  --background-start-color: #f7f9fc;
-  --background-end-color: #eef3f8;
+  --highlight-darker: #d39e00;
+  --background-start-color: #f8f9fa;
+  --background-end-color: #e9ecef;
   --container-bg: #ffffff;
   --card-bg: #ffffff;
-  --navbar-bg: rgba(255, 255, 255, 0.95);
+  --navbar-bg: rgba(255, 255, 255, 0.98);
   --giscus-bg: var(--card-bg);
   --skills-bg: #e9ecef;
   --toast-bg: var(--primary-color);
   --toast-color: #fff;
 
-  --shadow-color-light: rgba(0, 0, 0, 0.05);
-  --shadow-color-medium: rgba(0, 0, 0, 0.12);
-  --shadow-color-strong: rgba(0, 0, 0, 0.18);
+  --shadow-color-light: rgba(0, 0, 0, 0.08);
+  --shadow-color-medium: rgba(0, 0, 0, 0.15);
+  --shadow-color-strong: rgba(0, 0, 0, 0.25);
 
-  --text-color: #2f2f2f;
-  --text-color-light: #555555;
+  --text-color: #212529;
+  --text-color-light: #495057;
   --text-color-link: var(--accent-color);
   --heading-color: var(--secondary-color);
-  --tagline-color: #555555;
-  --footer-color: #555555;
+  --tagline-color: #495057;
+  --footer-color: #495057;
   --lang-switcher-active-color: #000;
 
-  --border-color: #e0e0e0;
+  --border-color: #dee2e6;
   --faq-link-hover-color: #0f172a;
   --timeline-line-color: var(--primary-color);
   --timeline-dot-border-color: var(--primary-color);

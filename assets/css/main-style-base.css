@@ -41,41 +41,41 @@ body {
 
 .dark-mode {
   background: #0f172a;
-  color: #fff;
-  --primary-color: #61dafb;
-  --primary-rgb: 97, 218, 251;
-  --secondary-color: #f0f0f0;
-  --accent-color: #5ab0f5;
-  --cta-text-color: #000;
-  --highlight-color: #ffca28;
-  --highlight-rgb: 253, 216, 53;
-  --highlight-darker: #c7a700;
-  --background-start-color: #1f2631;
-  --background-end-color: #151a24;
-  --container-bg: #1e1e1e;
-  --card-bg: #242424;
-  --navbar-bg: rgba(30, 30, 30, 0.95);
-  --giscus-bg: #1e1e1e;
-  --skills-bg: #3a3a3a;
+  color: #f8fafc;
+  --primary-color: #38bdf8;
+  --primary-rgb: 56, 189, 248;
+  --secondary-color: #f1f5f9;
+  --accent-color: #60a5fa;
+  --cta-text-color: #0f172a;
+  --highlight-color: #fbbf24;
+  --highlight-rgb: 251, 191, 36;
+  --highlight-darker: #d97706;
+  --background-start-color: #0f172a;
+  --background-end-color: #1e293b;
+  --container-bg: #1e293b;
+  --card-bg: #1e293b;
+  --navbar-bg: rgba(15, 23, 42, 0.95);
+  --giscus-bg: #1e293b;
+  --skills-bg: #334155;
   --toast-bg: var(--primary-color);
-  --toast-color: #fff;
-  --shadow-color-light: rgba(0, 0, 0, 0.15);
-  --shadow-color-medium: rgba(0, 0, 0, 0.3);
-  --shadow-color-strong: rgba(0, 0, 0, 0.45);
-  --text-color: #d0d0d0;
-  --text-color-light: #a9a9a9;
+  --toast-color: #0f172a;
+  --shadow-color-light: rgba(0, 0, 0, 0.3);
+  --shadow-color-medium: rgba(0, 0, 0, 0.5);
+  --shadow-color-strong: rgba(0, 0, 0, 0.7);
+  --text-color: #e2e8f0;
+  --text-color-light: #cbd5e1;
   --text-color-link: var(--primary-color);
   --heading-color: var(--secondary-color);
-  --tagline-color: #bcbcbc;
-  --footer-color: #a0a0a0;
-  --lang-switcher-active-color: #c0c0c0;
-  --border-color: #3a3a3a;
-  --timeline-line-color: #555555;
+  --tagline-color: #94a3b8;
+  --footer-color: #94a3b8;
+  --lang-switcher-active-color: #f8fafc;
+  --border-color: #334155;
+  --timeline-line-color: #475569;
   --timeline-dot-border-color: var(--primary-color);
-  --timeline-content-border-color: #4a4a4a;
+  --timeline-content-border-color: #334155;
   --giscus-border: 1px solid var(--border-color);
   --faq-link-hover-color: var(--primary-color);
-  --card-link-hover-text-color: #000;
+  --card-link-hover-text-color: #0f172a;
 }
 
 .light-mode {
@@ -91,7 +91,7 @@ body {
 }
 
 .footer-link {
-  color: #bbb;
+  color: var(--footer-color, #bbb);
   font-size: 0.9rem;
   text-decoration: none;
   padding: var(--space-1, 0.25rem) var(--space-2, 0.5rem);
@@ -115,13 +115,13 @@ body {
 
 .micro-profile {
   font-size: 0.75rem;
-  color: #555;
+  color: var(--text-color-light, #555);
   opacity: 0.6;
   text-align: center;
   max-width: 400px;
   margin: 2rem auto 0;
   padding: 0.5rem 1rem;
-  border-top: 1px dashed #ccc;
+  border-top: 1px dashed var(--border-color, #ccc);
   will-change: opacity;
 }
 
@@ -137,7 +137,7 @@ body {
 .micro-profile a.u-url,
 .micro-profile a.u-email {
   display: inline-block;
-  color: #0066cc;
+  color: var(--text-color-link, #0066cc);
   font-weight: bold;
   text-decoration: none;
 }
