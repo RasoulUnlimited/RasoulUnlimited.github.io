@@ -22,11 +22,6 @@
     {
       "rel": "me",
       "type": "text/html",
-      "href": "https://www.instagram.com/Rasoul.Unlimited"
-    },
-    {
-      "rel": "me",
-      "type": "text/html",
       "href": "https://github.com/RasoulUnlimited"
     },
     {
@@ -37,12 +32,42 @@
     {
       "rel": "me",
       "type": "text/html",
-      "href": "https://t.me/RasoulUnlimited"
+      "href": "https://www.instagram.com/Rasoul.Unlimited"
+    },
+    {
+      "rel": "me",
+      "type": "text/html",
+      "href": "https://x.com/rasoulunlimited"
+    },
+    {
+      "rel": "me",
+      "type": "text/html",
+      "href": "https://rasoulunlimited.medium.com"
+    },
+    {
+      "rel": "me",
+      "type": "text/html",
+      "href": "https://dev.to/rasoulunlimited"
     },
     {
       "rel": "me",
       "type": "text/html",
       "href": "https://www.youtube.com/@RasoulUnlimited"
+    },
+    {
+      "rel": "me",
+      "type": "text/html",
+      "href": "https://t.me/RasoulUnlimited"
+    },
+    {
+      "rel": "me",
+      "type": "text/html",
+      "href": "https://virgool.io/@RasoulUnlimited"
+    },
+    {
+      "rel": "me",
+      "type": "text/html",
+      "href": "https://mastodon.social/@rasoulunlimited"
     },
     {
       "rel": "me",
@@ -62,17 +87,12 @@
     {
       "rel": "me",
       "type": "text/html",
-      "href": "https://mastodon.social/@rasoulunlimited"
-    },
-    {
-      "rel": "me",
-      "type": "text/html",
-      "href": "https://x.com/rasoulunlimited"
-    },
-    {
-      "rel": "me",
-      "type": "text/html",
       "href": "https://keybase.io/RasoulUnlimited"
+    },
+    {
+      "rel": "me",
+      "type": "text/html",
+      "href": "https://top.gg/bot/735403725132136510"
     }
   ]
 }

@@ -14,7 +14,7 @@ Location: Karaj, Iran
 
 /* SOCIAL & PUBLIC PROFILES */
 GitHub: https://github.com/RasoulUnlimited
-LinkedIn: https://www.linkedin.com/in/rasoulunlimited
+LinkedIn: https://www.linkedin.com/in/rasoulunlimited/
 Instagram: https://www.instagram.com/Rasoul.Unlimited
 X (Twitter): https://x.com/rasoulunlimited
 Telegram: https://t.me/RasoulUnlimited
