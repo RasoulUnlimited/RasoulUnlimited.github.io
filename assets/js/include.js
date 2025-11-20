@@ -28,36 +28,19 @@
     const TRUSTED_SCRIPT_PATHS = [
       "/assets/js/",
       "/includes/",
-      "/assets/vendor/",
+      new URL(window.location.href).origin + "/assets/js/",
     ];
 
     function isScriptTrusted(src) {
       if (!src) return true; // inline scripts from trusted source are OK
       try {
-        // Use proper URL parsing with strict same-origin validation
         const url = new URL(src, window.location.origin);
-        
-        // Strictly validate origin - reject any non-same-origin scripts
-        if (url.origin !== window.location.origin) {
-          console.warn("Rejected cross-origin script:", src);
-          return false;
-        }
-        
-        // Normalize path for comparison
-        const pathname = url.pathname;
-        const isTrusted = TRUSTED_SCRIPT_PATHS.some((path) => {
-          // Use exact path matching with trailing slash to prevent bypasses
-          const normalizedPath = path.endsWith("/") ? path : path + "/";
-          return pathname.startsWith(normalizedPath);
-        });
-        
-        if (!isTrusted) {
-          console.warn("Rejected script from untrusted path:", src);
-        }
-        
-        return isTrusted;
-      } catch (err) {
-        console.warn("Failed to validate script URL:", src, err);
+        // Only allow same-origin scripts from trusted directories
+        return url.origin === window.location.origin &&
+          TRUSTED_SCRIPT_PATHS.some((path) =>
+            url.pathname.startsWith(path.replace(window.location.origin, ""))
+          );
+      } catch {
         return false;
       }
     }

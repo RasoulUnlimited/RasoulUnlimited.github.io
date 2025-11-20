@@ -76,12 +76,37 @@
     set(key, value) {
       try {
         localStorage.setItem(key, JSON.stringify(value));
-      } catch {}
+      } catch (e) {
+        if (e.name === 'QuotaExceededError') {
+          console.warn(`localStorage quota exceeded. Could not store ${key}`);
+          // Attempt to clear old data
+          try {
+            const oldKeys = Object.keys(localStorage).filter(k => 
+              !['theme', 'hasVisited'].includes(k)
+            );
+            if (oldKeys.length > 0) {
+              localStorage.removeItem(oldKeys[0]);
+              // Retry the set operation
+              localStorage.setItem(key, JSON.stringify(value));
+            }
+          } catch (innerE) {
+            console.error('Failed to recover from quota exceeded:', innerE);
+          }
+        } else {
+          console.error(`Failed to store ${key}:`, e);
+        }
+      }
     },
     setRaw(key, value) {
       try {
         localStorage.setItem(key, value);
-      } catch {}
+      } catch (e) {
+        if (e.name === 'QuotaExceededError') {
+          console.warn(`localStorage quota exceeded. Could not store ${key}`);
+        } else {
+          console.error(`Failed to store ${key}:`, e);
+        }
+      }
     },
     getRaw(key, fallback = null) {
       try {
@@ -352,9 +377,12 @@
 
     document.body.appendChild(toast);
 
-    requestAnimationFrame(() => {
+    // Use microtask to avoid frame starvation while ensuring proper timing
+    Promise.resolve().then(() => {
       toast.classList.add("show");
-      playSound("toast");
+      if (FLAGS().ENABLE_SOUNDS && audioContext) {
+        playSound("toast");
+      }
     });
 
     if (settings.duration > 0) {

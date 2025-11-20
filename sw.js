@@ -59,8 +59,10 @@ self.addEventListener('activate', event => {
             return caches.delete(k);
           })
       )
-    ).then(() => self.clients.claim()) // Claim clients after cleanup completes
+    )
   );
+  // Take control of clients immediately
+  return self.clients.claim();
 });
 
 // Fetch event: implement smart caching strategy
@@ -84,11 +86,11 @@ self.addEventListener('fetch', event => {
         .catch(() => {
           // Fall back to cache if network is unavailable
           return caches.match(event.request) ||
-            new Response('Offline - content not available', {
+            new Response('<!DOCTYPE html><html><head><meta charset="utf-8"><title>Offline</title><style>body{font-family:sans-serif;padding:2rem;max-width:600px;margin:0 auto}h1{color:#333}p{color:#666}</style></head><body><h1>Offline</h1><p>This content is not available offline. Please check your internet connection and try again.</p></body></html>', {
               status: 503,
               statusText: 'Service Unavailable',
               headers: new Headers({
-                'Content-Type': 'text/plain'
+                'Content-Type': 'text/html; charset=utf-8'
               })
             });
         })

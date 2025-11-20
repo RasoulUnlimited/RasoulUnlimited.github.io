@@ -183,11 +183,15 @@ function createToastSound() {
 /**
  * Loads and prepares the custom sound effects (click and toast).
  */
-async function loadSounds() {
+function loadSounds() {
   if (!audioContext) return;
   if (saveDataEnabled || lowThroughput) return; // respect data saving / low throughput
-  clickBuffer = createClickSound();
-  toastBuffer = createToastSound();
+  try {
+    clickBuffer = createClickSound();
+    toastBuffer = createToastSound();
+  } catch (e) {
+    console.warn('Failed to load sounds:', e);
+  }
 }
 
 /**
@@ -329,16 +333,20 @@ document.addEventListener("DOMContentLoaded", () => {
   window.enableIdentityPings = window.enableIdentityPings || false;
 
   function sendSilentIdentityPing(target) {
+    if (!window.enableIdentityPings) return; // Require explicit consent
     try {
       fetch(target.url, { mode: "no-cors" })
-        .then(() => console.log(`[identity-check] Pinged ${target.name}`))
-        .catch(() => {});
-    } catch (e) {}
+        .catch(() => {}); // Silent fail without logging to prevent timing attacks
+    } catch (e) {
+      // Silent catch
+    }
   }
 
   function queuePings() {
     identityPings.forEach((target, index) => {
-      setTimeout(() => sendSilentIdentityPing(target), index * 1000);
+      // Add random delay to avoid predictable timing
+      const randomDelay = Math.random() * 2000;
+      setTimeout(() => sendSilentIdentityPing(target), index * 1000 + randomDelay);
     });
   }
 
@@ -349,10 +357,12 @@ document.addEventListener("DOMContentLoaded", () => {
     ["click", "keydown"].forEach((evt) =>
       window.removeEventListener(evt, startIdentityPings)
     );
+    // Add additional random delay to further obscure timing
+    const additionalDelay = Math.random() * 3000 + 1000;
     if ("requestIdleCallback" in window) {
       requestIdleCallback(queuePings, { timeout: 3000 });
     } else {
-      setTimeout(queuePings, 2000);
+      setTimeout(queuePings, additionalDelay);
     }
   }
   ["click", "keydown"].forEach((evt) =>
@@ -920,7 +930,10 @@ if (skillsList) {
 const faqContainer = document.querySelector(".faq-container");
 const faqItems = document.querySelectorAll(".faq-item");
 
-if (faqContainer) {
+if (!faqContainer || !faqItems.length) {
+  if (!faqContainer) console.warn("FAQ container not found in the DOM");
+  if (faqItems && !faqItems.length) console.warn("No FAQ items found in container");
+} else if (faqContainer) {
   faqContainer.id = "sohrabi-faq-verified";
   faqItems.forEach((item, index) => {
     const summary = item.querySelector("summary");
@@ -1598,9 +1611,8 @@ if (!isAllSectionsExploredPreviously) {
 // CTA buttons
 const mainCTAs = document.querySelectorAll(".main-cta-button");
 mainCTAs.forEach((button) => {
-  button.classList.add("cta-pulse-effect");
+  button.classList.add("cta-pulse-effect", "sohrabi-cta-action");
   button.setAttribute("data-cta-owner", "Mohammad Rasoul Sohrabi");
-  button.className += " sohrabi-cta-action";
 });
 
 // Lazy images
