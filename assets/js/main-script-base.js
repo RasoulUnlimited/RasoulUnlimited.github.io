@@ -178,10 +178,17 @@
     const docHeight =
       Math.max(
         document.body.scrollHeight,
-        document.documentElement.scrollHeight
-      ) || document.body.offsetHeight;
+        document.documentElement.scrollHeight,
+        document.body.offsetHeight,
+        document.documentElement.offsetHeight
+      ) || 0;
 
-    if (!endOfPageShown && scrollPosition >= docHeight - 50) {
+    // Reset flag if user scrolls back up (more than 100px from bottom)
+    if (scrollPosition < docHeight - 100) {
+      endOfPageShown = false;
+    }
+
+    if (!endOfPageShown && scrollPosition >= docHeight - 50 && docHeight > 0) {
       endOfPageShown = true;
       if (typeof window.langStrings.endOfPage === "string") {
         createToast(window.langStrings.endOfPage);

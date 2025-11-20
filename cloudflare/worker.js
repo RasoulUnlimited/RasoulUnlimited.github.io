@@ -23,7 +23,14 @@ export default {
       ).toString();
       const schemaRes = await fetch(schemaURL);
       const payloadText = await schemaRes.text();
-      const crawlerScript = `<script nonce="RasoulCSP" type="application/ld+json">${payloadText}</script>`;
+      // Escape HTML special characters to prevent XSS
+      const escapedPayload = payloadText
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+      const crawlerScript = `<script nonce="RasoulCSP" type="application/ld+json">${escapedPayload}</script>`;
       const html = (await response.text()).replace(
         "</head>",
         `${crawlerScript}</head>`

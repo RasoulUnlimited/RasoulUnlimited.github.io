@@ -199,27 +199,24 @@ document.addEventListener("DOMContentLoaded", function () {
       recognition.lang = lang.startsWith("fa") ? "fa-IR" : "en-US";
       recognition.interimResults = false;
 
-      voiceButton.addEventListener("click", () => recognition.start());
-
-      recognition.addEventListener("start", () => {
+      // Define event handlers with proper cleanup capability
+      const handleClickStart = () => recognition.start();
+      const handleStart = () => {
         voiceButton.classList.add("listening");
         voiceButton.setAttribute("aria-pressed", "true");
-      });
-
-      recognition.addEventListener("end", () => {
+      };
+      const handleEnd = () => {
         voiceButton.classList.remove("listening");
         voiceButton.setAttribute("aria-pressed", "false");
-      });
-
-      recognition.addEventListener("result", (e) => {
+      };
+      const handleResult = (e) => {
         const transcript = (e.results[0][0].transcript || "").trim();
         searchInput.value = transcript;
         clearButton.style.display = transcript ? "block" : "none";
         persistTerm(transcript);
         filterCards(transcript);
-      });
-
-      recognition.addEventListener("error", (err) => {
+      };
+      const handleError = (err) => {
         // ignore "no-speech" / "aborted" noise
         if (err && (err.error === "no-speech" || err.error === "aborted"))
           return;
@@ -228,7 +225,30 @@ document.addEventListener("DOMContentLoaded", function () {
             ? "امکان دریافت صدا نیست."
             : "Voice recognition unavailable."
         );
-      });
+      };
+
+      voiceButton.addEventListener("click", handleClickStart);
+      recognition.addEventListener("start", handleStart);
+      recognition.addEventListener("end", handleEnd);
+      recognition.addEventListener("result", handleResult);
+      recognition.addEventListener("error", handleError);
+
+      // Cleanup on page unload to prevent memory leaks
+      const cleanup = () => {
+        try {
+          recognition.abort();
+        } catch (e) {
+          // Ignore errors during abort
+        }
+        voiceButton.removeEventListener("click", handleClickStart);
+        recognition.removeEventListener("start", handleStart);
+        recognition.removeEventListener("end", handleEnd);
+        recognition.removeEventListener("result", handleResult);
+        recognition.removeEventListener("error", handleError);
+        window.removeEventListener("beforeunload", cleanup);
+      };
+
+      window.addEventListener("beforeunload", cleanup);
     } else {
       voiceButton.style.display = "none";
       safeToast(
