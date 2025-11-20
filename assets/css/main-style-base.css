@@ -511,3 +511,122 @@ html {
   width: 24px;
   text-align: center;
 }
+
+/* Back to Top Button */
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background-color: var(--primary-color);
+  color: #fff;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 12px var(--shadow-color-medium);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+
+.back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  background-color: var(--accent-color);
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px var(--shadow-color-strong);
+}
+
+/* RTL Support for Back to Top */
+[dir="rtl"] .back-to-top {
+  right: auto;
+  left: 2rem;
+}
+
+/* Copy Button */
+.contact-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.copy-btn {
+  background: none;
+  border: none;
+  color: var(--text-color-light);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.copy-btn:hover {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+}
+
+.copy-btn:active {
+  transform: scale(0.95);
+}
+
+/* Print Styles */
+@media print {
+  .navbar,
+  .back-to-top,
+  .theme-switch,
+  .lang-switcher,
+  .hero-cta-group,
+  .copy-btn,
+  #theme-toast,
+  #scroll-progress-bar {
+    display: none !important;
+  }
+
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    padding-top: 0;
+  }
+
+  a {
+    text-decoration: none;
+    color: #000;
+  }
+
+  /* Show URL after links */
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666;
+  }
+
+  /* Don't show URL for internal links or specific classes if needed */
+  a[href^="#"]::after,
+  .no-print-url::after {
+    content: "";
+  }
+
+  .card, .project-card {
+    break-inside: avoid;
+    border: 1px solid #ddd;
+    box-shadow: none;
+  }
+
+  section {
+    break-inside: avoid;
+  }
+}

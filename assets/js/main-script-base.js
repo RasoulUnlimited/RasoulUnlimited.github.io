@@ -234,4 +234,50 @@
   if (yearEl) {
     yearEl.textContent = new Date().getFullYear();
   }
+
+  // Back to Top Button Logic
+  const backToTopBtn = document.getElementById("back-to-top");
+  if (backToTopBtn) {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 300) {
+        backToTopBtn.classList.add("show");
+      } else {
+        backToTopBtn.classList.remove("show");
+      }
+    }, { passive: true });
+
+    backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+  }
+
+  // Copy to Clipboard Logic
+  const copyBtns = document.querySelectorAll(".copy-btn");
+  copyBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const textToCopy = btn.getAttribute("data-copy");
+      if (textToCopy) {
+        navigator.clipboard.writeText(textToCopy).then(() => {
+          // Show feedback
+          const originalIcon = btn.innerHTML;
+          btn.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i>';
+          btn.classList.add("copied");
+          
+          if (window.createToast) {
+            window.createToast("ایمیل کپی شد!");
+          }
+
+          setTimeout(() => {
+            btn.innerHTML = originalIcon;
+            btn.classList.remove("copied");
+          }, 2000);
+        }).catch(err => {
+          console.error("Failed to copy: ", err);
+        });
+      }
+    });
+  });
 })();
