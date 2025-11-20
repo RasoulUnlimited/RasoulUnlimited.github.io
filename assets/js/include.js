@@ -40,7 +40,23 @@
           return resp.text();
         })
         .then((html) => {
-          el.innerHTML = html;
+          // Use DOMParser to safely parse and sanitize HTML
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(html, "text/html");
+
+          // Check for parsing errors
+          if (
+            doc.body &&
+            doc.body.firstChild &&
+            doc.body.firstChild.nodeName === "parsererror"
+          ) {
+            throw new Error(`Failed to parse HTML for ${file}`);
+          }
+
+          // Safely append parsed content
+          while (doc.body && doc.body.firstChild) {
+            el.appendChild(doc.body.firstChild);
+          }
 
           // Special-case: footer year autofill
           if (/footer\.html$/i.test(file)) {

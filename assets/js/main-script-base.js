@@ -104,22 +104,22 @@
     applyTheme(savedTheme);
   } else {
     applyTheme(prefersDark ? "dark" : "light");
+  }
 
-    // React to OS theme changes only if user has not explicitly chosen a theme
-    if (darkMediaQuery) {
-      const handleThemeSystemChange = function (e) {
-        // If user later sets a theme, this check prevents overriding it
-        if (!storage?.getItem("theme")) {
-          applyTheme(e.matches ? "dark" : "light");
-        }
-      };
-
-      if (typeof darkMediaQuery.addEventListener === "function") {
-        darkMediaQuery.addEventListener("change", handleThemeSystemChange);
-      } else if (typeof darkMediaQuery.addListener === "function") {
-        // Older browsers
-        darkMediaQuery.addListener(handleThemeSystemChange);
+  // React to OS theme changes only if user has not explicitly chosen a theme
+  if (darkMediaQuery) {
+    const handleThemeSystemChange = function (e) {
+      // If user later sets a theme, this check prevents overriding it
+      if (!storage?.getItem("theme")) {
+        applyTheme(e.matches ? "dark" : "light");
       }
+    };
+
+    if (typeof darkMediaQuery.addEventListener === "function") {
+      darkMediaQuery.addEventListener("change", handleThemeSystemChange);
+    } else if (typeof darkMediaQuery.addListener === "function") {
+      // Older browsers
+      darkMediaQuery.addListener(handleThemeSystemChange);
     }
   }
 

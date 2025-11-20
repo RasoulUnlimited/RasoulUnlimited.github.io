@@ -83,11 +83,21 @@ document.addEventListener("DOMContentLoaded", function () {
   const highlightText = (el, term) => {
     if (!el || !el.dataset.original) return;
     if (!term) {
-      el.innerHTML = el.dataset.original;
+      el.textContent = el.dataset.original;
       return;
     }
     const regex = new RegExp(`(${escapeRegExp(term)})`, "gi");
-    el.innerHTML = el.dataset.original.replace(regex, "<mark>$1</mark>");
+    const parts = el.dataset.original.split(regex);
+    el.innerHTML = "";
+    parts.forEach((part, index) => {
+      if (index % 2 === 1) {
+        const mark = document.createElement("mark");
+        mark.textContent = part;
+        el.appendChild(mark);
+      } else if (part) {
+        el.appendChild(document.createTextNode(part));
+      }
+    });
   };
 
   const updateResultsInfo = (count) => {
