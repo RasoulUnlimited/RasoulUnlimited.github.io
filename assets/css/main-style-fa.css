@@ -794,10 +794,15 @@ img.loaded {
 .card .card-links a:hover,
 .card .card-links a:focus-visible {
   background-color: var(--accent-color);
-  color: var(--card-link-hover-text-color);
+  color: var(--card-link-hover-text-color) !important;
   transform: translateY(-2px);
   text-decoration: none;
   box-shadow: 0 4px 8px var(--shadow-color-medium);
+}
+
+.card .card-links a:hover i,
+.card .card-links a:focus-visible i {
+  color: var(--card-link-hover-text-color) !important;
 }
 .card .card-links a:active {
   filter: brightness(0.9);
@@ -3580,14 +3585,18 @@ summary:active,
 
 .hero-btn.primary {
   background-color: var(--primary-color);
-  color: #fff; /* Assuming white text on primary color */
+  color: var(--cta-text-color)!important;
   box-shadow: 0 4px 15px var(--shadow-color-medium);
+}
+
+.dark-mode .hero-btn.primary {
+  color: #0f172a !important;
 }
 
 .hero-btn.primary:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 25px var(--shadow-color-medium);
-  color: #fff;
+  color: var(--cta-text-color) !important;
 }
 
 .hero-btn.secondary {
@@ -3598,7 +3607,7 @@ summary:active,
 
 .hero-btn.secondary:hover {
   background-color: var(--primary-color);
-  color: #fff;
+  color: var(--cta-text-color) !important;
   transform: translateY(-3px);
 }
 
