@@ -26,10 +26,20 @@ const URLS = [
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
+      // Try to add all URLs. If any fail, add them individually to identify which ones failed
       return cache.addAll(URLS).catch(err => {
         // Log errors but don't fail entirely if some assets aren't available
         console.warn('Cache.addAll failed:', err);
-        return cache.addAll(URLS.filter(url => url !== '/.well-known/security.txt'));
+        
+        // Fallback: add URLs one by one to cache what we can
+        return Promise.all(
+          URLS.map(url => 
+            cache.add(url).catch(addErr => {
+              console.warn(`Failed to cache ${url}:`, addErr);
+              // Continue even if individual cache fails
+            })
+          )
+        );
       });
     })
   );

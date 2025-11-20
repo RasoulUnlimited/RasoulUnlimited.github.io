@@ -64,7 +64,8 @@ document.addEventListener("DOMContentLoaded", function () {
       .replace(/[ي]/g, "ی")
       .replace(/[ك]/g, "ک")
       .replace(/[\u064B-\u065F\u0670]/g, "")
-      .replace(/‌/g, "");
+      .replace(/‌/g, "")
+      .toLowerCase();
 
   const escapeRegExp = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 

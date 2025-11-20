@@ -130,7 +130,7 @@
     });
 
     // وضعیت اولیه
-    clearButton.style.display = "";
+    clearButton.style.display = "none";
     filterFaq("");
 
     // Cleanup on page unload to prevent memory leaks
