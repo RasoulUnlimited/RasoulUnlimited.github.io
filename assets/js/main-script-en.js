@@ -225,8 +225,10 @@ function triggerHapticFeedback(pattern = [50]) {
 }
 
 function loadAOSScript() {
-  if (window.aosLoading || window.AOS) return Promise.resolve();
-  return new Promise((resolve, reject) => {
+  if (window.AOS) return Promise.resolve();
+  if (window.aosLoading) return window.aosLoadingPromise;
+  
+  window.aosLoadingPromise = new Promise((resolve, reject) => {
     window.aosLoading = true;
     const s = document.createElement("script");
     s.src = "../assets/vendor/aos/aos.min.js";
@@ -235,9 +237,14 @@ function loadAOSScript() {
       window.aosLoading = false;
       resolve();
     };
-    s.onerror = reject;
+    s.onerror = (err) => {
+      window.aosLoading = false;
+      reject(err);
+    };
     document.head.appendChild(s);
   });
+  
+  return window.aosLoadingPromise;
 }
 
 function handleMotionPreference() {

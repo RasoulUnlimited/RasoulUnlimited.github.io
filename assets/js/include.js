@@ -75,6 +75,66 @@
             throw new Error(`Failed to parse HTML for ${file}`);
           }
 
+          // Sanitize by removing all event handlers and potentially dangerous elements
+          const sanitize = (node) => {
+            if (node.nodeType === Node.ELEMENT_NODE) {
+              // Remove all event handler attributes (on*)
+              const attributes = Array.from(node.attributes);
+              attributes.forEach((attr) => {
+                if (attr.name.toLowerCase().startsWith("on")) {
+                  console.warn(
+                    `Removed event handler attribute: ${attr.name}`
+                  );
+                  node.removeAttribute(attr.name);
+                }
+              });
+
+              // Remove potentially dangerous elements/attributes
+              const tagName = node.tagName.toLowerCase();
+              
+              // Block object, embed, and form elements if they're not from trusted sources
+              if (["object", "embed", "form"].includes(tagName)) {
+                console.warn(
+                  `Removed potentially dangerous element: ${tagName}`
+                );
+                node.remove();
+                return;
+              }
+
+              // For SVG and other elements, remove suspicious attributes
+              if (
+                tagName === "svg" ||
+                tagName === "use" ||
+                tagName === "image"
+              ) {
+                const href = node.getAttribute("href") ||
+                  node.getAttributeNS("http://www.w3.org/1999/xlink", "href");
+                if (href && href.toLowerCase().startsWith("javascript:")) {
+                  node.removeAttribute("href");
+                  node.removeAttributeNS(
+                    "http://www.w3.org/1999/xlink",
+                    "href"
+                  );
+                  console.warn(`Removed javascript: URI from ${tagName}`);
+                }
+              }
+
+              // Recursively sanitize child nodes
+              const children = Array.from(node.childNodes);
+              children.forEach(sanitize);
+            } else if (
+              node.nodeType === Node.COMMENT_NODE ||
+              node.nodeType === Node.PROCESSING_INSTRUCTION_NODE
+            ) {
+              // Remove comments and processing instructions
+              node.remove();
+            }
+          };
+
+          // Sanitize all nodes in the document
+          const bodyChildren = Array.from(doc.body.childNodes);
+          bodyChildren.forEach(sanitize);
+
           // Clear existing content (e.g. "Loading...") before appending
           el.innerHTML = "";
 

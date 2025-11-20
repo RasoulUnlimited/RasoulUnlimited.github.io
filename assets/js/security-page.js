@@ -701,6 +701,18 @@
             if (err && err.message === "offline") msg = messages.offline;
             else if (err && err.message === "rate-limit")
               msg = messages.rateLimit;
+            else if (err && err.message === "stale-data") {
+              // Silently use stale data without notifying user
+              if (err.data && Array.isArray(err.data)) {
+                timelineData = err.data;
+                renderTimeline(timelineData);
+                timelineList.setAttribute("aria-busy", "false");
+                initializeTimeline();
+                setupTimelineSearch();
+                return; // Skip the default timeline
+              }
+              msg = messages.fetchFail;
+            }
             createToast(msg);
           }
 
