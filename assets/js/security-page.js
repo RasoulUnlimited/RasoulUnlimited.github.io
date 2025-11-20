@@ -204,8 +204,29 @@
                 key,
                 JSON.stringify({ t: Date.now(), d: data })
               );
-            } catch {
-              console.warn(`Failed to cache ${key}, but returning fresh data`);
+            } catch (cacheErr) {
+              // Handle QuotaExceededError by clearing old cache entries
+              if (cacheErr.name === 'QuotaExceededError') {
+                console.warn(`localStorage quota exceeded for ${key}, attempting cleanup...`);
+                try {
+                  // Clear oldest cache entries (those starting with our cache keys)
+                  const cacheKeys = ['security-timeline-cache', 'security-advisories-cache'];
+                  for (const oldKey of cacheKeys) {
+                    if (oldKey !== key) {
+                      storage.removeItem(oldKey);
+                    }
+                  }
+                  // Retry the cache operation
+                  storage.setItem(
+                    key,
+                    JSON.stringify({ t: Date.now(), d: data })
+                  );
+                } catch (retryErr) {
+                  console.error(`Failed to cache ${key} even after cleanup:`, retryErr);
+                }
+              } else {
+                console.warn(`Failed to cache ${key}, but returning fresh data:`, cacheErr);
+              }
             }
           }
         }
@@ -486,7 +507,6 @@
     }
 
     let filterDebounceTimer = null;
-    let isFilteringInProgress = false;
     let debounceTimer = null;  // Declare at module scope for proper cleanup
 
     function setupTimelineSearch() {
@@ -583,16 +603,9 @@
       timelineSearch.addEventListener("input", () => {
         const term = timelineSearch.value;
         clearTimeout(debounceTimer);
-        // Prevent overlapping filter operations
-        if (isFilteringInProgress) {
-          debounceTimer = setTimeout(() => filterList(term), 300);
-        } else {
-          debounceTimer = setTimeout(() => {
-            isFilteringInProgress = true;
-            filterList(term);
-            isFilteringInProgress = false;
-          }, 200);
-        }
+        debounceTimer = setTimeout(() => {
+          filterList(term);
+        }, 200);
       });
 
       timelineSearch.addEventListener("keydown", (e) => {
@@ -1158,6 +1171,16 @@
       if (expirationIntervalId) {
         clearInterval(expirationIntervalId);
         expirationIntervalId = null;
+      }
+      
+      // Clear debounce timers to prevent race conditions
+      if (debounceTimer) {
+        clearTimeout(debounceTimer);
+        debounceTimer = null;
+      }
+      if (filterDebounceTimer) {
+        clearTimeout(filterDebounceTimer);
+        filterDebounceTimer = null;
       }
     });
 

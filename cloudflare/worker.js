@@ -21,26 +21,58 @@ export default {
         "/schema/identity.jsonld",
         request.url
       ).toString();
-      const schemaRes = await fetch(schemaURL);
-      const payloadText = await schemaRes.text();
-      // Escape HTML special characters to prevent XSS
-      const escapedPayload = payloadText
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#39;");
-      const crawlerScript = `<script nonce="RasoulCSP" type="application/ld+json">${escapedPayload}</script>`;
-      const html = (await response.text()).replace(
-        "</head>",
-        `${crawlerScript}</head>`
-      );
-      headers.set("Cache-Control", "public, max-age=600");
-      return new Response(html, {
-        status: response.status,
-        statusText: response.statusText,
-        headers,
-      });
+      
+      try {
+        const schemaRes = await fetch(schemaURL);
+        
+        // Validate the schema response
+        if (!schemaRes.ok) {
+          console.error(`Failed to fetch schema: ${schemaRes.status}`);
+          // Return original response if schema fetch fails
+          return response;
+        }
+        
+        // Validate content type
+        const schemaContentType = schemaRes.headers.get("content-type") || "";
+        if (!schemaContentType.includes("application/json") && 
+            !schemaContentType.includes("application/ld+json")) {
+          console.error(`Invalid schema content-type: ${schemaContentType}`);
+          return response;
+        }
+        
+        const payloadText = await schemaRes.text();
+        
+        // Validate JSON structure before injecting
+        try {
+          JSON.parse(payloadText);
+        } catch (jsonErr) {
+          console.error("Invalid JSON in schema:", jsonErr);
+          return response;
+        }
+        
+        // Escape HTML special characters to prevent XSS
+        const escapedPayload = payloadText
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+        const crawlerScript = `<script nonce="RasoulCSP" type="application/ld+json">${escapedPayload}</script>`;
+        const html = (await response.text()).replace(
+          "</head>",
+          `${crawlerScript}</head>`
+        );
+        headers.set("Cache-Control", "public, max-age=600");
+        return new Response(html, {
+          status: response.status,
+          statusText: response.statusText,
+          headers,
+        });
+      } catch (err) {
+        // Log error and return original response if anything fails
+        console.error("Error processing crawler request:", err);
+        return response;
+      }
     }
 
     return response;
