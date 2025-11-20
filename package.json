@@ -2,19 +2,44 @@
   "name": "rasoulunlimited.github.io",
   "version": "1.0.0",
   "description": "Personal website of Mohammad Rasoul Sohrabi (Rasoul Unlimited) — Developer, Designer, Content Creator, and Biomedical Engineering student. Built with GitHub Pages",
+  "homepage": "https://rasoulunlimited.ir",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RasoulUnlimited/RasoulUnlimited.github.io"
+  },
   "main": "index.js",
+  "type": "module",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
   "scripts": {
     "build": "gulp",
+    "build:watch": "gulp watch",
+    "dev": "npm run build:watch & npx serve -l 8080 .",
     "start": "npx serve -l 8080 .",
-    "lint": "npx htmlhint \"**/*.html\" && npx eslint \"**/*.js\""
+    "lint": "npx htmlhint \"**/*.html\" && npx eslint \"**/*.js\"",
+    "lint:fix": "npx eslint \"**/*.js\" --fix",
+    "test": "npm run lint"
   },
-  "keywords": [],
+  "keywords": [
+    "portfolio",
+    "personal-website",
+    "github-pages",
+    "developer",
+    "rasoul-unlimited",
+    "typescript",
+    "javascript"
+  ],
   "author": "Mohammad Rasoul Sohrabi",
+  "email": "rasoul@rasoulunlimited.ir",
+  "url": "https://rasoulunlimited.ir",
   "license": "CC-BY-NC-ND-4.0",
   "devDependencies": {
     "gulp": "^5.0.1",
     "gulp-clean-css": "^4.3.0",
-    "gulp-rename": "^2.0.0",
+    "gulp-rename": "^2.1.0",
+    "gulp-sourcemaps": "^3.0.0",
     "gulp-terser": "^2.1.0"
   }
 }
