@@ -23,9 +23,8 @@
     const DAY_MS = 86400000;
 
     function formatRelative(date) {
-      if (!date || !window.IntL || !Intl.RelativeTimeFormat) {
-        // اگر Intl غلط تایپ شده بود یا در مرورگر نبود:
-        if (!date || !window.Intl || !Intl.RelativeTimeFormat) return "";
+      if (!date || !window.Intl || !Intl.RelativeTimeFormat) {
+        return "";
       }
       const diff = Date.now() - date.getTime();
       const units = [
@@ -498,10 +497,20 @@
 
           if (visible && match && reg) {
             count++;
-            contentEl.innerHTML = li.dataset.orig.replace(
-              reg,
-              '<span class="search-highlight">$1</span>'
-            );
+            // Use safe DOM method instead of innerHTML with regex replacement
+            const parts = li.dataset.orig.split(reg);
+            contentEl.innerHTML = "";
+            parts.forEach((part, index) => {
+              if (index % 2 === 1) {
+                // This is a match - wrapped in highlight span
+                const span = document.createElement("span");
+                span.className = "search-highlight";
+                span.textContent = part;
+                contentEl.appendChild(span);
+              } else if (part) {
+                contentEl.appendChild(document.createTextNode(part));
+              }
+            });
           } else {
             contentEl.innerHTML = li.dataset.orig;
           }
@@ -573,6 +582,11 @@
 
       filterList(saved);
       searchInitialized = true;
+
+      // Cleanup debounce timer on page unload to prevent memory leaks
+      window.addEventListener("beforeunload", () => {
+        clearTimeout(debounceTimer);
+      });
     }
 
     function loadTimeline(force = false, btn = null) {
