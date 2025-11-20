@@ -428,8 +428,10 @@ function createToast(message, options = {}) {
   dynamicToast.style.transform = "translateX(-50%)";
   if (settings.position === "top") {
     dynamicToast.style.top = "20px";
+    dynamicToast.style.bottom = "auto";
   } else {
     dynamicToast.style.bottom = "20px";
+    dynamicToast.style.top = "auto";
   }
 
   if (settings.iconClass) {
@@ -539,6 +541,8 @@ function applyTheme(theme, showToast = false) {
   }
 
   if (showToast) {
+    // Toast is handled by main-script-base.js to avoid duplicates
+    /*
     createToast(
       `Theme changed to ${theme === "dark" ? "dark" : "light"} mode.`,
       {
@@ -550,6 +554,7 @@ function applyTheme(theme, showToast = false) {
         duration: 2800,
       }
     );
+    */
     if (!prefersReducedMotion && themeToggleInput?.parentElement) {
       createSparkle(themeToggleInput.parentElement);
     }

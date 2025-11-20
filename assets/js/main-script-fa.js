@@ -363,8 +363,15 @@
       position: "fixed",
       left: "50%",
       transform: "translateX(-50%)",
-      [settings.position === "top" ? "top" : "bottom"]: "20px",
     });
+
+    if (settings.position === "top") {
+      toast.style.top = "20px";
+      toast.style.bottom = "auto";
+    } else {
+      toast.style.bottom = "20px";
+      toast.style.top = "auto";
+    }
 
     if (settings.iconClass) {
       const icon = document.createElement("i");
@@ -551,6 +558,8 @@
     if (toggle) {toggle.checked = theme === "dark";}
 
     if (showToast) {
+      // Toast is handled by main-script-base.js to avoid duplicates
+      /*
       createToast(
         theme === "dark"
           ? STRINGS_FA.toasts.themeDark
@@ -564,6 +573,7 @@
           duration: 2200,
         }
       );
+      */
       const parent = toggle?.parentElement;
       if (parent) {createSparkle(parent);}
       vibrate([30]);
