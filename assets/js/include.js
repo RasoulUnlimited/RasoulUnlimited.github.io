@@ -109,6 +109,7 @@
               ) {
                 const href = node.getAttribute("href") ||
                   node.getAttributeNS("http://www.w3.org/1999/xlink", "href");
+                // eslint-disable-next-line no-script-url
                 if (href && href.toLowerCase().startsWith("javascript:")) {
                   node.removeAttribute("href");
                   node.removeAttributeNS(
@@ -226,6 +227,7 @@
       if (
         href.startsWith("#") ||
         href.startsWith("mailto:") ||
+        // eslint-disable-next-line no-script-url
         href.startsWith("javascript:")
       ) {
         link.classList.remove("active");

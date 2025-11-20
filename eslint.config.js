@@ -1,4 +1,3 @@
-
 export default [
   {
     ignores: ["**/node_modules/**", "**/dist/**", "**/*.min.js", "assets/vendor/**"],
@@ -103,4 +102,3 @@ export default [
     },
   },
 ];
-

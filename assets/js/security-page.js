@@ -117,7 +117,9 @@
     const TIMELINE_SEARCH_KEY = "timeline-search-term";
     const TIMELINE_YEAR_KEY = "timeline-year";
 
+    // eslint-disable-next-line prefer-const
     let refreshTimelineBtn;
+    // eslint-disable-next-line prefer-const
     let refreshAdvisoriesBtn;
 
     async function cachedFetch(
@@ -197,7 +199,7 @@
         }
 
         // Only cache valid data
-        if (data != null) {
+        if (data !== null) {
           if (storage) {
             try {
               storage.setItem(

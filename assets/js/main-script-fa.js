@@ -68,7 +68,7 @@
     get(key, fallback = null) {
       try {
         const v = localStorage.getItem(key);
-        return v == null ? fallback : JSON.parse(v);
+        return v === null ? fallback : JSON.parse(v);
       } catch {
         return fallback;
       }
@@ -125,7 +125,7 @@
     getRaw(key, fallback = null) {
       try {
         const v = localStorage.getItem(key);
-        return v == null ? fallback : v;
+        return v === null ? fallback : v;
       } catch {
         return fallback;
       }
