@@ -13,54 +13,70 @@
 
     if (!searchInput || !clearButton || !faqItems.length) {return;}
 
-    // Live region برای اعلام تعداد نتایج (a11y)
+    // Live region for announcing search results (a11y)
     let status = document.getElementById("faq-search-status");
     if (!status) {
       status = document.createElement("div");
       status.id = "faq-search-status";
       status.setAttribute("aria-live", "polite");
       status.setAttribute("aria-atomic", "true");
-      status.className = "faq-search-status sr-only"; // تو CSS .sr-only رو تعریف کن
-      searchInput.closest("form")?.appendChild(status) ||
-        searchInput.parentNode.appendChild(status);
+      status.className = "faq-search-status sr-only";
+      (searchInput.closest("form") || searchInput.parentNode).appendChild(status);
     }
 
-    // مطمئن شو دکمه‌ی پاک‌کردن برای اسکرین‌ریدر واضح است
+    // Ensure clear button has accessible label
     if (!clearButton.getAttribute("aria-label")) {
-      clearButton.setAttribute("aria-label", "Clear FAQ search");
+      clearButton.setAttribute("aria-label", "پاک کردن جستجو");
     }
 
     let debounceTimer;
+    // Store original content to restore after search clears
+    const originalContent = new Map();
+
+    faqItems.forEach(item => {
+      const summary = item.querySelector(".accordion-header h3") || item.querySelector("summary");
+      const answer = item.querySelector(".accordion-content") || item.querySelector(".faq-answer");
+      if (summary) originalContent.set(summary, summary.innerHTML);
+      if (answer) originalContent.set(answer, answer.innerHTML);
+    });
 
     function updateStatus(term, visibleCount) {
       const total = faqItems.length;
       const trimmed = term.trim();
 
       if (!trimmed) {
-        status.textContent = `Showing all ${total} question${total === 1 ? "" : "s"}.`;
+        status.textContent = `نمایش همه ${total} سوال.`;
         return;
       }
       status.textContent =
         visibleCount === 0
-          ? `No results found for “${trimmed}”.`
-          : `Found ${visibleCount} result${visibleCount === 1 ? "" : "s"} for “${trimmed}”.`;
+          ? `نتیجه‌ای برای «${trimmed}» یافت نشد.`
+          : `${visibleCount} نتیجه برای «${trimmed}» پیدا شد.`;
     }
 
-    // Helper to highlight text
+    // Helper to highlight text safely
     function highlightText(element, term) {
-      if (!term) {
-        // Remove highlights
-        element.innerHTML = element.textContent;
-        return;
-      }
+      if (!element) return;
       
-      const text = element.textContent;
-      const regex = new RegExp(`(${term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-      if (regex.test(text)) {
-        element.innerHTML = text.replace(regex, '<span class="highlight-term">$1</span>');
-      } else {
-        element.innerHTML = text;
+      // Always restore original first to avoid nested spans
+      if (originalContent.has(element)) {
+        element.innerHTML = originalContent.get(element);
       }
+
+      if (!term) return;
+      
+      const text = element.innerHTML;
+      // Simple regex for text content - be careful with HTML tags
+      // This is a simple implementation. For robust highlighting in HTML, a tree walker is better.
+      // But for this specific use case (h3 and p), simple replacement is usually acceptable if no complex nested tags.
+      
+      const regex = new RegExp(`(${term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+      
+      // Only replace text nodes ideally, but innerHTML replace is faster for simple content
+      // We use a negative lookahead to avoid replacing inside HTML tags (attributes)
+      const newHtml = text.replace(new RegExp(`(?![^<]+>)(${term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi'), '<span class="highlight-term">$1</span>');
+      
+      element.innerHTML = newHtml;
     }
 
     function filterFaq(term) {
@@ -72,24 +88,20 @@
 
       faqItems.forEach((item) => {
         // Support both <details>/<summary> and custom .accordion-item structure
-        const summary = item.querySelector("summary") || item.querySelector(".accordion-header h3") || item.querySelector(".accordion-header");
-        const answerEl = item.querySelector(".faq-answer, p, .faq-body, .accordion-content");
+        const summaryEl = item.querySelector(".accordion-header h3") || item.querySelector("summary");
+        const answerEl = item.querySelector(".accordion-content") || item.querySelector(".faq-answer");
         
         // For custom accordion, the header button is the summary
         const isCustomAccordion = !item.tagName || item.tagName.toLowerCase() !== 'details';
 
-        const question = summary
-          ? summary.textContent.toLowerCase()
-          : "";
-        const answer = answerEl
-          ? answerEl.textContent.toLowerCase()
-          : "";
+        const questionText = summaryEl ? summaryEl.textContent.toLowerCase() : "";
+        const answerText = answerEl ? answerEl.textContent.toLowerCase() : "";
         const keywords = (item.dataset.keywords || "").toLowerCase();
 
         const matches =
           !hasTerm ||
-          question.includes(searchTerm) ||
-          answer.includes(searchTerm) ||
+          questionText.includes(searchTerm) ||
+          answerText.includes(searchTerm) ||
           keywords.includes(searchTerm);
 
         if (matches) {
@@ -98,7 +110,7 @@
           visibleCount++;
 
           // Highlight terms
-          if (summary) highlightText(summary, hasTerm ? searchTerm : null);
+          if (summaryEl) highlightText(summaryEl, hasTerm ? searchTerm : null);
           if (answerEl) highlightText(answerEl, hasTerm ? searchTerm : null);
 
           // Open item if searching
@@ -109,7 +121,7 @@
                     const header = item.querySelector(".accordion-header");
                     if (header) header.setAttribute("aria-expanded", "true");
                     item.dataset.openedBySearch = "true";
-                    // Ensure content is visible
+                    // Ensure content is visible (handled by CSS usually, but explicit doesn't hurt)
                     if (answerEl) answerEl.hidden = false;
                 }
             } else {
@@ -150,6 +162,16 @@
     searchInput.addEventListener("input", function () {
       clearTimeout(debounceTimer);
       debounceTimer = setTimeout(() => filterFaq(), 300);
+    });
+
+    // ESC to clear
+    searchInput.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        searchInput.value = "";
+        filterFaq();
+        searchInput.focus();
+      }
     });
 
     clearButton.addEventListener("click", function () {
