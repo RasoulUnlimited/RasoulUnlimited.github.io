@@ -144,7 +144,7 @@ html[dir="rtl"] .accordion-header {
 /* محتوای باز شده */
 .accordion-item.is-open > .accordion-content,
 .accordion-item.expanded > .accordion-content {
-  max-height: var(--accordion-max-height, 1000px);
+  max-height: var(--accordion-max-height, 3000px);
   opacity: 1;
   padding-top: 1.6rem;
   padding-bottom: 2.8rem;

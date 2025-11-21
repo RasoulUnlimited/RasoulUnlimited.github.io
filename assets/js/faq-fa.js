@@ -246,7 +246,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (shouldOpen) {
           item.classList.add("is-open");
           headerBtn.setAttribute("aria-expanded", "true");
-          content.style.maxHeight = content.scrollHeight + 50 + "px"; // Add buffer for padding
+          content.style.maxHeight = (content.scrollHeight + 500) + "px"; // Add generous buffer
       } else {
           item.classList.remove("is-open");
           headerBtn.setAttribute("aria-expanded", "false");
@@ -260,7 +260,7 @@ document.addEventListener("DOMContentLoaded", () => {
           if (item.classList.contains("is-open")) {
               const content = item.querySelector(".accordion-content");
               if (content) {
-                  content.style.maxHeight = content.scrollHeight + 50 + "px";
+                  content.style.maxHeight = (content.scrollHeight + 500) + "px";
               }
           }
       });

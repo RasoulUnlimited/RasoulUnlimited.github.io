@@ -229,7 +229,7 @@
             const panel = item.querySelector(".accordion-content");
             if (header) header.setAttribute("aria-expanded", "true");
             if (panel) {
-                panel.style.maxHeight = panel.scrollHeight + 50 + "px";
+                panel.style.maxHeight = (panel.scrollHeight + 500) + "px";
                 panel.style.opacity = "1";
             }
           } else {
@@ -364,7 +364,7 @@
             const panel = targetItem.querySelector(".accordion-content");
             if (header) header.setAttribute("aria-expanded", "true");
             if (panel) {
-                panel.style.maxHeight = panel.scrollHeight + 50 + "px";
+                panel.style.maxHeight = (panel.scrollHeight + 500) + "px";
                 panel.style.opacity = "1";
             }
           } else {

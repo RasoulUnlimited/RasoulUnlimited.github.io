@@ -159,7 +159,8 @@
       if (!header || !panel) {return;}
 
       header.setAttribute("aria-expanded", "true");
-      panel.style.maxHeight = panel.scrollHeight + 50 + "px";
+      // Add larger buffer to account for padding transition and potential layout shifts
+      panel.style.maxHeight = (panel.scrollHeight + 500) + "px";
       panel.style.opacity = "1";
       item.classList.add("is-open");
 
@@ -176,7 +177,7 @@
   // Handle resize to adjust max-height of open items
   window.addEventListener('resize', () => {
       document.querySelectorAll(".accordion-item.is-open .accordion-content").forEach(content => {
-          content.style.maxHeight = content.scrollHeight + 50 + "px";
+          content.style.maxHeight = (content.scrollHeight + 500) + "px";
       });
   });
 
