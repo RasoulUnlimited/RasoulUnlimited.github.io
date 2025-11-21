@@ -318,8 +318,8 @@ a.skip-link:focus-visible {
   flex-direction: column;
   justify-content: center;
   padding-top: 0;
-  padding-bottom: var(--space-xxxl);
-  margin-bottom: var(--section-margin-bottom);
+  padding-bottom: var(--space-xl);
+  margin-bottom: var(--space-xl);
   text-align: center;
   direction: rtl;
   overflow: hidden;
@@ -2985,8 +2985,8 @@ img.loaded {
     box-shadow: 0 6px 15px var(--shadow-color-medium);
   }
   #hero {
-    padding-bottom: var(--space-xxl);
-    margin-bottom: var(--section-margin-bottom);
+    padding-bottom: var(--space-xl);
+    margin-bottom: var(--space-xl);
     text-align: center;
     direction: rtl;
     padding-top: var(--space-xxl);
