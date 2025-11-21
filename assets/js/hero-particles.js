@@ -169,3 +169,26 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     observer.observe(document.body, { attributes: true });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Hero Image Tilt Effect
+  const heroImage = document.querySelector('.profile-image');
+  const heroSection = document.getElementById('hero');
+
+  if (heroImage && heroSection) {
+    heroSection.addEventListener('mousemove', function(e) {
+      const { left, top, width, height } = heroSection.getBoundingClientRect();
+      const x = (e.clientX - left) / width;
+      const y = (e.clientY - top) / height;
+
+      const moveX = (x - 0.5) * 15; 
+      const moveY = (y - 0.5) * 15;
+
+      heroImage.style.transform = `perspective(1000px) rotateY(${moveX}deg) rotateX(${-moveY}deg) scale(1.05)`;
+    });
+
+    heroSection.addEventListener('mouseleave', function() {
+      heroImage.style.transform = 'perspective(1000px) rotateY(0) rotateX(0) scale(1)';
+    });
+  }
+});
