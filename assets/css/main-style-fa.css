@@ -3700,6 +3700,13 @@ summary:active,
   margin-top: var(--space-xs);
 }
 
+.about-actions {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  margin-top: var(--space-md);
+}
+
 .about-cards {
   flex: 1 1 300px;
   display: flex;
@@ -3753,15 +3760,71 @@ summary:active,
 @media (max-width: 768px) {
   .about-content {
     flex-direction: column;
+    gap: var(--space-lg);
+    margin-top: var(--space-md);
   }
   
   .about-text, .about-cards {
     flex: 1 1 100%;
     width: 100%;
   }
+
+  .about-text .lead-text {
+    font-size: 1.1rem;
+    text-align: center;
+  }
+
+  .about-text p {
+    text-align: justify;
+  }
   
   .about-stats {
-    justify-content: space-around;
+    justify-content: space-between;
+    gap: var(--space-md);
+    margin: var(--space-md) 0;
+  }
+
+  .stat-item {
+    flex: 1 1 30%;
+    min-width: 80px;
+  }
+
+  .stat-number {
+    font-size: 1.5rem;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+  }
+
+  .about-actions {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .about-actions .hero-btn {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .info-card {
+    padding: var(--space-sm);
+    gap: var(--space-sm);
+  }
+
+  .info-card .card-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  .info-card h4 {
+    font-size: 1rem;
+  }
+
+  .info-card p {
+    font-size: 0.85rem;
   }
 }
 
