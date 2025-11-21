@@ -313,15 +313,33 @@ a.skip-link:focus-visible {
 
 #hero {
   position: relative;
-  padding-top: calc(var(--navbar-height) + var(--space-xl));
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: var(--navbar-height);
   padding-bottom: var(--space-xxxl);
   margin-bottom: var(--section-margin-bottom);
   text-align: center;
   direction: rtl;
   overflow: hidden;
   /* Dynamic background */
-  background: radial-gradient(circle at 20% 20%, rgba(var(--primary-rgb), 0.15) 0%, transparent 40%),
-              radial-gradient(circle at 80% 80%, rgba(var(--highlight-rgb), 0.1) 0%, transparent 40%);
+  background: radial-gradient(circle at 20% 20%, rgba(var(--primary-rgb), 0.08) 0%, transparent 50%),
+              radial-gradient(circle at 80% 80%, rgba(var(--highlight-rgb), 0.05) 0%, transparent 50%);
+}
+
+/* Add a subtle pattern overlay */
+#hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.5;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .hero-grid {
@@ -329,10 +347,11 @@ a.skip-link:focus-visible {
   grid-template-columns: 1fr 1.5fr;
   align-items: center;
   gap: var(--space-xxl);
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
   position: relative;
   z-index: 2;
+  padding: 0 var(--space-lg);
 }
 
 .hero-image-wrapper {
@@ -382,6 +401,111 @@ a.skip-link:focus-visible {
   justify-content: center;
   align-items: flex-start;
 }
+
+.eyebrow-text {
+  display: block;
+  font-size: 0.9rem;
+  opacity: 0.8;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent-color);
+  margin-bottom: var(--space-xs);
+  font-family: 'Montserrat', sans-serif;
+}
+
+.social-links-hero {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+  justify-content: flex-start;
+}
+
+.social-links-hero a {
+  color: var(--text-color-light);
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.social-links-hero a:hover {
+  color: var(--primary-color);
+  transform: translateY(-3px);
+}
+
+/* Scroll Down Indicator */
+.scroll-down-indicator {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.scroll-down-indicator:hover {
+  opacity: 1;
+}
+
+.scroll-down-indicator a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.mouse {
+  width: 30px;
+  height: 50px;
+  border: 2px solid var(--text-color);
+  border-radius: 20px;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.wheel {
+  width: 4px;
+  height: 8px;
+  background-color: var(--primary-color);
+  border-radius: 2px;
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: scroll-wheel 1.5s infinite;
+}
+
+.arrow-scroll span {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-bottom: 2px solid var(--text-color);
+  border-right: 2px solid var(--text-color);
+  transform: rotate(45deg);
+  margin: -5px auto;
+  animation: scroll-arrow 1.5s infinite;
+}
+
+.arrow-scroll span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.arrow-scroll span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes scroll-wheel {
+  0% { top: 10px; opacity: 1; }
+  100% { top: 30px; opacity: 0; }
+}
+
+@keyframes scroll-arrow {
+  0% { opacity: 0; transform: rotate(45deg) translate(-5px, -5px); }
+  50% { opacity: 1; }
+  100% { opacity: 0; transform: rotate(45deg) translate(5px, 5px); }
+}
+
 
 /* Gradient Text Effect for the Persian Name */
 h1 .rtl-text {
@@ -3574,7 +3698,7 @@ summary:active,
 .hero-cta-group {
   display: flex;
   gap: var(--space-md);
-  justify-content: center;
+  justify-content: flex-start;
   margin-top: var(--space-lg);
   margin-bottom: var(--space-lg);
 }
