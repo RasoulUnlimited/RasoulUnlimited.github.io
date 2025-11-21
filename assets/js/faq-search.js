@@ -5,6 +5,36 @@
   "use strict";
 
   document.addEventListener("DOMContentLoaded", function () {
+    // Toast fallback
+    if (typeof window.createToast !== 'function') {
+      window.createToast = function(message) {
+        const toast = document.createElement('div');
+        toast.className = 'toast-notification';
+        toast.textContent = message;
+        toast.style.cssText = `
+          position: fixed;
+          bottom: 20px;
+          left: 50%;
+          transform: translateX(-50%);
+          background: rgba(0,0,0,0.8);
+          color: white;
+          padding: 10px 20px;
+          border-radius: 20px;
+          z-index: 10000;
+          opacity: 0;
+          transition: opacity 0.3s;
+          font-family: inherit;
+          font-size: 0.9rem;
+        `;
+        document.body.appendChild(toast);
+        requestAnimationFrame(() => toast.style.opacity = '1');
+        setTimeout(() => {
+          toast.style.opacity = '0';
+          setTimeout(() => toast.remove(), 300);
+        }, 3000);
+      };
+    }
+
     const searchInput = document.getElementById("faq-search");
     const clearButton = document.getElementById("clear-search");
     const faqItems = Array.from(document.querySelectorAll(".faq-item"));
@@ -256,10 +286,22 @@
     });
 
     // 2. Feedback Functionality
+    // Restore feedback state
+    document.querySelectorAll('.faq-item').forEach(item => {
+        const id = item.id;
+        const storedFeedback = localStorage.getItem(`faq-feedback-${id}`);
+        if (storedFeedback) {
+            const btn = item.querySelector(`.btn-feedback.${storedFeedback}`);
+            if (btn) btn.classList.add('active');
+        }
+    });
+
     document.querySelectorAll('.btn-feedback').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
         const parent = btn.closest('.faq-feedback');
+        const item = btn.closest('.faq-item');
+        const id = item.id;
         
         // Remove active class from siblings
         parent.querySelectorAll('.btn-feedback').forEach(b => b.classList.remove('active'));
@@ -267,8 +309,10 @@
         // Add active class to clicked button
         btn.classList.add('active');
         
-        // Optional: Send analytics event here
         const isUp = btn.classList.contains('up');
+        localStorage.setItem(`faq-feedback-${id}`, isUp ? 'up' : 'down');
+        
+        // Optional: Send analytics event here
         const questionId = btn.closest('.faq-item').id;
         console.log(`Feedback for ${questionId}: ${isUp ? 'Positive' : 'Negative'}`);
         
