@@ -37,7 +37,7 @@
 
 .search-faq-container input[type="text"]:focus {
   border-color: var(--primary-color, #2980b9);
-  box-shadow: 0 8px 24px rgba(41, 128, 185, 0.15);
+  box-shadow: 0 0 0 4px rgba(41, 128, 185, 0.1), 0 8px 24px rgba(41, 128, 185, 0.15);
   outline: none;
   transform: translateY(-2px);
 }
@@ -131,22 +131,25 @@
   border: 1px solid #e2e8f0;
   border-radius: 16px;
   margin-bottom: 1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
   position: relative;
+  isolation: isolate;
 }
 
 .faq-container .accordion-item:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.06);
-  border-color: #cbd5e1;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+  border-color: #94a3b8;
+  z-index: 1;
 }
 
 .faq-container .accordion-item.is-open {
   border-color: var(--primary-color, #2980b9);
-  box-shadow: 0 8px 20px rgba(41, 128, 185, 0.1);
+  box-shadow: 0 20px 25px -5px rgba(41, 128, 185, 0.15), 0 10px 10px -5px rgba(41, 128, 185, 0.1);
   transform: translateY(-2px);
+  background: linear-gradient(to bottom, #fff, #f8fafc);
 }
 
 /* Accordion Header */
@@ -163,12 +166,17 @@
   color: inherit;
   font-family: inherit;
   position: relative;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .faq-container .accordion-item.is-open .accordion-header {
-  background-color: rgba(52, 152, 219, 0.08);
+  background-color: rgba(52, 152, 219, 0.05);
   color: var(--primary-color, #2980b9);
+  padding-bottom: 1rem;
+}
+
+.faq-container .accordion-header:hover {
+  background-color: rgba(241, 245, 249, 0.5);
 }
 
 .faq-container .accordion-header:focus {
@@ -178,6 +186,7 @@
 
 .faq-container .accordion-header:focus-visible {
   box-shadow: inset 0 0 0 2px var(--primary-color, #2980b9);
+  background-color: rgba(52, 152, 219, 0.1);
 }
 
 .faq-container .faq-question {
@@ -214,13 +223,14 @@
 /* Accordion Content */
 .faq-container .accordion-content {
   padding: 0 2rem 2rem;
-  color: #334155;
-  line-height: 1.8;
-  font-size: 1rem;
+  color: #475569;
+  line-height: 1.9;
+  font-size: 1.05rem;
   opacity: 0;
   transform: translateY(-10px);
   transition: opacity 0.3s ease, transform 0.3s ease;
   display: none; /* Default hidden */
+  border-top: 1px solid transparent;
 }
 
 .faq-container .accordion-item.is-open .accordion-content {
@@ -411,69 +421,89 @@
 
 /* Copy Link Button */
 .copy-faq-link {
-  background: none;
-  border: none;
+  background: #f1f5f9;
+  border: 1px solid transparent;
   color: #64748b;
   cursor: pointer;
-  padding: 0.5rem;
-  margin-right: 0.5rem;
+  padding: 0.6rem;
+  margin-right: 0.75rem;
   opacity: 0;
-  transition: all 0.2s ease;
+  transform: scale(0.9);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   border-radius: 50%;
   font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
 }
 
 .accordion-header:hover .copy-faq-link,
 .copy-faq-link:focus {
   opacity: 1;
+  transform: scale(1);
 }
 
 .copy-faq-link:hover {
   color: var(--primary-color, #2980b9);
-  background-color: rgba(52, 152, 219, 0.1);
+  background-color: #fff;
+  border-color: var(--primary-color, #2980b9);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transform: scale(1.1);
+}
+
+.copy-faq-link:active {
+  transform: scale(0.95);
 }
 
 /* Feedback Section */
 .faq-feedback {
-  margin-top: 1.5rem;
-  padding-top: 1rem;
-  border-top: 1px dashed #cbd5e1;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #f1f5f9;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 0.5rem;
+  gap: 0.75rem;
   font-size: 0.9rem;
   color: #64748b;
 }
 
 .feedback-label {
   margin-left: 0.5rem;
+  font-weight: 500;
 }
 
 .btn-feedback {
-  background: none;
-  border: 1px solid #cbd5e1;
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   color: #64748b;
-  transition: all 0.2s ease;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 
 .btn-feedback:hover {
   border-color: var(--primary-color, #2980b9);
   color: var(--primary-color, #2980b9);
-  background-color: rgba(52, 152, 219, 0.05);
+  background-color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
 }
 
 .btn-feedback.active {
   background-color: var(--primary-color, #2980b9);
   color: #fff;
   border-color: var(--primary-color, #2980b9);
+  box-shadow: 0 4px 10px rgba(41, 128, 185, 0.3);
+  transform: translateY(-1px);
 }
 
 /* Dark Mode for New Features */
