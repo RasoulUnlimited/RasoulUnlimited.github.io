@@ -3145,6 +3145,19 @@
               />
               <button id="clear-search" aria-label="Clear search">✖</button>
             </div>
+
+            <div class="faq-controls" style="display: flex; justify-content: flex-end; gap: 1rem; margin-bottom: 1.5rem; padding: 0 0.5rem;">
+              <button id="expand-all-faq" class="btn-text-only" aria-label="Expand all questions" style="background: none; border: none; color: var(--primary-color); cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem;">
+                <i class="fas fa-plus-circle" aria-hidden="true"></i> Expand All
+              </button>
+              <button id="collapse-all-faq" class="btn-text-only" aria-label="Collapse all questions" style="background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem;">
+                <i class="fas fa-minus-circle" aria-hidden="true"></i> Collapse All
+              </button>
+            </div>
+
+            <div id="faq-no-results" class="faq-no-results" style="display: none; text-align: center; padding: 2rem; color: var(--text-muted); font-weight: 500;">
+              No results found. Please try different keywords.
+            </div>
             <div class="faq-container accordion">
               <div
                 class="accordion-item faq-item"
@@ -3373,6 +3386,13 @@
               For more answers, visit the
               <a href="/en/faq" data-ai-intent="view-detailed-faq">FAQ page</a>.
             </p>
+
+            <div class="faq-footer" style="text-align: center; margin-top: 3rem; padding: 2rem; background: var(--bg-secondary, #f8f9fa); border-radius: 16px; border: 1px dashed var(--border-color, #e1e4e8);">
+              <p style="margin-bottom: 1.5rem; font-weight: 500; font-size: 1.1rem;">Didn't find your answer?</p>
+              <a href="/en/contact.html" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 2rem; border-radius: 50px;">
+                <i class="fas fa-envelope" aria-hidden="true"></i> Contact Me
+              </a>
+            </div>
           </section>
 
           <!-- Testimonials Section: User-generated content for E-E-A-T and social proof -->

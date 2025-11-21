@@ -164,6 +164,48 @@
     clearButton.style.display = "none";
     filterFaq("");
 
+    // Expand/Collapse All functionality
+    const expandAllBtn = document.getElementById("expand-all-faq");
+    const collapseAllBtn = document.getElementById("collapse-all-faq");
+
+    if (expandAllBtn && collapseAllBtn) {
+      expandAllBtn.addEventListener("click", () => {
+        faqItems.forEach(item => {
+          if (item.hidden || item.style.display === "none") return; // Don't expand hidden items
+          
+          const isCustomAccordion = !item.tagName || item.tagName.toLowerCase() !== 'details';
+          const summary = item.querySelector("summary") || item.querySelector(".accordion-header");
+          const answerEl = item.querySelector(".faq-answer, p, .faq-body, .accordion-content");
+
+          if (isCustomAccordion) {
+            item.classList.add("is-open");
+            if (summary) summary.setAttribute("aria-expanded", "true");
+            if (answerEl) answerEl.hidden = false;
+          } else {
+            item.open = true;
+          }
+        });
+      });
+
+      collapseAllBtn.addEventListener("click", () => {
+        faqItems.forEach(item => {
+          if (item.hidden || item.style.display === "none") return;
+
+          const isCustomAccordion = !item.tagName || item.tagName.toLowerCase() !== 'details';
+          const summary = item.querySelector("summary") || item.querySelector(".accordion-header");
+          const answerEl = item.querySelector(".faq-answer, p, .faq-body, .accordion-content");
+
+          if (isCustomAccordion) {
+            item.classList.remove("is-open");
+            if (summary) summary.setAttribute("aria-expanded", "false");
+            if (answerEl) answerEl.hidden = true;
+          } else {
+            item.open = false;
+          }
+        });
+      });
+    }
+
     // Cleanup on page unload to prevent memory leaks
     window.addEventListener("beforeunload", () => {
       clearTimeout(debounceTimer);

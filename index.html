@@ -3173,6 +3173,7 @@
           <!-- FAQ Section: Addressing common questions for clarity and search  -->
           <section
             id="faq"
+            class="faq-section"
             data-aos="fade-up"
             itemscope
             itemtype="https://schema.org/FAQPage"
@@ -3180,7 +3181,8 @@
             aria-labelledby="faq-heading"
           >
             <h2 id="faq-heading">❓ سوالات متداول (FAQ)</h2>
-            <div class="search-faq-container">
+            <div class="search-faq-container" role="search" aria-label="جستجو در سوالات متداول">
+              <label for="faq-search" class="visually-hidden">جستجو در سوالات متداول</label>
               <input
                 type="text"
                 id="faq-search"
@@ -3190,6 +3192,16 @@
               />
               <button id="clear-search" aria-label="پاک کردن جستجو" type="button">✖</button>
             </div>
+            
+            <div class="faq-controls" style="display: flex; justify-content: flex-end; gap: 1rem; margin-bottom: 1.5rem; padding: 0 0.5rem;">
+              <button id="expand-all-faq" class="btn-text-only" aria-label="باز کردن همه سوالات" style="background: none; border: none; color: var(--primary-color); cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem;">
+                <i class="fas fa-plus-circle" aria-hidden="true"></i> باز کردن همه
+              </button>
+              <button id="collapse-all-faq" class="btn-text-only" aria-label="بستن همه سوالات" style="background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem;">
+                <i class="fas fa-minus-circle" aria-hidden="true"></i> بستن همه
+              </button>
+            </div>
+
             <div id="faq-no-results" class="faq-no-results" style="display: none; text-align: center; padding: 2rem; color: var(--text-muted); font-weight: 500;">
               نتیجه‌ای یافت نشد. لطفاً کلمات کلیدی دیگری را امتحان کنید.
             </div>
@@ -3202,6 +3214,7 @@
                 itemscope
                 itemtype="https://schema.org/Question"
                 data-question-id="who-is-mohammad-rasoul"
+                data-keywords="رسول, آنلیمیتد, مهندس پزشکی, ربات دیسکورد, توسعه دهنده"
               >
                 <button
                   class="accordion-header no-click-feedback"
@@ -3243,6 +3256,7 @@
                 itemscope
                 itemtype="https://schema.org/Question"
                 data-question-id="major-projects-achievements"
+                data-keywords="پروژه, متن‌باز, DOI, گیت‌هاب, ربات"
               >
                 <button
                   class="accordion-header no-click-feedback"
@@ -3285,6 +3299,7 @@
                 itemscope
                 itemtype="https://schema.org/Question"
                 data-question-id="how-to-collaborate"
+                data-keywords="تماس, همکاری, ایمیل, لینکدین, تلگرام"
               >
                 <button
                   class="accordion-header no-click-feedback"
@@ -3327,6 +3342,7 @@
                 itemscope
                 itemtype="https://schema.org/Question"
                 data-question-id="unlimited-philosophy"
+                data-keywords="آنلیمیتد, فلسفه, برندینگ, مسیر, اصالت"
               >
                 <button
                   class="accordion-header no-click-feedback"
@@ -3369,6 +3385,7 @@
                 itemscope
                 itemtype="https://schema.org/Question"
                 data-question-id="education-background"
+                data-keywords="دانشگاه, مهندسی پزشکی, دانشگاه آزاد, تحصیل"
               >
                 <button
                   class="accordion-header no-click-feedback"
@@ -3418,6 +3435,7 @@
                 itemscope
                 itemtype="https://schema.org/Question"
                 data-question-id="open-source-projects"
+                data-keywords="متن‌باز, اوپن سورس, گیت‌هاب, اشتراک گذاری, همکاری"
               >
                 <button
                   class="accordion-header no-click-feedback"
@@ -3453,6 +3471,13 @@
               >
               را ببینید.
             </p>
+
+            <div class="faq-footer" style="text-align: center; margin-top: 3rem; padding: 2rem; background: var(--bg-secondary, #f8f9fa); border-radius: 16px; border: 1px dashed var(--border-color, #e1e4e8);">
+              <p style="margin-bottom: 1.5rem; font-weight: 500; font-size: 1.1rem;">پاسخ سوال خود را پیدا نکردید؟</p>
+              <a href="/contact.html" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 2rem; border-radius: 50px;">
+                <i class="fas fa-envelope" aria-hidden="true"></i> تماس با من
+              </a>
+            </div>
           </section>
 
           <!-- Testimonials Section: User-generated content for E-E-A-T and social proof -->
