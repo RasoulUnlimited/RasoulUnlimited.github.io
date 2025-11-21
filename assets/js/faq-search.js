@@ -151,8 +151,11 @@
                     const header = item.querySelector(".accordion-header");
                     if (header) header.setAttribute("aria-expanded", "true");
                     item.dataset.openedBySearch = "true";
-                    // Ensure content is visible (handled by CSS usually, but explicit doesn't hurt)
-                    if (answerEl) answerEl.hidden = false;
+                    // Ensure content is visible
+                    if (answerEl) {
+                        answerEl.style.maxHeight = answerEl.scrollHeight + 50 + "px";
+                        answerEl.style.opacity = "1";
+                    }
                 }
             } else {
                 if (!item.open) {
@@ -168,7 +171,10 @@
                 item.classList.remove("is-open");
                 const header = item.querySelector(".accordion-header");
                 if (header) header.setAttribute("aria-expanded", "false");
-                if (answerEl) answerEl.hidden = true;
+                if (answerEl) {
+                    answerEl.style.maxHeight = null;
+                    answerEl.style.opacity = "0";
+                }
             } else {
                 item.open = false;
             }
@@ -222,7 +228,10 @@
             const header = item.querySelector(".accordion-header");
             const panel = item.querySelector(".accordion-content");
             if (header) header.setAttribute("aria-expanded", "true");
-            if (panel) panel.hidden = false;
+            if (panel) {
+                panel.style.maxHeight = panel.scrollHeight + 50 + "px";
+                panel.style.opacity = "1";
+            }
           } else {
             item.open = true;
           }
@@ -243,7 +252,10 @@
             const header = item.querySelector(".accordion-header");
             const panel = item.querySelector(".accordion-content");
             if (header) header.setAttribute("aria-expanded", "false");
-            if (panel) panel.hidden = true;
+            if (panel) {
+                panel.style.maxHeight = null;
+                panel.style.opacity = "0";
+            }
           } else {
             item.open = false;
           }
@@ -312,6 +324,22 @@
         const isUp = btn.classList.contains('up');
         localStorage.setItem(`faq-feedback-${id}`, isUp ? 'up' : 'down');
         
+        // Visual feedback
+        const label = parent.querySelector(".feedback-label");
+        if (label) {
+            const originalText = "آیا این پاسخ مفید بود؟";
+            label.textContent = "بازخورد شما ثبت شد. ممنون!";
+            label.style.color = "#27ae60";
+            label.style.fontWeight = "bold";
+            
+            setTimeout(() => {
+                label.textContent = originalText;
+                label.style.color = "";
+                label.style.fontWeight = "";
+                btn.classList.remove("active");
+            }, 3000);
+        }
+        
         // Optional: Send analytics event here
         const questionId = btn.closest('.faq-item').id;
         console.log(`Feedback for ${questionId}: ${isUp ? 'Positive' : 'Negative'}`);
@@ -335,7 +363,10 @@
             const header = targetItem.querySelector(".accordion-header");
             const panel = targetItem.querySelector(".accordion-content");
             if (header) header.setAttribute("aria-expanded", "true");
-            if (panel) panel.hidden = false;
+            if (panel) {
+                panel.style.maxHeight = panel.scrollHeight + 50 + "px";
+                panel.style.opacity = "1";
+            }
           } else {
             targetItem.open = true;
           }

@@ -49,6 +49,23 @@
   transition: all var(--transition-speed-fast, 0.25s) ease-in-out;
 }
 
+/* محتوای آکاردئون */
+.accordion-content {
+  background-color: var(--bg-section, #fff);
+  color: var(--text-body, #546e7a);
+  font-size: 1.1rem;
+  line-height: 1.8;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+  opacity: 0;
+}
+
+.accordion-item.is-open .accordion-content {
+  /* max-height set by JS */
+  opacity: 1;
+}
+
 /* فوکوس دسترسی‌پذیر روی هدر (چون با JS role=button و tabindex می‌گیرد) */
 .accordion-header:focus-visible {
   outline: 3px solid var(--primary-blue, #3498db);

@@ -42,12 +42,16 @@
 
       panel.setAttribute("role", "region");
       panel.setAttribute("aria-labelledby", headerId);
-      panel.hidden = !initiallyOpen;
+      // panel.hidden = !initiallyOpen; // Removed for animation support
 
       if (initiallyOpen) {
         item.classList.add("is-open");
+        panel.style.maxHeight = panel.scrollHeight + 50 + "px";
+        panel.style.opacity = "1";
       } else {
         item.classList.remove("is-open");
+        panel.style.maxHeight = null;
+        panel.style.opacity = "0";
       }
 
       // Add to headers array for keyboard navigation
@@ -132,7 +136,8 @@
       if (!header || !panel) {return;}
 
       header.setAttribute("aria-expanded", "false");
-      panel.hidden = true;
+      panel.style.maxHeight = null;
+      panel.style.opacity = "0";
       item.classList.remove("is-open");
 
       // Custom event for hooks / analytics / extra animations
@@ -154,7 +159,8 @@
       if (!header || !panel) {return;}
 
       header.setAttribute("aria-expanded", "true");
-      panel.hidden = false;
+      panel.style.maxHeight = panel.scrollHeight + 50 + "px";
+      panel.style.opacity = "1";
       item.classList.add("is-open");
 
       // Custom event for hooks / analytics / extra animations
@@ -166,6 +172,13 @@
       );
     }
   }
+
+  // Handle resize to adjust max-height of open items
+  window.addEventListener('resize', () => {
+      document.querySelectorAll(".accordion-item.is-open .accordion-content").forEach(content => {
+          content.style.maxHeight = content.scrollHeight + 50 + "px";
+      });
+  });
 
   document.addEventListener("DOMContentLoaded", () => {
     const accordions = document.querySelectorAll(".accordion");

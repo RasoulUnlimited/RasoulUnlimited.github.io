@@ -246,13 +246,25 @@ document.addEventListener("DOMContentLoaded", () => {
       if (shouldOpen) {
           item.classList.add("is-open");
           headerBtn.setAttribute("aria-expanded", "true");
-          // content.style.maxHeight = content.scrollHeight + "px"; // If using max-height transition
+          content.style.maxHeight = content.scrollHeight + 50 + "px"; // Add buffer for padding
       } else {
           item.classList.remove("is-open");
           headerBtn.setAttribute("aria-expanded", "false");
-          // content.style.maxHeight = null;
+          content.style.maxHeight = null;
       }
   }
+
+  // Handle resize to adjust max-height of open items
+  window.addEventListener('resize', debounce(() => {
+      faqItems.forEach(item => {
+          if (item.classList.contains("is-open")) {
+              const content = item.querySelector(".accordion-content");
+              if (content) {
+                  content.style.maxHeight = content.scrollHeight + 50 + "px";
+              }
+          }
+      });
+  }, 200));
 
   // Event Delegation for Accordion Clicks
   const accordionContainer = document.getElementById("faq-container") || document.querySelector(".main-content");
@@ -343,10 +355,50 @@ document.addEventListener("DOMContentLoaded", () => {
           parent.querySelectorAll(".btn-feedback").forEach(b => b.classList.remove("active"));
           btn.classList.add("active");
           
-          // Here you would send data to server
-          console.log("Feedback:", btn.classList.contains("up") ? "up" : "down");
+          // Visual feedback
+          const label = parent.querySelector(".feedback-label");
+          if (label) {
+              const originalText = "آیا این پاسخ مفید بود؟"; // Default text
+              label.textContent = "بازخورد شما ثبت شد. ممنون!";
+              label.style.color = "#27ae60";
+              label.style.fontWeight = "bold";
+              
+              setTimeout(() => {
+                  label.textContent = originalText;
+                  label.style.color = "";
+                  label.style.fontWeight = "";
+                  btn.classList.remove("active");
+              }, 3000);
+          }
+
+          // Analytics
+          if (typeof gtag === "function") {
+              gtag("event", "faq_feedback", {
+                  event_category: "FAQ Feedback",
+                  event_label: btn.classList.contains("up") ? "helpful" : "not_helpful",
+              });
+          }
       });
   });
+
+  // Check for hash on load to open specific FAQ
+  if (window.location.hash) {
+      const targetId = window.location.hash.substring(1);
+      const targetItem = document.getElementById(targetId);
+      if (targetItem && targetItem.classList.contains("faq-item")) {
+          setTimeout(() => {
+              toggleItem(targetItem, true);
+              targetItem.scrollIntoView({ behavior: "smooth", block: "center" });
+              // Add a temporary highlight effect
+              targetItem.style.borderColor = "var(--faq-primary)";
+              targetItem.style.boxShadow = "0 0 0 4px rgba(52, 152, 219, 0.2)";
+              setTimeout(() => {
+                  targetItem.style.borderColor = "";
+                  targetItem.style.boxShadow = "";
+              }, 2000);
+          }, 500);
+      }
+  }
 
   // --- Page entry animation ---
   const prefersReducedMotion = window.matchMedia
