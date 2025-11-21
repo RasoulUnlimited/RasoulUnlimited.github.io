@@ -3173,7 +3173,7 @@
           <!-- FAQ Section: Addressing common questions for clarity and search  -->
           <section
             id="faq"
-            class="faq-section"
+            class="faq-section faq-section-container"
             data-aos="fade-up"
             itemscope
             itemtype="https://schema.org/FAQPage"
@@ -3917,22 +3917,6 @@
 
     <script src="assets/vendor/aos/aos.min.js" defer></script>
     <script src="assets/js/faq-search.min.js" defer></script>
-    <script defer>
-      // Keep expand/collapse buttons' aria-pressed in sync for assistive tech
-      document.addEventListener('DOMContentLoaded', function () {
-        var expandBtn = document.getElementById('expand-all-faq');
-        var collapseBtn = document.getElementById('collapse-all-faq');
-        if (!expandBtn || !collapseBtn) return;
-        function setPressed(expanded) {
-          expandBtn.setAttribute('aria-pressed', String(Boolean(expanded)));
-          collapseBtn.setAttribute('aria-pressed', String(!expanded));
-        }
-        expandBtn.addEventListener('click', function () { setPressed(true); });
-        collapseBtn.addEventListener('click', function () { setPressed(false); });
-        // initialize state
-        setPressed(false);
-      });
-    </script>
     <script src="assets/js/main-script-fa.min.js" defer></script>
     <script src="assets/js/lang/fa.min.js" defer></script>
     <script src="assets/js/hero-particles.min.js" defer></script>
