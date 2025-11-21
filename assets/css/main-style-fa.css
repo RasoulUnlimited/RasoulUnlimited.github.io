@@ -317,7 +317,7 @@ a.skip-link:focus-visible {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: var(--navbar-height);
+  padding-top: 0;
   padding-bottom: var(--space-xxxl);
   margin-bottom: var(--section-margin-bottom);
   text-align: center;
@@ -2989,6 +2989,7 @@ img.loaded {
     margin-bottom: var(--section-margin-bottom);
     text-align: center;
     direction: rtl;
+    padding-top: var(--space-xxl);
   }
   #hero::before {
     background: none;
