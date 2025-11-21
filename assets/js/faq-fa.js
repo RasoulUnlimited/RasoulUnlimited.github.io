@@ -6,11 +6,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.getElementById("faq-search");
   const clearSearchButton = document.getElementById("clear-search");
   const allSections = Array.from(document.querySelectorAll(".faq-section"));
-  const mainContent = document.querySelector(".main-content");
+  // Support both FAQ page structure and Home page structure
+  const mainContent = document.querySelector(".main-content") || document.getElementById("faq-container")?.parentElement;
   const header = document.querySelector(".page-header");
+  const expandAllBtn = document.getElementById("expand-all-faq");
+  const collapseAllBtn = document.getElementById("collapse-all-faq");
 
   // اگر هیچ FAQی نداریم، ادامه نده
-  if (!faqItems.length && !mainContent && !header) {return;}
+  if (!faqItems.length) {return;}
 
   // Utility: simple debounce helper
   function debounce(func, delay) {
@@ -84,8 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // --- FAQ Search Functionality (Cognitive Load Reduction - Information Foraging) ---
 
-  // اگر سرچ یا کلیر دکمه نداریم، بخش سرچ رو کلاً رد کن
-  if (searchInput && clearSearchButton && allSections.length) {
+  if (searchInput) {
     // live region برای اعلام تعداد نتایج (برای اسکرین‌ریدر)
     let status = document.getElementById("faq-search-status");
     if (!status) {
@@ -99,19 +101,27 @@ document.addEventListener("DOMContentLoaded", () => {
       );
     }
 
-    if (!clearSearchButton.getAttribute("aria-label")) {
+    if (clearSearchButton && !clearSearchButton.getAttribute("aria-label")) {
       clearSearchButton.setAttribute("aria-label", "پاک کردن جستجوی پرسش‌ها");
     }
 
     const updateStatus = (term, count) => {
       const total = faqItems.length;
       const trimmed = term.trim();
+      const noResultsMsg = document.getElementById("faq-no-results");
+      
       if (!trimmed) {
         status.textContent = `نمایش ${total} پرسش موجود.`;
+        if(noResultsMsg) noResultsMsg.style.display = 'none';
       } else if (!count) {
         status.textContent = `هیچ نتیجه‌ای برای «${trimmed}» پیدا نشد.`;
+        if(noResultsMsg) {
+            noResultsMsg.style.display = 'block';
+            noResultsMsg.textContent = `نتیجه‌ای برای «${trimmed}» یافت نشد. لطفاً کلمات کلیدی دیگری را امتحان کنید.`;
+        }
       } else {
         status.textContent = `${count} نتیجه برای «${trimmed}» یافت شد.`;
+        if(noResultsMsg) noResultsMsg.style.display = 'none';
       }
     };
 
@@ -119,18 +129,23 @@ document.addEventListener("DOMContentLoaded", () => {
       const rawTerm = searchInput.value || "";
       const searchTerm = rawTerm.trim().toLowerCase();
 
-      clearSearchButton.style.display = searchTerm ? "block" : "none";
+      if (clearSearchButton) {
+        clearSearchButton.style.display = searchTerm ? "block" : "none";
+      }
 
       let visibleItemsCount = 0;
 
-      allSections.forEach((section) => {
-        let sectionHasVisibleItems = false;
-        const itemsInSection = section.querySelectorAll(".faq-item");
+      // Handle sections if they exist (FAQ page), otherwise just items (Home page)
+      const containers = allSections.length ? allSections : [document.getElementById("faq-container") || document.body];
 
-        itemsInSection.forEach((item) => {
-          const summary = item.querySelector("summary");
-          const questionText = summary
-            ? summary.textContent.toLowerCase()
+      containers.forEach((container) => {
+        let sectionHasVisibleItems = false;
+        const itemsInContainer = container.querySelectorAll(".faq-item");
+
+        itemsInContainer.forEach((item) => {
+          const headerBtn = item.querySelector(".accordion-header");
+          const questionText = headerBtn
+            ? headerBtn.textContent.toLowerCase()
             : "";
           const answerTextElement = item.querySelector(".faq-answer");
           const answerText = answerTextElement
@@ -145,47 +160,41 @@ document.addEventListener("DOMContentLoaded", () => {
             keywords.includes(searchTerm);
 
           if (matches) {
-            item.hidden = false;
+            item.style.display = ""; // Reset display
             sectionHasVisibleItems = true;
             visibleItemsCount++;
 
-            // اگر سرچ فعال است و آیتم توسط یوزر باز نشده، با سرچ بازش کن
-            if (
-              searchTerm &&
-              !item.open &&
-              !item.dataset.openedByUser
-            ) {
-              item.open = true;
+            // Highlight logic could go here
+
+            // Open item if searching
+            if (searchTerm && !item.classList.contains("is-open")) {
+              toggleItem(item, true);
               item.dataset.openedBySearch = "true";
             }
           } else {
-            item.hidden = true;
-            // اگر با سرچ باز شده بود، الان که می‌ره بیرون نتیجه، ببندش
-            if (item.open && item.dataset.openedBySearch) {
-              item.open = false;
+            item.style.display = "none";
+            // Close if it was opened by search
+            if (item.classList.contains("is-open") && item.dataset.openedBySearch) {
+              toggleItem(item, false);
               delete item.dataset.openedBySearch;
             }
           }
         });
 
-        section.hidden = !sectionHasVisibleItems;
+        if (container.classList.contains("faq-section")) {
+            container.hidden = !sectionHasVisibleItems;
+        }
       });
 
       // Track search event in GA4
-      if (typeof gtag === "function") {
+      if (typeof gtag === "function" && searchTerm.length > 2) {
         gtag("event", "faq_search", {
           event_category: "FAQ Search",
           search_term: searchTerm,
           results_count: visibleItemsCount,
         });
       }
-      if (typeof hj === "function" && searchTerm) {
-        hj(
-          "event",
-          `faq_searched_${searchTerm.replace(/\s/g, "_").toLowerCase()}`
-        );
-      }
-
+      
       updateStatus(searchTerm, visibleItemsCount);
     };
 
@@ -197,170 +206,154 @@ document.addEventListener("DOMContentLoaded", () => {
       if (e.key === "Escape") {
         e.preventDefault();
         searchInput.value = "";
-        clearSearchButton.style.display = "none";
+        if(clearSearchButton) clearSearchButton.style.display = "none";
         handleSearch();
       }
     });
 
-    clearSearchButton.addEventListener("click", () => {
-      searchInput.value = "";
-      clearSearchButton.style.display = "none";
+    if (clearSearchButton) {
+        clearSearchButton.addEventListener("click", () => {
+        searchInput.value = "";
+        clearSearchButton.style.display = "none";
 
-      faqItems.forEach((item) => {
-        item.hidden = false;
-        if (item.open && item.dataset.openedBySearch) {
-          item.open = false;
-          delete item.dataset.openedBySearch;
-        }
-      });
-      allSections.forEach((section) => {
-        section.hidden = false;
-      });
-
-      updateStatus("", faqItems.length);
-
-      // Track clear search event in GA4
-      if (typeof gtag === "function") {
-        gtag("event", "faq_search_cleared", {
-          event_category: "FAQ Search",
-          event_label: "Search input cleared",
+        faqItems.forEach((item) => {
+            item.style.display = "";
+            if (item.classList.contains("is-open") && item.dataset.openedBySearch) {
+            toggleItem(item, false);
+            delete item.dataset.openedBySearch;
+            }
         });
-      }
-      if (typeof hj === "function") {
-        hj("event", "faq_search_cleared");
-      }
+        allSections.forEach((section) => {
+            section.hidden = false;
+        });
 
-      searchInput.focus();
-    });
-
-    // وضعیت اولیه
-    clearSearchButton.style.display = "none";
-    updateStatus("", faqItems.length);
+        updateStatus("", faqItems.length);
+        searchInput.focus();
+        });
+    }
   }
 
   // --- Accordion Logic ---
-  if (mainContent && faqItems.length) {
-    mainContent.addEventListener("click", (event) => {
-      const summary = event.target.closest(".faq-item summary");
-      if (!summary) {return;}
+  
+  function toggleItem(item, forceOpen = null) {
+      const headerBtn = item.querySelector(".accordion-header");
+      const content = item.querySelector(".accordion-content");
+      if (!headerBtn || !content) return;
 
-      const clickedLink = event.target.closest("a");
-      if (clickedLink && summary.contains(clickedLink)) {
-        event.preventDefault();
-        window.location.href = clickedLink.href;
-        return;
-      }
+      const isOpen = item.classList.contains("is-open");
+      const shouldOpen = forceOpen !== null ? forceOpen : !isOpen;
 
-      event.preventDefault();
-
-      const item = summary.parentElement;
-      const questionId = item.dataset.questionId || "unknown";
-      const wasAlreadyOpen = item.open;
-
-      // بستن بقیه
-      faqItems.forEach((otherItem) => {
-        if (otherItem !== item) {
-          otherItem.open = false;
-          delete otherItem.dataset.openedByUser;
-          delete otherItem.dataset.openedBySearch;
-          const otherSummary = otherItem.querySelector("summary");
-          if (otherSummary) {
-            otherSummary.setAttribute("aria-expanded", "false");
-          }
-        }
-      });
-
-      if (wasAlreadyOpen) {
-        item.open = false;
-        summary.setAttribute("aria-expanded", "false");
-
-        if (typeof gtag === "function") {
-          gtag("event", "faq_collapse", {
-            event_category: "FAQ Interaction",
-            event_label: `Question collapsed: ${questionId}`,
-            question_text: summary.textContent.trim(),
-          });
-        }
-        if (typeof hj === "function") {
-          hj("event", `faq_collapsed_${questionId}`);
-        }
-        delete item.dataset.openedBySearch;
-        delete item.dataset.openedByUser;
+      if (shouldOpen) {
+          item.classList.add("is-open");
+          headerBtn.setAttribute("aria-expanded", "true");
+          // content.style.maxHeight = content.scrollHeight + "px"; // If using max-height transition
       } else {
-        item.open = true;
-        summary.setAttribute("aria-expanded", "true");
-        item.dataset.openedByUser = "true";
-        delete item.dataset.openedBySearch;
-
-        setTimeout(() => {
-          const rect = item.getBoundingClientRect();
-          if (rect.top < 0 || rect.bottom > window.innerHeight) {
-            item.scrollIntoView({ behavior: "smooth", block: "nearest" });
-          }
-        }, 450);
-
-        if (typeof gtag === "function") {
-          gtag("event", "faq_expand", {
-            event_category: "FAQ Interaction",
-            event_label: `Question expanded: ${questionId}`,
-            question_text: summary.textContent.trim(),
-          });
-        }
-        if (typeof hj === "function") {
-          hj("event", `faq_expanded_${questionId}`);
-        }
+          item.classList.remove("is-open");
+          headerBtn.setAttribute("aria-expanded", "false");
+          // content.style.maxHeight = null;
       }
-    });
   }
 
-  // Focus outline برای summary ها (با احترام به CSS vars)
-  faqItems.forEach((item) => {
-    const summary = item.querySelector("summary");
-    if (!summary) {return;}
+  // Event Delegation for Accordion Clicks
+  const accordionContainer = document.getElementById("faq-container") || document.querySelector(".main-content");
+  if (accordionContainer) {
+      accordionContainer.addEventListener("click", (event) => {
+          const headerBtn = event.target.closest(".accordion-header");
+          if (!headerBtn) return;
 
-    summary.addEventListener("focus", () => {
-      const primary =
-        getComputedStyle(document.documentElement).getPropertyValue(
-          "--primary-blue"
-        ) || "#007bff";
-      summary.style.outline = `3px solid ${primary.trim()}66`;
-      summary.style.outlineOffset = "5px";
-    });
+          // Ignore clicks on interactive elements inside header (like copy link)
+          if (event.target.closest(".copy-faq-link") || event.target.closest("a")) return;
 
-    summary.addEventListener("blur", () => {
-      summary.style.outline = "none";
-      summary.style.outlineOffset = "0";
-    });
+          const item = headerBtn.closest(".accordion-item");
+          if (!item) return;
 
-    // initial aria-expanded sync
-    summary.setAttribute("aria-expanded", item.open ? "true" : "false");
+          // Close others (Accordion behavior) - Optional, can be toggle behavior
+          // faqItems.forEach(otherItem => {
+          //     if (otherItem !== item && otherItem.classList.contains("is-open")) {
+          //         toggleItem(otherItem, false);
+          //     }
+          // });
+
+          toggleItem(item);
+          
+          // Analytics
+          const questionId = item.dataset.questionId || "unknown";
+          const action = item.classList.contains("is-open") ? "expand" : "collapse";
+          if (typeof gtag === "function") {
+              gtag("event", `faq_${action}`, {
+                  event_category: "FAQ Interaction",
+                  event_label: `Question ${action}ed: ${questionId}`,
+              });
+          }
+      });
+
+      // Keyboard support for accordion headers
+      accordionContainer.addEventListener("keydown", (event) => {
+          const headerBtn = event.target.closest(".accordion-header");
+          if (!headerBtn) return;
+
+          if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              // Trigger click logic
+              headerBtn.click();
+          }
+      });
+  }
+
+  // Expand/Collapse All
+  if (expandAllBtn) {
+      expandAllBtn.addEventListener("click", () => {
+          faqItems.forEach(item => {
+              if (item.style.display !== "none") toggleItem(item, true);
+          });
+      });
+  }
+
+  if (collapseAllBtn) {
+      collapseAllBtn.addEventListener("click", () => {
+          faqItems.forEach(item => toggleItem(item, false));
+      });
+  }
+
+  // Copy Link Functionality
+  document.querySelectorAll(".copy-faq-link").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+          e.stopPropagation(); // Prevent accordion toggle
+          const link = btn.dataset.link; // e.g. #faq-item-fa-1
+          if (!link) return;
+          
+          const url = window.location.origin + window.location.pathname + link;
+          navigator.clipboard.writeText(url).then(() => {
+              const originalIcon = btn.innerHTML;
+              btn.innerHTML = '<i class="fas fa-check"></i>';
+              btn.classList.add("copied");
+              setTimeout(() => {
+                  btn.innerHTML = originalIcon;
+                  btn.classList.remove("copied");
+              }, 2000);
+          });
+      });
   });
 
-  // --- Page entry animation (با احترام به prefers-reduced-motion) ---
+  // Feedback Buttons
+  document.querySelectorAll(".btn-feedback").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const parent = btn.closest(".faq-feedback");
+          parent.querySelectorAll(".btn-feedback").forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          
+          // Here you would send data to server
+          console.log("Feedback:", btn.classList.contains("up") ? "up" : "down");
+      });
+  });
+
+  // --- Page entry animation ---
   const prefersReducedMotion = window.matchMedia
     ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
     : false;
 
-  if (!prefersReducedMotion) {
-    if (header) {
-      header.style.opacity = "0";
-      header.style.transform = "translateY(-20px)";
-      setTimeout(() => {
-        header.style.transition = "opacity 1s ease-out, transform 1s ease-out";
-        header.style.opacity = "1";
-        header.style.transform = "translateY(0)";
-      }, 100);
-    }
-
-    if (mainContent) {
-      mainContent.style.opacity = "0";
-      mainContent.style.transform = "translateY(20px)";
-      setTimeout(() => {
-        mainContent.style.transition =
-          "opacity 1s ease-out, transform 1s ease-out";
-        mainContent.style.opacity = "1";
-        mainContent.style.transform = "translateY(0)";
-      }, 300);
-    }
+  if (!prefersReducedMotion && header) {
+      // Simple fade in if not already handled by CSS
   }
 });
