@@ -1571,7 +1571,7 @@ img.loaded {
   bottom: 140px;
   right: 20px;
   background-color: var(--primary-color);
-  color: white;
+  color: var(--toast-color);
   border: none;
   border-radius: 50%;
   width: 50px;

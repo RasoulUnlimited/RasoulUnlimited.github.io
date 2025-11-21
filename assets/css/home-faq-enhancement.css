@@ -276,7 +276,7 @@
   align-items: center;
   gap: 1rem;
   padding: 1rem 2rem;
-  background-color: #f8fafc;
+  /* background-color: #f8fafc; Removed to prevent conflict */
   border-top: 1px solid #f1f5f9;
   font-size: 0.9rem;
   color: #64748b;
@@ -757,12 +757,18 @@
 /* Dark Mode for New Features */
 .dark-mode .faq-feedback {
   border-top-color: #334155;
-  color: #e2e8f0;
+  color: #f8fafc; /* Brighter text */
+  background-color: transparent; /* Ensure no light background persists */
+}
+
+.dark-mode .feedback-label {
+  color: #f8fafc;
+  opacity: 1;
 }
 
 .dark-mode .btn-feedback {
   border-color: #475569;
-  color: #cbd5e1;
+  color: #e2e8f0; /* Brighter icons */
   background-color: transparent;
 }
 
