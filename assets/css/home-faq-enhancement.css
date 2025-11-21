@@ -359,6 +359,8 @@
 
 .dark-mode .faq-container .accordion-content {
   color: #f1f5f9;
+  background-color: transparent;
+  border-top-color: #334155;
 }
 
 .dark-mode .faq-no-results {
