@@ -1745,7 +1745,7 @@
           <!-- About Me Section: Detailed identity narrative with Schema.org Person properties -->
           <section
             id="about"
-            class="section"
+            class="section about-enhanced"
             data-aos="fade-right"
             itemprop="about"
             itemscope
@@ -1754,76 +1754,71 @@
             role="region"
             aria-labelledby="about-heading"
           >
-            <h2 id="about-heading">رسول آنلیمیتد کیست؟</h2>
-            
-            <div class="about-container" style="display: flex; flex-direction: column; gap: var(--space-lg);">
-                
-                <!-- Intro Text -->
-                <div class="about-intro" style="max-width: 800px; margin: 0 auto; text-align: center;">
-                    <p itemprop="description" style="font-size: 1.2rem; line-height: 1.8; text-align: center;">
-                        محمد رسول سهرابی، متولد ۱۵ شهریور ۱۳۸۴، ملقب به «آنلیمیتد»، ترکیبی از 
-                        <strong>ورزش، تکنولوژی و علم</strong> است. 
-                        من با ذهنیت «نامحدود» به دنبال شکستن مرزهای میان رشته‌ای و خلق نوآوری در سلامت دیجیتال هستم.
-                    </p>
+            <div class="container">
+                <div class="section-header text-center" data-aos="fade-up">
+                    <h2 id="about-heading" class="section-title">درباره من</h2>
+                    <p class="section-subtitle" style="color: var(--text-color-light); margin-top: var(--space-xs);">تلاقی مهندسی، ورزش و نوآوری</p>
                 </div>
 
-                <!-- Highlights Grid -->
-                <div class="grid grid-3" style="margin-top: var(--space-md);">
-                    
-                    <!-- Card 1: Education -->
-                    <div class="card-basic" data-aos="fade-up" data-aos-delay="100" style="text-align: center;">
-                        <i class="fas fa-university fa-3x" style="color: var(--primary-color); margin-bottom: var(--space-sm);"></i>
-                        <h3 style="font-size: 1.2rem; margin-bottom: var(--space-xs);">مهندسی پزشکی</h3>
-                        <p style="font-size: 0.9rem; color: var(--text-color-light); text-align: center;">
-                            <span property="schema:alumniOf">دانشجوی دانشگاه آزاد اسلامی واحد تهران مرکزی</span>
-                            <br>
-                            <span itemprop="memberOf">عضو فعال انجمن علمی</span>
+                <div class="about-content">
+                    <div class="about-text" data-aos="fade-left">
+                        <p class="lead-text" itemprop="description">
+                            من <strong>محمد رسول سهرابی</strong> هستم؛ دانشجوی مهندسی پزشکی و توسعه‌دهنده‌ای که مرزهای بین رشته‌ای را به چالش می‌کشد.
                         </p>
+                        <p style="text-align: justify; line-height: 1.8;">
+                            داستان من از تاتامی کاراته شروع شد، جایی که نظم و استقامت را آموختم، و به دنیای کدنویسی رسید، جایی که خلاقیت را پیدا کردم. با نام مستعار <strong>Rasoul Unlimited</strong>، در دنیای دیجیتال فعالیت می‌کنم. هدف من ساده است: استفاده از تکنولوژی برای ارتقای کیفیت زندگی و سلامت انسان‌ها.
+                        </p>
+                        <p style="text-align: justify; line-height: 1.8;">
+                            از ساخت <a href="#projects" data-ai-context="discord-bot-highlight">اولین ربات فارسی دیسکورد</a> تا پژوهش در حوزه <a href="#skills" title="مشاهده مهارت‌های من در سلامت دیجیتال" data-ai-context="digital-health-focus">سلامت دیجیتال</a> و <strong>هویت دیجیتال قابل‌راستی‌آزمایی</strong>، هر پروژه برای من یک قدم به سوی آینده‌ای هوشمندتر و شفاف‌تر است. من باور دارم در دنیای شلوغ امروز، فقط صدای واقعی و اصیل شنیده می‌شود.
+                        </p>
+                        
+                        <div class="about-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">۵+</span>
+                                <span class="stat-label">سال فعالیت حرفه‌ای</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">۲۰+</span>
+                                <span class="stat-label">پروژه متن‌باز</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">۱</span>
+                                <span class="stat-label">ربات تایید شده رسمی</span>
+                            </div>
+                        </div>
+
+                        <div class="about-actions" style="display: flex; gap: var(--space-md); flex-wrap: wrap;">
+                            <a href="/about.html" class="hero-btn primary">بیوگرافی کامل</a>
+                            <a href="/wiki/rasoul-unlimited/" class="hero-btn secondary">زندگینامه تفصیلی</a>
+                        </div>
                     </div>
 
-                    <!-- Card 2: Tech -->
-                    <div class="card-basic" data-aos="fade-up" data-aos-delay="200" style="text-align: center;">
-                        <i class="fas fa-robot fa-3x" style="color: var(--accent-color); margin-bottom: var(--space-sm);"></i>
-                        <h3 style="font-size: 1.2rem; margin-bottom: var(--space-xs);">توسعه‌دهنده</h3>
-                        <p style="font-size: 0.9rem; color: var(--text-color-light); text-align: center;">
-                            خالق <a href="#projects" data-ai-context="discord-bot-highlight">اولین ربات فارسی دیسکورد</a>
-                            <br>
-                            توسعه‌دهنده فول‌استک
-                        </p>
+                    <div class="about-cards" data-aos="fade-right">
+                        <div class="info-card">
+                            <div class="card-icon"><i class="fas fa-laptop-code"></i></div>
+                            <div>
+                                <h4>توسعه‌دهنده</h4>
+                                <p>فول‌استک، پایتون و خالق اولین ربات فارسی دیسکورد</p>
+                            </div>
+                        </div>
+                        <div class="info-card">
+                            <div class="card-icon"><i class="fas fa-heartbeat"></i></div>
+                            <div>
+                                <h4>مهندس پزشکی</h4>
+                                <p>نوآوری در سلامت دیجیتال و پژوهش‌های دانشگاهی</p>
+                                <span property="schema:alumniOf" style="display:none;">دانشگاه آزاد اسلامی واحد تهران مرکزی</span>
+                            </div>
+                        </div>
+                        <div class="info-card">
+                            <div class="card-icon"><i class="fas fa-running"></i></div>
+                            <div>
+                                <h4>ورزشکار</h4>
+                                <p>دارنده دان ۱ رسمی کاراته و روحیه سخت‌کوشی</p>
+                                <span itemprop="hasCredential" style="display:none;">کاراته دان ۱ رسمی</span>
+                            </div>
+                        </div>
                     </div>
-
-                    <!-- Card 3: Sports -->
-                    <div class="card-basic" data-aos="fade-up" data-aos-delay="300" style="text-align: center;">
-                        <i class="fas fa-medal fa-3x" style="color: var(--highlight-color); margin-bottom: var(--space-sm);"></i>
-                        <h3 style="font-size: 1.2rem; margin-bottom: var(--space-xs);">ورزشکار</h3>
-                        <p style="font-size: 0.9rem; color: var(--text-color-light); text-align: center;">
-                            <span itemprop="hasCredential">کاراته دان ۱ رسمی</span>
-                            <br>
-                            فدراسیون جمهوری اسلامی ایران
-                        </p>
-                    </div>
-
                 </div>
-
-                <!-- Detailed Description -->
-                <div class="about-details" style="max-width: var(--max-paragraph-width); margin: 0 auto;">
-                    <p itemprop="description" style="text-align: justify;">
-                        از راه‌اندازی پروژه‌های موفق در ۱۴ سالگی تا انتشار مقالات معتبر و همکاری با مراکز علمی، مسیر من همواره با یادگیری و نوآوری همراه بوده است. 
-                        هدف اصلی من ترکیب خلاقانه‌ مهندسی پزشکی و برنامه‌نویسی برای ایجاد تحول در حوزه 
-                        <a href="#skills" title="مشاهده مهارت‌های من در سلامت دیجیتال" data-ai-context="digital-health-focus">سلامت دیجیتال</a> است.
-                    </p>
-                    <p itemprop="description" style="text-align: justify;">
-                        من باور دارم در دنیای شلوغ امروز، فقط صدای واقعی و اصیل شنیده می‌شود. برای همین، همواره فراتر از سن‌وسالم گام برمی‌دارم و به دنبال حل مسائل پیچیده هستم.
-                    </p>
-                </div>
-
-                <!-- Action Buttons -->
-                <div class="about-actions text-center" style="margin-top: var(--space-md); display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap;">
-                    <a href="/about.html" class="hero-btn primary">بیوگرافی کامل</a>
-                    <a href="/wiki/rasoul-unlimited/" class="hero-btn secondary">زندگینامه تفصیلی</a>
-                    <a href="/analysis-digital-identity.html" class="hero-btn secondary">تحلیل هویت دیجیتال</a>
-                </div>
-
             </div>
           </section>
 
