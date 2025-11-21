@@ -81,6 +81,7 @@
     <link rel="stylesheet" href="assets/css/main-style-fa.min.css" />
     <link rel="stylesheet" href="assets/css/accordion.min.css" />
     <link rel="stylesheet" href="assets/css/home-faq-enhancement.min.css" />
+    <link rel="stylesheet" href="assets/css/testimonials-enhancement.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
     <script src="assets/js/performance-helpers.min.js" defer></script>
     <script src="assets/js/main-script-base.min.js" defer></script>
@@ -3563,64 +3564,91 @@
             role="region"
             aria-labelledby="testimonials-heading"
           >
-            <h2 id="testimonials-heading">💬 نظرات و بازخوردها</h2>
-            <p
-              class="text-small subtle-text space-top-xs text-right rtl"
-              data-ai-context="user-engagement-call-to-action"
-            >
-              اگر تجربه‌ای از پروژه‌های من دارید، یا دوست دارید بازخوردی بدید،
-              <strong>در این بخش با حساب GitHub خود</strong> وارد شوید و نظر
-              ارزشمند خود را ثبت کنید. این دیدگاه‌ها توسط دیگر کاربران قابل
-              مشاهده است و هویت شما به‌طور کامل تأیید خواهد شد. این کار به
-              <strong data-trust-signal="user-generated-trust"
-                >افزایش اعتماد و اعتبار</strong
-              >
-              من کمک می‌کند.
-            </p>
+            <div class="testimonials-header">
+                <h2 id="testimonials-heading">💬 نظرات و بازخوردها</h2>
+            </div>
 
-            <div
-              class="giscus-container"
-              id="giscus-comments-section"
-              aria-label="Comments"
-            >
-              <!-- Giscus as a UGC (User Generated Content) source helps strengthen E-E-A-T. -->
-              <script nonce="RasoulCSP">
-                (function () {
-                  function loadGiscus() {
-                    const s = document.createElement("script");
-                    s.src = "https://giscus.app/client.js";
-                    s.setAttribute("data-repo", "RasoulUnlimited/comments");
-                    s.setAttribute("data-repo-id", "R_kgDOOx48HQ");
-                    s.setAttribute("data-category", "Q&A");
-                    s.setAttribute("data-category-id", "DIC_kwDOOx48Hc4Cqrc1");
-                    s.setAttribute("data-mapping", "pathname");
-                    s.setAttribute("data-lang", "fa");
-                    s.setAttribute("data-strict", "1");
-                    s.setAttribute("data-reactions-enabled", "1");
-                    s.setAttribute("data-emit-metadata", "0");
-                    s.setAttribute("data-input-position", "top");
-                    s.setAttribute("data-theme", "preferred_color_scheme");
-                    s.setAttribute("data-loading", "lazy");
-                    s.setAttribute("crossorigin", "anonymous");
-                    s.async = true;
-                    s.setAttribute("data-ai-integration", "giscus-comments");
-                    s.setAttribute("nonce", "RasoulCSP");
-                    document
-                      .getElementById("giscus-comments-section")
-                      .appendChild(s);
-                  }
-                  if (
-                    document.readyState === "complete" ||
-                    document.readyState === "interactive"
-                  ) {
-                    loadGiscus();
-                  } else {
-                    document.addEventListener("DOMContentLoaded", loadGiscus, {
-                      once: true,
-                    });
-                  }
-                })();
-              </script>
+            <div class="feedback-intro-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="feedback-icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <div class="feedback-content">
+                    <p data-ai-context="user-engagement-call-to-action">
+                        نظرات شما برای من بسیار ارزشمند است. اگر پیشنهادی دارید، یا می‌خواهید درباره پروژه‌ها گفتگو کنید، خوشحال می‌شوم بشنوم.
+                        <br>
+                        این بخش با استفاده از <strong>GitHub Discussions</strong> کار می‌کند که امنیت و اعتبار نظرات را تضمین می‌کند.
+                    </p>
+                    <ul class="feedback-benefits">
+                        <li><i class="fab fa-github"></i> ثبت نظر با حساب GitHub</li>
+                        <li><i class="fas fa-check-circle"></i> کمک به بهبود پروژه‌ها</li>
+                        <li><i class="fas fa-users"></i> تعامل با جامعه توسعه‌دهندگان</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="giscus-wrapper" data-aos="fade-up" data-aos-delay="200">
+                <div id="giscus-loading" class="giscus-loading">
+                    <div class="spinner"></div>
+                    <span class="loading-text">در حال بارگذاری نظرات...</span>
+                </div>
+                <div
+                  class="giscus-container"
+                  id="giscus-comments-section"
+                  aria-label="Comments"
+                >
+                  <!-- Giscus as a UGC (User Generated Content) source helps strengthen E-E-A-T. -->
+                  <script nonce="RasoulCSP">
+                    (function () {
+                      function loadGiscus() {
+                        const s = document.createElement("script");
+                        s.src = "https://giscus.app/client.js";
+                        s.setAttribute("data-repo", "RasoulUnlimited/comments");
+                        s.setAttribute("data-repo-id", "R_kgDOOx48HQ");
+                        s.setAttribute("data-category", "Q&A");
+                        s.setAttribute("data-category-id", "DIC_kwDOOx48Hc4Cqrc1");
+                        s.setAttribute("data-mapping", "pathname");
+                        s.setAttribute("data-lang", "fa");
+                        s.setAttribute("data-strict", "1");
+                        s.setAttribute("data-reactions-enabled", "1");
+                        s.setAttribute("data-emit-metadata", "0");
+                        s.setAttribute("data-input-position", "top");
+                        s.setAttribute("data-theme", "preferred_color_scheme");
+                        s.setAttribute("data-loading", "lazy");
+                        s.setAttribute("crossorigin", "anonymous");
+                        s.async = true;
+                        s.setAttribute("data-ai-integration", "giscus-comments");
+                        s.setAttribute("nonce", "RasoulCSP");
+                        
+                        const container = document.getElementById("giscus-comments-section");
+                        container.appendChild(s);
+
+                        // Monitor for iframe creation to hide loader
+                        const observer = new MutationObserver((mutations) => {
+                            const iframe = container.querySelector('iframe.giscus-frame');
+                            if (iframe) {
+                                // Fallback if load event doesn't fire (cross-origin issues sometimes)
+                                setTimeout(() => {
+                                     const loader = document.getElementById('giscus-loading');
+                                     if(loader) loader.classList.add('hidden');
+                                }, 1500);
+                                observer.disconnect();
+                            }
+                        });
+                        observer.observe(container, { childList: true });
+                      }
+                      if (
+                        document.readyState === "complete" ||
+                        document.readyState === "interactive"
+                      ) {
+                        loadGiscus();
+                      } else {
+                        document.addEventListener("DOMContentLoaded", loadGiscus, {
+                          once: true,
+                        });
+                      }
+                    })();
+                  </script>
+                </div>
             </div>
           </section>
 
