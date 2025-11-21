@@ -222,5 +222,93 @@
         if (expandAllBtn) expandAllBtn.setAttribute("aria-pressed", "false");
       });
     }
+
+    // --- New Features Logic ---
+
+    // 1. Copy Link Functionality
+    document.querySelectorAll('.copy-faq-link').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent accordion toggle
+        const link = btn.dataset.link;
+        if (!link) return;
+
+        const url = window.location.origin + window.location.pathname + link;
+        
+        navigator.clipboard.writeText(url).then(() => {
+          // Visual feedback
+          const originalIcon = btn.innerHTML;
+          btn.innerHTML = '<i class="fas fa-check"></i>';
+          btn.style.color = '#2ecc71';
+          
+          // Show toast if available
+          if (window.createToast) {
+            window.createToast('لینک کپی شد!');
+          }
+
+          setTimeout(() => {
+            btn.innerHTML = originalIcon;
+            btn.style.color = '';
+          }, 2000);
+        }).catch(err => {
+          console.error('Failed to copy: ', err);
+        });
+      });
+    });
+
+    // 2. Feedback Functionality
+    document.querySelectorAll('.btn-feedback').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const parent = btn.closest('.faq-feedback');
+        
+        // Remove active class from siblings
+        parent.querySelectorAll('.btn-feedback').forEach(b => b.classList.remove('active'));
+        
+        // Add active class to clicked button
+        btn.classList.add('active');
+        
+        // Optional: Send analytics event here
+        const isUp = btn.classList.contains('up');
+        const questionId = btn.closest('.faq-item').id;
+        console.log(`Feedback for ${questionId}: ${isUp ? 'Positive' : 'Negative'}`);
+        
+        if (window.createToast) {
+          window.createToast('بازخورد شما ثبت شد. ممنون!');
+        }
+      });
+    });
+
+    // 3. Handle Hash Navigation
+    if (window.location.hash) {
+      const targetId = window.location.hash.substring(1);
+      const targetItem = document.getElementById(targetId);
+      if (targetItem && targetItem.classList.contains('faq-item')) {
+        setTimeout(() => {
+          // Open the item
+          const isCustomAccordion = !targetItem.tagName || targetItem.tagName.toLowerCase() !== 'details';
+          if (isCustomAccordion) {
+            targetItem.classList.add("is-open");
+            const header = targetItem.querySelector(".accordion-header");
+            const panel = targetItem.querySelector(".accordion-content");
+            if (header) header.setAttribute("aria-expanded", "true");
+            if (panel) panel.hidden = false;
+          } else {
+            targetItem.open = true;
+          }
+          
+          // Scroll to it
+          targetItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          
+          // Highlight effect
+          targetItem.style.transition = 'background-color 0.5s';
+          const originalBg = targetItem.style.backgroundColor;
+          targetItem.style.backgroundColor = 'rgba(52, 152, 219, 0.1)';
+          setTimeout(() => {
+            targetItem.style.backgroundColor = originalBg;
+          }, 1500);
+        }, 500); // Delay to ensure page load
+      }
+    }
+
   });
 })();

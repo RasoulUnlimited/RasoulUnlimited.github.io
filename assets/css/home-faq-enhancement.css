@@ -385,3 +385,113 @@
   background-color: rgba(251, 191, 36, 0.3);
   color: #f8fafc;
 }
+
+/* --- New Features Styles --- */
+
+/* FAQ Icons */
+.faq-icon {
+  margin-left: 0.75rem;
+  color: var(--primary-color, #3498db);
+  opacity: 0.8;
+  font-size: 1.2rem;
+  vertical-align: middle;
+  transition: transform 0.3s ease;
+}
+
+.accordion-item:hover .faq-icon {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+/* Copy Link Button */
+.copy-faq-link {
+  background: none;
+  border: none;
+  color: #95a5a6;
+  cursor: pointer;
+  padding: 0.5rem;
+  margin-right: 0.5rem;
+  opacity: 0;
+  transition: all 0.2s ease;
+  border-radius: 50%;
+  font-size: 0.9rem;
+}
+
+.accordion-header:hover .copy-faq-link,
+.copy-faq-link:focus {
+  opacity: 1;
+}
+
+.copy-faq-link:hover {
+  color: var(--primary-color, #3498db);
+  background-color: rgba(52, 152, 219, 0.1);
+}
+
+/* Feedback Section */
+.faq-feedback {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px dashed #e1e7ed;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #7f8c8d;
+}
+
+.feedback-label {
+  margin-left: 0.5rem;
+}
+
+.btn-feedback {
+  background: none;
+  border: 1px solid #e1e7ed;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #95a5a6;
+  transition: all 0.2s ease;
+}
+
+.btn-feedback:hover {
+  border-color: var(--primary-color, #3498db);
+  color: var(--primary-color, #3498db);
+  background-color: rgba(52, 152, 219, 0.05);
+}
+
+.btn-feedback.active {
+  background-color: var(--primary-color, #3498db);
+  color: #fff;
+  border-color: var(--primary-color, #3498db);
+}
+
+/* Dark Mode for New Features */
+.dark-mode .faq-feedback {
+  border-top-color: #334155;
+  color: #94a3b8;
+}
+
+.dark-mode .btn-feedback {
+  border-color: #334155;
+  color: #94a3b8;
+}
+
+.dark-mode .btn-feedback:hover {
+  border-color: var(--primary-color, #38bdf8);
+  color: var(--primary-color, #38bdf8);
+  background-color: rgba(56, 189, 248, 0.1);
+}
+
+.dark-mode .copy-faq-link {
+  color: #64748b;
+}
+
+.dark-mode .copy-faq-link:hover {
+  color: var(--primary-color, #38bdf8);
+  background-color: rgba(56, 189, 248, 0.1);
+}
