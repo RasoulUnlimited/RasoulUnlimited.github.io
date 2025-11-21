@@ -3189,23 +3189,26 @@
                 placeholder="به دنبال چه سوالی هستید؟ (مثلاً: دیسکورد، پروژه C)"
                 aria-label="جستجو در سوالات متداول"
                 aria-controls="faq-container"
+                aria-describedby="faq-search-status"
               />
               <button id="clear-search" aria-label="پاک کردن جستجو" type="button">✖</button>
             </div>
             
             <div class="faq-controls" style="display: flex; justify-content: flex-end; gap: 1rem; margin-bottom: 1.5rem; padding: 0 0.5rem;">
-              <button id="expand-all-faq" class="btn-text-only" aria-label="باز کردن همه سوالات" style="background: none; border: none; color: var(--primary-color); cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem;">
+              <button id="expand-all-faq" class="btn-text-only" aria-label="باز کردن همه سوالات" aria-pressed="false" type="button" style="background: none; border: none; color: var(--primary-color); cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem;">
                 <i class="fas fa-plus-circle" aria-hidden="true"></i> باز کردن همه
               </button>
-              <button id="collapse-all-faq" class="btn-text-only" aria-label="بستن همه سوالات" style="background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem;">
+              <button id="collapse-all-faq" class="btn-text-only" aria-label="بستن همه سوالات" aria-pressed="false" type="button" style="background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem;">
                 <i class="fas fa-minus-circle" aria-hidden="true"></i> بستن همه
               </button>
             </div>
+            <!-- Screen-reader status for FAQ search (updated by JS) -->
+            <div id="faq-search-status" class="sr-only" aria-live="polite" aria-atomic="true">نمایش همه سوالات.</div>
 
             <div id="faq-no-results" class="faq-no-results" style="display: none; text-align: center; padding: 2rem; color: var(--text-muted); font-weight: 500;">
               نتیجه‌ای یافت نشد. لطفاً کلمات کلیدی دیگری را امتحان کنید.
             </div>
-            <div class="faq-container accordion">
+            <div id="faq-container" class="faq-container accordion">
               <div
                 class="accordion-item faq-item"
                 id="faq-item-fa-1"
@@ -3914,6 +3917,22 @@
 
     <script src="assets/vendor/aos/aos.min.js" defer></script>
     <script src="assets/js/faq-search.min.js" defer></script>
+    <script defer>
+      // Keep expand/collapse buttons' aria-pressed in sync for assistive tech
+      document.addEventListener('DOMContentLoaded', function () {
+        var expandBtn = document.getElementById('expand-all-faq');
+        var collapseBtn = document.getElementById('collapse-all-faq');
+        if (!expandBtn || !collapseBtn) return;
+        function setPressed(expanded) {
+          expandBtn.setAttribute('aria-pressed', String(Boolean(expanded)));
+          collapseBtn.setAttribute('aria-pressed', String(!expanded));
+        }
+        expandBtn.addEventListener('click', function () { setPressed(true); });
+        collapseBtn.addEventListener('click', function () { setPressed(false); });
+        // initialize state
+        setPressed(false);
+      });
+    </script>
     <script src="assets/js/main-script-fa.min.js" defer></script>
     <script src="assets/js/lang/fa.min.js" defer></script>
     <script src="assets/js/hero-particles.min.js" defer></script>
