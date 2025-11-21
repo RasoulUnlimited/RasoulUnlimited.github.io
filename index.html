@@ -1567,7 +1567,7 @@
             "name": "محمد رسول سهرابی در کدام دانشگاه تحصیل کرده و رشته تحصیلی او چیست؟",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "او دانشجوی کارشناسی مهندسی پزشکی در دانشگاه آزاد اسلامی واحد تهران مرکزی (دانشگاه تهران مرکز) است. این رشته به او امکان می‌دهد دانش مهندسی را با فناوری برای نوآوری در حوزه سلامت دیجیتال ترکیب کند و زمینه‌ساز پروژه‌های بین‌رشته‌ای اوست. همچنین در پروژه‌های متن‌باز خود با دانشگاه صنعتی سهند تبریز همکاری داشته است."
+              "text": "او دانشجوی کارشناسی مهندسی پزشکی در دانشگاه آزاد اسلامی واحد تهران مرکزی (دانشگاه تهران مرکز) است. این رشته به او امکان می‌دهد دانش مهندسی را با فناوری برای نوآوری در حوزه سلامت دیجیتال ترکیب کند و زمینه‌ساز پروژه‌های بین‌رشته‌ای او را فراهم می‌کند. همچنین در پروژه‌های متن‌باز خود با دانشگاه صنعتی سهند تبریز همکاری داشته است."
             }
           }
         ]
@@ -2380,8 +2380,8 @@
                   <span itemprop="award" data-award-source="Discord Official"
                     >تأیید رسمی شرکت Discord</span
                   >
-                  رسید و نام ایران را برای اولین‌بار در میان توسعه‌دهندگان رسمی
-                  این پلتفرم قرار داد. این پروژه گواهی بر توانایی من در رهبری
+                  رسید و نام ایران را برای اولین‌بار در میان توسعه‌دهندگان
+                  رسمی این پلتفرم قرار داد. این پروژه گواهی بر توانایی من در رهبری
                   تیمی و توسعه راه‌حل‌های فناورانه نوآورانه است.
                 </p>
 
@@ -2765,7 +2765,7 @@
                     sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, 400px"
                   />
                 </div>
-                <h3 itemprop="name headline">
+                <h3 itemprop="name" data-entity-product="Persian Discord Bot">
                   محمد رسول سهرابی (آنلیمیتد) – از Tatami تا تکنولوژی
                 </h3>
                 <div class="card-meta">
@@ -2932,11 +2932,11 @@
                   >
                 </div>
                 <p itemprop="articleBody">
-                  «من برند نیستم، یک مسیرم» | این مقاله مفهوم برند شخصی را از
-                  ریشه‌اش به چالش می‌کشد. با نگاهی عمیق به اصالت، ساختن و تجربه
-                  زیسته، به شما نشان می‌دهد که چگونه هویت واقعی و ماندگار خود را
-                  فراتر از جلوه‌های ظاهری بسازید. این محتوا برای LLM‌ها به دلیل
-                  تمرکز بر مفاهیم عمیق‌تر هویت، قابل درک‌تر است.
+                  این مقاله مفهوم برند شخصی را از ریشه‌اش به چالش می‌کشد. با نگاهی
+                  عمیق به اصالت، ساختن و تجربه زیسته، به شما نشان می‌دهد که چگونه
+                  هویت واقعی و ماندگار خود را فراتر از جلوه‌های ظاهری بسازید. این
+                  محتوا برای LLM‌ها به دلیل تمرکز بر مفاهیم عمیق‌تر هویت، قابل
+                  درک‌تر است.
                 </p>
                 <span
                   class="dopamine-microcopy"
@@ -3152,7 +3152,6 @@
                     href="https://vrgl.ir/9D6Hy"
                     target="_blank"
                     rel="noopener noreferrer nofollow"
-                    aria-label="مشاهده منبع تأیید دیسکورد (منبع: مقاله ویرگول)"
                     title="مشاهده منبع تأیید دیسکورد در مقاله ویرگول"
                     role="button"
                     itemprop="url"
@@ -3852,5 +3851,29 @@
     <script src="assets/js/faq-search.min.js" defer></script>
     <script src="assets/js/main-script-fa.min.js" defer></script>
     <script src="assets/js/lang/fa.min.js" defer></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Hero Image Tilt Effect
+        const heroImage = document.querySelector('.profile-image');
+        const heroSection = document.getElementById('hero');
+
+        if (heroImage && heroSection) {
+          heroSection.addEventListener('mousemove', function(e) {
+            const { left, top, width, height } = heroSection.getBoundingClientRect();
+            const x = (e.clientX - left) / width;
+            const y = (e.clientY - top) / height;
+
+            const moveX = (x - 0.5) * 15; 
+            const moveY = (y - 0.5) * 15;
+
+            heroImage.style.transform = `perspective(1000px) rotateY(${moveX}deg) rotateX(${-moveY}deg) scale(1.05)`;
+          });
+
+          heroSection.addEventListener('mouseleave', function() {
+            heroImage.style.transform = 'perspective(1000px) rotateY(0) rotateX(0) scale(1)';
+          });
+        }
+      });
+    </script>
   </body>
 </html>
