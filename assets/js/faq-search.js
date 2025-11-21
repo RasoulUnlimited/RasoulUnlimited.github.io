@@ -52,8 +52,12 @@
       let visibleCount = 0;
 
       faqItems.forEach((item) => {
-        const summary = item.querySelector("summary");
-        const answerEl = item.querySelector(".faq-answer, p, .faq-body");
+        // Support both <details>/<summary> and custom .accordion-item structure
+        const summary = item.querySelector("summary") || item.querySelector(".accordion-header");
+        const answerEl = item.querySelector(".faq-answer, p, .faq-body, .accordion-content");
+        
+        // For custom accordion, the header button is the summary
+        const isCustomAccordion = !item.tagName || item.tagName.toLowerCase() !== 'details';
 
         const question = summary
           ? summary.textContent.toLowerCase()
@@ -71,38 +75,65 @@
 
         if (matches) {
           item.hidden = false;
+          item.style.display = ""; // Reset display property
           visibleCount++;
 
-          // اگر سرچ داریم، آیتم رو باز کن ولی فقط اگر قبلاً باز نبوده
-          if (hasTerm && !item.open) {
-            item.open = true;
-            if (summary) {summary.setAttribute("aria-expanded", "true");}
-            item.dataset.openedBySearch = "true";
+          // Open item if searching
+          if (hasTerm) {
+            if (isCustomAccordion) {
+                if (!item.classList.contains("is-open")) {
+                    item.classList.add("is-open");
+                    if (summary) summary.setAttribute("aria-expanded", "true");
+                    item.dataset.openedBySearch = "true";
+                    // Ensure content is visible
+                    if (answerEl) answerEl.hidden = false;
+                }
+            } else {
+                if (!item.open) {
+                    item.open = true;
+                    item.dataset.openedBySearch = "true";
+                }
+            }
           }
 
-          // اگر سرچ خالی شده و این آیتم فقط به‌خاطر سرچ باز بود → ببندش
+          // Close if search cleared and was opened by search
           if (!hasTerm && item.dataset.openedBySearch) {
             delete item.dataset.openedBySearch;
-            if (item.open) {
-              item.open = false;
-              if (summary) {summary.setAttribute("aria-expanded", "false");}
+            if (isCustomAccordion) {
+                item.classList.remove("is-open");
+                if (summary) summary.setAttribute("aria-expanded", "false");
+                if (answerEl) answerEl.hidden = true;
+            } else {
+                item.open = false;
             }
           }
         } else {
           item.hidden = true;
-          // اگر در اثر سرچ باز شده بود، ببند
-          if (item.open && item.dataset.openedBySearch) {
-            item.open = false;
-            if (summary) {summary.setAttribute("aria-expanded", "false");}
+          item.style.display = "none"; // Force hide
+          
+          // Reset state if hidden
+          if (item.dataset.openedBySearch) {
             delete item.dataset.openedBySearch;
+            if (isCustomAccordion) {
+                item.classList.remove("is-open");
+                if (summary) summary.setAttribute("aria-expanded", "false");
+                if (answerEl) answerEl.hidden = true;
+            } else {
+                item.open = false;
+            }
           }
         }
       });
 
-      updateStatus(searchTerm, visibleCount);
+      const noResultsEl = document.getElementById("faq-no-results");
+      if (noResultsEl) {
+        noResultsEl.style.display = visibleCount === 0 && hasTerm ? "block" : "none";
+      }
+
+      updateStatus(rawTerm, visibleCount);
     }
 
-    searchInput.addEventListener("input", () => {
+    searchInput.addEventListener("input", function () {
       const term = searchInput.value.trim().toLowerCase();
       clearButton.style.display = term ? "inline-flex" : "none";
 

@@ -80,6 +80,7 @@
     <link rel="stylesheet" href="assets/css/design-system.min.css" />
     <link rel="stylesheet" href="assets/css/main-style-fa.min.css" />
     <link rel="stylesheet" href="assets/css/accordion.min.css" />
+    <link rel="stylesheet" href="assets/css/home-faq-enhancement.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
     <script src="assets/js/performance-helpers.min.js" defer></script>
     <script src="assets/js/main-script-base.min.js" defer></script>
@@ -3189,6 +3190,9 @@
               />
               <button id="clear-search" aria-label="پاک کردن جستجو" type="button">✖</button>
             </div>
+            <div id="faq-no-results" class="faq-no-results" style="display: none; text-align: center; padding: 2rem; color: var(--text-muted); font-weight: 500;">
+              نتیجه‌ای یافت نشد. لطفاً کلمات کلیدی دیگری را امتحان کنید.
+            </div>
             <div class="faq-container accordion">
               <div
                 class="accordion-item faq-item"
@@ -3403,6 +3407,41 @@
                     سلامت دیجیتال ترکیب کند و زمینه‌ساز پروژه‌های بین‌رشته‌ای
                     اوست. همچنین در پروژه‌های متن‌باز خود با دانشگاه صنعتی سهند
                     تبریز همکاری داشته است.</span
+                  >
+                </p>
+              </div>
+              <div
+                class="accordion-item faq-item"
+                id="faq-item-fa-6"
+                aria-labelledby="faq-question-fa-6"
+                itemprop="mainEntity"
+                itemscope
+                itemtype="https://schema.org/Question"
+                data-question-id="open-source-projects"
+              >
+                <button
+                  class="accordion-header no-click-feedback"
+                  type="button"
+                  aria-controls="faq-answer-fa-6"
+                  aria-expanded="false"
+                >
+                  <h3
+                    id="faq-question-fa-6"
+                    class="faq-question"
+                    itemprop="name"
+                  >
+                    آیا پروژه‌های شما متن‌باز (Open Source) هستند؟
+                  </h3>
+                </button>
+                <p
+                  id="faq-answer-fa-6"
+                  class="faq-answer accordion-content"
+                  itemprop="acceptedAnswer"
+                  itemscope
+                  itemtype="https://schema.org/Answer"
+                >
+                  <span itemprop="text"
+                    >بله، بسیاری از پروژه‌های من از جمله ابزارهای توسعه و کتابخانه‌های کاربردی به صورت متن‌باز در گیت‌هاب منتشر شده‌اند. من به اشتراک‌گذاری دانش و مشارکت در جامعه نرم‌افزار آزاد معتقدم و از همکاری با سایر توسعه‌دهندگان استقبال می‌کنم.</span
                   >
                 </p>
               </div>
