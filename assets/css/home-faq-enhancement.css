@@ -1,14 +1,15 @@
 /* Enhanced styles for Home Page FAQ */
 
 :root {
-  --faq-primary: #3498db;
+  --faq-primary: #2980b9;
+  --primary-blue: #2980b9; /* Override for accordion.css */
   --faq-bg-gradient: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
   --faq-item-bg: #ffffff;
   --faq-item-border: #eef2f7;
   --faq-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
   --faq-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
   --faq-text-color: #2c3e50;
-  --faq-meta-color: #64748b;
+  --faq-meta-color: #475569;
 }
 
 /* Section Container */
@@ -60,7 +61,7 @@
 }
 
 .search-faq-container input[type="text"]::placeholder {
-  color: #94a3b8;
+  color: #475569;
   opacity: 1;
 }
 
@@ -79,7 +80,7 @@
   background: none;
   border: none;
   font-size: 1.2rem;
-  color: #94a3b8;
+  color: #475569;
   cursor: pointer;
   padding: 0.5rem;
   display: none;
@@ -756,12 +757,13 @@
 /* Dark Mode for New Features */
 .dark-mode .faq-feedback {
   border-top-color: #334155;
-  color: #cbd5e1;
+  color: #e2e8f0;
 }
 
 .dark-mode .btn-feedback {
   border-color: #475569;
   color: #cbd5e1;
+  background-color: transparent;
 }
 
 .dark-mode .btn-feedback:hover {

@@ -76,6 +76,7 @@ body {
   --giscus-border: 1px solid var(--border-color);
   --faq-link-hover-color: var(--primary-color);
   --card-link-hover-text-color: #0f172a;
+  --bg-secondary: #1e293b;
 }
 
 .light-mode {
