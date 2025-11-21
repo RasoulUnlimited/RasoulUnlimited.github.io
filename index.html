@@ -1745,6 +1745,7 @@
           <!-- About Me Section: Detailed identity narrative with Schema.org Person properties -->
           <section
             id="about"
+            class="section"
             data-aos="fade-right"
             itemprop="about"
             itemscope
@@ -1754,87 +1755,76 @@
             aria-labelledby="about-heading"
           >
             <h2 id="about-heading">رسول آنلیمیتد کیست؟</h2>
-            <p itemprop="description">
-              محمد رسول سهرابی، متولد ۱۵ شهریور ۱۳۸۴ (
-              <time datetime="2005-09-06">September 6, 2005</time>) و ملقب به
-              «آنلیمیتد»، ترکیبی از ورزش، تکنولوژی و علم است.
-            </p>
-            <ul class="about-highlights about-list">
-              <li>
-                <span itemprop="hasCredential">کاراته دان ۱ رسمی فدراسیون جمهوری اسلامی ایران</span>
-              </li>
-              <li>
-                <span property="schema:alumniOf">
-                  <a href="https://ctb.iau.ir" target="_blank" rel="noopener noreferrer">دانشجوی مهندسی پزشکی دانشگاه آزاد اسلامی واحد تهران مرکزی</a>
-                </span>
-              </li>
-              <li>
-                <span itemprop="memberOf">عضو فعال انجمن علمی مهندسی پزشکی دانشگاه</span>
-              </li>
-            </ul>
-            <p itemprop="description">
-              این ترکیب نشان‌دهنده تعهد او به رشد همه‌جانبه در حوزه‌های آکادمیک، فنی و ورزشی است.
-            </p>
-            <p itemprop="description">
-              با انگیزه‌ی درونی برای تاثیرگذاری و ذهنیت «نامحدود»، از راه‌اندازی
-              پروژه
-              <a
-                href="#projects"
-                title="مشاهده پروژه‌های من"
-                data-ai-context="discord-bot-highlight"
-                >اولین ربات فارسی‌زبان دیسکورد</a
-              >
-              با تایید رسمی دیسکورد در ۱۴ سالگی (
-              <time datetime="2020-01-01">سال ۲۰۲۰</time>)، تا انتشار مقالات اعتباربخش
-              در ویرگول و مدیوم، و مشارکت در پروژه‌های دانشگاهی با شناسه‌های
-              DOI، در هر کاری سعی کرده‌ام امضای خودش را بگذارم و استانداردهای
-              بالایی را رعایت کنم. در همین راستا، با
-              <a
-                href="https://sut.ac.ir"
-                target="_blank"
-                rel="authoritative noopener noreferrer"
-                >دانشگاه صنعتی سهند</a
-              >
-              و دیگر مراکز علمی نیز همکاری داشته‌ام.
-            </p>
-            <p itemprop="description">
-              او باور دارد در دنیای شلوغ امروز، فقط صدای واقعی و اصیل شنیده
-              می‌شود. هدف اصلی او ترکیب خلاقانه‌ مهندسی پزشکی و برنامه‌نویسی
-              برای ایجاد تحول در حوزه
-              <a
-                href="#skills"
-                title="مشاهده مهارت‌های من در سلامت دیجیتال"
-                data-ai-context="digital-health-focus"
-                >سلامت دیجیتال</a
-              >
-              است و همواره فراتر از سن‌وسالش گام برمی‌دارد و به دنبال نوآوری و
-              حل مسائل پیچیده است.
-            </p>
-            <p itemprop="description">
-              برای نگاهی دقیق‌تر به چگونگی شکل‌گیری هویت آنلاین من و بررسی روند
-              حضور تأیید شده،
-              <a href="/analysis-digital-identity.html"
-                >digital identity analysis</a
-              >
-              را بخوانید.
-            </p>
-            <p class="more-bio">
-              <a href="/about.html" title="مشاهده بیوگرافی کامل رسول آنلیمیتد"
-                >بیوگرافی کامل را بخوانید &rarr;</a
-              >
-            </p>
-            <p class="more-bio">
-              <a href="/wiki/rasoul-unlimited/" title="مشاهده زندگینامه تفصیلی"
-                >زندگینامه تفصیلی &rarr;</a
-              >
-            </p>
-            <p class="more-bio">
-              <a
-                href="/analysis-digital-identity.html"
-                title="identity trends analysis"
-                >identity trends analysis &rarr;</a
-              >
-            </p>
+            
+            <div class="about-container" style="display: flex; flex-direction: column; gap: var(--space-lg);">
+                
+                <!-- Intro Text -->
+                <div class="about-intro" style="max-width: 800px; margin: 0 auto; text-align: center;">
+                    <p itemprop="description" style="font-size: 1.2rem; line-height: 1.8; text-align: center;">
+                        محمد رسول سهرابی، متولد ۱۵ شهریور ۱۳۸۴، ملقب به «آنلیمیتد»، ترکیبی از 
+                        <strong>ورزش، تکنولوژی و علم</strong> است. 
+                        من با ذهنیت «نامحدود» به دنبال شکستن مرزهای میان رشته‌ای و خلق نوآوری در سلامت دیجیتال هستم.
+                    </p>
+                </div>
+
+                <!-- Highlights Grid -->
+                <div class="grid grid-3" style="margin-top: var(--space-md);">
+                    
+                    <!-- Card 1: Education -->
+                    <div class="card-basic" data-aos="fade-up" data-aos-delay="100" style="text-align: center;">
+                        <i class="fas fa-university fa-3x" style="color: var(--primary-color); margin-bottom: var(--space-sm);"></i>
+                        <h3 style="font-size: 1.2rem; margin-bottom: var(--space-xs);">مهندسی پزشکی</h3>
+                        <p style="font-size: 0.9rem; color: var(--text-color-light); text-align: center;">
+                            <span property="schema:alumniOf">دانشجوی دانشگاه آزاد اسلامی واحد تهران مرکزی</span>
+                            <br>
+                            <span itemprop="memberOf">عضو فعال انجمن علمی</span>
+                        </p>
+                    </div>
+
+                    <!-- Card 2: Tech -->
+                    <div class="card-basic" data-aos="fade-up" data-aos-delay="200" style="text-align: center;">
+                        <i class="fas fa-robot fa-3x" style="color: var(--accent-color); margin-bottom: var(--space-sm);"></i>
+                        <h3 style="font-size: 1.2rem; margin-bottom: var(--space-xs);">توسعه‌دهنده</h3>
+                        <p style="font-size: 0.9rem; color: var(--text-color-light); text-align: center;">
+                            خالق <a href="#projects" data-ai-context="discord-bot-highlight">اولین ربات فارسی دیسکورد</a>
+                            <br>
+                            توسعه‌دهنده فول‌استک
+                        </p>
+                    </div>
+
+                    <!-- Card 3: Sports -->
+                    <div class="card-basic" data-aos="fade-up" data-aos-delay="300" style="text-align: center;">
+                        <i class="fas fa-medal fa-3x" style="color: var(--highlight-color); margin-bottom: var(--space-sm);"></i>
+                        <h3 style="font-size: 1.2rem; margin-bottom: var(--space-xs);">ورزشکار</h3>
+                        <p style="font-size: 0.9rem; color: var(--text-color-light); text-align: center;">
+                            <span itemprop="hasCredential">کاراته دان ۱ رسمی</span>
+                            <br>
+                            فدراسیون جمهوری اسلامی ایران
+                        </p>
+                    </div>
+
+                </div>
+
+                <!-- Detailed Description -->
+                <div class="about-details" style="max-width: var(--max-paragraph-width); margin: 0 auto;">
+                    <p itemprop="description" style="text-align: justify;">
+                        از راه‌اندازی پروژه‌های موفق در ۱۴ سالگی تا انتشار مقالات معتبر و همکاری با مراکز علمی، مسیر من همواره با یادگیری و نوآوری همراه بوده است. 
+                        هدف اصلی من ترکیب خلاقانه‌ مهندسی پزشکی و برنامه‌نویسی برای ایجاد تحول در حوزه 
+                        <a href="#skills" title="مشاهده مهارت‌های من در سلامت دیجیتال" data-ai-context="digital-health-focus">سلامت دیجیتال</a> است.
+                    </p>
+                    <p itemprop="description" style="text-align: justify;">
+                        من باور دارم در دنیای شلوغ امروز، فقط صدای واقعی و اصیل شنیده می‌شود. برای همین، همواره فراتر از سن‌وسالم گام برمی‌دارم و به دنبال حل مسائل پیچیده هستم.
+                    </p>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="about-actions text-center" style="margin-top: var(--space-md); display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap;">
+                    <a href="/about.html" class="hero-btn primary">بیوگرافی کامل</a>
+                    <a href="/wiki/rasoul-unlimited/" class="hero-btn secondary">زندگینامه تفصیلی</a>
+                    <a href="/analysis-digital-identity.html" class="hero-btn secondary">تحلیل هویت دیجیتال</a>
+                </div>
+
+            </div>
           </section>
 
           <!-- Timeline Section: Chronicling key life and professional milestones -->
