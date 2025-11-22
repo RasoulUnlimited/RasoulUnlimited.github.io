@@ -2,7 +2,7 @@
 # Maintainer: Mohammad Rasoul Sohrabi (Rasoul Unlimited)
 # Hosting: GitHub Pages (proxied via Cloudflare)
 # Contact: rasoul.unlimited@gmail.com
-# Updated: 2025-11-22 (SEO Audit Update)
+# Updated: 2025-11-23 (SEO Crawlability Fix)
 
 Sitemap: https://rasoulunlimited.ir/sitemap.xml
 Host: rasoulunlimited.ir
@@ -15,22 +15,10 @@ User-agent: *
 Allow: /
 
 # =====================================================================
-# CRITICAL: Block non-public sections (SEO Audit - Nov 22 2025)
+# CRITICAL: Block non-public sections (kept minimal to allow navigation/schema crawl)
 # =====================================================================
 # System files and build artifacts
 Disallow: /node_modules/
-Disallow: /includes/
-
-# =====================================================================
-# Machine-Readable Identity Files (Block from Search Results)
-# These files are functional but should not appear in search results
-# (SEO Audit - Index Bloat Reduction Nov 22 2025)
-# =====================================================================
-Disallow: /schema/
-Disallow: /.well-known/
-Disallow: /foaf.rdf
-Disallow: /manifest.json
-Disallow: /manifest-en.json
 
 # =====================================================================
 # High-value Public Sections (navigation / concepts / docs)
@@ -89,21 +77,11 @@ Disallow: /package-lock.json
 Disallow: /README.md
 Disallow: /LICENSE
 
-# Internal include fragments and error pages
-Disallow: /includes/
-Disallow: /404.html
-
 # =====================================================================
-# Notes (Updated Nov 22 2025)
+# Notes (Updated Nov 23 2025)
 # =====================================================================
-# - Updated robots.txt per SEO audit for crawl efficiency optimization
-# - Machine-readable files (.well-known/*, /schema/*) now blocked from 
-#   indexation to reduce index bloat and improve crawl budget efficiency
-# - These files remain functional and accessible via direct URLs for
-#   entity verification, federation, and semantic web discovery
-# - All high-value concept pages are now discoverable and properly
-#   integrated into site navigation
-# - This policy is intentionally simple: one unified rule-set for all
-#   major crawlers (Googlebot, Bingbot, social media bots, etc.)
-# - High-value sections rely on the global "Allow: /" directive
-# - Sensitive or non-public areas are explicitly disallowed
+# - Navigation fragments (/includes) and structured data (/schema) are now crawlable
+#   so search engines can see internal links and JSON-LD. Use X-Robots-Tag headers
+#   for noindex on machine-only files if needed.
+# - Custom 404s are crawlable; meta robots handles noindex.
+# - High-value sections rely on the global "Allow: /" directive; sensitive areas stay disallowed.
