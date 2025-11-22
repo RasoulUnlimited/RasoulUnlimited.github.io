@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let roleIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
-    let typeSpeed = 100;
+    let typeSpeed = 80; // Slightly faster typing
 
     function type() {
         const currentRole = roles[roleIndex];
@@ -43,25 +43,25 @@ document.addEventListener('DOMContentLoaded', function() {
         if (isDeleting) {
             typeSpan.textContent = currentRole.substring(0, charIndex - 1);
             charIndex--;
-            typeSpeed = 50;
+            typeSpeed = 40; // Fast deleting
         } else {
             typeSpan.textContent = currentRole.substring(0, charIndex + 1);
             charIndex++;
-            typeSpeed = 100;
+            typeSpeed = 80 + Math.random() * 50; // Natural typing variation
         }
 
         if (!isDeleting && charIndex === currentRole.length) {
             isDeleting = true;
-            typeSpeed = 2000; // Pause at end
+            typeSpeed = 2000; // Pause at end of word
         } else if (isDeleting && charIndex === 0) {
             isDeleting = false;
             roleIndex = (roleIndex + 1) % roles.length;
-            typeSpeed = 500; // Pause before typing next
+            typeSpeed = 500; // Pause before typing next word
         }
 
         setTimeout(type, typeSpeed);
     }
 
-    // Start typing
+    // Start typing loop
     setTimeout(type, 1000);
 });
