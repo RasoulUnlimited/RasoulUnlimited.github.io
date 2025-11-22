@@ -15,6 +15,13 @@ User-agent: *
 Allow: /
 
 # =====================================================================
+# CRITICAL: Block non-public sections (SEO Audit - Nov 22 2025)
+# =====================================================================
+# System files and build artifacts
+Disallow: /node_modules/
+Disallow: /includes/
+
+# =====================================================================
 # High-value Public Sections (navigation / identity / docs)
 # (These are already covered by "Allow: /" – listed here for clarity.)
 # =====================================================================

@@ -455,20 +455,6 @@
         <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/press-kit/fa/" />
     </url>
 
-    <url>
-        <loc>https://rasoulunlimited.ir/press-kit/rasoul-unlimited-bio.txt</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.5</priority>
-    </url>
-
-    <url>
-        <loc>https://rasoulunlimited.ir/press-kit/fa/rasoul-unlimited-bio.txt</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.5</priority>
-    </url>
-
     <!-- Identity Documents -->
     <url>
         <loc>https://rasoulunlimited.ir/schema/brand.jsonld</loc>
