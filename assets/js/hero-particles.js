@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let directionY = (Math.random() * 2) - 1; // -1 to 1
             
             // Theme aware colors
-            let color = 'rgba(100, 100, 100, 0.2)'; // Default gray
+            let color = getComputedStyle(document.documentElement).getPropertyValue('--particle-color').trim() || 'rgba(100, 100, 100, 0.2)';
             
             // Check if we can detect theme from body class or computed style
             // This is a simple check, might need adjustment based on actual theme implementation
@@ -128,6 +128,24 @@ document.addEventListener('DOMContentLoaded', function() {
     // Check if particles are close enough to draw line between them
     function connect() {
         let opacityValue = 1;
+        const style = getComputedStyle(document.documentElement);
+        const particleColor = style.getPropertyValue('--particle-color').trim() || 'rgba(99, 102, 241, 0.2)';
+        
+        // Extract RGB from rgba string or hex
+        // This is a simplified approach, assuming the variable is rgba or we fallback
+        // For better results, we might want to just use the variable color but opacity is dynamic here.
+        // So let's try to parse the base color.
+        
+        let r=99, g=102, b=241; // Default Indigo
+        
+        // Simple parser for rgba(r, g, b, a)
+        const rgbaMatch = particleColor.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+        if (rgbaMatch) {
+            r = rgbaMatch[1];
+            g = rgbaMatch[2];
+            b = rgbaMatch[3];
+        }
+
         for (let a = 0; a < particlesArray.length; a++) {
             for (let b = a; b < particlesArray.length; b++) {
                 let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x))
@@ -135,16 +153,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 if (distance < (canvas.width/7) * (canvas.height/7)) {
                     opacityValue = 1 - (distance/20000);
-                    
-                    const isDark = document.body.classList.contains('dark-mode') || 
-                                   window.matchMedia('(prefers-color-scheme: dark)').matches;
-                    
-                    if (isDark) {
-                        ctx.strokeStyle = 'rgba(255, 255, 255,' + opacityValue + ')';
-                    } else {
-                        ctx.strokeStyle = 'rgba(0, 0, 0,' + opacityValue + ')';
-                    }
-                    
+                    ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${opacityValue})`;
                     ctx.lineWidth = 1;
                     ctx.beginPath();
                     ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
