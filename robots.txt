@@ -78,6 +78,20 @@ Disallow: /README.md
 Disallow: /LICENSE
 
 # =====================================================================
+# Security-sensitive and Machine-readable Assets (SEO Optimization)
+# =====================================================================
+# Security key storage (non-user-facing)
+Disallow: /assets/keys/
+
+# Machine-readable semantic data (JSON-LD schemas)
+# Note: Search engines can still crawl schema.org data from HTML; 
+# this prevents crawling the directory as a separate section
+Disallow: /schema/
+
+# Security metadata files (system-level, not user-facing)
+Disallow: /.well-known/security.txt
+
+# =====================================================================
 # Notes (Updated Nov 23 2025)
 # =====================================================================
 # - Navigation fragments (/includes) and structured data (/schema) are now crawlable
