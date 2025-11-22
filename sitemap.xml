@@ -6,7 +6,7 @@
 
     <!-- Homepage -->
     <url>
-        <loc>https://rasoulunlimited.ir/</loc>
+        <loc>https://rasoulunlimited.ir</loc>
         <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
@@ -20,15 +20,7 @@
         <video:video>
             <video:thumbnail_loc>https://rasoulunlimited.ir/assets/images/persian-bot-project-thumbnail.webp</video:thumbnail_loc>
             <video:title>معرفی ربات فارسی دیسکورد</video:title>
-            <video:description>در این ویدئو، محمد رسول سهرابی سازندهٔ «اولین ربات فارسی دیسکورد» که
-                به صورت رسمی توسط Discord تایید شده، روند توسعه و قابلیت‌های اصلی پروژه را شرح
-                می‌دهد. او ساختار متن‌باز، سیستم فرمان‌های چندزبانه و امکانات مدیریت سرور را با
-                جزئیات عملی نشان می‌دهد تا کاربران ایرانی بتوانند در محیطی امن به زبان مادری خود
-                گفت‌وگو کنند. آموزش شامل نحوهٔ نصب، پیکربندی در Cloudflare Workers، اصول امنیتی و
-                مراحل طولانی تأیید رسمی است. همچنین به به‌روزرسانی‌های جامعه‌محور، مشارکت‌های
-                GitHub، اتصال به تلگرام و کاربردهای آموزشی برای سواد دیجیتال پرداخته می‌شود. این
-                کلیپ ربات را به‌عنوان نماینده‌ای از فناوری فارسی در اکوسیستم جهانی توسعه‌دهندگان
-                معرفی می‌کند و مخاطبان را به مشارکت در توسعهٔ آینده دعوت می‌نماید.</video:description>
+            <video:description>در این ویدئو، محمد رسول سهرابی سازندهٔ «اولین ربات فارسی دیسکورد» که به صورت رسمی توسط Discord تایید شده، روند توسعه و قابلیت‌های اصلی پروژه را شرح می‌دهد.</video:description>
             <video:duration>661</video:duration>
             <video:view_count>1663</video:view_count>
             <video:publication_date>2021-03-27T00:00:00+00:00</video:publication_date>
@@ -41,54 +33,29 @@
             <video:category>Technology</video:category>
             <video:player_loc allow_embed="yes">https://www.aparat.com/video/video/embed/videohash/AxQyY/vt/frame</video:player_loc>
         </video:video>
-        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/" />
-        <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/" />
-        <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/en/" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir" />
+        <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir" />
+        <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/en" />
     </url>
 
     <url>
-        <loc>https://rasoulunlimited.ir/en/</loc>
+        <loc>https://rasoulunlimited.ir/en</loc>
         <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
-        <video:video>
-            <video:thumbnail_loc>https://rasoulunlimited.ir/assets/images/persian-bot-project-thumbnail.webp</video:thumbnail_loc>
-            <video:title>Persian Discord Bot introduction</video:title>
-            <video:description>Detailed introduction video for the first Persian-language Discord
-                bot officially verified by Discord. Developer Mohammad Rasoul Sohrabi walks through
-                the bot’s moderation features, multilingual command handlers and open-source
-                architecture, demonstrating how the project empowers Iranian communities to
-                communicate in their native language. The tutorial covers installation,
-                configuration on Cloudflare Workers, best practices for security and scalability,
-                and the long review process that led to verification. It highlights community-driven
-                updates, GitHub contributions, integration with Telegram, and examples of
-                educational use cases for digital literacy. The clip positions the bot as an
-                ambassador for Persian technology within the global developer ecosystem and invites
-                viewers to participate in its ongoing development.</video:description>
-            <video:duration>661</video:duration>
-            <video:view_count>1663</video:view_count>
-            <video:publication_date>2021-03-27T00:00:00+00:00</video:publication_date>
-            <video:family_friendly>yes</video:family_friendly>
-            <video:tag>Discord</video:tag>
-            <video:tag>Persian Bot</video:tag>
-            <video:tag>Open Source</video:tag>
-            <video:tag>Programming</video:tag>
-            <video:tag>Community</video:tag>
-            <video:category>Technology</video:category>
-            <video:player_loc allow_embed="yes">https://www.aparat.com/video/video/embed/videohash/AxQyY/vt/frame</video:player_loc>
-        </video:video>
-        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/" />
-        <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/" />
-        <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/en/" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir" />
+        <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir" />
+        <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/en" />
     </url>
 
+    <!-- AI Hub (NEW) -->
     <url>
-        <loc>https://rasoulunlimited.ir/ai/</loc>
+        <loc>https://rasoulunlimited.ir/ai</loc>
         <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/ai/" />
-        <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/ai/" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/ai" />
+        <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/ai" />
     </url>
 
     <!-- Core Entity Pages -->
@@ -104,8 +71,7 @@
             <image:license>https://rasoulunlimited.ir/license</image:license>
             <image:geo_location>Karaj, Iran</image:geo_location>
         </image:image>
-        <xhtml:link rel="alternate" hreflang="x-default"
-            href="https://rasoulunlimited.ir/about.html" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/about.html" />
         <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/about.html" />
         <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/en/about.html" />
     </url>
@@ -115,15 +81,7 @@
         <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.9</priority>
-        <image:image>
-            <image:loc>https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp</image:loc>
-            <image:caption>Verified portrait of influential developer Mohammad Rasoul Sohrabi</image:caption>
-            <image:title>Rasoul Unlimited</image:title>
-            <image:license>https://rasoulunlimited.ir/license</image:license>
-            <image:geo_location>Karaj, Iran</image:geo_location>
-        </image:image>
-        <xhtml:link rel="alternate" hreflang="x-default"
-            href="https://rasoulunlimited.ir/about.html" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/about.html" />
         <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/about.html" />
         <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/en/about.html" />
     </url>
@@ -133,18 +91,9 @@
         <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
-        <image:image>
-            <image:loc>https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp</image:loc>
-            <image:caption>پرترهٔ تاییدشدهٔ محمد رسول سهرابی</image:caption>
-            <image:title>محمد رسول سهرابی</image:title>
-            <image:license>https://rasoulunlimited.ir/license</image:license>
-            <image:geo_location>Karaj, Iran</image:geo_location>
-        </image:image>
-        <xhtml:link rel="alternate" hreflang="x-default"
-            href="https://rasoulunlimited.ir/resume.html" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/resume.html" />
         <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/resume.html" />
-        <xhtml:link rel="alternate" hreflang="en-US"
-            href="https://rasoulunlimited.ir/en/resume.html" />
+        <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/en/resume.html" />
     </url>
 
     <url>
@@ -152,18 +101,9 @@
         <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
-        <image:image>
-            <image:loc>https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp</image:loc>
-            <image:caption>Professional portrait of Rasoul Unlimited</image:caption>
-            <image:title>Rasoul Unlimited</image:title>
-            <image:license>https://rasoulunlimited.ir/license</image:license>
-            <image:geo_location>Karaj, Iran</image:geo_location>
-        </image:image>
-        <xhtml:link rel="alternate" hreflang="x-default"
-            href="https://rasoulunlimited.ir/resume.html" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/resume.html" />
         <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/resume.html" />
-        <xhtml:link rel="alternate" hreflang="en-US"
-            href="https://rasoulunlimited.ir/en/resume.html" />
+        <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/en/resume.html" />
     </url>
 
     <url>
@@ -171,8 +111,7 @@
         <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
-        <xhtml:link rel="alternate" hreflang="x-default"
-            href="https://rasoulunlimited.ir/press.html" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/press.html" />
         <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/press.html" />
         <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/en/press.html" />
     </url>
@@ -182,8 +121,7 @@
         <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
-        <xhtml:link rel="alternate" hreflang="x-default"
-            href="https://rasoulunlimited.ir/press.html" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/press.html" />
         <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/press.html" />
         <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/en/press.html" />
     </url>
@@ -193,8 +131,7 @@
         <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <xhtml:link rel="alternate" hreflang="x-default"
-            href="https://rasoulunlimited.ir/media.html" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/media.html" />
         <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/media.html" />
         <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/en/media.html" />
     </url>
@@ -204,8 +141,7 @@
         <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <xhtml:link rel="alternate" hreflang="x-default"
-            href="https://rasoulunlimited.ir/media.html" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/media.html" />
         <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/media.html" />
         <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/en/media.html" />
     </url>
@@ -215,8 +151,7 @@
         <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.8</priority>
-        <xhtml:link rel="alternate" hreflang="x-default"
-            href="https://rasoulunlimited.ir/proof.html" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/proof.html" />
         <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/proof.html" />
         <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/en/proof.html" />
     </url>
@@ -226,8 +161,7 @@
         <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.8</priority>
-        <xhtml:link rel="alternate" hreflang="x-default"
-            href="https://rasoulunlimited.ir/proof.html" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/proof.html" />
         <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/proof.html" />
         <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/en/proof.html" />
     </url>
@@ -237,11 +171,9 @@
         <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.8</priority>
-        <xhtml:link rel="alternate" hreflang="x-default"
-            href="https://rasoulunlimited.ir/quotes.html" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/quotes.html" />
         <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/quotes.html" />
-        <xhtml:link rel="alternate" hreflang="en-US"
-            href="https://rasoulunlimited.ir/en/quotes.html" />
+        <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/en/quotes.html" />
     </url>
 
     <url>
@@ -249,11 +181,9 @@
         <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.8</priority>
-        <xhtml:link rel="alternate" hreflang="x-default"
-            href="https://rasoulunlimited.ir/quotes.html" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/quotes.html" />
         <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/quotes.html" />
-        <xhtml:link rel="alternate" hreflang="en-US"
-            href="https://rasoulunlimited.ir/en/quotes.html" />
+        <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/en/quotes.html" />
     </url>
 
     <url>
@@ -261,11 +191,9 @@
         <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.9</priority>
-        <xhtml:link rel="alternate" hreflang="x-default"
-            href="https://rasoulunlimited.ir/contact.html" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/contact.html" />
         <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/contact.html" />
-        <xhtml:link rel="alternate" hreflang="en-US"
-            href="https://rasoulunlimited.ir/en/contact.html" />
+        <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/en/contact.html" />
     </url>
 
     <url>
@@ -273,11 +201,9 @@
         <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.9</priority>
-        <xhtml:link rel="alternate" hreflang="x-default"
-            href="https://rasoulunlimited.ir/contact.html" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/contact.html" />
         <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/contact.html" />
-        <xhtml:link rel="alternate" hreflang="en-US"
-            href="https://rasoulunlimited.ir/en/contact.html" />
+        <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/en/contact.html" />
     </url>
 
     <url>
@@ -285,11 +211,9 @@
         <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.8</priority>
-        <xhtml:link rel="alternate" hreflang="x-default"
-            href="https://rasoulunlimited.ir/security.html" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/security.html" />
         <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/security.html" />
-        <xhtml:link rel="alternate" hreflang="en-US"
-            href="https://rasoulunlimited.ir/en/security.html" />
+        <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/en/security.html" />
     </url>
 
     <url>
@@ -297,31 +221,29 @@
         <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.8</priority>
-        <xhtml:link rel="alternate" hreflang="x-default"
-            href="https://rasoulunlimited.ir/security.html" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/security.html" />
         <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/security.html" />
-        <xhtml:link rel="alternate" hreflang="en-US"
-            href="https://rasoulunlimited.ir/en/security.html" />
+        <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/en/security.html" />
     </url>
 
     <url>
-        <loc>https://rasoulunlimited.ir/faq/</loc>
+        <loc>https://rasoulunlimited.ir/faq</loc>
         <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.8</priority>
-        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/faq/" />
-        <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/faq/" />
-        <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/en/faq/" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/faq" />
+        <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/faq" />
+        <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/en/faq" />
     </url>
 
     <url>
-        <loc>https://rasoulunlimited.ir/en/faq/</loc>
+        <loc>https://rasoulunlimited.ir/en/faq</loc>
         <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.8</priority>
-        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/faq/" />
-        <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/faq/" />
-        <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/en/faq/" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/faq" />
+        <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/faq" />
+        <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/en/faq" />
     </url>
 
     <url>
@@ -329,12 +251,9 @@
         <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.8</priority>
-        <xhtml:link rel="alternate" hreflang="x-default"
-            href="https://rasoulunlimited.ir/analysis-digital-identity.html" />
-        <xhtml:link rel="alternate" hreflang="fa-IR"
-            href="https://rasoulunlimited.ir/analysis-digital-identity.html" />
-        <xhtml:link rel="alternate" hreflang="en-US"
-            href="https://rasoulunlimited.ir/en/analysis-digital-identity.html" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/analysis-digital-identity.html" />
+        <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/analysis-digital-identity.html" />
+        <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/en/analysis-digital-identity.html" />
     </url>
 
     <url>
@@ -342,128 +261,133 @@
         <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.8</priority>
-        <xhtml:link rel="alternate" hreflang="x-default"
-            href="https://rasoulunlimited.ir/analysis-digital-identity.html" />
-        <xhtml:link rel="alternate" hreflang="fa-IR"
-            href="https://rasoulunlimited.ir/analysis-digital-identity.html" />
-        <xhtml:link rel="alternate" hreflang="en-US"
-            href="https://rasoulunlimited.ir/en/analysis-digital-identity.html" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/analysis-digital-identity.html" />
+        <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/analysis-digital-identity.html" />
+        <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/en/analysis-digital-identity.html" />
     </url>
 
     <!-- Projects -->
     <url>
-        <loc>https://rasoulunlimited.ir/projects/</loc>
+        <loc>https://rasoulunlimited.ir/projects</loc>
         <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/projects" />
+        <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/projects" />
     </url>
 
     <url>
-        <loc>https://rasoulunlimited.ir/projects/python-projects/</loc>
+        <loc>https://rasoulunlimited.ir/projects/python-projects</loc>
         <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <xhtml:link rel="alternate" hreflang="x-default"
-            href="https://rasoulunlimited.ir/projects/python-projects/" />
-        <xhtml:link rel="alternate" hreflang="en-US"
-            href="https://rasoulunlimited.ir/projects/python-projects/" />
-        <xhtml:link rel="alternate" hreflang="fa-IR"
-            href="https://rasoulunlimited.ir/projects/python-projects/fa/" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/projects/python-projects" />
+        <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/projects/python-projects" />
+        <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/projects/python-projects/fa" />
     </url>
 
     <url>
-        <loc>https://rasoulunlimited.ir/projects/python-projects/fa/</loc>
+        <loc>https://rasoulunlimited.ir/projects/python-projects/fa</loc>
         <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <xhtml:link rel="alternate" hreflang="x-default"
-            href="https://rasoulunlimited.ir/projects/python-projects/" />
-        <xhtml:link rel="alternate" hreflang="en-US"
-            href="https://rasoulunlimited.ir/projects/python-projects/" />
-        <xhtml:link rel="alternate" hreflang="fa-IR"
-            href="https://rasoulunlimited.ir/projects/python-projects/fa/" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/projects/python-projects" />
+        <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/projects/python-projects" />
+        <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/projects/python-projects/fa" />
     </url>
 
     <url>
-        <loc>https://rasoulunlimited.ir/projects/c-projects/</loc>
+        <loc>https://rasoulunlimited.ir/projects/c-projects</loc>
         <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <xhtml:link rel="alternate" hreflang="x-default"
-            href="https://rasoulunlimited.ir/projects/c-projects/" />
-        <xhtml:link rel="alternate" hreflang="en-US"
-            href="https://rasoulunlimited.ir/projects/c-projects/" />
-        <xhtml:link rel="alternate" hreflang="fa-IR"
-            href="https://rasoulunlimited.ir/projects/c-projects/fa/" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/projects/c-projects" />
+        <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/projects/c-projects" />
+        <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/projects/c-projects/fa" />
     </url>
 
     <url>
-        <loc>https://rasoulunlimited.ir/projects/c-projects/fa/</loc>
+        <loc>https://rasoulunlimited.ir/projects/c-projects/fa</loc>
         <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <xhtml:link rel="alternate" hreflang="x-default"
-            href="https://rasoulunlimited.ir/projects/c-projects/" />
-        <xhtml:link rel="alternate" hreflang="en-US"
-            href="https://rasoulunlimited.ir/projects/c-projects/" />
-        <xhtml:link rel="alternate" hreflang="fa-IR"
-            href="https://rasoulunlimited.ir/projects/c-projects/fa/" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/projects/c-projects" />
+        <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/projects/c-projects" />
+        <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/projects/c-projects/fa" />
     </url>
 
     <!-- Concepts -->
     <url>
-        <loc>https://rasoulunlimited.ir/concepts/authority-feedback-system/</loc>
+        <loc>https://rasoulunlimited.ir/concepts/authority-feedback-system</loc>
         <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/concepts/authority-feedback-system" />
+        <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/concepts/authority-feedback-system" />
     </url>
 
     <url>
-        <loc>https://rasoulunlimited.ir/concepts/social-gravity-effect/</loc>
+        <loc>https://rasoulunlimited.ir/concepts/social-gravity-effect</loc>
         <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/concepts/social-gravity-effect" />
+        <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/concepts/social-gravity-effect" />
     </url>
 
     <url>
-        <loc>https://rasoulunlimited.ir/concepts/visual-identity-loop/</loc>
+        <loc>https://rasoulunlimited.ir/concepts/visual-identity-loop</loc>
         <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/concepts/visual-identity-loop" />
+        <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/concepts/visual-identity-loop" />
     </url>
 
     <!-- Press Kit -->
     <url>
-        <loc>https://rasoulunlimited.ir/press-kit/</loc>
+        <loc>https://rasoulunlimited.ir/press-kit</loc>
         <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.9</priority>
-        <xhtml:link rel="alternate" hreflang="x-default"
-            href="https://rasoulunlimited.ir/press-kit/" />
-        <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/press-kit/" />
-        <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/press-kit/fa/" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/press-kit" />
+        <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/press-kit" />
+        <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/press-kit/fa" />
     </url>
 
     <url>
-        <loc>https://rasoulunlimited.ir/press-kit/fa/</loc>
+        <loc>https://rasoulunlimited.ir/press-kit/fa</loc>
         <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.9</priority>
-        <xhtml:link rel="alternate" hreflang="x-default"
-            href="https://rasoulunlimited.ir/press-kit/" />
-        <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/press-kit/" />
-        <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/press-kit/fa/" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/press-kit" />
+        <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/press-kit" />
+        <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/press-kit/fa" />
+    </url>
+
+    <!-- Wiki (NEW) -->
+    <url>
+        <loc>https://rasoulunlimited.ir/wiki/rasoul-unlimited</loc>
+        <lastmod>2025-11-22T00:00:00+00:00</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/wiki/rasoul-unlimited" />
+        <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/wiki/rasoul-unlimited" />
+    </url>
+
+    <!-- Error Pages (NEW) -->
+    <url>
+        <loc>https://rasoulunlimited.ir/404.html</loc>
+        <lastmod>2025-11-22T00:00:00+00:00</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.1</priority>
     </url>
 
     <url>
-        <loc>https://rasoulunlimited.ir/wiki/rasoul-unlimited/</loc>
+        <loc>https://rasoulunlimited.ir/en/404.html</loc>
         <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>yearly</changefreq>
-        <priority>0.9</priority>
-        <xhtml:link rel="alternate" hreflang="x-default"
-            href="https://rasoulunlimited.ir/wiki/rasoul-unlimited/" />
-        <xhtml:link rel="alternate" hreflang="en-US"
-            href="https://rasoulunlimited.ir/wiki/rasoul-unlimited/" />
+        <priority>0.1</priority>
     </url>
 
 </urlset>
