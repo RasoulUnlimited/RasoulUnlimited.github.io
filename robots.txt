@@ -2,7 +2,7 @@
 # Maintainer: Mohammad Rasoul Sohrabi (Rasoul Unlimited)
 # Hosting: GitHub Pages (proxied via Cloudflare)
 # Contact: rasoul.unlimited@gmail.com
-# Updated: 2025-11-13
+# Updated: 2025-11-22 (SEO Audit Update)
 
 Sitemap: https://rasoulunlimited.ir/sitemap.xml
 Host: rasoulunlimited.ir
@@ -22,15 +22,27 @@ Disallow: /node_modules/
 Disallow: /includes/
 
 # =====================================================================
-# High-value Public Sections (navigation / identity / docs)
+# Machine-Readable Identity Files (Block from Search Results)
+# These files are functional but should not appear in search results
+# (SEO Audit - Index Bloat Reduction Nov 22 2025)
+# =====================================================================
+Disallow: /schema/
+Disallow: /.well-known/
+Disallow: /foaf.rdf
+Disallow: /manifest.json
+Disallow: /manifest-en.json
+
+# =====================================================================
+# High-value Public Sections (navigation / concepts / docs)
 # (These are already covered by "Allow: /" – listed here for clarity.)
 # =====================================================================
 # Language roots
-#   - /           : Persian (default)
-#   - /en/        : English section
-#   - /projects/  : Project index and subpages
-#   - /faq/       : Frequently Asked Questions
-#   - /wiki/      : Extended background
+#   - /                : Persian (default)
+#   - /en/             : English section
+#   - /projects/       : Project index and subpages
+#   - /faq/            : Frequently Asked Questions
+#   - /wiki/           : Extended background
+#   - /concepts/       : Strategic concepts (visual-identity-loop, etc)
 #
 # Core pages
 #   - /about.html
@@ -40,6 +52,7 @@ Disallow: /includes/
 #   - /proof.html
 #   - /security.html
 #   - /contact.html
+#   - /ai/
 #
 # Press kit and assets
 #   - /press-kit/, /press-kit/fa/
@@ -48,13 +61,9 @@ Disallow: /includes/
 #   - /assets/js/
 #   - /assets/vendor/
 #
-# Identity / machine-readable descriptors
+# Semantic / human-readable identity
 #   - /humans.txt
-#   - /foaf.rdf
-#   - /.well-known/…
-#   - /schema/identity.jsonld
 #   - /links.txt
-#   - /manifest.json, /manifest-en.json
 
 # =====================================================================
 # Blocked Paths (non-public, internal, or build-related)
@@ -85,33 +94,16 @@ Disallow: /includes/
 Disallow: /404.html
 
 # =====================================================================
-# Identity and Verification Files (explicitly allowed, if needed)
-# (All already allowed via "Allow: /" – listed for documentation.)
+# Notes (Updated Nov 22 2025)
 # =====================================================================
-# Human / semantic identity
-#   /humans.txt
-#   /foaf.rdf
-#   /schema/identity.jsonld
-#
-# Well-known endpoints for security & identity
-#   /.well-known/identity.json
-#   /.well-known/entity.rdf
-#   /.well-known/entity.ttl
-#   /.well-known/security.txt
-#   /.well-known/entity-profile.json
-#   /.well-known/webfinger.json
-#   /.well-known/keybase.txt
-#
-# Navigation / discovery helpers
-#   /links.txt
-
-# =====================================================================
-# Notes
-# =====================================================================
+# - Updated robots.txt per SEO audit for crawl efficiency optimization
+# - Machine-readable files (.well-known/*, /schema/*) now blocked from 
+#   indexation to reduce index bloat and improve crawl budget efficiency
+# - These files remain functional and accessible via direct URLs for
+#   entity verification, federation, and semantic web discovery
+# - All high-value concept pages are now discoverable and properly
+#   integrated into site navigation
 # - This policy is intentionally simple: one unified rule-set for all
-#   major crawlers (Googlebot, Bingbot, social media bots, etc.) to
-#   avoid conflicting user-agent groups.
-# - High-value public sections are documented above but rely on the
-#   global "Allow: /" directive.
-# - Sensitive or non-public areas are explicitly disallowed to reduce
-#   noise in search results and avoid indexing internal artifacts.
+#   major crawlers (Googlebot, Bingbot, social media bots, etc.)
+# - High-value sections rely on the global "Allow: /" directive
+# - Sensitive or non-public areas are explicitly disallowed

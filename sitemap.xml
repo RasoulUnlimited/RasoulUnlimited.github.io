@@ -7,7 +7,7 @@
     <!-- Homepage -->
     <url>
         <loc>https://rasoulunlimited.ir/</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
+        <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
         <image:image>
@@ -48,7 +48,7 @@
 
     <url>
         <loc>https://rasoulunlimited.ir/en/</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
+        <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
         <video:video>
@@ -84,7 +84,7 @@
 
     <url>
         <loc>https://rasoulunlimited.ir/ai/</loc>
-        <lastmod>2025-11-15T00:00:00+00:00</lastmod>
+        <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
         <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/ai/" />
@@ -94,7 +94,7 @@
     <!-- Core Entity Pages -->
     <url>
         <loc>https://rasoulunlimited.ir/about.html</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
+        <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.9</priority>
         <image:image>
@@ -112,7 +112,7 @@
 
     <url>
         <loc>https://rasoulunlimited.ir/en/about.html</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
+        <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.9</priority>
         <image:image>
@@ -130,7 +130,7 @@
 
     <url>
         <loc>https://rasoulunlimited.ir/resume.html</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
+        <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
         <image:image>
@@ -149,7 +149,7 @@
 
     <url>
         <loc>https://rasoulunlimited.ir/en/resume.html</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
+        <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
         <image:image>
@@ -168,7 +168,7 @@
 
     <url>
         <loc>https://rasoulunlimited.ir/press.html</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
+        <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
         <xhtml:link rel="alternate" hreflang="x-default"
@@ -179,7 +179,7 @@
 
     <url>
         <loc>https://rasoulunlimited.ir/en/press.html</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
+        <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
         <xhtml:link rel="alternate" hreflang="x-default"
@@ -190,7 +190,7 @@
 
     <url>
         <loc>https://rasoulunlimited.ir/media.html</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
+        <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
         <xhtml:link rel="alternate" hreflang="x-default"
@@ -201,7 +201,7 @@
 
     <url>
         <loc>https://rasoulunlimited.ir/en/media.html</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
+        <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
         <xhtml:link rel="alternate" hreflang="x-default"
@@ -212,7 +212,7 @@
 
     <url>
         <loc>https://rasoulunlimited.ir/proof.html</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
+        <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.8</priority>
         <xhtml:link rel="alternate" hreflang="x-default"
@@ -223,7 +223,7 @@
 
     <url>
         <loc>https://rasoulunlimited.ir/en/proof.html</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
+        <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.8</priority>
         <xhtml:link rel="alternate" hreflang="x-default"
@@ -234,7 +234,7 @@
 
     <url>
         <loc>https://rasoulunlimited.ir/quotes.html</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
+        <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.8</priority>
         <xhtml:link rel="alternate" hreflang="x-default"
@@ -246,7 +246,7 @@
 
     <url>
         <loc>https://rasoulunlimited.ir/en/quotes.html</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
+        <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.8</priority>
         <xhtml:link rel="alternate" hreflang="x-default"
@@ -258,7 +258,7 @@
 
     <url>
         <loc>https://rasoulunlimited.ir/contact.html</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
+        <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.9</priority>
         <xhtml:link rel="alternate" hreflang="x-default"
@@ -270,7 +270,7 @@
 
     <url>
         <loc>https://rasoulunlimited.ir/en/contact.html</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
+        <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.9</priority>
         <xhtml:link rel="alternate" hreflang="x-default"
@@ -282,7 +282,7 @@
 
     <url>
         <loc>https://rasoulunlimited.ir/security.html</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
+        <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.8</priority>
         <xhtml:link rel="alternate" hreflang="x-default"
@@ -294,7 +294,7 @@
 
     <url>
         <loc>https://rasoulunlimited.ir/en/security.html</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
+        <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.8</priority>
         <xhtml:link rel="alternate" hreflang="x-default"
@@ -306,7 +306,7 @@
 
     <url>
         <loc>https://rasoulunlimited.ir/faq/</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
+        <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.8</priority>
         <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/faq/" />
@@ -316,7 +316,7 @@
 
     <url>
         <loc>https://rasoulunlimited.ir/en/faq/</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
+        <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.8</priority>
         <xhtml:link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/faq/" />
@@ -326,7 +326,7 @@
 
     <url>
         <loc>https://rasoulunlimited.ir/analysis-digital-identity.html</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
+        <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.8</priority>
         <xhtml:link rel="alternate" hreflang="x-default"
@@ -339,7 +339,7 @@
 
     <url>
         <loc>https://rasoulunlimited.ir/en/analysis-digital-identity.html</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
+        <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.8</priority>
         <xhtml:link rel="alternate" hreflang="x-default"
@@ -353,14 +353,14 @@
     <!-- Projects -->
     <url>
         <loc>https://rasoulunlimited.ir/projects/</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
+        <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://rasoulunlimited.ir/projects/python-projects/</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
+        <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
         <xhtml:link rel="alternate" hreflang="x-default"
@@ -373,7 +373,7 @@
 
     <url>
         <loc>https://rasoulunlimited.ir/projects/python-projects/fa/</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
+        <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
         <xhtml:link rel="alternate" hreflang="x-default"
@@ -386,7 +386,7 @@
 
     <url>
         <loc>https://rasoulunlimited.ir/projects/c-projects/</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
+        <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
         <xhtml:link rel="alternate" hreflang="x-default"
@@ -399,7 +399,7 @@
 
     <url>
         <loc>https://rasoulunlimited.ir/projects/c-projects/fa/</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
+        <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
         <xhtml:link rel="alternate" hreflang="x-default"
@@ -413,21 +413,21 @@
     <!-- Concepts -->
     <url>
         <loc>https://rasoulunlimited.ir/concepts/authority-feedback-system/</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
+        <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://rasoulunlimited.ir/concepts/social-gravity-effect/</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
+        <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.8</priority>
     </url>
 
     <url>
         <loc>https://rasoulunlimited.ir/concepts/visual-identity-loop/</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
+        <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -435,7 +435,7 @@
     <!-- Press Kit -->
     <url>
         <loc>https://rasoulunlimited.ir/press-kit/</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
+        <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.9</priority>
         <xhtml:link rel="alternate" hreflang="x-default"
@@ -446,120 +446,13 @@
 
     <url>
         <loc>https://rasoulunlimited.ir/press-kit/fa/</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
+        <lastmod>2025-11-22T00:00:00+00:00</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.9</priority>
         <xhtml:link rel="alternate" hreflang="x-default"
             href="https://rasoulunlimited.ir/press-kit/" />
         <xhtml:link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/press-kit/" />
         <xhtml:link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/press-kit/fa/" />
-    </url>
-
-    <!-- Identity Documents -->
-    <url>
-        <loc>https://rasoulunlimited.ir/schema/brand.jsonld</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.5</priority>
-    </url>
-
-    <url>
-        <loc>https://rasoulunlimited.ir/schema/identity.jsonld</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.5</priority>
-    </url>
-
-    <url>
-        <loc>https://rasoulunlimited.ir/foaf.rdf</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.5</priority>
-    </url>
-
-    <url>
-        <loc>https://rasoulunlimited.ir/.well-known/entity-profile.json</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.5</priority>
-    </url>
-
-    <url>
-        <loc>https://rasoulunlimited.ir/.well-known/identity.json</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.5</priority>
-    </url>
-
-    <url>
-        <loc>https://rasoulunlimited.ir/.well-known/rasoul-unlimited.json</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.5</priority>
-    </url>
-
-    <url>
-        <loc>https://rasoulunlimited.ir/.well-known/webfinger.json</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.5</priority>
-    </url>
-
-    <url>
-        <loc>https://rasoulunlimited.ir/.well-known/entity.rdf</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.5</priority>
-    </url>
-
-    <url>
-        <loc>https://rasoulunlimited.ir/.well-known/entity.ttl</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.5</priority>
-    </url>
-
-    <url>
-        <loc>https://rasoulunlimited.ir/.well-known/host-meta</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.5</priority>
-    </url>
-
-    <!-- Utility Files -->
-    <url>
-        <loc>https://rasoulunlimited.ir/robots.txt</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.3</priority>
-    </url>
-
-    <url>
-        <loc>https://rasoulunlimited.ir/manifest.json</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.3</priority>
-    </url>
-
-    <url>
-        <loc>https://rasoulunlimited.ir/manifest-en.json</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.3</priority>
-    </url>
-
-    <url>
-        <loc>https://rasoulunlimited.ir/.well-known/keybase.txt</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.3</priority>
-    </url>
-
-    <url>
-        <loc>https://rasoulunlimited.ir/.well-known/security.txt</loc>
-        <lastmod>2025-08-14T08:19:09+00:00</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>0.3</priority>
     </url>
 
 </urlset>
