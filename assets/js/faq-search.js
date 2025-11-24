@@ -100,7 +100,8 @@
       const nodesToReplace = [];
       // Escape regex special characters in term
       const escapedTerm = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      const regex = new RegExp(`(${escapedTerm})`, "gi");
+      // Remove 'g' flag to avoid stateful behavior with test() in loop
+      const regex = new RegExp(`(${escapedTerm})`, "i");
 
       while (walker.nextNode()) {
         const node = walker.currentNode;

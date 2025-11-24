@@ -108,7 +108,8 @@ document.addEventListener("DOMContentLoaded", function () {
       .replace(/ک/g, "[کك]")
       .replace(/ك/g, "[کك]");
 
-    const regex = new RegExp(`(${escapedTerm})`, "gi");
+    // Remove 'g' flag to avoid stateful behavior with test() in loop
+    const regex = new RegExp(`(${escapedTerm})`, "i");
 
     while (walker.nextNode()) {
       const node = walker.currentNode;

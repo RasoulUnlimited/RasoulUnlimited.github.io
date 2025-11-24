@@ -46,7 +46,8 @@
 
       if (initiallyOpen) {
         item.classList.add("is-open");
-        panel.style.maxHeight = panel.scrollHeight + 50 + "px";
+        // Use "none" to allow content to determine height, avoiding issues with hidden containers
+        panel.style.maxHeight = "none";
         panel.style.opacity = "1";
       } else {
         item.classList.remove("is-open");
@@ -135,10 +136,19 @@
       const panel = item.querySelector(".accordion-content");
       if (!header || !panel) {return;}
 
-      header.setAttribute("aria-expanded", "false");
-      panel.style.maxHeight = null;
-      panel.style.opacity = "0";
-      item.classList.remove("is-open");
+      // If max-height is "none", set it to explicit pixel value first to enable transition
+      if (panel.style.maxHeight === "none") {
+        panel.style.maxHeight = panel.scrollHeight + "px";
+        // Force reflow
+        void panel.offsetHeight;
+      }
+
+      requestAnimationFrame(() => {
+        header.setAttribute("aria-expanded", "false");
+        panel.style.maxHeight = null;
+        panel.style.opacity = "0";
+        item.classList.remove("is-open");
+      });
 
       // Custom event for hooks / analytics / extra animations
       item.dispatchEvent(
