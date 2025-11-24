@@ -98,91 +98,120 @@
 /* Mobile Optimizations */
 @media (max-width: 991px) {
   .hero {
-    padding-top: 6rem;
-    padding-bottom: 4rem;
+    padding-top: 5rem; /* Reduced from 6rem */
+    padding-bottom: 3rem; /* Reduced from 4rem */
     min-height: auto; /* Prevent excessive scrolling on small content */
   }
 
   .hero-grid {
-    gap: 2rem;
+    gap: 1.5rem; /* Reduced from 2rem */
   }
 
   /* Show image first on mobile for better personal connection */
   .hero-image-wrapper {
     order: -1;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0; /* Removed margin */
   }
 
   .profile-image {
-    width: 180px;
-    height: 180px;
-    box-shadow: 0 15px 30px var(--hero-shadow-color);
+    width: 160px; /* Reduced from 180px */
+    height: 160px;
+    box-shadow: 0 10px 25px var(--hero-shadow-color);
   }
 
   .hero-content-wrapper {
-    padding: 2rem 1.25rem;
+    padding: 1.5rem 1rem; /* Reduced padding */
     margin-top: 0;
     width: 100%;
+    text-align: center; /* Center align text on mobile */
+    background: var(--glass-bg); /* Ensure background is visible */
+    backdrop-filter: blur(10px);
+    border-radius: 1rem;
+    border: 1px solid var(--glass-border);
   }
 
   .rtl-text {
-    font-size: clamp(2rem, 10vw, 3rem);
-    line-height: 1.3;
+    font-size: clamp(1.8rem, 8vw, 2.5rem); /* Slightly smaller for better fit */
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+    display: block;
   }
 
   .eyebrow-text {
-    font-size: 0.9rem;
-    letter-spacing: 1.5px;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+    display: block;
   }
 
   .tagline {
-    font-size: 1rem;
-    line-height: 1.7;
+    font-size: 0.95rem;
+    line-height: 1.6;
     margin-bottom: 1.5rem;
+    padding: 0 0.5rem;
   }
 
   .hero-cta-group {
     gap: 0.75rem;
-    flex-direction: column;
+    flex-direction: row; /* Changed to row */
+    flex-wrap: wrap;
+    justify-content: center;
     width: 100%;
   }
 
   .hero-btn {
-    width: 100%;
-    padding: 0.8rem 1.5rem;
-    font-size: 1rem;
+    width: auto; /* Allow buttons to size to content */
+    min-width: 140px;
+    padding: 0.7rem 1.2rem;
+    font-size: 0.95rem;
+    flex: 1; /* Distribute space evenly */
   }
 
   .social-links-hero {
-    gap: 1rem;
-    margin-top: 1rem;
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+    justify-content: center;
   }
 
   .social-links-hero a {
-    width: 48px;
-    height: 48px;
-    font-size: 1.25rem;
+    width: 42px;
+    height: 42px;
+    font-size: 1.1rem;
   }
   
   .scroll-down-indicator {
     bottom: 1rem;
-    transform: translateX(-50%) scale(0.8);
+    transform: translateX(-50%) scale(0.7);
+    opacity: 0.8;
   }
 }
 
 /* Small Mobile Devices */
 @media (max-width: 480px) {
   .hero {
-    padding-top: 5.5rem;
+    padding-top: 4.5rem;
+    padding-bottom: 2rem;
   }
   
+  .profile-image {
+    width: 140px;
+    height: 140px;
+  }
+
   .hero-content-wrapper {
-    padding: 1.5rem 1rem;
-    backdrop-filter: blur(12px); /* Slightly less blur for performance */
+    padding: 1.25rem 0.75rem;
   }
   
   .rtl-text {
-    font-size: 2.2rem;
+    font-size: 1.8rem;
+  }
+
+  .hero-cta-group {
+    flex-direction: column; /* Stack on very small screens */
+  }
+
+  .hero-btn {
+    width: 100%;
   }
 }
 
