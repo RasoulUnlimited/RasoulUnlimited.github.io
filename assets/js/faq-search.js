@@ -297,10 +297,18 @@
         const url = window.location.origin + window.location.pathname + link;
         
         navigator.clipboard.writeText(url).then(() => {
-          // Visual feedback
-          const originalIcon = btn.innerHTML;
-          btn.innerHTML = '<i class="fas fa-check"></i>';
+          // Visual feedback - store original HTML safely, use createElement for new content
+          const originalHTML = btn.innerHTML;
+          const originalClass = btn.className;
+          
+          // Clear and create safe icon element
+          btn.innerHTML = '';
+          const icon = document.createElement('i');
+          icon.className = 'fas fa-check';
+          icon.setAttribute('aria-hidden', 'true');
+          btn.appendChild(icon);
           btn.style.color = '#2ecc71';
+          btn.classList.add('copied');
           
           // Show toast if available
           if (window.createToast) {
@@ -308,7 +316,8 @@
           }
 
           setTimeout(() => {
-            btn.innerHTML = originalIcon;
+            btn.innerHTML = originalHTML;
+            btn.className = originalClass;
             btn.style.color = '';
           }, 2000);
         }).catch(err => {

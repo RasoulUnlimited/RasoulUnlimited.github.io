@@ -256,6 +256,10 @@ document.addEventListener("DOMContentLoaded", function () {
         searchInput.value = transcript;
         clearButton.style.display = transcript ? "block" : "none";
         persistTerm(transcript);
+        
+        // Clear any pending debounce timers to prevent memory buildup
+        clearTimeout(debounceTimer);
+        // Immediately filter without debounce for voice results (more responsive UX)
         filterCards(transcript);
       };
       const handleError = (err) => {

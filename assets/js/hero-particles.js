@@ -114,10 +114,32 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Cache computed particle color to avoid repeated getComputedStyle calls
+    let cachedR = 99, cachedG = 102, cachedB = 241; // Default Indigo
+    let lastColorUpdateTime = 0;
+    const COLOR_CACHE_INTERVAL = 1000; // Update color cache every 1 second
+    
+    function updateParticleColorCache() {
+        const now = Date.now();
+        if (now - lastColorUpdateTime < COLOR_CACHE_INTERVAL) return;
+        
+        lastColorUpdateTime = now;
+        const style = getComputedStyle(document.documentElement);
+        const particleColor = style.getPropertyValue('--particle-color').trim() || 'rgba(99, 102, 241, 0.2)';
+        
+        // Parse RGBA color once per interval
+        const rgbaMatch = particleColor.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+        if (rgbaMatch) {
+            cachedR = parseInt(rgbaMatch[1], 10);
+            cachedG = parseInt(rgbaMatch[2], 10);
+            cachedB = parseInt(rgbaMatch[3], 10);
+        }
+    }
+
     // Animation loop
     function animate() {
         requestAnimationFrame(animate);
-        ctx.clearRect(0, 0, innerWidth, innerHeight);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         for (let i = 0; i < particlesArray.length; i++) {
             particlesArray[i].update();
@@ -127,33 +149,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Check if particles are close enough to draw line between them
     function connect() {
+        updateParticleColorCache();
+        
         let opacityValue = 1;
-        const style = getComputedStyle(document.documentElement);
-        const particleColor = style.getPropertyValue('--particle-color').trim() || 'rgba(99, 102, 241, 0.2)';
-        
-        // Extract RGB from rgba string or hex
-        // This is a simplified approach, assuming the variable is rgba or we fallback
-        // For better results, we might want to just use the variable color but opacity is dynamic here.
-        // So let's try to parse the base color.
-        
-        let r=99, g=102, b=241; // Default Indigo
-        
-        // Simple parser for rgba(r, g, b, a)
-        const rgbaMatch = particleColor.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
-        if (rgbaMatch) {
-            r = rgbaMatch[1];
-            g = rgbaMatch[2];
-            b = rgbaMatch[3];
-        }
+        const maxDistanceSq = (canvas.width/7) * (canvas.height/7);
 
         for (let a = 0; a < particlesArray.length; a++) {
-            for (let b = a; b < particlesArray.length; b++) {
+            for (let b = a + 1; b < particlesArray.length; b++) {
                 let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x))
                 + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
                 
-                if (distance < (canvas.width/7) * (canvas.height/7)) {
+                if (distance < maxDistanceSq) {
                     opacityValue = 1 - (distance/20000);
-                    ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${opacityValue})`;
+                    ctx.strokeStyle = `rgba(${cachedR}, ${cachedG}, ${cachedB}, ${opacityValue})`;
                     ctx.lineWidth = 1;
                     ctx.beginPath();
                     ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
