@@ -98,14 +98,14 @@
 /* Mobile Optimizations */
 @media (max-width: 991px) {
   .hero {
-    padding-top: 5rem; /* Reduced from 6rem */
-    padding-bottom: 3rem; /* Reduced from 4rem */
+    padding: 5rem 0 3rem; /* Remove horizontal padding from container */
     min-height: auto; /* Prevent excessive scrolling on small content */
   }
 
   .hero-grid {
     gap: 1.5rem; /* Reduced from 2rem */
-    padding: 0 1rem; /* Reduced padding for small screens */
+    padding: 0; /* Remove padding from grid, handle in wrapper */
+    width: 100%;
   }
 
   /* Show image first on mobile for better personal connection */
@@ -121,18 +121,18 @@
   }
 
   .hero-content-wrapper {
+    margin: 0 1rem; /* Add margin to wrapper for spacing from screen edges */
+    width: auto; /* Allow margin to define width */
     padding: 1.5rem 1rem; /* Reduced padding */
-    margin-top: 0;
-    width: 100%;
     text-align: center; /* Center align text on mobile */
     background: var(--glass-bg); /* Ensure background is visible */
     backdrop-filter: blur(10px);
     border-radius: 1rem;
     border: 1px solid var(--glass-border);
-    overflow: visible; /* Allow shadows/transforms to show */
+    overflow: hidden; /* Prevent overflow */
   }
 
-  .rtl-text {
+  #hero-heading .rtl-text {
     font-size: clamp(1.5rem, 7vw, 2.5rem); /* Reduced min size and scaling */
     line-height: 1.2;
     margin-bottom: 0.5rem;
@@ -140,13 +140,16 @@
     word-wrap: break-word; /* Ensure long words break */
   }
 
-  .eyebrow-text {
-    font-size: 0.8rem; /* Slightly smaller */
+  #hero-heading .eyebrow-text {
+    font-size: 0.85rem; /* Ensure specific size */
     letter-spacing: 0.5px; /* Reduced spacing */
     margin-bottom: 0.5rem;
     display: block;
     white-space: normal; /* Allow wrapping */
     word-wrap: break-word;
+    opacity: 0.9;
+    font-weight: 600;
+    text-transform: uppercase;
   }
 
   .tagline {
@@ -201,24 +204,21 @@
     padding-bottom: 2rem;
   }
 
-  .hero-grid {
-    padding: 0 0.5rem; /* Further reduced padding */
+  .hero-content-wrapper {
+    margin: 0 0.75rem; /* Smaller margin on very small screens */
+    padding: 1.25rem 0.5rem; /* Further reduced padding */
   }
   
   .profile-image {
     width: 130px; /* Further reduced */
     height: 130px;
   }
-
-  .hero-content-wrapper {
-    padding: 1.25rem 0.5rem; /* Further reduced padding */
-  }
   
-  .rtl-text {
+  #hero-heading .rtl-text {
     font-size: 1.6rem;
   }
 
-  .eyebrow-text {
+  #hero-heading .eyebrow-text {
     font-size: 0.75rem;
   }
 
