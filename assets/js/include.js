@@ -51,6 +51,18 @@
       const file = el.getAttribute("data-include-html");
       if (!file) {continue;}
 
+      // Security check: Ensure file is same-origin
+      try {
+        const fileUrl = new URL(file, window.location.origin);
+        if (fileUrl.origin !== window.location.origin) {
+          console.error(`Blocked cross-origin include: ${file}`);
+          continue;
+        }
+      } catch (e) {
+        console.error(`Invalid include URL: ${file}`);
+        continue;
+      }
+
       // Prevent double-include if function is called again
       el.removeAttribute("data-include-html");
 

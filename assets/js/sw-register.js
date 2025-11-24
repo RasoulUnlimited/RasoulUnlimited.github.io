@@ -49,11 +49,6 @@
    * @param {ServiceWorkerRegistration} reg - Registration object
    */
   function handleRegistration(reg) {
-    // If active worker exists, offline support is enabled
-    if (reg.active) {
-      notifyReady();
-    }
-
     // If waiting worker exists, update is available
     if (reg.waiting) {
       notifyUpdate();
