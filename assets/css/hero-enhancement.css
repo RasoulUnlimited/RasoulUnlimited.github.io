@@ -434,24 +434,35 @@
   border: 0;
 }
 
+.typing-wrapper {
+  display: inline;
+  position: relative;
+  direction: rtl;
+}
+
 .typing-text {
+  display: inline;
   font-weight: 800;
   color: var(--text-color);
   background: var(--hero-text-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  position: relative;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  line-height: 1.4;
 }
 
 .cursor {
   display: inline-block;
   width: 3px;
-  height: 1.2em;
+  height: 1em;
   background-color: var(--primary-color);
   animation: blink 1s step-end infinite;
   margin-right: 2px;
   vertical-align: text-bottom;
+  position: relative;
+  top: 1px;
 }
 
 @keyframes blink {
