@@ -60,15 +60,6 @@
     }
 
     let debounceTimer;
-    // Store original content to restore after search clears
-    const originalContent = new Map();
-
-    faqItems.forEach(item => {
-      const summary = item.querySelector(".accordion-header h3") || item.querySelector("summary");
-      const answer = item.querySelector(".accordion-content") || item.querySelector(".faq-answer");
-      if (summary) originalContent.set(summary, summary.innerHTML);
-      if (answer) originalContent.set(answer, answer.innerHTML);
-    });
 
     function updateStatus(term, visibleCount) {
       const total = faqItems.length;
@@ -88,10 +79,13 @@
     function highlightText(element, term) {
       if (!element) return;
       
-      // Always restore original first to avoid nested spans
-      if (originalContent.has(element)) {
-        element.innerHTML = originalContent.get(element);
-      }
+      // Remove existing highlights first to preserve event listeners
+      const highlights = element.querySelectorAll(".highlight-term");
+      highlights.forEach(span => {
+        const parent = span.parentNode;
+        parent.replaceChild(document.createTextNode(span.textContent), span);
+        parent.normalize();
+      });
 
       if (!term) return;
       
@@ -105,6 +99,9 @@
 
       while (walker.nextNode()) {
         const node = walker.currentNode;
+        // Skip if parent is already a highlight span
+        if (node.parentNode.classList.contains("highlight-term")) continue;
+
         if (node.nodeValue && regex.test(node.nodeValue)) {
           nodesToReplace.push(node);
         }
