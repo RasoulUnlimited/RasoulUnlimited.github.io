@@ -191,3 +191,44 @@
 [data-theme="dark"] .feedback-intro-card {
     background: rgba(255, 255, 255, 0.05);
 }
+
+/* Small Mobile Optimizations */
+@media (max-width: 480px) {
+  .testimonials-section {
+    padding: 1rem 0;
+    margin: 1rem auto;
+  }
+
+  .testimonials-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .feedback-intro-card {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .feedback-icon {
+    font-size: 2.5rem;
+  }
+
+  .feedback-content p {
+    font-size: 0.95rem;
+  }
+
+  .feedback-benefits {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .feedback-benefits li {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .giscus-wrapper {
+    padding: 0.5rem;
+    min-height: 250px;
+  }
+}

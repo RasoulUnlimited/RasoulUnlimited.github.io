@@ -4091,3 +4091,148 @@ summary:active,
   }
 }
 
+/* Mobile Optimizations for Small Screens */
+@media (max-width: 480px) {
+  :root {
+    --space-xxl: 2rem;
+    --space-xl: 1.5rem;
+    --space-lg: 1rem;
+    --space-md: 0.75rem;
+    --space-sm: 0.5rem;
+    --navbar-height: 60px;
+  }
+
+  body {
+    font-size: 14px; /* Base font size adjustment */
+  }
+
+  h1 {
+    font-size: 1.75rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+
+  .container {
+    padding: 0 var(--space-sm);
+  }
+
+  .content-area {
+    padding: var(--space-md);
+    border-radius: var(--border-radius-md);
+  }
+
+  /* Navbar adjustments */
+  .navbar {
+    padding: 0.25rem 0;
+  }
+  
+  .navbar nav {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 5px; /* Space for scrollbar if visible */
+  }
+
+  .navbar nav ul {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    padding: 0 var(--space-sm);
+    width: max-content; /* Allow content to determine width */
+  }
+
+  .navbar nav a {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.5rem;
+    white-space: nowrap;
+  }
+
+  /* Card adjustments */
+  .card {
+    padding: var(--space-md);
+  }
+
+  .card h3 {
+    font-size: 1.1rem;
+  }
+
+  .card .card-meta {
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+
+  .card .card-links {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.5rem;
+  }
+
+  .card .card-links a {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* Timeline adjustments */
+  .timeline li {
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  
+  .timeline::after {
+    display: none; /* Remove vertical line on very small screens to save space */
+  }
+  
+  .timeline li::after {
+    display: none; /* Remove dots */
+  }
+  
+  .timeline-icon {
+    position: static;
+    transform: none;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    margin-right: 0;
+    margin-left: 0.5rem;
+  }
+
+  .timeline-content {
+    width: 100%;
+  }
+  
+  .timeline-content::before,
+  .timeline-content::after {
+    display: none; /* Remove arrows */
+  }
+
+  /* Footer adjustments */
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .footer-link {
+    display: block;
+    padding: 0.5rem;
+    background: rgba(0,0,0,0.05);
+    border-radius: 4px;
+  }
+
+  /* About section adjustments */
+  .about-stats {
+    flex-wrap: wrap;
+  }
+  
+  .stat-item {
+    flex: 1 1 45%; /* 2 per row */
+  }
+}
+

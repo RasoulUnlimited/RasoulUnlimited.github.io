@@ -849,3 +849,43 @@
     color: #000;
   }
 }
+
+/* Small Mobile Optimizations */
+@media (max-width: 480px) {
+  .faq-section-container {
+    padding: 1.5rem 0.75rem;
+    border-radius: 16px;
+  }
+
+  .search-faq-container input[type="text"] {
+    padding: 1rem 3rem 1rem 1rem;
+    font-size: 1rem;
+  }
+
+  .accordion-header {
+    padding: 1rem;
+    font-size: 0.95rem;
+  }
+
+  .faq-icon {
+    font-size: 1.2rem;
+  }
+
+  .faq-text {
+    padding: 0 1rem;
+    font-size: 0.9rem;
+  }
+
+  .faq-item.is-open .faq-text {
+    padding: 0.75rem 1rem 1.25rem;
+  }
+
+  .faq-controls {
+    justify-content: center;
+  }
+
+  .faq-controls button {
+    width: 100%;
+    justify-content: center;
+  }
+}
