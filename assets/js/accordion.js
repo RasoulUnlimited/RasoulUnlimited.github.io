@@ -169,10 +169,21 @@
       if (!header || !panel) {return;}
 
       header.setAttribute("aria-expanded", "true");
-      // Add larger buffer to account for padding transition and potential layout shifts
-      panel.style.maxHeight = (panel.scrollHeight + 500) + "px";
+      
+      // Set explicit height for transition
+      panel.style.maxHeight = panel.scrollHeight + "px";
       panel.style.opacity = "1";
       item.classList.add("is-open");
+
+      // After transition, set to none to allow content to resize naturally
+      const onTransitionEnd = (e) => {
+        // Ensure we're handling the height transition
+        if (e.propertyName === "max-height") {
+          panel.style.maxHeight = "none";
+          panel.removeEventListener("transitionend", onTransitionEnd);
+        }
+      };
+      panel.addEventListener("transitionend", onTransitionEnd);
 
       // Custom event for hooks / analytics / extra animations
       item.dispatchEvent(

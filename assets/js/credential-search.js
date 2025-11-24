@@ -100,16 +100,20 @@ document.addEventListener("DOMContentLoaded", function () {
     const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null, false);
     const nodesToReplace = [];
     
-    // Create a regex that matches the term but allows for Persian/Arabic character variations
-    let escapedTerm = escapeRegExp(term);
-    escapedTerm = escapedTerm
-      .replace(/ی/g, "[یي]")
-      .replace(/ي/g, "[یي]")
-      .replace(/ک/g, "[کك]")
-      .replace(/ك/g, "[کك]");
+    // Normalize term to base characters first to match filter logic
+    const normalizedTerm = normalizeText(term);
+    
+    // Build regex that allows for diacritics and ZWNJ between characters
+    const noise = "[\\u064B-\\u065F\\u0670\\u200c\\u200d]*";
+    const pattern = normalizedTerm.split("").map(char => {
+      const escaped = escapeRegExp(char);
+      if (char === "ی") return "[یي]";
+      if (char === "ک") return "[کك]";
+      return escaped;
+    }).join(noise);
 
     // Remove 'g' flag to avoid stateful behavior with test() in loop
-    const regex = new RegExp(`(${escapedTerm})`, "i");
+    const regex = new RegExp(`(${pattern})`, "i");
 
     while (walker.nextNode()) {
       const node = walker.currentNode;

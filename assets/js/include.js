@@ -92,8 +92,8 @@
               // Remove potentially dangerous elements/attributes
               const tagName = node.tagName.toLowerCase();
 
-              // Block object and embed elements
-              if (["object", "embed"].includes(tagName)) {
+              // Block object, embed, and iframe elements
+              if (["object", "embed", "iframe"].includes(tagName)) {
                 console.warn(
                   `Removed potentially dangerous element: ${tagName}`
                 );
