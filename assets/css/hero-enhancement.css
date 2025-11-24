@@ -434,16 +434,17 @@
   border: 0;
 }
 
-.typing-wrapper {
-  display: inline;
+.tagline .typing-wrapper {
+  display: inline !important;
   position: relative;
   direction: rtl;
+  unicode-bidi: embed;
 }
 
-.typing-text {
-  display: inline;
+.tagline .typing-text {
+  display: inline !important;
   font-weight: 800;
-  color: var(--text-color);
+  color: var(--text-color); /* Fallback */
   background: var(--hero-text-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -453,8 +454,8 @@
   line-height: 1.4;
 }
 
-.cursor {
-  display: inline-block;
+.tagline .cursor {
+  display: inline-block !important;
   width: 3px;
   height: 1em;
   background-color: var(--primary-color);
