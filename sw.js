@@ -120,13 +120,30 @@ self.addEventListener("fetch", (event) => {
   } else {
     // For assets (CSS, JS, images), use cache-first with network fallback
     event.respondWith(
-      caches
-        .match(event.request)
-        .then((response) => response || fetch(event.request))
-        .catch(() => {
+      caches.match(event.request).then((response) => {
+        if (response) {
+          return response;
+        }
+        return fetch(event.request).then((networkResponse) => {
+          // Cache successful same-origin responses
+          if (
+            networkResponse &&
+            networkResponse.status === 200 &&
+            networkResponse.type === "basic"
+          ) {
+            const responseToCache = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(event.request, responseToCache);
+            });
+          }
+          return networkResponse;
+        });
+      }).catch(() => {
           // Return a placeholder for failed image requests
           if (event.request.destination === "image") {
-            return caches.match("/assets/images/RasoulUnlimited.webp");
+            return caches.match("/assets/images/RasoulUnlimited.webp").then((fallback) => {
+              return fallback || new Response("Image not found", { status: 404 });
+            });
           }
           return new Response("Resource not available", { status: 503 });
         })

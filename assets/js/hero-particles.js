@@ -9,11 +9,15 @@ document.addEventListener('DOMContentLoaded', function() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    // Handle resize
+    // Handle resize with debounce
+    let resizeTimeout;
     window.addEventListener('resize', function() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        init();
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            init();
+        }, 200);
     });
 
     // Mouse interaction
@@ -137,8 +141,20 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Animation loop
+    let isVisible = true;
+    if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                isVisible = entry.isIntersecting;
+            });
+        });
+        observer.observe(canvas);
+    }
+
     function animate() {
         requestAnimationFrame(animate);
+        if (!isVisible) return;
+
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         for (let i = 0; i < particlesArray.length; i++) {
