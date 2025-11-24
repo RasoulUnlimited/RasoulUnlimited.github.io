@@ -92,8 +92,8 @@
               // Remove potentially dangerous elements/attributes
               const tagName = node.tagName.toLowerCase();
 
-              // Block object, embed, and form elements if they're not from trusted sources
-              if (["object", "embed", "form"].includes(tagName)) {
+              // Block object and embed elements
+              if (["object", "embed"].includes(tagName)) {
                 console.warn(
                   `Removed potentially dangerous element: ${tagName}`
                 );
@@ -168,10 +168,10 @@
 
             const newScript = document.createElement("script");
 
-            // Copy only safe attributes
-            const safeAttributes = ["type", "async", "defer", "charset"];
+            // Copy safe attributes including id, class, and data-*
+            const safeAttributes = ["type", "async", "defer", "charset", "id", "class"];
             for (const attr of oldScript.attributes) {
-              if (safeAttributes.includes(attr.name)) {
+              if (safeAttributes.includes(attr.name) || attr.name.startsWith("data-")) {
                 newScript.setAttribute(attr.name, attr.value);
               }
             }

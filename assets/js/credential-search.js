@@ -85,29 +85,53 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const highlightText = (el, term) => {
     if (!el || !el.dataset.original) {return;}
+    
+    // Restore original HTML structure
+    if (el.dataset.originalHtml) {
+      el.innerHTML = el.dataset.originalHtml;
+    } else {
+      el.textContent = el.dataset.original;
+    }
+
     if (!term) {
-      // Restore original HTML structure
-      if (el.dataset.originalHtml) {
-        el.innerHTML = el.dataset.originalHtml;
-      } else {
-        el.textContent = el.dataset.original;
-      }
       return;
     }
-    const regex = new RegExp(`(${escapeRegExp(term)})`, "gi");
-    const parts = el.dataset.original.split(regex);
-    // Clear safely without using innerHTML to prevent XSS
-    while (el.firstChild) {
-      el.removeChild(el.firstChild);
-    }
-    parts.forEach((part, index) => {
-      if (index % 2 === 1) {
-        const mark = document.createElement("mark");
-        mark.textContent = part;
-        el.appendChild(mark);
-      } else if (part) {
-        el.appendChild(document.createTextNode(part));
+
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null, false);
+    const nodesToReplace = [];
+    
+    // Create a regex that matches the term but allows for Persian/Arabic character variations
+    let escapedTerm = escapeRegExp(term);
+    escapedTerm = escapedTerm
+      .replace(/ی/g, "[یي]")
+      .replace(/ي/g, "[یي]")
+      .replace(/ک/g, "[کك]")
+      .replace(/ك/g, "[کك]");
+
+    const regex = new RegExp(`(${escapedTerm})`, "gi");
+
+    while (walker.nextNode()) {
+      const node = walker.currentNode;
+      if (node.nodeValue && regex.test(node.nodeValue)) {
+        nodesToReplace.push(node);
       }
+    }
+
+    nodesToReplace.forEach(node => {
+      const fragment = document.createDocumentFragment();
+      const parts = node.nodeValue.split(regex);
+      
+      parts.forEach((part, index) => {
+        if (index % 2 === 1) { // Matched part
+          const mark = document.createElement("mark");
+          mark.textContent = part;
+          fragment.appendChild(mark);
+        } else if (part) {
+          fragment.appendChild(document.createTextNode(part));
+        }
+      });
+      
+      node.parentNode.replaceChild(fragment, node);
     });
   };
 

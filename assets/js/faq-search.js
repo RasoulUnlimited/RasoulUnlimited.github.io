@@ -95,18 +95,37 @@
 
       if (!term) return;
       
-      const text = element.innerHTML;
-      // Simple regex for text content - be careful with HTML tags
-      // This is a simple implementation. For robust highlighting in HTML, a tree walker is better.
-      // But for this specific use case (h3 and p), simple replacement is usually acceptable if no complex nested tags.
-      
-      const regex = new RegExp(`(${term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-      
-      // Only replace text nodes ideally, but innerHTML replace is faster for simple content
-      // We use a negative lookahead to avoid replacing inside HTML tags (attributes)
-      const newHtml = text.replace(new RegExp(`(?![^<]+>)(${term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi'), '<span class="highlight-term">$1</span>');
-      
-      element.innerHTML = newHtml;
+      // Use TreeWalker for safe highlighting
+      const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, null, false);
+      const nodesToReplace = [];
+      // Escape regex special characters in term
+      const escapedTerm = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const regex = new RegExp(`(${escapedTerm})`, "gi");
+
+      while (walker.nextNode()) {
+        const node = walker.currentNode;
+        if (node.nodeValue && regex.test(node.nodeValue)) {
+          nodesToReplace.push(node);
+        }
+      }
+
+      nodesToReplace.forEach(node => {
+        const fragment = document.createDocumentFragment();
+        const parts = node.nodeValue.split(regex);
+        
+        parts.forEach((part, index) => {
+          if (index % 2 === 1) { // Matched part
+            const span = document.createElement("span");
+            span.className = "highlight-term";
+            span.textContent = part;
+            fragment.appendChild(span);
+          } else if (part) {
+            fragment.appendChild(document.createTextNode(part));
+          }
+        });
+        
+        node.parentNode.replaceChild(fragment, node);
+      });
     }
 
     function filterFaq(term) {

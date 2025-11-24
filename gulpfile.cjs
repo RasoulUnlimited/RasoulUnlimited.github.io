@@ -46,8 +46,8 @@ gulp.task("minify-js", function () {
           reduce_vars: true,
           hoist_funs: false,
           hoist_vars: false,
-          drop_console: true,
-          pure_funcs: ["console.log", "console.warn"],
+          drop_console: false,
+          pure_funcs: ["console.log", "console.warn", "console.info", "console.debug"],
           passes: 2
         },
         mangle: { toplevel: false, keep_fnames: false },
