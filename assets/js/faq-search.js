@@ -35,6 +35,18 @@
       };
     }
 
+    // Helper for Persian character normalization
+    const normalizeText = (str) =>
+      (str || "")
+        .normalize("NFC")
+        .replace(/[ي]/g, "ی")
+        .replace(/[ك]/g, "ک")
+        .replace(/[\u064B-\u065F\u0670]/g, "") // Remove tashkeel
+        .replace(/‌/g, "") // Remove ZWNJ
+        .toLowerCase();
+
+    const escapeRegExp = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
     const searchInput = document.getElementById("faq-search");
     const clearButton = document.getElementById("clear-search");
     const faqItems = Array.from(document.querySelectorAll(".faq-item"));
@@ -92,10 +104,20 @@
       // Use TreeWalker for safe highlighting
       const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, null, false);
       const nodesToReplace = [];
-      // Escape regex special characters in term
-      const escapedTerm = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      
+      // Build regex that allows for diacritics and ZWNJ between characters
+      // This matches the logic in credential-search.js
+      const normalizedTerm = normalizeText(term);
+      const noise = "[\\u064B-\\u065F\\u0670\\u200c\\u200d]*";
+      const pattern = normalizedTerm.split("").map(char => {
+        const escaped = escapeRegExp(char);
+        if (char === "ی") return "[یي]";
+        if (char === "ک") return "[کك]";
+        return escaped;
+      }).join(noise);
+
       // Remove 'g' flag to avoid stateful behavior with test() in loop
-      const regex = new RegExp(`(${escapedTerm})`, "i");
+      const regex = new RegExp(`(${pattern})`, "i");
 
       while (walker.nextNode()) {
         const node = walker.currentNode;
@@ -128,7 +150,7 @@
 
     function filterFaq(term) {
       const rawTerm = term !== undefined ? term : searchInput.value;
-      const searchTerm = (rawTerm || "").trim().toLowerCase();
+      const searchTerm = normalizeText(rawTerm);
       const hasTerm = searchTerm.length > 0;
 
       let visibleCount = 0;
@@ -141,9 +163,9 @@
         // For custom accordion, the header button is the summary
         const isCustomAccordion = !item.tagName || item.tagName.toLowerCase() !== 'details';
 
-        const questionText = summaryEl ? summaryEl.textContent.toLowerCase() : "";
-        const answerText = answerEl ? answerEl.textContent.toLowerCase() : "";
-        const keywords = (item.dataset.keywords || "").toLowerCase();
+        const questionText = summaryEl ? normalizeText(summaryEl.textContent) : "";
+        const answerText = answerEl ? normalizeText(answerEl.textContent) : "";
+        const keywords = normalizeText(item.dataset.keywords || "");
 
         const matches =
           !hasTerm ||

@@ -196,11 +196,15 @@
   }
 
   // Handle resize to adjust max-height of open items
+  // Removed: This was causing issues by forcing fixed pixel heights, breaking responsiveness.
+  // The expandItem function already sets max-height to "none" after transition, which handles resize automatically.
+  /*
   window.addEventListener('resize', () => {
       document.querySelectorAll(".accordion-item.is-open .accordion-content").forEach(content => {
           content.style.maxHeight = (content.scrollHeight + 500) + "px";
       });
   });
+  */
 
   document.addEventListener("DOMContentLoaded", () => {
     const accordions = document.querySelectorAll(".accordion");

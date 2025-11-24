@@ -84,14 +84,16 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   const highlightText = (el, term) => {
-    if (!el || !el.dataset.original) {return;}
+    if (!el) {return;}
     
-    // Restore original HTML structure
-    if (el.dataset.originalHtml) {
-      el.innerHTML = el.dataset.originalHtml;
-    } else {
-      el.textContent = el.dataset.original;
-    }
+    // Remove existing highlights first to preserve event listeners
+    // This replaces the destructive innerHTML restoration
+    const highlights = el.querySelectorAll("mark.search-highlight");
+    highlights.forEach(mark => {
+      const parent = mark.parentNode;
+      parent.replaceChild(document.createTextNode(mark.textContent), mark);
+      parent.normalize();
+    });
 
     if (!term) {
       return;
@@ -117,6 +119,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     while (walker.nextNode()) {
       const node = walker.currentNode;
+      // Skip if parent is already a highlight
+      if (node.parentNode.classList.contains("search-highlight")) continue;
+
       if (node.nodeValue && regex.test(node.nodeValue)) {
         nodesToReplace.push(node);
       }
@@ -129,6 +134,7 @@ document.addEventListener("DOMContentLoaded", function () {
       parts.forEach((part, index) => {
         if (index % 2 === 1) { // Matched part
           const mark = document.createElement("mark");
+          mark.className = "search-highlight"; // Add class for safe removal
           mark.textContent = part;
           fragment.appendChild(mark);
         } else if (part) {
