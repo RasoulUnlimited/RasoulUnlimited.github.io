@@ -105,6 +105,7 @@
 
   .hero-grid {
     gap: 1.5rem; /* Reduced from 2rem */
+    padding: 0 1rem; /* Reduced padding for small screens */
   }
 
   /* Show image first on mobile for better personal connection */
@@ -128,24 +129,28 @@
     backdrop-filter: blur(10px);
     border-radius: 1rem;
     border: 1px solid var(--glass-border);
+    overflow: visible; /* Allow shadows/transforms to show */
   }
 
   .rtl-text {
-    font-size: clamp(1.8rem, 8vw, 2.5rem); /* Slightly smaller for better fit */
+    font-size: clamp(1.5rem, 7vw, 2.5rem); /* Reduced min size and scaling */
     line-height: 1.2;
     margin-bottom: 0.5rem;
     display: block;
+    word-wrap: break-word; /* Ensure long words break */
   }
 
   .eyebrow-text {
-    font-size: 0.85rem;
-    letter-spacing: 1px;
+    font-size: 0.8rem; /* Slightly smaller */
+    letter-spacing: 0.5px; /* Reduced spacing */
     margin-bottom: 0.5rem;
     display: block;
+    white-space: normal; /* Allow wrapping */
+    word-wrap: break-word;
   }
 
   .tagline {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     line-height: 1.6;
     margin-bottom: 1.5rem;
     padding: 0 0.5rem;
@@ -161,16 +166,19 @@
 
   .hero-btn {
     width: auto; /* Allow buttons to size to content */
-    min-width: 140px;
-    padding: 0.7rem 1.2rem;
-    font-size: 0.95rem;
+    min-width: 120px; /* Reduced min-width */
+    padding: 0.6rem 1rem; /* Reduced padding */
+    font-size: 0.9rem;
     flex: 1; /* Distribute space evenly */
+    white-space: nowrap; /* Prevent text wrapping */
+    justify-content: center; /* Center content */
   }
 
   .social-links-hero {
     gap: 1.25rem;
     margin-top: 1.5rem;
     justify-content: center;
+    flex-wrap: wrap; /* Allow wrapping if needed */
   }
 
   .social-links-hero a {
@@ -192,26 +200,36 @@
     padding-top: 4.5rem;
     padding-bottom: 2rem;
   }
+
+  .hero-grid {
+    padding: 0 0.5rem; /* Further reduced padding */
+  }
   
   .profile-image {
-    width: 140px;
-    height: 140px;
+    width: 130px; /* Further reduced */
+    height: 130px;
   }
 
   .hero-content-wrapper {
-    padding: 1.25rem 0.75rem;
+    padding: 1.25rem 0.5rem; /* Further reduced padding */
   }
   
   .rtl-text {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
+  }
+
+  .eyebrow-text {
+    font-size: 0.75rem;
   }
 
   .hero-cta-group {
     flex-direction: column; /* Stack on very small screens */
+    align-items: stretch; /* Stretch buttons to full width */
   }
 
   .hero-btn {
     width: 100%;
+    margin-bottom: 0.25rem; /* Add spacing */
   }
 }
 
