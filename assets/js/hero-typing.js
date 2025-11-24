@@ -38,6 +38,8 @@ document.addEventListener('DOMContentLoaded', function() {
     let typeSpeed = 80; // Slightly faster typing
 
     function type() {
+        if (!document.body.contains(tagline)) return;
+
         const currentRole = roles[roleIndex];
         
         if (isDeleting) {

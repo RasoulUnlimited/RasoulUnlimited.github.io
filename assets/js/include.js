@@ -117,19 +117,27 @@
               if (
                 tagName === "svg" ||
                 tagName === "use" ||
-                tagName === "image"
+                tagName === "image" ||
+                tagName === "a" ||
+                tagName === "area" ||
+                tagName === "form" ||
+                tagName === "button" ||
+                tagName === "input"
               ) {
-                const href = node.getAttribute("href") ||
-                  node.getAttributeNS("http://www.w3.org/1999/xlink", "href");
-                // eslint-disable-next-line no-script-url
-                if (href && href.toLowerCase().startsWith("javascript:")) {
-                  node.removeAttribute("href");
-                  node.removeAttributeNS(
-                    "http://www.w3.org/1999/xlink",
-                    "href"
-                  );
-                  console.warn(`Removed javascript: URI from ${tagName}`);
-                }
+                const attributesToCheck = ["href", "xlink:href", "action", "formaction"];
+                attributesToCheck.forEach(attrName => {
+                  const val = node.getAttribute(attrName) || 
+                              node.getAttributeNS("http://www.w3.org/1999/xlink", "href");
+                  
+                  // eslint-disable-next-line no-script-url
+                  if (val && val.toLowerCase().trim().startsWith("javascript:")) {
+                    node.removeAttribute(attrName);
+                    if (attrName === "xlink:href") {
+                       node.removeAttributeNS("http://www.w3.org/1999/xlink", "href");
+                    }
+                    console.warn(`Removed javascript: URI from ${tagName} attribute ${attrName}`);
+                  }
+                });
               }
 
               // Recursively sanitize child nodes

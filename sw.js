@@ -80,8 +80,10 @@ self.addEventListener("fetch", (event) => {
 
   // For HTML documents, prioritize network (fresh content) with fallback to cache
   if (
-    event.request.destination === "document" ||
-    event.request.url.endsWith("/")
+    event.request.mode === "navigate" ||
+    (event.request.method === "GET" &&
+     event.request.headers.get("accept") &&
+     event.request.headers.get("accept").includes("text/html"))
   ) {
     event.respondWith(
       fetch(event.request)
