@@ -25,19 +25,31 @@
   background: var(--card-bg);
   padding: var(--space-xl);
   border-radius: var(--border-radius-lg);
-  box-shadow: 0 10px 30px var(--shadow-color-medium);
+  box-shadow: 0 10px 30px -10px var(--shadow-color-medium);
   border: 1px solid var(--border-color);
   position: relative;
   z-index: 1;
-  transition: transform var(--transition-duration-medium) var(--transition-easing-smooth);
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
+  overflow: hidden;
+}
+
+.connect-info-block::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), #4f46e5);
+  opacity: 0.8;
 }
 
 .connect-info-block:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 40px var(--shadow-color-strong);
+  box-shadow: 0 20px 40px -12px var(--shadow-color-strong);
 }
 
 /* Status Badge */
@@ -92,11 +104,14 @@
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius-md);
   padding: var(--space-md);
-  transition: border-color 0.3s ease;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
 .contact-card-box:hover {
   border-color: var(--primary-color);
+  background: var(--card-bg);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
 .contact-email-row {
@@ -246,42 +261,42 @@
 .social-link-card {
   display: flex;
   align-items: center;
-  gap: var(--space-sm);
+  gap: 12px;
   background: var(--card-bg);
-  padding: var(--space-md);
-  border-radius: var(--border-radius-md);
+  padding: 16px;
+  border-radius: 12px;
   text-decoration: none;
   color: var(--text-color);
   border: 1px solid var(--border-color);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   position: relative;
   overflow: hidden;
-}
-
-.social-link-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 4px;
-  height: 100%;
-  background: var(--primary-color);
-  opacity: 0;
-  transition: opacity 0.3s;
+  font-weight: 500;
 }
 
 .social-link-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px var(--shadow-color-light);
-  border-color: transparent;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px -6px var(--shadow-color-light);
+  border-color: var(--brand-color, var(--primary-color));
 }
 
-.social-link-card:hover::before {
-  opacity: 1;
+/* Dynamic background tint on hover */
+.social-link-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: currentColor;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.social-link-card:hover::after {
+  opacity: 0.05;
 }
 
 .social-link-card i {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   transition: transform 0.3s ease;
   flex-shrink: 0;
 }
@@ -296,50 +311,29 @@
 }
 
 /* Brand Colors */
-.social-link-card.instagram:hover { color: #E1306C; }
-.social-link-card.instagram i { color: #E1306C; }
+.social-link-card.instagram { --brand-color: #E1306C; }
+.social-link-card.telegram { --brand-color: #0088cc; }
+.social-link-card.twitter { --brand-color: #1DA1F2; }
+.social-link-card.youtube { --brand-color: #FF0000; }
+.social-link-card.linkedin { --brand-color: #0077b5; }
+.social-link-card.github { --brand-color: var(--heading-color); }
+.social-link-card.aboutme { --brand-color: var(--primary-color); }
+.social-link-card.keybase { --brand-color: #FF6F00; }
+.social-link-card.virgool { --brand-color: #2e86de; }
+.social-link-card.medium { --brand-color: var(--heading-color); }
+.social-link-card.devto { --brand-color: var(--heading-color); }
+.social-link-card.google-scholar { --brand-color: #4285F4; }
+.social-link-card.researchgate { --brand-color: #00ccbb; }
+.social-link-card.orcid { --brand-color: #A6CE39; }
+.social-link-card.wikidata { --brand-color: var(--text-muted); }
 
-.social-link-card.telegram:hover { color: #0088cc; }
-.social-link-card.telegram i { color: #0088cc; }
-
-.social-link-card.twitter:hover { color: #1DA1F2; }
-.social-link-card.twitter i { color: #1DA1F2; }
-
-.social-link-card.youtube:hover { color: #FF0000; }
-.social-link-card.youtube i { color: #FF0000; }
-
-.social-link-card.linkedin:hover { color: #0077b5; }
-.social-link-card.linkedin i { color: #0077b5; }
-
-.social-link-card.github:hover { color: var(--heading-color); }
-.social-link-card.github i { color: var(--heading-color); }
-
-.social-link-card.aboutme:hover { color: var(--primary-color); }
-.social-link-card.aboutme i { color: var(--primary-color); }
-
-.social-link-card.keybase:hover { color: #FF6F00; }
-.social-link-card.keybase i { color: #FF6F00; }
-
-.social-link-card.virgool:hover { color: #2e86de; }
-.social-link-card.virgool i { color: #2e86de; }
-
-.social-link-card.medium:hover { color: var(--heading-color); }
-.social-link-card.medium i { color: var(--heading-color); }
-
-.social-link-card.devto:hover { color: var(--heading-color); }
-.social-link-card.devto i { color: var(--heading-color); }
-
-.social-link-card.google-scholar:hover { color: #4285F4; }
-.social-link-card.google-scholar i { color: #4285F4; }
-
-.social-link-card.researchgate:hover { color: #00ccbb; }
-.social-link-card.researchgate i { color: #00ccbb; }
-
-.social-link-card.orcid:hover { color: #A6CE39; }
-.social-link-card.orcid i { color: #A6CE39; }
-
-.social-link-card.wikidata:hover { color: var(--text-muted); }
-.social-link-card.wikidata i { color: var(--text-muted); }
+/* Apply brand color on hover */
+.social-link-card:hover {
+  color: var(--brand-color);
+}
+.social-link-card:hover i {
+  color: var(--brand-color);
+}
 
 /* Dark Mode Adjustments */
 @media (prefers-color-scheme: dark) {
