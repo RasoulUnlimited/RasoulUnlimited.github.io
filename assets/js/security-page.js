@@ -168,10 +168,21 @@
         }, timeout);
 
       try {
-        const res = await fetch(url, {
-          signal: controller ? controller.signal : undefined,
-          cache: "no-store",
-        });
+        let res;
+        try {
+          res = await fetch(url, {
+            signal: controller ? controller.signal : undefined,
+            cache: "no-store",
+          });
+        } catch (fetchErr) {
+          // Fall back to stale cache if available on network error
+          if (cached && cached.d) {
+            const staleError = new Error("stale-data");
+            staleError.data = cached.d;
+            throw staleError;
+          }
+          throw fetchErr;
+        }
 
         if (!res.ok) {
           if (
@@ -663,10 +674,6 @@
     function loadTimeline(force = false, btn = null) {
       if (!timelineList) {return;}
 
-      // Clear safely without using innerHTML to prevent XSS
-      while (timelineList.firstChild) {
-        timelineList.removeChild(timelineList.firstChild);
-      }
       timelineList.setAttribute("aria-busy", "true");
 
       if (btn) {
@@ -970,11 +977,6 @@
 
     function loadAdvisories(force = false, btn = null) {
       if (!advisoriesList) {return;}
-
-      // Clear safely without using innerHTML to prevent XSS
-      while (advisoriesList.firstChild) {
-        advisoriesList.removeChild(advisoriesList.firstChild);
-      }
 
       if (btn) {
         btn.classList.add("loading");
