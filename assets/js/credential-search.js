@@ -1,7 +1,7 @@
 // Minimal credential search functionality
 // Similar to faq-search.js but for proof pages
 
-function initCredentialSearch() {
+document.addEventListener("DOMContentLoaded", function () {
   const searchInput = document.getElementById("credential-search");
   const clearButton = document.getElementById("clear-credential-search");
   const voiceButton = document.getElementById("voice-search-btn");
@@ -13,14 +13,6 @@ function initCredentialSearch() {
     "en";
 
   if (!searchInput || !clearButton || !cards.length) {return;}
-
-  // Cleanup previous listeners if any
-  if (searchInput._searchAbortController) {
-    searchInput._searchAbortController.abort();
-  }
-  const controller = new AbortController();
-  searchInput._searchAbortController = controller;
-  const signal = { signal: controller.signal };
 
   // Make results info a live region for screen readers
   if (resultsInfo) {
@@ -235,16 +227,16 @@ function initCredentialSearch() {
 
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(() => filterCards(term), 200);
-  }, { signal: controller.signal });
+  });
 
-  clearButton.addEventListener("click", clearSearch, { signal: controller.signal });
+  clearButton.addEventListener("click", clearSearch);
 
   searchInput.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       e.preventDefault();
       clearSearch();
     }
-  }, { signal: controller.signal });
+  });
 
   // Voice search
   if (voiceButton) {
@@ -287,28 +279,28 @@ function initCredentialSearch() {
         );
       };
 
-      voiceButton.addEventListener("click", handleClickStart, { signal: controller.signal });
+      voiceButton.addEventListener("click", handleClickStart);
       recognition.addEventListener("start", handleStart);
       recognition.addEventListener("end", handleEnd);
       recognition.addEventListener("result", handleResult);
       recognition.addEventListener("error", handleError);
 
-      // Cleanup on page unload or re-init
+      // Cleanup on page unload to prevent memory leaks
       const cleanup = () => {
         try {
           recognition.abort();
         } catch (e) {
           // Ignore errors during abort
         }
-        // voiceButton listener is removed by signal
+        voiceButton.removeEventListener("click", handleClickStart);
         recognition.removeEventListener("start", handleStart);
         recognition.removeEventListener("end", handleEnd);
         recognition.removeEventListener("result", handleResult);
         recognition.removeEventListener("error", handleError);
+        window.removeEventListener("beforeunload", cleanup);
       };
 
-      controller.signal.addEventListener('abort', cleanup);
-      window.addEventListener("beforeunload", cleanup, { signal: controller.signal });
+      window.addEventListener("beforeunload", cleanup);
     } else {
       voiceButton.style.display = "none";
       safeToast(
@@ -345,7 +337,7 @@ function initCredentialSearch() {
       e.preventDefault();
       clearSearch();
     }
-  }, { signal: controller.signal });
+  });
 
   // Initial filter with saved term (if any)
   filterCards(savedTerm);
@@ -353,8 +345,5 @@ function initCredentialSearch() {
   // Cleanup on page unload to prevent memory leaks
   window.addEventListener("beforeunload", () => {
     clearTimeout(debounceTimer);
-  }, { signal: controller.signal });
-}
-
-document.addEventListener("DOMContentLoaded", initCredentialSearch);
-document.addEventListener("includesLoaded", initCredentialSearch);
+  });
+});

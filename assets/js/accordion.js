@@ -206,20 +206,13 @@
   });
   */
 
-  function initAllAccordions() {
+  document.addEventListener("DOMContentLoaded", () => {
     const accordions = document.querySelectorAll(".accordion");
     accordions.forEach((acc, index) => {
-      // Prevent double initialization
-      if (acc.classList.contains("js-accordion-init")) {return;}
-
       if (!acc.dataset.accordionId) {
         acc.dataset.accordionId = String(index + 1);
       }
       initAccordion(acc);
-      acc.classList.add("js-accordion-init");
     });
-  }
-
-  document.addEventListener("DOMContentLoaded", initAllAccordions);
-  document.addEventListener("includesLoaded", initAllAccordions);
+  });
 })();
