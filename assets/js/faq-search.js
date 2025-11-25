@@ -4,7 +4,7 @@
 (function () {
   "use strict";
 
-  document.addEventListener("DOMContentLoaded", function () {
+  function initFaqSearch() {
     // Toast fallback
     if (typeof window.createToast !== 'function') {
       window.createToast = function(message) {
@@ -54,6 +54,14 @@
     const collapseAllBtn = document.getElementById("collapse-all-faq");
 
     if (!searchInput || !clearButton || !faqItems.length) {return;}
+
+    // Cleanup previous listeners if any
+    if (searchInput._faqSearchAbortController) {
+      searchInput._faqSearchAbortController.abort();
+    }
+    const controller = new AbortController();
+    searchInput._faqSearchAbortController = controller;
+    const signal = { signal: controller.signal };
 
     // Live region for announcing search results (a11y)
     let status = document.getElementById("faq-search-status");
@@ -237,7 +245,7 @@
     searchInput.addEventListener("input", function () {
       clearTimeout(debounceTimer);
       debounceTimer = setTimeout(() => filterFaq(), 300);
-    });
+    }, { signal: controller.signal });
 
     // ESC to clear
     searchInput.addEventListener("keydown", (e) => {
@@ -247,13 +255,13 @@
         filterFaq();
         searchInput.focus();
       }
-    });
+    }, { signal: controller.signal });
 
     clearButton.addEventListener("click", function () {
       searchInput.value = "";
       filterFaq();
       searchInput.focus();
-    });
+    }, { signal: controller.signal });
 
     // Expand/Collapse All Logic
     if (expandAllBtn) {
@@ -277,7 +285,7 @@
         });
         expandAllBtn.setAttribute("aria-pressed", "true");
         if (collapseAllBtn) collapseAllBtn.setAttribute("aria-pressed", "false");
-      });
+      }, { signal: controller.signal });
     }
 
     if (collapseAllBtn) {
@@ -301,7 +309,7 @@
         });
         collapseAllBtn.setAttribute("aria-pressed", "true");
         if (expandAllBtn) expandAllBtn.setAttribute("aria-pressed", "false");
-      });
+      }, { signal: controller.signal });
     }
 
     // --- New Features Logic ---
@@ -342,7 +350,7 @@
         }).catch(err => {
           console.error('Failed to copy: ', err);
         });
-      });
+      }, { signal: controller.signal });
     });
 
     // 2. Feedback Functionality
@@ -395,7 +403,7 @@
         if (window.createToast) {
           window.createToast('بازخورد شما ثبت شد. ممنون!');
         }
-      });
+      }, { signal: controller.signal });
     });
 
     // 3. Handle Hash Navigation
@@ -433,5 +441,8 @@
       }
     }
 
-  });
+  }
+
+  document.addEventListener("DOMContentLoaded", initFaqSearch);
+  document.addEventListener("includesLoaded", initFaqSearch);
 })();
