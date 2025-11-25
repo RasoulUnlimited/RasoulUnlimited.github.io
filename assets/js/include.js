@@ -216,6 +216,12 @@
 
     await Promise.all(fetches);
 
+    // Recursively process any new includes that were injected
+    if (document.querySelectorAll("[data-include-html]").length > 0) {
+      await includeHTML(callback);
+      return;
+    }
+
     if (typeof callback === "function") {
       try {
         callback();

@@ -1,7 +1,7 @@
 // Minimal credential search functionality
 // Similar to faq-search.js but for proof pages
 
-document.addEventListener("DOMContentLoaded", function () {
+function initCredentialSearch() {
   const searchInput = document.getElementById("credential-search");
   const clearButton = document.getElementById("clear-credential-search");
   const voiceButton = document.getElementById("voice-search-btn");
@@ -13,6 +13,14 @@ document.addEventListener("DOMContentLoaded", function () {
     "en";
 
   if (!searchInput || !clearButton || !cards.length) {return;}
+
+  // Cleanup previous listeners if any
+  if (searchInput._searchAbortController) {
+    searchInput._searchAbortController.abort();
+  }
+  const controller = new AbortController();
+  searchInput._searchAbortController = controller;
+  const signal = { signal: controller.signal };
 
   // Make results info a live region for screen readers
   if (resultsInfo) {
@@ -227,16 +235,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(() => filterCards(term), 200);
-  });
+  }, { signal: controller.signal });
 
-  clearButton.addEventListener("click", clearSearch);
+  clearButton.addEventListener("click", clearSearch, { signal: controller.signal });
 
   searchInput.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       e.preventDefault();
       clearSearch();
     }
-  });
+  }, { signal: controller.signal });
 
   // Voice search
   if (voiceButton) {
@@ -279,28 +287,28 @@ document.addEventListener("DOMContentLoaded", function () {
         );
       };
 
-      voiceButton.addEventListener("click", handleClickStart);
+      voiceButton.addEventListener("click", handleClickStart, { signal: controller.signal });
       recognition.addEventListener("start", handleStart);
       recognition.addEventListener("end", handleEnd);
       recognition.addEventListener("result", handleResult);
       recognition.addEventListener("error", handleError);
 
-      // Cleanup on page unload to prevent memory leaks
+      // Cleanup on page unload or re-init
       const cleanup = () => {
         try {
           recognition.abort();
         } catch (e) {
           // Ignore errors during abort
         }
-        voiceButton.removeEventListener("click", handleClickStart);
+        // voiceButton listener is removed by signal
         recognition.removeEventListener("start", handleStart);
         recognition.removeEventListener("end", handleEnd);
         recognition.removeEventListener("result", handleResult);
         recognition.removeEventListener("error", handleError);
-        window.removeEventListener("beforeunload", cleanup);
       };
 
-      window.addEventListener("beforeunload", cleanup);
+      controller.signal.addEventListener('abort', cleanup);
+      window.addEventListener("beforeunload", cleanup, { signal: controller.signal });
     } else {
       voiceButton.style.display = "none";
       safeToast(
@@ -337,7 +345,7 @@ document.addEventListener("DOMContentLoaded", function () {
       e.preventDefault();
       clearSearch();
     }
-  });
+  }, { signal: controller.signal });
 
   // Initial filter with saved term (if any)
   filterCards(savedTerm);
@@ -345,5 +353,8 @@ document.addEventListener("DOMContentLoaded", function () {
   // Cleanup on page unload to prevent memory leaks
   window.addEventListener("beforeunload", () => {
     clearTimeout(debounceTimer);
-  });
-});
+  }, { signal: controller.signal });
+}
+
+document.addEventListener("DOMContentLoaded", initCredentialSearch);
+document.addEventListener("includesLoaded", initCredentialSearch);
