@@ -249,9 +249,6 @@
   const teardown = new AbortController();
   const { signal: abortSignal } = teardown;
 
-  // Controller for dynamic content (re-initialized on includesLoaded)
-  let dynamicController = new AbortController();
-
   // ==========================
   // Haptics / Vibrate
   // ==========================
@@ -855,7 +852,7 @@
   // ==========================
   // Skills hover microcopy
   // ==========================
-  function initSkillsHover(signal) {
+  function initSkillsHover() {
     const list = document.querySelector("#skills .skills-list");
     if (!list) {return;}
 
@@ -888,7 +885,7 @@
           span.classList.add("show-message");
         }
         li.classList.add("skill-hover-effect");
-      }, { signal });
+      });
 
       on(li, "mouseleave", () => {
         const span = li.querySelector(".skill-hover-message");
@@ -900,14 +897,14 @@
           }, 180);
         }
         li.classList.remove("skill-hover-effect");
-      }, { signal });
+      });
     });
   }
 
   // ==========================
   // FAQ Accordion (ARIA preserved)
   // ==========================
-  function initFAQ(signal) {
+  function initFAQ() {
     const container = document.querySelector(".faq-container");
     if (!container) {return;}
 
@@ -952,7 +949,7 @@
         });
 
         toggleFAQ(item, !item.open);
-      }, { signal });
+      });
     });
 
     function toggleFAQ(item, open, scrollIntoView = false) {
@@ -990,9 +987,10 @@
       }
     }
 
-    // deep-link check
-    const hash = window.location.hash;
-    if (hash) {
+    // deep-link به FAQ با hash (بعد از DOM ready)
+    on(window, "DOMContentLoaded", () => {
+      const hash = window.location.hash;
+      if (!hash) {return;}
       const target = document.querySelector(hash);
       if (target && target.classList.contains("faq-item")) {
         items.forEach(
@@ -1000,7 +998,7 @@
         );
         toggleFAQ(target, true, true);
       }
-    }
+    });
   }
 
   // ==========================
@@ -1037,7 +1035,7 @@
   // ==========================
   // Email copy helper
   // ==========================
-  function initEmailCopy(signal) {
+  function initEmailCopy() {
     const emailLink = document.querySelector(
       ".contact-info a[href^=\"mailto:\"]"
     );
@@ -1046,8 +1044,8 @@
     emailLink.dataset.contactPerson = "Mohammad Rasoul Sohrabi";
     emailLink.classList.add("sohrabi-contact-method");
 
-    on(
-      emailLink,
+    // ⚠️ اینجا قبلاً passive:true بود ولی preventDefault هم داشتی → باگ
+    emailLink.addEventListener(
       "click",
       async (e) => {
         e.preventDefault();
@@ -1071,7 +1069,7 @@
           });
         }
       },
-      { passive: false, signal }
+      { passive: false }
     );
   }
 
@@ -1105,7 +1103,7 @@
   // ==========================
   // Lazy Images (IO + decoding=async)
   // ==========================
-  function initLazyImages(signal) {
+  function initLazyImages() {
     const lazyImages = document.querySelectorAll("img[data-src]");
     if (!lazyImages.length) {return;}
 
@@ -1146,23 +1144,18 @@
     );
 
     lazyImages.forEach((img) => observer.observe(img));
-    
-    if (signal) {
-      signal.addEventListener("abort", () => observer.disconnect());
-    } else {
-      on(
-        window,
-        "beforeunload",
-        () => observer.disconnect(),
-        { once: true }
-      );
-    }
+    on(
+      window,
+      "beforeunload",
+      () => observer.disconnect(),
+      { once: true }
+    );
   }
 
   // ==========================
   // Share Button
   // ==========================
-  function initShareButton(signal) {
+  function initShareButton() {
     let shareBtn = document.getElementById("share-page-button");
     if (!shareBtn) {
       shareBtn = document.createElement("button");
@@ -1185,7 +1178,7 @@
       shareBtn.classList.toggle("hidden", !isVisible);
     }, 120);
 
-    on(window, "scroll", onScroll, { passive: true, signal });
+    on(window, "scroll", onScroll, { passive: true });
     onScroll();
 
     on(shareBtn, "click", async () => {
@@ -1219,13 +1212,13 @@
           STRINGS_FA.toasts.linkCopied("صفحه")
         );
       }
-    }, { signal });
+    });
   }
 
   // ==========================
   // Section Milestones & Confetti
   // ==========================
-  function initExplorationMilestones(signal) {
+  function initExplorationMilestones() {
     const sections = document.querySelectorAll("section[id]");
     const total = sections.length;
     if (!total) {return;}
@@ -1320,17 +1313,12 @@
     );
 
     sections.forEach((sec) => observer.observe(sec));
-    
-    if (signal) {
-      signal.addEventListener("abort", () => observer.disconnect());
-    } else {
-      on(
-        window,
-        "beforeunload",
-        () => observer.disconnect(),
-        { once: true }
-      );
-    }
+    on(
+      window,
+      "beforeunload",
+      () => observer.disconnect(),
+      { once: true }
+    );
   }
 
   function createConfetti() {
@@ -1473,7 +1461,7 @@
   // ==========================
   // Social Links Copy
   // ==========================
-  function initSocialLinksCopy(signal) {
+  function initSocialLinksCopy() {
     const block = document.querySelector(".connect-links-block ul");
     if (!block) {return;}
 
@@ -1500,7 +1488,7 @@
           STRINGS_FA.toasts.linkCopied(name)
         );
       }
-    }, { signal });
+    });
   }
 
   // ==========================
@@ -1612,7 +1600,7 @@
   // ==========================
   // Mobile Menu
   // ==========================
-  function initMobileMenu(signal) {
+  function initMobileMenu() {
     const hamburger = document.querySelector(".hamburger");
     const navLinks = document.querySelector(".nav-links");
     const links = document.querySelectorAll(".nav-links a");
@@ -1624,14 +1612,14 @@
       navLinks.classList.toggle("active");
       const expanded = hamburger.getAttribute("aria-expanded") === "true";
       hamburger.setAttribute("aria-expanded", !expanded);
-    }, { signal });
+    });
 
     links.forEach((link) => {
       on(link, "click", () => {
         hamburger.classList.remove("active");
         navLinks.classList.remove("active");
         hamburger.setAttribute("aria-expanded", "false");
-      }, { signal });
+      });
     });
 
     // Close menu when clicking outside
@@ -1645,38 +1633,15 @@
         navLinks.classList.remove("active");
         hamburger.setAttribute("aria-expanded", "false");
       }
-    }, { signal });
+    });
   }
 
   // ==========================
   // Boot & Live Updates
   // ==========================
-  function handleDynamicContent() {
-    // Abort previous dynamic listeners
-    dynamicController.abort();
-    dynamicController = new AbortController();
-    const { signal } = dynamicController;
-
-    initMobileMenu(signal);
-    initFAQ(signal);
-    initEmailCopy(signal);
-    initLazyImages(signal);
-    initShareButton(signal);
-    initExplorationMilestones(signal);
-    initSocialLinksCopy(signal);
-    initCTAs(signal);
-    initSkillsHover(signal);
-
-    // Refresh AOS if available
-    if (window.AOS?.refresh) {
-      window.AOS.refresh();
-    } else {
-      initAOS();
-    }
-  }
-
   function boot() {
-    // Static inits (run once)
+    initMobileMenu();
+    initAOS();
     setDynamicDates();
     setIdentityHooks();
     queueIdentityPings();
@@ -1684,15 +1649,17 @@
     initAnchorScrolling();
     initClickEffects();
     initScrollUI();
+    initSkillsHover();
+    initFAQ();
+    initEmailCopy();
+    initLazyImages();
+    initShareButton();
+    initExplorationMilestones();
     initFunFacts();
+    initSocialLinksCopy();
+    initCTAs();
     initEndOfPageToast();
     showWelcomeToast();
-
-    // Dynamic inits
-    handleDynamicContent();
-
-    // Listen for dynamic content updates
-    document.addEventListener("includesLoaded", handleDynamicContent);
   }
 
   document.addEventListener("DOMContentLoaded", boot, { once: true });
