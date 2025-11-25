@@ -396,3 +396,68 @@
     background: rgba(255, 255, 255, 0.03);
   }
 }
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+  #connect {
+    padding-bottom: var(--space-xl);
+  }
+
+  .connect-info-block {
+    padding: var(--space-lg);
+  }
+
+  .connect-title {
+    font-size: 1.5rem;
+  }
+
+  /* Force 2 columns for links on mobile for better density */
+  .links-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .social-link-card {
+    padding: 12px;
+    gap: 8px;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    min-height: 90px;
+  }
+
+  .social-link-card i {
+    font-size: 1.8rem;
+    margin-bottom: 2px;
+  }
+
+  .social-link-card span {
+    font-size: 0.85rem;
+    white-space: normal;
+    text-align: center;
+  }
+  
+  .contact-email-row {
+      gap: 10px;
+  }
+  
+  .email-icon-wrapper {
+      width: 36px;
+      height: 36px;
+      font-size: 1rem;
+  }
+  
+  .email-link {
+      font-size: 0.9rem;
+  }
+  
+  .copy-btn {
+      width: 36px;
+      height: 36px;
+  }
+
+  .category-title {
+    font-size: 1.1rem;
+    margin-bottom: var(--space-sm);
+  }
+}
