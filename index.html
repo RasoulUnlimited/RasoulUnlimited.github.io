@@ -3176,6 +3176,40 @@
             aria-labelledby="faq-heading"
           >
             <h2 id="faq-heading">❓ سوالات متداول (FAQ)</h2>
+            <style>
+              /* Local styles for FAQ section to replace inline styles and enhance layout */
+              #faq .faq-footer {
+                text-align: center;
+                margin-top: 3rem;
+                padding: 2rem;
+                background: var(--bg-secondary, #f8f9fa);
+                border-radius: 16px;
+                border: 1px dashed var(--border-color, #e1e4e8);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+              }
+              #faq .faq-footer:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+              }
+              #faq .faq-footer .btn-primary {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 0.8rem 2rem;
+                border-radius: 50px;
+              }
+              /* Ensure no results message is styled nicely */
+              #faq .faq-no-results {
+                display: none;
+                text-align: center;
+                padding: 2rem;
+                color: var(--text-muted);
+                font-weight: 500;
+                background: rgba(255,255,255,0.5);
+                border-radius: 12px;
+                margin-top: 1rem;
+              }
+            </style>
             <div class="search-faq-container" role="search" aria-label="جستجو در سوالات متداول">
               <label for="faq-search" class="visually-hidden">جستجو در سوالات متداول</label>
               <input
@@ -3189,18 +3223,18 @@
               <button id="clear-search" aria-label="پاک کردن جستجو" type="button">✖</button>
             </div>
             
-            <div class="faq-controls" style="display: flex; justify-content: flex-end; gap: 1rem; margin-bottom: 1.5rem; padding: 0 0.5rem;">
-              <button id="expand-all-faq" class="btn-text-only" aria-label="باز کردن همه سوالات" aria-pressed="false" type="button" style="background: none; border: none; color: var(--primary-color); cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem;">
+            <div class="faq-controls">
+              <button id="expand-all-faq" class="btn-text-only" aria-label="باز کردن همه سوالات" aria-pressed="false" type="button">
                 <i class="fas fa-plus-circle" aria-hidden="true"></i> باز کردن همه
               </button>
-              <button id="collapse-all-faq" class="btn-text-only" aria-label="بستن همه سوالات" aria-pressed="false" type="button" style="background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem;">
+              <button id="collapse-all-faq" class="btn-text-only" aria-label="بستن همه سوالات" aria-pressed="false" type="button">
                 <i class="fas fa-minus-circle" aria-hidden="true"></i> بستن همه
               </button>
             </div>
             <!-- Screen-reader status for FAQ search (updated by JS) -->
             <div id="faq-search-status" class="sr-only" aria-live="polite" aria-atomic="true">نمایش همه سوالات.</div>
 
-            <div id="faq-no-results" class="faq-no-results" style="display: none; text-align: center; padding: 2rem; color: var(--text-muted); font-weight: 500;">
+            <div id="faq-no-results" class="faq-no-results">
               نتیجه‌ای یافت نشد. لطفاً کلمات کلیدی دیگری را امتحان کنید.
             </div>
             <div id="faq-container" class="faq-container accordion">
@@ -3542,9 +3576,9 @@
               را ببینید.
             </p>
 
-            <div class="faq-footer" style="text-align: center; margin-top: 3rem; padding: 2rem; background: var(--bg-secondary, #f8f9fa); border-radius: 16px; border: 1px dashed var(--border-color, #e1e4e8);">
+            <div class="faq-footer">
               <p style="margin-bottom: 1.5rem; font-weight: 500; font-size: 1.1rem;">پاسخ سوال خود را پیدا نکردید؟</p>
-              <a href="/contact.html" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 2rem; border-radius: 50px;">
+              <a href="/contact.html" class="btn btn-primary">
                 <i class="fas fa-envelope" aria-hidden="true"></i> تماس با من
               </a>
             </div>
