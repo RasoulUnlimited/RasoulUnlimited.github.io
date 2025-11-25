@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  function initGalleryFilter() {
+  document.addEventListener("DOMContentLoaded", function () {
     const filterBar = document.querySelector(".filter-bar");
     if (!filterBar) {return;}
 
@@ -12,13 +12,6 @@
       filterBar.querySelectorAll("button[data-filter]")
     );
     if (!buttons.length) {return;}
-
-    // Cleanup previous listeners if any
-    if (filterBar._filterAbortController) {
-      filterBar._filterAbortController.abort();
-    }
-    const controller = new AbortController();
-    filterBar._filterAbortController = controller;
 
     // Live region برای اعلام تعداد نتایج
     let liveRegion = filterBar.querySelector("[data-filter-live=\"true\"]");
@@ -99,7 +92,7 @@
 
       const filter = button.getAttribute("data-filter") || "all";
       applyFilter(filter, button);
-    }, { signal: controller.signal });
+    });
 
     // اینیت اولیه: از data-initial-filter یا از دکمه‌ی active
     const initialFromAttr = filterBar.getAttribute("data-initial-filter");
@@ -113,8 +106,5 @@
       "all";
 
     applyFilter(initialFilter, activeBtn);
-  }
-
-  document.addEventListener("DOMContentLoaded", initGalleryFilter);
-  document.addEventListener("includesLoaded", initGalleryFilter);
+  });
 })();
