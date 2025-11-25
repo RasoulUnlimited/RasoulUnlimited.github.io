@@ -3175,69 +3175,385 @@
             role="region"
             aria-labelledby="faq-heading"
           >
-            <h2 id="faq-heading">❓ سوالات متداول (FAQ)</h2>
-            <style>
-              /* Local styles for FAQ section to replace inline styles and enhance layout */
-              #faq .faq-footer {
-                text-align: center;
-                margin-top: 3rem;
-                padding: 2rem;
-                background: var(--bg-secondary, #f8f9fa);
-                border-radius: 16px;
-                border: 1px dashed var(--border-color, #e1e4e8);
-                transition: transform 0.3s ease, box-shadow 0.3s ease;
-              }
-              #faq .faq-footer:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 8px 16px rgba(0,0,0,0.05);
-              }
-              #faq .faq-footer .btn-primary {
-                display: inline-flex;
-                align-items: center;
-                gap: 0.5rem;
-                padding: 0.8rem 2rem;
-                border-radius: 50px;
-              }
-              /* Ensure no results message is styled nicely */
-              #faq .faq-no-results {
-                display: none;
-                text-align: center;
-                padding: 2rem;
-                color: var(--text-muted);
-                font-weight: 500;
-                background: rgba(255,255,255,0.5);
-                border-radius: 12px;
-                margin-top: 1rem;
-              }
-            </style>
-            <div class="search-faq-container" role="search" aria-label="جستجو در سوالات متداول">
-              <label for="faq-search" class="visually-hidden">جستجو در سوالات متداول</label>
-              <input
-                type="text"
-                id="faq-search"
-                placeholder="به دنبال چه سوالی هستید؟ (مثلاً: دیسکورد، پروژه C)"
-                aria-label="جستجو در سوالات متداول"
-                aria-controls="faq-container"
-                aria-describedby="faq-search-status"
-              />
-              <button id="clear-search" aria-label="پاک کردن جستجو" type="button">✖</button>
-            </div>
-            
-            <div class="faq-controls">
-              <button id="expand-all-faq" class="btn-text-only" aria-label="باز کردن همه سوالات" aria-pressed="false" type="button">
-                <i class="fas fa-plus-circle" aria-hidden="true"></i> باز کردن همه
-              </button>
-              <button id="collapse-all-faq" class="btn-text-only" aria-label="بستن همه سوالات" aria-pressed="false" type="button">
-                <i class="fas fa-minus-circle" aria-hidden="true"></i> بستن همه
-              </button>
-            </div>
-            <!-- Screen-reader status for FAQ search (updated by JS) -->
-            <div id="faq-search-status" class="sr-only" aria-live="polite" aria-atomic="true">نمایش همه سوالات.</div>
+            <div class="container">
+              <h2 id="faq-heading" class="section-title text-center mb-5">❓ سوالات متداول (FAQ)</h2>
+              
+              <style>
+                /* Enhanced Local Styles for FAQ Section - Improved Version */
+                #faq {
+                  position: relative;
+                  padding: 5rem 0;
+                  background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(248,249,250,0.5) 100%);
+                }
+                
+                #faq .search-faq-container {
+                  position: relative;
+                  max-width: 650px;
+                  margin: 0 auto 3rem auto;
+                }
+                
+                #faq #faq-search {
+                  width: 100%;
+                  padding: 1.4rem 3.5rem 1.4rem 1.8rem;
+                  border-radius: 20px;
+                  border: 2px solid transparent;
+                  background: var(--bg-surface, #ffffff);
+                  font-size: 1.1rem;
+                  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+                  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+                  color: var(--text-primary, #212529);
+                }
+                
+                #faq #faq-search:focus {
+                  border-color: var(--primary-color, #007bff);
+                  box-shadow: 0 15px 40px rgba(0, 123, 255, 0.15);
+                  transform: translateY(-2px);
+                  outline: none;
+                }
+                
+                #faq #clear-search {
+                  position: absolute;
+                  left: 1.5rem;
+                  top: 50%;
+                  transform: translateY(-50%);
+                  background: rgba(0,0,0,0.05);
+                  border: none;
+                  color: var(--text-muted, #adb5bd);
+                  cursor: pointer;
+                  font-size: 1rem;
+                  width: 28px;
+                  height: 28px;
+                  border-radius: 50%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  transition: all 0.2s;
+                  display: none; /* Controlled by JS */
+                }
+                
+                #faq #clear-search:hover {
+                  background-color: var(--danger-color, #dc3545);
+                  color: white;
+                }
+                
+                #faq .faq-controls {
+                  display: flex;
+                  justify-content: center;
+                  gap: 1rem;
+                  margin-bottom: 3rem;
+                  flex-wrap: wrap;
+                }
+                
+                #faq .btn-text-only {
+                  background: var(--bg-surface, #ffffff);
+                  border: 1px solid var(--border-color, #e1e4e8);
+                  color: var(--text-secondary, #495057);
+                  font-weight: 600;
+                  cursor: pointer;
+                  padding: 0.7rem 1.5rem;
+                  border-radius: 50px;
+                  transition: all 0.2s ease;
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 0.6rem;
+                  font-size: 0.95rem;
+                  box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+                }
+                
+                #faq .btn-text-only:hover {
+                  background: var(--primary-color, #007bff);
+                  color: white;
+                  border-color: var(--primary-color, #007bff);
+                  transform: translateY(-2px);
+                  box-shadow: 0 5px 15px rgba(0, 123, 255, 0.2);
+                }
+                
+                #faq .faq-container {
+                  display: flex;
+                  flex-direction: column;
+                  gap: 1.5rem;
+                  max-width: 900px;
+                  margin: 0 auto;
+                }
+                
+                #faq .faq-item {
+                  background: var(--bg-surface, #ffffff);
+                  border: 1px solid var(--border-color, #e1e4e8);
+                  border-radius: 18px;
+                  overflow: hidden;
+                  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+                  position: relative;
+                }
+                
+                #faq .faq-item::before {
+                  content: '';
+                  position: absolute;
+                  top: 0;
+                  right: 0;
+                  width: 4px;
+                  height: 100%;
+                  background: var(--primary-color, #007bff);
+                  opacity: 0;
+                  transition: opacity 0.3s ease;
+                }
 
-            <div id="faq-no-results" class="faq-no-results">
-              نتیجه‌ای یافت نشد. لطفاً کلمات کلیدی دیگری را امتحان کنید.
-            </div>
+                #faq .faq-item:hover, #faq .faq-item.active {
+                  border-color: var(--primary-color-light, #80bdff);
+                  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+                  transform: translateY(-3px);
+                  z-index: 2;
+                }
+
+                #faq .faq-item.active::before {
+                  opacity: 1;
+                }
+                
+                #faq .accordion-header {
+                  padding: 1.6rem 2rem;
+                  cursor: pointer;
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  background: transparent;
+                  transition: background 0.2s ease;
+                  user-select: none;
+                }
+                
+                #faq .faq-question {
+                  margin: 0;
+                  font-size: 1.2rem;
+                  font-weight: 700;
+                  color: var(--text-primary, #212529);
+                  display: flex;
+                  align-items: center;
+                  gap: 1.2rem;
+                  flex-grow: 1;
+                  line-height: 1.6;
+                }
+                
+                #faq .faq-icon {
+                  color: var(--primary-color, #007bff);
+                  font-size: 1.4rem;
+                  background: rgba(0, 123, 255, 0.1);
+                  width: 45px;
+                  height: 45px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  border-radius: 12px;
+                  flex-shrink: 0;
+                  transition: all 0.3s ease;
+                }
+                
+                #faq .faq-item:hover .faq-icon, #faq .faq-item.active .faq-icon {
+                  background: var(--primary-color, #007bff);
+                  color: white;
+                  transform: rotate(10deg);
+                }
+                
+                #faq .copy-faq-link {
+                  background: transparent;
+                  border: none;
+                  color: var(--text-muted, #adb5bd);
+                  cursor: pointer;
+                  padding: 0.6rem;
+                  border-radius: 50%;
+                  transition: all 0.2s ease;
+                  opacity: 0;
+                  margin-right: 0.5rem;
+                }
+                
+                #faq .accordion-header:hover .copy-faq-link,
+                #faq .copy-faq-link:focus {
+                  opacity: 1;
+                }
+                
+                #faq .copy-faq-link:hover {
+                  color: var(--primary-color, #007bff);
+                  background: rgba(0, 123, 255, 0.1);
+                }
+                
+                #faq .faq-answer {
+                  padding: 0 2rem;
+                  max-height: 0;
+                  overflow: hidden;
+                  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s ease, opacity 0.4s ease;
+                  opacity: 0;
+                  background: var(--bg-surface, #ffffff);
+                }
+                
+                #faq .accordion-item.active .faq-answer {
+                  padding: 0 2rem 2rem 2rem;
+                  opacity: 1;
+                }
+                
+                #faq .faq-text {
+                  color: var(--text-secondary, #495057);
+                  line-height: 1.9;
+                  margin-bottom: 1.5rem;
+                  font-size: 1.05rem;
+                  text-align: justify;
+                }
+                
+                #faq .faq-feedback {
+                  display: flex;
+                  align-items: center;
+                  gap: 1rem;
+                  margin-top: 1.5rem;
+                  padding-top: 1.2rem;
+                  border-top: 1px solid var(--border-color, #f1f3f5);
+                  font-size: 0.9rem;
+                  color: var(--text-muted, #6c757d);
+                  background: #f8f9fa;
+                  margin: 0 -2rem -2rem -2rem;
+                  padding: 1rem 2rem;
+                }
+                
+                #faq .btn-feedback {
+                  background: white;
+                  border: 1px solid var(--border-color, #dee2e6);
+                  border-radius: 8px;
+                  width: 32px;
+                  height: 32px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  cursor: pointer;
+                  transition: all 0.2s ease;
+                  color: var(--text-muted, #6c757d);
+                }
+                
+                #faq .btn-feedback:hover {
+                  border-color: var(--primary-color, #007bff);
+                  color: var(--primary-color, #007bff);
+                  transform: translateY(-2px);
+                  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+                }
+                
+                #faq .faq-footer {
+                  text-align: center;
+                  margin-top: 5rem;
+                  padding: 3rem 2rem;
+                  background: var(--bg-surface, #ffffff);
+                  border-radius: 24px;
+                  border: 1px solid var(--border-color, #e1e4e8);
+                  box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+                  position: relative;
+                  overflow: hidden;
+                  max-width: 800px;
+                  margin-left: auto;
+                  margin-right: auto;
+                }
+                
+                #faq .faq-footer::before {
+                  content: '';
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  width: 100%;
+                  height: 4px;
+                  background: linear-gradient(90deg, var(--primary-color, #007bff), var(--secondary-color, #6c757d));
+                }
+                
+                #faq .faq-footer h3 {
+                  font-size: 1.5rem;
+                  margin-bottom: 1rem;
+                  color: var(--text-primary, #212529);
+                  font-weight: 800;
+                }
+
+                #faq .faq-footer p {
+                  color: var(--text-secondary);
+                  margin-bottom: 2rem;
+                  font-size: 1.1rem;
+                }
+                
+                #faq .faq-footer .btn-primary {
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 0.8rem;
+                  padding: 1rem 3rem;
+                  border-radius: 50px;
+                  font-weight: 700;
+                  font-size: 1.1rem;
+                  box-shadow: 0 10px 25px rgba(0, 123, 255, 0.3);
+                  transition: all 0.3s ease;
+                  background: linear-gradient(45deg, var(--primary-color, #007bff), var(--primary-color-dark, #0056b3));
+                  color: white;
+                  border: none;
+                }
+                
+                #faq .faq-footer .btn-primary:hover {
+                  transform: translateY(-3px);
+                  box-shadow: 0 15px 35px rgba(0, 123, 255, 0.4);
+                }
+
+                #faq .faq-no-results {
+                  display: none;
+                  text-align: center;
+                  padding: 4rem 2rem;
+                  color: var(--text-muted);
+                  font-weight: 500;
+                  background: var(--bg-surface, #ffffff);
+                  border-radius: 18px;
+                  margin-top: 1rem;
+                  border: 2px dashed var(--border-color, #e1e4e8);
+                  box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+                }
+                
+                @media (max-width: 768px) {
+                  #faq .accordion-header {
+                    padding: 1.2rem;
+                  }
+                  #faq .faq-question {
+                    font-size: 1.05rem;
+                  }
+                  #faq .faq-icon {
+                    width: 35px;
+                    height: 35px;
+                    font-size: 1.1rem;
+                  }
+                  #faq .faq-footer {
+                    padding: 2rem 1.5rem;
+                  }
+                }
+              </style>
+              
+              <div class="search-faq-container" role="search" aria-label="جستجو در سوالات متداول">
+                <label for="faq-search" class="visually-hidden">جستجو در سوالات متداول</label>
+                <input
+                  type="text"
+                  id="faq-search"
+                  placeholder="به دنبال چه سوالی هستید؟ (مثلاً: دیسکورد، پروژه C)"
+                  aria-label="جستجو در سوالات متداول"
+                  aria-controls="faq-container"
+                  aria-describedby="faq-search-status"
+                />
+                <button id="clear-search" aria-label="پاک کردن جستجو" type="button">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+              
+              <div class="faq-controls">
+                <button id="expand-all-faq" class="btn-text-only" aria-label="باز کردن همه سوالات" aria-pressed="false" type="button">
+                  <i class="fas fa-plus-circle" aria-hidden="true"></i> باز کردن همه
+                </button>
+                <button id="collapse-all-faq" class="btn-text-only" aria-label="بستن همه سوالات" aria-pressed="false" type="button">
+                  <i class="fas fa-minus-circle" aria-hidden="true"></i> بستن همه
+                </button>
+              </div>
+              
+              <!-- Screen-reader status for FAQ search (updated by JS) -->
+              <div id="faq-search-status" class="sr-only" aria-live="polite" aria-atomic="true">نمایش همه سوالات.</div>
+
+              <div id="faq-no-results" class="faq-no-results">
+                <div style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.3;">🤔</div>
+                <h4 style="margin-bottom: 0.5rem; color: var(--text-primary);">نتیجه‌ای یافت نشد</h4>
+                <p>لطفاً کلمات کلیدی دیگری را امتحان کنید یا از بخش تماس با ما استفاده کنید.</p>
+              </div>
+
             <div id="faq-container" class="faq-container accordion">
+              <!-- FAQ Item 1 -->
               <div
                 class="accordion-item faq-item"
                 id="faq-item-fa-1"
@@ -3260,8 +3576,8 @@
                     class="faq-question"
                     itemprop="name"
                   >
-                    <i class="fas fa-user-circle faq-icon"></i>
-                    محمد رسول سهرابی کیست و چه فعالیت‌هایی دارد؟
+                    <div class="faq-icon"><i class="fas fa-user-circle"></i></div>
+                    <span>محمد رسول سهرابی کیست و چه فعالیت‌هایی دارد؟</span>
                   </h3>
                   <button class="copy-faq-link" aria-label="کپی لینک این پرسش" title="کپی لینک" data-link="#faq-item-fa-1">
                     <i class="fas fa-link"></i>
@@ -3292,6 +3608,8 @@
                   </div>
                 </div>
               </div>
+
+              <!-- FAQ Item 2 -->
               <div
                 class="accordion-item faq-item"
                 id="faq-item-fa-2"
@@ -3314,8 +3632,8 @@
                     class="faq-question"
                     itemprop="name"
                   >
-                    <i class="fas fa-laptop-code faq-icon"></i>
-                    مهم‌ترین پروژه‌ها و دستاوردهای محمد رسول سهرابی کدامند؟
+                    <div class="faq-icon"><i class="fas fa-laptop-code"></i></div>
+                    <span>مهم‌ترین پروژه‌ها و دستاوردهای محمد رسول سهرابی کدامند؟</span>
                   </h3>
                   <button class="copy-faq-link" aria-label="کپی لینک این پرسش" title="کپی لینک" data-link="#faq-item-fa-2">
                     <i class="fas fa-link"></i>
@@ -3347,6 +3665,8 @@
                   </div>
                 </div>
               </div>
+
+              <!-- FAQ Item 3 -->
               <div
                 class="accordion-item faq-item"
                 id="faq-item-fa-3"
@@ -3369,9 +3689,8 @@
                     class="faq-question"
                     itemprop="name"
                   >
-                    <i class="fas fa-envelope faq-icon"></i>
-                    چگونه می‌توان با محمد رسول سهرابی و تیم او ارتباط برقرار
-                    کرد؟
+                    <div class="faq-icon"><i class="fas fa-envelope"></i></div>
+                    <span>چگونه می‌توان با محمد رسول سهرابی و تیم او ارتباط برقرار کرد؟</span>
                   </h3>
                   <button class="copy-faq-link" aria-label="کپی لینک این پرسش" title="کپی لینک" data-link="#faq-item-fa-3">
                     <i class="fas fa-link"></i>
@@ -3402,6 +3721,8 @@
                   </div>
                 </div>
               </div>
+
+              <!-- FAQ Item 4 -->
               <div
                 class="accordion-item faq-item"
                 id="faq-item-fa-4"
@@ -3424,8 +3745,8 @@
                     class="faq-question"
                     itemprop="name"
                   >
-                    <i class="fas fa-infinity faq-icon"></i>
-                    «آنلیمیتد» به چه معناست و فلسفه پشت این لقب چیست؟
+                    <div class="faq-icon"><i class="fas fa-infinity"></i></div>
+                    <span>«آنلیمیتد» به چه معناست و فلسفه پشت این لقب چیست؟</span>
                   </h3>
                   <button class="copy-faq-link" aria-label="کپی لینک این پرسش" title="کپی لینک" data-link="#faq-item-fa-4">
                     <i class="fas fa-link"></i>
@@ -3457,6 +3778,8 @@
                   </div>
                 </div>
               </div>
+
+              <!-- FAQ Item 5 -->
               <div
                 class="accordion-item faq-item"
                 id="faq-item-fa-5"
@@ -3479,9 +3802,8 @@
                     class="faq-question"
                     itemprop="name"
                   >
-                    <i class="fas fa-graduation-cap faq-icon"></i>
-                    محمد رسول سهرابی در کدام دانشگاه تحصیل کرده و رشته تحصیلی او
-                    چیست؟
+                    <div class="faq-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <span>محمد رسول سهرابی در کدام دانشگاه تحصیل کرده و رشته تحصیلی او چیست؟</span>
                   </h3>
                   <button class="copy-faq-link" aria-label="کپی لینک این پرسش" title="کپی لینک" data-link="#faq-item-fa-5">
                     <i class="fas fa-link"></i>
@@ -3519,6 +3841,8 @@
                   </div>
                 </div>
               </div>
+
+              <!-- FAQ Item 6 -->
               <div
                 class="accordion-item faq-item"
                 id="faq-item-fa-6"
@@ -3541,8 +3865,8 @@
                     class="faq-question"
                     itemprop="name"
                   >
-                    <i class="fab fa-github faq-icon"></i>
-                    آیا پروژه‌های شما متن‌باز (Open Source) هستند؟
+                    <div class="faq-icon"><i class="fab fa-github"></i></div>
+                    <span>آیا پروژه‌های شما متن‌باز (Open Source) هستند؟</span>
                   </h3>
                   <button class="copy-faq-link" aria-label="کپی لینک این پرسش" title="کپی لینک" data-link="#faq-item-fa-6">
                     <i class="fas fa-link"></i>
@@ -3568,19 +3892,20 @@
                 </div>
               </div>
             </div>
-            <p class="text-small subtle-text space-top-xs text-right rtl">
-              برای فهرست کامل پرسش‌ها،
-              <a href="/faq" data-ai-intent="view-detailed-faq"
-                >صفحه سؤالات متداول</a
-              >
-              را ببینید.
-            </p>
+              <p class="text-small subtle-text space-top-xs text-right rtl" style="max-width: 850px; margin: 1rem auto 0 auto;">
+                برای فهرست کامل پرسش‌ها،
+                <a href="/faq" data-ai-intent="view-detailed-faq"
+                  >صفحه سؤالات متداول</a
+                >
+                را ببینید.
+              </p>
 
-            <div class="faq-footer">
-              <p style="margin-bottom: 1.5rem; font-weight: 500; font-size: 1.1rem;">پاسخ سوال خود را پیدا نکردید؟</p>
-              <a href="/contact.html" class="btn btn-primary">
-                <i class="fas fa-envelope" aria-hidden="true"></i> تماس با من
-              </a>
+              <div class="faq-footer">
+                <h3 style="margin-bottom: 1.5rem; font-weight: 700; font-size: 1.3rem;">پاسخ سوال خود را پیدا نکردید؟</h3>
+                <a href="/contact.html" class="btn btn-primary">
+                  <i class="fas fa-envelope" aria-hidden="true"></i> تماس با من
+                </a>
+              </div>
             </div>
           </section>
 
