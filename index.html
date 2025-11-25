@@ -83,6 +83,7 @@
     <link rel="stylesheet" href="assets/css/home-faq-enhancement.min.css" />
     <link rel="stylesheet" href="assets/css/testimonials-enhancement.css" />
     <link rel="stylesheet" href="assets/css/hero-enhancement.css" />
+    <link rel="stylesheet" href="assets/css/connect-enhancement.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
     <script src="assets/js/performance-helpers.min.js" defer></script>
     <script src="assets/js/main-script-base.min.js" defer></script>
@@ -2844,7 +2845,7 @@
                     sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, 400px"
                   />
                 </div>
-                <h3 itemprop="name headline">
+                <h3 itemprop="name" data-entity-product="Persian Discord Bot">
                   چطور توی دنیای شلوغ امروز، یه برند شخصی واقعی بسازیم؟ | داستان
                   Rasoul Unlimited
                 </h3>
@@ -3146,12 +3147,7 @@
                 </div>
                 <p itemprop="description">
                   تأیید رسمی قابلیت‌ها و استاندارد بودن اولین ربات مستقل
-                  فارسی‌زبان توسط تیم رسمی شرکت Discord Inc. این تأیید نه تنها
-                  کیفیت پروژه را نشان می‌دهد، بلکه نام ایران را برای اولین‌بار
-                  در میان توسعه‌دهندگان مورد تأیید دیسکورد قرار داد و یک نقطه
-                  عطف مهم در فعالیت‌های اولیه من در حوزه برنامه‌نویسی و
-                  جامعه‌سازی بود. این دستاورد به شدت به اعتبار و Expertise من
-                  می‌افزاید.
+                  فارسی‌زبان توسط تیم رسمی شرکت Discord Inc. این تأیید نه تنها کیفیت پروژه را نشان می‌دهد، بلکه نام ایران را برای اولین‌بار در میان توسعه‌دهندگان مورد تأیید دیسکورد قرار داد و یک نقطه عطف مهم در فعالیت‌های اولیه من در حوزه برنامه‌نویسی و جامعه‌سازی بود. این دستاورد به شدت به اعتبار و Expertise من می‌افزاید.
                 </p>
                 <div class="card-links">
                   <a
@@ -3664,6 +3660,7 @@
           >
             <h2 id="connect-heading">تماس و پیوندهای من</h2>
             <div class="connect-content">
+              <!-- Left Side: Contact Info -->
               <div class="connect-info-block" data-aos="fade-right">
                 <p data-ai-context="contact-invitation">
                   اگر سؤال، ایده‌ی پروژه، یا فقط تمایل به ارتباط دارید، درنگ
@@ -3680,215 +3677,132 @@
                   >
                     <i class="fas fa-envelope" aria-hidden="true"></i>
                     <span itemprop="email" class="ltr nowrap"
-                      >rasoul.unlimited [at] gmail [dot] com</span
+                      >rasoul.unlimited@gmail.com</span
                     >
                   </a>
                   <button class="copy-btn" aria-label="کپی آدرس ایمیل" data-copy="rasoul.unlimited@gmail.com" title="کپی آدرس ایمیل">
                     <i class="far fa-copy" aria-hidden="true"></i>
                   </button>
                 </div>
-                <p class="location-edu" data-ai-context="location-education">
-                  <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-                  <span
-                    itemprop="homeLocation"
-                    itemscope
-                    itemtype="https://schema.org/Place"
-                  >
+                <div class="location-edu" data-ai-context="location-education">
+                  <div>
+                    <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
                     <span
-                      itemprop="address"
+                      itemprop="homeLocation"
                       itemscope
-                      itemtype="https://schema.org/PostalAddress"
+                      itemtype="https://schema.org/Place"
                     >
-                      <span itemprop="addressLocality">تهران</span> /
-                      <span itemprop="addressLocality">کرج</span>
+                      <span
+                        itemprop="address"
+                        itemscope
+                        itemtype="https://schema.org/PostalAddress"
+                      >
+                        <span itemprop="addressLocality">تهران</span> /
+                        <span itemprop="addressLocality">کرج</span>
+                      </span>
                     </span>
-                  </span>
-                  <i
-                    class="fas fa-graduation-cap icon-margin-left"
-                    aria-hidden="true"
-                  ></i>
-                  <span property="schema:alumniOf"
-                    >کارشناسی مهندسی پزشکی – دانشگاه آزاد اسلامی واحد تهران
-                    مرکزی</span
-                  >
-                </p>
-                <div class="resume-download" style="margin-top: 1.5rem;">
-                  <a href="/resume.html" class="hero-btn primary" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.2rem; border-radius: 8px; font-size: 0.9rem;">
+                  </div>
+                  <div style="margin-top: 0.5rem;">
+                    <i
+                      class="fas fa-graduation-cap"
+                      aria-hidden="true"
+                    ></i>
+                    <span property="schema:alumniOf"
+                      >کارشناسی مهندسی پزشکی – دانشگاه آزاد اسلامی واحد تهران
+                      مرکزی</span
+                    >
+                  </div>
+                </div>
+                <div class="resume-download">
+                  <a href="/resume.html" class="hero-btn primary">
                     <i class="fas fa-file-alt"></i> مشاهده و دانلود رزومه
                   </a>
                 </div>
               </div>
+
+              <!-- Right Side: Links Grid -->
               <div class="connect-links-block" data-aos="fade-left">
                 
-                <h3>شبکه‌های اجتماعی</h3>
-                <ul data-ai-context="social-media-links">
-                  <li>
-                    <a
-                      href="https://www.instagram.com/Rasoul.Unlimited"
-                      target="_blank"
-                      rel="noopener noreferrer me"
-                      aria-label="اینستاگرام"
-                      title="پیج اینستاگرام Rasoul Unlimited"
-                      role="button"
-                      ><i class="fab fa-instagram" aria-hidden="true"></i> اینستاگرام</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      href="https://t.me/RasoulUnlimited"
-                      target="_blank"
-                      rel="authoritative noopener noreferrer me"
-                      aria-label="تلگرام"
-                      title="عضویت در کانال تلگرام"
-                      role="button"
-                      ><i class="fab fa-telegram-plane" aria-hidden="true"></i> تلگرام</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      href="https://x.com/rasoulunlimited"
-                      target="_blank"
-                      rel="authoritative noopener noreferrer me"
-                      aria-label="X (توییتر)"
-                      title="مشاهده پروفایل X (توییتر سابق)"
-                      role="button"
-                      ><i class="fab fa-x" aria-hidden="true"></i> X (Twitter)</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      href="https://www.youtube.com/@RasoulUnlimited"
-                      target="_blank"
-                      rel="authoritative noopener noreferrer me"
-                      aria-label="یوتیوب"
-                      title="مشاهده کانال یوتیوب"
-                      role="button"
-                      ><i class="fab fa-youtube" aria-hidden="true"></i> یوتیوب</a
-                    >
-                  </li>
-                </ul>
+                <div class="link-category">
+                  <h3>شبکه‌های اجتماعی</h3>
+                  <div class="links-grid" data-ai-context="social-media-links">
+                    <a href="https://www.instagram.com/Rasoul.Unlimited" target="_blank" rel="noopener noreferrer me" class="social-link-card" aria-label="اینستاگرام">
+                      <i class="fab fa-instagram" aria-hidden="true"></i>
+                      <span>اینستاگرام</span>
+                    </a>
+                    <a href="https://t.me/RasoulUnlimited" target="_blank" rel="authoritative noopener noreferrer me" class="social-link-card" aria-label="تلگرام">
+                      <i class="fab fa-telegram-plane" aria-hidden="true"></i>
+                      <span>تلگرام</span>
+                    </a>
+                    <a href="https://x.com/rasoulunlimited" target="_blank" rel="authoritative noopener noreferrer me" class="social-link-card" aria-label="X (توییتر)">
+                      <i class="fab fa-x" aria-hidden="true"></i>
+                      <span>X (Twitter)</span>
+                    </a>
+                    <a href="https://www.youtube.com/@RasoulUnlimited" target="_blank" rel="authoritative noopener noreferrer me" class="social-link-card" aria-label="یوتیوب">
+                      <i class="fab fa-youtube" aria-hidden="true"></i>
+                      <span>یوتیوب</span>
+                    </a>
+                  </div>
+                </div>
 
-                <h3>پروفایل‌های حرفه‌ای</h3>
-                <ul data-ai-context="professional-links">
-                  <li>
-                    <a
-                      href="https://www.linkedin.com/in/rasoulunlimited/"
-                      target="_blank"
-                      rel="noopener noreferrer me"
-                      aria-label="لینکدین"
-                      title="مشاهده پروفایل لینکدین"
-                      role="button"
-                      ><i class="fab fa-linkedin" aria-hidden="true"></i> لینکدین</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      href="https://github.com/RasoulUnlimited/"
-                      target="_blank"
-                      rel="authoritative noopener noreferrer me"
-                      aria-label="گیت‌هاب"
-                      title="مشاهده پروژه‌ها در گیت‌هاب"
-                      role="button"
-                      ><i class="fab fa-github" aria-hidden="true"></i> گیت‌هاب</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      href="https://about.me/rasoulunlimited"
-                      target="_blank"
-                      rel="authoritative noopener noreferrer me"
-                      aria-label="About.me"
-                      title="مشاهده پروفایل About.me"
-                      role="button"
-                      ><i class="fas fa-user-circle" aria-hidden="true"></i> About.me</a
-                    >
-                  </li>
-                </ul>
+                <div class="link-category">
+                  <h3>پروفایل‌های حرفه‌ای</h3>
+                  <div class="links-grid" data-ai-context="professional-links">
+                    <a href="https://www.linkedin.com/in/rasoulunlimited/" target="_blank" rel="noopener noreferrer me" class="social-link-card" aria-label="لینکدین">
+                      <i class="fab fa-linkedin" aria-hidden="true"></i>
+                      <span>لینکدین</span>
+                    </a>
+                    <a href="https://github.com/RasoulUnlimited/" target="_blank" rel="authoritative noopener noreferrer me" class="social-link-card" aria-label="گیت‌هاب">
+                      <i class="fab fa-github" aria-hidden="true"></i>
+                      <span>گیت‌هاب</span>
+                    </a>
+                    <a href="https://about.me/rasoulunlimited" target="_blank" rel="authoritative noopener noreferrer me" class="social-link-card" aria-label="About.me">
+                      <i class="fas fa-user-circle" aria-hidden="true"></i>
+                      <span>About.me</span>
+                    </a>
+                  </div>
+                </div>
 
-                <h3>محتوا و بلاگ</h3>
-                <ul data-ai-context="content-links">
-                  <li>
-                    <a
-                      href="https://virgool.io/@RasoulUnlimited"
-                      target="_blank"
-                      rel="noopener noreferrer me"
-                      aria-label="ویرگول"
-                      title="مشاهده مقالات در ویرگول"
-                      role="button"
-                      ><i class="fas fa-pen-fancy" aria-hidden="true"></i> ویرگول</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      href="https://rasoulunlimited.medium.com"
-                      target="_blank"
-                      rel="authoritative noopener noreferrer me"
-                      aria-label="مدیوم"
-                      title="مشاهده مقالات در مدیوم"
-                      role="button"
-                      ><i class="fab fa-medium" aria-hidden="true"></i> مدیوم</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      href="https://dev.to/rasoulunlimited"
-                      target="_blank"
-                      rel="authoritative noopener noreferrer me"
-                      aria-label="dev.to"
-                      title="مشاهده مقالات در dev.to"
-                      role="button"
-                      ><i class="fab fa-dev" aria-hidden="true"></i> dev.to</a
-                    >
-                  </li>
-                </ul>
+                <div class="link-category">
+                  <h3>محتوا و بلاگ</h3>
+                  <div class="links-grid" data-ai-context="content-links">
+                    <a href="https://virgool.io/@RasoulUnlimited" target="_blank" rel="noopener noreferrer me" class="social-link-card" aria-label="ویرگول">
+                      <i class="fas fa-pen-fancy" aria-hidden="true"></i>
+                      <span>ویرگول</span>
+                    </a>
+                    <a href="https://rasoulunlimited.medium.com" target="_blank" rel="authoritative noopener noreferrer me" class="social-link-card" aria-label="مدیوم">
+                      <i class="fab fa-medium" aria-hidden="true"></i>
+                      <span>مدیوم</span>
+                    </a>
+                    <a href="https://dev.to/rasoulunlimited" target="_blank" rel="authoritative noopener noreferrer me" class="social-link-card" aria-label="dev.to">
+                      <i class="fab fa-dev" aria-hidden="true"></i>
+                      <span>dev.to</span>
+                    </a>
+                  </div>
+                </div>
 
-                <h3>پروفایل‌های پژوهشی</h3>
-                <ul class="academic-links">
-                  <li>
-                    <a
-                      href="https://scholar.google.com/citations?user=kDl5eNUAAAAJ"
-                      target="_blank"
-                      rel="authoritative noopener noreferrer me"
-                      aria-label="Google Scholar"
-                      title="مشاهده پروفایل Google Scholar"
-                      role="button"
-                      ><i class="fas fa-graduation-cap" aria-hidden="true"></i> Google Scholar</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      href="https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi"
-                      target="_blank"
-                      rel="authoritative noopener noreferrer me"
-                      aria-label="ResearchGate"
-                      title="مشاهده پروفایل ResearchGate"
-                      role="button"
-                      ><i class="fab fa-researchgate" aria-hidden="true"></i> ResearchGate</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      href="https://orcid.org/0009-0004-7177-2080"
-                      target="_blank"
-                      rel="authoritative noopener noreferrer me"
-                      aria-label="ORCID"
-                      title="مشاهده پروفایل ORCID"
-                      role="button"
-                      ><i class="fab fa-orcid" aria-hidden="true"></i> ORCID</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      href="https://rasoulunlimited.ir/wiki/rasoul-unlimited/"
-                      target="_blank"
-                      rel="authoritative noopener noreferrer me"
-                      aria-label="ویکی‌دیتا"
-                      title="مشاهده آیتم من در ویکی‌دیتا"
-                      role="button"
-                      ><i class="fas fa-database" aria-hidden="true"></i> ویکی‌دیتا</a
-                    >
-                  </li>
-                </ul>
+                <div class="link-category">
+                  <h3>پروفایل‌های پژوهشی</h3>
+                  <div class="links-grid academic-links">
+                    <a href="https://scholar.google.com/citations?user=kDl5eNUAAAAJ" target="_blank" rel="authoritative noopener noreferrer me" class="social-link-card" aria-label="Google Scholar">
+                      <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+                      <span>Google Scholar</span>
+                    </a>
+                    <a href="https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi" target="_blank" rel="authoritative noopener noreferrer me" class="social-link-card" aria-label="ResearchGate">
+                      <i class="fab fa-researchgate" aria-hidden="true"></i>
+                      <span>ResearchGate</span>
+                    </a>
+                    <a href="https://orcid.org/0009-0004-7177-2080" target="_blank" rel="authoritative noopener noreferrer me" class="social-link-card" aria-label="ORCID">
+                      <i class="fab fa-orcid" aria-hidden="true"></i>
+                      <span>ORCID</span>
+                    </a>
+                    <a href="https://rasoulunlimited.ir/wiki/rasoul-unlimited/" target="_blank" rel="authoritative noopener noreferrer me" class="social-link-card" aria-label="ویکی‌دیتا">
+                      <i class="fas fa-database" aria-hidden="true"></i>
+                      <span>ویکی‌دیتا</span>
+                    </a>
+                  </div>
+                </div>
+
               </div>
             </div>
           </section>

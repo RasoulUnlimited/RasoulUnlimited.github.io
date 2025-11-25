@@ -1,0 +1,175 @@
+/* Enhanced Connect Section Styles */
+#connect {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: var(--space-xxxl);
+}
+
+#connect .connect-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+  margin-top: var(--space-lg);
+}
+
+@media (min-width: 992px) {
+  #connect .connect-content {
+    grid-template-columns: 1fr 1.5fr;
+    align-items: start;
+  }
+}
+
+/* Contact Info Block (Left Side) */
+.connect-info-block {
+  background: var(--card-bg);
+  padding: var(--space-xl);
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 10px 30px var(--shadow-color-medium);
+  border: 1px solid var(--border-color);
+  position: relative;
+  z-index: 1;
+  transition: transform var(--transition-duration-medium) var(--transition-easing-smooth);
+}
+
+.connect-info-block:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px var(--shadow-color-strong);
+}
+
+.connect-info-block p {
+  margin-bottom: var(--space-md);
+  color: var(--text-color);
+  line-height: 1.8;
+}
+
+.contact-info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background: var(--bg-secondary);
+  padding: var(--space-md);
+  border-radius: var(--border-radius-md);
+  margin-bottom: var(--space-md);
+  border: 1px dashed var(--border-color);
+}
+
+.contact-info a {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  color: var(--primary-color);
+  font-weight: 600;
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.contact-info a:hover {
+  color: var(--accent-color);
+}
+
+.copy-btn {
+  background: none;
+  border: none;
+  color: var(--text-color-light);
+  cursor: pointer;
+  transition: color 0.2s;
+  padding: 5px;
+}
+
+.copy-btn:hover {
+  color: var(--primary-color);
+}
+
+.location-edu {
+  font-size: 0.95rem;
+  color: var(--text-color-light);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.location-edu i {
+  color: var(--primary-color);
+  width: 20px;
+  text-align: center;
+}
+
+/* Links Block (Right Side) */
+.connect-links-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.link-category h3 {
+  font-size: 1.2rem;
+  margin-bottom: var(--space-md);
+  color: var(--heading-color);
+  border-bottom: 2px solid var(--primary-color);
+  display: inline-block;
+  padding-bottom: var(--space-xs);
+}
+
+.links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: var(--space-md);
+}
+
+.social-link-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background: var(--card-bg);
+  padding: var(--space-md);
+  border-radius: var(--border-radius-md);
+  text-decoration: none;
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  transition: all var(--transition-duration-short) ease;
+  box-shadow: 0 2px 5px var(--shadow-color-light);
+}
+
+.social-link-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px var(--shadow-color-medium);
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.social-link-card i {
+  font-size: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.social-link-card:hover i {
+  transform: scale(1.2) rotate(5deg);
+}
+
+/* Specific Brand Colors (Optional, for extra polish) */
+.social-link-card[href*="instagram"] i { color: #E1306C; }
+.social-link-card[href*="telegram"] i { color: #0088cc; }
+.social-link-card[href*="linkedin"] i { color: #0077b5; }
+.social-link-card[href*="github"] i { color: #333; }
+.social-link-card[href*="youtube"] i { color: #FF0000; }
+.social-link-card[href*="medium"] i { color: #00ab6c; }
+.social-link-card[href*="dev.to"] i { color: #0a0a0a; }
+.social-link-card[href*="twitter"], .social-link-card[href*="x.com"] i { color: #1DA1F2; }
+
+/* Dark mode adjustments for brand colors if needed */
+@media (prefers-color-scheme: dark) {
+  .social-link-card[href*="github"] i { color: #fff; }
+  .social-link-card[href*="dev.to"] i { color: #fff; }
+}
+
+/* Resume Button Enhancement */
+.resume-download .hero-btn {
+  width: 100%;
+  justify-content: center;
+  margin-top: var(--space-sm);
+  box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.3);
+}
+
+.resume-download .hero-btn:hover {
+  box-shadow: 0 6px 20px rgba(var(--primary-rgb), 0.5);
+}
