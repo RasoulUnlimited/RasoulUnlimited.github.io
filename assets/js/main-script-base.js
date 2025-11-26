@@ -31,12 +31,22 @@
   const prefersDark = !!(darkMediaQuery && darkMediaQuery.matches);
   const savedTheme = storage?.getItem("theme") || null;
 
+  // Motion preference (for smooth scroll, etc.)
+  const reduceMotionQuery = window.matchMedia
+    ? window.matchMedia("(prefers-reduced-motion: reduce)")
+    : null;
+  const prefersReducedMotion = !!(reduceMotionQuery && reduceMotionQuery.matches);
+
   /**
    * Basic toast helper (string-only API to stay compatible)
    * Other scripts can call window.createToast("message").
    */
   function createToast(message) {
     if (!message) {return;}
+    if (!document.body) {
+      console.warn("Cannot show toast: document.body not ready");
+      return;
+    }
 
     const toast = document.createElement("div");
     toast.setAttribute("role", "status");
@@ -44,11 +54,11 @@
     toast.className = "dynamic-toast";
     toast.textContent = String(message);
 
-    // Optional: prevent infinite stacking by removing old non-visible toasts
+    // Optional: prevent infinite stacking by removing oldest toast if too many
     const existingToasts = document.querySelectorAll(".dynamic-toast");
     if (existingToasts.length > 3) {
       existingToasts.forEach((t, index) => {
-        if (index === 0) {t.remove();}
+        if (index === 0 && t.parentNode) {t.remove();}
       });
     }
 
@@ -79,6 +89,7 @@
    */
   function applyTheme(theme, showToast) {
     const isDark = theme === "dark";
+    const shouldShowToast = !!showToast;
 
     document.body.classList.toggle("dark-mode", isDark);
     document.body.classList.toggle("light-mode", !isDark);
@@ -92,7 +103,10 @@
       toggle.setAttribute("aria-checked", String(isDark));
     }
 
-    if (showToast && typeof window.langStrings.themeChanged === "function") {
+    if (
+      shouldShowToast &&
+      typeof window.langStrings.themeChanged === "function"
+    ) {
       // themeChanged(theme) → localized message
       const msg = window.langStrings.themeChanged(theme);
       if (msg) {createToast(msg);}
@@ -129,6 +143,12 @@
   function initThemeToggle() {
     const themeToggleInput = document.getElementById("theme-toggle");
     if (!themeToggleInput) {return;}
+
+    // Avoid attaching listeners multiple times on dynamic includes
+    if (themeToggleInput.dataset.themeToggleInit === "true") {
+      return;
+    }
+    themeToggleInput.dataset.themeToggleInit = "true";
 
     // Sync ARIA
     themeToggleInput.setAttribute(
@@ -204,12 +224,23 @@
     const progressBar = document.getElementById("scroll-progress-bar");
     if (!progressBar) return;
 
-    const scrollTop = window.scrollY || document.documentElement.scrollTop;
-    const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrollPercent = (scrollTop / docHeight) * 100;
+    const scrollTop =
+      window.scrollY || document.documentElement.scrollTop || 0;
+    const docHeight =
+      document.documentElement.scrollHeight -
+      document.documentElement.clientHeight;
 
-    progressBar.style.width = scrollPercent + "%";
-    progressBar.setAttribute("aria-valuenow", Math.round(scrollPercent));
+    if (docHeight <= 0) {
+      progressBar.style.width = "0%";
+      progressBar.setAttribute("aria-valuenow", "0");
+      return;
+    }
+
+    const scrollPercent = (scrollTop / docHeight) * 100;
+    const clamped = Math.max(0, Math.min(100, scrollPercent));
+
+    progressBar.style.width = clamped + "%";
+    progressBar.setAttribute("aria-valuenow", Math.round(clamped));
   }
 
   window.addEventListener(
@@ -238,35 +269,55 @@
   // Back to Top Button Logic
   const backToTopBtn = document.getElementById("back-to-top");
   if (backToTopBtn) {
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 300) {
-        backToTopBtn.classList.add("show");
-      } else {
-        backToTopBtn.classList.remove("show");
-      }
-    }, { passive: true });
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (window.scrollY > 300) {
+          backToTopBtn.classList.add("show");
+        } else {
+          backToTopBtn.classList.remove("show");
+        }
+      },
+      { passive: true }
+    );
 
     backToTopBtn.addEventListener("click", () => {
       window.scrollTo({
         top: 0,
-        behavior: "smooth"
+        behavior: prefersReducedMotion ? "auto" : "smooth",
       });
     });
   }
 
   // Copy to Clipboard Logic
   const copyBtns = document.querySelectorAll(".copy-btn");
-  copyBtns.forEach(btn => {
+  copyBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
       const textToCopy = btn.getAttribute("data-copy");
-      if (textToCopy) {
-        navigator.clipboard.writeText(textToCopy).then(() => {
+      if (!textToCopy) {
+        console.warn("No data-copy attribute found on .copy-btn");
+        return;
+      }
+
+      if (!navigator.clipboard || !navigator.clipboard.writeText) {
+        console.warn("Clipboard API not available");
+        if (window.createToast) {
+          window.createToast("مرورگر شما از کپی خودکار پشتیبانی نمی‌کند.");
+        }
+        return;
+      }
+
+      navigator.clipboard
+        .writeText(textToCopy)
+        .then(() => {
           // Show feedback
           const originalIcon = btn.innerHTML;
-          btn.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i>';
+          btn.innerHTML =
+            '<i class="fas fa-check" aria-hidden="true"></i>';
           btn.classList.add("copied");
-          
+
           if (window.createToast) {
+            // این پیام را می‌توانی بعداً با langStrings هم محلی‌سازی کنی
             window.createToast("ایمیل کپی شد!");
           }
 
@@ -274,10 +325,13 @@
             btn.innerHTML = originalIcon;
             btn.classList.remove("copied");
           }, 2000);
-        }).catch(err => {
+        })
+        .catch((err) => {
           console.error("Failed to copy: ", err);
+          if (window.createToast) {
+            window.createToast("کپی کردن با مشکل مواجه شد.");
+          }
         });
-      }
     });
   });
 })();

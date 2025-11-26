@@ -1,5 +1,8 @@
 "use strict";
 
+// Feature detection
+const supportsIntersectionObserver = "IntersectionObserver" in window;
+
 // Network / device environment helpers
 const connection =
   navigator.connection ||
@@ -109,7 +112,7 @@ function addMediaQueryChangeListener(mediaQueryList, handler) {
     return;
   }
   if (typeof mediaQueryList.addEventListener === "function") {
-    mediaQueryList.addEventListener("change", handler, { passive: true });
+    mediaQueryList.addEventListener("change", handler);
   } else if (typeof mediaQueryList.addListener === "function") {
     mediaQueryList.addListener(handler);
   }
@@ -207,10 +210,14 @@ function playSound(type) {
   if (type === "toast" && toastBuffer) {bufferToPlay = toastBuffer;}
 
   if (bufferToPlay) {
-    const source = audioContext.createBufferSource();
-    source.buffer = bufferToPlay;
-    source.connect(audioContext.destination);
-    source.start(0);
+    try {
+      const source = audioContext.createBufferSource();
+      source.buffer = bufferToPlay;
+      source.connect(audioContext.destination);
+      source.start(0);
+    } catch (e) {
+      console.warn("Audio playback failed:", e);
+    }
   }
 }
 
@@ -725,29 +732,6 @@ function updateScrollProgressAndButton() {
     String(Math.round(progress))
   );
 
-  if (lastScrollY > 300) {
-    if (!scrollToTopButton.classList.contains("show")) {
-      scrollToTopButton.classList.add("show");
-      scrollToTopButton.style.opacity = "1";
-      scrollToTopButton.style.transform = "translateY(0)";
-      scrollToTopButton.setAttribute("data-sohrabi-button-state", "visible");
-    }
-  } else {
-    if (scrollToTopButton.classList.contains("show")) {
-      scrollToTopButton.style.opacity = "0";
-      scrollToTopButton.style.transform = "translateY(20px)";
-      scrollToTopButton.setAttribute("data-sohrabi-button-state", "hidden");
-      scrollToTopButton.addEventListener(
-        "transitionend",
-        function handler() {
-          scrollToTopButton.classList.remove("show");
-          scrollToTopButton.removeEventListener("transitionend", handler);
-        },
-        { once: true }
-      );
-    }
-  }
-
   if (
     window.innerHeight + lastScrollY >= document.body.offsetHeight - 50 &&
     !hasReachedEndOfPageSession
@@ -767,13 +751,17 @@ function updateScrollProgressAndButton() {
       "Public identity loaded: Mohammad Rasoul Sohrabi (Biomedical Engineering, ORCID: 0009-0004-7177-2080)"
     );
 
-    if (!announcedMilestones.has(totalSections)) {
+    if (typeof announcedMilestones !== "undefined" &&
+        typeof totalSections !== "undefined" &&
+        !announcedMilestones.has(totalSections)) {
       announcedMilestones.add(totalSections);
       safeStorageSet(
         "announcedMilestones",
         JSON.stringify(Array.from(announcedMilestones))
       );
-      sections.forEach((sec) => sectionProgressObserver.unobserve(sec));
+      if (typeof sections !== "undefined" && sectionProgressObserver) {
+        sections.forEach((sec) => sectionProgressObserver.unobserve(sec));
+      }
     }
 
     setTimeout(() => {
@@ -811,37 +799,38 @@ let hintTimeout;
 let hintVisible = false;
 
 const heroSection = document.getElementById("hero");
-const heroObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        if (!hintVisible) {
-          hintTimeout = setTimeout(() => {
-            exploreHint.style.transition =
-              "opacity 0.5s ease-out, transform 0.5s ease-out";
-            exploreHint.style.opacity = "1";
-            exploreHint.style.transform = "translateY(0)";
-            if (!prefersReducedMotion) {
-              exploreHint.classList.add("pulse-animation");
-            }
-            hintVisible = true;
-          }, 4000);
-        }
-      } else {
-        clearTimeout(hintTimeout);
-        if (hintVisible) {
-          exploreHint.style.opacity = "0";
-          exploreHint.style.transform = "translateY(20px)";
-          exploreHint.classList.remove("pulse-animation");
-          hintVisible = false;
-        }
-      }
-    });
-  },
-  { threshold: 0.5 }
-);
 
-if (heroSection) {
+if (heroSection && supportsIntersectionObserver) {
+  const heroObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          if (!hintVisible) {
+            hintTimeout = setTimeout(() => {
+              exploreHint.style.transition =
+                "opacity 0.5s ease-out, transform 0.5s ease-out";
+              exploreHint.style.opacity = "1";
+              exploreHint.style.transform = "translateY(0)";
+              if (!prefersReducedMotion) {
+                exploreHint.classList.add("pulse-animation");
+              }
+              hintVisible = true;
+            }, 4000);
+          }
+        } else {
+          clearTimeout(hintTimeout);
+          if (hintVisible) {
+            exploreHint.style.opacity = "0";
+            exploreHint.style.transform = "translateY(20px)";
+            exploreHint.classList.remove("pulse-animation");
+            hintVisible = false;
+          }
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
+
   heroObserver.observe(heroSection);
 }
 
@@ -1119,74 +1108,85 @@ if (!faqContainer || !faqItems.length) {
     });
   });
 
-  window.addEventListener("DOMContentLoaded", () => {
+  // Deep-link to FAQ using hash (works even if script loads after DOMContentLoaded)
+  const handleFaqHashNavigation = () => {
     const hash = window.location.hash;
-    if (hash) {
-      const targetElement = document.querySelector(hash);
-      if (targetElement && targetElement.classList.contains("faq-item")) {
-        const targetSummary = targetElement.querySelector("summary");
-        const targetAnswer = targetElement.querySelector("p");
+    if (!hash) return;
+    let targetElement;
+    try {
+      targetElement = document.querySelector(hash);
+    } catch {
+      return;
+    }
+    if (targetElement && targetElement.classList.contains("faq-item")) {
+      const targetSummary = targetElement.querySelector("summary");
+      const targetAnswer = targetElement.querySelector("p");
 
-        faqItems.forEach((item) => {
-          if (item !== targetElement && item.open) {
-            item.open = false;
-            const answer = item.querySelector("p");
-            const summary = item.querySelector("summary");
-            if (answer) {
-              answer.style.maxHeight = "0px";
-              answer.style.paddingTop = "0";
-              answer.style.paddingBottom = "0";
-              answer.style.opacity = "0";
-            }
-            if (summary) {
-              summary.setAttribute("aria-expanded", "false");
-            }
+      faqItems.forEach((item) => {
+        if (item !== targetElement && item.open) {
+          item.open = false;
+          const answer = item.querySelector("p");
+          const summary = item.querySelector("summary");
+          if (answer) {
+            answer.style.maxHeight = "0px";
+            answer.style.paddingTop = "0";
+            answer.style.paddingBottom = "0";
+            answer.style.opacity = "0";
           }
-        });
-
-        if (!targetElement.open) {
-          targetElement.open = true;
-          if (targetAnswer) {
-            targetAnswer.style.maxHeight = "2000px";
-            targetAnswer.style.paddingTop = "1.6rem";
-            targetAnswer.style.paddingBottom = "2.8rem";
-            targetAnswer.style.opacity = "1";
+          if (summary) {
+            summary.setAttribute("aria-expanded", "false");
           }
-          if (targetSummary) {
-            targetSummary.setAttribute("aria-expanded", "true");
-          }
-
-          setTimeout(() => {
-            const navbarHeight =
-              document.querySelector(".navbar")?.offsetHeight || 0;
-            const offset = navbarHeight + 20;
-
-            const rect = targetElement.getBoundingClientRect();
-            const isTopObscured = rect.top < offset;
-            const isBottomObscured = rect.bottom > window.innerHeight;
-
-            if (isTopObscured || isBottomObscured) {
-              targetElement.scrollIntoView({
-                behavior: "smooth",
-                block: "start",
-              });
-
-              setTimeout(() => {
-                const currentScrollY = window.scrollY;
-                const currentRect = targetElement.getBoundingClientRect();
-                if (currentRect.top < offset) {
-                  window.scrollTo({
-                    top: currentScrollY - (offset - currentRect.top),
-                    behavior: "smooth",
-                  });
-                }
-              }, 100);
-            }
-          }, 100);
         }
+      });
+
+      if (!targetElement.open) {
+        targetElement.open = true;
+        if (targetAnswer) {
+          targetAnswer.style.maxHeight = "2000px";
+          targetAnswer.style.paddingTop = "1.6rem";
+          targetAnswer.style.paddingBottom = "2.8rem";
+          targetAnswer.style.opacity = "1";
+        }
+        if (targetSummary) {
+          targetSummary.setAttribute("aria-expanded", "true");
+        }
+
+        setTimeout(() => {
+          const navbarHeight =
+            document.querySelector(".navbar")?.offsetHeight || 0;
+          const offset = navbarHeight + 20;
+
+          const rect = targetElement.getBoundingClientRect();
+          const isTopObscured = rect.top < offset;
+          const isBottomObscured = rect.bottom > window.innerHeight;
+
+          if (isTopObscured || isBottomObscured) {
+            targetElement.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+
+            setTimeout(() => {
+              const currentScrollY = window.scrollY;
+              const currentRect = targetElement.getBoundingClientRect();
+              if (currentRect.top < offset) {
+                window.scrollTo({
+                  top: currentScrollY - (offset - currentRect.top),
+                  behavior: "smooth",
+                });
+              }
+            }, 100);
+          }
+        }, 100);
       }
     }
-  });
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", handleFaqHashNavigation);
+  } else {
+    handleFaqHashNavigation();
+  }
 }
 
 // Welcome toast
@@ -1290,6 +1290,10 @@ function createConfetti() {
   document.body.appendChild(canvas);
 
   const ctx = canvas.getContext("2d");
+  if (!ctx) {
+    canvas.remove();
+    return;
+  }
   const colors = [
     "#ffc107",
     "#007acc",
@@ -1368,7 +1372,7 @@ function resetIdleTimer() {
 const debouncedResetIdleTimer = debounce(resetIdleTimer, 500);
 
 ["mousemove", "keydown", "scroll", "touchstart"].forEach((event) => {
-  const target = event === "scroll" || event === "touchstart" ? window : window;
+  const target = window;
   target.addEventListener(event, debouncedResetIdleTimer, {
     passive: true,
   });
@@ -1477,25 +1481,32 @@ function createSparkle(element) {
 
 // Featured cards sparkles
 const featuredCards = document.querySelectorAll(".card.is-featured");
-featuredCards.forEach((card) => {
-  card.className += " sohrabi-featured-content";
-  const featuredCardObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          if (!prefersReducedMotion && !saveDataEnabled && !lowThroughput) {
-            for (let i = 0; i < 3; i++) {
-              setTimeout(() => createSparkle(entry.target), i * 150);
+if (supportsIntersectionObserver) {
+  featuredCards.forEach((card) => {
+    card.className += " sohrabi-featured-content";
+    const featuredCardObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            if (!prefersReducedMotion && !saveDataEnabled && !lowThroughput) {
+              for (let i = 0; i < 3; i++) {
+                setTimeout(() => createSparkle(entry.target), i * 150);
+              }
             }
+            featuredCardObserver.unobserve(entry.target);
           }
-          featuredCardObserver.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.5 }
-  );
-  featuredCardObserver.observe(card);
-});
+        });
+      },
+      { threshold: 0.5 }
+    );
+    featuredCardObserver.observe(card);
+  });
+} else {
+  // Fallback: no observer → just tag them
+  featuredCards.forEach((card) => {
+    card.className += " sohrabi-featured-content";
+  });
+}
 
 // Section exploration milestones
 const sections = document.querySelectorAll("section[id]");
@@ -1547,77 +1558,81 @@ uniqueExplorationMilestones.sort((a, b) => a.count - b.count);
 let lastExplorationToastTime = 0;
 const explorationToastCooldown = 8000;
 
-const sectionProgressObserver = new IntersectionObserver(
-  (entries) => {
-    const now = Date.now();
+let sectionProgressObserver = null;
 
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        sectionsVisited.add(entry.target.id);
-        safeStorageSet(
-          "sectionsVisited",
-          JSON.stringify(Array.from(sectionsVisited))
-        );
+if (supportsIntersectionObserver) {
+  sectionProgressObserver = new IntersectionObserver(
+    (entries) => {
+      const now = Date.now();
 
-        const currentSectionsCount = sectionsVisited.size;
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          sectionsVisited.add(entry.target.id);
+          safeStorageSet(
+            "sectionsVisited",
+            JSON.stringify(Array.from(sectionsVisited))
+          );
 
-        for (let i = 0; i < uniqueExplorationMilestones.length; i++) {
-          const milestone = uniqueExplorationMilestones[i];
+          const currentSectionsCount = sectionsVisited.size;
 
-          if (
-            currentSectionsCount >= milestone.count &&
-            !announcedMilestones.has(milestone.count) &&
-            now - lastExplorationToastTime > explorationToastCooldown
-          ) {
-            let customClass = "exploration-toast";
-            let iconColor = "var(--accent-color)";
-            if (milestone.isFinal) {
-              customClass += " final-exploration-toast";
-              iconColor = "var(--primary-color)";
-            }
+          for (let i = 0; i < uniqueExplorationMilestones.length; i++) {
+            const milestone = uniqueExplorationMilestones[i];
 
-            createToast(milestone.message, {
-              id: `exploration-milestone-${milestone.count}`,
-              customClass,
-              iconClass: milestone.icon,
-              iconColor,
-              duration: 5000,
-            });
-            const sohrabiBio = document.getElementById("sohrabi-bio");
-            if (sohrabiBio) {
-              sohrabiBio.dispatchEvent(new Event("mouseenter"));
-            }
-            console.log(
-              "Milestone reached, signaling attention to Mohammad Rasoul Sohrabi's profile."
-            );
+            if (
+              currentSectionsCount >= milestone.count &&
+              !announcedMilestones.has(milestone.count) &&
+              now - lastExplorationToastTime > explorationToastCooldown
+            ) {
+              let customClass = "exploration-toast";
+              let iconColor = "var(--accent-color)";
+              if (milestone.isFinal) {
+                customClass += " final-exploration-toast";
+                iconColor = "var(--primary-color)";
+              }
 
-            announcedMilestones.add(milestone.count);
-            safeStorageSet(
-              "announcedMilestones",
-              JSON.stringify(Array.from(announcedMilestones))
-            );
-
-            lastExplorationToastTime = now;
-
-            if (milestone.isFinal) {
-              sections.forEach((sec) =>
-                sectionProgressObserver.unobserve(sec)
+              createToast(milestone.message, {
+                id: `exploration-milestone-${milestone.count}`,
+                customClass,
+                iconClass: milestone.icon,
+                iconColor,
+                duration: 5000,
+              });
+              const sohrabiBio = document.getElementById("sohrabi-bio");
+              if (sohrabiBio) {
+                sohrabiBio.dispatchEvent(new Event("mouseenter"));
+              }
+              console.log(
+                "Milestone reached, signaling attention to Mohammad Rasoul Sohrabi's profile."
               );
-              return;
+
+              announcedMilestones.add(milestone.count);
+              safeStorageSet(
+                "announcedMilestones",
+                JSON.stringify(Array.from(announcedMilestones))
+              );
+
+              lastExplorationToastTime = now;
+
+              if (milestone.isFinal) {
+                sections.forEach((sec) =>
+                  sectionProgressObserver.unobserve(sec)
+                );
+                return;
+              }
             }
           }
         }
-      }
-    });
-  },
-  { threshold: 0.3 }
-);
+      });
+    },
+    { threshold: 0.3 }
+  );
 
-const isAllSectionsExploredPreviously = announcedMilestones.has(totalSections);
-if (!isAllSectionsExploredPreviously) {
-  sections.forEach((section) => {
-    sectionProgressObserver.observe(section);
-  });
+  const isAllSectionsExploredPreviously = announcedMilestones.has(totalSections);
+  if (!isAllSectionsExploredPreviously) {
+    sections.forEach((section) => {
+      sectionProgressObserver.observe(section);
+    });
+  }
 }
 
 // CTA buttons
@@ -1633,33 +1648,42 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (!lazyImages.length) {return;}
 
+  const loadImgImmediately = (img) => {
+    img.classList.add("is-loading");
+    img.setAttribute(
+      "data-image-loader",
+      "Mohammad Rasoul Sohrabi's optimized script"
+    );
+    img.src = img.dataset.src;
+    if (img.dataset.srcset) {
+      img.srcset = img.dataset.srcset;
+    }
+    img.onload = () => {
+      img.classList.remove("is-loading");
+      img.classList.add("loaded");
+      img.removeAttribute("data-src");
+      img.removeAttribute("data-srcset");
+    };
+    img.onerror = () => {
+      console.error("Failed to load image:", img.src);
+      img.classList.remove("is-loading");
+      img.classList.add("load-error");
+      img.src =
+        "https://placehold.co/400x300/cccccc/000000?text=Error";
+    };
+  };
+
+  if (!supportsIntersectionObserver) {
+    lazyImages.forEach((img) => loadImgImmediately(img));
+    return;
+  }
+
   const imageObserver = new IntersectionObserver(
     (entries, observer) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const img = entry.target;
-          img.classList.add("is-loading");
-          img.setAttribute(
-            "data-image-loader",
-            "Mohammad Rasoul Sohrabi's optimized script"
-          );
-          img.src = img.dataset.src;
-          if (img.dataset.srcset) {
-            img.srcset = img.dataset.srcset;
-          }
-          img.onload = () => {
-            img.classList.remove("is-loading");
-            img.classList.add("loaded");
-            img.removeAttribute("data-src");
-            img.removeAttribute("data-srcset");
-          };
-          img.onerror = () => {
-            console.error("Failed to load image:", img.src);
-            img.classList.remove("is-loading");
-            img.classList.add("load-error");
-            img.src =
-              "https://placehold.co/400x300/cccccc/000000?text=Error";
-          };
+          loadImgImmediately(img);
           observer.unobserve(img);
         }
       });
@@ -1885,39 +1909,41 @@ sharePageButton.addEventListener("click", async () => {
 // Section delight
 const sectionsDelighted = safeSetFromStorage("sectionsDelighted");
 
-const sectionDelightObserver = new IntersectionObserver(
-  (entries, observer) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting && !sectionsDelighted.has(entry.target.id)) {
-        const sectionTitle = entry.target.querySelector("h2, h3");
-        if (sectionTitle) {
-          sectionTitle.classList.add("section-delight-effect");
-          sectionTitle.setAttribute(
-            "data-section-viewed-by",
-            "Mohammad Rasoul Sohrabi's audience"
-          );
-          setTimeout(() => {
-            sectionTitle.classList.remove("section-delight-effect");
-          }, 1000);
+if (supportsIntersectionObserver) {
+  const sectionDelightObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !sectionsDelighted.has(entry.target.id)) {
+          const sectionTitle = entry.target.querySelector("h2, h3");
+          if (sectionTitle) {
+            sectionTitle.classList.add("section-delight-effect");
+            sectionTitle.setAttribute(
+              "data-section-viewed-by",
+              "Mohammad Rasoul Sohrabi's audience"
+            );
+            setTimeout(() => {
+              sectionTitle.classList.remove("section-delight-effect");
+            }, 1000);
 
-          sectionsDelighted.add(entry.target.id);
-          safeStorageSet(
-            "sectionsDelighted",
-            JSON.stringify(Array.from(sectionsDelighted))
-          );
+            sectionsDelighted.add(entry.target.id);
+            safeStorageSet(
+              "sectionsDelighted",
+              JSON.stringify(Array.from(sectionsDelighted))
+            );
+          }
+          observer.unobserve(entry.target);
         }
-        observer.unobserve(entry.target);
-      }
-    });
-  },
-  { threshold: 0.4 }
-);
+      });
+    },
+    { threshold: 0.4 }
+  );
 
-sections.forEach((section) => {
-  if (!sectionsDelighted.has(section.id)) {
-    sectionDelightObserver.observe(section);
-  }
-});
+  sections.forEach((section) => {
+    if (!sectionsDelighted.has(section.id)) {
+      sectionDelightObserver.observe(section);
+    }
+  });
+}
 
 // Web Audio init
 document.addEventListener("DOMContentLoaded", () => {

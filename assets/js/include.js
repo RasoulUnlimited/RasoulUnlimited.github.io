@@ -1,6 +1,8 @@
-// include.js - improved version
+// include.js - improved + refined version
 (function () {
   "use strict";
+
+  var ORIGIN = window.location.origin;
 
   /**
    * Injects external HTML fragments into elements with [data-include-html].
@@ -24,42 +26,50 @@
       return;
     }
 
-    // Whitelist of trusted script paths that are allowed to be re-executed
-    const TRUSTED_SCRIPT_PATHS = [
+    // Whitelist of trusted script path prefixes (same-origin)
+    const TRUSTED_SCRIPT_PATH_PREFIXES = [
       "/assets/js/",
       "/includes/",
-      new URL(window.location.href).origin + "/assets/js/",
     ];
 
     function isScriptTrusted(src) {
-      if (!src) {return true;} // inline scripts from trusted source are OK
+      // Inline scripts (no src) are considered trusted for this site setup
+      // If in future you include untrusted/user content, tighten this rule.
+      if (!src) { return true; }
+
       try {
-        const url = new URL(src, window.location.origin);
-        // Only allow same-origin scripts from trusted directories
-        return url.origin === window.location.origin &&
-          TRUSTED_SCRIPT_PATHS.some((path) =>
-            url.pathname.startsWith(path.replace(window.location.origin, ""))
-          );
+        const url = new URL(src, ORIGIN);
+        if (url.origin !== ORIGIN) {
+          return false;
+        }
+        return TRUSTED_SCRIPT_PATH_PREFIXES.some((prefix) =>
+          url.pathname.startsWith(prefix)
+        );
       } catch {
         return false;
       }
     }
 
+    // Optional CSP nonce propagation (if you decide to use it later)
+    // Example: <script data-csp-nonce nonce="..."></script> in main HTML
+    const cspSourceScript = document.querySelector("script[data-csp-nonce]");
+    const globalNonce = cspSourceScript?.nonce || null;
+
     const fetches = [];
 
     for (const el of elements) {
       const file = el.getAttribute("data-include-html");
-      if (!file) {continue;}
+      if (!file) { continue; }
 
       // Security check: Ensure file is same-origin
       try {
-        const fileUrl = new URL(file, window.location.origin);
-        if (fileUrl.origin !== window.location.origin) {
-          console.error(`Blocked cross-origin include: ${file}`);
+        const fileUrl = new URL(file, ORIGIN);
+        if (fileUrl.origin !== ORIGIN) {
+          console.error("Blocked cross-origin include:", file);
           continue;
         }
       } catch (e) {
-        console.error(`Invalid include URL: ${file}`);
+        console.error("Invalid include URL:", file);
         continue;
       }
 
@@ -69,7 +79,7 @@
       const fetchPromise = fetch(file)
         .then((resp) => {
           if (!resp.ok) {
-            throw new Error(`HTTP ${resp.status} for ${file}`);
+            throw new Error("HTTP " + resp.status + " for " + file);
           }
           return resp.text();
         })
@@ -78,42 +88,35 @@
           const parser = new DOMParser();
           const doc = parser.parseFromString(html, "text/html");
 
-          // Check for parsing errors
-          if (
-            doc.body &&
-            doc.body.firstChild &&
-            doc.body.firstChild.nodeName === "parsererror"
-          ) {
-            throw new Error(`Failed to parse HTML for ${file}`);
+          // Check for parsing errors (more robust than body.firstChild check)
+          if (doc.querySelector("parsererror")) {
+            throw new Error("Failed to parse HTML for " + file);
           }
 
-          // Sanitize by removing all event handlers and potentially dangerous elements
+          // Sanitize by removing event handlers, comments, and dangerous elements
           const sanitize = (node) => {
+            if (!node) { return; }
+
             if (node.nodeType === Node.ELEMENT_NODE) {
               // Remove all event handler attributes (on*)
               const attributes = Array.from(node.attributes);
               attributes.forEach((attr) => {
                 if (attr.name.toLowerCase().startsWith("on")) {
-                  console.warn(
-                    `Removed event handler attribute: ${attr.name}`
-                  );
+                  console.warn("Removed event handler attribute:", attr.name);
                   node.removeAttribute(attr.name);
                 }
               });
 
-              // Remove potentially dangerous elements/attributes
               const tagName = node.tagName.toLowerCase();
 
-              // Block object, embed, and iframe elements
+              // Block object, embed, and iframe elements completely
               if (["object", "embed", "iframe"].includes(tagName)) {
-                console.warn(
-                  `Removed potentially dangerous element: ${tagName}`
-                );
+                console.warn("Removed potentially dangerous element:", tagName);
                 node.remove();
                 return;
               }
 
-              // For SVG and other elements, remove suspicious attributes
+              // For specific elements, strip javascript: URLs from href/action/etc.
               if (
                 tagName === "svg" ||
                 tagName === "use" ||
@@ -124,24 +127,45 @@
                 tagName === "button" ||
                 tagName === "input"
               ) {
-                const attributesToCheck = ["href", "xlink:href", "action", "formaction"];
-                attributesToCheck.forEach(attrName => {
-                  const val = node.getAttribute(attrName) || 
-                              node.getAttributeNS("http://www.w3.org/1999/xlink", "href");
-                  
+                const attributesToCheck = [
+                  "href",
+                  "xlink:href",
+                  "action",
+                  "formaction",
+                ];
+
+                attributesToCheck.forEach((attrName) => {
+                  let val = node.getAttribute(attrName);
+
+                  // Special-case xlink:href
+                  if (!val && attrName === "xlink:href") {
+                    val = node.getAttributeNS(
+                      "http://www.w3.org/1999/xlink",
+                      "href"
+                    );
+                  }
+
                   // eslint-disable-next-line no-script-url
                   if (val && val.toLowerCase().trim().startsWith("javascript:")) {
                     node.removeAttribute(attrName);
                     if (attrName === "xlink:href") {
-                       node.removeAttributeNS("http://www.w3.org/1999/xlink", "href");
+                      node.removeAttributeNS(
+                        "http://www.w3.org/1999/xlink",
+                        "href"
+                      );
                     }
-                    console.warn(`Removed javascript: URI from ${tagName} attribute ${attrName}`);
+                    console.warn(
+                      "Removed javascript: URI from",
+                      tagName,
+                      "attribute",
+                      attrName
+                    );
                   }
                 });
               }
 
-              // Recursively sanitize child nodes
-              Array.from(node.children).forEach(sanitize);
+              // Recursively sanitize all child nodes (not just elements)
+              Array.from(node.childNodes).forEach(sanitize);
             } else if (
               node.nodeType === Node.COMMENT_NODE ||
               node.nodeType === Node.PROCESSING_INSTRUCTION_NODE
@@ -151,7 +175,7 @@
             }
           };
 
-          // Sanitize all nodes in the document
+          // Sanitize all nodes in the document body
           const bodyChildren = Array.from(doc.body.childNodes);
           bodyChildren.forEach(sanitize);
 
@@ -189,11 +213,27 @@
             const newScript = document.createElement("script");
 
             // Copy safe attributes including id, class, and data-*
-            const safeAttributes = ["type", "async", "defer", "charset", "id", "class"];
+            const safeAttributes = [
+              "type",
+              "async",
+              "defer",
+              "charset",
+              "id",
+              "class",
+            ];
+
             for (const attr of oldScript.attributes) {
-              if (safeAttributes.includes(attr.name) || attr.name.startsWith("data-")) {
+              if (
+                safeAttributes.includes(attr.name) ||
+                attr.name.startsWith("data-")
+              ) {
                 newScript.setAttribute(attr.name, attr.value);
               }
+            }
+
+            // Optional: propagate CSP nonce if you use it
+            if (globalNonce) {
+              newScript.nonce = globalNonce;
             }
 
             if (oldScript.src) {
@@ -234,7 +274,7 @@
    */
   function setActiveNavLink() {
     const normalize = (path) =>
-      path
+      (path || "/")
         .replace(/\/index\.html$/i, "/")
         .replace(/\/+$/, "/") || "/";
 
@@ -258,12 +298,12 @@
         return;
       }
 
-      let linkPath;
+      let linkPath = "";
       try {
-        const url = new URL(href, window.location.origin);
+        const url = new URL(href, ORIGIN);
         linkPath = normalize(url.pathname);
       } catch (err) {
-        // If URL constructor fails for some reason, fallback to current
+        // If URL constructor fails for some reason, leave link inactive
         linkPath = "";
       }
 

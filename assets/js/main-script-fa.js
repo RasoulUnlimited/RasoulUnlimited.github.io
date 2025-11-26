@@ -12,7 +12,6 @@
 
   const noop = () => {};
 
-  // ⚠️ قبلاً همه‌چی passive:true بود؛ الان فقط جایی که لازم داریم passive:true می‌دیم
   const on = (el, evt, fn, opts) =>
     el &&
     el.addEventListener &&
@@ -86,8 +85,8 @@
             retryCount++;
 
             // Get sortable keys (excluding protected ones)
-            const oldKeys = Object.keys(localStorage).filter(k =>
-              !["theme", "hasVisited"].includes(k)
+            const oldKeys = Object.keys(localStorage).filter(
+              (k) => !["theme", "hasVisited"].includes(k)
             );
 
             if (oldKeys.length > 0) {
@@ -96,12 +95,17 @@
                 localStorage.removeItem(oldKeys[0]);
                 return attemptSet(); // Recursive retry
               } catch (innerE) {
-                console.error(`Failed to recover from quota exceeded for ${key}:`, innerE);
+                console.error(
+                  `Failed to recover from quota exceeded for ${key}:`,
+                  innerE
+                );
                 return false;
               }
             }
           } else if (e.name === "QuotaExceededError") {
-            console.warn(`localStorage quota exceeded. Could not store ${key} after ${maxRetries} retries`);
+            console.warn(
+              `localStorage quota exceeded. Could not store ${key} after ${maxRetries} retries`
+            );
           } else {
             console.error(`Failed to store ${key}:`, e);
           }
@@ -142,7 +146,13 @@
     const mq = (q) =>
       window.matchMedia
         ? window.matchMedia(q)
-        : { matches: false, addEventListener: noop, removeEventListener: noop };
+        : {
+            matches: false,
+            addEventListener: noop,
+            removeEventListener: noop,
+            addListener: noop,
+            removeListener: noop,
+          };
 
     const mqs = {
       reduced: mq("(prefers-reduced-motion: reduce)"),
@@ -182,8 +192,11 @@
     const notify = () => listeners.forEach((l) => l());
 
     const bindMQL = (m) => {
-      if (m && m.addEventListener) {
+      if (!m) return;
+      if (typeof m.addEventListener === "function") {
         m.addEventListener("change", notify);
+      } else if (typeof m.addListener === "function") {
+        m.addListener(notify);
       }
     };
 
@@ -191,11 +204,20 @@
     bindMQL(mqs.dark);
     bindMQL(mqs.coarse);
 
-    if (conn && conn.addEventListener) {
-      on(conn, "change", notify);
+    if (conn) {
+      if (conn.addEventListener) {
+        on(conn, "change", notify);
+      } else if (typeof conn.addListener === "function") {
+        conn.addListener(notify);
+      }
     }
 
-    return { state, onChange: (fn) => listeners.push(fn) };
+    return {
+      state,
+      onChange: (fn) => {
+        if (typeof fn === "function") listeners.push(fn);
+      },
+    };
   })();
 
   const FLAGS = () => {
@@ -253,8 +275,8 @@
   // Haptics / Vibrate
   // ==========================
   function vibrate(pattern = [50]) {
-    if (!FLAGS().ENABLE_HAPTICS || ENV.state.reduced) {return;}
-    if (navigator.vibrate) {navigator.vibrate(pattern);}
+    if (!FLAGS().ENABLE_HAPTICS || ENV.state.reduced) return;
+    if (navigator.vibrate) navigator.vibrate(pattern);
   }
 
   // ==========================
@@ -263,13 +285,13 @@
   let audioContext, clickBuffer, toastBuffer;
 
   function ensureAudioContext() {
-    if (!FLAGS().ENABLE_SOUNDS || audioContext) {return;}
+    if (!FLAGS().ENABLE_SOUNDS || audioContext) return;
     const Ctx = window.AudioContext || window.webkitAudioContext;
-    if (Ctx) {audioContext = new Ctx();}
+    if (Ctx) audioContext = new Ctx();
   }
 
   function createToneBuffer(duration, wave) {
-    if (!audioContext) {return null;}
+    if (!audioContext) return null;
     const sr = audioContext.sampleRate;
     const buffer = audioContext.createBuffer(
       1,
@@ -277,12 +299,12 @@
       sr
     );
     const data = buffer.getChannelData(0);
-    for (let i = 0; i < data.length; i++) {data[i] = wave(i, sr);}
+    for (let i = 0; i < data.length; i++) data[i] = wave(i, sr);
     return buffer;
   }
 
   function loadSounds() {
-    if (!audioContext) {return;}
+    if (!audioContext) return;
     clickBuffer = createToneBuffer(
       0.05,
       (i, sr) => Math.sin(2 * Math.PI * 440 * (i / sr)) * 0.08
@@ -291,8 +313,30 @@
       const t = i / sr;
       const d = 0.1;
       const f = 880 + (1200 - 880) * (t / d);
-      return Math.sin(2 * Math.PI * f * t) * 0.12 * Math.max(0, 1 - t / d);
+      return (
+        Math.sin(2 * Math.PI * f * t) *
+        0.12 *
+        Math.max(0, 1 - t / d)
+      );
     });
+  }
+
+  // 🔊 BUG FIX: playSound implementation
+  function playSound(kind) {
+    if (!FLAGS().ENABLE_SOUNDS || !audioContext) return;
+
+    const buffer =
+      kind === "toast" ? toastBuffer : kind === "click" ? clickBuffer : null;
+    if (!buffer) return;
+
+    try {
+      const src = audioContext.createBufferSource();
+      src.buffer = buffer;
+      src.connect(audioContext.destination);
+      src.start(0);
+    } catch (err) {
+      console.warn("Audio playback failed:", err);
+    }
   }
 
   on(
@@ -307,15 +351,15 @@
   );
 
   on(document, "visibilitychange", () => {
-    if (document.hidden) {audioContext?.suspend?.();}
-    else {audioContext?.resume?.();}
+    if (document.hidden) audioContext?.suspend?.();
+    else audioContext?.resume?.();
   });
 
   // ==========================
   // Toasts (CSS-driven)
   // ==========================
   function dismissToast(toast) {
-    if (!toast) {return;}
+    if (!toast) return;
     toast.classList.remove("show");
     toast.addEventListener(
       "transitionend",
@@ -338,7 +382,7 @@
 
     if (settings.id) {
       const existing = document.getElementById(settings.id);
-      if (existing && existing.classList.contains("show")) {return existing;}
+      if (existing && existing.classList.contains("show")) return existing;
     }
 
     document.querySelectorAll(".dynamic-toast").forEach((t) => {
@@ -357,7 +401,7 @@
     toast.role = "status";
     toast.setAttribute("aria-live", "polite");
     toast.tabIndex = -1;
-    if (settings.id) {toast.id = settings.id;}
+    if (settings.id) toast.id = settings.id;
 
     Object.assign(toast.style, {
       position: "fixed",
@@ -376,7 +420,7 @@
     if (settings.iconClass) {
       const icon = document.createElement("i");
       icon.className = settings.iconClass;
-      if (settings.iconColor) {icon.style.color = settings.iconColor;}
+      if (settings.iconColor) icon.style.color = settings.iconColor;
       icon.setAttribute("aria-hidden", "true");
       toast.appendChild(icon);
     }
@@ -391,14 +435,14 @@
       closeBtn.type = "button";
       closeBtn.className = "fun-fact-close";
       closeBtn.setAttribute("aria-label", STRINGS_FA.aria.closeToast);
-      closeBtn.innerHTML = "<i class=\"fas fa-times\" aria-hidden=\"true\"></i>";
+      closeBtn.innerHTML =
+        '<i class="fas fa-times" aria-hidden="true"></i>';
       on(closeBtn, "click", () => dismissToast(toast));
       toast.appendChild(closeBtn);
     }
 
     document.body.appendChild(toast);
 
-    // Use microtask to avoid frame starvation while ensuring proper timing
     Promise.resolve().then(() => {
       toast.classList.add("show");
       if (FLAGS().ENABLE_SOUNDS && audioContext) {
@@ -420,12 +464,15 @@
     const yearEl =
       document.getElementById("current-year") ||
       document.getElementById("footer-year");
-    if (yearEl) {yearEl.textContent = String(new Date().getFullYear());}
+    if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
     const lastUpdated = document.getElementById("last-updated-date");
     if (lastUpdated) {
       const opts = { year: "numeric", month: "long", day: "numeric" };
-      lastUpdated.textContent = new Date().toLocaleDateString("fa-IR", opts);
+      lastUpdated.textContent = new Date().toLocaleDateString(
+        "fa-IR",
+        opts
+      );
       lastUpdated.setAttribute(
         "data-last-updated-by",
         "Mohammad Rasoul Sohrabi"
@@ -466,9 +513,10 @@
     if (
       !FLAGS().ENABLE_IDENTITY_PINGS ||
       ENV.state.coarse ||
-      ENV.state.saveData
+      ENV.state.saveData ||
+      typeof fetch !== "function"
     )
-    {return;}
+      return;
 
     const targets = [
       { name: "GitHub", url: "https://github.com/RasoulUnlimited" },
@@ -484,12 +532,13 @@
       { name: "ORCID", url: "https://orcid.org/0009-0004-7177-2080" },
     ];
 
-    const ping = (t) => fetch(t.url, { mode: "no-cors" }).catch(() => {});
+    const ping = (t) =>
+      fetch(t.url, { mode: "no-cors" }).catch(() => {});
 
     ric(() =>
       targets.forEach((t, i) =>
         setTimeout(() => {
-          if (abortSignal.aborted) {return;}
+          if (abortSignal.aborted) return;
           ping(t);
         }, i * 1000)
       )
@@ -535,7 +584,7 @@
       return initAOS();
     }
 
-    if (aosLoaded) {return;}
+    if (aosLoaded) return;
 
     const s = document.createElement("script");
     s.src = "/assets/vendor/aos/aos.min.js";
@@ -555,39 +604,24 @@
     document.body.classList.toggle("light-mode", theme === "light");
 
     const toggle = document.getElementById("theme-toggle");
-    if (toggle) {toggle.checked = theme === "dark";}
+    if (toggle) toggle.checked = theme === "dark";
 
     if (showToast) {
-      // Toast is handled by main-script-base.js to avoid duplicates
-      /*
-      createToast(
-        theme === "dark"
-          ? STRINGS_FA.toasts.themeDark
-          : STRINGS_FA.toasts.themeLight,
-        {
-          id: "theme-change-toast",
-          customClass: "theme-toast",
-          iconClass: theme === "dark" ? "fas fa-moon" : "fas fa-sun",
-          iconColor: theme === "dark" ? "white" : "var(--highlight-color)",
-          position: "top",
-          duration: 2200,
-        }
-      );
-      */
       const parent = toggle?.parentElement;
-      if (parent) {createSparkle(parent);}
+      if (parent) createSparkle(parent);
       vibrate([30]);
     }
   }
 
   function initTheme() {
     const toggle = document.getElementById("theme-toggle");
-    if (toggle) {toggle.setAttribute("aria-label", STRINGS_FA.aria.themeToggle);}
+    if (toggle)
+      toggle.setAttribute("aria-label", STRINGS_FA.aria.themeToggle);
 
     const saved = storage.getRaw("theme");
     applyTheme(saved || (ENV.state.dark ? "dark" : "light"));
 
-    if (!toggle) {return;}
+    if (!toggle) return;
 
     on(toggle, "change", () => {
       const next = toggle.checked ? "dark" : "light";
@@ -607,8 +641,9 @@
 
     // auto-switch if system theme changes and user hasn't chosen explicitly
     ENV.onChange(() => {
-      if (!storage.getRaw("theme"))
-      {applyTheme(ENV.state.dark ? "dark" : "light");}
+      if (!storage.getRaw("theme")) {
+        applyTheme(ENV.state.dark ? "dark" : "light");
+      }
     });
   }
 
@@ -618,23 +653,34 @@
   function initAnchorScrolling() {
     const smoothAllowed = !ENV.state.reduced;
 
-    document.querySelectorAll("a[href^=\"#\"]").forEach((a) => {
+    document.querySelectorAll('a[href^="#"]').forEach((a) => {
       on(a, "click", (e) => {
         const targetId = a.getAttribute("href");
-        const el = document.querySelector(targetId);
-        if (!el) {return;}
+        if (!targetId || targetId === "#") return;
+
+        let el;
+        try {
+          el = document.querySelector(targetId);
+        } catch {
+          // invalid selector (e.g. malformed id)
+          return;
+        }
+
+        if (!el) return;
 
         e.preventDefault();
 
-        const navH = document.querySelector(".navbar")?.offsetHeight || 0;
+        const navH =
+          document.querySelector(".navbar")?.offsetHeight || 0;
         const progH =
-          document.getElementById("scroll-progress-bar")?.offsetHeight || 0;
+          document.getElementById("scroll-progress-bar")?.offsetHeight ||
+          0;
         const padTop = parseFloat(getComputedStyle(el).paddingTop) || 0;
         const y = Math.max(0, el.offsetTop + padTop - navH - progH);
 
         if (smoothAllowed)
-        {window.scrollTo({ top: y, behavior: "smooth" });}
-        else {window.scrollTo(0, y);}
+          window.scrollTo({ top: y, behavior: "smooth" });
+        else window.scrollTo(0, y);
 
         vibrate([20]);
       });
@@ -656,12 +702,12 @@
       }
 
       const interactive = event.target.closest?.(
-        "button, a:not([href^=\"#\"]), input[type=\"submit\"], [role=\"button\"], [tabindex=\"0\"]"
+        'button, a:not([href^="#"]), input[type="submit"], [role="button"], [tabindex="0"]'
       );
       if (
         interactive &&
         !interactive.classList.contains("no-click-feedback") &&
-        !interactive.matches("a[href^=\"#\"]")
+        !interactive.matches('a[href^="#"]')
       ) {
         interactive.classList.add("click-feedback-effect");
         interactive.dataset.userAction =
@@ -671,17 +717,19 @@
           () => interactive.classList.remove("click-feedback-effect"),
           { once: true }
         );
-        if (!interactive.closest(".faq-item")) {vibrate([8]);}
+        if (!interactive.closest(".faq-item")) vibrate([8]);
         playSound("click");
       }
     });
 
     on(document, "keydown", (e) => {
-      if (e.key !== "Enter" && e.key !== " ") {return;}
+      if (e.key !== "Enter" && e.key !== " ") return;
       const card = e.target.closest?.(".card");
       if (card) {
         e.preventDefault();
-        card.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+        card.dispatchEvent(
+          new MouseEvent("click", { bubbles: true })
+        );
       }
     });
   }
@@ -733,9 +781,14 @@
       btn = document.createElement("button");
       btn.id = "scroll-to-top";
       btn.type = "button";
-      btn.innerHTML = "<i class=\"fas fa-arrow-up\" aria-hidden=\"true\"></i>";
+      btn.innerHTML =
+        '<i class="fas fa-arrow-up" aria-hidden="true"></i>';
       btn.setAttribute("aria-label", STRINGS_FA.aria.scrollTop);
-      btn.classList.add("sohrabi-nav-button", "hidden", "cta-pulse-effect");
+      btn.classList.add(
+        "sohrabi-nav-button",
+        "hidden",
+        "cta-pulse-effect"
+      );
       document.body.appendChild(btn);
     }
 
@@ -760,7 +813,10 @@
       innerBar.style.backgroundColor =
         progress > 0.9 ? highlight : progress > 0.5 ? accent : primary;
 
-      bar.setAttribute("aria-valuenow", String(Math.round(progress * 100)));
+      bar.setAttribute(
+        "aria-valuenow",
+        String(Math.round(progress * 100))
+      );
 
       btn.classList.toggle("visible", scrolled > 300);
       btn.classList.toggle("hidden", scrolled <= 300);
@@ -775,8 +831,8 @@
       const smooth =
         !ENV.state.reduced &&
         "scrollBehavior" in document.documentElement.style;
-      if (smooth) {window.scrollTo({ top: 0, behavior: "smooth" });}
-      else {window.scrollTo(0, 0);}
+      if (smooth) window.scrollTo({ top: 0, behavior: "smooth" });
+      else window.scrollTo(0, 0);
       vibrate([16]);
     });
 
@@ -787,7 +843,7 @@
         a.href = "#projects";
         a.id = "explore-hint";
         a.innerHTML =
-          "<i class=\"fas fa-lightbulb\" aria-hidden=\"true\"></i> <span class=\"hint-text\">پروژه‌های من را کشف کنید.</span>";
+          '<i class="fas fa-lightbulb" aria-hidden="true"></i> <span class="hint-text">پروژه‌های من را کشف کنید.</span>';
         a.dataset.hintAuthor = "Mohammad Rasoul Sohrabi";
         a.classList.add("sohrabi-hint-module", "hidden");
         document.body.appendChild(a);
@@ -795,22 +851,14 @@
       })();
 
     const hero = document.getElementById("hero");
-    if (hero) {
+    if (hero && "IntersectionObserver" in window) {
       const obs = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
-            exploreHint.classList.toggle(
-              "visible",
-              entry.isIntersecting
-            );
-            exploreHint.classList.toggle(
-              "pulse-animation",
-              entry.isIntersecting
-            );
-            exploreHint.classList.toggle(
-              "hidden",
-              !entry.isIntersecting
-            );
+            const vis = entry.isIntersecting;
+            exploreHint.classList.toggle("visible", vis);
+            exploreHint.classList.toggle("pulse-animation", vis);
+            exploreHint.classList.toggle("hidden", !vis);
           });
         },
         { threshold: 0.5 }
@@ -831,7 +879,8 @@
 
       const target = document.querySelector("#projects");
       if (target) {
-        const navH = document.querySelector(".navbar")?.offsetHeight || 0;
+        const navH =
+          document.querySelector(".navbar")?.offsetHeight || 0;
         const progH =
           document.getElementById("scroll-progress-bar")?.offsetHeight ||
           0;
@@ -842,8 +891,8 @@
           target.offsetTop + padTop - navH - progH
         );
         const smooth = !ENV.state.reduced;
-        if (smooth) {window.scrollTo({ top: y, behavior: "smooth" });}
-        else {window.scrollTo(0, y);}
+        if (smooth) window.scrollTo({ top: y, behavior: "smooth" });
+        else window.scrollTo(0, y);
       }
       vibrate([16]);
     });
@@ -854,7 +903,7 @@
   // ==========================
   function initSkillsHover() {
     const list = document.querySelector("#skills .skills-list");
-    if (!list) {return;}
+    if (!list) return;
 
     list.querySelectorAll("li").forEach((li) => {
       li.dataset.skillOwner = "Mohammad Rasoul Sohrabi";
@@ -906,7 +955,7 @@
   // ==========================
   function initFAQ() {
     const container = document.querySelector(".faq-container");
-    if (!container) {return;}
+    if (!container) return;
 
     container.id = "sohrabi-faq-verified";
 
@@ -916,17 +965,20 @@
       const summary = item.querySelector("summary");
       const answer = item.querySelector("p");
       const qId = item.dataset.questionId || `faq-q-${idx + 1}`;
-      if (!summary) {return;}
+      if (!summary) return;
 
       summary.dataset.faqAuthor = "Mohammad Rasoul Sohrabi";
 
       if (!summary.hasAttribute("aria-expanded"))
-      {summary.setAttribute("aria-expanded", item.open ? "true" : "false");}
+        summary.setAttribute(
+          "aria-expanded",
+          item.open ? "true" : "false"
+        );
 
       if (answer) {
-        if (!answer.id) {answer.id = `faq-answer-${qId}`;}
+        if (!answer.id) answer.id = `faq-answer-${qId}`;
         if (!summary.hasAttribute("aria-controls"))
-        {summary.setAttribute("aria-controls", answer.id);}
+          summary.setAttribute("aria-controls", answer.id);
 
         Object.assign(answer.style, {
           maxHeight: item.open ? "2000px" : "0px",
@@ -940,12 +992,12 @@
       }
 
       on(summary, "click", (e) => {
-        if (e.target.tagName === "A") {return;}
+        if (e.target.tagName === "A") return;
         e.preventDefault();
         createSparkle(summary);
 
         items.forEach((other) => {
-          if (other !== item && other.open) {toggleFAQ(other, false);}
+          if (other !== item && other.open) toggleFAQ(other, false);
         });
 
         toggleFAQ(item, !item.open);
@@ -958,7 +1010,7 @@
       const answer = item.querySelector("p");
 
       if (summary)
-      {summary.setAttribute("aria-expanded", open ? "true" : "false");}
+        summary.setAttribute("aria-expanded", open ? "true" : "false");
 
       if (answer) {
         answer.style.maxHeight = open ? "2000px" : "0px";
@@ -978,19 +1030,18 @@
           setTimeout(() => {
             const rect = item.getBoundingClientRect();
             if (rect.top < navH)
-            {window.scrollBy({
-              top: rect.top - navH,
-              behavior: ENV.state.reduced ? "auto" : "smooth",
-            });}
+              window.scrollBy({
+                top: rect.top - navH,
+                behavior: ENV.state.reduced ? "auto" : "smooth",
+              });
           }, 90);
         }, 80);
       }
     }
 
-    // deep-link به FAQ با hash (بعد از DOM ready)
-    on(window, "DOMContentLoaded", () => {
-      const hash = window.location.hash;
-      if (!hash) {return;}
+    // 🔧 deep-link به FAQ با hash (همین‌جا، چون الان DOM آماده است)
+    const hash = window.location.hash;
+    if (hash) {
       const target = document.querySelector(hash);
       if (target && target.classList.contains("faq-item")) {
         items.forEach(
@@ -998,7 +1049,7 @@
         );
         toggleFAQ(target, true, true);
       }
-    });
+    }
   }
 
   // ==========================
@@ -1008,69 +1059,28 @@
     const hasVisited = storage.getRaw("hasVisited");
     let msg = "";
 
-    if (hasVisited) {msg = STRINGS_FA.toasts.welcomeBack;}
+    if (hasVisited) msg = STRINGS_FA.toasts.welcomeBack;
     else {
       const hour = new Date().getHours();
       msg =
         hour >= 5 && hour < 10
           ? STRINGS_FA.toasts.welcomeMorning
           : hour < 16
-            ? STRINGS_FA.toasts.welcomeNoon
-            : hour < 20
-              ? STRINGS_FA.toasts.welcomeEvening
-              : STRINGS_FA.toasts.welcomeNight;
+          ? STRINGS_FA.toasts.welcomeNoon
+          : hour < 20
+          ? STRINGS_FA.toasts.welcomeEvening
+          : STRINGS_FA.toasts.welcomeNight;
       storage.setRaw("hasVisited", "true");
     }
 
     if (msg)
-    {createToast(msg, {
-      id: "welcome-toast",
-      customClass: "welcome-toast",
-      iconClass: "fas fa-hand-sparkles",
-      iconColor: "var(--highlight-color)",
-      duration: ENV.state.coarse ? 2500 : 3500,
-    });}
-  }
-
-  // ==========================
-  // Email copy helper
-  // ==========================
-  function initEmailCopy() {
-    const emailLink = document.querySelector(
-      ".contact-info a[href^=\"mailto:\"]"
-    );
-    if (!emailLink) {return;}
-
-    emailLink.dataset.contactPerson = "Mohammad Rasoul Sohrabi";
-    emailLink.classList.add("sohrabi-contact-method");
-
-    // ⚠️ اینجا قبلاً passive:true بود ولی preventDefault هم داشتی → باگ
-    emailLink.addEventListener(
-      "click",
-      async (e) => {
-        e.preventDefault();
-        const email = emailLink.href.replace("mailto:", "");
-        try {
-          await navigator.clipboard.writeText(email);
-          createToast(STRINGS_FA.toasts.emailCopied, {
-            id: "email-copy-toast",
-            iconClass: "fas fa-check-circle",
-            iconColor: "var(--highlight-color)",
-            duration: 1600,
-          });
-          vibrate([40]);
-        } catch (err) {
-          console.error("Clipboard error:", err);
-          createToast(STRINGS_FA.toasts.emailCopyError, {
-            id: "copy-error-toast",
-            iconClass: "fas fa-exclamation-triangle",
-            iconColor: "red",
-            duration: 2800,
-          });
-        }
-      },
-      { passive: false }
-    );
+      createToast(msg, {
+        id: "welcome-toast",
+        customClass: "welcome-toast",
+        iconClass: "fas fa-hand-sparkles",
+        iconColor: "var(--highlight-color)",
+        duration: ENV.state.coarse ? 2500 : 3500,
+      });
   }
 
   // ==========================
@@ -1078,6 +1088,9 @@
   // ==========================
   async function copyToClipboard(text, okId, errId, okMsg) {
     try {
+      if (!navigator.clipboard || !navigator.clipboard.writeText) {
+        throw new Error("clipboard-unsupported");
+      }
       await navigator.clipboard.writeText(text);
       createToast(okMsg, {
         id: okId,
@@ -1097,6 +1110,56 @@
     }
   }
 
+  // ==========================
+  // Email copy helper
+  // ==========================
+  function initEmailCopy() {
+    const emailLink = document.querySelector(
+      '.contact-info a[href^="mailto:"]'
+    );
+    if (!emailLink) return;
+
+    emailLink.dataset.contactPerson = "Mohammad Rasoul Sohrabi";
+    emailLink.classList.add("sohrabi-contact-method");
+
+    emailLink.addEventListener(
+      "click",
+      async (e) => {
+        e.preventDefault();
+        const email = emailLink.href.replace("mailto:", "");
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          try {
+            await navigator.clipboard.writeText(email);
+            createToast(STRINGS_FA.toasts.emailCopied, {
+              id: "email-copy-toast",
+              iconClass: "fas fa-check-circle",
+              iconColor: "var(--highlight-color)",
+              duration: 1600,
+            });
+            vibrate([40]);
+          } catch (err) {
+            console.error("Clipboard error:", err);
+            createToast(STRINGS_FA.toasts.emailCopyError, {
+              id: "copy-error-toast",
+              iconClass: "fas fa-exclamation-triangle",
+              iconColor: "red",
+              duration: 2800,
+            });
+          }
+        } else {
+          await copyToClipboard(
+            email,
+            "email-copy-toast",
+            "copy-error-toast",
+            STRINGS_FA.toasts.emailCopied
+          );
+        }
+      },
+      { passive: false }
+    );
+  }
+
   window.copyToClipboard = copyToClipboard;
   window.createToast = createToast;
 
@@ -1105,38 +1168,45 @@
   // ==========================
   function initLazyImages() {
     const lazyImages = document.querySelectorAll("img[data-src]");
-    if (!lazyImages.length) {return;}
+    if (!lazyImages.length) return;
+
+    const loadImg = (img) => {
+      img.decoding = "async";
+      img.loading = "lazy";
+      img.classList.add("is-loading");
+      img.dataset.imageLoader =
+        "Mohammad Rasoul Sohrabi's optimized script";
+
+      img.src = img.dataset.src;
+      if (img.dataset.srcset) img.srcset = img.dataset.srcset;
+
+      img.onload = () => {
+        img.classList.remove("is-loading");
+        img.classList.add("loaded");
+        img.removeAttribute("data-src");
+        img.removeAttribute("data-srcset");
+      };
+
+      img.onerror = () => {
+        console.error("Failed to load image:", img.src);
+        img.classList.remove("is-loading");
+        img.classList.add("load-error");
+        img.src =
+          "https://placehold.co/400x300/cccccc/000000?text=Error";
+      };
+    };
+
+    if (!("IntersectionObserver" in window)) {
+      lazyImages.forEach((img) => loadImg(img));
+      return;
+    }
 
     const observer = new IntersectionObserver(
       (entries, obs) => {
         entries.forEach((entry) => {
-          if (!entry.isIntersecting) {return;}
+          if (!entry.isIntersecting) return;
           const img = entry.target;
-
-          img.decoding = "async";
-          img.loading = "lazy";
-          img.classList.add("is-loading");
-          img.dataset.imageLoader =
-            "Mohammad Rasoul Sohrabi's optimized script";
-
-          img.src = img.dataset.src;
-          if (img.dataset.srcset) {img.srcset = img.dataset.srcset;}
-
-          img.onload = () => {
-            img.classList.remove("is-loading");
-            img.classList.add("loaded");
-            img.removeAttribute("data-src");
-            img.removeAttribute("data-srcset");
-          };
-
-          img.onerror = () => {
-            console.error("Failed to load image:", img.src);
-            img.classList.remove("is-loading");
-            img.classList.add("load-error");
-            img.src =
-              "https://placehold.co/400x300/cccccc/000000?text=Error";
-          };
-
+          loadImg(img);
           obs.unobserve(img);
         });
       },
@@ -1162,7 +1232,7 @@
       shareBtn.id = "share-page-button";
       shareBtn.type = "button";
       shareBtn.innerHTML =
-        "<i class=\"fas fa-share-alt\" aria-hidden=\"true\"></i>";
+        '<i class="fas fa-share-alt" aria-hidden="true"></i>';
       shareBtn.setAttribute("aria-label", STRINGS_FA.aria.share);
       shareBtn.classList.add(
         "sohrabi-share-feature",
@@ -1221,7 +1291,8 @@
   function initExplorationMilestones() {
     const sections = document.querySelectorAll("section[id]");
     const total = sections.length;
-    if (!total) {return;}
+    if (!total) return;
+    if (!("IntersectionObserver" in window)) return;
 
     const visited = new Set(storage.get("sectionsVisited", []));
     const announced = new Set(storage.get("announcedMilestones", []));
@@ -1270,7 +1341,7 @@
         const now = Date.now();
 
         entries.forEach((entry) => {
-          if (!entry.isIntersecting) {return;}
+          if (!entry.isIntersecting) return;
 
           visited.add(entry.target.id);
           storage.set("sectionsVisited", [...visited]);
@@ -1303,7 +1374,7 @@
               lastToastAt = now;
 
               if (m.isFinal && FLAGS().ENABLE_CONFETTI)
-              {setTimeout(createConfetti, 500);}
+                setTimeout(createConfetti, 500);
               break;
             }
           }
@@ -1322,7 +1393,7 @@
   }
 
   function createConfetti() {
-    if (ENV.state.reduced || ENV.state.coarse) {return;}
+    if (ENV.state.reduced || ENV.state.coarse) return;
 
     const canvas = document.createElement("canvas");
     canvas.id = "confetti-canvas";
@@ -1345,6 +1416,11 @@
     document.body.appendChild(canvas);
 
     const ctx = canvas.getContext("2d");
+    if (!ctx) {
+      canvas.remove();
+      return;
+    }
+
     const colors = [
       "#ffc107",
       "#007acc",
@@ -1369,7 +1445,7 @@
     let rafId = null;
 
     const cleanup = () => {
-      if (rafId) {cancelAnimationFrame(rafId);}
+      if (rafId) cancelAnimationFrame(rafId);
       if (canvas && canvas.parentNode) {
         canvas.remove();
       }
@@ -1401,7 +1477,6 @@
 
     rafId = requestAnimationFrame(loop);
 
-    // Cleanup observer for early canvas removal
     const observer = new MutationObserver(() => {
       if (!document.body.contains(canvas)) {
         cleanup();
@@ -1416,7 +1491,7 @@
   // Fun Fact idle toast
   // ==========================
   function initFunFacts() {
-    if (ENV.state.coarse || ENV.state.saveData) {return;} // disable on phones / save-data
+    if (ENV.state.coarse || ENV.state.saveData) return;
 
     let toastRef = null;
     let idleTimeout;
@@ -1437,13 +1512,16 @@
     const reset = debounce(() => {
       clearTimeout(idleTimeout);
       idleTimeout = setTimeout(() => {
-        if (!toastRef || !toastRef.classList.contains("show")) {show();}
+        if (!toastRef || !toastRef.classList.contains("show")) {
+          show();
+        }
       }, 24000);
     }, 600);
 
     const evs = ["mousemove", "keydown", "scroll", "touchstart"];
     evs.forEach((ev) => {
-      const opts = ev === "scroll" || ev === "touchstart" ? { passive: true } : {};
+      const opts =
+        ev === "scroll" || ev === "touchstart" ? { passive: true } : {};
       on(window, ev, reset, opts);
     });
 
@@ -1463,7 +1541,7 @@
   // ==========================
   function initSocialLinksCopy() {
     const block = document.querySelector(".connect-links-block ul");
-    if (!block) {return;}
+    if (!block) return;
 
     block.id = "sohrabi-social-links";
     block.dataset.profileOwner = "Mohammad Rasoul Sohrabi";
@@ -1481,11 +1559,12 @@
         const name =
           link.querySelector("i")?.nextSibling?.textContent?.trim() ||
           txt;
+        const safeName = (name || "link").replace(/\s/g, "");
         await copyToClipboard(
           link.href,
-          `social-link-copy-${name.replace(/\s/g, "")}`,
-          `social-link-copy-error-${name.replace(/\s/g, "")}`,
-          STRINGS_FA.toasts.linkCopied(name)
+          `social-link-copy-${safeName}`,
+          `social-link-copy-error-${safeName}`,
+          STRINGS_FA.toasts.linkCopied(name || "لینک")
         );
       }
     });
@@ -1501,7 +1580,7 @@
       ENV.state.saveData ||
       ENV.state.lowPowerCPU
     )
-    {return;}
+      return;
 
     const sparkle = document.createElement("div");
     sparkle.className = "sparkle-effect";
@@ -1530,7 +1609,7 @@
 
     const cs = getComputedStyle(element);
     if (!cs.position || cs.position === "static")
-    {element.style.position = "relative";}
+      element.style.position = "relative";
 
     element.appendChild(sparkle);
 
@@ -1578,7 +1657,7 @@
     let announced = false;
 
     const handler = throttle(() => {
-      if (announced) {return;}
+      if (announced) return;
       const nearBottom =
         window.innerHeight + window.scrollY >=
         document.body.offsetHeight - 50;
@@ -1610,8 +1689,9 @@
     on(hamburger, "click", () => {
       hamburger.classList.toggle("active");
       navLinks.classList.toggle("active");
-      const expanded = hamburger.getAttribute("aria-expanded") === "true";
-      hamburger.setAttribute("aria-expanded", !expanded);
+      const expanded =
+        hamburger.getAttribute("aria-expanded") === "true";
+      hamburger.setAttribute("aria-expanded", String(!expanded));
     });
 
     links.forEach((link) => {
