@@ -89,14 +89,31 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function dispatchThemeEvent(theme, isDark) {
+  // CustomEvent fallback برای مرورگرهای قدیمی‌تر
+  function createThemeChangeEvent(theme, isDark) {
     try {
-      const event = new CustomEvent("themechange", {
+      return new CustomEvent("themechange", {
         detail: { theme, isDark },
       });
+    } catch {
+      // Fallback برای مرورگرهایی که سازنده‌ی CustomEvent را ندارند
+      const event = document.createEvent("CustomEvent");
+      event.initCustomEvent(
+        "themechange",
+        false, // bubbles
+        false, // cancelable
+        { theme, isDark }
+      );
+      return event;
+    }
+  }
+
+  function dispatchThemeEvent(theme, isDark) {
+    try {
+      const event = createThemeChangeEvent(theme, isDark);
       window.dispatchEvent(event);
     } catch {
-      // برای مرورگرهای خیلی قدیمی که CustomEvent ندارند
+      // اگر حتی این هم ساپورت نشه، نادیده می‌گیریم
     }
   }
 
@@ -147,6 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- Accessibility defaults ---
 
   if (!toggle.hasAttribute("role")) {
+    // برای inputهای checkable، switch؛ برای بقیه، button
     toggle.setAttribute("role", isCheckable ? "switch" : "button");
   }
 
@@ -236,6 +254,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (storage && typeof window !== "undefined") {
     window.addEventListener("storage", (event) => {
       if (event.key !== THEME_KEY) return;
+      if (event.storageArea && event.storageArea !== localStorage) return;
 
       const value = event.newValue;
       if (value === DARK || value === LIGHT) {

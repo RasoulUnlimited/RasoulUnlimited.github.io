@@ -4,6 +4,7 @@
 (function () {
   "use strict";
 
+  // Feature & security checks
   if (!("serviceWorker" in navigator)) {
     return;
   }
@@ -17,7 +18,11 @@
   }
 
   const root = document.documentElement;
-  const lang = (root.getAttribute("lang") || "").toLowerCase();
+
+  // زبان صفحه: اول lang روی <html> بعد navigator.language
+  const docLang = (root.getAttribute("lang") || "").toLowerCase();
+  const navLang = (navigator.language || "").toLowerCase();
+  const lang = docLang || navLang;
   const isFa = lang.indexOf("fa") === 0;
 
   /**
@@ -31,9 +36,7 @@
   }
 
   function notifyReady() {
-    safeToast(
-      isFa ? "پشتیبانی آفلاین فعال شد" : "Offline support enabled"
-    );
+    safeToast(isFa ? "پشتیبانی آفلاین فعال شد" : "Offline support enabled");
   }
 
   function notifyUpdate() {
@@ -46,12 +49,12 @@
 
   /**
    * Attach "installed" listener to a worker (if present)
-   * @param {ServiceWorker} worker
+   * @param {ServiceWorker | null | undefined} worker
    */
   function attachInstalledListener(worker) {
     if (!worker) return;
 
-    worker.addEventListener("statechange", function () {
+    function onStateChange() {
       if (worker.state !== "installed") return;
 
       // If controller exists, this is an update
@@ -61,7 +64,12 @@
         // First installation: offline support enabled
         notifyReady();
       }
-    });
+
+      // بعد از رسیدن به installed، دیگر نیازی به لیسنر نیست
+      worker.removeEventListener("statechange", onStateChange);
+    }
+
+    worker.addEventListener("statechange", onStateChange);
   }
 
   /**
@@ -69,6 +77,8 @@
    * @param {ServiceWorkerRegistration} reg - Registration object
    */
   function handleRegistration(reg) {
+    if (!reg) return;
+
     // If waiting worker exists, update is available (e.g. from previous visit)
     if (reg.waiting) {
       notifyUpdate();
@@ -78,16 +88,17 @@
     attachInstalledListener(reg.installing);
 
     // Listen for future updates
-    reg.addEventListener("updatefound", function () {
-      attachInstalledListener(reg.installing);
-    });
+    if (typeof reg.addEventListener === "function") {
+      reg.addEventListener("updatefound", function () {
+        attachInstalledListener(reg.installing);
+      });
+    }
 
-    // اگر سرویس‌ورکر فعال است ولی کنترلی نداریم (سناریوی لبه‌ای)
-    // می‌توانیم وقتی آماده شد، پیام ready بدهیم
+    // Edge-case: سرویس‌ورکر فعال است ولی controller نداریم
     if (!navigator.serviceWorker.controller) {
       navigator.serviceWorker.ready
         .then(function () {
-          // هنوز controller نداریم؟ یعنی این تب تازه تحت کنترل قرار گرفته
+          // اگر هنوز controller نداریم یعنی این تب تازه تحت کنترل قرار گرفته
           if (!navigator.serviceWorker.controller) {
             notifyReady();
           }
@@ -96,8 +107,17 @@
           // ignore
         });
     }
+
+    // Optional: گوش دادن به تغییر controller برای توسعه‌های بعدی (auto-refresh و غیره)
+    navigator.serviceWorker.addEventListener("controllerchange", function () {
+      // در صورت نیاز می‌تونی اینجا لاجیک اضافه کنی
+      // مثلاً:
+      // notifyUpdate();
+      // یا auto-refresh: window.location.reload();
+    });
   }
 
+  // Register Service Worker when window has fully loaded
   window.addEventListener("load", function () {
     navigator.serviceWorker
       .register("/sw.js")

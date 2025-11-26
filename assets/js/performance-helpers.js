@@ -6,75 +6,101 @@
     return;
   }
 
-  const HEAD = document.head || document.getElementsByTagName("head")[0];
+  const DOC = document;
+  const WIN = window;
+  const HEAD = DOC.head || DOC.getElementsByTagName("head")[0];
+
+  if (!HEAD) {
+    // اگر head وجود نداشت، عملاً کاری نمی‌تونیم بکنیم
+    return;
+  }
+
+  // ---- ابزار کمکی: اجرا بعد از آماده شدن DOM ----
+  function ready(fn) {
+    if (typeof fn !== "function") return;
+
+    if (DOC.readyState === "loading") {
+      if (typeof DOC.addEventListener === "function") {
+        DOC.addEventListener("DOMContentLoaded", function onReady() {
+          DOC.removeEventListener("DOMContentLoaded", onReady);
+          fn();
+        });
+      } else {
+        // محیط‌های خیلی قدیمی: بدون انتظار
+        fn();
+      }
+    } else {
+      fn();
+    }
+  }
 
   // ---- 1) Preloaded styles → real stylesheets ----
 
   function activatePreloadedStyles() {
-    if (!document.querySelectorAll) {return;}
+    if (!DOC.querySelectorAll) return;
 
-    document
-      .querySelectorAll(
-        "link[rel=\"preload\"][as=\"style\"][data-make-stylesheet]"
-      )
-      .forEach((preloadLink) => {
-        // جلوگیری از اجرای دوباره روی یک لینک
-        if (preloadLink.dataset.stylesheetActivated === "true") {return;}
+    const preloads = DOC.querySelectorAll(
+      'link[rel="preload"][as="style"][data-make-stylesheet]'
+    );
 
-        const realHref =
-          preloadLink.getAttribute("data-href") ||
-          preloadLink.getAttribute("href");
+    preloads.forEach(function (preloadLink) {
+      // جلوگیری از اجرای دوباره روی یک لینک
+      if (preloadLink.dataset.stylesheetActivated === "true") return;
 
-        if (!realHref) {return;}
+      const realHref =
+        preloadLink.getAttribute("data-href") ||
+        preloadLink.getAttribute("href");
 
-        const newLink = document.createElement("link");
-        newLink.rel = "stylesheet";
-        newLink.href = realHref;
+      if (!realHref) return;
 
-        // فقط اگر ویژگی‌ها روی preload ست شده باشند، کپی‌شان می‌کنیم
-        if (preloadLink.hasAttribute("crossorigin")) {
-          newLink.crossOrigin = preloadLink.crossOrigin;
-        }
-        if (preloadLink.hasAttribute("referrerpolicy")) {
-          newLink.referrerPolicy = preloadLink.referrerPolicy;
-        }
-        if (preloadLink.media) {
-          newLink.media = preloadLink.media;
-        }
+      const parent = preloadLink.parentNode;
+      if (!parent) return;
 
-        preloadLink.parentNode.insertBefore(newLink, preloadLink.nextSibling);
-        preloadLink.dataset.stylesheetActivated = "true";
-      });
+      const newLink = DOC.createElement("link");
+      newLink.rel = "stylesheet";
+      newLink.href = realHref;
+
+      // کپی کردن attributeهای مهم اگر روی preload ست شده باشند
+      if (preloadLink.hasAttribute("crossorigin")) {
+        newLink.crossOrigin = preloadLink.crossOrigin;
+      }
+      if (preloadLink.hasAttribute("referrerpolicy")) {
+        newLink.referrerPolicy = preloadLink.referrerPolicy;
+      }
+      if (preloadLink.media) {
+        newLink.media = preloadLink.media;
+      }
+      if (preloadLink.hasAttribute("integrity")) {
+        newLink.integrity = preloadLink.integrity;
+      }
+      if (preloadLink.hasAttribute("nonce")) {
+        // برای CSP
+        newLink.nonce = preloadLink.nonce;
+      }
+      if (preloadLink.title) {
+        newLink.title = preloadLink.title;
+      }
+      if (preloadLink.disabled) {
+        newLink.disabled = true;
+      }
+
+      parent.insertBefore(newLink, preloadLink.nextSibling);
+
+      // علامت‌گذاری به‌عنوان فعال‌شده
+      preloadLink.dataset.stylesheetActivated = "true";
+
+      // بعد از فعال‌سازی، preload دیگه لازم نیست
+      try {
+        parent.removeChild(preloadLink);
+      } catch {
+        // اگر حذف نشد، مشکلی نیست
+      }
+    });
   }
-
-  function runWhenReadyAndIdle(fn) {
-    if (document.readyState === "loading") {
-      document.addEventListener(
-        "DOMContentLoaded",
-        function onReady() {
-          document.removeEventListener("DOMContentLoaded", onReady);
-          scheduleIdle(fn);
-        }
-      );
-    } else {
-      scheduleIdle(fn);
-    }
-  }
-
-  function scheduleIdle(fn) {
-    if ("requestIdleCallback" in window) {
-      window.requestIdleCallback(fn, { timeout: 1000 });
-    } else {
-      setTimeout(fn, 1);
-    }
-  }
-
-  // Use ready() instead of runWhenReadyAndIdle() to avoid FOUC
-  ready(activatePreloadedStyles);
 
   // ---- 2) AI Signal config ----
 
-  const AI_SIGNAL_CONFIG = {
+  const AI_SIGNAL_CONFIG = Object.freeze({
     meta: {
       "ai.canonical-data": "https://rasoulunlimited.ir/ai/meta.json",
       "ai.instructions": "https://rasoulunlimited.ir/ai.txt",
@@ -143,17 +169,18 @@
         },
       ],
     },
-  };
+  });
 
   function ensureMetaTag(name, content) {
-    if (!HEAD || !name || !content) {return;}
+    if (!name || !content) return;
+    if (!HEAD.querySelector) return;
 
-    const existing = HEAD.querySelector(`meta[name="${name}"]`);
+    const existing = HEAD.querySelector('meta[name="' + name + '"]');
 
     // اگر متا موجوده و content خالی نیست، دست نمی‌زنیم
-    if (existing && existing.getAttribute("content")) {return;}
+    if (existing && existing.getAttribute("content")) return;
 
-    const meta = existing || document.createElement("meta");
+    const meta = existing || DOC.createElement("meta");
     meta.setAttribute("name", name);
     meta.setAttribute("content", content);
     meta.dataset.aiInjected = "true";
@@ -164,40 +191,49 @@
   }
 
   function ensureLinkTag(config) {
-    if (!HEAD || !config || !config.rel) {return;}
+    if (!config || !config.rel) return;
+    if (!HEAD.querySelector) return;
 
-    const selectorParts = [`link[rel="${config.rel}"]`];
-    if (config.href) {selectorParts.push(`[href="${config.href}"]`);}
-    if (config.type) {selectorParts.push(`[type="${config.type}"]`);}
+    const selectorParts = ['link[rel="' + config.rel + '"]'];
+    if (config.href) selectorParts.push('[href="' + config.href + '"]');
+    if (config.type) selectorParts.push('[type="' + config.type + '"]');
 
     const selector = selectorParts.join("");
     const existing = HEAD.querySelector(selector);
-    if (existing) {return;}
+    if (existing) return;
 
-    const link = document.createElement("link");
+    const link = DOC.createElement("link");
     link.rel = config.rel;
-    if (config.href) {link.href = config.href;}
-    if (config.type) {link.type = config.type;}
-    if (config.title) {link.title = config.title;}
+    if (config.href) link.href = config.href;
+    if (config.type) link.type = config.type;
+    if (config.title) link.title = config.title;
     link.dataset.aiInjected = "true";
 
     HEAD.appendChild(link);
   }
 
   function ensureManifestScript() {
-    if (!HEAD) {return;}
+    if (!DOC.getElementById) return;
 
     const scriptId = "ai-signal-manifest";
-    const payload = JSON.stringify(AI_SIGNAL_CONFIG.manifest, null, 2);
+    let payload = "";
 
-    let node = document.getElementById(scriptId);
+    try {
+      payload = JSON.stringify(AI_SIGNAL_CONFIG.manifest, null, 2);
+    } catch (err) {
+      // اگر stringify شکست خورد، چیزی تزریق نکن
+      console.error("Failed to stringify AI manifest:", err);
+      return;
+    }
+
+    let node = DOC.getElementById(scriptId);
     if (node) {
       // اگر محتوای قبلی متفاوت بود، آپدیتش کن
       if (node.textContent !== payload) {
         node.textContent = payload;
       }
     } else {
-      node = document.createElement("script");
+      node = DOC.createElement("script");
       node.id = scriptId;
       node.type = "application/json";
       node.setAttribute("data-ai", "signal-manifest");
@@ -207,34 +243,35 @@
 
     // همیشه global را sync نگه می‌داریم
     try {
-      window.aiSignalManifest = AI_SIGNAL_CONFIG.manifest;
+      WIN.aiSignalManifest = AI_SIGNAL_CONFIG.manifest;
     } catch {
       // اگر window قفل شده بود، نادیده بگیر
     }
   }
 
   function injectAiSignals() {
-    if (!HEAD) {return;}
+    const htmlEl = DOC.documentElement;
 
-    Object.entries(AI_SIGNAL_CONFIG.meta).forEach(([name, content]) =>
-      ensureMetaTag(name, content)
-    );
+    // اگر قبلاً تزریق شده، دوباره انجام نده
+    if (htmlEl && htmlEl.dataset.aiSignalsInjected === "true") {
+      return;
+    }
+
+    Object.keys(AI_SIGNAL_CONFIG.meta).forEach(function (name) {
+      ensureMetaTag(name, AI_SIGNAL_CONFIG.meta[name]);
+    });
 
     AI_SIGNAL_CONFIG.links.forEach(ensureLinkTag);
     ensureManifestScript();
-  }
 
-  function ready(fn) {
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", function onReady() {
-        document.removeEventListener("DOMContentLoaded", onReady);
-        fn();
-      });
-    } else {
-      fn();
+    if (htmlEl) {
+      htmlEl.dataset.aiSignalsInjected = "true";
     }
   }
 
-  // تزریق سیگنال‌های AI بعد از آماده شدن DOM
-  ready(injectAiSignals);
+  // یک بار بعد از آماده شدن DOM همه چیز را انجام می‌دهیم
+  ready(function () {
+    activatePreloadedStyles();
+    injectAiSignals();
+  });
 })();

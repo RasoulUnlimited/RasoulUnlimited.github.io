@@ -9,7 +9,7 @@ const sourcemaps = require("gulp-sourcemaps");
  * Optimizes stylesheets for production deployment
  */
 gulp.task("minify-css", function () {
-  console.log("🎨 Minifying CSS files...");
+  console.log("Minifying CSS files...");
   return gulp
     .src(["assets/css/**/*.css", "!assets/css/**/*.min.css"])
     .pipe(sourcemaps.init())
@@ -92,3 +92,5 @@ gulp.task("default", gulp.series(
     done();
   }
 ));
+
+

@@ -22,37 +22,67 @@
 
     const DAY_MS = 86400000;
 
+    // --- Relative time formatter with small cache ---
+
+    const rtfCache = {};
+
+    function getRelativeTimeFormatter(locale) {
+      if (!window.Intl || !Intl.RelativeTimeFormat) {
+        return null;
+      }
+      if (!rtfCache[locale]) {
+        rtfCache[locale] = new Intl.RelativeTimeFormat(locale, {
+          numeric: "auto",
+        });
+      }
+      return rtfCache[locale];
+    }
+
+    const RELATIVE_UNITS = [
+      ["year", 31536000000],
+      ["month", 2592000000],
+      ["week", 604800000],
+      ["day", 86400000],
+      ["hour", 3600000],
+      ["minute", 60000],
+      ["second", 1000],
+    ];
+
     function formatRelative(date) {
-      if (!date || !window.Intl || !Intl.RelativeTimeFormat) {
+      if (!date) {
         return "";
       }
-      const diff = Date.now() - date.getTime();
-      const units = [
-        ["year", 31536000000],
-        ["month", 2592000000],
-        ["week", 604800000],
-        ["day", 86400000],
-        ["hour", 3600000],
-        ["minute", 60000],
-        ["second", 1000],
-      ];
-      const locale = isFa ? "fa" : "en";
 
-      for (const [unit, ms] of units) {
+      const locale = isFa ? "fa" : "en";
+      const rtf = getRelativeTimeFormatter(locale);
+      if (!rtf) {
+        return "";
+      }
+
+      const diff = Date.now() - date.getTime();
+
+      for (const [unit, ms] of RELATIVE_UNITS) {
         if (Math.abs(diff) >= ms || unit === "second") {
-          const rtf = new Intl.RelativeTimeFormat(locale, { numeric: "auto" });
           return rtf.format(-Math.round(diff / ms), unit);
         }
       }
       return "";
     }
 
-    const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    );
+    // --- Motion / reduced motion handling ---
+
+    const hasMatchMedia = typeof window.matchMedia === "function";
+    const prefersReduced = hasMatchMedia
+      ? window.matchMedia("(prefers-reduced-motion: reduce)")
+      : null;
+    const smallScreen = hasMatchMedia
+      ? window.matchMedia("(max-width: 600px)")
+      : null;
 
     function addMediaQueryChangeListener(mediaQueryList, handler) {
-      if (!mediaQueryList || typeof handler !== "function") {return;}
+      if (!mediaQueryList || typeof handler !== "function") {
+        return;
+      }
       if (typeof mediaQueryList.addEventListener === "function") {
         mediaQueryList.addEventListener("change", handler);
       } else if (typeof mediaQueryList.addListener === "function") {
@@ -70,31 +100,48 @@
     }
 
     // احترام به کاربرانی که motion کم می‌خواهند
-    if (prefersReduced.matches) {
+    if (prefersReduced && prefersReduced.matches) {
       disableMotion();
     }
     addMediaQueryChangeListener(prefersReduced, (e) => {
-      if (e.matches) {disableMotion();}
+      if (e.matches) {
+        disableMotion();
+      }
     });
 
     // روی موبایل/اسکرین کوچک هم انیمیشن‌ها حذف شوند
-    const smallScreen = window.matchMedia("(max-width: 600px)");
-    if (smallScreen.matches) {
+    if (smallScreen && smallScreen.matches) {
       disableMotion();
     }
     addMediaQueryChangeListener(smallScreen, (e) => {
-      if (e.matches) {disableMotion();}
+      if (e.matches) {
+        disableMotion();
+      }
     });
 
+    // --- Text normalization for search ---
+
     function normalizeText(str) {
-      if (!str) {return "";}
+      if (!str) {
+        return "";
+      }
+      let s = String(str);
+      try {
+        if (typeof s.normalize === "function") {
+          s = s.normalize("NFKD");
+        }
+      } catch {
+        // اگر normalize ساپورت نشود، ادامه می‌دهیم
+      }
+
       const persianDigits = "۰۱۲۳۴۵۶۷۸۹";
-      return str
-        .normalize("NFKD")
+      return s
         .replace(/[۰-۹]/g, (d) => String(persianDigits.indexOf(d)))
         .replace(/[\u064B-\u065F\u0670]/g, "")
         .toLowerCase();
     }
+
+    // --- Storage wrapper ---
 
     function getStorage() {
       const test = "__test";
@@ -122,13 +169,9 @@
     // eslint-disable-next-line prefer-const
     let refreshAdvisoriesBtn;
 
-    async function cachedFetch(
-      url,
-      key,
-      ttl,
-      parser,
-      timeout = 5000
-    ) {
+    // --- Cached fetch helper ---
+
+    async function cachedFetch(url, key, ttl, parser, timeout = 5000) {
       let cached = null;
       if (storage) {
         try {
@@ -138,7 +181,7 @@
         }
       }
 
-      const cacheIsValid = cached && (Date.now() - cached.t < ttl);
+      const cacheIsValid = cached && Date.now() - cached.t < ttl;
 
       if (cacheIsValid) {
         return cached.d;
@@ -192,57 +235,73 @@
           throw new Error("parse-error");
         }
 
-        if (data !== null) {
-          if (storage) {
-            try {
-              storage.setItem(
-                key,
-                JSON.stringify({ t: Date.now(), d: data })
+        if (data !== null && storage) {
+          try {
+            storage.setItem(
+              key,
+              JSON.stringify({ t: Date.now(), d: data })
+            );
+          } catch (cacheErr) {
+            if (cacheErr.name === "QuotaExceededError") {
+              console.warn(
+                `localStorage quota exceeded for ${key}, attempting cleanup...`
               );
-            } catch (cacheErr) {
-              if (cacheErr.name === "QuotaExceededError") {
-                console.warn(`localStorage quota exceeded for ${key}, attempting cleanup...`);
-                try {
-                  const cacheKeys = ["security-timeline-cache", "security-advisories-cache"];
-                  for (const oldKey of cacheKeys) {
-                    if (oldKey !== key) {
-                      storage.removeItem(oldKey);
-                    }
+              try {
+                const cacheKeys = [
+                  "security-timeline-cache",
+                  "security-advisories-cache",
+                ];
+                for (const oldKey of cacheKeys) {
+                  if (oldKey !== key) {
+                    storage.removeItem(oldKey);
                   }
-                  storage.setItem(
-                    key,
-                    JSON.stringify({ t: Date.now(), d: data })
-                  );
-                } catch (retryErr) {
-                  console.error(`Failed to cache ${key} even after cleanup:`, retryErr);
                 }
-              } else {
-                console.warn(`Failed to cache ${key}, but returning fresh data:`, cacheErr);
+                storage.setItem(
+                  key,
+                  JSON.stringify({ t: Date.now(), d: data })
+                );
+              } catch (retryErr) {
+                console.error(
+                  `Failed to cache ${key} even after cleanup:`,
+                  retryErr
+                );
               }
+            } else {
+              console.warn(
+                `Failed to cache ${key}, but returning fresh data:`,
+                cacheErr
+              );
             }
           }
         }
+
         return data;
       } finally {
-        if (timer) {clearTimeout(timer);}
+        if (timer) {
+          clearTimeout(timer);
+        }
       }
     }
 
+    // --- Copy helpers ---
+
     function copyTextToClipboard(text) {
-      if (!text) {return;}
+      if (!text) {
+        return;
+      }
 
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard
           .writeText(text)
           .then(() => {
-            if (typeof createToast === "function") {
-              createToast(messages.success);
+            if (typeof window.createToast === "function") {
+              window.createToast(messages.success);
             }
           })
           .catch((err) => {
             console.error("Copy failed:", err);
-            if (typeof createToast === "function") {
-              createToast(messages.fail);
+            if (typeof window.createToast === "function") {
+              window.createToast(messages.fail);
             }
           });
       } else {
@@ -255,13 +314,15 @@
         hidden.select();
         try {
           const successful = document.execCommand("copy");
-          if (typeof createToast === "function") {
-            createToast(successful ? messages.success : messages.fail);
+          if (typeof window.createToast === "function") {
+            window.createToast(
+              successful ? messages.success : messages.fail
+            );
           }
         } catch (err) {
           console.error("execCommand copy failed:", err);
-          if (typeof createToast === "function") {
-            createToast(messages.fail);
+          if (typeof window.createToast === "function") {
+            window.createToast(messages.fail);
           }
         }
         document.body.removeChild(hidden);
@@ -274,7 +335,9 @@
       if (!text) {
         const targetId = btn.dataset.copyTarget;
         const targetEl = document.getElementById(targetId);
-        if (targetEl) {text = targetEl.textContent.trim();}
+        if (targetEl) {
+          text = (targetEl.textContent || "").trim();
+        }
       }
       copyTextToClipboard(text);
     }
@@ -286,7 +349,9 @@
 
     document.querySelectorAll(".copyable").forEach((el) => {
       const handler = () =>
-        copyTextToClipboard(el.dataset.copyText || el.textContent.trim());
+        copyTextToClipboard(
+          el.dataset.copyText || (el.textContent || "").trim()
+        );
       el.addEventListener("click", handler);
       el.addEventListener("keypress", (e) => {
         if (e.key === "Enter" || e.key === " ") {
@@ -296,10 +361,14 @@
       });
     });
 
+    // --- Connection status ---
+
     const connectionEl = document.getElementById("connection-status");
 
     function updateConnection() {
-      if (!connectionEl) {return;}
+      if (!connectionEl) {
+        return;
+      }
       const online = navigator.onLine;
 
       connectionEl.textContent = online
@@ -307,17 +376,19 @@
           ? "اتصال اینترنت برقرار است."
           : "You are online."
         : isFa
-          ? "شما آفلاین هستید. برخی قابلیت‌ها غیرفعال است."
-          : "You are offline. Some features may be unavailable.";
+        ? "شما آفلاین هستید. برخی قابلیت‌ها غیرفعال است."
+        : "You are offline. Some features may be unavailable.";
 
       document.body.classList.toggle("offline", !online);
 
       [refreshTimelineBtn, refreshAdvisoriesBtn].forEach((btn) => {
-        if (btn) {btn.disabled = !online;}
+        if (btn) {
+          btn.disabled = !online;
+        }
       });
     }
 
-    // --- تایم‌لاین و فیلترها ---
+    // --- Default timeline data ---
 
     const DEFAULT_TIMELINE = [
       {
@@ -387,19 +458,31 @@
       ? storage.getItem("timeline-sort") === "asc"
       : false;
 
-    // Strict whitelist of allowed Font Awesome icon classes - defined once outside loop
+    // Strict whitelist of allowed Font Awesome icon classes
     const ALLOWED_ICONS = new Set([
-      "fa-rocket", "fa-cloud", "fa-shield-alt", "fa-key",
-      "fa-bell", "fa-wifi", "fa-lock", "fa-shield",
-      "fa-check", "fa-star", "fa-bookmark", "fa-award"
+      "fa-rocket",
+      "fa-cloud",
+      "fa-shield-alt",
+      "fa-key",
+      "fa-bell",
+      "fa-wifi",
+      "fa-lock",
+      "fa-shield",
+      "fa-check",
+      "fa-star",
+      "fa-bookmark",
+      "fa-award",
     ]);
 
     function renderTimeline(events) {
-      if (!timelineList) {return;}
+      if (!timelineList) {
+        return;
+      }
 
       while (timelineList.firstChild) {
         timelineList.removeChild(timelineList.firstChild);
       }
+
       const sorted = events
         .slice()
         .sort((a, b) =>
@@ -463,20 +546,26 @@
     }
 
     function updateSortButton() {
-      if (!sortBtn) {return;}
+      if (!sortBtn) {
+        return;
+      }
       sortBtn.textContent = isFa
         ? sortAsc
           ? "قدیمی‌ترین"
           : "جدیدترین"
         : sortAsc
-          ? "Oldest first"
-          : "Newest first";
+        ? "Oldest first"
+        : "Newest first";
     }
 
     updateSortButton();
 
     function initializeTimeline() {
       const timelineItems = document.querySelectorAll(".timeline li");
+      if (!timelineItems.length) {
+        return;
+      }
+
       if ("IntersectionObserver" in window) {
         const observer = new IntersectionObserver(
           (entries, obs) => {
@@ -497,10 +586,12 @@
       }
     }
 
-    let debounceTimer = null;  // برای debounce سرچ
+    let debounceTimer = null; // برای debounce سرچ
 
     function setupTimelineSearch() {
-      if (!timelineList || !timelineSearch || searchInitialized) {return;}
+      if (!timelineList || !timelineSearch || searchInitialized) {
+        return;
+      }
 
       function filterList(term) {
         const q = normalizeText(term.trim());
@@ -595,7 +686,9 @@
         const savedYear = storage
           ? storage.getItem(TIMELINE_YEAR_KEY) || ""
           : "";
-        if (savedYear) {yearFilter.value = savedYear;}
+        if (savedYear) {
+          yearFilter.value = savedYear;
+        }
         yearFilter.addEventListener("change", () =>
           filterList(timelineSearch.value)
         );
@@ -614,7 +707,9 @@
     }
 
     function loadTimeline(force = false, btn = null) {
-      if (!timelineList) {return;}
+      if (!timelineList) {
+        return;
+      }
 
       while (timelineList.firstChild) {
         timelineList.removeChild(timelineList.firstChild);
@@ -684,32 +779,37 @@
           timelineList.setAttribute("aria-busy", "false");
           initializeTimeline();
           setupTimelineSearch();
-          if (force && typeof createToast === "function") {
-            createToast(messages.refreshed);
+          if (force && typeof window.createToast === "function") {
+            window.createToast(messages.refreshed);
           }
         })
         .catch((err) => {
-          if (typeof createToast === "function") {
+          if (typeof window.createToast === "function") {
             let msg = messages.fetchFail;
-            if (err && err.message === "offline") {msg = messages.offline;}
-            else if (err && err.message === "rate-limit")
-            {msg = messages.rateLimit;}
-            else if (err && err.message === "stale-data") {
-              // استفاده‌ی بی‌سروصدا از داده‌ی staled
-              if (err.data && Array.isArray(err.data)) {
-                timelineData = err.data;
-                renderTimeline(timelineData);
-                timelineList.setAttribute("aria-busy", "false");
-                initializeTimeline();
-                setupTimelineSearch();
-                return;
-              }
-              msg = messages.fetchFail;
+            if (err && err.message === "offline") {
+              msg = messages.offline;
+            } else if (err && err.message === "rate-limit") {
+              msg = messages.rateLimit;
+            } else if (err && err.message === "stale-data") {
+              // استفاده‌ی بی‌سروصدا از داده‌ی staled در ادامه
+              msg = "";
             }
-            createToast(msg);
+            if (msg) {
+              window.createToast(msg);
+            }
           }
 
-          timelineData = DEFAULT_TIMELINE;
+          if (
+            err &&
+            err.message === "stale-data" &&
+            err.data &&
+            Array.isArray(err.data)
+          ) {
+            timelineData = err.data;
+          } else {
+            timelineData = DEFAULT_TIMELINE;
+          }
+
           renderTimeline(timelineData);
           timelineList.setAttribute("aria-busy", "false");
           initializeTimeline();
@@ -741,7 +841,9 @@
     let expirationIntervalId = null;
 
     function updateExpirationDisplay() {
-      if (!expireDate || !expirationEl) {return;}
+      if (!expireDate || !expirationEl) {
+        return;
+      }
 
       const now = new Date();
       const diffDays = (expireDate - now) / DAY_MS;
@@ -755,10 +857,18 @@
         );
         progressEl.value = percent;
         progressEl.removeAttribute("aria-hidden");
+
+        if (diffDays > 0) {
+          daysLabel = isFa
+            ? `${Math.ceil(diffDays)} روز باقیمانده`
+            : `${Math.ceil(diffDays)} days remaining`;
+        } else {
+          daysLabel = isFa
+            ? "منقضی شده"
+            : "Expired";
+        }
+
         progressEl.setAttribute("aria-valuenow", percent.toFixed(0));
-        daysLabel = isFa
-          ? `${Math.ceil(diffDays)} روز باقیمانده`
-          : `${Math.ceil(diffDays)} days remaining`;
         progressEl.setAttribute("aria-valuetext", daysLabel);
       }
 
@@ -768,11 +878,7 @@
         daysTextEl.setAttribute("aria-hidden", "false");
       }
 
-      expirationEl.classList.remove(
-        "expired",
-        "expiring",
-        "warning"
-      );
+      expirationEl.classList.remove("expired", "expiring", "warning");
       if (progressEl) {
         progressEl.classList.remove("expired", "expiring", "warning");
       }
@@ -789,8 +895,54 @@
       }
     }
 
+    function processSecurityTxt(text) {
+      const match = text.match(/^Expires:\s*(.+)$/m);
+      if (match) {
+        const parsed = new Date(match[1].trim());
+        if (Number.isNaN(parsed.getTime())) {
+          expirationEl.textContent = isFa
+            ? "تاریخ اعتبار معتبر نیست."
+            : "Expiration date is invalid.";
+          return;
+        }
+
+        expireDate = parsed;
+        const locale = isFa ? "fa-IR" : "en-US";
+        const opts = {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        };
+        const label = isFa
+          ? `اعتبار سیاست تا ${expireDate.toLocaleDateString(
+              locale,
+              opts
+            )}`
+          : `Policy valid until ${expireDate.toLocaleDateString(
+              locale,
+              opts
+            )}`;
+        expirationEl.textContent = label;
+        updateExpirationDisplay();
+
+        if (expirationIntervalId) {
+          clearInterval(expirationIntervalId);
+        }
+        expirationIntervalId = setInterval(
+          updateExpirationDisplay,
+          3600000
+        );
+      } else {
+        expirationEl.textContent = isFa
+          ? "تاریخ اعتبار در دسترس نیست."
+          : "Expiration date unavailable.";
+      }
+    }
+
     function loadPolicyExpiration(force = false) {
-      if (!expirationEl) {return;}
+      if (!expirationEl) {
+        return;
+      }
 
       if (force && storage) {
         try {
@@ -805,41 +957,19 @@
         (res) => res.text()
       )
         .then((text) => {
-          const match = text.match(/^Expires:\s*(.+)$/m);
-          if (match) {
-            expireDate = new Date(match[1].trim());
-            const locale = isFa ? "fa-IR" : "en-US";
-            const opts = {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            };
-            const label = isFa
-              ? `اعتبار سیاست تا ${expireDate.toLocaleDateString(
-                locale,
-                opts
-              )}`
-              : `Policy valid until ${expireDate.toLocaleDateString(
-                locale,
-                opts
-              )}`;
-            expirationEl.textContent = label;
-            updateExpirationDisplay();
-
-            if (expirationIntervalId) {
-              clearInterval(expirationIntervalId);
-            }
-            expirationIntervalId = setInterval(
-              updateExpirationDisplay,
-              3600000
-            );
-          } else {
-            expirationEl.textContent = isFa
-              ? "تاریخ اعتبار در دسترس نیست."
-              : "Expiration date unavailable.";
-          }
+          processSecurityTxt(text);
         })
-        .catch(() => {
+        .catch((err) => {
+          // اگر داده کش‌شده داریم، از آن استفاده کن
+          if (
+            err &&
+            err.message === "stale-data" &&
+            typeof err.data === "string"
+          ) {
+            processSecurityTxt(err.data);
+            return;
+          }
+
           expirationEl.textContent = isFa
             ? "خطا در دریافت تاریخ اعتبار."
             : "Failed to load expiration date.";
@@ -866,8 +996,30 @@
     // آخرین بروزرسانی از GitHub
     const lastUpdatedEl = document.getElementById("last-updated-date");
 
+    function processLastUpdated(data) {
+      if (Array.isArray(data) && data.length > 0) {
+        const commitDate = new Date(data[0].commit.committer.date);
+        if (Number.isNaN(commitDate.getTime())) {
+          return;
+        }
+        const locale = isFa ? "fa-IR" : "en-US";
+        const opts = {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        };
+        const dateStr = commitDate.toLocaleDateString(locale, opts);
+        const rel = formatRelative(commitDate);
+        lastUpdatedEl.textContent = rel
+          ? `${dateStr} (${rel})`
+          : dateStr;
+      }
+    }
+
     function loadLastUpdated(force = false) {
-      if (!lastUpdatedEl) {return;}
+      if (!lastUpdatedEl) {
+        return;
+      }
 
       if (force && storage) {
         try {
@@ -880,33 +1032,22 @@
 
       cachedFetch(apiUrl, "security-last", DAY_MS, (res) => res.json())
         .then((data) => {
-          if (Array.isArray(data) && data.length > 0) {
-            const commitDate = new Date(
-              data[0].commit.committer.date
-            );
-            const locale = isFa ? "fa-IR" : "en-US";
-            const opts = {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            };
-            const dateStr = commitDate.toLocaleDateString(
-              locale,
-              opts
-            );
-            const rel = formatRelative(commitDate);
-            lastUpdatedEl.textContent = rel
-              ? `${dateStr} (${rel})`
-              : dateStr;
-          }
+          processLastUpdated(data);
         })
         .catch((err) => {
-          if (typeof createToast === "function") {
+          if (err && err.message === "stale-data" && err.data) {
+            processLastUpdated(err.data);
+            return;
+          }
+
+          if (typeof window.createToast === "function") {
             let msg = messages.fetchFail;
-            if (err && err.message === "offline") {msg = messages.offline;}
-            else if (err && err.message === "rate-limit")
-            {msg = messages.rateLimit;}
-            createToast(msg);
+            if (err && err.message === "offline") {
+              msg = messages.offline;
+            } else if (err && err.message === "rate-limit") {
+              msg = messages.rateLimit;
+            }
+            window.createToast(msg);
           }
         });
     }
@@ -915,12 +1056,52 @@
       loadLastUpdated();
     }
 
-    // GitHub Security Advisories
+    // --- GitHub Security Advisories ---
+
     const advisoriesList = document.getElementById("advisories-list");
     refreshAdvisoriesBtn = document.getElementById("refresh-advisories");
 
+    function renderAdvisories(advs) {
+      if (!advisoriesList) {
+        return;
+      }
+
+      while (advisoriesList.firstChild) {
+        advisoriesList.removeChild(advisoriesList.firstChild);
+      }
+
+      if (Array.isArray(advs) && advs.length > 0) {
+        advs.forEach((adv) => {
+          const li = document.createElement("li");
+          const link = document.createElement("a");
+          link.href = adv.html_url;
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          link.textContent = adv.summary || adv.ghsa_id || adv.id;
+          li.appendChild(link);
+
+          const advTime = adv.published_at || adv.created_at;
+          if (advTime) {
+            const span = document.createElement("span");
+            span.className = "adv-time";
+            span.textContent = formatRelative(new Date(advTime));
+            li.appendChild(document.createTextNode(" "));
+            li.appendChild(span);
+          }
+
+          advisoriesList.appendChild(li);
+        });
+      } else {
+        advisoriesList.textContent = isFa
+          ? "موردی یافت نشد."
+          : "No advisories found.";
+      }
+    }
+
     function loadAdvisories(force = false, btn = null) {
-      if (!advisoriesList) {return;}
+      if (!advisoriesList) {
+        return;
+      }
 
       while (advisoriesList.firstChild) {
         advisoriesList.removeChild(advisoriesList.firstChild);
@@ -942,44 +1123,25 @@
 
       cachedFetch(advUrl, key, DAY_MS, (res) => res.json())
         .then((advs) => {
-          if (Array.isArray(advs) && advs.length > 0) {
-            advs.forEach((adv) => {
-              const li = document.createElement("li");
-              const link = document.createElement("a");
-              link.href = adv.html_url;
-              link.target = "_blank";
-              link.rel = "noopener";
-              link.textContent =
-                adv.summary || adv.ghsa_id || adv.id;
-              li.appendChild(link);
-
-              const advTime = adv.published_at || adv.created_at;
-              if (advTime) {
-                const span = document.createElement("span");
-                span.className = "adv-time";
-                span.textContent = formatRelative(new Date(advTime));
-                li.appendChild(document.createTextNode(" "));
-                li.appendChild(span);
-              }
-
-              advisoriesList.appendChild(li);
-            });
-          } else {
-            advisoriesList.textContent = isFa
-              ? "موردی یافت نشد."
-              : "No advisories found.";
-          }
+          renderAdvisories(advs);
         })
         .catch((err) => {
-          advisoriesList.textContent = isFa
-            ? "خطا در دریافت اعلان‌ها."
-            : "Failed to load advisories.";
-          if (typeof createToast === "function") {
+          if (err && err.message === "stale-data" && err.data) {
+            renderAdvisories(err.data);
+          } else {
+            advisoriesList.textContent = isFa
+              ? "خطا در دریافت اعلان‌ها."
+              : "Failed to load advisories.";
+          }
+
+          if (typeof window.createToast === "function") {
             let msg = messages.fetchFail;
-            if (err && err.message === "offline") {msg = messages.offline;}
-            else if (err && err.message === "rate-limit")
-            {msg = messages.rateLimit;}
-            createToast(msg);
+            if (err && err.message === "offline") {
+              msg = messages.offline;
+            } else if (err && err.message === "rate-limit") {
+              msg = messages.rateLimit;
+            }
+            window.createToast(msg);
           }
         })
         .finally(() => {
@@ -1083,9 +1245,12 @@
 
     function toggleFloatButtons() {
       const show = window.scrollY > 200;
-      if (scrollBtn) {scrollBtn.classList.toggle("visible", show);}
-      if (floatingShare)
-      {floatingShare.classList.toggle("visible", show);}
+      if (scrollBtn) {
+        scrollBtn.classList.toggle("visible", show);
+      }
+      if (floatingShare) {
+        floatingShare.classList.toggle("visible", show);
+      }
     }
 
     window.addEventListener("scroll", toggleFloatButtons, {
@@ -1102,8 +1267,8 @@
     // --- Online / Offline events ---
     window.addEventListener("online", () => {
       updateConnection();
-      if (typeof createToast === "function") {
-        createToast(messages.online);
+      if (typeof window.createToast === "function") {
+        window.createToast(messages.online);
       }
       loadTimeline(true);
       loadAdvisories(true);
@@ -1113,8 +1278,8 @@
 
     window.addEventListener("offline", () => {
       updateConnection();
-      if (typeof createToast === "function") {
-        createToast(messages.offline);
+      if (typeof window.createToast === "function") {
+        window.createToast(messages.offline);
       }
     });
 

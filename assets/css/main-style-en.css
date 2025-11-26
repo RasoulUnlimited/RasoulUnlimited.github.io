@@ -346,7 +346,7 @@ a.skip-link:focus-visible {
   pointer-events: none;
 }
 
-.profile-image {
+.hero .profile-image {
   width: 220px;
   height: 220px;
   border-radius: var(--border-radius-full);
@@ -368,7 +368,7 @@ a.skip-link:focus-visible {
   margin-left: auto;
   margin-right: auto;
 }
-.profile-image:hover {
+.hero .profile-image:hover {
   transform: scale(1.05) rotate(1deg);
   box-shadow: 0 20px 50px var(--shadow-color-strong);
 }
@@ -386,7 +386,7 @@ h1 {
   word-break: break-word;
 }
 
-.tagline {
+.hero .tagline {
   font-family: var(--font-heading);
   font-size: clamp(1.2rem, 3vw, 1.6rem);
   letter-spacing: 0.3px;
@@ -1466,7 +1466,7 @@ section h2::after {
   section h2 {
     font-size: 2.4rem;
   }
-  .tagline {
+  .hero .tagline {
     font-size: 1.4rem;
   }
   #about p {
@@ -1611,10 +1611,10 @@ section h2::after {
     width: 80px;
     height: 4px;
   }
-  .tagline {
+  .hero .tagline {
     font-size: 1.3rem;
   }
-  .profile-image {
+  .hero .profile-image {
     width: 130px;
     height: 130px;
     border-width: 5px;
@@ -2175,7 +2175,7 @@ section h2::after {
   height: 48px;
 }
 
-.search-faq-container {
+#faq .search-faq-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -2185,7 +2185,7 @@ section h2::after {
   position: relative;
 }
 
-.search-faq-container input[type="text"] {
+#faq .search-faq-container input[type="text"] {
   width: 100%;
   padding: 1.2rem 2rem;
   border: 2px solid var(--search-border);
@@ -2198,19 +2198,19 @@ section h2::after {
   padding-right: 4rem;
 }
 
-.search-faq-container input[type="text"]::placeholder {
+#faq .search-faq-container input[type="text"]::placeholder {
   color: var(--text-color-light);
   opacity: 0.8;
 }
 
-.search-faq-container input[type="text"]:focus {
+#faq .search-faq-container input[type="text"]:focus {
   border-color: var(--primary-color);
   box-shadow: 0 0 0 4px var(--search-focus-shadow);
   outline: none;
   background-color: #ffffff;
 }
 
-.search-faq-container button#clear-search {
+#faq .search-faq-container button#clear-search {
   position: absolute;
   right: 1.5rem;
   background: none;
@@ -2223,11 +2223,11 @@ section h2::after {
   transition: color 0.2s ease-in-out;
 }
 
-.search-faq-container button#clear-search:hover {
+#faq .search-faq-container button#clear-search:hover {
   color: var(--accent-color);
 }
 
-.faq-container {
+#faq .faq-container {
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
@@ -2547,9 +2547,9 @@ summary:active,
   .skill-hover-message,
   .project-card,
   .skills-list li,
-  .faq-item,
-  .faq-item summary,
-  .faq-item summary::after,
+  #faq .faq-item,
+  #faq .faq-item summary,
+  #faq .faq-item summary::after,
   .section-delight-effect,
   .theme-switch .slider,
   .theme-switch .slider:before,
@@ -2564,7 +2564,7 @@ summary:active,
   .timeline-content,
   .testimonial-item,
   .giscus-container,
-  .faq-item summary.faq-summary-clicked,
+  #faq .faq-item summary.faq-summary-clicked,
   .card.clicked-pop,
   .card.is-featured,
   .project-image-placeholder img,
@@ -2604,7 +2604,7 @@ summary:active,
     box-shadow: none !important;
     outline: none !important;
   }
-  .faq-item p {
+  #faq .faq-item p {
     max-height: fit-content !important;
     padding-top: var(--space-md) !important;
     padding-bottom: var(--space-md) !important;
@@ -2646,11 +2646,11 @@ summary:active,
   outline-offset: 2px;
 }
 
-@media (max-width: 480px) {
+  @media (max-width: 480px) {
   #hero {
     padding-bottom: var(--space-lg);
   }
-  .profile-image {
+  .hero .profile-image {
     width: 100px;
     height: 100px;
     border-width: 4px;
@@ -2658,7 +2658,7 @@ summary:active,
   h1 {
     font-size: 2.2rem;
   }
-  .tagline {
+  .hero .tagline {
     font-size: 1.1rem;
   }
   .policy-container,
@@ -2682,7 +2682,7 @@ summary:active,
 }
 
 @media (max-width: 360px) {
-  .profile-image {
+  .hero .profile-image {
     width: 80px;
     height: 80px;
     border-width: 3px;
@@ -2690,7 +2690,7 @@ summary:active,
   h1 {
     font-size: 1.9rem;
   }
-  .tagline {
+  .hero .tagline {
     font-size: 1rem;
   }
   .policy-container,
