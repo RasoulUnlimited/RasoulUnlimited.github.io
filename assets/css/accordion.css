@@ -19,14 +19,17 @@
     transform var(--transition-speed-medium, 0.3s) var(--ease-bezier, ease);
 }
 
-/* هاور / فوکوس روی آیتم */
-.accordion-item:hover,
-.accordion-item:focus-within {
-  border-color: var(--primary-blue, #3498db);
-  box-shadow: 0 15px 45px var(--shadow-faq-item-hover, rgba(0, 0, 0, 0.12));
+/* هاور / فوکوس روی آیتم - فقط روی دستگاه‌هایی که hover دارند */
+@media (hover: hover) {
+  .accordion-item:hover,
+  .accordion-item:focus-within {
+    border-color: var(--primary-blue, #3498db);
+    box-shadow: 0 15px 45px var(--shadow-faq-item-hover, rgba(0, 0, 0, 0.12));
+    transform: translateY(-2px);
+  }
 }
 
-/* کلاس فعال – توسط JS ست می‌شود */
+/* کلاس فعال – توسط JS ست می‌شود (انیمیشن بلند شدن را خنثی می‌کنیم) */
 .accordion-item.is-open,
 .accordion-item.expanded {
   transform: none;
@@ -46,6 +49,8 @@
   border: none;
   border-bottom: 1px solid transparent;
   cursor: pointer;
+  touch-action: manipulation; /* UX بهتر روی موبایل */
+  -webkit-tap-highlight-color: transparent;
   transition:
     background-color var(--transition-speed-fast, 0.25s) ease-in-out,
     color var(--transition-speed-fast, 0.25s) ease-in-out,
@@ -57,6 +62,7 @@
 .accordion-header[aria-disabled="true"] {
   cursor: default;
   opacity: 0.6;
+  pointer-events: none; /* غیرفعال‌کردن کامل کلیک/هوور */
 }
 
 /* متن سوال */
@@ -65,7 +71,7 @@
   margin: 0;
   line-height: 1.5;
   text-align: inherit;
-  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 /* آیکون + / − قبل از سوال */
@@ -118,8 +124,8 @@ html[dir="rtl"] .accordion-header {
 
 /* محتوای آکاردئون – حالت بسته (default) */
 .accordion-content {
-  padding: 0 2.8rem;
   margin: 0;
+  padding: 0 2.8rem;
   border-top: 1px solid #f0f4f7;
   background-color: var(--bg-section, #fff);
   color: var(--text-muted, #546e7a);
@@ -130,14 +136,14 @@ html[dir="rtl"] .accordion-header {
   opacity: 0;
   padding-top: 0;
   padding-bottom: 0;
+  overflow-wrap: break-word;
   transition:
     max-height var(--transition-speed-medium, 0.4s) var(--ease-bezier, ease),
     padding var(--transition-speed-medium, 0.4s) var(--ease-bezier, ease),
     opacity var(--transition-speed-medium, 0.4s) ease-out;
 }
 
-/* محتوای باز شده
-   max-height اینجا عمداً ست نمی‌شود تا با JS که max-height داینامیک می‌دهد تداخل نکند */
+/* محتوای باز شده – max-height توسط JS کنترل می‌شود */
 .accordion-item.is-open > .accordion-content,
 .accordion-item.expanded > .accordion-content {
   opacity: 1;
@@ -156,6 +162,10 @@ html[dir="rtl"] .accordion-header {
 
 /* ریسپانسیو: برای موبایل padding و سایز فونت را کمی کم می‌کنیم */
 @media (max-width: 600px) {
+  .accordion {
+    gap: 1.4rem;
+  }
+
   .accordion-header {
     padding: 1.6rem 1.8rem;
     font-size: 1.2rem;
@@ -169,5 +179,9 @@ html[dir="rtl"] .accordion-header {
   .accordion-header::before {
     font-size: 2.2rem;
     margin-inline-end: 1.4rem;
+  }
+
+  .accordion-item {
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
   }
 }

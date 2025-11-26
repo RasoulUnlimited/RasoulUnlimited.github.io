@@ -15,19 +15,20 @@
    */
 
   /**
-   * رجیستری آکاردئون‌ها برای استفاده در API سراسری
-   * @type {Map<string, {
-   *   root: HTMLElement,
-   *   itemRefs: AccordionItemRefs[],
-   *   allowMultiple: boolean,
-   *   allowToggle: boolean,
-   *   expandItem: (ref: AccordionItemRefs) => void,
-   *   collapseItem: (ref: AccordionItemRefs) => void,
-   *   toggleItem: (ref: AccordionItemRefs) => void,
-   *   isItemExpanded: (ref: AccordionItemRefs) => boolean
-   * }>}
+   * @typedef {Object} AccordionRecord
+   * @property {HTMLElement} root
+   * @property {AccordionItemRefs[]} itemRefs
+   * @property {boolean} allowMultiple
+   * @property {boolean} allowToggle
+   * @property {(ref: AccordionItemRefs) => void} expandItem
+   * @property {(ref: AccordionItemRefs) => void} collapseItem
+   * @property {(ref: AccordionItemRefs) => void} toggleItem
+   * @property {(ref: AccordionItemRefs) => boolean} isItemExpanded
    */
+
+  /** @type {Map<string, AccordionRecord>} */
   const ACCORDION_REGISTRY = new Map();
+  const ACCORDION_ATTR = "accordionId";
 
   // ترجیح کاربر برای کاهش انیمیشن + گوش دادن به تغییرات سیستم
   let PREFERS_REDUCED_MOTION = false;
@@ -110,7 +111,12 @@
   function initAccordion(root) {
     if (!root) return;
 
-    const accordionId = root.dataset.accordionId || "main";
+    // جلوگیری از دوباره‌سازی
+    if (root.dataset.accordionInitialized === "true") {
+      return;
+    }
+
+    const accordionId = root.dataset[ACCORDION_ATTR] || "main";
 
     const allowMultiple =
       root.getAttribute("data-allow-multiple") === "true" ||
@@ -127,7 +133,10 @@
     const reduceMotion = PREFERS_REDUCED_MOTION;
 
     const items = Array.from(root.querySelectorAll(".accordion-item"));
-    if (!items.length) return;
+    if (!items.length) {
+      root.dataset.accordionInitialized = "true";
+      return;
+    }
 
     // برای نگه‌داری هندلرهای transitionend و timeoutها
     /** @type {WeakMap<HTMLElement, (e: TransitionEvent) => void>} */
@@ -186,60 +195,12 @@
       transitionTimeoutIds.set(panel, timeoutId);
     }
 
-    // --- First pass: setup ARIA / state ---
-    items.forEach((item, index) => {
-      const header = /** @type {HTMLElement|null} */ (
-        item.querySelector(".accordion-header")
-      );
-      const panel = /** @type {HTMLElement|null} */ (
-        item.querySelector(".accordion-content")
-      );
-
-      if (!header || !panel) return;
-
-      const headerId = header.id || `accordion-header-${accordionId}-${index}`;
-      const panelId = panel.id || `accordion-panel-${accordionId}-${index}`;
-
-      header.id = headerId;
-      panel.id = panelId;
-
-      const initiallyOpen =
-        item.classList.contains("is-open") || item.hasAttribute("data-open");
-
-      // ARIA wiring
-      header.setAttribute("role", "button");
-      header.setAttribute("aria-controls", panelId);
-      header.setAttribute("aria-expanded", initiallyOpen ? "true" : "false");
-      header.setAttribute("tabindex", "0");
-
-      panel.setAttribute("role", "region");
-      panel.setAttribute("aria-labelledby", headerId);
-      panel.setAttribute("aria-hidden", initiallyOpen ? "false" : "true");
-      panel.hidden = !initiallyOpen;
-
-      if (initiallyOpen) {
-        item.classList.add("is-open");
-        panel.style.maxHeight = "none";
-        panel.style.opacity = "1";
-      } else {
-        item.classList.remove("is-open");
-        panel.style.maxHeight = "0px";
-        panel.style.opacity = "0";
-      }
-
-      headers.push(header);
-      itemRefs.push({ item, header, panel });
-    });
-
-    if (!itemRefs.length) return;
-
     /**
      * Dispatch a custom event from an item.
      * @param {HTMLElement} item
      * @param {string} type
-     * @param {string} accordionId
      */
-    function dispatchAccordionEvent(item, type, accordionId) {
+    function dispatchAccordionEvent(item, type) {
       if (!item) return;
       const event = createAccordionEvent(type, { item, accordionId });
       item.dispatchEvent(event);
@@ -265,17 +226,74 @@
       );
     }
 
+    /**
+     * تنظیم وضعیت ARIA و کلاس is-open
+     * @param {AccordionItemRefs} ref
+     * @param {boolean} expanded
+     */
+    function setExpandedState(ref, expanded) {
+      const { item, header, panel } = ref;
+      header.setAttribute("aria-expanded", expanded ? "true" : "false");
+      panel.setAttribute("aria-hidden", expanded ? "false" : "true");
+      item.classList.toggle("is-open", expanded);
+      panel.hidden = !expanded;
+    }
+
+    // --- First pass: setup ARIA / state ---
+    items.forEach((item, index) => {
+      const header = /** @type {HTMLElement|null} */ (
+        item.querySelector(".accordion-header")
+      );
+      const panel = /** @type {HTMLElement|null} */ (
+        item.querySelector(".accordion-content")
+      );
+
+      if (!header || !panel) return;
+
+      const headerId = header.id || `accordion-header-${accordionId}-${index}`;
+      const panelId = panel.id || `accordion-panel-${accordionId}-${index}`;
+
+      header.id = headerId;
+      panel.id = panelId;
+
+      const initiallyOpen =
+        item.classList.contains("is-open") || item.hasAttribute("data-open");
+
+      // ARIA wiring
+      header.setAttribute("role", "button");
+      header.setAttribute("aria-controls", panelId);
+      header.setAttribute("tabindex", "0");
+
+      panel.setAttribute("role", "region");
+      panel.setAttribute("aria-labelledby", headerId);
+
+      setExpandedState({ item, header, panel }, initiallyOpen);
+
+      if (initiallyOpen) {
+        panel.style.maxHeight = "none";
+        panel.style.opacity = "1";
+      } else {
+        panel.style.maxHeight = "0px";
+        panel.style.opacity = "0";
+      }
+
+      headers.push(header);
+      itemRefs.push({ item, header, panel });
+    });
+
+    if (!itemRefs.length) {
+      root.dataset.accordionInitialized = "true";
+      return;
+    }
+
     // اگر اجازه‌ی toggle نداریم، مطمئن شو حداقل یک آیتم از ابتدا باز است
     if (!allowToggle) {
       const hasOpen = itemRefs.some((ref) => isItemExpanded(ref));
       if (!hasOpen && itemRefs[0]) {
-        const { item, header, panel } = itemRefs[0];
-        header.setAttribute("aria-expanded", "true");
-        item.classList.add("is-open");
-        panel.setAttribute("aria-hidden", "false");
-        panel.hidden = false;
-        panel.style.maxHeight = "none";
-        panel.style.opacity = "1";
+        const ref = itemRefs[0];
+        setExpandedState(ref, true);
+        ref.panel.style.maxHeight = "none";
+        ref.panel.style.opacity = "1";
       }
     }
 
@@ -284,17 +302,13 @@
      * @param {AccordionItemRefs} ref
      */
     function collapseItem(ref) {
-      const { item, header, panel } = ref;
-      if (!header || !panel) return;
+      const { panel } = ref;
+      if (!panel) return;
 
-      header.setAttribute("aria-expanded", "false");
-      item.classList.remove("is-open");
-      panel.setAttribute("aria-hidden", "true");
-
+      setExpandedState(ref, false);
       clearTransitionHandlers(panel);
 
       if (reduceMotion) {
-        // بدون انیمیشن
         panel.style.maxHeight = "0px";
         panel.style.opacity = "0";
         panel.hidden = true;
@@ -302,7 +316,6 @@
         // مطمئن شو برای محاسبه scrollHeight مخفی نیست
         panel.hidden = false;
 
-        // همیشه از ارتفاع واقعی فعلی شروع می‌کنیم
         const startHeight = panel.scrollHeight;
         panel.style.maxHeight = startHeight + "px";
 
@@ -310,7 +323,6 @@
         void panel.offsetHeight;
 
         setupTransitionEnd(panel, () => {
-          // بعد از پایان انیمیشن، واقعاً مخفی‌اش می‌کنیم
           panel.hidden = true;
           panel.style.maxHeight = "0px";
         });
@@ -321,7 +333,7 @@
         });
       }
 
-      dispatchAccordionEvent(item, "accordion:collapse", accordionId);
+      dispatchAccordionEvent(ref.item, "accordion:collapse");
     }
 
     /**
@@ -329,26 +341,21 @@
      * @param {AccordionItemRefs} ref
      */
     function expandItem(ref) {
-      const { item, header, panel } = ref;
-      if (!header || !panel) return;
+      const { panel } = ref;
+      if (!panel) return;
 
-      header.setAttribute("aria-expanded", "true");
-      item.classList.add("is-open");
-      panel.setAttribute("aria-hidden", "false");
-      panel.hidden = false;
-
+      setExpandedState(ref, true);
       clearTransitionHandlers(panel);
 
       if (reduceMotion) {
         panel.style.maxHeight = "none";
         panel.style.opacity = "1";
       } else {
-        // از ارتفاع صفر شروع می‌کنیم، بعد به scrollHeight انیمیت می‌کنیم
+        panel.hidden = false;
         panel.style.maxHeight = "0px";
         panel.style.opacity = "0";
 
         setupTransitionEnd(panel, () => {
-          // بعد از انیمیشن، max-height را none می‌کنیم تا محتوا آزادانه رشد کند
           panel.style.maxHeight = "none";
         });
 
@@ -359,7 +366,7 @@
         });
       }
 
-      dispatchAccordionEvent(item, "accordion:expand", accordionId);
+      dispatchAccordionEvent(ref.item, "accordion:expand");
     }
 
     /**
@@ -446,11 +453,14 @@
       toggleItem,
       isItemExpanded,
     });
+
+    root.dataset.accordionInitialized = "true";
   }
 
   /**
    * Resolve registry record by id or element.
    * @param {string | HTMLElement} accordionIdOrElement
+   * @returns {AccordionRecord | null}
    */
   function resolveRecord(accordionIdOrElement) {
     if (!accordionIdOrElement) return null;
@@ -460,9 +470,14 @@
     }
 
     if (accordionIdOrElement instanceof HTMLElement) {
-      const id = accordionIdOrElement.dataset
-        ? accordionIdOrElement.dataset.accordionId
-        : null;
+      // اگر خود روت نبود، نزدیک‌ترین والد با کلاس accordion را پیدا کن
+      const root = accordionIdOrElement.matches(".accordion")
+        ? accordionIdOrElement
+        : accordionIdOrElement.closest(".accordion");
+
+      if (!root) return null;
+
+      const id = root.dataset[ACCORDION_ATTR];
       if (!id) return null;
       return ACCORDION_REGISTRY.get(id) || null;
     }
@@ -472,7 +487,7 @@
 
   /**
    * Resolve item ref by index or id.
-   * @param {ReturnType<typeof resolveRecord>} record
+   * @param {AccordionRecord | null} record
    * @param {number | string} target
    * @returns {AccordionItemRefs | null}
    */
@@ -502,8 +517,8 @@
   document.addEventListener("DOMContentLoaded", () => {
     const accordions = document.querySelectorAll(".accordion");
     accordions.forEach((acc, index) => {
-      if (!acc.dataset.accordionId) {
-        acc.dataset.accordionId = String(index + 1);
+      if (!acc.dataset[ACCORDION_ATTR]) {
+        acc.dataset[ACCORDION_ATTR] = String(index + 1);
       }
       initAccordion(acc);
     });
@@ -564,7 +579,6 @@
     if (!record) return;
     const { allowMultiple, itemRefs, expandItem } = record;
     if (!allowMultiple) {
-      // اگر اجازه‌ی چندتایی نداریم، فقط اولین آیتم را باز می‌کنیم
       if (itemRefs[0]) expandItem(itemRefs[0]);
       return;
     }
@@ -587,13 +601,11 @@
         firstOpen = itemRefs[0];
       }
 
-      // بقیه را می‌بندیم
       itemRefs.forEach((ref) => {
         if (ref === firstOpen) return;
         collapseItem(ref);
       });
 
-      // اگر firstOpen بسته بود، دوباره بازش می‌کنیم تا قانون حفظ شود
       if (firstOpen && !isItemExpanded(firstOpen)) {
         expandItem(firstOpen);
       }
@@ -609,19 +621,20 @@
    */
   window.Accordion.init = function (rootOrSelector) {
     if (!rootOrSelector) return;
+
     if (typeof rootOrSelector === "string") {
       const nodes = document.querySelectorAll(rootOrSelector);
       nodes.forEach((node, index) => {
-        if (!node.dataset.accordionId) {
-          node.dataset.accordionId = String(
+        if (!node.dataset[ACCORDION_ATTR]) {
+          node.dataset[ACCORDION_ATTR] = String(
             ACCORDION_REGISTRY.size + index + 1
           );
         }
         initAccordion(node);
       });
     } else if (rootOrSelector instanceof HTMLElement) {
-      if (!rootOrSelector.dataset.accordionId) {
-        rootOrSelector.dataset.accordionId = String(
+      if (!rootOrSelector.dataset[ACCORDION_ATTR]) {
+        rootOrSelector.dataset[ACCORDION_ATTR] = String(
           ACCORDION_REGISTRY.size + 1
         );
       }
