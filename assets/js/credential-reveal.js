@@ -6,17 +6,38 @@
     return;
   }
 
+  const HIDDEN_CLASS = "card-hidden";
+  const VISIBLE_CLASS = "card-visible";
+
+  const OBSERVER_OPTIONS = {
+    root: null,
+    rootMargin: "0px 0px -10% 0px",
+    threshold: 0.1,
+  };
+
+  /**
+   * یک کارت را نمایش می‌دهد (کلاس‌های لازم را ست می‌کند)
+   * @param {HTMLElement} card
+   */
+  function revealCard(card) {
+    card.classList.remove(HIDDEN_CLASS);
+    card.classList.add(VISIBLE_CLASS);
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
     const cards = document.querySelectorAll(".credential-card");
     if (!cards.length) return;
 
     let observer = null;
+    let motionQuery = null;
+    let prefersReduced = false;
 
+    /**
+     * همه‌ی کارت‌ها را بدون انیمیشن اسکرول نمایش بده
+     * و اگر observer فعال است آن را قطع کن.
+     */
     const showCardsImmediately = () => {
-      cards.forEach((card) => {
-        card.classList.remove("card-hidden");
-        card.classList.add("card-visible");
-      });
+      cards.forEach(revealCard);
 
       if (observer) {
         observer.disconnect();
@@ -25,9 +46,6 @@
     };
 
     // هندلینگ prefers-reduced-motion
-    let prefersReduced = false;
-    let motionQuery = null;
-
     if ("matchMedia" in window) {
       motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
       prefersReduced = motionQuery.matches;
@@ -49,34 +67,29 @@
     }
 
     // اگر IntersectionObserver نیست یا کاربر motion را کم کرده، انیمیشن اسکرول نداشته باش
-    if (!("IntersectionObserver" in window) || prefersReduced) {
+    const hasIntersectionObserver = "IntersectionObserver" in window;
+    if (!hasIntersectionObserver || prefersReduced) {
       showCardsImmediately();
       return;
     }
 
     // حالت عادی: کارت‌ها ابتدا مخفی، با اسکرول وارد می‌شوند
     cards.forEach((card) => {
-      card.classList.add("card-hidden");
-      card.classList.remove("card-visible");
+      card.classList.add(HIDDEN_CLASS);
+      card.classList.remove(VISIBLE_CLASS);
     });
 
-    observer = new IntersectionObserver(
-      (entries, obs) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
+    observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
 
-          const card = entry.target;
-          card.classList.add("card-visible");
-          card.classList.remove("card-hidden");
+        const card = entry.target;
+        revealCard(card);
 
-          obs.unobserve(card);
-        });
-      },
-      {
-        rootMargin: "0px 0px -10% 0px",
-        threshold: 0.1,
-      }
-    );
+        // فقط یک بار برای هر کارت کافی است
+        obs.unobserve(card);
+      });
+    }, OBSERVER_OPTIONS);
 
     cards.forEach((card) => observer.observe(card));
   });
