@@ -45,36 +45,57 @@
   }
 
   /**
+   * Attach "installed" listener to a worker (if present)
+   * @param {ServiceWorker} worker
+   */
+  function attachInstalledListener(worker) {
+    if (!worker) return;
+
+    worker.addEventListener("statechange", function () {
+      if (worker.state !== "installed") return;
+
+      // If controller exists, this is an update
+      if (navigator.serviceWorker.controller) {
+        notifyUpdate();
+      } else {
+        // First installation: offline support enabled
+        notifyReady();
+      }
+    });
+  }
+
+  /**
    * Handle Service Worker registration and updates
    * @param {ServiceWorkerRegistration} reg - Registration object
    */
   function handleRegistration(reg) {
-    // If waiting worker exists, update is available
+    // If waiting worker exists, update is available (e.g. from previous visit)
     if (reg.waiting) {
       notifyUpdate();
     }
 
+    // اگر همین الان در حال نصب باشد (before we attached 'updatefound')
+    attachInstalledListener(reg.installing);
+
     // Listen for future updates
     reg.addEventListener("updatefound", function () {
-      const newWorker = reg.installing;
-      if (!newWorker) {
-        return;
-      }
-
-      newWorker.addEventListener("statechange", function () {
-        if (newWorker.state !== "installed") {
-          return;
-        }
-
-        // If controller exists, this is an update
-        if (navigator.serviceWorker.controller) {
-          notifyUpdate();
-        } else {
-          // First installation: offline support enabled
-          notifyReady();
-        }
-      });
+      attachInstalledListener(reg.installing);
     });
+
+    // اگر سرویس‌ورکر فعال است ولی کنترلی نداریم (سناریوی لبه‌ای)
+    // می‌توانیم وقتی آماده شد، پیام ready بدهیم
+    if (!navigator.serviceWorker.controller) {
+      navigator.serviceWorker.ready
+        .then(function () {
+          // هنوز controller نداریم؟ یعنی این تب تازه تحت کنترل قرار گرفته
+          if (!navigator.serviceWorker.controller) {
+            notifyReady();
+          }
+        })
+        .catch(function () {
+          // ignore
+        });
+    }
   }
 
   window.addEventListener("load", function () {

@@ -1,94 +1,142 @@
 // js/theme-toggle.js
-// Shared, accessible, and robust theme toggle script
+// Accessible, robust, and framework-agnostic theme toggle
 
 document.addEventListener("DOMContentLoaded", () => {
   const toggle = document.getElementById("theme-toggle");
-  if (!toggle) {return;}
+  if (!toggle) return;
 
   const THEME_KEY = "theme";
   const DARK = "dark";
   const LIGHT = "light";
 
-  // Safe localStorage wrapper
+  const root = document.documentElement;
+  const body = document.body;
+
+  // --- Safe localStorage wrapper ---
+
   function getSafeStorage() {
     const testKey = "__theme_toggle__";
     try {
       localStorage.setItem(testKey, testKey);
       localStorage.removeItem(testKey);
       return localStorage;
-    } catch (err) {
+    } catch {
       return null;
     }
   }
 
   const storage = getSafeStorage();
-  const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+  // --- System preference ---
+
+  const mediaQuery =
+    typeof window !== "undefined" && "matchMedia" in window
+      ? window.matchMedia("(prefers-color-scheme: dark)")
+      : null;
 
   function getStoredTheme() {
-    if (!storage) {return null;}
+    if (!storage) return null;
     const value = storage.getItem(THEME_KEY);
     return value === DARK || value === LIGHT ? value : null;
   }
 
   function getSystemTheme() {
+    if (!mediaQuery) return LIGHT;
     return mediaQuery.matches ? DARK : LIGHT;
   }
 
   function getCurrentTheme() {
-    const attr = document.documentElement.getAttribute("data-theme");
-    if (attr === DARK || attr === LIGHT) {return attr;}
+    // احترام به چیزی که سرور روی data-theme ست کرده
+    const attr = root.getAttribute("data-theme");
+    if (attr === DARK || attr === LIGHT) return attr;
+
     const stored = getStoredTheme();
-    if (stored) {return stored;}
+    if (stored) return stored;
+
     return getSystemTheme();
   }
 
+  // --- Helpers ---
+
+  function isCheckableInput(el) {
+    return (
+      el instanceof HTMLInputElement &&
+      (el.type === "checkbox" || el.type === "radio")
+    );
+  }
+
+  const isCheckable = isCheckableInput(toggle);
+
+  function syncToggleState(isDark) {
+    if (isCheckable) {
+      // برای inputهای checkable
+      /** @type {HTMLInputElement} */ (toggle).checked = isDark;
+
+      // برای screen readerها
+      toggle.setAttribute("aria-checked", String(isDark));
+    } else {
+      // برای المنت‌های غیر-input (مثلاً button سفارشی)
+      toggle.setAttribute("aria-pressed", String(isDark));
+    }
+  }
+
+  function persistTheme(theme) {
+    if (!storage) return;
+    try {
+      storage.setItem(THEME_KEY, theme);
+    } catch {
+      // ignore storage errors (e.g. private mode)
+    }
+  }
+
+  function dispatchThemeEvent(theme, isDark) {
+    try {
+      const event = new CustomEvent("themechange", {
+        detail: { theme, isDark },
+      });
+      window.dispatchEvent(event);
+    } catch {
+      // برای مرورگرهای خیلی قدیمی که CustomEvent ندارند
+    }
+  }
+
   function applyTheme(theme, { persist = true } = {}) {
+    if (theme !== DARK && theme !== LIGHT) return;
+
     const isDark = theme === DARK;
 
     // data-theme برای CSSهای تم‌محور
-    document.documentElement.setAttribute("data-theme", theme);
+    root.setAttribute("data-theme", theme);
 
     // کلاس‌های عمومی تم روی html و body
-    document.documentElement.classList.toggle("dark-mode", isDark);
-    document.documentElement.classList.toggle("light-mode", !isDark);
-    document.body.classList.toggle("dark-mode", isDark);
-    document.body.classList.toggle("light-mode", !isDark);
+    root.classList.toggle("dark-mode", isDark);
+    root.classList.toggle("light-mode", !isDark);
+
+    if (body) {
+      body.classList.toggle("dark-mode", isDark);
+      body.classList.toggle("light-mode", !isDark);
+    }
 
     // ساپورت سبک Tailwind: .dark
-    document.documentElement.classList.toggle("dark", isDark);
+    root.classList.toggle("dark", isDark);
+
+    // color-scheme برای اسکرول‌بار و کنترل‌های سیستم
+    try {
+      root.style.colorScheme = isDark ? "dark" : "light";
+    } catch {
+      // اگر ساپورت نشه، نادیده بگیر
+    }
 
     // همگام‌سازی وضعیت خود سوییچ
-    if ("checked" in toggle) {
-      toggle.checked = isDark;
-    } else {
-      toggle.setAttribute("aria-pressed", String(isDark));
+    syncToggleState(isDark);
+
+    if (persist) {
+      persistTheme(theme);
     }
 
-    if (persist && storage) {
-      try {
-        storage.setItem(THEME_KEY, theme);
-      } catch {
-        // ignore storage errors (e.g. private mode)
-      }
-    }
+    // اطلاع دادن به بقیه‌ی اسکریپت‌ها
+    dispatchThemeEvent(theme, isDark);
   }
-
-  // Accessibility defaults (درصورتی که از HTML ست نشده باشن)
-  if (!toggle.hasAttribute("role")) {
-    // اگر input[type=checkbox] است، نقش switch براش منطقی‌تره
-    const isCheckbox =
-      toggle.tagName === "INPUT" &&
-      (toggle.type === "checkbox" || toggle.type === "radio");
-    toggle.setAttribute("role", isCheckbox ? "switch" : "button");
-  }
-
-  if (!toggle.hasAttribute("aria-label") && !toggle.hasAttribute("aria-labelledby")) {
-    toggle.setAttribute("aria-label", "Toggle dark mode");
-  }
-
-  // Init theme (بدون persist، فقط sync اولیه)
-  const initialTheme = getStoredTheme() ?? getSystemTheme();
-  applyTheme(initialTheme, { persist: false });
 
   function toggleTheme() {
     const current = getCurrentTheme();
@@ -96,47 +144,104 @@ document.addEventListener("DOMContentLoaded", () => {
     applyTheme(next);
   }
 
-  // Mouse / touch change برای checkboxها
-  toggle.addEventListener("change", () => {
-    if ("checked" in toggle) {
-      const next = toggle.checked ? DARK : LIGHT;
+  // --- Accessibility defaults ---
+
+  if (!toggle.hasAttribute("role")) {
+    toggle.setAttribute("role", isCheckable ? "switch" : "button");
+  }
+
+  if (!toggle.hasAttribute("tabindex") && !(toggle instanceof HTMLInputElement)) {
+    // برای المنت‌های غیر-focussable مثل <div>
+    toggle.setAttribute("tabindex", "0");
+  }
+
+  if (
+    !toggle.hasAttribute("aria-label") &&
+    !toggle.hasAttribute("aria-labelledby")
+  ) {
+    toggle.setAttribute("aria-label", "Toggle dark mode");
+  }
+
+  // برای screen reader ها، اگر checkable باشد
+  if (isCheckable && !toggle.hasAttribute("aria-checked")) {
+    toggle.setAttribute("aria-checked", "false");
+  }
+
+  // --- Init theme ---
+  // از تم فعلی (data-theme)، یا ذخیره‌شده، یا سیستم استفاده می‌کنیم
+  const initialTheme = getCurrentTheme();
+  applyTheme(initialTheme, { persist: false });
+
+  // --- Event listeners ---
+
+  if (isCheckable) {
+    const input = /** @type {HTMLInputElement} */ (toggle);
+
+    // Mouse / touch change برای input[type=checkbox]/radio
+    input.addEventListener("change", () => {
+      const next = input.checked ? DARK : LIGHT;
       applyTheme(next);
-    } else {
-      toggleTheme();
-    }
-  });
+    });
 
-  // برای المنت‌هایی که checkbox نیستند (مثلاً دکمه سفارشی)
-  toggle.addEventListener("click", (event) => {
-    if (!("checked" in toggle)) {
-      event.preventDefault();
-      toggleTheme();
-    }
-  });
-
-  // Keyboard accessibility: Enter & Space
-  toggle.addEventListener("keydown", (event) => {
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-
-      if ("checked" in toggle) {
-        toggle.checked = !toggle.checked;
+    // Keyboard accessibility: Enter (Space خودش به‌صورت native چک‌باکس را هندل می‌کند)
+    input.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        input.checked = !input.checked;
+        const next = input.checked ? DARK : LIGHT;
+        applyTheme(next);
       }
+    });
+  } else {
+    // برای المنت‌های غیر-checkbox (مثلاً دکمه سفارشی)
+    toggle.addEventListener("click", (event) => {
+      event.preventDefault();
       toggleTheme();
-    }
-  });
+    });
 
-  // واکنش به تغییر تم سیستم، فقط وقتی کاربر چیزی تو localStorage نذاشته
-  const handleSystemChange = (event) => {
+    // Keyboard accessibility: Enter & Space برای دکمه سفارشی
+    toggle.addEventListener("keydown", (event) => {
+      if (
+        event.key === "Enter" ||
+        event.key === " " ||
+        event.key === "Spacebar"
+      ) {
+        event.preventDefault();
+        toggleTheme();
+      }
+    });
+  }
+
+  // --- واکنش به تغییر تم سیستم، فقط وقتی کاربر چیزی تو localStorage نذاشته ---
+
+  function handleSystemChange(event) {
     const hasUserPreference = !!getStoredTheme();
-    if (hasUserPreference) {return;}
-    applyTheme(event.matches ? DARK : LIGHT, { persist: false });
-  };
+    if (hasUserPreference) return;
 
-  if (typeof mediaQuery.addEventListener === "function") {
-    mediaQuery.addEventListener("change", handleSystemChange);
-  } else if (typeof mediaQuery.addListener === "function") {
-    // برای مرورگرهای قدیمی‌تر
-    mediaQuery.addListener(handleSystemChange);
+    const isDark = event.matches;
+    applyTheme(isDark ? DARK : LIGHT, { persist: false });
+  }
+
+  if (mediaQuery) {
+    if (typeof mediaQuery.addEventListener === "function") {
+      mediaQuery.addEventListener("change", handleSystemChange);
+    } else if (typeof mediaQuery.addListener === "function") {
+      // برای مرورگرهای قدیمی‌تر
+      mediaQuery.addListener(handleSystemChange);
+    }
+  }
+
+  // --- همگام‌سازی بین تب‌ها از طریق localStorage ---
+
+  if (storage && typeof window !== "undefined") {
+    window.addEventListener("storage", (event) => {
+      if (event.key !== THEME_KEY) return;
+
+      const value = event.newValue;
+      if (value === DARK || value === LIGHT) {
+        // اینجا persist:false چون خود storage event یعنی از یه تب دیگه ذخیره شده
+        applyTheme(value, { persist: false });
+      }
+    });
   }
 });

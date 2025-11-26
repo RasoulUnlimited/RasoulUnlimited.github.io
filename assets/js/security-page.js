@@ -138,18 +138,14 @@
         }
       }
 
-      // Check if cache is valid and not expired
       const cacheIsValid = cached && (Date.now() - cached.t < ttl);
 
-      // Return fresh cache if available and valid
       if (cacheIsValid) {
         return cached.d;
       }
 
-      // If offline and no valid cache, throw immediately
       if (!navigator.onLine) {
         if (cached && cached.d) {
-          // Return stale data but indicate it's stale
           const staleError = new Error("stale-data");
           staleError.data = cached.d;
           throw staleError;
@@ -180,7 +176,6 @@
           ) {
             throw new Error("rate-limit");
           }
-          // Fall back to stale cache if available
           if (cached && cached.d) {
             const staleError = new Error("stale-data");
             staleError.data = cached.d;
@@ -189,7 +184,6 @@
           throw new Error(res.statusText || "fetch error");
         }
 
-        // Validate parser output before caching
         let data;
         try {
           data = await parser(res);
@@ -198,7 +192,6 @@
           throw new Error("parse-error");
         }
 
-        // Only cache valid data
         if (data !== null) {
           if (storage) {
             try {
@@ -207,18 +200,15 @@
                 JSON.stringify({ t: Date.now(), d: data })
               );
             } catch (cacheErr) {
-              // Handle QuotaExceededError by clearing old cache entries
               if (cacheErr.name === "QuotaExceededError") {
                 console.warn(`localStorage quota exceeded for ${key}, attempting cleanup...`);
                 try {
-                  // Clear oldest cache entries (those starting with our cache keys)
                   const cacheKeys = ["security-timeline-cache", "security-advisories-cache"];
                   for (const oldKey of cacheKeys) {
                     if (oldKey !== key) {
                       storage.removeItem(oldKey);
                     }
                   }
-                  // Retry the cache operation
                   storage.setItem(
                     key,
                     JSON.stringify({ t: Date.now(), d: data })
@@ -407,7 +397,6 @@
     function renderTimeline(events) {
       if (!timelineList) {return;}
 
-      // Clear safely without using innerHTML to prevent XSS
       while (timelineList.firstChild) {
         timelineList.removeChild(timelineList.firstChild);
       }
@@ -508,8 +497,7 @@
       }
     }
 
-    let filterDebounceTimer = null;
-    let debounceTimer = null;  // Declare at module scope for proper cleanup
+    let debounceTimer = null;  // برای debounce سرچ
 
     function setupTimelineSearch() {
       if (!timelineList || !timelineSearch || searchInitialized) {return;}
@@ -531,50 +519,19 @@
           } catch {}
         }
 
-        const reg = hasQuery
-          ? new RegExp(
-            `(${q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`,
-            "gi"
-          )
-          : null;
-
         let count = 0;
 
         timelineList.querySelectorAll("li").forEach((li) => {
-          const contentEl = li.querySelector(".timeline-content");
-          if (!contentEl) {return;}
-
-          // Cache text content instead of full HTML to avoid memory bloat
-          if (!li.dataset.origText) {li.dataset.origText = contentEl.textContent;}
-
-          const text = normalizeText(li.textContent);
-          const match = hasQuery && text.includes(q);
+          const text = normalizeText(li.textContent || "");
+          const matchQuery = hasQuery ? text.includes(q) : true;
           const matchYear =
             !yearVal || (li.dataset.date || "").startsWith(yearVal);
 
-          const visible = (match || !hasQuery) && matchYear;
+          const visible = matchQuery && matchYear;
           li.style.display = visible ? "" : "none";
 
-          if (visible && match && reg) {
+          if (visible && hasQuery) {
             count++;
-            // Rebuild content from cached text with highlighting
-            const origText = li.dataset.origText;
-            const parts = origText.split(reg);
-            contentEl.textContent = "";
-            parts.forEach((part, index) => {
-              if (index % 2 === 1) {
-                // This is a match - wrapped in highlight span
-                const span = document.createElement("span");
-                span.className = "search-highlight";
-                span.textContent = part;
-                contentEl.appendChild(span);
-              } else if (part) {
-                contentEl.appendChild(document.createTextNode(part));
-              }
-            });
-          } else {
-            // Restore original text content
-            contentEl.textContent = li.dataset.origText;
           }
         });
 
@@ -583,8 +540,9 @@
         }
 
         if (noResultsEl) {
-          noResultsEl.classList.toggle("hidden", count !== 0);
-          noResultsEl.classList.toggle("visible", count === 0);
+          const noResults = hasQuery && count === 0;
+          noResultsEl.classList.toggle("hidden", !noResults);
+          noResultsEl.classList.toggle("visible", noResults);
         }
 
         if (resultsCountEl) {
@@ -601,7 +559,6 @@
         }
       }
 
-      // Use debounceTimer at module scope for proper cleanup
       timelineSearch.addEventListener("input", () => {
         const term = timelineSearch.value;
         clearTimeout(debounceTimer);
@@ -649,10 +606,6 @@
 
       // Cleanup debounce timer on page unload to prevent memory leaks
       window.addEventListener("beforeunload", () => {
-        if (filterDebounceTimer) {
-          clearTimeout(filterDebounceTimer);
-          filterDebounceTimer = null;
-        }
         if (debounceTimer) {
           clearTimeout(debounceTimer);
           debounceTimer = null;
@@ -663,7 +616,6 @@
     function loadTimeline(force = false, btn = null) {
       if (!timelineList) {return;}
 
-      // Clear safely without using innerHTML to prevent XSS
       while (timelineList.firstChild) {
         timelineList.removeChild(timelineList.firstChild);
       }
@@ -697,7 +649,6 @@
               )
             ).sort((a, b) => b - a);
 
-            // Clear safely without using innerHTML
             while (yearFilter.firstChild) {
               yearFilter.removeChild(yearFilter.firstChild);
             }
@@ -744,14 +695,14 @@
             else if (err && err.message === "rate-limit")
             {msg = messages.rateLimit;}
             else if (err && err.message === "stale-data") {
-              // Silently use stale data without notifying user
+              // استفاده‌ی بی‌سروصدا از داده‌ی staled
               if (err.data && Array.isArray(err.data)) {
                 timelineData = err.data;
                 renderTimeline(timelineData);
                 timelineList.setAttribute("aria-busy", "false");
                 initializeTimeline();
                 setupTimelineSearch();
-                return; // Skip the default timeline
+                return;
               }
               msg = messages.fetchFail;
             }
@@ -971,7 +922,6 @@
     function loadAdvisories(force = false, btn = null) {
       if (!advisoriesList) {return;}
 
-      // Clear safely without using innerHTML to prevent XSS
       while (advisoriesList.firstChild) {
         advisoriesList.removeChild(advisoriesList.firstChild);
       }
@@ -1168,21 +1118,15 @@
       }
     });
 
-    // Cleanup timers and intervals before page unload to prevent memory leaks
+    // Cleanup timers and intervals قبل unload
     window.addEventListener("beforeunload", () => {
       if (expirationIntervalId) {
         clearInterval(expirationIntervalId);
         expirationIntervalId = null;
       }
-
-      // Clear debounce timers to prevent race conditions
       if (debounceTimer) {
         clearTimeout(debounceTimer);
         debounceTimer = null;
-      }
-      if (filterDebounceTimer) {
-        clearTimeout(filterDebounceTimer);
-        filterDebounceTimer = null;
       }
     });
 

@@ -138,17 +138,18 @@
       return;
     }
 
-    // برای نگه‌داری هندلرهای transitionend و timeoutها
-    /** @type {WeakMap<HTMLElement, (e: TransitionEvent) => void>} */
-    const transitionEndHandlers = new WeakMap();
-    /** @type {WeakMap<HTMLElement, number>} */
-    const transitionTimeoutIds = new WeakMap();
+    // برای نگه‌داری هندلرهای transitionend و timeoutها (فقط در صورت نیاز به انیمیشن)
+    /** @type {WeakMap<HTMLElement, (e: TransitionEvent) => void> | null} */
+    const transitionEndHandlers = reduceMotion ? null : new WeakMap();
+    /** @type {WeakMap<HTMLElement, number> | null} */
+    const transitionTimeoutIds = reduceMotion ? null : new WeakMap();
 
     /**
      * پاک کردن هندلر transitionend و timeout از پنل
      * @param {HTMLElement} panel
      */
     function clearTransitionHandlers(panel) {
+      if (reduceMotion || !panel || !transitionEndHandlers || !transitionTimeoutIds) return;
       const existingHandler = transitionEndHandlers.get(panel);
       if (existingHandler) {
         panel.removeEventListener("transitionend", existingHandler);
@@ -167,6 +168,12 @@
      * @param {(e?: TransitionEvent) => void} onEnd
      */
     function setupTransitionEnd(panel, onEnd) {
+      if (reduceMotion || !panel || !transitionEndHandlers || !transitionTimeoutIds) {
+        // در حالت کاهش موشن، مستقیم فراخوانی می‌کنیم
+        onEnd();
+        return;
+      }
+
       clearTransitionHandlers(panel);
 
       let finished = false;
@@ -239,6 +246,27 @@
       panel.hidden = !expanded;
     }
 
+    /**
+     * برای حالت بدون انیمیشن (reduceMotion = true)
+     * @param {AccordionItemRefs} ref
+     * @param {boolean} expanded
+     */
+    function applyInstantState(ref, expanded) {
+      const { panel } = ref;
+      setExpandedState(ref, expanded);
+      if (!panel) return;
+
+      if (expanded) {
+        panel.style.maxHeight = "none";
+        panel.style.opacity = "1";
+        panel.hidden = false;
+      } else {
+        panel.style.maxHeight = "0px";
+        panel.style.opacity = "0";
+        panel.hidden = true;
+      }
+    }
+
     // --- First pass: setup ARIA / state ---
     items.forEach((item, index) => {
       const header = /** @type {HTMLElement|null} */ (
@@ -267,14 +295,18 @@
       panel.setAttribute("role", "region");
       panel.setAttribute("aria-labelledby", headerId);
 
-      setExpandedState({ item, header, panel }, initiallyOpen);
-
-      if (initiallyOpen) {
-        panel.style.maxHeight = "none";
-        panel.style.opacity = "1";
+      if (reduceMotion) {
+        applyInstantState({ item, header, panel }, initiallyOpen);
       } else {
-        panel.style.maxHeight = "0px";
-        panel.style.opacity = "0";
+        setExpandedState({ item, header, panel }, initiallyOpen);
+
+        if (initiallyOpen) {
+          panel.style.maxHeight = "none";
+          panel.style.opacity = "1";
+        } else {
+          panel.style.maxHeight = "0px";
+          panel.style.opacity = "0";
+        }
       }
 
       headers.push(header);
@@ -291,9 +323,13 @@
       const hasOpen = itemRefs.some((ref) => isItemExpanded(ref));
       if (!hasOpen && itemRefs[0]) {
         const ref = itemRefs[0];
-        setExpandedState(ref, true);
-        ref.panel.style.maxHeight = "none";
-        ref.panel.style.opacity = "1";
+        if (reduceMotion) {
+          applyInstantState(ref, true);
+        } else {
+          setExpandedState(ref, true);
+          ref.panel.style.maxHeight = "none";
+          ref.panel.style.opacity = "1";
+        }
       }
     }
 
@@ -305,14 +341,12 @@
       const { panel } = ref;
       if (!panel) return;
 
-      setExpandedState(ref, false);
-      clearTransitionHandlers(panel);
-
       if (reduceMotion) {
-        panel.style.maxHeight = "0px";
-        panel.style.opacity = "0";
-        panel.hidden = true;
+        applyInstantState(ref, false);
       } else {
+        setExpandedState(ref, false);
+        clearTransitionHandlers(panel);
+
         // مطمئن شو برای محاسبه scrollHeight مخفی نیست
         panel.hidden = false;
 
@@ -344,13 +378,12 @@
       const { panel } = ref;
       if (!panel) return;
 
-      setExpandedState(ref, true);
-      clearTransitionHandlers(panel);
-
       if (reduceMotion) {
-        panel.style.maxHeight = "none";
-        panel.style.opacity = "1";
+        applyInstantState(ref, true);
       } else {
+        setExpandedState(ref, true);
+        clearTransitionHandlers(panel);
+
         panel.hidden = false;
         panel.style.maxHeight = "0px";
         panel.style.opacity = "0";
@@ -466,7 +499,10 @@
     if (!accordionIdOrElement) return null;
 
     if (typeof accordionIdOrElement === "string") {
-      return ACCORDION_REGISTRY.get(accordionIdOrElement) || null;
+      const id = accordionIdOrElement.trim();
+      if (!id) return null;
+      const record = ACCORDION_REGISTRY.get(id);
+      return record || null;
     }
 
     if (accordionIdOrElement instanceof HTMLElement) {
@@ -479,7 +515,8 @@
 
       const id = root.dataset[ACCORDION_ATTR];
       if (!id) return null;
-      return ACCORDION_REGISTRY.get(id) || null;
+      const record = ACCORDION_REGISTRY.get(id);
+      return record || null;
     }
 
     return null;
@@ -496,6 +533,7 @@
     const { itemRefs } = record;
 
     if (typeof target === "number") {
+      if (target < 0 || target >= itemRefs.length) return null;
       return itemRefs[target] || null;
     }
 
@@ -527,15 +565,16 @@
   // --- Global API ---
   /**
    * @typedef {Object} AccordionGlobalAPI
-   * @property {(accordionIdOrElement: string | HTMLElement, target: number | string) => void} open
-   * @property {(accordionIdOrElement: string | HTMLElement, target: number | string) => void} close
-   * @property {(accordionIdOrElement: string | HTMLElement, target: number | string) => void} toggle
+   * @property {(accordionIdOrElement: string | HTMLElement, target: number | string) => boolean} open
+   * @property {(accordionIdOrElement: string | HTMLElement, target: number | string) => boolean} close
+   * @property {(accordionIdOrElement: string | HTMLElement, target: number | string) => boolean} toggle
+   * @property {(accordionIdOrElement: string | HTMLElement, target: number | string) => (boolean | null)} isOpen
    * @property {(accordionIdOrElement: string | HTMLElement) => void} openAll
    * @property {(accordionIdOrElement: string | HTMLElement) => void} closeAll
    * @property {(rootOrSelector: string | HTMLElement) => void} init
    */
 
-  /** @type {AccordionGlobalAPI & typeof window.Accordion} */
+  /** @type {AccordionGlobalAPI & (typeof window.Accordion)} */
   window.Accordion = window.Accordion || {};
 
   /**
@@ -543,10 +582,11 @@
    */
   window.Accordion.open = function (accordionIdOrElement, target) {
     const record = resolveRecord(accordionIdOrElement);
-    if (!record) return;
+    if (!record) return false;
     const ref = resolveItemRef(record, target);
-    if (!ref) return;
+    if (!ref) return false;
     record.expandItem(ref);
+    return true;
   };
 
   /**
@@ -554,10 +594,11 @@
    */
   window.Accordion.close = function (accordionIdOrElement, target) {
     const record = resolveRecord(accordionIdOrElement);
-    if (!record) return;
+    if (!record) return false;
     const ref = resolveItemRef(record, target);
-    if (!ref) return;
+    if (!ref) return false;
     record.collapseItem(ref);
+    return true;
   };
 
   /**
@@ -565,10 +606,23 @@
    */
   window.Accordion.toggle = function (accordionIdOrElement, target) {
     const record = resolveRecord(accordionIdOrElement);
-    if (!record) return;
+    if (!record) return false;
     const ref = resolveItemRef(record, target);
-    if (!ref) return;
+    if (!ref) return false;
     record.toggleItem(ref);
+    return true;
+  };
+
+  /**
+   * وضعیت باز/بسته بودن یک آیتم
+   * @returns {boolean | null} true/false اگر آیتم پیدا شود، null اگر پیدا نشود
+   */
+  window.Accordion.isOpen = function (accordionIdOrElement, target) {
+    const record = resolveRecord(accordionIdOrElement);
+    if (!record) return null;
+    const ref = resolveItemRef(record, target);
+    if (!ref) return null;
+    return record.isItemExpanded(ref);
   };
 
   /**

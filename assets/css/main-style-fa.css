@@ -345,7 +345,7 @@ a.skip-link:focus-visible {
   -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
 }
 
-.hero-grid {
+.hero .hero-grid {
   display: grid;
   grid-template-columns: 1fr 1.2fr;
   align-items: center;
@@ -358,13 +358,13 @@ a.skip-link:focus-visible {
 }
 
 @media (max-width: 992px) {
-  .hero-grid {
+  .hero .hero-grid {
     grid-template-columns: 1fr;
     text-align: center;
     gap: var(--space-xl);
   }
   
-  .hero-content-wrapper {
+  .hero .hero-content-wrapper {
     align-items: center !important;
     text-align: center !important;
   }
@@ -374,14 +374,14 @@ a.skip-link:focus-visible {
   }
 }
 
-.hero-image-wrapper {
+.hero .hero-image-wrapper {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.profile-image {
+.hero .profile-image {
   width: 300px;
   height: 300px;
   border-radius: 50%;
@@ -396,7 +396,7 @@ a.skip-link:focus-visible {
   backdrop-filter: blur(5px);
 }
 
-.profile-image:hover {
+.hero .profile-image:hover {
   transform: scale(1.05) rotate(-2deg);
   box-shadow: 0 0 0 8px rgba(var(--primary-rgb), 0.5), 
               0 30px 70px var(--shadow-color-strong);
@@ -404,7 +404,7 @@ a.skip-link:focus-visible {
 }
 
 /* Decorative elements behind image */
-.hero-image-wrapper::before {
+.hero .hero-image-wrapper::before {
   content: '';
   position: absolute;
   width: 350px;
@@ -467,7 +467,7 @@ a.skip-link:focus-visible {
     display: block;
 }
 
-.tagline {
+.hero .tagline {
     font-size: 1.25rem;
     color: var(--text-color-light);
     margin-bottom: var(--space-xl);
@@ -475,7 +475,7 @@ a.skip-link:focus-visible {
     line-height: 1.8;
 }
 
-.tagline span {
+.hero .tagline span {
     color: var(--text-color);
     font-weight: 600;
     border-bottom: 2px solid rgba(var(--primary-rgb), 0.3);
@@ -656,34 +656,34 @@ h1 .rtl-text {
 }
 
 @media (max-width: 900px) {
-  .hero-grid {
+  .hero .hero-grid {
     grid-template-columns: 1fr;
     text-align: center;
     gap: var(--space-lg);
   }
   
-  .hero-content-wrapper {
+  .hero .hero-content-wrapper {
     align-items: center;
     text-align: center;
   }
   
-  .profile-image {
+  .hero .profile-image {
     width: 220px;
     height: 220px;
   }
   
-  .hero-image-wrapper::before {
+  .hero .hero-image-wrapper::before {
     width: 250px;
     height: 250px;
   }
   
-  .hero-cta-group {
+  .hero .hero-cta-group {
     flex-direction: column;
     width: 100%;
     max-width: 300px;
   }
   
-  .hero-btn {
+  .hero .hero-btn {
     width: 100%;
   }
 }
@@ -2819,7 +2819,7 @@ img.loaded {
   section h2 {
     font-size: 2.4rem;
   }
-  .tagline {
+  .hero .tagline {
     font-size: 1.4rem;
   }
   #about p {
@@ -2975,10 +2975,10 @@ img.loaded {
     width: 80px;
     height: 4px;
   }
-  .tagline {
+  .hero .tagline {
     font-size: 1.3rem;
   }
-  .profile-image {
+  .hero .profile-image {
     width: 130px;
     height: 130px;
     border-width: 5px;
@@ -3559,7 +3559,7 @@ summary:active,
   #hero {
     padding-bottom: var(--space-lg);
   }
-  .profile-image {
+  .hero .profile-image {
     width: 100px;
     height: 100px;
     border-width: 4px;
@@ -3567,7 +3567,7 @@ summary:active,
   h1 {
     font-size: 2.2rem;
   }
-  .tagline {
+  .hero .tagline {
     font-size: 1.1rem;
   }
   .policy-container {
@@ -3598,18 +3598,18 @@ summary:active,
     bottom: 110px;
   }
 }
-@media (max-width: 360px) {
+  @media (max-width: 360px) {
   .policy-container {
     padding: var(--space-sm);
   }
-  .profile-image {
+  .hero .profile-image {
     width: 80px;
     height: 80px;
   }
   h1 {
     font-size: 1.9rem;
   }
-  .tagline {
+  .hero .tagline {
     font-size: 1rem;
   }
   .cta-button {
@@ -3718,7 +3718,7 @@ summary:active,
   .policy-container {
     padding: var(--space-xs);
   }
-  .profile-image {
+  .hero .profile-image {
     width: 70px;
     height: 70px;
     border-width: 3px;
@@ -3726,7 +3726,7 @@ summary:active,
   h1 {
     font-size: 1.7rem;
   }
-  .tagline {
+  .hero .tagline {
     font-size: 0.9rem;
   }
   .cta-button {

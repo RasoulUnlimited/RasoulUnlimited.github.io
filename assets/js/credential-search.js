@@ -15,6 +15,7 @@
     const voiceButton = document.getElementById("voice-search-btn");
     const resultsInfo = document.getElementById("results-info");
     const cards = document.querySelectorAll(".credential-card");
+
     const lang =
       (resultsInfo && resultsInfo.dataset.lang) ||
       document.documentElement.lang ||
@@ -46,6 +47,8 @@
 
     /**
      * Safe wrapper for createToast (works with 1-arg or 2-arg versions)
+     * @param {string} message
+     * @param {any} [options]
      */
     function safeToast(message, options) {
       if (!message || typeof window.createToast !== "function") return;
@@ -66,45 +69,21 @@
         .normalize("NFC")
         .replace(/[ي]/g, "ی")
         .replace(/[ك]/g, "ک")
-        .replace(/[\u064B-\u065F\u0670]/g, "")
-        .replace(/‌/g, "")
+        .replace(/[\u064B-\u065F\u0670]/g, "") // حذف حرکات
+        .replace(/‌/g, "") // حذف ZWNJ
         .toLowerCase();
 
     const escapeRegExp = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
-    // cache original texts/HTML + ساخت search index نرمالایز‌شده
-    cards.forEach((card) => {
-      const nameEl = card.querySelector("h3");
-      const summaryEl = card.querySelector(".credential-summary");
-
-      if (nameEl && !nameEl.dataset.original) {
-        nameEl.dataset.original = nameEl.textContent || "";
-        nameEl.dataset.originalHtml = nameEl.innerHTML || "";
-      }
-      if (summaryEl && !summaryEl.dataset.original) {
-        summaryEl.dataset.original = summaryEl.textContent || "";
-        summaryEl.dataset.originalHtml = summaryEl.innerHTML || "";
-      }
-
-      const normalizedName = nameEl?.dataset.original
-        ? normalizeText(nameEl.dataset.original)
-        : "";
-      const normalizedSummary = summaryEl?.dataset.original
-        ? normalizeText(summaryEl.dataset.original)
-        : "";
-      const normalizedKeywords = normalizeText(card.dataset.keywords || "");
-
-      // یک ایندکس واحد برای جستجو
-      const searchIndex = [
-        normalizedName,
-        normalizedSummary,
-        normalizedKeywords,
-      ]
-        .filter(Boolean)
-        .join(" ");
-
-      card.dataset.searchIndex = searchIndex;
-    });
+    const isInputLike = (el) => {
+      if (!el) return false;
+      const tag = el.tagName;
+      return (
+        tag === "INPUT" ||
+        tag === "TEXTAREA" ||
+        el.isContentEditable === true
+      );
+    };
 
     /**
      * حذف هایلایت‌های قبلی و اعمال هایلایت جدید روی متن
@@ -115,12 +94,15 @@
     const highlightText = (el, term) => {
       if (!el) return;
 
-      // Remove existing highlights (mark.search-highlight) بدون دست‌کاری بقیه DOM
+      // حذف هایلایت‌های قبلی
       const highlights = el.querySelectorAll("mark.search-highlight");
       highlights.forEach((mark) => {
         const parent = mark.parentNode;
         if (!parent) return;
-        parent.replaceChild(document.createTextNode(mark.textContent), mark);
+        parent.replaceChild(
+          document.createTextNode(mark.textContent || ""),
+          mark
+        );
         parent.normalize();
       });
 
@@ -148,7 +130,10 @@
         })
         .join(noise);
 
-      const regex = new RegExp(`(${pattern})`, "i"); // بدون g تا stateful نباشد
+      if (!pattern) return;
+
+      // از g استفاده می‌کنیم ولی قبل از هر استفاده lastIndex را صفر می‌کنیم تا stateful بودن اذیت نکند
+      const regex = new RegExp(`(${pattern})`, "gi");
 
       while (walker.nextNode()) {
         const node = walker.currentNode;
@@ -162,13 +147,17 @@
           continue;
         }
 
+        regex.lastIndex = 0;
         if (regex.test(node.nodeValue)) {
           nodesToReplace.push(node);
         }
       }
 
       nodesToReplace.forEach((node) => {
+        if (!node.parentNode) return;
+
         const fragment = document.createDocumentFragment();
+        regex.lastIndex = 0;
         const parts = node.nodeValue.split(regex);
 
         parts.forEach((part, index) => {
@@ -199,13 +188,66 @@
       }
     };
 
-    const savedTerm = storage?.getItem(STORAGE_KEY) || "";
-    if (savedTerm) {
-      searchInput.value = savedTerm;
-      clearButton.style.display = "block";
-    }
+    // --- Precompute card meta to avoid repeated querySelector در هر سرچ ---
+
+    /**
+     * @typedef {Object} CredentialItem
+     * @property {HTMLElement} card
+     * @property {HTMLElement | null} nameEl
+     * @property {HTMLElement | null} summaryEl
+     * @property {string} searchIndex
+     */
+
+    /** @type {CredentialItem[]} */
+    const credentialItems = [];
+
+    cards.forEach((card) => {
+      const nameEl = card.querySelector("h3");
+      const summaryEl = card.querySelector(".credential-summary");
+
+      if (nameEl && !nameEl.dataset.original) {
+        nameEl.dataset.original = nameEl.textContent || "";
+      }
+      if (summaryEl && !summaryEl.dataset.original) {
+        summaryEl.dataset.original = summaryEl.textContent || "";
+      }
+
+      const normalizedName = nameEl?.dataset.original
+        ? normalizeText(nameEl.dataset.original)
+        : "";
+      const normalizedSummary = summaryEl?.dataset.original
+        ? normalizeText(summaryEl.dataset.original)
+        : "";
+      const normalizedKeywords = normalizeText(card.dataset.keywords || "");
+
+      const searchIndex = [normalizedName, normalizedSummary, normalizedKeywords]
+        .filter(Boolean)
+        .join(" ");
+
+      card.dataset.searchIndex = searchIndex;
+
+      credentialItems.push({
+        card,
+        nameEl: nameEl || null,
+        summaryEl: summaryEl || null,
+        searchIndex,
+      });
+    });
 
     let debounceTimer;
+
+    const persistTerm = (term) => {
+      if (!storage) return;
+      try {
+        if (term) {
+          storage.setItem(STORAGE_KEY, term);
+        } else {
+          storage.removeItem(STORAGE_KEY);
+        }
+      } catch {
+        // ignore storage errors (e.g. Safari private mode)
+      }
+    };
 
     const filterCards = (term) => {
       const searchTerm =
@@ -213,11 +255,8 @@
       const searchNormalized = normalizeText(searchTerm);
       let visibleCount = 0;
 
-      cards.forEach((card) => {
-        const nameEl = card.querySelector("h3");
-        const summaryEl = card.querySelector(".credential-summary");
-        const searchIndex = card.dataset.searchIndex || "";
-
+      credentialItems.forEach((item) => {
+        const { card, nameEl, summaryEl, searchIndex } = item;
         const matches =
           !searchNormalized || searchIndex.includes(searchNormalized);
 
@@ -236,156 +275,180 @@
       updateResultsInfo(visibleCount);
     };
 
-    function persistTerm(term) {
-      if (!storage) return;
-      try {
-        if (term) {
-          storage.setItem(STORAGE_KEY, term);
-        } else {
-          storage.removeItem(STORAGE_KEY);
-        }
-      } catch {
-        // ignore storage errors (e.g. Safari private mode)
-      }
-    }
-
-    function clearSearch() {
+    const clearSearch = () => {
       searchInput.value = "";
       clearButton.style.display = "none";
       clearTimeout(debounceTimer);
       persistTerm("");
       filterCards("");
       searchInput.focus();
-    }
+    };
 
-    // text search
-    searchInput.addEventListener("input", () => {
-      const term = searchInput.value.trim();
-      clearButton.style.display = term ? "block" : "none";
-      persistTerm(term);
-
-      clearTimeout(debounceTimer);
-      debounceTimer = setTimeout(() => filterCards(term), 200);
-    });
-
-    clearButton.addEventListener("click", clearSearch);
-
-    searchInput.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
-        e.preventDefault();
-        clearSearch();
+    // --- Initial state from storage ---
+    const initStorageAndInitialState = () => {
+      const savedTerm = storage?.getItem(STORAGE_KEY) || "";
+      if (savedTerm) {
+        searchInput.value = savedTerm;
+        clearButton.style.display = "block";
       }
-    });
+      filterCards(savedTerm);
+    };
 
-    // Voice search
-    if (voiceButton) {
+    // --- Text search events ---
+    const initTextSearch = () => {
+      searchInput.addEventListener("input", () => {
+        const term = searchInput.value.trim();
+        clearButton.style.display = term ? "block" : "none";
+        persistTerm(term);
+
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => filterCards(term), 200);
+      });
+
+      clearButton.addEventListener("click", clearSearch);
+
+      searchInput.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          e.preventDefault();
+          clearSearch();
+        }
+      });
+    };
+
+    // --- Voice search ---
+    let recognition = null;
+
+    // --- Cleanup handler list ---
+    const cleanupHandlers = [];
+
+    const initVoiceSearch = () => {
+      if (!voiceButton) return;
+
       const SpeechRecognition =
         window.SpeechRecognition || window.webkitSpeechRecognition;
 
-      if (SpeechRecognition) {
-        const recognition = new SpeechRecognition();
-        recognition.lang = isFarsi ? "fa-IR" : "en-US";
-        recognition.interimResults = false;
-
-        const handleClickStart = () => recognition.start();
-        const handleStart = () => {
-          voiceButton.classList.add("listening");
-          voiceButton.setAttribute("aria-pressed", "true");
-        };
-        const handleEnd = () => {
-          voiceButton.classList.remove("listening");
-          voiceButton.setAttribute("aria-pressed", "false");
-        };
-        const handleResult = (e) => {
-          const transcript = (e.results[0][0].transcript || "").trim();
-          searchInput.value = transcript;
-          clearButton.style.display = transcript ? "block" : "none";
-          persistTerm(transcript);
-
-          clearTimeout(debounceTimer);
-          // برای تجربه‌ی بهتر، نتایج صوتی را بدون debounce اعمال می‌کنیم
-          filterCards(transcript);
-        };
-        const handleError = (err) => {
-          if (
-            err &&
-            (err.error === "no-speech" || err.error === "aborted")
-          ) {
-            return;
-          }
-          safeToast(
-            isFarsi
-              ? "امکان دریافت صدا نیست."
-              : "Voice recognition unavailable."
-          );
-        };
-
-        voiceButton.addEventListener("click", handleClickStart);
-        recognition.addEventListener("start", handleStart);
-        recognition.addEventListener("end", handleEnd);
-        recognition.addEventListener("result", handleResult);
-        recognition.addEventListener("error", handleError);
-
-        // Cleanup on page unload to prevent memory leaks
-        const cleanup = () => {
-          try {
-            recognition.abort();
-          } catch {
-            // Ignore errors during abort
-          }
-          voiceButton.removeEventListener("click", handleClickStart);
-          recognition.removeEventListener("start", handleStart);
-          recognition.removeEventListener("end", handleEnd);
-          recognition.removeEventListener("result", handleResult);
-          recognition.removeEventListener("error", handleError);
-          window.removeEventListener("beforeunload", cleanup);
-        };
-
-        window.addEventListener("beforeunload", cleanup);
-      } else {
+      if (!SpeechRecognition) {
         voiceButton.style.display = "none";
         safeToast(
           isFarsi
             ? "مرورگر شما از جستجوی صوتی پشتیبانی نمی‌کند."
             : "Voice search isn't supported."
         );
-      }
-    }
-
-    // Global keyboard shortcuts: / or Ctrl/Cmd+K to focus search
-    document.addEventListener("keydown", (e) => {
-      const active = document.activeElement;
-      const tag = active && active.tagName;
-
-      const isTextField =
-        active &&
-        (tag === "INPUT" ||
-          tag === "TEXTAREA" ||
-          active.isContentEditable === true);
-
-      if (
-        (e.key === "/" ||
-          (e.key.toLowerCase() === "k" && (e.ctrlKey || e.metaKey))) &&
-        !isTextField &&
-        active !== searchInput
-      ) {
-        e.preventDefault();
-        searchInput.focus();
         return;
       }
 
-      if (e.key === "Escape" && active === searchInput) {
-        e.preventDefault();
-        clearSearch();
-      }
-    });
+      recognition = new SpeechRecognition();
+      recognition.lang = isFarsi ? "fa-IR" : "en-US";
+      recognition.interimResults = false;
 
-    // Initial filter with saved term (if any)
-    filterCards(savedTerm);
+      const handleClickStart = () => {
+        try {
+          recognition.start();
+        } catch {
+          // اگر در حال اجرا بود، خطا را نادیده می‌گیریم
+        }
+      };
 
-    // Cleanup on page unload to prevent memory leaks
-    window.addEventListener("beforeunload", () => {
-      clearTimeout(debounceTimer);
-    });
+      const handleStart = () => {
+        voiceButton.classList.add("listening");
+        voiceButton.setAttribute("aria-pressed", "true");
+      };
+
+      const handleEnd = () => {
+        voiceButton.classList.remove("listening");
+        voiceButton.setAttribute("aria-pressed", "false");
+      };
+
+      const handleResult = (e) => {
+        const transcript = (e.results[0][0].transcript || "").trim();
+        searchInput.value = transcript;
+        clearButton.style.display = transcript ? "block" : "none";
+        persistTerm(transcript);
+
+        clearTimeout(debounceTimer);
+        // برای تجربه‌ی بهتر، نتایج صوتی را بدون debounce اعمال می‌کنیم
+        filterCards(transcript);
+      };
+
+      const handleError = (err) => {
+        if (err && (err.error === "no-speech" || err.error === "aborted")) {
+          return;
+        }
+        safeToast(
+          isFarsi
+            ? "امکان دریافت صدا نیست."
+            : "Voice recognition unavailable."
+        );
+      };
+
+      voiceButton.addEventListener("click", handleClickStart);
+      recognition.addEventListener("start", handleStart);
+      recognition.addEventListener("end", handleEnd);
+      recognition.addEventListener("result", handleResult);
+      recognition.addEventListener("error", handleError);
+
+      // ثبت برای cleanup
+      cleanupHandlers.push(() => {
+        try {
+          recognition.abort();
+        } catch {
+          // Ignore errors during abort
+        }
+        voiceButton.removeEventListener("click", handleClickStart);
+        recognition.removeEventListener("start", handleStart);
+        recognition.removeEventListener("end", handleEnd);
+        recognition.removeEventListener("result", handleResult);
+        recognition.removeEventListener("error", handleError);
+      });
+    };
+
+    // --- Global keyboard shortcuts: / or Ctrl/Cmd+K to focus search ---
+    const initKeyboardShortcuts = () => {
+      const handler = (e) => {
+        const active = document.activeElement;
+
+        if (
+          (e.key === "/" ||
+            (e.key.toLowerCase() === "k" && (e.ctrlKey || e.metaKey))) &&
+          !isInputLike(active) &&
+          active !== searchInput
+        ) {
+          e.preventDefault();
+          searchInput.focus();
+          return;
+        }
+
+        if (e.key === "Escape" && active === searchInput) {
+          e.preventDefault();
+          clearSearch();
+        }
+      };
+
+      document.addEventListener("keydown", handler);
+
+      cleanupHandlers.push(() => {
+        document.removeEventListener("keydown", handler);
+      });
+    };
+
+    const initGlobalCleanup = () => {
+      window.addEventListener("beforeunload", () => {
+        clearTimeout(debounceTimer);
+        cleanupHandlers.forEach((fn) => {
+          try {
+            fn();
+          } catch {
+            // ignore individual cleanup errors
+          }
+        });
+      });
+    };
+
+    // --- Init all ---
+    initStorageAndInitialState();
+    initTextSearch();
+    initVoiceSearch();
+    initKeyboardShortcuts();
+    initGlobalCleanup();
   });
 })();

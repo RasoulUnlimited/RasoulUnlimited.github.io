@@ -95,6 +95,12 @@ html[dir="rtl"] .accordion-header {
   text-align: right;
 }
 
+/* اصلاح فاصله‌ی آیکون در RTL تا توی راست‌چین هم تمیز بنشینه */
+html[dir="rtl"] .accordion-header::before {
+  margin-inline-start: 2rem;
+  margin-inline-end: 0;
+}
+
 /* فوکوس دسترسی‌پذیر روی هدر (JS role=button و tabindex می‌دهد) */
 .accordion-header:focus-visible {
   outline: 3px solid var(--primary-blue, #3498db);
@@ -125,7 +131,6 @@ html[dir="rtl"] .accordion-header {
 /* محتوای آکاردئون – حالت بسته (default) */
 .accordion-content {
   margin: 0;
-  padding: 0 2.8rem;
   border-top: 1px solid #f0f4f7;
   background-color: var(--bg-section, #fff);
   color: var(--text-muted, #546e7a);
@@ -134,6 +139,7 @@ html[dir="rtl"] .accordion-header {
   max-height: 0;
   overflow: hidden;
   opacity: 0;
+  padding: 0 2.8rem;
   padding-top: 0;
   padding-bottom: 0;
   overflow-wrap: break-word;
@@ -157,6 +163,13 @@ html[dir="rtl"] .accordion-header {
   .accordion-header,
   .accordion-content {
     transition: none !important;
+  }
+
+  /* جلو گیری از حرکت کارت در حالت reduce-motion */
+  .accordion-item:hover,
+  .accordion-item:focus-within {
+    transform: none !important;
+    box-shadow: 0 10px 30px var(--shadow-faq-item, rgba(0, 0, 0, 0.08));
   }
 }
 

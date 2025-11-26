@@ -1,10 +1,11 @@
 (function () {
   "use strict";
 
-  // جلوگیری از ارور در محیط‌هایی مثل SSR/Node
-  if (typeof window === "undefined" || typeof document === "undefined") {
-    return;
-  }
+  // جلوگیری از اجرا در محیط‌هایی مثل SSR/Node
+  const supportsDOM =
+    typeof window !== "undefined" && typeof document !== "undefined";
+
+  if (!supportsDOM) return;
 
   const HIDDEN_CLASS = "card-hidden";
   const VISIBLE_CLASS = "card-visible";
@@ -20,17 +21,19 @@
    * @param {HTMLElement} card
    */
   function revealCard(card) {
+    if (!card) return;
     card.classList.remove(HIDDEN_CLASS);
     card.classList.add(VISIBLE_CLASS);
   }
 
   document.addEventListener("DOMContentLoaded", () => {
-    const cards = document.querySelectorAll(".credential-card");
-    if (!cards.length) return;
+    const cardsNodeList = document.querySelectorAll(".credential-card");
+    if (!cardsNodeList || !cardsNodeList.length) return;
+
+    // در صورت نیاز بعداً از متدهای آرایه استفاده کنیم
+    const cards = Array.from(cardsNodeList);
 
     let observer = null;
-    let motionQuery = null;
-    let prefersReduced = false;
 
     /**
      * همه‌ی کارت‌ها را بدون انیمیشن اسکرول نمایش بده
@@ -46,29 +49,39 @@
     };
 
     // هندلینگ prefers-reduced-motion
-    if ("matchMedia" in window) {
-      motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-      prefersReduced = motionQuery.matches;
+    const supportsMatchMedia = typeof window.matchMedia === "function";
+    if (supportsMatchMedia) {
+      const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+      // اگر از ابتدا reduce بوده، کلاً انیمیشن‌ها را غیر فعال کن
+      if (motionQuery.matches) {
+        showCardsImmediately();
+        return;
+      }
 
       const handleMotionChange = (e) => {
-        prefersReduced = !!e.matches;
+        const prefersReduced = !!(e && e.matches);
         if (prefersReduced) {
           // اگر کاربر وسط کار motion را reduce کرد، انیمیشن‌ها را متوقف کن
           showCardsImmediately();
         }
+        // اگر کاربر از reduce برگشت به normal، عمداً
+        // دوباره observer را راه نمی‌اندازیم تا رفتار قابل پیش‌بینی بماند.
       };
 
+      // API جدید
       if (typeof motionQuery.addEventListener === "function") {
         motionQuery.addEventListener("change", handleMotionChange);
-      } else if (typeof motionQuery.addListener === "function") {
-        // برای مرورگرهای قدیمی‌تر
+      }
+      // برای مرورگرهای قدیمی‌تر
+      else if (typeof motionQuery.addListener === "function") {
         motionQuery.addListener(handleMotionChange);
       }
     }
 
-    // اگر IntersectionObserver نیست یا کاربر motion را کم کرده، انیمیشن اسکرول نداشته باش
-    const hasIntersectionObserver = "IntersectionObserver" in window;
-    if (!hasIntersectionObserver || prefersReduced) {
+    const supportsIO = "IntersectionObserver" in window;
+    // اگر IntersectionObserver وجود ندارد، همه کارت‌ها را بدون انیمیشن نشان بده
+    if (!supportsIO) {
       showCardsImmediately();
       return;
     }
