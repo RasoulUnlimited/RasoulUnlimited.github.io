@@ -34,6 +34,27 @@
     !!(window.matchMedia &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches);
 
+  // مدت‌زمان fallback برای ترنزیشن‌ها (باید با transition CSS تقریباً هماهنگ باشد)
+  const TRANSITION_FALLBACK_MS = 500;
+
+  /**
+   * سازنده‌ی امن CustomEvent برای مرورگرهای قدیمی‌تر
+   * @param {string} type
+   * @param {any} detail
+   * @returns {CustomEvent}
+   */
+  function createAccordionEvent(type, detail) {
+    if (typeof window.CustomEvent === "function") {
+      return new CustomEvent(type, {
+        bubbles: true,
+        detail,
+      });
+    }
+    const evt = document.createEvent("CustomEvent");
+    evt.initCustomEvent(type, true, false, detail);
+    return evt;
+  }
+
   /**
    * Initialize a single accordion container.
    * @param {HTMLElement} root
@@ -60,9 +81,60 @@
     const items = Array.from(root.querySelectorAll(".accordion-item"));
     if (!items.length) return;
 
-    // برای نگه‌داری هندلرهای transitionend بدون دست‌کاری DOM
+    // برای نگه‌داری هندلرهای transitionend و timeoutها
     /** @type {WeakMap<HTMLElement, (e: TransitionEvent) => void>} */
     const transitionEndHandlers = new WeakMap();
+    /** @type {WeakMap<HTMLElement, number>} */
+    const transitionTimeoutIds = new WeakMap();
+
+    /**
+     * پاک کردن هندلر transitionend و timeout از پنل
+     * @param {HTMLElement} panel
+     */
+    function clearTransitionHandlers(panel) {
+      const existingHandler = transitionEndHandlers.get(panel);
+      if (existingHandler) {
+        panel.removeEventListener("transitionend", existingHandler);
+        transitionEndHandlers.delete(panel);
+      }
+      const timeoutId = transitionTimeoutIds.get(panel);
+      if (timeoutId != null) {
+        clearTimeout(timeoutId);
+        transitionTimeoutIds.delete(panel);
+      }
+    }
+
+    /**
+     * ثبت هندلر transitionend + fallback timeout روی پنل
+     * @param {HTMLElement} panel
+     * @param {(e?: TransitionEvent) => void} onEnd
+     */
+    function setupTransitionEnd(panel, onEnd) {
+      clearTransitionHandlers(panel);
+
+      let finished = false;
+
+      function finish(e) {
+        if (finished) return;
+        finished = true;
+        clearTransitionHandlers(panel);
+        onEnd(e);
+      }
+
+      const handler = (e) => {
+        if (e.propertyName === "max-height") {
+          finish(e);
+        }
+      };
+
+      panel.addEventListener("transitionend", handler);
+      transitionEndHandlers.set(panel, handler);
+
+      const timeoutId = window.setTimeout(() => {
+        finish();
+      }, TRANSITION_FALLBACK_MS);
+      transitionTimeoutIds.set(panel, timeoutId);
+    }
 
     // --- First pass: setup ARIA / state ---
     items.forEach((item, index) => {
@@ -101,7 +173,7 @@
         panel.style.opacity = "1";
       } else {
         item.classList.remove("is-open");
-        panel.style.maxHeight = null;
+        panel.style.maxHeight = "0px";
         panel.style.opacity = "0";
       }
 
@@ -111,24 +183,6 @@
 
     if (!itemRefs.length) return;
 
-    // اگر اجازه‌ی toggle نداریم، مطمئن شو حداقل یک آیتم از ابتدا باز است
-    if (!allowToggle) {
-      const hasOpen = itemRefs.some((ref) =>
-        ref.header.getAttribute("aria-expanded") === "true"
-      );
-      if (!hasOpen && itemRefs[0]) {
-        const { item, header, panel } = itemRefs[0];
-        header.setAttribute("aria-expanded", "true");
-        item.classList.add("is-open");
-        panel.setAttribute("aria-hidden", "false");
-        panel.hidden = false;
-        panel.style.maxHeight = "none";
-        panel.style.opacity = "1";
-      }
-    }
-
-    // --- Helpers ---
-
     /**
      * Dispatch a custom event from an item.
      * @param {HTMLElement} item
@@ -137,12 +191,8 @@
      */
     function dispatchAccordionEvent(item, type, accordionId) {
       if (!item) return;
-      item.dispatchEvent(
-        new CustomEvent(type, {
-          bubbles: true,
-          detail: { item, accordionId },
-        })
-      );
+      const event = createAccordionEvent(type, { item, accordionId });
+      item.dispatchEvent(event);
     }
 
     /**
@@ -152,6 +202,31 @@
      */
     function isItemExpanded(ref) {
       return ref.header.getAttribute("aria-expanded") === "true";
+    }
+
+    /**
+     * تعداد آیتم‌های باز در این آکاردئون.
+     * @returns {number}
+     */
+    function getExpandedCount() {
+      return itemRefs.reduce(
+        (count, ref) => (isItemExpanded(ref) ? count + 1 : count),
+        0
+      );
+    }
+
+    // اگر اجازه‌ی toggle نداریم، مطمئن شو حداقل یک آیتم از ابتدا باز است
+    if (!allowToggle) {
+      const hasOpen = itemRefs.some((ref) => isItemExpanded(ref));
+      if (!hasOpen && itemRefs[0]) {
+        const { item, header, panel } = itemRefs[0];
+        header.setAttribute("aria-expanded", "true");
+        item.classList.add("is-open");
+        panel.setAttribute("aria-hidden", "false");
+        panel.hidden = false;
+        panel.style.maxHeight = "none";
+        panel.style.opacity = "1";
+      }
     }
 
     /**
@@ -165,21 +240,34 @@
       header.setAttribute("aria-expanded", "false");
       item.classList.remove("is-open");
       panel.setAttribute("aria-hidden", "true");
-      panel.hidden = true;
+
+      // پاک کردن هر هندلر قبلی
+      clearTransitionHandlers(panel);
 
       if (reduceMotion) {
-        panel.style.maxHeight = null;
+        // بدون انیمیشن
+        panel.style.maxHeight = "0px";
         panel.style.opacity = "0";
+        panel.hidden = true;
       } else {
-        // اگر max-height = "none" بود، اول height فعلی را تنظیم می‌کنیم برای transition
-        if (panel.style.maxHeight === "none") {
-          panel.style.maxHeight = panel.scrollHeight + "px";
-          // Force reflow
-          void panel.offsetHeight;
-        }
+        // مطمئن شو برای محاسبه scrollHeight مخفی نیست
+        panel.hidden = false;
+
+        // همیشه از ارتفاع واقعی فعلی شروع می‌کنیم
+        const startHeight = panel.scrollHeight;
+        panel.style.maxHeight = startHeight + "px";
+
+        // Force reflow
+        void panel.offsetHeight;
+
+        setupTransitionEnd(panel, () => {
+          // بعد از پایان انیمیشن، واقعاً مخفی‌اش می‌کنیم
+          panel.hidden = true;
+          panel.style.maxHeight = "0px";
+        });
 
         requestAnimationFrame(() => {
-          panel.style.maxHeight = null;
+          panel.style.maxHeight = "0px";
           panel.style.opacity = "0";
         });
       }
@@ -204,27 +292,22 @@
         panel.style.maxHeight = "none";
         panel.style.opacity = "1";
       } else {
-        // ابتدا max-height را به ارتفاع واقعی تنظیم می‌کنیم
-        panel.style.maxHeight = panel.scrollHeight + "px";
-        panel.style.opacity = "1";
+        // از ارتفاع صفر شروع می‌کنیم، بعد به scrollHeight انیمیت می‌کنیم
+        panel.style.maxHeight = "0px";
+        panel.style.opacity = "0";
 
-        // جلوگیری از چند بار اضافه شدن لیسنر transitionend
-        const existingHandler = transitionEndHandlers.get(panel);
-        if (existingHandler) {
-          panel.removeEventListener("transitionend", existingHandler);
-        }
+        clearTransitionHandlers(panel);
 
-        const onTransitionEnd = (e) => {
-          if (e.propertyName === "max-height") {
-            // برای اینکه بعداً با تغییر محتوا به‌راحتی ریسایز شود
-            panel.style.maxHeight = "none";
-            panel.removeEventListener("transitionend", onTransitionEnd);
-            transitionEndHandlers.delete(panel);
-          }
-        };
+        setupTransitionEnd(panel, () => {
+          // بعد از انیمیشن، max-height را none می‌کنیم تا محتوا آزادانه رشد کند
+          panel.style.maxHeight = "none";
+        });
 
-        transitionEndHandlers.set(panel, onTransitionEnd);
-        panel.addEventListener("transitionend", onTransitionEnd);
+        requestAnimationFrame(() => {
+          const targetHeight = panel.scrollHeight;
+          panel.style.maxHeight = targetHeight + "px";
+          panel.style.opacity = "1";
+        });
       }
 
       dispatchAccordionEvent(item, "accordion:expand", accordionId);
@@ -239,14 +322,8 @@
       const currentlyExpanded = isItemExpanded(ref);
 
       // اگر اجازه‌ی toggle نداریم و این تنها آیتم باز است، نبندش
-      if (!allowToggle && currentlyExpanded) {
-        const expandedCount = itemRefs.reduce(
-          (count, r) => (isItemExpanded(r) ? count + 1 : count),
-          0
-        );
-        if (expandedCount <= 1) {
-          return;
-        }
+      if (!allowToggle && currentlyExpanded && getExpandedCount() <= 1) {
+        return;
       }
 
       if (!allowMultiple) {
@@ -384,12 +461,21 @@
   });
 
   // --- Global API ---
+  /**
+   * @typedef {Object} AccordionGlobalAPI
+   * @property {(accordionIdOrElement: string | HTMLElement, target: number | string) => void} open
+   * @property {(accordionIdOrElement: string | HTMLElement, target: number | string) => void} close
+   * @property {(accordionIdOrElement: string | HTMLElement, target: number | string) => void} toggle
+   * @property {(accordionIdOrElement: string | HTMLElement) => void} openAll
+   * @property {(accordionIdOrElement: string | HTMLElement) => void} closeAll
+   * @property {(rootOrSelector: string | HTMLElement) => void} init
+   */
+
+  /** @type {AccordionGlobalAPI & typeof window.Accordion} */
   window.Accordion = window.Accordion || {};
 
   /**
    * باز کردن یک آیتم
-   * @param {string | HTMLElement} accordionIdOrElement
-   * @param {number | string} target
    */
   window.Accordion.open = function (accordionIdOrElement, target) {
     const record = resolveRecord(accordionIdOrElement);
@@ -401,8 +487,6 @@
 
   /**
    * بستن یک آیتم
-   * @param {string | HTMLElement} accordionIdOrElement
-   * @param {number | string} target
    */
   window.Accordion.close = function (accordionIdOrElement, target) {
     const record = resolveRecord(accordionIdOrElement);
@@ -414,8 +498,6 @@
 
   /**
    * تغییر وضعیت یک آیتم
-   * @param {string | HTMLElement} accordionIdOrElement
-   * @param {number | string} target
    */
   window.Accordion.toggle = function (accordionIdOrElement, target) {
     const record = resolveRecord(accordionIdOrElement);
@@ -427,7 +509,6 @@
 
   /**
    * باز کردن همه آیتم‌ها (فقط اگر allowMultiple = true باشد)
-   * @param {string | HTMLElement} accordionIdOrElement
    */
   window.Accordion.openAll = function (accordionIdOrElement) {
     const record = resolveRecord(accordionIdOrElement);
@@ -443,12 +524,12 @@
 
   /**
    * بستن همه آیتم‌ها (اگر allowToggle=false، یکی را باز نگه می‌داریم)
-   * @param {string | HTMLElement} accordionIdOrElement
    */
   window.Accordion.closeAll = function (accordionIdOrElement) {
     const record = resolveRecord(accordionIdOrElement);
     if (!record) return;
-    const { allowToggle, itemRefs, collapseItem, isItemExpanded } = record;
+    const { allowToggle, itemRefs, collapseItem, isItemExpanded, expandItem } =
+      record;
 
     if (!allowToggle) {
       // حداقل یک آیتم باید باز بماند
@@ -456,13 +537,46 @@
       if (!firstOpen && itemRefs[0]) {
         firstOpen = itemRefs[0];
       }
+
+      // بقیه را می‌بندیم
       itemRefs.forEach((ref) => {
         if (ref === firstOpen) return;
         collapseItem(ref);
       });
+
+      // اگر firstOpen بسته بود، دوباره بازش می‌کنیم تا قانون حفظ شود
+      if (firstOpen && !isItemExpanded(firstOpen)) {
+        expandItem(firstOpen);
+      }
       return;
     }
 
     itemRefs.forEach((ref) => collapseItem(ref));
+  };
+
+  /**
+   * init دستی برای آکاردئون‌هایی که بعداً به DOM اضافه می‌کنی
+   * @param {string | HTMLElement} rootOrSelector
+   */
+  window.Accordion.init = function (rootOrSelector) {
+    if (!rootOrSelector) return;
+    if (typeof rootOrSelector === "string") {
+      const nodes = document.querySelectorAll(rootOrSelector);
+      nodes.forEach((node, index) => {
+        if (!node.dataset.accordionId) {
+          node.dataset.accordionId = String(
+            ACCORDION_REGISTRY.size + index + 1
+          );
+        }
+        initAccordion(node);
+      });
+    } else if (rootOrSelector instanceof HTMLElement) {
+      if (!rootOrSelector.dataset.accordionId) {
+        rootOrSelector.dataset.accordionId = String(
+          ACCORDION_REGISTRY.size + 1
+        );
+      }
+      initAccordion(rootOrSelector);
+    }
   };
 })();
