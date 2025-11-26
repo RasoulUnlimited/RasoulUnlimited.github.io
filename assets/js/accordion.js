@@ -29,12 +29,27 @@
    */
   const ACCORDION_REGISTRY = new Map();
 
-  // ترجیح کاربر برای کاهش انیمیشن فقط یک بار محاسبه می‌شود
-  const PREFERS_REDUCED_MOTION =
-    !!(window.matchMedia &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  // ترجیح کاربر برای کاهش انیمیشن + گوش دادن به تغییرات سیستم
+  let PREFERS_REDUCED_MOTION = false;
+  const motionQuery =
+    window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)");
 
-  // مدت‌زمان fallback برای ترنزیشن‌ها (باید با transition CSS تقریباً هماهنگ باشد)
+  if (motionQuery) {
+    PREFERS_REDUCED_MOTION = motionQuery.matches;
+    const motionListener = (e) => {
+      PREFERS_REDUCED_MOTION = !!e.matches;
+    };
+
+    if (typeof motionQuery.addEventListener === "function") {
+      motionQuery.addEventListener("change", motionListener);
+    } else if (typeof motionQuery.addListener === "function") {
+      // برای مرورگرهای قدیمی‌تر
+      motionQuery.addListener(motionListener);
+    }
+  }
+
+  // مدت‌زمان fallback برای ترنزیشن‌ها (اگر از CSS نتوانستیم بخوانیم)
   const TRANSITION_FALLBACK_MS = 500;
 
   /**
@@ -53,6 +68,39 @@
     const evt = document.createEvent("CustomEvent");
     evt.initCustomEvent(type, true, false, detail);
     return evt;
+  }
+
+  /**
+   * مدت‌زمان transition را از CSS محاسبه می‌کند (duration + delay)
+   * @param {HTMLElement} el
+   * @returns {number} ms
+   */
+  function getTransitionDurationMS(el) {
+    if (!el) return TRANSITION_FALLBACK_MS;
+
+    const style = window.getComputedStyle(el);
+    const durations = style.transitionDuration.split(",");
+    const delays = style.transitionDelay.split(",");
+
+    const toMs = (value) => {
+      value = value.trim();
+      if (!value) return 0;
+      const num = parseFloat(value);
+      if (Number.isNaN(num)) return 0;
+      return value.includes("ms") ? num : num * 1000;
+    };
+
+    let maxTotal = 0;
+    for (let i = 0; i < durations.length; i++) {
+      const dur = toMs(durations[i] || "0s");
+      const delay = toMs(delays[i] || delays[0] || "0s");
+      const total = dur + delay;
+      if (total > maxTotal) {
+        maxTotal = total;
+      }
+    }
+
+    return maxTotal || TRANSITION_FALLBACK_MS;
   }
 
   /**
@@ -122,6 +170,7 @@
       }
 
       const handler = (e) => {
+        // فقط روی تغییر max-height واکنش نشان بده
         if (e.propertyName === "max-height") {
           finish(e);
         }
@@ -130,9 +179,10 @@
       panel.addEventListener("transitionend", handler);
       transitionEndHandlers.set(panel, handler);
 
+      const timeoutMs = getTransitionDurationMS(panel) + 50; // کمی حاشیه
       const timeoutId = window.setTimeout(() => {
         finish();
-      }, TRANSITION_FALLBACK_MS);
+      }, timeoutMs || TRANSITION_FALLBACK_MS);
       transitionTimeoutIds.set(panel, timeoutId);
     }
 
@@ -241,7 +291,6 @@
       item.classList.remove("is-open");
       panel.setAttribute("aria-hidden", "true");
 
-      // پاک کردن هر هندلر قبلی
       clearTransitionHandlers(panel);
 
       if (reduceMotion) {
@@ -288,6 +337,8 @@
       panel.setAttribute("aria-hidden", "false");
       panel.hidden = false;
 
+      clearTransitionHandlers(panel);
+
       if (reduceMotion) {
         panel.style.maxHeight = "none";
         panel.style.opacity = "1";
@@ -295,8 +346,6 @@
         // از ارتفاع صفر شروع می‌کنیم، بعد به scrollHeight انیمیت می‌کنیم
         panel.style.maxHeight = "0px";
         panel.style.opacity = "0";
-
-        clearTransitionHandlers(panel);
 
         setupTransitionEnd(panel, () => {
           // بعد از انیمیشن، max-height را none می‌کنیم تا محتوا آزادانه رشد کند
