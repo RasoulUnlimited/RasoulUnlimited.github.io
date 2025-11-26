@@ -49,7 +49,7 @@ html {
   overflow-x: hidden;
 }
 
-body {
+body[data-lang="fa"] {
   font-family: var(--font-body);
   background: linear-gradient(
     135deg,
@@ -2916,7 +2916,7 @@ img.loaded {
   html {
     scroll-padding-top: var(--navbar-height);
   }
-  body {
+  body[data-lang="fa"] {
     padding-top: var(--navbar-height);
   }
   .container {
@@ -3330,7 +3330,7 @@ img.loaded {
 }
 
 @media (min-resolution: 192dpi), (min-resolution: 2dppx) {
-  body {
+  body[data-lang="fa"] {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -4102,7 +4102,7 @@ summary:active,
     --navbar-height: 60px;
   }
 
-  body {
+  body[data-lang="fa"] {
     font-size: 14px; /* Base font size adjustment */
   }
 

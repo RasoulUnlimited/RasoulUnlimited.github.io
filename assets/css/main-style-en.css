@@ -107,7 +107,7 @@ html {
   overflow-x: hidden;
 }
 
-body {
+body[data-lang="en"] {
   font-family: var(--font-body);
   background: linear-gradient(
     135deg,
@@ -1552,7 +1552,7 @@ section h2::after {
   html {
     scroll-padding-top: var(--navbar-height);
   }
-  body {
+  body[data-lang="en"] {
     padding-top: var(--navbar-height);
   }
   .container {
