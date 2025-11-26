@@ -53,6 +53,12 @@
     border-color var(--transition-speed-fast, 0.25s) ease-in-out;
 }
 
+/* حالت غیرفعال (از طریق aria-disabled=true) */
+.accordion-header[aria-disabled="true"] {
+  cursor: default;
+  opacity: 0.6;
+}
+
 /* متن سوال */
 .accordion-header .faq-question {
   flex: 1 1 100%;
@@ -145,5 +151,23 @@ html[dir="rtl"] .accordion-header {
   .accordion-header,
   .accordion-content {
     transition: none !important;
+  }
+}
+
+/* ریسپانسیو: برای موبایل padding و سایز فونت را کمی کم می‌کنیم */
+@media (max-width: 600px) {
+  .accordion-header {
+    padding: 1.6rem 1.8rem;
+    font-size: 1.2rem;
+  }
+
+  .accordion-content {
+    padding-inline: 1.8rem;
+    font-size: 1.05rem;
+  }
+
+  .accordion-header::before {
+    font-size: 2.2rem;
+    margin-inline-end: 1.4rem;
   }
 }
