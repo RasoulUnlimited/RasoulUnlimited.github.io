@@ -3,34 +3,58 @@
   "use strict";
 
   /**
+   * @typedef {Object} AccordionItemRefs
+   * @property {HTMLElement} item
+   * @property {HTMLElement} header
+   * @property {HTMLElement} panel
+   */
+
+  /**
    * Initialize a single accordion container.
    * @param {HTMLElement} root
    */
   function initAccordion(root) {
-    if (!root) {return;}
+    if (!root) return;
+
+    const accordionId = root.dataset.accordionId || "main";
 
     const allowMultiple =
       root.getAttribute("data-allow-multiple") === "true" ||
       root.hasAttribute("data-allow-multiple");
 
-    const items = Array.from(root.querySelectorAll(".accordion-item"));
+    const allowToggle =
+      root.getAttribute("data-allow-toggle") !== "false"; // اگر false ست شود، آخرین باز را نمی‌بندد
+
+    /** @type {AccordionItemRefs[]} */
+    const itemRefs = [];
+    /** @type {HTMLElement[]} */
     const headers = [];
 
-    // First pass: Collect all headers and setup ARIA attributes
+    const reduceMotion =
+      !!(window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+
+    const items = Array.from(root.querySelectorAll(".accordion-item"));
+
+    if (!items.length) return;
+
+    // --- First pass: setup ARIA / state ---
     items.forEach((item, index) => {
-      const header = item.querySelector(".accordion-header");
-      const panel = item.querySelector(".accordion-content");
+      const header = /** @type {HTMLElement|null} */ (
+        item.querySelector(".accordion-header")
+      );
+      const panel = /** @type {HTMLElement|null} */ (
+        item.querySelector(".accordion-content")
+      );
 
-      if (!header || !panel) {return;}
+      if (!header || !panel) return;
 
-      const accId = root.dataset.accordionId || "main";
-      const headerId = header.id || `accordion-header-${accId}-${index}`;
-      const panelId = panel.id || `accordion-panel-${accId}-${index}`;
+      const headerId = header.id || `accordion-header-${accordionId}-${index}`;
+      const panelId = panel.id || `accordion-panel-${accordionId}-${index}`;
 
       header.id = headerId;
       panel.id = panelId;
 
-      // آیا این آیتم در HTML به صورت پیش‌فرض باز است؟
       const initiallyOpen =
         item.classList.contains("is-open") || item.hasAttribute("data-open");
 
@@ -42,11 +66,9 @@
 
       panel.setAttribute("role", "region");
       panel.setAttribute("aria-labelledby", headerId);
-      // panel.hidden = !initiallyOpen; // Removed for animation support
 
       if (initiallyOpen) {
         item.classList.add("is-open");
-        // Use "none" to allow content to determine height, avoiding issues with hidden containers
         panel.style.maxHeight = "none";
         panel.style.opacity = "1";
       } else {
@@ -55,33 +77,149 @@
         panel.style.opacity = "0";
       }
 
-      // Add to headers array for keyboard navigation
       headers.push(header);
+      itemRefs.push({ item, header, panel });
     });
 
-    // Second pass: Attach event listeners using complete headers array
-    items.forEach((item, index) => {
-      const header = item.querySelector(".accordion-header");
-      const panel = item.querySelector(".accordion-content");
+    if (!itemRefs.length) return;
 
-      if (!header || !panel) {return;}
+    // --- Helpers ---
 
-      // Click / keyboard handlers
+    /**
+     * Dispatch a custom event from an item.
+     * @param {HTMLElement} item
+     * @param {string} type
+     * @param {string} accordionId
+     */
+    function dispatchAccordionEvent(item, type, accordionId) {
+      item.dispatchEvent(
+        new CustomEvent(type, {
+          bubbles: true,
+          detail: { item, accordionId },
+        })
+      );
+    }
+
+    /**
+     * Collapse a single item.
+     * @param {AccordionItemRefs} ref
+     */
+    function collapseItem(ref) {
+      const { item, header, panel } = ref;
+      if (!header || !panel) return;
+
+      header.setAttribute("aria-expanded", "false");
+      item.classList.remove("is-open");
+
+      if (reduceMotion) {
+        panel.style.maxHeight = null;
+        panel.style.opacity = "0";
+      } else {
+        // اگر max-height = "none" بود، اول height فعلی رو ست می‌کنیم برای transition
+        if (panel.style.maxHeight === "none") {
+          panel.style.maxHeight = panel.scrollHeight + "px";
+          // Force reflow
+          void panel.offsetHeight;
+        }
+
+        requestAnimationFrame(() => {
+          panel.style.maxHeight = null;
+          panel.style.opacity = "0";
+        });
+      }
+
+      dispatchAccordionEvent(item, "accordion:collapse", accordionId);
+    }
+
+    /**
+     * Expand a single item.
+     * @param {AccordionItemRefs} ref
+     */
+    function expandItem(ref) {
+      const { item, header, panel } = ref;
+      if (!header || !panel) return;
+
+      header.setAttribute("aria-expanded", "true");
+      item.classList.add("is-open");
+
+      if (reduceMotion) {
+        panel.style.maxHeight = "none";
+        panel.style.opacity = "1";
+      } else {
+        // ابتدا max-height را به ارتفاع واقعی تنظیم می‌کنیم
+        panel.style.maxHeight = panel.scrollHeight + "px";
+        panel.style.opacity = "1";
+
+        const onTransitionEnd = (e) => {
+          if (e.propertyName === "max-height") {
+            // برای اینکه بعداً با تغییر محتوا به‌راحتی ریسایز شود
+            panel.style.maxHeight = "none";
+            panel.removeEventListener("transitionend", onTransitionEnd);
+          }
+        };
+
+        panel.addEventListener("transitionend", onTransitionEnd);
+      }
+
+      dispatchAccordionEvent(item, "accordion:expand", accordionId);
+    }
+
+    /**
+     * Toggle one accordion item
+     * @param {AccordionItemRefs} ref
+     */
+    function toggleItem(ref) {
+      const { item, header } = ref;
+      const isExpanded = header.getAttribute("aria-expanded") === "true";
+
+      // اگر تنها آیتم باز است و اجازه‌ی toggle نداریم، هیچی نکن
+      if (!allowMultiple && !allowToggle && isExpanded) {
+        return;
+      }
+
+      if (!allowMultiple) {
+        itemRefs.forEach((otherRef) => {
+          if (otherRef.item === item) return;
+          const otherExpanded =
+            otherRef.header.getAttribute("aria-expanded") === "true";
+          if (otherExpanded) {
+            collapseItem(otherRef);
+          }
+        });
+      }
+
+      if (isExpanded) {
+        collapseItem(ref);
+      } else {
+        expandItem(ref);
+      }
+    }
+
+    // --- Events: click + keyboard ---
+
+    itemRefs.forEach((ref) => {
+      const { header } = ref;
+
+      // Click handler
       header.addEventListener("click", () => {
-        toggleItem(item, allowMultiple);
+        if (header.hasAttribute("aria-disabled")) return;
+        toggleItem(ref);
       });
 
+      // Keyboard handler
       header.addEventListener("keydown", (e) => {
         const key = e.key;
 
+        if (header.hasAttribute("aria-disabled")) return;
+
         if (key === "Enter" || key === " ") {
           e.preventDefault();
-          toggleItem(item, allowMultiple);
+          toggleItem(ref);
           return;
         }
 
         const currentIndex = headers.indexOf(header);
-        if (currentIndex === -1) {return;}
+        if (currentIndex === -1) return;
 
         if (key === "ArrowDown") {
           e.preventDefault();
@@ -100,112 +238,9 @@
         }
       });
     });
-
-    /**
-     * Toggle one accordion item
-     * @param {HTMLElement} item
-     * @param {boolean} allowMultiple
-     */
-    function toggleItem(item, allowMultiple) {
-      const header = item.querySelector(".accordion-header");
-      const panel = item.querySelector(".accordion-content");
-      if (!header || !panel) {return;}
-
-      const isExpanded = header.getAttribute("aria-expanded") === "true";
-
-      if (!allowMultiple) {
-        items.forEach((otherItem) => {
-          if (otherItem === item) {return;}
-          collapseItem(otherItem);
-        });
-      }
-
-      if (isExpanded) {
-        collapseItem(item);
-      } else {
-        expandItem(item);
-      }
-    }
-
-    /**
-     * Collapse item
-     * @param {HTMLElement} item
-     */
-    function collapseItem(item) {
-      const header = item.querySelector(".accordion-header");
-      const panel = item.querySelector(".accordion-content");
-      if (!header || !panel) {return;}
-
-      // If max-height is "none", set it to explicit pixel value first to enable transition
-      if (panel.style.maxHeight === "none") {
-        panel.style.maxHeight = panel.scrollHeight + "px";
-        // Force reflow
-        void panel.offsetHeight;
-      }
-
-      requestAnimationFrame(() => {
-        header.setAttribute("aria-expanded", "false");
-        panel.style.maxHeight = null;
-        panel.style.opacity = "0";
-        item.classList.remove("is-open");
-      });
-
-      // Custom event for hooks / analytics / extra animations
-      item.dispatchEvent(
-        new CustomEvent("accordion:collapse", {
-          bubbles: true,
-          detail: { item, accordionId: root.dataset.accordionId },
-        })
-      );
-    }
-
-    /**
-     * Expand item
-     * @param {HTMLElement} item
-     */
-    function expandItem(item) {
-      const header = item.querySelector(".accordion-header");
-      const panel = item.querySelector(".accordion-content");
-      if (!header || !panel) {return;}
-
-      header.setAttribute("aria-expanded", "true");
-      
-      // Set explicit height for transition
-      panel.style.maxHeight = panel.scrollHeight + "px";
-      panel.style.opacity = "1";
-      item.classList.add("is-open");
-
-      // After transition, set to none to allow content to resize naturally
-      const onTransitionEnd = (e) => {
-        // Ensure we're handling the height transition
-        if (e.propertyName === "max-height") {
-          panel.style.maxHeight = "none";
-          panel.removeEventListener("transitionend", onTransitionEnd);
-        }
-      };
-      panel.addEventListener("transitionend", onTransitionEnd);
-
-      // Custom event for hooks / analytics / extra animations
-      item.dispatchEvent(
-        new CustomEvent("accordion:expand", {
-          bubbles: true,
-          detail: { item, accordionId: root.dataset.accordionId },
-        })
-      );
-    }
   }
 
-  // Handle resize to adjust max-height of open items
-  // Removed: This was causing issues by forcing fixed pixel heights, breaking responsiveness.
-  // The expandItem function already sets max-height to "none" after transition, which handles resize automatically.
-  /*
-  window.addEventListener('resize', () => {
-      document.querySelectorAll(".accordion-item.is-open .accordion-content").forEach(content => {
-          content.style.maxHeight = (content.scrollHeight + 500) + "px";
-      });
-  });
-  */
-
+  // Auto-init on DOMContentLoaded
   document.addEventListener("DOMContentLoaded", () => {
     const accordions = document.querySelectorAll(".accordion");
     accordions.forEach((acc, index) => {
