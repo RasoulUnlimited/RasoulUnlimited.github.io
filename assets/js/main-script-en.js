@@ -1649,6 +1649,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (!lazyImages.length) {return;}
 
   const loadImgImmediately = (img) => {
+    img.classList.add("lazy-image");
     img.classList.add("is-loading");
     img.setAttribute(
       "data-image-loader",

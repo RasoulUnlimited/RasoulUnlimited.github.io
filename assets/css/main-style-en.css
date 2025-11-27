@@ -133,14 +133,19 @@ body[data-lang="en"] {
     background var(--transition-duration-medium)
       var(--transition-easing-standard);
 }
-img {
+img[data-src],
+.lazy-image {
   opacity: 0;
   transform: translateY(10px);
-  transition: opacity var(--transition-duration-medium)
+  transition:
+    opacity var(--transition-duration-medium)
       var(--transition-easing-smooth),
-    transform var(--transition-duration-medium) var(--transition-easing-smooth);
+    transform var(--transition-duration-medium)
+      var(--transition-easing-smooth);
 }
-img.loaded {
+
+img[data-src].loaded,
+.lazy-image.loaded {
   opacity: 1;
   transform: none;
 }
@@ -2594,6 +2599,7 @@ summary:active,
   .fun-fact-close,
   .final-exploration-toast,
   .final-exploration-toast i,
+  .lazy-image,
   img.is-loading,
   img.loaded {
     transition: none !important;

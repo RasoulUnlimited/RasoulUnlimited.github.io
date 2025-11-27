@@ -1173,6 +1173,7 @@
     const loadImg = (img) => {
       img.decoding = "async";
       img.loading = "lazy";
+      img.classList.add("lazy-image");
       img.classList.add("is-loading");
       img.dataset.imageLoader =
         "Mohammad Rasoul Sohrabi's optimized script";
