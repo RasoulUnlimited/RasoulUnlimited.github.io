@@ -1,20 +1,35 @@
-/* Enhanced Connect Section Styles - Refined & Optimized */
+/* =========================================================
+   CONNECT SECTION – Enhanced, DRY & Accessible
+   ========================================================= */
+
 #connect {
   position: relative;
   overflow: hidden;
   padding-bottom: var(--space-xxxl);
 
-  /* Local design tokens for this section */
+  /* Local design tokens */
   --connect-border-radius-lg: var(--border-radius-lg);
   --connect-border-radius-md: var(--border-radius-md);
   --connect-transition-fast: 0.2s ease;
   --connect-transition-medium: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  /* Shared transitions for elevated cards & controls */
+  --connect-elevated-transition:
+    transform var(--connect-transition-medium),
+    box-shadow var(--connect-transition-medium),
+    border-color var(--connect-transition-fast),
+    background-color var(--connect-transition-fast),
+    color var(--connect-transition-fast);
 
   /* Subtle background accent */
   background:
     radial-gradient(circle at 10% 20%, rgba(var(--primary-rgb), 0.03) 0%, transparent 20%),
     radial-gradient(circle at 90% 80%, rgba(var(--primary-rgb), 0.03) 0%, transparent 20%);
 }
+
+/* =========================================================
+   GRID LAYOUT
+   ========================================================= */
 
 #connect .connect-content {
   display: grid;
@@ -31,7 +46,10 @@
   }
 }
 
-/* --- Left Side: Info Block --- */
+/* =========================================================
+   LEFT SIDE: INFO BLOCK
+   ========================================================= */
+
 #connect .connect-info-block {
   background: var(--card-bg);
   padding: var(--space-xl);
@@ -45,11 +63,7 @@
   gap: var(--space-md);
   overflow: hidden;
   backdrop-filter: blur(10px);
-  transition:
-    transform var(--connect-transition-medium),
-    box-shadow var(--connect-transition-fast),
-    border-color var(--connect-transition-fast),
-    background-color var(--connect-transition-fast);
+  transition: var(--connect-elevated-transition);
 }
 
 #connect .connect-info-block::before {
@@ -66,7 +80,10 @@
   box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.12);
 }
 
-/* Status Badge */
+/* =========================================================
+   STATUS BADGE
+   ========================================================= */
+
 #connect .status-badge {
   display: inline-flex;
   align-items: center;
@@ -110,10 +127,15 @@
   #connect .social-link-card,
   #connect .contact-card-box,
   #connect .email-icon-wrapper,
-  #connect .copy-btn {
+  #connect .copy-btn,
+  #connect .full-width-btn {
     transition: none !important;
   }
 }
+
+/* =========================================================
+   TITLES & TEXT
+   ========================================================= */
 
 #connect .connect-title {
   font-size: 1.75rem;
@@ -130,7 +152,10 @@
   font-size: 1rem;
 }
 
-/* Contact Box */
+/* =========================================================
+   CONTACT BOX
+   ========================================================= */
+
 #connect .contact-card-box {
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
@@ -138,11 +163,7 @@
   padding: var(--space-md);
   position: relative;
   margin-top: var(--space-sm);
-  transition:
-    transform var(--connect-transition-fast),
-    box-shadow var(--connect-transition-fast),
-    background-color var(--connect-transition-fast),
-    border-color var(--connect-transition-fast);
+  transition: var(--connect-elevated-transition);
 }
 
 #connect .contact-card-box:hover {
@@ -226,11 +247,7 @@
   justify-content: center;
   cursor: pointer;
   flex-shrink: 0;
-  transition:
-    transform var(--connect-transition-fast),
-    background-color var(--connect-transition-fast),
-    color var(--connect-transition-fast),
-    border-color var(--connect-transition-fast);
+  transition: var(--connect-elevated-transition);
 }
 
 #connect .copy-btn:hover {
@@ -240,7 +257,10 @@
   transform: scale(1.05);
 }
 
-/* Location / Education Area */
+/* =========================================================
+   LOCATION / EDUCATION
+   ========================================================= */
+
 #connect .location-edu-box {
   display: flex;
   flex-direction: column;
@@ -267,7 +287,10 @@
   font-size: 1.1rem;
 }
 
-/* Resume Button */
+/* =========================================================
+   RESUME BUTTON
+   ========================================================= */
+
 #connect .resume-download {
   margin-top: var(--space-md);
 }
@@ -282,11 +305,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  transition:
-    transform var(--connect-transition-medium),
-    box-shadow var(--connect-transition-medium),
-    background-color var(--connect-transition-fast),
-    color var(--connect-transition-fast);
+  transition: var(--connect-elevated-transition);
 }
 
 #connect .full-width-btn:hover {
@@ -294,14 +313,20 @@
   transform: translateY(-3px);
 }
 
-/* Accessible focus states */
+/* =========================================================
+   ACCESSIBILITY: FOCUS STATES
+   ========================================================= */
+
 #connect a:focus-visible,
 #connect button:focus-visible {
   outline: 2px solid var(--primary-color);
   outline-offset: 3px;
 }
 
-/* --- Right Side: Links Grid --- */
+/* =========================================================
+   RIGHT SIDE: LINKS BLOCK
+   ========================================================= */
+
 #connect .connect-links-block {
   display: flex;
   flex-direction: column;
@@ -339,18 +364,24 @@
   flex-grow: 1;
   height: 1px;
   background: var(--border-color);
-  margin-right: var(--space-sm);
+  margin-inline-end: var(--space-sm);
   opacity: 0.6;
 }
 
-/* Links Grid */
+/* =========================================================
+   LINKS GRID
+   ========================================================= */
+
 #connect .links-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: var(--space-md);
 }
 
-/* Social Link Cards */
+/* =========================================================
+   SOCIAL LINK CARDS
+   ========================================================= */
+
 #connect .social-link-card {
   display: flex;
   align-items: center;
@@ -365,11 +396,7 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
   position: relative;
   overflow: hidden;
-  transition:
-    transform var(--connect-transition-medium),
-    box-shadow var(--connect-transition-medium),
-    border-color var(--connect-transition-fast),
-    background-color var(--connect-transition-fast);
+  transition: var(--connect-elevated-transition);
 }
 
 #connect .social-link-card::after {
@@ -398,7 +425,9 @@
   flex-shrink: 0;
   z-index: 1;
   color: var(--text-muted);
-  transition: transform var(--connect-transition-medium), color var(--connect-transition-fast);
+  transition:
+    transform var(--connect-transition-medium),
+    color var(--connect-transition-fast);
 }
 
 #connect .social-link-card span {
@@ -434,23 +463,41 @@
 #connect .social-link-card.orcid          { --brand-color: #A6CE39; }
 #connect .social-link-card.wikidata       { --brand-color: #990000; }
 
-/* Dark Mode Adjustments */
-@media (prefers-color-scheme: dark) {
-  #connect .social-link-card.github  { --brand-color: #ffffff; }
-  #connect .social-link-card.twitter { --brand-color: #ffffff; }
-  #connect .social-link-card.medium  { --brand-color: #ffffff; }
-  #connect .social-link-card.devto   { --brand-color: #ffffff; }
+/* =========================================================
+   DARK MODE ADJUSTMENTS
+   ========================================================= */
 
-  #connect .social-link-card i {
-    color: var(--text-muted);
+@media (prefers-color-scheme: dark) {
+  #connect .social-link-card.github,
+  #connect .social-link-card.twitter,
+  #connect .social-link-card.medium,
+  #connect .social-link-card.devto {
+    --brand-color: #ffffff;
+  }
+
+  #connect .social-link-card {
+    background: rgba(255, 255, 255, 0.02);
+    border-color: rgba(255, 255, 255, 0.08);
   }
 
   #connect .social-link-card:hover {
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  #connect .connect-info-block {
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 40px -20px rgba(0, 0, 0, 0.8);
+  }
+
+  #connect .contact-card-box {
+    background: rgba(255, 255, 255, 0.02);
   }
 }
 
-/* Mobile Optimizations */
+/* =========================================================
+   MOBILE OPTIMIZATIONS
+   ========================================================= */
+
 @media (max-width: 768px) {
   #connect {
     padding-bottom: var(--space-xl);
@@ -472,8 +519,7 @@
   }
 
   #connect .status-badge {
-    margin-left: auto;
-    margin-right: auto;
+    margin-inline: auto;
   }
 
   /* Grid */
