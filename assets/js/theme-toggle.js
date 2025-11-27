@@ -5,21 +5,40 @@ document.addEventListener("DOMContentLoaded", () => {
   const toggle = document.getElementById("theme-toggle");
   if (!toggle) return;
 
-  const THEME_KEY = "theme";
+  // Namespaced key برای کاهش احتمال تداخل با اسکریپت‌های دیگر
+  const THEME_KEY = "app:theme";
   const DARK = "dark";
   const LIGHT = "light";
 
   const root = document.documentElement;
   const body = document.body;
 
-  // --- Safe localStorage wrapper ---
+  // --- Helpers ---
 
+  /**
+   * فقط مقادیر مجاز تم
+   * @param {string | null} value
+   * @returns {value is "dark" | "light"}
+   */
+  function isValidTheme(value) {
+    return value === DARK || value === LIGHT;
+  }
+
+  /**
+   * بررسی امن بودن localStorage
+   * - هم وجود window/localStorage
+   * - هم قابلیت write/read (برای private mode و ... )
+   */
   function getSafeStorage() {
+    if (typeof window === "undefined" || !("localStorage" in window)) {
+      return null;
+    }
+
     const testKey = "__theme_toggle__";
     try {
-      localStorage.setItem(testKey, testKey);
-      localStorage.removeItem(testKey);
-      return localStorage;
+      window.localStorage.setItem(testKey, testKey);
+      window.localStorage.removeItem(testKey);
+      return window.localStorage;
     } catch {
       return null;
     }
@@ -37,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function getStoredTheme() {
     if (!storage) return null;
     const value = storage.getItem(THEME_KEY);
-    return value === DARK || value === LIGHT ? value : null;
+    return isValidTheme(value) ? value : null;
   }
 
   function getSystemTheme() {
@@ -48,15 +67,13 @@ document.addEventListener("DOMContentLoaded", () => {
   function getCurrentTheme() {
     // احترام به چیزی که سرور روی data-theme ست کرده
     const attr = root.getAttribute("data-theme");
-    if (attr === DARK || attr === LIGHT) return attr;
+    if (isValidTheme(attr)) return /** @type {"dark" | "light"} */ (attr);
 
     const stored = getStoredTheme();
     if (stored) return stored;
 
     return getSystemTheme();
   }
-
-  // --- Helpers ---
 
   function isCheckableInput(el) {
     return (
@@ -69,19 +86,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function syncToggleState(isDark) {
     if (isCheckable) {
-      // برای inputهای checkable
       /** @type {HTMLInputElement} */ (toggle).checked = isDark;
-
-      // برای screen readerها
       toggle.setAttribute("aria-checked", String(isDark));
     } else {
-      // برای المنت‌های غیر-input (مثلاً button سفارشی)
       toggle.setAttribute("aria-pressed", String(isDark));
     }
   }
 
   function persistTheme(theme) {
     if (!storage) return;
+    if (!isValidTheme(theme)) return;
+
     try {
       storage.setItem(THEME_KEY, theme);
     } catch {
@@ -91,19 +106,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // CustomEvent fallback برای مرورگرهای قدیمی‌تر
   function createThemeChangeEvent(theme, isDark) {
+    const detail = { theme, isDark };
     try {
       return new CustomEvent("themechange", {
-        detail: { theme, isDark },
+        detail,
+        bubbles: true,
+        cancelable: false,
       });
     } catch {
       // Fallback برای مرورگرهایی که سازنده‌ی CustomEvent را ندارند
       const event = document.createEvent("CustomEvent");
-      event.initCustomEvent(
-        "themechange",
-        false, // bubbles
-        false, // cancelable
-        { theme, isDark }
-      );
+      event.initCustomEvent("themechange", true, false, detail);
       return event;
     }
   }
@@ -112,13 +125,23 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       const event = createThemeChangeEvent(theme, isDark);
       window.dispatchEvent(event);
+      // در صورت نیاز، می‌تونی روی document هم dispatch کنی:
+      // document.dispatchEvent(event);
     } catch {
       // اگر حتی این هم ساپورت نشه، نادیده می‌گیریم
     }
   }
 
+  /**
+   * تم را اعمال می‌کند و:
+   * - data-theme را ست می‌کند
+   * - کلاس‌ها روی html/body
+   * - color-scheme
+   * - وضعیت سوییچ
+   * - ارسال event
+   */
   function applyTheme(theme, { persist = true } = {}) {
-    if (theme !== DARK && theme !== LIGHT) return;
+    if (!isValidTheme(theme)) return;
 
     const isDark = theme === DARK;
 
@@ -144,7 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // اگر ساپورت نشه، نادیده بگیر
     }
 
-    // همگام‌سازی وضعیت خود سوییچ
+    // همگام‌سازی وضعیت خود سوییچ (ARIA + visual)
     syncToggleState(isDark);
 
     if (persist) {
@@ -180,9 +203,11 @@ document.addEventListener("DOMContentLoaded", () => {
     toggle.setAttribute("aria-label", "Toggle dark mode");
   }
 
-  // برای screen reader ها، اگر checkable باشد
+  // برای screen reader ها، ARIA state اولیه
   if (isCheckable && !toggle.hasAttribute("aria-checked")) {
     toggle.setAttribute("aria-checked", "false");
+  } else if (!isCheckable && !toggle.hasAttribute("aria-pressed")) {
+    toggle.setAttribute("aria-pressed", "false");
   }
 
   // --- Init theme ---
@@ -233,6 +258,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- واکنش به تغییر تم سیستم، فقط وقتی کاربر چیزی تو localStorage نذاشته ---
 
   function handleSystemChange(event) {
+    // اگر کاربر ترجیح خودش رو ذخیره کرده، به سیستم گوش نده
     const hasUserPreference = !!getStoredTheme();
     if (hasUserPreference) return;
 
@@ -254,13 +280,28 @@ document.addEventListener("DOMContentLoaded", () => {
   if (storage && typeof window !== "undefined") {
     window.addEventListener("storage", (event) => {
       if (event.key !== THEME_KEY) return;
-      if (event.storageArea && event.storageArea !== localStorage) return;
+      if (event.storageArea && event.storageArea !== window.localStorage) return;
 
       const value = event.newValue;
-      if (value === DARK || value === LIGHT) {
+      // اگر key حذف شده، کاری نکنیم و بذاریم منطق فعلی بمونه
+      if (value === null) return;
+
+      if (isValidTheme(value)) {
         // اینجا persist:false چون خود storage event یعنی از یه تب دیگه ذخیره شده
         applyTheme(value, { persist: false });
       }
     });
+  }
+
+  // --- API عمومی برای اسکریپت‌های دیگر (بهبود توسعه‌پذیری) ---
+
+  if (typeof window !== "undefined") {
+    window.__themeToggle = {
+      getCurrentTheme,
+      applyTheme,
+      toggleTheme,
+      isDark: () => getCurrentTheme() === DARK,
+      constants: { DARK, LIGHT, THEME_KEY },
+    };
   }
 });
