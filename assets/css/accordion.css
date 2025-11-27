@@ -5,7 +5,7 @@
   gap: var(--accordion-gap, 2rem);
   margin: 0;
   padding: 0;
-  list-style: none; /* اگر از <ul> استفاده شده باشد */
+  list-style: none;
   width: 100%;
 }
 
@@ -49,7 +49,7 @@
   }
 }
 
-/* کلاس‌های فعال – توسط JS ست می‌شوند (انیمیشن بلند شدن را خنثی می‌کنیم) */
+/* کلاس‌های فعال – توسط JS ست می‌شوند */
 .accordion-item:is(.is-open, .expanded) {
   transform: none;
 }
@@ -62,14 +62,14 @@
   padding-block: 2.2rem;
   padding-inline: 2.8rem;
   font-weight: 600;
-  font-size: clamp(1.2rem, 1.1rem + 0.3vw, 1.4rem);
+  font-size: clamp(1.1rem, 1rem + 0.4vw, 1.4rem);
   text-align: start;
   color: var(--text-dark, #263238);
   background-color: var(--bg-section, #fff);
   border: none;
   border-bottom: 1px solid transparent;
   cursor: pointer;
-  touch-action: manipulation; /* UX بهتر روی موبایل */
+  touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
   text-decoration: none;
   transition:
@@ -83,7 +83,7 @@
 .accordion-header[aria-disabled="true"] {
   cursor: default;
   opacity: 0.6;
-  pointer-events: none; /* غیرفعال‌کردن کامل کلیک/هوور */
+  pointer-events: none;
 }
 
 /* متن سوال */
@@ -100,7 +100,7 @@
   content: "+";
   font-family: "Montserrat", system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", sans-serif;
-  font-size: 2.8rem;
+  font-size: 2.6rem;
   line-height: 1;
   color: var(--primary-blue, #3498db);
   margin-inline-end: 2rem;
@@ -116,13 +116,13 @@ html[dir="rtl"] .accordion-header {
   text-align: right;
 }
 
-/* اصلاح فاصله‌ی آیکون در RTL تا تمیز بنشیند */
+/* اصلاح فاصله‌ی آیکون در RTL */
 html[dir="rtl"] .accordion-header::before {
   margin-inline-start: 2rem;
   margin-inline-end: 0;
 }
 
-/* فوکوس دسترسی‌پذیر روی هدر (role=button و tabindex از JS) */
+/* فوکوس دسترسی‌پذیر روی هدر */
 .accordion-header:focus-visible {
   outline: 3px solid var(--primary-blue, #3498db);
   outline-offset: 4px;
@@ -149,13 +149,13 @@ html[dir="rtl"] .accordion-header::before {
   color: var(--accent-red, #e74c3c);
 }
 
-/* محتوای آکاردئون – حالت بسته (default) */
+/* محتوای آکاردئون – حالت بسته */
 .accordion-content {
   margin: 0;
   border-top: 1px solid #f0f4f7;
   background-color: var(--bg-section, #fff);
   color: var(--text-muted, #546e7a);
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   line-height: 1.8;
   max-height: 0;
   overflow: hidden;
@@ -171,15 +171,15 @@ html[dir="rtl"] .accordion-header::before {
     opacity var(--transition-speed-medium, 0.4s) ease-out;
 }
 
-/* محتوای باز شده – fallback برای زمانی که JS max-height را ست نکند */
+/* محتوای باز شده – fallback */
 .accordion-item:is(.is-open, .expanded) > .accordion-content {
   opacity: 1;
   padding-block-start: 1.6rem;
-  padding-block-end: 2.8rem;
+  padding-block-end: 2.4rem;
   max-height: var(--accordion-content-max, 800px);
 }
 
-/* احترام به prefers-reduced-motion (حذف/کاهش انیمیشن‌ها) */
+/* احترام به prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
   .accordion-item,
   .accordion-header,
@@ -188,12 +188,10 @@ html[dir="rtl"] .accordion-header::before {
   }
 
   .accordion-content {
-    max-height: none !important; /* در صورت باز بودن، محتوا بدون انیمیشن نمایش می‌شود */
+    max-height: none !important;
   }
 }
 
-/* در حالت reduce-motion + دستگاه‌هایی که hover دارند:
-   از حرکت کارت جلوگیری می‌کنیم ولی سایه‌ی پایه را نگه می‌داریم */
 @media (prefers-reduced-motion: reduce) and (hover: hover) {
   .accordion-item:hover,
   .accordion-item:focus-within {
@@ -202,35 +200,73 @@ html[dir="rtl"] .accordion-header::before {
   }
 }
 
-/* ریسپانسیو عمومی برای موبایل‌ها (تا 600px) */
+/* 📱 تبلت‌ها و موبایل‌های بزرگ (تا 768px) */
+@media (max-width: 768px) {
+  .accordion {
+    gap: 1.6rem;
+  }
+
+  .accordion-item {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    border-radius: 11px;
+  }
+
+  .accordion-header {
+    padding-block: 1.8rem;
+    padding-inline: 2rem;
+    font-size: 1.05rem;
+  }
+
+  .accordion-header::before {
+    font-size: 2.3rem;
+    margin-inline-end: 1.6rem;
+  }
+
+  .accordion-content {
+    padding-inline: 2rem;
+    font-size: 1.02rem;
+  }
+
+  /* برای متن‌های طولانی در موبایل، محدودیت ارتفاع رو کمی آزادتر می‌کنیم */
+  .accordion-item:is(.is-open, .expanded) > .accordion-content {
+    max-height: 1200px;
+  }
+}
+
+/* 📱 موبایل‌های معمولی (تا 600px) */
 @media (max-width: 600px) {
   .accordion {
     gap: 1.4rem;
   }
 
   .accordion-item {
-    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
     border-radius: 10px;
   }
 
   .accordion-header {
     padding-block: 1.6rem;
-    padding-inline: 1.8rem;
-    font-size: 1.15rem;
-  }
-
-  .accordion-content {
-    padding-inline: 1.8rem;
-    font-size: 1.05rem;
+    padding-inline: 1.6rem;
+    font-size: 1rem;
   }
 
   .accordion-header::before {
-    font-size: 2.2rem;
-    margin-inline-end: 1.4rem;
+    font-size: 2.1rem;
+    margin-inline-end: 1.3rem;
+  }
+
+  .accordion-content {
+    padding-inline: 1.6rem;
+    font-size: 0.98rem;
+  }
+
+  /* در موبایل اجازه‌ی ارتفاع بیشتری برای متن می‌دهیم */
+  .accordion-item:is(.is-open, .expanded) > .accordion-content {
+    max-height: 1500px;
   }
 }
 
-/* ریزبهینه‌سازی برای گوشی‌های خیلی کوچک (تا 480px) */
+/* 📱 گوشی‌های کوچک (تا 480px) */
 @media (max-width: 480px) {
   .accordion {
     gap: 1.1rem;
@@ -239,7 +275,7 @@ html[dir="rtl"] .accordion-header::before {
   .accordion-header {
     padding-block: 1.4rem;
     padding-inline: 1.4rem;
-    font-size: 1.05rem;
+    font-size: 0.98rem;
   }
 
   .accordion-header .faq-question {
@@ -247,31 +283,40 @@ html[dir="rtl"] .accordion-header::before {
   }
 
   .accordion-header::before {
-    font-size: 2rem;
-    margin-inline-end: 1.2rem;
+    font-size: 1.9rem;
+    margin-inline-end: 1.1rem;
   }
 
   .accordion-content {
     padding-inline: 1.4rem;
-    font-size: 0.98rem;
+    font-size: 0.96rem;
+  }
+
+  /* در گوشی‌های کوچک، برای جلوگیری از بریدن محتوا، محدودیت ارتفاع را عملاً حذف می‌کنیم */
+  .accordion-item:is(.is-open, .expanded) > .accordion-content {
+    max-height: none;
   }
 }
 
-/* خیلی کوچک (تا 360px) برای موبایل‌های قدیمی / خیلی کوچک */
+/* 📱 خیلی کوچک (تا 360px) */
 @media (max-width: 360px) {
+  .accordion {
+    gap: 1rem;
+  }
+
   .accordion-header {
     padding-block: 1.2rem;
     padding-inline: 1.1rem;
-    font-size: 0.98rem;
+    font-size: 0.94rem;
   }
 
   .accordion-header::before {
-    font-size: 1.8rem;
-    margin-inline-end: 1rem;
+    font-size: 1.7rem;
+    margin-inline-end: 0.9rem;
   }
 
   .accordion-content {
     padding-inline: 1.1rem;
-    font-size: 0.95rem;
+    font-size: 0.93rem;
   }
 }
