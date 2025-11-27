@@ -1,11 +1,19 @@
-/* Enhanced Connect Section Styles - Completely Revamped */
+/* Enhanced Connect Section Styles - Refined & Optimized */
 #connect {
   position: relative;
   overflow: hidden;
   padding-bottom: var(--space-xxxl);
+
+  /* Local design tokens for this section */
+  --connect-border-radius-lg: var(--border-radius-lg);
+  --connect-border-radius-md: var(--border-radius-md);
+  --connect-transition-fast: 0.2s ease;
+  --connect-transition-medium: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
   /* Subtle background accent */
-  background: radial-gradient(circle at 10% 20%, rgba(var(--primary-rgb), 0.03) 0%, transparent 20%),
-              radial-gradient(circle at 90% 80%, rgba(var(--primary-rgb), 0.03) 0%, transparent 20%);
+  background:
+    radial-gradient(circle at 10% 20%, rgba(var(--primary-rgb), 0.03) 0%, transparent 20%),
+    radial-gradient(circle at 90% 80%, rgba(var(--primary-rgb), 0.03) 0%, transparent 20%);
 }
 
 #connect .connect-content {
@@ -18,36 +26,39 @@
 @media (min-width: 992px) {
   #connect .connect-content {
     grid-template-columns: 1fr 1.5fr;
-    align-items: start;
+    align-items: flex-start;
     gap: var(--space-xxl);
   }
 }
 
+/* --- Left Side: Info Block --- */
 #connect .connect-info-block {
   background: var(--card-bg);
   padding: var(--space-xl);
-  border-radius: var(--border-radius-lg);
+  border-radius: var(--connect-border-radius-lg);
   box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
   border: 1px solid var(--border-color);
   position: relative;
   z-index: 1;
-  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
   overflow: hidden;
   backdrop-filter: blur(10px);
+  transition:
+    transform var(--connect-transition-medium),
+    box-shadow var(--connect-transition-fast),
+    border-color var(--connect-transition-fast),
+    background-color var(--connect-transition-fast);
 }
 
 #connect .connect-info-block::before {
   content: '';
   position: absolute;
+  inset-inline: 0;
   top: 0;
-  left: 0;
-  width: 100%;
   height: 4px;
   background: linear-gradient(90deg, var(--primary-color), #4f46e5);
-  opacity: 1;
 }
 
 #connect .connect-info-block:hover {
@@ -69,7 +80,9 @@
   border: 1px solid rgba(16, 185, 129, 0.2);
   align-self: flex-start;
   margin-bottom: var(--space-xs);
+  white-space: nowrap;
 }
+
 #connect .status-dot {
   width: 8px;
   height: 8px;
@@ -81,9 +94,25 @@
 }
 
 @keyframes pulse-green {
-  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-  70% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+  0%   { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70%  { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
   100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  #connect .status-dot {
+    animation: none;
+    box-shadow: none;
+  }
+
+  #connect .connect-info-block,
+  #connect .social-link-card,
+  #connect .contact-card-box,
+  #connect .email-icon-wrapper,
+  #connect .copy-btn {
+    transition: none !important;
+  }
 }
 
 #connect .connect-title {
@@ -101,20 +130,25 @@
   font-size: 1rem;
 }
 
+/* Contact Box */
 #connect .contact-card-box {
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
-  border-radius: var(--border-radius-md);
+  border-radius: var(--connect-border-radius-md);
   padding: var(--space-md);
-  transition: all 0.3s ease;
   position: relative;
   margin-top: var(--space-sm);
+  transition:
+    transform var(--connect-transition-fast),
+    box-shadow var(--connect-transition-fast),
+    background-color var(--connect-transition-fast),
+    border-color var(--connect-transition-fast);
 }
 
 #connect .contact-card-box:hover {
   border-color: var(--primary-color);
   background: var(--card-bg);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
   transform: translateY(-2px);
 }
 
@@ -135,7 +169,10 @@
   justify-content: center;
   font-size: 1.2rem;
   flex-shrink: 0;
-  transition: transform 0.3s ease;
+  transition:
+    transform var(--connect-transition-medium),
+    background-color var(--connect-transition-fast),
+    color var(--connect-transition-fast);
 }
 
 #connect .contact-card-box:hover .email-icon-wrapper {
@@ -149,6 +186,7 @@
   flex-direction: column;
   flex-grow: 1;
   overflow: hidden;
+  min-width: 0;
 }
 
 #connect .email-label {
@@ -168,8 +206,8 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  transition: color 0.2s;
-  font-family: 'Roboto', sans-serif; /* Ensure readable email font */
+  transition: color var(--connect-transition-fast);
+  font-family: 'Roboto', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 #connect .email-link:hover {
@@ -183,11 +221,16 @@
   width: 40px;
   height: 40px;
   border-radius: 10px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.2s;
+  flex-shrink: 0;
+  transition:
+    transform var(--connect-transition-fast),
+    background-color var(--connect-transition-fast),
+    color var(--connect-transition-fast),
+    border-color var(--connect-transition-fast);
 }
 
 #connect .copy-btn:hover {
@@ -197,6 +240,7 @@
   transform: scale(1.05);
 }
 
+/* Location / Education Area */
 #connect .location-edu-box {
   display: flex;
   flex-direction: column;
@@ -223,6 +267,7 @@
   font-size: 1.1rem;
 }
 
+/* Resume Button */
 #connect .resume-download {
   margin-top: var(--space-md);
 }
@@ -232,16 +277,28 @@
   justify-content: center;
   padding: 14px;
   font-weight: 700;
-  border-radius: var(--border-radius-md);
+  border-radius: var(--connect-border-radius-md);
   box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.3);
-  transition: all 0.3s ease;
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  gap: 8px;
+  transition:
+    transform var(--connect-transition-medium),
+    box-shadow var(--connect-transition-medium),
+    background-color var(--connect-transition-fast),
+    color var(--connect-transition-fast);
 }
 
 #connect .full-width-btn:hover {
   box-shadow: 0 8px 25px rgba(var(--primary-rgb), 0.45);
   transform: translateY(-3px);
+}
+
+/* Accessible focus states */
+#connect a:focus-visible,
+#connect button:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 3px;
 }
 
 /* --- Right Side: Links Grid --- */
@@ -267,15 +324,6 @@
   position: relative;
 }
 
-#connect .category-title::after {
-  content: '';
-  flex-grow: 1;
-  height: 1px;
-  background: var(--border-color);
-  margin-right: var(--space-sm);
-  opacity: 0.6;
-}
-
 #connect .category-title::before {
   content: '';
   display: block;
@@ -286,6 +334,16 @@
   transform: rotate(45deg);
 }
 
+#connect .category-title::after {
+  content: '';
+  flex-grow: 1;
+  height: 1px;
+  background: var(--border-color);
+  margin-right: var(--space-sm);
+  opacity: 0.6;
+}
+
+/* Links Grid */
 #connect .links-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -303,49 +361,51 @@
   text-decoration: none;
   color: var(--text-color);
   border: 1px solid var(--border-color);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
   position: relative;
   overflow: hidden;
-  font-weight: 600;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+  transition:
+    transform var(--connect-transition-medium),
+    box-shadow var(--connect-transition-medium),
+    border-color var(--connect-transition-fast),
+    background-color var(--connect-transition-fast);
 }
 
-#connect .social-link-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.1);
-  border-color: var(--brand-color, var(--primary-color));
-  background: var(--card-bg); /* Ensure bg stays solid */
-}
-
-/* Dynamic background tint on hover */
 #connect .social-link-card::after {
   content: '';
   position: absolute;
   inset: 0;
   background: var(--brand-color);
   opacity: 0;
-  transition: opacity 0.3s;
+  transition: opacity var(--connect-transition-fast);
   pointer-events: none;
   z-index: 0;
 }
 
+#connect .social-link-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.1);
+  border-color: var(--brand-color, var(--primary-color));
+}
+
 #connect .social-link-card:hover::after {
-  opacity: 0.04;
+  opacity: 0.06;
 }
 
 #connect .social-link-card i {
   font-size: 1.6rem;
-  transition: transform 0.3s ease;
   flex-shrink: 0;
   z-index: 1;
-  color: var(--text-muted); /* Default icon color */
+  color: var(--text-muted);
+  transition: transform var(--connect-transition-medium), color var(--connect-transition-fast);
 }
 
 #connect .social-link-card span {
   font-weight: 600;
   font-size: 0.95rem;
   z-index: 1;
-  transition: color 0.3s;
+  transition: color var(--connect-transition-fast);
 }
 
 #connect .social-link-card:hover i {
@@ -358,33 +418,33 @@
 }
 
 /* Brand Colors */
-#connect .social-link-card.instagram { --brand-color: #E1306C; }
-#connect .social-link-card.telegram { --brand-color: #229ED9; }
-#connect .social-link-card.twitter { --brand-color: #000000; } /* X Brand Color */
-#connect .social-link-card.youtube { --brand-color: #FF0000; }
-#connect .social-link-card.linkedin { --brand-color: #0077b5; }
-#connect .social-link-card.github { --brand-color: #333; }
-#connect .social-link-card.aboutme { --brand-color: var(--primary-color); }
-#connect .social-link-card.keybase { --brand-color: #FF6F00; }
-#connect .social-link-card.virgool { --brand-color: #2e86de; }
-#connect .social-link-card.medium { --brand-color: #000; }
-#connect .social-link-card.devto { --brand-color: #0a0a0a; }
+#connect .social-link-card.instagram      { --brand-color: #E1306C; }
+#connect .social-link-card.telegram       { --brand-color: #229ED9; }
+#connect .social-link-card.twitter        { --brand-color: #000000; } /* X */
+#connect .social-link-card.youtube        { --brand-color: #FF0000; }
+#connect .social-link-card.linkedin       { --brand-color: #0077b5; }
+#connect .social-link-card.github         { --brand-color: #333333; }
+#connect .social-link-card.aboutme        { --brand-color: var(--primary-color); }
+#connect .social-link-card.keybase        { --brand-color: #FF6F00; }
+#connect .social-link-card.virgool        { --brand-color: #2e86de; }
+#connect .social-link-card.medium         { --brand-color: #000000; }
+#connect .social-link-card.devto          { --brand-color: #0a0a0a; }
 #connect .social-link-card.google-scholar { --brand-color: #4285F4; }
-#connect .social-link-card.researchgate { --brand-color: #00ccbb; }
-#connect .social-link-card.orcid { --brand-color: #A6CE39; }
-#connect .social-link-card.wikidata { --brand-color: #990000; }
+#connect .social-link-card.researchgate   { --brand-color: #00ccbb; }
+#connect .social-link-card.orcid          { --brand-color: #A6CE39; }
+#connect .social-link-card.wikidata       { --brand-color: #990000; }
 
 /* Dark Mode Adjustments */
 @media (prefers-color-scheme: dark) {
-  #connect .social-link-card.github { --brand-color: #fff; }
-  #connect .social-link-card.twitter { --brand-color: #fff; }
-  #connect .social-link-card.medium { --brand-color: #fff; }
-  #connect .social-link-card.devto { --brand-color: #fff; }
-  
+  #connect .social-link-card.github  { --brand-color: #ffffff; }
+  #connect .social-link-card.twitter { --brand-color: #ffffff; }
+  #connect .social-link-card.medium  { --brand-color: #ffffff; }
+  #connect .social-link-card.devto   { --brand-color: #ffffff; }
+
   #connect .social-link-card i {
     color: var(--text-muted);
   }
-  
+
   #connect .social-link-card:hover {
     background: rgba(255, 255, 255, 0.03);
   }
@@ -398,26 +458,25 @@
 
   #connect .connect-info-block {
     padding: var(--space-lg);
-    /* Add a subtle border for better definition on mobile */
     border: 1px solid rgba(var(--primary-rgb), 0.1);
   }
 
   #connect .connect-title {
     font-size: 1.5rem;
-    text-align: center; /* Center title on mobile */
+    text-align: center;
   }
-  
+
   #connect .connect-desc {
     text-align: center;
     font-size: 0.95rem;
   }
-  
+
   #connect .status-badge {
-      margin-left: auto;
-      margin-right: auto; /* Center badge */
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  /* Improved Grid for Mobile */
+  /* Grid */
   #connect .links-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
@@ -429,14 +488,13 @@
     flex-direction: column;
     text-align: center;
     justify-content: center;
-    min-height: 90px; /* Slightly smaller height */
+    min-height: 90px;
     border-radius: 12px;
-    background: var(--bg-secondary); /* Slightly different bg */
+    background: var(--bg-secondary);
   }
-  
-  /* Active state for touch */
+
   #connect .social-link-card:active {
-      transform: scale(0.96);
+    transform: scale(0.96);
   }
 
   #connect .social-link-card i {
@@ -447,67 +505,61 @@
   #connect .social-link-card span {
     font-size: 0.85rem;
     white-space: normal;
-    text-align: center;
     line-height: 1.2;
   }
-  
-  /* Contact Box Improvements */
+
+  /* Contact Box */
   #connect .contact-card-box {
-      padding: 12px;
-      background: var(--bg-secondary);
+    padding: 12px;
+    background: var(--bg-secondary);
   }
 
   #connect .contact-email-row {
-      gap: 8px;
-      flex-wrap: nowrap;
-      align-items: center;
+    gap: 8px;
+    flex-wrap: nowrap;
+    align-items: center;
   }
-  
+
   #connect .email-icon-wrapper {
-      width: 36px;
-      height: 36px;
-      font-size: 1rem;
-      border-radius: 8px;
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+    border-radius: 8px;
   }
-  
-  #connect .email-content {
-      min-width: 0; /* Allow flex item to shrink below content size */
-  }
-  
+
   #connect .email-link {
-      font-size: 0.9rem;
-      display: block;
+    font-size: 0.9rem;
+    display: block;
   }
-  
+
   #connect .copy-btn {
-      width: 36px;
-      height: 36px;
-      flex-shrink: 0;
-      border-radius: 8px;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
   }
 
   #connect .category-title {
     font-size: 1.1rem;
     margin-bottom: var(--space-sm);
     margin-top: var(--space-md);
-    justify-content: center; /* Center category titles */
-  }
-  
-  #connect .category-title::after {
-      display: none; /* Remove line on mobile for cleaner look */
-  }
-  
-  #connect .location-edu-box {
-      text-align: center;
-      align-items: center;
-  }
-  
-  #connect .info-item {
-      justify-content: center;
-      text-align: center;
+    justify-content: center;
   }
 
-  /* Resume Button Mobile Optimization */
+  #connect .category-title::after {
+    display: none;
+  }
+
+  #connect .location-edu-box {
+    text-align: center;
+    align-items: center;
+  }
+
+  #connect .info-item {
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* Resume Button */
   #connect .resume-download {
     width: 100%;
     display: flex;
@@ -525,39 +577,37 @@
     padding: 12px 16px !important;
     text-decoration: none !important;
     white-space: nowrap !important;
-    gap: 8px !important;
   }
 
   #connect .resume-download .full-width-btn i {
     margin: 0 !important;
     width: auto !important;
-    display: inline-block !important;
     flex: 0 0 auto !important;
   }
 }
 
 /* Extra Small Devices */
 @media (max-width: 480px) {
-    #connect .connect-info-block {
-        padding: var(--space-md);
-    }
-    
-    #connect .links-grid {
-        grid-template-columns: repeat(2, 1fr); /* Keep 2 columns */
-        gap: 8px;
-    }
-    
-    #connect .social-link-card {
-        padding: 10px 6px;
-        min-height: 80px;
-    }
-    
-    #connect .email-link {
-        font-size: 0.8rem; /* Smaller font for very small screens */
-    }
-    
-    #connect .status-badge {
-        font-size: 0.75rem;
-        padding: 4px 10px;
-    }
+  #connect .connect-info-block {
+    padding: var(--space-md);
+  }
+
+  #connect .links-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  #connect .social-link-card {
+    padding: 10px 6px;
+    min-height: 80px;
+  }
+
+  #connect .email-link {
+    font-size: 0.8rem;
+  }
+
+  #connect .status-badge {
+    font-size: 0.75rem;
+    padding: 4px 10px;
+  }
 }
