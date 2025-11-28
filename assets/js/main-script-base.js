@@ -38,10 +38,11 @@
   const prefersReducedMotion = !!(reduceMotionQuery && reduceMotionQuery.matches);
 
   /**
-   * Basic toast helper (string-only API to stay compatible)
-   * Other scripts can call window.createToast("message").
+   * Enhanced toast helper with types and icons
+   * @param {string} message
+   * @param {"success"|"error"|"info"|"default"} [type="default"]
    */
-  function createToast(message) {
+  function createToast(message, type = "default") {
     if (!message) {return;}
     if (!document.body) {
       console.warn("Cannot show toast: document.body not ready");
@@ -51,8 +52,19 @@
     const toast = document.createElement("div");
     toast.setAttribute("role", "status");
     toast.setAttribute("aria-live", "polite");
-    toast.className = "dynamic-toast";
-    toast.textContent = String(message);
+    toast.className = `dynamic-toast ${type}`;
+    
+    // Add icon based on type
+    let iconHtml = "";
+    if (type === "success") {
+      iconHtml = '<i class="fas fa-check-circle" aria-hidden="true"></i> ';
+    } else if (type === "error") {
+      iconHtml = '<i class="fas fa-exclamation-circle" aria-hidden="true"></i> ';
+    } else if (type === "info") {
+      iconHtml = '<i class="fas fa-info-circle" aria-hidden="true"></i> ';
+    }
+
+    toast.innerHTML = `${iconHtml}<span>${String(message)}</span>`;
 
     // Optional: prevent infinite stacking by removing oldest toast if too many
     const existingToasts = document.querySelectorAll(".dynamic-toast");
@@ -334,4 +346,39 @@
         });
     });
   });
+
+  // ---- Neurodesign Enhancements Initialization ----
+
+  // 1. Scroll Progress Bar Logic is handled by updateProgressBar() and existing HTML
+
+  // 2. Ripple Effect for Buttons
+  document.addEventListener("click", function (e) {
+    const target = e.target.closest(".btn, button, .cta-button, .hero-btn");
+    if (target) {
+      const rect = target.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      const ripple = document.createElement("span");
+      ripple.className = "ripple";
+      ripple.style.left = `${x}px`;
+      ripple.style.top = `${y}px`;
+
+      target.appendChild(ripple);
+
+      setTimeout(() => {
+        ripple.remove();
+      }, 600);
+    }
+  });
+
+  // 3. Success Trigger Helper
+  window.triggerSuccess = function(element) {
+    if (!element) return;
+    element.classList.add("success-trigger");
+    setTimeout(() => {
+      element.classList.remove("success-trigger");
+    }, 300);
+  };
+
 })();

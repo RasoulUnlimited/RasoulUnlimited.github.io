@@ -223,6 +223,7 @@ html[dir="rtl"] {
 
 .card--project {
   /* reserved for project-specific overrides */
+  transition: transform var(--transition-duration-short);
 }
 
 /* --- Call to action button --- */
@@ -705,3 +706,138 @@ html[dir="rtl"] {
 /* Shared base utilities and theme tokens now live in
    assets/css/main-style-base.css to avoid duplicate rules
    and keep light/dark mode custom properties in sync. */
+
+/* --- Neurodesign Enhancements --- */
+
+/* 1. Scroll Progress Bar (Serotonin: Sense of Control) */
+#scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  width: 0%;
+  z-index: 9999;
+  transition: width 0.1s ease-out;
+  box-shadow: 0 0 10px rgba(var(--primary-rgb), 0.5);
+}
+
+/* 2. Button Micro-interactions (Dopamine: Immediate Feedback) */
+.btn, button, .cta-button, .hero-btn {
+  position: relative;
+  overflow: hidden; /* For ripple effect */
+  transition: all var(--transition-duration-short) var(--transition-easing-smooth);
+}
+
+.btn:hover, button:hover, .cta-button:hover, .hero-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow-color-medium);
+}
+
+.btn:active, button:active, .cta-button:active, .hero-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px var(--shadow-color-light);
+}
+
+/* Ripple Effect */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(0);
+  animation: ripple-animation 0.6s linear;
+  pointer-events: none;
+}
+
+@keyframes ripple-animation {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* 3. Shine Effect for Primary CTAs (Adrenaline: Controlled Excitement) */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-25deg);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% { left: -100%; }
+  20% { left: 200%; }
+  100% { left: 200%; }
+}
+
+/* 4. Success/Reward Animation (Dopamine) */
+@keyframes success-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.success-trigger {
+  animation: success-pop 0.3s var(--transition-easing-springy);
+  color: var(--accent-color) !important;
+}
+
+/* 5. Enhanced Toast (Cortisol Reduction: Clear Feedback) */
+.dynamic-toast {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--border-radius-md);
+  box-shadow: 0 8px 24px var(--shadow-color-strong);
+  font-weight: 500;
+  min-width: 300px;
+  max-width: 90vw;
+  /* Default styling handled in JS or base CSS, adding refinements here */
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dynamic-toast.success {
+  background-color: rgba(16, 185, 129, 0.9); /* Green */
+  color: white;
+}
+
+.dynamic-toast.error {
+  background-color: rgba(239, 68, 68, 0.9); /* Red */
+  color: white;
+}
+
+.dynamic-toast.info {
+  background-color: rgba(59, 130, 246, 0.9); /* Blue */
+  color: white;
+}
+
+/* 6. Smooth Entrance (Endorphin: Lightness) */
+.fade-in-up {
+  animation: fadeInUp 0.6s var(--transition-easing-smooth) forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
