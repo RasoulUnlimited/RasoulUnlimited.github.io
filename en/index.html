@@ -383,10 +383,97 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "What does Rasoul Unlimited do?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Full-stack development, digital health, personal branding." }
+        "name": "Who is Rasoul Unlimited?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Mohammad Rasoul Sohrabi, known as Rasoul Unlimited, is a Biomedical Engineering student, Full-stack Developer, and the creator of the first verified Persian Discord bot. He specializes in Digital Health and Personal Branding."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What services do you offer?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Key services include Software Development (Web & Bots), Personal Branding Strategy, Content Strategy, and Digital Health solutions."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the Persian Discord Bot?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It is the first fully Persian-language Discord bot officially verified by Discord Inc., providing management and entertainment features for Farsi-speaking communities."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are your projects open source?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, many projects including Python and C tools are open source on GitHub and have Zenodo DOIs for academic citation."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How can I contact you?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can reach out via email at rasoul.unlimited@gmail.com or through social media platforms like LinkedIn, Twitter, and Telegram using the handle @RasoulUnlimited."
+        }
       }
     ]
+  }
+  </script>
+
+  <!-- BreadcrumbList JSON-LD -->
+  <script type="application/ld+json" nonce="RasoulCSP">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://rasoulunlimited.ir/en/"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Service JSON-LD -->
+  <script type="application/ld+json" nonce="RasoulCSP">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Software Development",
+    "provider": {
+      "@id": "https://rasoulunlimited.ir/#person"
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "Worldwide"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Software Development Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Discord Bot Development"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Full-stack Web Development"
+          }
+        }
+      ]
+    }
   }
   </script>
 

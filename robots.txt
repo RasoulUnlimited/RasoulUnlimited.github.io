@@ -86,7 +86,7 @@ Disallow: /assets/keys/
 # Machine-readable semantic data (JSON-LD schemas)
 # Note: Search engines can still crawl schema.org data from HTML; 
 # this prevents crawling the directory as a separate section
-Disallow: /schema/
+# Disallow: /schema/
 
 # Security metadata files (system-level, not user-facing)
 Disallow: /.well-known/security.txt

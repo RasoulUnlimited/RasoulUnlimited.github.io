@@ -342,10 +342,97 @@
      "mainEntity": [
        {
          "@type": "Question",
-         "name": "رسول آنلیمیتد چه می‌کند؟",
-         "acceptedAnswer": { "@type": "Answer", "text": "توسعه فول‌استک، سلامت دیجیتال، برندینگ شخصی." }
+         "name": "رسول آنلیمیتد (Rasoul Unlimited) کیست؟",
+         "acceptedAnswer": {
+           "@type": "Answer",
+           "text": "محمد رسول سهرابی، معروف به رسول آنلیمیتد، دانشجوی مهندسی پزشکی، توسعه‌دهنده فول‌استک و خالق اولین ربات فارسی دیسکورد تایید شده است. او در زمینه‌های سلامت دیجیتال و برندینگ شخصی فعالیت می‌کند."
+         }
+       },
+       {
+         "@type": "Question",
+         "name": "چه خدماتی ارائه می‌دهید؟",
+         "acceptedAnswer": {
+           "@type": "Answer",
+           "text": "خدمات اصلی شامل توسعه نرم‌افزار (وب و ربات)، مشاوره برندینگ شخصی، استراتژی محتوا و پروژه‌های مهندسی پزشکی و سلامت دیجیتال است."
+         }
+       },
+       {
+         "@type": "Question",
+         "name": "ربات فارسی دیسکورد چیست؟",
+         "acceptedAnswer": {
+           "@type": "Answer",
+           "text": "این اولین ربات دیسکورد کاملاً فارسی است که توسط دیسکورد رسمی تایید شده است. این ربات امکانات مدیریتی و سرگرمی را برای جوامع فارسی‌زبان فراهم می‌کند."
+         }
+       },
+       {
+         "@type": "Question",
+         "name": "آیا پروژه‌های شما متن‌باز هستند؟",
+         "acceptedAnswer": {
+           "@type": "Answer",
+           "text": "بله، بسیاری از پروژه‌های من از جمله ابزارهای پایتون و C به صورت متن‌باز (Open Source) در گیت‌هاب منتشر شده و دارای شناسه DOI از Zenodo برای ارجاع علمی هستند."
+         }
+       },
+       {
+         "@type": "Question",
+         "name": "چگونه می‌توانم با شما تماس بگیرم؟",
+         "acceptedAnswer": {
+           "@type": "Answer",
+           "text": "شما می‌توانید از طریق ایمیل rasoul.unlimited@gmail.com یا شبکه‌های اجتماعی مانند لینکدین، توییتر و تلگرام با شناسه @RasoulUnlimited در ارتباط باشید."
+         }
        }
      ]
+   }
+   </script>
+
+   <!-- BreadcrumbList JSON-LD -->
+   <script type="application/ld+json" nonce="RasoulCSP">
+   {
+     "@context": "https://schema.org",
+     "@type": "BreadcrumbList",
+     "itemListElement": [
+       {
+         "@type": "ListItem",
+         "position": 1,
+         "name": "خانه",
+         "item": "https://rasoulunlimited.ir/"
+       }
+     ]
+   }
+   </script>
+
+   <!-- Service JSON-LD -->
+   <script type="application/ld+json" nonce="RasoulCSP">
+   {
+     "@context": "https://schema.org",
+     "@type": "Service",
+     "serviceType": "Software Development",
+     "provider": {
+       "@id": "https://rasoulunlimited.ir/#person"
+     },
+     "areaServed": {
+       "@type": "Country",
+       "name": "Worldwide"
+     },
+     "hasOfferCatalog": {
+       "@type": "OfferCatalog",
+       "name": "خدمات توسعه نرم‌افزار",
+       "itemListElement": [
+         {
+           "@type": "Offer",
+           "itemOffered": {
+             "@type": "Service",
+             "name": "توسعه ربات دیسکورد"
+           }
+         },
+         {
+           "@type": "Offer",
+           "itemOffered": {
+             "@type": "Service",
+             "name": "توسعه وب فول‌استک"
+           }
+         }
+       ]
+     }
    }
    </script>
 

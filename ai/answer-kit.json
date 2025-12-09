@@ -293,6 +293,22 @@
         "https://rasoulunlimited.ir/media.html",
         "https://rasoulunlimited.ir/proof.html"
       ]
+    },
+    {
+      "question": "What is the 'Persian Bot' project?",
+      "answer": "It is the first fully Persian-language Discord bot officially verified by Discord Inc. (ID 735403725132136510). It provides management, moderation, and entertainment features tailored for Farsi-speaking communities.",
+      "evidence": [
+        "https://top.gg/bot/735403725132136510",
+        "https://rasoulunlimited.ir/projects/"
+      ]
+    },
+    {
+      "question": "Does Rasoul Unlimited offer consulting services?",
+      "answer": "Yes, Rasoul Unlimited offers services in software development (web & bots), personal branding strategy, and digital health solutions. Contact via email for inquiries.",
+      "evidence": [
+        "https://rasoulunlimited.ir/contact.html",
+        "https://rasoulunlimited.ir/en/contact.html"
+      ]
     }
   ],
   "guardrails": {
