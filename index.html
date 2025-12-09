@@ -1,636 +1,192 @@
 ﻿<!DOCTYPE html>
-<html lang="fa-IR" xml:lang="fa" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta
-      name="google-site-verification"
-      content="sI3YvXPMuU3icAsGNq50ESbsjBsZqBxuw_cA_pag7GU"
-    />
-    <meta
-      name="facebook-domain-verification"
-      content="7aqz9tz4lk5slr9gd39317h9d4uyzb"
-    />
+<html lang="fa-IR" dir="rtl">
+<head>
+  <!-- Basic document setup -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta http-equiv="Content-Language" content="fa-IR" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="format-detection" content="telephone=no, email=no, address=no" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0f172a" />
 
-    <!-- Preconnect to necessary domains for faster resource loading -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
-    <link rel="dns-prefetch" href="https://giscus.app" />
-    <link rel="prefetch" href="https://rasoulunlimited.ir/en/" />
-    <link rel="prefetch" href="https://rasoulunlimited.ir/about.html" />
+  <!-- Identity & verification -->
+  <meta name="google-site-verification" content="sI3YvXPMuU3icAsGNq50ESbsjBsZqBxuw_cA_pag7GU" />
+  <meta name="facebook-domain-verification" content="7aqz9tz4lk5slr9gd39317h9d4uyzb" />
 
-    <!-- Favicons for various platforms and devices -->
-    <link rel="icon" type="image/png" href="assets/images/favicon.png" />
-    <link rel="manifest" href="/manifest.json" />
-    <link rel="apple-touch-icon" href="assets/images/RasoulUnlimitedC.webp" sizes="180x180" />
-    <meta name="msapplication-TileColor" content="#ffffff" />
-    <meta name="msapplication-config" content="/browserconfig.xml" />
-    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-    <link
-      rel="alternate"
-      type="application/rss+xml"
-      href="/feed.xml"
-      title="Rasoul Unlimited Updates"
-    />
-    <link
-      rel="preload"
-      as="image"
-      href="assets/images/RasoulUnlimitedN.webp"
-      fetchpriority="high"
-    />
+  <!-- Title & SEO core -->
+  <title>محمد رسول سهرابی (Rasoul Unlimited) – مهندس پزشکی و توسعه‌دهنده</title>
+  <meta name="description"
+        content="وبسایت رسمی محمد رسول سهرابی (Rasoul Unlimited): مهندس پزشکی، توسعه‌دهنده فول‌استک و خالق اولین ربات فارسی دیسکورد. متخصص سلامت دیجیتال، پروژه‌های متن‌باز و برندینگ شخصی." />
+  <meta name="keywords"
+        content="محمد رسول سهرابی, Rasoul Unlimited, مهندس پزشکی, توسعه‌دهنده فول‌استک, ربات فارسی دیسکورد, سلامت دیجیتال, برندینگ شخصی, سئو, طراحی وب, برنامه نویسی, پایتون, جاوااسکریپت, هوش مصنوعی, متن‌باز, Open Source, Python, JavaScript, Digital Health, Medical Engineering" />
+  <meta name="robots"
+        content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <link rel="canonical" href="https://rasoulunlimited.ir/" />
 
-    <!-- Preload critical CSS for faster rendering -->
-    <link
-      rel="preload"
-      as="style"
-      data-href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;700&family=Vazirmatn:wght@400;500;700;900&display=swap"
-      data-make-stylesheet
-    />
-    <noscript
-      ><link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;700&family=Vazirmatn:wght@400;500;700;900&display=swap"
-    /></noscript>
+  <!-- Hreflang -->
+  <link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir/" />
+  <link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/en/" />
+  <link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir/" />
 
-    <link
-      rel="preload"
-      as="style"
-      data-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-      data-make-stylesheet
-    />
-    <noscript
-      ><link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    /></noscript>
+  <!-- App & PWA -->
+  <meta name="application-name" content="Rasoul Unlimited" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Rasoul Unlimited" />
+  <link rel="manifest" href="/manifest.json" />
 
-    <link
-      rel="preload"
-      as="style"
-      data-href="assets/vendor/aos/aos.min.css"
-      data-make-stylesheet
-    />
-    <noscript
-      ><link rel="stylesheet" href="assets/vendor/aos/aos.min.css"
-    /></noscript>
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/RasoulUnlimitedC.webp" />
+  <meta name="msapplication-TileColor" content="#ffffff" />
+  <meta name="msapplication-config" content="/browserconfig.xml" />
 
-    <link rel="stylesheet" href="assets/css/main-style-base.min.css" />
-    <link rel="stylesheet" href="assets/css/design-system.min.css" />
-    <link rel="stylesheet" href="assets/css/main-style-fa.min.css" />
-    <link rel="stylesheet" href="assets/css/accordion.min.css" />
-    <link rel="stylesheet" href="assets/css/home-faq-enhancement.min.css" />
-    <link rel="stylesheet" href="assets/css/testimonials-enhancement.css" />
-    <link rel="stylesheet" href="assets/css/hero-enhancement.css" />
-    <link rel="stylesheet" href="assets/css/connect-enhancement.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
-    <script src="assets/js/performance-helpers.min.js" defer></script>
-    <script src="assets/js/main-script-base.min.js" defer></script>
-    <script src="assets/js/accordion.min.js" defer></script>
-    <script src="assets/js/hero-typing.js" defer></script>
-    <script src="assets/js/hero-particles.js" defer></script>
-    <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <meta name="format-detection" content="telephone=no, email=no, address=no" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="Rasoul Unlimited" />
-    <!-- Enhanced Title Tag for stronger identity signaling and clarity -->
-    <title>
-      محمد رسول سهرابی (Rasoul Unlimited) – مهندس پزشکی و توسعه‌دهنده
-    </title>
+  <!-- Feeds & sitemaps -->
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+  <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="Rasoul Unlimited Updates" />
 
-    <!-- Meta Description - Critical for SEO and search result snippets -->
-    <meta
-      name="description"
-      content="وبسایت رسمی محمد رسول سهرابی (Rasoul Unlimited): مهندس پزشکی، توسعه‌دهنده فول‌استک و خالق اولین ربات فارسی دیسکورد. متخصص سلامت دیجیتال و برندینگ شخصی."
-    />
-    <meta
-      name="keywords"
-      content="محمد رسول سهرابی, Rasoul Unlimited, مهندس پزشکی, توسعه‌دهنده فول‌استک, ربات دیسکورد, سلامت دیجیتال, برندینگ شخصی, سئو, طراحی وب, برنامه نویسی, پایتون, جاوااسکریپت, هوش مصنوعی, متن‌باز, Open Source, Python, JavaScript, Digital Health, Medical Engineering"
-    />
-    <meta name="application-name" content="Rasoul Unlimited" />
-    <meta name="rating" content="General" />
-    <meta name="revisit-after" content="7 days" />
+  <!-- Performance hints -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="dns-prefetch" href="https://giscus.app" />
 
-    <!-- Canonical URL for consistent indexing -->
-    <link rel="canonical" href="https://rasoulunlimited.ir" />
-    <link rel="alternate" hreflang="fa-IR" href="https://rasoulunlimited.ir" />
-    <link rel="alternate" hreflang="en-US" href="https://rasoulunlimited.ir/en" />
-    <link rel="alternate" hreflang="x-default" href="https://rasoulunlimited.ir" />
-    <meta
-      name="ai-primary-entity"
-      content="محمد رسول سهرابی (Rasoul Unlimited)"
-    />
-    <meta
-      name="ai-topics"
-      content="مهندسی پزشکی; سلامت دیجیتال; توسعه نرم‌افزار; برندینگ شخصی؛ پروژه‌های متن‌باز"
-    />
-    <meta
-      name="ai-proof-points"
-      content="ربات فارسی دیسکورد تاییدشده؛ DOIهای منتشرشده در Zenodo؛ دانشجوی مهندسی پزشکی دانشگاه آزاد اسلامی"
-    />
-    <meta
+  <!-- Critical image preload -->
+  <link rel="preload" as="image"
+        href="assets/images/RasoulUnlimitedN.webp"
+        fetchpriority="high" />
 
-      name="ai.canonical-data"
+  <!-- CSS: fonts & icons -->
+  <link rel="preload"
+        as="style"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;700&family=Vazirmatn:wght@400;500;700;900&display=swap" />
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;700&family=Vazirmatn:wght@400;500;700;900&display=swap" />
+  <link rel="preload"
+        as="style"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 
-      content="https://rasoulunlimited.ir/ai/meta.json"
+  <!-- CSS: local styles -->
+  <link rel="stylesheet" href="assets/vendor/aos/aos.min.css" />
+  <link rel="stylesheet" href="assets/css/main-style-base.min.css" />
+  <link rel="stylesheet" href="assets/css/design-system.min.css" />
+  <link rel="stylesheet" href="assets/css/main-style-fa.min.css" />
+  <link rel="stylesheet" href="assets/css/accordion.min.css" />
+  <link rel="stylesheet" href="assets/css/home-faq-enhancement.min.css" />
+  <link rel="stylesheet" href="assets/css/testimonials-enhancement.css" />
+  <link rel="stylesheet" href="assets/css/hero-enhancement.css" />
+  <link rel="stylesheet" href="assets/css/connect-enhancement.css" />
 
-    />
+  <!-- JS: core scripts (defer for performance) -->
+  <script src="assets/js/performance-helpers.min.js" defer></script>
+  <script src="assets/js/main-script-base.min.js" defer></script>
+  <script src="assets/js/accordion.min.js" defer></script>
+  <script src="assets/js/hero-typing.js" defer></script>
+  <script src="assets/js/hero-particles.js" defer></script>
 
-    <meta
+  <!-- Author & copyright -->
+  <meta name="author" content="Mohammad Rasoul Sohrabi" />
+  <meta name="creator" content="Rasoul Unlimited" />
+  <meta name="citation_title" content="Rasoul Unlimited – Official Website" />
+  <meta name="dcterms.creator" content="Mohammad Rasoul Sohrabi" />
+  <meta name="dc.created" content="2025-01-15" />
+  <meta name="dc.modified" content="2025-11-20" />
+  <meta name="dc.language" content="fa-IR" />
+  <meta name="dc.identifier" content="https://rasoulunlimited.ir/" />
+  <meta name="copyright"
+        content="© 2025 Mohammad Rasoul Sohrabi. All rights reserved. Licensed under Creative Commons Attribution 4.0 International." />
 
-      name="ai.instructions"
+  <!-- Geo metadata (optional but kept) -->
+  <meta name="geo.region" content="IR-23" />
+  <meta name="geo.placename" content="Karaj" />
+  <meta name="geo.position" content="35.8398;50.9912" />
+  <meta name="ICBM" content="35.8398, 50.9912" />
 
-      content="https://rasoulunlimited.ir/ai.txt"
+  <!-- AI / agent-facing metadata -->
+  <meta name="ai-primary-entity" content="محمد رسول سهرابی (Rasoul Unlimited)" />
+  <meta name="ai-topics"
+        content="مهندسی پزشکی; سلامت دیجیتال; توسعه نرم‌افزار; برندینگ شخصی؛ پروژه‌های متن‌باز" />
+  <meta name="ai-proof-points"
+        content="ربات فارسی دیسکورد تاییدشده؛ DOIهای منتشرشده در Zenodo؛ دانشجوی مهندسی پزشکی دانشگاه آزاد اسلامی" />
+  <meta name="ai.canonical-data" content="https://rasoulunlimited.ir/ai/meta.json" />
+  <meta name="ai.instructions" content="https://rasoulunlimited.ir/ai.txt" />
+  <meta name="ai.resource-map" content="https://rasoulunlimited.ir/ai/resource-map.json" />
+  <meta name="ai.answer-kit" content="https://rasoulunlimited.ir/ai/answer-kit.json" />
 
-    />
+  <link rel="alternate" type="text/plain" href="/ai.txt" />
+  <link rel="alternate" type="application/json" href="/ai/meta.json" />
+  <link rel="alternate" type="application/json" href="/ai/resource-map.json" />
+  <link rel="alternate" type="application/json" href="/ai/answer-kit.json" />
 
-    <meta
+  <!-- Open Graph -->
+  <meta property="og:type" content="profile" />
+  <meta property="og:url" content="https://rasoulunlimited.ir/" />
+  <meta property="og:title"
+        content="محمد رسول سهرابی (Rasoul Unlimited) | مهندس پزشکی، توسعه‌دهنده و استراتژیست محتوا" />
+  <meta property="og:description"
+        content="وبسایت رسمی محمد رسول سهرابی (Rasoul Unlimited): مهندس پزشکی، توسعه‌دهنده فول‌استک و خالق اولین ربات فارسی دیسکورد تأیید شده. متخصص سلامت دیجیتال، برندینگ شخصی و پروژه‌های متن‌باز با DOI." />
+  <meta property="og:image"
+        content="https://rasoulunlimited.ir/assets/images/RasoulUnlimitedC.webp" />
+  <meta property="og:image:secure_url"
+        content="https://rasoulunlimited.ir/assets/images/RasoulUnlimitedC.webp" />
+  <meta property="og:image:type" content="image/webp" />
+  <meta property="og:image:alt" content="تصویر پروفایل محمد رسول سهرابی" />
+  <meta property="og:image:width" content="220" />
+  <meta property="og:image:height" content="220" />
+  <meta property="og:locale" content="fa_IR" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:site_name" content="Rasoul Unlimited – Official Website" />
+  <meta property="og:updated_time" content="2025-11-20T00:00:00Z" />
 
-      name="ai.resource-map"
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@rasoulunlimited" />
+  <meta name="twitter:creator" content="@rasoulunlimited" />
+  <meta name="twitter:title"
+        content="محمد رسول سهرابی (Rasoul Unlimited) | توسعه‌دهنده و مهندس پزشکی" />
+  <meta name="twitter:description"
+        content="وبسایت رسمی محمد رسول سهرابی: توسعه‌دهنده فول‌استک، مهندس پزشکی، و خالق اولین ربات فارسی دیسکورد تأیید شده. متخصص سلامت دیجیتال و برندینگ شخصی." />
+  <meta name="twitter:image"
+        content="https://rasoulunlimited.ir/assets/images/RasoulUnlimitedC.webp" />
+  <meta name="twitter:image:alt" content="تصویر پروفایل محمد رسول سهرابی" />
 
-      content="https://rasoulunlimited.ir/ai/resource-map.json"
+  <!-- rel=me & Webmention / IndieWeb -->
+  <link rel="me" href="https://github.com/RasoulUnlimited" />
+  <link rel="me" href="https://www.linkedin.com/in/rasoulunlimited/" />
+  <link rel="me" href="https://t.me/RasoulUnlimited" />
+  <link rel="me" href="https://mastodon.social/@rasoulunlimited" />
+  <link rel="me" href="https://orcid.org/0009-0004-7177-2080" />
+  <link rel="me" href="https://x.com/rasoulunlimited" />
+  <link rel="me" href="mailto:rasoul.unlimited@gmail.com" />
+  <link rel="me" href="https://rasoulunlimited.ir/" />
+  <link rel="me" href="https://rasoulunlimited.medium.com" />
+  <link rel="me" href="https://dev.to/rasoulunlimited" />
+  <link rel="me" href="https://virgool.io/@RasoulUnlimited" />
+  <link rel="me" href="https://www.youtube.com/@RasoulUnlimited" />
+  <link rel="me" href="https://about.me/rasoulunlimited" />
+  <link rel="me" href="https://gravatar.com/rasoulunlimited" />
+  <link rel="me" href="https://keybase.io/RasoulUnlimited" />
+  <link rel="me" href="https://gitlab.com/rasoul.unlimited" />
+  <link rel="webmention" href="https://webmention.io/rasoulunlimited.ir/webmention" />
+  <link rel="pingback" href="https://webmention.io/rasoulunlimited.ir/xmlrpc" />
 
-    />
+  <!-- FOAF / RDF / identity node -->
+  <link rel="alternate" type="application/rdf+xml" href="/foaf.rdf" />
+  <link rel="entity-profile" href="/.well-known/entity-profile.json" />
+  <meta name="identity-status"
+        content="This site operates as a verified, graph-indexed identity node with structured data for knowledge graphs, FOAF profiles, and AI-understanding." />
 
-    <meta
-
-      name="ai.answer-kit"
-
-      content="https://rasoulunlimited.ir/ai/answer-kit.json"
-
-    />
-
-
-    <link rel="alternate" type="text/plain" href="/ai.txt" />
-    <link rel="alternate" type="application/json" href="/ai/meta.json" />
-
-    <link rel="alternate" type="application/json" href="/ai/resource-map.json" />
-
-    <link rel="alternate" type="application/json" href="/ai/answer-kit.json" />
-
-    <link rel="alternate" type="application/ld+json" href="/schema/generative-brief.jsonld" />
-
-    <!-- Primary entity graph to help search engines understand the person + brand relationship -->
-    <script type="application/ld+json" id="structured-data-entity-fa">
+  <!-- Structured Data: Person, Organization, WebSite, WebPage, Breadcrumb, FAQ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
       {
-        "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": ["Organization", "Brand"],
-            "@id": "https://rasoulunlimited.ir/#brand",
-            "name": "Rasoul Unlimited",
-            "alternateName": ["رسول آنلیمیتد"],
-            "url": "https://rasoulunlimited.ir/",
-            "logo": {
-              "@type": "ImageObject",
-              "@id": "https://rasoulunlimited.ir/#logo",
-              "url": "https://rasoulunlimited.ir/assets/images/RasoulUnlimitedC.webp",
-              "width": 220,
-              "height": 220,
-              "caption": "لوگوی رسمی Rasoul Unlimited",
-              "contentUrl": "https://rasoulunlimited.ir/assets/images/RasoulUnlimitedC.webp",
-              "representativeOfPage": true
-            },
-            "founder": { "@id": "https://rasoulunlimited.ir/#person" },
-            "foundingLocation": {
-              "@type": "Place",
-              "name": "Karaj, Iran"
-            },
-            "sameAs": [
-              "https://github.com/RasoulUnlimited",
-              "https://x.com/rasoulunlimited",
-              "https://www.linkedin.com/in/rasoulunlimited/",
-              "https://www.instagram.com/Rasoul.Unlimited",
-              "https://www.youtube.com/@RasoulUnlimited",
-              "https://t.me/RasoulUnlimited",
-              "https://mastodon.social/@rasoulunlimited",
-              "https://rasoulunlimited.medium.com",
-              "https://dev.to/rasoulunlimited",
-              "https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi",
-              "https://orcid.org/0009-0004-7177-2080",
-              "https://scholar.google.com/citations?user=kDl5eNUAAAAJ",
-              "https://virgool.io/@RasoulUnlimited",
-              "https://keybase.io/RasoulUnlimited",
-              "https://about.me/rasoulunlimited",
-              "https://top.gg/bot/735403725132136510",
-              "https://gravatar.com/rasoulunlimited",
-              "https://gitlab.com/rasoul.unlimited",
-              "https://loop.frontiersin.org/people/3130177/overview",
-              "https://www.lens.org/lens/profile/rasoulunlimited",
-              "https://sourceforge.net/u/rasoulunlimited",
-              "https://www.facebook.com/RasoulUnlimited",
-              "https://www.webofscience.com/wos/author/record/NJS-6637-2025",
-              "https://isni.org/isni/0000000527866581",
-              "https://www.authenticus.pt/R-00M-286",
-              "https://independent.academia.edu/MohammadRasoulSohrabi",
-              "https://commons.datacite.org/orcid.org/0009-0004-7177-2080",
-              "https://commons.wikimedia.org/wiki/File:Mohammad_Rasoul_Sohrabi_(Rasoul_Unlimited),_2025.jpg"
-            ],
-            "contactPoint": [
-              {
-                "@type": "ContactPoint",
-                "contactType": "general inquiries",
-                "email": "rasoul.unlimited@gmail.com",
-                "availableLanguage": ["fa", "en"]
-              }
-            ]
-          },
-          {
-            "@type": "Person",
-            "@id": "https://rasoulunlimited.ir/#person",
-            "name": "محمد رسول سهرابی",
-            "alternateName": ["Rasoul Unlimited", "رسول آنلیمیتد"],
-            "url": "https://rasoulunlimited.ir/",
-            "image": { "@id": "https://rasoulunlimited.ir/#logo" },
-            "jobTitle": "مهندس پزشکی و توسعه‌دهنده فول‌استک",
-            "description": "دانشجوی مهندسی پزشکی، توسعه‌دهنده فول‌استک، استراتژیست برند شخصی و خالق اولین ربات فارسی دیسکورد تایید شده.",
-            "worksFor": { "@id": "https://rasoulunlimited.ir/#brand" },
-            "brand": { "@id": "https://rasoulunlimited.ir/#brand" },
-            "knowsAbout": [
-              "سلامت دیجیتال",
-              "برندینگ شخصی",
-              "اتوماسیون جامعه‌محور",
-              "پروژه‌های متن‌باز"
-            ],
-            "knowsLanguage": ["fa-IR", "en-US"],
-            "alumniOf": {
-              "@type": "CollegeOrUniversity",
-              "name": "Islamic Azad University, Central Tehran Branch"
-            },
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": "Karaj",
-              "addressRegion": "Alborz",
-              "addressCountry": "IR"
-            },
-            "sameAs": [
-              "https://github.com/RasoulUnlimited",
-              "https://x.com/rasoulunlimited",
-              "https://www.linkedin.com/in/rasoulunlimited/",
-              "https://www.instagram.com/Rasoul.Unlimited",
-              "https://www.youtube.com/@RasoulUnlimited",
-              "https://t.me/RasoulUnlimited",
-              "https://mastodon.social/@rasoulunlimited",
-              "https://rasoulunlimited.medium.com",
-              "https://dev.to/rasoulunlimited",
-              "https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi",
-              "https://orcid.org/0009-0004-7177-2080",
-              "https://scholar.google.com/citations?user=kDl5eNUAAAAJ",
-              "https://virgool.io/@RasoulUnlimited",
-              "https://keybase.io/RasoulUnlimited",
-              "https://about.me/rasoulunlimited",
-              "https://top.gg/bot/735403725132136510",
-              "https://gravatar.com/rasoulunlimited",
-              "https://gitlab.com/rasoul.unlimited",
-              "https://loop.frontiersin.org/people/3130177/overview",
-              "https://www.lens.org/lens/profile/rasoulunlimited",
-              "https://sourceforge.net/u/rasoulunlimited",
-              "https://www.facebook.com/RasoulUnlimited",
-              "https://www.webofscience.com/wos/author/record/NJS-6637-2025",
-              "https://isni.org/isni/0000000527866581",
-              "https://www.authenticus.pt/R-00M-286",
-              "https://independent.academia.edu/MohammadRasoulSohrabi",
-              "https://commons.datacite.org/orcid.org/0009-0004-7177-2080",
-              "https://commons.wikimedia.org/wiki/File:Mohammad_Rasoul_Sohrabi_(Rasoul_Unlimited),_2025.jpg"
-            ]
-          },
-          {
-            "@type": "WebSite",
-            "@id": "https://rasoulunlimited.ir/#website",
-            "url": "https://rasoulunlimited.ir/",
-            "name": "وبسایت رسمی Rasoul Unlimited",
-            "alternateName": "محمد رسول سهرابی",
-            "inLanguage": "fa-IR",
-            "publisher": { "@id": "https://rasoulunlimited.ir/#person" }
-          },
-          {
-            "@type": "ProfilePage",
-            "@id": "https://rasoulunlimited.ir/#webpage",
-            "url": "https://rasoulunlimited.ir/",
-            "name": "محمد رسول سهرابی | Rasoul Unlimited",
-            "isPartOf": { "@id": "https://rasoulunlimited.ir/#website" },
-            "about": { "@id": "https://rasoulunlimited.ir/#person" },
-            "primaryImageOfPage": { "@id": "https://rasoulunlimited.ir/#logo" },
-            "inLanguage": "fa-IR",
-            "description": "وبسایت رسمی محمد رسول سهرابی برای معرفی پروژه‌های سلامت دیجیتال، برندینگ شخصی و محصولات متن‌باز."
-          }
-        ]
-      }
-    </script>
-
-   <!-- AI Answer Map -->
-   <script type="application/json" id="ai-answer-map">
-     {
-       "primaryEntity": "Rasoul Unlimited",
-       "source": "https://rasoulunlimited.ir/ai/answer-kit.json",
-       "faq": [
-         {
-           "q": "رسول آنلیمیتد کیست؟",
-           "a": "دانشجوی مهندسی پزشکی و توسعه‌دهنده فول‌استک."
-         },
-         {
-           "q": "بزرگ‌ترین افتخار فنی او چیست؟",
-           "a": "ساخت اولین ربات فارسی دیسکورد تاییدشده."
-         }
-       ]
-     }
-   </script>
-
-   <!-- FAQ JSON-LD -->
-   <script type="application/ld+json" nonce="RasoulCSP">
-   {
-     "@context": "https://schema.org",
-     "@type": "FAQPage",
-     "mainEntity": [
-       {
-         "@type": "Question",
-         "name": "رسول آنلیمیتد (Rasoul Unlimited) کیست؟",
-         "acceptedAnswer": {
-           "@type": "Answer",
-           "text": "محمد رسول سهرابی، معروف به رسول آنلیمیتد، دانشجوی مهندسی پزشکی، توسعه‌دهنده فول‌استک و خالق اولین ربات فارسی دیسکورد تایید شده است. او در زمینه‌های سلامت دیجیتال و برندینگ شخصی فعالیت می‌کند."
-         }
-       },
-       {
-         "@type": "Question",
-         "name": "چه خدماتی ارائه می‌دهید؟",
-         "acceptedAnswer": {
-           "@type": "Answer",
-           "text": "خدمات اصلی شامل توسعه نرم‌افزار (وب و ربات)، مشاوره برندینگ شخصی، استراتژی محتوا و پروژه‌های مهندسی پزشکی و سلامت دیجیتال است."
-         }
-       },
-       {
-         "@type": "Question",
-         "name": "ربات فارسی دیسکورد چیست؟",
-         "acceptedAnswer": {
-           "@type": "Answer",
-           "text": "این اولین ربات دیسکورد کاملاً فارسی است که توسط دیسکورد رسمی تایید شده است. این ربات امکانات مدیریتی و سرگرمی را برای جوامع فارسی‌زبان فراهم می‌کند."
-         }
-       },
-       {
-         "@type": "Question",
-         "name": "آیا پروژه‌های شما متن‌باز هستند؟",
-         "acceptedAnswer": {
-           "@type": "Answer",
-           "text": "بله، بسیاری از پروژه‌های من از جمله ابزارهای پایتون و C به صورت متن‌باز (Open Source) در گیت‌هاب منتشر شده و دارای شناسه DOI از Zenodo برای ارجاع علمی هستند."
-         }
-       },
-       {
-         "@type": "Question",
-         "name": "چگونه می‌توانم با شما تماس بگیرم؟",
-         "acceptedAnswer": {
-           "@type": "Answer",
-           "text": "شما می‌توانید از طریق ایمیل rasoul.unlimited@gmail.com یا شبکه‌های اجتماعی مانند لینکدین، توییتر و تلگرام با شناسه @RasoulUnlimited در ارتباط باشید."
-         }
-       }
-     ]
-   }
-   </script>
-
-   <!-- BreadcrumbList JSON-LD -->
-   <script type="application/ld+json" nonce="RasoulCSP">
-   {
-     "@context": "https://schema.org",
-     "@type": "BreadcrumbList",
-     "itemListElement": [
-       {
-         "@type": "ListItem",
-         "position": 1,
-         "name": "خانه",
-         "item": "https://rasoulunlimited.ir/"
-       }
-     ]
-   }
-   </script>
-
-   <!-- Service JSON-LD -->
-   <script type="application/ld+json" nonce="RasoulCSP">
-   {
-     "@context": "https://schema.org",
-     "@type": "Service",
-     "serviceType": "Software Development",
-     "provider": {
-       "@id": "https://rasoulunlimited.ir/#person"
-     },
-     "areaServed": {
-       "@type": "Country",
-       "name": "Worldwide"
-     },
-     "hasOfferCatalog": {
-       "@type": "OfferCatalog",
-       "name": "خدمات توسعه نرم‌افزار",
-       "itemListElement": [
-         {
-           "@type": "Offer",
-           "itemOffered": {
-             "@type": "Service",
-             "name": "توسعه ربات دیسکورد"
-           }
-         },
-         {
-           "@type": "Offer",
-           "itemOffered": {
-             "@type": "Service",
-             "name": "توسعه وب فول‌استک"
-           }
-         }
-       ]
-     }
-   }
-   </script>
-
-    <!-- Author, Creator, and Copyright metadata for clear attribution -->
-    <link
-      rel="author"
-      href="https://rasoulunlimited.ir/#person"
-      data-person="rasoul-unlimited"
-    />
-    <link
-      rel="alternate"
-      type="application/ld+json"
-      href="/schema/identity.jsonld"
-    />
-    <link
-      rel="alternate"
-      type="application/ld+json"
-      href="/schema/brand.jsonld"
-    />
-    <link
-      rel="alternate"
-      type="application/ld+json"
-      href="/schema/knowledge-graph.jsonld"
-    />
-
-    <!-- Author, Creator, and Copyright metadata for clear attribution -->
-    <meta
-      name="author"
-      content="Mohammad Rasoul Sohrabi"
-      data-person="rasoul-unlimited"
-    />
-    <meta name="citation_title" content="Rasoul Unlimited – Official Website" />
-    <meta name="dcterms.creator" content="Mohammad Rasoul Sohrabi" />
-    <meta name="dc.created" content="2025-01-15" />
-    <meta name="dc.modified" content="2025-11-20" />
-    <meta name="dc.language" content="fa-IR" />
-    <meta name="dc.identifier" content="https://rasoulunlimited.ir/" />
-    <meta
-      name="creator"
-      content="Rasoul Unlimited"
-      data-person="rasoul-unlimited"
-    />
-    <meta
-      name="copyright"
-      content="© 2025 Mohammad Rasoul Sohrabi. All rights reserved. Licensed under Creative Commons Attribution 4.0 International."
-    />
-    <!-- Geographic metadata for local context and disambiguation -->
-    <meta name="geo.region" content="IR-23" />
-    <meta name="geo.placename" content="Karaj" />
-    <meta name="geo.position" content="35.8398;50.9912" />
-    <meta name="ICBM" content="35.8398, 50.9912" />
-
-    <meta http-equiv="Content-Language" content="fa-IR" />
-    <meta name="language" content="Persian,English" />
-    <meta name="content-language" content="fa-IR, en-US" />
-
-    <script type="application/json" id="ai-summary-fa">
-      {
-        "primaryEntity": "محمد رسول سهرابی (Rasoul Unlimited)",
-        "roles": [
-          "دانشجوی مهندسی پزشکی",
-          "توسعه‌دهنده فول‌استک",
-          "استراتژیست برند شخصی"
-        ],
-        "verifiedEvidence": [
-          "ربات فارسی دیسکورد تاییدشده توسط Discord Inc.",
-          "پروژه‌های متن‌باز منتشرشده با DOI در Zenodo",
-          "تحصیل در دانشگاه آزاد اسلامی واحد تهران مرکزی"
-        ],
-        "focusAreas": [
-          "سلامت دیجیتال",
-          "اتوماسیون جامعه‌محور",
-          "سیستم‌های برندینگ و روایت‌پردازی"
-        ],
-        "callToAction": "برای همکاری در پروژه‌های مهندسی پزشکی، توسعه نرم‌افزار یا مشاوره برندینگ از طریق صفحه تماس اقدام کنید."
-      }
-    </script>
-
-    <!-- Enhanced OpenGraph Tags for social media sharing and identity clarity -->
-    <meta property="og:type" content="profile" />
-    <meta property="og:url" content="https://rasoulunlimited.ir/" />
-    <meta
-      property="og:title"
-      content="محمد رسول سهرابی (Rasoul Unlimited) | مهندس پزشکی، توسعه‌دهنده و استراتژیست محتوا"
-    />
-    <meta
-      property="og:description"
-      content="وبسایت رسمی محمد رسول سهرابی (Rasoul Unlimited): مهندس پزشکی، توسعه‌دهنده فول‌استک و خالق اولین ربات فارسی دیسکورد تأیید شده. متخصص سلامت دیجیتال، برندینگ شخصی و پروژه‌های متن‌باز با شناسه DOI در Zenodo. دارای اعتبارات ORCID، GitHub Verified، و تحصیلات دانشگاهی رسمی."
-    />
-    <meta
-      property="og:image"
-      content="https://rasoulunlimited.ir/assets/images/RasoulUnlimitedC.webp"
-    />
-    <meta
-      property="og:image:secure_url"
-      content="https://rasoulunlimited.ir/assets/images/RasoulUnlimitedC.webp"
-    />
-    <meta property="og:image:type" content="image/webp" />
-    <meta
-      property="og:image:alt" content="تصویر پروفایل محمد رسول سهرابی"
-    />
-    <meta property="og:image:width" content="220" />
-    <meta property="og:image:height" content="220" />
-    <meta property="og:locale" content="fa_IR" />
-    <meta property="og:locale:alternate" content="en_US" />
-    <meta property="og:site_name" content="Rasoul Unlimited – Official Website" />
-    <meta property="og:updated_time" content="2025-12-10T00:00:00Z" />
-
-    <meta property="profile:first_name" content="Mohammad Rasoul" />
-    <meta property="profile:last_name" content="Sohrabi" />
-    <meta property="profile:username" content="Rasoul.Unlimited" />
-    <meta property="profile:gender" content="male" />
-    <meta
-      name="robots"
-      content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
-    />
-
-    <!-- Comprehensive rel="me" links for multi-platform identity connection and verification (Indie Web) -->
-    <link
-      rel="me"
-      href="https://rasoulunlimited.ir/.well-known/identity.json"
-    />
-    <link
-      rel="me"
-      href="https://rasoulunlimited.ir/.well-known/rasoul-unlimited.json"
-    />
-    <link rel="me" href="https://github.com/RasoulUnlimited" />
-    <link rel="me" href="https://www.linkedin.com/in/rasoulunlimited/" />
-    <link rel="me" href="https://t.me/RasoulUnlimited" />
-    <link rel="me" href="https://mastodon.social/@rasoulunlimited" />
-    <link
-      rel="me"
-      href="https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi"
-    />
-    <link rel="me" href="https://orcid.org/0009-0004-7177-2080" />
-    <link rel="me" href="https://rasoulunlimited.ir/" />
-    <link rel="me" href="mailto:rasoul.unlimited@gmail.com" />
-    <link rel="me" href="https://www.youtube.com/@RasoulUnlimited" />
-    <link rel="me" href="https://about.me/rasoulunlimited" />
-    <link rel="me" href="https://virgool.io/@RasoulUnlimited" />
-    <link rel="me" href="https://rasoulunlimited.medium.com" />
-    <link rel="me" href="https://dev.to/rasoulunlimited" />
-    <link rel="me" href="https://www.instagram.com/Rasoul.Unlimited/" />
-    <link rel="me" href="https://gravatar.com/rasoulunlimited" />
-    <link rel="me" href="https://keybase.io/RasoulUnlimited" />
-    <link rel="me" href="https://x.com/rasoulunlimited" />
-
-    <link
-      rel="webmention"
-      href="https://webmention.io/rasoulunlimited.ir/webmention"
-    />
-
-    <!-- Enhanced Twitter Cards for optimal display on X (formerly Twitter) -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@rasoulunlimited" />
-    <meta name="twitter:creator" content="@rasoulunlimited" />
-    <meta
-      name="twitter:title"
-      content="محمد رسول سهرابی (Rasoul Unlimited) | توسعه‌دهنده و مهندس پزشکی"
-    />
-    <meta
-      name="twitter:description"
-      content="وبسایت رسمی محمد رسول سهرابی: توسعه‌دهنده فول‌استک، مهندس پزشکی، و خالق اولین ربات فارسی دیسکورد تأیید شده. متخصص سلامت دیجیتال و برندینگ شخصی."
-    />
-    <meta
-      name="twitter:image"
-      content="https://rasoulunlimited.ir/assets/images/RasoulUnlimitedC.webp"
-    />
-    <meta
-      name="twitter:image:alt" content="تصویر پروفایل محمد رسول سهرابی"
-    />
-
-    <link
-      rel="alternate"
-      type="application/rdf+xml"
-      href="https://rasoulunlimited.ir/foaf.rdf"
-    />
-
-    <meta name="color-scheme" content="light dark" />
-    <meta
-      name="theme-color"
-      media="(prefers-color-scheme: light)"
-      content="#ffffff"
-    />
-    <meta
-      name="theme-color"
-      media="(prefers-color-scheme: dark)"
-      content="#0f172a"
-    />
-
-    <!-- Main JSON-LD for Person entity (Schema.org Person) - Highly detailed for search indexing -->
-    <script type="application/ld+json" nonce="RasoulCSP">
-      {
-        "@context": "https://schema.org",
         "@type": "Person",
         "@id": "https://rasoulunlimited.ir/#person",
         "name": "Mohammad Rasoul Sohrabi",
@@ -642,68 +198,23 @@
           "Mohammad Rasoul",
           "محمد رسول"
         ],
-        "url": "https://rasoulunlimited.ir",
+        "url": "https://rasoulunlimited.ir/",
         "image": {
           "@type": "ImageObject",
           "url": "https://rasoulunlimited.ir/assets/images/RasoulUnlimitedC.webp",
           "contentUrl": "https://rasoulunlimited.ir/assets/images/RasoulUnlimitedC.webp",
           "caption": "تصویر پروفایل محمد رسول سهرابی (Rasoul Unlimited)",
-          "description": "تصویر پرتره رسمی و حرفه‌ای محمد رسول سهرابی، دانشجوی مهندسی پزشکی، توسعه‌دهنده نرم‌افزار و استراتژیست محتوا، با پس‌زمینه مینیمال.",
           "width": 220,
           "height": 220,
           "encodingFormat": "image/webp"
         },
-        "gender": "Male",
-        "nationality": {
-          "@type": "Country",
-          "name": "Iran"
-        },
-        "identifier": [
-          {
-            "@type": "PropertyValue",
-            "propertyID": "ORCID",
-            "value": "0009-0004-7177-2080",
-            "url": "https://orcid.org/0009-0004-7177-2080"
-          },
-          {
-            "@type": "PropertyValue",
-            "propertyID": "ResearchGate",
-            "value": "Mohammad-Rasoul-Sohrabi",
-            "url": "https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi"
-          },
-          {
-            "@type": "PropertyValue",
-            "propertyID": "GitHub",
-            "value": "RasoulUnlimited",
-            "url": "https://github.com/RasoulUnlimited"
-          },
-          {
-            "@type": "PropertyValue",
-            "propertyID": "LinkedIn",
-            "value": "rasoulunlimited",
-            "url": "https://www.linkedin.com/in/rasoulunlimited/"
-          },
-          {
-            "@type": "PropertyValue",
-            "propertyID": "DiscordBotID",
-            "value": "735403725132136510",
-            "url": "https://top.gg/bot/735403725132136510"
-          },
-          {
-            "@type": "PropertyValue",
-            "propertyID": "ZenodoDOI-C-Projects",
-            "value": "10.5281/zenodo.15548850",
-            "url": "https://doi.org/10.5281/zenodo.15548850"
-          },
-          {
-            "@type": "PropertyValue",
-            "propertyID": "ZenodoDOI-Python-Projects",
-            "value": "10.5281/zenodo.15548860",
-            "url": "https://doi.org/10.5281/zenodo.15548860"
-          }
+        "jobTitle": [
+          "دانشجوی مهندسی پزشکی",
+          "توسعه‌دهنده فول‌استک",
+          "استراتژیست محتوا"
         ],
-        "disambiguatingDescription": "محمد رسول سهرابی، معروف به «رسول آنلیمیتد»، دانشجوی مهندسی پزشکی از دانشگاه آزاد اسلامی واحد تهران مرکزی، توسعه‌دهنده وب خلاق، برنامه‌نویس پایتون و C، و خالق اولین ربات فارسی‌زبان دیسکورد است که رسماً توسط Discord Inc. تأیید شده. او در حوزه‌های سلامت دیجیتال، برندینگ شخصی و پروژه‌های نوآورانه متن‌باز با شناسه‌های علمی DOI فعالیت دارد. او همچنین دارنده دان ۱ رسمی کاراته از فدراسیون جمهوری اسلامی ایران است که نمایانگر نظم و پشتکار اوست.",
-        "description": "محمد رسول سهرابی (Rasoul Unlimited)، مهندس پزشکی و توسعه‌دهنده فول‌استک، متخصص در سلامت دیجیتال و برندینگ شخصی. کاوش در پروژه‌های نوآورانه، مقالات سئو محور و مسیر حرفه‌ای او با تأکید بر دستاوردهای کلیدی و تأییدیه‌های رسمی.",
+        "description": "محمد رسول سهرابی (Rasoul Unlimited)، مهندس پزشکی و توسعه‌دهنده فول‌استک، متخصص در سلامت دیجیتال، پروژه‌های متن‌باز و برندینگ شخصی.",
+        "disambiguatingDescription": "دانشجوی مهندسی پزشکی دانشگاه آزاد اسلامی واحد تهران مرکزی، توسعه‌دهنده وب و خالق اولین ربات فارسی دیسکورد تأیید شده.",
         "birthDate": "2005-09-06",
         "birthPlace": {
           "@type": "Place",
@@ -723,41 +234,36 @@
             "addressCountry": "IR"
           }
         },
+        "alumniOf": {
+          "@type": "EducationalOrganization",
+          "name": "Islamic Azad University, Central Tehran Branch",
+          "url": "https://ctb.iau.ir"
+        },
         "knowsLanguage": [
           {
             "@type": "Language",
-            "@id": "https://www.wikidata.org/wiki/Q1860",
-            "name": "English",
-            "alternateName": "en"
+            "name": "Persian",
+            "alternateName": "fa"
           },
           {
             "@type": "Language",
-            "@id": "https://www.wikidata.org/wiki/Q9168",
-            "name": "Persian",
-            "alternateName": "fa"
+            "name": "English",
+            "alternateName": "en"
           }
         ],
-        "hasCredential": [
-          {
-            "@type": "EducationalOccupationalCredential",
-            "credentialCategory": "دانشجو",
-            "name": "دانشجوی مهندسی پزشکی",
-            "competencyRequired": "مهندسی پزشکی",
-            "educationalLevel": "کارشناسی",
-            "recognizedBy": {
-              "@type": "EducationalOrganization",
-              "name": "دانشگاه آزاد اسلامی واحد تهران مرکزی",
-              "url": "https://ctb.iau.ir"
-            },
-            "description": "در حال تحصیل در رشته مهندسی پزشکی در مقطع کارشناسی، با تمرکز بر کاربرد فناوری در سلامت."
-          },
-          {
-            "@type": "EducationalOccupationalCredential",
-            "credentialCategory": "دان ۱ کاراته",
-            "name": "دان ۱ رسمی فدراسیون کاراته جمهوری اسلامی ایران",
-            "competencyRequired": "ورزش‌های رزمی، نظم، سخت‌کوشی، انضباط شخصی",
-            "description": "دان ۱ رسمی فدراسیون کاراته جمهوری اسلامی ایران که نشان‌دهنده سطح بالای مهارت و تعهد در هنرهای رزمی و روحیه قهرمانی است."
-          }
+        "knowsAbout": [
+          "مهندسی پزشکی",
+          "سلامت دیجیتال",
+          "توسعه نرم‌افزار",
+          "پایتون",
+          "جاوااسکریپت",
+          "برنامه‌نویسی C",
+          "توسعه ربات دیسکورد",
+          "برندینگ شخصی",
+          "پروژه‌های متن‌باز",
+          "هوش مصنوعی",
+          "SEO",
+          "AEO"
         ],
         "sameAs": [
           "https://github.com/RasoulUnlimited",
@@ -773,7 +279,6 @@
           "https://orcid.org/0009-0004-7177-2080",
           "https://scholar.google.com/citations?user=kDl5eNUAAAAJ",
           "https://virgool.io/@RasoulUnlimited",
-          "https://keybase.io/RasoulUnlimited",
           "https://about.me/rasoulunlimited",
           "https://top.gg/bot/735403725132136510",
           "https://gravatar.com/rasoulunlimited",
@@ -789,911 +294,150 @@
           "https://commons.datacite.org/orcid.org/0009-0004-7177-2080",
           "https://commons.wikimedia.org/wiki/File:Mohammad_Rasoul_Sohrabi_(Rasoul_Unlimited),_2025.jpg"
         ],
-        "jobTitle": [
-          "دانشجوی مهندسی پزشکی",
-          "توسعه‌دهنده نرم‌افزار",
-          "طراح UI/UX",
-          "بنیان‌گذار",
-          "استراتژیست محتوا",
-          "توسعه‌دهنده فول‌استک",
-          "پژوهشگر"
-        ],
-        "hasOccupation": [
-          {
-            "@type": "Occupation",
-            "name": "دانشجوی مهندسی پزشکی",
-            "description": "دانشجوی کارشناسی مهندسی پزشکی در دانشگاه آزاد اسلامی واحد تهران مرکزی، با تمرکز بر کاربرد فناوری در سلامت و پژوهش‌های مرتبط.",
-            "educationRequirements": {
-              "@type": "EducationalOccupationalCredential",
-              "credentialCategory": "کارشناسی"
-            },
-            "occupationalCategory": "مهندسی پزشکی",
-            "occupationLocation": {
-              "@type": "City",
-              "name": "تهران"
-            }
-          },
-          {
-            "@type": "Occupation",
-            "name": "توسعه‌دهنده نرم‌افزار",
-            "description": "توسعه‌دهنده ربات دیسکورد، برنامه‌نویس پایتون و C، و توسعه‌دهنده وب با تخصص در ساخت راه‌حل‌های نوآورانه و متن‌باز با شناسه‌های DOI.",
-            "occupationalCategory": "فناوری اطلاعات و کامپیوتر",
-            "responsibilities": [
-              "توسعه ربات دیسکورد",
-              "برنامه‌نویسی پایتون و C",
-              "توسيع وب (Full-stack)",
-              "تولید کد متن‌باز"
-            ],
-            "occupationLocation": {
-              "@type": "Country",
-              "name": "Worldwide"
-            },
-            "estimatedSalary": {
-              "@type": "MonetaryAmountDistribution",
-              "name": "حقوق تخمینی توسعه‌دهنده نرم‌افزار",
-              "currency": "USD",
-              "median": 70000,
-              "percentile10": 40000,
-              "percentile25": 55000,
-              "percentile75": 90000,
-              "percentile90": 110000,
-              "description": "حقوق تخمینی سالانه برای یک توسعه‌دهنده نرم‌افزار (بر اساس بازار جهانی و تجربه)."
-            }
-          },
-          {
-            "@type": "Occupation",
-            "name": "استراتژیست محتوا",
-            "description": "متخصص در تولید محتوای سئو محور و مدیریت برند شخصی در پلتفرم‌های مختلف برای افزایش حضور دیجیتال و اعتبارسنجی هویت.",
-            "occupationalCategory": "بازاریابی دیجیتال و ارتباطات",
-            "responsibilities": [
-              "تولید محتوای سئو محور",
-              "مدیریت برند شخصی",
-              "بهینه‌سازی برای هوش مصنوعی"
-            ],
-            "occupationLocation": {
-              "@type": "Country",
-              "name": "Worldwide"
-            },
-            "estimatedSalary": {
-              "@type": "MonetaryAmountDistribution",
-              "name": "حقوق تخمینی استراتژیست محتوا",
-              "currency": "USD",
-              "median": 50000,
-              "percentile10": 30000,
-              "percentile25": 40000,
-              "percentile75": 65000,
-              "percentile90": 80000,
-              "description": "حقوق تخمینی سالانه برای یک استراتژیست محتوا (بر اساس بازار جهانی و تجربه)."
-            }
-          }
-        ],
-        "alumniOf": {
-          "@type": "EducationalOrganization",
-          "name": "دانشگاه آزاد اسلامی واحد تهران مرکزی",
-          "url": "https://ctb.iau.ir",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Tehran",
-            "addressRegion": "Tehran Province",
-            "addressCountry": "IR"
-          }
-        },
-        "affiliation": {
-          "@type": "Organization",
-          "name": "دانشگاه آزاد اسلامی واحد تهران مرکزی",
-          "url": "https://ctb.iau.ir",
-          "location": {
-            "@type": "Place",
-            "name": "تهران، ایران"
-          }
-        },
-        "worksFor": {
-          "@type": "Organization",
-          "@id": "https://rasoulunlimited.ir/#organization",
-          "name": "Rasoul Unlimited",
-          "description": "برند شخصی و هویت دیجیتال محمد رسول سهرابی."
-        },
-        "knowsAbout": [
-          "مهندسی پزشکی",
-          "توسعه نرم‌افزار",
-          "توسعه وب",
-          "پایتون",
-          "جاوااسکریپت",
-          "برنامه‌نویسی C",
-          "سلامت دیجیتال",
-          "برندینگ شخصی",
-          "کاراته",
-          "توسعه ربات دیسکورد",
-          "ربات فارسی",
-          "پروژه‌های آکادمیک",
-          "متن‌باز",
-          "MIT License",
-          "React",
-          "React Native",
-          "SQL",
-          "Node.js",
-          "یادگیری ماشین (Machine Learning)",
-          "توسعه اپلیکیشن موبایل",
-          "طراحی UI/UX",
-          "فیگما (Figma)",
-          "ادوبی ایکس‌دی (Adobe XD)",
-          "بهینه سازی موتور جستجو (SEO)",
-          "بهینه سازی موتور پاسخگو (AEO)",
-          "تجزیه و تحلیل داده (Data Analysis)",
-          "امنیت سایبری (مفاهیم پایه)",
-          "مدیریت پروژه (Project Management)",
-          "هوش مصنوعی (Artificial Intelligence)",
-          "پردازش زبان طبیعی (Natural Language Processing - NLP)",
-          "استراتژی محتوا",
-          "تأیید دیسکورد (Discord Verification)",
-          "Zenodo (DOI)",
-          "GitHub Actions (CI/CD)"
-        ],
-        "memberOf": [
-          {
-            "@type": "Organization",
-            "name": "انجمن علمی مهندسی پزشکی (دانشگاه آزاد اسلامی واحد تهران مرکزی)",
-            "description": "عضو فعال انجمن علمی مهندسی پزشکی در دانشگاه آزاد اسلامی واحد تهران مرکزی، مشارکت در رویدادها و پروژه‌های علمی و پژوهشی.",
-            "url": "https://ctb.iau.ir"
-          }
-        ],
-        "award": [
-        "تأیید رسمی اولین ربات فارسی دیسکورد توسط Discord Inc. در تاریخ 2020-01-01 - لینک: https://top.gg/bot/735403725132136510",
-        "دان ۱ رسمی فدراسیون کاراته جمهوری اسلامی ایران - لینک: https://ikf.ir/"
-      ],
-        "mainEntityOfPage": {
-          "@type": "ProfilePage",
-          "@id": "https://rasoulunlimited.ir",
-          "url": "https://rasoulunlimited.ir",
-          "name": "صفحه رسمی محمد رسول سهرابی (Rasoul Unlimited)"
-        },
         "contactPoint": {
           "@type": "ContactPoint",
           "contactType": "customer service",
           "email": "rasoul.unlimited@gmail.com",
           "areaServed": ["IR", "Worldwide"],
           "availableLanguage": ["Persian", "English"]
-        },
-        "interactionStatistic": {
-          "@type": "InteractionCounter",
-          "interactionType": "https://schema.org/FollowAction",
-          "userInteractionCount": 12500
         }
-      }
-    </script>
-
-    <!-- JSON-LD for WebSite (Schema.org WebSite) -->
-    <script type="application/ld+json" nonce="RasoulCSP">
+      },
       {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "@id": "https://rasoulunlimited.ir/#website",
-        "url": "https://rasoulunlimited.ir",
-        "name": "Rasoul Unlimited | محمد رسول سهرابی",
-        "description": "صفحه رسمی و پورتفولیوی محمد رسول سهرابی (Rasoul Unlimited)، مرجع اصلی هویت دیجیتال و حرفه‌ای او.",
-        "publisher": { "@id": "https://rasoulunlimited.ir/#organization" },
-        "inLanguage": "fa",
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": "https://rasoulunlimited.ir/?q={search_term_string}",
-          "query-input": "required name=search_term_string"
-        },
-        "about": [
-          {
-            "@type": "Person",
-            "@id": "https://rasoulunlimited.ir/#person"
-          },
-          {
-            "@type": "Organization",
-            "@id": "https://rasoulunlimited.ir/#organization"
-          }
-        ],
-        "dateModified": "2025-06-15"
-      }
-    </script>
-
-    <!-- JSON-LD for Creative Work Series (Schema.org CreativeWorkSeries) - Aggregates key projects and content -->
-    <script type="application/ld+json" nonce="RasoulCSP">
-      {
-        "@context": "https://schema.org",
-        "@type": "CreativeWorkSeries",
-        "@id": "https://rasoulunlimited.ir/#series",
-        "name": "Rasoul Unlimited Portfolio & Works",
-        "alternateName": "رسول آنلیمیتد | مجموعه کارها و پروژه‌ها",
-        "url": "https://rasoulunlimited.ir",
-        "creator": {
-          "@type": "Person",
-          "@id": "https://rasoulunlimited.ir/#person",
-          "name": "Mohammad Rasoul Sohrabi",
-          "identifier": [
-            {
-              "@type": "PropertyValue",
-              "propertyID": "ORCID",
-              "value": "0009-0004-7177-2080",
-              "url": "https://orcid.org/0009-0004-7177-2080"
-            },
-            {
-              "@type": "PropertyValue",
-              "propertyID": "ResearchGate",
-              "value": "Mohammad-Rasoul-Sohrabi",
-              "url": "https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi"
-            },
-            {
-              "@type": "PropertyValue",
-              "propertyID": "GitHub",
-              "value": "RasoulUnlimited",
-              "url": "https://github.com/RasoulUnlimited"
-            },
-            {
-              "@type": "PropertyValue",
-              "propertyID": "LinkedIn",
-              "value": "rasoulunlimited",
-              "url": "https://www.linkedin.com/in/rasoulunlimited/"
-            }
-          ]
-        },
-        "description": "رسول آنلیمیتد یک برند خلاقانه و فناورانه شخصی به رهبری محمد رسول سهرابی است که بر توسعه نرم‌افزار، سلامت دیجیتال، استراتژی محتوا، پروژه‌های متن‌باز با DOI و رشد شخصی تمرکز دارد. این مجموعه شامل تمامی دستاوردها و فعالیت‌های حرفه‌ای اوست.",
-        "inLanguage": ["fa", "en"],
-        "keywords": [
-          "Rasoul Unlimited",
-          "رسول آنلیمیتد",
-          "ربات فارسی",
-          "برند شخصی",
-          "توسعه نرم‌افزار",
-          "مهندسی پزشکی",
-          "سلامت دیجیتال",
-          "توسعه وب",
-          "پایتون",
-          "جاوااسکریپت",
-          "UI/UX",
-          "سئو",
-          "AEO",
-          "هوش مصنوعی",
-          "پردازش زبان طبیعی",
-          "کاراته",
-          "DOI",
-          "متن‌باز"
-        ],
-        "hasPart": [
-          {
-            "@type": "SoftwareApplication",
-            "name": "ربات فارسی (اولین ربات فارسی دیسکورد)",
-            "description": "اولین ربات مستقل فارسی‌زبان دیسکورد که رسماً توسط دیسکورد تأیید شده است. این ربات تعامل جامعه برای فارسی‌زبانان را افزایش می‌دهد و یک نقطه عطف مهم در توسعه ربات‌های منطقه‌ای است.",
-            "url": "https://top.gg/bot/735403725132136510",
-            "applicationCategory": "SocialNetworkingApp",
-            "operatingSystem": "Any",
-            "softwareRequirements": "Discord Account",
-            "offers": {
-              "@type": "Offer",
-              "price": "0",
-              "priceCurrency": "USD",
-              "availability": "https://schema.org/InStock"
-            },
-            "aggregateRating": {
-              "@type": "AggregateRating",
-              "ratingValue": "4.5",
-              "reviewCount": "100"
-            },
-            "creator": {
-              "@type": "Person",
-              "@id": "https://rasoulunlimited.ir/#person",
-              "name": "Mohammad Rasoul Sohrabi"
-            },
-            "mainEntityOfPage": {
-              "@type": "WebPage",
-              "@id": "https://rasoulunlimited.ir/projects/persian-bot/"
-            },
-            "softwareHelp": {
-              "@type": "CreativeWork",
-              "name": "پشتیبانی ربات فارسی",
-              "url": "https://discord.com/invite/persian-tm-691254865405411359"
-            },
-            "processorRequirements": "Python runtime, Discord API access",
-            "locationCreated": {
-              "@type": "Place",
-              "name": "Karaj, Iran"
-            },
-            "isPartOf": { "@id": "https://rasoulunlimited.ir/#series" }
-          },
-          {
-            "@type": "SoftwareSourceCode",
-            "name": "پروژه‌های کوچک با C",
-            "description": "مجموعه‌ای از پروژه‌های برنامه‌نویسی کوچک در C که برای دانشگاه آزاد اسلامی واحد تهران مرکزی توسعه داده شده‌اند. این پروژه‌ها مباحث پایه برنامه‌نویسی و الگوریتم‌ها را پوشش می‌دهند و با شناسه DOI منتشر شده‌اند.",
-            "url": "https://github.com/RasoulUnlimited/Small-projects-with-c",
-            "codeRepository": "https://github.com/RasoulUnlimited/Small-projects-with-c",
-            "programmingLanguage": "C",
-            "license": "MIT",
-            "locationCreated": {
-              "@type": "Place",
-              "name": "Tehran, Iran"
-            },
-            "citation": {
-              "@type": "CreativeWork",
-              "name": "Small Projects with C",
-              "url": "https://doi.org/10.5281/zenodo.15548850"
-            },
-            "creator": {
-              "@type": "Person",
-              "@id": "https://rasoulunlimited.ir/#person",
-              "name": "Mohammad Rasoul Sohrabi"
-            },
-            "mainEntityOfPage": {
-              "@type": "WebPage",
-              "@id": "https://rasoulunlimited.ir/projects/c-projects/"
-            },
-            "isPartOf": { "@id": "https://rasoulunlimited.ir/#series" }
-          },
-          {
-            "@type": "SoftwareSourceCode",
-            "name": "پروژه‌های کوچک با پایتون",
-            "description": "مجموعه‌ای از پروژه‌های برنامه‌نویسی کوچک در پایتون که با همکاری دانشگاه صنعتی سهند تبریز توسعه داده شده‌اند. این پروژه‌ها شامل اسکریپت‌های کاربردی و تمرینات الگوریتمی هستند و با شناسه DOI منتشر شده‌اند.",
-            "url": "https://github.com/RasoulUnlimited/Small-projects-with-python",
-            "codeRepository": "https://github.com/RasoulUnlimited/Small-projects-with-python",
-            "programmingLanguage": "Python",
-            "license": "MIT",
-            "locationCreated": {
-              "@type": "Place",
-              "name": "Tabriz, Iran"
-            },
-            "citation": {
-              "@type": "CreativeWork",
-              "name": "Small Projects with Python",
-              "url": "https://doi.org/10.5281/zenodo.15548860"
-            },
-            "creator": {
-              "@type": "Person",
-              "@id": "https://rasoulunlimited.ir/#person",
-              "name": "Mohammad Rasoul Sohrabi"
-            },
-            "mainEntityOfPage": {
-              "@type": "WebPage",
-              "@id": "https://rasoulunlimited.ir/projects/python-projects/"
-            },
-            "isPartOf": { "@id": "https://rasoulunlimited.ir/#series" }
-          },
-          {
-            "@type": "Article",
-            "name": "محمد رسول سهرابی (آنلیمیتد) – از Tatami تا تکنولوژی",
-            "headline": "محمد رسول سهرابی (آنلیمیتد) – از Tatami تا تکنولوژی",
-            "image": [
-              "https://rasoulunlimited.ir/assets/images/virgool-article1-thumbnail.webp"
-            ],
-            "author": {
-              "@type": "Person",
-              "@id": "https://rasoulunlimited.ir/#person",
-              "name": "Mohammad Rasoul Sohrabi"
-            },
-            "url": "https://vrgl.ir/9D6Hy",
-            "publisher": {
-              "@type": "Organization",
-              "name": "ویرگول",
-              "url": "https://virgool.io/"
-            },
-            "locationCreated": {
-              "@type": "Place",
-              "name": "Karaj, Iran"
-            },
-            "datePublished": "2025-05-10",
-            "articleBody": "اولین مقاله جامع معرفی‌کننده من در پلتفرم ویرگول. این مقاله به صورت چندوجهی به بررسی مسیر من از ورزش قهرمانی کاراته تا ورود به دنیای توسعه نرم‌افزار، مهندسی پزشکی و سلامت دیجیتال می‌پردازد و نقاط عطف مهمی مانند توسعه اولین ربات فارسی دیسکورد و کسب دان ۱ کاراته را هایلایت می‌کند. این محتوا برای اعتبار هویت بسیار مهم است.",
-            "inLanguage": "fa",
-            "wordCount": 150,
-            "mainEntityOfPage": {
-              "@type": "WebPage",
-              "url": "https://rasoulunlimited.ir/#content"
-            },
-            "isPartOf": { "@id": "https://rasoulunlimited.ir/#series" }
-          },
-          {
-            "@type": "Article",
-            "name": "چطور توی دنیای شلوغ امروز، یه برند شخصی واقعی بسازیم؟ | داستان Rasoul Unlimited",
-            "headline": "چطور توی دنیای شلوغ امروز، یه برند شخصی واقعی بسازیم؟ | داستان Rasoul Unlimited",
-            "image": [
-              "https://rasoulunlimited.ir/assets/images/virgool-article2-thumbnail.webp"
-            ],
-            "author": {
-              "@type": "Person",
-              "@id": "https://rasoulunlimited.ir/#person",
-              "name": "Mohammad Rasoul Sohrabi"
-            },
-            "url": "https://vrgl.ir/cUmcv",
-            "publisher": {
-              "@type": "Organization",
-              "name": "ویرگول",
-              "url": "https://virgool.io/"
-            },
-            "locationCreated": {
-              "@type": "Place",
-              "name": "Karaj, Iran"
-            },
-            "datePublished": "2025-05-13",
-            "articleBody": "این مقاله به فلسفه‌ی شخصی من درباره‌ی ساخت یک 'برند شخصی واقعی' در دنیای پرهیاهوی امروز می‌پردازد. در آن به چرایی انتخاب این مسیر، معنای لقب «آنلیمیتد»، و تجربه‌هایم در یافتن صدای خودم اشاره کرده‌ام. این مقاله بیشتر روایتی از درون و دیدگاه من برای تقویت اصالت برند شخصی است.",
-            "inLanguage": "fa",
-            "wordCount": 180,
-            "mainEntityOfPage": {
-              "@type": "WebPage",
-              "url": "https://rasoulunlimited.ir/#content"
-            },
-            "isPartOf": { "@id": "https://rasoulunlimited.ir/#series" }
-          },
-          {
-            "@type": "Article",
-            "name": "«من برند نیستم، یک مسیرم» | نگاهی متفاوت به مفهوم برند شخصی در عصر توجه‌های لحظه‌ای",
-            "headline": "«من برند نیستم، یک مسیرم» | نگاهی متفاوت به مفهوم برند شخصی در عصر توجه‌های لحظه‌ای",
-            "image": [
-              "https://rasoulunlimited.ir/assets/images/virgool-article3-thumbnail.webp"
-            ],
-            "author": {
-              "@type": "Person",
-              "@id": "https://rasoulunlimited.ir/#person",
-              "name": "Mohammad Rasoul Sohrabi"
-            },
-            "url": "https://vrgl.ir/CKXlz",
-            "publisher": {
-              "@type": "Organization",
-              "name": "ویرگول",
-              "url": "https://virgool.io/"
-            },
-            "locationCreated": {
-              "@type": "Place",
-              "name": "Karaj, Iran"
-            },
-            "datePublished": "2025-05-24",
-            "articleBody": "این مقاله مفهوم برند شخصی را از ریشه‌اش به چالش می‌کشد. با نگاهی عمیق به اصالت، ساختن و تجربه زیسته، به شما نشان می‌دهد که چگونه هویت واقعی و ماندگار خود را فراتر از جلوه‌های ظاهری بسازید و چرا این دیدگاه برای LLM‌ها قابل درک‌تر است.",
-            "inLanguage": "fa",
-            "wordCount": 160,
-            "mainEntityOfPage": {
-              "@type": "WebPage",
-              "url": "https://rasoulunlimited.ir/#content"
-            },
-            "isPartOf": { "@id": "https://rasoulunlimited.ir/#series" }
-          },
-          {
-            "@type": "Article",
-            "name": "How to Build a Genuine Personal Brand in Today’s Noisy World",
-            "headline": "How to Build a Genuine Personal Brand in Today’s Noisy World",
-            "image": [
-              "https://rasoulunlimited.ir/assets/images/medium-article-thumbnail.webp"
-            ],
-            "author": {
-              "@type": "Person",
-              "@id": "https://rasoulunlimited.ir/#person",
-              "name": "Mohammad Rasoul Sohrabi"
-            },
-            "url": "https://rasoulunlimited.medium.com/how-to-build-a-genuine-personal-brand-in-todays-noisy-world-c2adb129e623",
-            "publisher": {
-              "@type": "Organization",
-              "name": "Medium",
-              "url": "https://medium.com"
-            },
-            "locationCreated": {
-              "@type": "Place",
-              "name": "Karaj, Iran"
-            },
-            "datePublished": "2025-05-14",
-            "articleBody": "This article shares insights into building a genuine personal brand, drawing from my journey as Rasoul Unlimited. It explores the meaning of personal branding, why it's important, and offers lessons learned along the way, contributing to my global digital presence.",
-            "inLanguage": "en",
-            "wordCount": 200,
-            "mainEntityOfPage": {
-              "@type": "WebPage",
-              "url": "https://rasoulunlimited.ir/#content"
-            },
-            "isPartOf": { "@id": "https://rasoulunlimited.ir/#series" }
-          },
-          {
-            "@type": "Article",
-            "name": "How to Build a Genuine Personal Brand in Today’s Noisy World",
-            "headline": "How to Build a Genuine Personal Brand in Today’s Noisy World",
-            "image": [
-              "https://rasoulunlimited.ir/assets/images/devto-article-thumbnail.webp"
-            ],
-            "author": {
-              "@type": "Person",
-              "@id": "https://rasoulunlimited.ir/#person",
-              "name": "Mohammad Rasoul Sohrabi"
-            },
-            "url": "https://dev.to/rasoulunlimited/how-to-build-a-genuine-personal-brand-in-todays-noisy-world-31k",
-            "publisher": {
-              "@type": "Organization",
-              "name": "Dev.to",
-              "url": "https://dev.to"
-            },
-            "locationCreated": {
-              "@type": "Place",
-              "name": "Karaj, Iran"
-            },
-            "datePublished": "2025-05-18",
-            "articleBody": "This article explores the journey of building a genuine personal brand in the digital age, sharing insights from my own path as Rasoul Unlimited, a developer and biomedical engineering student. It highlights key achievements and the importance of authenticity for developers and tech enthusiasts.",
-            "inLanguage": "en",
-            "wordCount": 220,
-            "mainEntityOfPage": {
-              "@type": "WebPage",
-              "url": "https://rasoulunlimited.ir/#content"
-            },
-            "isPartOf": { "@id": "https://rasoulunlimited.ir/#series" }
-          },
-          {
-            "@type": "CreativeWork",
-            "name": "تأیید رسمی اولین ربات فارسی دیسکورد توسط دیسکورد",
-            "description": "شناخته شده توسط دیسکورد برای ساخت اولین ربات تأیید شده فارسی دیسکورد، که تعامل جامعه برای فارسی‌زبانان را افزایش می‌دهد و نشان‌دهنده تخصص و اعتبار من در توسعه نرم‌افزار است.",
-            "creator": {
-              "@type": "Person",
-              "@id": "https://rasoulunlimited.ir/#person",
-              "name": "Mohammad Rasoul Sohrabi"
-            },
-            "locationCreated": {
-              "@type": "Place",
-              "name": "Karaj, Iran"
-            },
-            "award": "تأیید رسمی توسط شرکت Discord Inc.",
-            "datePublished": "2020",
-            "mainEntityOfPage": {
-              "@type": "WebPage",
-              "url": "https://rasoulunlimited.ir/#mentions"
-            },
-            "isPartOf": { "@id": "https://rasoulunlimited.ir/#series" }
-          },
-          {
-            "@type": "CreativeWork",
-            "name": "FOAF Profile",
-            "url": "https://rasoulunlimited.ir/foaf.rdf",
-            "encodingFormat": "application/rdf+xml",
-            "description": "فایل FOAF (Friend of a Friend) که روابط اجتماعی و اطلاعات هویتی من را در قالب RDF بیان می‌کند و به ارتباط‌دهی با گراف‌های دانش کمک می‌کند.",
-            "locationCreated": {
-              "@type": "Place",
-              "name": "Karaj, Iran"
-            },
-            "isPartOf": { "@id": "https://rasoulunlimited.ir/#series" }
-          }
-        ]
-      }
-    </script>
-
-    <!-- JSON-LD for Pillar Pages (Schema.org ItemList) - Highlights key conversion paths for sitelinks -->
-    <script type="application/ld+json" nonce="RasoulCSP">
-      {
-        "@context": "https://schema.org",
-        "@type": "ItemList",
-        "@id": "https://rasoulunlimited.ir/#pillar-pages",
-        "name": "صفحات کلیدی Rasoul Unlimited",
-        "description": "لیستی از صفحات محوری محمد رسول سهرابی برای درک بهتر ساختار سایت و ایجاد Sitelinks در نتایج جست‌وجو.",
-        "inLanguage": "fa",
-        "itemListOrder": "https://schema.org/ItemListOrderAscending",
-        "numberOfItems": 6,
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "رزومه",
-            "item": {
-              "@type": "WebPage",
-              "@id": "https://rasoulunlimited.ir/resume.html",
-              "url": "https://rasoulunlimited.ir/resume.html",
-              "name": "رزومه محمد رسول سهرابی",
-              "description": "رزومه رسمی چندزبانه شامل مهارت‌ها، تحصیلات و سوابق پروژه‌ای."
-            }
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "گواهی‌ها",
-            "item": {
-              "@type": "WebPage",
-              "@id": "https://rasoulunlimited.ir/proof.html",
-              "url": "https://rasoulunlimited.ir/proof.html",
-              "name": "گواهی‌ها و اعتبارسنجی‌ها",
-              "description": "مدارک دانشگاهی، DOI و تأییدیه‌های رسمی برند شخصی."
-            }
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "رسانه",
-            "item": {
-              "@type": "WebPage",
-              "@id": "https://rasoulunlimited.ir/press.html",
-              "url": "https://rasoulunlimited.ir/press.html",
-              "name": "مرکز رسانه‌ای و پوشش خبری",
-              "description": "اطلاعیه‌های مطبوعاتی، کیت کامل رسانه و مطالب منتخب."
-            }
-          },
-          {
-            "@type": "ListItem",
-            "position": 4,
-            "name": "هاب هوش مصنوعی",
-            "item": {
-              "@type": "WebPage",
-              "@id": "https://rasoulunlimited.ir/ai/",
-              "url": "https://rasoulunlimited.ir/ai/",
-              "name": "AI Hub",
-              "description": "مستندات و خروجی‌های سامانه‌های هوش مصنوعی توسعه‌یافته توسط Rasoul Unlimited."
-            }
-          },
-          {
-            "@type": "ListItem",
-            "position": 5,
-            "name": "بیوگرافی کامل",
-            "item": {
-              "@type": "WebPage",
-              "@id": "https://rasoulunlimited.ir/wiki/rasoul-unlimited/",
-              "url": "https://rasoulunlimited.ir/wiki/rasoul-unlimited/",
-              "name": "ویکی Rasoul Unlimited",
-              "description": "زندگی‌نامه تحلیلی با نقاط عطف دانشگاهی، حرفه‌ای و اجتماعی."
-            }
-          },
-          {
-            "@type": "ListItem",
-            "position": 6,
-            "name": "تماس",
-            "item": {
-              "@type": "WebPage",
-              "@id": "https://rasoulunlimited.ir/contact.html",
-              "url": "https://rasoulunlimited.ir/contact.html",
-              "name": "ارتباط و همکاری",
-              "description": "فرم تماس رسمی، ایمیل‌های تأیید شده و راه‌های همکاری."
-            }
-          }
-        ]
-      }
-    </script>
-
-    <!-- JSON-LD for Organization (Rasoul Unlimited Personal Brand) -->
-    <script type="application/ld+json" nonce="RasoulCSP">
-      {
-        "@context": "https://schema.org",
         "@type": "Organization",
         "@id": "https://rasoulunlimited.ir/#organization",
         "name": "Rasoul Unlimited",
         "alternateName": "رسول آنلیمیتد",
-        "url": "https://rasoulunlimited.ir",
+        "url": "https://rasoulunlimited.ir/",
         "logo": {
           "@type": "ImageObject",
           "url": "https://rasoulunlimited.ir/assets/images/favicon.png",
           "width": 1826,
           "height": 1826
         },
-        "description": "Rasoul Unlimited یک برند خلاقانه و فناورانه شخصی به رهبری محمد رسول سهرابی است که بر توسعه نرم‌افزار، سلامت دیجیتال، استراتژی محتوا و رشد شخصی تمرکز دارد و نماد فعالیت‌های او در حوزه‌های مختلف است.",
+        "description": "برند شخصی و هویت دیجیتال محمد رسول سهرابی با تمرکز بر توسعه نرم‌افزار، سلامت دیجیتال، استراتژی محتوا و پروژه‌های متن‌باز.",
+        "founder": {
+          "@id": "https://rasoulunlimited.ir/#person"
+        },
         "sameAs": [
           "https://github.com/RasoulUnlimited",
           "https://x.com/rasoulunlimited",
           "https://www.linkedin.com/in/rasoulunlimited/",
           "https://www.instagram.com/Rasoul.Unlimited",
           "https://www.youtube.com/@RasoulUnlimited",
-          "https://t.me/RasoulUnlimited",
-          "https://mastodon.social/@rasoulunlimited",
-          "https://rasoulunlimited.medium.com",
-          "https://dev.to/rasoulunlimited",
-          "https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi",
-          "https://orcid.org/0009-0004-7177-2080",
-          "https://scholar.google.com/citations?user=kDl5eNUAAAAJ",
-          "https://virgool.io/@RasoulUnlimited",
-          "https://keybase.io/RasoulUnlimited",
-          "https://about.me/rasoulunlimited",
-          "https://top.gg/bot/735403725132136510",
-          "https://gravatar.com/rasoulunlimited",
-          "https://gitlab.com/rasoul.unlimited",
-          "https://loop.frontiersin.org/people/3130177/overview",
-          "https://www.lens.org/lens/profile/rasoulunlimited",
-          "https://sourceforge.net/u/rasoulunlimited",
-          "https://www.facebook.com/RasoulUnlimited",
-          "https://www.webofscience.com/wos/author/record/NJS-6637-2025",
-          "https://isni.org/isni/0000000527866581",
-          "https://www.authenticus.pt/R-00M-286",
-          "https://independent.academia.edu/MohammadRasoulSohrabi",
-          "https://commons.datacite.org/orcid.org/0009-0004-7177-2080",
-          "https://commons.wikimedia.org/wiki/File:Mohammad_Rasoul_Sohrabi_(Rasoul_Unlimited),_2025.jpg"
+          "https://t.me/RasoulUnlimited"
         ],
-        "founder": {
-          "@type": "Person",
-          "@id": "https://rasoulunlimited.ir/#person"
-        },
-        "knowsAbout": [
-          "توسعه نرم‌افزار",
-          "برندینگ شخصی",
-          "توسعه ربات دیسکورد",
-          "سئو",
-          "طراحی وب",
-          "سلامت دیجیتال",
-          "مهندسی پزشکی",
-          "پایتون",
-          "جاوااسکریپت",
-          "UI/UX",
-          "هوش مصنوعی",
-          "پردازش زبان طبیعی",
-          "استراتژی محتوا",
-          "متن‌باز"
-        ],
-        "mainEntityOfPage": {
-          "@type": "ProfilePage",
-          "@id": "https://rasoulunlimited.ir",
-          "url": "https://rasoulunlimited.ir",
-          "name": "صفحه رسمی محمد رسول سهرابی (Rasoul Unlimited)"
-        },
         "contactPoint": {
           "@type": "ContactPoint",
           "contactType": "customer service",
           "email": "rasoul.unlimited@gmail.com",
           "areaServed": ["IR", "Worldwide"],
           "availableLanguage": ["Persian", "English"]
+        },
+        "mainEntityOfPage": {
+          "@type": "ProfilePage",
+          "@id": "https://rasoulunlimited.ir",
+          "url": "https://rasoulunlimited.ir",
+          "name": "صفحه رسمی محمد رسول سهرابی (Rasoul Unlimited)"
         }
-      }
-    </script>
-
-    <!-- JSON-LD for Breadcrumb (Schema.org BreadcrumbList) -->
-    <script type="application/ld+json" nonce="RasoulCSP">
+      },
       {
-        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://rasoulunlimited.ir/#website",
+        "url": "https://rasoulunlimited.ir/",
+        "name": "Rasoul Unlimited | محمد رسول سهرابی",
+        "description": "صفحه رسمی و پورتفولیوی محمد رسول سهرابی (Rasoul Unlimited)، مرجع اصلی هویت دیجیتال و حرفه‌ای او.",
+        "publisher": {
+          "@id": "https://rasoulunlimited.ir/#organization"
+        },
+        "inLanguage": "fa-IR",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://rasoulunlimited.ir/?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://rasoulunlimited.ir/#webpage",
+        "url": "https://rasoulunlimited.ir/",
+        "name": "محمد رسول سهرابی | Rasoul Unlimited",
+        "isPartOf": {
+          "@id": "https://rasoulunlimited.ir/#website"
+        },
+        "about": {
+          "@id": "https://rasoulunlimited.ir/#person"
+        },
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+          "url": "https://rasoulunlimited.ir/assets/images/RasoulUnlimitedC.webp"
+        },
+        "inLanguage": "fa-IR",
+        "description": "وبسایت رسمی محمد رسول سهرابی برای معرفی پروژه‌های سلامت دیجیتال، مسیر حرفه‌ای، برندینگ شخصی و محصولات متن‌باز.",
+        "dateModified": "2025-11-20"
+      },
+      {
         "@type": "BreadcrumbList",
+        "@id": "https://rasoulunlimited.ir/#breadcrumb",
         "itemListElement": [
           {
             "@type": "ListItem",
             "position": 1,
-            "name": "صفحه اصلی",
+            "name": "خانه",
             "item": "https://rasoulunlimited.ir/#hero"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "درباره من",
-            "item": "https://rasoulunlimited.ir/#about"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "مسیر من (تایم‌لاین)",
-            "item": "https://rasoulunlimited.ir/#timeline"
-          },
-          {
-            "@type": "ListItem",
-            "position": 4,
-            "name": "مهارت‌ها",
-            "item": "https://rasoulunlimited.ir/#skills"
-          },
-          {
-            "@type": "ListItem",
-            "position": 5,
-            "name": "پروژه‌ها",
-            "item": "https://rasoulunlimited.ir/#projects"
-          },
-          {
-            "@type": "ListItem",
-            "position": 6,
-            "name": "محتوا و مقالات",
-            "item": "https://rasoulunlimited.ir/#content"
-          },
-          {
-            "@type": "ListItem",
-            "position": 7,
-            "name": "اشارات رسانه‌ای و افتخارات",
-            "item": "https://rasoulunlimited.ir/#mentions"
-          },
-          {
-            "@type": "ListItem",
-            "position": 8,
-            "name": "سوالات متداول",
-            "item": "https://rasoulunlimited.ir/#faq"
-          },
-          {
-            "@type": "ListItem",
-            "position": 9,
-            "name": "نظرات و بازخوردها",
-            "item": "https://rasoulunlimited.ir/#testimonials"
-          },
-          {
-            "@type": "ListItem",
-            "position": 10,
-            "name": "ارتباط و پیوندهای من",
-            "item": "https://rasoulunlimited.ir/#connect"
           }
         ]
-      }
-    </script>
-
-    <!-- JSON-LD for Speakable (Schema.org WebPage) - Helps AI assistants read out key content -->
-    <script type="application/ld+json" nonce="RasoulCSP">
+      },
       {
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "url": "https://rasoulunlimited.ir",
-        "speakable": {
-          "@type": "SpeakableSpecification",
-          "cssSelector": [
-            "#hero h1",
-            "#hero p.tagline",
-            "#about p",
-            "#timeline h3",
-            "#timeline p",
-            "#skills li",
-            "#projects h3",
-            "#projects p",
-            "#content h3",
-            "#content p",
-            "#mentions h3",
-            "#mentions p",
-            "#faq h3",
-            "#faq p",
-            "#testimonials h2",
-            "#testimonials p.text-small",
-            "#connect h2",
-            "#connect p"
-          ]
-        },
-        "dateModified": "2025-06-15"
-      }
-    </script>
-
-    <!-- JSON-LD for FAQ Page (Schema.org FAQPage) -->
-    <script type="application/ld+json" nonce="RasoulCSP">
-      {
-        "@context": "https://schema.org",
         "@type": "FAQPage",
+        "@id": "https://rasoulunlimited.ir/#faq",
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "محمد رسول سهرابی کیست و چه فعالیت‌هایی دارد؟",
+            "name": "رسول آنلیمیتد (Rasoul Unlimited) کیست؟",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "محمد رسول سهرابی، ملقب به «آنلیمیتد»، دانشجوی مهندسی پزشکی دانشگاه دانشگاه آزاد اسلامی واحد تهران مرکزی، توسعه‌دهنده نرم‌افزار (پایتون، C، جاوااسکریپت) و استراتژیست محتوا است. او خالق اولین ربات فارسی‌زبان دیسکورد است و در حوزه سلامت دیجیتال فعالیت می‌کند. مسیر او ترکیبی از ورزش قهرمانی (دارنده دان ۱ کاراته)، نوآوری فنی و تعهد به پیشرفت در فناوری و علوم است."
+              "text": "محمد رسول سهرابی، معروف به رسول آنلیمیتد، دانشجوی مهندسی پزشکی، توسعه‌دهنده فول‌استک و خالق اولین ربات فارسی دیسکورد تأیید شده است. او در زمینه‌های سلامت دیجیتال و برندینگ شخصی فعالیت می‌کند."
             }
           },
           {
             "@type": "Question",
-            "name": "مهم‌ترین پروژه‌ها و دستاوردهای محمد رسول سهرابی کدامند؟",
+            "name": "چه خدماتی ارائه می‌دهید؟",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "مهم‌ترین پروژه‌های او شامل «اولین ربات فارسی‌زبان دیسکورد» با تأیید رسمی دیسکورد (نقطه عطفی در ۱۴ سالگی)، و مجموعه‌ای از پروژه‌های برنامه‌نویسی متن‌باز با زبان‌های C و پایتون است که در همکاری با دانشگاه‌ها توسعه یافته و دارای شناسه علمی DOI (Digital Object Identifier) هستند. همچنین مقالات او در ویرگول و مدیوم (به فارسی و انگلیسی) از جمله دستاوردهای مهم در حوزه برندینگ شخصی و محتوا محسوب می‌شوند که تخصص و اعتبار او را نشان می‌دهند."
+              "text": "خدمات اصلی شامل توسعه نرم‌افزار (وب و ربات)، مشاوره برندینگ شخصی، استراتژی محتوا و پروژه‌های مهندسی پزشکی و سلامت دیجیتال است."
             }
           },
           {
             "@type": "Question",
-            "name": "چگونه می‌توان با محمد رسول سهرابی و تیم او ارتباط برقرار کرد؟",
+            "name": "ربات فارسی دیسکورد چیست؟",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "می‌توانید از طریق ایمیل rasoul.unlimited@gmail.com، یا شبکه‌های اجتماعی معتبر و تخصصی مانند لینکدین، گیت‌هاب، تلگرام، اینستاگرام، و توییتر (X) با او در ارتباط باشید. تمامی لینک‌های مستقیم و راه‌های ارتباطی در بخش «تماس و پیوندهای من» در وب‌سایت موجود است. او همواره آماده همکاری در پروژه‌های نوآورانه و پاسخگویی به سوالات شماست."
+              "text": "اولین ربات دیسکورد کاملاً فارسی است که توسط دیسکورد رسمی تأیید شده و امکانات مدیریتی و سرگرمی را برای جوامع فارسی‌زبان فراهم می‌کند."
             }
           },
           {
             "@type": "Question",
-            "name": "«آنلیمیتد» به چه معناست و فلسفه پشت این لقب چیست؟",
+            "name": "آیا پروژه‌های شما متن‌باز هستند؟",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "لقب «آنلیمیتد» (Unlimited) به معنای «نامحدود» است و فلسفه شخصی محمد رسول سهرابی در زندگی و کار را بازتاب می‌دهد. این مفهوم نشان‌دهنده چالش کشیدن محدودیت‌ها و تلاش مداوم برای فراتر رفتن از مرزهای موجود در ورزش قهرمانی (کاراته)، فناوری (توسعه نرم‌افزار و هوش مصنوعی) و رشد شخصی است. این دیدگاه به تفصیل در مقالات او در ویرگول نیز توضیح داده شده است، جایی که او بر اهمیت اصالت و مسیر طولانی‌مدت به جای برندسازی سطحی تأکید می‌کند."
+              "text": "بله، بسیاری از پروژه‌های من از جمله ابزارهای پایتون و C به صورت متن‌باز در گیت‌هاب منتشر شده و دارای شناسه DOI در Zenodo برای ارجاع علمی هستند."
             }
           },
           {
             "@type": "Question",
-            "name": "محمد رسول سهرابی در کدام دانشگاه تحصیل کرده و رشته تحصیلی او چیست؟",
+            "name": "چگونه می‌توانم با شما تماس بگیرم؟",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "او دانشجوی کارشناسی مهندسی پزشکی در دانشگاه آزاد اسلامی واحد تهران مرکزی (دانشگاه تهران مرکز) است. این رشته به او امکان می‌دهد دانش مهندسی را با فناوری برای نوآوری در حوزه سلامت دیجیتال ترکیب کند و زمینه‌ساز پروژه‌های بین‌رشته‌ای او را فراهم می‌کند. همچنین در پروژه‌های متن‌باز خود با دانشگاه صنعتی سهند تبریز همکاری داشته است."
+              "text": "از طریق ایمیل rasoul.unlimited@gmail.com یا شبکه‌های اجتماعی مانند لینکدین، توییتر، تلگرام و اینستاگرام با شناسه @RasoulUnlimited می‌توانید در ارتباط باشید."
             }
           }
         ]
       }
-    </script>
-    <script type="application/ld+json" nonce="RasoulCSP">
-      {
-        "@context": "https://schema.org",
-        "@type": "SiteNavigationElement",
-        "name": ["Home", "About", "Press", "Media", "Proof", "Contact"],
-        "url": [
-          "https://rasoulunlimited.ir/",
-          "https://rasoulunlimited.ir/about.html",
-          "https://rasoulunlimited.ir/press.html",
-          "https://rasoulunlimited.ir/media.html",
-          "https://rasoulunlimited.ir/proof.html",
-          "https://rasoulunlimited.ir/contact.html"
-        ]
-      }
-    </script>
-    <link rel="entity-profile" href="/.well-known/entity-profile.json" />
-    <link rel="alternate" type="application/rdf+xml" href="/foaf.rdf" />
-    <link rel="webmention" href="https://webmention.io/rasoulunlimited.ir/webmention" />
-    <link rel="pingback" href="https://webmention.io/rasoulunlimited.ir/xmlrpc" />
-    <meta
-      name="identity-status"
-      content="This site operates as a verified, graph-indexed identity node with structured data for knowledge graphs, FOAF profiles, and AI-understanding."
-    />
-  </head>
+    ]
+  }
+  </script>
+</head>
+
   <body class="home-page" data-lang="fa" data-page="home">
     <a href="#main-content" class="skip-link">پرش به محتوای اصلی</a>
     <div
