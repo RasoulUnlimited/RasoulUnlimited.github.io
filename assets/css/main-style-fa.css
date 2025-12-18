@@ -2650,6 +2650,11 @@ img[data-src].loaded,
   will-change: opacity, transform;
 }
 
+.skill-hover-message.show-message {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-5px);
+}
+
 #skills .skills-list li {
   position: relative;
 }
