@@ -21,7 +21,7 @@
       document.documentElement.lang ||
       "en";
 
-    if (!searchInput || !clearButton || !cards.length) return;
+    if (!searchInput || !clearButton || !cards.length) {return;}
 
     const isFarsi = lang.toLowerCase().startsWith("fa");
     const STORAGE_KEY = "credentialSearchTerm";
@@ -51,7 +51,7 @@
      * @param {any} [options]
      */
     function safeToast(message, options) {
-      if (!message || typeof window.createToast !== "function") return;
+      if (!message || typeof window.createToast !== "function") {return;}
       try {
         return window.createToast(message, options);
       } catch {
@@ -76,7 +76,7 @@
     const escapeRegExp = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
     const isInputLike = (el) => {
-      if (!el) return false;
+      if (!el) {return false;}
       const tag = el.tagName;
       return (
         tag === "INPUT" ||
@@ -92,13 +92,13 @@
      * @param {string} term
      */
     const highlightText = (el, term) => {
-      if (!el) return;
+      if (!el) {return;}
 
       // حذف هایلایت‌های قبلی
       const highlights = el.querySelectorAll("mark.search-highlight");
       highlights.forEach((mark) => {
         const parent = mark.parentNode;
-        if (!parent) return;
+        if (!parent) {return;}
         parent.replaceChild(
           document.createTextNode(mark.textContent || ""),
           mark
@@ -106,7 +106,7 @@
         parent.normalize();
       });
 
-      if (!term) return;
+      if (!term) {return;}
 
       const walker = document.createTreeWalker(
         el,
@@ -124,13 +124,13 @@
         .split("")
         .map((char) => {
           const escaped = escapeRegExp(char);
-          if (char === "ی") return "[یي]";
-          if (char === "ک") return "[کك]";
+          if (char === "ی") {return "[یي]";}
+          if (char === "ک") {return "[کك]";}
           return escaped;
         })
         .join(noise);
 
-      if (!pattern) return;
+      if (!pattern) {return;}
 
       // از g استفاده می‌کنیم ولی قبل از هر استفاده lastIndex را صفر می‌کنیم تا stateful بودن اذیت نکند
       const regex = new RegExp(`(${pattern})`, "gi");
@@ -154,7 +154,7 @@
       }
 
       nodesToReplace.forEach((node) => {
-        if (!node.parentNode) return;
+        if (!node.parentNode) {return;}
 
         const fragment = document.createDocumentFragment();
         regex.lastIndex = 0;
@@ -177,7 +177,7 @@
     };
 
     const updateResultsInfo = (count) => {
-      if (!resultsInfo) return;
+      if (!resultsInfo) {return;}
       if (isFarsi) {
         resultsInfo.textContent =
           count === 0 ? "موردی یافت نشد" : `${count} نتیجه یافت شد`;
@@ -237,7 +237,7 @@
     let debounceTimer;
 
     const persistTerm = (term) => {
-      if (!storage) return;
+      if (!storage) {return;}
       try {
         if (term) {
           storage.setItem(STORAGE_KEY, term);
@@ -322,7 +322,7 @@
     const cleanupHandlers = [];
 
     const initVoiceSearch = () => {
-      if (!voiceButton) return;
+      if (!voiceButton) {return;}
 
       const SpeechRecognition =
         window.SpeechRecognition || window.webkitSpeechRecognition;

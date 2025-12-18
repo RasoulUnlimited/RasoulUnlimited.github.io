@@ -139,14 +139,14 @@ self.addEventListener("fetch", (event) => {
           return networkResponse;
         });
       }).catch(() => {
-          // Return a placeholder for failed image requests
-          if (event.request.destination === "image") {
-            return caches.match("/assets/images/RasoulUnlimited.webp").then((fallback) => {
-              return fallback || new Response("Image not found", { status: 404 });
-            });
-          }
-          return new Response("Resource not available", { status: 503 });
-        })
+        // Return a placeholder for failed image requests
+        if (event.request.destination === "image") {
+          return caches.match("/assets/images/RasoulUnlimited.webp").then((fallback) => {
+            return fallback || new Response("Image not found", { status: 404 });
+          });
+        }
+        return new Response("Resource not available", { status: 503 });
+      })
     );
   }
 });

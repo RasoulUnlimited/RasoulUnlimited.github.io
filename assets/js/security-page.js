@@ -376,8 +376,8 @@
           ? "اتصال اینترنت برقرار است."
           : "You are online."
         : isFa
-        ? "شما آفلاین هستید. برخی قابلیت‌ها غیرفعال است."
-        : "You are offline. Some features may be unavailable.";
+          ? "شما آفلاین هستید. برخی قابلیت‌ها غیرفعال است."
+          : "You are offline. Some features may be unavailable.";
 
       document.body.classList.toggle("offline", !online);
 
@@ -554,8 +554,8 @@
           ? "قدیمی‌ترین"
           : "جدیدترین"
         : sortAsc
-        ? "Oldest first"
-        : "Newest first";
+          ? "Oldest first"
+          : "Newest first";
     }
 
     updateSortButton();
@@ -915,13 +915,13 @@
         };
         const label = isFa
           ? `اعتبار سیاست تا ${expireDate.toLocaleDateString(
-              locale,
-              opts
-            )}`
+            locale,
+            opts
+          )}`
           : `Policy valid until ${expireDate.toLocaleDateString(
-              locale,
-              opts
-            )}`;
+            locale,
+            opts
+          )}`;
         expirationEl.textContent = label;
         updateExpirationDisplay();
 

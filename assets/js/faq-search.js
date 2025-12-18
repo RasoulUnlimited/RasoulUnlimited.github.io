@@ -6,10 +6,10 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     // Toast fallback
-    if (typeof window.createToast !== 'function') {
-      window.createToast = function(message) {
-        const toast = document.createElement('div');
-        toast.className = 'toast-notification';
+    if (typeof window.createToast !== "function") {
+      window.createToast = function (message) {
+        const toast = document.createElement("div");
+        toast.className = "toast-notification";
         toast.textContent = message;
         toast.style.cssText = `
           position: fixed;
@@ -27,9 +27,9 @@
           font-size: 0.9rem;
         `;
         document.body.appendChild(toast);
-        requestAnimationFrame(() => toast.style.opacity = '1');
+        requestAnimationFrame(() => toast.style.opacity = "1");
         setTimeout(() => {
-          toast.style.opacity = '0';
+          toast.style.opacity = "0";
           setTimeout(() => toast.remove(), 300);
         }, 3000);
       };
@@ -89,8 +89,8 @@
 
     // Helper to highlight text safely
     function highlightText(element, term) {
-      if (!element) return;
-      
+      if (!element) {return;}
+
       // Remove existing highlights first to preserve event listeners
       const highlights = element.querySelectorAll(".highlight-term");
       highlights.forEach(span => {
@@ -99,20 +99,20 @@
         parent.normalize();
       });
 
-      if (!term) return;
-      
+      if (!term) {return;}
+
       // Use TreeWalker for safe highlighting
       const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, null, false);
       const nodesToReplace = [];
-      
+
       // Build regex that allows for diacritics and ZWNJ between characters
       // This matches the logic in credential-search.js
       const normalizedTerm = normalizeText(term);
       const noise = "[\\u064B-\\u065F\\u0670\\u200c\\u200d]*";
       const pattern = normalizedTerm.split("").map(char => {
         const escaped = escapeRegExp(char);
-        if (char === "ی") return "[یي]";
-        if (char === "ک") return "[کك]";
+        if (char === "ی") {return "[یي]";}
+        if (char === "ک") {return "[کك]";}
         return escaped;
       }).join(noise);
 
@@ -122,7 +122,7 @@
       while (walker.nextNode()) {
         const node = walker.currentNode;
         // Skip if parent is already a highlight span
-        if (node.parentNode.classList.contains("highlight-term")) continue;
+        if (node.parentNode.classList.contains("highlight-term")) {continue;}
 
         if (node.nodeValue && regex.test(node.nodeValue)) {
           nodesToReplace.push(node);
@@ -132,7 +132,7 @@
       nodesToReplace.forEach(node => {
         const fragment = document.createDocumentFragment();
         const parts = node.nodeValue.split(regex);
-        
+
         parts.forEach((part, index) => {
           if (index % 2 === 1) { // Matched part
             const span = document.createElement("span");
@@ -143,7 +143,7 @@
             fragment.appendChild(document.createTextNode(part));
           }
         });
-        
+
         node.parentNode.replaceChild(fragment, node);
       });
     }
@@ -159,9 +159,9 @@
         // Support both <details>/<summary> and custom .accordion-item structure
         const summaryEl = item.querySelector(".accordion-header h3") || item.querySelector("summary");
         const answerEl = item.querySelector(".accordion-content") || item.querySelector(".faq-answer");
-        
+
         // For custom accordion, the header button is the summary
-        const isCustomAccordion = !item.tagName || item.tagName.toLowerCase() !== 'details';
+        const isCustomAccordion = !item.tagName || item.tagName.toLowerCase() !== "details";
 
         const questionText = summaryEl ? normalizeText(summaryEl.textContent) : "";
         const answerText = answerEl ? normalizeText(answerEl.textContent) : "";
@@ -179,43 +179,43 @@
           visibleCount++;
 
           // Highlight terms
-          if (summaryEl) highlightText(summaryEl, hasTerm ? searchTerm : null);
-          if (answerEl) highlightText(answerEl, hasTerm ? searchTerm : null);
+          if (summaryEl) {highlightText(summaryEl, hasTerm ? searchTerm : null);}
+          if (answerEl) {highlightText(answerEl, hasTerm ? searchTerm : null);}
 
           // Open item if searching
           if (hasTerm) {
             if (isCustomAccordion) {
-                if (!item.classList.contains("is-open")) {
-                    item.classList.add("is-open");
-                    const header = item.querySelector(".accordion-header");
-                    if (header) header.setAttribute("aria-expanded", "true");
-                    item.dataset.openedBySearch = "true";
-                    // Ensure content is visible
-                    if (answerEl) {
-                        answerEl.style.maxHeight = answerEl.scrollHeight + 50 + "px";
-                        answerEl.style.opacity = "1";
-                    }
+              if (!item.classList.contains("is-open")) {
+                item.classList.add("is-open");
+                const header = item.querySelector(".accordion-header");
+                if (header) {header.setAttribute("aria-expanded", "true");}
+                item.dataset.openedBySearch = "true";
+                // Ensure content is visible
+                if (answerEl) {
+                  answerEl.style.maxHeight = answerEl.scrollHeight + 50 + "px";
+                  answerEl.style.opacity = "1";
                 }
+              }
             } else {
-                if (!item.open) {
-                    item.open = true;
-                    item.dataset.openedBySearch = "true";
-                }
+              if (!item.open) {
+                item.open = true;
+                item.dataset.openedBySearch = "true";
+              }
             }
           }
 
           // Close if search cleared and was opened by search
           if (!hasTerm && item.dataset.openedBySearch) {
             if (isCustomAccordion) {
-                item.classList.remove("is-open");
-                const header = item.querySelector(".accordion-header");
-                if (header) header.setAttribute("aria-expanded", "false");
-                if (answerEl) {
-                    answerEl.style.maxHeight = null;
-                    answerEl.style.opacity = "0";
-                }
+              item.classList.remove("is-open");
+              const header = item.querySelector(".accordion-header");
+              if (header) {header.setAttribute("aria-expanded", "false");}
+              if (answerEl) {
+                answerEl.style.maxHeight = null;
+                answerEl.style.opacity = "0";
+              }
             } else {
-                item.open = false;
+              item.open = false;
             }
             delete item.dataset.openedBySearch;
           }
@@ -259,141 +259,141 @@
     if (expandAllBtn) {
       expandAllBtn.addEventListener("click", () => {
         faqItems.forEach(item => {
-          if (item.hidden || item.style.display === "none") return; // Skip hidden items
-          
-          const isCustomAccordion = !item.tagName || item.tagName.toLowerCase() !== 'details';
+          if (item.hidden || item.style.display === "none") {return;} // Skip hidden items
+
+          const isCustomAccordion = !item.tagName || item.tagName.toLowerCase() !== "details";
           if (isCustomAccordion) {
             item.classList.add("is-open");
             const header = item.querySelector(".accordion-header");
             const panel = item.querySelector(".accordion-content");
-            if (header) header.setAttribute("aria-expanded", "true");
+            if (header) {header.setAttribute("aria-expanded", "true");}
             if (panel) {
-                panel.style.maxHeight = (panel.scrollHeight + 500) + "px";
-                panel.style.opacity = "1";
+              panel.style.maxHeight = (panel.scrollHeight + 500) + "px";
+              panel.style.opacity = "1";
             }
           } else {
             item.open = true;
           }
         });
         expandAllBtn.setAttribute("aria-pressed", "true");
-        if (collapseAllBtn) collapseAllBtn.setAttribute("aria-pressed", "false");
+        if (collapseAllBtn) {collapseAllBtn.setAttribute("aria-pressed", "false");}
       });
     }
 
     if (collapseAllBtn) {
       collapseAllBtn.addEventListener("click", () => {
         faqItems.forEach(item => {
-          if (item.hidden || item.style.display === "none") return;
-          
-          const isCustomAccordion = !item.tagName || item.tagName.toLowerCase() !== 'details';
+          if (item.hidden || item.style.display === "none") {return;}
+
+          const isCustomAccordion = !item.tagName || item.tagName.toLowerCase() !== "details";
           if (isCustomAccordion) {
             item.classList.remove("is-open");
             const header = item.querySelector(".accordion-header");
             const panel = item.querySelector(".accordion-content");
-            if (header) header.setAttribute("aria-expanded", "false");
+            if (header) {header.setAttribute("aria-expanded", "false");}
             if (panel) {
-                panel.style.maxHeight = null;
-                panel.style.opacity = "0";
+              panel.style.maxHeight = null;
+              panel.style.opacity = "0";
             }
           } else {
             item.open = false;
           }
         });
         collapseAllBtn.setAttribute("aria-pressed", "true");
-        if (expandAllBtn) expandAllBtn.setAttribute("aria-pressed", "false");
+        if (expandAllBtn) {expandAllBtn.setAttribute("aria-pressed", "false");}
       });
     }
 
     // --- New Features Logic ---
 
     // 1. Copy Link Functionality
-    document.querySelectorAll('.copy-faq-link').forEach(btn => {
-      btn.addEventListener('click', (e) => {
+    document.querySelectorAll(".copy-faq-link").forEach(btn => {
+      btn.addEventListener("click", (e) => {
         e.stopPropagation(); // Prevent accordion toggle
         const link = btn.dataset.link;
-        if (!link) return;
+        if (!link) {return;}
 
         const url = window.location.origin + window.location.pathname + link;
-        
+
         navigator.clipboard.writeText(url).then(() => {
           // Visual feedback - store original HTML safely, use createElement for new content
           const originalHTML = btn.innerHTML;
           const originalClass = btn.className;
-          
+
           // Clear and create safe icon element
-          btn.innerHTML = '';
-          const icon = document.createElement('i');
-          icon.className = 'fas fa-check';
-          icon.setAttribute('aria-hidden', 'true');
+          btn.innerHTML = "";
+          const icon = document.createElement("i");
+          icon.className = "fas fa-check";
+          icon.setAttribute("aria-hidden", "true");
           btn.appendChild(icon);
-          btn.style.color = '#2ecc71';
-          btn.classList.add('copied');
-          
+          btn.style.color = "#2ecc71";
+          btn.classList.add("copied");
+
           // Show toast if available
           if (window.createToast) {
-            window.createToast('لینک کپی شد!');
+            window.createToast("لینک کپی شد!");
           }
 
           setTimeout(() => {
             btn.innerHTML = originalHTML;
             btn.className = originalClass;
-            btn.style.color = '';
+            btn.style.color = "";
           }, 2000);
         }).catch(err => {
-          console.error('Failed to copy: ', err);
+          console.error("Failed to copy: ", err);
         });
       });
     });
 
     // 2. Feedback Functionality
     // Restore feedback state
-    document.querySelectorAll('.faq-item').forEach(item => {
-        const id = item.id;
-        const storedFeedback = localStorage.getItem(`faq-feedback-${id}`);
-        if (storedFeedback) {
-            const btn = item.querySelector(`.btn-feedback.${storedFeedback}`);
-            if (btn) btn.classList.add('active');
-        }
+    document.querySelectorAll(".faq-item").forEach(item => {
+      const id = item.id;
+      const storedFeedback = localStorage.getItem(`faq-feedback-${id}`);
+      if (storedFeedback) {
+        const btn = item.querySelector(`.btn-feedback.${storedFeedback}`);
+        if (btn) {btn.classList.add("active");}
+      }
     });
 
-    document.querySelectorAll('.btn-feedback').forEach(btn => {
-      btn.addEventListener('click', (e) => {
+    document.querySelectorAll(".btn-feedback").forEach(btn => {
+      btn.addEventListener("click", (e) => {
         e.stopPropagation();
-        const parent = btn.closest('.faq-feedback');
-        const item = btn.closest('.faq-item');
+        const parent = btn.closest(".faq-feedback");
+        const item = btn.closest(".faq-item");
         const id = item.id;
-        
+
         // Remove active class from siblings
-        parent.querySelectorAll('.btn-feedback').forEach(b => b.classList.remove('active'));
-        
+        parent.querySelectorAll(".btn-feedback").forEach(b => b.classList.remove("active"));
+
         // Add active class to clicked button
-        btn.classList.add('active');
-        
-        const isUp = btn.classList.contains('up');
-        localStorage.setItem(`faq-feedback-${id}`, isUp ? 'up' : 'down');
-        
+        btn.classList.add("active");
+
+        const isUp = btn.classList.contains("up");
+        localStorage.setItem(`faq-feedback-${id}`, isUp ? "up" : "down");
+
         // Visual feedback
         const label = parent.querySelector(".feedback-label");
         if (label) {
-            const originalText = "آیا این پاسخ مفید بود؟";
-            label.textContent = "بازخورد شما ثبت شد. ممنون!";
-            label.style.color = "#27ae60";
-            label.style.fontWeight = "bold";
-            
-            setTimeout(() => {
-                label.textContent = originalText;
-                label.style.color = "";
-                label.style.fontWeight = "";
-                btn.classList.remove("active");
-            }, 3000);
+          const originalText = "آیا این پاسخ مفید بود؟";
+          label.textContent = "بازخورد شما ثبت شد. ممنون!";
+          label.style.color = "#27ae60";
+          label.style.fontWeight = "bold";
+
+          setTimeout(() => {
+            label.textContent = originalText;
+            label.style.color = "";
+            label.style.fontWeight = "";
+            btn.classList.remove("active");
+          }, 3000);
         }
-        
+
         // Optional: Send analytics event here
-        const questionId = btn.closest('.faq-item').id;
-        console.log(`Feedback for ${questionId}: ${isUp ? 'Positive' : 'Negative'}`);
-        
+        const questionId = btn.closest(".faq-item").id;
+        console.log(`Feedback for ${questionId}: ${isUp ? "Positive" : "Negative"}`);
+
         if (window.createToast) {
-          window.createToast('بازخورد شما ثبت شد. ممنون!');
+          window.createToast("بازخورد شما ثبت شد. ممنون!");
         }
       });
     });
@@ -402,30 +402,30 @@
     if (window.location.hash) {
       const targetId = window.location.hash.substring(1);
       const targetItem = document.getElementById(targetId);
-      if (targetItem && targetItem.classList.contains('faq-item')) {
+      if (targetItem && targetItem.classList.contains("faq-item")) {
         setTimeout(() => {
           // Open the item
-          const isCustomAccordion = !targetItem.tagName || targetItem.tagName.toLowerCase() !== 'details';
+          const isCustomAccordion = !targetItem.tagName || targetItem.tagName.toLowerCase() !== "details";
           if (isCustomAccordion) {
             targetItem.classList.add("is-open");
             const header = targetItem.querySelector(".accordion-header");
             const panel = targetItem.querySelector(".accordion-content");
-            if (header) header.setAttribute("aria-expanded", "true");
+            if (header) {header.setAttribute("aria-expanded", "true");}
             if (panel) {
-                panel.style.maxHeight = (panel.scrollHeight + 500) + "px";
-                panel.style.opacity = "1";
+              panel.style.maxHeight = (panel.scrollHeight + 500) + "px";
+              panel.style.opacity = "1";
             }
           } else {
             targetItem.open = true;
           }
-          
+
           // Scroll to it
-          targetItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          
+          targetItem.scrollIntoView({ behavior: "smooth", block: "center" });
+
           // Highlight effect
-          targetItem.style.transition = 'background-color 0.5s';
+          targetItem.style.transition = "background-color 0.5s";
           const originalBg = targetItem.style.backgroundColor;
-          targetItem.style.backgroundColor = 'rgba(52, 152, 219, 0.1)';
+          targetItem.style.backgroundColor = "rgba(52, 152, 219, 0.1)";
           setTimeout(() => {
             targetItem.style.backgroundColor = originalBg;
           }, 1500);

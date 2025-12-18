@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   const tagline = document.querySelector(".tagline");
-  if (!tagline) return;
+  if (!tagline) {return;}
 
   // اگر قبلاً این اسکریپت روی این عنصر اجرا شده، دوباره دست نزن
   if (tagline.dataset.typingInitialized === "true") {
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (roleSpans.length > 0) {
     roleSpans.forEach((span) => {
       const text = span.textContent.trim();
-      if (text) roles.push(text);
+      if (text) {roles.push(text);}
     });
   } else {
     // Fallback if structure changes
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function type() {
     // اگر در حین کار این بلاک از DOM حذف شد، حلقه رو متوقف کن
-    if (!document.body.contains(tagline)) return;
+    if (!document.body.contains(tagline)) {return;}
 
     const currentRole = roles[roleIndex];
 

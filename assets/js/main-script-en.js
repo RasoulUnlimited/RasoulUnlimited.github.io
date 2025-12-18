@@ -1104,7 +1104,7 @@ if (!faqContainer || !faqItems.length) {
   // Deep-link to FAQ using hash (works even if script loads after DOMContentLoaded)
   const handleFaqHashNavigation = () => {
     const hash = window.location.hash;
-    if (!hash) return;
+    if (!hash) {return;}
     let targetElement;
     try {
       targetElement = document.querySelector(hash);

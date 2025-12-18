@@ -3,7 +3,7 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   const toggle = document.getElementById("theme-toggle");
-  if (!toggle) return;
+  if (!toggle) {return;}
 
   // Namespaced key برای کاهش احتمال تداخل با اسکریپت‌های دیگر
   const THEME_KEY = "app:theme";
@@ -54,23 +54,23 @@ document.addEventListener("DOMContentLoaded", () => {
       : null;
 
   function getStoredTheme() {
-    if (!storage) return null;
+    if (!storage) {return null;}
     const value = storage.getItem(THEME_KEY);
     return isValidTheme(value) ? value : null;
   }
 
   function getSystemTheme() {
-    if (!mediaQuery) return LIGHT;
+    if (!mediaQuery) {return LIGHT;}
     return mediaQuery.matches ? DARK : LIGHT;
   }
 
   function getCurrentTheme() {
     // احترام به چیزی که سرور روی data-theme ست کرده
     const attr = root.getAttribute("data-theme");
-    if (isValidTheme(attr)) return /** @type {"dark" | "light"} */ (attr);
+    if (isValidTheme(attr)) {return /** @type {"dark" | "light"} */ (attr);}
 
     const stored = getStoredTheme();
-    if (stored) return stored;
+    if (stored) {return stored;}
 
     return getSystemTheme();
   }
@@ -94,8 +94,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function persistTheme(theme) {
-    if (!storage) return;
-    if (!isValidTheme(theme)) return;
+    if (!storage) {return;}
+    if (!isValidTheme(theme)) {return;}
 
     try {
       storage.setItem(THEME_KEY, theme);
@@ -141,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
    * - ارسال event
    */
   function applyTheme(theme, { persist = true } = {}) {
-    if (!isValidTheme(theme)) return;
+    if (!isValidTheme(theme)) {return;}
 
     const isDark = theme === DARK;
 
@@ -257,7 +257,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function handleSystemChange(event) {
     // اگر کاربر ترجیح خودش رو ذخیره کرده، به سیستم گوش نده
     const hasUserPreference = !!getStoredTheme();
-    if (hasUserPreference) return;
+    if (hasUserPreference) {return;}
 
     const isDark = event.matches;
     applyTheme(isDark ? DARK : LIGHT, { persist: false });
@@ -276,12 +276,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (storage && typeof window !== "undefined") {
     window.addEventListener("storage", (event) => {
-      if (event.key !== THEME_KEY) return;
-      if (event.storageArea && event.storageArea !== window.localStorage) return;
+      if (event.key !== THEME_KEY) {return;}
+      if (event.storageArea && event.storageArea !== window.localStorage) {return;}
 
       const value = event.newValue;
       // اگر key حذف شده، کاری نکنیم و بذاریم منطق فعلی بمونه
-      if (value === null) return;
+      if (value === null) {return;}
 
       if (isValidTheme(value)) {
         // اینجا persist:false چون خود storage event یعنی از یه تب دیگه ذخیره شده

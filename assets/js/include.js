@@ -2,7 +2,7 @@
 (function () {
   "use strict";
 
-  var ORIGIN = window.location.origin;
+  const ORIGIN = window.location.origin;
 
   /**
    * Injects external HTML fragments into elements with [data-include-html].

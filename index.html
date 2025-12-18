@@ -67,9 +67,8 @@
         fetchpriority="high" />
 
   <!-- CSS: fonts & icons -->
-  <link rel="preload"
-        as="style"
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;700&family=Vazirmatn:wght@400;500;700;900&display=swap" />
+  <!-- Preload for Google Fonts CSS can be reported as unused by some browsers
+   depending on caching and timing; preconnect already gives most of the win. -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;700&family=Vazirmatn:wght@400;500;700;900&display=swap" />
   <link rel="preload"
@@ -2036,7 +2035,7 @@
             <div class="container">
               <h2 id="faq-heading" class="section-title text-center mb-5">❓ سوالات متداول (FAQ)</h2>
               
-              <style>
+              <style nonce="RasoulCSP">
                 /* Enhanced Local Styles for FAQ Section - Improved Version */
                 #faq {
                   position: relative;
@@ -2405,8 +2404,8 @@
               <div id="faq-search-status" class="sr-only" aria-live="polite" aria-atomic="true">نمایش همه سوالات.</div>
 
               <div id="faq-no-results" class="faq-no-results">
-                <div style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.3;">🤔</div>
-                <h4 style="margin-bottom: 0.5rem; color: var(--text-primary);">نتیجه‌ای یافت نشد</h4>
+                <div class="faq-no-results-emoji">🤔</div>
+                <h4 class="faq-no-results-title">نتیجه‌ای یافت نشد</h4>
                 <p>لطفاً کلمات کلیدی دیگری را امتحان کنید یا از بخش تماس با ما استفاده کنید.</p>
               </div>
 
@@ -2750,7 +2749,7 @@
                 </div>
               </div>
             </div>
-              <p class="text-small subtle-text space-top-xs text-right rtl" style="max-width: 850px; margin: 1rem auto 0 auto;">
+              <p class="text-small subtle-text space-top-xs text-right rtl faq-more-link">
                 برای فهرست کامل پرسش‌ها،
                 <a href="/faq" data-ai-intent="view-detailed-faq"
                   >صفحه سؤالات متداول</a
@@ -2759,7 +2758,7 @@
               </p>
 
               <div class="faq-footer">
-                <h3 style="margin-bottom: 1.5rem; font-weight: 700; font-size: 1.3rem;">پاسخ سوال خود را پیدا نکردید؟</h3>
+                <h3 class="faq-footer-title">پاسخ سوال خود را پیدا نکردید؟</h3>
                 <a href="/contact.html" class="btn btn-primary">
                   <i class="fas fa-envelope" aria-hidden="true"></i> تماس با من
                 </a>
@@ -2944,7 +2943,7 @@
                 
                 <div class="resume-download">
                   <a href="/resume.html" class="hero-btn primary full-width-btn">
-                    <i class="fas fa-file-alt" style="margin-left: 8px;"></i> مشاهده و دانلود رزومه کامل
+                    <i class="fas fa-file-alt resume-link-icon" aria-hidden="true"></i> مشاهده و دانلود رزومه کامل
                   </a>
                 </div>
               </div>
@@ -3054,31 +3053,31 @@
     </button>
 
     <!-- DISCOVERY SECTION: Link to all important subsections (SEO Optimization) -->
-    <section id="discovery-nav" style="margin: 3rem 0; padding: 2rem; background: #f5f5f5; border-radius: 8px; text-align: center;">
-        <h2 style="margin-bottom: 1.5rem; font-size: 1.5rem; color: #333;">بیشتر بخوانید</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; max-width: 800px; margin: 0 auto;">
-            <a href="/ai/" style="padding: 1rem; text-decoration: none; background: white; border-radius: 4px; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; transition: all 0.3s; border: 1px solid #ddd;">
-                <span style="font-size: 1.5rem;">🤖</span>
-                <span style="font-weight: bold; color: #333;">بخش AI</span>
-            </a>
-            <a href="/wiki/rasoul-unlimited/" style="padding: 1rem; text-decoration: none; background: white; border-radius: 4px; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; transition: all 0.3s; border: 1px solid #ddd;">
-                <span style="font-size: 1.5rem;">📖</span>
-                <span style="font-weight: bold; color: #333;">Wiki</span>
-            </a>
-            <a href="/concepts/authority-feedback-system/" style="padding: 1rem; text-decoration: none; background: white; border-radius: 4px; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; transition: all 0.3s; border: 1px solid #ddd;">
-                <span style="font-size: 1.5rem;">🔄</span>
-                <span style="font-weight: bold; color: #333;">سیستم بازخورد</span>
-            </a>
-            <a href="/concepts/social-gravity-effect/" style="padding: 1rem; text-decoration: none; background: white; border-radius: 4px; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; transition: all 0.3s; border: 1px solid #ddd;">
-                <span style="font-size: 1.5rem;">🌍</span>
-                <span style="font-weight: bold; color: #333;">اثر جاذبه</span>
-            </a>
-            <a href="/concepts/visual-identity-loop/" style="padding: 1rem; text-decoration: none; background: white; border-radius: 4px; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; transition: all 0.3s; border: 1px solid #ddd;">
-                <span style="font-size: 1.5rem;">👁️</span>
-                <span style="font-weight: bold; color: #333;">هویت بصری</span>
-            </a>
-        </div>
-    </section>
+  <section id="discovery-nav" class="discovery-nav">
+    <h2 class="discovery-nav-title">بیشتر بخوانید</h2>
+    <div class="discovery-nav-grid">
+      <a href="/ai/" class="discovery-nav-card">
+        <span class="discovery-nav-emoji">🤖</span>
+        <span class="discovery-nav-label">بخش AI</span>
+      </a>
+      <a href="/wiki/rasoul-unlimited/" class="discovery-nav-card">
+        <span class="discovery-nav-emoji">📖</span>
+        <span class="discovery-nav-label">Wiki</span>
+      </a>
+      <a href="/concepts/authority-feedback-system/" class="discovery-nav-card">
+        <span class="discovery-nav-emoji">🔄</span>
+        <span class="discovery-nav-label">سیستم بازخورد</span>
+      </a>
+      <a href="/concepts/social-gravity-effect/" class="discovery-nav-card">
+        <span class="discovery-nav-emoji">🌍</span>
+        <span class="discovery-nav-label">اثر جاذبه</span>
+      </a>
+      <a href="/concepts/visual-identity-loop/" class="discovery-nav-card">
+        <span class="discovery-nav-emoji">👁️</span>
+        <span class="discovery-nav-label">هویت بصری</span>
+      </a>
+    </div>
+  </section>
 
     <footer class="footer" role="contentinfo">
       <div class="footer-top">

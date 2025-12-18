@@ -109,19 +109,19 @@ document.addEventListener("DOMContentLoaded", () => {
       const total = faqItems.length;
       const trimmed = term.trim();
       const noResultsMsg = document.getElementById("faq-no-results");
-      
+
       if (!trimmed) {
         status.textContent = `نمایش ${total} پرسش موجود.`;
-        if(noResultsMsg) noResultsMsg.style.display = 'none';
+        if (noResultsMsg) {noResultsMsg.style.display = "none";}
       } else if (!count) {
         status.textContent = `هیچ نتیجه‌ای برای «${trimmed}» پیدا نشد.`;
-        if(noResultsMsg) {
-            noResultsMsg.style.display = 'block';
-            noResultsMsg.textContent = `نتیجه‌ای برای «${trimmed}» یافت نشد. لطفاً کلمات کلیدی دیگری را امتحان کنید.`;
+        if (noResultsMsg) {
+          noResultsMsg.style.display = "block";
+          noResultsMsg.textContent = `نتیجه‌ای برای «${trimmed}» یافت نشد. لطفاً کلمات کلیدی دیگری را امتحان کنید.`;
         }
       } else {
         status.textContent = `${count} نتیجه برای «${trimmed}» یافت شد.`;
-        if(noResultsMsg) noResultsMsg.style.display = 'none';
+        if (noResultsMsg) {noResultsMsg.style.display = "none";}
       }
     };
 
@@ -182,7 +182,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         if (container.classList.contains("faq-section")) {
-            container.hidden = !sectionHasVisibleItems;
+          container.hidden = !sectionHasVisibleItems;
         }
       });
 
@@ -194,7 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
           results_count: visibleItemsCount,
         });
       }
-      
+
       updateStatus(searchTerm, visibleItemsCount);
     };
 
@@ -206,198 +206,198 @@ document.addEventListener("DOMContentLoaded", () => {
       if (e.key === "Escape") {
         e.preventDefault();
         searchInput.value = "";
-        if(clearSearchButton) clearSearchButton.style.display = "none";
+        if (clearSearchButton) {clearSearchButton.style.display = "none";}
         handleSearch();
       }
     });
 
     if (clearSearchButton) {
-        clearSearchButton.addEventListener("click", () => {
+      clearSearchButton.addEventListener("click", () => {
         searchInput.value = "";
         clearSearchButton.style.display = "none";
 
         faqItems.forEach((item) => {
-            item.style.display = "";
-            if (item.classList.contains("is-open") && item.dataset.openedBySearch) {
+          item.style.display = "";
+          if (item.classList.contains("is-open") && item.dataset.openedBySearch) {
             toggleItem(item, false);
             delete item.dataset.openedBySearch;
-            }
+          }
         });
         allSections.forEach((section) => {
-            section.hidden = false;
+          section.hidden = false;
         });
 
         updateStatus("", faqItems.length);
         searchInput.focus();
-        });
+      });
     }
   }
 
   // --- Accordion Logic ---
-  
+
   function toggleItem(item, forceOpen = null) {
-      const headerBtn = item.querySelector(".accordion-header");
-      const content = item.querySelector(".accordion-content");
-      if (!headerBtn || !content) return;
+    const headerBtn = item.querySelector(".accordion-header");
+    const content = item.querySelector(".accordion-content");
+    if (!headerBtn || !content) {return;}
 
-      const isOpen = item.classList.contains("is-open");
-      const shouldOpen = forceOpen !== null ? forceOpen : !isOpen;
+    const isOpen = item.classList.contains("is-open");
+    const shouldOpen = forceOpen !== null ? forceOpen : !isOpen;
 
-      if (shouldOpen) {
-          item.classList.add("is-open");
-          headerBtn.setAttribute("aria-expanded", "true");
-          content.style.maxHeight = (content.scrollHeight + 500) + "px"; // Add generous buffer
-      } else {
-          item.classList.remove("is-open");
-          headerBtn.setAttribute("aria-expanded", "false");
-          content.style.maxHeight = null;
-      }
+    if (shouldOpen) {
+      item.classList.add("is-open");
+      headerBtn.setAttribute("aria-expanded", "true");
+      content.style.maxHeight = (content.scrollHeight + 500) + "px"; // Add generous buffer
+    } else {
+      item.classList.remove("is-open");
+      headerBtn.setAttribute("aria-expanded", "false");
+      content.style.maxHeight = null;
+    }
   }
 
   // Handle resize to adjust max-height of open items
-  window.addEventListener('resize', debounce(() => {
-      faqItems.forEach(item => {
-          if (item.classList.contains("is-open")) {
-              const content = item.querySelector(".accordion-content");
-              if (content) {
-                  content.style.maxHeight = (content.scrollHeight + 500) + "px";
-              }
-          }
-      });
+  window.addEventListener("resize", debounce(() => {
+    faqItems.forEach(item => {
+      if (item.classList.contains("is-open")) {
+        const content = item.querySelector(".accordion-content");
+        if (content) {
+          content.style.maxHeight = (content.scrollHeight + 500) + "px";
+        }
+      }
+    });
   }, 200));
 
   // Event Delegation for Accordion Clicks
   const accordionContainer = document.getElementById("faq-container") || document.querySelector(".main-content");
   if (accordionContainer) {
-      accordionContainer.addEventListener("click", (event) => {
-          const headerBtn = event.target.closest(".accordion-header");
-          if (!headerBtn) return;
+    accordionContainer.addEventListener("click", (event) => {
+      const headerBtn = event.target.closest(".accordion-header");
+      if (!headerBtn) {return;}
 
-          // Ignore clicks on interactive elements inside header (like copy link)
-          if (event.target.closest(".copy-faq-link") || event.target.closest("a")) return;
+      // Ignore clicks on interactive elements inside header (like copy link)
+      if (event.target.closest(".copy-faq-link") || event.target.closest("a")) {return;}
 
-          const item = headerBtn.closest(".accordion-item");
-          if (!item) return;
+      const item = headerBtn.closest(".accordion-item");
+      if (!item) {return;}
 
-          // Close others (Accordion behavior) - Optional, can be toggle behavior
-          // faqItems.forEach(otherItem => {
-          //     if (otherItem !== item && otherItem.classList.contains("is-open")) {
-          //         toggleItem(otherItem, false);
-          //     }
-          // });
+      // Close others (Accordion behavior) - Optional, can be toggle behavior
+      // faqItems.forEach(otherItem => {
+      //     if (otherItem !== item && otherItem.classList.contains("is-open")) {
+      //         toggleItem(otherItem, false);
+      //     }
+      // });
 
-          toggleItem(item);
-          
-          // Analytics
-          const questionId = item.dataset.questionId || "unknown";
-          const action = item.classList.contains("is-open") ? "expand" : "collapse";
-          if (typeof gtag === "function") {
-              gtag("event", `faq_${action}`, {
-                  event_category: "FAQ Interaction",
-                  event_label: `Question ${action}ed: ${questionId}`,
-              });
-          }
-      });
+      toggleItem(item);
 
-      // Keyboard support for accordion headers
-      accordionContainer.addEventListener("keydown", (event) => {
-          const headerBtn = event.target.closest(".accordion-header");
-          if (!headerBtn) return;
+      // Analytics
+      const questionId = item.dataset.questionId || "unknown";
+      const action = item.classList.contains("is-open") ? "expand" : "collapse";
+      if (typeof gtag === "function") {
+        gtag("event", `faq_${action}`, {
+          event_category: "FAQ Interaction",
+          event_label: `Question ${action}ed: ${questionId}`,
+        });
+      }
+    });
 
-          if (event.key === "Enter" || event.key === " ") {
-              event.preventDefault();
-              // Trigger click logic
-              headerBtn.click();
-          }
-      });
+    // Keyboard support for accordion headers
+    accordionContainer.addEventListener("keydown", (event) => {
+      const headerBtn = event.target.closest(".accordion-header");
+      if (!headerBtn) {return;}
+
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        // Trigger click logic
+        headerBtn.click();
+      }
+    });
   }
 
   // Expand/Collapse All
   if (expandAllBtn) {
-      expandAllBtn.addEventListener("click", () => {
-          faqItems.forEach(item => {
-              if (item.style.display !== "none") toggleItem(item, true);
-          });
+    expandAllBtn.addEventListener("click", () => {
+      faqItems.forEach(item => {
+        if (item.style.display !== "none") {toggleItem(item, true);}
       });
+    });
   }
 
   if (collapseAllBtn) {
-      collapseAllBtn.addEventListener("click", () => {
-          faqItems.forEach(item => toggleItem(item, false));
-      });
+    collapseAllBtn.addEventListener("click", () => {
+      faqItems.forEach(item => toggleItem(item, false));
+    });
   }
 
   // Copy Link Functionality
   document.querySelectorAll(".copy-faq-link").forEach(btn => {
-      btn.addEventListener("click", (e) => {
-          e.stopPropagation(); // Prevent accordion toggle
-          const link = btn.dataset.link; // e.g. #faq-item-fa-1
-          if (!link) return;
-          
-          const url = window.location.origin + window.location.pathname + link;
-          navigator.clipboard.writeText(url).then(() => {
-              const originalIcon = btn.innerHTML;
-              btn.innerHTML = '<i class="fas fa-check"></i>';
-              btn.classList.add("copied");
-              setTimeout(() => {
-                  btn.innerHTML = originalIcon;
-                  btn.classList.remove("copied");
-              }, 2000);
-          });
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation(); // Prevent accordion toggle
+      const link = btn.dataset.link; // e.g. #faq-item-fa-1
+      if (!link) {return;}
+
+      const url = window.location.origin + window.location.pathname + link;
+      navigator.clipboard.writeText(url).then(() => {
+        const originalIcon = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check"></i>';
+        btn.classList.add("copied");
+        setTimeout(() => {
+          btn.innerHTML = originalIcon;
+          btn.classList.remove("copied");
+        }, 2000);
       });
+    });
   });
 
   // Feedback Buttons
   document.querySelectorAll(".btn-feedback").forEach(btn => {
-      btn.addEventListener("click", (e) => {
-          e.stopPropagation();
-          const parent = btn.closest(".faq-feedback");
-          parent.querySelectorAll(".btn-feedback").forEach(b => b.classList.remove("active"));
-          btn.classList.add("active");
-          
-          // Visual feedback
-          const label = parent.querySelector(".feedback-label");
-          if (label) {
-              const originalText = "آیا این پاسخ مفید بود؟"; // Default text
-              label.textContent = "بازخورد شما ثبت شد. ممنون!";
-              label.style.color = "#27ae60";
-              label.style.fontWeight = "bold";
-              
-              setTimeout(() => {
-                  label.textContent = originalText;
-                  label.style.color = "";
-                  label.style.fontWeight = "";
-                  btn.classList.remove("active");
-              }, 3000);
-          }
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const parent = btn.closest(".faq-feedback");
+      parent.querySelectorAll(".btn-feedback").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
 
-          // Analytics
-          if (typeof gtag === "function") {
-              gtag("event", "faq_feedback", {
-                  event_category: "FAQ Feedback",
-                  event_label: btn.classList.contains("up") ? "helpful" : "not_helpful",
-              });
-          }
-      });
+      // Visual feedback
+      const label = parent.querySelector(".feedback-label");
+      if (label) {
+        const originalText = "آیا این پاسخ مفید بود؟"; // Default text
+        label.textContent = "بازخورد شما ثبت شد. ممنون!";
+        label.style.color = "#27ae60";
+        label.style.fontWeight = "bold";
+
+        setTimeout(() => {
+          label.textContent = originalText;
+          label.style.color = "";
+          label.style.fontWeight = "";
+          btn.classList.remove("active");
+        }, 3000);
+      }
+
+      // Analytics
+      if (typeof gtag === "function") {
+        gtag("event", "faq_feedback", {
+          event_category: "FAQ Feedback",
+          event_label: btn.classList.contains("up") ? "helpful" : "not_helpful",
+        });
+      }
+    });
   });
 
   // Check for hash on load to open specific FAQ
   if (window.location.hash) {
-      const targetId = window.location.hash.substring(1);
-      const targetItem = document.getElementById(targetId);
-      if (targetItem && targetItem.classList.contains("faq-item")) {
-          setTimeout(() => {
-              toggleItem(targetItem, true);
-              targetItem.scrollIntoView({ behavior: "smooth", block: "center" });
-              // Add a temporary highlight effect
-              targetItem.style.borderColor = "var(--faq-primary)";
-              targetItem.style.boxShadow = "0 0 0 4px rgba(52, 152, 219, 0.2)";
-              setTimeout(() => {
-                  targetItem.style.borderColor = "";
-                  targetItem.style.boxShadow = "";
-              }, 2000);
-          }, 500);
-      }
+    const targetId = window.location.hash.substring(1);
+    const targetItem = document.getElementById(targetId);
+    if (targetItem && targetItem.classList.contains("faq-item")) {
+      setTimeout(() => {
+        toggleItem(targetItem, true);
+        targetItem.scrollIntoView({ behavior: "smooth", block: "center" });
+        // Add a temporary highlight effect
+        targetItem.style.borderColor = "var(--faq-primary)";
+        targetItem.style.boxShadow = "0 0 0 4px rgba(52, 152, 219, 0.2)";
+        setTimeout(() => {
+          targetItem.style.borderColor = "";
+          targetItem.style.boxShadow = "";
+        }, 2000);
+      }, 500);
+    }
   }
 
   // --- Page entry animation ---
@@ -406,6 +406,6 @@ document.addEventListener("DOMContentLoaded", () => {
     : false;
 
   if (!prefersReducedMotion && header) {
-      // Simple fade in if not already handled by CSS
+    // Simple fade in if not already handled by CSS
   }
 });

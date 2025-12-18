@@ -5,7 +5,7 @@
   const supportsDOM =
     typeof window !== "undefined" && typeof document !== "undefined";
 
-  if (!supportsDOM) return;
+  if (!supportsDOM) {return;}
 
   const HIDDEN_CLASS = "card-hidden";
   const VISIBLE_CLASS = "card-visible";
@@ -21,14 +21,14 @@
    * @param {HTMLElement} card
    */
   function revealCard(card) {
-    if (!card) return;
+    if (!card) {return;}
     card.classList.remove(HIDDEN_CLASS);
     card.classList.add(VISIBLE_CLASS);
   }
 
   document.addEventListener("DOMContentLoaded", () => {
     const cardsNodeList = document.querySelectorAll(".credential-card");
-    if (!cardsNodeList || !cardsNodeList.length) return;
+    if (!cardsNodeList || !cardsNodeList.length) {return;}
 
     // در صورت نیاز بعداً از متدهای آرایه استفاده کنیم
     const cards = Array.from(cardsNodeList);
@@ -94,7 +94,7 @@
 
     observer = new IntersectionObserver((entries, obs) => {
       entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
+        if (!entry.isIntersecting) {return;}
 
         const card = entry.target;
         revealCard(card);

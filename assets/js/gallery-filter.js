@@ -8,15 +8,15 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     const filterBar = document.querySelector(".filter-bar");
-    if (!filterBar) return;
+    if (!filterBar) {return;}
 
     const cards = Array.from(document.querySelectorAll(".presskit-card"));
-    if (!cards.length) return;
+    if (!cards.length) {return;}
 
     const buttons = Array.from(
       filterBar.querySelectorAll("button[data-filter]")
     );
-    if (!buttons.length) return;
+    if (!buttons.length) {return;}
 
     const ALL_FILTER = "all";
     let currentFilter = ALL_FILTER;
@@ -62,7 +62,7 @@
     const totalItems = items.length;
 
     function setActiveButton(targetBtn) {
-      if (!targetBtn) return;
+      if (!targetBtn) {return;}
 
       buttons.forEach((btn) => {
         const isActive = btn === targetBtn;
@@ -72,7 +72,7 @@
     }
 
     function updateLiveRegion(visibleCount) {
-      if (!liveRegion) return;
+      if (!liveRegion) {return;}
 
       if (isFarsi) {
         if (visibleCount === totalItems) {
@@ -134,7 +134,7 @@
         card.hidden = !show;
         card.classList.toggle("is-filtered-out", !show);
 
-        if (show) visibleCount += 1;
+        if (show) {visibleCount += 1;}
       });
 
       updateLiveRegion(visibleCount);
@@ -143,7 +143,7 @@
     // کلیک روی filter bar (event delegation)
     filterBar.addEventListener("click", (event) => {
       const button = event.target.closest("button[data-filter]");
-      if (!button) return;
+      if (!button) {return;}
 
       event.preventDefault();
 

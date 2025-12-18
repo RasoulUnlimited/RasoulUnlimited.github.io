@@ -53,7 +53,7 @@
     toast.setAttribute("role", "status");
     toast.setAttribute("aria-live", "polite");
     toast.className = `dynamic-toast ${type}`;
-    
+
     // Add icon based on type
     let iconHtml = "";
     if (type === "success") {
@@ -234,7 +234,7 @@
 
   function updateProgressBar() {
     const progressBar = document.getElementById("scroll-progress-bar");
-    if (!progressBar) return;
+    if (!progressBar) {return;}
 
     const scrollTop =
       window.scrollY || document.documentElement.scrollTop || 0;
@@ -373,8 +373,8 @@
   });
 
   // 3. Success Trigger Helper
-  window.triggerSuccess = function(element) {
-    if (!element) return;
+  window.triggerSuccess = function (element) {
+    if (!element) {return;}
     element.classList.add("success-trigger");
     setTimeout(() => {
       element.classList.remove("success-trigger");

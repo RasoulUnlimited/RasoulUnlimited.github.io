@@ -37,6 +37,80 @@ body {
   opacity: 1;
 }
 
+/* =====================================================
+   CSP-safe replacements for former inline styles
+   ===================================================== */
+
+.faq-no-results-emoji {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.3;
+}
+
+.faq-no-results-title {
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.faq-more-link {
+  max-width: 850px;
+  margin: 1rem auto 0 auto;
+}
+
+.faq-footer-title {
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.resume-link-icon {
+  margin-left: 8px;
+}
+
+.discovery-nav {
+  margin: 3rem 0;
+  padding: 2rem;
+  background: #f5f5f5;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.discovery-nav-title {
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.discovery-nav-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.discovery-nav-card {
+  padding: 1rem;
+  text-decoration: none;
+  background: white;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s;
+  border: 1px solid #ddd;
+}
+
+.discovery-nav-emoji {
+  font-size: 1.5rem;
+}
+
+.discovery-nav-label {
+  font-weight: bold;
+  color: #333;
+}
+
 /* --- Themes --- */
 
 .dark-mode {

@@ -52,10 +52,10 @@
    * @param {ServiceWorker | null | undefined} worker
    */
   function attachInstalledListener(worker) {
-    if (!worker) return;
+    if (!worker) {return;}
 
     function onStateChange() {
-      if (worker.state !== "installed") return;
+      if (worker.state !== "installed") {return;}
 
       // If controller exists, this is an update
       if (navigator.serviceWorker.controller) {
@@ -77,7 +77,7 @@
    * @param {ServiceWorkerRegistration} reg - Registration object
    */
   function handleRegistration(reg) {
-    if (!reg) return;
+    if (!reg) {return;}
 
     // If waiting worker exists, update is available (e.g. from previous visit)
     if (reg.waiting) {

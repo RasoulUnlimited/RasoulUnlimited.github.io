@@ -39,7 +39,7 @@
   if (motionQuery) {
     PREFERS_REDUCED_MOTION = motionQuery.matches;
     const motionListener = (e) => {
-      PREFERS_REDUCED_MOTION = !!e.matches;
+      PREFERS_REDUCED_MOTION = Boolean(e.matches);
     };
 
     if (typeof motionQuery.addEventListener === "function") {
@@ -49,9 +49,6 @@
       motionQuery.addListener(motionListener);
     }
   }
-
-  // مدت‌زمان fallback برای ترنزیشن‌ها (اگر از CSS نتوانستیم بخوانیم)
-  const TRANSITION_FALLBACK_MS = 500;
 
   /**
    * سازنده‌ی امن CustomEvent برای مرورگرهای قدیمی‌تر
@@ -71,45 +68,15 @@
     return evt;
   }
 
-  /**
-   * مدت‌زمان transition را از CSS محاسبه می‌کند (duration + delay)
-   * @param {HTMLElement} el
-   * @returns {number} ms
-   */
-  function getTransitionDurationMS(el) {
-    if (!el) return TRANSITION_FALLBACK_MS;
-
-    const style = window.getComputedStyle(el);
-    const durations = style.transitionDuration.split(",");
-    const delays = style.transitionDelay.split(",");
-
-    const toMs = (value) => {
-      value = value.trim();
-      if (!value) return 0;
-      const num = parseFloat(value);
-      if (Number.isNaN(num)) return 0;
-      return value.includes("ms") ? num : num * 1000;
-    };
-
-    let maxTotal = 0;
-    for (let i = 0; i < durations.length; i++) {
-      const dur = toMs(durations[i] || "0s");
-      const delay = toMs(delays[i] || delays[0] || "0s");
-      const total = dur + delay;
-      if (total > maxTotal) {
-        maxTotal = total;
-      }
-    }
-
-    return maxTotal || TRANSITION_FALLBACK_MS;
-  }
+  // NOTE: JS-driven transition timing helpers were removed to keep the
+  // accordion CSP-safe (no inline style manipulation).
 
   /**
    * Initialize a single accordion container.
    * @param {HTMLElement} root
    */
   function initAccordion(root) {
-    if (!root) return;
+    if (!root) {return;}
 
     // جلوگیری از دوباره‌سازی
     if (root.dataset.accordionInitialized === "true") {
@@ -138,69 +105,8 @@
       return;
     }
 
-    // برای نگه‌داری هندلرهای transitionend و timeoutها (فقط در صورت نیاز به انیمیشن)
-    /** @type {WeakMap<HTMLElement, (e: TransitionEvent) => void> | null} */
-    const transitionEndHandlers = reduceMotion ? null : new WeakMap();
-    /** @type {WeakMap<HTMLElement, number> | null} */
-    const transitionTimeoutIds = reduceMotion ? null : new WeakMap();
-
-    /**
-     * پاک کردن هندلر transitionend و timeout از پنل
-     * @param {HTMLElement} panel
-     */
-    function clearTransitionHandlers(panel) {
-      if (reduceMotion || !panel || !transitionEndHandlers || !transitionTimeoutIds) return;
-      const existingHandler = transitionEndHandlers.get(panel);
-      if (existingHandler) {
-        panel.removeEventListener("transitionend", existingHandler);
-        transitionEndHandlers.delete(panel);
-      }
-      const timeoutId = transitionTimeoutIds.get(panel);
-      if (timeoutId != null) {
-        clearTimeout(timeoutId);
-        transitionTimeoutIds.delete(panel);
-      }
-    }
-
-    /**
-     * ثبت هندلر transitionend + fallback timeout روی پنل
-     * @param {HTMLElement} panel
-     * @param {(e?: TransitionEvent) => void} onEnd
-     */
-    function setupTransitionEnd(panel, onEnd) {
-      if (reduceMotion || !panel || !transitionEndHandlers || !transitionTimeoutIds) {
-        // در حالت کاهش موشن، مستقیم فراخوانی می‌کنیم
-        onEnd();
-        return;
-      }
-
-      clearTransitionHandlers(panel);
-
-      let finished = false;
-
-      function finish(e) {
-        if (finished) return;
-        finished = true;
-        clearTransitionHandlers(panel);
-        onEnd(e);
-      }
-
-      const handler = (e) => {
-        // فقط روی تغییر max-height واکنش نشان بده
-        if (e.propertyName === "max-height") {
-          finish(e);
-        }
-      };
-
-      panel.addEventListener("transitionend", handler);
-      transitionEndHandlers.set(panel, handler);
-
-      const timeoutMs = getTransitionDurationMS(panel) + 50; // کمی حاشیه
-      const timeoutId = window.setTimeout(() => {
-        finish();
-      }, timeoutMs || TRANSITION_FALLBACK_MS);
-      transitionTimeoutIds.set(panel, timeoutId);
-    }
+    // NOTE: we used to use JS transition hooks here, but the site runs with a
+    // strict Content-Security-Policy and we avoid inline style manipulation.
 
     /**
      * Dispatch a custom event from an item.
@@ -208,7 +114,7 @@
      * @param {string} type
      */
     function dispatchAccordionEvent(item, type) {
-      if (!item) return;
+      if (!item) {return;}
       const event = createAccordionEvent(type, { item, accordionId });
       item.dispatchEvent(event);
     }
@@ -254,17 +160,12 @@
     function applyInstantState(ref, expanded) {
       const { panel } = ref;
       setExpandedState(ref, expanded);
-      if (!panel) return;
+      if (!panel) {return;}
 
-      if (expanded) {
-        panel.style.maxHeight = "none";
-        panel.style.opacity = "1";
-        panel.hidden = false;
-      } else {
-        panel.style.maxHeight = "0px";
-        panel.style.opacity = "0";
-        panel.hidden = true;
-      }
+      // CSP note: avoid inline styles (panel.style.*) because strict policies
+      // may block style attributes. We rely on CSS rules driven by aria-expanded
+      // and the `.is-open` class.
+      panel.hidden = !expanded;
     }
 
     // --- First pass: setup ARIA / state ---
@@ -276,7 +177,7 @@
         item.querySelector(".accordion-content")
       );
 
-      if (!header || !panel) return;
+      if (!header || !panel) {return;}
 
       const headerId = header.id || `accordion-header-${accordionId}-${index}`;
       const panelId = panel.id || `accordion-panel-${accordionId}-${index}`;
@@ -299,14 +200,6 @@
         applyInstantState({ item, header, panel }, initiallyOpen);
       } else {
         setExpandedState({ item, header, panel }, initiallyOpen);
-
-        if (initiallyOpen) {
-          panel.style.maxHeight = "none";
-          panel.style.opacity = "1";
-        } else {
-          panel.style.maxHeight = "0px";
-          panel.style.opacity = "0";
-        }
       }
 
       headers.push(header);
@@ -327,8 +220,6 @@
           applyInstantState(ref, true);
         } else {
           setExpandedState(ref, true);
-          ref.panel.style.maxHeight = "none";
-          ref.panel.style.opacity = "1";
         }
       }
     }
@@ -339,32 +230,16 @@
      */
     function collapseItem(ref) {
       const { panel } = ref;
-      if (!panel) return;
+      if (!panel) {return;}
 
       if (reduceMotion) {
         applyInstantState(ref, false);
       } else {
         setExpandedState(ref, false);
-        clearTransitionHandlers(panel);
 
-        // مطمئن شو برای محاسبه scrollHeight مخفی نیست
-        panel.hidden = false;
-
-        const startHeight = panel.scrollHeight;
-        panel.style.maxHeight = startHeight + "px";
-
-        // Force reflow
-        void panel.offsetHeight;
-
-        setupTransitionEnd(panel, () => {
-          panel.hidden = true;
-          panel.style.maxHeight = "0px";
-        });
-
-        requestAnimationFrame(() => {
-          panel.style.maxHeight = "0px";
-          panel.style.opacity = "0";
-        });
+        // CSP-safe behavior: skip JS-driven height/opacity transitions.
+        // Hide immediately; CSS handles animation where possible.
+        panel.hidden = true;
       }
 
       dispatchAccordionEvent(ref.item, "accordion:collapse");
@@ -376,27 +251,15 @@
      */
     function expandItem(ref) {
       const { panel } = ref;
-      if (!panel) return;
+      if (!panel) {return;}
 
       if (reduceMotion) {
         applyInstantState(ref, true);
       } else {
         setExpandedState(ref, true);
-        clearTransitionHandlers(panel);
 
+        // show panel; CSS (accordion.css) expands content via `.is-open`
         panel.hidden = false;
-        panel.style.maxHeight = "0px";
-        panel.style.opacity = "0";
-
-        setupTransitionEnd(panel, () => {
-          panel.style.maxHeight = "none";
-        });
-
-        requestAnimationFrame(() => {
-          const targetHeight = panel.scrollHeight;
-          panel.style.maxHeight = targetHeight + "px";
-          panel.style.opacity = "1";
-        });
       }
 
       dispatchAccordionEvent(ref.item, "accordion:expand");
@@ -417,7 +280,7 @@
 
       if (!allowMultiple) {
         itemRefs.forEach((otherRef) => {
-          if (otherRef.item === item) return;
+          if (otherRef.item === item) {return;}
           if (isItemExpanded(otherRef)) {
             collapseItem(otherRef);
           }
@@ -438,7 +301,7 @@
 
       // Click handler
       header.addEventListener("click", () => {
-        if (header.hasAttribute("aria-disabled")) return;
+        if (header.hasAttribute("aria-disabled")) {return;}
         toggleItem(ref);
       });
 
@@ -446,7 +309,7 @@
       header.addEventListener("keydown", (e) => {
         const key = e.key;
 
-        if (header.hasAttribute("aria-disabled")) return;
+        if (header.hasAttribute("aria-disabled")) {return;}
 
         if (key === "Enter" || key === " ") {
           e.preventDefault();
@@ -455,7 +318,7 @@
         }
 
         const currentIndex = headers.indexOf(header);
-        if (currentIndex === -1) return;
+        if (currentIndex === -1) {return;}
 
         if (key === "ArrowDown") {
           e.preventDefault();
@@ -496,11 +359,11 @@
    * @returns {AccordionRecord | null}
    */
   function resolveRecord(accordionIdOrElement) {
-    if (!accordionIdOrElement) return null;
+    if (!accordionIdOrElement) {return null;}
 
     if (typeof accordionIdOrElement === "string") {
       const id = accordionIdOrElement.trim();
-      if (!id) return null;
+      if (!id) {return null;}
       const record = ACCORDION_REGISTRY.get(id);
       return record || null;
     }
@@ -511,10 +374,10 @@
         ? accordionIdOrElement
         : accordionIdOrElement.closest(".accordion");
 
-      if (!root) return null;
+      if (!root) {return null;}
 
       const id = root.dataset[ACCORDION_ATTR];
-      if (!id) return null;
+      if (!id) {return null;}
       const record = ACCORDION_REGISTRY.get(id);
       return record || null;
     }
@@ -529,11 +392,11 @@
    * @returns {AccordionItemRefs | null}
    */
   function resolveItemRef(record, target) {
-    if (!record || target == null) return null;
+    if (!record || target === null || target === undefined) {return null;}
     const { itemRefs } = record;
 
     if (typeof target === "number") {
-      if (target < 0 || target >= itemRefs.length) return null;
+      if (target < 0 || target >= itemRefs.length) {return null;}
       return itemRefs[target] || null;
     }
 
@@ -582,9 +445,9 @@
    */
   window.Accordion.open = function (accordionIdOrElement, target) {
     const record = resolveRecord(accordionIdOrElement);
-    if (!record) return false;
+    if (!record) {return false;}
     const ref = resolveItemRef(record, target);
-    if (!ref) return false;
+    if (!ref) {return false;}
     record.expandItem(ref);
     return true;
   };
@@ -594,9 +457,9 @@
    */
   window.Accordion.close = function (accordionIdOrElement, target) {
     const record = resolveRecord(accordionIdOrElement);
-    if (!record) return false;
+    if (!record) {return false;}
     const ref = resolveItemRef(record, target);
-    if (!ref) return false;
+    if (!ref) {return false;}
     record.collapseItem(ref);
     return true;
   };
@@ -606,9 +469,9 @@
    */
   window.Accordion.toggle = function (accordionIdOrElement, target) {
     const record = resolveRecord(accordionIdOrElement);
-    if (!record) return false;
+    if (!record) {return false;}
     const ref = resolveItemRef(record, target);
-    if (!ref) return false;
+    if (!ref) {return false;}
     record.toggleItem(ref);
     return true;
   };
@@ -619,9 +482,9 @@
    */
   window.Accordion.isOpen = function (accordionIdOrElement, target) {
     const record = resolveRecord(accordionIdOrElement);
-    if (!record) return null;
+    if (!record) {return null;}
     const ref = resolveItemRef(record, target);
-    if (!ref) return null;
+    if (!ref) {return null;}
     return record.isItemExpanded(ref);
   };
 
@@ -630,10 +493,10 @@
    */
   window.Accordion.openAll = function (accordionIdOrElement) {
     const record = resolveRecord(accordionIdOrElement);
-    if (!record) return;
+    if (!record) {return;}
     const { allowMultiple, itemRefs, expandItem } = record;
     if (!allowMultiple) {
-      if (itemRefs[0]) expandItem(itemRefs[0]);
+      if (itemRefs[0]) {expandItem(itemRefs[0]);}
       return;
     }
     itemRefs.forEach((ref) => expandItem(ref));
@@ -644,7 +507,7 @@
    */
   window.Accordion.closeAll = function (accordionIdOrElement) {
     const record = resolveRecord(accordionIdOrElement);
-    if (!record) return;
+    if (!record) {return;}
     const { allowToggle, itemRefs, collapseItem, isItemExpanded, expandItem } =
       record;
 
@@ -656,7 +519,7 @@
       }
 
       itemRefs.forEach((ref) => {
-        if (ref === firstOpen) return;
+        if (ref === firstOpen) {return;}
         collapseItem(ref);
       });
 
@@ -674,7 +537,7 @@
    * @param {string | HTMLElement} rootOrSelector
    */
   window.Accordion.init = function (rootOrSelector) {
-    if (!rootOrSelector) return;
+    if (!rootOrSelector) {return;}
 
     if (typeof rootOrSelector === "string") {
       const nodes = document.querySelectorAll(rootOrSelector);
