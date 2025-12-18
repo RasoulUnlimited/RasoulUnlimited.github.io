@@ -2136,6 +2136,25 @@ img[data-src].loaded,
   line-height: 1.8;
   color: var(--text-color);
   text-align: right;
+
+  /* CSP-safe accordion animation (no JS style writes) */
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  transition:
+    max-height 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55),
+    padding 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55),
+    opacity 0.4s ease-out;
+}
+
+#faq .faq-item.is-open p,
+#faq .faq-item[open] p {
+  max-height: 2000px;
+  opacity: 1;
+  padding-top: 1.6rem;
+  padding-bottom: 2.8rem;
 }
 
 .testimonial-item {

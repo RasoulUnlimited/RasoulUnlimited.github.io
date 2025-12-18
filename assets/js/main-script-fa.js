@@ -482,7 +482,7 @@
     );
 
     const hiddenInfo = document.createElement("div");
-    hiddenInfo.style.display = "none";
+    hiddenInfo.classList.add("visually-hidden");
     hiddenInfo.dataset.authorFullName = "Mohammad Rasoul Sohrabi";
     hiddenInfo.dataset.orcidId = "0009-0004-7177-2080";
     hiddenInfo.setAttribute("aria-hidden", "true");
@@ -793,18 +793,9 @@
       const scrolled = window.scrollY;
       const progress = Math.min(1, Math.max(0, scrolled / total));
 
-      innerBar.style.transform = `scaleX(${progress})`;
-
-      const rootStyle = getComputedStyle(document.documentElement);
-      const primary =
-        rootStyle.getPropertyValue("--primary-color") || "gray";
-      const accent =
-        rootStyle.getPropertyValue("--accent-color") || "dodgerblue";
-      const highlight =
-        rootStyle.getPropertyValue("--highlight-color") || "gold";
-
-      innerBar.style.backgroundColor =
-        progress > 0.9 ? highlight : progress > 0.5 ? accent : primary;
+      bar.style.setProperty("--sohrabi-progress", progress);
+      bar.dataset.progressTone =
+        progress > 0.9 ? "high" : progress > 0.5 ? "mid" : "low";
 
       bar.setAttribute(
         "aria-valuenow",
@@ -920,10 +911,6 @@
         if (!span.classList.contains("show-message")) {
           span.textContent =
             FUN_FACTS_FA[(Math.random() * FUN_FACTS_FA.length) | 0];
-          Object.assign(span.style, {
-            opacity: "1",
-            transform: "translateY(-5px)",
-          });
           span.classList.add("show-message");
         }
         li.classList.add("skill-hover-effect");
@@ -933,8 +920,6 @@
         const span = li.querySelector(".skill-hover-message");
         if (span) {
           hideTimeout = setTimeout(() => {
-            span.style.opacity = "0";
-            span.style.transform = "translateY(0)";
             span.classList.remove("show-message");
           }, 180);
         }
@@ -972,17 +957,9 @@
         if (!answer.id) answer.id = `faq-answer-${qId}`;
         if (!summary.hasAttribute("aria-controls"))
           summary.setAttribute("aria-controls", answer.id);
-
-        Object.assign(answer.style, {
-          maxHeight: item.open ? "2000px" : "0px",
-          overflow: "hidden",
-          transition:
-            "max-height .4s cubic-bezier(0.68,-0.55,0.27,1.55), padding .4s cubic-bezier(0.68,-0.55,0.27,1.55), opacity .4s ease-out",
-          paddingTop: item.open ? "1.6rem" : "0",
-          paddingBottom: item.open ? "2.8rem" : "0",
-          opacity: item.open ? "1" : "0",
-        });
       }
+
+      item.classList.toggle("is-open", !!item.open);
 
       on(summary, "click", (e) => {
         if (e.target.tagName === "A") return;
@@ -1000,17 +977,10 @@
     function toggleFAQ(item, open, scrollIntoView = false) {
       item.open = open;
       const summary = item.querySelector("summary");
-      const answer = item.querySelector("p");
+      item.classList.toggle("is-open", !!open);
 
       if (summary)
         summary.setAttribute("aria-expanded", open ? "true" : "false");
-
-      if (answer) {
-        answer.style.maxHeight = open ? "2000px" : "0px";
-        answer.style.paddingTop = open ? "1.6rem" : "0";
-        answer.style.paddingBottom = open ? "2.8rem" : "0";
-        answer.style.opacity = open ? "1" : "0";
-      }
 
       if (scrollIntoView && open) {
         setTimeout(() => {
@@ -1391,18 +1361,9 @@
 
     const canvas = document.createElement("canvas");
     canvas.id = "confetti-canvas";
+    canvas.classList.add("confetti-canvas");
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-
-    Object.assign(canvas.style, {
-      position: "fixed",
-      top: 0,
-      left: 0,
-      width: "100vw",
-      height: "100vh",
-      pointerEvents: "none",
-      zIndex: 9998,
-    });
 
     canvas.dataset.celebrationEvent =
       "page_completion_by_Mohammad_Rasoul_Sohrabi_user";
@@ -1583,27 +1544,21 @@
 
     const size = Math.random() * 10 + 5;
 
-    Object.assign(sparkle.style, {
-      width: `${size}px`,
-      height: `${size}px`,
-      left: `${(Math.random() * 100).toFixed(2)}%`,
-      top: `${(Math.random() * 100).toFixed(2)}%`,
-      backgroundColor: [
-        "var(--primary-color)",
-        "var(--accent-color)",
-        "var(--highlight-color)",
-      ][(Math.random() * 3) | 0],
-      opacity: 0,
-      position: "absolute",
-      borderRadius: "50%",
-      boxShadow: `0 0 ${size / 2}px ${size / 4}px var(--highlight-color)`,
-      zIndex: 10,
-      pointerEvents: "none",
-    });
+    sparkle.style.setProperty("--sparkle-size", `${size}px`);
+    sparkle.style.setProperty(
+      "--sparkle-x",
+      `${(Math.random() * 100).toFixed(2)}%`
+    );
+    sparkle.style.setProperty(
+      "--sparkle-y",
+      `${(Math.random() * 100).toFixed(2)}%`
+    );
 
-    const cs = getComputedStyle(element);
-    if (!cs.position || cs.position === "static")
-      element.style.position = "relative";
+    sparkle.dataset.sparkleColor = ["primary", "accent", "highlight"][
+      (Math.random() * 3) | 0
+    ];
+
+    element.classList.add("sparkle-host");
 
     element.appendChild(sparkle);
 

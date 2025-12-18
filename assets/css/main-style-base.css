@@ -532,10 +532,70 @@ html[data-color-scheme="light"] {
   top: 0;
   left: 0;
   height: 4px;
-  background: var(--primary-color);
-  width: 0%;
+  width: 100%;
   z-index: 9999;
-  transition: width 0.1s linear;
+  overflow: hidden;
+}
+
+.sohrabi-progress .sohrabi-progress-inner {
+  height: 100%;
+  width: 100%;
+  transform-origin: left center;
+  transform: scaleX(var(--sohrabi-progress, 0));
+  background: var(--primary-color);
+  transition: background-color 0.3s ease-in-out;
+  will-change: transform, background-color;
+}
+
+.sohrabi-progress[data-progress-tone="low"] .sohrabi-progress-inner {
+  background: var(--primary-color);
+}
+
+.sohrabi-progress[data-progress-tone="mid"] .sohrabi-progress-inner {
+  background: var(--accent-color);
+}
+
+.sohrabi-progress[data-progress-tone="high"] .sohrabi-progress-inner {
+  background: var(--highlight-color);
+}
+
+/* Confetti canvas (CSP-safe) */
+.confetti-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* Sparkle host ensures positioning without JS style writes */
+.sparkle-host {
+  position: relative;
+}
+
+.sparkle-effect {
+  width: var(--sparkle-size, 8px);
+  height: var(--sparkle-size, 8px);
+  left: var(--sparkle-x, 50%);
+  top: var(--sparkle-y, 50%);
+  box-shadow:
+    0 0 calc(var(--sparkle-size, 8px) / 2)
+      calc(var(--sparkle-size, 8px) / 4)
+      var(--highlight-color);
+}
+
+.sparkle-effect[data-sparkle-color="primary"] {
+  background-color: var(--primary-color);
+}
+
+.sparkle-effect[data-sparkle-color="accent"] {
+  background-color: var(--accent-color);
+}
+
+.sparkle-effect[data-sparkle-color="highlight"] {
+  background-color: var(--highlight-color);
 }
 
 /* Connect Section Grid Layout */
