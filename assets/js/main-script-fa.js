@@ -403,24 +403,17 @@
     toast.tabIndex = -1;
     if (settings.id) toast.id = settings.id;
 
-    Object.assign(toast.style, {
-      position: "fixed",
-      left: "50%",
-      transform: "translateX(-50%)",
-    });
-
-    if (settings.position === "top") {
-      toast.style.top = "20px";
-      toast.style.bottom = "auto";
-    } else {
-      toast.style.bottom = "20px";
-      toast.style.top = "auto";
-    }
+    // CSP-safe positioning (no style attribute mutations)
+    toast.classList.add("toast-fixed");
+    toast.dataset.toastPosition = settings.position === "top" ? "top" : "bottom";
 
     if (settings.iconClass) {
       const icon = document.createElement("i");
       icon.className = settings.iconClass;
-      if (settings.iconColor) icon.style.color = settings.iconColor;
+      // CSP-safe icon color: use CSS var via inline? no. We'll map known vars or fallback.
+      if (settings.iconColor) {
+        icon.dataset.iconColor = settings.iconColor;
+      }
       icon.setAttribute("aria-hidden", "true");
       toast.appendChild(icon);
     }

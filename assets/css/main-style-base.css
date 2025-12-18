@@ -386,6 +386,48 @@ html {
   scroll-behavior: smooth;
 }
 
+/* CSP-safe color-scheme hook (set by JS via data attribute, not style attr) */
+html[data-color-scheme="dark"] {
+  color-scheme: dark;
+}
+
+html[data-color-scheme="light"] {
+  color-scheme: light;
+}
+
+/* ==========================
+   Dynamic toast (CSP-safe positioning)
+   ========================== */
+
+.toast-fixed {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.toast-fixed[data-toast-position="top"] {
+  top: 20px;
+  bottom: auto;
+}
+
+.toast-fixed[data-toast-position="bottom"] {
+  bottom: 20px;
+  top: auto;
+}
+
+/* map a few known icon colors used in scripts without using inline styles */
+.dynamic-toast i[data-icon-color="var(--primary-color)"] {
+  color: var(--primary-color);
+}
+
+.dynamic-toast i[data-icon-color="var(--accent-color)"] {
+  color: var(--accent-color);
+}
+
+.dynamic-toast i[data-icon-color="var(--highlight-color)"] {
+  color: var(--highlight-color);
+}
+
 /* Hero Section Enhancements */
 .hero {
   position: relative;

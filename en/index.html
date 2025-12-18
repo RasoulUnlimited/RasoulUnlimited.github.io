@@ -3246,16 +3246,16 @@
               <button id="clear-search" aria-label="Clear search">✖</button>
             </div>
 
-            <div class="faq-controls" style="display: flex; justify-content: flex-end; gap: 1rem; margin-bottom: 1.5rem; padding: 0 0.5rem;">
-              <button id="expand-all-faq" class="btn-text-only" aria-label="Expand all questions" style="background: none; border: none; color: var(--primary-color); cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem;">
+            <div class="faq-controls faq-controls-inline">
+              <button id="expand-all-faq" class="btn-text-only faq-control-btn faq-control-btn--primary" aria-label="Expand all questions">
                 <i class="fas fa-plus-circle" aria-hidden="true"></i> Expand All
               </button>
-              <button id="collapse-all-faq" class="btn-text-only" aria-label="Collapse all questions" style="background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem;">
+              <button id="collapse-all-faq" class="btn-text-only faq-control-btn faq-control-btn--muted" aria-label="Collapse all questions">
                 <i class="fas fa-minus-circle" aria-hidden="true"></i> Collapse All
               </button>
             </div>
 
-            <div id="faq-no-results" class="faq-no-results" style="display: none; text-align: center; padding: 2rem; color: var(--text-muted); font-weight: 500;">
+            <div id="faq-no-results" class="faq-no-results faq-no-results--hidden">
               No results found. Please try different keywords.
             </div>
             <div class="faq-container accordion">
@@ -3487,9 +3487,9 @@
               <a href="/en/faq" data-ai-intent="view-detailed-faq">FAQ page</a>.
             </p>
 
-            <div class="faq-footer" style="text-align: center; margin-top: 3rem; padding: 2rem; background: var(--bg-secondary, #f8f9fa); border-radius: 16px; border: 1px dashed var(--border-color, #e1e4e8);">
-              <p style="margin-bottom: 1.5rem; font-weight: 500; font-size: 1.1rem;">Didn't find your answer?</p>
-              <a href="/en/contact.html" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 2rem; border-radius: 50px;">
+            <div class="faq-footer faq-footer-card">
+              <p class="faq-footer__title">Didn't find your answer?</p>
+              <a href="/en/contact.html" class="btn btn-primary faq-footer__cta">
                 <i class="fas fa-envelope" aria-hidden="true"></i> Contact Me
               </a>
             </div>
@@ -3900,28 +3900,28 @@
     <script src="../assets/js/include.min.js" defer></script>
 
     <!-- DISCOVERY SECTION: Link to all important subsections (SEO Optimization) -->
-    <section id="discovery-nav" style="margin: 3rem 0; padding: 2rem; background: #f5f5f5; border-radius: 8px; text-align: center;">
-        <h2 style="margin-bottom: 1.5rem; font-size: 1.5rem; color: #333;">Explore More</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; max-width: 800px; margin: 0 auto;">
-            <a href="/ai/" style="padding: 1rem; text-decoration: none; background: white; border-radius: 4px; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; transition: all 0.3s; border: 1px solid #ddd;">
-                <span style="font-size: 1.5rem;">🤖</span>
-                <span style="font-weight: bold; color: #333;">AI Section</span>
+  <section id="discovery-nav" class="discovery-nav">
+    <h2 class="discovery-nav__title">Explore More</h2>
+    <div class="discovery-nav__grid">
+      <a href="/ai/" class="discovery-nav__card">
+        <span class="discovery-nav__emoji" aria-hidden="true">🤖</span>
+        <span class="discovery-nav__label">AI Section</span>
             </a>
-            <a href="/wiki/rasoul-unlimited/" style="padding: 1rem; text-decoration: none; background: white; border-radius: 4px; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; transition: all 0.3s; border: 1px solid #ddd;">
-                <span style="font-size: 1.5rem;">📖</span>
-                <span style="font-weight: bold; color: #333;">Wiki</span>
+      <a href="/wiki/rasoul-unlimited/" class="discovery-nav__card">
+        <span class="discovery-nav__emoji" aria-hidden="true">📖</span>
+        <span class="discovery-nav__label">Wiki</span>
             </a>
-            <a href="/concepts/authority-feedback-system/" style="padding: 1rem; text-decoration: none; background: white; border-radius: 4px; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; transition: all 0.3s; border: 1px solid #ddd;">
-                <span style="font-size: 1.5rem;">🔄</span>
-                <span style="font-weight: bold; color: #333;">Authority</span>
+      <a href="/concepts/authority-feedback-system/" class="discovery-nav__card">
+        <span class="discovery-nav__emoji" aria-hidden="true">🔄</span>
+        <span class="discovery-nav__label">Authority</span>
             </a>
-            <a href="/concepts/social-gravity-effect/" style="padding: 1rem; text-decoration: none; background: white; border-radius: 4px; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; transition: all 0.3s; border: 1px solid #ddd;">
-                <span style="font-size: 1.5rem;">🌍</span>
-                <span style="font-weight: bold; color: #333;">Gravity</span>
+      <a href="/concepts/social-gravity-effect/" class="discovery-nav__card">
+        <span class="discovery-nav__emoji" aria-hidden="true">🌍</span>
+        <span class="discovery-nav__label">Gravity</span>
             </a>
-            <a href="/concepts/visual-identity-loop/" style="padding: 1rem; text-decoration: none; background: white; border-radius: 4px; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; transition: all 0.3s; border: 1px solid #ddd;">
-                <span style="font-size: 1.5rem;">👁️</span>
-                <span style="font-weight: bold; color: #333;">Identity</span>
+      <a href="/concepts/visual-identity-loop/" class="discovery-nav__card">
+        <span class="discovery-nav__emoji" aria-hidden="true">👁️</span>
+        <span class="discovery-nav__label">Identity</span>
             </a>
         </div>
     </section>

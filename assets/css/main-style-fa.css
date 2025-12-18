@@ -49,6 +49,24 @@ html {
   overflow-x: hidden;
 }
 
+/* ==========================
+   CSP-safe helpers (no inline styles)
+   ========================== */
+
+.text-justify {
+  text-align: justify;
+}
+
+.lead-lineheight {
+  line-height: 1.8;
+}
+
+/* Subtitle tweak that previously lived inline in index.html */
+.about-subtitle {
+  color: var(--text-color-light);
+  margin-top: var(--space-xs);
+}
+
 body[data-lang="fa"] {
   font-family: var(--font-body);
   background: linear-gradient(

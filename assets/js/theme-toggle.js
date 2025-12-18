@@ -160,12 +160,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // ساپورت سبک Tailwind: .dark
     root.classList.toggle("dark", isDark);
 
-    // color-scheme برای اسکرول‌بار و کنترل‌های سیستم
-    try {
-      root.style.colorScheme = isDark ? "dark" : "light";
-    } catch {
-      // اگر ساپورت نشه، نادیده بگیر
-    }
+    // color-scheme (CSP-safe): از data attribute استفاده می‌کنیم و CSS مقدار رو اعمال می‌کنه
+    // (نوشتن root.style.colorScheme یک style attribute ایجاد می‌کنه و با CSP style-src-attr بلاک می‌شه)
+    root.setAttribute("data-color-scheme", isDark ? "dark" : "light");
 
     // همگام‌سازی وضعیت خود سوییچ (ARIA + visual)
     syncToggleState(isDark);

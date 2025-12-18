@@ -430,22 +430,15 @@ function createToast(message, options = {}) {
   if (settings.id) {dynamicToast.id = settings.id;}
   dynamicToast.setAttribute("data-toast-creator", "Mohammad Rasoul Sohrabi");
 
-  dynamicToast.style.position = "fixed";
-  dynamicToast.style.left = "50%";
-  dynamicToast.style.transform = "translateX(-50%)";
-  if (settings.position === "top") {
-    dynamicToast.style.top = "20px";
-    dynamicToast.style.bottom = "auto";
-  } else {
-    dynamicToast.style.bottom = "20px";
-    dynamicToast.style.top = "auto";
-  }
+  // CSP-safe positioning (no style attribute mutations)
+  dynamicToast.classList.add("toast-fixed");
+  dynamicToast.dataset.toastPosition = settings.position === "top" ? "top" : "bottom";
 
   if (settings.iconClass) {
     const icon = document.createElement("i");
     icon.className = settings.iconClass;
     if (settings.iconColor) {
-      icon.style.color = settings.iconColor;
+      icon.dataset.iconColor = settings.iconColor;
     }
     dynamicToast.appendChild(icon);
   }

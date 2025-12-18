@@ -78,6 +78,120 @@
   opacity: 1;
   color: var(--text-color);
 }
+
+/* ==========================
+   CSP-safe helpers (no inline styles)
+   ========================== */
+
+.faq-controls-inline {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 0 0.5rem;
+}
+
+.faq-control-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.faq-control-btn--primary {
+  color: var(--primary-color);
+}
+
+.faq-control-btn--muted {
+  color: var(--text-muted);
+}
+
+.faq-no-results {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.faq-no-results--hidden {
+  display: none;
+}
+
+.faq-footer-card {
+  text-align: center;
+  margin-top: 3rem;
+  padding: 2rem;
+  background: var(--bg-secondary, #f8f9fa);
+  border-radius: 16px;
+  border: 1px dashed var(--border-color, #e1e4e8);
+}
+
+.faq-footer__title {
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+.faq-footer__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+}
+
+.discovery-nav {
+  margin: 3rem 0;
+  padding: 2rem;
+  background: #f5f5f5;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.discovery-nav__title {
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.discovery-nav__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.discovery-nav__card {
+  padding: 1rem;
+  text-decoration: none;
+  background: white;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s;
+  border: 1px solid #ddd;
+}
+
+.discovery-nav__card:hover,
+.discovery-nav__card:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.discovery-nav__emoji {
+  font-size: 1.5rem;
+}
+
+.discovery-nav__label {
+  font-weight: 700;
+  color: #333;
+}
 .dark-mode .micro-profile .u-email {
   color: var(--text-color-link);
 }
