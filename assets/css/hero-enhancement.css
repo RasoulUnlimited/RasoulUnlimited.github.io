@@ -29,6 +29,47 @@
   }
 }
 
+/* Accessibility & robustness */
+:where(.hero-btn, .social-links-hero a, .scroll-down-indicator):focus-visible {
+  outline: 3px solid var(--hero-accent);
+  outline-offset: 3px;
+}
+
+/* Fallback when backdrop-filter isn't supported */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .hero-content-wrapper,
+  .hero-btn.secondary,
+  .social-links-hero a,
+  .status-badge {
+    background: rgba(255, 255, 255, 0.92);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .hero-content-wrapper,
+    .hero-btn.secondary,
+    .social-links-hero a,
+    .status-badge {
+      background: rgba(15, 23, 42, 0.85);
+    }
+  }
+}
+
+/* Respect user preference to reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .hero,
+  .hero::before,
+  .hero .profile-image,
+  .hero-image-wrapper,
+  .hero-image-wrapper::before,
+  .rtl-text,
+  .scroll-down-indicator .wheel,
+  .scroll-down-indicator .arrow-scroll span,
+  .status-dot {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
 .hero {
   position: relative;
   padding: 9rem 1rem 6rem; /* Optimized padding */
@@ -265,112 +306,10 @@
 }
 
 /* Enhanced Buttons */
-.hero-cta-group {
-  display: flex;
-  gap: 1.5rem;
-  margin-top: 2.5rem;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-@media (min-width: 992px) {
-  .hero-cta-group {
-    justify-content: flex-start;
-  }
-}
-
-.hero-btn {
-  padding: 0.85rem 2rem;
-  border-radius: 50px;
-  font-weight: 700;
-  font-family: 'Vazirmatn', sans-serif;
-  text-decoration: none;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-}
-
-.hero-btn.primary {
-  background: var(--hero-text-gradient);
-  color: white;
-  box-shadow: 0 10px 25px -5px var(--hero-shadow-color);
-  border: 2px solid transparent;
-}
-
-.hero-btn.primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 15px 35px -5px var(--hero-shadow-color);
-}
-
-.hero-btn.secondary {
-  background: var(--glass-bg);
-  color: var(--text-color, #1e293b);
-  border: 2px solid var(--glass-border);
-  backdrop-filter: blur(10px);
-}
-
-.hero-btn.secondary:hover {
-  background: rgba(255, 255, 255, 0.9);
-  transform: translateY(-3px);
-  border-color: var(--hero-gradient-start);
-  color: var(--hero-gradient-start);
-}
-
-/* Typography Enhancements */
-#hero-heading {
-  font-family: 'Vazirmatn', sans-serif;
-  font-weight: 900;
-  line-height: 1.2;
-  margin-bottom: 1.5rem;
-}
-
-.eyebrow-text {
-  display: block;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1.1rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: var(--hero-gradient-start);
-  margin-bottom: 0.5rem;
-  opacity: 0.9;
-}
-
-.rtl-text {
-  display: block;
-  font-size: 3.5rem;
-  background: var(--hero-text-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  filter: drop-shadow(0 2px 10px rgba(99, 102, 241, 0.2));
-}
-
-.hero .tagline {
-  font-size: 1.25rem;
-  color: var(--text-color-light, #64748b);
-  max-width: 600px;
-  line-height: 1.8;
-  margin-bottom: 2rem;
-}
-
-/* Typing Effect Cursor */
-.cursor {
-  display: inline-block;
-  width: 3px;
-  background-color: var(--hero-accent);
-  animation: blink 1s step-end infinite;
-  margin-right: 4px;
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
+/*
+  NOTE: The button/typography blocks used to be duplicated below.
+  We keep the later (more complete) definitions as canonical.
+*/
 
 @keyframes float {
   0% { transform: translateY(0px); }
@@ -715,11 +654,6 @@
   top: 1px;
 }
 
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
 /* Dark mode adjustments */
 @media (prefers-color-scheme: dark) {
   .hero-btn.secondary {
@@ -784,62 +718,7 @@
 }
 
 /* Small Mobile Devices */
-@media (max-width: 480px) {
-  .hero {
-    padding-top: 4rem;
-    padding-bottom: 2rem;
-  }
-
-  .hero-grid {
-    gap: 1rem;
-  }
-
-  .hero .profile-image {
-    width: 130px;
-    height: 130px;
-    border-width: 3px;
-  }
-
-  .hero-content-wrapper {
-    padding: 1rem 0.75rem;
-    margin: 0 0.5rem;
-  }
-
-  #hero-heading .rtl-text {
-    font-size: 1.75rem;
-  }
-
-  #hero-heading .eyebrow-text {
-    font-size: 0.75rem;
-  }
-
-  .hero .tagline {
-    font-size: 0.85rem;
-    margin-bottom: 1rem;
-  }
-
-  .hero-cta-group {
-    flex-direction: column;
-    width: 100%;
-    gap: 0.5rem;
-  }
-
-  .hero-btn {
-    width: 100%;
-    padding: 0.75rem 1rem;
-  }
-
-  .social-links-hero {
-    gap: 1rem;
-    margin-top: 1rem;
-  }
-
-  .social-links-hero a {
-    width: 36px;
-    height: 36px;
-    font-size: 1rem;
-  }
-}
+/* (deduped) The 480px mobile block is defined earlier in the file. */
 
 
 
