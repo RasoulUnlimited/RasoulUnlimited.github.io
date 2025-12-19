@@ -68,6 +68,11 @@
     animation: none !important;
     transition: none !important;
   }
+
+  /* Avoid motion from background-position animation and heavy effects */
+  .hero {
+    background-position: 50% 50% !important;
+  }
 }
 
 .hero {
@@ -79,6 +84,8 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  /* Better behavior on mobile browsers with dynamic address bars */
+  min-height: 100svh;
   background-color: var(--bg-color, #f8fafc);
   background-image: 
     radial-gradient(at 40% 20%, rgba(79, 70, 229, 0.1) 0px, transparent 50%),
@@ -281,9 +288,11 @@
               var(--hero-text-gradient) border-box;
   box-shadow: 0 20px 50px var(--hero-shadow-color),
               inset 0 0 20px rgba(79, 70, 229, 0.1);
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  animation: morph-border 8s ease-in-out infinite alternate, 
-             float-image 6s ease-in-out infinite;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              filter 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Keep transforms reserved for hover; float animation happens on the wrapper */
+  animation: morph-border 8s ease-in-out infinite alternate;
   object-fit: cover;
   filter: grayscale(10%);
 }
@@ -292,11 +301,6 @@
   transform: scale(1.05) rotate(2deg);
   box-shadow: 0 30px 60px var(--hero-shadow-color);
   filter: grayscale(0%);
-}
-
-@keyframes float-image {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
 }
 
 @keyframes morph-border {
@@ -367,7 +371,6 @@
 @media (min-width: 992px) {
   .hero-content-wrapper {
     align-items: flex-start;
-    text-align: right; /* RTL alignment */
     padding: 3.5rem;
   }
 }
@@ -459,7 +462,11 @@
   font-weight: 700;
   border-radius: 50px;
   text-decoration: none;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
   z-index: 1;
@@ -518,7 +525,11 @@
 
 .social-links-hero a {
   color: var(--text-color-light, #64748b);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+              box-shadow 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+              background-color 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+              color 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+              border-color 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -681,6 +692,10 @@
 }
 
 /* RTL Specifics */
+[dir="rtl"] .hero-content-wrapper {
+  text-align: right;
+}
+
 [dir="rtl"] .hero-btn i {
   margin-left: 8px;
   margin-right: 0;
@@ -718,7 +733,7 @@
 }
 
 /* Small Mobile Devices */
-/* (deduped) The 480px mobile block is defined earlier in the file. */
+/* (intentionally blank) */
 
 
 
