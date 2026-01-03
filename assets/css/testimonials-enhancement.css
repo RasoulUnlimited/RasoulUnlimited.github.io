@@ -1,427 +1,475 @@
-/* Testimonials Enhancement Styles - Revamped 2.3 (RTL, A11y, Motion, Fallbacks, Perf) */
+/* Testimonials Enhancement Styles - Revamped 2.3
+   (RTL, A11y, Motion, Fallbacks, Perf, Forced-Colors)
+*/
 
 .testimonials-section {
-    position: relative;
-    padding: var(--space-xxxl, 6rem) 0;
-    background: linear-gradient(
-        180deg,
-        transparent 0%,
-        rgba(var(--primary-rgb, 11, 94, 215), 0.02) 100%
-    );
-    margin: var(--space-xxl, 3rem) auto;
-    overflow: hidden;
-    isolation: isolate; /* reliable ::before/::after layering */
-}
-
-/* Containment only when supported (perf + avoids edge issues) */
-@supports (contain: paint) {
-    .testimonials-section {
-        contain: paint; /* decorative layers isolation */
-    }
+  position: relative;
+  padding: var(--space-xxxl, 6rem) 0;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(var(--primary-rgb, 11, 94, 215), 0.02) 100%
+  );
+  margin: var(--space-xxl, 3rem) auto;
+  overflow: hidden;
+  isolation: isolate; /* ensures ::before/::after layering is reliable */
+  contain: paint; /* decorative layers isolation */
 }
 
 /* Decorative background elements */
 .testimonials-section::before,
 .testimonials-section::after {
-    content: "";
-    position: absolute;
-    border-radius: 50%;
-    z-index: 0;
-    pointer-events: none;
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  z-index: 0;
+  pointer-events: none;
+  filter: blur(0.2px);
 }
 
 .testimonials-section::before {
-    top: -10%;
-    right: -5%;
-    width: min(500px, 60vw);
-    height: min(500px, 60vw);
-    background: radial-gradient(
-        circle,
-        rgba(var(--primary-rgb, 11, 94, 215), 0.05) 0%,
-        transparent 70%
-    );
+  top: -10%;
+  right: -5%;
+  width: min(500px, 60vw);
+  height: min(500px, 60vw);
+  background: radial-gradient(
+    circle,
+    rgba(var(--primary-rgb, 11, 94, 215), 0.05) 0%,
+    transparent 70%
+  );
 }
 
 .testimonials-section::after {
-    bottom: -10%;
-    left: -5%;
-    width: min(400px, 55vw);
-    height: min(400px, 55vw);
-    background: radial-gradient(
-        circle,
-        rgba(var(--accent-rgb, 111, 66, 193), 0.05) 0%,
-        transparent 70%
-    );
+  bottom: -10%;
+  left: -5%;
+  width: min(400px, 55vw);
+  height: min(400px, 55vw);
+  background: radial-gradient(
+    circle,
+    rgba(var(--accent-rgb, 111, 66, 193), 0.05) 0%,
+    transparent 70%
+  );
 }
 
 .testimonials-header {
-    text-align: center;
-    margin-bottom: var(--space-xxl, 3rem);
-    position: relative;
-    z-index: 2;
+  text-align: center;
+  margin-bottom: var(--space-xxl, 3rem);
+  position: relative;
+  z-index: 2;
 }
 
 .testimonials-header h2 {
-    font-size: clamp(1.8rem, 3vw, 2.5rem);
-    font-weight: 900;
-    margin-bottom: var(--space-sm, 0.75rem);
-    letter-spacing: -0.5px;
-    display: inline-block;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-weight: 900;
+  margin-bottom: var(--space-sm, 0.75rem);
+  letter-spacing: -0.5px;
+  display: inline-block;
 
-    /* Fallback first */
-    color: var(--text-color, #111);
+  /* Fallback first (so text never disappears) */
+  color: var(--text-color, #111);
 
-    /* Gradient text where supported */
-    background: linear-gradient(
-        135deg,
-        var(--text-color, #111) 0%,
-        var(--primary-color, #0b5ed7) 100%
-    );
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  /* Gradient text where supported */
+  background: linear-gradient(
+    135deg,
+    var(--text-color, #111) 0%,
+    var(--primary-color, #0b5ed7) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /* If gradient clipping isn't supported, keep readable text */
 @supports not ((-webkit-text-fill-color: transparent) and (-webkit-background-clip: text)) {
-    .testimonials-header h2 {
-        background: none;
-        -webkit-text-fill-color: initial;
-        color: var(--text-color, #111);
-    }
+  .testimonials-header h2 {
+    background: none;
+    -webkit-text-fill-color: initial;
+    color: var(--text-color, #111);
+  }
 }
 
 /* New Intro Wrapper Styling */
 .feedback-intro-wrapper {
-    max-width: 1000px;
-    margin: 0 auto var(--space-xxl, 3rem);
-    padding: 0 var(--space-md, 1rem);
-    position: relative;
-    z-index: 2;
+  max-width: 1000px;
+  margin: 0 auto var(--space-xxl, 3rem);
+  padding: 0 var(--space-md, 1rem);
+  position: relative;
+  z-index: 2;
 }
 
 .feedback-intro-content {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: var(--space-xxl, 3rem);
-    align-items: center;
-    background: var(--card-bg, #fff);
-    border: 1px solid var(--border-color, rgba(0, 0, 0, 0.08));
-    border-radius: var(--border-radius-xl, 1.5rem);
-    padding: var(--space-xxl, 3rem);
-    box-shadow: 0 18px 38px -12px rgba(0, 0, 0, 0.06);
-    position: relative;
-    overflow: hidden;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: var(--space-xxl, 3rem);
+  align-items: center;
+  background: var(--card-bg, #fff);
+  border: 1px solid var(--border-color, rgba(0, 0, 0, 0.08));
+  border-radius: var(--border-radius-xl, 1.5rem);
+  padding: var(--space-xxl, 3rem);
+  box-shadow: 0 18px 38px -12px rgba(0, 0, 0, 0.06);
+  position: relative;
+  overflow: hidden;
 }
 
 /* Glass effect / top bar */
 .feedback-intro-content::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    inset-inline: 0;
-    height: 4px;
-    background: linear-gradient(
-        90deg,
-        var(--primary-color, #0b5ed7),
-        var(--accent-color, #6f42c1)
-    );
-    opacity: 0.85;
+  content: "";
+  position: absolute;
+  top: 0;
+  inset-inline: 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--primary-color, #0b5ed7),
+    var(--accent-color, #6f42c1)
+  );
+  opacity: 0.85;
 }
 
-/* RTL/LTR friendly text column:
-   - direction inherits from parent by default
-   - can be controlled via dir attribute on html/body/wrapper
+/* RTL/LTR friendly text column
+   - Inherit from html/body dir
+   - Use logical alignment
 */
 .feedback-text-column {
-    text-align: start; /* start respects RTL/LTR */
+  text-align: start; /* start respects RTL/LTR */
 }
 
-[dir="rtl"] .feedback-text-column {
-    direction: rtl;
-}
-
-[dir="ltr"] .feedback-text-column {
-    direction: ltr;
-}
+/* If you want to force direction per block, use dir attr in HTML:
+   <div class="feedback-text-column" dir="rtl"> ... */
+[dir="ltr"] .feedback-text-column { direction: ltr; }
+[dir="rtl"] .feedback-text-column { direction: rtl; }
 
 .feedback-subtitle {
-    font-size: 1.5rem;
-    font-weight: 800;
-    margin-bottom: var(--space-md, 1rem);
-    color: var(--text-color, #111);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    justify-content: flex-start;
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: var(--space-md, 1rem);
+  color: var(--text-color, #111);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: flex-start;
 }
 
 .feedback-description {
-    font-size: 1.05rem;
-    line-height: 1.8;
-    color: var(--text-muted, rgba(0, 0, 0, 0.65));
-    margin-bottom: 0;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-muted, rgba(0, 0, 0, 0.65));
+  margin-bottom: 0;
 }
 
 .feedback-description strong {
-    color: var(--primary-color, #0b5ed7);
-    font-weight: 700;
+  color: var(--primary-color, #0b5ed7);
+  font-weight: 700;
 }
 
 /* Stats Column */
 .feedback-stats-column {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-md, 1rem);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md, 1rem);
 }
 
 .stat-card {
-    background: var(--bg-secondary, rgba(0, 0, 0, 0.03));
-    padding: var(--space-md, 1rem);
-    border-radius: var(--border-radius-lg, 1rem);
-    text-align: center;
-    border: 1px solid transparent;
+  background: var(--bg-secondary, rgba(0, 0, 0, 0.03));
+  padding: var(--space-md, 1rem);
+  border-radius: var(--border-radius-lg, 1rem);
+  text-align: center;
+  border: 1px solid transparent;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 
-    transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease,
-        background 0.25s ease,
-        border-color 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease;
 
-    /* avoid always-on will-change (perf) */
-    transform: translateZ(0);
+  transform: translateZ(0);
 }
 
-/* Hover effects only on devices that actually hover */
-@media (hover: hover) and (pointer: fine) {
-    .stat-card:hover {
-        transform: translateY(-5px);
-        background: var(--card-bg, #fff);
-        border-color: rgba(var(--primary-rgb, 11, 94, 215), 0.35);
-        box-shadow: 0 10px 22px -10px rgba(var(--primary-rgb, 11, 94, 215), 0.18);
-        will-change: transform;
-    }
-}
-
-/* A11y focus states (works if stat-card is a link/button or contains focusable elements) */
+/* Perf: will-change only when actually interacting */
+.stat-card:hover,
+.stat-card:focus,
+.stat-card:focus-visible,
 .stat-card:focus-within {
-    outline: 3px solid rgba(var(--primary-rgb, 11, 94, 215), 0.25);
-    outline-offset: 4px;
+  will-change: transform;
 }
 
-.stat-card :focus-visible {
-    outline: 3px solid rgba(var(--primary-rgb, 11, 94, 215), 0.28);
-    outline-offset: 3px;
-    border-radius: 0.75rem;
+/* Hover */
+.stat-card:hover {
+  transform: translateY(-5px);
+  background: var(--card-bg, #fff);
+  border-color: rgba(var(--primary-rgb, 11, 94, 215), 0.35);
+  box-shadow: 0 10px 22px -10px rgba(var(--primary-rgb, 11, 94, 215), 0.18);
+}
+
+/* A11y focus states (works best if stat-card is focusable: tabindex / a / button) */
+.stat-card:focus-within,
+.stat-card:focus,
+.stat-card:focus-visible {
+  outline: 3px solid rgba(var(--primary-rgb, 11, 94, 215), 0.28);
+  outline-offset: 4px;
+}
+
+/* Keep focus visible only for keyboard where supported */
+.stat-card:focus:not(:focus-visible) {
+  outline: none;
 }
 
 .stat-icon {
-    font-size: 1.5rem;
-    color: var(--primary-color, #0b5ed7);
-    margin-bottom: 0.25rem;
+  font-size: 1.5rem;
+  color: var(--primary-color, #0b5ed7);
+  margin-bottom: 0.25rem;
 }
 
 .stat-value {
-    font-weight: 800;
-    font-size: 1.1rem;
-    color: var(--text-color, #111);
-    display: block;
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--text-color, #111);
+  display: block;
 }
 
 .stat-label {
-    font-size: 0.8rem;
-    color: var(--text-muted, rgba(0, 0, 0, 0.65));
-    font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--text-muted, rgba(0, 0, 0, 0.65));
+  font-weight: 600;
 }
 
 /* Giscus Wrapper & Loading */
 .giscus-wrapper {
-    position: relative;
-    min-height: 300px;
-    background: var(--card-bg, #fff);
-    border-radius: var(--border-radius-xl, 1.5rem);
-    box-shadow: 0 10px 36px -14px rgba(0, 0, 0, 0.08);
-    padding: var(--space-xl, 2rem);
-    max-width: 1000px;
-    margin: 0 auto;
-    border: 1px solid var(--border-color, rgba(0, 0, 0, 0.08));
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-    z-index: 2;
-    transform: translateZ(0);
+  position: relative;
+  min-height: 300px;
+  background: var(--card-bg, #fff);
+  border-radius: var(--border-radius-xl, 1.5rem);
+  box-shadow: 0 10px 36px -14px rgba(0, 0, 0, 0.08);
+  padding: var(--space-xl, 2rem);
+  max-width: 1000px;
+  margin: 0 auto;
+  border: 1px solid var(--border-color, rgba(0, 0, 0, 0.08));
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  z-index: 2;
+  transform: translateZ(0);
 }
 
-/* hover only where hover exists */
-@media (hover: hover) and (pointer: fine) {
-    .giscus-wrapper:hover {
-        box-shadow: 0 22px 60px -22px rgba(0, 0, 0, 0.14);
-        transform: translateY(-2px);
-        will-change: transform;
-    }
+.giscus-wrapper:hover {
+  box-shadow: 0 22px 60px -22px rgba(0, 0, 0, 0.14);
+  transform: translateY(-2px);
 }
 
 .giscus-loading {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: var(--card-bg, #fff);
-    z-index: 10;
-    transition: opacity 0.35s ease, visibility 0.35s ease;
-    border-radius: var(--border-radius-xl, 1.5rem);
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--card-bg, #fff);
+  z-index: 10;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+  border-radius: var(--border-radius-xl, 1.5rem);
 }
 
 .giscus-loading.hidden {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .spinner {
-    width: 50px;
-    height: 50px;
-    border: 3px solid rgba(var(--primary-rgb, 11, 94, 215), 0.12);
-    border-top: 3px solid var(--primary-color, #0b5ed7);
-    border-radius: 50%;
-    animation: spin 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
-    margin-bottom: var(--space-md, 1rem);
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(var(--primary-rgb, 11, 94, 215), 0.12);
+  border-top: 3px solid var(--primary-color, #0b5ed7);
+  border-radius: 50%;
+  animation: spin 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+  margin-bottom: var(--space-md, 1rem);
 }
 
 .loading-text {
-    font-weight: 600;
-    color: var(--text-muted, rgba(0, 0, 0, 0.65));
-    letter-spacing: 0.4px;
+  font-weight: 600;
+  color: var(--text-muted, rgba(0, 0, 0, 0.65));
+  letter-spacing: 0.4px;
 }
 
 /* Better focus visibility if wrapper contains focusable children */
 .giscus-wrapper:focus-within {
-    outline: 3px solid rgba(var(--primary-rgb, 11, 94, 215), 0.22);
-    outline-offset: 4px;
+  outline: 3px solid rgba(var(--primary-rgb, 11, 94, 215), 0.22);
+  outline-offset: 4px;
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 /* Reset giscus-container styles when inside wrapper to avoid double boxing */
 .giscus-wrapper .giscus-container {
-    box-shadow: none;
-    background: transparent;
-    border: none;
-    padding: 0;
-    margin-top: 0;
+  box-shadow: none;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin-top: 0;
 }
 
 /* Dark mode adjustments */
 [data-theme="dark"] .feedback-intro-content {
-    background: rgba(255, 255, 255, 0.03);
-    border-color: rgba(255, 255, 255, 0.10);
-    box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.5);
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.10);
+  box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.5);
 }
 
 [data-theme="dark"] .feedback-description {
-    color: rgba(255, 255, 255, 0.70);
+  color: rgba(255, 255, 255, 0.70);
 }
 
 [data-theme="dark"] .stat-card {
-    background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.05);
 }
 
-@media (hover: hover) and (pointer: fine) {
-    [data-theme="dark"] .stat-card:hover {
-        background: rgba(255, 255, 255, 0.09);
-        border-color: rgba(var(--primary-rgb, 11, 94, 215), 0.45);
-    }
+[data-theme="dark"] .stat-card:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(var(--primary-rgb, 11, 94, 215), 0.45);
 }
 
 [data-theme="dark"] .stat-label,
 [data-theme="dark"] .loading-text {
-    color: rgba(255, 255, 255, 0.70);
+  color: rgba(255, 255, 255, 0.70);
 }
 
 [data-theme="dark"] .giscus-wrapper {
-    background: rgba(255, 255, 255, 0.03);
-    border-color: rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.10);
 }
 
 [data-theme="dark"] .giscus-loading {
-    background: rgba(0, 0, 0, 0.15);
+  background: rgba(0, 0, 0, 0.15);
 }
 
 /* Reduced motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
-    .spinner { animation: none; }
-    .stat-card,
-    .giscus-wrapper,
-    .giscus-loading {
-        transition: none !important;
-    }
-    .stat-card:hover,
-    .giscus-wrapper:hover {
-        transform: none;
-        box-shadow: inherit;
-    }
+  .spinner { animation: none; }
+
+  .stat-card,
+  .giscus-wrapper,
+  .giscus-loading {
+    transition: none !important;
+  }
+
+  .stat-card:hover,
+  .giscus-wrapper:hover {
+    transform: none;
+    box-shadow: inherit;
+  }
+}
+
+/* Avoid hover-only effects on touch devices */
+@media (hover: none) {
+  .stat-card:hover,
+  .giscus-wrapper:hover {
+    transform: none;
+    box-shadow: inherit;
+  }
+}
+
+/* Higher contrast preference */
+@media (prefers-contrast: more) {
+  .feedback-intro-content,
+  .giscus-wrapper {
+    border-color: rgba(0, 0, 0, 0.20);
+  }
+
+  [data-theme="dark"] .feedback-intro-content,
+  [data-theme="dark"] .giscus-wrapper {
+    border-color: rgba(255, 255, 255, 0.25);
+  }
+
+  .stat-card:hover {
+    border-color: rgba(var(--primary-rgb, 11, 94, 215), 0.55);
+  }
+}
+
+/* Forced colors (Windows High Contrast) */
+@media (forced-colors: active) {
+  .testimonials-section::before,
+  .testimonials-section::after {
+    display: none;
+  }
+
+  .feedback-intro-content,
+  .giscus-wrapper,
+  .stat-card {
+    forced-color-adjust: auto;
+    border: 1px solid CanvasText;
+    background: Canvas;
+  }
+
+  .testimonials-header h2 {
+    -webkit-text-fill-color: initial;
+    background: none;
+    color: CanvasText;
+  }
+
+  .stat-card:focus,
+  .stat-card:focus-visible,
+  .giscus-wrapper:focus-within {
+    outline: 2px solid Highlight;
+  }
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    .feedback-intro-content {
-        grid-template-columns: 1fr;
-        gap: var(--space-xl, 2rem);
-        padding: var(--space-lg, 1.5rem);
-        text-align: center;
-    }
+  .feedback-intro-content {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl, 2rem);
+    padding: var(--space-lg, 1.5rem);
+    text-align: center;
+  }
 
-    /* keep readable; direction controlled via [dir] */
-    .feedback-text-column {
-        text-align: center;
-    }
+  .feedback-text-column {
+    text-align: center;
+  }
 
-    .feedback-subtitle {
-        justify-content: center;
-    }
+  .feedback-subtitle {
+    justify-content: center;
+  }
 
-    .feedback-stats-column {
-        grid-template-columns: repeat(3, 1fr);
-    }
+  .feedback-stats-column {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 @media (max-width: 480px) {
-    .testimonials-section {
-        padding: var(--space-xl, 2rem) 0;
-    }
+  .testimonials-section {
+    padding: var(--space-xl, 2rem) 0;
+  }
 
-    .testimonials-header h2 {
-        font-size: 1.8rem;
-    }
+  .testimonials-header h2 {
+    font-size: 1.8rem;
+  }
 
-    .feedback-stats-column {
-        grid-template-columns: 1fr;
-        gap: var(--space-sm, 0.75rem);
-    }
+  .feedback-stats-column {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm, 0.75rem);
+  }
 
-    .stat-card {
-        flex-direction: row;
-        justify-content: flex-start;
-        padding: var(--space-md, 1rem);
-        gap: var(--space-md, 1rem);
-        text-align: start;
-    }
+  .stat-card {
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: var(--space-md, 1rem);
+    gap: var(--space-md, 1rem);
+    text-align: start;
+  }
 
-    .stat-icon {
-        margin-bottom: 0;
-        font-size: 1.2rem;
-    }
+  .stat-icon {
+    margin-bottom: 0;
+    font-size: 1.2rem;
+  }
 
-    .stat-value {
-        margin-inline-start: auto; /* RTL/LTR-safe push */
-    }
+  .stat-value {
+    margin-inline-start: auto; /* RTL/LTR-safe push */
+  }
 }
