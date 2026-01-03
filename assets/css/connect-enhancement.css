@@ -1,5 +1,5 @@
 /* =========================================================
-   CONNECT SECTION – Enhanced, DRY & Accessible
+   CONNECT SECTION – Enhanced, DRY & Accessible (Revised)
    ========================================================= */
 
 #connect {
@@ -62,12 +62,19 @@
   flex-direction: column;
   gap: var(--space-md);
   overflow: hidden;
-  backdrop-filter: blur(10px);
   transition: var(--connect-elevated-transition);
 }
 
+/* backdrop-filter with fallback */
+@supports ((-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px))) {
+  #connect .connect-info-block {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+}
+
 #connect .connect-info-block::before {
-  content: '';
+  content: "";
   position: absolute;
   inset-inline: 0;
   top: 0;
@@ -75,9 +82,12 @@
   background: linear-gradient(90deg, var(--primary-color), #4f46e5);
 }
 
-#connect .connect-info-block:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.12);
+/* Hover only on hover-capable devices */
+@media (hover: hover) {
+  #connect .connect-info-block:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.12);
+  }
 }
 
 /* =========================================================
@@ -106,6 +116,7 @@
   background-color: #10b981;
   border-radius: 50%;
   display: inline-block;
+  will-change: box-shadow;
   box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
   animation: pulse-green 2s infinite;
 }
@@ -114,23 +125,6 @@
   0%   { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
   70%  { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
   100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
-}
-
-/* Reduce motion for users who prefer it */
-@media (prefers-reduced-motion: reduce) {
-  #connect .status-dot {
-    animation: none;
-    box-shadow: none;
-  }
-
-  #connect .connect-info-block,
-  #connect .social-link-card,
-  #connect .contact-card-box,
-  #connect .email-icon-wrapper,
-  #connect .copy-btn,
-  #connect .full-width-btn {
-    transition: none !important;
-  }
 }
 
 /* =========================================================
@@ -166,11 +160,27 @@
   transition: var(--connect-elevated-transition);
 }
 
-#connect .contact-card-box:hover {
-  border-color: var(--primary-color);
-  background: var(--card-bg);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-  transform: translateY(-2px);
+/* Hover only on hover-capable devices */
+@media (hover: hover) {
+  #connect .contact-card-box:hover {
+    border-color: var(--primary-color);
+    background: var(--card-bg);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    transform: translateY(-2px);
+  }
+
+  #connect .contact-card-box:hover .email-icon-wrapper {
+    transform: scale(1.1) rotate(-5deg);
+    background: var(--primary-color);
+    color: #fff;
+  }
+
+  #connect .copy-btn:hover {
+    background: rgba(var(--primary-rgb), 0.1);
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    transform: scale(1.05);
+  }
 }
 
 #connect .contact-email-row {
@@ -196,18 +206,13 @@
     color var(--connect-transition-fast);
 }
 
-#connect .contact-card-box:hover .email-icon-wrapper {
-  transform: scale(1.1) rotate(-5deg);
-  background: var(--primary-color);
-  color: #fff;
-}
-
 #connect .email-content {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   overflow: hidden;
-  min-width: 0;
+  min-width: 0; /* مهم برای ellipsis در flex */
+  max-width: 100%;
 }
 
 #connect .email-label {
@@ -227,8 +232,9 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  max-width: 100%;
   transition: color var(--connect-transition-fast);
-  font-family: 'Roboto', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: "Roboto", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 #connect .email-link:hover {
@@ -250,11 +256,11 @@
   transition: var(--connect-elevated-transition);
 }
 
-#connect .copy-btn:hover {
-  background: rgba(var(--primary-rgb), 0.1);
-  color: var(--primary-color);
-  border-color: var(--primary-color);
-  transform: scale(1.05);
+/* Better tap feedback on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  #connect .copy-btn:active {
+    transform: scale(0.96);
+  }
 }
 
 /* =========================================================
@@ -308,9 +314,12 @@
   transition: var(--connect-elevated-transition);
 }
 
-#connect .full-width-btn:hover {
-  box-shadow: 0 8px 25px rgba(var(--primary-rgb), 0.45);
-  transform: translateY(-3px);
+/* Hover only on hover-capable devices */
+@media (hover: hover) {
+  #connect .full-width-btn:hover {
+    box-shadow: 0 8px 25px rgba(var(--primary-rgb), 0.45);
+    transform: translateY(-3px);
+  }
 }
 
 /* =========================================================
@@ -321,6 +330,15 @@
 #connect button:focus-visible {
   outline: 2px solid var(--primary-color);
   outline-offset: 3px;
+}
+
+/* Optional: make focus even clearer on cards */
+#connect .social-link-card:focus-visible,
+#connect .copy-btn:focus-visible,
+#connect .full-width-btn:focus-visible,
+#connect .email-link:focus-visible {
+  box-shadow: 0 0 0 4px rgba(var(--primary-rgb), 0.18);
+  border-radius: 12px;
 }
 
 /* =========================================================
@@ -350,7 +368,7 @@
 }
 
 #connect .category-title::before {
-  content: '';
+  content: "";
   display: block;
   width: 8px;
   height: 8px;
@@ -360,7 +378,7 @@
 }
 
 #connect .category-title::after {
-  content: '';
+  content: "";
   flex-grow: 1;
   height: 1px;
   background: var(--border-color);
@@ -400,7 +418,7 @@
 }
 
 #connect .social-link-card::after {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background: var(--brand-color);
@@ -410,14 +428,26 @@
   z-index: 0;
 }
 
-#connect .social-link-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.1);
-  border-color: var(--brand-color, var(--primary-color));
-}
+/* Hover only on hover-capable devices */
+@media (hover: hover) {
+  #connect .social-link-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.1);
+    border-color: var(--brand-color, var(--primary-color));
+  }
 
-#connect .social-link-card:hover::after {
-  opacity: 0.06;
+  #connect .social-link-card:hover::after {
+    opacity: 0.06;
+  }
+
+  #connect .social-link-card:hover i {
+    transform: scale(1.2) rotate(5deg);
+    color: var(--brand-color);
+  }
+
+  #connect .social-link-card:hover span {
+    color: var(--brand-color);
+  }
 }
 
 #connect .social-link-card i {
@@ -435,15 +465,6 @@
   font-size: 0.95rem;
   z-index: 1;
   transition: color var(--connect-transition-fast);
-}
-
-#connect .social-link-card:hover i {
-  transform: scale(1.2) rotate(5deg);
-  color: var(--brand-color);
-}
-
-#connect .social-link-card:hover span {
-  color: var(--brand-color);
 }
 
 /* Brand Colors */
@@ -495,6 +516,27 @@
 }
 
 /* =========================================================
+   REDUCE MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  #connect .status-dot {
+    animation: none;
+    box-shadow: none;
+  }
+
+  #connect .connect-info-block,
+  #connect .social-link-card,
+  #connect .contact-card-box,
+  #connect .email-icon-wrapper,
+  #connect .copy-btn,
+  #connect .full-width-btn {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+/* =========================================================
    MOBILE OPTIMIZATIONS
    ========================================================= */
 
@@ -539,6 +581,7 @@
     background: var(--bg-secondary);
   }
 
+  /* Touch feedback */
   #connect .social-link-card:active {
     transform: scale(0.96);
   }

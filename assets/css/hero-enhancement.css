@@ -10,9 +10,9 @@
   --glass-border: rgba(255, 255, 255, 0.5);
   --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
   --particle-color: rgba(79, 70, 229, 0.15);
-  --hero-bg-mesh: 
-      radial-gradient(at 0% 0%, hsla(253,16%,96%,1) 0, transparent 50%), 
-      radial-gradient(at 50% 0%, hsla(225,39%,97%,1) 0, transparent 50%), 
+  --hero-bg-mesh:
+      radial-gradient(at 0% 0%, hsla(253,16%,96%,1) 0, transparent 50%),
+      radial-gradient(at 50% 0%, hsla(225,39%,97%,1) 0, transparent 50%),
       radial-gradient(at 100% 0%, hsla(339,49%,97%,1) 0, transparent 50%);
 
   /* Layout & motion tuning */
@@ -40,9 +40,9 @@
     --glass-border: rgba(255, 255, 255, 0.08);
     --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
     --particle-color: rgba(255, 255, 255, 0.1);
-    --hero-bg-mesh: 
-        radial-gradient(at 0% 0%, hsla(253,16%,10%,1) 0, transparent 50%), 
-        radial-gradient(at 50% 0%, hsla(225,39%,12%,1) 0, transparent 50%), 
+    --hero-bg-mesh:
+        radial-gradient(at 0% 0%, hsla(253,16%,10%,1) 0, transparent 50%),
+        radial-gradient(at 50% 0%, hsla(225,39%,12%,1) 0, transparent 50%),
         radial-gradient(at 100% 0%, hsla(339,49%,12%,1) 0, transparent 50%);
   }
 }
@@ -80,51 +80,56 @@
   }
 }
 
-/* Respect user preference to reduce motion */
+/* Respect user preference to reduce motion (complete) */
 @media (prefers-reduced-motion: reduce) {
   .hero,
   .hero::before,
+  .hero::after,
   .hero .profile-image,
   .hero-image-wrapper,
   .hero-image-wrapper::before,
+  .hero-image-wrapper::after,
   .rtl-text,
+  .hero .tagline .cursor,
   .scroll-down-indicator .wheel,
   .scroll-down-indicator .arrow-scroll span,
   .status-dot {
     animation: none !important;
     transition: none !important;
+    transform: none !important;
   }
 
   /* Avoid motion from background-position animation and heavy effects */
   .hero {
     background-position: 50% 50% !important;
   }
-
-  .hero::after {
-    animation: none !important;
-  }
 }
+
+/* =========================================================
+   HERO BASE
+   ========================================================= */
 
 .hero {
   position: relative;
-  padding: 9rem 1rem 6rem; /* Optimized padding */
+  padding: 9rem 1rem 6rem;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
   min-height: 100vh;
-  /* Better behavior on mobile browsers with dynamic address bars */
   min-height: 100svh;
-  /* Better scrolling and paint containment */
-  contain: layout paint;
+
+  /* safer containment: don't restrict layout calculations for positioned children */
+  contain: paint;
+
   background-color: var(--bg-color, #f8fafc);
   background-image:
     radial-gradient(at 40% 20%, var(--hero-glow-1) 0px, transparent 55%),
     radial-gradient(at 80% 0%, var(--hero-glow-2) 0px, transparent 55%),
     radial-gradient(at 0% 50%, var(--hero-glow-3) 0px, transparent 55%);
   background-size: 140% 140%;
-  /* Subtle motion (less busy than before); animation off in reduced-motion */
   animation: hero-bg-pulse 28s ease-in-out infinite alternate;
 }
 
@@ -139,17 +144,14 @@
 .hero::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
   opacity: 0.4;
   pointer-events: none;
   z-index: 0;
 }
 
-/* Aurora layer (GPU-friendly: opacity + transform only) */
+/* Aurora layer */
 .hero::after {
   content: "";
   position: absolute;
@@ -178,10 +180,7 @@
 
 #hero-particles {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   z-index: 1;
   pointer-events: none;
 }
@@ -196,10 +195,10 @@
   width: 100%;
   z-index: 2;
   padding: 0 var(--hero-container-pad);
-  position: relative; /* anchor ::before texture + avoid accidental absolute positioning to viewport */
+  position: relative;
 }
 
-/* Subtle grid texture behind content (cheap: linear gradients) */
+/* Subtle grid texture behind content */
 .hero-grid::before {
   content: "";
   position: absolute;
@@ -216,8 +215,7 @@
 
 @media (min-width: 992px) {
   .hero-grid {
-    grid-template-columns: 1.2fr 1fr; /* Content left (visually right in RTL), Image right (visually left in RTL) */
-    /* Note: In RTL, column 1 is on the right. So 1.2fr is the content. */
+    grid-template-columns: 1.2fr 1fr;
     gap: 5rem;
   }
 }
@@ -225,54 +223,54 @@
 /* Mobile Optimizations */
 @media (max-width: 991px) {
   .hero {
-    padding: 5rem 0 3rem; /* Container handles safe-area via supports block */
-    min-height: auto; /* Prevent excessive scrolling on small content */
+    padding: 5rem 0 3rem;
+    min-height: auto;
   }
 
   .hero-grid {
-    gap: 1.5rem; /* Reduced from 2rem */
-    padding: 0; /* Remove padding from grid, handle in wrapper */
+    gap: 1.5rem;
+    padding: 0;
     width: 100%;
   }
 
-  /* Show image first on mobile for better personal connection */
   .hero-image-wrapper {
     order: -1;
-    margin-bottom: 0; /* Removed margin */
+    margin-bottom: 0;
   }
 
   .hero .profile-image {
-    width: 160px; /* Reduced from 180px */
+    width: 160px;
     height: 160px;
     box-shadow: 0 10px 25px var(--hero-shadow-color);
   }
 
   .hero-content-wrapper {
-    margin: 0 1rem; /* keep edge breathing room */
+    margin: 0 1rem;
     width: auto;
     padding: 1.5rem 1rem;
     text-align: center;
-    background: var(--glass-bg); /* Ensure background is visible */
+    background: var(--glass-bg);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-radius: 1rem;
     border: 1px solid var(--glass-border);
-    overflow: hidden; /* Prevent overflow */
+    overflow: hidden;
   }
 
   #hero-heading .rtl-text {
-    font-size: clamp(1.5rem, 7vw, 2.5rem); /* Reduced min size and scaling */
+    font-size: clamp(1.5rem, 7vw, 2.5rem);
     line-height: 1.2;
     margin-bottom: 0.5rem;
     display: block;
-    word-wrap: break-word; /* Ensure long words break */
+    word-wrap: break-word;
   }
 
   #hero-heading .eyebrow-text {
-    font-size: 0.85rem; /* Ensure specific size */
-    letter-spacing: 0.5px; /* Reduced spacing */
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
     margin-bottom: 0.5rem;
     display: block;
-    white-space: normal; /* Allow wrapping */
+    white-space: normal;
     word-wrap: break-word;
     opacity: 0.9;
     font-weight: 600;
@@ -288,20 +286,20 @@
 
   .hero-cta-group {
     gap: 0.75rem;
-    flex-direction: row; /* Changed to row */
+    flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
   }
 
   .hero-btn {
-    width: auto; /* Allow buttons to size to content */
-    min-width: 120px; /* Reduced min-width */
-    padding: 0.6rem 1rem; /* Reduced padding */
+    width: auto;
+    min-width: 120px;
+    padding: 0.6rem 1rem;
     font-size: 0.9rem;
-    flex: 1; /* Distribute space evenly */
-    white-space: nowrap; /* Prevent text wrapping */
-    justify-content: center; /* Center content */
+    flex: 1;
+    white-space: nowrap;
+    justify-content: center;
   }
 
   .social-links-hero {
@@ -314,8 +312,6 @@
     height: 42px;
     font-size: 1.1rem;
   }
-  
-  /* Scroll indicator is handled lower (static) to avoid overlapping content */
 }
 
 /* Small Mobile Devices */
@@ -326,15 +322,15 @@
   }
 
   .hero-content-wrapper {
-    margin: 0 0.75rem; /* Smaller margin on very small screens */
-    padding: 1.25rem 0.5rem; /* Further reduced padding */
+    margin: 0 0.75rem;
+    padding: 1.25rem 0.5rem;
   }
-  
+
   .hero .profile-image {
-    width: 130px; /* Further reduced */
+    width: 130px;
     height: 130px;
   }
-  
+
   #hero-heading .rtl-text {
     font-size: 1.6rem;
   }
@@ -344,62 +340,44 @@
   }
 
   .hero-cta-group {
-    flex-direction: column; /* Stack on very small screens */
-    align-items: stretch; /* Stretch buttons to full width */
+    flex-direction: column;
+    align-items: stretch;
   }
 
   .hero-btn {
     width: 100%;
-    margin-bottom: 0.25rem; /* Add spacing */
+    margin-bottom: 0.25rem;
   }
 }
 
 /* ------------------------------------------------------------
-  Core hero visuals (desktop-first refinements)
+  Core hero visuals
   ------------------------------------------------------------ */
 
 .hero .profile-image {
   border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
   border: 4px solid transparent;
-  background: linear-gradient(var(--card-bg, #fff), var(--card-bg, #fff)) padding-box, 
-              var(--hero-text-gradient) border-box;
+  background:
+    linear-gradient(var(--card-bg, #fff), var(--card-bg, #fff)) padding-box,
+    var(--hero-text-gradient) border-box;
   box-shadow: 0 20px 50px var(--hero-shadow-color),
               inset 0 0 20px rgba(79, 70, 229, 0.1);
   transition: transform 0.55s var(--hero-ease),
               box-shadow 0.55s var(--hero-ease),
               filter 0.55s var(--hero-ease);
-  /* Keep transforms reserved for hover; float animation happens on the wrapper */
   animation: morph-border 8s ease-in-out infinite alternate;
   object-fit: cover;
   filter: grayscale(10%);
   will-change: transform;
 }
 
-/* Premium ring glow around the avatar */
-.hero-image-wrapper::after {
-  content: "";
-  position: absolute;
-  width: min(420px, 86vw);
-  height: min(420px, 86vw);
-  border-radius: 999px;
-  background:
-    conic-gradient(from 180deg, rgba(79,70,229,0.0), rgba(79,70,229,0.55), rgba(6,182,212,0.45), rgba(244,63,94,0.35), rgba(79,70,229,0.0));
-  filter: blur(0px);
-  opacity: var(--hero-ring-opacity);
-  z-index: -2;
-  transform: translateZ(0);
-  mask: radial-gradient(circle at 50% 50%, transparent 56%, rgba(0,0,0,1) 58%);
-  animation: ring-spin 18s linear infinite;
-}
-
-@keyframes ring-spin {
-  to { transform: rotate(360deg); }
-}
-
-.hero .profile-image:hover {
-  transform: scale(1.05) rotate(2deg);
-  box-shadow: 0 30px 60px var(--hero-shadow-color);
-  filter: grayscale(0%);
+/* Hover فقط برای دستگاه‌های hoverدار */
+@media (hover: hover) {
+  .hero .profile-image:hover {
+    transform: scale(1.05) rotate(2deg);
+    box-shadow: 0 30px 60px var(--hero-shadow-color);
+    filter: grayscale(0%);
+  }
 }
 
 @keyframes morph-border {
@@ -407,12 +385,6 @@
   50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
   100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
 }
-
-/* Enhanced Buttons */
-/*
-  NOTE: The button/typography blocks used to be duplicated below.
-  We keep the later (more complete) definitions as canonical.
-*/
 
 @keyframes float {
   0% { transform: translateY(0px); }
@@ -431,7 +403,7 @@
 
 /* Decorative elements behind image */
 .hero-image-wrapper::before {
-  content: '';
+  content: "";
   position: absolute;
   width: 120%;
   height: 120%;
@@ -446,6 +418,31 @@
   100% { transform: scale(1.1); opacity: 0.6; }
 }
 
+/* Premium ring glow around the avatar */
+.hero-image-wrapper::after {
+  content: "";
+  position: absolute;
+  width: min(420px, 86vw);
+  height: min(420px, 86vw);
+  border-radius: 999px;
+  background:
+    conic-gradient(from 180deg,
+      rgba(79,70,229,0.0),
+      rgba(79,70,229,0.55),
+      rgba(6,182,212,0.45),
+      rgba(244,63,94,0.35),
+      rgba(79,70,229,0.0));
+  opacity: var(--hero-ring-opacity);
+  z-index: -2;
+  transform: translateZ(0);
+  mask: radial-gradient(circle at 50% 50%, transparent 56%, rgba(0,0,0,1) 58%);
+  animation: ring-spin 18s linear infinite;
+}
+
+@keyframes ring-spin {
+  to { transform: rotate(360deg); }
+}
+
 .hero-content-wrapper {
   display: flex;
   flex-direction: column;
@@ -456,22 +453,37 @@
   background: var(--glass-bg);
   backdrop-filter: blur(var(--hero-blur));
   -webkit-backdrop-filter: blur(var(--hero-blur));
-  border: 1px solid color-mix(in srgb, var(--glass-border), rgba(79, 70, 229, 0.18));
+
+  /* color-mix fallback */
+  border: 1px solid rgba(255, 255, 255, 0.5);
   box-shadow:
     var(--glass-shadow),
     inset 0 0 0 1px rgba(255, 255, 255, 0.14),
     0 1px 0 rgba(255, 255, 255, 0.14);
-  transition: transform 0.45s var(--hero-ease), box-shadow 0.45s var(--hero-ease), border-color 0.45s var(--hero-ease);
-  margin-top: 2rem; /* Ensure space from top */
+
+  transition: transform 0.45s var(--hero-ease),
+              box-shadow 0.45s var(--hero-ease),
+              border-color 0.45s var(--hero-ease);
+  margin-top: 2rem;
   max-width: min(100%, calc(var(--hero-content-max) + 14ch));
   will-change: transform;
-  position: relative; /* anchor ::before edge highlight */
+  position: relative;
 }
 
-.hero-content-wrapper:hover {
-  transform: translateY(-5px) scale(1.01);
-  box-shadow: var(--hero-shadow-strong);
-  border-color: rgba(255, 255, 255, 0.8);
+/* Upgrade border when color-mix is supported */
+@supports (color: color-mix(in srgb, #fff, #000)) {
+  .hero-content-wrapper {
+    border: 1px solid color-mix(in srgb, var(--glass-border), rgba(79, 70, 229, 0.18));
+  }
+}
+
+/* Hover فقط برای دستگاه‌های hoverدار */
+@media (hover: hover) {
+  .hero-content-wrapper:hover {
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: var(--hero-shadow-strong);
+    border-color: rgba(255, 255, 255, 0.8);
+  }
 }
 
 /* Edge highlight on the glass card */
@@ -511,7 +523,7 @@
 
 .eyebrow-text {
   display: block;
-  font-family: 'Montserrat', sans-serif; /* Ensure English font */
+  font-family: "Montserrat", sans-serif;
   font-size: clamp(0.9rem, 1.1vw, 1.1rem);
   font-weight: 700;
   color: var(--primary-color);
@@ -527,7 +539,7 @@
 
 .rtl-text {
   display: block;
-  font-family: 'Vazirmatn', sans-serif;
+  font-family: "Vazirmatn", sans-serif;
   font-size: clamp(2.15rem, 6vw, 4.6rem);
   font-weight: 900;
   background: linear-gradient(135deg, var(--hero-gradient-start), var(--hero-gradient-end), var(--hero-accent));
@@ -535,10 +547,10 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  color: transparent; /* Fallback */
+  color: transparent;
   text-shadow: 0 10px 30px rgba(99, 102, 241, 0.15);
   animation: gradient-text-flow 4.5s linear infinite;
-  padding-top: 0.2em; /* Prevent clipping of top accents */
+  padding-top: 0.2em;
   padding-bottom: 0.1em;
   line-height: 1.3;
 }
@@ -601,33 +613,10 @@
   z-index: 1;
   letter-spacing: 0.5px;
   -webkit-tap-highlight-color: transparent;
-}
-
-/* Premium interactive feel */
-.hero-btn {
   transform: translateZ(0);
 }
 
-.hero-btn.primary {
-  background-size: 140% 140%;
-}
-
-.hero-btn.primary:hover {
-  filter: saturate(112%) contrast(108%);
-}
-
-.hero-btn.secondary {
-  background: color-mix(in srgb, rgba(255,255,255,0.16), transparent 35%);
-}
-
-.hero-btn.secondary:hover {
-  filter: saturate(105%);
-}
-
-.hero-btn i {
-  margin-inline-end: 0.5rem;
-}
-
+.hero-btn i { margin-inline-end: 0.5rem; }
 [dir="rtl"] .hero-btn i {
   margin-inline-end: 0;
   margin-inline-start: 0.5rem;
@@ -638,12 +627,36 @@
   color: white;
   box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
   border: none;
-  position: relative;
-  overflow: hidden;
+  background-size: 140% 140%;
 }
 
+.hero-btn.secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-color);
+  border: 2px solid var(--primary-color);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* Hover فقط روی hover-capable */
+@media (hover: hover) {
+  .hero-btn.primary:hover {
+    filter: saturate(112%) contrast(108%);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(99, 102, 241, 0.6);
+  }
+
+  .hero-btn.secondary:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(99, 102, 241, 0.2);
+  }
+}
+
+/* Shine sweep */
 .hero-btn.primary::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
@@ -653,34 +666,16 @@
   transition: 0.5s;
 }
 
-.hero-btn.primary:hover::after {
-  left: 100%;
-}
-
-.hero-btn.primary:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(99, 102, 241, 0.6);
+@media (hover: hover) {
+  .hero-btn.primary:hover::after {
+    left: 100%;
+  }
 }
 
 .hero-btn:active {
   transform: translateY(-2px);
 }
 
-.hero-btn.secondary {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--text-color);
-  border: 2px solid var(--primary-color);
-  backdrop-filter: blur(4px);
-}
-
-.hero-btn.secondary:hover {
-  background-color: var(--primary-color);
-  color: white;
-  transform: translateY(-4px);
-  box-shadow: 0 10px 25px rgba(99, 102, 241, 0.2);
-}
-
-/* If a CTA is used full-width in other sections, keep it consistent */
 .hero-btn.full-width-btn {
   width: 100%;
 }
@@ -695,18 +690,16 @@
 }
 
 @media (min-width: 992px) {
-  .social-links-hero {
-    justify-content: flex-start;
-  }
+  .social-links-hero { justify-content: flex-start; }
 }
 
 .social-links-hero a {
   color: var(--text-color-light, #64748b);
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-              box-shadow 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-              background-color 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-              color 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-              border-color 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform 0.35s var(--hero-ease),
+              box-shadow 0.35s var(--hero-ease),
+              background-color 0.35s var(--hero-ease),
+              color 0.35s var(--hero-ease),
+              border-color 0.35s var(--hero-ease);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -721,21 +714,28 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+/* Touch feedback */
 .social-links-hero a:active {
   transform: translateY(-2px) scale(1.04);
 }
 
-.social-links-hero a:hover {
-  transform: translateY(-5px) scale(1.1);
-  color: white;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-  border-color: transparent;
-}
+/* Hover only on hover-capable devices */
+@media (hover: hover) {
+  .social-links-hero a:hover {
+    transform: translateY(-5px) scale(1.1);
+    color: white;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    border-color: transparent;
+  }
 
-.social-links-hero a:nth-child(1):hover { background-color: #333; } /* GitHub */
-.social-links-hero a:nth-child(2):hover { background-color: #0077b5; } /* LinkedIn */
-.social-links-hero a:nth-child(3):hover { background-color: #0088cc; } /* Telegram */
-.social-links-hero a:nth-child(4):hover { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); } /* Instagram */
+  .social-links-hero a:nth-child(1):hover { background-color: #333; }
+  .social-links-hero a:nth-child(2):hover { background-color: #0077b5; }
+  .social-links-hero a:nth-child(3):hover { background-color: #0088cc; }
+  .social-links-hero a:nth-child(4):hover {
+    background: radial-gradient(circle at 30% 107%,
+      #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  }
+}
 
 /* Scroll Down Indicator */
 .scroll-down-indicator {
@@ -752,7 +752,6 @@
   z-index: 10;
 }
 
-/* Ensure the indicator link is a proper tap target */
 .scroll-down-indicator a {
   display: inline-flex;
   flex-direction: column;
@@ -764,21 +763,28 @@
   color: inherit;
 }
 
-.scroll-down-indicator a:hover {
-  background: color-mix(in srgb, var(--glass-bg), transparent 55%);
+/* hover فقط روی hover-capable + fallback برای color-mix */
+@media (hover: hover) {
+  .scroll-down-indicator a:hover {
+    background: rgba(255, 255, 255, 0.22);
+  }
+
+  @supports (color: color-mix(in srgb, #fff, #000)) {
+    .scroll-down-indicator a:hover {
+      background: color-mix(in srgb, var(--glass-bg), transparent 55%);
+    }
+  }
+
+  .scroll-down-indicator:hover { opacity: 1; }
 }
 
-/* If the content is short (e.g., mobile hero with min-height:auto), avoid overlaying the button group */
+/* Mobile: avoid overlaying CTA */
 @media (max-width: 991px) {
   .scroll-down-indicator {
     position: static;
     margin-top: 1.5rem;
     transform: none;
   }
-}
-
-.scroll-down-indicator:hover {
-  opacity: 1;
 }
 
 .mouse {
@@ -850,7 +856,7 @@
 .hero .tagline .typing-text {
   display: inline !important;
   font-weight: 800;
-  color: var(--text-color); /* Fallback */
+  color: var(--text-color);
   background: var(--hero-text-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -896,34 +902,21 @@
     border-color: rgba(255,255,255,0.3);
     color: #f1f5f9;
   }
-  
+
   .social-links-hero a {
     background-color: rgba(30, 41, 59, 0.72);
     color: #cbd5e1;
     border-color: rgba(255,255,255,0.1);
   }
-  
-  .mouse {
-    border-color: #cbd5e1;
-  }
-  
-  .wheel {
-    background: #38bdf8;
-  }
-  
-  .arrow-scroll span {
-    border-color: #cbd5e1;
-  }
+
+  .mouse { border-color: #cbd5e1; }
+  .wheel { background: #38bdf8; }
+  .arrow-scroll span { border-color: #cbd5e1; }
 }
 
 /* RTL Specifics */
-[dir="rtl"] .hero-content-wrapper {
-  text-align: right;
-}
-
-[dir="ltr"] .hero-content-wrapper {
-  text-align: left;
-}
+[dir="rtl"] .hero-content-wrapper { text-align: right; }
+[dir="ltr"] .hero-content-wrapper { text-align: left; }
 
 /* Status Badge */
 .status-badge {
@@ -939,6 +932,7 @@
   font-weight: 600;
   margin-bottom: 1.5rem;
   backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 }
 
 .status-dot {
@@ -958,6 +952,3 @@
 
 /* Small Mobile Devices */
 /* (intentionally blank) */
-
-
-

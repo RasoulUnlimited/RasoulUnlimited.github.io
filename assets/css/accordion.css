@@ -157,29 +157,34 @@ html[dir="rtl"] .accordion-header::before {
   color: var(--text-muted, #cfd8dc);
   font-size: 1.1rem;
   line-height: 1.8;
+
   max-height: 0;
   overflow: hidden;
   opacity: 0;
+
   padding-inline: 2.8rem;
-  padding-block-start: 0;
-  padding-block-end: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+
   overflow-wrap: break-word;
-  will-change: max-height, opacity, padding-block;
+  will-change: max-height, opacity, padding-top, padding-bottom;
+
   transition:
     max-height var(--transition-speed-medium, 0.4s) var(--ease-bezier, ease),
-    padding-block var(--transition-speed-medium, 0.4s) var(--ease-bezier, ease),
+    padding-top var(--transition-speed-medium, 0.4s) var(--ease-bezier, ease),
+    padding-bottom var(--transition-speed-medium, 0.4s) var(--ease-bezier, ease),
     opacity var(--transition-speed-medium, 0.4s) ease-out;
 }
 
 /* محتوای باز شده – fallback */
 .accordion-item:is(.is-open, .expanded) > .accordion-content {
   opacity: 1;
-  padding-block-start: 1.6rem;
-  padding-block-end: 2.4rem;
+  padding-top: 1.6rem;
+  padding-bottom: 2.4rem;
   max-height: var(--accordion-content-max, 800px);
 }
 
-/* احترام به prefers-reduced-motion */
+/* احترام به prefers-reduced-motion (بدون باگِ نمایشِ محتوای بسته) */
 @media (prefers-reduced-motion: reduce) {
   .accordion-item,
   .accordion-header,
@@ -187,7 +192,8 @@ html[dir="rtl"] .accordion-header::before {
     transition: none !important;
   }
 
-  .accordion-content {
+  /* فقط وقتی بازه، ارتفاع آزاد باشه؛ وقتی بسته‌ست همون 0 می‌مونه */
+  .accordion-item:is(.is-open, .expanded) > .accordion-content {
     max-height: none !important;
   }
 }
@@ -247,7 +253,7 @@ html[dir="rtl"] .accordion-header::before {
     padding-block: 1.6rem;
     padding-inline: 1.4rem;
     font-size: 1rem;
-    align-items: center; /* آیکون گرد کنار متن بهتر تراز می‌شود */
+    align-items: center;
   }
 
   /* چون خودت آیکون گرد + رو داری، این آیکون متنی رو روی موبایل مخفی می‌کنیم */
@@ -256,7 +262,7 @@ html[dir="rtl"] .accordion-header::before {
   }
 
   .accordion-header .faq-question {
-    text-align: center; /* مثل اسکرین‌شاتت، متن وسط‌چین می‌شود */
+    text-align: center;
   }
 
   .accordion-content {

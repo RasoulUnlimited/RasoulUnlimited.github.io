@@ -31,6 +31,9 @@
   --footer-color: #495057;
   --lang-switcher-active-color: #000;
 
+  /* اضافه شد چون در بخش‌های مختلف (مثل connect) کاربرد دارد */
+  --text-muted: #6c757d;
+
   --border-color: #dee2e6;
   --faq-link-hover-color: #0f172a;
   --timeline-line-color: var(--primary-color);
@@ -50,6 +53,7 @@
   --space-xl: calc(var(--space-unit) * 4);
   --space-xxl: calc(var(--space-unit) * 6);
   --space-xxxl: calc(var(--space-unit) * 10);
+
   /* Fine-grained spacing scale */
   --space-1: 4px;
   --space-2: 8px;
@@ -61,6 +65,7 @@
   --space-8: 32px;
   --space-9: 36px;
   --space-10: 40px;
+
   /* Golden ratio padding values */
   --golden-ratio: 1.618;
   --padding-golden-sm: 0.382rem;
@@ -140,25 +145,15 @@ html[dir="rtl"] {
 }
 
 @keyframes float404 {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(0);
-  }
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
 }
 
 /* --- Generic hero fade-in --- */
 @keyframes fadeInHero {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .hero.fade-in {
@@ -194,9 +189,12 @@ html[dir="rtl"] {
     box-shadow var(--transition-duration-medium) var(--transition-easing-standard);
 }
 
-.card:hover {
-  transform: translateY(calc(var(--space-1) * -1));
-  box-shadow: 0 8px 20px var(--shadow-color-medium);
+/* hover فقط روی دستگاه‌های hoverدار */
+@media (hover: hover) {
+  .card:hover {
+    transform: translateY(calc(var(--space-1) * -1));
+    box-shadow: 0 8px 20px var(--shadow-color-medium);
+  }
 }
 
 /* کارت با فوکوس داخلی (لینک/دکمه) برای کیبورد */
@@ -236,16 +234,22 @@ html[dir="rtl"] {
   text-decoration: none;
   border: none;
   cursor: pointer;
+
+  /* به جای all: سبک‌تر و قابل پیش‌بینی‌تر */
   transition:
     transform var(--transition-duration-short) var(--transition-easing-standard),
     box-shadow var(--transition-duration-short) var(--transition-easing-standard),
-    background-color var(--transition-duration-short)
-      var(--transition-easing-standard);
+    background-color var(--transition-duration-short) var(--transition-easing-standard),
+    color var(--transition-duration-short) var(--transition-easing-standard),
+    border-color var(--transition-duration-short) var(--transition-easing-standard);
 }
 
-.cta-button:hover {
-  transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 6px 15px var(--shadow-color-medium);
+/* hover فقط روی دستگاه‌های hoverدار */
+@media (hover: hover) {
+  .cta-button:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 6px 15px var(--shadow-color-medium);
+  }
 }
 
 /* کیبورد/فوکوس دیداری */
@@ -269,9 +273,11 @@ html[dir="rtl"] {
     box-shadow var(--transition-duration-medium) var(--transition-easing-standard);
 }
 
-.presskit-card:hover {
-  transform: translateY(calc(var(--space-1) * -1));
-  box-shadow: 0 8px 20px var(--shadow-color-medium);
+@media (hover: hover) {
+  .presskit-card:hover {
+    transform: translateY(calc(var(--space-1) * -1));
+    box-shadow: 0 8px 20px var(--shadow-color-medium);
+  }
 }
 
 .presskit-card:focus-within {
@@ -303,19 +309,27 @@ html[dir="rtl"] {
   border: none;
   cursor: pointer;
   transition:
-    background-color var(--transition-duration-short)
-      var(--transition-easing-standard),
+    background-color var(--transition-duration-short) var(--transition-easing-standard),
     transform var(--transition-duration-short) var(--transition-easing-standard),
-    box-shadow var(--transition-duration-short)
-      var(--transition-easing-standard);
+    box-shadow var(--transition-duration-short) var(--transition-easing-standard);
 }
 
-.download-button:hover,
+@media (hover: hover) {
+  .download-button:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--shadow-color-medium);
+    text-decoration: none;
+  }
+}
+
 .download-button:focus-visible {
   background-color: var(--primary-color);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px var(--shadow-color-medium);
+  transform: translateY(-1px);
+  box-shadow: 0 0 0 4px rgba(var(--primary-rgb), 0.2);
   text-decoration: none;
+  outline: 2px solid var(--highlight-color);
+  outline-offset: 3px;
 }
 
 /* Utility sections */
@@ -367,13 +381,16 @@ html[dir="rtl"] {
   box-shadow: 0 2px 6px var(--shadow-color-light);
   transition:
     transform var(--transition-duration-medium) var(--transition-easing-standard),
-    box-shadow var(--transition-duration-medium)
-      var(--transition-easing-standard);
+    box-shadow var(--transition-duration-medium) var(--transition-easing-standard);
 }
-.card-basic:hover {
-  transform: translateY(calc(var(--space-1) * -1));
-  box-shadow: 0 8px 20px var(--shadow-color-medium);
+
+@media (hover: hover) {
+  .card-basic:hover {
+    transform: translateY(calc(var(--space-1) * -1));
+    box-shadow: 0 8px 20px var(--shadow-color-medium);
+  }
 }
+
 .card-basic:focus-within {
   transform: translateY(calc(var(--space-1) * -1));
   box-shadow: 0 8px 24px var(--shadow-color-medium);
@@ -395,15 +412,10 @@ html[dir="rtl"] {
 }
 
 /* Typography */
-.text-center {
-  text-align: center;
-}
-.text-left {
-  text-align: left;
-}
-.text-right {
-  text-align: right;
-}
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
 .section-title {
   font-family: var(--font-heading);
   font-size: clamp(1.8rem, 4vw, 2.8rem);
@@ -442,25 +454,24 @@ html[dir="rtl"] {
   margin-bottom: var(--space-sm);
 }
 
-.security-section li {
-  margin-bottom: var(--space-xs);
-}
+.security-section li { margin-bottom: var(--space-xs); }
+.security-section li:last-child { margin-bottom: 0; }
 
-.security-section li:last-child {
-  margin-bottom: 0;
-}
 .security-section ul {
   list-style: none;
   padding: 0;
 }
+
 .security-section li {
   position: relative;
   padding-left: 1.6rem;
 }
+
 [dir="rtl"] .security-section li {
   padding-right: 1.6rem;
   padding-left: 0;
 }
+
 .security-section li::before {
   content: "\f058";
   font-family: "Font Awesome 6 Free";
@@ -470,6 +481,7 @@ html[dir="rtl"] {
   left: 0;
   top: 0.2em;
 }
+
 [dir="rtl"] .security-section li::before {
   left: auto;
   right: 0;
@@ -486,9 +498,8 @@ html[dir="rtl"] {
   font-weight: 500;
   margin-top: var(--space-sm);
 }
-.contact-form label:first-child {
-  margin-top: 0;
-}
+.contact-form label:first-child { margin-top: 0; }
+
 .contact-form input,
 .contact-form textarea {
   display: block;
@@ -504,16 +515,19 @@ html[dir="rtl"] {
     border-color var(--transition-duration-short) var(--transition-easing-standard),
     box-shadow var(--transition-duration-short) var(--transition-easing-standard);
 }
+
 .contact-form input:focus,
 .contact-form textarea:focus {
   outline: none;
   border-color: var(--primary-color);
   box-shadow: 0 0 0 3px var(--search-focus-shadow);
 }
+
 .contact-form textarea {
   min-height: 6rem;
   resize: vertical;
 }
+
 .contact-form button {
   margin-top: var(--space-md);
   width: fit-content;
@@ -524,38 +538,28 @@ html[dir="rtl"] {
   border-radius: var(--border-radius-md);
   cursor: pointer;
   transition:
-    background-color var(--transition-duration-short)
-      var(--transition-easing-standard),
-    transform var(--transition-duration-short) var(--transition-easing-standard);
+    background-color var(--transition-duration-short) var(--transition-easing-standard),
+    transform var(--transition-duration-short) var(--transition-easing-standard),
+    box-shadow var(--transition-duration-short) var(--transition-easing-standard);
 }
-.contact-form button:hover,
+
+@media (hover: hover) {
+  .contact-form button:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--shadow-color-medium);
+  }
+}
+
 .contact-form button:focus-visible {
-  background-color: var(--primary-color);
-  transform: translateY(-2px);
-}
-
-/* motion-reduction */
-@media (prefers-reduced-motion: reduce) {
-  .cta-button,
-  .presskit-card,
-  .card-basic,
-  .card {
-    transition: none;
-  }
-
-  .cta-button:hover,
-  .presskit-card:hover,
-  .card-basic:hover,
-  .card:hover {
-    transform: none;
-    box-shadow: none;
-  }
+  outline: 3px solid var(--highlight-color);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px rgba(var(--highlight-rgb), 0.25);
 }
 
 /* Code block style for security policy */
 .security-code-block {
-  font-family: ui-monospace, "SFMono-Regular", Menlo, Monaco,
-    "Liberation Mono", monospace;
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Monaco, "Liberation Mono", monospace;
   background-color: var(--container-bg);
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius-md);
@@ -583,7 +587,6 @@ html[dir="rtl"] {
   color: #ff8800;
   font-weight: 500;
 }
-
 .policy-expiration.warning {
   color: var(--highlight-color);
   font-weight: 500;
@@ -630,12 +633,8 @@ html[dir="rtl"] {
 }
 
 @keyframes skeleton-loading {
-  0% {
-    background-position: 200% 0;
-  }
-  to {
-    background-position: -200% 0;
-  }
+  0% { background-position: 200% 0; }
+  to { background-position: -200% 0; }
 }
 
 .skeleton {
@@ -671,20 +670,8 @@ html[dir="rtl"] {
   color: var(--text-color-light);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  [data-aos] {
-    opacity: 1 !important;
-    transform: none !important;
-  }
-  .skeleton {
-    animation: none;
-  }
-}
-
 @keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+  to { transform: rotate(360deg); }
 }
 
 .refresh-button.loading {
@@ -723,18 +710,35 @@ html[dir="rtl"] {
 }
 
 /* 2. Button Micro-interactions (Dopamine: Immediate Feedback) */
-.btn, button, .cta-button, .hero-btn {
+/* اصلاح: transition all حذف شد + hover فقط برای hover-capable */
+.btn,
+button,
+.cta-button,
+.hero-btn {
   position: relative;
   overflow: hidden; /* For ripple effect */
-  transition: all var(--transition-duration-short) var(--transition-easing-smooth);
+  transition:
+    transform var(--transition-duration-short) var(--transition-easing-smooth),
+    box-shadow var(--transition-duration-short) var(--transition-easing-smooth),
+    background-color var(--transition-duration-short) var(--transition-easing-smooth),
+    color var(--transition-duration-short) var(--transition-easing-smooth),
+    border-color var(--transition-duration-short) var(--transition-easing-smooth);
 }
 
-.btn:hover, button:hover, .cta-button:hover, .hero-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px var(--shadow-color-medium);
+@media (hover: hover) {
+  .btn:hover,
+  button:hover,
+  .cta-button:hover,
+  .hero-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--shadow-color-medium);
+  }
 }
 
-.btn:active, button:active, .cta-button:active, .hero-btn:active {
+.btn:active,
+button:active,
+.cta-button:active,
+.hero-btn:active {
   transform: translateY(0);
   box-shadow: 0 2px 6px var(--shadow-color-light);
 }
@@ -763,7 +767,7 @@ html[dir="rtl"] {
 }
 
 .btn-shine::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
@@ -808,23 +812,20 @@ html[dir="rtl"] {
   font-weight: 500;
   min-width: 300px;
   max-width: 90vw;
-  /* Default styling handled in JS or base CSS, adding refinements here */
   backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .dynamic-toast.success {
-  background-color: rgba(16, 185, 129, 0.9); /* Green */
+  background-color: rgba(16, 185, 129, 0.9);
   color: white;
 }
-
 .dynamic-toast.error {
-  background-color: rgba(239, 68, 68, 0.9); /* Red */
+  background-color: rgba(239, 68, 68, 0.9);
   color: white;
 }
-
 .dynamic-toast.info {
-  background-color: rgba(59, 130, 246, 0.9); /* Blue */
+  background-color: rgba(59, 130, 246, 0.9);
   color: white;
 }
 
@@ -839,5 +840,70 @@ html[dir="rtl"] {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* =========================================================
+   motion-reduction (یکپارچه و کامل‌تر)
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  /* transitions */
+  .cta-button,
+  .presskit-card,
+  .card-basic,
+  .card,
+  .btn,
+  button,
+  .hero-btn {
+    transition: none !important;
+  }
+
+  /* hover transforms */
+  .cta-button:hover,
+  .presskit-card:hover,
+  .card-basic:hover,
+  .card:hover,
+  .btn:hover,
+  button:hover,
+  .hero-btn:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  /* disable animations */
+  .not-found-hero h1,
+  .not-found-hero p,
+  .not-found-hero nav,
+  .not-found-hero svg,
+  .hero.fade-in,
+  .fade-in-up,
+  .success-trigger,
+  .ripple,
+  .btn-shine::after,
+  .skeleton,
+  .refresh-button.loading::after {
+    animation: none !important;
+  }
+
+  /* ensure visibility when animations removed */
+  .not-found-hero h1,
+  .not-found-hero p,
+  .not-found-hero nav,
+  .not-found-hero svg,
+  .hero.fade-in,
+  .fade-in-up {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* scroll progress bar: remove transition */
+  #scroll-progress-bar {
+    transition: none !important;
+  }
+
+  /* AOS override (از نسخه‌ی قبلی خودت) */
+  [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
