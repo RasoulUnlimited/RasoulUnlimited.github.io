@@ -1,12 +1,21 @@
-/* Modern minimalist redesign for Security page */
+/* Modern minimalist redesign for Security page - Revamped 1.1 (RTL, A11y, Motion, Fallbacks) */
 
 body.security-page {
   --primary-color: #1d4ed8;
   --accent-color: #2563eb;
+
   --background-start-color: #ffffff;
   --background-end-color: #f8fafc;
+
   --text-color: #374151;
   --heading-color: #111827;
+
+  /* Consistent surfaces */
+  --card-bg: #ffffff;
+  --container-bg: #f9fafb;
+  --border-color: rgba(148, 163, 184, 0.7);
+  --border-color-subtle: rgba(148, 163, 184, 0.25);
+  --shadow-color-light: rgba(15, 23, 42, 0.12);
 
   font-family: var(--font-body, var(--base-font-family, "Roboto", sans-serif));
   color: var(--text-color);
@@ -15,6 +24,23 @@ body.security-page {
     var(--background-start-color),
     var(--background-end-color)
   );
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Helpful default link styling (so non-CTA links aren't "unstyled") */
+body.security-page a {
+  color: var(--primary-color);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+body.security-page a:hover {
+  color: var(--accent-color);
+}
+body.security-page a:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 3px;
+  border-radius: 0.5rem;
 }
 
 /* HERO */
@@ -30,6 +56,7 @@ body.security-page #hero {
 
 body.security-page .hero-text {
   max-width: 600px;
+  text-align: start; /* respects RTL/LTR */
 }
 
 /* Profile image in hero */
@@ -39,10 +66,15 @@ body.security-page .profile-image {
   border-color: var(--primary-color);
   border-radius: var(--border-radius-full, 9999px);
   display: block;
+
   max-width: 220px;
   width: 100%;
   height: auto;
   object-fit: cover;
+
+  /* avoids odd stretching in some layouts */
+  aspect-ratio: 1 / 1;
+
   box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15);
 }
 
@@ -52,6 +84,7 @@ body.security-page .hero-title {
   font-size: clamp(2rem, 6vw, 3rem);
   margin: 0 0 var(--space-sm, 0.75rem);
   color: var(--heading-color);
+  letter-spacing: -0.02em;
 }
 
 body.security-page .tagline {
@@ -67,7 +100,17 @@ body.security-page .hero-links {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   gap: var(--space-sm, 0.75rem);
+}
+
+@media (min-width: 768px) {
+  body.security-page .hero-links {
+    justify-content: flex-start;
+  }
+  html[dir="rtl"] body.security-page .hero-links {
+    justify-content: flex-end;
+  }
 }
 
 body.security-page .hero-links .cta-button {
@@ -76,7 +119,7 @@ body.security-page .hero-links .cta-button {
   border: 1px solid transparent;
   background: var(--primary-color);
   color: #ffffff;
-  font-weight: 500;
+  font-weight: 600;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
@@ -102,18 +145,45 @@ body.security-page .hero-links .cta-button:focus-visible {
   border-color: var(--accent-color);
 }
 
+/* Optional: a secondary button style if you have multiple links */
+body.security-page .hero-links .secondary-link {
+  padding: var(--space-sm, 0.75rem) var(--space-lg, 1.5rem);
+  border-radius: var(--border-radius-full, 9999px);
+  border: 1px solid rgba(37, 99, 235, 0.25);
+  background: transparent;
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+  transition:
+    transform 0.15s ease-out,
+    background-color 0.15s ease-out,
+    border-color 0.15s ease-out;
+}
+
+body.security-page .hero-links .secondary-link:hover {
+  background: rgba(37, 99, 235, 0.06);
+  border-color: rgba(37, 99, 235, 0.35);
+  transform: translateY(-1px);
+}
+
+body.security-page .hero-links .secondary-link:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 3px;
+}
+
 /* RTL-aware layout on larger screens */
 
 @media (min-width: 768px) {
   body.security-page #hero {
     flex-direction: row;
-    text-align: left;
+    text-align: start;
     justify-content: space-between;
+    align-items: center;
+    gap: var(--space-xl, 2rem);
   }
 
   html[dir="rtl"] body.security-page #hero {
     flex-direction: row-reverse;
-    text-align: right;
   }
 
   body.security-page #hero .profile-image {
@@ -143,14 +213,24 @@ body.security-page .policy-container {
   max-width: 860px;
   margin: var(--space-xl, 2rem) auto;
   padding: var(--space-xl, 2rem);
-  background: var(--card-bg, #ffffff);
+  background: var(--card-bg);
   border-radius: var(--border-radius-lg, 1.25rem);
-  box-shadow: 0 8px 32px var(--shadow-color-light, rgba(15, 23, 42, 0.12));
-  border: 1px solid var(--border-color-subtle, rgba(148, 163, 184, 0.25));
+  box-shadow: 0 8px 32px var(--shadow-color-light);
+  border: 1px solid var(--border-color-subtle);
+}
+
+/* Slight hover lift if you want a modern feel (safe + subtle) */
+@media (hover: hover) {
+  body.security-page .policy-container {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  body.security-page .policy-container:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 14px 40px rgba(15, 23, 42, 0.14);
+  }
 }
 
 /* کمی جمع‌تر روی موبایل‌های خیلی کوچک */
-
 @media (max-width: 480px) {
   body.security-page .policy-container {
     margin: var(--space-lg, 1.5rem) var(--space-md, 1rem);
@@ -188,25 +268,40 @@ body.security-page .timeline-search-container {
   margin-bottom: var(--space-md, 1rem);
 }
 
+/* Make it RTL/LTR friendly */
+body.security-page .timeline-search-container {
+  justify-content: flex-start;
+}
+html[dir="rtl"] body.security-page .timeline-search-container {
+  justify-content: flex-end;
+}
+
 body.security-page .timeline-year-filter {
   padding: var(--space-xs, 0.5rem) var(--space-sm, 0.75rem);
-  border: 1px solid var(--border-color, rgba(148, 163, 184, 0.7));
+  border: 1px solid var(--border-color);
   border-radius: var(--border-radius-md, 0.75rem);
-  background-color: var(--container-bg, #f9fafb);
+  background-color: var(--container-bg);
   color: var(--text-color);
   font-size: 0.875rem;
   cursor: pointer;
+
+  /* more consistent height across browsers */
+  line-height: 1.2;
+  min-height: 2.25rem;
+
   transition:
     background-color 0.15s ease-out,
     border-color 0.15s ease-out,
     color 0.15s ease-out,
-    box-shadow 0.15s ease-out;
+    box-shadow 0.15s ease-out,
+    transform 0.15s ease-out;
 }
 
 body.security-page .timeline-year-filter:hover {
-  background-color: #e5edff;
+  background-color: rgba(37, 99, 235, 0.10);
   border-color: var(--primary-color);
   box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.25);
+  transform: translateY(-1px);
 }
 
 body.security-page .timeline-year-filter:focus-visible {
@@ -220,4 +315,65 @@ body.security-page .timeline-year-filter.is-active {
   color: #ffffff;
   border-color: transparent;
   box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.2);
+}
+
+/* Optional disabled state */
+body.security-page .timeline-year-filter:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  body.security-page .hero-links .cta-button,
+  body.security-page .hero-links .secondary-link,
+  body.security-page .policy-container,
+  body.security-page .timeline-year-filter {
+    transition: none !important;
+  }
+
+  body.security-page .hero-links .cta-button:hover,
+  body.security-page .hero-links .secondary-link:hover,
+  body.security-page .policy-container:hover,
+  body.security-page .timeline-year-filter:hover {
+    transform: none !important;
+  }
+}
+
+/* Avoid hover-only effects on touch devices */
+@media (hover: none) {
+  body.security-page .hero-links .cta-button:hover,
+  body.security-page .hero-links .secondary-link:hover,
+  body.security-page .timeline-year-filter:hover,
+  body.security-page .policy-container:hover {
+    transform: none;
+    box-shadow: inherit;
+  }
+}
+
+/* Optional: Dark mode support if your site uses data-theme */
+[data-theme="dark"] body.security-page {
+  --background-start-color: #0b1220;
+  --background-end-color: #0f172a;
+  --text-color: rgba(255, 255, 255, 0.78);
+  --heading-color: rgba(255, 255, 255, 0.92);
+
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --container-bg: rgba(255, 255, 255, 0.05);
+  --border-color: rgba(148, 163, 184, 0.35);
+  --border-color-subtle: rgba(148, 163, 184, 0.22);
+  --shadow-color-light: rgba(0, 0, 0, 0.45);
+}
+
+[data-theme="dark"] body.security-page .profile-image {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+[data-theme="dark"] body.security-page a {
+  color: #93c5fd;
+}
+[data-theme="dark"] body.security-page a:hover {
+  color: #bfdbfe;
 }

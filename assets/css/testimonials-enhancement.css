@@ -1,4 +1,4 @@
-/* Testimonials Enhancement Styles - Revamped 2.1 (Improved RTL, A11y, Motion, Fallbacks) */
+/* Testimonials Enhancement Styles - Revamped 2.2 (RTL, A11y, Motion, Fallbacks, Perf) */
 
 .testimonials-section {
     position: relative;
@@ -11,6 +11,7 @@
     margin: var(--space-xxl, 3rem) auto;
     overflow: hidden;
     isolation: isolate; /* ensures ::before/::after layering is reliable */
+    contain: paint; /* decorative layers isolation */
 }
 
 /* Decorative background elements */
@@ -21,6 +22,7 @@
     border-radius: 50%;
     z-index: 0;
     pointer-events: none;
+    filter: blur(0.2px);
 }
 
 .testimonials-section::before {
@@ -42,7 +44,7 @@
     height: min(400px, 55vw);
     background: radial-gradient(
         circle,
-        rgba(var(--accent-rgb, 11, 94, 215), 0.05) 0%,
+        rgba(var(--accent-rgb, 111, 66, 193), 0.05) 0%,
         transparent 70%
     );
 }
@@ -58,12 +60,30 @@
     font-size: clamp(1.8rem, 3vw, 2.5rem);
     font-weight: 900;
     margin-bottom: var(--space-sm, 0.75rem);
-    background: linear-gradient(135deg, var(--text-color, #111) 0%, var(--primary-color, #0b5ed7) 100%);
+    letter-spacing: -0.5px;
+    display: inline-block;
+
+    /* Fallback first (so text never disappears) */
+    color: var(--text-color, #111);
+
+    /* Gradient text where supported */
+    background: linear-gradient(
+        135deg,
+        var(--text-color, #111) 0%,
+        var(--primary-color, #0b5ed7) 100%
+    );
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    display: inline-block;
-    letter-spacing: -0.5px;
+}
+
+/* If gradient clipping isn't supported, keep readable text */
+@supports not ((-webkit-text-fill-color: transparent) and (-webkit-background-clip: text)) {
+    .testimonials-header h2 {
+        background: none;
+        -webkit-text-fill-color: initial;
+        color: var(--text-color, #111);
+    }
 }
 
 /* New Intro Wrapper Styling */
@@ -104,10 +124,26 @@
     opacity: 0.85;
 }
 
-/* RTL-friendly text column */
+/* RTL/LTR friendly text column
+   - prefer inheriting direction from parent (html/body)
+   - allow forcing via wrapper dir attribute
+*/
+.feedback-text-column {
+    text-align: start; /* start respects RTL/LTR */
+}
+
+/* If you want this block always RTL, keep this.
+   Otherwise comment it out and set dir="rtl" on html/body when needed. */
 .feedback-text-column {
     direction: rtl;
-    text-align: start; /* start respects RTL/LTR */
+}
+
+/* If parent dir controls layout, this helps when direction differs */
+[dir="ltr"] .feedback-text-column {
+    direction: ltr;
+}
+[dir="rtl"] .feedback-text-column {
+    direction: rtl;
 }
 
 .feedback-subtitle {
@@ -145,21 +181,41 @@
     padding: var(--space-md, 1rem);
     border-radius: var(--border-radius-lg, 1rem);
     text-align: center;
-    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
     border: 1px solid transparent;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease,
+        border-color 0.25s ease;
+
     will-change: transform;
+    transform: translateZ(0);
 }
 
+/* Hover */
 .stat-card:hover {
     transform: translateY(-5px);
     background: var(--card-bg, #fff);
     border-color: rgba(var(--primary-rgb, 11, 94, 215), 0.35);
     box-shadow: 0 10px 22px -10px rgba(var(--primary-rgb, 11, 94, 215), 0.18);
+}
+
+/* A11y focus states (works if stat-card is a link/button or contains focusable elements) */
+.stat-card:focus-within {
+    outline: 3px solid rgba(var(--primary-rgb, 11, 94, 215), 0.25);
+    outline-offset: 4px;
+}
+.stat-card :focus-visible {
+    outline: 3px solid rgba(var(--primary-rgb, 11, 94, 215), 0.28);
+    outline-offset: 3px;
+    border-radius: 0.75rem;
 }
 
 .stat-icon {
@@ -194,6 +250,7 @@
     border: 1px solid var(--border-color, rgba(0, 0, 0, 0.08));
     transition: box-shadow 0.3s ease, transform 0.3s ease;
     z-index: 2;
+    transform: translateZ(0);
 }
 
 .giscus-wrapper:hover {
@@ -236,7 +293,7 @@
     letter-spacing: 0.4px;
 }
 
-/* Optional: better focus visibility if wrapper is focusable */
+/* Better focus visibility if wrapper contains focusable children */
 .giscus-wrapper:focus-within {
     outline: 3px solid rgba(var(--primary-rgb, 11, 94, 215), 0.22);
     outline-offset: 4px;
@@ -263,6 +320,10 @@
     box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.5);
 }
 
+[data-theme="dark"] .feedback-description {
+    color: rgba(255, 255, 255, 0.70);
+}
+
 [data-theme="dark"] .stat-card {
     background: rgba(255, 255, 255, 0.05);
 }
@@ -272,9 +333,18 @@
     border-color: rgba(var(--primary-rgb, 11, 94, 215), 0.45);
 }
 
+[data-theme="dark"] .stat-label,
+[data-theme="dark"] .loading-text {
+    color: rgba(255, 255, 255, 0.70);
+}
+
 [data-theme="dark"] .giscus-wrapper {
     background: rgba(255, 255, 255, 0.03);
     border-color: rgba(255, 255, 255, 0.10);
+}
+
+[data-theme="dark"] .giscus-loading {
+    background: rgba(0, 0, 0, 0.15);
 }
 
 /* Reduced motion for accessibility */
@@ -288,6 +358,7 @@
     .stat-card:hover,
     .giscus-wrapper:hover {
         transform: none;
+        box-shadow: inherit;
     }
 }
 
@@ -311,7 +382,6 @@
 
     .feedback-text-column {
         text-align: center;
-        direction: rtl;
     }
 
     .feedback-subtitle {
