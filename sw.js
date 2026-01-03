@@ -1,9 +1,13 @@
-// Service Worker Cache Strategy with Dynamic Versioning
-// Update ASSET_VERSION when pushing significant changes to ensure old caches are cleared
+/* Service Worker Cache Strategy with Dynamic Versioning
+   - Update ASSET_VERSION when pushing significant changes to ensure old caches are cleared
+*/
 const ASSET_VERSION = "2025-11-20-v4"; // Bumped to invalidate old caches
-const CACHE_NAME = `ru-security-${ASSET_VERSION}`;
 
-// Asset endpoints to cache
+// Separate caches: precache vs runtime
+const PRECACHE_NAME = `ru-security-precache-${ASSET_VERSION}`;
+const RUNTIME_NAME = `ru-security-runtime-${ASSET_VERSION}`;
+
+// Asset endpoints to precache (same-origin)
 const URLS = [
   "/",
   "/security.html",
@@ -23,130 +27,225 @@ const URLS = [
   "/.well-known/security.txt"
 ];
 
+// Simple offline HTML fallback (inline)
+const OFFLINE_HTML = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Offline</title>
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;padding:2rem;max-width:640px;margin:0 auto;line-height:1.5}
+    h1{color:#222;margin:0 0 0.75rem}
+    p{color:#555;margin:0 0 1rem}
+    .box{padding:1rem 1.25rem;border:1px solid #e5e5e5;border-radius:12px;background:#fafafa}
+    code{background:#eee;padding:0.15rem 0.35rem;border-radius:6px}
+  </style>
+</head>
+<body>
+  <h1>Offline</h1>
+  <div class="box">
+    <p>This content is not available offline.</p>
+    <p>Please check your internet connection and try again.</p>
+  </div>
+</body>
+</html>`;
+
 /**
  * Safely cache URLs with error handling
+ * Uses cache: "reload" to avoid pulling stale entries from the HTTP cache.
  */
-function precacheUrls() {
-  return caches.open(CACHE_NAME).then((cache) => {
-    return cache.addAll(URLS).catch((err) => {
-      // Fallback: add URLs one by one to cache what we can
-      console.warn("Cache.addAll failed, falling back to individual caching:", err);
-      return Promise.all(
-        URLS.map((url) =>
-          cache.add(url).catch((addErr) => {
-            console.warn(`Failed to cache ${url}:`, addErr);
-            // Continue even if individual cache fails
-          })
-        )
-      );
-    });
-  });
+async function precacheUrls() {
+  const cache = await caches.open(PRECACHE_NAME);
+
+  // Prefer “reload” so we don’t re-cache stale browser HTTP cache responses
+  const requests = URLS.map((url) => new Request(url, { cache: "reload" }));
+
+  try {
+    await cache.addAll(requests);
+  } catch (err) {
+    // Fallback: add URLs one by one to cache what we can
+    console.warn("Cache.addAll failed, falling back to individual caching:", err);
+    await Promise.all(
+      requests.map((req) =>
+        cache.add(req).catch((addErr) => {
+          console.warn(`Failed to cache ${req.url}:`, addErr);
+        })
+      )
+    );
+  }
 }
 
-// Install event: cache all static assets
+/**
+ * Helper: only handle same-origin GET requests
+ */
+function isSameOrigin(request) {
+  try {
+    return new URL(request.url).origin === self.location.origin;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Strategy: Network-first for HTML navigations, with cache fallback.
+ * Uses navigation preload response when available.
+ */
+async function handleHtmlRequest(event) {
+  const request = event.request;
+
+  // Use navigation preload if available (Chrome/Edge etc.)
+  const preloadResponse = await event.preloadResponse;
+  if (preloadResponse) {
+    // Update runtime cache in background
+    event.waitUntil((async () => {
+      try {
+        const cache = await caches.open(RUNTIME_NAME);
+        await cache.put(request, preloadResponse.clone());
+      } catch {}
+    })());
+    return preloadResponse;
+  }
+
+  try {
+    const response = await fetch(request);
+
+    // Cache successful responses for offline use (runtime cache)
+    if (response && response.status === 200 && isSameOrigin(request)) {
+      const cache = await caches.open(RUNTIME_NAME);
+      await cache.put(request, response.clone());
+    }
+
+    return response;
+  } catch {
+    // Fall back to caches (runtime first, then precache)
+    const runtime = await caches.match(request);
+    if (runtime) return runtime;
+
+    const precached = await caches.open(PRECACHE_NAME).then((c) => c.match(request));
+    if (precached) return precached;
+
+    return new Response(OFFLINE_HTML, {
+      status: 503,
+      statusText: "Service Unavailable",
+      headers: { "Content-Type": "text/html; charset=utf-8" }
+    });
+  }
+}
+
+/**
+ * Strategy: Stale-While-Revalidate for static assets
+ * - Return cache immediately if exists
+ * - In background fetch and update cache (runtime)
+ */
+async function handleAssetRequest(event) {
+  const request = event.request;
+
+  // Try runtime cache first, then precache
+  const cached = await caches.match(request);
+  if (cached) {
+    // Update in background (best effort, same-origin only)
+    event.waitUntil((async () => {
+      try {
+        if (!isSameOrigin(request)) return;
+        const fresh = await fetch(request);
+        if (fresh && fresh.status === 200) {
+          const cache = await caches.open(RUNTIME_NAME);
+          await cache.put(request, fresh.clone());
+        }
+      } catch {}
+    })());
+
+    return cached;
+  }
+
+  // Not cached → fetch and cache
+  try {
+    const response = await fetch(request);
+
+    // Cache successful same-origin responses (runtime)
+    if (response && response.status === 200 && isSameOrigin(request)) {
+      const cache = await caches.open(RUNTIME_NAME);
+      await cache.put(request, response.clone());
+    }
+
+    return response;
+  } catch {
+    // Fallbacks
+    if (request.destination === "image") {
+      // Try precached fallback image
+      const fallback = await caches.open(PRECACHE_NAME).then((c) => c.match("/assets/images/RasoulUnlimited.webp"));
+      return fallback || new Response("Image not found", { status: 404 });
+    }
+    return new Response("Resource not available", { status: 503 });
+  }
+}
+
+// Install event: precache
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    precacheUrls().then(() => {
-      // Skip waiting to activate immediately when a new version is deployed
-      self.skipWaiting();
-    })
+    (async () => {
+      await precacheUrls();
+      // Activate new SW immediately
+      await self.skipWaiting();
+    })()
   );
 });
 
-// Activate event: clean up old cache versions
+// Activate event: enable navigation preload + clean old caches
 self.addEventListener("activate", (event) => {
   event.waitUntil(
-    Promise.all([
-      caches.keys().then((keys) =>
-        Promise.all(
-          keys
-            .filter((k) => k.startsWith("ru-security-") && k !== CACHE_NAME)
-            .map((k) => {
-              console.warn("Deleting old cache version:", k);
-              return caches.delete(k);
-            })
-        )
-      ),
-      self.clients.claim()
-    ])
+    (async () => {
+      // Enable navigation preload if supported
+      if (self.registration && self.registration.navigationPreload) {
+        try {
+          await self.registration.navigationPreload.enable();
+        } catch {}
+      }
+
+      const keys = await caches.keys();
+      const keep = new Set([PRECACHE_NAME, RUNTIME_NAME]);
+
+      await Promise.all(
+        keys
+          .filter((k) => k.startsWith("ru-security-") && !keep.has(k))
+          .map((k) => {
+            console.warn("Deleting old cache version:", k);
+            return caches.delete(k);
+          })
+      );
+
+      await self.clients.claim();
+    })()
   );
 });
 
-// Fetch event: implement smart caching strategy
+// Optional: allow client to trigger skipWaiting (useful for “Update available” UI)
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.type === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
+});
+
+// Fetch event
 self.addEventListener("fetch", (event) => {
-  if (event.request.method !== "GET") {
+  // Only handle GET
+  if (event.request.method !== "GET") return;
+
+  const accept = event.request.headers.get("accept") || "";
+  const isHtml =
+    event.request.mode === "navigate" ||
+    (accept.includes("text/html"));
+
+  // Only manage same-origin HTML navigations/assets (avoid surprises with third-party requests)
+  if (!isSameOrigin(event.request) && isHtml) {
+    // Let the browser handle cross-origin navigations normally
     return;
   }
 
-  // For HTML documents, prioritize network (fresh content) with fallback to cache
-  if (
-    event.request.mode === "navigate" ||
-    (event.request.method === "GET" &&
-     event.request.headers.get("accept") &&
-     event.request.headers.get("accept").includes("text/html"))
-  ) {
-    event.respondWith(
-      fetch(event.request)
-        .then((response) => {
-          // Cache successful responses for offline use
-          if (response && response.status === 200) {
-            const responseClone = response.clone();
-            const cacheUpdate = caches.open(CACHE_NAME).then((cache) => {
-              return cache.put(event.request, responseClone);
-            });
-            event.waitUntil(cacheUpdate);
-          }
-          return response;
-        })
-        .catch(() => {
-          // Fall back to cache if network is unavailable
-          return caches.match(event.request).then((response) => {
-            return (
-              response ||
-              new Response(
-                "<!DOCTYPE html><html><head><meta charset=\"utf-8\"><title>Offline</title><style>body{font-family:sans-serif;padding:2rem;max-width:600px;margin:0 auto}h1{color:#333}p{color:#666}</style></head><body><h1>Offline</h1><p>This content is not available offline. Please check your internet connection and try again.</p></body></html>",
-                {
-                  status: 503,
-                  statusText: "Service Unavailable",
-                  headers: new Headers({
-                    "Content-Type": "text/html; charset=utf-8"
-                  })
-                }
-              )
-            );
-          });
-        })
-    );
+  if (isHtml) {
+    event.respondWith(handleHtmlRequest(event));
   } else {
-    // For assets (CSS, JS, images), use cache-first with network fallback
-    event.respondWith(
-      caches.match(event.request).then((response) => {
-        if (response) {
-          return response;
-        }
-        return fetch(event.request).then((networkResponse) => {
-          // Cache successful same-origin responses
-          if (
-            networkResponse &&
-            networkResponse.status === 200 &&
-            networkResponse.type === "basic"
-          ) {
-            const responseToCache = networkResponse.clone();
-            caches.open(CACHE_NAME).then((cache) => {
-              cache.put(event.request, responseToCache);
-            });
-          }
-          return networkResponse;
-        });
-      }).catch(() => {
-        // Return a placeholder for failed image requests
-        if (event.request.destination === "image") {
-          return caches.match("/assets/images/RasoulUnlimited.webp").then((fallback) => {
-            return fallback || new Response("Image not found", { status: 404 });
-          });
-        }
-        return new Response("Resource not available", { status: 503 });
-      })
-    );
+    event.respondWith(handleAssetRequest(event));
   }
 });
