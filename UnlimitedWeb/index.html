@@ -43,27 +43,24 @@
         // گرفتن FIXED_S از initData که بات ارسال کرده
         let FIXED_S = "";
 
-        // 1. اول query string را چک کن (برای دیباگ و باز کردن مستقیم)
-        const urlParams = new URLSearchParams(window.location.search);
-        FIXED_S = urlParams.get("s") || FIXED_S;
+        Telegram.WebApp.ready();
+        Telegram.WebApp.expand();
 
-        // 2. اگر هنوز خالی بود، از start_param تلگرام بگیر
-        if (!FIXED_S && Telegram.WebApp.initDataUnsafe?.start_param) {
+        // دریافت داده از بات (اگر وجود داشته باشد)
+        if (Telegram.WebApp.initDataUnsafe.start_param) {
             try {
                 const params = new URLSearchParams(Telegram.WebApp.initDataUnsafe.start_param);
                 FIXED_S = params.get("s") || "";
-            } catch (e) {
-                console.error("Error parsing start_param", e);
-            }
+            } catch (e) {}
         }
 
+        // اگر به هر دلیلی نیامد، یک پیام هشدار نشان بده
         if (!FIXED_S) {
             document.body.innerHTML = `
                 <h2 style="color: red;">خطا</h2>
-                <p>نمی‌توان به سرویس متصل شد. لطفاً ربات را دوباره باز کنید یا با پشتیبانی تماس بگیرید.</p>
+                <p>نمی‌توان به سرویس متصل شد. لطفاً ربات را دوباره باز کنید.</p>
             `;
-            console.error("FIXED_S is empty");
-            // throw را بردار یا کامنت کن تا دیباگ راحت‌تر باشد
+            throw new Error("FIXED_S not received");
         }
 
         function makeProxyLink(url, ip) {
