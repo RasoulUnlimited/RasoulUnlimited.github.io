@@ -98,12 +98,7 @@
         FIXED_S = urlParams.get("s") || FIXED_S;
 
         if (!FIXED_S && Telegram.WebApp.initDataUnsafe?.start_param) {
-            try {
-                const params = new URLSearchParams(Telegram.WebApp.initDataUnsafe.start_param);
-                FIXED_S = params.get("s") || "";
-            } catch (e) {
-                console.error("خطا در خواندن start_param:", e);
-            }
+            FIXED_S = Telegram.WebApp.initDataUnsafe.start_param || "";
         }
 
         if (!FIXED_S) {
