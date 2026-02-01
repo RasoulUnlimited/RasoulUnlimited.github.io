@@ -42,16 +42,21 @@
 
         // گرفتن FIXED_S از initData که بات ارسال کرده
         let FIXED_S = "";
-
         Telegram.WebApp.ready();
         Telegram.WebApp.expand();
 
-        // دریافت داده از بات (اگر وجود داشته باشد)
-        if (Telegram.WebApp.initDataUnsafe.start_param) {
+        // ۱. ابتدا query string را چک کن (برای تست مستقیم در مرورگر)
+        const urlParams = new URLSearchParams(window.location.search);
+        FIXED_S = urlParams.get("s") || FIXED_S;
+
+        // ۲. اگر هنوز نداشتیم، از تلگرام بگیریم
+        if (!FIXED_S && Telegram.WebApp.initDataUnsafe?.start_param) {
             try {
                 const params = new URLSearchParams(Telegram.WebApp.initDataUnsafe.start_param);
                 FIXED_S = params.get("s") || "";
-            } catch (e) {}
+            } catch (e) {
+                console.error("خطا در خواندن start_param:", e);
+            }
         }
 
         // اگر به هر دلیلی نیامد، یک پیام هشدار نشان بده
@@ -60,7 +65,10 @@
                 <h2 style="color: red;">خطا</h2>
                 <p>نمی‌توان به سرویس متصل شد. لطفاً ربات را دوباره باز کنید.</p>
             `;
-            throw new Error("FIXED_S not received");
+            console.error("FIXED_S دریافت نشد");
+        // throw new Error("FIXED_S not received");  ← پیشنهاد: حذف یا کامنت
+        } else {
+            console.log("FIXED_S با موفقیت دریافت شد");
         }
 
         function makeProxyLink(url, ip) {
@@ -93,9 +101,6 @@
             Telegram.WebApp.MainButton.setText('بستن').show().onClick(() => Telegram.WebApp.close());
         }
 
-        // مقداردهی اولیه تلگرام Mini App
-        Telegram.WebApp.ready();
-        Telegram.WebApp.expand();
     </script>
 </body>
 </html>
