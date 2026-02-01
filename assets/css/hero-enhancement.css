@@ -418,30 +418,7 @@
   100% { transform: scale(1.1); opacity: 0.6; }
 }
 
-/* Premium ring glow around the avatar */
-.hero-image-wrapper::after {
-  content: "";
-  position: absolute;
-  width: min(420px, 86vw);
-  height: min(420px, 86vw);
-  border-radius: 999px;
-  background:
-    conic-gradient(from 180deg,
-      rgba(79,70,229,0.0),
-      rgba(79,70,229,0.55),
-      rgba(6,182,212,0.45),
-      rgba(244,63,94,0.35),
-      rgba(79,70,229,0.0));
-  opacity: var(--hero-ring-opacity);
-  z-index: -2;
-  transform: translateZ(0);
-  mask: radial-gradient(circle at 50% 50%, transparent 56%, rgba(0,0,0,1) 58%);
-  animation: ring-spin 18s linear infinite;
-}
 
-@keyframes ring-spin {
-  to { transform: rotate(360deg); }
-}
 
 .hero-content-wrapper {
   display: flex;
