@@ -59,25 +59,30 @@
     <h2>Unlimited Web Proxy</h2>
     
     <div class="preset-buttons">
-        <button onclick="setUrl('https://www.youtube.com')">🎬 یوتیوب</button>
-        <button onclick="setUrl('https://www.instagram.com')">📸 اینستاگرام</button>
-        <button onclick="setUrl('https://www.google.com')">🔍 گوگل</button>
-        <button onclick="setUrl('https://www.tiktok.com')">🎵 تیک‌تاک</button>
-        <button onclick="setUrl('https://www.pinterest.com')">📌 پینترست</button>
-        <button onclick="setUrl('https://x.com')">🐦 توییتر / X</button>
+        <button data-url="https://www.youtube.com">🎬 یوتیوب</button>
+        <button data-url="https://www.instagram.com">📸 اینستاگرام</button>
+        <button data-url="https://www.google.com">🔍 گوگل</button>
+        <button data-url="https://www.tiktok.com">🎵 تیک‌تاک</button>
+        <button data-url="https://www.pinterest.com">📌 پینترست</button>
+        <button data-url="https://x.com">🐦 توییتر / X</button>
     </div>
 
     <p>یا لینک دلخواه خود را وارد کنید:</p>
     <input type="text" id="urlInput" placeholder="https://example.com">
-    <button onclick="generateProxies()">ساخت لینک بدون فیلتر</button>
+    <button id="generateBtn">ساخت لینک بدون فیلتر</button>
 
-    <div id="result" style="margin-top: 30px;"></div>
+    <div id="result"></div>
 
     <script nonce="RasoulCSP">
-        function setUrl(url) {
-            document.getElementById('urlInput').value = url;
-            generateProxies();
-        }
+        // اتصال رویدادها
+        document.querySelectorAll('.preset-buttons button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.getElementById('urlInput').value = btn.dataset.url;
+                generateProxies();
+            });
+        });
+
+        document.getElementById('generateBtn').addEventListener('click', generateProxies);
 
         const PROXY_IPS = [
             "185.16.38.122", "185.16.38.230", "185.16.38.114",
@@ -89,11 +94,9 @@
         Telegram.WebApp.ready();
         Telegram.WebApp.expand();
 
-        // اول query string
         const urlParams = new URLSearchParams(window.location.search);
         FIXED_S = urlParams.get("s") || FIXED_S;
 
-        // بعد start_param تلگرام
         if (!FIXED_S && Telegram.WebApp.initDataUnsafe?.start_param) {
             try {
                 const params = new URLSearchParams(Telegram.WebApp.initDataUnsafe.start_param);
@@ -129,6 +132,7 @@
             if (!url.startsWith('http://') && !url.startsWith('https://')) {
                 url = 'https://' + url;
             }
+
             if (!url.match(/^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/)) {
                 alert('لینک معتبر وارد کنید!');
                 return;
