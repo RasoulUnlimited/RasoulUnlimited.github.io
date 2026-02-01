@@ -5,17 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unlimited Web Proxy</title>
     <script nonce="RasoulCSP" src="https://telegram.org/js/telegram-web-app.js"></script>
-    <style>
-        body { font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 20px; text-align: center; }
-        input { width: 80%; padding: 10px; margin: 10px 0; }
-        button { padding: 10px 20px; background-color: #007bff; color: white; border: none; cursor: pointer; }
-        .proxy-link { margin: 10px; display: block; }
+    <style nonce="RasoulCSP">
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+            text-align: center;
+            margin: 0;
+        }
+        input {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 6px;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .preset-buttons {
+            margin: 20px 0;
+        }
+        .error-container h2 {
+            color: red;
+        }
+        .error-container p {
+            font-size: 1.1em;
+            margin-top: 10px;
+        }
+        .proxy-link {
+            display: block;
+            margin: 12px auto;
+            padding: 12px;
+            background-color: #e6f3ff;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #0066cc;
+            font-weight: bold;
+            max-width: 320px;
+        }
     </style>
 </head>
 <body>
     <h2>Unlimited Web Proxy</h2>
     
-    <div style="margin: 20px 0;">
+    <div class="preset-buttons">
         <button onclick="setUrl('https://www.youtube.com')">🎬 یوتیوب</button>
         <button onclick="setUrl('https://www.instagram.com')">📸 اینستاگرام</button>
         <button onclick="setUrl('https://www.google.com')">🔍 گوگل</button>
@@ -29,6 +72,7 @@
     <button onclick="generateProxies()">ساخت لینک بدون فیلتر</button>
 
     <div id="result" style="margin-top: 30px;"></div>
+
     <script nonce="RasoulCSP">
         function setUrl(url) {
             document.getElementById('urlInput').value = url;
@@ -40,16 +84,16 @@
             "95.214.53.28", "51.159.194.214", "51.159.111.51"
         ];
 
-        // گرفتن FIXED_S از initData که بات ارسال کرده
         let FIXED_S = "";
+
         Telegram.WebApp.ready();
         Telegram.WebApp.expand();
 
-        // ۱. ابتدا query string را چک کن (برای تست مستقیم در مرورگر)
+        // اول query string
         const urlParams = new URLSearchParams(window.location.search);
         FIXED_S = urlParams.get("s") || FIXED_S;
 
-        // ۲. اگر هنوز نداشتیم، از تلگرام بگیریم
+        // بعد start_param تلگرام
         if (!FIXED_S && Telegram.WebApp.initDataUnsafe?.start_param) {
             try {
                 const params = new URLSearchParams(Telegram.WebApp.initDataUnsafe.start_param);
@@ -59,16 +103,16 @@
             }
         }
 
-        // اگر به هر دلیلی نیامد، یک پیام هشدار نشان بده
         if (!FIXED_S) {
             document.body.innerHTML = `
-                <h2 style="color: red;">خطا</h2>
-                <p>نمی‌توان به سرویس متصل شد. لطفاً ربات را دوباره باز کنید.</p>
+                <div class="error-container">
+                    <h2>خطا</h2>
+                    <p>نمی‌توان به سرویس متصل شد.<br>لطفاً ربات را دوباره باز کنید.</p>
+                </div>
             `;
             console.error("FIXED_S دریافت نشد");
-        // throw new Error("FIXED_S not received");  ← پیشنهاد: حذف یا کامنت
         } else {
-            console.log("FIXED_S با موفقیت دریافت شد");
+            console.log("FIXED_S دریافت شد:", FIXED_S);
         }
 
         function makeProxyLink(url, ip) {
@@ -92,15 +136,14 @@
 
             const resultDiv = document.getElementById('result');
             resultDiv.innerHTML = '<p>⚠️ هر لینک فقط برای یک نفر قابل استفاده است.</p>';
+
             PROXY_IPS.forEach((ip, index) => {
                 const proxyUrl = makeProxyLink(url, ip);
-                resultDiv.innerHTML += `<a href="${proxyUrl}" class="proxy-link">🌐 سرور شماره ${index + 1}</a>`;
+                resultDiv.innerHTML += `<a href="${proxyUrl}" class="proxy-link" target="_blank">🌐 سرور شماره ${index + 1}</a>`;
             });
 
-            // ادغام با تلگرام: نمایش دکمه اصلی برای بستن اپ
             Telegram.WebApp.MainButton.setText('بستن').show().onClick(() => Telegram.WebApp.close());
         }
-
     </script>
 </body>
 </html>
