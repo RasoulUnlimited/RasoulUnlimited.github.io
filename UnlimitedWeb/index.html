@@ -14,17 +14,54 @@
 </head>
 <body>
     <h2>Unlimited Web Proxy</h2>
-    <p>لینک سایت فیلترشده را وارد کنید:</p>
+    
+    <div style="margin: 20px 0;">
+        <button onclick="setUrl('https://www.youtube.com')">🎬 یوتیوب</button>
+        <button onclick="setUrl('https://www.instagram.com')">📸 اینستاگرام</button>
+        <button onclick="setUrl('https://www.google.com')">🔍 گوگل</button>
+        <button onclick="setUrl('https://www.tiktok.com')">🎵 تیک‌تاک</button>
+        <button onclick="setUrl('https://www.pinterest.com')">📌 پینترست</button>
+        <button onclick="setUrl('https://x.com')">🐦 توییتر / X</button>
+    </div>
+
+    <p>یا لینک دلخواه خود را وارد کنید:</p>
     <input type="text" id="urlInput" placeholder="https://example.com">
     <button onclick="generateProxies()">ساخت لینک بدون فیلتر</button>
-    <div id="result"></div>
 
+    <div id="result" style="margin-top: 30px;"></div>
     <script>
-        const FIXED_S = "YjdMaGNkQXh5bjh2allsMWRlZXBnRGRFQnZVVkZsU3gvb1Z3SVhvM0pNODFyMGFMUTUzZHNNYWEzVHIwdzhZb0tHM1VORWY0bE54b2psbjd4Sm1ZN2JHNitZOFV6OHFQa1VmQkVOaWxjN3FVbkE5UzhvTXFRelBibktEeVVwQjg%3D";
+        function setUrl(url) {
+            document.getElementById('urlInput').value = url;
+            generateProxies();
+        }
+
         const PROXY_IPS = [
             "185.16.38.122", "185.16.38.230", "185.16.38.114",
             "95.214.53.28", "51.159.194.214", "51.159.111.51"
         ];
+
+        // گرفتن FIXED_S از initData که بات ارسال کرده
+        let FIXED_S = "";
+
+        Telegram.WebApp.ready();
+        Telegram.WebApp.expand();
+
+        // دریافت داده از بات (اگر وجود داشته باشد)
+        if (Telegram.WebApp.initDataUnsafe.start_param) {
+            try {
+                const params = new URLSearchParams(Telegram.WebApp.initDataUnsafe.start_param);
+                FIXED_S = params.get("s") || "";
+            } catch (e) {}
+        }
+
+        // اگر به هر دلیلی نیامد، یک پیام هشدار نشان بده
+        if (!FIXED_S) {
+            document.body.innerHTML = `
+                <h2 style="color: red;">خطا</h2>
+                <p>نمی‌توان به سرویس متصل شد. لطفاً ربات را دوباره باز کنید.</p>
+            `;
+            throw new Error("FIXED_S not received");
+        }
 
         function makeProxyLink(url, ip) {
             try {
