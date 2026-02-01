@@ -47,12 +47,6 @@
         Telegram.WebApp.expand();
 
         // دریافت داده از بات (اگر وجود داشته باشد)
-        if (Telegram.WebApp.initDataUnsafe.start_param) {
-            try {
-                const params = new URLSearchParams(Telegram.WebApp.initDataUnsafe.start_param);
-                FIXED_S = params.get("s") || "";
-            } catch (e) {}
-        }
 
         // اگر به هر دلیلی نیامد، یک پیام هشدار نشان بده
         if (!FIXED_S) {
