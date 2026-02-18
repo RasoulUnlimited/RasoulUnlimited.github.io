@@ -27,6 +27,7 @@
     "lint:strict": "npm run lint -- --max-warnings=0",
     "test": "npm run lint",
     "test:strict": "npm run lint:strict",
+    "seo:verify": "node scripts/seo-verify.mjs",
     "audit": "npm audit --production && npm audit fix",
     "audit:prod": "npm audit --production",
     "clean": "rimraf node_modules .eslintcache",
