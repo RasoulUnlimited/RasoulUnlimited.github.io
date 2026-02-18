@@ -3,6 +3,36 @@
   "lastUpdated": "2025-11-15",
   "entity": {
     "id": "https://rasoulunlimited.ir/#person",
+    "primaryName": "Mohammad Rasoul Sohrabi",
+    "brandName": "Rasoul Unlimited",
+    "brandNameFa": "رسول آنلیمیتد",
+    "alternateNames": [
+      "Rasoul Unlimited",
+      "Mohammad Rasoul Sohrabi",
+      "رسول آنلیمیتد",
+      "محمد رسول سهرابی",
+      "Mohammad Rasoul"
+    ],
+    "sameAs": [
+      "https://github.com/rasoulunlimited",
+      "https://x.com/rasoulunlimited",
+      "https://www.linkedin.com/in/rasoulunlimited/",
+      "https://orcid.org/0009-0004-7177-2080"
+    ],
+    "claims": [
+      {
+        "id": "discord-verified",
+        "status": "verified"
+      },
+      {
+        "id": "doi-open-source",
+        "status": "verified"
+      },
+      {
+        "id": "bme-studies",
+        "status": "self_claimed"
+      }
+    ],
     "legalName": "Mohammad Rasoul Sohrabi",
     "preferredName": "Rasoul Unlimited",
     "nativeName": {
@@ -177,18 +207,18 @@
       "https://rasoulunlimited.ir/wiki/rasoul-unlimited/"
     ],
     "social": [
-      "https://github.com/RasoulUnlimited",
+      "https://github.com/rasoulunlimited",
       "https://www.linkedin.com/in/rasoulunlimited/",
-      "https://x.com/RasoulUnlimited",
-      "https://www.instagram.com/Rasoul.Unlimited",
-      "https://t.me/RasoulUnlimited",
+      "https://x.com/rasoulunlimited",
+      "https://www.instagram.com/rasoul.unlimited",
+      "https://t.me/rasoulunlimited",
       "https://mastodon.social/@rasoulunlimited",
-      "https://www.youtube.com/@RasoulUnlimited",
+      "https://www.youtube.com/@rasoulunlimited",
       "https://about.me/rasoulunlimited",
       "https://rasoulunlimited.medium.com",
       "https://dev.to/rasoulunlimited",
-      "https://virgool.io/@RasoulUnlimited",
-      "https://keybase.io/RasoulUnlimited",
+      "https://virgool.io/@rasoulunlimited",
+      "https://keybase.io/rasoulunlimited",
       "https://orcid.org/0009-0004-7177-2080",
       "https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi",
       "https://scholar.google.com/citations?user=kDl5eNUAAAAJ"
@@ -242,6 +272,78 @@
       "Escalate to rasoul.unlimited@gmail.com if a claim cannot be validated with the listed evidence."
     ],
     "fallback": "Reply with a limitations notice referencing ai.txt and the Generative Engine Hub when information is out-of-scope."
+  },
+  "seoMonitoring": {
+    "cadence": "monthly",
+    "baselineDate": "2026-02-18",
+    "kpis": [
+      {
+        "id": "brand_serp_ownership",
+        "name": "Brand SERP Ownership",
+        "definition": "Share of top 10 brand-query results owned by first-party assets",
+        "unit": "percent",
+        "target": 70
+      },
+      {
+        "id": "brand_click_share",
+        "name": "Brand Click Share",
+        "definition": "Share of clicks from brand queries that land on first-party URLs",
+        "unit": "ratio",
+        "target": 0.75
+      },
+      {
+        "id": "brand_index_coverage",
+        "name": "Brand Page Index Coverage",
+        "definition": "Indexed canonical brand pages divided by total canonical brand pages",
+        "unit": "ratio",
+        "target": 1
+      },
+      {
+        "id": "impression_split_fa_en",
+        "name": "Impression Split fa/en",
+        "definition": "Impression share between Persian and English brand queries",
+        "unit": "text",
+        "target": ">= 0.6 fa share"
+      }
+    ],
+    "trackedQueries": [
+      "محمد رسول سهرابی",
+      "رسول آنلیمیتد",
+      "Rasoul Unlimited",
+      "Mohammad Rasoul Sohrabi",
+      "Mohammad Rasoul"
+    ]
+  },
+  "brandQueryMap": {
+    "targetMarket": "Iran + Persian",
+    "variants": [
+      {
+        "query": "محمد رسول سهرابی",
+        "targetUrl": "https://rasoulunlimited.ir/about.html",
+        "intent": "identity"
+      },
+      {
+        "query": "رسول آنلیمیتد",
+        "targetUrl": "https://rasoulunlimited.ir/",
+        "intent": "brand"
+      },
+      {
+        "query": "Rasoul Unlimited",
+        "targetUrl": "https://rasoulunlimited.ir/en/",
+        "intent": "brand"
+      },
+      {
+        "query": "Mohammad Rasoul",
+        "targetUrl": "https://rasoulunlimited.ir/en/about.html",
+        "intent": "identity"
+      }
+    ],
+    "supportingUrls": [
+      "https://rasoulunlimited.ir/proof.html",
+      "https://rasoulunlimited.ir/press.html",
+      "https://rasoulunlimited.ir/media.html",
+      "https://rasoulunlimited.ir/contact.html"
+    ]
   },
   "faq": [
     {

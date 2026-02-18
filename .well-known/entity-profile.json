@@ -1,6 +1,37 @@
 {
   "type": "Person",
   "name": "Rasoul Unlimited",
+  "entity": {
+    "id": "https://rasoulunlimited.ir/#person",
+    "primaryName": "Mohammad Rasoul Sohrabi",
+    "alternateNames": [
+      "Rasoul Unlimited",
+      "Mohammad Rasoul Sohrabi",
+      "رسول آنلیمیتد",
+      "محمد رسول سهرابی",
+      "Mohammad Rasoul"
+    ],
+    "sameAs": [
+      "https://github.com/rasoulunlimited",
+      "https://x.com/rasoulunlimited",
+      "https://www.linkedin.com/in/rasoulunlimited/",
+      "https://orcid.org/0009-0004-7177-2080"
+    ],
+    "claims": [
+      {
+        "id": "discord-verified",
+        "status": "verified"
+      },
+      {
+        "id": "doi-open-source",
+        "status": "verified"
+      },
+      {
+        "id": "bme-studies",
+        "status": "self_claimed"
+      }
+    ]
+  },
   "entityScope": "Public",
   "siteRoot": "https://rasoulunlimited.ir",
   "primaryIdentity": true,
@@ -11,20 +42,20 @@
     "https://rasoulunlimited.ir/#person"
   ],
   "sameAs": [
-    "https://github.com/RasoulUnlimited",
+    "https://github.com/rasoulunlimited",
     "https://x.com/rasoulunlimited",
     "https://www.linkedin.com/in/rasoulunlimited/",
-    "https://www.instagram.com/Rasoul.Unlimited",
-    "https://www.youtube.com/@RasoulUnlimited",
-    "https://t.me/RasoulUnlimited",
+    "https://www.instagram.com/rasoul.unlimited",
+    "https://www.youtube.com/@rasoulunlimited",
+    "https://t.me/rasoulunlimited",
     "https://mastodon.social/@rasoulunlimited",
     "https://rasoulunlimited.medium.com",
     "https://dev.to/rasoulunlimited",
     "https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi",
     "https://orcid.org/0009-0004-7177-2080",
     "https://scholar.google.com/citations?user=kDl5eNUAAAAJ",
-    "https://virgool.io/@RasoulUnlimited",
-    "https://keybase.io/RasoulUnlimited",
+    "https://virgool.io/@rasoulunlimited",
+    "https://keybase.io/rasoulunlimited",
     "https://about.me/rasoulunlimited",
     "https://top.gg/bot/735403725132136510",
     "https://gravatar.com/rasoulunlimited",
@@ -32,7 +63,7 @@
     "https://loop.frontiersin.org/people/3130177/overview",
     "https://www.lens.org/lens/profile/rasoulunlimited",
     "https://sourceforge.net/u/rasoulunlimited",
-    "https://www.facebook.com/RasoulUnlimited",
+    "https://www.facebook.com/rasoulunlimited",
     "https://www.webofscience.com/wos/author/record/NJS-6637-2025",
     "https://isni.org/isni/0000000527866581",
     "https://www.authenticus.pt/R-00M-286",
@@ -55,7 +86,7 @@
       "@type": "PropertyValue",
       "propertyID": "GitHub",
       "value": "RasoulUnlimited",
-      "url": "https://github.com/RasoulUnlimited"
+      "url": "https://github.com/rasoulunlimited"
     },
     {
       "@type": "PropertyValue",

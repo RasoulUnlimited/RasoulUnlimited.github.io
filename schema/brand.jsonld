@@ -1,96 +1,152 @@
 {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Person",
-        "@id": "https://rasoulunlimited.ir/#person",
-        "name": "Mohammad Rasoul Sohrabi",
-        "alternateName": "Rasoul Unlimited",
-        "url": "https://rasoulunlimited.ir",
-        "description": "Digital creator and full-stack developer behind the Rasoul Unlimited brand.",
-        "affiliation": { "@id": "https://rasoulunlimited.ir/#studio" },
-        "sameAs": [
-          "https://github.com/RasoulUnlimited",
-          "https://x.com/rasoulunlimited",
-          "https://www.linkedin.com/in/rasoulunlimited/",
-          "https://www.instagram.com/Rasoul.Unlimited",
-          "https://www.youtube.com/@RasoulUnlimited",
-          "https://t.me/RasoulUnlimited",
-          "https://mastodon.social/@rasoulunlimited",
-          "https://rasoulunlimited.medium.com",
-          "https://dev.to/rasoulunlimited",
-          "https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi",
-          "https://orcid.org/0009-0004-7177-2080",
-          "https://scholar.google.com/citations?user=kDl5eNUAAAAJ",
-          "https://virgool.io/@RasoulUnlimited",
-          "https://keybase.io/RasoulUnlimited",
-          "https://about.me/rasoulunlimited",
-          "https://top.gg/bot/735403725132136510",
-          "https://gravatar.com/rasoulunlimited",
-          "https://gitlab.com/rasoul.unlimited",
-          "https://loop.frontiersin.org/people/3130177/overview",
-          "https://www.lens.org/lens/profile/rasoulunlimited",
-          "https://sourceforge.net/u/rasoulunlimited",
-          "https://www.facebook.com/RasoulUnlimited",
-          "https://www.webofscience.com/wos/author/record/NJS-6637-2025",
-          "https://isni.org/isni/0000000527866581",
-          "https://www.authenticus.pt/R-00M-286",
-          "https://independent.academia.edu/MohammadRasoulSohrabi",
-          "https://commons.datacite.org/orcid.org/0009-0004-7177-2080",
-          "https://commons.wikimedia.org/wiki/File:Mohammad_Rasoul_Sohrabi_(Rasoul_Unlimited),_2025.jpg"
-        ],
-        "award": [
-          "Top Digital Creator 2023 - Tech Innovators Guild"
-        ]
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://rasoulunlimited.ir/#person",
+      "name": "Mohammad Rasoul Sohrabi",
+      "alternateName": "Rasoul Unlimited",
+      "url": "https://rasoulunlimited.ir",
+      "description": "Digital creator and full-stack developer behind the Rasoul Unlimited brand.",
+      "affiliation": {
+        "@id": "https://rasoulunlimited.ir/#studio"
       },
-      {
-        "@type": "Organization",
-        "@id": "https://rasoulunlimited.ir/#studio",
-        "name": "Rasoul Unlimited Creative Studio",
-        "url": "https://rasoulunlimited.ir",
-        "founder": { "@id": "https://rasoulunlimited.ir/#person" }
-      },
-      {
-        "@type": "CreativeWork",
-        "@id": "https://rasoulunlimited.ir/#featured-work",
-        "url": "https://rasoulunlimited.ir/press.html",
-        "headline": "Press and Media Highlights for Rasoul Unlimited",
-        "creator": { "@id": "https://rasoulunlimited.ir/#person" },
-        "publisher": { "@id": "https://rasoulunlimited.ir/#studio" },
-        "locationCreated": {
-          "@type": "Place",
-          "name": "Karaj, Iran"
-        }
-      },
-      {
-        "@type": "ClaimReview",
-        "@id": "https://rasoulunlimited.ir/#claimReview",
-        "url": "https://rasoulunlimited.ir/press.html",
-        "claimReviewed": "Rasoul Unlimited has been recognized by the Tech Innovators Guild and the Digital Creators Association and has appeared in top publications such as The Creators Chronicle, Innovate Magazine and TechVision Online.",
-        "itemReviewed": { "@id": "https://rasoulunlimited.ir/#person" },
-        "reviewRating": { "@type": "Rating", "ratingValue": 5, "bestRating": 5 },
-        "author": { "@type": "Organization", "name": "Global Creative Review Board" },
-        "datePublished": "2024-05-15"
-      },
-      {
-        "@type": "ClaimReview",
-        "@id": "https://rasoulunlimited.ir/#discord-claim",
-        "url": "https://top.gg/bot/735403725132136510",
-        "claimReviewed": "The Persian Discord bot created by Rasoul Unlimited is officially verified by Discord's Verified Bots program.",
-        "itemReviewed": { "@id": "https://rasoulunlimited.ir/#person" },
-        "reviewRating": { "@type": "Rating", "ratingValue": 5, "bestRating": 5 },
-        "author": { "@type": "Organization", "name": "Discord Inc." },
-        "datePublished": "2020-10-01"
-      },
-      {
-        "@type": "ClaimReview",
-        "@id": "https://rasoulunlimited.ir/#academic-claim",
-        "url": "https://ctb.iau.ir",
-        "claimReviewed": "Mohammad Rasoul Sohrabi is an officially enrolled biomedical engineering student at Islamic Azad University Central Tehran Branch.",
-        "itemReviewed": { "@id": "https://rasoulunlimited.ir/#person" },
-        "reviewRating": { "@type": "Rating", "ratingValue": 5, "bestRating": 5 },
-        "author": { "@type": "EducationalOrganization", "name": "Islamic Azad University Central Tehran Branch" },
-        "datePublished": "2023-09-01"
+      "sameAs": [
+        "https://github.com/rasoulunlimited",
+        "https://x.com/rasoulunlimited",
+        "https://www.linkedin.com/in/rasoulunlimited/",
+        "https://www.instagram.com/rasoul.unlimited",
+        "https://www.youtube.com/@rasoulunlimited",
+        "https://t.me/rasoulunlimited",
+        "https://mastodon.social/@rasoulunlimited",
+        "https://rasoulunlimited.medium.com",
+        "https://dev.to/rasoulunlimited",
+        "https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi",
+        "https://orcid.org/0009-0004-7177-2080",
+        "https://scholar.google.com/citations?user=kDl5eNUAAAAJ",
+        "https://virgool.io/@rasoulunlimited",
+        "https://keybase.io/rasoulunlimited",
+        "https://about.me/rasoulunlimited",
+        "https://top.gg/bot/735403725132136510",
+        "https://gravatar.com/rasoulunlimited",
+        "https://gitlab.com/rasoul.unlimited",
+        "https://loop.frontiersin.org/people/3130177/overview",
+        "https://www.lens.org/lens/profile/rasoulunlimited",
+        "https://sourceforge.net/u/rasoulunlimited",
+        "https://www.facebook.com/rasoulunlimited",
+        "https://www.webofscience.com/wos/author/record/NJS-6637-2025",
+        "https://isni.org/isni/0000000527866581",
+        "https://www.authenticus.pt/R-00M-286",
+        "https://independent.academia.edu/MohammadRasoulSohrabi",
+        "https://commons.datacite.org/orcid.org/0009-0004-7177-2080",
+        "https://commons.wikimedia.org/wiki/File:Mohammad_Rasoul_Sohrabi_(Rasoul_Unlimited),_2025.jpg"
+      ],
+      "award": [
+        "Top Digital Creator 2023 - Tech Innovators Guild"
+      ]
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://rasoulunlimited.ir/#studio",
+      "name": "Rasoul Unlimited Creative Studio",
+      "url": "https://rasoulunlimited.ir",
+      "founder": {
+        "@id": "https://rasoulunlimited.ir/#person"
       }
-    ]
-  }
+    },
+    {
+      "@type": "CreativeWork",
+      "@id": "https://rasoulunlimited.ir/#featured-work",
+      "url": "https://rasoulunlimited.ir/press.html",
+      "headline": "Press and Media Highlights for Rasoul Unlimited",
+      "creator": {
+        "@id": "https://rasoulunlimited.ir/#person"
+      },
+      "publisher": {
+        "@id": "https://rasoulunlimited.ir/#studio"
+      },
+      "locationCreated": {
+        "@type": "Place",
+        "name": "Karaj, Iran"
+      }
+    },
+    {
+      "@type": "ClaimReview",
+      "@id": "https://rasoulunlimited.ir/#claimReview",
+      "url": "https://rasoulunlimited.ir/press.html",
+      "claimReviewed": "Rasoul Unlimited has been recognized by the Tech Innovators Guild and the Digital Creators Association and has appeared in top publications such as The Creators Chronicle, Innovate Magazine and TechVision Online.",
+      "itemReviewed": {
+        "@id": "https://rasoulunlimited.ir/#person"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": 5,
+        "bestRating": 5
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Global Creative Review Board"
+      },
+      "datePublished": "2024-05-15",
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "propertyID": "claim.status",
+          "value": "self_claimed"
+        }
+      ]
+    },
+    {
+      "@type": "ClaimReview",
+      "@id": "https://rasoulunlimited.ir/#discord-claim",
+      "url": "https://top.gg/bot/735403725132136510",
+      "claimReviewed": "The Persian Discord bot created by Rasoul Unlimited is officially verified by Discord's Verified Bots program.",
+      "itemReviewed": {
+        "@id": "https://rasoulunlimited.ir/#person"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": 5,
+        "bestRating": 5
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Discord Inc."
+      },
+      "datePublished": "2020-10-01",
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "propertyID": "claim.status",
+          "value": "verified"
+        }
+      ]
+    },
+    {
+      "@type": "ClaimReview",
+      "@id": "https://rasoulunlimited.ir/#academic-claim",
+      "url": "https://ctb.iau.ir",
+      "claimReviewed": "Mohammad Rasoul Sohrabi is an officially enrolled biomedical engineering student at Islamic Azad University Central Tehran Branch.",
+      "itemReviewed": {
+        "@id": "https://rasoulunlimited.ir/#person"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": 5,
+        "bestRating": 5
+      },
+      "author": {
+        "@type": "EducationalOrganization",
+        "name": "Islamic Azad University Central Tehran Branch"
+      },
+      "datePublished": "2023-09-01",
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "propertyID": "claim.status",
+          "value": "self_claimed"
+        }
+      ]
+    }
+  ]
+}

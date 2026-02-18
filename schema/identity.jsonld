@@ -52,7 +52,7 @@
           "@type": "PropertyValue",
           "propertyID": "GitHub",
           "value": "RasoulUnlimited",
-          "url": "https://github.com/RasoulUnlimited"
+          "url": "https://github.com/rasoulunlimited"
         },
         {
           "@type": "PropertyValue",
@@ -145,20 +145,20 @@
         }
       ],
       "sameAs": [
-        "https://github.com/RasoulUnlimited",
+        "https://github.com/rasoulunlimited",
         "https://x.com/rasoulunlimited",
         "https://www.linkedin.com/in/rasoulunlimited/",
-        "https://www.instagram.com/Rasoul.Unlimited",
-        "https://www.youtube.com/@RasoulUnlimited",
-        "https://t.me/RasoulUnlimited",
+        "https://www.instagram.com/rasoul.unlimited",
+        "https://www.youtube.com/@rasoulunlimited",
+        "https://t.me/rasoulunlimited",
         "https://mastodon.social/@rasoulunlimited",
         "https://rasoulunlimited.medium.com",
         "https://dev.to/rasoulunlimited",
         "https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi",
         "https://orcid.org/0009-0004-7177-2080",
         "https://scholar.google.com/citations?user=kDl5eNUAAAAJ",
-        "https://virgool.io/@RasoulUnlimited",
-        "https://keybase.io/RasoulUnlimited",
+        "https://virgool.io/@rasoulunlimited",
+        "https://keybase.io/rasoulunlimited",
         "https://about.me/rasoulunlimited",
         "https://top.gg/bot/735403725132136510",
         "https://gravatar.com/rasoulunlimited",
@@ -166,7 +166,7 @@
         "https://loop.frontiersin.org/people/3130177/overview",
         "https://www.lens.org/lens/profile/rasoulunlimited",
         "https://sourceforge.net/u/rasoulunlimited",
-        "https://www.facebook.com/RasoulUnlimited",
+        "https://www.facebook.com/rasoulunlimited",
         "https://www.webofscience.com/wos/author/record/NJS-6637-2025",
         "https://isni.org/isni/0000000527866581",
         "https://www.authenticus.pt/R-00M-286",
@@ -338,7 +338,10 @@
           "description": "همکاری پژوهشی در پروژه‌های برنامه‌نویسی پایتون."
         }
       ],
-      "award": ["Official verification of the first Persian Discord bot", "1st Dan Karate certificate"],
+      "award": [
+        "Official verification of the first Persian Discord bot",
+        "1st Dan Karate certificate"
+      ],
       "subjectOf": [
         {
           "@type": "WebPage",
@@ -374,7 +377,34 @@
       },
       "publishingPrinciples": "https://rasoulunlimited.ir/proof.html",
       "correctionsPolicy": "https://rasoulunlimited.ir/security.html",
-      "dateModified": "2025-07-01"
+      "dateModified": "2025-07-01",
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "propertyID": "entity.id",
+          "value": "https://rasoulunlimited.ir/#person"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "entity.primaryName",
+          "value": "Mohammad Rasoul Sohrabi"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "entity.alternateNames[]",
+          "value": "Rasoul Unlimited | Mohammad Rasoul | ???? ???????? | ???? ???? ??????"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "entity.sameAs[]",
+          "value": "https://github.com/rasoulunlimited | https://x.com/rasoulunlimited | https://www.linkedin.com/in/rasoulunlimited/ | https://orcid.org/0009-0004-7177-2080"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "entity.claims[]",
+          "value": "discord-verified:verified | doi-open-source:verified | bme-studies:self_claimed"
+        }
+      ]
     },
     {
       "@type": "Organization",
@@ -439,8 +469,12 @@
       "accessibilitySummary": "Keyboard-friendly navigation, strong color contrast and alt text ensure inclusive access across the site.",
       "accessibilityHazard": "noFlashingHazard",
       "isAccessibleForFree": true,
-      "creator": {"@id": "https://rasoulunlimited.ir/#person"},
-      "author": {"@id": "https://rasoulunlimited.ir/#person"},
+      "creator": {
+        "@id": "https://rasoulunlimited.ir/#person"
+      },
+      "author": {
+        "@id": "https://rasoulunlimited.ir/#person"
+      },
       "provider": [
         {
           "@type": "Organization",
@@ -488,8 +522,12 @@
       "description": "گزیده‌ای از مصاحبه‌ها و مقالات درباره رسول آنلیمیتد.",
       "accessibilitySummary": "Fully keyboard navigable with high color contrast and alt text for all media.",
       "accessibilityHazard": "noFlashingHazard",
-      "isPartOf": { "@id": "https://rasoulunlimited.ir/#website" },
-      "author": { "@id": "https://rasoulunlimited.ir/#person" },
+      "isPartOf": {
+        "@id": "https://rasoulunlimited.ir/#website"
+      },
+      "author": {
+        "@id": "https://rasoulunlimited.ir/#person"
+      },
       "datePublished": "2025-06-23",
       "dateModified": "2025-07-01"
     },
@@ -507,8 +545,12 @@
       "description": "فهرست DOIها و گواهی‌های رسمی تاییدکنندهٔ کارهای محمد رسول سهرابی.",
       "accessibilitySummary": "Fully keyboard navigable with high color contrast and alt text for all media.",
       "accessibilityHazard": "noFlashingHazard",
-      "isPartOf": { "@id": "https://rasoulunlimited.ir/#website" },
-      "author": { "@id": "https://rasoulunlimited.ir/#person" },
+      "isPartOf": {
+        "@id": "https://rasoulunlimited.ir/#website"
+      },
+      "author": {
+        "@id": "https://rasoulunlimited.ir/#person"
+      },
       "datePublished": "2025-06-23",
       "dateModified": "2025-07-01"
     },
@@ -526,8 +568,12 @@
       "description": "پاسخ‌های جامع و بینش‌بخش به سوالات پرتکرار درباره محمد رسول سهرابی (رسول آنلیمیتد): از عمق تخصص‌های پیشرو در توسعه فول‌استک و طراحی رابط کاربری گرفته تا جزئیات پروژه‌های تاثیرگذار و خدمات حرفه‌ای استثنایی. سفری الهام‌بخش به دنیای تخصص و نوآوری.",
       "accessibilitySummary": "Fully keyboard navigable with high color contrast and alt text for all media.",
       "accessibilityHazard": "noFlashingHazard",
-      "isPartOf": { "@id": "https://rasoulunlimited.ir/#website" },
-      "author": { "@id": "https://rasoulunlimited.ir/#person" },
+      "isPartOf": {
+        "@id": "https://rasoulunlimited.ir/#website"
+      },
+      "author": {
+        "@id": "https://rasoulunlimited.ir/#person"
+      },
       "datePublished": "2025-06-02",
       "dateModified": "2025-07-01"
     },
@@ -545,8 +591,12 @@
       "description": "Download logos, biographies and screenshots for Rasoul Unlimited.",
       "accessibilitySummary": "Fully keyboard navigable with high color contrast and alt text for all media.",
       "accessibilityHazard": "noFlashingHazard",
-      "isPartOf": { "@id": "https://rasoulunlimited.ir/#website" },
-      "author": { "@id": "https://rasoulunlimited.ir/#person" },
+      "isPartOf": {
+        "@id": "https://rasoulunlimited.ir/#website"
+      },
+      "author": {
+        "@id": "https://rasoulunlimited.ir/#person"
+      },
       "datePublished": "2025-07-01",
       "dateModified": "2025-07-01"
     },
@@ -564,8 +614,12 @@
       "description": "راه‌های ارتباط با محمد رسول سهرابی برای همکاری یا پرسش‌های حرفه‌ای.",
       "accessibilitySummary": "Fully keyboard navigable with high color contrast and alt text for all media.",
       "accessibilityHazard": "noFlashingHazard",
-      "isPartOf": { "@id": "https://rasoulunlimited.ir/#website" },
-      "author": { "@id": "https://rasoulunlimited.ir/#person" },
+      "isPartOf": {
+        "@id": "https://rasoulunlimited.ir/#website"
+      },
+      "author": {
+        "@id": "https://rasoulunlimited.ir/#person"
+      },
       "datePublished": "2025-06-23",
       "dateModified": "2025-07-01"
     },
@@ -575,8 +629,10 @@
       "name": "Rasoul Unlimited Cloudflare Worker",
       "applicationCategory": "Web Service",
       "operatingSystem": "Cloudflare",
-      "codeRepository": "https://github.com/RasoulUnlimited/RasoulUnlimited.github.io/blob/main/cloudflare/worker.js",
-      "creator": {"@id": "https://rasoulunlimited.ir/#person"},
+      "codeRepository": "https://github.com/rasoulunlimited/RasoulUnlimited.github.io/blob/main/cloudflare/worker.js",
+      "creator": {
+        "@id": "https://rasoulunlimited.ir/#person"
+      },
       "locationCreated": {
         "@type": "Place",
         "name": "Karaj, Iran"
@@ -591,7 +647,9 @@
         "@type": "VirtualLocation",
         "url": "https://discord.com"
       },
-      "organizer": { "@id": "https://rasoulunlimited.ir/#person" }
+      "organizer": {
+        "@id": "https://rasoulunlimited.ir/#person"
+      }
     },
     {
       "@type": "Event",
@@ -602,7 +660,9 @@
         "@type": "VirtualLocation",
         "url": "https://rasoulunlimited.ir"
       },
-      "organizer": { "@id": "https://rasoulunlimited.ir/#person" }
+      "organizer": {
+        "@id": "https://rasoulunlimited.ir/#person"
+      }
     },
     {
       "@type": "CreativeWorkSeries",
@@ -611,8 +671,13 @@
       "alternateName": "رسول آنلیمیتد | مجموعه کارها و پروژه‌ها",
       "url": "https://rasoulunlimited.ir",
       "description": "رسول آنلیمیتد مجموعه کامل پروژه‌ها و محتواهای حرفه‌ای محمد رسول سهرابی را در بر می‌گیرد.",
-      "creator": { "@id": "https://rasoulunlimited.ir/#person" },
-      "inLanguage": ["fa", "en"]
+      "creator": {
+        "@id": "https://rasoulunlimited.ir/#person"
+      },
+      "inLanguage": [
+        "fa",
+        "en"
+      ]
     },
     {
       "@type": "BreadcrumbList",

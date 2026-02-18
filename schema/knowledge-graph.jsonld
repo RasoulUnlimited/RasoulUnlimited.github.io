@@ -19,20 +19,20 @@
         "@id": "https://rasoulunlimited.ir/#person"
       },
       "sameAs": [
-        "https://github.com/RasoulUnlimited",
+        "https://github.com/rasoulunlimited",
         "https://x.com/rasoulunlimited",
         "https://www.linkedin.com/in/rasoulunlimited/",
-        "https://www.instagram.com/Rasoul.Unlimited",
-        "https://www.youtube.com/@RasoulUnlimited",
-        "https://t.me/RasoulUnlimited",
+        "https://www.instagram.com/rasoul.unlimited",
+        "https://www.youtube.com/@rasoulunlimited",
+        "https://t.me/rasoulunlimited",
         "https://mastodon.social/@rasoulunlimited",
         "https://rasoulunlimited.medium.com",
         "https://dev.to/rasoulunlimited",
         "https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi",
         "https://orcid.org/0009-0004-7177-2080",
         "https://scholar.google.com/citations?user=kDl5eNUAAAAJ",
-        "https://virgool.io/@RasoulUnlimited",
-        "https://keybase.io/RasoulUnlimited",
+        "https://virgool.io/@rasoulunlimited",
+        "https://keybase.io/rasoulunlimited",
         "https://about.me/rasoulunlimited",
         "https://top.gg/bot/735403725132136510",
         "https://gravatar.com/rasoulunlimited",
@@ -40,7 +40,7 @@
         "https://loop.frontiersin.org/people/3130177/overview",
         "https://www.lens.org/lens/profile/rasoulunlimited",
         "https://sourceforge.net/u/rasoulunlimited",
-        "https://www.facebook.com/RasoulUnlimited",
+        "https://www.facebook.com/rasoulunlimited",
         "https://www.webofscience.com/wos/author/record/NJS-6637-2025",
         "https://isni.org/isni/0000000527866581",
         "https://www.authenticus.pt/R-00M-286",
@@ -65,7 +65,34 @@
       ],
       "about": {
         "@id": "https://rasoulunlimited.ir/#person"
-      }
+      },
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "propertyID": "entity.id",
+          "value": "https://rasoulunlimited.ir/#person"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "entity.primaryName",
+          "value": "Mohammad Rasoul Sohrabi"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "entity.alternateNames[]",
+          "value": "Rasoul Unlimited | Mohammad Rasoul | ???? ???????? | ???? ???? ??????"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "entity.sameAs[]",
+          "value": "https://github.com/rasoulunlimited | https://x.com/rasoulunlimited | https://www.linkedin.com/in/rasoulunlimited/ | https://orcid.org/0009-0004-7177-2080"
+        },
+        {
+          "@type": "PropertyValue",
+          "propertyID": "entity.claims[]",
+          "value": "discord-verified:verified | doi-open-source:verified | bme-studies:self_claimed"
+        }
+      ]
     },
     {
       "@type": "ProfilePage",
@@ -225,7 +252,7 @@
           "@type": "CreativeWork",
           "name": "Rasoul Unlimited Discord Bot",
           "url": "https://top.gg/bot/735403725132136510",
-          "sameAs": "https://github.com/RasoulUnlimited",
+          "sameAs": "https://github.com/rasoulunlimited",
           "description": "Officially verified Persian-language Discord assistant with community management automations."
         },
         {

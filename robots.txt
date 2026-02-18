@@ -69,6 +69,7 @@ Disallow: /private/
 Disallow: /tmp/
 Disallow: /backup/
 Disallow: /cloudflare/
+Disallow: /UnlimitedWeb/
 
 # Build / repository meta files that may be present in the root
 Disallow: /gulpfile.js

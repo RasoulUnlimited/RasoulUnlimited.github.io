@@ -92,34 +92,34 @@ Structured Data (JSON-LD):
 # ------------------------------------------------------------
 # Source Code & Licensing
 # ------------------------------------------------------------
-GitHub Repository:        https://github.com/RasoulUnlimited/RasoulUnlimited.github.io
+GitHub Repository:        https://github.com/rasoulunlimited/RasoulUnlimited.github.io
 License File:             https://rasoulunlimited.ir/LICENSE
 
 
 # ------------------------------------------------------------
 # Social & Public Profiles
 # ------------------------------------------------------------
-GitHub:                   https://github.com/RasoulUnlimited
+GitHub:                   https://github.com/rasoulunlimited
 LinkedIn:                 https://www.linkedin.com/in/rasoulunlimited/
 ResearchGate:             https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi
 ORCID:                    https://orcid.org/0009-0004-7177-2080
 Google Scholar:           https://scholar.google.com/citations?user=kDl5eNUAAAAJ
 About.me:                 https://about.me/rasoulunlimited
-Instagram:                https://www.instagram.com/Rasoul.Unlimited
-Telegram:                 https://t.me/RasoulUnlimited
-YouTube:                  https://www.youtube.com/@RasoulUnlimited
+Instagram:                https://www.instagram.com/rasoul.unlimited
+Telegram:                 https://t.me/rasoulunlimited
+YouTube:                  https://www.youtube.com/@rasoulunlimited
 Mastodon:                 https://mastodon.social/@rasoulunlimited
 X (Twitter):              https://x.com/rasoulunlimited
 Medium:                   https://rasoulunlimited.medium.com
 dev.to:                   https://dev.to/rasoulunlimited
-Virgool:                  https://virgool.io/@RasoulUnlimited
-Keybase:                  https://keybase.io/RasoulUnlimited
+Virgool:                  https://virgool.io/@rasoulunlimited
+Keybase:                  https://keybase.io/rasoulunlimited
 Gravatar:                 https://gravatar.com/rasoulunlimited
 GitLab:                   https://gitlab.com/rasoul.unlimited
 Frontier Research:        https://loop.frontiersin.org/people/3130177/overview
 Lens.org:                 https://www.lens.org/lens/profile/rasoulunlimited
 SourceForge:              https://sourceforge.net/u/rasoulunlimited
-Facebook:                 https://www.facebook.com/RasoulUnlimited
+Facebook:                 https://www.facebook.com/rasoulunlimited
 Web of Science:           https://www.webofscience.com/wos/author/record/NJS-6637-2025
 ISNI:                     https://isni.org/isni/0000000527866581
 Authenticus:              https://www.authenticus.pt/R-00M-286
@@ -135,6 +135,30 @@ Wikidata (Local Copy):    https://rasoulunlimited.ir/wiki/rasoul-unlimited/
 # ------------------------------------------------------------
 Sitemap:                  https://rasoulunlimited.ir/sitemap.xml
 Robots.txt:               https://rasoulunlimited.ir/robots.txt
+
+# ------------------------------------------------------------
+# Brand Query Citation Matrix (On-site + Off-site)
+# ------------------------------------------------------------
+Primary Brand Landing:    https://rasoulunlimited.ir/about.html
+Primary EN Landing:       https://rasoulunlimited.ir/en/about.html
+Evidence Hub:             https://rasoulunlimited.ir/proof.html
+Media Hub:                https://rasoulunlimited.ir/media.html
+Press Hub:                https://rasoulunlimited.ir/press.html
+Direct Contact:           https://rasoulunlimited.ir/contact.html
+
+# Off-site priority publishing surfaces (Iran/Persian first)
+Priority-1 (Code):        https://github.com/rasoulunlimited
+Priority-2 (Persian):     https://virgool.io/@rasoulunlimited
+Priority-3 (Professional):https://www.linkedin.com/in/rasoulunlimited/
+
+# Monthly off-site consistency checklist
+# 1) Keep name/bio/handle aligned with:
+#    - Mohammad Rasoul Sohrabi
+#    - Rasoul Unlimited
+#    - رسول آنلیمیتد
+# 2) Link back to canonical pages:
+#    /about.html, /proof.html, /press.html
+# 3) Publish at least one verified update/month on 3 priority surfaces.
 
 
 # ========================= END OF INDEX =========================
