@@ -35,6 +35,50 @@ async function scrollToTestimonials(page: Page) {
 }
 
 test.describe("Home Testimonials (Giscus)", () => {
+  test.describe("Visual layout resilience", () => {
+    for (const pageMeta of PAGES) {
+      test(`${pageMeta.key}: testimonials section avoids horizontal overflow on mobile viewport`, async ({
+        page,
+      }) => {
+        await page.setViewportSize({ width: 360, height: 780 });
+        await page.goto(pageMeta.path, { waitUntil: "domcontentloaded" });
+        await scrollToTestimonials(page);
+
+        const overflow = await page.evaluate(() => {
+          const section = document.getElementById("testimonials");
+          if (!(section instanceof HTMLElement)) {
+            return null;
+          }
+
+          const pageOverflow = document.documentElement.scrollWidth - window.innerWidth;
+          const intro = section.querySelector(".feedback-intro-content");
+          const featured = section.querySelector(".featured-feedback-grid");
+          const giscus = section.querySelector(".giscus-wrapper");
+
+          const introOverflow =
+            intro instanceof HTMLElement ? intro.scrollWidth - intro.clientWidth : 0;
+          const featuredOverflow =
+            featured instanceof HTMLElement ? featured.scrollWidth - featured.clientWidth : 0;
+          const giscusOverflow =
+            giscus instanceof HTMLElement ? giscus.scrollWidth - giscus.clientWidth : 0;
+
+          return {
+            pageOverflow,
+            introOverflow,
+            featuredOverflow,
+            giscusOverflow,
+          };
+        });
+
+        expect(overflow).not.toBeNull();
+        expect((overflow?.pageOverflow || 0)).toBeLessThanOrEqual(1);
+        expect((overflow?.introOverflow || 0)).toBeLessThanOrEqual(1);
+        expect((overflow?.featuredOverflow || 0)).toBeLessThanOrEqual(1);
+        expect((overflow?.giscusOverflow || 0)).toBeLessThanOrEqual(1);
+      });
+    }
+  });
+
   test.describe("Featured feedback rail", () => {
     for (const pageMeta of PAGES) {
       test(`${pageMeta.key}: renders language-filtered featured feedback cards`, async ({
