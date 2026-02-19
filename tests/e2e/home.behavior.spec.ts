@@ -251,6 +251,64 @@ test.describe("FA Home Behavior", () => {
     expect(["dark", "light"]).toContain(storedTheme || "");
   });
 
+  test("saved theme in localStorage is applied on initial load", async ({ page }) => {
+    await page.addInitScript(() => localStorage.setItem("theme", "dark"));
+    await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });
+
+    await expect
+      .poll(async () => {
+        return page.evaluate(() => ({
+          isDark: document.body.classList.contains("dark-mode"),
+          isLight: document.body.classList.contains("light-mode"),
+          toggleChecked:
+            (document.getElementById("theme-toggle") as HTMLInputElement | null)
+              ?.checked || false,
+        }));
+      })
+      .toEqual({
+        isDark: true,
+        isLight: false,
+        toggleChecked: true,
+      });
+  });
+
+  test("theme preference persists after reload", async ({ page }) => {
+    await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });
+
+    await page.evaluate(() => {
+      const toggle = document.getElementById("theme-toggle");
+      if (toggle instanceof HTMLInputElement) {
+        toggle.click();
+      }
+    });
+
+    const storedTheme = await page.evaluate(() => localStorage.getItem("theme") || "");
+    expect(["dark", "light"]).toContain(storedTheme);
+
+    await page.reload({ waitUntil: "domcontentloaded" });
+
+    const stateAfterReload = await page.evaluate(() => {
+      const toggle = document.getElementById("theme-toggle") as HTMLInputElement | null;
+      return {
+        storedTheme: localStorage.getItem("theme") || "",
+        darkClass: document.body.classList.contains("dark-mode"),
+        lightClass: document.body.classList.contains("light-mode"),
+        checked: !!toggle?.checked,
+      };
+    });
+
+    expect(stateAfterReload.storedTheme).toBe(storedTheme);
+    if (storedTheme === "dark") {
+      expect(stateAfterReload.darkClass).toBeTruthy();
+      expect(stateAfterReload.lightClass).toBeFalsy();
+      expect(stateAfterReload.checked).toBeTruthy();
+    } else {
+      expect(stateAfterReload.lightClass).toBeTruthy();
+      expect(stateAfterReload.darkClass).toBeFalsy();
+      expect(stateAfterReload.checked).toBeFalsy();
+    }
+  });
+
   test("scrolling shows floating action buttons and updates progress", async ({ page }) => {
     await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });
 
@@ -265,6 +323,56 @@ test.describe("FA Home Behavior", () => {
       .locator("#scroll-progress-bar")
       .getAttribute("aria-valuenow");
     expect(Number(progressValue || "0")).toBeGreaterThan(0);
+  });
+
+  test("scroll-to-top button returns page near top", async ({ page }) => {
+    await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+
+    const topBtn = page.locator("#scroll-to-top");
+    await expect(topBtn).toHaveClass(/visible/);
+    await topBtn.click();
+
+    await expect
+      .poll(async () => {
+        return page.evaluate(() => window.scrollY);
+      })
+      .toBeLessThan(20);
+  });
+
+  test("share button falls back to clipboard copy when Web Share API is unavailable", async ({
+    page,
+  }) => {
+    await page.addInitScript(() => {
+      (window as any).__copiedText = "";
+      Object.defineProperty(navigator, "share", {
+        configurable: true,
+        value: undefined,
+      });
+      Object.defineProperty(navigator, "clipboard", {
+        configurable: true,
+        value: {
+          writeText: async (text: string) => {
+            (window as any).__copiedText = text;
+          },
+        },
+      });
+    });
+
+    await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+
+    const shareBtn = page.locator("#share-page-button");
+    await expect(shareBtn).toHaveClass(/visible/);
+    await shareBtn.click();
+
+    await expect
+      .poll(async () => {
+        return page.evaluate(() => (window as any).__copiedText || "");
+      })
+      .toBe(page.url());
+
+    await expect(page.locator("#share-copy-toast")).toBeVisible();
   });
 
   test("faq supports accordion interaction and search filtering", async ({ page }) => {
@@ -288,6 +396,115 @@ test.describe("FA Home Behavior", () => {
     await expect(visibleItems.first()).toHaveAttribute("id", "faq-item-fa-2");
     await expect(page.locator("#faq-no-results")).toBeHidden();
     await expect(clearButton).toBeVisible();
+  });
+
+  test("faq search shows no-results state and clear restores all items", async ({ page }) => {
+    await page.goto(HOME_PATH, { waitUntil: "networkidle" });
+
+    const searchInput = page.locator("#faq-search");
+    const clearButton = page.locator("#clear-search");
+    const noResults = page.locator("#faq-no-results");
+
+    await searchInput.fill("zzzznotfoundterm");
+    await page.waitForTimeout(450);
+
+    await expect(noResults).toBeVisible();
+    const visibleFiltered = await page.evaluate(() => {
+      const items = Array.from(document.querySelectorAll<HTMLElement>("#faq-container .faq-item"));
+      return items.filter((item) => !item.hidden && item.style.display !== "none").length;
+    });
+    expect(visibleFiltered).toBe(0);
+    await expect(clearButton).toBeVisible();
+
+    await page.evaluate(() => {
+      const clear = document.getElementById("clear-search");
+      if (clear instanceof HTMLButtonElement) {
+        clear.click();
+      }
+    });
+    await expect(noResults).toBeHidden();
+
+    const visibleAfterClear = await page.evaluate(() => {
+      const items = Array.from(document.querySelectorAll<HTMLElement>("#faq-container .faq-item"));
+      return items.filter((item) => !item.hidden && item.style.display !== "none").length;
+    });
+    expect(visibleAfterClear).toBe(6);
+  });
+
+  test("faq deep-link hash opens target item on load", async ({ page }) => {
+    await page.goto(`${HOME_PATH}#faq-item-fa-3`, { waitUntil: "networkidle" });
+    await page.waitForTimeout(500);
+
+    const targetHeader = page.locator("#faq-item-fa-3 .accordion-header");
+    const targetPanel = page.locator("#faq-answer-fa-3");
+
+    await expect(targetHeader).toHaveAttribute("aria-expanded", "true");
+    await expect(targetPanel).toHaveAttribute("aria-hidden", "false");
+  });
+
+  test("faq keyboard navigation supports Arrow/Home/End and Enter toggling", async ({
+    page,
+  }) => {
+    await page.goto(HOME_PATH, { waitUntil: "networkidle" });
+
+    const firstHeader = page.locator("#faq-item-fa-1 .accordion-header");
+    const secondHeader = page.locator("#faq-item-fa-2 .accordion-header");
+    const lastHeader = page.locator("#faq-item-fa-6 .accordion-header");
+
+    await firstHeader.focus();
+    await expect(firstHeader).toBeFocused();
+
+    await page.keyboard.press("ArrowDown");
+    await expect(secondHeader).toBeFocused();
+
+    await page.keyboard.press("End");
+    await expect(lastHeader).toBeFocused();
+
+    await page.keyboard.press("Home");
+    await expect(firstHeader).toBeFocused();
+
+    await page.keyboard.press("Enter");
+    await expect(firstHeader).toHaveAttribute("aria-expanded", "true");
+  });
+
+  test("copy faq link button writes canonical faq hash URL", async ({ page }) => {
+    await page.addInitScript(() => {
+      (window as any).__copiedFaqLink = "";
+      Object.defineProperty(navigator, "clipboard", {
+        configurable: true,
+        value: {
+          writeText: async (text: string) => {
+            (window as any).__copiedFaqLink = text;
+          },
+        },
+      });
+    });
+
+    await page.goto(HOME_PATH, { waitUntil: "networkidle" });
+    await page.locator('#faq-item-fa-1 .copy-faq-link').click();
+
+    await expect
+      .poll(async () => {
+        return page.evaluate(() => (window as any).__copiedFaqLink || "");
+      })
+      .toMatch(/#faq-item-fa-1$/);
+  });
+
+  test("faq feedback vote persists in localStorage and rehydrates on reload", async ({ page }) => {
+    await page.goto(HOME_PATH, { waitUntil: "networkidle" });
+
+    const firstHeader = page.locator("#faq-item-fa-1 .accordion-header");
+    await firstHeader.click();
+    await expect(firstHeader).toHaveAttribute("aria-expanded", "true");
+
+    const upVote = page.locator("#faq-item-fa-1 .btn-feedback.up");
+    await upVote.click({ force: true });
+
+    const storedValue = await page.evaluate(() => localStorage.getItem("faq-feedback-faq-item-fa-1"));
+    expect(storedValue).toBe("up");
+
+    await page.reload({ waitUntil: "networkidle" });
+    await expect(page.locator("#faq-item-fa-1 .btn-feedback.up")).toHaveClass(/active/);
   });
 
   test("home page keeps sw-register script disabled", async ({ page }) => {
