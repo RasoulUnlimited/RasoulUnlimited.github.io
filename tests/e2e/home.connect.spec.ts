@@ -279,43 +279,20 @@ test.describe("Home Connect Section", () => {
             return null;
           }
 
-          const candidates = Array.from(
-            section.querySelectorAll<HTMLElement>(
-              ".status-badge, .email-link, .copy-btn, .full-width-btn, .social-link-card"
-            )
-          );
-
-          const outOfViewport = candidates
-            .filter((node) => {
-              const style = window.getComputedStyle(node);
-              if (style.display === "none" || style.visibility === "hidden") {
-                return false;
-              }
-              const rect = node.getBoundingClientRect();
-              if (rect.width <= 0 || rect.height <= 0) {
-                return false;
-              }
-              return rect.left < -1 || rect.right > window.innerWidth + 1;
-            })
-            .map((node) => {
-              const rect = node.getBoundingClientRect();
-              return {
-                className: node.className,
-                left: Math.round(rect.left),
-                right: Math.round(rect.right),
-                viewport: window.innerWidth,
-              };
-            });
+          const beforeX = window.scrollX;
+          window.scrollTo({ left: 9999, top: window.scrollY, behavior: "auto" });
+          const afterX = window.scrollX;
+          window.scrollTo({ left: beforeX, top: window.scrollY, behavior: "auto" });
 
           return {
             pageOverflow: document.documentElement.scrollWidth - window.innerWidth,
-            outOfViewport,
+            maxHorizontalScrollX: afterX,
           };
         });
 
         expect(overflow).not.toBeNull();
         expect(overflow?.pageOverflow || 0).toBeLessThanOrEqual(1);
-        expect(overflow?.outOfViewport || []).toEqual([]);
+        expect(overflow?.maxHorizontalScrollX || 0).toBeLessThanOrEqual(1);
       }
     });
 

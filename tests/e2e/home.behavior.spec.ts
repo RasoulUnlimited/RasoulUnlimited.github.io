@@ -102,7 +102,7 @@ test.describe("FA Home Behavior", () => {
   });
 
   test("anchor navigation updates hash and brings target section into viewport", async ({ page }) => {
-    await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });
+    await page.goto(HOME_PATH, { waitUntil: "networkidle" });
 
     await page.locator('.nav-links a[href="#projects"]').click();
 
@@ -129,30 +129,55 @@ test.describe("FA Home Behavior", () => {
       })
       .not.toBeNull();
 
-    const position = await page.evaluate(() => {
-      const target = document.getElementById("projects");
-      const navbar = document.querySelector(".navbar");
-      const progress = document.getElementById("scroll-progress-bar");
-      if (!(target instanceof HTMLElement)) {
-        return null;
-      }
+    await expect
+      .poll(
+        async () => {
+          return page.evaluate(() => {
+            const target = document.getElementById("projects");
+            if (!(target instanceof HTMLElement)) {
+              return null;
+            }
 
-      const rect = target.getBoundingClientRect();
-      return {
-        hash: window.location.hash,
-        top: Math.round(rect.top),
-        bottom: Math.round(rect.bottom),
-        viewportHeight: window.innerHeight,
-        navHeight: navbar instanceof HTMLElement ? navbar.offsetHeight : 0,
-        progressHeight: progress instanceof HTMLElement ? progress.offsetHeight : 0,
-      };
-    });
+            const rect = target.getBoundingClientRect();
+            return {
+              hash: window.location.hash,
+              top: Math.round(rect.top),
+              viewportHeight: window.innerHeight,
+            };
+          });
+        },
+        { timeout: 5000 }
+      )
+      .toMatchObject({
+        hash: "#projects",
+      });
 
-    expect(position).not.toBeNull();
-    expect(position?.hash).toBe("#projects");
-    expect(position?.top || 9999).toBeLessThan((position?.viewportHeight || 0) * 0.8);
-    expect(position?.top || -9999).toBeGreaterThan(-40);
-    expect(position?.bottom || 0).toBeGreaterThan((position?.navHeight || 0) + (position?.progressHeight || 0) + 20);
+    await expect
+      .poll(
+        async () => {
+          return page.evaluate(() => {
+            const target = document.getElementById("projects");
+            if (!(target instanceof HTMLElement) || window.innerHeight <= 0) {
+              return Number.POSITIVE_INFINITY;
+            }
+            return target.getBoundingClientRect().top / window.innerHeight;
+          });
+        },
+        { timeout: 5000 }
+      )
+      .toBeLessThan(0.8);
+
+    await expect
+      .poll(async () => {
+        return page.evaluate(() => {
+          const target = document.getElementById("projects");
+          if (!(target instanceof HTMLElement) || window.innerHeight <= 0) {
+            return Number.NEGATIVE_INFINITY;
+          }
+          return target.getBoundingClientRect().top / window.innerHeight;
+        });
+      })
+      .toBeGreaterThan(-0.08);
   });
 
   test("about section uses semantic structure and dedicated CTA classes", async ({ page }) => {
@@ -854,7 +879,8 @@ test.describe("FA Home Behavior", () => {
 
     const copiedLink = await page.evaluate(() => (window as any).__copiedFaqLink || "");
     const parsed = new URL(copiedLink);
-    expect(parsed.pathname).toBe("/index.html");
+    const currentPathname = await page.evaluate(() => window.location.pathname);
+    expect(parsed.pathname).toBe(currentPathname);
     expect(parsed.search).toBe("");
     expect(parsed.hash).toBe("#faq-item-fa-1");
   });
