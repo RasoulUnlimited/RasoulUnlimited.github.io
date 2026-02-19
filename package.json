@@ -25,7 +25,7 @@
     "test:e2e:debug": "playwright test --debug",
     "test:e2e:report": "playwright show-report",
     "lint": "npm run lint:html && npm run lint:js",
-    "lint:html": "npx htmlhint --config .htmlhintrc.json \"**/*.html\"",
+    "lint:html": "npx htmlhint --config .htmlhintrc.json --ignore \"**/playwright-report/**,**/test-results/**\" \"**/*.html\"",
     "lint:js": "npx eslint \"**/*.js\" --ignore-pattern=\"**/node_modules/**\" --ignore-pattern=\"**/dist/**\" --ignore-pattern=\"**/*.min.js\"",
     "lint:fix": "npm run lint:fix:html && npm run lint:fix:js",
     "lint:fix:html": "npm run lint:html",

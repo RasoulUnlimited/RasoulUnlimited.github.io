@@ -27,7 +27,12 @@ const FORMAT_JSON = ARGS.has("--format=json");
 // ---------------------- Config ----------------------
 const ROOT = process.cwd();
 const DOMAIN = "https://rasoulunlimited.ir";
-const IGNORED_DIRS = new Set(["node_modules", ".git"]);
+const IGNORED_DIRS = new Set([
+  "node_modules",
+  ".git",
+  "playwright-report",
+  "test-results",
+]);
 const INCLUDE_DIR_PREFIXES = ["includes/"];
 
 // Allowlist hosts considered internal
