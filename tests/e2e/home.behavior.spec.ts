@@ -1,6 +1,15 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 
 const HOME_PATH = "/index.html";
+
+async function getVisibleFaqItemIds(page: Page): Promise<string[]> {
+  return page.evaluate(() => {
+    const items = Array.from(document.querySelectorAll<HTMLElement>("#faq-container .faq-item"));
+    return items
+      .filter((item) => !item.hidden && item.style.display !== "none")
+      .map((item) => item.id);
+  });
+}
 
 test.describe("FA Home Behavior", () => {
   test("loads homepage without page errors or request failures", async ({ page }) => {
@@ -74,6 +83,76 @@ test.describe("FA Home Behavior", () => {
     await aboutLink.click();
     await expect(hamburger).toHaveAttribute("aria-expanded", "false");
     await expect(navLinks).not.toHaveClass(/active/);
+  });
+
+  test("mobile navigation closes when clicking outside menu container", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });
+
+    const hamburger = page.locator(".hamburger");
+    const navLinks = page.locator(".nav-links");
+
+    await hamburger.click();
+    await expect(hamburger).toHaveAttribute("aria-expanded", "true");
+    await expect(navLinks).toHaveClass(/active/);
+
+    await page.mouse.click(8, 8);
+    await expect(hamburger).toHaveAttribute("aria-expanded", "false");
+    await expect(navLinks).not.toHaveClass(/active/);
+  });
+
+  test("anchor navigation updates hash and brings target section into viewport", async ({ page }) => {
+    await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });
+
+    await page.locator('.nav-links a[href="#projects"]').click();
+
+    await expect
+      .poll(async () => {
+        return page.evaluate(() => {
+          const target = document.getElementById("projects");
+          const navbar = document.querySelector(".navbar");
+          const progress = document.getElementById("scroll-progress-bar");
+          if (!(target instanceof HTMLElement)) {
+            return null;
+          }
+
+          const rect = target.getBoundingClientRect();
+          return {
+            hash: window.location.hash,
+            top: Math.round(rect.top),
+            bottom: Math.round(rect.bottom),
+            viewportHeight: window.innerHeight,
+            navHeight: navbar instanceof HTMLElement ? navbar.offsetHeight : 0,
+            progressHeight: progress instanceof HTMLElement ? progress.offsetHeight : 0,
+          };
+        });
+      })
+      .not.toBeNull();
+
+    const position = await page.evaluate(() => {
+      const target = document.getElementById("projects");
+      const navbar = document.querySelector(".navbar");
+      const progress = document.getElementById("scroll-progress-bar");
+      if (!(target instanceof HTMLElement)) {
+        return null;
+      }
+
+      const rect = target.getBoundingClientRect();
+      return {
+        hash: window.location.hash,
+        top: Math.round(rect.top),
+        bottom: Math.round(rect.bottom),
+        viewportHeight: window.innerHeight,
+        navHeight: navbar instanceof HTMLElement ? navbar.offsetHeight : 0,
+        progressHeight: progress instanceof HTMLElement ? progress.offsetHeight : 0,
+      };
+    });
+
+    expect(position).not.toBeNull();
+    expect(position?.hash).toBe("#projects");
+    expect(position?.top || 9999).toBeLessThan((position?.viewportHeight || 0) * 0.8);
+    expect(position?.top || -9999).toBeGreaterThan(-40);
+    expect(position?.bottom || 0).toBeGreaterThan((position?.navHeight || 0) + (position?.progressHeight || 0) + 20);
   });
 
   test("about section uses semantic structure and dedicated CTA classes", async ({ page }) => {
@@ -272,6 +351,90 @@ test.describe("FA Home Behavior", () => {
       });
   });
 
+  test("theme follows system color scheme when no explicit localStorage preference exists", async ({
+    page,
+  }) => {
+    await page.addInitScript(() => localStorage.removeItem("theme"));
+    await page.emulateMedia({ colorScheme: "dark" });
+    await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });
+
+    await expect
+      .poll(async () => {
+        return page.evaluate(() => ({
+          darkClass: document.body.classList.contains("dark-mode"),
+          lightClass: document.body.classList.contains("light-mode"),
+          storedTheme: localStorage.getItem("theme"),
+        }));
+      })
+      .toEqual({
+        darkClass: true,
+        lightClass: false,
+        storedTheme: null,
+      });
+
+    await page.emulateMedia({ colorScheme: "light" });
+
+    await expect
+      .poll(async () => {
+        return page.evaluate(() => ({
+          darkClass: document.body.classList.contains("dark-mode"),
+          lightClass: document.body.classList.contains("light-mode"),
+          storedTheme: localStorage.getItem("theme"),
+        }));
+      })
+      .toEqual({
+        darkClass: false,
+        lightClass: true,
+        storedTheme: null,
+      });
+  });
+
+  test("explicit user theme preference is not overridden by later system theme changes", async ({
+    page,
+  }) => {
+    await page.addInitScript(() => localStorage.removeItem("theme"));
+    await page.emulateMedia({ colorScheme: "dark" });
+    await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });
+
+    await page.evaluate(() => {
+      const toggle = document.getElementById("theme-toggle");
+      if (toggle instanceof HTMLInputElement) {
+        toggle.click();
+      }
+    });
+
+    await expect
+      .poll(async () => {
+        return page.evaluate(() => ({
+          storedTheme: localStorage.getItem("theme"),
+          darkClass: document.body.classList.contains("dark-mode"),
+          lightClass: document.body.classList.contains("light-mode"),
+        }));
+      })
+      .toEqual({
+        storedTheme: "light",
+        darkClass: false,
+        lightClass: true,
+      });
+
+    await page.emulateMedia({ colorScheme: "light" });
+    await page.emulateMedia({ colorScheme: "dark" });
+
+    await expect
+      .poll(async () => {
+        return page.evaluate(() => ({
+          storedTheme: localStorage.getItem("theme"),
+          darkClass: document.body.classList.contains("dark-mode"),
+          lightClass: document.body.classList.contains("light-mode"),
+        }));
+      })
+      .toEqual({
+        storedTheme: "light",
+        darkClass: false,
+        lightClass: true,
+      });
+  });
+
   test("theme preference persists after reload", async ({ page }) => {
     await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });
 
@@ -375,6 +538,85 @@ test.describe("FA Home Behavior", () => {
     await expect(page.locator("#share-copy-toast")).toBeVisible();
   });
 
+  test("share button uses Web Share API with page title and URL when available", async ({
+    page,
+  }) => {
+    await page.addInitScript(() => {
+      (window as any).__sharePayload = null;
+      Object.defineProperty(navigator, "share", {
+        configurable: true,
+        value: async (payload: { title?: string; url?: string }) => {
+          (window as any).__sharePayload = payload;
+        },
+      });
+    });
+
+    await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+
+    const shareBtn = page.locator("#share-page-button");
+    await expect(shareBtn).toHaveClass(/visible/);
+    await shareBtn.click();
+
+    await expect
+      .poll(async () => {
+        return page.evaluate(() => (window as any).__sharePayload);
+      })
+      .not.toBeNull();
+
+    const payload = await page.evaluate(() => (window as any).__sharePayload);
+    expect(payload?.title).toBeTruthy();
+    expect(payload?.url).toBe(page.url());
+    await expect(page.locator("#share-success-toast")).toBeVisible();
+  });
+
+  test("share button ignores AbortError from Web Share API without error toast", async ({
+    page,
+  }) => {
+    await page.addInitScript(() => {
+      Object.defineProperty(navigator, "share", {
+        configurable: true,
+        value: async () => {
+          const error = new Error("share aborted");
+          error.name = "AbortError";
+          throw error;
+        },
+      });
+    });
+
+    await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+
+    const shareBtn = page.locator("#share-page-button");
+    await expect(shareBtn).toHaveClass(/visible/);
+    await shareBtn.click();
+
+    await expect(page.locator("#share-error-toast")).toHaveCount(0);
+    await expect(page.locator("#share-success-toast")).toHaveCount(0);
+  });
+
+  test("share button shows error toast when Web Share API fails unexpectedly", async ({
+    page,
+  }) => {
+    await page.addInitScript(() => {
+      Object.defineProperty(navigator, "share", {
+        configurable: true,
+        value: async () => {
+          throw new Error("share failure");
+        },
+      });
+    });
+
+    await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+
+    const shareBtn = page.locator("#share-page-button");
+    await expect(shareBtn).toHaveClass(/visible/);
+    await shareBtn.click();
+
+    await expect(page.locator("#share-error-toast")).toBeVisible();
+  });
+
   test("faq supports accordion interaction and search filtering", async ({ page }) => {
     await page.goto(HOME_PATH, { waitUntil: "networkidle" });
 
@@ -429,6 +671,104 @@ test.describe("FA Home Behavior", () => {
       return items.filter((item) => !item.hidden && item.style.display !== "none").length;
     });
     expect(visibleAfterClear).toBe(6);
+  });
+
+  test("faq search supports Escape to clear query and restore all entries", async ({ page }) => {
+    await page.goto(HOME_PATH, { waitUntil: "networkidle" });
+
+    const searchInput = page.locator("#faq-search");
+    await searchInput.fill("doi");
+
+    await expect
+      .poll(async () => {
+        const ids = await getVisibleFaqItemIds(page);
+        return ids.length;
+      })
+      .toBe(1);
+
+    await expect(page.locator("#faq .highlight-term").first()).toBeVisible();
+    await searchInput.press("Escape");
+
+    await expect(searchInput).toHaveValue("");
+    await expect(page.locator("#clear-search")).not.toBeVisible();
+    await expect(page.locator("#faq-no-results")).toBeHidden();
+
+    await expect
+      .poll(async () => {
+        const ids = await getVisibleFaqItemIds(page);
+        return ids.length;
+      })
+      .toBe(6);
+
+    await expect(page.locator("#faq .highlight-term")).toHaveCount(0);
+  });
+
+  test("faq expand and collapse controls sync aria-pressed and open state", async ({ page }) => {
+    await page.goto(HOME_PATH, { waitUntil: "networkidle" });
+
+    const expandAll = page.locator("#expand-all-faq");
+    const collapseAll = page.locator("#collapse-all-faq");
+    const searchInput = page.locator("#faq-search");
+
+    await searchInput.fill("doi");
+    await expect
+      .poll(async () => {
+        const ids = await getVisibleFaqItemIds(page);
+        return ids;
+      })
+      .toEqual(["faq-item-fa-2"]);
+
+    await expandAll.click();
+    await expect(expandAll).toHaveAttribute("aria-pressed", "true");
+    await expect(collapseAll).toHaveAttribute("aria-pressed", "false");
+    await expect(page.locator("#faq-item-fa-2 .accordion-header")).toHaveAttribute(
+      "aria-expanded",
+      "true"
+    );
+
+    await collapseAll.click();
+    await expect(collapseAll).toHaveAttribute("aria-pressed", "true");
+    await expect(expandAll).toHaveAttribute("aria-pressed", "false");
+    await expect(page.locator("#faq-item-fa-2 .accordion-header")).toHaveAttribute(
+      "aria-expanded",
+      "false"
+    );
+
+    await page.locator("#clear-search").click();
+    await expect(searchInput).toHaveValue("");
+    await expect
+      .poll(async () => {
+        const ids = await getVisibleFaqItemIds(page);
+        return ids.length;
+      })
+      .toBe(6);
+
+    await expandAll.click();
+    await expect(page.locator("#faq-container .faq-item .accordion-header[aria-expanded='true']")).toHaveCount(6);
+
+    await collapseAll.click();
+    await expect(page.locator("#faq-container .faq-item .accordion-header[aria-expanded='false']")).toHaveCount(6);
+  });
+
+  test("faq search normalizes Arabic/Persian letter variants for reliable matching", async ({
+    page,
+  }) => {
+    await page.goto(HOME_PATH, { waitUntil: "networkidle" });
+
+    await page.locator("#faq-search").fill("همكاري");
+
+    await expect
+      .poll(async () => {
+        return getVisibleFaqItemIds(page);
+      })
+      .not.toEqual([]);
+
+    const ids = await getVisibleFaqItemIds(page);
+    expect(ids).toContain("faq-item-fa-3");
+    await expect(page.locator("#faq-item-fa-3 .accordion-header")).toHaveAttribute(
+      "aria-expanded",
+      "true"
+    );
   });
 
   test("faq deep-link hash opens target item on load", async ({ page }) => {
@@ -490,6 +830,35 @@ test.describe("FA Home Behavior", () => {
       .toMatch(/#faq-item-fa-1$/);
   });
 
+  test("copy faq link excludes query params and keeps canonical pathname", async ({ page }) => {
+    await page.addInitScript(() => {
+      (window as any).__copiedFaqLink = "";
+      Object.defineProperty(navigator, "clipboard", {
+        configurable: true,
+        value: {
+          writeText: async (text: string) => {
+            (window as any).__copiedFaqLink = text;
+          },
+        },
+      });
+    });
+
+    await page.goto(`${HOME_PATH}?utm_source=e2e`, { waitUntil: "networkidle" });
+    await page.locator('#faq-item-fa-1 .copy-faq-link').click();
+
+    await expect
+      .poll(async () => {
+        return page.evaluate(() => (window as any).__copiedFaqLink || "");
+      })
+      .not.toBe("");
+
+    const copiedLink = await page.evaluate(() => (window as any).__copiedFaqLink || "");
+    const parsed = new URL(copiedLink);
+    expect(parsed.pathname).toBe("/index.html");
+    expect(parsed.search).toBe("");
+    expect(parsed.hash).toBe("#faq-item-fa-1");
+  });
+
   test("faq feedback vote persists in localStorage and rehydrates on reload", async ({ page }) => {
     await page.goto(HOME_PATH, { waitUntil: "networkidle" });
 
@@ -505,6 +874,99 @@ test.describe("FA Home Behavior", () => {
 
     await page.reload({ waitUntil: "networkidle" });
     await expect(page.locator("#faq-item-fa-1 .btn-feedback.up")).toHaveClass(/active/);
+  });
+
+  test("faq feedback enforces exclusive selection and resets transient UI label", async ({
+    page,
+  }) => {
+    await page.goto(HOME_PATH, { waitUntil: "networkidle" });
+
+    const firstHeader = page.locator("#faq-item-fa-1 .accordion-header");
+    await firstHeader.click();
+    await expect(firstHeader).toHaveAttribute("aria-expanded", "true");
+
+    const label = page.locator("#faq-item-fa-1 .faq-feedback .feedback-label");
+    const up = page.locator("#faq-item-fa-1 .btn-feedback.up");
+    const down = page.locator("#faq-item-fa-1 .btn-feedback.down");
+
+    const originalLabel = ((await label.textContent()) || "").trim();
+    expect(originalLabel.length).toBeGreaterThan(0);
+
+    await up.click({ force: true });
+    await expect(up).toHaveClass(/active/);
+    await expect
+      .poll(async () => {
+        return page.evaluate(() => localStorage.getItem("faq-feedback-faq-item-fa-1"));
+      })
+      .toBe("up");
+
+    await down.click({ force: true });
+    await expect(down).toHaveClass(/active/);
+    await expect(up).not.toHaveClass(/active/);
+    await expect
+      .poll(async () => {
+        return page.evaluate(() => localStorage.getItem("faq-feedback-faq-item-fa-1"));
+      })
+      .toBe("down");
+
+    const duringMessage = ((await label.textContent()) || "").trim();
+    expect(duringMessage).not.toBe(originalLabel);
+
+    await expect
+      .poll(async () => {
+        return page.evaluate(() => {
+          const labelEl = document.querySelector(
+            "#faq-item-fa-1 .faq-feedback .feedback-label"
+          );
+          const downBtn = document.querySelector("#faq-item-fa-1 .btn-feedback.down");
+          return {
+            label: (labelEl?.textContent || "").trim(),
+            downActive: !!downBtn?.classList.contains("active"),
+          };
+        });
+      }, { timeout: 5000 })
+      .toEqual({
+        label: originalLabel,
+        downActive: false,
+      });
+  });
+
+  test("runtime error handler records errors and exposes degraded runtime state", async ({
+    page,
+  }) => {
+    await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });
+
+    await page.evaluate(() => {
+      const probe = new Error("e2e-runtime-probe");
+      window.dispatchEvent(new ErrorEvent("error", { error: probe, message: probe.message }));
+    });
+
+    await expect
+      .poll(async () => {
+        return page.evaluate(() => {
+          const raw = sessionStorage.getItem("runtimeErrors");
+          const list = raw ? JSON.parse(raw) : [];
+          return {
+            isDegraded: document.documentElement.classList.contains("runtime-degraded"),
+            count: Array.isArray(list) ? list.length : 0,
+            hasProbe: Array.isArray(list)
+              ? list.some(
+                (entry) =>
+                  entry &&
+                    entry.scope === "window.error" &&
+                    String(entry.message || "").includes("e2e-runtime-probe")
+              )
+              : false,
+            dataCount: document.documentElement.dataset.runtimeErrorCount || "",
+          };
+        });
+      })
+      .toEqual({
+        isDegraded: true,
+        count: 1,
+        hasProbe: true,
+        dataCount: "1",
+      });
   });
 
   test("home page keeps sw-register script disabled", async ({ page }) => {

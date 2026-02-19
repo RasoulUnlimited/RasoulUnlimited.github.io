@@ -1,4 +1,4 @@
-import { expect, test, type Page } from "@playwright/test";
+import { expect, test, type Locator, type Page } from "@playwright/test";
 
 const MOCK_GISCUS_CLIENT = `
 (() => {
@@ -30,8 +30,87 @@ const PAGES = [
   },
 ] as const;
 
+const MOCK_FEATURED_FEEDBACK_ITEMS = [
+  {
+    id: "fa-1",
+    lang: "fa",
+    quote: "FA first quote",
+    author: "FA Author 1",
+    role: "FA Role 1",
+    source_url: "https://example.com/fa/1",
+    source_label: "Source 1",
+    date: "2026-02-10",
+  },
+  {
+    id: "en-1",
+    lang: "en",
+    quote: "EN first quote",
+    author: "EN Author 1",
+    role: "EN Role 1",
+    source_url: "https://example.com/en/1",
+    source_label: "Source 1",
+    date: "2026-02-09",
+  },
+  {
+    id: "fa-2",
+    lang: "fa",
+    quote: "FA second quote",
+    author: "FA Author 2",
+    role: "FA Role 2",
+    source_url: "https://example.com/fa/2",
+    source_label: "Source 2",
+    date: "2026-02-08",
+  },
+  {
+    id: "en-2",
+    lang: "en",
+    quote: "EN second quote",
+    author: "EN Author 2",
+    role: "EN Role 2",
+    source_url: "https://example.com/en/2",
+    source_label: "Source 2",
+    date: "2026-02-07",
+  },
+  {
+    id: "fa-3",
+    lang: "fa",
+    quote: "FA third quote",
+    author: "FA Author 3",
+    role: "FA Role 3",
+    source_url: "https://example.com/fa/3",
+    source_label: "Source 3",
+    date: "2026-02-06",
+  },
+  {
+    id: "en-3",
+    lang: "en",
+    quote: "EN third quote",
+    author: "EN Author 3",
+    role: "EN Role 3",
+    source_url: "https://example.com/en/3",
+    source_label: "Source 3",
+    date: "2026-02-05",
+  },
+  {
+    id: "en-4",
+    lang: "en",
+    quote: "EN fourth quote",
+    author: "EN Author 4",
+    role: "EN Role 4",
+    source_url: "https://example.com/en/4",
+    source_label: "Source 4",
+    date: "2026-02-04",
+  },
+] as const;
+
 async function scrollToTestimonials(page: Page) {
   await page.locator("#testimonials").scrollIntoViewIfNeeded();
+}
+
+async function waitForGiscusStatus(root: Locator, status: "idle" | "loading" | "ready" | "error") {
+  await expect
+    .poll(async () => root.getAttribute("data-giscus-status"))
+    .toBe(status);
 }
 
 test.describe("Home Testimonials (Giscus)", () => {
@@ -295,7 +374,9 @@ test.describe("Home Testimonials (Giscus)", () => {
 
   test.describe("Config contract", () => {
     for (const pageMeta of PAGES) {
-      test(`${pageMeta.key}: uses specific mapping and expected term/lang`, async ({ page }) => {
+      test(`${pageMeta.key}: injects giscus script with full expected config payload`, async ({
+        page,
+      }) => {
         await page.route("**/giscus.app/client.js", (route) =>
           route.fulfill({
             status: 200,
@@ -323,21 +404,57 @@ test.describe("Home Testimonials (Giscus)", () => {
           const root = document.querySelector("#testimonials [data-giscus-root]");
           const script = root?.querySelector(
             '.giscus-container script[src*="giscus.app/client.js"]'
-          );
+          ) as HTMLScriptElement | null;
           return {
+            repo: script?.getAttribute("data-repo") || "",
+            repoId: script?.getAttribute("data-repo-id") || "",
+            category: script?.getAttribute("data-category") || "",
+            categoryId: script?.getAttribute("data-category-id") || "",
             mapping: script?.getAttribute("data-mapping") || "",
             term: script?.getAttribute("data-term") || "",
             lang: script?.getAttribute("data-lang") || "",
+            strict: script?.getAttribute("data-strict") || "",
+            reactionsEnabled: script?.getAttribute("data-reactions-enabled") || "",
+            emitMetadata: script?.getAttribute("data-emit-metadata") || "",
+            inputPosition: script?.getAttribute("data-input-position") || "",
+            loading: script?.getAttribute("data-loading") || "",
+            aiIntegration: script?.getAttribute("data-ai-integration") || "",
+            crossOrigin: script?.crossOrigin || "",
+            async: !!script?.async,
           };
         }) as {
+          repo: string;
+          repoId: string;
+          category: string;
+          categoryId: string;
           mapping: string;
           term: string;
           lang: string;
+          strict: string;
+          reactionsEnabled: string;
+          emitMetadata: string;
+          inputPosition: string;
+          loading: string;
+          aiIntegration: string;
+          crossOrigin: string;
+          async: boolean;
         };
 
+        expect(payload.repo).toBe("RasoulUnlimited/comments");
+        expect(payload.repoId).toBe("R_kgDOOx48HQ");
+        expect(payload.category).toBe("Q&A");
+        expect(payload.categoryId).toBe("DIC_kwDOOx48Hc4Cqrc1");
         expect(payload.mapping).toBe("specific");
         expect(payload.term).toBe(pageMeta.term);
         expect(payload.lang).toBe(pageMeta.lang);
+        expect(payload.strict).toBe("1");
+        expect(payload.reactionsEnabled).toBe("1");
+        expect(payload.emitMetadata).toBe("0");
+        expect(payload.inputPosition).toBe("top");
+        expect(payload.loading).toBe("lazy");
+        expect(payload.aiIntegration).toBe("giscus-comments");
+        expect(payload.crossOrigin).toBe("anonymous");
+        expect(payload.async).toBeTruthy();
       });
     }
   });
