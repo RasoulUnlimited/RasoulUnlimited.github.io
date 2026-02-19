@@ -253,8 +253,8 @@
   width: 100%;
   flex: 1 1 auto;
   padding-block: 1.5rem;
-  padding-inline-start: 2rem;
-  padding-inline-end: 3.75rem; /* room for copy button at inline-end */
+  padding-inline-start: 3.75rem; /* room for copy button at inline-start */
+  padding-inline-end: 2rem;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -313,6 +313,10 @@
 
 /* Icon */
 #faq .faq-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
   color: var(--faq-primary);
   opacity: 0.85;
   font-size: 1.2rem;
@@ -356,7 +360,8 @@
 
 #faq .copy-faq-link {
   position: absolute;
-  inset-inline-end: 0.95rem;
+  inset-inline-start: 0.95rem;
+  inset-inline-end: auto;
   top: 50%;
   background: #f1f5f9;
   border: 1px solid transparent;
@@ -660,8 +665,8 @@
 
   #faq .accordion-header {
     padding-block: 1.2rem;
-    padding-inline-start: 1.5rem;
-    padding-inline-end: 3.25rem;
+    padding-inline-start: 3.25rem;
+    padding-inline-end: 1.5rem;
     font-size: 1rem;
   }
 
@@ -694,8 +699,8 @@
 
   #faq .accordion-header {
     padding-block: 1rem;
-    padding-inline-start: 1rem;
-    padding-inline-end: 3rem;
+    padding-inline-start: 3rem;
+    padding-inline-end: 1rem;
     font-size: 0.95rem;
   }
 
