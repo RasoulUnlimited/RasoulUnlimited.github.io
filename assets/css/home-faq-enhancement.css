@@ -246,16 +246,15 @@
    ========================================================= */
 
 #faq .faq-header-row {
-  display: flex;
-  align-items: stretch;
-  gap: 0.5rem;
-  padding-inline-end: 0.75rem;
+  position: relative;
 }
 
 #faq .accordion-header {
   width: 100%;
   flex: 1 1 auto;
-  padding: 1.5rem 2rem;
+  padding-block: 1.5rem;
+  padding-inline-start: 2rem;
+  padding-inline-end: 3.75rem; /* room for copy button at inline-end */
   background: transparent;
   border: none;
   cursor: pointer;
@@ -331,8 +330,8 @@
   flex-shrink: 0;
 }
 
-#faq .accordion-item.is-open > .accordion-header::after,
-#faq .faq-item.is-open > .accordion-header::after,
+#faq .accordion-item.is-open .accordion-header::after,
+#faq .faq-item.is-open .accordion-header::after,
 #faq .accordion-header[aria-expanded="true"]::after {
   transform: rotate(180deg);
   color: var(--faq-primary);
@@ -356,6 +355,9 @@
    ========================================================= */
 
 #faq .copy-faq-link {
+  position: absolute;
+  inset-inline-end: 0.95rem;
+  top: 50%;
   background: #f1f5f9;
   border: 1px solid transparent;
   color: #64748b;
@@ -363,7 +365,7 @@
   padding: 0.6rem;
   margin-inline-start: 0;
   opacity: 0;
-  transform: scale(0.92);
+  transform: translateY(-50%) scale(0.92);
   transition: transform 0.2s var(--faq-ease),
               opacity 0.2s var(--faq-ease),
               background-color 0.2s ease,
@@ -383,18 +385,18 @@
 @media (hover: hover) {
   #faq .faq-header-row:hover .copy-faq-link {
     opacity: 1;
-    transform: scale(1);
+    transform: translateY(-50%) scale(1);
   }
 }
 
 #faq .faq-header-row:focus-within .copy-faq-link {
   opacity: 1;
-  transform: scale(1);
+  transform: translateY(-50%) scale(1);
 }
 
 #faq .copy-faq-link:focus-visible {
   opacity: 1;
-  transform: scale(1);
+  transform: translateY(-50%) scale(1);
   outline: 3px solid rgba(41, 128, 185, 0.35);
   outline-offset: 2px;
 }
@@ -405,26 +407,26 @@
     background-color: #fff;
     border-color: var(--faq-primary);
     box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-    transform: scale(1.06);
+    transform: translateY(-50%) scale(1.06);
   }
 }
 
 #faq .copy-faq-link:active {
-  transform: scale(0.96);
+  transform: translateY(-50%) scale(0.96);
 }
 
 #faq .copy-faq-link.copied {
   color: #2ecc71;
   border-color: #2ecc71;
   opacity: 1;
-  transform: scale(1.06);
+  transform: translateY(-50%) scale(1.06);
 }
 
 /* Always visible on small screens (you had this behavior) */
 @media (max-width: 768px) {
   #faq .copy-faq-link {
     opacity: 1;
-    transform: none;
+    transform: translateY(-50%) scale(1);
   }
 }
 
@@ -656,12 +658,10 @@
     border-radius: 16px;
   }
 
-  #faq .faq-header-row {
-    padding-inline-end: 0;
-  }
-
   #faq .accordion-header {
-    padding: 1.2rem 1.5rem;
+    padding-block: 1.2rem;
+    padding-inline-start: 1.5rem;
+    padding-inline-end: 3.25rem;
     font-size: 1rem;
   }
 
@@ -693,7 +693,9 @@
   }
 
   #faq .accordion-header {
-    padding: 1rem;
+    padding-block: 1rem;
+    padding-inline-start: 1rem;
+    padding-inline-end: 3rem;
     font-size: 0.95rem;
   }
 
@@ -785,8 +787,8 @@
   color: var(--primary-color, #38bdf8);
 }
 
-.dark-mode #faq .accordion-item.is-open > .accordion-header::after,
-.dark-mode #faq .faq-item.is-open > .accordion-header::after,
+.dark-mode #faq .accordion-item.is-open .accordion-header::after,
+.dark-mode #faq .faq-item.is-open .accordion-header::after,
 .dark-mode #faq .accordion-header[aria-expanded="true"]::after {
   color: var(--primary-color, #38bdf8);
 }
