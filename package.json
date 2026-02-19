@@ -19,6 +19,8 @@
     "dev": "npm run build:watch & npx serve -l 8080 .",
     "start": "npx serve -l 8080 .",
     "test:e2e": "playwright test",
+    "test:e2e:fast": "playwright test --workers=4 --fully-parallel",
+    "test:e2e:low": "playwright test --workers=1",
     "test:e2e:headed": "playwright test --headed",
     "test:e2e:debug": "playwright test --debug",
     "test:e2e:report": "playwright show-report",
