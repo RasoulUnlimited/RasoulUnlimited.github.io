@@ -2435,69 +2435,74 @@
                 </div>
             </div>
 
-            <div class="giscus-wrapper" data-aos="fade-up" data-aos-delay="200">
-                <div id="giscus-loading" class="giscus-loading">
-                    <div class="spinner"></div>
+            <div
+              class="giscus-wrapper"
+              data-aos="fade-up"
+              data-aos-delay="200"
+              data-giscus-root
+              data-giscus-repo="RasoulUnlimited/comments"
+              data-giscus-repo-id="R_kgDOOx48HQ"
+              data-giscus-category="Q&A"
+              data-giscus-category-id="DIC_kwDOOx48Hc4Cqrc1"
+              data-giscus-mapping="specific"
+              data-giscus-term="home-fa"
+              data-giscus-lang="fa"
+              data-giscus-strict="1"
+              data-giscus-reactions-enabled="1"
+              data-giscus-emit-metadata="0"
+              data-giscus-input-position="top"
+              data-giscus-loading="lazy"
+              data-giscus-timeout="8000"
+              data-giscus-fallback-url="https://github.com/RasoulUnlimited/comments/discussions"
+              data-giscus-error-message="بارگذاری نظرات با مشکل مواجه شد. اتصال اینترنت را بررسی کنید."
+            >
+                <div class="testimonials-trustbar">
+                  <i class="fab fa-github" aria-hidden="true"></i>
+                  <span>نظرات در GitHub Discussions ثبت می‌شوند؛ شفاف، امن و قابل پیگیری.</span>
+                </div>
+                <div
+                  id="giscus-loading"
+                  class="giscus-loading hidden"
+                  aria-live="polite"
+                  hidden
+                >
+                    <div class="spinner" aria-hidden="true"></div>
                     <span class="loading-text">در حال بارگذاری نظرات...</span>
+                </div>
+                <div
+                  class="giscus-error hidden"
+                  role="alert"
+                  aria-live="assertive"
+                  hidden
+                >
+                  <p class="giscus-error-message">
+                    بارگذاری نظرات با مشکل مواجه شد. اتصال اینترنت را بررسی کنید.
+                  </p>
+                  <div class="giscus-error-actions">
+                    <button type="button" class="giscus-retry-btn">تلاش مجدد</button>
+                    <a
+                      href="https://github.com/RasoulUnlimited/comments/discussions"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="giscus-fallback-link"
+                    >
+                      مشاهده Discussions در GitHub
+                    </a>
+                  </div>
                 </div>
                 <div
                   class="giscus-container"
                   id="giscus-comments-section"
-                  aria-label="Comments"
-                >
-                  <!-- Giscus as a UGC (User Generated Content) source helps strengthen E-E-A-T. -->
-                  <script nonce="RasoulCSP">
-                    (function () {
-                      function loadGiscus() {
-                        const s = document.createElement("script");
-                        s.src = "https://giscus.app/client.js";
-                        s.setAttribute("data-repo", "RasoulUnlimited/comments");
-                        s.setAttribute("data-repo-id", "R_kgDOOx48HQ");
-                        s.setAttribute("data-category", "Q&A");
-                        s.setAttribute("data-category-id", "DIC_kwDOOx48Hc4Cqrc1");
-                        s.setAttribute("data-mapping", "pathname");
-                        s.setAttribute("data-lang", "fa");
-                        s.setAttribute("data-strict", "1");
-                        s.setAttribute("data-reactions-enabled", "1");
-                        s.setAttribute("data-emit-metadata", "0");
-                        s.setAttribute("data-input-position", "top");
-                        s.setAttribute("data-theme", "preferred_color_scheme");
-                        s.setAttribute("data-loading", "lazy");
-                        s.setAttribute("crossorigin", "anonymous");
-                        s.async = true;
-                        s.setAttribute("data-ai-integration", "giscus-comments");
-                        s.setAttribute("nonce", "RasoulCSP");
-                        
-                        const container = document.getElementById("giscus-comments-section");
-                        container.appendChild(s);
-
-                        // Monitor for iframe creation to hide loader
-                        const observer = new MutationObserver((mutations) => {
-                            const iframe = container.querySelector('iframe.giscus-frame');
-                            if (iframe) {
-                                // Fallback if load event doesn't fire (cross-origin issues sometimes)
-                                setTimeout(() => {
-                                     const loader = document.getElementById('giscus-loading');
-                                     if(loader) loader.classList.add('hidden');
-                                }, 1500);
-                                observer.disconnect();
-                            }
-                        });
-                        observer.observe(container, { childList: true });
-                      }
-                      if (
-                        document.readyState === "complete" ||
-                        document.readyState === "interactive"
-                      ) {
-                        loadGiscus();
-                      } else {
-                        document.addEventListener("DOMContentLoaded", loadGiscus, {
-                          once: true,
-                        });
-                      }
-                    })();
-                  </script>
-                </div>
+                  aria-label="بخش نظرات کاربران"
+                  aria-busy="false"
+                ></div>
+                <noscript>
+                  <p class="giscus-noscript">
+                    برای مشاهده بخش نظرات، جاوااسکریپت را فعال کنید یا
+                    <a href="https://github.com/RasoulUnlimited/comments/discussions" target="_blank" rel="noopener noreferrer">مستقیماً در GitHub Discussions</a>
+                    پیام بگذارید.
+                  </p>
+                </noscript>
             </div>
           </section>
 
@@ -2778,6 +2783,7 @@
     <script src="assets/vendor/aos/aos.min.js" defer></script>
     <script src="assets/js/faq-search.min.js" defer></script>
     <script src="assets/js/main-script-fa.min.js" defer></script>
+    <script src="assets/js/giscus-loader.min.js" defer></script>
     <script src="assets/js/lang/fa.min.js" defer></script>
     <script src="assets/js/hero-particles.min.js" defer></script>
 

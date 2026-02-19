@@ -255,6 +255,28 @@
   transform: translateZ(0);
 }
 
+.testimonials-trustbar {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: var(--space-md, 1rem);
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  border: 1px dashed rgba(var(--primary-rgb, 11, 94, 215), 0.28);
+  background: linear-gradient(
+    135deg,
+    rgba(var(--primary-rgb, 11, 94, 215), 0.07),
+    rgba(var(--primary-rgb, 11, 94, 215), 0.02)
+  );
+  color: var(--text-color, #111);
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.testimonials-trustbar i {
+  color: var(--primary-color, #0b5ed7);
+}
+
 .giscus-wrapper:hover {
   box-shadow: 0 22px 60px -22px rgba(0, 0, 0, 0.14);
   transform: translateY(-2px);
@@ -277,6 +299,73 @@
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
+}
+
+.giscus-error {
+  position: absolute;
+  inset-inline: var(--space-lg, 1.5rem);
+  top: var(--space-lg, 1.5rem);
+  z-index: 11;
+  border: 1px solid rgba(176, 42, 55, 0.24);
+  background: linear-gradient(180deg, rgba(176, 42, 55, 0.08), rgba(176, 42, 55, 0.03));
+  border-radius: 14px;
+  padding: 1rem;
+  color: var(--text-color, #111);
+}
+
+.giscus-error.hidden {
+  display: none;
+}
+
+.giscus-error-message {
+  margin: 0;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.giscus-error-actions {
+  margin-top: 0.85rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.giscus-retry-btn {
+  border: 1px solid rgba(var(--primary-rgb, 11, 94, 215), 0.35);
+  background: var(--card-bg, #fff);
+  color: var(--text-color, #111);
+  border-radius: 999px;
+  padding: 0.5rem 1rem;
+  min-height: 44px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.giscus-retry-btn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(var(--primary-rgb, 11, 94, 215), 0.65);
+  box-shadow: 0 6px 18px -10px rgba(var(--primary-rgb, 11, 94, 215), 0.45);
+}
+
+.giscus-retry-btn:focus-visible,
+.giscus-fallback-link:focus-visible {
+  outline: 3px solid rgba(var(--primary-rgb, 11, 94, 215), 0.28);
+  outline-offset: 2px;
+}
+
+.giscus-fallback-link {
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--primary-color, #0b5ed7);
+}
+
+.giscus-fallback-link:hover {
+  text-decoration: underline;
 }
 
 .spinner {
@@ -313,6 +402,22 @@
   border: none;
   padding: 0;
   margin-top: 0;
+  min-height: 180px;
+}
+
+.giscus-noscript {
+  margin-top: var(--space-md, 1rem);
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  background: rgba(var(--primary-rgb, 11, 94, 215), 0.08);
+  border: 1px solid rgba(var(--primary-rgb, 11, 94, 215), 0.2);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.giscus-noscript a {
+  font-weight: 700;
+  color: var(--primary-color, #0b5ed7);
 }
 
 /* Dark mode adjustments */
@@ -349,13 +454,42 @@
   background: rgba(0, 0, 0, 0.15);
 }
 
+[data-theme="dark"] .testimonials-trustbar {
+  border-color: rgba(255, 255, 255, 0.22);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.03)
+  );
+}
+
+[data-theme="dark"] .giscus-error {
+  border-color: rgba(248, 113, 113, 0.34);
+  background: linear-gradient(
+    180deg,
+    rgba(248, 113, 113, 0.15),
+    rgba(248, 113, 113, 0.06)
+  );
+}
+
+[data-theme="dark"] .giscus-retry-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.24);
+}
+
+[data-theme="dark"] .giscus-noscript {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.24);
+}
+
 /* Reduced motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
   .spinner { animation: none; }
 
   .stat-card,
   .giscus-wrapper,
-  .giscus-loading {
+  .giscus-loading,
+  .giscus-retry-btn {
     transition: none !important;
   }
 
@@ -401,7 +535,8 @@
 
   .feedback-intro-content,
   .giscus-wrapper,
-  .stat-card {
+  .stat-card,
+  .giscus-error {
     forced-color-adjust: auto;
     border: 1px solid CanvasText;
     background: Canvas;
@@ -440,6 +575,16 @@
   .feedback-stats-column {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  .testimonials-trustbar {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .giscus-error {
+    inset-inline: var(--space-md, 1rem);
+    top: var(--space-md, 1rem);
+  }
 }
 
 @media (max-width: 480px) {
@@ -471,5 +616,14 @@
 
   .stat-value {
     margin-inline-start: auto; /* RTL/LTR-safe push */
+  }
+
+  .giscus-error-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .giscus-retry-btn {
+    width: 100%;
   }
 }
