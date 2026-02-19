@@ -779,7 +779,7 @@ section h2::after {
 .content-area
   a:not(.navbar nav a):not(.card .card-links a):not(.contact-info a):not(
     .connect-links-block ul li a
-  ):not(.footer a):not(.cta-button) {
+  ):not(.footer a):not(.cta-button):not(.about-btn) {
   color: var(--text-color-link);
   text-decoration: underline;
   transition:
@@ -792,14 +792,14 @@ section h2::after {
 .content-area
   a:not(.navbar nav a):not(.card .card-links a):not(.contact-info a):not(
     .connect-links-block ul li a
-  ):not(.footer a):hover {
+  ):not(.footer a):not(.about-btn):hover {
   color: var(--primary-color);
   text-decoration: none;
 }
 .content-area
   a:not(.navbar nav a):not(.card .card-links a):not(.contact-info a):not(
     .connect-links-block ul li a
-  ):not(.footer a):active {
+  ):not(.footer a):not(.about-btn):active {
   filter: brightness(0.9);
 }
 
@@ -4053,6 +4053,10 @@ summary:active,
   flex-wrap: wrap;
   margin-top: var(--space-md);
   align-items: stretch;
+}
+
+.content-area .about-actions .about-btn {
+  text-decoration: none;
 }
 
 .about-btn {
