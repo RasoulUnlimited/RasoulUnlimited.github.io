@@ -1,147 +1,156 @@
-# Security Policy
+# Security Policy / سیاست امنیتی
 
-We take the security of this website and its infrastructure seriously.  
-If you discover a vulnerability, we ask that you report it responsibly so we can investigate and resolve the issue without putting users at risk.
+## Purpose / هدف
+### فارسی
+امنیت این وب سایت و زیرساخت آن برای ما جدی است. اگر آسیب پذیری امنیتی پیدا کردید، لطفا مسئولانه گزارش دهید تا بدون به خطر افتادن کاربران، بررسی و رفع انجام شود.
 
----
+### English
+We take the security of this website and its infrastructure seriously. If you discover a security vulnerability, please report it responsibly so we can investigate and resolve it without putting users at risk.
 
-## Contact & Primary Channel
+## Contact / راه ارتباطی
+### فارسی
+- ایمیل اصلی: `rasoul.unlimited@gmail.com`
+- قالب عنوان ایمیل: `Security Report - <short description>`
+- کانال اصلی گزارش امنیتی ایمیل است.
 
-If you believe you’ve found a security issue, please contact:
+### English
+- Primary email: `rasoul.unlimited@gmail.com`
+- Suggested subject line: `Security Report - <short description>`
+- Email is the primary reporting channel.
 
-- **Email (preferred):** `rasoul.unlimited@gmail.com`
-- **Subject line:** `Security Report – <short description>`
+## How to Report / نحوه گزارش
+### فارسی
+برای تسریع بررسی، موارد زیر را ارسال کنید:
+1. خلاصه مشکل و اثر امنیتی احتمالی
+2. مراحل دقیق بازتولید (URL، پارامتر، HTTP method)
+3. PoC کوتاه و غیرمخرب (در صورت وجود)
+4. جزئیات محیط (مرورگر، سیستم عامل، نسخه)
+5. شواهد (log، screenshot، request/response)
+6. راه تماس شما برای پیگیری
 
-We review all reports in good faith and will do our best to respond as quickly as possible.
+لطفا تا زمان بررسی و رفع، جزئیات فنی را عمومی منتشر نکنید.
 
----
+### English
+To help us triage quickly, include:
+1. A clear summary and expected security impact
+2. Exact reproduction steps (URL, parameters, HTTP method)
+3. A short non-destructive PoC (if available)
+4. Environment details (browser, OS, version)
+5. Evidence (logs, screenshots, request/response samples)
+6. Your contact details for follow-up
 
-## Reporting a Vulnerability
+Please do not publicly disclose technical details before investigation and remediation.
 
-When submitting a report, please include as much detail as you reasonably can:
+## Sensitive Reports (PGP) / گزارش های حساس (PGP)
+### فارسی
+اگر گزارش شما شامل اطلاعات حساس است (مانند توکن فعال یا PoC حساس)، پیام را رمزنگاری کنید:
+- کلید عمومی PGP: [`assets/keys/rasoulunlimited_pgp.asc`](assets/keys/rasoulunlimited_pgp.asc)
+- Keybase: <https://keybase.io/rasoulunlimited>
+- Fingerprint:
+`D483 4991 882E 7EC4 4187 40AC 1CAF 52B8 DB95 F6FE`
 
-1. **Summary of the issue**  
-   A clear and concise description of the vulnerability and its potential impact.
+پس از رمزنگاری، گزارش را به `rasoul.unlimited@gmail.com` ارسال کنید.
 
-2. **Steps to reproduce**  
-   - Exact URLs, parameters, and HTTP methods  
-   - Example payloads or request/response samples  
-   - Any required authentication or roles
+### English
+If your report contains sensitive information (for example active tokens or sensitive PoC details), use encryption:
+- PGP public key: [`assets/keys/rasoulunlimited_pgp.asc`](assets/keys/rasoulunlimited_pgp.asc)
+- Keybase: <https://keybase.io/rasoulunlimited>
+- Fingerprint:
+`D483 4991 882E 7EC4 4187 40AC 1CAF 52B8 DB95 F6FE`
 
-3. **Environment & context**  
-   - Affected domain or endpoint  
-   - Browser / client / OS (if relevant)  
-   - Any special configuration assumptions
+After encryption, send the report to `rasoul.unlimited@gmail.com`.
 
-4. **Evidence**  
-   - Logs, screenshots, or short proof-of-concept snippets  
-   - Any indicators that show business or security impact
+## Coordinated Disclosure / افشای هماهنگ
+### فارسی
+- لطفا قبل از تایید دریافت گزارش و انتشار اصلاح، جزئیات فنی را عمومی نکنید.
+- بدون مجوز به داده ای که متعلق به شما نیست دسترسی نگیرید، آن را تغییر ندهید و حذف نکنید.
+- تست هایی که باعث اختلال سرویس یا آسیب به کاربران شوند انجام ندهید.
 
-5. **Your contact details**  
-   So we can follow up with clarifying questions and share status updates.
+### English
+- Please avoid public disclosure before we acknowledge the report and deploy a fix, or agree on a disclosure timeline.
+- Do not intentionally access, modify, or delete data that is not yours.
+- Do not perform testing that can degrade service or harm other users.
 
-Please give us reasonable time to investigate, fix, and deploy a patch **before** sharing any details publicly.
+## In Scope / محدوده مجاز
+### فارسی
+این سیاست برای موارد زیر است:
+- `https://rasoulunlimited.ir`
+- `https://www.rasoulunlimited.ir`
+- assetها و endpointهای عمومی تحت همین دامنه ها
 
----
+سرویس های ثالث (مانند CDN، hosting، analytics یا form provider) تحت سیاست خود آن سرویس ها هستند.
 
-## Encrypted / Sensitive Reports
+### English
+This policy covers:
+- `https://rasoulunlimited.ir`
+- `https://www.rasoulunlimited.ir`
+- Public assets and endpoints under these domains
 
-If your report contains sensitive information (for example: exploit details, active tokens, or non-public data), please encrypt your message:
+Third-party providers (for example CDN, hosting, analytics, or form providers) follow their own security policies.
 
-- **PGP public key (direct download):** [`assets/keys/rasoulunlimited_pgp.asc`](assets/keys/rasoulunlimited_pgp.asc)  
-- **PGP key on Keybase:** <https://keybase.io/rasoulunlimited>
+## Out of Scope / خارج از محدوده
+### فارسی
+موارد زیر معمولا آسیب پذیری قابل قبول این برنامه محسوب نمی شوند:
+- self-XSS که مهاجم و قربانی یک نفر هستند
+- کتابخانه قدیمی بدون exploit عملی و قابل اثبات
+- clickjacking روی صفحات غیرحساس
+- مشکلاتی که فقط روی مرورگرهای بسیار قدیمی/پشتیبانی نشده رخ می دهند
+- پیشنهادهای hardening بدون اثر امنیتی روشن
 
-After encrypting, send the report to:
+### English
+The following are generally out of scope:
+- Self-XSS where the attacker is also the victim
+- Outdated libraries without a practical, demonstrable exploit
+- Clickjacking on non-sensitive pages
+- Issues affecting only very old or unsupported browsers
+- Hardening or best-practice suggestions without clear security impact
 
-- `rasoul.unlimited@gmail.com` (with the encrypted body or attachment)
+## Rules of Engagement / قواعد تست
+### فارسی
+- فقط تست غیرمخرب انجام دهید.
+- از DoS/DDoS، fuzzing سنگین، اسکن تهاجمی و تولید ترافیک بیش از حد خودداری کنید.
+- تا حد امکان از داده تست استفاده کنید و به داده واقعی کاربران دسترسی نگیرید.
+- اگر به داده واقعی یا وضعیت پرخطر برخورد کردید، تست را متوقف کنید و فوری اطلاع دهید.
+- رعایت قوانین محلی و بین المللی مرتبط بر عهده پژوهشگر است.
 
----
-
-## Coordinated Vulnerability Disclosure
-
-By reporting a vulnerability to us, you agree to follow a **coordinated disclosure** process:
-
-- Please **do not publicly disclose** technical details of the issue until we have:
-  - Acknowledged the report, and  
-  - Either deployed a fix or explicitly agreed on a disclosure timeline with you.
-- Do **not** intentionally access, modify, or delete data that does not belong to you.
-- Do **not** perform testing that could:
-  - Degrade the service,  
-  - Cause denial-of-service, or  
-  - Negatively impact other users.
-
-We strongly value and appreciate researchers who follow coordinated disclosure practices and help us improve the security of the ecosystem.
-
----
-
-## Scope
-
-This policy primarily covers:
-
-- The main website: `https://rasoulunlimited.ir`
-- The `www` subdomain: `https://www.rasoulunlimited.ir`
-- Public assets and endpoints hosted under these domains
-
-For third-party services (hosting platforms, CDNs, analytics providers, form endpoints, etc.), please also respect and follow their own security policies and disclosure programs.
-
-If you are unsure whether a specific target is in scope, feel free to ask.
-
----
-
-## Out of Scope (Examples)
-
-While we welcome all good-faith reports, the following examples are **generally not considered** security vulnerabilities for this program:
-
-- Clickjacking / framing issues on **non-sensitive** pages
-- Use of outdated libraries **without a demonstrable, exploitable impact**
-- Missing or optional security headers that do not lead to a practical exploit
-- **Self-XSS** (where the attacker is also the victim)
-- Issues that only affect very old or unsupported browsers
-- Best-practice or “hardening” suggestions without a clear security impact
-
-That said, if you are unsure whether something is in scope, it is still better to contact us than to ignore a potential issue.
-
----
-
-## Rules of Engagement
-
-To keep both users and you safe, please:
-
-- Perform **only non-destructive** testing.
-- Avoid any kind of:
-  - Denial-of-service (DoS / DDoS)  
-  - Excessive automated scanning, fuzzing, or traffic generation  
-  - Spamming contact forms or other user-facing features
+### English
+- Perform non-destructive testing only.
+- Avoid DoS/DDoS, heavy fuzzing, aggressive scanning, and excessive traffic generation.
 - Use test data where possible and avoid accessing real user data.
-- Immediately stop testing and contact us if you encounter:
-  - Production data you did not intend to access, or  
-  - A situation that could harm availability or integrity.
+- If you encounter real production data or a risky situation, stop testing and report immediately.
+- You are responsible for complying with applicable laws and regulations.
 
-You are responsible for ensuring that all of your activities comply with applicable laws and regulations.
+## Response Targets / زمان بندی پاسخ
+### فارسی
+زمان بندی زیر **non-binding goals** است و تضمین قطعی نیست:
+- Acknowledge: تا 48 ساعت
+- Initial assessment: تا 7 روز
+- Fix/Mitigation plan: تا 30 روز (بسته به شدت و پیچیدگی)
 
----
+### English
+These response targets are **non-binding goals**, not guarantees:
+- Acknowledge: within 48 hours
+- Initial assessment: within 7 days
+- Fix/Mitigation plan: within 30 days (depending on severity and complexity)
 
-## Response Targets
+## Recognition / قدردانی
+### فارسی
+در صورت تمایل شما، بعد از رفع مشکل می توانیم نام یا handle شما را در بخش قدردانی امنیتی منتشر کنیم. این برنامه شامل تعهد bounty نقدی نیست.
 
-These are **non-binding goals**, not guarantees, but we aim to:
+### English
+If you wish, we may publicly credit your name or handle after the issue is resolved. This policy does not promise a monetary bounty program.
 
-- **Acknowledge** valid reports within **48 hours**.
-- **Provide an initial assessment** (validity, severity, rough plan) within **7 days**.
-- **Deploy a fix or share a mitigation plan** for confirmed issues within **30 days**, depending on complexity and impact.
+## Canonical References / ارجاعات مرجع
+### فارسی
+- نسخه canonical و machine-readable:
+`/.well-known/security.txt` -> <https://rasoulunlimited.ir/.well-known/security.txt>
+- نسخه انسانی سیاست:
+<https://rasoulunlimited.ir/security.html>
+<https://rasoulunlimited.ir/en/security.html>
 
-Where appropriate, and if you wish, we may **credit you** in a public acknowledgments section once the issue is resolved.
-
----
-
-## Canonical Policy & Further Information
-
-The canonical, machine-readable version of this security contact policy is published at:
-
-- `/.well-known/security.txt` → <https://rasoulunlimited.ir/.well-known/security.txt>
-
-The human-readable, full security policy pages are available at:
-
-- Persian: <https://rasoulunlimited.ir/security.html>  
-- English: <https://rasoulunlimited.ir/en/security.html>
-
-Thank you for helping to keep users and infrastructure safe.
+### English
+- Canonical machine-readable policy:
+`/.well-known/security.txt` -> <https://rasoulunlimited.ir/.well-known/security.txt>
+- Human-readable policy pages:
+<https://rasoulunlimited.ir/security.html>
+<https://rasoulunlimited.ir/en/security.html>
