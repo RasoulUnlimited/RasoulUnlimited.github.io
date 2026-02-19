@@ -24,11 +24,19 @@ test.describe("FA Home Timeline Resilience", () => {
         })
         .filter(Boolean);
 
+      const invalidLinkRoles = Array.from(
+        document.querySelectorAll("#timeline a[role='button']")
+      ).map((link) => ({
+        href: (link as HTMLAnchorElement).getAttribute("href") || "",
+        text: ((link.textContent || "").trim()).slice(0, 60),
+      }));
+
       return {
         hasSection: !!section,
         itemCount: items.length,
         hasDateAsHeading: !!document.querySelector("#timeline .timeline-content h3.date"),
         invalidItems,
+        invalidLinkRoles,
       };
     });
 
@@ -36,6 +44,7 @@ test.describe("FA Home Timeline Resilience", () => {
     expect(model.itemCount).toBeGreaterThanOrEqual(10);
     expect(model.hasDateAsHeading).toBeFalsy();
     expect(model.invalidItems).toEqual([]);
+    expect(model.invalidLinkRoles).toEqual([]);
   });
 
   test("timeline event order remains chronological", async ({ page }) => {
@@ -210,4 +219,5 @@ test.describe("FA Home Timeline Resilience", () => {
     expect(ratio).toBeGreaterThanOrEqual(4.5);
   });
 });
+
 
