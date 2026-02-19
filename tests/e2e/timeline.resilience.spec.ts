@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+﻿import { expect, test } from "@playwright/test";
 
 const HOME_PATH = "/index.html";
 
@@ -56,6 +56,9 @@ test.describe("FA Home Timeline Resilience", () => {
 
       return {
         hasSection: !!section,
+        timelineTag: (
+          document.querySelector("#timeline .timeline")?.tagName || ""
+        ).toUpperCase(),
         itemCount: items.length,
         hasDateAsHeading: !!document.querySelector("#timeline .timeline-content h3.date"),
         invalidItems,
@@ -65,7 +68,8 @@ test.describe("FA Home Timeline Resilience", () => {
     });
 
     expect(model.hasSection).toBeTruthy();
-    expect(model.itemCount).toBeGreaterThanOrEqual(10);
+    expect(model.timelineTag).toBe("OL");
+    expect(model.itemCount).toBeGreaterThanOrEqual(9);
     expect(model.hasDateAsHeading).toBeFalsy();
     expect(model.invalidItems).toEqual([]);
     expect(model.invalidLinkRoles).toEqual([]);
@@ -118,11 +122,23 @@ test.describe("FA Home Timeline Resilience", () => {
       return result;
     });
 
-    expect(labelsByDatetime["2005-09-06"]).toContain("۱۵ شهریور ۱۳۸۴");
-    expect(labelsByDatetime["2023-09-01"]).toContain("۱۰ شهریور ۱۴۰۲");
-    expect(labelsByDatetime["2023-11-16"]).toContain("۲۵ آبان ۱۴۰۲");
-    expect(labelsByDatetime["2024-03-12"]).toContain("۲۲ اسفند ۱۴۰۲");
-    expect(labelsByDatetime["2025-11-01"]).toContain("۱۰ آبان ۱۴۰۴");
+    expect(labelsByDatetime["2005-09-06"]).toContain("September 6, 2005");
+    expect(labelsByDatetime["2023-09-01"]).toContain("September 1, 2023");
+    expect(labelsByDatetime["2023-11-16"]).toContain("November 16, 2023");
+    expect(labelsByDatetime["2024-03-12"]).toContain("March 12, 2024");
+    expect(labelsByDatetime["2026-02-01"]).toContain("February 1, 2026");
+    expect(labelsByDatetime["2027-01-01"]).toContain("January 1, 2027");
+  });
+
+  test("timeline hash deep-link highlights the targeted event", async ({ page }) => {
+    await page.goto(`${HOME_PATH}#timeline-event-current-focus`, {
+      waitUntil: "domcontentloaded",
+    });
+
+    const target = page.locator("#timeline-event-current-focus");
+    await target.scrollIntoViewIfNeeded();
+    await expect(target).toBeVisible();
+    await expect(target).toHaveClass(/is-targeted/);
   });
 
   test("timeline remains visible and readable when AOS script fails", async ({ page }) => {
@@ -293,5 +309,3 @@ test.describe("FA Home Timeline Resilience", () => {
     expect(ratio).toBeGreaterThanOrEqual(4.5);
   });
 });
-
-

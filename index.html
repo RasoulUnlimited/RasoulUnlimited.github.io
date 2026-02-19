@@ -741,10 +741,9 @@
             aria-labelledby="timeline-heading"
           >
             <h2 id="timeline-heading">⏳ مسیر من</h2>
-            <ul class="timeline" aria-label="نمای کلی آموزشی و حرفه‌ای">
-              <!-- Birth -->
-              <li data-aos="fade-up">
-                <div class="timeline-content">
+            <ol class="timeline" aria-label="نمای کلی آموزشی و حرفه‌ای">
+              <li id="timeline-event-birth" class="timeline-item" data-aos="fade-up">
+                <article class="timeline-content timeline-card">
                   <div class="timeline-icon">
                     <i class="fas fa-birthday-cake" aria-hidden="true"></i>
                   </div>
@@ -752,51 +751,58 @@
                     <time datetime="2005-09-06">۱۵ شهریور ۱۳۸۴ (September 6, 2005)</time>
                   </p>
                   <h3>تولد و آغاز مسیر</h3>
-                  <p>نقطه شروع زندگی و شکل‌گیری مسیری که امروز در توسعه، پژوهش و سلامت دیجیتال دنبال می‌کنم.</p>
-                </div>
+                  <p>
+                    نقطه شروع مسیری که بعدها در توسعه نرم‌افزار، پژوهش و سلامت
+                    دیجیتال شکل گرفت.
+                  </p>
+                </article>
               </li>
 
-              <!-- Karate -->
-              <li data-aos="fade-up">
-                <div class="timeline-content">
+              <li id="timeline-event-karate" class="timeline-item" data-aos="fade-up">
+                <article class="timeline-content timeline-card">
                   <div class="timeline-icon">
                     <i class="fas fa-medal" aria-hidden="true"></i>
                   </div>
-                  <p class="date">سال‌های ابتدایی (Early Years)</p>
+                  <p class="date">
+                    <time datetime="2013-01-01">سال‌های ابتدایی دهه ۱۳۹۰ (Early 2010s)</time>
+                  </p>
                   <h3 itemprop="award" data-award-type="sports-credential">
                     ورود به ورزش قهرمانی و دریافت دان ۱ کاراته
                   </h3>
                   <p itemprop="description">
-                    شروع جدی ورزش حرفه‌ای و یادگیری نظم، تاب‌آوری و تمرکز در رقابت‌های رسمی. دریافت
+                    انضباط، تمرکز و تاب‌آوری را از رقابت‌های رسمی آموختم و با
+                    دریافت
                     <span itemprop="hasCredential" data-credential-name="Karate 1st Dan">
-                      دان ۱ رسمی از فدراسیون کاراته جمهوری اسلامی ایران
+                      دان ۱ رسمی فدراسیون کاراته جمهوری اسلامی ایران
                     </span>
-                    که پایه انضباط فردی در مسیر حرفه‌ای من شد.
+                    پایه ذهنی مسیر حرفه‌ای خودم را ساختم.
                   </p>
-                </div>
+                </article>
               </li>
 
-              <!-- Discord Bot -->
               <li
+                id="timeline-event-discord-bot"
+                class="timeline-item"
                 data-aos="fade-up"
                 itemscope
                 itemtype="https://schema.org/SoftwareApplication"
                 itemid="https://top.gg/bot/735403725132136510"
               >
-                <div class="timeline-content">
+                <article class="timeline-content timeline-card">
                   <div class="timeline-icon">
                     <i class="fab fa-discord" aria-hidden="true"></i>
                   </div>
                   <p class="date">
                     <time datetime="2020-01-01" itemprop="dateCreated">سال ۲۰۲۰ (سن ۱۴ سالگی)</time>
                   </p>
-                  <h3 itemprop="name">
-                    توسعه نخستین ربات فارسی‌زبان دیسکورد (Persian Bot)
-                  </h3>
+                  <h3 itemprop="name">توسعه نخستین ربات فارسی‌زبان دیسکورد (Persian Bot)</h3>
                   <p itemprop="description">
-                    طراحی و توسعه نخستین ربات مستقل فارسی‌زبان در پلتفرم Discord که موفق به دریافت
-                    <span itemprop="award" data-award-source="Discord Official">تأییدیه رسمی (Verified) از شرکت Discord</span>
-                    شد. این پروژه با امتیاز ۴.۵ از بیش از ۱۰۰ نظر در Top.gg، نقطه عطف ورود من به توسعه محصول و اکوسیستم متن‌باز بود.
+                    این پروژه با دریافت
+                    <span itemprop="award" data-award-source="Discord Official">
+                      تأییدیه رسمی (Verified) از Discord
+                    </span>
+                    و ثبت بازخورد گسترده در Top.gg، نقطه عطف جدی من در ساخت محصول
+                    و توسعه متن‌باز بود.
                   </p>
                   <div class="card-links card-links-clean">
                     <a
@@ -820,12 +826,11 @@
                     <meta itemprop="ratingValue" content="4.5" />
                     <meta itemprop="reviewCount" content="100" />
                   </div>
-                </div>
+                </article>
               </li>
 
-              <!-- University -->
-              <li data-aos="fade-up">
-                <div class="timeline-content">
+              <li id="timeline-event-university" class="timeline-item" data-aos="fade-up">
+                <article class="timeline-content timeline-card">
                   <div class="timeline-icon">
                     <i class="fas fa-graduation-cap" aria-hidden="true"></i>
                   </div>
@@ -836,91 +841,77 @@
                     آغاز تحصیل در مهندسی پزشکی
                   </h3>
                   <p itemprop="description">
-                    شروع دوره کارشناسی مهندسی پزشکی در
+                    ورود به دوره کارشناسی مهندسی پزشکی در
                     <span property="schema:alumniOf">
                       <a href="https://ctb.iau.ir" target="_blank" rel="noopener noreferrer">دانشگاه آزاد اسلامی واحد تهران مرکزی</a>
-                    </span>.
-                    تمرکز من در این مسیر بر تلاقی مهندسی، برنامه‌نویسی و Digital Health برای طراحی راهکارهای کاربردی و پژوهش‌محور است.
+                    </span>
+                    با تمرکز بر تلاقی برنامه‌نویسی، مهندسی و Digital Health.
                   </p>
-                </div>
+                </article>
               </li>
 
-              <!-- C Projects -->
               <li
-              data-aos="fade-up"
-              itemscope
-              itemtype="https://schema.org/SoftwareSourceCode"
-              itemid="https://rasoulunlimited.ir/projects/c-projects/"
-            >
-              <div class="timeline-content">
-                <div class="timeline-icon">
-                  <i class="fas fa-code" aria-hidden="true"></i>
-                </div>
-                <p class="date">
-                  <time datetime="2023-11-16" itemprop="dateCreated">
-                    ۲۵ آبان ۱۴۰۲ (November 16, 2023)
-                  </time>
-                </p>
-                <h3 itemprop="name">
-                  توسعه پروژه‌های برنامه‌نویسی با زبان C (دانشگاهی)
-                </h3>
-                <p itemprop="description">
-                  پیاده‌سازی مجموعه‌ای از پروژه‌های برنامه‌نویسی در چارچوب دروس ترم اول
-                  <span itemprop="provider">دانشگاه آزاد اسلامی واحد تهران مرکزی</span>
-                  با زبان C. این مخزن‌ها به صورت
-                  <span>متن‌باز در گیت‌هاب</span> منتشر شده‌اند و پایه مهارت‌های الگوریتمی و حل‌مسئله من را شکل داده‌اند.
-                </p>
-            
-                <meta itemprop="codeRepository" content="https://github.com/RasoulUnlimited/Small-projects-with-c" />
-            
-                <div class="card-links card-links-clean">
-                  <a
-                    href="https://github.com/RasoulUnlimited/Small-projects-with-c"
-                    target="_blank"
-                    rel="authoritative noopener noreferrer me"
-                    aria-label="مشاهده پروژه‌های C در GitHub"
-                    title="مشاهده پروژه‌های برنامه‌نویسی C در گیت‌هاب"
-                    data-ai-intent="view-source-code-c"
-                    >مشاهده در GitHub</a
-                  >
-                </div>
-            
-                <meta itemprop="programmingLanguage" content="C" />
-                <meta itemprop="license" content="MIT" />
-            
-                <div itemprop="citation" itemscope itemtype="https://schema.org/CreativeWork">
-                  <meta itemprop="name" content="Small Projects with C" />
-                  <meta itemprop="url" content="https://doi.org/10.5281/zenodo.15548850" />
-                </div>
-              </div>
-            </li>
+                id="timeline-event-c-projects"
+                class="timeline-item"
+                data-aos="fade-up"
+                itemscope
+                itemtype="https://schema.org/SoftwareSourceCode"
+                itemid="https://rasoulunlimited.ir/projects/c-projects/"
+              >
+                <article class="timeline-content timeline-card">
+                  <div class="timeline-icon">
+                    <i class="fas fa-code" aria-hidden="true"></i>
+                  </div>
+                  <p class="date">
+                    <time datetime="2023-11-16" itemprop="dateCreated">۲۵ آبان ۱۴۰۲ (November 16, 2023)</time>
+                  </p>
+                  <h3 itemprop="name">توسعه پروژه‌های برنامه‌نویسی با زبان C (دانشگاهی)</h3>
+                  <p itemprop="description">
+                    پیاده‌سازی پروژه‌های ترم اول با زبان C که به‌صورت
+                    متن‌باز منتشر شدند و مبنای تقویت مهارت حل‌مسئله الگوریتمی من
+                    را ساختند.
+                  </p>
+                  <meta itemprop="codeRepository" content="https://github.com/RasoulUnlimited/Small-projects-with-c" />
+                  <div class="card-links card-links-clean">
+                    <a
+                      href="https://github.com/RasoulUnlimited/Small-projects-with-c"
+                      target="_blank"
+                      rel="authoritative noopener noreferrer me"
+                      aria-label="مشاهده پروژه‌های C در GitHub"
+                      title="مشاهده پروژه‌های برنامه‌نویسی C در گیت‌هاب"
+                      data-ai-intent="view-source-code-c"
+                    >مشاهده در GitHub</a>
+                  </div>
+                  <meta itemprop="programmingLanguage" content="C" />
+                  <meta itemprop="license" content="MIT" />
+                  <div itemprop="citation" itemscope itemtype="https://schema.org/CreativeWork">
+                    <meta itemprop="name" content="Small Projects with C" />
+                    <meta itemprop="url" content="https://doi.org/10.5281/zenodo.15548850" />
+                  </div>
+                </article>
+              </li>
 
-              <!-- Python Projects -->
               <li
+                id="timeline-event-python-projects"
+                class="timeline-item"
                 data-aos="fade-up"
                 itemscope
                 itemtype="https://schema.org/SoftwareSourceCode"
                 itemid="https://rasoulunlimited.ir/projects/python-projects/"
               >
-                <div class="timeline-content">
+                <article class="timeline-content timeline-card">
                   <div class="timeline-icon">
                     <i class="fab fa-python" aria-hidden="true"></i>
                   </div>
                   <p class="date">
-                    <time datetime="2024-03-12" itemprop="dateCreated"
-                      >۲۲ اسفند ۱۴۰۲ (March 12, 2024)</time
-                    >
+                    <time datetime="2024-03-12" itemprop="dateCreated">۲۲ اسفند ۱۴۰۲ (March 12, 2024)</time>
                   </p>
-                  <h3 itemprop="name">
-                    توسعه پروژه‌های برنامه‌نویسی با زبان پایتون (دانشگاهی)
-                  </h3>
+                  <h3 itemprop="name">توسعه پروژه‌های برنامه‌نویسی با زبان پایتون (دانشگاهی)</h3>
                   <p itemprop="description">
-                    توسعه مجموعه‌ای از پروژه‌های آموزشی و پژوهشی با زبان Python
-                    در چارچوب همکاری با
+                    توسعه پروژه‌های آموزشی و پژوهشی با Python در همکاری دانشگاهی
+                    با
                     <span itemprop="provider">دانشگاه صنعتی سهند تبریز</span>
-                    . این پروژه‌ها با
-                    <span itemprop="license">مجوز MIT</span>
-                    منتشر شده‌اند و بخشی از مسیر فعال من در متن‌باز و یادگیری مهندسی نرم‌افزار هستند.
+                    که با مجوز MIT منتشر شدند.
                   </p>
                   <div class="card-links card-links-clean">
                     <a
@@ -930,141 +921,98 @@
                       aria-label="مشاهده پروژه‌های پایتون در GitHub"
                       title="مشاهده پروژه‌های برنامه‌نویسی پایتون در گیت‌هاب"
                       data-ai-intent="view-source-code-python"
-                      >مشاهده در GitHub</a
-                    >
+                    >مشاهده در GitHub</a>
                   </div>
                   <meta itemprop="programmingLanguage" content="Python" />
                   <meta itemprop="license" content="MIT" />
-                  <div
-                    itemprop="citation"
-                    itemscope
-                    itemtype="https://schema.org/CreativeWork"
-                  >
-                    <meta
-                      itemprop="name"
-                      content="Small Projects with Python"
-                    />
-                    <meta
-                      itemprop="url"
-                      content="https://doi.org/10.5281/zenodo.15548860"
-                    />
+                  <div itemprop="citation" itemscope itemtype="https://schema.org/CreativeWork">
+                    <meta itemprop="name" content="Small Projects with Python" />
+                    <meta itemprop="url" content="https://doi.org/10.5281/zenodo.15548860" />
                   </div>
-                </div>
+                </article>
               </li>
 
-              <!-- Virgool Article 1 -->
               <li
-                data-aos="fade-up"
-                itemscope
-                itemtype="https://schema.org/Article"
-                itemid="https://vrgl.ir/9D6Hy"
-              >
-                <div class="timeline-content">
-                  <div class="timeline-icon">
-                    <i class="fas fa-feather-alt" aria-hidden="true"></i>
-                  </div>
-                  <p class="date">
-                    <time datetime="2025-05-10" itemprop="datePublished"
-                      >۲۰ اردیبهشت ۱۴۰۴ (May 10, 2025)</time
-                    >
-                  </p>
-                  <h3 itemprop="name">انتشار اولین مقاله معرفی در ویرگول</h3>
-                  <p itemprop="articleBody">
-                    نشر مقاله "<a
-                      href="https://vrgl.ir/9D6Hy"
-                      target="_blank"
-                      rel="noopener noreferrer nofollow"
-                      title="خواندن مقاله 'از Tatami تا تکنولوژی' در ویرگول"
-                      itemprop="url"
-                      >محمد رسول سهرابی (آنلیمیتد) – از Tatami تا تکنولوژی</a
-                    >" به عنوان نخستین معرفی جامع من در فضای دیجیتال؛ با تمرکز بر مسیر رشد، تجربه‌های عملی و نقاط عطف حرفه‌ای.
-                  </p>
-                  <div
-                    itemprop="publisher"
-                    itemscope
-                    itemtype="https://schema.org/Organization"
-                  >
-                    <meta itemprop="name" content="ویرگول" />
-                    <meta itemprop="url" content="https://virgool.io/" />
-                  </div>
-                  <meta itemprop="inLanguage" content="fa" />
-                </div>
-              </li>
-
-              <!-- Virgool Article 2 -->
-              <li
+                id="timeline-event-writing-series"
+                class="timeline-item"
                 data-aos="fade-up"
                 itemscope
                 itemtype="https://schema.org/Article"
                 itemid="https://vrgl.ir/cUmcv"
               >
-                <div class="timeline-content">
+                <article class="timeline-content timeline-card">
                   <div class="timeline-icon">
                     <i class="fas fa-feather-alt" aria-hidden="true"></i>
                   </div>
                   <p class="date">
-                    <time datetime="2025-05-13" itemprop="datePublished"
-                      >۲۳ اردیبهشت ۱۴۰۴ (May 13, 2025)</time
-                    >
+                    <time datetime="2025-05-13" itemprop="datePublished">۲۳ اردیبهشت ۱۴۰۴ (May 13, 2025)</time>
                   </p>
-                  <h3 itemprop="name">انتشار مقاله برند شخصی در ویرگول</h3>
+                  <h3 itemprop="name">انتشار سری مقالات «هویت و برند شخصی» در ویرگول</h3>
                   <p itemprop="articleBody">
-                    نشر مقاله "<a
+                    با انتشار دو مقاله تحلیلی درباره مسیر رشد فردی و برندسازی
+                    اصیل، روایت حرفه‌ای خودم را از «تاتامی تا تکنولوژی» به‌صورت
+                    مستند و قابل ارجاع منتشر کردم.
+                  </p>
+                  <div class="card-links card-links-clean">
+                    <a
+                      href="https://vrgl.ir/9D6Hy"
+                      target="_blank"
+                      rel="noopener noreferrer nofollow"
+                      title="خواندن مقاله از Tatami تا تکنولوژی در ویرگول"
+                      itemprop="url"
+                    >مقاله اول</a>
+                    <a
                       href="https://vrgl.ir/cUmcv"
                       target="_blank"
                       rel="noopener noreferrer nofollow"
-                      title="خواندن مقاله 'چطور توی دنیای شلوغ امروز، یه برند شخصی واقعی بسازیم؟' در ویرگول"
+                      title="خواندن مقاله برند شخصی در ویرگول"
                       itemprop="url"
-                      >چطور توی دنیای شلوغ امروز، یه برند شخصی واقعی بسازیم؟ |
-                      داستان Rasoul Unlimited</a
-                    >" که نگاه من به اصالت در برند شخصی، مسیرسازی بلندمدت و معنای «آنلیمیتد» را به‌صورت تحلیلی توضیح می‌دهد.
-                  </p>
-                  <div
-                    itemprop="publisher"
-                    itemscope
-                    itemtype="https://schema.org/Organization"
-                  >
+                    >مقاله دوم</a>
+                  </div>
+                  <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
                     <meta itemprop="name" content="ویرگول" />
                     <meta itemprop="url" content="https://virgool.io/" />
                   </div>
                   <meta itemprop="inLanguage" content="fa" />
-                </div>
+                </article>
               </li>
 
-              <!-- Current Focus (Improved) -->
-              <li data-aos="fade-up">
-                <div class="timeline-content">
+              <li id="timeline-event-current-focus" class="timeline-item" data-aos="fade-up">
+                <article class="timeline-content timeline-card">
                   <div class="timeline-icon">
                     <i class="fas fa-code-branch" aria-hidden="true"></i>
                   </div>
                   <p class="date">
-                    <time datetime="2025-11-01">۱۰ آبان ۱۴۰۴ (November 1, 2025)</time>
+                    <time datetime="2026-02-01">۱۲ بهمن ۱۴۰۴ (February 1, 2026)</time>
                   </p>
-                  <h3>گسترش مرزهای سلامت دیجیتال و هویت باز</h3>
+                  <h3>تمرکز فعلی: سیستم‌های هوشمند سلامت و هویت قابل‌راستی‌آزمایی</h3>
                   <p>
-                    تمرکز فعلی من بر پژوهش مهندسی پزشکی، توسعه سیستم‌های هوشمند سلامت و ساخت زیرساخت هویت دیجیتال قابل‌راستی‌آزمایی است.
-                    <br>
-                    <a href="/projects/" class="text-link">مشاهده پروژه‌ها &larr;</a>
+                    تمرکز امروز من روی توسعه راهکارهای کاربردی در سلامت دیجیتال،
+                    پژوهش مهندسی پزشکی و ساخت زیرساخت هویت باز و قابل اعتماد است.
                   </p>
-                </div>
+                  <div class="card-links card-links-clean">
+                    <a href="https://rasoulunlimited.ir/projects/" class="text-link">مشاهده پروژه‌ها</a>
+                  </div>
+                </article>
               </li>
 
-              <!-- Future Vision -->
-              <li data-aos="fade-up">
-                <div class="timeline-content">
+              <li id="timeline-event-future" class="timeline-item" data-aos="fade-up">
+                <article class="timeline-content timeline-card">
                   <div class="timeline-icon">
                     <i class="fas fa-rocket" aria-hidden="true"></i>
                   </div>
                   <p class="date">
-                    <time datetime="2027">از ۲۰۲۷ به بعد (2027+)</time>
+                    <time datetime="2027-01-01">۱۱ دی ۱۴۰۵ (January 1, 2027)</time>
                   </p>
                   <h3>پیشگامی در نوآوری‌های پزشکی و تکنولوژی</h3>
                   <p>
-                    افق بلندمدت من طراحی اکوسیستم‌های یکپارچه سلامت و هوش مصنوعی است؛ راهکارهایی که اثر فنی و اثر واقعی بر کیفیت زندگی داشته باشند.
+                    افق بلندمدت من طراحی اکوسیستم‌های یکپارچه سلامت و هوش مصنوعی
+                    است؛ راهکارهایی که هم از نظر فنی عمیق باشند و هم اثر واقعی بر
+                    کیفیت زندگی ایجاد کنند.
                   </p>
-                </div>
+                </article>
               </li>
-            </ul>
+            </ol>
           </section>
 
           <!-- Skills and Technologies Section -->

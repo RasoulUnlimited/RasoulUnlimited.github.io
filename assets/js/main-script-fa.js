@@ -1523,6 +1523,155 @@
   }
 
   // ==========================
+  // Timeline Micro-interactions
+  // ==========================
+  function initTimelineMicroInteractions() {
+    const section = document.getElementById("timeline");
+    const list = section?.querySelector(".timeline");
+    if (!section || !list) {return;}
+
+    const items = Array.from(list.children).filter(
+      (node) => node instanceof HTMLElement && node.tagName === "LI"
+    );
+    if (!items.length) {return;}
+
+    items.forEach((item) => item.classList.add("timeline-item"));
+    section.classList.add("timeline-enhanced");
+
+    const markVisible = (item) => {
+      item.classList.add("is-visible", "timeline-item-visible");
+    };
+
+    const reduced = ENV.state.reduced;
+    const coarse = ENV.state.coarse;
+    const supportsObserver = "IntersectionObserver" in window;
+
+    if (!supportsObserver || reduced) {
+      items.forEach(markVisible);
+    } else {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) {return;}
+            markVisible(entry.target);
+            observer.unobserve(entry.target);
+          });
+        },
+        {
+          threshold: coarse ? 0.1 : 0.24,
+          rootMargin: "0px 0px -8% 0px",
+        }
+      );
+
+      items.forEach((item, index) => {
+        if (coarse) {
+          observer.observe(item);
+          return;
+        }
+
+        setTimeout(() => {
+          if (!abortSignal.aborted) {
+            observer.observe(item);
+          }
+        }, Math.min(320, index * 38));
+      });
+
+      on(window, "beforeunload", () => observer.disconnect(), { once: true });
+    }
+
+    let targetTimer = null;
+    const clearTargets = () =>
+      items.forEach((item) => item.classList.remove("is-targeted"));
+
+    const focusHashTarget = () => {
+      const hash = window.location.hash || "";
+      if (!hash) {return;}
+
+      let target = null;
+      try {
+        target = section.querySelector(hash);
+      } catch {
+        return;
+      }
+
+      if (!(target instanceof HTMLElement)) {return;}
+      if (!target.classList.contains("timeline-item")) {return;}
+
+      clearTargets();
+      markVisible(target);
+      target.classList.add("is-targeted");
+
+      if (targetTimer) {
+        clearTimeout(targetTimer);
+      }
+      targetTimer = setTimeout(() => {
+        target.classList.remove("is-targeted");
+      }, 2200);
+
+      const navbarHeight = document.querySelector(".navbar")?.offsetHeight || 0;
+      const progressHeight =
+        document.getElementById("scroll-progress-bar")?.offsetHeight || 0;
+      const offset = navbarHeight + progressHeight + 20;
+      const rect = target.getBoundingClientRect();
+      const top = window.scrollY + rect.top - offset;
+
+      if (Math.abs(rect.top - offset) > 24) {
+        window.scrollTo({
+          top: Math.max(0, top),
+          behavior: reduced ? "auto" : "smooth",
+        });
+      }
+    };
+
+    setTimeout(focusHashTarget, 120);
+    on(window, "hashchange", focusHashTarget);
+
+    if (reduced || coarse) {return;}
+
+    let ticking = false;
+    const updateParallax = () => {
+      ticking = false;
+      const rect = section.getBoundingClientRect();
+      const viewH = Math.max(window.innerHeight, 1);
+      const centerDelta = rect.top + rect.height / 2 - viewH / 2;
+      const ratio = Math.max(-1, Math.min(1, centerDelta / viewH));
+
+      section.style.setProperty(
+        "--timeline-line-shift",
+        `${(-ratio * 8).toFixed(2)}px`
+      );
+      section.style.setProperty(
+        "--timeline-icon-shift",
+        `${(-ratio * 3).toFixed(2)}px`
+      );
+    };
+
+    const requestParallaxUpdate = () => {
+      if (ticking) {return;}
+      ticking = true;
+      requestAnimationFrame(updateParallax);
+    };
+
+    on(window, "scroll", requestParallaxUpdate, { passive: true });
+    on(window, "resize", requestParallaxUpdate, { passive: true });
+    on(
+      window,
+      "beforeunload",
+      () => {
+        section.style.removeProperty("--timeline-line-shift");
+        section.style.removeProperty("--timeline-icon-shift");
+        if (targetTimer) {
+          clearTimeout(targetTimer);
+          targetTimer = null;
+        }
+      },
+      { once: true }
+    );
+
+    requestParallaxUpdate();
+  }
+
+  // ==========================
   // Section Milestones & Confetti
   // ==========================
   function initExplorationMilestones() {
@@ -1962,6 +2111,7 @@
       ["anchor-scrolling", initAnchorScrolling],
       ["click-effects", initClickEffects],
       ["scroll-ui", initScrollUI],
+      ["timeline-micro-interactions", initTimelineMicroInteractions],
       ["skills-hover", initSkillsHover],
       ["faq", initFAQ],
       ["email-copy", initEmailCopy],
