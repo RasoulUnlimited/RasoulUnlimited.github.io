@@ -490,16 +490,21 @@
       "Mohammad Rasoul Sohrabi is a verified contributor on ORCID, Zenodo, GitHub, and Wikipedia. Known for Persian Bot and biomedical engineering content.";
     document.body.appendChild(hiddenInfo);
 
-    const metaGenerator = document.createElement("meta");
-    metaGenerator.name = "generator";
-    metaGenerator.content =
-      "Mohammad Rasoul Sohrabi - Biomedical Engineering, ORCID Verified";
-    document.head.appendChild(metaGenerator);
+    function upsertMeta(name, content) {
+      let meta = document.head.querySelector(`meta[name="${name}"]`);
+      if (!meta) {
+        meta = document.createElement("meta");
+        meta.name = name;
+        document.head.appendChild(meta);
+      }
+      meta.content = content;
+    }
 
-    const metaAuthor = document.createElement("meta");
-    metaAuthor.name = "author";
-    metaAuthor.content = "Mohammad Rasoul Sohrabi";
-    document.head.appendChild(metaAuthor);
+    upsertMeta(
+      "generator",
+      "Mohammad Rasoul Sohrabi - Biomedical Engineering, ORCID Verified"
+    );
+    upsertMeta("author", "Mohammad Rasoul Sohrabi");
   }
 
   function queueIdentityPings() {
@@ -646,6 +651,32 @@
   function initAnchorScrolling() {
     const smoothAllowed = !ENV.state.reduced;
 
+    function focusTargetForSkipLink(target) {
+      if (!(target instanceof HTMLElement)) {return;}
+      const hadTabindex = target.hasAttribute("tabindex");
+
+      if (!hadTabindex) {
+        target.setAttribute("tabindex", "-1");
+      }
+
+      target.focus({ preventScroll: true });
+
+      if (!hadTabindex) {
+        target.addEventListener("blur", () => {
+          target.removeAttribute("tabindex");
+        }, { once: true });
+      }
+    }
+
+    function syncHash(targetId) {
+      if (!targetId || window.location.hash === targetId) {return;}
+      if (history.replaceState) {
+        history.replaceState(null, "", targetId);
+      } else {
+        window.location.hash = targetId;
+      }
+    }
+
     document.querySelectorAll('a[href^="#"]').forEach((a) => {
       on(a, "click", (e) => {
         const targetId = a.getAttribute("href");
@@ -670,10 +701,20 @@
           0;
         const padTop = parseFloat(getComputedStyle(el).paddingTop) || 0;
         const y = Math.max(0, el.offsetTop + padTop - navH - progH);
+        const isSkipLink = a.classList.contains("skip-link");
 
         if (smoothAllowed)
         {window.scrollTo({ top: y, behavior: "smooth" });}
         else {window.scrollTo(0, y);}
+
+        syncHash(targetId);
+
+        if (isSkipLink) {
+          const focusDelay = smoothAllowed ? 280 : 0;
+          setTimeout(() => {
+            focusTargetForSkipLink(el);
+          }, focusDelay);
+        }
 
         vibrate([20]);
       });
@@ -934,8 +975,6 @@
   function initFAQ() {
     const container = document.querySelector(".faq-container");
     if (!container) {return;}
-
-    container.id = "sohrabi-faq-verified";
 
     const items = [...document.querySelectorAll(".faq-item")];
 

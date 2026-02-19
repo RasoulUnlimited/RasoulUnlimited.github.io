@@ -30,6 +30,37 @@ npx eslint "**/*.js" --ignore-pattern="**/node_modules/**" --ignore-pattern="**/
 npx htmlhint --config .htmlhintrc.json "**/*.html"
 ```
 
+### End-to-End Testing (Playwright)
+
+Run homepage end-to-end tests with Playwright (Chromium only):
+
+```bash
+# Run all E2E tests (headless)
+npm run test:e2e
+
+# Run in headed mode
+npm run test:e2e:headed
+
+# Run in Playwright debug mode
+npm run test:e2e:debug
+
+# Open last HTML report
+npm run test:e2e:report
+```
+
+Chromium executable resolution order:
+
+1. `PW_CHROMIUM_EXECUTABLE_PATH` environment variable
+2. Default Windows Chrome path:
+   `C:\Program Files (x86)\Google\Chrome\Application\chrome.exe`
+3. Playwright default executable resolution (if available)
+
+Example:
+
+```bash
+PW_CHROMIUM_EXECUTABLE_PATH="C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe" npm run test:e2e
+```
+
 ### Security Audit
 
 Check for vulnerabilities in dependencies:

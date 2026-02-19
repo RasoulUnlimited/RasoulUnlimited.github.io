@@ -3,7 +3,6 @@
 
   // Ensure language strings object exists
   if (!window.langStrings) {
-    console.warn("No language strings loaded");
     window.langStrings = {};
   }
 

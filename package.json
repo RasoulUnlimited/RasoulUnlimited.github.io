@@ -18,6 +18,10 @@
     "build:watch": "gulp watch",
     "dev": "npm run build:watch & npx serve -l 8080 .",
     "start": "npx serve -l 8080 .",
+    "test:e2e": "playwright test",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:debug": "playwright test --debug",
+    "test:e2e:report": "playwright show-report",
     "lint": "npm run lint:html && npm run lint:js",
     "lint:html": "npx htmlhint --config .htmlhintrc.json \"**/*.html\"",
     "lint:js": "npx eslint \"**/*.js\" --ignore-pattern=\"**/node_modules/**\" --ignore-pattern=\"**/dist/**\" --ignore-pattern=\"**/*.min.js\"",
@@ -49,6 +53,7 @@
   "license": "CC-BY-NC-ND-4.0",
   "devDependencies": {
     "@eslint/js": "8.57.1",
+    "@playwright/test": "1.58.2",
     "eslint": "^8.55.0",
     "gulp": "^5.0.1",
     "gulp-clean-css": "^4.3.0",

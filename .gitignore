@@ -38,6 +38,8 @@ pnpm-debug.log*
 .mocha_output/
 .coverage/
 lcov.info
+playwright-report/
+test-results/
 
 # Patch & Backup files
 *.patch
