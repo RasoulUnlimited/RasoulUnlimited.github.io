@@ -97,6 +97,7 @@
 #connect .status-badge {
   display: inline-flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 8px;
   background: rgba(16, 185, 129, 0.1);
   color: #10b981;
@@ -107,7 +108,18 @@
   border: 1px solid rgba(16, 185, 129, 0.2);
   align-self: flex-start;
   margin-bottom: var(--space-xs);
-  white-space: nowrap;
+  white-space: normal;
+}
+
+#connect .status-response-chip {
+  background: rgba(var(--primary-rgb), 0.12);
+  color: var(--heading-color);
+  border: 1px solid rgba(var(--primary-rgb), 0.2);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1;
+  padding: 6px 10px;
 }
 
 #connect .status-dot {
@@ -229,6 +241,9 @@
   color: var(--heading-color);
   text-decoration: none;
   font-size: 1.05rem;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -245,6 +260,8 @@
   background: transparent;
   border: 1px solid var(--border-color);
   color: var(--text-muted);
+  min-width: 44px;
+  min-height: 44px;
   width: 40px;
   height: 40px;
   border-radius: 10px;
@@ -303,6 +320,7 @@
 
 #connect .full-width-btn {
   width: 100%;
+  min-height: 44px;
   justify-content: center;
   padding: 14px;
   font-weight: 700;
@@ -610,20 +628,23 @@
   }
 
   #connect .email-icon-wrapper {
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     font-size: 1rem;
     border-radius: 8px;
   }
 
   #connect .email-link {
     font-size: 0.9rem;
+    min-height: 40px;
     display: block;
   }
 
   #connect .copy-btn {
-    width: 36px;
-    height: 36px;
+    min-width: 40px;
+    min-height: 40px;
+    width: 40px;
+    height: 40px;
     border-radius: 8px;
   }
 
@@ -698,5 +719,11 @@
   #connect .status-badge {
     font-size: 0.75rem;
     padding: 4px 10px;
+  }
+
+  #connect .status-response-chip {
+    width: 100%;
+    text-align: center;
+    font-size: 0.72rem;
   }
 }

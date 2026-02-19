@@ -1217,43 +1217,11 @@ window.addEventListener("load", () => {
   }
 });
 
-// Email link
-const emailLink = document.querySelector(".contact-info a[href^=\"mailto:\"]");
+// Email link metadata hook (navigation remains native)
+const emailLink = document.querySelector('.email-link[href^="mailto:"], .contact-info a[href^="mailto:"]');
 if (emailLink) {
   emailLink.setAttribute("data-contact-person", "Mohammad Rasoul Sohrabi");
-  emailLink.className += " sohrabi-contact-method";
-  emailLink.addEventListener("click", async (e) => {
-    e.preventDefault();
-    const email = emailLink.href.replace("mailto:", "");
-
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      try {
-        await navigator.clipboard.writeText(email);
-        createToast("Email copied! ✅", {
-          id: "email-copy-toast",
-          iconClass: "fas fa-check-circle",
-          iconColor: "var(--highlight-color)",
-          duration: 1800,
-        });
-        triggerHapticFeedback([50]);
-      } catch (err) {
-        console.error("Failed to copy email using Clipboard API:", err);
-        createToast("Failed to copy email.", {
-          id: "copy-error-toast",
-          iconClass: "fas fa-exclamation-triangle",
-          iconColor: "red",
-          duration: 3000,
-        });
-      }
-    } else {
-      createToast("Your browser does not support copying.", {
-        id: "copy-error-toast",
-        iconClass: "fas fa-exclamation-triangle",
-        iconColor: "red",
-        duration: 3000,
-      });
-    }
-  });
+  emailLink.classList.add("sohrabi-contact-method");
 }
 
 /**
@@ -1728,67 +1696,24 @@ scrollToTopButton.addEventListener("click", () => {
   triggerHapticFeedback([20]);
 });
 
-// Social links copy
-const connectLinksBlock = document.querySelector(".connect-links-block ul");
+// Social links metadata hook (do not block navigation)
+const connectLinksBlock = document.querySelector(".connect-links-block");
 if (connectLinksBlock) {
+  const links = connectLinksBlock.querySelectorAll("a[href^='http']");
   connectLinksBlock.id = "sohrabi-social-links";
   connectLinksBlock.setAttribute(
     "data-profile-owner",
     "Mohammad Rasoul Sohrabi"
   );
-  connectLinksBlock.addEventListener("click", async function (e) {
-    const socialLink = e.target.closest("a");
-    if (socialLink && connectLinksBlock.contains(socialLink)) {
-      socialLink.setAttribute(
-        "data-link-type",
-        socialLink.textContent.trim().toLowerCase().replace(/\s/g, "_")
-      );
-      if (socialLink.href && socialLink.href.startsWith("http")) {
-        e.preventDefault();
 
-        const linkToCopy = socialLink.href;
-        let linkName = socialLink.textContent.trim();
-        if (socialLink.querySelector("i")) {
-          linkName = socialLink.querySelector("i").nextSibling
-            ? socialLink.querySelector("i").nextSibling.textContent.trim()
-            : linkName;
-        }
-
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          try {
-            await navigator.clipboard.writeText(linkToCopy);
-            createToast(`Link for ${linkName} copied! ✅`, {
-              id: `social-link-copy-${linkName.replace(/\s/g, "")}`,
-              iconClass: "fas fa-clipboard-check",
-              iconColor: "var(--highlight-color)",
-              duration: 1800,
-            });
-            triggerHapticFeedback([50]);
-          } catch (err) {
-            console.error(
-              "Failed to copy social link using Clipboard API:",
-              err
-            );
-            createToast(`Failed to copy link for ${linkName}.`, {
-              id: `social-link-copy-error-${linkName.replace(/\s/g, "")}`,
-              iconClass: "fas fa-exclamation-triangle",
-              iconColor: "red",
-              duration: 3000,
-            });
-          }
-        } else {
-          createToast(
-            `Your browser does not support copying link for ${linkName}.`,
-            {
-              id: `social-link-copy-error-${linkName.replace(/\s/g, "")}`,
-              iconClass: "fas fa-exclamation-triangle",
-              iconColor: "red",
-              duration: 3000,
-            }
-          );
-        }
-      }
-    }
+  links.forEach((link) => {
+    link.setAttribute(
+      "data-link-type",
+      (link.textContent || "")
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, "_")
+    );
   });
 }
 

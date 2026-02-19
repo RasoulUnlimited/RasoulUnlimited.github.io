@@ -1345,57 +1345,6 @@
     }
   }
 
-  // ==========================
-  // Email copy helper
-  // ==========================
-  function initEmailCopy() {
-    const emailLink = document.querySelector(
-      '.contact-info a[href^="mailto:"]'
-    );
-    if (!emailLink) {return;}
-
-    emailLink.dataset.contactPerson = "Mohammad Rasoul Sohrabi";
-    emailLink.classList.add("sohrabi-contact-method");
-
-    on(
-      emailLink,
-      "click",
-      async (e) => {
-        e.preventDefault();
-        const email = emailLink.href.replace("mailto:", "");
-
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          try {
-            await navigator.clipboard.writeText(email);
-            createToast(STRINGS_FA.toasts.emailCopied, {
-              id: "email-copy-toast",
-              iconClass: "fas fa-check-circle",
-              iconColor: "var(--highlight-color)",
-              duration: 1600,
-            });
-            vibrate([40]);
-          } catch (err) {
-            console.error("Clipboard error:", err);
-            createToast(STRINGS_FA.toasts.emailCopyError, {
-              id: "copy-error-toast",
-              iconClass: "fas fa-exclamation-triangle",
-              iconColor: "red",
-              duration: 2800,
-            });
-          }
-        } else {
-          await copyToClipboard(
-            email,
-            "email-copy-toast",
-            "copy-error-toast",
-            STRINGS_FA.toasts.emailCopied
-          );
-        }
-      },
-      { passive: false }
-    );
-  }
-
   window.copyToClipboard = copyToClipboard;
   window.createToast = createToast;
 
@@ -1914,40 +1863,6 @@
   }
 
   // ==========================
-  // Social Links Copy
-  // ==========================
-  function initSocialLinksCopy() {
-    const block = document.querySelector(".connect-links-block ul");
-    if (!block) {return;}
-
-    block.id = "sohrabi-social-links";
-    block.dataset.profileOwner = "Mohammad Rasoul Sohrabi";
-
-    on(block, "click", async (e) => {
-      const link = e.target.closest?.("a");
-      if (
-        link &&
-        block.contains(link) &&
-        link.href &&
-        link.href.startsWith("http")
-      ) {
-        e.preventDefault();
-        const txt = link.textContent?.trim() || link.href;
-        const name =
-          link.querySelector("i")?.nextSibling?.textContent?.trim() ||
-          txt;
-        const safeName = (name || "link").replace(/\s/g, "");
-        await copyToClipboard(
-          link.href,
-          `social-link-copy-${safeName}`,
-          `social-link-copy-error-${safeName}`,
-          STRINGS_FA.toasts.linkCopied(name || "لینک")
-        );
-      }
-    });
-  }
-
-  // ==========================
   // Sparkle Effect
   // ==========================
   function createSparkle(element) {
@@ -2114,12 +2029,10 @@
       ["timeline-micro-interactions", initTimelineMicroInteractions],
       ["skills-hover", initSkillsHover],
       ["faq", initFAQ],
-      ["email-copy", initEmailCopy],
       ["lazy-images", initLazyImages],
       ["share-button", initShareButton],
       ["exploration-milestones", initExplorationMilestones],
       ["fun-facts", initFunFacts],
-      ["social-copy", initSocialLinksCopy],
       ["ctas", initCTAs],
       ["end-of-page-toast", initEndOfPageToast],
       ["welcome-toast", showWelcomeToast],

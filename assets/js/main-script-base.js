@@ -300,10 +300,51 @@
     });
   }
 
+  function resolveCopyToastMessage(kind) {
+    const strings = window.langStrings || {};
+    const keyOrder = {
+      success: ["copySuccess", "emailCopied"],
+      error: ["copyError", "emailCopyError"],
+      unsupported: ["copyUnsupported", "clipboardUnsupported"],
+    };
+
+    const keys = keyOrder[kind] || [];
+    for (const key of keys) {
+      const value = strings[key];
+      if (typeof value === "function") {
+        const message = value();
+        if (typeof message === "string" && message.trim()) {return message;}
+      } else if (typeof value === "string" && value.trim()) {
+        return value;
+      }
+    }
+
+    const isFa = (document.documentElement.lang || "")
+      .toLowerCase()
+      .startsWith("fa");
+
+    const fallback = {
+      success: isFa
+        ? "\u0627\u06cc\u0645\u06cc\u0644 \u06a9\u067e\u06cc \u0634\u062f."
+        : "Email copied.",
+      error: isFa
+        ? "\u06a9\u067e\u06cc \u0628\u0627 \u0645\u0634\u06a9\u0644 \u0645\u0648\u0627\u062c\u0647 \u0634\u062f."
+        : "Copy failed.",
+      unsupported: isFa
+        ? "\u0645\u0631\u0648\u0631\u06af\u0631 \u0634\u0645\u0627 \u0627\u0632 \u06a9\u067e\u06cc \u062e\u0648\u062f\u06a9\u0627\u0631 \u067e\u0634\u062a\u06cc\u0628\u0627\u0646\u06cc \u0646\u0645\u06cc\u200c\u06a9\u0646\u062f."
+        : "Your browser does not support automatic copy.",
+    };
+
+    return fallback[kind] || fallback.error;
+  }
+
   // Copy to Clipboard Logic
   const copyBtns = document.querySelectorAll(".copy-btn");
   copyBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
+    btn.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
       const textToCopy = btn.getAttribute("data-copy");
       if (!textToCopy) {
         console.warn("No data-copy attribute found on .copy-btn");
@@ -313,7 +354,7 @@
       if (!navigator.clipboard || !navigator.clipboard.writeText) {
         console.warn("Clipboard API not available");
         if (window.createToast) {
-          window.createToast("مرورگر شما از کپی خودکار پشتیبانی نمی‌کند.");
+          window.createToast(resolveCopyToastMessage("unsupported"));
         }
         return;
       }
@@ -321,15 +362,13 @@
       navigator.clipboard
         .writeText(textToCopy)
         .then(() => {
-          // Show feedback
           const originalIcon = btn.innerHTML;
           btn.innerHTML =
             '<i class="fas fa-check" aria-hidden="true"></i>';
           btn.classList.add("copied");
 
           if (window.createToast) {
-            // این پیام را می‌توانی بعداً با langStrings هم محلی‌سازی کنی
-            window.createToast("ایمیل کپی شد!");
+            window.createToast(resolveCopyToastMessage("success"));
           }
 
           setTimeout(() => {
@@ -340,7 +379,7 @@
         .catch((err) => {
           console.error("Failed to copy: ", err);
           if (window.createToast) {
-            window.createToast("کپی کردن با مشکل مواجه شد.");
+            window.createToast(resolveCopyToastMessage("error"));
           }
         });
     });
