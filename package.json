@@ -16,7 +16,7 @@
   "scripts": {
     "build": "gulp",
     "build:watch": "gulp watch",
-    "dev": "npm run build:watch & npx serve -l 8080 .",
+    "dev": "concurrently -k \"npm:build:watch\" \"npm:start\"",
     "start": "npx serve -l 8080 .",
     "test:e2e": "playwright test",
     "test:e2e:fast": "playwright test --workers=4 --fully-parallel",
@@ -35,8 +35,8 @@
     "test:strict": "npm run lint:strict",
     "seo:verify": "node scripts/seo-verify.mjs --warn-only",
     "seo:verify:strict": "node scripts/seo-verify.mjs",
-    "audit": "npm audit --production && npm audit fix",
-    "audit:prod": "npm audit --production",
+    "audit": "npm audit --omit=dev && npm audit fix",
+    "audit:prod": "npm audit --omit=dev",
     "clean": "rimraf node_modules .eslintcache",
     "precommit": "npm run lint:fix && npm run build"
   },
@@ -56,6 +56,7 @@
   "devDependencies": {
     "@eslint/js": "8.57.1",
     "@playwright/test": "1.58.2",
+    "concurrently": "^9.0.0",
     "eslint": "^8.55.0",
     "gulp": "^5.0.1",
     "gulp-clean-css": "^4.3.0",

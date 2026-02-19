@@ -28,6 +28,10 @@ const launchArgs = [
   "--disable-background-networking",
 ];
 
+if (isCI) {
+  launchArgs.push("--no-sandbox", "--disable-setuid-sandbox");
+}
+
 export default defineConfig({
   testDir: "tests/e2e",
   fullyParallel,
@@ -55,9 +59,9 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: "npm run start",
+    command: isCI ? "npm run build && npm run start" : "npm run start",
     url: baseURL,
-    reuseExistingServer: true,
+    reuseExistingServer: !isCI,
     timeout: 120000,
   },
 });
