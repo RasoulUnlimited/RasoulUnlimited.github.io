@@ -3718,7 +3718,7 @@ summary:active,
   .timeline li:nth-child(odd) .timeline-icon {
     left: var(--space-lg);
     right: auto;
-    transform: translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
   }
   .timeline-content::before,
   .timeline li:nth-child(even) .timeline-content::before,
