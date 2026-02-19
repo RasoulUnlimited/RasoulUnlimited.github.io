@@ -200,6 +200,48 @@ test.describe("Home Connect Section", () => {
       await expect(copyBtn.locator(".fa-copy")).toBeVisible();
     });
 
+    test(`${pageMeta.key}: copy button click is intercepted (preventDefault + stopPropagation)`, async ({
+      page,
+    }) => {
+      await page.addInitScript(() => {
+        Object.defineProperty(navigator, "clipboard", {
+          configurable: true,
+          value: {
+            writeText: async () => undefined,
+          },
+        });
+      });
+
+      await gotoConnect(page, pageMeta.path, "domcontentloaded");
+
+      const state = await page.evaluate(() => {
+        const section = document.getElementById("connect");
+        const copyBtn = section?.querySelector<HTMLButtonElement>(".copy-btn");
+        if (!(section instanceof HTMLElement) || !(copyBtn instanceof HTMLButtonElement)) {
+          return null;
+        }
+
+        let bubbledCount = 0;
+        const onSectionClick = () => {
+          bubbledCount += 1;
+        };
+        section.addEventListener("click", onSectionClick);
+
+        const event = new MouseEvent("click", { bubbles: true, cancelable: true });
+        copyBtn.dispatchEvent(event);
+        section.removeEventListener("click", onSectionClick);
+
+        return {
+          defaultPrevented: event.defaultPrevented,
+          bubbledCount,
+        };
+      });
+
+      expect(state).not.toBeNull();
+      expect(state?.defaultPrevented).toBe(true);
+      expect(state?.bubbledCount).toBe(0);
+    });
+
     test(`${pageMeta.key}: clipboard write failure shows feedback and avoids stuck copied state`, async ({
       page,
     }) => {
@@ -258,6 +300,69 @@ test.describe("Home Connect Section", () => {
           return page.evaluate(() => document.querySelectorAll(".dynamic-toast.show").length);
         })
         .toBeGreaterThan(0);
+    });
+
+    test(`${pageMeta.key}: interactive controls keep touch-friendly size and non-empty labels`, async ({
+      page,
+    }) => {
+      await page.setViewportSize({ width: 390, height: 844 });
+      await gotoConnect(page, pageMeta.path, "domcontentloaded");
+
+      const audit = await page.evaluate(() => {
+        const controls = Array.from(
+          document.querySelectorAll<HTMLElement>(
+            "#connect .copy-btn, #connect .email-link, #connect .full-width-btn, #connect .social-link-card"
+          )
+        );
+
+        const visibleControls = controls.filter((control) => {
+          const style = window.getComputedStyle(control);
+          if (style.display === "none" || style.visibility === "hidden") {
+            return false;
+          }
+          const rect = control.getBoundingClientRect();
+          return rect.width > 0 && rect.height > 0;
+        });
+
+        const missingLabel = visibleControls
+          .map((control) => {
+            const ariaLabel = (control.getAttribute("aria-label") || "").trim();
+            const text = (control.textContent || "").replace(/\s+/g, " ").trim();
+            const label = ariaLabel || text;
+            if (label.length > 0) {
+              return null;
+            }
+            return {
+              tag: control.tagName.toLowerCase(),
+              className: control.className,
+            };
+          })
+          .filter(Boolean);
+
+        const undersized = visibleControls
+          .map((control) => {
+            const rect = control.getBoundingClientRect();
+            if (rect.width >= 40 && rect.height >= 40) {
+              return null;
+            }
+            return {
+              className: control.className,
+              width: Math.round(rect.width),
+              height: Math.round(rect.height),
+            };
+          })
+          .filter(Boolean);
+
+        return {
+          controlCount: visibleControls.length,
+          missingLabel,
+          undersized,
+        };
+      });
+
+      expect(audit.controlCount).toBeGreaterThanOrEqual(17);
+      expect(audit.missingLabel).toEqual([]);
+      expect(audit.undersized).toEqual([]);
     });
 
     test(`${pageMeta.key}: avoids horizontal overflow on narrow mobile widths`, async ({
