@@ -22,6 +22,22 @@
     el.removeEventListener &&
     el.removeEventListener(evt, fn, { capture: false, ...(opts || {}) });
 
+  function reportRuntimeError(scope, err) {
+    try {
+      document.documentElement.classList.add("runtime-degraded");
+    } catch {}
+    console.error(`[runtime:${scope}]`, err);
+  }
+
+  function safeRun(scope, fn) {
+    try {
+      return fn();
+    } catch (err) {
+      reportRuntimeError(scope, err);
+      return undefined;
+    }
+  }
+
   function throttle(fn, limit) {
     let inThrottle, lastFunc, lastRan;
     return function () {
@@ -1713,35 +1729,64 @@
   // ==========================
   // Boot & Live Updates
   // ==========================
+  let booted = false;
+
   function boot() {
-    initMobileMenu();
-    initAOS();
-    setDynamicDates();
-    setIdentityHooks();
-    queueIdentityPings();
-    initTheme();
-    initAnchorScrolling();
-    initClickEffects();
-    initScrollUI();
-    initSkillsHover();
-    initFAQ();
-    initEmailCopy();
-    initLazyImages();
-    initShareButton();
-    initExplorationMilestones();
-    initFunFacts();
-    initSocialLinksCopy();
-    initCTAs();
-    initEndOfPageToast();
-    showWelcomeToast();
+    if (booted) {return;}
+    booted = true;
+
+    const initSteps = [
+      ["mobile-menu", initMobileMenu],
+      ["aos", initAOS],
+      ["dynamic-dates", setDynamicDates],
+      ["identity-hooks", setIdentityHooks],
+      ["identity-pings", queueIdentityPings],
+      ["theme", initTheme],
+      ["anchor-scrolling", initAnchorScrolling],
+      ["click-effects", initClickEffects],
+      ["scroll-ui", initScrollUI],
+      ["skills-hover", initSkillsHover],
+      ["faq", initFAQ],
+      ["email-copy", initEmailCopy],
+      ["lazy-images", initLazyImages],
+      ["share-button", initShareButton],
+      ["exploration-milestones", initExplorationMilestones],
+      ["fun-facts", initFunFacts],
+      ["social-copy", initSocialLinksCopy],
+      ["ctas", initCTAs],
+      ["end-of-page-toast", initEndOfPageToast],
+      ["welcome-toast", showWelcomeToast],
+    ];
+
+    initSteps.forEach(([scope, fn]) => {
+      safeRun(scope, fn);
+    });
   }
 
-  document.addEventListener("DOMContentLoaded", boot, { once: true });
+  function installGlobalErrorHandlers() {
+    on(window, "error", (event) => {
+      reportRuntimeError("window.error", event.error || event.message);
+    });
+
+    on(window, "unhandledrejection", (event) => {
+      reportRuntimeError("unhandledrejection", event.reason);
+    });
+  }
+
+  installGlobalErrorHandlers();
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => safeRun("boot", boot), {
+      once: true,
+    });
+  } else {
+    safeRun("boot", boot);
+  }
 
   // Re-evaluate dynamic flags on env change (e.g., user toggles reduced motion or system theme)
   ENV.onChange(() => {
     // Refresh only the pieces that depend on flags
-    initAOS();
+    safeRun("env-change.aos", initAOS);
   });
 
   // Teardown on page hide/unload
