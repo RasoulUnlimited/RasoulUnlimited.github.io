@@ -1,11 +1,13 @@
-// Minimal FAQ search functionality for home pages
-// Derived from assets/js/faq-fa.js without analytics or extras
+// Minimal FAQ search and interaction logic for homepage FAQ section
 
 (function () {
   "use strict";
 
   document.addEventListener("DOMContentLoaded", function () {
-    // Toast fallback
+    const faqRoot = document.getElementById("faq");
+    if (!faqRoot) {return;}
+
+    // Toast fallback for pages where main toast helper is not loaded yet.
     if (typeof window.createToast !== "function") {
       window.createToast = function (message) {
         const toast = document.createElement("div");
@@ -27,124 +29,177 @@
           font-size: 0.9rem;
         `;
         document.body.appendChild(toast);
-        requestAnimationFrame(() => toast.style.opacity = "1");
+        requestAnimationFrame(() => {
+          toast.style.opacity = "1";
+        });
         setTimeout(() => {
           toast.style.opacity = "0";
-          setTimeout(() => toast.remove(), 300);
+          setTimeout(() => {
+            toast.remove();
+          }, 300);
         }, 3000);
       };
     }
 
-    // Helper for Persian character normalization
     const normalizeText = (str) =>
       (str || "")
         .normalize("NFC")
         .replace(/[ي]/g, "ی")
         .replace(/[ك]/g, "ک")
-        .replace(/[\u064B-\u065F\u0670]/g, "") // Remove tashkeel
-        .replace(/‌/g, "") // Remove ZWNJ
+        .replace(/[\u064B-\u065F\u0670]/g, "")
+        .replace(/[\u200c\u200d]/g, "")
         .toLowerCase();
 
     const escapeRegExp = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
-    const searchInput = document.getElementById("faq-search");
-    const clearButton = document.getElementById("clear-search");
-    const faqItems = Array.from(document.querySelectorAll(".faq-item"));
-    const expandAllBtn = document.getElementById("expand-all-faq");
-    const collapseAllBtn = document.getElementById("collapse-all-faq");
+    const searchInput = faqRoot.querySelector("#faq-search");
+    const clearButton = faqRoot.querySelector("#clear-search");
+    const faqItems = Array.from(faqRoot.querySelectorAll(".faq-item"));
+    const expandAllBtn = faqRoot.querySelector("#expand-all-faq");
+    const collapseAllBtn = faqRoot.querySelector("#collapse-all-faq");
+    const noResults = faqRoot.querySelector("#faq-no-results");
+    const accordionRoot = faqRoot.querySelector("#faq-container.accordion") || faqRoot.querySelector(".faq-container.accordion");
 
     if (!searchInput || !clearButton || !faqItems.length) {return;}
 
-    // Live region for announcing search results (a11y)
-    let status = document.getElementById("faq-search-status");
+    if (accordionRoot && !accordionRoot.hasAttribute("data-allow-multiple")) {
+      accordionRoot.setAttribute("data-allow-multiple", "true");
+    }
+
+    let status = faqRoot.querySelector("#faq-search-status");
     if (!status) {
       status = document.createElement("div");
       status.id = "faq-search-status";
       status.setAttribute("aria-live", "polite");
       status.setAttribute("aria-atomic", "true");
-      status.className = "faq-search-status sr-only";
+      status.className = "faq-search-status visually-hidden";
       (searchInput.closest("form") || searchInput.parentNode).appendChild(status);
+    } else if (!status.classList.contains("visually-hidden")) {
+      status.classList.add("visually-hidden");
+      status.classList.remove("sr-only");
     }
 
-    // Ensure clear button has accessible label
     if (!clearButton.getAttribute("aria-label")) {
       clearButton.setAttribute("aria-label", "پاک کردن جستجو");
     }
 
     let debounceTimer;
 
+    function isItemVisible(item) {
+      return !item.hidden && item.style.display !== "none";
+    }
+
+    function isItemOpen(item) {
+      if (window.Accordion && accordionRoot && item.id) {
+        const state = window.Accordion.isOpen(accordionRoot, item.id);
+        if (typeof state === "boolean") {return state;}
+      }
+      const header = item.querySelector(".accordion-header");
+      return item.classList.contains("is-open") ||
+        (header && header.getAttribute("aria-expanded") === "true");
+    }
+
+    function openItem(item) {
+      if (window.Accordion && accordionRoot && item.id) {
+        const opened = window.Accordion.open(accordionRoot, item.id);
+        if (opened) {return;}
+      }
+
+      item.classList.add("is-open");
+      const header = item.querySelector(".accordion-header");
+      if (header) {
+        header.setAttribute("aria-expanded", "true");
+      }
+    }
+
+    function closeItem(item) {
+      if (window.Accordion && accordionRoot && item.id) {
+        const closed = window.Accordion.close(accordionRoot, item.id);
+        if (closed) {return;}
+      }
+
+      item.classList.remove("is-open");
+      const header = item.querySelector(".accordion-header");
+      if (header) {
+        header.setAttribute("aria-expanded", "false");
+      }
+    }
+
     function updateStatus(term, visibleCount) {
       const total = faqItems.length;
-      const trimmed = term.trim();
+      const trimmed = (term || "").trim();
 
       if (!trimmed) {
         status.textContent = `نمایش همه ${total} سوال.`;
         return;
       }
-      status.textContent =
-        visibleCount === 0
-          ? `نتیجه‌ای برای «${trimmed}» یافت نشد.`
-          : `${visibleCount} نتیجه برای «${trimmed}» پیدا شد.`;
+
+      status.textContent = visibleCount === 0
+        ? `نتیجه‌ای برای «${trimmed}» یافت نشد.`
+        : `${visibleCount} نتیجه برای «${trimmed}» پیدا شد.`;
     }
 
-    // Helper to highlight text safely
-    function highlightText(element, term) {
+    function clearHighlights(element) {
       if (!element) {return;}
-
-      // Remove existing highlights first to preserve event listeners
-      const highlights = element.querySelectorAll(".highlight-term");
-      highlights.forEach(span => {
+      element.querySelectorAll(".highlight-term").forEach((span) => {
         const parent = span.parentNode;
-        parent.replaceChild(document.createTextNode(span.textContent), span);
+        if (!parent) {return;}
+        parent.replaceChild(document.createTextNode(span.textContent || ""), span);
         parent.normalize();
       });
+    }
 
+    function highlightText(element, term) {
+      if (!element) {return;}
+      clearHighlights(element);
       if (!term) {return;}
 
-      // Use TreeWalker for safe highlighting
+      const normalizedTerm = normalizeText(term);
+      if (!normalizedTerm) {return;}
+
+      const pattern = normalizedTerm
+        .split("")
+        .map((char) => {
+          const escaped = escapeRegExp(char);
+          if (char === "ی") {return "[یي]";}
+          if (char === "ک") {return "[کك]";}
+          return escaped;
+        })
+        .join("[\\u064B-\\u065F\\u0670\\u200c\\u200d]*");
+
+      const regex = new RegExp(`(${pattern})`, "i");
       const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, null, false);
       const nodesToReplace = [];
 
-      // Build regex that allows for diacritics and ZWNJ between characters
-      // This matches the logic in credential-search.js
-      const normalizedTerm = normalizeText(term);
-      const noise = "[\\u064B-\\u065F\\u0670\\u200c\\u200d]*";
-      const pattern = normalizedTerm.split("").map(char => {
-        const escaped = escapeRegExp(char);
-        if (char === "ی") {return "[یي]";}
-        if (char === "ک") {return "[کك]";}
-        return escaped;
-      }).join(noise);
-
-      // Remove 'g' flag to avoid stateful behavior with test() in loop
-      const regex = new RegExp(`(${pattern})`, "i");
-
       while (walker.nextNode()) {
         const node = walker.currentNode;
-        // Skip if parent is already a highlight span
-        if (node.parentNode.classList.contains("highlight-term")) {continue;}
-
-        if (node.nodeValue && regex.test(node.nodeValue)) {
+        const parent = node.parentNode;
+        if (!parent || !node.nodeValue) {continue;}
+        if (parent.classList && parent.classList.contains("highlight-term")) {continue;}
+        if (regex.test(node.nodeValue)) {
           nodesToReplace.push(node);
         }
       }
 
-      nodesToReplace.forEach(node => {
+      nodesToReplace.forEach((node) => {
         const fragment = document.createDocumentFragment();
         const parts = node.nodeValue.split(regex);
 
         parts.forEach((part, index) => {
-          if (index % 2 === 1) { // Matched part
+          if (!part) {return;}
+          if (index % 2 === 1) {
             const span = document.createElement("span");
             span.className = "highlight-term";
             span.textContent = part;
             fragment.appendChild(span);
-          } else if (part) {
+          } else {
             fragment.appendChild(document.createTextNode(part));
           }
         });
 
-        node.parentNode.replaceChild(fragment, node);
+        if (node.parentNode) {
+          node.parentNode.replaceChild(fragment, node);
+        }
       });
     }
 
@@ -152,97 +207,61 @@
       const rawTerm = term !== undefined ? term : searchInput.value;
       const searchTerm = normalizeText(rawTerm);
       const hasTerm = searchTerm.length > 0;
-
       let visibleCount = 0;
 
       faqItems.forEach((item) => {
-        // Support both <details>/<summary> and custom .accordion-item structure
-        const summaryEl = item.querySelector(".accordion-header h3") || item.querySelector("summary");
+        const summaryEl = item.querySelector(".accordion-header .faq-question") || item.querySelector(".faq-question");
         const answerEl = item.querySelector(".accordion-content") || item.querySelector(".faq-answer");
-
-        // For custom accordion, the header button is the summary
-        const isCustomAccordion = !item.tagName || item.tagName.toLowerCase() !== "details";
-
         const questionText = summaryEl ? normalizeText(summaryEl.textContent) : "";
         const answerText = answerEl ? normalizeText(answerEl.textContent) : "";
         const keywords = normalizeText(item.dataset.keywords || "");
 
-        const matches =
-          !hasTerm ||
+        const matches = !hasTerm ||
           questionText.includes(searchTerm) ||
           answerText.includes(searchTerm) ||
           keywords.includes(searchTerm);
 
         if (matches) {
           item.hidden = false;
-          item.style.display = ""; // Reset display property
-          visibleCount++;
+          item.style.display = "";
+          visibleCount += 1;
 
-          // Highlight terms
-          if (summaryEl) {highlightText(summaryEl, hasTerm ? searchTerm : null);}
-          if (answerEl) {highlightText(answerEl, hasTerm ? searchTerm : null);}
+          highlightText(summaryEl, hasTerm ? searchTerm : null);
+          highlightText(answerEl, hasTerm ? searchTerm : null);
 
-          // Open item if searching
-          if (hasTerm) {
-            if (isCustomAccordion) {
-              if (!item.classList.contains("is-open")) {
-                item.classList.add("is-open");
-                const header = item.querySelector(".accordion-header");
-                if (header) {header.setAttribute("aria-expanded", "true");}
-                item.dataset.openedBySearch = "true";
-                // Ensure content is visible
-                if (answerEl) {
-                  answerEl.style.maxHeight = answerEl.scrollHeight + 50 + "px";
-                  answerEl.style.opacity = "1";
-                }
-              }
-            } else {
-              if (!item.open) {
-                item.open = true;
-                item.dataset.openedBySearch = "true";
-              }
-            }
+          if (hasTerm && !isItemOpen(item)) {
+            openItem(item);
+            item.dataset.openedBySearch = "true";
           }
 
-          // Close if search cleared and was opened by search
           if (!hasTerm && item.dataset.openedBySearch) {
-            if (isCustomAccordion) {
-              item.classList.remove("is-open");
-              const header = item.querySelector(".accordion-header");
-              if (header) {header.setAttribute("aria-expanded", "false");}
-              if (answerEl) {
-                answerEl.style.maxHeight = null;
-                answerEl.style.opacity = "0";
-              }
-            } else {
-              item.open = false;
-            }
+            closeItem(item);
             delete item.dataset.openedBySearch;
           }
         } else {
           item.hidden = true;
-          item.style.display = "none"; // Force hide
+          item.style.display = "none";
         }
       });
 
-      const noResults = document.getElementById("faq-no-results");
       if (noResults) {
         noResults.style.display = visibleCount === 0 ? "block" : "none";
       }
 
       clearButton.style.display = hasTerm ? "block" : "none";
-      updateStatus(searchTerm, visibleCount);
+      updateStatus(rawTerm, visibleCount);
     }
 
     searchInput.addEventListener("input", function () {
       clearTimeout(debounceTimer);
-      debounceTimer = setTimeout(() => filterFaq(), 300);
+      debounceTimer = setTimeout(() => {
+        filterFaq();
+      }, 300);
     });
 
-    // ESC to clear
-    searchInput.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
-        e.preventDefault();
+    searchInput.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
         searchInput.value = "";
         filterFaq();
         searchInput.focus();
@@ -255,183 +274,121 @@
       searchInput.focus();
     });
 
-    // Expand/Collapse All Logic
     if (expandAllBtn) {
       expandAllBtn.addEventListener("click", () => {
-        faqItems.forEach(item => {
-          if (item.hidden || item.style.display === "none") {return;} // Skip hidden items
-
-          const isCustomAccordion = !item.tagName || item.tagName.toLowerCase() !== "details";
-          if (isCustomAccordion) {
-            item.classList.add("is-open");
-            const header = item.querySelector(".accordion-header");
-            const panel = item.querySelector(".accordion-content");
-            if (header) {header.setAttribute("aria-expanded", "true");}
-            if (panel) {
-              panel.style.maxHeight = (panel.scrollHeight + 500) + "px";
-              panel.style.opacity = "1";
-            }
-          } else {
-            item.open = true;
-          }
+        faqItems.forEach((item) => {
+          if (!isItemVisible(item)) {return;}
+          openItem(item);
+          delete item.dataset.openedBySearch;
         });
         expandAllBtn.setAttribute("aria-pressed", "true");
-        if (collapseAllBtn) {collapseAllBtn.setAttribute("aria-pressed", "false");}
+        if (collapseAllBtn) {
+          collapseAllBtn.setAttribute("aria-pressed", "false");
+        }
       });
     }
 
     if (collapseAllBtn) {
       collapseAllBtn.addEventListener("click", () => {
-        faqItems.forEach(item => {
-          if (item.hidden || item.style.display === "none") {return;}
-
-          const isCustomAccordion = !item.tagName || item.tagName.toLowerCase() !== "details";
-          if (isCustomAccordion) {
-            item.classList.remove("is-open");
-            const header = item.querySelector(".accordion-header");
-            const panel = item.querySelector(".accordion-content");
-            if (header) {header.setAttribute("aria-expanded", "false");}
-            if (panel) {
-              panel.style.maxHeight = null;
-              panel.style.opacity = "0";
-            }
-          } else {
-            item.open = false;
-          }
+        faqItems.forEach((item) => {
+          if (!isItemVisible(item)) {return;}
+          closeItem(item);
+          delete item.dataset.openedBySearch;
         });
         collapseAllBtn.setAttribute("aria-pressed", "true");
-        if (expandAllBtn) {expandAllBtn.setAttribute("aria-pressed", "false");}
+        if (expandAllBtn) {
+          expandAllBtn.setAttribute("aria-pressed", "false");
+        }
       });
     }
 
-    // --- New Features Logic ---
+    faqRoot.querySelectorAll(".copy-faq-link").forEach((btn) => {
+      btn.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
 
-    // 1. Copy Link Functionality
-    document.querySelectorAll(".copy-faq-link").forEach(btn => {
-      btn.addEventListener("click", (e) => {
-        e.stopPropagation(); // Prevent accordion toggle
         const link = btn.dataset.link;
         if (!link) {return;}
 
         const url = window.location.origin + window.location.pathname + link;
+        if (!navigator.clipboard || !navigator.clipboard.writeText) {
+          window.createToast("مرورگر شما از کپی پشتیبانی نمی‌کند.");
+          return;
+        }
 
-        navigator.clipboard.writeText(url).then(() => {
-          // Visual feedback - store original HTML safely, use createElement for new content
-          const originalHTML = btn.innerHTML;
-          const originalClass = btn.className;
-
-          // Clear and create safe icon element
-          btn.innerHTML = "";
-          const icon = document.createElement("i");
-          icon.className = "fas fa-check";
-          icon.setAttribute("aria-hidden", "true");
-          btn.appendChild(icon);
-          btn.style.color = "#2ecc71";
-          btn.classList.add("copied");
-
-          // Show toast if available
-          if (window.createToast) {
+        navigator.clipboard.writeText(url)
+          .then(() => {
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i>';
+            btn.classList.add("copied");
             window.createToast("لینک کپی شد!");
-          }
 
-          setTimeout(() => {
-            btn.innerHTML = originalHTML;
-            btn.className = originalClass;
-            btn.style.color = "";
-          }, 2000);
-        }).catch(err => {
-          console.error("Failed to copy: ", err);
-        });
+            setTimeout(() => {
+              btn.innerHTML = originalHTML;
+              btn.classList.remove("copied");
+            }, 2000);
+          })
+          .catch(() => {
+            window.createToast("کپی لینک انجام نشد.");
+          });
       });
     });
 
-    // 2. Feedback Functionality
-    // Restore feedback state
-    document.querySelectorAll(".faq-item").forEach(item => {
+    faqRoot.querySelectorAll(".faq-item").forEach((item) => {
       const id = item.id;
       const storedFeedback = localStorage.getItem(`faq-feedback-${id}`);
-      if (storedFeedback) {
-        const btn = item.querySelector(`.btn-feedback.${storedFeedback}`);
-        if (btn) {btn.classList.add("active");}
+      if (!storedFeedback) {return;}
+      const btn = item.querySelector(`.btn-feedback.${storedFeedback}`);
+      if (btn) {
+        btn.classList.add("active");
       }
     });
 
-    document.querySelectorAll(".btn-feedback").forEach(btn => {
-      btn.addEventListener("click", (e) => {
-        e.stopPropagation();
+    faqRoot.querySelectorAll(".btn-feedback").forEach((btn) => {
+      btn.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
         const parent = btn.closest(".faq-feedback");
         const item = btn.closest(".faq-item");
-        const id = item.id;
+        if (!parent || !item) {return;}
 
-        // Remove active class from siblings
-        parent.querySelectorAll(".btn-feedback").forEach(b => b.classList.remove("active"));
-
-        // Add active class to clicked button
+        parent.querySelectorAll(".btn-feedback").forEach((siblingBtn) => {
+          siblingBtn.classList.remove("active");
+        });
         btn.classList.add("active");
 
         const isUp = btn.classList.contains("up");
-        localStorage.setItem(`faq-feedback-${id}`, isUp ? "up" : "down");
+        localStorage.setItem(`faq-feedback-${item.id}`, isUp ? "up" : "down");
 
-        // Visual feedback
         const label = parent.querySelector(".feedback-label");
         if (label) {
-          const originalText = "آیا این پاسخ مفید بود؟";
+          const originalText = label.dataset.originalText || label.textContent;
+          label.dataset.originalText = originalText;
           label.textContent = "بازخورد شما ثبت شد. ممنون!";
-          label.style.color = "#27ae60";
-          label.style.fontWeight = "bold";
 
           setTimeout(() => {
             label.textContent = originalText;
-            label.style.color = "";
-            label.style.fontWeight = "";
             btn.classList.remove("active");
           }, 3000);
         }
 
-        // Optional: Send analytics event here
-        const questionId = btn.closest(".faq-item").id;
-        console.log(`Feedback for ${questionId}: ${isUp ? "Positive" : "Negative"}`);
-
-        if (window.createToast) {
-          window.createToast("بازخورد شما ثبت شد. ممنون!");
-        }
+        window.createToast("بازخورد شما ثبت شد. ممنون!");
       });
     });
 
-    // 3. Handle Hash Navigation
     if (window.location.hash) {
       const targetId = window.location.hash.substring(1);
-      const targetItem = document.getElementById(targetId);
+      const escapedId = window.CSS && typeof window.CSS.escape === "function"
+        ? window.CSS.escape(targetId)
+        : targetId.replace(/([ #;?%&,.+*~\':"!^$[\]()=>|/@])/g, "\\$1");
+      const targetItem = faqRoot.querySelector(`#${escapedId}`);
       if (targetItem && targetItem.classList.contains("faq-item")) {
         setTimeout(() => {
-          // Open the item
-          const isCustomAccordion = !targetItem.tagName || targetItem.tagName.toLowerCase() !== "details";
-          if (isCustomAccordion) {
-            targetItem.classList.add("is-open");
-            const header = targetItem.querySelector(".accordion-header");
-            const panel = targetItem.querySelector(".accordion-content");
-            if (header) {header.setAttribute("aria-expanded", "true");}
-            if (panel) {
-              panel.style.maxHeight = (panel.scrollHeight + 500) + "px";
-              panel.style.opacity = "1";
-            }
-          } else {
-            targetItem.open = true;
-          }
-
-          // Scroll to it
+          openItem(targetItem);
           targetItem.scrollIntoView({ behavior: "smooth", block: "center" });
-
-          // Highlight effect
-          targetItem.style.transition = "background-color 0.5s";
-          const originalBg = targetItem.style.backgroundColor;
-          targetItem.style.backgroundColor = "rgba(52, 152, 219, 0.1)";
-          setTimeout(() => {
-            targetItem.style.backgroundColor = originalBg;
-          }, 1500);
-        }, 500); // Delay to ensure page load
+        }, 400);
       }
     }
-
   });
 })();
