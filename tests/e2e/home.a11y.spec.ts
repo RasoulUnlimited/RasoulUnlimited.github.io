@@ -109,6 +109,26 @@ test.describe("FA Home Accessibility and Integrity", () => {
     expect(unnamedControls).toEqual([]);
   });
 
+  test("hero profile image avoids redundant aria-label while keeping alt text", async ({ page }) => {
+    await page.goto(HOME_PATH, { waitUntil: "networkidle" });
+
+    const imageA11y = await page.evaluate(() => {
+      const image = document.querySelector("#hero .profile-image");
+      if (!(image instanceof HTMLImageElement)) {
+        return null;
+      }
+
+      return {
+        alt: image.getAttribute("alt") || "",
+        ariaLabel: image.getAttribute("aria-label") || "",
+      };
+    });
+
+    expect(imageA11y).not.toBeNull();
+    expect((imageA11y?.alt || "").trim().length).toBeGreaterThan(0);
+    expect((imageA11y?.ariaLabel || "").trim()).toBe("");
+  });
+
   test("faq accordion headers and panels keep valid ARIA linkage", async ({ page }) => {
     await page.goto(HOME_PATH, { waitUntil: "networkidle" });
 

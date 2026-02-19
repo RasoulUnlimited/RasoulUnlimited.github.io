@@ -1,13 +1,14 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
+  const hero = document.getElementById("hero");
+  if (!hero) {
+    return;
+  }
+
   const canvas = document.getElementById("hero-particles");
-  if (!canvas) {return;}
+  const heroImage = hero.querySelector(".profile-image");
+  const ctx = canvas instanceof HTMLCanvasElement ? canvas.getContext("2d") : null;
 
-  const ctx = canvas.getContext("2d");
-  if (!ctx) {return;}
-
-  const MIN_FULL_MOTION_VIEWPORT = 992;
-  const connection =
-    navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
   const reducedMotionQuery = window.matchMedia
     ? window.matchMedia("(prefers-reduced-motion: reduce)")
     : null;
@@ -15,37 +16,90 @@ document.addEventListener("DOMContentLoaded", function () {
     ? window.matchMedia("(pointer: coarse)")
     : null;
 
-  let particlesArray = [];
-  let resizeTimeout;
-  let rafId = null;
-  let destroyed = false;
+  const MIN_FULL_MOTION_VIEWPORT = 1100;
+  const PARTICLE_DENSITY = 22000;
+  const MIN_PARTICLES = 16;
+  const MAX_PARTICLES = 72;
+  const TARGET_FPS = 30;
+  const FRAME_INTERVAL = 1000 / TARGET_FPS;
+
+  let motionMode = "full";
   let heroVisible = true;
   let pageVisible = !document.hidden;
   let particlesEnabled = false;
+  let rafId = null;
+  let resizeTimer = null;
+  let destroyed = false;
+  let particles = [];
+  let lastFrameTime = 0;
+  let colorCache = { r: 59, g: 130, b: 246 };
+  let colorCacheTs = 0;
   let canvasObserver = null;
   let themeObserver = null;
 
+  const mouse = {
+    x: null,
+    y: null,
+    radius: 135,
+  };
+
   function isNetworkConstrained() {
-    if (!connection) {return false;}
-    const saveData = !!connection.saveData;
+    if (!connection) {
+      return false;
+    }
+
+    const saveData = Boolean(connection.saveData);
     const type = String(connection.effectiveType || "").toLowerCase();
     return saveData || type.includes("2g") || type.includes("slow-2g");
   }
 
-  function isMotionConstrained() {
-    return (
-      !!reducedMotionQuery?.matches ||
-      !!coarsePointerQuery?.matches ||
-      isNetworkConstrained() ||
-      window.innerWidth < MIN_FULL_MOTION_VIEWPORT
-    );
+  function isLowPowerDevice() {
+    const cores = Number(navigator.hardwareConcurrency || 0);
+    const memory = Number(navigator.deviceMemory || 0);
+    const fewCores = cores > 0 && cores <= 4;
+    const lowMemory = memory > 0 && memory <= 4;
+    return fewCores || lowMemory;
+  }
+
+  function resolveMotionMode() {
+    if (reducedMotionQuery?.matches || isNetworkConstrained()) {
+      return "off";
+    }
+
+    const isBoundaryViewport = window.innerWidth < MIN_FULL_MOTION_VIEWPORT;
+    if (coarsePointerQuery?.matches || isBoundaryViewport || isLowPowerDevice()) {
+      return "lite";
+    }
+
+    return "full";
+  }
+
+  function setMotionMode(nextMode) {
+    if (motionMode === nextMode && hero.dataset.heroMotion === nextMode) {
+      return;
+    }
+
+    motionMode = nextMode;
+    hero.dataset.heroMotion = nextMode;
+    syncTiltMode();
+    syncParticlesMode();
   }
 
   function shouldAnimateParticles() {
-    return !destroyed && heroVisible && pageVisible && !isMotionConstrained();
+    return (
+      !destroyed &&
+      motionMode === "full" &&
+      heroVisible &&
+      pageVisible &&
+      Boolean(ctx)
+    );
   }
 
   function resizeCanvas() {
+    if (!canvas || !ctx) {
+      return;
+    }
+
     const rect = canvas.getBoundingClientRect();
     const width = Math.max(1, Math.round(rect.width || window.innerWidth));
     const height = Math.max(1, Math.round(rect.height || window.innerHeight));
@@ -53,184 +107,183 @@ document.addEventListener("DOMContentLoaded", function () {
     canvas.height = height;
   }
 
-  function resolveParticleColor() {
-    const fromVar = getComputedStyle(document.documentElement)
+  function updateColorCache() {
+    const now = Date.now();
+    if (now - colorCacheTs < 900) {
+      return;
+    }
+
+    colorCacheTs = now;
+    const fromCss = getComputedStyle(document.documentElement)
       .getPropertyValue("--particle-color")
       .trim();
 
-    if (fromVar) {
-      return fromVar;
+    const match = (fromCss || "").match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/i);
+    if (match) {
+      colorCache = {
+        r: Number.parseInt(match[1], 10),
+        g: Number.parseInt(match[2], 10),
+        b: Number.parseInt(match[3], 10),
+      };
     }
-
-    const prefersDark =
-      document.body.classList.contains("dark-mode") ||
-      (window.matchMedia &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches);
-    return prefersDark ? "rgba(255, 255, 255, 0.22)" : "rgba(0, 0, 0, 0.2)";
   }
 
   class Particle {
-    constructor(x, y, directionX, directionY, size, color) {
+    constructor(x, y, vx, vy, size) {
       this.x = x;
       this.y = y;
-      this.directionX = directionX;
-      this.directionY = directionY;
+      this.vx = vx;
+      this.vy = vy;
       this.size = size;
-      this.color = color;
     }
 
     draw() {
+      if (!ctx) {
+        return;
+      }
+
       ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-      ctx.fillStyle = this.color;
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${colorCache.r}, ${colorCache.g}, ${colorCache.b}, 0.42)`;
       ctx.fill();
     }
 
-    update(mouse) {
+    update() {
+      if (!canvas) {
+        return;
+      }
+
       if (this.x > canvas.width || this.x < 0) {
-        this.directionX = -this.directionX;
+        this.vx = -this.vx;
       }
       if (this.y > canvas.height || this.y < 0) {
-        this.directionY = -this.directionY;
+        this.vy = -this.vy;
       }
 
-      const dx = mouse.x - this.x;
-      const dy = mouse.y - this.y;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-      if (distance < mouse.radius + this.size) {
-        if (mouse.x < this.x && this.x < canvas.width - this.size * 10) {
-          this.x += 10;
-        }
-        if (mouse.x > this.x && this.x > this.size * 10) {
-          this.x -= 10;
-        }
-        if (mouse.y < this.y && this.y < canvas.height - this.size * 10) {
-          this.y += 10;
-        }
-        if (mouse.y > this.y && this.y > this.size * 10) {
-          this.y -= 10;
+      if (mouse.x !== null && mouse.y !== null) {
+        const dx = mouse.x - this.x;
+        const dy = mouse.y - this.y;
+        const dist = Math.hypot(dx, dy);
+        if (dist < mouse.radius + this.size) {
+          this.x -= dx * 0.008;
+          this.y -= dy * 0.008;
         }
       }
 
-      this.x += this.directionX;
-      this.y += this.directionY;
+      this.x += this.vx;
+      this.y += this.vy;
       this.draw();
     }
   }
 
-  const mouse = {
-    x: null,
-    y: null,
-    radius: 140,
-  };
-
   function initParticles() {
-    particlesArray = [];
-    const particleColor = resolveParticleColor();
+    if (!canvas) {
+      return;
+    }
+
+    particles = [];
     const count = Math.min(
-      170,
-      Math.max(18, Math.floor((canvas.width * canvas.height) / 12000))
+      MAX_PARTICLES,
+      Math.max(MIN_PARTICLES, Math.floor((canvas.width * canvas.height) / PARTICLE_DENSITY))
     );
 
-    for (let i = 0; i < count; i++) {
-      const size = Math.random() * 4 + 1;
-      const x = Math.random() * (canvas.width - size * 4) + size * 2;
-      const y = Math.random() * (canvas.height - size * 4) + size * 2;
-      const directionX = Math.random() * 1.5 - 0.75;
-      const directionY = Math.random() * 1.5 - 0.75;
-      particlesArray.push(
-        new Particle(x, y, directionX, directionY, size, particleColor)
-      );
+    for (let i = 0; i < count; i += 1) {
+      const size = Math.random() * 2.8 + 1;
+      const x = Math.random() * Math.max(1, canvas.width - size * 2) + size;
+      const y = Math.random() * Math.max(1, canvas.height - size * 2) + size;
+      const vx = Math.random() * 1.1 - 0.55;
+      const vy = Math.random() * 1.1 - 0.55;
+      particles.push(new Particle(x, y, vx, vy, size));
     }
   }
 
-  let cachedR = 99;
-  let cachedG = 102;
-  let cachedB = 241;
-  let lastColorUpdateTime = 0;
-  const COLOR_CACHE_INTERVAL = 1000;
-
-  function updateParticleColorCache() {
-    const now = Date.now();
-    if (now - lastColorUpdateTime < COLOR_CACHE_INTERVAL) {return;}
-
-    lastColorUpdateTime = now;
-    const particleColor =
-      getComputedStyle(document.documentElement)
-        .getPropertyValue("--particle-color")
-        .trim() || "rgba(99, 102, 241, 0.2)";
-    const rgbaMatch = particleColor.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
-    if (rgbaMatch) {
-      cachedR = parseInt(rgbaMatch[1], 10);
-      cachedG = parseInt(rgbaMatch[2], 10);
-      cachedB = parseInt(rgbaMatch[3], 10);
+  function drawConnections() {
+    if (!ctx || !canvas || particles.length < 2) {
+      return;
     }
-  }
 
-  function connectParticles() {
-    updateParticleColorCache();
-    const maxDistanceSq = (canvas.width / 8) * (canvas.height / 8);
+    const maxDistanceSq = Math.min(20000, (canvas.width * canvas.height) / 42);
+    const lineLimit = 6;
 
-    for (let a = 0; a < particlesArray.length; a++) {
-      for (let b = a + 1; b < particlesArray.length; b++) {
-        const distance =
-          (particlesArray[a].x - particlesArray[b].x) *
-            (particlesArray[a].x - particlesArray[b].x) +
-          (particlesArray[a].y - particlesArray[b].y) *
-            (particlesArray[a].y - particlesArray[b].y);
+    for (let i = 0; i < particles.length; i += 1) {
+      let linked = 0;
+      for (let j = i + 1; j < particles.length && linked < lineLimit; j += 1) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const distanceSq = dx * dx + dy * dy;
 
-        if (distance < maxDistanceSq) {
-          const opacityValue = 1 - distance / 22000;
-          ctx.strokeStyle = `rgba(${cachedR}, ${cachedG}, ${cachedB}, ${opacityValue})`;
+        if (distanceSq < maxDistanceSq) {
+          const alpha = Math.max(0, 0.26 - distanceSq / (maxDistanceSq * 3.8));
+          ctx.strokeStyle = `rgba(${colorCache.r}, ${colorCache.g}, ${colorCache.b}, ${alpha})`;
           ctx.lineWidth = 1;
           ctx.beginPath();
-          ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
-          ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
           ctx.stroke();
+          linked += 1;
         }
       }
     }
   }
 
-  function stopAnimationLoop() {
+  function stopParticles() {
     if (rafId !== null) {
       cancelAnimationFrame(rafId);
       rafId = null;
     }
+
+    if (ctx && canvas) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
   }
 
-  function renderFrame() {
-    if (!particlesEnabled || destroyed) {
+  function renderParticles(ts) {
+    if (!particlesEnabled || destroyed || !ctx || !canvas) {
       rafId = null;
       return;
     }
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (let i = 0; i < particlesArray.length; i++) {
-      particlesArray[i].update(mouse);
+    if (ts - lastFrameTime < FRAME_INTERVAL) {
+      rafId = requestAnimationFrame(renderParticles);
+      return;
     }
-    connectParticles();
-    rafId = requestAnimationFrame(renderFrame);
-  }
 
-  function startAnimationLoop() {
-    if (rafId === null) {
-      rafId = requestAnimationFrame(renderFrame);
+    lastFrameTime = ts;
+    updateColorCache();
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (let i = 0; i < particles.length; i += 1) {
+      particles[i].update();
     }
+    drawConnections();
+
+    rafId = requestAnimationFrame(renderParticles);
   }
 
   function setParticlesMode(active) {
-    if (active === particlesEnabled) {return;}
+    if (!canvas || !ctx) {
+      return;
+    }
+
+    if (active === particlesEnabled) {
+      canvas.dataset.particlesState = active ? "active" : "disabled";
+      return;
+    }
+
     particlesEnabled = active;
     canvas.dataset.particlesState = active ? "active" : "disabled";
 
-    if (active) {
-      resizeCanvas();
-      initParticles();
-      startAnimationLoop();
-    } else {
-      stopAnimationLoop();
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (!active) {
+      stopParticles();
+      return;
+    }
+
+    resizeCanvas();
+    updateColorCache();
+    initParticles();
+    lastFrameTime = 0;
+    if (rafId === null) {
+      rafId = requestAnimationFrame(renderParticles);
     }
   }
 
@@ -238,83 +291,132 @@ document.addEventListener("DOMContentLoaded", function () {
     setParticlesMode(shouldAnimateParticles());
   }
 
-  function onResize() {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => {
-      resizeCanvas();
-      if (particlesEnabled) {
-        initParticles();
-      }
-      syncParticlesMode();
-    }, 140);
+  let tiltEnabled = false;
+
+  function syncTiltMode() {
+    const next = motionMode === "full" && !document.hidden && heroImage instanceof HTMLElement;
+    tiltEnabled = Boolean(next);
+    hero.dataset.heroTilt = tiltEnabled ? "enabled" : "disabled";
+
+    if (!tiltEnabled && heroImage instanceof HTMLElement) {
+      heroImage.style.transform = "";
+    }
   }
 
-  function onMouseMove(event) {
+  function onHeroPointerMove(event) {
     mouse.x = event.clientX;
     mouse.y = event.clientY;
+
+    if (!tiltEnabled || !(heroImage instanceof HTMLElement)) {
+      return;
+    }
+
+    const rect = hero.getBoundingClientRect();
+    if (rect.width <= 0 || rect.height <= 0) {
+      return;
+    }
+
+    const rx = (event.clientX - rect.left) / rect.width;
+    const ry = (event.clientY - rect.top) / rect.height;
+    const rotateY = (rx - 0.5) * 10;
+    const rotateX = (ry - 0.5) * -10;
+
+    heroImage.style.transform = `perspective(920px) rotateY(${rotateY.toFixed(2)}deg) rotateX(${rotateX.toFixed(2)}deg) scale(1.025)`;
+  }
+
+  function onHeroPointerLeave() {
+    mouse.x = null;
+    mouse.y = null;
+    if (heroImage instanceof HTMLElement) {
+      heroImage.style.transform = "";
+    }
   }
 
   function onVisibilityChange() {
     pageVisible = !document.hidden;
+    syncTiltMode();
     syncParticlesMode();
   }
 
   function onMediaOrNetworkChange() {
-    syncParticlesMode();
+    setMotionMode(resolveMotionMode());
+  }
+
+  function onResize() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      resizeCanvas();
+      setMotionMode(resolveMotionMode());
+      if (particlesEnabled) {
+        initParticles();
+      }
+    }, 140);
   }
 
   function cleanup() {
     destroyed = true;
-    clearTimeout(resizeTimeout);
-    stopAnimationLoop();
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    canvas.dataset.particlesState = "disabled";
+    clearTimeout(resizeTimer);
+    stopParticles();
+
+    if (canvas) {
+      canvas.dataset.particlesState = "disabled";
+    }
+    hero.dataset.heroTilt = "disabled";
 
     window.removeEventListener("resize", onResize);
-    window.removeEventListener("mousemove", onMouseMove);
     document.removeEventListener("visibilitychange", onVisibilityChange);
-    window.removeEventListener("pagehide", cleanup);
     window.removeEventListener("beforeunload", cleanup);
+    window.removeEventListener("pagehide", cleanup);
+    hero.removeEventListener("pointermove", onHeroPointerMove);
+    hero.removeEventListener("pointerleave", onHeroPointerLeave);
 
-    if (themeObserver) {
-      themeObserver.disconnect();
-      themeObserver = null;
-    }
     if (canvasObserver) {
       canvasObserver.disconnect();
       canvasObserver = null;
+    }
+    if (themeObserver) {
+      themeObserver.disconnect();
+      themeObserver = null;
     }
 
     reducedMotionQuery?.removeEventListener?.("change", onMediaOrNetworkChange);
     coarsePointerQuery?.removeEventListener?.("change", onMediaOrNetworkChange);
     connection?.removeEventListener?.("change", onMediaOrNetworkChange);
+
+    reducedMotionQuery?.removeListener?.(onMediaOrNetworkChange);
+    coarsePointerQuery?.removeListener?.(onMediaOrNetworkChange);
+    connection?.removeListener?.(onMediaOrNetworkChange);
   }
 
-  resizeCanvas();
-  canvas.setAttribute("aria-hidden", "true");
-  canvas.dataset.particlesState = "disabled";
+  if (canvas) {
+    canvas.setAttribute("aria-hidden", "true");
+    canvas.dataset.particlesState = "disabled";
+  }
 
+  hero.dataset.heroMotion = "off";
+  hero.dataset.heroTilt = "disabled";
+
+  hero.addEventListener("pointermove", onHeroPointerMove, { passive: true });
+  hero.addEventListener("pointerleave", onHeroPointerLeave, { passive: true });
   window.addEventListener("resize", onResize, { passive: true });
-  window.addEventListener("mousemove", onMouseMove, { passive: true });
   document.addEventListener("visibilitychange", onVisibilityChange);
-  window.addEventListener("pagehide", cleanup, { once: true });
   window.addEventListener("beforeunload", cleanup, { once: true });
+  window.addEventListener("pagehide", cleanup, { once: true });
 
-  if ("IntersectionObserver" in window) {
+  if (canvas && "IntersectionObserver" in window) {
     canvasObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
+      for (const entry of entries) {
         heroVisible = entry.isIntersecting;
-      });
+      }
       syncParticlesMode();
     });
     canvasObserver.observe(canvas);
   }
 
-  themeObserver = new MutationObserver((mutations) => {
-    for (const mutation of mutations) {
-      if (mutation.attributeName === "class" && particlesEnabled) {
-        initParticles();
-      }
+  themeObserver = new MutationObserver(() => {
+    if (particlesEnabled) {
+      updateColorCache();
+      initParticles();
     }
   });
   themeObserver.observe(document.body, {
@@ -326,85 +428,10 @@ document.addEventListener("DOMContentLoaded", function () {
   coarsePointerQuery?.addEventListener?.("change", onMediaOrNetworkChange);
   connection?.addEventListener?.("change", onMediaOrNetworkChange);
 
-  syncParticlesMode();
-});
+  reducedMotionQuery?.addListener?.(onMediaOrNetworkChange);
+  coarsePointerQuery?.addListener?.(onMediaOrNetworkChange);
+  connection?.addListener?.(onMediaOrNetworkChange);
 
-document.addEventListener("DOMContentLoaded", function () {
-  const heroImage = document.querySelector(".profile-image");
-  const heroSection = document.getElementById("hero");
-  if (!heroImage || !heroSection) {return;}
-
-  const reducedMotionQuery = window.matchMedia
-    ? window.matchMedia("(prefers-reduced-motion: reduce)")
-    : null;
-  const coarsePointerQuery = window.matchMedia
-    ? window.matchMedia("(pointer: coarse)")
-    : null;
-  const MIN_TILT_VIEWPORT = 992;
-
-  let tiltEnabled = false;
-  let destroyed = false;
-
-  function canEnableTilt() {
-    return (
-      !reducedMotionQuery?.matches &&
-      !coarsePointerQuery?.matches &&
-      window.innerWidth >= MIN_TILT_VIEWPORT &&
-      !document.hidden
-    );
-  }
-
-  function syncTiltMode() {
-    if (destroyed) {return;}
-    const nextEnabled = canEnableTilt();
-    tiltEnabled = nextEnabled;
-    heroSection.dataset.heroTilt = nextEnabled ? "enabled" : "disabled";
-    if (!nextEnabled) {
-      heroImage.style.transform = "";
-    }
-  }
-
-  function onMouseMove(e) {
-    if (!tiltEnabled) {return;}
-    const rect = heroSection.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width;
-    const y = (e.clientY - rect.top) / rect.height;
-    const moveX = (x - 0.5) * 12;
-    const moveY = (y - 0.5) * 12;
-    heroImage.style.transform =
-      `perspective(1000px) rotateY(${moveX}deg) rotateX(${-moveY}deg) scale(1.03)`;
-  }
-
-  function onMouseLeave() {
-    heroImage.style.transform = "";
-  }
-
-  function onVisibilityChange() {
-    syncTiltMode();
-  }
-
-  function cleanupTilt() {
-    destroyed = true;
-    heroImage.style.transform = "";
-    heroSection.dataset.heroTilt = "disabled";
-    heroSection.removeEventListener("mousemove", onMouseMove);
-    heroSection.removeEventListener("mouseleave", onMouseLeave);
-    window.removeEventListener("resize", syncTiltMode);
-    document.removeEventListener("visibilitychange", onVisibilityChange);
-    window.removeEventListener("pagehide", cleanupTilt);
-    window.removeEventListener("beforeunload", cleanupTilt);
-    reducedMotionQuery?.removeEventListener?.("change", syncTiltMode);
-    coarsePointerQuery?.removeEventListener?.("change", syncTiltMode);
-  }
-
-  heroSection.addEventListener("mousemove", onMouseMove);
-  heroSection.addEventListener("mouseleave", onMouseLeave);
-  window.addEventListener("resize", syncTiltMode, { passive: true });
-  document.addEventListener("visibilitychange", onVisibilityChange);
-  window.addEventListener("pagehide", cleanupTilt, { once: true });
-  window.addEventListener("beforeunload", cleanupTilt, { once: true });
-  reducedMotionQuery?.addEventListener?.("change", syncTiltMode);
-  coarsePointerQuery?.addEventListener?.("change", syncTiltMode);
-
-  syncTiltMode();
+  resizeCanvas();
+  setMotionMode(resolveMotionMode());
 });

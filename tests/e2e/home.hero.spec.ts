@@ -6,6 +6,8 @@ test.describe("FA Home Hero", () => {
   test("hero keeps horizontal layout integrity across key viewports", async ({ page }) => {
     const viewports = [
       { width: 1440, height: 900 },
+      { width: 1024, height: 768 },
+      { width: 768, height: 1024 },
       { width: 390, height: 844 },
       { width: 320, height: 568 },
     ];
@@ -23,6 +25,18 @@ test.describe("FA Home Hero", () => {
       expect(metrics.heroExists).toBeTruthy();
       expect(metrics.rootOverflow).toBeLessThanOrEqual(1);
     }
+  });
+
+  test("hero exposes motion mode state on runtime", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(700);
+
+    const motionMode = await page.evaluate(() => {
+      return document.getElementById("hero")?.getAttribute("data-hero-motion") || "";
+    });
+
+    expect(["full", "lite", "off"]).toContain(motionMode);
   });
 
   test("hero controls do not inherit global underline/link transitions", async ({ page }) => {
@@ -106,12 +120,14 @@ test.describe("FA Home Hero", () => {
       const canvas = document.getElementById("hero-particles");
       const hero = document.getElementById("hero");
       return {
+        heroMotion: hero?.getAttribute("data-hero-motion") || "",
         typingWrapperExists: !!document.querySelector("#hero .tagline .typing-wrapper"),
         particlesState: canvas?.getAttribute("data-particles-state") || "",
         tiltState: hero?.getAttribute("data-hero-tilt") || "",
       };
     });
 
+    expect(state.heroMotion).toBe("off");
     expect(state.typingWrapperExists).toBeFalsy();
     expect(state.particlesState).toBe("disabled");
     expect(state.tiltState).toBe("disabled");
@@ -130,6 +146,71 @@ test.describe("FA Home Hero", () => {
 
     expect(color).not.toBe("");
     expect(color).not.toBe("rgb(15, 23, 42)");
+  });
+
+  test("dark mode keeps secondary hero CTA contrast readable", async ({ page }) => {
+    await page.addInitScript(() => localStorage.setItem("theme", "dark"));
+    await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(700);
+
+    const ratio = await page.evaluate(() => {
+      const parseRgba = (input: string) => {
+        const match = input.match(/rgba?\(([^)]+)\)/i);
+        if (!match) {
+          return null;
+        }
+        const nums = match[1]
+          .split(",")
+          .map((n) => Number(n.trim()))
+          .filter((n) => !Number.isNaN(n));
+        if (nums.length < 3) {
+          return null;
+        }
+        return {
+          r: nums[0],
+          g: nums[1],
+          b: nums[2],
+          a: nums.length > 3 ? nums[3] : 1,
+        };
+      };
+
+      const luminance = (rgb: { r: number; g: number; b: number }) => {
+        const channel = (value: number) => {
+          const v = value / 255;
+          return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4;
+        };
+        return 0.2126 * channel(rgb.r) + 0.7152 * channel(rgb.g) + 0.0722 * channel(rgb.b);
+      };
+
+      const btn = document.querySelector("#hero .hero-btn.secondary");
+      const hero = document.getElementById("hero");
+      if (!(btn instanceof HTMLElement) || !(hero instanceof HTMLElement)) {
+        return 0;
+      }
+
+      const fg = parseRgba(getComputedStyle(btn).color);
+      const bg = parseRgba(getComputedStyle(btn).backgroundColor);
+      const heroBg = parseRgba(getComputedStyle(hero).backgroundColor) || { r: 15, g: 23, b: 42, a: 1 };
+
+      if (!fg || !bg) {
+        return 0;
+      }
+
+      const alpha = Math.min(Math.max(bg.a, 0), 1);
+      const blendedBg = {
+        r: bg.r * alpha + heroBg.r * (1 - alpha),
+        g: bg.g * alpha + heroBg.g * (1 - alpha),
+        b: bg.b * alpha + heroBg.b * (1 - alpha),
+      };
+
+      const l1 = luminance({ r: fg.r, g: fg.g, b: fg.b });
+      const l2 = luminance(blendedBg);
+      const lighter = Math.max(l1, l2);
+      const darker = Math.min(l1, l2);
+      return Number(((lighter + 0.05) / (darker + 0.05)).toFixed(2));
+    });
+
+    expect(ratio).toBeGreaterThanOrEqual(3);
   });
 
   test("hero content remains visible with JavaScript disabled", async ({ browser }) => {
@@ -179,5 +260,26 @@ test.describe("FA Home Hero", () => {
     expect(schema.heroItemId).toContain("#person");
     expect(schema.headingItemProp).toBe("name");
     expect(schema.roleSpanCount).toBeGreaterThanOrEqual(3);
+  });
+
+  test("hero button styles do not bleed into connect resume CTA", async ({ page }) => {
+    await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });
+    await page.waitForSelector("#connect .resume-download .full-width-btn");
+
+    const styles = await page.evaluate(() => {
+      const btn = document.querySelector("#connect .resume-download .full-width-btn");
+      if (!(btn instanceof HTMLElement)) {
+        return null;
+      }
+      const s = getComputedStyle(btn);
+      return {
+        radius: Number.parseFloat(s.borderTopLeftRadius || "0"),
+        width: Math.round(btn.getBoundingClientRect().width),
+      };
+    });
+
+    expect(styles).not.toBeNull();
+    expect(styles?.radius || 0).toBeLessThan(40);
+    expect(styles?.width || 0).toBeGreaterThan(200);
   });
 });
