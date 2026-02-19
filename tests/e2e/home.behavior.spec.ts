@@ -45,6 +45,150 @@ test.describe("FA Home Behavior", () => {
     await expect(navLinks).not.toHaveClass(/active/);
   });
 
+  test("about section uses semantic structure and dedicated CTA classes", async ({ page }) => {
+    await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });
+
+    const about = page.locator("#about");
+    await expect(about).toBeVisible();
+    await expect(about.locator(".about-actions .about-btn")).toHaveCount(2);
+    await expect(about.locator(".about-actions .hero-btn")).toHaveCount(0);
+    await expect(about.locator(".about-cards .info-card h3")).toHaveCount(3);
+    await expect(about.locator(".about-cards .info-card h4")).toHaveCount(0);
+
+    const semantics = await page.evaluate(() => {
+      const stats = document.querySelector("#about .about-stats");
+      const cards = document.querySelector("#about .about-cards");
+      const subtitle = document.querySelector("#about .about-subtitle");
+
+      return {
+        statsTag: stats?.tagName || "",
+        cardsTag: cards?.tagName || "",
+        subtitleAlign: subtitle ? getComputedStyle(subtitle).textAlign : "",
+      };
+    });
+
+    expect(semantics.statsTag).toBe("UL");
+    expect(semantics.cardsTag).toBe("UL");
+    expect(semantics.subtitleAlign).toBe("center");
+  });
+
+  test("about CTA buttons become full-width and stacked on mobile", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });
+    await page.waitForSelector("#about .about-actions .about-btn");
+
+    const metrics = await page.evaluate(() => {
+      const actions = document.querySelector("#about .about-actions");
+      const buttons = Array.from(
+        document.querySelectorAll("#about .about-actions .about-btn")
+      ) as HTMLElement[];
+      const actionsStyle = actions ? getComputedStyle(actions) : null;
+      const actionsWidth = actions
+        ? Math.round(actions.getBoundingClientRect().width)
+        : 0;
+
+      return {
+        actionsFlexDirection: actionsStyle?.flexDirection || "",
+        actionsWidth,
+        buttons: buttons.map((btn) => ({
+          width: Math.round(btn.getBoundingClientRect().width),
+          minHeight: parseFloat(getComputedStyle(btn).minHeight || "0"),
+        })),
+      };
+    });
+
+    expect(metrics.actionsFlexDirection).toBe("column");
+    expect(metrics.buttons.length).toBe(2);
+    metrics.buttons.forEach((btn) => {
+      expect(btn.width).toBeGreaterThanOrEqual(metrics.actionsWidth - 6);
+      expect(btn.minHeight).toBeGreaterThanOrEqual(44);
+    });
+  });
+
+  test("about section remains visible when JavaScript is disabled", async ({ browser }) => {
+    const context = await browser.newContext({ javaScriptEnabled: false });
+    const page = await context.newPage();
+
+    await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });
+    await expect(page.locator("#about")).toBeVisible();
+
+    const aboutStyle = await page.evaluate(() => {
+      const section = document.querySelector("#about");
+      if (!section) {return null;}
+      const s = getComputedStyle(section);
+      return { opacity: s.opacity, transform: s.transform };
+    });
+
+    expect(aboutStyle).not.toBeNull();
+    expect(aboutStyle?.opacity).not.toBe("0");
+    expect(aboutStyle?.transform).toBe("none");
+    await context.close();
+  });
+
+  test("about section remains visible if AOS script fails to load", async ({ page }) => {
+    await page.route("**/assets/vendor/aos/aos.min.js", (route) => route.abort());
+    await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(300);
+
+    const isFallbackEnabled = await page.evaluate(() =>
+      document.documentElement.classList.contains("aos-disabled")
+    );
+    expect(isFallbackEnabled).toBeTruthy();
+    await expect(page.locator("#about")).toBeVisible();
+
+    const aboutOpacity = await page.locator("#about").evaluate((el) =>
+      getComputedStyle(el).opacity
+    );
+    expect(aboutOpacity).not.toBe("0");
+  });
+
+  test("about card headings keep readable contrast in dark mode", async ({ page }) => {
+    await page.addInitScript(() => localStorage.setItem("theme", "dark"));
+    await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });
+    await page.waitForTimeout(700);
+
+    const ratio = await page.evaluate(() => {
+      const card = document.querySelector("#about .info-card");
+      const heading = document.querySelector("#about .info-card h3");
+      if (!card || !heading) {return 0;}
+
+      const parseRgb = (input: string) => {
+        const match = input.match(/rgba?\(([^)]+)\)/i);
+        if (!match) {return null;}
+        const [r, g, b] = match[1]
+          .split(",")
+          .slice(0, 3)
+          .map((v) => Number(v.trim()));
+        if ([r, g, b].some((n) => Number.isNaN(n))) {return null;}
+        return { r, g, b };
+      };
+
+      const luminance = (rgb: { r: number; g: number; b: number }) => {
+        const convert = (v: number) => {
+          const s = v / 255;
+          return s <= 0.03928 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4;
+        };
+        return (
+          0.2126 * convert(rgb.r) +
+          0.7152 * convert(rgb.g) +
+          0.0722 * convert(rgb.b)
+        );
+      };
+
+      const fg = parseRgb(getComputedStyle(heading).color);
+      const bg = parseRgb(getComputedStyle(card).backgroundColor);
+      if (!fg || !bg) {return 0;}
+
+      const l1 = luminance(fg);
+      const l2 = luminance(bg);
+      const lighter = Math.max(l1, l2);
+      const darker = Math.min(l1, l2);
+      return Number(((lighter + 0.05) / (darker + 0.05)).toFixed(2));
+    });
+
+    expect(ratio).toBeGreaterThanOrEqual(4.5);
+  });
+
   test("theme toggle updates current theme state", async ({ page }) => {
     await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });
 

@@ -547,42 +547,44 @@
   // AOS (Animations) — gated
   // ==========================
   let aosLoaded = false;
+  let aosScriptRequested = false;
 
   function setAOSDisabledCSS(disabled) {
     document.documentElement.classList.toggle("aos-disabled", disabled);
   }
 
   function initAOS() {
-    if (!FLAGS().ENABLE_AOS) {
-      setAOSDisabledCSS(true);
-      return;
-    }
+    // Keep content visible by default; only disable this fallback after
+    // a successful AOS initialization.
+    setAOSDisabledCSS(true);
 
-    setAOSDisabledCSS(false);
-
-    if (aosLoaded && window.AOS?.init) {
-      window.AOS.init({
-        startEvent: "DOMContentLoaded",
-        initClassName: "aos-init",
-        animatedClassName: "aos-animate",
-        debounceDelay: 50,
-        throttleDelay: 99,
-        offset: 120,
-        duration: 500,
-        easing: "ease-out",
-        once: false,
-        mirror: false,
-        anchorPlacement: "top-bottom",
-      });
-      return;
-    }
+    if (!FLAGS().ENABLE_AOS) {return;}
 
     if (window.AOS?.init) {
-      aosLoaded = true;
-      return initAOS();
+      try {
+        window.AOS.init({
+          startEvent: "DOMContentLoaded",
+          initClassName: "aos-init",
+          animatedClassName: "aos-animate",
+          debounceDelay: 50,
+          throttleDelay: 99,
+          offset: 120,
+          duration: 500,
+          easing: "ease-out",
+          once: false,
+          mirror: false,
+          anchorPlacement: "top-bottom",
+        });
+        aosLoaded = true;
+        setAOSDisabledCSS(false);
+      } catch {
+        setAOSDisabledCSS(true);
+      }
+      return;
     }
 
-    if (aosLoaded) {return;}
+    if (aosLoaded || aosScriptRequested) {return;}
+    aosScriptRequested = true;
 
     const s = document.createElement("script");
     s.src = "/assets/vendor/aos/aos.min.js";
@@ -590,6 +592,10 @@
     s.onload = () => {
       aosLoaded = true;
       initAOS();
+    };
+    s.onerror = () => {
+      aosScriptRequested = false;
+      setAOSDisabledCSS(true);
     };
     document.head.appendChild(s);
   }
