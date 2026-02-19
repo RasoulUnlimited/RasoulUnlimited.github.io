@@ -779,7 +779,9 @@ section h2::after {
 .content-area
   a:not(.navbar nav a):not(.card .card-links a):not(.contact-info a):not(
     .connect-links-block ul li a
-  ):not(.footer a):not(.cta-button):not(.about-btn) {
+  ):not(.footer a):not(.cta-button):not(.about-btn):not(.hero-btn):not(
+    .hero-social-link
+  ):not(.scroll-indicator-link) {
   color: var(--text-color-link);
   text-decoration: underline;
   transition:
@@ -792,14 +794,18 @@ section h2::after {
 .content-area
   a:not(.navbar nav a):not(.card .card-links a):not(.contact-info a):not(
     .connect-links-block ul li a
-  ):not(.footer a):not(.about-btn):hover {
+  ):not(.footer a):not(.cta-button):not(.about-btn):not(.hero-btn):not(
+    .hero-social-link
+  ):not(.scroll-indicator-link):hover {
   color: var(--primary-color);
   text-decoration: none;
 }
 .content-area
   a:not(.navbar nav a):not(.card .card-links a):not(.contact-info a):not(
     .connect-links-block ul li a
-  ):not(.footer a):not(.about-btn):active {
+  ):not(.footer a):not(.cta-button):not(.about-btn):not(.hero-btn):not(
+    .hero-social-link
+  ):not(.scroll-indicator-link):active {
   filter: brightness(0.9);
 }
 

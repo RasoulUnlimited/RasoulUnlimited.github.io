@@ -488,12 +488,12 @@ html[data-color-scheme="light"] {
 }
 
 /* Hero Section Enhancements */
-.hero {
+body.home-page .hero {
   position: relative;
   overflow: hidden;
 }
 
-#hero-particles {
+body.home-page #hero-particles {
     position: absolute;
     top: 0;
     left: 0;
@@ -503,12 +503,12 @@ html[data-color-scheme="light"] {
     pointer-events: none;
 }
 
-.hero-grid {
+body.home-page .hero-grid {
     position: relative;
     z-index: 1;
 }
 
-.dark-mode .hero::before {
+body.home-page.dark-mode .hero::before {
   content: '';
   position: absolute;
   top: -50%;
@@ -525,12 +525,12 @@ html[data-color-scheme="light"] {
   100% { transform: scale(1.2); opacity: 0.8; }
 }
 
-.hero .profile-image {
+body.home-page .hero .profile-image {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border: 4px solid var(--primary-color);
 }
 
-.hero .profile-image:hover {
+body.home-page .hero .profile-image:hover {
   transform: scale(1.05) rotate(2deg);
   box-shadow: 0 0 20px var(--primary-color);
 }
@@ -542,18 +542,18 @@ html[data-color-scheme="light"] {
   100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
 }
 
-.hero-btn.primary {
+body.home-page #hero .hero-btn.primary {
   animation: pulse-btn 2s infinite;
 }
 
-.hero-btn {
+body.home-page #hero .hero-btn {
   position: relative;
   overflow: hidden;
   z-index: 1;
   transition: all 0.3s ease;
 }
 
-.hero-btn::after {
+body.home-page #hero .hero-btn::after {
   content: '';
   position: absolute;
   top: 0;
@@ -565,11 +565,11 @@ html[data-color-scheme="light"] {
   z-index: -1;
 }
 
-.hero-btn:hover::after {
+body.home-page #hero .hero-btn:hover::after {
   width: 100%;
 }
 
-.hero-btn:hover {
+body.home-page #hero .hero-btn:hover {
   transform: translateY(-3px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
