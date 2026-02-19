@@ -742,147 +742,432 @@
             aria-labelledby="skills-heading"
           >
             <h2 id="skills-heading">🛠️ Skills & Technologies</h2>
+            <p class="skills-intro">
+              A balanced stack of engineering, product, and leadership skills I
+              use to build practical outcomes in software and digital health.
+            </p>
+            <div
+              class="skills-toolbar"
+              role="toolbar"
+              aria-label="Skills filters and visibility controls"
+            >
+              <div class="skills-filter-group" role="group" aria-label="Skill categories">
+                <button type="button" class="skills-filter is-active" data-filter="all" aria-pressed="true">
+                  All
+                </button>
+                <button type="button" class="skills-filter" data-filter="development" aria-pressed="false">
+                  Development
+                </button>
+                <button type="button" class="skills-filter" data-filter="ai-data" aria-pressed="false">
+                  AI & Data
+                </button>
+                <button type="button" class="skills-filter" data-filter="engineering" aria-pressed="false">
+                  Engineering
+                </button>
+                <button type="button" class="skills-filter" data-filter="strategy" aria-pressed="false">
+                  Strategy
+                </button>
+                <button type="button" class="skills-filter" data-filter="leadership" aria-pressed="false">
+                  Leadership
+                </button>
+                <button type="button" class="skills-filter" data-filter="languages" aria-pressed="false">
+                  Languages
+                </button>
+              </div>
+              <button
+                type="button"
+                id="skills-expand-toggle"
+                class="skills-expand-toggle"
+                aria-expanded="false"
+                data-label-expand="Show more skills"
+                data-label-collapse="Show fewer skills"
+              >
+                Show more skills
+              </button>
+            </div>
             <ul
               class="skills-list"
               aria-label="List of Specialized Skills and Technologies"
             >
               <li
+                class="skill-chip"
                 itemprop="knowsAbout"
-                data-skill-category="programming-language"
+                data-skill-key="python"
+                data-skill-group="development"
+                data-skill-tier="core"
+                data-skill-priority="core"
               >
                 <i class="fas fa-code" aria-hidden="true"></i>
                 <span>Python</span>
+                <span class="tier-badge">Core</span>
               </li>
               <li
+                class="skill-chip"
                 itemprop="knowsAbout"
-                data-skill-category="programming-language"
+                data-skill-key="c"
+                data-skill-group="development"
+                data-skill-tier="strong"
+                data-skill-priority="secondary"
               >
                 <i class="fas fa-code" aria-hidden="true"></i>
                 <span>C</span>
+                <span class="tier-badge">Strong</span>
               </li>
               <li
+                class="skill-chip"
                 itemprop="knowsAbout"
-                data-skill-category="programming-language"
+                data-skill-key="javascript"
+                data-skill-group="development"
+                data-skill-tier="core"
+                data-skill-priority="core"
               >
                 <i class="fas fa-code" aria-hidden="true"></i>
                 <span>JavaScript</span>
-              </li>
-              <li itemprop="knowsAbout" data-skill-category="web-development">
-                <i class="fas fa-laptop-code" aria-hidden="true"></i>
-                <span>Web Development (Full-stack: Frontend, Backend)</span>
+                <span class="tier-badge">Core</span>
               </li>
               <li
+                class="skill-chip"
                 itemprop="knowsAbout"
-                data-skill-category="software-engineering"
+                data-skill-key="fullstack"
+                data-skill-group="development"
+                data-skill-tier="core"
+                data-skill-priority="core"
+              >
+                <i class="fas fa-laptop-code" aria-hidden="true"></i>
+                <span>Web Development (Full-stack: Frontend, Backend)</span>
+                <span class="tier-badge">Core</span>
+              </li>
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="software-engineering"
+                data-skill-group="engineering"
+                data-skill-tier="core"
+                data-skill-priority="core"
               >
                 <i class="fas fa-server" aria-hidden="true"></i>
                 <span>Software Engineering</span>
+                <span class="tier-badge">Core</span>
               </li>
               <li
+                class="skill-chip"
                 itemprop="knowsAbout"
-                data-skill-category="biomedical-engineering"
+                data-skill-key="biomedical-engineering"
+                data-skill-group="engineering"
+                data-skill-tier="core"
+                data-skill-priority="core"
               >
                 <i class="fas fa-dna" aria-hidden="true"></i>
                 <span>Biomedical Engineering</span>
+                <span class="tier-badge">Core</span>
               </li>
-              <li itemprop="knowsAbout" data-skill-category="digital-health">
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="digital-health"
+                data-skill-group="engineering"
+                data-skill-tier="core"
+                data-skill-priority="core"
+              >
                 <i class="fas fa-heartbeat" aria-hidden="true"></i>
                 <span>Digital Health</span>
+                <span class="tier-badge">Core</span>
               </li>
-              <li itemprop="knowsAbout" data-skill-category="content-strategy">
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="content-strategy"
+                data-skill-group="strategy"
+                data-skill-tier="strong"
+                data-skill-priority="secondary"
+              >
                 <i class="fas fa-pencil-alt" aria-hidden="true"></i>
                 <span>Content Strategy & Management</span>
+                <span class="tier-badge">Strong</span>
               </li>
-              <li itemprop="knowsAbout" data-skill-category="social-media">
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="social-media"
+                data-skill-group="strategy"
+                data-skill-tier="working"
+                data-skill-priority="secondary"
+              >
                 <i class="fas fa-bullhorn" aria-hidden="true"></i>
                 <span>Social Media Management</span>
+                <span class="tier-badge">Working</span>
               </li>
-              <li itemprop="knowsAbout" data-skill-category="martial-arts">
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="karate"
+                data-skill-group="leadership"
+                data-skill-tier="working"
+                data-skill-priority="secondary"
+              >
                 <i class="fas fa-fist-raised" aria-hidden="true"></i>
                 <span>Karate (Official 1st Dan)</span>
+                <span class="tier-badge">Working</span>
               </li>
-              <li itemprop="knowsAbout" data-skill-category="soft-skills">
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="diligence"
+                data-skill-group="leadership"
+                data-skill-tier="strong"
+                data-skill-priority="secondary"
+              >
                 <i class="fas fa-brain" aria-hidden="true"></i>
                 <span>Diligence & Discipline</span>
+                <span class="tier-badge">Strong</span>
               </li>
-              <li itemprop="knowsAbout" data-skill-category="team-work">
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="teamwork"
+                data-skill-group="leadership"
+                data-skill-tier="strong"
+                data-skill-priority="core"
+              >
                 <i class="fas fa-users" aria-hidden="true"></i>
                 <span
                   >Teamwork (Experience in 10-person Discord bot development
                   team)</span
                 >
+                <span class="tier-badge">Strong</span>
               </li>
-              <li itemprop="knowsAbout" data-skill-category="analysis">
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="foresight"
+                data-skill-group="leadership"
+                data-skill-tier="strong"
+                data-skill-priority="core"
+              >
                 <i class="fas fa-search" aria-hidden="true"></i>
                 <span>Foresight & Analysis</span>
+                <span class="tier-badge">Strong</span>
               </li>
-              <li itemprop="knowsLanguage" data-language="en">
+              <li
+                class="skill-chip"
+                itemprop="knowsLanguage"
+                data-skill-key="english-language"
+                data-skill-group="languages"
+                data-skill-tier="strong"
+                data-skill-priority="core"
+                data-language="en"
+              >
                 <i class="fas fa-language" aria-hidden="true"></i>
                 <span>English (Fluent)</span>
+                <span class="tier-badge">Strong</span>
               </li>
-              <li itemprop="knowsLanguage" data-language="fa">
+              <li
+                class="skill-chip"
+                itemprop="knowsLanguage"
+                data-skill-key="persian-language"
+                data-skill-group="languages"
+                data-skill-tier="core"
+                data-skill-priority="core"
+                data-language="fa"
+              >
                 <i class="fas fa-language" aria-hidden="true"></i>
                 <span>Persian (Native)</span>
+                <span class="tier-badge">Core</span>
               </li>
-              <li itemprop="knowsAbout" data-tech-stack="frontend">
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="react-native"
+                data-skill-group="development"
+                data-skill-tier="strong"
+                data-skill-priority="secondary"
+                data-tech-stack="frontend"
+              >
                 <i class="fab fa-react" aria-hidden="true"></i>
                 <span>React / React Native</span>
+                <span class="tier-badge">Strong</span>
               </li>
-              <li itemprop="knowsAbout" data-tech-stack="database">
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="sql"
+                data-skill-group="development"
+                data-skill-tier="strong"
+                data-skill-priority="secondary"
+                data-tech-stack="database"
+              >
                 <i class="fas fa-database" aria-hidden="true"></i>
                 <span>SQL</span>
+                <span class="tier-badge">Strong</span>
               </li>
-              <li itemprop="knowsAbout" data-tech-stack="backend">
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="nodejs"
+                data-skill-group="development"
+                data-skill-tier="strong"
+                data-skill-priority="secondary"
+                data-tech-stack="backend"
+              >
                 <i class="fas fa-server" aria-hidden="true"></i>
                 <span>Node.js</span>
+                <span class="tier-badge">Strong</span>
               </li>
-              <li itemprop="knowsAbout" data-field="ai-ml">
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="machine-learning"
+                data-skill-group="ai-data"
+                data-skill-tier="core"
+                data-skill-priority="core"
+                data-field="ai-ml"
+              >
                 <i class="fas fa-brain" aria-hidden="true"></i>
                 <span>Machine Learning</span>
+                <span class="tier-badge">Core</span>
               </li>
-              <li itemprop="knowsAbout" data-field="mobile-development">
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="mobile-development"
+                data-skill-group="development"
+                data-skill-tier="working"
+                data-skill-priority="secondary"
+                data-field="mobile-development"
+              >
                 <i class="fas fa-mobile-alt" aria-hidden="true"></i>
                 <span>Mobile App Development</span>
+                <span class="tier-badge">Working</span>
               </li>
-              <li itemprop="knowsAbout" data-field="ui-ux-design">
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="ui-ux"
+                data-skill-group="strategy"
+                data-skill-tier="working"
+                data-skill-priority="secondary"
+                data-field="ui-ux-design"
+              >
                 <i class="fas fa-palette" aria-hidden="true"></i>
                 <span>UI/UX Design (Figma, Adobe XD)</span>
+                <span class="tier-badge">Working</span>
               </li>
-              <li itemprop="knowsAbout" data-field="open-source">
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="open-source"
+                data-skill-group="strategy"
+                data-skill-tier="strong"
+                data-skill-priority="secondary"
+                data-field="open-source"
+              >
                 <i class="fas fa-code-branch" aria-hidden="true"></i>
                 <span>Academic & Open-Source Projects (with DOI)</span>
+                <span class="tier-badge">Strong</span>
               </li>
-              <li itemprop="knowsAbout" data-field="seo">
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="seo"
+                data-skill-group="strategy"
+                data-skill-tier="strong"
+                data-skill-priority="secondary"
+                data-field="seo"
+              >
                 <i class="fas fa-magnifying-glass-chart" aria-hidden="true"></i>
                 <span>SEO (Search Engine Optimization)</span>
+                <span class="tier-badge">Strong</span>
               </li>
-              <li itemprop="knowsAbout" data-field="aeo">
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="aeo"
+                data-skill-group="strategy"
+                data-skill-tier="working"
+                data-skill-priority="secondary"
+                data-field="aeo"
+              >
                 <i class="fas fa-robot" aria-hidden="true"></i>
                 <span>AEO (Answer Engine Optimization)</span>
+                <span class="tier-badge">Working</span>
               </li>
-              <li itemprop="knowsAbout" data-field="data-analysis">
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="data-analysis"
+                data-skill-group="ai-data"
+                data-skill-tier="strong"
+                data-skill-priority="secondary"
+                data-field="data-analysis"
+              >
                 <i class="fas fa-chart-line" aria-hidden="true"></i>
                 <span>Data Analysis</span>
+                <span class="tier-badge">Strong</span>
               </li>
-              <li itemprop="knowsAbout" data-field="cybersecurity">
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="cybersecurity"
+                data-skill-group="engineering"
+                data-skill-tier="working"
+                data-skill-priority="secondary"
+                data-field="cybersecurity"
+              >
                 <i class="fas fa-shield-alt" aria-hidden="true"></i>
                 <span>Cybersecurity (Basic Concepts)</span>
+                <span class="tier-badge">Working</span>
               </li>
-              <li itemprop="knowsAbout" data-field="project-management">
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="project-management"
+                data-skill-group="leadership"
+                data-skill-tier="strong"
+                data-skill-priority="secondary"
+                data-field="project-management"
+              >
                 <i class="fas fa-tasks" aria-hidden="true"></i>
                 <span>Project Management</span>
+                <span class="tier-badge">Strong</span>
               </li>
-              <li itemprop="knowsAbout" data-field="ai">
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="ai"
+                data-skill-group="ai-data"
+                data-skill-tier="core"
+                data-skill-priority="core"
+                data-field="ai"
+              >
                 <i class="fas fa-microchip" aria-hidden="true"></i>
                 <span>Artificial Intelligence (AI)</span>
+                <span class="tier-badge">Core</span>
               </li>
-              <li itemprop="knowsAbout" data-field="nlp">
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="nlp"
+                data-skill-group="ai-data"
+                data-skill-tier="working"
+                data-skill-priority="secondary"
+                data-field="nlp"
+              >
                 <i class="fas fa-comment-dots" aria-hidden="true"></i>
                 <span>Natural Language Processing (NLP)</span>
+                <span class="tier-badge">Working</span>
               </li>
-              <li itemprop="knowsAbout" data-field="github-actions">
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="github-actions"
+                data-skill-group="development"
+                data-skill-tier="strong"
+                data-skill-priority="secondary"
+                data-field="github-actions"
+              >
                 <i class="fab fa-github-alt" aria-hidden="true"></i>
                 <span>GitHub Actions (CI/CD)</span>
+                <span class="tier-badge">Strong</span>
               </li>
             </ul>
           </section>

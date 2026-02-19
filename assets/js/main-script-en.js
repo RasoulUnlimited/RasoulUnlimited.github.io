@@ -491,6 +491,56 @@
     "Dolphins sleep with one half of their brain at a time.",
   ];
 
+  const SKILL_TOOLTIPS_EN = {
+    python: "Strong for automation, backend services, and production scripting.",
+    c: "Solid low-level logic and memory-oriented problem solving foundation.",
+    javascript: "Daily language for interactive web products and tooling.",
+    fullstack:
+      "Builds full product flow from UI layer to APIs and deployment.",
+    "software-engineering":
+      "Applies architecture, maintainability, and testing-first thinking.",
+    "biomedical-engineering":
+      "Connects engineering decisions to real healthcare constraints.",
+    "digital-health":
+      "Designs practical digital pathways for patient and clinical workflows.",
+    "content-strategy":
+      "Turns technical depth into clear, outcome-oriented communication.",
+    "social-media": "Builds consistent channels for product and brand narrative.",
+    karate: "Discipline and consistency under pressure, trained through karate.",
+    diligence: "Delivers with persistence, pace, and execution focus.",
+    teamwork:
+      "Collaborated in a 10-person product team on a verified Discord bot.",
+    foresight: "Uses structured analysis for long-term technical decisions.",
+    "english-language":
+      "Fluent working proficiency for technical documentation and collaboration.",
+    "persian-language":
+      "Native language communication with strong clarity and precision.",
+    "react-native":
+      "Builds cross-platform app experiences with shared component logic.",
+    sql: "Comfortable with relational modeling, querying, and optimization basics.",
+    nodejs: "Builds API services and integration layers in JavaScript runtime.",
+    "machine-learning":
+      "Uses practical ML methods for data-driven feature exploration.",
+    "mobile-development":
+      "Understands delivery constraints and UX tradeoffs on mobile platforms.",
+    "ui-ux":
+      "Translates user journeys into coherent, implementation-ready interfaces.",
+    "open-source":
+      "Publishes academic and open-source outputs with DOI-backed traceability.",
+    seo: "Optimizes structure and content for discoverability in search engines.",
+    aeo: "Adapts content for answer engines and AI-first retrieval contexts.",
+    "data-analysis":
+      "Extracts patterns from datasets for product and research decisions.",
+    cybersecurity:
+      "Applies baseline security principles in software design and operations.",
+    "project-management":
+      "Plans scope, sequencing, and delivery rhythm for multi-step projects.",
+    ai: "Builds and evaluates AI capabilities with product-level pragmatism.",
+    nlp: "Explores language modeling and text-processing use cases.",
+    "github-actions":
+      "Implements CI/CD workflows for faster, safer releases.",
+  };
+
   // Abort controller for idle/async work cleanup
   const teardown = new AbortController();
   const { signal: abortSignal } = teardown;
@@ -1157,49 +1207,185 @@
   }
 
   // ==========================
-  // Skills hover microcopy
+  // Skills UI (filters, tiering, tooltip, collapse)
   // ==========================
-  function initSkillsHover() {
-    const list = document.querySelector("#skills .skills-list");
-    if (!list) {return;}
+  function showSkillTooltip(chip, tooltipText) {
+    if (!(chip instanceof HTMLElement)) {return;}
 
-    list.querySelectorAll("li").forEach((li) => {
-      li.dataset.skillOwner = "Mohammad Rasoul Sohrabi";
-      li.classList.add("sohrabi-skill-item");
+    let tooltip = chip.querySelector(".skill-hover-message");
+    if (!(tooltip instanceof HTMLElement)) {
+      tooltip = document.createElement("span");
+      tooltip.className = "skill-hover-message";
+      chip.appendChild(tooltip);
+    }
 
-      let hideTimeout;
+    const skillKey = chip.dataset.skillKey || `skill-${Date.now()}`;
+    if (!tooltip.id) {tooltip.id = `skill-tooltip-${skillKey}`;}
+    tooltip.setAttribute("role", "tooltip");
+    tooltip.textContent = tooltipText;
+    tooltip.classList.add("show-message");
 
-      function getSpan() {
-        let s = li.querySelector(".skill-hover-message");
-        if (!s) {
-          s = document.createElement("span");
-          s.className = "skill-hover-message";
-          li.appendChild(s);
+    chip.classList.add("skill-hover-effect");
+    chip.setAttribute("aria-describedby", tooltip.id);
+  }
+
+  function hideSkillTooltip(chip) {
+    if (!(chip instanceof HTMLElement)) {return;}
+    const tooltip = chip.querySelector(".skill-hover-message");
+    if (tooltip instanceof HTMLElement)
+    {tooltip.classList.remove("show-message");}
+    chip.classList.remove("skill-hover-effect");
+    chip.removeAttribute("aria-describedby");
+  }
+
+  function syncSkillsVisibility(section, chips, activeFilter, expanded) {
+    chips.forEach((chip) => {
+      const group = chip.dataset.skillGroup || "";
+      const priority = chip.dataset.skillPriority || "secondary";
+      const hiddenByFilter =
+        activeFilter !== "all" && activeFilter !== group;
+      const hiddenByCollapse = !expanded && priority === "secondary";
+      const isHidden = hiddenByFilter || hiddenByCollapse;
+
+      chip.classList.toggle("is-filter-hidden", hiddenByFilter);
+      chip.classList.toggle("is-collapsed-hidden", !hiddenByFilter && hiddenByCollapse);
+      chip.setAttribute("aria-hidden", String(isHidden));
+
+      if (isHidden) {hideSkillTooltip(chip);}
+    });
+
+    section.classList.toggle("is-expanded", expanded);
+    section.classList.toggle("is-collapsed", !expanded);
+  }
+
+  function applySkillFilter(section, chips, filters, activeFilter, expanded) {
+    filters.forEach((button) => {
+      const isActive = (button.dataset.filter || "all") === activeFilter;
+      button.classList.toggle("is-active", isActive);
+      button.setAttribute("aria-pressed", String(isActive));
+    });
+    syncSkillsVisibility(section, chips, activeFilter, expanded);
+  }
+
+  function toggleSkillsExpansion(
+    section,
+    chips,
+    filters,
+    toggleButton,
+    activeFilter,
+    expanded
+  ) {
+    const nextExpanded = !expanded;
+    toggleButton.setAttribute("aria-expanded", String(nextExpanded));
+
+    const expandLabel =
+      toggleButton.dataset.labelExpand || "Show more skills";
+    const collapseLabel =
+      toggleButton.dataset.labelCollapse || "Show fewer skills";
+    toggleButton.textContent = nextExpanded ? collapseLabel : expandLabel;
+
+    applySkillFilter(
+      section,
+      chips,
+      filters,
+      activeFilter,
+      nextExpanded
+    );
+
+    return nextExpanded;
+  }
+
+  function initSkillsUI() {
+    const section = document.getElementById("skills");
+    const list = section?.querySelector(".skills-list");
+    const filters = section
+      ? [...section.querySelectorAll(".skills-filter")]
+      : [];
+    const toggleButton = section?.querySelector("#skills-expand-toggle");
+
+    if (!section || !list || !filters.length || !(toggleButton instanceof HTMLElement))
+    {return;}
+
+    const chips = [...list.querySelectorAll(".skill-chip")];
+    if (!chips.length) {return;}
+
+    const pointerFine =
+      window.matchMedia &&
+      window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+    section.classList.add("skills-enhanced", "is-collapsed");
+    section.classList.remove("is-expanded");
+
+    let activeFilter = "all";
+    let expanded = false;
+
+    chips.forEach((chip, index) => {
+      chip.dataset.skillOwner = "Mohammad Rasoul Sohrabi";
+      chip.classList.add("sohrabi-skill-item");
+      if (chip.tabIndex < 0) {chip.tabIndex = 0;}
+
+      const key = chip.dataset.skillKey || `chip-${index + 1}`;
+      let hideTimeout = null;
+
+      const tooltipMessage = () =>
+        SKILL_TOOLTIPS_EN[key] ||
+        "Additional context is available in project and case-study sections.";
+
+      const revealTooltip = () => {
+        if (hideTimeout) {
+          clearTimeout(hideTimeout);
+          hideTimeout = null;
         }
-        return s;
+        if (
+          chip.classList.contains("is-filter-hidden") ||
+          chip.classList.contains("is-collapsed-hidden")
+        ) {return;}
+        showSkillTooltip(chip, tooltipMessage());
+      };
+
+      const concealTooltip = () => {
+        if (hideTimeout) {clearTimeout(hideTimeout);}
+        hideTimeout = setTimeout(() => {
+          hideSkillTooltip(chip);
+        }, 120);
+      };
+
+      if (pointerFine && !ENV.state.coarse) {
+        on(chip, "pointerenter", revealTooltip);
+        on(chip, "pointerleave", concealTooltip);
       }
 
-      on(li, "mouseenter", () => {
-        clearTimeout(hideTimeout);
-        const span = getSpan();
-        if (!span.classList.contains("show-message")) {
-          span.textContent =
-            FUN_FACTS_EN[(Math.random() * FUN_FACTS_EN.length) | 0];
-          span.classList.add("show-message");
+      on(chip, "focusin", revealTooltip);
+      on(chip, "focusout", concealTooltip);
+      on(chip, "keydown", (event) => {
+        if (event.key === "Escape") {
+          hideSkillTooltip(chip);
+          chip.blur();
         }
-        li.classList.add("skill-hover-effect");
-      });
-
-      on(li, "mouseleave", () => {
-        const span = li.querySelector(".skill-hover-message");
-        if (span) {
-          hideTimeout = setTimeout(() => {
-            span.classList.remove("show-message");
-          }, 180);
-        }
-        li.classList.remove("skill-hover-effect");
       });
     });
+
+    filters.forEach((button) => {
+      on(button, "click", () => {
+        activeFilter = button.dataset.filter || "all";
+        applySkillFilter(section, chips, filters, activeFilter, expanded);
+      });
+    });
+
+    on(toggleButton, "click", () => {
+      expanded = toggleSkillsExpansion(
+        section,
+        chips,
+        filters,
+        toggleButton,
+        activeFilter,
+        expanded
+      );
+    });
+
+    toggleButton.textContent =
+      toggleButton.dataset.labelExpand || "Show more skills";
+    applySkillFilter(section, chips, filters, activeFilter, expanded);
   }
 
   // ==========================
@@ -2027,7 +2213,7 @@
       ["click-effects", initClickEffects],
       ["scroll-ui", initScrollUI],
       ["timeline-micro-interactions", initTimelineMicroInteractions],
-      ["skills-hover", initSkillsHover],
+      ["skills-ui", initSkillsUI],
       ["faq", initFAQ],
       ["lazy-images", initLazyImages],
       ["share-button", initShareButton],

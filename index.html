@@ -1023,119 +1023,433 @@
             aria-labelledby="skills-heading"
           >
             <h2 id="skills-heading">🛠️ مهارت‌ها و تکنولوژی‌ها</h2>
+            <p class="skills-intro">
+              ترکیبی از مهارت‌های فنی، محصولی و رهبری که برای ساخت راه‌حل‌های
+              واقعی در سلامت دیجیتال و نرم‌افزار استفاده می‌کنم.
+            </p>
+            <div
+              class="skills-toolbar"
+              role="toolbar"
+              aria-label="فیلتر و نمایش مهارت‌ها"
+            >
+              <div class="skills-filter-group" role="group" aria-label="دسته‌بندی مهارت‌ها">
+                <button type="button" class="skills-filter is-active" data-filter="all" aria-pressed="true">
+                  همه
+                </button>
+                <button type="button" class="skills-filter" data-filter="development" aria-pressed="false">
+                  توسعه
+                </button>
+                <button type="button" class="skills-filter" data-filter="ai-data" aria-pressed="false">
+                  هوش مصنوعی و داده
+                </button>
+                <button type="button" class="skills-filter" data-filter="engineering" aria-pressed="false">
+                  مهندسی
+                </button>
+                <button type="button" class="skills-filter" data-filter="strategy" aria-pressed="false">
+                  استراتژی
+                </button>
+                <button type="button" class="skills-filter" data-filter="leadership" aria-pressed="false">
+                  رهبری
+                </button>
+                <button type="button" class="skills-filter" data-filter="languages" aria-pressed="false">
+                  زبان‌ها
+                </button>
+              </div>
+              <button
+                type="button"
+                id="skills-expand-toggle"
+                class="skills-expand-toggle"
+                aria-expanded="false"
+                data-label-expand="نمایش مهارت‌های بیشتر"
+                data-label-collapse="نمایش کمتر"
+              >
+                نمایش مهارت‌های بیشتر
+              </button>
+            </div>
             <ul
               class="skills-list"
               aria-label="لیست مهارت‌ها و تکنولوژی‌های تخصصی"
             >
               <li
+                class="skill-chip"
                 itemprop="knowsAbout"
-                data-skill-category="programming-language"
+                data-skill-key="python"
+                data-skill-group="development"
+                data-skill-tier="core"
+                data-skill-priority="core"
               >
                 <i class="fas fa-code" aria-hidden="true"></i>
                 <span>پایتون (Python)</span>
+                <span class="tier-badge">هسته</span>
               </li>
               <li
+                class="skill-chip"
                 itemprop="knowsAbout"
-                data-skill-category="programming-language"
+                data-skill-key="c"
+                data-skill-group="development"
+                data-skill-tier="strong"
+                data-skill-priority="secondary"
               >
                 <i class="fas fa-code" aria-hidden="true"></i>
                 <span>C</span>
+                <span class="tier-badge">قوی</span>
               </li>
               <li
+                class="skill-chip"
                 itemprop="knowsAbout"
-                data-skill-category="programming-language"
+                data-skill-key="javascript"
+                data-skill-group="development"
+                data-skill-tier="core"
+                data-skill-priority="core"
               >
                 <i class="fas fa-code" aria-hidden="true"></i>
                 <span>جاوااسکریپت (JavaScript)</span>
+                <span class="tier-badge">هسته</span>
               </li>
-              <li itemprop="knowsAbout" data-skill-category="web-development">
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="fullstack"
+                data-skill-group="development"
+                data-skill-tier="core"
+                data-skill-priority="core"
+              >
                 <i class="fas fa-laptop-code" aria-hidden="true"></i>
                 <span
                   >توسعه وب (Full-stack Development: فرانت‌اند، بک‌اند)</span
                 >
+                <span class="tier-badge">هسته</span>
               </li>
               <li
+                class="skill-chip"
                 itemprop="knowsAbout"
-                data-skill-category="software-engineering"
+                data-skill-key="software-engineering"
+                data-skill-group="engineering"
+                data-skill-tier="core"
+                data-skill-priority="core"
               >
                 <i class="fas fa-server" aria-hidden="true"></i>
                 <span>مهندسی نرم‌افزار (Software Engineering)</span>
+                <span class="tier-badge">هسته</span>
               </li>
               <li
+                class="skill-chip"
                 itemprop="knowsAbout"
-                data-skill-category="biomedical-engineering"
+                data-skill-key="biomedical-engineering"
+                data-skill-group="engineering"
+                data-skill-tier="core"
+                data-skill-priority="core"
               >
                 <i class="fas fa-dna" aria-hidden="true"></i>
                 <span>مهندسی پزشکی (Biomedical Engineering)</span>
+                <span class="tier-badge">هسته</span>
               </li>
-              <li itemprop="knowsAbout" data-skill-category="digital-health">
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="digital-health"
+                data-skill-group="engineering"
+                data-skill-tier="core"
+                data-skill-priority="core"
+              >
                 <i class="fas fa-heartbeat" aria-hidden="true"></i>
                 <span>سلامت دیجیتال (Digital Health)</span>
+                <span class="tier-badge">هسته</span>
               </li>
-              <li itemprop="knowsAbout" data-skill-category="content-strategy">
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="content-strategy"
+                data-skill-group="strategy"
+                data-skill-tier="strong"
+                data-skill-priority="secondary"
+              >
                 <i class="fas fa-pencil-alt" aria-hidden="true"></i>
                 <span
                   >مدیریت محتوا و استراتژی (Content Strategy & Management)</span
                 >
+                <span class="tier-badge">قوی</span>
               </li>
-              <li itemprop="knowsAbout" data-skill-category="social-media">
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="social-media"
+                data-skill-group="strategy"
+                data-skill-tier="working"
+                data-skill-priority="secondary"
+              >
                 <i class="fas fa-bullhorn" aria-hidden="true"></i>
                 <span>مدیریت شبکه‌های اجتماعی (Social Media Management)</span>
+                <span class="tier-badge">در حال توسعه</span>
               </li>
-              <li itemprop="knowsAbout" data-skill-category="martial-arts">
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="karate"
+                data-skill-group="leadership"
+                data-skill-tier="working"
+                data-skill-priority="secondary"
+              >
                 <i class="fas fa-fist-raised" aria-hidden="true"></i>
                 <span>کاراته (دان ۱ رسمی)</span>
+                <span class="tier-badge">در حال توسعه</span>
               </li>
-              <li itemprop="knowsAbout" data-skill-category="soft-skills">
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="diligence"
+                data-skill-group="leadership"
+                data-skill-tier="strong"
+                data-skill-priority="secondary"
+              >
                 <i class="fas fa-brain" aria-hidden="true"></i>
                 <span>سخت‌کوشی و نظم (Diligence & Discipline)</span>
+                <span class="tier-badge">قوی</span>
               </li>
-              <li itemprop="knowsAbout" data-skill-category="team-work">
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="teamwork"
+                data-skill-group="leadership"
+                data-skill-tier="strong"
+                data-skill-priority="core"
+              >
                 <i class="fas fa-users" aria-hidden="true"></i>
                 <span>کار تیمی (تجربه در تیم 10 نفره توسعه ربات دیسکورد)</span>
+                <span class="tier-badge">قوی</span>
               </li>
-              <li itemprop="knowsAbout" data-skill-category="analysis">
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="foresight"
+                data-skill-group="leadership"
+                data-skill-tier="strong"
+                data-skill-priority="core"
+              >
                 <i class="fas fa-search" aria-hidden="true"></i>
                 <span>آینده‌نگری و تحلیل (Foresight & Analysis)</span>
+                <span class="tier-badge">قوی</span>
               </li>
-              <li itemprop="knowsLanguage" data-language="en">
+              <li
+                class="skill-chip"
+                itemprop="knowsLanguage"
+                data-skill-key="english-language"
+                data-skill-group="languages"
+                data-skill-tier="strong"
+                data-skill-priority="core"
+                data-language="en"
+              >
                 <i class="fas fa-language" aria-hidden="true"></i>
                 <span>انگلیسی (روان - Fluent)</span>
+                <span class="tier-badge">قوی</span>
               </li>
-              <li itemprop="knowsLanguage" data-language="fa">
+              <li
+                class="skill-chip"
+                itemprop="knowsLanguage"
+                data-skill-key="persian-language"
+                data-skill-group="languages"
+                data-skill-tier="core"
+                data-skill-priority="core"
+                data-language="fa"
+              >
                 <i class="fas fa-language" aria-hidden="true"></i>
                 <span>فارسی (زبان مادری - Native)</span>
+                <span class="tier-badge">هسته</span>
               </li>
-              <li itemprop="knowsAbout" data-tech-stack="frontend">
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="react-native"
+                data-skill-group="development"
+                data-skill-tier="strong"
+                data-skill-priority="secondary"
+                data-tech-stack="frontend"
+              >
                 <i class="fab fa-react" aria-hidden="true"></i>
                 <span>React / React Native</span>
+                <span class="tier-badge">قوی</span>
               </li>
-              <li itemprop="knowsAbout" data-tech-stack="database">
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="sql"
+                data-skill-group="development"
+                data-skill-tier="strong"
+                data-skill-priority="secondary"
+                data-tech-stack="database"
+              >
                 <i class="fas fa-database" aria-hidden="true"></i>
                 <span>SQL</span>
+                <span class="tier-badge">قوی</span>
               </li>
-              <li itemprop="knowsAbout" data-tech-stack="backend">
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="nodejs"
+                data-skill-group="development"
+                data-skill-tier="strong"
+                data-skill-priority="secondary"
+                data-tech-stack="backend"
+              >
                 <i class="fas fa-server" aria-hidden="true"></i>
                 <span>Node.js</span>
+                <span class="tier-badge">قوی</span>
               </li>
-              <li itemprop="knowsAbout" data-field="ai-ml">
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="machine-learning"
+                data-skill-group="ai-data"
+                data-skill-tier="core"
+                data-skill-priority="core"
+                data-field="ai-ml"
+              >
                 <i class="fas fa-brain" aria-hidden="true"></i>
                 <span>یادگیری ماشین (Machine Learning)</span>
+                <span class="tier-badge">هسته</span>
               </li>
-              <li itemprop="knowsAbout" data-field="mobile-development">
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="mobile-development"
+                data-skill-group="development"
+                data-skill-tier="working"
+                data-skill-priority="secondary"
+                data-field="mobile-development"
+              >
                 <i class="fas fa-mobile-alt" aria-hidden="true"></i>
                 <span>توسعه اپلیکیشن موبایل (Mobile App Development)</span>
+                <span class="tier-badge">در حال توسعه</span>
               </li>
-              <li itemprop="knowsAbout" data-field="ui-ux-design">
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="ui-ux"
+                data-skill-group="strategy"
+                data-skill-tier="working"
+                data-skill-priority="secondary"
+                data-field="ui-ux-design"
+              >
                 <i class="fas fa-palette" aria-hidden="true"></i>
                 <span>طراحی UI/UX (فیگما Figma، ادوبی ایکس‌دی Adobe XD)</span>
+                <span class="tier-badge">در حال توسعه</span>
               </li>
-              <li itemprop="knowsAbout" data-field="open-source">
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="open-source"
+                data-skill-group="strategy"
+                data-skill-tier="strong"
+                data-skill-priority="secondary"
+                data-field="open-source"
+              >
                 <i class="fas fa-code-branch" aria-hidden="true"></i>
-                <span
-                  >پروژه‌های آکادمیک و متن‌باز (Academic & Open-Source Projects
-                  با DOI)</span
-                >
+                <span>پروژه‌های آکادمیک و متن‌باز (Academic & Open-Source Projects با DOI)</span>
+                <span class="tier-badge">قوی</span>
+              </li>
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="seo"
+                data-skill-group="strategy"
+                data-skill-tier="strong"
+                data-skill-priority="secondary"
+                data-field="seo"
+              >
+                <i class="fas fa-magnifying-glass-chart" aria-hidden="true"></i>
+                <span>سئو (SEO - Search Engine Optimization)</span>
+                <span class="tier-badge">قوی</span>
+              </li>
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="aeo"
+                data-skill-group="strategy"
+                data-skill-tier="working"
+                data-skill-priority="secondary"
+                data-field="aeo"
+              >
+                <i class="fas fa-robot" aria-hidden="true"></i>
+                <span>AEO (بهینه‌سازی برای موتورهای پاسخ)</span>
+                <span class="tier-badge">در حال توسعه</span>
+              </li>
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="data-analysis"
+                data-skill-group="ai-data"
+                data-skill-tier="strong"
+                data-skill-priority="secondary"
+                data-field="data-analysis"
+              >
+                <i class="fas fa-chart-line" aria-hidden="true"></i>
+                <span>تحلیل داده (Data Analysis)</span>
+                <span class="tier-badge">قوی</span>
+              </li>
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="cybersecurity"
+                data-skill-group="engineering"
+                data-skill-tier="working"
+                data-skill-priority="secondary"
+                data-field="cybersecurity"
+              >
+                <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                <span>امنیت سایبری (مفاهیم پایه)</span>
+                <span class="tier-badge">در حال توسعه</span>
+              </li>
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="project-management"
+                data-skill-group="leadership"
+                data-skill-tier="strong"
+                data-skill-priority="secondary"
+                data-field="project-management"
+              >
+                <i class="fas fa-tasks" aria-hidden="true"></i>
+                <span>مدیریت پروژه (Project Management)</span>
+                <span class="tier-badge">قوی</span>
+              </li>
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="ai"
+                data-skill-group="ai-data"
+                data-skill-tier="core"
+                data-skill-priority="core"
+                data-field="ai"
+              >
+                <i class="fas fa-microchip" aria-hidden="true"></i>
+                <span>هوش مصنوعی (AI)</span>
+                <span class="tier-badge">هسته</span>
+              </li>
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="nlp"
+                data-skill-group="ai-data"
+                data-skill-tier="working"
+                data-skill-priority="secondary"
+                data-field="nlp"
+              >
+                <i class="fas fa-comment-dots" aria-hidden="true"></i>
+                <span>پردازش زبان طبیعی (NLP)</span>
+                <span class="tier-badge">در حال توسعه</span>
+              </li>
+              <li
+                class="skill-chip"
+                itemprop="knowsAbout"
+                data-skill-key="github-actions"
+                data-skill-group="development"
+                data-skill-tier="strong"
+                data-skill-priority="secondary"
+                data-field="github-actions"
+              >
+                <i class="fab fa-github-alt" aria-hidden="true"></i>
+                <span>GitHub Actions (CI/CD)</span>
+                <span class="tier-badge">قوی</span>
               </li>
             </ul>
           </section>

@@ -23,6 +23,22 @@ test.describe("EN Home Parity", () => {
     await expect(page.locator("#about .about-cards .info-card h3")).toHaveCount(3);
   });
 
+  test("skills block keeps parity controls and data contract", async ({ page }) => {
+    await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });
+    await page.locator("#skills").scrollIntoViewIfNeeded();
+
+    await expect(page.locator("#skills .skills-toolbar")).toBeVisible();
+    await expect(page.locator("#skills .skills-filter")).toHaveCount(7);
+    await expect(page.locator("#skills #skills-expand-toggle")).toHaveAttribute(
+      "aria-expanded",
+      "false"
+    );
+    await expect(page.locator("#skills .skills-list .skill-chip")).toHaveCount(30);
+    await expect(page.locator("#skills .skills-list .skill-chip .tier-badge")).toHaveCount(
+      30
+    );
+  });
+
   test("timeline supports deep-link targeting and event ids", async ({ page }) => {
     await page.goto(`${HOME_PATH}#timeline-event-current-focus`, {
       waitUntil: "domcontentloaded",

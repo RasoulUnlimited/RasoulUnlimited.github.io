@@ -491,6 +491,55 @@
     "دلفین‌ها برای خواب تنها نیمی از مغز خود را خاموش می‌کنند.",
   ];
 
+  const SKILL_TOOLTIPS_FA = {
+    python: "برای اتوماسیون، سرویس‌های بک‌اند و اسکریپت‌نویسی عملیاتی استفاده می‌شود.",
+    c: "پایه‌ای قوی برای منطق سطح پایین، الگوریتم و مدیریت حافظه.",
+    javascript: "زبان اصلی توسعه رابط‌های تعاملی و ابزارهای وب.",
+    fullstack: "پیاده‌سازی کامل محصول از رابط کاربری تا API و استقرار.",
+    "software-engineering":
+      "تمرکز بر معماری، نگه‌داشت‌پذیری، تست و توسعه پایدار.",
+    "biomedical-engineering":
+      "اتصال تصمیم‌های مهندسی به مسائل واقعی پزشکی و سلامت.",
+    "digital-health":
+      "طراحی راهکارهای دیجیتال قابل‌استفاده برای مسیرهای درمانی.",
+    "content-strategy":
+      "تبدیل موضوعات فنی به پیام شفاف و قابل‌اقدام برای مخاطب.",
+    "social-media": "مدیریت کانال‌های انتشار با نگاه داده‌محور و ساختاری.",
+    karate: "انضباط و تداوم اجرایی که در پروژه‌های فنی هم اعمال می‌شود.",
+    diligence: "پشتکار بالا برای تحویل باکیفیت در شرایط محدود.",
+    teamwork:
+      "تجربه همکاری عملی در تیم ۱۰ نفره توسعه محصول دیسکورد.",
+    foresight: "تصمیم‌گیری فنی با تحلیل ریسک و نگاه بلندمدت.",
+    "english-language":
+      "تسلط روان برای مستندات فنی، منابع جهانی و همکاری بین‌المللی.",
+    "persian-language":
+      "زبان مادری برای ارتباط دقیق، حرفه‌ای و قابل‌فهم محلی.",
+    "react-native":
+      "توسعه تجربه‌های چندسکویی با منطق کامپوننت‌محور مشترک.",
+    sql: "کار با مدل‌سازی رابطه‌ای، کوئری‌نویسی و بهینه‌سازی پایه.",
+    nodejs: "توسعه سرویس‌های API و لایه‌های یکپارچه‌سازی سمت سرور.",
+    "machine-learning":
+      "به‌کارگیری روش‌های کاربردی ML برای تحلیل و ساخت ویژگی.",
+    "mobile-development":
+      "درک قیود پلتفرم موبایل و طراحی تجربه کاربری قابل‌استفاده.",
+    "ui-ux":
+      "تبدیل مسیر کاربر به رابط قابل‌اجرا با تمرکز بر usability.",
+    "open-source":
+      "انتشار خروجی‌های آکادمیک و متن‌باز با قابلیت رهگیری DOI.",
+    seo: "بهینه‌سازی ساختار و محتوا برای دیده‌شدن در موتورهای جستجو.",
+    aeo: "سازگار کردن محتوا برای موتورهای پاسخ و بازیابی مبتنی بر AI.",
+    "data-analysis":
+      "استخراج الگوهای قابل‌تصمیم از داده‌های خام و پیچیده.",
+    cybersecurity:
+      "رعایت اصول پایه امنیت در طراحی و تحویل نرم‌افزار.",
+    "project-management":
+      "مدیریت دامنه، اولویت‌بندی و ریتم تحویل در پروژه‌های چندمرحله‌ای.",
+    ai: "کاربردگرایی در استفاده از هوش مصنوعی برای خروجی واقعی محصول.",
+    nlp: "تحلیل و پردازش زبان طبیعی در سناریوهای جستجو و تعامل.",
+    "github-actions":
+      "پیاده‌سازی CI/CD خودکار برای انتشار سریع‌تر و مطمئن‌تر.",
+  };
+
   // Abort controller for idle/async work cleanup
   const teardown = new AbortController();
   const { signal: abortSignal } = teardown;
@@ -1157,49 +1206,185 @@
   }
 
   // ==========================
-  // Skills hover microcopy
+  // Skills UI (filters, tiering, tooltip, collapse)
   // ==========================
-  function initSkillsHover() {
-    const list = document.querySelector("#skills .skills-list");
-    if (!list) {return;}
+  function showSkillTooltip(chip, tooltipText) {
+    if (!(chip instanceof HTMLElement)) {return;}
 
-    list.querySelectorAll("li").forEach((li) => {
-      li.dataset.skillOwner = "Mohammad Rasoul Sohrabi";
-      li.classList.add("sohrabi-skill-item");
+    let tooltip = chip.querySelector(".skill-hover-message");
+    if (!(tooltip instanceof HTMLElement)) {
+      tooltip = document.createElement("span");
+      tooltip.className = "skill-hover-message";
+      chip.appendChild(tooltip);
+    }
 
-      let hideTimeout;
+    const skillKey = chip.dataset.skillKey || `skill-${Date.now()}`;
+    if (!tooltip.id) {tooltip.id = `skill-tooltip-${skillKey}`;}
+    tooltip.setAttribute("role", "tooltip");
+    tooltip.textContent = tooltipText;
+    tooltip.classList.add("show-message");
 
-      function getSpan() {
-        let s = li.querySelector(".skill-hover-message");
-        if (!s) {
-          s = document.createElement("span");
-          s.className = "skill-hover-message";
-          li.appendChild(s);
+    chip.classList.add("skill-hover-effect");
+    chip.setAttribute("aria-describedby", tooltip.id);
+  }
+
+  function hideSkillTooltip(chip) {
+    if (!(chip instanceof HTMLElement)) {return;}
+    const tooltip = chip.querySelector(".skill-hover-message");
+    if (tooltip instanceof HTMLElement)
+    {tooltip.classList.remove("show-message");}
+    chip.classList.remove("skill-hover-effect");
+    chip.removeAttribute("aria-describedby");
+  }
+
+  function syncSkillsVisibility(section, chips, activeFilter, expanded) {
+    chips.forEach((chip) => {
+      const group = chip.dataset.skillGroup || "";
+      const priority = chip.dataset.skillPriority || "secondary";
+      const hiddenByFilter =
+        activeFilter !== "all" && activeFilter !== group;
+      const hiddenByCollapse = !expanded && priority === "secondary";
+      const isHidden = hiddenByFilter || hiddenByCollapse;
+
+      chip.classList.toggle("is-filter-hidden", hiddenByFilter);
+      chip.classList.toggle("is-collapsed-hidden", !hiddenByFilter && hiddenByCollapse);
+      chip.setAttribute("aria-hidden", String(isHidden));
+
+      if (isHidden) {hideSkillTooltip(chip);}
+    });
+
+    section.classList.toggle("is-expanded", expanded);
+    section.classList.toggle("is-collapsed", !expanded);
+  }
+
+  function applySkillFilter(section, chips, filters, activeFilter, expanded) {
+    filters.forEach((button) => {
+      const isActive = (button.dataset.filter || "all") === activeFilter;
+      button.classList.toggle("is-active", isActive);
+      button.setAttribute("aria-pressed", String(isActive));
+    });
+    syncSkillsVisibility(section, chips, activeFilter, expanded);
+  }
+
+  function toggleSkillsExpansion(
+    section,
+    chips,
+    filters,
+    toggleButton,
+    activeFilter,
+    expanded
+  ) {
+    const nextExpanded = !expanded;
+    toggleButton.setAttribute("aria-expanded", String(nextExpanded));
+
+    const expandLabel =
+      toggleButton.dataset.labelExpand || "نمایش مهارت‌های بیشتر";
+    const collapseLabel =
+      toggleButton.dataset.labelCollapse || "نمایش کمتر";
+    toggleButton.textContent = nextExpanded ? collapseLabel : expandLabel;
+
+    applySkillFilter(
+      section,
+      chips,
+      filters,
+      activeFilter,
+      nextExpanded
+    );
+
+    return nextExpanded;
+  }
+
+  function initSkillsUI() {
+    const section = document.getElementById("skills");
+    const list = section?.querySelector(".skills-list");
+    const filters = section
+      ? [...section.querySelectorAll(".skills-filter")]
+      : [];
+    const toggleButton = section?.querySelector("#skills-expand-toggle");
+
+    if (!section || !list || !filters.length || !(toggleButton instanceof HTMLElement))
+    {return;}
+
+    const chips = [...list.querySelectorAll(".skill-chip")];
+    if (!chips.length) {return;}
+
+    const pointerFine =
+      window.matchMedia &&
+      window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+    section.classList.add("skills-enhanced", "is-collapsed");
+    section.classList.remove("is-expanded");
+
+    let activeFilter = "all";
+    let expanded = false;
+
+    chips.forEach((chip, index) => {
+      chip.dataset.skillOwner = "Mohammad Rasoul Sohrabi";
+      chip.classList.add("sohrabi-skill-item");
+      if (chip.tabIndex < 0) {chip.tabIndex = 0;}
+
+      const key = chip.dataset.skillKey || `chip-${index + 1}`;
+      let hideTimeout = null;
+
+      const tooltipMessage = () =>
+        SKILL_TOOLTIPS_FA[key] ||
+        "جزئیات تکمیلی در بخش پروژه‌ها و مسیر حرفه‌ای قابل مشاهده است.";
+
+      const revealTooltip = () => {
+        if (hideTimeout) {
+          clearTimeout(hideTimeout);
+          hideTimeout = null;
         }
-        return s;
+        if (
+          chip.classList.contains("is-filter-hidden") ||
+          chip.classList.contains("is-collapsed-hidden")
+        ) {return;}
+        showSkillTooltip(chip, tooltipMessage());
+      };
+
+      const concealTooltip = () => {
+        if (hideTimeout) {clearTimeout(hideTimeout);}
+        hideTimeout = setTimeout(() => {
+          hideSkillTooltip(chip);
+        }, 120);
+      };
+
+      if (pointerFine && !ENV.state.coarse) {
+        on(chip, "pointerenter", revealTooltip);
+        on(chip, "pointerleave", concealTooltip);
       }
 
-      on(li, "mouseenter", () => {
-        clearTimeout(hideTimeout);
-        const span = getSpan();
-        if (!span.classList.contains("show-message")) {
-          span.textContent =
-            FUN_FACTS_FA[(Math.random() * FUN_FACTS_FA.length) | 0];
-          span.classList.add("show-message");
+      on(chip, "focusin", revealTooltip);
+      on(chip, "focusout", concealTooltip);
+      on(chip, "keydown", (event) => {
+        if (event.key === "Escape") {
+          hideSkillTooltip(chip);
+          chip.blur();
         }
-        li.classList.add("skill-hover-effect");
-      });
-
-      on(li, "mouseleave", () => {
-        const span = li.querySelector(".skill-hover-message");
-        if (span) {
-          hideTimeout = setTimeout(() => {
-            span.classList.remove("show-message");
-          }, 180);
-        }
-        li.classList.remove("skill-hover-effect");
       });
     });
+
+    filters.forEach((button) => {
+      on(button, "click", () => {
+        activeFilter = button.dataset.filter || "all";
+        applySkillFilter(section, chips, filters, activeFilter, expanded);
+      });
+    });
+
+    on(toggleButton, "click", () => {
+      expanded = toggleSkillsExpansion(
+        section,
+        chips,
+        filters,
+        toggleButton,
+        activeFilter,
+        expanded
+      );
+    });
+
+    toggleButton.textContent =
+      toggleButton.dataset.labelExpand || "نمایش مهارت‌های بیشتر";
+    applySkillFilter(section, chips, filters, activeFilter, expanded);
   }
 
   // ==========================
@@ -2027,7 +2212,7 @@
       ["click-effects", initClickEffects],
       ["scroll-ui", initScrollUI],
       ["timeline-micro-interactions", initTimelineMicroInteractions],
-      ["skills-hover", initSkillsHover],
+      ["skills-ui", initSkillsUI],
       ["faq", initFAQ],
       ["lazy-images", initLazyImages],
       ["share-button", initShareButton],
