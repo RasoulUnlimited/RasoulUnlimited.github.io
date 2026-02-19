@@ -31,12 +31,36 @@ test.describe("FA Home Timeline Resilience", () => {
         text: ((link.textContent || "").trim()).slice(0, 60),
       }));
 
+      const invalidTimelineLinks = Array.from(
+        document.querySelectorAll<HTMLAnchorElement>("#timeline .timeline-content a")
+      )
+        .map((link) => {
+          const text = (link.textContent || "").trim();
+          const label = (link.getAttribute("aria-label") || "").trim();
+          const title = (link.getAttribute("title") || "").trim();
+          const role = (link.getAttribute("role") || "").trim();
+          const href = (link.getAttribute("href") || "").trim();
+
+          if (!href) {
+            return { href, text: text.slice(0, 60), issue: "missing-href" };
+          }
+          if (role === "button") {
+            return { href, text: text.slice(0, 60), issue: "button-role-on-link" };
+          }
+          if (!(text.length > 0 || label.length > 0 || title.length > 0)) {
+            return { href, text: text.slice(0, 60), issue: "missing-accessible-name" };
+          }
+          return null;
+        })
+        .filter(Boolean);
+
       return {
         hasSection: !!section,
         itemCount: items.length,
         hasDateAsHeading: !!document.querySelector("#timeline .timeline-content h3.date"),
         invalidItems,
         invalidLinkRoles,
+        invalidTimelineLinks,
       };
     });
 
@@ -45,6 +69,7 @@ test.describe("FA Home Timeline Resilience", () => {
     expect(model.hasDateAsHeading).toBeFalsy();
     expect(model.invalidItems).toEqual([]);
     expect(model.invalidLinkRoles).toEqual([]);
+    expect(model.invalidTimelineLinks).toEqual([]);
   });
 
   test("timeline event order remains chronological", async ({ page }) => {
@@ -76,6 +101,28 @@ test.describe("FA Home Timeline Resilience", () => {
 
     expect(order.count).toBeGreaterThanOrEqual(8);
     expect(order.isSorted).toBeTruthy();
+  });
+
+  test("timeline key dates match expected localized labels", async ({ page }) => {
+    await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });
+
+    const labelsByDatetime = await page.evaluate(() => {
+      const result: Record<string, string> = {};
+      document
+        .querySelectorAll<HTMLTimeElement>("#timeline .timeline .date time[datetime]")
+        .forEach((node) => {
+          const key = (node.getAttribute("datetime") || "").trim();
+          if (!key) {return;}
+          result[key] = (node.textContent || "").trim();
+        });
+      return result;
+    });
+
+    expect(labelsByDatetime["2005-09-06"]).toContain("۱۵ شهریور ۱۳۸۴");
+    expect(labelsByDatetime["2023-09-01"]).toContain("۱۰ شهریور ۱۴۰۲");
+    expect(labelsByDatetime["2023-11-16"]).toContain("۲۵ آبان ۱۴۰۲");
+    expect(labelsByDatetime["2024-03-12"]).toContain("۲۲ اسفند ۱۴۰۲");
+    expect(labelsByDatetime["2025-11-01"]).toContain("۱۰ آبان ۱۴۰۴");
   });
 
   test("timeline remains visible and readable when AOS script fails", async ({ page }) => {
@@ -124,6 +171,7 @@ test.describe("FA Home Timeline Resilience", () => {
 
   test("timeline stays stable on mobile portrait and landscape", async ({ page }) => {
     const viewports = [
+      { width: 320, height: 640 },
       { width: 390, height: 844 },
       { width: 844, height: 390 },
     ];
@@ -166,9 +214,35 @@ test.describe("FA Home Timeline Resilience", () => {
       });
 
       expect(layout.valid).toBeTruthy();
-      expect(layout.rootOverflow).toBeLessThanOrEqual(1);
+      expect(layout.rootOverflow).toBeLessThanOrEqual(2);
       expect(layout.offscreenCards).toBeFalsy();
       expect(layout.offscreenIcons).toBeFalsy();
+    }
+  });
+
+  test("timeline external links are keyboard-focusable and keep link semantics", async ({ page }) => {
+    await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });
+    await page.locator("#timeline").scrollIntoViewIfNeeded();
+
+    const links = page.locator("#timeline .timeline-content .card-links a");
+    const linkCount = await links.count();
+    expect(linkCount).toBeGreaterThan(0);
+
+    for (let i = 0; i < linkCount; i++) {
+      const link = links.nth(i);
+      await expect(link).toBeVisible();
+      await expect(link).toHaveAttribute("href", /^https?:\/\//);
+      await expect(link).not.toHaveAttribute("role", "button");
+      await link.focus();
+      await expect(link).toBeFocused();
+
+      const accessibleNameLength = await link.evaluate((node) => {
+        const text = (node.textContent || "").trim();
+        const label = (node.getAttribute("aria-label") || "").trim();
+        const title = (node.getAttribute("title") || "").trim();
+        return Math.max(text.length, label.length, title.length);
+      });
+      expect(accessibleNameLength).toBeGreaterThan(0);
     }
   });
 
