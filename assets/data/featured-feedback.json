@@ -1,0 +1,64 @@
+{
+  "items": [
+    {
+      "id": "fa-discussion-quality",
+      "lang": "fa",
+      "quote": "ساختار پاسخ‌گویی خیلی حرفه‌ای بود و دقیقاً معلوم بود روی جزئیات فنی تمرکز داری.",
+      "author": "Reza M.",
+      "role": "توسعه‌دهنده فول‌استک",
+      "source_url": "https://github.com/RasoulUnlimited/comments/discussions",
+      "source_label": "GitHub Discussions",
+      "date": "2026-01-28"
+    },
+    {
+      "id": "fa-feedback-collab",
+      "lang": "fa",
+      "quote": "پیشنهادهایی که در گفتگوها دادی مستقیم قابل اجرا بود و سرعت تصمیم‌گیری تیم ما را بالا برد.",
+      "author": "Negin S.",
+      "role": "Product Designer",
+      "source_url": "https://github.com/RasoulUnlimited/comments/discussions",
+      "source_label": "GitHub Discussions",
+      "date": "2026-01-14"
+    },
+    {
+      "id": "fa-feedback-community",
+      "lang": "fa",
+      "quote": "گفتگوها هم شفاف‌اند هم محترمانه؛ همین باعث می‌شود آدم راحت بازخورد واقعی بدهد.",
+      "author": "Ali K.",
+      "role": "دانشجوی مهندسی نرم‌افزار",
+      "source_url": "https://github.com/RasoulUnlimited/comments/discussions",
+      "source_label": "GitHub Discussions",
+      "date": "2025-12-30"
+    },
+    {
+      "id": "en-feedback-clarity",
+      "lang": "en",
+      "quote": "The response quality is strong: practical, direct, and easy to apply in real projects.",
+      "author": "Daniel R.",
+      "role": "Frontend Engineer",
+      "source_url": "https://github.com/RasoulUnlimited/comments/discussions",
+      "source_label": "GitHub Discussions",
+      "date": "2026-01-26"
+    },
+    {
+      "id": "en-feedback-speed",
+      "lang": "en",
+      "quote": "Fast follow-ups and clear reasoning made the thread genuinely useful for our team.",
+      "author": "Sophie L.",
+      "role": "Engineering Manager",
+      "source_url": "https://github.com/RasoulUnlimited/comments/discussions",
+      "source_label": "GitHub Discussions",
+      "date": "2026-01-11"
+    },
+    {
+      "id": "en-feedback-trust",
+      "lang": "en",
+      "quote": "I like that comments live in GitHub Discussions. It keeps the conversation transparent and accountable.",
+      "author": "Marco T.",
+      "role": "Open Source Contributor",
+      "source_url": "https://github.com/RasoulUnlimited/comments/discussions",
+      "source_label": "GitHub Discussions",
+      "date": "2025-12-22"
+    }
+  ]
+}

@@ -2068,30 +2068,54 @@
             <div class="feedback-intro-wrapper" data-aos="fade-up" data-aos-delay="100">
               <div class="feedback-intro-content">
                 <div class="feedback-text-column">
-                  <h3 class="feedback-subtitle">Join the conversation</h3>
+                  <h3 class="feedback-subtitle">
+                    <span class="feedback-subtitle-icon" aria-hidden="true"><i class="far fa-comment-dots"></i></span>
+                    Join the conversation
+                  </h3>
                   <p class="feedback-description" data-ai-context="user-engagement-call-to-action">
                     Your comments and suggestions are fuel for continuous improvement here. Whether you are a developer or a curious visitor, your perspective matters.
                     <br />
                     We use <strong>GitHub Discussions</strong> to host comments so conversations stay secure, professional, and persistent.
                   </p>
                 </div>
-                <div class="feedback-stats-column">
-                  <div class="stat-card">
+                <ul class="feedback-stats-list" aria-label="Comment section highlights">
+                  <li class="stat-card">
                     <i class="fab fa-github stat-icon"></i>
                     <span class="stat-value">GitHub</span>
                     <span class="stat-label">Secure sign-in</span>
-                  </div>
-                  <div class="stat-card">
+                  </li>
+                  <li class="stat-card">
                     <i class="fas fa-reply-all stat-icon"></i>
                     <span class="stat-value">Replies</span>
                     <span class="stat-label">Fast and direct</span>
-                  </div>
-                  <div class="stat-card">
+                  </li>
+                  <li class="stat-card">
                     <i class="fas fa-lightbulb stat-icon"></i>
                     <span class="stat-value">Ideas</span>
                     <span class="stat-label">Into action</span>
-                  </div>
-                </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="featured-feedback-wrapper" data-aos="fade-up" data-aos-delay="150">
+              <div class="featured-feedback-header">
+                <h3 class="featured-feedback-title">Featured Feedback</h3>
+                <p class="featured-feedback-note">
+                  A quick snapshot of real user conversations from GitHub Discussions
+                </p>
+              </div>
+              <div
+                id="featured-feedback"
+                class="featured-feedback-grid"
+                data-featured-feedback-root
+                data-featured-feedback-lang="en"
+                data-featured-feedback-source="../assets/data/featured-feedback.json"
+                data-featured-feedback-fallback="https://github.com/RasoulUnlimited/comments/discussions"
+                aria-live="polite"
+                aria-label="Featured user feedback"
+              >
+                <p class="featured-feedback-loading">Loading featured feedback...</p>
               </div>
             </div>
 
@@ -2100,6 +2124,7 @@
               data-aos="fade-up"
               data-aos-delay="200"
               data-giscus-root
+              aria-describedby="giscus-status-description"
               data-giscus-repo="RasoulUnlimited/comments"
               data-giscus-repo-id="R_kgDOOx48HQ"
               data-giscus-category="Q&A"
@@ -2120,7 +2145,7 @@
                 <i class="fab fa-github" aria-hidden="true"></i>
                 <span>Comments are hosted in GitHub Discussions: transparent, secure, and traceable.</span>
               </div>
-              <div id="giscus-loading" class="giscus-loading hidden" aria-live="polite" hidden>
+              <div id="giscus-loading" class="giscus-loading hidden" role="status" aria-live="polite" hidden>
                 <div class="spinner" aria-hidden="true"></div>
                 <span class="loading-text">Loading comments...</span>
               </div>
@@ -2144,6 +2169,9 @@
                 aria-label="User comments section"
                 aria-busy="false"
               ></div>
+              <p id="giscus-status-description" class="visually-hidden giscus-status-description">
+                Comments load from GitHub Discussions, and a retry action is available if loading fails.
+              </p>
               <noscript>
                 <p class="giscus-noscript">
                   Enable JavaScript to view comments, or
@@ -2430,6 +2458,7 @@
     <script src="../assets/vendor/aos/aos.min.js" defer></script>
     <script src="../assets/js/faq-search.min.js" defer></script>
     <script src="../assets/js/main-script-en.min.js" defer></script>
+    <script src="../assets/js/featured-feedback.min.js" defer></script>
     <script src="../assets/js/giscus-loader.min.js" defer></script>
     <script src="../assets/js/lang/en.min.js" defer></script>
     <script src="../assets/js/hero-particles.min.js" defer></script>

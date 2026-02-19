@@ -11,10 +11,13 @@
   const GISCUS_ORIGIN = "https://giscus.app";
   const DEFAULT_TIMEOUT_MS = 8000;
   const IO_ROOT_MARGIN = "320px 0px";
+  const MAX_AUTO_RETRIES = 1;
+  const AUTO_RETRY_DELAY_MS = 900;
   const ROOTS = [];
   const STATES = new WeakMap();
 
   let themeBindingsAttached = false;
+  let connectivityBindingsAttached = false;
 
   function query(root, selector) {
     return root ? root.querySelector(selector) : null;
@@ -53,12 +56,39 @@
       : "Comments could not be loaded. Please try again.";
   }
 
+  function reportState(status) {
+    if (typeof window.gtag !== "function") {return;}
+    if (status === "idle") {return;}
+
+    try {
+      window.gtag("event", "giscus_state_change", {
+        event_category: "engagement",
+        event_label: status,
+      });
+    } catch {
+      // Metrics should never block UX.
+    }
+  }
+
   function setBusyState(root, busy) {
     const container = query(root, ".giscus-container");
     if (container) {
       container.setAttribute("aria-busy", busy ? "true" : "false");
     }
     root.setAttribute("aria-busy", busy ? "true" : "false");
+  }
+
+  function emit(root, name, detail) {
+    try {
+      root.dispatchEvent(
+        new CustomEvent(name, {
+          bubbles: true,
+          detail: detail || {},
+        })
+      );
+    } catch {
+      // Silently ignore in older browsers.
+    }
   }
 
   function setStatus(root, status, message) {
@@ -85,6 +115,8 @@
     }
 
     setBusyState(root, isLoading);
+    emit(root, "giscus:state-change", { status });
+    reportState(status);
   }
 
   function clearContainer(root) {
@@ -103,6 +135,11 @@
       state.timeoutId = null;
     }
 
+    if (state.retryTimer) {
+      window.clearTimeout(state.retryTimer);
+      state.retryTimer = null;
+    }
+
     if (state.observer) {
       state.observer.disconnect();
       state.observer = null;
@@ -117,17 +154,18 @@
     state.script = null;
   }
 
-  function emit(root, name, detail) {
-    try {
-      root.dispatchEvent(
-        new CustomEvent(name, {
-          bubbles: true,
-          detail: detail || {},
-        })
-      );
-    } catch {
-      // Silently ignore in older browsers.
-    }
+  function pulseReady(root) {
+    const prefersReducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) {return;}
+
+    root.classList.remove("giscus-ready-pulse");
+    // Trigger reflow so a subsequent class re-add restarts animation.
+    void root.offsetWidth;
+    root.classList.add("giscus-ready-pulse");
+
+    window.setTimeout(() => {
+      root.classList.remove("giscus-ready-pulse");
+    }, 700);
   }
 
   function syncTheme(root) {
@@ -181,6 +219,28 @@
       () => {
         observer.disconnect();
         window.removeEventListener("themechange", syncAllReadyThemes);
+      },
+      { once: true }
+    );
+  }
+
+  function attachConnectivityBindings() {
+    if (connectivityBindingsAttached) {return;}
+    connectivityBindingsAttached = true;
+
+    const onOnline = () => {
+      ROOTS.forEach((root) => {
+        const state = STATES.get(root);
+        if (!state || state.status !== "error") {return;}
+        startLoad(root, true, "online");
+      });
+    };
+
+    window.addEventListener("online", onOnline);
+    window.addEventListener(
+      "beforeunload",
+      () => {
+        window.removeEventListener("online", onOnline);
       },
       { once: true }
     );
@@ -243,6 +303,29 @@
     return script;
   }
 
+  function shouldAutoRetry(state, reason) {
+    if (!state) {return false;}
+    if (state.autoRetryCount >= MAX_AUTO_RETRIES) {return false;}
+    if (reason !== "timeout" && reason !== "script-error") {return false;}
+    if (!navigator.onLine) {return false;}
+    return true;
+  }
+
+  function scheduleAutoRetry(root, reason) {
+    const state = STATES.get(root);
+    if (!state || !shouldAutoRetry(state, reason)) {return;}
+
+    state.autoRetryCount += 1;
+    const attempt = state.autoRetryCount;
+    emit(root, "giscus:retry", { reason, attempt, source: "auto" });
+
+    state.retryTimer = window.setTimeout(() => {
+      const active = STATES.get(root);
+      if (!active || active.status !== "error") {return;}
+      startLoad(root, true, "auto");
+    }, AUTO_RETRY_DELAY_MS * attempt);
+  }
+
   function fail(root, reason) {
     const state = STATES.get(root);
     if (!state || state.status !== "loading") {return;}
@@ -258,6 +341,7 @@
     );
 
     emit(root, "giscus:error", { reason });
+    scheduleAutoRetry(root, reason);
   }
 
   function succeed(root) {
@@ -266,15 +350,21 @@
 
     clearRuntime(state);
     state.status = "ready";
+    state.autoRetryCount = 0;
     setStatus(root, "ready");
     syncTheme(root);
+    pulseReady(root);
 
     emit(root, "giscus:ready", { theme: resolveTheme() });
   }
 
-  function startLoad(root, forceRetry) {
+  function startLoad(root, forceRetry, source = "manual") {
     const state = STATES.get(root);
     if (!state) {return;}
+
+    if (source !== "auto") {
+      state.autoRetryCount = 0;
+    }
 
     if (state.status === "loading") {return;}
     if (state.status === "ready" && !forceRetry) {return;}
@@ -302,7 +392,7 @@
     setStatus(root, "loading");
     root.dataset.giscusThemeApplied = resolveTheme();
     root.dataset.giscusErrorReason = "";
-    emit(root, "giscus:loading", {});
+    emit(root, "giscus:loading", { source });
 
     const script = buildScript(config);
     state.script = script;
@@ -345,6 +435,8 @@
       status: "idle",
       observer: null,
       timeoutId: null,
+      retryTimer: null,
+      autoRetryCount: 0,
       iframe: null,
       iframeLoadHandler: null,
       script: null,
@@ -361,7 +453,8 @@
     const retryButton = query(root, ".giscus-retry-btn");
     if (retryButton) {
       retryButton.addEventListener("click", () => {
-        startLoad(root, true);
+        emit(root, "giscus:retry", { reason: "manual-click", attempt: 0, source: "manual" });
+        startLoad(root, true, "manual");
       });
     }
 
@@ -376,14 +469,14 @@
               state.io.disconnect();
               state.io = null;
             }
-            startLoad(root, false);
+            startLoad(root, false, "init");
           });
         },
         { rootMargin: IO_ROOT_MARGIN, threshold: 0.01 }
       );
       state.io.observe(root);
     } else {
-      startLoad(root, false);
+      startLoad(root, false, "init");
     }
   }
 
@@ -393,6 +486,7 @@
 
     roots.forEach(initRoot);
     attachThemeBindings();
+    attachConnectivityBindings();
   }
 
   if (document.readyState === "loading") {
@@ -403,7 +497,7 @@
 
   window.__giscusLoader = {
     reloadAll() {
-      ROOTS.forEach((root) => startLoad(root, true));
+      ROOTS.forEach((root) => startLoad(root, true, "manual"));
     },
     getStatus(root) {
       const state = STATES.get(root);

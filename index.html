@@ -2402,37 +2402,61 @@
             aria-labelledby="testimonials-heading"
           >
             <div class="testimonials-header">
-                <h2 id="testimonials-heading">💬 نظرات و بازخوردها</h2>
+                <h2 id="testimonials-heading">نظرات و بازخوردها</h2>
             </div>
 
             <div class="feedback-intro-wrapper" data-aos="fade-up" data-aos-delay="100">
                 <div class="feedback-intro-content">
                     <div class="feedback-text-column">
-                        <h3 class="feedback-subtitle">👋 به گفت‌وگو بپیوندید</h3>
+                        <h3 class="feedback-subtitle">
+                          <span class="feedback-subtitle-icon" aria-hidden="true"><i class="far fa-comment-dots"></i></span>
+                          به گفت‌وگو بپیوندید
+                        </h3>
                         <p class="feedback-description" data-ai-context="user-engagement-call-to-action">
                             نظرات و پیشنهادات شما سوخت موتور پیشرفت اینجاست. چه یک توسعه‌دهنده باشید، چه یک بازدیدکننده کنجکاو، دیدگاه شما ارزشمند است.
                             <br>
                             ما از <strong>GitHub Discussions</strong> برای میزبانی نظرات استفاده می‌کنیم تا فضایی امن، حرفه‌ای و پایدار برای تبادل دانش داشته باشیم.
                         </p>
                     </div>
-                    <div class="feedback-stats-column">
-                        <div class="stat-card">
+                    <ul class="feedback-stats-list" aria-label="مزایای بخش نظرات">
+                        <li class="stat-card">
                             <i class="fab fa-github stat-icon"></i>
                             <span class="stat-value">GitHub</span>
                             <span class="stat-label">ورود امن</span>
-                        </div>
-                        <div class="stat-card">
+                        </li>
+                        <li class="stat-card">
                             <i class="fas fa-reply-all stat-icon"></i>
                             <span class="stat-value">پاسخ‌دهی</span>
                             <span class="stat-label">سریع و مستقیم</span>
-                        </div>
-                        <div class="stat-card">
+                        </li>
+                        <li class="stat-card">
                             <i class="fas fa-lightbulb stat-icon"></i>
                             <span class="stat-value">ایده‌ها</span>
                             <span class="stat-label">تبدیل به واقعیت</span>
-                        </div>
-                    </div>
+                        </li>
+                    </ul>
                 </div>
+            </div>
+
+            <div class="featured-feedback-wrapper" data-aos="fade-up" data-aos-delay="150">
+              <div class="featured-feedback-header">
+                <h3 class="featured-feedback-title">بازخوردهای منتخب</h3>
+                <p class="featured-feedback-note">
+                  گزیده‌ای از گفتگوهای واقعی کاربران در GitHub Discussions
+                </p>
+              </div>
+              <div
+                id="featured-feedback"
+                class="featured-feedback-grid"
+                data-featured-feedback-root
+                data-featured-feedback-lang="fa"
+                data-featured-feedback-source="assets/data/featured-feedback.json"
+                data-featured-feedback-fallback="https://github.com/RasoulUnlimited/comments/discussions"
+                aria-live="polite"
+                aria-label="بازخوردهای منتخب کاربران"
+              >
+                <p class="featured-feedback-loading">در حال بارگذاری بازخوردهای منتخب...</p>
+              </div>
             </div>
 
             <div
@@ -2440,6 +2464,7 @@
               data-aos="fade-up"
               data-aos-delay="200"
               data-giscus-root
+              aria-describedby="giscus-status-description"
               data-giscus-repo="RasoulUnlimited/comments"
               data-giscus-repo-id="R_kgDOOx48HQ"
               data-giscus-category="Q&A"
@@ -2463,6 +2488,7 @@
                 <div
                   id="giscus-loading"
                   class="giscus-loading hidden"
+                  role="status"
                   aria-live="polite"
                   hidden
                 >
@@ -2496,6 +2522,9 @@
                   aria-label="بخش نظرات کاربران"
                   aria-busy="false"
                 ></div>
+                <p id="giscus-status-description" class="visually-hidden giscus-status-description">
+                  بخش نظرات از GitHub Discussions بارگذاری می‌شود و در صورت خطا امکان تلاش مجدد وجود دارد.
+                </p>
                 <noscript>
                   <p class="giscus-noscript">
                     برای مشاهده بخش نظرات، جاوااسکریپت را فعال کنید یا
@@ -2783,6 +2812,7 @@
     <script src="assets/vendor/aos/aos.min.js" defer></script>
     <script src="assets/js/faq-search.min.js" defer></script>
     <script src="assets/js/main-script-fa.min.js" defer></script>
+    <script src="assets/js/featured-feedback.min.js" defer></script>
     <script src="assets/js/giscus-loader.min.js" defer></script>
     <script src="assets/js/lang/fa.min.js" defer></script>
     <script src="assets/js/hero-particles.min.js" defer></script>

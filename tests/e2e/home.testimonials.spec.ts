@@ -35,6 +35,46 @@ async function scrollToTestimonials(page: Page) {
 }
 
 test.describe("Home Testimonials (Giscus)", () => {
+  test.describe("Featured feedback rail", () => {
+    for (const pageMeta of PAGES) {
+      test(`${pageMeta.key}: renders language-filtered featured feedback cards`, async ({
+        page,
+      }) => {
+        await page.goto(pageMeta.path, { waitUntil: "domcontentloaded" });
+        await scrollToTestimonials(page);
+
+        const rail = page.locator("#testimonials [data-featured-feedback-root]");
+        await expect
+          .poll(async () => rail.getAttribute("data-featured-feedback-status"))
+          .toBe("ready");
+
+        const cards = rail.locator(".featured-feedback-card");
+        await expect(cards).toHaveCount(3);
+
+        const langs = await cards.evaluateAll((nodes) =>
+          nodes.map((node) => node.getAttribute("data-feedback-lang") || "")
+        );
+        expect(langs.every((lang) => lang === pageMeta.lang)).toBeTruthy();
+      });
+    }
+  });
+
+  test.describe("A11y semantics", () => {
+    for (const pageMeta of PAGES) {
+      test(`${pageMeta.key}: exposes status and description wiring for giscus`, async ({
+        page,
+      }) => {
+        await page.goto(pageMeta.path, { waitUntil: "domcontentloaded" });
+        await scrollToTestimonials(page);
+
+        const root = page.locator("#testimonials [data-giscus-root]");
+        await expect(root).toHaveAttribute("aria-describedby", "giscus-status-description");
+        await expect(root.locator("#giscus-status-description")).toHaveCount(1);
+        await expect(root.locator(".giscus-loading")).toHaveAttribute("role", "status");
+      });
+    }
+  });
+
   test.describe("Failure fallback", () => {
     for (const pageMeta of PAGES) {
       test(`${pageMeta.key}: shows error state with retry and fallback when giscus is blocked`, async ({
@@ -63,6 +103,13 @@ test.describe("Home Testimonials (Giscus)", () => {
   });
 
   test("fa: retry flow recovers from initial failure and loads iframe", async ({ page }) => {
+    await page.addInitScript(() => {
+      Object.defineProperty(window.navigator, "onLine", {
+        configurable: true,
+        get: () => false,
+      });
+    });
+
     let callCount = 0;
     await page.route("**/giscus.app/client.js", (route) => {
       callCount += 1;
@@ -100,6 +147,39 @@ test.describe("Home Testimonials (Giscus)", () => {
     await expect(root.locator(".giscus-error")).toBeHidden();
   });
 
+  test("fa: retry button is keyboard operable", async ({ page }) => {
+    let callCount = 0;
+    await page.route("**/giscus.app/client.js", (route) => {
+      callCount += 1;
+      if (callCount === 1) {
+        route.abort();
+        return;
+      }
+
+      route.fulfill({
+        status: 200,
+        contentType: "application/javascript",
+        body: MOCK_GISCUS_CLIENT,
+      });
+    });
+
+    await page.goto("/index.html", { waitUntil: "domcontentloaded" });
+    await scrollToTestimonials(page);
+
+    const root = page.locator("#testimonials [data-giscus-root]");
+    await expect
+      .poll(async () => root.getAttribute("data-giscus-status"))
+      .toBe("error");
+
+    const retryButton = root.locator(".giscus-retry-btn");
+    await retryButton.focus();
+    await page.keyboard.press("Enter");
+
+    await expect
+      .poll(async () => root.getAttribute("data-giscus-status"))
+      .toBe("ready");
+  });
+
   test("en: success flow hides loader and renders iframe", async ({ page }) => {
     await page.route("**/giscus.app/client.js", (route) =>
       route.fulfill({
@@ -122,6 +202,35 @@ test.describe("Home Testimonials (Giscus)", () => {
     await expect(root.locator("iframe.giscus-frame")).toBeVisible();
     await expect(root.locator(".giscus-loading")).toBeHidden();
     await expect(root.locator(".giscus-error")).toBeHidden();
+  });
+
+  test("en: online event retries failed load and recovers", async ({ page }) => {
+    await page.route("**/giscus.app/client.js", (route) => route.abort());
+
+    await page.goto("/en/index.html", { waitUntil: "domcontentloaded" });
+    await scrollToTestimonials(page);
+
+    const root = page.locator("#testimonials [data-giscus-root]");
+    await expect
+      .poll(async () => root.getAttribute("data-giscus-status"))
+      .toBe("error");
+
+    await page.unroute("**/giscus.app/client.js");
+    await page.route("**/giscus.app/client.js", (route) =>
+      route.fulfill({
+        status: 200,
+        contentType: "application/javascript",
+        body: MOCK_GISCUS_CLIENT,
+      })
+    );
+
+    await page.evaluate(() => {
+      window.dispatchEvent(new Event("online"));
+    });
+
+    await expect
+      .poll(async () => root.getAttribute("data-giscus-status"))
+      .toBe("ready");
   });
 
   test.describe("No-JS fallback", () => {
@@ -222,5 +331,32 @@ test.describe("Home Testimonials (Giscus)", () => {
         return root.getAttribute("data-giscus-theme-applied");
       })
       .not.toBe(beforeTheme || "");
+  });
+
+  test("fa: reduced motion mode disables giscus ready pulse animation", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto("/index.html", { waitUntil: "domcontentloaded" });
+    await scrollToTestimonials(page);
+
+    const animationName = await page.evaluate(() => {
+      const root = document.querySelector("#testimonials [data-giscus-root]");
+      if (!(root instanceof HTMLElement)) {return "";}
+      root.classList.add("giscus-ready-pulse");
+      return window.getComputedStyle(root).animationName || "";
+    });
+
+    expect(animationName).toBe("none");
+  });
+
+  test("en: forced-colors mode keeps featured cards visible with borders", async ({ page }) => {
+    await page.emulateMedia({ forcedColors: "active" });
+    await page.goto("/en/index.html", { waitUntil: "domcontentloaded" });
+    await scrollToTestimonials(page);
+
+    const card = page.locator("#testimonials .featured-feedback-card").first();
+    await expect(card).toBeVisible();
+
+    const borderStyle = await card.evaluate((node) => window.getComputedStyle(node).borderStyle);
+    expect(borderStyle).toBe("solid");
   });
 });
