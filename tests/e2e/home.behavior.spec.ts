@@ -25,6 +25,37 @@ test.describe("FA Home Behavior", () => {
     expect(requestFailures).toEqual([]);
   });
 
+  test("homepage stays usable when Font Awesome CDNs are unreachable", async ({ page }) => {
+    await page.route("**/cdnjs.cloudflare.com/ajax/libs/font-awesome/**", (route) =>
+      route.abort()
+    );
+    await page.route("**/cdn.jsdelivr.net/npm/@fortawesome/**", (route) =>
+      route.abort()
+    );
+    await page.route("**/use.fontawesome.com/releases/**", (route) =>
+      route.abort()
+    );
+
+    await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });
+    await expect
+      .poll(async () => {
+        return page.evaluate(() => {
+          const degraded = document.documentElement.classList.contains("icons-degraded");
+          const hasFont = !!(
+            document.fonts &&
+            typeof document.fonts.check === "function" &&
+            document.fonts.check('1em "Font Awesome 6 Free"')
+          );
+          return degraded || hasFont;
+        });
+      }, { timeout: 7000 })
+      .toBeTruthy();
+
+    await expect(page.locator("#main-content")).toBeVisible();
+    await page.locator('.nav-links a[href="#about"]').first().click();
+    await expect(page.locator("#about")).toBeVisible();
+  });
+
   test("mobile navigation toggles menu state and aria attributes", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });

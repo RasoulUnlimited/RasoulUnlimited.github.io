@@ -410,6 +410,35 @@ body.offline .offline-info {
   transition: none !important;
 }
 
+/* --- Icon-font resilience when Font Awesome is unavailable --- */
+
+html.icons-degraded i[class^="fa"]::before,
+html.icons-degraded i[class*=" fa-"]::before {
+  content: "•" !important;
+  font-family: var(--font-body, sans-serif) !important;
+  font-weight: 700 !important;
+}
+
+html.icons-degraded #scroll-to-top i[class^="fa"]::before,
+html.icons-degraded #scroll-to-top i[class*=" fa-"]::before {
+  content: "↑" !important;
+}
+
+html.icons-degraded #share-page-button i[class^="fa"]::before,
+html.icons-degraded #share-page-button i[class*=" fa-"]::before {
+  content: "↗" !important;
+}
+
+html.icons-degraded .slider::before {
+  font-family: var(--font-body, sans-serif);
+  content: "☀";
+  font-size: 0.75rem;
+}
+
+html.icons-degraded input:checked + .slider::before {
+  content: "☾";
+}
+
 /* --- Modern Enhancements --- */
 
 html {

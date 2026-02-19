@@ -12,21 +12,106 @@
 
   const noop = () => {};
 
-  const on = (el, evt, fn, opts) =>
-    el &&
-    el.addEventListener &&
-    el.addEventListener(evt, fn, { capture: false, ...(opts || {}) });
+  const on = (el, evt, fn, opts) => {
+    if (!el || !el.addEventListener || typeof fn !== "function") {return null;}
+
+    const wrapped = function () {
+      try {
+        const result = fn.apply(this, arguments);
+        if (result && typeof result.then === "function") {
+          return result.catch((err) => {
+            reportRuntimeError(`event:${evt}`, err);
+            return undefined;
+          });
+        }
+        return result;
+      } catch (err) {
+        reportRuntimeError(`event:${evt}`, err);
+        return undefined;
+      }
+    };
+
+    el.addEventListener(evt, wrapped, { capture: false, ...(opts || {}) });
+    return wrapped;
+  };
 
   const off = (el, evt, fn, opts) =>
     el &&
     el.removeEventListener &&
     el.removeEventListener(evt, fn, { capture: false, ...(opts || {}) });
 
+  const RUNTIME_ERRORS_KEY = "runtimeErrors";
+  const RUNTIME_ERRORS_MAX = 30;
+
+  function serializeRuntimeError(err) {
+    if (!err) {
+      return { name: "UnknownError", message: "Unknown runtime error", stack: "" };
+    }
+    if (err instanceof Error) {
+      return {
+        name: err.name || "Error",
+        message: err.message || "Error",
+        stack: err.stack || "",
+      };
+    }
+    if (typeof err === "string") {
+      return { name: "Error", message: err, stack: "" };
+    }
+    return {
+      name: "ErrorObject",
+      message: (() => {
+        try {
+          return JSON.stringify(err);
+        } catch {
+          return String(err);
+        }
+      })(),
+      stack: "",
+    };
+  }
+
+  function pushRuntimeError(scope, err) {
+    const payload = serializeRuntimeError(err);
+    const entry = {
+      scope,
+      name: payload.name,
+      message: payload.message,
+      stack: payload.stack,
+      ts: new Date().toISOString(),
+    };
+
+    try {
+      const raw = sessionStorage.getItem(RUNTIME_ERRORS_KEY);
+      const prev = raw ? JSON.parse(raw) : [];
+      const next = (Array.isArray(prev) ? prev : []).concat(entry).slice(
+        -RUNTIME_ERRORS_MAX
+      );
+      sessionStorage.setItem(RUNTIME_ERRORS_KEY, JSON.stringify(next));
+      document.documentElement.dataset.runtimeErrorCount = String(next.length);
+    } catch {}
+
+    try {
+      window.dispatchEvent(new CustomEvent("app-runtime-error", { detail: entry }));
+    } catch {}
+  }
+
   function reportRuntimeError(scope, err) {
     try {
       document.documentElement.classList.add("runtime-degraded");
     } catch {}
+    pushRuntimeError(scope, err);
     console.error(`[runtime:${scope}]`, err);
+  }
+
+  function hydrateRuntimeErrorState() {
+    try {
+      const raw = sessionStorage.getItem(RUNTIME_ERRORS_KEY);
+      const list = raw ? JSON.parse(raw) : [];
+      const count = Array.isArray(list) ? list.length : 0;
+      if (count > 0) {
+        document.documentElement.dataset.runtimeErrorCount = String(count);
+      }
+    } catch {}
   }
 
   function safeRun(scope, fn) {
@@ -205,12 +290,20 @@
     };
 
     const listeners = [];
-    const notify = () => listeners.forEach((l) => l());
+    const notify = () => {
+      listeners.forEach((l) => {
+        try {
+          l();
+        } catch (err) {
+          reportRuntimeError("env.change", err);
+        }
+      });
+    };
 
     const bindMQL = (m) => {
       if (!m) {return;}
       if (typeof m.addEventListener === "function") {
-        m.addEventListener("change", notify);
+        on(m, "change", notify);
       } else if (typeof m.addListener === "function") {
         m.addListener(notify);
       }
@@ -247,6 +340,121 @@
       ENABLE_IDENTITY_PINGS: false,
     };
   };
+
+  function loadStylesheetWithTimeout(href, timeoutMs = 3000) {
+    return new Promise((resolve, reject) => {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = href;
+      link.crossOrigin = "anonymous";
+
+      let done = false;
+      const timer = setTimeout(() => {
+        if (done) {return;}
+        done = true;
+        try {
+          link.remove();
+        } catch {}
+        reject(new Error(`stylesheet timeout: ${href}`));
+      }, timeoutMs);
+
+      link.onload = () => {
+        if (done) {return;}
+        done = true;
+        clearTimeout(timer);
+        resolve(true);
+      };
+
+      link.onerror = () => {
+        if (done) {return;}
+        done = true;
+        clearTimeout(timer);
+        try {
+          link.remove();
+        } catch {}
+        reject(new Error(`stylesheet load failed: ${href}`));
+      };
+
+      document.head.appendChild(link);
+    });
+  }
+
+  function hasFontAwesome() {
+    try {
+      if (
+        document.fonts &&
+        typeof document.fonts.check === "function" &&
+        document.fonts.check('1em "Font Awesome 6 Free"')
+      ) {
+        return true;
+      }
+    } catch {}
+
+    try {
+      const probe = document.createElement("i");
+      probe.className = "fas fa-circle";
+      probe.style.position = "absolute";
+      probe.style.width = "0";
+      probe.style.height = "0";
+      probe.style.overflow = "hidden";
+      probe.style.opacity = "0";
+      document.body.appendChild(probe);
+      const family = getComputedStyle(probe).fontFamily || "";
+      probe.remove();
+      return /font awesome/i.test(family);
+    } catch {
+      return false;
+    }
+  }
+
+  async function waitForFontAwesome(maxWaitMs = 1500) {
+    const start = Date.now();
+    while (Date.now() - start < maxWaitMs) {
+      if (hasFontAwesome()) {return true;}
+      await new Promise((resolve) => setTimeout(resolve, 120));
+    }
+    return hasFontAwesome();
+  }
+
+  function scheduleFontAwesomeRecoveryCheck(delayMs = 6500) {
+    setTimeout(async () => {
+      if (await waitForFontAwesome(1200)) {
+        document.documentElement.classList.remove("icons-degraded");
+      }
+    }, delayMs);
+  }
+
+  function initCriticalStyleFallbacks() {
+    const run = async () => {
+      const ready = await waitForFontAwesome(1500);
+      if (ready) {
+        document.documentElement.classList.remove("icons-degraded");
+        return;
+      }
+
+      const fallbacks = [
+        "https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css",
+        "https://use.fontawesome.com/releases/v6.0.0/css/all.css",
+      ];
+
+      for (const href of fallbacks) {
+        try {
+          await loadStylesheetWithTimeout(href, 2800);
+          if (await waitForFontAwesome(1200)) {
+            document.documentElement.classList.remove("icons-degraded");
+            return;
+          }
+        } catch (err) {
+          console.warn("[fontawesome.fallback]", err);
+        }
+      }
+
+      document.documentElement.classList.add("icons-degraded");
+      scheduleFontAwesomeRecoveryCheck();
+    };
+
+    run().catch((err) => reportRuntimeError("fontawesome.bootstrap", err));
+  }
 
   // i18n (FA)
   const STRINGS_FA = {
@@ -377,7 +585,8 @@
   function dismissToast(toast) {
     if (!toast) {return;}
     toast.classList.remove("show");
-    toast.addEventListener(
+    on(
+      toast,
       "transitionend",
       () => toast.remove(),
       { once: true }
@@ -404,7 +613,8 @@
     document.querySelectorAll(".dynamic-toast").forEach((t) => {
       if (!settings.id || t.id !== settings.id) {
         t.classList.remove("show");
-        t.addEventListener(
+        on(
+          t,
           "transitionend",
           () => t.remove(),
           { once: true }
@@ -684,7 +894,7 @@
       target.focus({ preventScroll: true });
 
       if (!hadTabindex) {
-        target.addEventListener("blur", () => {
+        on(target, "blur", () => {
           target.removeAttribute("tabindex");
         }, { once: true });
       }
@@ -768,7 +978,8 @@
         interactive.classList.add("click-feedback-effect");
         interactive.dataset.userAction =
           "verified interaction by Mohammad Rasoul Sohrabi's website functionality";
-        interactive.addEventListener(
+        on(
+          interactive,
           "animationend",
           () => interactive.classList.remove("click-feedback-effect"),
           { once: true }
@@ -1146,7 +1357,8 @@
     emailLink.dataset.contactPerson = "Mohammad Rasoul Sohrabi";
     emailLink.classList.add("sohrabi-contact-method");
 
-    emailLink.addEventListener(
+    on(
+      emailLink,
       "click",
       async (e) => {
         e.preventDefault();
@@ -1623,31 +1835,35 @@
 
     element.appendChild(sparkle);
 
-    sparkle
-      .animate(
-        [
-          {
-            opacity: 0,
-            transform: `scale(0) rotate(${(
-              Math.random() * 360
-            ).toFixed(1)}deg)`,
-          },
-          {
-            opacity: 1,
-            transform: `scale(1) rotate(${(
-              360 + Math.random() * 360
-            ).toFixed(1)}deg)`,
-          },
-          {
-            opacity: 0,
-            transform: `scale(0.5) rotate(${(
-              720 + Math.random() * 360
-            ).toFixed(1)}deg)`,
-          },
-        ],
-        { duration: 650, easing: "ease-out", fill: "forwards" }
-      )
-      .addEventListener("finish", () => sparkle.remove());
+    const animation = sparkle.animate?.(
+      [
+        {
+          opacity: 0,
+          transform: `scale(0) rotate(${(
+            Math.random() * 360
+          ).toFixed(1)}deg)`,
+        },
+        {
+          opacity: 1,
+          transform: `scale(1) rotate(${(
+            360 + Math.random() * 360
+          ).toFixed(1)}deg)`,
+        },
+        {
+          opacity: 0,
+          transform: `scale(0.5) rotate(${(
+            720 + Math.random() * 360
+          ).toFixed(1)}deg)`,
+        },
+      ],
+      { duration: 650, easing: "ease-out", fill: "forwards" }
+    );
+
+    if (animation) {
+      on(animation, "finish", () => sparkle.remove(), { once: true });
+    } else {
+      setTimeout(() => sparkle.remove(), 700);
+    }
   }
 
   // ==========================
@@ -1738,6 +1954,7 @@
     const initSteps = [
       ["mobile-menu", initMobileMenu],
       ["aos", initAOS],
+      ["critical-styles", initCriticalStyleFallbacks],
       ["dynamic-dates", setDynamicDates],
       ["identity-hooks", setIdentityHooks],
       ["identity-pings", queueIdentityPings],
@@ -1773,6 +1990,7 @@
     });
   }
 
+  hydrateRuntimeErrorState();
   installGlobalErrorHandlers();
 
   if (document.readyState === "loading") {
