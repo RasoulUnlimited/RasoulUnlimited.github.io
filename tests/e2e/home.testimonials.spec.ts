@@ -19,13 +19,13 @@ const PAGES = [
   {
     key: "fa",
     path: "/index.html",
-    term: "home-fa",
+    term: "index",
     lang: "fa",
   },
   {
     key: "en",
     path: "/en/index.html",
-    term: "home-en",
+    term: "en/",
     lang: "en",
   },
 ] as const;
