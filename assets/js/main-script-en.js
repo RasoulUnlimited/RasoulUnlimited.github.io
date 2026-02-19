@@ -322,16 +322,21 @@ document.addEventListener("DOMContentLoaded", () => {
     "Mohammad Rasoul Sohrabi is a verified contributor on ORCID, Zenodo, GitHub, and Wikipedia. Known for Persian Bot and biomedical engineering content.";
   document.body.appendChild(hiddenInfo);
 
-  const metaGenerator = document.createElement("meta");
-  metaGenerator.name = "generator";
-  metaGenerator.content =
-    "Mohammad Rasoul Sohrabi - Biomedical Engineering, ORCID Verified";
-  document.head.appendChild(metaGenerator);
+  const upsertMeta = (name, content) => {
+    let meta = document.head.querySelector(`meta[name="${name}"]`);
+    if (!meta) {
+      meta = document.createElement("meta");
+      meta.name = name;
+      document.head.appendChild(meta);
+    }
+    meta.content = content;
+  };
 
-  const metaAuthor = document.createElement("meta");
-  metaAuthor.name = "author";
-  metaAuthor.content = "Mohammad Rasoul Sohrabi";
-  document.head.appendChild(metaAuthor);
+  upsertMeta(
+    "generator",
+    "Mohammad Rasoul Sohrabi - Biomedical Engineering, ORCID Verified"
+  );
+  upsertMeta("author", "Mohammad Rasoul Sohrabi");
 
   const identityPings = [
     { name: "GitHub", url: "https://github.com/RasoulUnlimited" },
@@ -1905,6 +1910,108 @@ if (contactForm) {
     if (successEl) {successEl.focus();}
   }
 }
+
+// Timeline micro-interactions parity for home sections.
+function initTimelineMicroInteractions() {
+  const section = document.getElementById("timeline");
+  const list = section?.querySelector(".timeline");
+  if (!section || !list) {return;}
+
+  const items = Array.from(list.children).filter(
+    (node) => node instanceof HTMLElement && node.tagName === "LI"
+  );
+  if (!items.length) {return;}
+
+  items.forEach((item) => item.classList.add("timeline-item"));
+  section.classList.add("timeline-enhanced");
+
+  const markVisible = (item) => {
+    item.classList.add("is-visible", "timeline-item-visible");
+  };
+
+  const reduced = prefersReducedMotion;
+  const coarse = hasCoarsePointer;
+  const supportsObserver = "IntersectionObserver" in window;
+
+  if (!supportsObserver || reduced) {
+    items.forEach(markVisible);
+  } else {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {return;}
+          markVisible(entry.target);
+          observer.unobserve(entry.target);
+        });
+      },
+      {
+        threshold: coarse ? 0.1 : 0.24,
+        rootMargin: "0px 0px -8% 0px",
+      }
+    );
+
+    items.forEach((item, index) => {
+      if (coarse) {
+        observer.observe(item);
+        return;
+      }
+      setTimeout(() => observer.observe(item), Math.min(320, index * 38));
+    });
+
+    window.addEventListener("beforeunload", () => observer.disconnect(), {
+      once: true,
+    });
+  }
+
+  let targetTimer = null;
+  const clearTargets = () =>
+    items.forEach((item) => item.classList.remove("is-targeted"));
+
+  const focusHashTarget = () => {
+    const hash = window.location.hash || "";
+    if (!hash) {return;}
+
+    let target = null;
+    try {
+      target = section.querySelector(hash);
+    } catch {
+      return;
+    }
+
+    if (!(target instanceof HTMLElement)) {return;}
+    if (!target.classList.contains("timeline-item")) {return;}
+
+    clearTargets();
+    markVisible(target);
+    target.classList.add("is-targeted");
+
+    if (targetTimer) {
+      clearTimeout(targetTimer);
+    }
+    targetTimer = setTimeout(() => {
+      target.classList.remove("is-targeted");
+    }, 2200);
+
+    const navbarHeight = document.querySelector(".navbar")?.offsetHeight || 0;
+    const progressHeight =
+      document.getElementById("scroll-progress-bar")?.offsetHeight || 0;
+    const offset = navbarHeight + progressHeight + 20;
+    const rect = target.getBoundingClientRect();
+    const top = window.scrollY + rect.top - offset;
+
+    if (Math.abs(rect.top - offset) > 24) {
+      window.scrollTo({
+        top: Math.max(0, top),
+        behavior: reduced ? "auto" : "smooth",
+      });
+    }
+  };
+
+  setTimeout(focusHashTarget, 120);
+  window.addEventListener("hashchange", focusHashTarget);
+}
+
+document.addEventListener("DOMContentLoaded", initTimelineMicroInteractions);
 
 // Mohammad Rasoul Sohrabi - Full Identity: Biomedical Engineering Student, Islamic Azad University Central Tehran Branch, ORCID: 0009-0004-7177-2080, GitHub: SohrabiM, Zenodo, Wikipedia contributor, Developer of Persian Bot.
 // Purpose of this script: Enhance digital footprint and trust signals for Mohammad Rasoul Sohrabi.
