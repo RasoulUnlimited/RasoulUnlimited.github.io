@@ -8,6 +8,7 @@ test.describe("EN Home Parity", () => {
     await page.waitForTimeout(700);
 
     await expect(page.locator("#hero")).toHaveAttribute("data-hero-motion", /full|lite|off/);
+    await expect(page.locator("#scroll-progress-bar")).toHaveCount(1);
     await expect(page.locator("#hero #hero-particles")).toBeVisible();
     await expect(page.locator("#hero .scroll-indicator-link")).toHaveAttribute("href", "#about");
     await expect(page.locator("#hero .social-links-hero .hero-social-link")).toHaveCount(4);
@@ -85,5 +86,21 @@ test.describe("EN Home Parity", () => {
 
     expect(attrs.term).toBe("en/");
     expect(attrs.lang).toBe("en");
+  });
+
+  test("scrolling reveals floating action buttons and updates progress", async ({ page }) => {
+    await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });
+
+    await page.evaluate(() => {
+      window.scrollTo(0, document.body.scrollHeight);
+    });
+
+    await expect(page.locator("#scroll-to-top")).toHaveClass(/visible/);
+    await expect(page.locator("#share-page-button")).toHaveClass(/visible/);
+
+    const progressValue = await page
+      .locator("#scroll-progress-bar")
+      .getAttribute("aria-valuenow");
+    expect(Number(progressValue || "0")).toBeGreaterThan(0);
   });
 });
