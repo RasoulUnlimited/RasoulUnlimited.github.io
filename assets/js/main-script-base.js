@@ -72,62 +72,454 @@
     : null;
   const prefersReducedMotion = !!(reduceMotionQuery && reduceMotionQuery.matches);
 
-  /**
-   * Enhanced toast helper with types and icons
-   * @param {string} message
-   * @param {"success"|"error"|"info"|"default"} [type="default"]
-   */
-  function createToast(message, type = "default") {
-    if (!message) {return;}
+  const TOAST_LIMIT_PER_POSITION = 3;
+  const TOAST_DEFAULT_DURATION = 2800;
+  const TOAST_EXIT_FALLBACK_MS = prefersReducedMotion ? 60 : 260;
+  const TOAST_KIND_ICONS = {
+    success: "fas fa-check-circle",
+    error: "fas fa-exclamation-circle",
+    info: "fas fa-circle-info",
+    default: "fas fa-bell",
+  };
+  const toastRegistry = new Map();
+  const toastState = {
+    top: {
+      position: "top",
+      viewport: null,
+      visible: [],
+      queue: [],
+    },
+    bottom: {
+      position: "bottom",
+      viewport: null,
+      visible: [],
+      queue: [],
+    },
+  };
+
+  function normalizeToastKind(kind) {
+    const safeKind = String(kind || "default").toLowerCase();
+    if (safeKind === "success" || safeKind === "error" || safeKind === "info") {
+      return safeKind;
+    }
+    return "default";
+  }
+
+  function normalizeToastOptions(optionsOrType) {
+    const input =
+      typeof optionsOrType === "string"
+        ? { kind: optionsOrType }
+        : optionsOrType && typeof optionsOrType === "object"
+          ? optionsOrType
+          : {};
+
+    const kind = normalizeToastKind(input.kind || input.type);
+    const durationRaw = Number(input.duration);
+    const duration =
+      Number.isFinite(durationRaw) && durationRaw >= 0
+        ? Math.round(durationRaw)
+        : TOAST_DEFAULT_DURATION;
+    const id = typeof input.id === "string" ? input.id.trim() : "";
+    const position = input.position === "top" ? "top" : "bottom";
+    const customClass =
+      typeof input.customClass === "string" ? input.customClass.trim() : "";
+    const iconClass =
+      typeof input.iconClass === "string" && input.iconClass.trim()
+        ? input.iconClass.trim()
+        : TOAST_KIND_ICONS[kind];
+    const iconColor =
+      typeof input.iconColor === "string" ? input.iconColor.trim() : "";
+    const closeButton = !!input.closeButton;
+    const role =
+      typeof input.role === "string" && input.role.trim()
+        ? input.role.trim()
+        : kind === "error"
+          ? "alert"
+          : "status";
+    const ariaLive =
+      typeof input.ariaLive === "string" && input.ariaLive.trim()
+        ? input.ariaLive.trim()
+        : kind === "error"
+          ? "assertive"
+          : "polite";
+
+    return {
+      id,
+      kind,
+      duration,
+      position,
+      customClass,
+      iconClass,
+      iconColor,
+      closeButton,
+      role,
+      ariaLive,
+    };
+  }
+
+  function getToastState(position) {
+    return position === "top" ? toastState.top : toastState.bottom;
+  }
+
+  function ensureToastViewport(position) {
+    const state = getToastState(position);
+    if (state.viewport && state.viewport.isConnected) {
+      return state.viewport;
+    }
+
+    const selector = `.toast-viewport[data-toast-position="${position}"]`;
+    const existing = document.querySelector(selector);
+    if (existing instanceof HTMLElement) {
+      state.viewport = existing;
+      return state.viewport;
+    }
+
     if (!document.body) {
-      console.warn("Cannot show toast: document.body not ready");
+      return null;
+    }
+
+    const viewport = document.createElement("div");
+    viewport.className = "toast-viewport";
+    viewport.dataset.toastPosition = position;
+    viewport.setAttribute("aria-live", "off");
+    document.body.appendChild(viewport);
+    state.viewport = viewport;
+    return viewport;
+  }
+
+  function removeEntry(collection, entry) {
+    const index = collection.indexOf(entry);
+    if (index >= 0) {
+      collection.splice(index, 1);
+    }
+  }
+
+  function pruneToastState(state) {
+    state.visible = state.visible.filter((entry) => {
+      if (!entry || !(entry.toast instanceof HTMLElement)) {
+        return false;
+      }
+      if (entry.toast.isConnected && entry.mounted) {
+        return true;
+      }
+
+      stopToastTimers(entry);
+      entry.mounted = false;
+      entry.dismissing = false;
+      if (entry.settings.id && toastRegistry.get(entry.settings.id) === entry) {
+        toastRegistry.delete(entry.settings.id);
+      }
+      return false;
+    });
+
+    state.queue = state.queue.filter((entry) => !!entry && !entry.dismissing);
+  }
+
+  function stopToastTimers(entry) {
+    if (entry.timer) {
+      clearTimeout(entry.timer);
+      entry.timer = null;
+    }
+    if (entry.progressAnimation) {
+      try {
+        entry.progressAnimation.cancel();
+      } catch {}
+      entry.progressAnimation = null;
+    }
+  }
+
+  function applyToastContent(entry) {
+    const { settings, toast } = entry;
+    const classes = ["dynamic-toast", `toast-kind-${settings.kind}`];
+    if (settings.customClass) {
+      classes.push(settings.customClass);
+    }
+    toast.className = classes.join(" ");
+    toast.dataset.toastKind = settings.kind;
+    toast.dataset.toastPosition = settings.position;
+    toast.setAttribute("role", settings.role);
+    toast.setAttribute("aria-live", settings.ariaLive);
+    toast.setAttribute("aria-atomic", "true");
+    toast.tabIndex = -1;
+    if (settings.id) {
+      toast.id = settings.id;
+    } else {
+      toast.removeAttribute("id");
+    }
+
+    const fragment = document.createDocumentFragment();
+    if (settings.iconClass) {
+      const icon = document.createElement("i");
+      icon.className = `${settings.iconClass} toast-icon`.trim();
+      if (settings.iconColor) {
+        icon.dataset.iconColor = settings.iconColor;
+      }
+      icon.setAttribute("aria-hidden", "true");
+      fragment.appendChild(icon);
+    }
+
+    const text = document.createElement("span");
+    text.className = "toast-message";
+    text.textContent = entry.message;
+    fragment.appendChild(text);
+
+    if (settings.closeButton) {
+      const isFaLocale = (document.documentElement.lang || "")
+        .toLowerCase()
+        .startsWith("fa");
+      const closeBtn = document.createElement("button");
+      closeBtn.type = "button";
+      closeBtn.className = "toast-close";
+      closeBtn.setAttribute(
+        "aria-label",
+        isFaLocale ? "بستن پیام" : "Close message"
+      );
+      closeBtn.innerHTML = '<i class="fas fa-times" aria-hidden="true"></i>';
+      closeBtn.addEventListener(
+        "click",
+        () => dismissToastEntry(entry),
+        { once: true }
+      );
+      fragment.appendChild(closeBtn);
+    }
+
+    const progress = document.createElement("span");
+    progress.className = "toast-progress";
+    progress.setAttribute("aria-hidden", "true");
+    fragment.appendChild(progress);
+
+    toast.replaceChildren(fragment);
+  }
+
+  function startToastProgress(entry) {
+    const progress = entry.toast.querySelector(".toast-progress");
+    if (!(progress instanceof HTMLElement)) {
       return;
     }
 
-    const toast = document.createElement("div");
-    toast.setAttribute("role", "status");
-    toast.setAttribute("aria-live", "polite");
-    toast.className = `dynamic-toast ${type}`;
-
-    // Add icon based on type
-    let iconHtml = "";
-    if (type === "success") {
-      iconHtml = '<i class="fas fa-check-circle" aria-hidden="true"></i> ';
-    } else if (type === "error") {
-      iconHtml = '<i class="fas fa-exclamation-circle" aria-hidden="true"></i> ';
-    } else if (type === "info") {
-      iconHtml = '<i class="fas fa-info-circle" aria-hidden="true"></i> ';
+    progress.hidden = entry.settings.duration <= 0;
+    if (prefersReducedMotion || entry.settings.duration <= 0) {
+      return;
     }
 
-    toast.innerHTML = `${iconHtml}<span>${String(message)}</span>`;
-
-    // Optional: prevent infinite stacking by removing oldest toast if too many
-    const existingToasts = document.querySelectorAll(".dynamic-toast");
-    if (existingToasts.length > 3) {
-      existingToasts.forEach((t, index) => {
-        if (index === 0 && t.parentNode) {t.remove();}
-      });
+    if (typeof progress.animate !== "function") {
+      return;
     }
 
-    document.body.appendChild(toast);
-
-    // Trigger CSS transition
-    requestAnimationFrame(() => toast.classList.add("show"));
-
-    // Auto-hide
-    setTimeout(() => {
-      toast.classList.remove("show");
-      // Wait for CSS transition to finish if any
-      setTimeout(() => {
-        if (toast.parentNode) {toast.remove();}
-      }, 300);
-    }, 3000);
+    try {
+      entry.progressAnimation = progress.animate(
+        [
+          { transform: "scaleX(1)" },
+          { transform: "scaleX(0)" },
+        ],
+        {
+          duration: entry.settings.duration,
+          easing: "linear",
+          fill: "forwards",
+        }
+      );
+    } catch {}
   }
 
-  // Expose toast helper globally if not already defined
-  if (typeof window.createToast !== "function") {
-    window.createToast = createToast;
+  function startToastLifecycle(entry) {
+    stopToastTimers(entry);
+    startToastProgress(entry);
+
+    if (entry.settings.duration > 0) {
+      entry.timer = setTimeout(() => {
+        dismissToastEntry(entry);
+      }, entry.settings.duration);
+    }
   }
+
+  function refreshVisibleToast(entry) {
+    if (!entry.mounted || !entry.toast) {
+      return;
+    }
+
+    entry.dismissing = false;
+    applyToastContent(entry);
+    entry.toast.classList.add("show");
+    entry.toast.classList.remove("is-closing");
+    startToastLifecycle(entry);
+  }
+
+  function mountToastEntry(entry) {
+    const state = entry.state || getToastState(entry.settings.position);
+    const viewport = ensureToastViewport(state.position);
+    if (!viewport) {
+      return;
+    }
+
+    entry.state = state;
+    entry.mounted = true;
+    entry.dismissing = false;
+    applyToastContent(entry);
+    viewport.appendChild(entry.toast);
+    state.visible.push(entry);
+
+    requestAnimationFrame(() => {
+      if (!entry.mounted) {
+        return;
+      }
+
+      entry.toast.classList.add("show");
+      startToastLifecycle(entry);
+
+      if (typeof window.__ruToastFeedback === "function") {
+        try {
+          window.__ruToastFeedback();
+        } catch {}
+      }
+    });
+  }
+
+  function flushToastQueue(position) {
+    const state = getToastState(position);
+    ensureToastViewport(position);
+    pruneToastState(state);
+
+    while (
+      state.visible.length < TOAST_LIMIT_PER_POSITION &&
+      state.queue.length > 0
+    ) {
+      const next = state.queue.shift();
+      if (!next) {
+        continue;
+      }
+
+      if (next.dismissing) {
+        continue;
+      }
+
+      mountToastEntry(next);
+    }
+  }
+
+  function dismissToastEntry(entry) {
+    if (!entry || entry.dismissing) {
+      return;
+    }
+
+    entry.dismissing = true;
+    stopToastTimers(entry);
+
+    if (!entry.mounted || !(entry.toast instanceof HTMLElement)) {
+      const queuedState = entry.state || getToastState(entry.settings.position);
+      removeEntry(queuedState.queue, entry);
+      if (entry.settings.id && toastRegistry.get(entry.settings.id) === entry) {
+        toastRegistry.delete(entry.settings.id);
+      }
+      entry.dismissing = false;
+      return;
+    }
+
+    const { toast } = entry;
+    toast.classList.remove("show");
+    toast.classList.add("is-closing");
+
+    let finalized = false;
+    const finalize = () => {
+      if (finalized) {
+        return;
+      }
+      finalized = true;
+
+      const state = entry.state || getToastState(entry.settings.position);
+      removeEntry(state.visible, entry);
+      removeEntry(state.queue, entry);
+      if (entry.settings.id && toastRegistry.get(entry.settings.id) === entry) {
+        toastRegistry.delete(entry.settings.id);
+      }
+      toast.remove();
+      entry.mounted = false;
+      entry.dismissing = false;
+      flushToastQueue(state.position);
+    };
+
+    toast.addEventListener(
+      "transitionend",
+      (event) => {
+        if (event.target === toast) {
+          finalize();
+        }
+      },
+      { once: true }
+    );
+    setTimeout(finalize, TOAST_EXIT_FALLBACK_MS);
+  }
+
+  function createToastEntry(message, optionsOrType) {
+    if (!message && message !== 0) {
+      return null;
+    }
+    if (!document.body) {
+      console.warn("Cannot show toast: document.body not ready");
+      return null;
+    }
+
+    const settings = normalizeToastOptions(optionsOrType);
+    const text = String(message);
+
+    pruneToastState(toastState.top);
+    pruneToastState(toastState.bottom);
+
+    if (settings.id && toastRegistry.has(settings.id)) {
+      const entry = toastRegistry.get(settings.id);
+      entry.message = text;
+      entry.settings = {
+        ...entry.settings,
+        ...settings,
+        position: entry.mounted ? entry.settings.position : settings.position,
+      };
+
+      if (entry.mounted) {
+        refreshVisibleToast(entry);
+        return entry;
+      }
+
+      const targetState = getToastState(entry.settings.position);
+      removeEntry(toastState.top.queue, entry);
+      removeEntry(toastState.bottom.queue, entry);
+      entry.state = targetState;
+      targetState.queue.push(entry);
+      flushToastQueue(targetState.position);
+      return entry;
+    }
+
+    const entry = {
+      message: text,
+      settings,
+      state: getToastState(settings.position),
+      toast: document.createElement("div"),
+      timer: null,
+      progressAnimation: null,
+      dismissing: false,
+      mounted: false,
+    };
+
+    if (settings.id) {
+      toastRegistry.set(settings.id, entry);
+    }
+
+    entry.state.queue.push(entry);
+    flushToastQueue(entry.state.position);
+    return entry;
+  }
+
+  /**
+   * Unified toast API.
+   * Backward compatible signatures:
+   *  - createToast(message, "success"|"error"|"info"|"default")
+   *  - createToast(message, options)
+   */
+  function createToast(message, optionsOrType) {
+    const entry = createToastEntry(message, optionsOrType);
+    return entry ? entry.toast : null;
+  }
+
+  // Expose the unified toast API globally.
+  window.createToast = createToast;
 
   function getNetworkMessage(online) {
     const strings = window.langStrings || {};
@@ -193,7 +585,11 @@
       return;
     }
     lastNetworkToastAt = now;
-    window.createToast(getNetworkMessage(isOnline), isOnline ? "success" : "info");
+    window.createToast(getNetworkMessage(isOnline), {
+      id: "network-status-toast",
+      kind: isOnline ? "success" : "info",
+      duration: 2600,
+    });
   }
 
   function installNetworkResilience() {
@@ -394,7 +790,15 @@
     ) {
       // themeChanged(theme) → localized message
       const msg = window.langStrings.themeChanged(theme);
-      if (msg) {createToast(msg);}
+      if (msg) {
+        createToast(msg, {
+          id: "theme-toast",
+          kind: "info",
+          customClass: "theme-toast",
+          duration: 1800,
+          position: "top",
+        });
+      }
     }
   }
 
@@ -501,10 +905,22 @@
     if (!endOfPageShown && scrollPosition >= docHeight - 50 && docHeight > 0) {
       endOfPageShown = true;
       if (typeof window.langStrings.endOfPage === "string") {
-        createToast(window.langStrings.endOfPage);
+        createToast(window.langStrings.endOfPage, {
+          id: "end-of-page-toast",
+          kind: "info",
+          customClass: "end-of-page-toast",
+          duration: 3200,
+        });
       } else if (typeof window.langStrings.endOfPage === "function") {
         const msg = window.langStrings.endOfPage();
-        if (msg) {createToast(msg);}
+        if (msg) {
+          createToast(msg, {
+            id: "end-of-page-toast",
+            kind: "info",
+            customClass: "end-of-page-toast",
+            duration: 3200,
+          });
+        }
       }
     }
     ticking = false;
@@ -579,10 +995,13 @@
     });
   }
 
-  function resolveCopyToastMessage(kind) {
+  function resolveCopyToastMessage(kind, subject = "email") {
     const strings = window.langStrings || {};
     const keyOrder = {
-      success: ["copySuccess", "emailCopied"],
+      success:
+        subject === "link"
+          ? ["linkCopied", "copySuccess"]
+          : ["copySuccess", "emailCopied"],
       error: ["copyError", "emailCopyError"],
       unsupported: ["copyUnsupported", "clipboardUnsupported"],
     };
@@ -604,14 +1023,53 @@
 
     const fallback = {
       success: isFa
-        ? "\u0627\u06cc\u0645\u06cc\u0644 \u06a9\u067e\u06cc \u0634\u062f."
-        : "Email copied.",
+        ? subject === "link"
+          ? "\u0644\u06cc\u0646\u06a9 \u06a9\u067e\u06cc \u0634\u062f."
+          : "\u0627\u06cc\u0645\u06cc\u0644 \u06a9\u067e\u06cc \u0634\u062f."
+        : subject === "link"
+          ? "Link copied."
+          : "Email copied.",
       error: isFa
         ? "\u06a9\u067e\u06cc \u0628\u0627 \u0645\u0634\u06a9\u0644 \u0645\u0648\u0627\u062c\u0647 \u0634\u062f."
         : "Copy failed.",
       unsupported: isFa
         ? "\u0645\u0631\u0648\u0631\u06af\u0631 \u0634\u0645\u0627 \u0627\u0632 \u06a9\u067e\u06cc \u062e\u0648\u062f\u06a9\u0627\u0631 \u067e\u0634\u062a\u06cc\u0628\u0627\u0646\u06cc \u0646\u0645\u06cc\u200c\u06a9\u0646\u062f."
         : "Your browser does not support automatic copy.",
+    };
+
+    return fallback[kind] || fallback.error;
+  }
+
+  function resolveShareToastMessage(kind) {
+    const strings = window.langStrings || {};
+    const keyOrder = {
+      success: ["shareOk", "shareSuccess"],
+      error: ["shareErr", "shareError"],
+    };
+    const keys = keyOrder[kind] || [];
+
+    for (const key of keys) {
+      const value = strings[key];
+      if (typeof value === "function") {
+        const message = value();
+        if (typeof message === "string" && message.trim()) {
+          return message;
+        }
+      } else if (typeof value === "string" && value.trim()) {
+        return value;
+      }
+    }
+
+    const isFa = (document.documentElement.lang || "")
+      .toLowerCase()
+      .startsWith("fa");
+    const fallback = {
+      success: isFa
+        ? "\u0627\u0634\u062a\u0631\u0627\u06a9\u200c\u06af\u0630\u0627\u0631\u06cc \u0645\u0648\u0641\u0642 \u0628\u0648\u062f."
+        : "Shared successfully.",
+      error: isFa
+        ? "\u0627\u0634\u062a\u0631\u0627\u06a9\u200c\u06af\u0630\u0627\u0631\u06cc \u0628\u0627 \u0645\u0634\u06a9\u0644 \u0645\u0648\u0627\u062c\u0647 \u0634\u062f."
+        : "Sharing failed.",
     };
 
     return fallback[kind] || fallback.error;
@@ -641,15 +1099,41 @@
     }
   }
 
-  function handleCopySuccess(btn) {
+  async function copyText(text, options = {}) {
+    const allowExecCommand = options.allowExecCommand === true;
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      try {
+        await navigator.clipboard.writeText(text);
+        return { ok: true, mode: "clipboard" };
+      } catch {}
+    }
+
+    if (allowExecCommand && copyWithExecCommand(text)) {
+      return { ok: true, mode: "exec-command" };
+    }
+
+    return {
+      ok: false,
+      mode:
+        navigator.clipboard && navigator.clipboard.writeText
+          ? "clipboard-failed"
+          : "unsupported",
+    };
+  }
+
+  function emitToast(message, options) {
+    if (!message || typeof window.createToast !== "function") {
+      return;
+    }
+    window.createToast(message, options);
+  }
+
+  function showCopySuccessState(btn) {
     const originalIcon = btn.innerHTML;
     btn.innerHTML =
       '<i class="fas fa-check" aria-hidden="true"></i>';
     btn.classList.add("copied");
-
-    if (window.createToast) {
-      window.createToast(resolveCopyToastMessage("success"));
-    }
 
     setTimeout(() => {
       btn.innerHTML = originalIcon;
@@ -657,10 +1141,16 @@
     }, 2000);
   }
 
-  // Copy to Clipboard Logic
-  const copyBtns = document.querySelectorAll(".copy-btn");
-  copyBtns.forEach((btn) => {
-    btn.addEventListener("click", (event) => {
+  function bindCopyButton(btn) {
+    if (!(btn instanceof HTMLButtonElement)) {
+      return;
+    }
+    if (btn.dataset.toastCopyBound === "true") {
+      return;
+    }
+    btn.dataset.toastCopyBound = "true";
+
+    btn.addEventListener("click", async (event) => {
       event.preventDefault();
       event.stopPropagation();
 
@@ -669,33 +1159,99 @@
         console.warn("No data-copy attribute found on .copy-btn");
         return;
       }
+      const subject = textToCopy.includes("@") ? "email" : "link";
 
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard
-          .writeText(textToCopy)
-          .then(() => {
-            handleCopySuccess(btn);
-          })
-          .catch((err) => {
-            console.error("Failed to copy via Clipboard API:", err);
-            if (copyWithExecCommand(textToCopy)) {
-              handleCopySuccess(btn);
-              return;
-            }
-
-            if (window.createToast) {
-              window.createToast(resolveCopyToastMessage("error"));
-            }
-          });
+      const result = await copyText(textToCopy, {
+        allowExecCommand: false,
+      });
+      if (result.ok) {
+        showCopySuccessState(btn);
+        emitToast(resolveCopyToastMessage("success", subject), {
+          id: "copy-success-toast",
+          kind: "success",
+          duration: 1800,
+        });
         return;
       }
 
-      if (copyWithExecCommand(textToCopy)) {
-        handleCopySuccess(btn);
-      } else if (window.createToast) {
-        window.createToast(resolveCopyToastMessage("unsupported"));
-      }
+      const failedKind =
+        result.mode === "unsupported"
+          ? "unsupported"
+          : "error";
+      emitToast(resolveCopyToastMessage(failedKind), {
+        id:
+          failedKind === "unsupported"
+            ? "copy-unsupported-toast"
+            : "copy-error-toast",
+        kind: failedKind === "unsupported" ? "info" : "error",
+        duration: failedKind === "unsupported" ? 3000 : 2600,
+      });
     });
+  }
+
+  function bindShareButton(btn) {
+    if (!(btn instanceof HTMLButtonElement)) {
+      return;
+    }
+    if (btn.dataset.toastShareBound === "true") {
+      return;
+    }
+    btn.dataset.toastShareBound = "true";
+
+    btn.addEventListener("click", async (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      const shareUrl = btn.getAttribute("data-share") || window.location.href;
+      if (!shareUrl) {
+        return;
+      }
+
+      if (typeof navigator.share === "function") {
+        try {
+          await navigator.share({
+            title: document.title,
+            url: shareUrl,
+          });
+          emitToast(resolveShareToastMessage("success"), {
+            id: "share-success-toast",
+            kind: "success",
+            duration: 1800,
+          });
+          return;
+        } catch (err) {
+          if (err && err.name === "AbortError") {
+            return;
+          }
+        }
+      }
+
+      const copied = await copyText(shareUrl, {
+        allowExecCommand: true,
+      });
+      if (copied.ok) {
+        emitToast(resolveCopyToastMessage("success", "link"), {
+          id: "share-copy-toast",
+          kind: "success",
+          duration: 2000,
+        });
+        return;
+      }
+
+      emitToast(resolveShareToastMessage("error"), {
+        id: "share-error-toast",
+        kind: "error",
+        duration: 2800,
+      });
+    });
+  }
+
+  // Copy/share interactions (global + proof cards)
+  document.querySelectorAll(".copy-btn").forEach((btn) => {
+    bindCopyButton(btn);
+  });
+  document.querySelectorAll(".share-btn").forEach((btn) => {
+    bindShareButton(btn);
   });
 
   // ---- Neurodesign Enhancements Initialization ----

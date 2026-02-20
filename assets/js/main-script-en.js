@@ -630,100 +630,21 @@
   });
 
   // ==========================
-  // Toasts (CSS-driven)
+  // Toasts (delegated to unified global engine)
   // ==========================
-  function dismissToast(toast) {
-    if (!toast) {return;}
-    toast.classList.remove("show");
-    on(
-      toast,
-      "transitionend",
-      () => toast.remove(),
-      { once: true }
-    );
-  }
-
-  function createToast(message, options = {}) {
-    const defaults = {
-      duration: 2500,
-      customClass: "",
-      iconClass: "",
-      iconColor: "",
-      position: "bottom",
-      id: "",
-      closeButton: false,
-    };
-    const settings = { ...defaults, ...options };
-
-    if (settings.id) {
-      const existing = document.getElementById(settings.id);
-      if (existing && existing.classList.contains("show")) {return existing;}
+  window.__ruToastFeedback = () => {
+    if (FLAGS().ENABLE_SOUNDS && audioContext) {
+      playSound("toast");
     }
+  };
 
-    document.querySelectorAll(".dynamic-toast").forEach((t) => {
-      if (!settings.id || t.id !== settings.id) {
-        t.classList.remove("show");
-        on(
-          t,
-          "transitionend",
-          () => t.remove(),
-          { once: true }
-        );
-      }
-    });
-
-    const toast = document.createElement("div");
-    toast.className = `dynamic-toast ${settings.customClass}`.trim();
-    toast.role = "status";
-    toast.setAttribute("aria-live", "polite");
-    toast.tabIndex = -1;
-    if (settings.id) {toast.id = settings.id;}
-
-    // CSP-safe positioning (no style attribute mutations)
-    toast.classList.add("toast-fixed");
-    toast.dataset.toastPosition = settings.position === "top" ? "top" : "bottom";
-
-    if (settings.iconClass) {
-      const icon = document.createElement("i");
-      icon.className = settings.iconClass;
-      // CSP-safe icon color: use CSS var via inline? no. We'll map known vars or fallback.
-      if (settings.iconColor) {
-        icon.dataset.iconColor = settings.iconColor;
-      }
-      icon.setAttribute("aria-hidden", "true");
-      toast.appendChild(icon);
+  function showToast(message, optionsOrType = {}) {
+    if (!message || typeof window.createToast !== "function") {return null;}
+    try {
+      return window.createToast(message, optionsOrType);
+    } catch {
+      return null;
     }
-
-    const text = document.createElement("span");
-    text.className = "toast-message";
-    text.textContent = message;
-    toast.appendChild(text);
-
-    if (settings.closeButton) {
-      const closeBtn = document.createElement("button");
-      closeBtn.type = "button";
-      closeBtn.className = "fun-fact-close";
-      closeBtn.setAttribute("aria-label", STRINGS_EN.aria.closeToast);
-      closeBtn.innerHTML =
-        '<i class="fas fa-times" aria-hidden="true"></i>';
-      on(closeBtn, "click", () => dismissToast(toast));
-      toast.appendChild(closeBtn);
-    }
-
-    document.body.appendChild(toast);
-
-    Promise.resolve().then(() => {
-      toast.classList.add("show");
-      if (FLAGS().ENABLE_SOUNDS && audioContext) {
-        playSound("toast");
-      }
-    });
-
-    if (settings.duration > 0) {
-      setTimeout(() => dismissToast(toast), settings.duration);
-    }
-
-    return toast;
   }
 
   // ==========================
@@ -917,14 +838,14 @@
   // ==========================
   // Theme Handling
   // ==========================
-  function applyTheme(theme, showToast = false) {
+  function applyTheme(theme, notifyToast = false) {
     document.body.classList.toggle("dark-mode", theme === "dark");
     document.body.classList.toggle("light-mode", theme === "light");
 
     const toggle = document.getElementById("theme-toggle");
     if (toggle) {toggle.checked = theme === "dark";}
 
-    if (showToast) {
+    if (notifyToast) {
       const parent = toggle?.parentElement;
       if (parent) {createSparkle(parent);}
       vibrate([30]);
@@ -1545,8 +1466,9 @@
     }
 
     if (msg)
-    {createToast(msg, {
+    {showToast(msg, {
       id: "welcome-toast",
+      kind: "info",
       customClass: "welcome-toast",
       iconClass: "fas fa-hand-sparkles",
       iconColor: "var(--highlight-color)",
@@ -1563,8 +1485,9 @@
         throw new Error("clipboard-unsupported");
       }
       await navigator.clipboard.writeText(text);
-      createToast(okMsg, {
+      showToast(okMsg, {
         id: okId,
+        kind: "success",
         iconClass: "fas fa-check-circle",
         iconColor: "var(--highlight-color)",
         duration: 1600,
@@ -1572,8 +1495,9 @@
       vibrate([40]);
     } catch (err) {
       console.error("Clipboard error:", err);
-      createToast(STRINGS_EN.toasts.clipboardUnsupported, {
+      showToast(STRINGS_EN.toasts.clipboardUnsupported, {
         id: errId,
+        kind: "error",
         iconClass: "fas fa-exclamation-triangle",
         iconColor: "red",
         duration: 2800,
@@ -1582,7 +1506,6 @@
   }
 
   window.copyToClipboard = copyToClipboard;
-  window.createToast = createToast;
 
   // ==========================
   // Lazy Images (IO + decoding=async)
@@ -1678,8 +1601,9 @@
       if (navigator.share) {
         try {
           await navigator.share({ title: document.title, url: pageUrl });
-          createToast(STRINGS_EN.toasts.shareOk, {
+          showToast(STRINGS_EN.toasts.shareOk, {
             id: "share-success-toast",
+            kind: "success",
             iconClass: "fas fa-check-circle",
             iconColor: "var(--highlight-color)",
             duration: 1800,
@@ -1688,8 +1612,9 @@
         } catch (error) {
           if (error?.name !== "AbortError") {
             console.error("Share error:", error);
-            createToast(STRINGS_EN.toasts.shareErr, {
+            showToast(STRINGS_EN.toasts.shareErr, {
               id: "share-error-toast",
+              kind: "error",
               iconClass: "fas fa-exclamation-triangle",
               iconColor: "red",
               duration: 2800,
@@ -1925,8 +1850,9 @@
               !announced.has(m.count) &&
               now - lastToastAt > cooldown
             ) {
-              createToast(m.message, {
+              showToast(m.message, {
                 id: `exploration-milestone-${m.count}`,
+                kind: m.isFinal ? "success" : "info",
                 customClass: m.isFinal
                   ? "exploration-toast final-exploration-toast"
                   : "exploration-toast",
@@ -2060,8 +1986,9 @@
 
     const show = () => {
       const fact = FUN_FACTS_EN[(Math.random() * FUN_FACTS_EN.length) | 0];
-      toastRef = createToast(`${STRINGS_EN.funFactsPrefix} ${fact}`, {
+      toastRef = showToast(`${STRINGS_EN.funFactsPrefix} ${fact}`, {
         id: "fun-fact-toast",
+        kind: "info",
         customClass: "fun-fact-toast",
         iconClass: "fas fa-lightbulb",
         iconColor: "var(--primary-color)",
@@ -2188,8 +2115,9 @@
         window.innerHeight + window.scrollY >=
         document.body.offsetHeight - 50;
       if (nearBottom) {
-        createToast(STRINGS_EN.toasts.reachedEnd, {
+        showToast(STRINGS_EN.toasts.reachedEnd, {
           id: "end-of-page-toast",
+          kind: "info",
           customClass: "end-of-page-toast",
           iconClass: "fas fa-flag-checkered",
           iconColor: "var(--highlight-color)",

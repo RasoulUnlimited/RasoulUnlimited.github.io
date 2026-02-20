@@ -801,32 +801,17 @@ button:active,
   color: var(--accent-color) !important;
 }
 
-/* 5. Enhanced Toast (Cortisol Reduction: Clear Feedback) */
-.dynamic-toast {
-  display: flex;
-  align-items: center;
-  gap: var(--space-xs);
-  padding: var(--space-sm) var(--space-md);
-  border-radius: var(--border-radius-md);
-  box-shadow: 0 8px 24px var(--shadow-color-strong);
-  font-weight: 500;
-  min-width: 300px;
-  max-width: 90vw;
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+/* 5. Toast tokens (layout lives in main-style-base.css) */
+.dynamic-toast.toast-kind-success {
+  --toast-accent: #10b981;
 }
 
-.dynamic-toast.success {
-  background-color: rgba(16, 185, 129, 0.9);
-  color: white;
+.dynamic-toast.toast-kind-error {
+  --toast-accent: #ef4444;
 }
-.dynamic-toast.error {
-  background-color: rgba(239, 68, 68, 0.9);
-  color: white;
-}
-.dynamic-toast.info {
-  background-color: rgba(59, 130, 246, 0.9);
-  color: white;
+
+.dynamic-toast.toast-kind-info {
+  --toast-accent: #3b82f6;
 }
 
 /* 6. Smooth Entrance (Endorphin: Lightness) */

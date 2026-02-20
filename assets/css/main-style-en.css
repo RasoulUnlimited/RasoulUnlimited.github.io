@@ -2395,48 +2395,52 @@ section h2::after {
     max-width: calc(100% - 30px);
     white-space: normal;
   }
-  .dynamic-toast i { font-size: 1em; }
+  .dynamic-toast i,
+  .dynamic-toast .toast-icon { font-size: 1em; }
 }
 
 .theme-toast {
-  border-right: 4px solid var(--highlight-color);
+  --toast-accent: var(--highlight-color);
 }
 
 .fun-fact-toast {
+  --toast-accent: var(--primary-color);
   background-color: var(--highlight-color);
   color: var(--secondary-color);
-  border-right: 6px solid var(--primary-color);
-  will-change: background-color, color, border-right;
+  will-change: background-color, color;
 }
 
 .fun-fact-toast i {
   color: var(--primary-color);
 }
 
-.dynamic-toast .toast-message {
-  flex-grow: 1;
+.dynamic-toast {
+  direction: ltr;
+  text-align: left;
 }
 
-.dynamic-toast i {
+.dynamic-toast .toast-message {
+  text-wrap: pretty;
+}
+
+.dynamic-toast i,
+.dynamic-toast .toast-icon {
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
   margin-right: var(--space-sm);
+  margin-left: 0;
   font-size: 1.2em;
 }
 
 .welcome-toast {
-  background-color: var(--toast-bg);
-  color: var(--toast-color);
-  border-left: 6px solid var(--highlight-color);
+  --toast-accent: var(--highlight-color);
 }
 .welcome-toast i {
   color: var(--highlight-color);
 }
 
 .end-of-page-toast {
-  background-color: var(--toast-bg);
-  color: var(--toast-color);
-  border-left: 6px solid var(--highlight-color);
+  --toast-accent: var(--highlight-color);
 }
 .end-of-page-toast i {
   color: var(--highlight-color);
@@ -2444,9 +2448,9 @@ section h2::after {
 
 .email-copy-toast,
 .social-link-copy-toast {
+  --toast-accent: var(--highlight-color);
   background-color: var(--accent-color);
   color: var(--toast-color);
-  border-left: 6px solid var(--highlight-color);
 }
 .email-copy-toast i,
 .social-link-copy-toast i {
@@ -2454,30 +2458,34 @@ section h2::after {
 }
 
 .exploration-toast {
-  background-color: var(--toast-bg);
-  color: var(--toast-color);
-  border-left: 6px solid var(--accent-color);
+  --toast-accent: var(--accent-color);
 }
 .exploration-toast i {
   color: var(--accent-color);
 }
 
 .final-exploration-toast {
+  --toast-accent: var(--primary-color);
   background: linear-gradient(
     135deg,
     var(--highlight-color) 0%,
     var(--accent-color) 100%
   );
   color: var(--secondary-color);
-  border-left: 6px solid var(--primary-color);
-  animation: celebrationPulse 2s infinite ease-in-out;
+  isolation: isolate;
+  overflow: hidden;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 20px var(--highlight-color);
-  transform: translateX(-50%) translateY(150%) scale(0.9);
-  will-change: transform, box-shadow, background;
+  will-change: box-shadow, background;
 }
 
-.final-exploration-toast.show {
-  transform: translateX(-50%) translateY(0) scale(1);
+.final-exploration-toast::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: 0 0 0 0 rgba(var(--highlight-rgb), 0.35);
+  animation: celebrationPulse 2s infinite ease-in-out;
 }
 
 .final-exploration-toast i {
@@ -2488,19 +2496,13 @@ section h2::after {
 
 @keyframes celebrationPulse {
   0% {
-    transform: translateX(-50%) scale(1);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5),
-      0 0 20px var(--highlight-color);
+    box-shadow: 0 0 0 0 rgba(var(--highlight-rgb), 0.35);
   }
-  50% {
-    transform: translateX(-50%) scale(1.03);
-    box-shadow: 0 12px 50px rgba(0, 0, 0, 0.6),
-      0 0 30px var(--highlight-color);
+  70% {
+    box-shadow: 0 0 0 14px rgba(var(--highlight-rgb), 0);
   }
   100% {
-    transform: translateX(-50%) scale(1);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5),
-      0 0 20px var(--highlight-color);
+    box-shadow: 0 0 0 0 rgba(var(--highlight-rgb), 0);
   }
 }
 
@@ -2612,6 +2614,7 @@ summary:active,
   #explore-hint i,
   .sparkle-effect,
   .dynamic-toast i,
+  .toast-close,
   .fun-fact-close,
   .final-exploration-toast,
   .final-exploration-toast i,
@@ -2621,7 +2624,6 @@ summary:active,
     transition: none !important;
     animation: none !important;
     transform: none !important;
-    opacity: 1 !important;
     filter: none !important;
     box-shadow: none !important;
     outline: none !important;
