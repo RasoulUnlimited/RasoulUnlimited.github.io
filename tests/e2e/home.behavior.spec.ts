@@ -138,6 +138,85 @@ test.describe("FA Home Behavior", () => {
     await expect(page.locator("#about")).toBeVisible();
   });
 
+  test("falls back to non-minified script when a deferred minified script fails", async ({
+    page,
+  }) => {
+    await page.route("**/assets/js/faq-search.min.js", (route) => route.abort());
+
+    const pageErrors: string[] = [];
+    page.on("pageerror", (error) => {
+      pageErrors.push(String(error));
+    });
+
+    await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });
+
+    await expect
+      .poll(
+        async () =>
+          page.evaluate(() => {
+            const hasFallbackClass = document.documentElement.classList.contains(
+              "asset-fallback-active"
+            );
+            const fallbackScript = Array.from(document.scripts).find((script) =>
+              /\/assets\/js\/faq-search\.js(?:$|\?)/.test(script.src)
+            );
+            return {
+              hasFallbackClass,
+              hasFallbackScript: !!fallbackScript,
+              fallbackFrom: fallbackScript?.getAttribute("data-asset-fallback-from") || "",
+            };
+          }),
+        { timeout: 7000 }
+      )
+      .toEqual({
+        hasFallbackClass: true,
+        hasFallbackScript: true,
+        fallbackFrom: expect.stringMatching(/\/assets\/js\/faq-search\.min\.js/),
+      });
+    expect(pageErrors).toEqual([]);
+  });
+
+  test("network status state tracks offline and online transitions", async ({ page }) => {
+    await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });
+
+    const context = page.context();
+    await context.setOffline(true);
+
+    await expect
+      .poll(
+        async () =>
+          page.evaluate(() => ({
+            htmlOffline: document.documentElement.classList.contains("offline"),
+            bodyOffline: document.body.classList.contains("offline"),
+            status: document.documentElement.getAttribute("data-network-status") || "",
+          })),
+        { timeout: 5000 }
+      )
+      .toEqual({
+        htmlOffline: true,
+        bodyOffline: true,
+        status: "offline",
+      });
+
+    await context.setOffline(false);
+
+    await expect
+      .poll(
+        async () =>
+          page.evaluate(() => ({
+            htmlOnline: document.documentElement.classList.contains("online"),
+            bodyOnline: document.body.classList.contains("online"),
+            status: document.documentElement.getAttribute("data-network-status") || "",
+          })),
+        { timeout: 5000 }
+      )
+      .toEqual({
+        htmlOnline: true,
+        bodyOnline: true,
+        status: "online",
+      });
+  });
+
   test("mobile navigation toggles menu state and aria attributes", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });

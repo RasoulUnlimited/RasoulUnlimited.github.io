@@ -7,18 +7,28 @@
   const INCLUDE_FETCH_TIMEOUT_MS = 7000;
   const INCLUDE_FETCH_ATTEMPTS = 3;
   const INCLUDE_RETRY_BASE_MS = 350;
-
-  const docLang = (
-    document.documentElement.getAttribute("lang") ||
-    navigator.language ||
-    ""
-  ).toLowerCase();
-  const isFa = docLang.indexOf("fa") === 0;
+  const INCLUDE_AUTORETRY_BASE_MS = 1200;
+  const INCLUDE_AUTORETRY_MAX_ATTEMPTS = 4;
+  const INCLUDE_RETRY_JITTER_MS = 220;
 
   const TRUSTED_SCRIPT_PATH_PREFIXES = ["/assets/js/", "/includes/"];
+  const includeInflightRequests = new Map();
+  const includeRetryState = new WeakMap();
 
   function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  function dispatchIncludeEvent(name, detail) {
+    try {
+      window.dispatchEvent(
+        new CustomEvent(name, {
+          detail: detail || {},
+        })
+      );
+    } catch {
+      // Ignore event dispatch failures in old environments.
+    }
   }
 
   function getStorage() {
@@ -217,6 +227,71 @@
     return doc;
   }
 
+  function isOnline() {
+    return navigator.onLine !== false;
+  }
+
+  function clearScheduledIncludeRetry(el) {
+    const state = includeRetryState.get(el);
+    if (!state) {
+      return;
+    }
+
+    if (state.timerId) {
+      clearTimeout(state.timerId);
+    }
+
+    includeRetryState.delete(el);
+    delete el.dataset.includeRetryAttempt;
+  }
+
+  function scheduleIncludeRetry(el, file) {
+    if (!isOnline()) {
+      return;
+    }
+
+    const state = includeRetryState.get(el) || { attempts: 0, timerId: null };
+    if (state.timerId) {
+      return;
+    }
+
+    if (state.attempts >= INCLUDE_AUTORETRY_MAX_ATTEMPTS) {
+      return;
+    }
+
+    state.attempts += 1;
+    el.dataset.includeRetryAttempt = String(state.attempts);
+
+    const delay =
+      INCLUDE_AUTORETRY_BASE_MS * 2 ** (state.attempts - 1) +
+      Math.floor(Math.random() * INCLUDE_RETRY_JITTER_MS);
+
+    state.timerId = setTimeout(() => {
+      state.timerId = null;
+
+      if (!document.documentElement.contains(el)) {
+        clearScheduledIncludeRetry(el);
+        return;
+      }
+
+      if (el.dataset.includeLoaded === "true" || el.dataset.includePending === "true") {
+        clearScheduledIncludeRetry(el);
+        return;
+      }
+
+      const source = el.getAttribute("data-include-html") || file;
+      if (!source) {
+        clearScheduledIncludeRetry(el);
+        return;
+      }
+
+      el.setAttribute("data-include-html", source);
+      includeHTML();
+    }, delay);
+
+    includeRetryState.set(el, state);
+  }
+
   function applyIncludedHtml(el, file, html, stale) {
     const doc = parseAndSanitizeHtml(file, html);
     const cspSourceScript = document.querySelector("script[data-csp-nonce]");
@@ -272,21 +347,56 @@
     }
 
     el.removeAttribute("data-include-failed");
+    el.removeAttribute("data-include-retryable");
+    el.setAttribute("data-include-source", file);
   }
 
-  function renderIncludeFallback(el) {
+  function renderIncludeFallback(el, file, retryable) {
+    const canRetry = retryable !== false;
     const fallback = document.createElement("div");
     fallback.className = "include-fallback";
     fallback.setAttribute("role", "status");
     fallback.setAttribute("aria-live", "polite");
-    fallback.textContent = isFa
-      ? "This section is temporarily unavailable. Please refresh when your connection is stable."
-      : "This section is temporarily unavailable. Please refresh when your connection is stable.";
+    fallback.textContent =
+      "This section is temporarily unavailable. Please refresh when your connection is stable.";
+
+    if (canRetry) {
+      const retryWrap = document.createElement("div");
+      retryWrap.className = "include-fallback-actions";
+
+      const retryButton = document.createElement("button");
+      retryButton.type = "button";
+      retryButton.className = "include-retry";
+      retryButton.textContent = "Retry now";
+      retryButton.addEventListener("click", () => {
+        clearScheduledIncludeRetry(el);
+        if (el.dataset.includePending === "true") {
+          return;
+        }
+
+        if (file) {
+          el.setAttribute("data-include-html", file);
+        }
+
+        includeHTML();
+      });
+
+      retryWrap.appendChild(retryButton);
+      fallback.appendChild(retryWrap);
+    }
 
     el.innerHTML = "";
     el.appendChild(fallback);
     el.setAttribute("data-include-failed", "true");
+    if (canRetry) {
+      el.setAttribute("data-include-retryable", "true");
+    } else {
+      el.removeAttribute("data-include-retryable");
+    }
     el.removeAttribute("data-include-stale");
+    if (file) {
+      el.setAttribute("data-include-source", file);
+    }
   }
 
   async function fetchWithTimeout(file) {
@@ -338,17 +448,30 @@
   }
 
   async function loadIncludeHtml(file) {
-    try {
-      const html = await fetchIncludeHtml(file);
-      writeCachedInclude(file, html);
-      return { html, stale: false };
-    } catch (networkErr) {
-      const cachedHtml = readCachedInclude(file);
-      if (cachedHtml) {
-        console.warn("Using stale include cache for", file, networkErr);
-        return { html: cachedHtml, stale: true };
+    if (includeInflightRequests.has(file)) {
+      return includeInflightRequests.get(file);
+    }
+
+    const pending = (async () => {
+      try {
+        const html = await fetchIncludeHtml(file);
+        return { html, stale: false };
+      } catch (networkErr) {
+        const cachedHtml = readCachedInclude(file);
+        if (cachedHtml) {
+          console.warn("Using stale include cache for", file, networkErr);
+          return { html: cachedHtml, stale: true };
+        }
+        throw networkErr;
       }
-      throw networkErr;
+    })();
+
+    includeInflightRequests.set(file, pending);
+
+    try {
+      return await pending;
+    } finally {
+      includeInflightRequests.delete(file);
     }
   }
 
@@ -383,14 +506,27 @@
         continue;
       }
 
+      let fileUrl = null;
       try {
-        const fileUrl = new URL(file, ORIGIN);
+        fileUrl = new URL(file, ORIGIN);
         if (fileUrl.origin !== ORIGIN) {
           console.error("Blocked cross-origin include:", file);
+          renderIncludeFallback(el, file, false);
+          el.removeAttribute("data-include-html");
+          dispatchIncludeEvent("include:failed", {
+            file,
+            reason: "cross-origin-blocked",
+          });
           continue;
         }
       } catch {
         console.error("Invalid include URL:", file);
+        renderIncludeFallback(el, file, false);
+        el.removeAttribute("data-include-html");
+        dispatchIncludeEvent("include:failed", {
+          file,
+          reason: "invalid-url",
+        });
         continue;
       }
 
@@ -399,12 +535,40 @@
       const fetchPromise = (async () => {
         try {
           const { html, stale } = await loadIncludeHtml(file);
-          applyIncludedHtml(el, file, html, stale);
+          try {
+            applyIncludedHtml(el, file, html, stale);
+          } catch (applyErr) {
+            if (!stale) {
+              const cachedHtml = readCachedInclude(file);
+              if (cachedHtml && cachedHtml !== html) {
+                applyIncludedHtml(el, file, cachedHtml, true);
+              } else {
+                throw applyErr;
+              }
+            } else {
+              throw applyErr;
+            }
+          }
+
+          if (!stale) {
+            writeCachedInclude(file, html);
+          }
+
           el.dataset.includeLoaded = "true";
           el.removeAttribute("data-include-html");
+          clearScheduledIncludeRetry(el);
+          dispatchIncludeEvent("include:loaded", {
+            file: fileUrl ? fileUrl.pathname : file,
+            stale,
+          });
         } catch (err) {
           console.error("Include error for", file, err);
-          renderIncludeFallback(el);
+          renderIncludeFallback(el, file, true);
+          scheduleIncludeRetry(el, file);
+          dispatchIncludeEvent("include:failed", {
+            file: fileUrl ? fileUrl.pathname : file,
+            reason: String(err && err.message ? err.message : err),
+          });
         } finally {
           delete el.dataset.includePending;
         }
@@ -485,6 +649,22 @@
   document.addEventListener("DOMContentLoaded", bootIncludes);
 
   window.addEventListener("online", () => {
+    document
+      .querySelectorAll('[data-include-stale="true"][data-include-source]')
+      .forEach((el) => {
+        if (el.dataset.includePending === "true") {
+          return;
+        }
+
+        const source = el.getAttribute("data-include-source");
+        if (!source) {
+          return;
+        }
+
+        el.setAttribute("data-include-html", source);
+        delete el.dataset.includeLoaded;
+      });
+
     if (document.querySelector("[data-include-html]")) {
       includeHTML();
     }

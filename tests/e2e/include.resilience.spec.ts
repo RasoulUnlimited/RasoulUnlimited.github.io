@@ -23,6 +23,9 @@ test.describe("Include Resilience", () => {
       .locator('[data-include-stale="true"]')
       .count();
     expect(staleIncludeCount).toBeGreaterThanOrEqual(1);
+
+    const staleInclude = page.locator('[data-include-stale="true"]').first();
+    await expect(staleInclude).toHaveAttribute("data-include-source", /includes\/.+\.html$/);
   });
 
   test("shows a visible fallback when include fetch fails without cache", async ({
@@ -37,11 +40,17 @@ test.describe("Include Resilience", () => {
     const fallback = page.locator(".include-fallback").first();
     await expect(fallback).toBeVisible();
     await expect(fallback).toContainText("temporarily unavailable");
+    await expect(fallback.locator(".include-retry")).toBeVisible();
 
     const failedIncludeCount = await page
       .locator('[data-include-failed="true"]')
       .count();
     expect(failedIncludeCount).toBeGreaterThanOrEqual(1);
+
+    const retryableCount = await page
+      .locator('[data-include-retryable="true"]')
+      .count();
+    expect(retryableCount).toBeGreaterThanOrEqual(1);
 
     await context.close();
   });

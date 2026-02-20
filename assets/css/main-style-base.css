@@ -402,6 +402,48 @@ body.offline .offline-info {
   display: block;
 }
 
+/* Include loader resilience UI */
+
+.include-fallback {
+  margin: 1rem 0;
+  padding: 0.9rem 1rem;
+  border-radius: 10px;
+  border: 1px solid var(--border-color, #d6d9df);
+  background: var(--container-bg, #ffffff);
+  color: var(--text-color, #1f2937);
+  line-height: 1.6;
+}
+
+.include-fallback-actions {
+  margin-top: 0.75rem;
+}
+
+.include-retry {
+  appearance: none;
+  border: 1px solid var(--primary-color, #2563eb);
+  background: transparent;
+  color: var(--primary-color, #2563eb);
+  border-radius: 999px;
+  padding: 0.35rem 0.85rem;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color var(--transition-duration-short, 120ms)
+      var(--transition-easing-standard, ease),
+    color var(--transition-duration-short, 120ms)
+      var(--transition-easing-standard, ease),
+    border-color var(--transition-duration-short, 120ms)
+      var(--transition-easing-standard, ease);
+}
+
+.include-retry:hover,
+.include-retry:focus-visible {
+  background-color: var(--primary-color, #2563eb);
+  color: var(--cta-text-color, #ffffff);
+}
+
 /* --- Disable AOS hiding when animations are off --- */
 
 .aos-disabled [data-aos] {

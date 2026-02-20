@@ -22,6 +22,11 @@
   }
 
   const storage = getSafeStorage();
+  const ASSET_FALLBACK_CLASS = "asset-fallback-active";
+  const ASSET_FALLBACK_FAILED_CLASS = "asset-fallback-failed";
+  const NETWORK_EVENT_NAME = "ru:network-status";
+  const assetFallbackAttempts = new Set();
+  let lastNetworkToastAt = 0;
 
   // Reuse a single MediaQueryList if available
   const darkMediaQuery = window.matchMedia
@@ -123,6 +128,244 @@
   if (typeof window.createToast !== "function") {
     window.createToast = createToast;
   }
+
+  function getNetworkMessage(online) {
+    const strings = window.langStrings || {};
+    const keyOrder = online
+      ? ["backOnline", "online", "connectionRestored"]
+      : ["offline", "connectionLost"];
+
+    for (const key of keyOrder) {
+      const value = strings[key];
+      if (typeof value === "function") {
+        const result = value();
+        if (typeof result === "string" && result.trim()) {
+          return result;
+        }
+      } else if (typeof value === "string" && value.trim()) {
+        return value;
+      }
+    }
+
+    return online
+      ? "Connection restored."
+      : "You are offline. Some features may be unavailable.";
+  }
+
+  function emitNetworkStatusEvent(online) {
+    const detail = { online, timestamp: Date.now() };
+    try {
+      window.dispatchEvent(
+        new CustomEvent(NETWORK_EVENT_NAME, {
+          detail,
+        })
+      );
+    } catch (err) {
+      // CustomEvent fallback for old browsers.
+      try {
+        const event = document.createEvent("CustomEvent");
+        event.initCustomEvent(NETWORK_EVENT_NAME, false, false, detail);
+        window.dispatchEvent(event);
+      } catch {}
+    }
+  }
+
+  function updateNetworkState(online, notify) {
+    const isOnline = !!online;
+
+    document.documentElement.classList.toggle("online", isOnline);
+    document.documentElement.classList.toggle("offline", !isOnline);
+    document.documentElement.setAttribute("data-network-status", isOnline ? "online" : "offline");
+
+    if (document.body) {
+      document.body.classList.toggle("online", isOnline);
+      document.body.classList.toggle("offline", !isOnline);
+    }
+
+    emitNetworkStatusEvent(isOnline);
+
+    if (!notify || typeof window.createToast !== "function") {
+      return;
+    }
+
+    const now = Date.now();
+    if (now - lastNetworkToastAt < 1200) {
+      return;
+    }
+    lastNetworkToastAt = now;
+    window.createToast(getNetworkMessage(isOnline), isOnline ? "success" : "info");
+  }
+
+  function installNetworkResilience() {
+    const initialOnline = navigator.onLine !== false;
+    updateNetworkState(initialOnline, false);
+    window.addEventListener("online", () => updateNetworkState(true, true));
+    window.addEventListener("offline", () => updateNetworkState(false, true));
+  }
+
+  function toSameOriginUrl(rawUrl) {
+    if (!rawUrl) {
+      return null;
+    }
+
+    try {
+      const parsed = new URL(rawUrl, window.location.href);
+      if (parsed.origin !== window.location.origin) {
+        return null;
+      }
+      return parsed;
+    } catch {
+      return null;
+    }
+  }
+
+  function resolveAssetFallback(rawUrl) {
+    const parsed = toSameOriginUrl(rawUrl);
+    if (!parsed) {
+      return null;
+    }
+
+    const next = new URL(parsed.toString());
+    const path = next.pathname;
+
+    if (/\.min\.js$/i.test(path)) {
+      next.pathname = path.replace(/\.min\.js$/i, ".js");
+      return next.toString();
+    }
+
+    if (/\.min\.css$/i.test(path)) {
+      next.pathname = path.replace(/\.min\.css$/i, ".css");
+      return next.toString();
+    }
+
+    return null;
+  }
+
+  function markAssetFallbackAttempt(target, originalUrl, fallbackUrl) {
+    const key = `${originalUrl}::${fallbackUrl}`;
+    if (assetFallbackAttempts.has(key)) {
+      return false;
+    }
+
+    assetFallbackAttempts.add(key);
+    target.setAttribute("data-asset-failed", "true");
+    document.documentElement.classList.add(ASSET_FALLBACK_CLASS);
+    const currentCount = Number(document.documentElement.dataset.assetFallbackCount || "0");
+    document.documentElement.dataset.assetFallbackCount = String(currentCount + 1);
+    return true;
+  }
+
+  function injectScriptFallback(target, fallbackUrl) {
+    const script = document.createElement("script");
+    script.src = fallbackUrl;
+    script.defer = !!target.defer;
+    script.async = !!target.async;
+    if (target.type) {
+      script.type = target.type;
+    }
+    if (target.crossOrigin) {
+      script.crossOrigin = target.crossOrigin;
+    }
+    if (target.referrerPolicy) {
+      script.referrerPolicy = target.referrerPolicy;
+    }
+    if (target.nonce) {
+      script.nonce = target.nonce;
+    }
+    script.setAttribute("data-asset-fallback", "true");
+    script.setAttribute("data-asset-fallback-from", target.src || "");
+    script.addEventListener(
+      "error",
+      () => {
+        document.documentElement.classList.add(ASSET_FALLBACK_FAILED_CLASS);
+      },
+      { once: true }
+    );
+    target.insertAdjacentElement("afterend", script);
+  }
+
+  function injectStylesheetFallback(target, fallbackUrl) {
+    if ((target.rel || "").toLowerCase() !== "stylesheet") {
+      return;
+    }
+
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = fallbackUrl;
+    if (target.media) {
+      link.media = target.media;
+    }
+    if (target.crossOrigin) {
+      link.crossOrigin = target.crossOrigin;
+    }
+    if (target.referrerPolicy) {
+      link.referrerPolicy = target.referrerPolicy;
+    }
+    if (target.nonce) {
+      link.nonce = target.nonce;
+    }
+    link.setAttribute("data-asset-fallback", "true");
+    link.setAttribute("data-asset-fallback-from", target.href || "");
+    link.addEventListener(
+      "error",
+      () => {
+        document.documentElement.classList.add(ASSET_FALLBACK_FAILED_CLASS);
+      },
+      { once: true }
+    );
+    target.insertAdjacentElement("afterend", link);
+  }
+
+  function installAssetFallbackResilience() {
+    window.addEventListener(
+      "error",
+      (event) => {
+        const target = event.target;
+        if (!target || target === window) {
+          return;
+        }
+
+        if (
+          typeof HTMLScriptElement !== "undefined" &&
+          target instanceof HTMLScriptElement
+        ) {
+          const originalUrl = target.src || "";
+          const fallbackUrl = resolveAssetFallback(originalUrl);
+          if (!fallbackUrl) {
+            return;
+          }
+
+          if (!markAssetFallbackAttempt(target, originalUrl, fallbackUrl)) {
+            return;
+          }
+
+          injectScriptFallback(target, fallbackUrl);
+          return;
+        }
+
+        if (
+          typeof HTMLLinkElement !== "undefined" &&
+          target instanceof HTMLLinkElement
+        ) {
+          const originalUrl = target.href || "";
+          const fallbackUrl = resolveAssetFallback(originalUrl);
+          if (!fallbackUrl) {
+            return;
+          }
+
+          if (!markAssetFallbackAttempt(target, originalUrl, fallbackUrl)) {
+            return;
+          }
+
+          injectStylesheetFallback(target, fallbackUrl);
+        }
+      },
+      true
+    );
+  }
+
+  installNetworkResilience();
+  installAssetFallbackResilience();
 
   /**
    * Apply theme and sync toggle + a11y attributes.
@@ -374,6 +617,46 @@
     return fallback[kind] || fallback.error;
   }
 
+  function copyWithExecCommand(text) {
+    if (!document.body) {
+      return false;
+    }
+
+    const probe = document.createElement("textarea");
+    probe.value = text;
+    probe.setAttribute("readonly", "");
+    probe.setAttribute("aria-hidden", "true");
+    probe.style.position = "absolute";
+    probe.style.left = "-9999px";
+    probe.style.top = "0";
+    document.body.appendChild(probe);
+    probe.select();
+
+    try {
+      return !!document.execCommand("copy");
+    } catch {
+      return false;
+    } finally {
+      probe.remove();
+    }
+  }
+
+  function handleCopySuccess(btn) {
+    const originalIcon = btn.innerHTML;
+    btn.innerHTML =
+      '<i class="fas fa-check" aria-hidden="true"></i>';
+    btn.classList.add("copied");
+
+    if (window.createToast) {
+      window.createToast(resolveCopyToastMessage("success"));
+    }
+
+    setTimeout(() => {
+      btn.innerHTML = originalIcon;
+      btn.classList.remove("copied");
+    }, 2000);
+  }
+
   // Copy to Clipboard Logic
   const copyBtns = document.querySelectorAll(".copy-btn");
   copyBtns.forEach((btn) => {
@@ -387,37 +670,31 @@
         return;
       }
 
-      if (!navigator.clipboard || !navigator.clipboard.writeText) {
-        console.warn("Clipboard API not available");
-        if (window.createToast) {
-          window.createToast(resolveCopyToastMessage("unsupported"));
-        }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard
+          .writeText(textToCopy)
+          .then(() => {
+            handleCopySuccess(btn);
+          })
+          .catch((err) => {
+            console.error("Failed to copy via Clipboard API:", err);
+            if (copyWithExecCommand(textToCopy)) {
+              handleCopySuccess(btn);
+              return;
+            }
+
+            if (window.createToast) {
+              window.createToast(resolveCopyToastMessage("error"));
+            }
+          });
         return;
       }
 
-      navigator.clipboard
-        .writeText(textToCopy)
-        .then(() => {
-          const originalIcon = btn.innerHTML;
-          btn.innerHTML =
-            '<i class="fas fa-check" aria-hidden="true"></i>';
-          btn.classList.add("copied");
-
-          if (window.createToast) {
-            window.createToast(resolveCopyToastMessage("success"));
-          }
-
-          setTimeout(() => {
-            btn.innerHTML = originalIcon;
-            btn.classList.remove("copied");
-          }, 2000);
-        })
-        .catch((err) => {
-          console.error("Failed to copy: ", err);
-          if (window.createToast) {
-            window.createToast(resolveCopyToastMessage("error"));
-          }
-        });
+      if (copyWithExecCommand(textToCopy)) {
+        handleCopySuccess(btn);
+      } else if (window.createToast) {
+        window.createToast(resolveCopyToastMessage("unsupported"));
+      }
     });
   });
 
@@ -427,7 +704,12 @@
 
   // 2. Ripple Effect for Buttons
   document.addEventListener("click", function (e) {
-    const target = e.target.closest(".btn, button, .cta-button, .hero-btn");
+    const origin = e.target;
+    if (!(origin instanceof Element)) {
+      return;
+    }
+
+    const target = origin.closest(".btn, button, .cta-button, .hero-btn");
     if (target) {
       const rect = target.getBoundingClientRect();
       const x = e.clientX - rect.left;
