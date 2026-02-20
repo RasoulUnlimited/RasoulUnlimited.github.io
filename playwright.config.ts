@@ -1,6 +1,6 @@
+import { defineConfig } from "@playwright/test";
 import fs from "node:fs";
 import os from "node:os";
-import { defineConfig } from "@playwright/test";
 
 const port = Number(process.env.PW_PORT || 8080);
 const baseURL = process.env.PW_BASE_URL || `http://127.0.0.1:${port}`;
