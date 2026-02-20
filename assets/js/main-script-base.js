@@ -28,7 +28,38 @@
     ? window.matchMedia("(prefers-color-scheme: dark)")
     : null;
   const prefersDark = !!(darkMediaQuery && darkMediaQuery.matches);
-  const savedTheme = storage?.getItem("theme") || null;
+  const THEME_STORAGE_KEY = "theme";
+  const LEGACY_THEME_STORAGE_KEY = "app:theme";
+
+  function isValidTheme(value) {
+    return value === "dark" || value === "light";
+  }
+
+  function readStoredTheme() {
+    if (!storage) {return null;}
+
+    const storedTheme = storage.getItem(THEME_STORAGE_KEY);
+    if (isValidTheme(storedTheme)) {
+      return storedTheme;
+    }
+
+    const legacyTheme = storage.getItem(LEGACY_THEME_STORAGE_KEY);
+    if (!isValidTheme(legacyTheme)) {
+      return null;
+    }
+
+    // One-time migration from legacy key to canonical key.
+    try {
+      storage.setItem(THEME_STORAGE_KEY, legacyTheme);
+      storage.removeItem(LEGACY_THEME_STORAGE_KEY);
+    } catch (err) {
+      // Ignore storage failures in restricted environments.
+    }
+
+    return legacyTheme;
+  }
+
+  const savedTheme = readStoredTheme();
 
   // Motion preference (for smooth scroll, etc.)
   const reduceMotionQuery = window.matchMedia
@@ -135,7 +166,7 @@
   if (darkMediaQuery) {
     const handleThemeSystemChange = function (e) {
       // If user later sets a theme, this check prevents overriding it
-      if (!storage?.getItem("theme")) {
+      if (!readStoredTheme()) {
         applyTheme(e.matches ? "dark" : "light");
       }
     };
@@ -173,7 +204,7 @@
       const newTheme = themeToggleInput.checked ? "dark" : "light";
       applyTheme(newTheme, true);
       try {
-        storage?.setItem("theme", newTheme);
+        storage?.setItem(THEME_STORAGE_KEY, newTheme);
       } catch (err) {
         // Ignore storage failures (e.g., private mode)
       }
@@ -187,7 +218,7 @@
         const newTheme = themeToggleInput.checked ? "dark" : "light";
         applyTheme(newTheme, true);
         try {
-          storage?.setItem("theme", newTheme);
+          storage?.setItem(THEME_STORAGE_KEY, newTheme);
         } catch (err) {}
       }
     });

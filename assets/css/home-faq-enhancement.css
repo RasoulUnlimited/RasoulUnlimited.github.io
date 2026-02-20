@@ -728,7 +728,7 @@
    ========================================================= */
 
 @media (prefers-color-scheme: dark) {
-  body:not(.light-mode):not(.dark-mode) #faq {
+  html:not([data-theme]) #faq {
     --faq-bg-gradient: linear-gradient(145deg, #1e293b, #0f172a);
     --faq-item-bg: #1e293b;
     --faq-item-border: #334155;

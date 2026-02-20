@@ -508,28 +508,28 @@
    ========================================================= */
 
 @media (prefers-color-scheme: dark) {
-  #connect .social-link-card.github,
-  #connect .social-link-card.twitter,
-  #connect .social-link-card.medium,
-  #connect .social-link-card.devto {
+  html:not([data-theme]) #connect .social-link-card.github,
+  html:not([data-theme]) #connect .social-link-card.twitter,
+  html:not([data-theme]) #connect .social-link-card.medium,
+  html:not([data-theme]) #connect .social-link-card.devto {
     --brand-color: #ffffff;
   }
 
-  #connect .social-link-card {
+  html:not([data-theme]) #connect .social-link-card {
     background: rgba(255, 255, 255, 0.02);
     border-color: rgba(255, 255, 255, 0.08);
   }
 
-  #connect .social-link-card:hover {
+  html:not([data-theme]) #connect .social-link-card:hover {
     background: rgba(255, 255, 255, 0.04);
   }
 
-  #connect .connect-info-block {
+  html:not([data-theme]) #connect .connect-info-block {
     border-color: rgba(255, 255, 255, 0.08);
     box-shadow: 0 10px 40px -20px rgba(0, 0, 0, 0.8);
   }
 
-  #connect .contact-card-box {
+  html:not([data-theme]) #connect .contact-card-box {
     background: rgba(255, 255, 255, 0.02);
   }
 }
