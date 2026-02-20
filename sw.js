@@ -1,84 +1,58 @@
-/* Service Worker Cache Strategy with Dynamic Versioning
-   - Update ASSET_VERSION when pushing significant changes to ensure old caches are cleared
+/*
+  Service worker focused on resiliency:
+  - Network-first navigation with timeout and offline fallback
+  - Stale-while-revalidate for same-origin static assets
+  - Runtime cache size control to avoid unbounded growth
 */
-const ASSET_VERSION = "2025-11-20-v4"; // Bumped to invalidate old caches
 
-// Separate caches: precache vs runtime
-const PRECACHE_NAME = `ru-security-precache-${ASSET_VERSION}`;
-const RUNTIME_NAME = `ru-security-runtime-${ASSET_VERSION}`;
+const SW_VERSION = "2026-02-20-v1";
+const CACHE_PREFIX = "ru-site";
+const PRECACHE_NAME = `${CACHE_PREFIX}-precache-${SW_VERSION}`;
+const RUNTIME_NAME = `${CACHE_PREFIX}-runtime-${SW_VERSION}`;
 
-// Asset endpoints to precache (same-origin)
-const URLS = [
+const OFFLINE_URL = "/offline.html";
+const FALLBACK_IMAGE_URL = "/assets/images/RasoulUnlimited.webp";
+
+const NAVIGATION_TIMEOUT_MS = 7000;
+const ASSET_TIMEOUT_MS = 12000;
+const MAX_RUNTIME_ENTRIES = 220;
+
+const PRECACHE_URLS = [
   "/",
+  "/index.html",
+  "/en/index.html",
   "/security.html",
   "/en/security.html",
-  "/assets/js/security-page.min.js",
+  OFFLINE_URL,
+  "/includes/header-fa.html",
+  "/includes/header-en.html",
+  "/includes/footer.html",
+  "/assets/js/include.min.js",
+  "/assets/js/performance-helpers.min.js",
   "/assets/js/main-script-base.min.js",
   "/assets/js/main-script-fa.min.js",
   "/assets/js/main-script-en.min.js",
   "/assets/js/theme-toggle.min.js",
+  "/assets/js/security-page.min.js",
   "/assets/css/design-system.min.css",
   "/assets/css/main-style-fa.min.css",
   "/assets/css/main-style-en.min.css",
   "/assets/vendor/aos/aos.min.css",
   "/assets/vendor/aos/aos.min.js",
-  "/assets/images/RasoulUnlimited.webp",
+  FALLBACK_IMAGE_URL,
   "/assets/data/security-timeline.json",
-  "/.well-known/security.txt"
+  "/.well-known/security.txt",
 ];
 
-// Simple offline HTML fallback (inline)
-const OFFLINE_HTML = `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Offline</title>
-  <style>
-    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;padding:2rem;max-width:640px;margin:0 auto;line-height:1.5}
-    h1{color:#222;margin:0 0 0.75rem}
-    p{color:#555;margin:0 0 1rem}
-    .box{padding:1rem 1.25rem;border:1px solid #e5e5e5;border-radius:12px;background:#fafafa}
-    code{background:#eee;padding:0.15rem 0.35rem;border-radius:6px}
-  </style>
-</head>
-<body>
-  <h1>Offline</h1>
-  <div class="box">
-    <p>This content is not available offline.</p>
-    <p>Please check your internet connection and try again.</p>
-  </div>
-</body>
-</html>`;
-
-/**
- * Safely cache URLs with error handling
- * Uses cache: "reload" to avoid pulling stale entries from the HTTP cache.
- */
-async function precacheUrls() {
-  const cache = await caches.open(PRECACHE_NAME);
-
-  // Prefer “reload” so we don’t re-cache stale browser HTTP cache responses
-  const requests = URLS.map((url) => new Request(url, { cache: "reload" }));
-
+function isHttpRequest(request) {
   try {
-    await cache.addAll(requests);
-  } catch (err) {
-    // Fallback: add URLs one by one to cache what we can
-    console.warn("Cache.addAll failed, falling back to individual caching:", err);
-    await Promise.all(
-      requests.map((req) =>
-        cache.add(req).catch((addErr) => {
-          console.warn(`Failed to cache ${req.url}:`, addErr);
-        })
-      )
-    );
+    const protocol = new URL(request.url).protocol;
+    return protocol === "http:" || protocol === "https:";
+  } catch {
+    return false;
   }
 }
 
-/**
- * Helper: only handle same-origin GET requests
- */
 function isSameOrigin(request) {
   try {
     return new URL(request.url).origin === self.location.origin;
@@ -87,120 +61,200 @@ function isSameOrigin(request) {
   }
 }
 
-/**
- * Strategy: Network-first for HTML navigations, with cache fallback.
- * Uses navigation preload response when available.
- */
-async function handleHtmlRequest(event) {
+function canCacheResponse(request, response) {
+  if (!isSameOrigin(request)) {
+    return false;
+  }
+
+  if (!response || response.status !== 200 || response.type !== "basic") {
+    return false;
+  }
+
+  const cacheControl = (response.headers.get("cache-control") || "").toLowerCase();
+  if (cacheControl.includes("no-store")) {
+    return false;
+  }
+
+  return true;
+}
+
+async function trimRuntimeCache() {
+  const cache = await caches.open(RUNTIME_NAME);
+  const keys = await cache.keys();
+
+  if (keys.length <= MAX_RUNTIME_ENTRIES) {
+    return;
+  }
+
+  const overflowCount = keys.length - MAX_RUNTIME_ENTRIES;
+  await Promise.all(keys.slice(0, overflowCount).map((request) => cache.delete(request)));
+}
+
+async function putRuntime(request, response) {
+  if (!canCacheResponse(request, response)) {
+    return;
+  }
+
+  const cache = await caches.open(RUNTIME_NAME);
+  await cache.put(request, response);
+  await trimRuntimeCache();
+}
+
+async function fetchWithTimeout(request, timeoutMs) {
+  if (typeof AbortController !== "function") {
+    return fetch(request);
+  }
+
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    return await fetch(request, { signal: controller.signal });
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+async function precacheUrls() {
+  const cache = await caches.open(PRECACHE_NAME);
+  const requests = PRECACHE_URLS.map((url) => new Request(url, { cache: "reload" }));
+
+  try {
+    await cache.addAll(requests);
+  } catch (err) {
+    console.warn("Precache addAll failed, retrying one-by-one:", err);
+
+    await Promise.all(
+      requests.map(async (request) => {
+        try {
+          const response = await fetchWithTimeout(request, ASSET_TIMEOUT_MS);
+          if (canCacheResponse(request, response)) {
+            await cache.put(request, response.clone());
+          }
+        } catch (fetchErr) {
+          console.warn("Failed to precache:", request.url, fetchErr);
+        }
+      })
+    );
+  }
+}
+
+function isAssetRequest(request) {
+  const destination = request.destination || "";
+  if (["script", "style", "image", "font", "manifest"].includes(destination)) {
+    return true;
+  }
+
+  try {
+    const path = new URL(request.url).pathname;
+    return (
+      path.startsWith("/assets/") ||
+      path.startsWith("/includes/") ||
+      path.startsWith("/.well-known/")
+    );
+  } catch {
+    return false;
+  }
+}
+
+function getNavigationFallbackPath(request) {
+  try {
+    const path = new URL(request.url).pathname;
+    return path.startsWith("/en/") ? "/en/index.html" : "/index.html";
+  } catch {
+    return "/index.html";
+  }
+}
+
+async function handleNavigationRequest(event) {
   const request = event.request;
 
-  // Use navigation preload if available (Chrome/Edge etc.)
   const preloadResponse = await event.preloadResponse;
   if (preloadResponse) {
-    // Update runtime cache in background
-    event.waitUntil((async () => {
-      try {
-        const cache = await caches.open(RUNTIME_NAME);
-        await cache.put(request, preloadResponse.clone());
-      } catch {}
-    })());
+    event.waitUntil(putRuntime(request, preloadResponse.clone()));
     return preloadResponse;
   }
 
   try {
-    const response = await fetch(request);
-
-    // Cache successful responses for offline use (runtime cache)
-    if (response && response.status === 200 && isSameOrigin(request)) {
-      const cache = await caches.open(RUNTIME_NAME);
-      await cache.put(request, response.clone());
+    const networkResponse = await fetchWithTimeout(request, NAVIGATION_TIMEOUT_MS);
+    event.waitUntil(putRuntime(request, networkResponse.clone()));
+    return networkResponse;
+  } catch {
+    const runtimeMatch = await caches.match(request);
+    if (runtimeMatch) {
+      return runtimeMatch;
     }
 
-    return response;
-  } catch {
-    // Fall back to caches (runtime first, then precache)
-    const runtime = await caches.match(request);
-    if (runtime) return runtime;
+    const languageFallback = await caches.match(getNavigationFallbackPath(request));
+    if (languageFallback) {
+      return languageFallback;
+    }
 
-    const precached = await caches.open(PRECACHE_NAME).then((c) => c.match(request));
-    if (precached) return precached;
+    const offlinePage = await caches.match(OFFLINE_URL);
+    if (offlinePage) {
+      return offlinePage;
+    }
 
-    return new Response(OFFLINE_HTML, {
+    return new Response("Offline", {
       status: 503,
       statusText: "Service Unavailable",
-      headers: { "Content-Type": "text/html; charset=utf-8" }
+      headers: { "Content-Type": "text/plain; charset=utf-8" },
     });
   }
 }
 
-/**
- * Strategy: Stale-While-Revalidate for static assets
- * - Return cache immediately if exists
- * - In background fetch and update cache (runtime)
- */
 async function handleAssetRequest(event) {
   const request = event.request;
-
-  // Try runtime cache first, then precache
   const cached = await caches.match(request);
-  if (cached) {
-    // Update in background (best effort, same-origin only)
-    event.waitUntil((async () => {
-      try {
-        if (!isSameOrigin(request)) return;
-        const fresh = await fetch(request);
-        if (fresh && fresh.status === 200) {
-          const cache = await caches.open(RUNTIME_NAME);
-          await cache.put(request, fresh.clone());
-        }
-      } catch {}
-    })());
 
+  const revalidatePromise = (async () => {
+    try {
+      const networkResponse = await fetchWithTimeout(request, ASSET_TIMEOUT_MS);
+      await putRuntime(request, networkResponse.clone());
+      return networkResponse;
+    } catch {
+      return null;
+    }
+  })();
+
+  if (cached) {
+    event.waitUntil(revalidatePromise);
     return cached;
   }
 
-  // Not cached → fetch and cache
-  try {
-    const response = await fetch(request);
-
-    // Cache successful same-origin responses (runtime)
-    if (response && response.status === 200 && isSameOrigin(request)) {
-      const cache = await caches.open(RUNTIME_NAME);
-      await cache.put(request, response.clone());
-    }
-
-    return response;
-  } catch {
-    // Fallbacks
-    if (request.destination === "image") {
-      // Try precached fallback image
-      const fallback = await caches.open(PRECACHE_NAME).then((c) => c.match("/assets/images/RasoulUnlimited.webp"));
-      return fallback || new Response("Image not found", { status: 404 });
-    }
-    return new Response("Resource not available", { status: 503 });
+  const networkResponse = await revalidatePromise;
+  if (networkResponse) {
+    return networkResponse;
   }
+
+  if (request.destination === "image") {
+    const fallbackImage = await caches.match(FALLBACK_IMAGE_URL);
+    if (fallbackImage) {
+      return fallbackImage;
+    }
+  }
+
+  return new Response("Resource not available", { status: 503 });
 }
 
-// Install event: precache
 self.addEventListener("install", (event) => {
   event.waitUntil(
     (async () => {
       await precacheUrls();
-      // Activate new SW immediately
       await self.skipWaiting();
     })()
   );
 });
 
-// Activate event: enable navigation preload + clean old caches
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     (async () => {
-      // Enable navigation preload if supported
       if (self.registration && self.registration.navigationPreload) {
         try {
           await self.registration.navigationPreload.enable();
-        } catch {}
+        } catch {
+          // Ignore navigation preload failures.
+        }
       }
 
       const keys = await caches.keys();
@@ -208,11 +262,15 @@ self.addEventListener("activate", (event) => {
 
       await Promise.all(
         keys
-          .filter((k) => k.startsWith("ru-security-") && !keep.has(k))
-          .map((k) => {
-            console.warn("Deleting old cache version:", k);
-            return caches.delete(k);
+          .filter((key) => {
+            const isCurrent = keep.has(key);
+            const isManaged =
+              key.startsWith(`${CACHE_PREFIX}-`) ||
+              key.startsWith("ru-security-precache-") ||
+              key.startsWith("ru-security-runtime-");
+            return isManaged && !isCurrent;
           })
+          .map((key) => caches.delete(key))
       );
 
       await self.clients.claim();
@@ -220,32 +278,44 @@ self.addEventListener("activate", (event) => {
   );
 });
 
-// Optional: allow client to trigger skipWaiting (useful for “Update available” UI)
 self.addEventListener("message", (event) => {
   if (event.data && event.data.type === "SKIP_WAITING") {
     self.skipWaiting();
   }
 });
 
-// Fetch event
 self.addEventListener("fetch", (event) => {
-  // Only handle GET
-  if (event.request.method !== "GET") return;
+  const request = event.request;
 
-  const accept = event.request.headers.get("accept") || "";
-  const isHtml =
-    event.request.mode === "navigate" ||
-    (accept.includes("text/html"));
-
-  // Only manage same-origin HTML navigations/assets (avoid surprises with third-party requests)
-  if (!isSameOrigin(event.request) && isHtml) {
-    // Let the browser handle cross-origin navigations normally
+  if (request.method !== "GET") {
     return;
   }
 
-  if (isHtml) {
-    event.respondWith(handleHtmlRequest(event));
-  } else {
+  if (!isHttpRequest(request)) {
+    return;
+  }
+
+  if (request.headers.has("range")) {
+    return;
+  }
+
+  if (request.cache === "only-if-cached" && request.mode !== "same-origin") {
+    return;
+  }
+
+  if (!isSameOrigin(request)) {
+    return;
+  }
+
+  const accept = request.headers.get("accept") || "";
+  const isNavigation = request.mode === "navigate" || accept.includes("text/html");
+
+  if (isNavigation) {
+    event.respondWith(handleNavigationRequest(event));
+    return;
+  }
+
+  if (isAssetRequest(request)) {
     event.respondWith(handleAssetRequest(event));
   }
 });

@@ -192,6 +192,11 @@
     }
     themeToggleInput.dataset.themeToggleInit = "true";
 
+    const currentTheme = document.documentElement.getAttribute("data-theme");
+    if (currentTheme === "dark" || currentTheme === "light") {
+      themeToggleInput.checked = currentTheme === "dark";
+    }
+
     // Sync ARIA
     themeToggleInput.setAttribute(
       "aria-checked",

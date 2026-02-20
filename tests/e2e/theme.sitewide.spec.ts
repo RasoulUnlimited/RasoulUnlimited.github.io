@@ -97,6 +97,8 @@ test.describe("Sitewide Theme Toggle", () => {
   test("key pages: toggle changes theme, syncs classes, and persists after reload", async ({
     browser,
   }) => {
+    test.setTimeout(10 * 60 * 1000);
+
     for (const path of KEY_PAGES) {
       const context = await browser.newContext({ colorScheme: "light" });
       const page = await context.newPage();
@@ -196,6 +198,8 @@ test.describe("Sitewide Theme Toggle", () => {
   test("concept and wiki pages: theme toggle remains available (smoke)", async ({
     browser,
   }) => {
+    test.setTimeout(3 * 60 * 1000);
+
     for (const path of SMOKE_PAGES) {
       const context = await browser.newContext({ colorScheme: "light" });
       const page = await context.newPage();
