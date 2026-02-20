@@ -54,6 +54,11 @@
   pointer-events: none;
 }
 
+/* Keep FAQ heading in sync with active theme colors */
+#faq .section-title {
+  color: var(--faq-text-color);
+}
+
 /* =========================================================
    SEARCH
    ========================================================= */
@@ -723,7 +728,7 @@
    ========================================================= */
 
 @media (prefers-color-scheme: dark) {
-  #faq {
+  body:not(.light-mode):not(.dark-mode) #faq {
     --faq-bg-gradient: linear-gradient(145deg, #1e293b, #0f172a);
     --faq-item-bg: #1e293b;
     --faq-item-border: #334155;
