@@ -824,10 +824,46 @@
   // ==========================
   let aosLoaded = false;
   let aosScriptRequested = false;
+  const AOS_DELAY_CLAMP_MAX = 200;
+  const AOS_REFRESH_DEBOUNCE_MS = 90;
+  const AOS_REFRESH_DELAY_SMOOTH_SCROLL_MS = 300;
+  const AOS_REFRESH_DELAY_INSTANT_SCROLL_MS = 40;
+  const AOS_REFRESH_DELAY_HASH_BOOT_MS = 220;
 
   function setAOSDisabledCSS(disabled) {
     document.documentElement.classList.toggle("aos-disabled", disabled);
   }
+
+  function normalizeAOSDelays(maxDelay = AOS_DELAY_CLAMP_MAX) {
+    document.querySelectorAll("[data-aos-delay]").forEach((node) => {
+      if (!(node instanceof HTMLElement)) {return;}
+      const rawDelay = node.getAttribute("data-aos-delay");
+      const parsedDelay = Number.parseInt(rawDelay || "", 10);
+      if (!Number.isFinite(parsedDelay) || parsedDelay <= maxDelay) {return;}
+      node.setAttribute("data-aos-delay", String(maxDelay));
+    });
+  }
+
+  const scheduleAOSRefresh = (() => {
+    const debouncedRefresh = debounce((scope = "aos.refreshHard") => {
+      if (!FLAGS().ENABLE_AOS || typeof window.AOS?.refreshHard !== "function") {
+        return;
+      }
+      try {
+        window.AOS.refreshHard();
+      } catch (err) {
+        reportRuntimeError(scope, err);
+      }
+    }, AOS_REFRESH_DEBOUNCE_MS);
+
+    return (scope = "aos.refreshHard", delay = 0) => {
+      if (delay > 0) {
+        setTimeout(() => debouncedRefresh(scope), delay);
+        return;
+      }
+      debouncedRefresh(scope);
+    };
+  })();
 
   function initAOS() {
     // Keep content visible by default; only disable this fallback after
@@ -838,13 +874,14 @@
 
     if (window.AOS?.init) {
       try {
+        normalizeAOSDelays();
         window.AOS.init({
           startEvent: "DOMContentLoaded",
           initClassName: "aos-init",
           animatedClassName: "aos-animate",
           debounceDelay: 50,
           throttleDelay: 99,
-          offset: 120,
+          offset: 0,
           duration: 500,
           easing: "ease-out",
           once: false,
@@ -853,6 +890,7 @@
         });
         aosLoaded = true;
         setAOSDisabledCSS(false);
+        scheduleAOSRefresh("aos.init", AOS_REFRESH_DELAY_INSTANT_SCROLL_MS);
       } catch {
         setAOSDisabledCSS(true);
       }
@@ -932,6 +970,9 @@
   // ==========================
   function initAnchorScrolling() {
     const smoothAllowed = !ENV.state.reduced;
+    const scrollRefreshDelay = smoothAllowed
+      ? AOS_REFRESH_DELAY_SMOOTH_SCROLL_MS
+      : AOS_REFRESH_DELAY_INSTANT_SCROLL_MS;
 
     function focusTargetForSkipLink(target) {
       if (!(target instanceof HTMLElement)) {return;}
@@ -988,6 +1029,7 @@
         if (smoothAllowed)
         {window.scrollTo({ top: y, behavior: "smooth" });}
         else {window.scrollTo(0, y);}
+        scheduleAOSRefresh("aos.anchor-scroll", scrollRefreshDelay);
 
         syncHash(targetId);
 
@@ -1000,6 +1042,14 @@
 
         vibrate([20]);
       });
+    });
+
+    if (window.location.hash) {
+      scheduleAOSRefresh("aos.hash-on-boot", AOS_REFRESH_DELAY_HASH_BOOT_MS);
+    }
+
+    on(window, "hashchange", () => {
+      scheduleAOSRefresh("aos.hashchange", AOS_REFRESH_DELAY_HASH_BOOT_MS);
     });
   }
 

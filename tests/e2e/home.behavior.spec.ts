@@ -11,6 +11,79 @@ async function getVisibleFaqItemIds(page: Page): Promise<string[]> {
   });
 }
 
+type AosNodeState = {
+  hidden: boolean;
+  hasAosAnimate: boolean;
+  hasAosInit: boolean;
+  opacity: number;
+};
+
+type SectionAosState = {
+  firstAos: AosNodeState | null;
+  hash: string;
+  target: AosNodeState;
+};
+
+async function getSectionAosState(
+  page: Page,
+  selector: string
+): Promise<SectionAosState | null> {
+  return page.evaluate((targetSelector) => {
+    const target = document.querySelector(targetSelector);
+    if (!(target instanceof HTMLElement)) {
+      return null;
+    }
+
+    const toNodeState = (node: HTMLElement): AosNodeState => {
+      const style = getComputedStyle(node);
+      const opacity = Number.parseFloat(style.opacity || "0");
+      return {
+        opacity: Number.isNaN(opacity) ? 0 : opacity,
+        hidden: style.visibility === "hidden" || style.display === "none",
+        hasAosInit: node.classList.contains("aos-init"),
+        hasAosAnimate: node.classList.contains("aos-animate"),
+      };
+    };
+
+    const firstAosNode = target.matches("[data-aos]")
+      ? target
+      : target.querySelector("[data-aos]");
+
+    return {
+      hash: window.location.hash || "",
+      target: toNodeState(target),
+      firstAos: firstAosNode instanceof HTMLElement ? toNodeState(firstAosNode) : null,
+    };
+  }, selector);
+}
+
+async function expectSectionVisibleWithoutAosStuck(
+  page: Page,
+  selector: string,
+  expectedHash?: string
+) {
+  await expect
+    .poll(
+      async () => {
+        const state = await getSectionAosState(page, selector);
+        if (!state) {
+          return false;
+        }
+
+        const isVisible = (node: AosNodeState) => node.opacity > 0.01 && !node.hidden;
+        const isNotStuck = (node: AosNodeState) =>
+          !node.hasAosInit || node.hasAosAnimate || isVisible(node);
+
+        const targetOk = isVisible(state.target) && isNotStuck(state.target);
+        const firstAosOk = !state.firstAos || (isVisible(state.firstAos) && isNotStuck(state.firstAos));
+        const hashOk = !expectedHash || state.hash === expectedHash;
+        return targetOk && firstAosOk && hashOk;
+      },
+      { timeout: 5000 }
+    )
+    .toBeTruthy();
+}
+
 test.describe("FA Home Behavior", () => {
   test("loads homepage without page errors or request failures", async ({ page }) => {
     const pageErrors: string[] = [];
@@ -178,6 +251,36 @@ test.describe("FA Home Behavior", () => {
         });
       })
       .toBeGreaterThan(-0.08);
+  });
+
+  test("anchor links reveal sections quickly without extra scrolling", async ({ page }) => {
+    await page.goto(HOME_PATH, { waitUntil: "networkidle" });
+
+    const sections = ["about", "projects", "faq", "testimonials", "connect"];
+    for (const sectionId of sections) {
+      const hash = `#${sectionId}`;
+      await page.locator(`.nav-links a[href="${hash}"]`).first().click();
+      await expectSectionVisibleWithoutAosStuck(page, hash, hash);
+    }
+  });
+
+  test("direct hash load reveals testimonials section and first AOS wrapper", async ({ page }) => {
+    await page.goto(`${HOME_PATH}#testimonials`, { waitUntil: "networkidle" });
+    await expectSectionVisibleWithoutAosStuck(page, "#testimonials", "#testimonials");
+  });
+
+  test("reduced-motion keeps hash target visible without AOS reveal dependency", async ({
+    browser,
+  }) => {
+    const context = await browser.newContext({ reducedMotion: "reduce" });
+    const page = await context.newPage();
+
+    try {
+      await page.goto(`${HOME_PATH}#testimonials`, { waitUntil: "networkidle" });
+      await expectSectionVisibleWithoutAosStuck(page, "#testimonials", "#testimonials");
+    } finally {
+      await context.close();
+    }
   });
 
   test("about section uses semantic structure and dedicated CTA classes", async ({ page }) => {
