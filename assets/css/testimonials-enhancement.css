@@ -374,6 +374,18 @@
   color: var(--testi-text-main);
 }
 
+.featured-feedback-stale-note {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 0.7rem 0.95rem;
+  border-radius: 0.8rem;
+  border: 1px solid rgba(var(--primary-rgb, 11, 94, 215), 0.28);
+  background: rgba(var(--primary-rgb, 11, 94, 215), 0.1);
+  color: var(--testi-text-main);
+  font-size: 0.86rem;
+  line-height: 1.6;
+}
+
 .featured-feedback-error {
   border-color: rgba(176, 42, 55, 0.24);
   background: rgba(176, 42, 55, 0.08);
@@ -628,6 +640,11 @@
 [data-theme="dark"] .featured-feedback-loading,
 [data-theme="dark"] .featured-feedback-empty,
 [data-theme="dark"] .featured-feedback-error {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.24);
+}
+
+[data-theme="dark"] .featured-feedback-stale-note {
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.24);
 }

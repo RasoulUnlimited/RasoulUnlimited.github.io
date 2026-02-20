@@ -35,6 +35,38 @@
         feedbackSaved: "Your feedback was saved. Thank you!",
       };
 
+    function getSafeStorage() {
+      try {
+        const key = "__faq_storage_probe__";
+        localStorage.setItem(key, "1");
+        localStorage.removeItem(key);
+        return localStorage;
+      } catch {
+        return null;
+      }
+    }
+
+    const safeStorage = getSafeStorage();
+
+    function readStoredValue(key) {
+      if (!safeStorage) {return null;}
+      try {
+        return safeStorage.getItem(key);
+      } catch {
+        return null;
+      }
+    }
+
+    function writeStoredValue(key, value) {
+      if (!safeStorage) {return false;}
+      try {
+        safeStorage.setItem(key, value);
+        return true;
+      } catch {
+        return false;
+      }
+    }
+
     if (typeof window.createToast !== "function") {
       window.createToast = function (message) {
         const toast = document.createElement("div");
@@ -183,6 +215,50 @@
         parent.normalize();
       });
     };
+
+    function copyWithExecCommand(text) {
+      if (!document.body) {return false;}
+
+      const probe = document.createElement("textarea");
+      probe.value = text;
+      probe.setAttribute("readonly", "");
+      probe.setAttribute("aria-hidden", "true");
+      probe.style.position = "absolute";
+      probe.style.left = "-9999px";
+      probe.style.top = "0";
+      document.body.appendChild(probe);
+      probe.select();
+
+      try {
+        return !!document.execCommand("copy");
+      } catch {
+        return false;
+      } finally {
+        probe.remove();
+      }
+    }
+
+    async function copyText(text) {
+      const hasClipboardApi = !!(navigator.clipboard && navigator.clipboard.writeText);
+      if (hasClipboardApi) {
+        try {
+          await navigator.clipboard.writeText(text);
+          return { ok: true, mode: "clipboard" };
+        } catch {
+          // Fallback to legacy copy path below.
+        }
+      }
+
+      const legacySuccess = copyWithExecCommand(text);
+      if (legacySuccess) {
+        return { ok: true, mode: "execCommand" };
+      }
+
+      return {
+        ok: false,
+        mode: hasClipboardApi ? "clipboard-failed" : "unsupported",
+      };
+    }
 
     const highlightText = (root, term) => {
       if (!root) {return;}
@@ -349,14 +425,17 @@
         if (!hash) {return;}
         const url = window.location.origin + window.location.pathname + hash;
 
-        if (!navigator.clipboard || !navigator.clipboard.writeText) {
-          window.createToast(STRINGS.copyUnsupported);
-          return;
-        }
+        copyText(url)
+          .then((result) => {
+            if (!result.ok) {
+              if (result.mode === "unsupported") {
+                window.createToast(STRINGS.copyUnsupported);
+              } else {
+                window.createToast(STRINGS.copyFailed);
+              }
+              return;
+            }
 
-        navigator.clipboard
-          .writeText(url)
-          .then(() => {
             const original = button.innerHTML;
             button.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i>';
             button.classList.add("copied");
@@ -372,7 +451,7 @@
 
     faqRoot.querySelectorAll(".faq-item").forEach((item) => {
       const key = `faq-feedback-${item.id}`;
-      const stored = localStorage.getItem(key);
+      const stored = readStoredValue(key);
       if (!stored) {return;}
       const btn = item.querySelector(`.btn-feedback.${stored}`);
       if (btn) {
@@ -395,7 +474,7 @@
         button.classList.add("active");
 
         const value = button.classList.contains("up") ? "up" : "down";
-        localStorage.setItem(`faq-feedback-${item.id}`, value);
+        writeStoredValue(`faq-feedback-${item.id}`, value);
 
         const label = wrapper.querySelector(".feedback-label");
         if (label) {
