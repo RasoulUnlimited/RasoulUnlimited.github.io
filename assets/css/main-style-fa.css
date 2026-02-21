@@ -3109,17 +3109,6 @@ img[data-src].loaded,
 }
 
 @media (max-width: 480px) {
-  .dynamic-toast {
-    padding: var(--space-sm) var(--space-md);
-    font-size: 0.9rem;
-    line-height: 1.3;
-    max-width: calc(100% - 30px);
-    white-space: normal;
-  }
-  .dynamic-toast i {
-    font-size: 1em;
-    margin-left: var(--space-xs);
-  }
   .fun-fact-close {
     font-size: 1rem;
   }
@@ -3145,7 +3134,6 @@ img[data-src].loaded,
   .cta-pulse-effect {
     animation: none !important;
   }
-  .dynamic-toast,
   #scroll-to-top,
   #share-page-button,
   .skill-hover-message,
@@ -3193,8 +3181,6 @@ img[data-src].loaded,
   .theme-toast,
   #explore-hint i,
   .sparkle-effect,
-  .dynamic-toast i,
-  .toast-close,
   .fun-fact-close,
   .final-exploration-toast,
   .final-exploration-toast i,

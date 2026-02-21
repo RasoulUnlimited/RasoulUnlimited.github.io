@@ -75,6 +75,13 @@
   const TOAST_LIMIT_PER_POSITION = 3;
   const TOAST_DEFAULT_DURATION = 2800;
   const TOAST_EXIT_FALLBACK_MS = prefersReducedMotion ? 60 : 260;
+  const TOAST_STACK_SHIFTS_BOTTOM = [0, -3, -6];
+  const TOAST_STACK_SHIFTS_TOP = [0, 3, 6];
+  const TOAST_STACK_SCALE_LOSS = [0, 0.005, 0.01];
+  const TOAST_SWIPE_MIN_DISTANCE = 56;
+  const TOAST_SWIPE_MAX_CROSS_AXIS = 24;
+  const TOAST_SWIPE_MIN_VELOCITY = 0.35;
+  const TOAST_SWIPE_DISMISS_OFFSET_VW = 72;
   const TOAST_KIND_ICONS = {
     success: "fas fa-check-circle",
     error: "fas fa-exclamation-circle",
@@ -142,6 +149,12 @@
         : kind === "error"
           ? "assertive"
           : "polite";
+    const swipeDismiss =
+      input.swipeDismiss === true
+        ? true
+        : input.swipeDismiss === false
+          ? false
+          : "auto";
 
     return {
       id,
@@ -154,6 +167,7 @@
       closeButton,
       role,
       ariaLive,
+      swipeDismiss,
     };
   }
 
@@ -185,6 +199,56 @@
     document.body.appendChild(viewport);
     state.viewport = viewport;
     return viewport;
+  }
+
+  function canUseToastSwipe() {
+    const touchCapable =
+      (typeof navigator.maxTouchPoints === "number" && navigator.maxTouchPoints > 0) ||
+      "ontouchstart" in window;
+
+    if (typeof window.matchMedia !== "function") {
+      return touchCapable;
+    }
+    try {
+      return window.matchMedia("(pointer: coarse)").matches || touchCapable;
+    } catch {
+      return touchCapable;
+    }
+  }
+
+  function isSwipeEnabled(entry) {
+    const setting = entry && entry.settings ? entry.settings.swipeDismiss : "auto";
+    if (setting === false) {
+      return false;
+    }
+    if (setting === true) {
+      return true;
+    }
+    return canUseToastSwipe();
+  }
+
+  function syncToastStack(state) {
+    if (!state || !Array.isArray(state.visible) || state.visible.length === 0) {
+      return;
+    }
+
+    const shifts =
+      state.position === "top" ? TOAST_STACK_SHIFTS_TOP : TOAST_STACK_SHIFTS_BOTTOM;
+
+    // The newest visible toast gets the front-most stack values.
+    const ordered = state.visible.slice().reverse();
+    ordered.forEach((entry, index) => {
+      if (!entry || !(entry.toast instanceof HTMLElement)) {
+        return;
+      }
+
+      const shift = shifts[Math.min(index, shifts.length - 1)];
+      const scaleLoss =
+        TOAST_STACK_SCALE_LOSS[Math.min(index, TOAST_STACK_SCALE_LOSS.length - 1)];
+      entry.toast.style.setProperty("--toast-stack-shift", `${shift}px`);
+      entry.toast.style.setProperty("--toast-stack-scale-loss", String(scaleLoss));
+      entry.toast.style.setProperty("--toast-z", String(300 - index));
+    });
   }
 
   function removeEntry(collection, entry) {
@@ -226,6 +290,181 @@
       } catch {}
       entry.progressAnimation = null;
     }
+  }
+
+  function stopSwipeRebound(entry) {
+    if (entry && entry.swipe && entry.swipe.reboundTimer) {
+      clearTimeout(entry.swipe.reboundTimer);
+      entry.swipe.reboundTimer = null;
+    }
+  }
+
+  function resetSwipeState(entry) {
+    if (!entry || !(entry.toast instanceof HTMLElement)) {
+      return;
+    }
+
+    stopSwipeRebound(entry);
+    entry.toast.style.setProperty("--toast-swipe-x", "0px");
+    entry.toast.classList.remove("is-swiping", "swipe-dismiss", "swipe-rebound");
+  }
+
+  function releaseToastSwipe(entry) {
+    if (!entry || !entry.swipe || typeof entry.swipe.cleanup !== "function") {
+      return;
+    }
+    entry.swipe.cleanup();
+    entry.swipe.cleanup = null;
+  }
+
+  function installToastSwipe(entry) {
+    if (
+      !entry ||
+      !(entry.toast instanceof HTMLElement) ||
+      !isSwipeEnabled(entry) ||
+      (entry.swipe && typeof entry.swipe.cleanup === "function")
+    ) {
+      return;
+    }
+
+    const toast = entry.toast;
+    const state = {
+      pointerId: null,
+      active: false,
+      startX: 0,
+      startY: 0,
+      startAt: 0,
+      lastX: 0,
+      lastY: 0,
+      lastAt: 0,
+      reboundTimer: null,
+      cleanup: null,
+    };
+    entry.swipe = state;
+
+    const onPointerDown = (event) => {
+      if (entry.dismissing || event.isPrimary === false || event.button > 0) {
+        return;
+      }
+      if (event.target instanceof Element && event.target.closest(".toast-close")) {
+        return;
+      }
+
+      state.pointerId = event.pointerId;
+      state.active = true;
+      state.startX = event.clientX;
+      state.startY = event.clientY;
+      state.startAt = Date.now();
+      state.lastX = event.clientX;
+      state.lastY = event.clientY;
+      state.lastAt = state.startAt;
+      stopSwipeRebound(entry);
+      toast.classList.add("is-swiping");
+      toast.classList.remove("swipe-rebound", "swipe-dismiss");
+      stopToastTimers(entry);
+
+      if (typeof toast.setPointerCapture === "function") {
+        try {
+          toast.setPointerCapture(event.pointerId);
+        } catch {}
+      }
+    };
+
+    const onPointerMove = (event) => {
+      if (!state.active || event.pointerId !== state.pointerId) {
+        return;
+      }
+
+      const dx = event.clientX - state.startX;
+      const dy = event.clientY - state.startY;
+      state.lastX = event.clientX;
+      state.lastY = event.clientY;
+      state.lastAt = Date.now();
+
+      if (Math.abs(dy) > TOAST_SWIPE_MAX_CROSS_AXIS * 1.6) {
+        return;
+      }
+
+      toast.style.setProperty("--toast-swipe-x", `${dx}px`);
+    };
+
+    const completeSwipe = (event) => {
+      if (!state.active || event.pointerId !== state.pointerId) {
+        return;
+      }
+
+      state.active = false;
+      const dx = state.lastX - state.startX;
+      const dy = state.lastY - state.startY;
+      const elapsed = Math.max(1, state.lastAt - state.startAt);
+      const velocity = Math.abs(dx) / elapsed;
+      const absDx = Math.abs(dx);
+      const absDy = Math.abs(dy);
+      const validSwipe =
+        absDx >= TOAST_SWIPE_MIN_DISTANCE &&
+        absDy <= TOAST_SWIPE_MAX_CROSS_AXIS &&
+        velocity >= TOAST_SWIPE_MIN_VELOCITY;
+
+      if (validSwipe) {
+        toast.classList.remove("is-swiping", "swipe-rebound");
+        toast.classList.add("swipe-dismiss");
+        const direction = dx >= 0 ? 1 : -1;
+        const targetOffset = Math.round((window.innerWidth * TOAST_SWIPE_DISMISS_OFFSET_VW) / 100);
+        toast.style.setProperty("--toast-swipe-x", `${direction * targetOffset}px`);
+
+        if (prefersReducedMotion) {
+          dismissToastEntry(entry);
+          return;
+        }
+
+        setTimeout(() => {
+          dismissToastEntry(entry);
+        }, 110);
+        return;
+      }
+
+      toast.classList.remove("is-swiping", "swipe-dismiss");
+      toast.classList.add("swipe-rebound");
+      toast.style.setProperty("--toast-swipe-x", "0px");
+      state.reboundTimer = setTimeout(() => {
+        toast.classList.remove("swipe-rebound");
+        state.reboundTimer = null;
+      }, prefersReducedMotion ? 1 : 220);
+      startToastLifecycle(entry);
+    };
+
+    const onPointerCancel = (event) => {
+      if (!state.active || event.pointerId !== state.pointerId) {
+        return;
+      }
+      state.active = false;
+      toast.classList.remove("is-swiping", "swipe-dismiss");
+      toast.classList.add("swipe-rebound");
+      toast.style.setProperty("--toast-swipe-x", "0px");
+      state.reboundTimer = setTimeout(() => {
+        toast.classList.remove("swipe-rebound");
+        state.reboundTimer = null;
+      }, prefersReducedMotion ? 1 : 220);
+      startToastLifecycle(entry);
+    };
+
+    toast.addEventListener("pointerdown", onPointerDown);
+    toast.addEventListener("pointermove", onPointerMove);
+    toast.addEventListener("pointerup", completeSwipe);
+    toast.addEventListener("pointercancel", onPointerCancel);
+    toast.addEventListener("lostpointercapture", onPointerCancel);
+
+    state.cleanup = () => {
+      toast.removeEventListener("pointerdown", onPointerDown);
+      toast.removeEventListener("pointermove", onPointerMove);
+      toast.removeEventListener("pointerup", completeSwipe);
+      toast.removeEventListener("pointercancel", onPointerCancel);
+      toast.removeEventListener("lostpointercapture", onPointerCancel);
+      stopSwipeRebound(entry);
+      if (entry && entry.swipe) {
+        entry.swipe.active = false;
+      }
+    };
   }
 
   function applyToastContent(entry) {
@@ -338,10 +577,12 @@
     }
 
     entry.dismissing = false;
+    resetSwipeState(entry);
     applyToastContent(entry);
     entry.toast.classList.add("show");
     entry.toast.classList.remove("is-closing");
     startToastLifecycle(entry);
+    syncToastStack(entry.state || getToastState(entry.settings.position));
   }
 
   function mountToastEntry(entry) {
@@ -354,9 +595,12 @@
     entry.state = state;
     entry.mounted = true;
     entry.dismissing = false;
+    resetSwipeState(entry);
     applyToastContent(entry);
     viewport.appendChild(entry.toast);
     state.visible.push(entry);
+    syncToastStack(state);
+    installToastSwipe(entry);
 
     requestAnimationFrame(() => {
       if (!entry.mounted) {
@@ -394,6 +638,7 @@
 
       mountToastEntry(next);
     }
+    syncToastStack(state);
   }
 
   function dismissToastEntry(entry) {
@@ -403,6 +648,7 @@
 
     entry.dismissing = true;
     stopToastTimers(entry);
+    stopSwipeRebound(entry);
 
     if (!entry.mounted || !(entry.toast instanceof HTMLElement)) {
       const queuedState = entry.state || getToastState(entry.settings.position);
@@ -410,6 +656,7 @@
       if (entry.settings.id && toastRegistry.get(entry.settings.id) === entry) {
         toastRegistry.delete(entry.settings.id);
       }
+      releaseToastSwipe(entry);
       entry.dismissing = false;
       return;
     }
@@ -431,10 +678,12 @@
       if (entry.settings.id && toastRegistry.get(entry.settings.id) === entry) {
         toastRegistry.delete(entry.settings.id);
       }
+      releaseToastSwipe(entry);
       toast.remove();
       entry.mounted = false;
       entry.dismissing = false;
       flushToastQueue(state.position);
+      syncToastStack(state);
     };
 
     toast.addEventListener(
@@ -496,6 +745,7 @@
       progressAnimation: null,
       dismissing: false,
       mounted: false,
+      swipe: null,
     };
 
     if (settings.id) {
