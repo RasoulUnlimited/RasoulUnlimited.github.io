@@ -74,7 +74,8 @@
 
   const TOAST_LIMIT_PER_POSITION = 3;
   const TOAST_DEFAULT_DURATION = 2800;
-  const TOAST_EXIT_FALLBACK_MS = prefersReducedMotion ? 60 : 260;
+  const TOAST_EXIT_FALLBACK_MS = prefersReducedMotion ? 60 : 220;
+  const TOAST_EXIT_EXTRA_BUFFER_MS = 90;
   const TOAST_STACK_SHIFTS_BOTTOM = [0, -3, -6];
   const TOAST_STACK_SHIFTS_TOP = [0, 3, 6];
   const TOAST_STACK_SCALE_LOSS = [0, 0.005, 0.01];
@@ -228,6 +229,49 @@
     return canUseToastSwipe();
   }
 
+  function parseCssTimeToMs(value) {
+    const token = String(value || "").trim();
+    if (!token) {
+      return 0;
+    }
+    if (token.endsWith("ms")) {
+      return Number.parseFloat(token) || 0;
+    }
+    if (token.endsWith("s")) {
+      return (Number.parseFloat(token) || 0) * 1000;
+    }
+    return Number.parseFloat(token) || 0;
+  }
+
+  function getToastExitFallbackMs(toast) {
+    if (prefersReducedMotion) {
+      return TOAST_EXIT_FALLBACK_MS;
+    }
+    if (!(toast instanceof HTMLElement) || typeof window.getComputedStyle !== "function") {
+      return TOAST_EXIT_FALLBACK_MS;
+    }
+
+    const style = window.getComputedStyle(toast);
+    const durations = String(style.transitionDuration || "0s").split(",");
+    const delays = String(style.transitionDelay || "0s").split(",");
+    const totalTokens = Math.max(durations.length, delays.length);
+    let longest = 0;
+
+    for (let index = 0; index < totalTokens; index += 1) {
+      const durationToken = durations[index] || durations[durations.length - 1] || "0s";
+      const delayToken = delays[index] || delays[delays.length - 1] || "0s";
+      const total = parseCssTimeToMs(durationToken) + parseCssTimeToMs(delayToken);
+      if (total > longest) {
+        longest = total;
+      }
+    }
+
+    if (longest <= 0) {
+      return TOAST_EXIT_FALLBACK_MS;
+    }
+    return Math.max(TOAST_EXIT_FALLBACK_MS, Math.round(longest + TOAST_EXIT_EXTRA_BUFFER_MS));
+  }
+
   function syncToastStack(state) {
     if (!state || !Array.isArray(state.visible) || state.visible.length === 0) {
       return;
@@ -246,8 +290,11 @@
       const shift = shifts[Math.min(index, shifts.length - 1)];
       const scaleLoss =
         TOAST_STACK_SCALE_LOSS[Math.min(index, TOAST_STACK_SCALE_LOSS.length - 1)];
+      const maxDepthIndex = Math.max(1, TOAST_LIMIT_PER_POSITION - 1);
+      const depth = Math.min(1, index / maxDepthIndex);
       entry.toast.style.setProperty("--toast-stack-shift", `${shift}px`);
       entry.toast.style.setProperty("--toast-stack-scale-loss", String(scaleLoss));
+      entry.toast.style.setProperty("--toast-depth", depth.toFixed(3));
       entry.toast.style.setProperty("--toast-z", String(300 - index));
     });
   }
@@ -879,7 +926,7 @@
       },
       { once: true }
     );
-    setTimeout(finalize, TOAST_EXIT_FALLBACK_MS);
+    setTimeout(finalize, getToastExitFallbackMs(toast));
   }
 
   function createToastEntry(message, optionsOrType) {

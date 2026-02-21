@@ -124,6 +124,20 @@ test.describe("Toast lifecycle", () => {
     );
     expect(new Set(stackShifts).size).toBeGreaterThan(1);
 
+    const stackDepths = await page.evaluate(() =>
+      Array.from(document.querySelectorAll<HTMLElement>(".dynamic-toast.show"))
+        .map((node) => {
+          const inline = node.style.getPropertyValue("--toast-depth").trim();
+          const computed = getComputedStyle(node).getPropertyValue("--toast-depth").trim();
+          const value = Number.parseFloat(inline || computed);
+          return Number.isFinite(value) ? value : null;
+        })
+        .filter((value): value is number => value !== null)
+    );
+    expect(stackDepths.length).toBeGreaterThanOrEqual(2);
+    expect(new Set(stackDepths.map((value) => value.toFixed(2))).size).toBeGreaterThan(1);
+    expect(Math.max(...stackDepths)).toBeLessThanOrEqual(1);
+
     await expect
       .poll(
         async () =>
@@ -346,20 +360,46 @@ test.describe("Toast lifecycle", () => {
         kind: "info",
         duration: 6000,
       });
-      (window as any).createToast?.("Second escape target", {
-        id: "escape-toast-2",
-        kind: "success",
-        duration: 6000,
-      });
+      window.setTimeout(() => {
+        (window as any).createToast?.("Second escape target", {
+          id: "escape-toast-2",
+          kind: "success",
+          duration: 6000,
+        });
+      }, 45);
     });
 
+    await page.evaluate(() => {
+      const active = document.activeElement;
+      if (active instanceof HTMLElement && typeof active.blur === "function") {
+        active.blur();
+      }
+    });
+    await page.locator("body").click({ position: { x: 8, y: 8 } });
+
     await expect(page.locator("#escape-toast-2")).toBeVisible();
-    await page.keyboard.press("Escape");
+    await page.evaluate(() => {
+      document.dispatchEvent(
+        new KeyboardEvent("keydown", {
+          key: "Escape",
+          bubbles: true,
+          cancelable: true,
+        })
+      );
+    });
 
     await expect(page.locator("#escape-toast-2")).toHaveCount(0);
     await expect(page.locator("#escape-toast-1")).toBeVisible();
 
-    await page.keyboard.press("Escape");
+    await page.evaluate(() => {
+      document.dispatchEvent(
+        new KeyboardEvent("keydown", {
+          key: "Escape",
+          bubbles: true,
+          cancelable: true,
+        })
+      );
+    });
     await expect(page.locator("#escape-toast-1")).toHaveCount(0);
   });
 
@@ -398,6 +438,208 @@ test.describe("Toast lifecycle", () => {
     });
 
     expect(colors.actual).toBe(colors.expected);
+  });
+
+  test("toast rail uses dual-layer accent and intensifies on hover", async ({ page }) => {
+    await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });
+    await clearToasts(page);
+
+    await page.evaluate(() => {
+      (window as any).createToast?.("Rail check", {
+        id: "rail-layer-toast",
+        kind: "success",
+        duration: 2800,
+      });
+    });
+
+    const toast = page.locator("#rail-layer-toast");
+    await expect(toast).toBeVisible();
+
+    const initial = await page.evaluate(() => {
+      const node = document.getElementById("rail-layer-toast");
+      if (!(node instanceof HTMLElement)) {
+        return { layers: 0, opacity: 0, shadow: "none" };
+      }
+      const before = getComputedStyle(node, "::before");
+      return {
+        layers: (before.backgroundImage.match(/linear-gradient/gi) || []).length,
+        opacity: Number.parseFloat(before.opacity) || 0,
+        shadow: before.boxShadow,
+      };
+    });
+
+    await toast.hover();
+    await page.waitForTimeout(150);
+
+    const hovered = await page.evaluate(() => {
+      const node = document.getElementById("rail-layer-toast");
+      if (!(node instanceof HTMLElement)) {
+        return { opacity: 0, shadow: "none" };
+      }
+      const before = getComputedStyle(node, "::before");
+      return {
+        opacity: Number.parseFloat(before.opacity) || 0,
+        shadow: before.boxShadow,
+      };
+    });
+
+    expect(initial.layers).toBeGreaterThanOrEqual(2);
+    expect(hovered.opacity).toBeGreaterThanOrEqual(initial.opacity);
+    expect(hovered.shadow).not.toBe("none");
+  });
+
+  test("toast icon badge renders from tokenized surface without affecting close icon", async ({
+    page,
+  }) => {
+    await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });
+    await clearToasts(page);
+
+    await page.evaluate(() => {
+      (window as any).createToast?.("Badge check", {
+        id: "icon-badge-toast",
+        kind: "info",
+        closeButton: true,
+        duration: 2800,
+      });
+    });
+
+    await expect(page.locator("#icon-badge-toast")).toBeVisible();
+
+    const styles = await page.evaluate(() => {
+      const icon = document.querySelector<HTMLElement>("#icon-badge-toast .toast-icon");
+      const closeIcon = document.querySelector<HTMLElement>("#icon-badge-toast .toast-close i");
+      if (!icon || !closeIcon) {
+        return {
+          iconBackground: "",
+          expectedBackground: "",
+          iconBorderColor: "",
+          expectedBorderColor: "",
+          iconBorderWidth: "",
+          closeMarginLeft: "",
+          closeMarginRight: "",
+        };
+      }
+
+      const iconVars = getComputedStyle(icon);
+      const badgeBgToken = iconVars.getPropertyValue("--toast-icon-badge-bg").trim();
+      const badgeBorderToken = iconVars
+        .getPropertyValue("--toast-icon-badge-border")
+        .trim();
+      const bgProbe = document.createElement("span");
+      bgProbe.style.backgroundColor = badgeBgToken;
+      bgProbe.style.borderColor = badgeBorderToken;
+      document.body.appendChild(bgProbe);
+      const expected = getComputedStyle(bgProbe);
+      const expectedBackground = expected.backgroundColor;
+      const expectedBorderColor = expected.borderTopColor;
+      bgProbe.remove();
+
+      const iconStyle = getComputedStyle(icon);
+      const closeStyle = getComputedStyle(closeIcon);
+      return {
+        iconBackground: iconStyle.backgroundColor,
+        expectedBackground,
+        iconBorderColor: iconStyle.borderTopColor,
+        expectedBorderColor,
+        iconBorderWidth: iconStyle.borderTopWidth,
+        closeMarginLeft: closeStyle.marginLeft,
+        closeMarginRight: closeStyle.marginRight,
+      };
+    });
+
+    expect(styles.iconBackground).toBe(styles.expectedBackground);
+    expect(styles.iconBorderColor).toBe(styles.expectedBorderColor);
+    expect(styles.iconBorderWidth).not.toBe("0px");
+    expect(styles.closeMarginLeft).toBe("0px");
+    expect(styles.closeMarginRight).toBe("0px");
+  });
+
+  test("dark-mode toast adapts contrast when prefers-contrast is more", async ({ page }) => {
+    await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });
+    await clearToasts(page);
+
+    const supportsContrast = await page.evaluate(
+      () => window.matchMedia("(prefers-contrast: more)").media !== "not all"
+    );
+    test.skip(!supportsContrast, "Browser does not expose prefers-contrast media query.");
+
+    await page.emulateMedia({
+      colorScheme: "dark",
+      contrast: "no-preference",
+    } as any);
+    await page.evaluate(() => {
+      document.body.classList.add("dark-mode");
+      document.body.classList.remove("light-mode");
+      (window as any).createToast?.("Dark contrast baseline", {
+        id: "contrast-baseline-toast",
+        kind: "info",
+        closeButton: true,
+        duration: 3200,
+      });
+    });
+    await expect(page.locator("#contrast-baseline-toast")).toBeVisible();
+    await page.evaluate(() => {
+      const close = document.querySelector<HTMLElement>(
+        "#contrast-baseline-toast .toast-close"
+      );
+      close?.focus();
+    });
+
+    const baseline = await page.evaluate(() => {
+      const toast = document.getElementById("contrast-baseline-toast");
+      const close = document.querySelector<HTMLElement>("#contrast-baseline-toast .toast-close");
+      if (!(toast instanceof HTMLElement) || !(close instanceof HTMLElement)) {
+        return { borderColor: "", outlineWidth: "" };
+      }
+      const toastStyle = getComputedStyle(toast);
+      const closeStyle = getComputedStyle(close);
+      return {
+        borderColor: toastStyle.borderTopColor,
+        outlineWidth: closeStyle.outlineWidth,
+      };
+    });
+
+    await clearToasts(page);
+    await page.emulateMedia({ colorScheme: "dark", contrast: "more" } as any);
+    const prefersMore = await page.evaluate(() =>
+      window.matchMedia("(prefers-contrast: more)").matches
+    );
+    test.skip(!prefersMore, "Contrast emulation is not available on this browser.");
+
+    await page.evaluate(() => {
+      document.body.classList.add("dark-mode");
+      document.body.classList.remove("light-mode");
+      (window as any).createToast?.("Dark contrast more", {
+        id: "contrast-more-toast",
+        kind: "info",
+        closeButton: true,
+        duration: 3200,
+      });
+    });
+    await expect(page.locator("#contrast-more-toast")).toBeVisible();
+    await page.evaluate(() => {
+      const close = document.querySelector<HTMLElement>("#contrast-more-toast .toast-close");
+      close?.focus();
+    });
+
+    const stronger = await page.evaluate(() => {
+      const toast = document.getElementById("contrast-more-toast");
+      const close = document.querySelector<HTMLElement>("#contrast-more-toast .toast-close");
+      if (!(toast instanceof HTMLElement) || !(close instanceof HTMLElement)) {
+        return { borderColor: "", outlineWidth: "" };
+      }
+      const toastStyle = getComputedStyle(toast);
+      const closeStyle = getComputedStyle(close);
+      return {
+        borderColor: toastStyle.borderTopColor,
+        outlineWidth: closeStyle.outlineWidth,
+      };
+    });
+
+    expect(stronger.borderColor).not.toBe(baseline.borderColor);
+    expect(Number.parseFloat(stronger.outlineWidth)).toBeGreaterThanOrEqual(
+      Number.parseFloat(baseline.outlineWidth)
+    );
   });
 
   for (const pagePath of [HOME_PATH, EN_HOME_PATH] as const) {

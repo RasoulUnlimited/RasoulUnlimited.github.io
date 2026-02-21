@@ -801,18 +801,7 @@ button:active,
   color: var(--accent-color) !important;
 }
 
-/* 5. Toast tokens (layout lives in main-style-base.css) */
-.dynamic-toast.toast-kind-success {
-  --toast-accent: #10b981;
-}
-
-.dynamic-toast.toast-kind-error {
-  --toast-accent: #ef4444;
-}
-
-.dynamic-toast.toast-kind-info {
-  --toast-accent: #3b82f6;
-}
+/* 5. Toast visual tokens are owned by main-style-base.css to avoid conflicts. */
 
 /* 6. Smooth Entrance (Endorphin: Lightness) */
 .fade-in-up {

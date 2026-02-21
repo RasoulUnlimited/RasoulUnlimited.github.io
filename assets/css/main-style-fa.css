@@ -1,24 +1,32 @@
 /* Specific Dark Mode Adjustments for Contrast */
 .dark-mode .fun-fact-toast {
-  background-color: var(--card-bg); /* Use darker card background for contrast */
-  color: var(--text-color); /* Use lighter text color for contrast */
-  border-right: 6px solid var(--primary-color); /* Use primary color for border */
+  --toast-surface: rgba(30, 41, 59, 0.94);
+  --toast-foreground: var(--text-color);
+  --toast-border: rgba(var(--primary-rgb), 0.56);
+  --toast-rail-core: var(--primary-color);
+  --toast-rail-glow: rgba(var(--primary-rgb), 0.52);
+  --toast-icon-badge-bg: rgba(var(--primary-rgb), 0.2);
+  --toast-icon-badge-border: rgba(var(--primary-rgb), 0.4);
 }
 
-.dark-mode .fun-fact-toast i {
-  color: var(--primary-color); /* Ensure icon color contrasts */
+.dark-mode .fun-fact-toast .toast-icon {
+  color: var(--primary-color);
 }
 
 .dark-mode .email-copy-toast,
 .dark-mode .social-link-copy-toast {
-  background-color: var(--card-bg); /* Use darker card background for contrast */
-  color: var(--text-color); /* Use lighter text color for contrast */
-  border-left: 6px solid var(--accent-color); /* Keep accent color for border */
+  --toast-surface: rgba(30, 41, 59, 0.94);
+  --toast-foreground: var(--text-color);
+  --toast-border: rgba(var(--primary-rgb), 0.52);
+  --toast-rail-core: var(--accent-color);
+  --toast-rail-glow: rgba(var(--primary-rgb), 0.48);
+  --toast-icon-badge-bg: rgba(var(--primary-rgb), 0.2);
+  --toast-icon-badge-border: rgba(var(--primary-rgb), 0.38);
 }
 
-.dark-mode .email-copy-toast i,
-.dark-mode .social-link-copy-toast i {
-  color: var(--accent-color); /* Ensure icon color contrasts */
+.dark-mode .email-copy-toast .toast-icon,
+.dark-mode .social-link-copy-toast .toast-icon {
+  color: var(--accent-color);
 }
 
 .dark-mode .skill-hover-message {
@@ -2356,6 +2364,8 @@ img[data-src].loaded,
 
 .theme-toast {
   --toast-accent: var(--highlight-color);
+  --toast-rail-core: var(--highlight-color);
+  --toast-rail-glow: rgba(var(--highlight-rgb), 0.46);
 }
 
 #explore-hint {
@@ -2463,64 +2473,90 @@ img[data-src].loaded,
 .dynamic-toast .toast-icon {
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
-  margin-left: var(--space-sm);
+  margin-left: var(--space-xs);
   margin-right: 0;
-  font-size: 1.2em;
+  font-size: 1rem;
 }
 
 .welcome-toast {
   --toast-accent: var(--highlight-color);
+  --toast-rail-core: var(--highlight-color);
+  --toast-rail-glow: rgba(var(--highlight-rgb), 0.44);
 }
-.welcome-toast i {
+.welcome-toast .toast-icon {
   color: var(--highlight-color);
 }
 
 .end-of-page-toast {
   --toast-accent: var(--highlight-color);
+  --toast-rail-core: var(--highlight-color);
+  --toast-rail-glow: rgba(var(--highlight-rgb), 0.44);
 }
-.end-of-page-toast i {
+.end-of-page-toast .toast-icon {
   color: var(--highlight-color);
 }
 
 .email-copy-toast {
   --toast-accent: var(--highlight-color);
-  background-color: var(--accent-color);
-  color: var(--toast-color);
+  --toast-rail-core: var(--highlight-color);
+  --toast-rail-glow: rgba(var(--highlight-rgb), 0.5);
+  --toast-surface: var(--accent-color);
+  --toast-surface-contrast: rgba(255, 255, 255, 0.16);
+  --toast-foreground: var(--toast-color);
+  --toast-border: rgba(255, 255, 255, 0.28);
+  --toast-icon-badge-bg: rgba(255, 255, 255, 0.16);
+  --toast-icon-badge-border: rgba(255, 255, 255, 0.32);
 }
-.email-copy-toast i {
+.email-copy-toast .toast-icon {
   color: var(--highlight-color);
 }
 
 .social-link-copy-toast {
   --toast-accent: var(--highlight-color);
-  background-color: var(--accent-color);
-  color: var(--toast-color);
+  --toast-rail-core: var(--highlight-color);
+  --toast-rail-glow: rgba(var(--highlight-rgb), 0.5);
+  --toast-surface: var(--accent-color);
+  --toast-surface-contrast: rgba(255, 255, 255, 0.16);
+  --toast-foreground: var(--toast-color);
+  --toast-border: rgba(255, 255, 255, 0.28);
+  --toast-icon-badge-bg: rgba(255, 255, 255, 0.16);
+  --toast-icon-badge-border: rgba(255, 255, 255, 0.32);
 }
-.social-link-copy-toast i {
+.social-link-copy-toast .toast-icon {
   color: var(--highlight-color);
 }
 
 .exploration-toast {
   --toast-accent: var(--accent-color);
+  --toast-rail-core: var(--accent-color);
+  --toast-rail-glow: rgba(var(--primary-rgb), 0.42);
+  --toast-icon-badge-bg: rgba(var(--primary-rgb), 0.14);
+  --toast-icon-badge-border: rgba(var(--primary-rgb), 0.32);
 }
 
-.exploration-toast i {
+.exploration-toast .toast-icon {
   color: var(--accent-color);
 }
 
 .final-exploration-toast {
   --toast-accent: var(--primary-color);
-  background: linear-gradient(
+  --toast-rail-core: var(--primary-color);
+  --toast-rail-glow: rgba(var(--primary-rgb), 0.5);
+  --toast-surface: linear-gradient(
     135deg,
     var(--highlight-color) 0%,
     var(--accent-color) 100%
   );
-  color: var(--secondary-color);
+  --toast-surface-contrast: rgba(255, 255, 255, 0.12);
+  --toast-foreground: var(--secondary-color);
+  --toast-border: rgba(255, 255, 255, 0.28);
+  --toast-icon-badge-bg: rgba(255, 255, 255, 0.2);
+  --toast-icon-badge-border: rgba(255, 255, 255, 0.34);
   isolation: isolate;
   overflow: hidden;
   box-shadow:
-    0 10px 40px rgba(0, 0, 0, 0.5),
-    0 0 20px var(--highlight-color);
+    0 14px 34px rgba(0, 0, 0, 0.34),
+    0 0 16px rgba(var(--highlight-rgb), 0.34);
   will-change: box-shadow, background;
 }
 
@@ -2531,12 +2567,12 @@ img[data-src].loaded,
   border-radius: inherit;
   pointer-events: none;
   box-shadow: 0 0 0 0 rgba(var(--highlight-rgb), 0.35);
-  animation: celebrationPulse 2s infinite ease-in-out;
+  animation: celebrationPulse 2.2s infinite ease-in-out;
 }
 
-.final-exploration-toast i {
+.final-exploration-toast .toast-icon {
   color: var(--primary-color);
-  animation: bounceIn 1s ease-out;
+  animation: bounceIn 0.7s ease-out;
   will-change: transform;
 }
 
@@ -2571,12 +2607,18 @@ img[data-src].loaded,
 
 .fun-fact-toast {
   --toast-accent: var(--primary-color);
-  background-color: var(--highlight-color);
-  color: var(--secondary-color);
+  --toast-rail-core: var(--primary-color);
+  --toast-rail-glow: rgba(var(--primary-rgb), 0.46);
+  --toast-surface: var(--highlight-color);
+  --toast-surface-contrast: rgba(255, 255, 255, 0.2);
+  --toast-foreground: var(--secondary-color);
+  --toast-border: rgba(0, 0, 0, 0.18);
+  --toast-icon-badge-bg: rgba(0, 0, 0, 0.1);
+  --toast-icon-badge-border: rgba(0, 0, 0, 0.18);
   will-change: background-color, color;
 }
 
-.fun-fact-toast i {
+.fun-fact-toast .toast-icon {
   color: var(--primary-color);
 }
 
@@ -3182,7 +3224,7 @@ img[data-src].loaded,
   .sparkle-effect,
   .fun-fact-close,
   .final-exploration-toast,
-  .final-exploration-toast i,
+  .final-exploration-toast .toast-icon,
   .lazy-image,
   img.is-loading,
   img.loaded {
