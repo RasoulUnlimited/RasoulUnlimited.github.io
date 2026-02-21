@@ -67,36 +67,47 @@
       }
     }
 
-    if (typeof window.createToast !== "function") {
-      window.createToast = function (message) {
-        const toast = document.createElement("div");
-        toast.className = "toast-notification";
-        toast.textContent = message;
-        toast.style.cssText = [
-          "position:fixed",
-          "bottom:20px",
-          "left:50%",
-          "transform:translateX(-50%)",
-          "background:rgba(0,0,0,0.8)",
-          "color:#fff",
-          "padding:10px 20px",
-          "border-radius:20px",
-          "z-index:10000",
-          "opacity:0",
-          "transition:opacity 0.3s",
-          "font-family:inherit",
-          "font-size:0.9rem",
-        ].join(";");
+    function showLocalToast(message) {
+      const toast = document.createElement("div");
+      toast.className = "toast-notification";
+      toast.textContent = message;
+      toast.style.cssText = [
+        "position:fixed",
+        "bottom:20px",
+        "left:50%",
+        "transform:translateX(-50%)",
+        "background:rgba(0,0,0,0.8)",
+        "color:#fff",
+        "padding:10px 20px",
+        "border-radius:20px",
+        "z-index:10000",
+        "opacity:0",
+        "transition:opacity 0.3s",
+        "font-family:inherit",
+        "font-size:0.9rem",
+      ].join(";");
 
-        document.body.appendChild(toast);
-        requestAnimationFrame(() => {
-          toast.style.opacity = "1";
-        });
-        setTimeout(() => {
-          toast.style.opacity = "0";
-          setTimeout(() => toast.remove(), 300);
-        }, 2200);
-      };
+      document.body.appendChild(toast);
+      requestAnimationFrame(() => {
+        toast.style.opacity = "1";
+      });
+      setTimeout(() => {
+        toast.style.opacity = "0";
+        setTimeout(() => toast.remove(), 300);
+      }, 2200);
+    }
+
+    function emitToast(message, options) {
+      if (!message) {
+        return;
+      }
+      if (typeof window.createToast === "function") {
+        try {
+          window.createToast(message, options);
+          return;
+        } catch {}
+      }
+      showLocalToast(message);
     }
 
     const normalizeText = (input) =>
@@ -429,9 +440,17 @@
           .then((result) => {
             if (!result.ok) {
               if (result.mode === "unsupported") {
-                window.createToast(STRINGS.copyUnsupported);
+                emitToast(STRINGS.copyUnsupported, {
+                  id: "faq-copy-unsupported-toast",
+                  kind: "info",
+                  duration: 3000,
+                });
               } else {
-                window.createToast(STRINGS.copyFailed);
+                emitToast(STRINGS.copyFailed, {
+                  id: "faq-copy-failed-toast",
+                  kind: "error",
+                  duration: 2600,
+                });
               }
               return;
             }
@@ -439,13 +458,23 @@
             const original = button.innerHTML;
             button.innerHTML = '<i class="fas fa-check" aria-hidden="true"></i>';
             button.classList.add("copied");
-            window.createToast(STRINGS.copySuccess);
+            emitToast(STRINGS.copySuccess, {
+              id: "faq-copy-success-toast",
+              kind: "success",
+              duration: 1800,
+            });
             setTimeout(() => {
               button.innerHTML = original;
               button.classList.remove("copied");
             }, 1800);
           })
-          .catch(() => window.createToast(STRINGS.copyFailed));
+          .catch(() =>
+            emitToast(STRINGS.copyFailed, {
+              id: "faq-copy-failed-toast",
+              kind: "error",
+              duration: 2600,
+            })
+          );
       });
     });
 
@@ -487,7 +516,11 @@
           }, 3000);
         }
 
-        window.createToast(STRINGS.feedbackSaved);
+        emitToast(STRINGS.feedbackSaved, {
+          id: "faq-feedback-saved-toast",
+          kind: "success",
+          duration: 2400,
+        });
       });
     });
 

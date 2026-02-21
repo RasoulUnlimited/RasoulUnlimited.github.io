@@ -1,6 +1,7 @@
 import { expect, test, type Page } from "@playwright/test";
 
 const HOME_PATH = "/index.html";
+const EN_HOME_PATH = "/en/index.html";
 
 async function clearToasts(page: Page) {
   await page.evaluate(() => {
@@ -274,5 +275,195 @@ test.describe("Toast lifecycle", () => {
       .toBe(0);
 
     await context.close();
+  });
+
+  test("theme toast uses non-conflicting id and keeps DOM ids unique", async ({ page }) => {
+    await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });
+    await clearToasts(page);
+
+    await expect(page.locator("#theme-toast")).toHaveCount(0);
+
+    await page.evaluate(() => {
+      const toggle = document.getElementById("theme-toggle");
+      if (!(toggle instanceof HTMLInputElement)) {
+        return;
+      }
+      for (let i = 0; i < 2; i += 1) {
+        toggle.checked = !toggle.checked;
+        toggle.dispatchEvent(new Event("change", { bubbles: true }));
+      }
+    });
+
+    await expect(page.locator("#theme-change-toast")).toHaveCount(1);
+
+    const duplicateIds = await page.evaluate(() => {
+      const counts = new Map<string, number>();
+      document.querySelectorAll<HTMLElement>("[id]").forEach((node) => {
+        const key = node.id;
+        counts.set(key, (counts.get(key) || 0) + 1);
+      });
+      return Array.from(counts.entries()).filter(([, count]) => count > 1);
+    });
+    expect(duplicateIds).toHaveLength(0);
+  });
+
+  test("toast pauses on hover and resumes lifecycle on leave", async ({ page }) => {
+    await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });
+    await clearToasts(page);
+
+    await page.evaluate(() => {
+      (window as any).createToast?.("Pause and resume", {
+        id: "pause-resume-toast",
+        kind: "info",
+        duration: 420,
+      });
+    });
+
+    const toast = page.locator("#pause-resume-toast");
+    await expect(toast).toBeVisible();
+    await page.waitForTimeout(130);
+    await toast.dispatchEvent("pointerenter");
+    await page.waitForTimeout(500);
+    await expect(toast).toBeVisible();
+
+    await toast.dispatchEvent("pointerleave");
+    await expect
+      .poll(
+        async () =>
+          page.evaluate(() => document.querySelectorAll("#pause-resume-toast").length),
+        { timeout: 2500 }
+      )
+      .toBe(0);
+  });
+
+  test("Escape dismisses the most recent visible toast", async ({ page }) => {
+    await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });
+    await clearToasts(page);
+
+    await page.evaluate(() => {
+      (window as any).createToast?.("First escape target", {
+        id: "escape-toast-1",
+        kind: "info",
+        duration: 6000,
+      });
+      (window as any).createToast?.("Second escape target", {
+        id: "escape-toast-2",
+        kind: "success",
+        duration: 6000,
+      });
+    });
+
+    await expect(page.locator("#escape-toast-2")).toBeVisible();
+    await page.keyboard.press("Escape");
+
+    await expect(page.locator("#escape-toast-2")).toHaveCount(0);
+    await expect(page.locator("#escape-toast-1")).toBeVisible();
+
+    await page.keyboard.press("Escape");
+    await expect(page.locator("#escape-toast-1")).toHaveCount(0);
+  });
+
+  test("toast supports danger icon token mapping", async ({ page }) => {
+    await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });
+    await clearToasts(page);
+
+    await page.evaluate(() => {
+      (window as any).createToast?.("Danger icon token", {
+        id: "danger-token-toast",
+        kind: "error",
+        iconClass: "fas fa-exclamation-triangle",
+        iconColor: "var(--toast-danger)",
+        duration: 2400,
+      });
+    });
+
+    await expect(page.locator("#danger-token-toast")).toBeVisible();
+
+    const colors = await page.evaluate(() => {
+      const icon = document.querySelector<HTMLElement>("#danger-token-toast .toast-icon");
+      if (!icon) {
+        return { actual: "", expected: "" };
+      }
+
+      const probe = document.createElement("span");
+      probe.style.color = "var(--toast-danger)";
+      document.body.appendChild(probe);
+      const expected = getComputedStyle(probe).color;
+      probe.remove();
+
+      return {
+        actual: getComputedStyle(icon).color,
+        expected,
+      };
+    });
+
+    expect(colors.actual).toBe(colors.expected);
+  });
+
+  for (const pagePath of [HOME_PATH, EN_HOME_PATH] as const) {
+    test(`close icon keeps zero side margins on ${pagePath}`, async ({ page }) => {
+      await page.goto(pagePath, { waitUntil: "domcontentloaded" });
+      await clearToasts(page);
+
+      await page.evaluate(() => {
+        (window as any).createToast?.("Close icon alignment", {
+          id: "close-icon-align-toast",
+          kind: "info",
+          closeButton: true,
+          duration: 2800,
+        });
+      });
+
+      await expect(page.locator("#close-icon-align-toast")).toBeVisible();
+
+      const margins = await page.evaluate(() => {
+        const icon = document.querySelector<HTMLElement>(
+          "#close-icon-align-toast .toast-close i"
+        );
+        if (!icon) {
+          return { left: "", right: "" };
+        }
+        const style = getComputedStyle(icon);
+        return {
+          left: style.marginLeft,
+          right: style.marginRight,
+        };
+      });
+
+      expect(margins.left).toBe("0px");
+      expect(margins.right).toBe("0px");
+    });
+  }
+
+  test("faq local fallback toast works without re-defining global API", async ({ page }) => {
+    await page.addInitScript(() => {
+      Object.defineProperty(navigator, "clipboard", {
+        configurable: true,
+        value: undefined,
+      });
+      try {
+        Object.defineProperty(document, "execCommand", {
+          configurable: true,
+          value: () => false,
+        });
+      } catch {}
+    });
+
+    await page.goto(HOME_PATH, { waitUntil: "domcontentloaded" });
+    await page.evaluate(() => {
+      // Simulate missing global toast engine after page boot.
+      try {
+        (window as any).createToast = undefined;
+      } catch {}
+    });
+
+    const copyFaqLink = page.locator(".copy-faq-link").first();
+    await expect(copyFaqLink).toBeVisible();
+    await copyFaqLink.click();
+
+    await expect(page.locator(".toast-notification")).toBeVisible();
+    await expect
+      .poll(async () => page.evaluate(() => typeof (window as any).createToast))
+      .toBe("undefined");
   });
 });

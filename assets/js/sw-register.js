@@ -26,10 +26,16 @@
   let readyNotified = false;
   let updateNotified = false;
 
-  function safeToast(message) {
-    if (typeof window.createToast === "function") {
-      window.createToast(message);
+  function safeToast(message, options = {}) {
+    if (!message || typeof window.createToast !== "function") {
+      return;
     }
+    const settings = {
+      kind: "info",
+      duration: 2600,
+      ...options,
+    };
+    window.createToast(message, settings);
   }
 
   function notifyReady() {
@@ -37,7 +43,11 @@
       return;
     }
     readyNotified = true;
-    safeToast(isFa ? "Offline support enabled" : "Offline support enabled");
+    safeToast(isFa ? "Offline support enabled" : "Offline support enabled", {
+      id: "sw-ready-toast",
+      kind: "success",
+      duration: 2200,
+    });
   }
 
   function notifyUpdate() {
@@ -48,7 +58,12 @@
     safeToast(
       isFa
         ? "A new version is available. Refresh to update."
-        : "A new version is available. Refresh to update."
+        : "A new version is available. Refresh to update.",
+      {
+        id: "sw-update-toast",
+        kind: "info",
+        duration: 3200,
+      }
     );
   }
 

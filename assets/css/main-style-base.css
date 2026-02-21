@@ -5,6 +5,7 @@
 body {
   margin: 0;
   font-family: var(--font-body, sans-serif);
+  --toast-danger: #ef4444;
 }
 
 /* --- Toast --- */
@@ -153,6 +154,8 @@ body {
   font-size: 1.05rem;
   line-height: 1;
   flex-shrink: 0;
+  width: 1.2em;
+  text-align: center;
 }
 
 .dynamic-toast .toast-close {
@@ -176,6 +179,18 @@ body {
 
 .dynamic-toast .toast-close:active {
   transform: scale(0.96);
+}
+
+.dynamic-toast .toast-close:focus-visible {
+  outline: 2px solid rgba(var(--highlight-rgb, 255, 193, 7), 0.95);
+  outline-offset: 2px;
+  background-color: rgba(255, 255, 255, 0.22);
+  box-shadow: 0 0 0 3px rgba(var(--highlight-rgb, 255, 193, 7), 0.32);
+}
+
+.dynamic-toast .toast-close i {
+  margin: 0;
+  font-size: 0.95rem;
 }
 
 .dynamic-toast .toast-progress {
@@ -284,6 +299,7 @@ html[dir="rtl"] .dynamic-toast .toast-progress {
   --giscus-bg: #1e293b;
   --skills-bg: #334155;
   --toast-bg: var(--primary-color);
+  --toast-danger: #f87171;
   --toast-color: #0f172a;
   --shadow-color-light: rgba(0, 0, 0, 0.3);
   --shadow-color-medium: rgba(0, 0, 0, 0.5);
@@ -725,6 +741,10 @@ html[data-color-scheme="light"] {
   color: var(--highlight-color);
 }
 
+.dynamic-toast i[data-icon-color="var(--toast-danger)"] {
+  color: var(--toast-danger);
+}
+
 /* Home hero styles live in assets/css/hero-enhancement.css */
 
 /* Timeline Enhancements */
@@ -931,7 +951,7 @@ html[data-color-scheme="light"] {
   .lang-switcher,
   .hero-cta-group,
   .copy-btn,
-  #theme-toast,
+  .toast-viewport,
   #scroll-progress-bar {
     display: none !important;
   }

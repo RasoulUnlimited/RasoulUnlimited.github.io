@@ -2411,7 +2411,6 @@ section h2::after {
   text-wrap: pretty;
 }
 
-.dynamic-toast i,
 .dynamic-toast .toast-icon {
   font-family: "Font Awesome 6 Free";
   font-weight: 900;

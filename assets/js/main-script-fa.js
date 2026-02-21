@@ -1498,7 +1498,7 @@
         id: errId,
         kind: "error",
         iconClass: "fas fa-exclamation-triangle",
-        iconColor: "red",
+        iconColor: "var(--toast-danger)",
         duration: 2800,
       });
     }
@@ -1615,7 +1615,7 @@
               id: "share-error-toast",
               kind: "error",
               iconClass: "fas fa-exclamation-triangle",
-              iconColor: "red",
+              iconColor: "var(--toast-danger)",
               duration: 2800,
             });
           }

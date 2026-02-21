@@ -21,6 +21,31 @@
     };
 
     const DAY_MS = 86400000;
+    const toastCooldowns = new Map();
+
+    function emitToast(message, options = {}) {
+      if (!message || typeof window.createToast !== "function") {
+        return;
+      }
+
+      const {
+        id = "",
+        kind = "info",
+        duration = 2600,
+        cooldownMs = 0,
+      } = options;
+
+      if (id && cooldownMs > 0) {
+        const now = Date.now();
+        const lastAt = toastCooldowns.get(id) || 0;
+        if (now - lastAt < cooldownMs) {
+          return;
+        }
+        toastCooldowns.set(id, now);
+      }
+
+      window.createToast(message, { id, kind, duration });
+    }
 
     // --- Relative time formatter with small cache ---
 
@@ -294,15 +319,21 @@
         navigator.clipboard
           .writeText(text)
           .then(() => {
-            if (typeof window.createToast === "function") {
-              window.createToast(messages.success);
-            }
+            emitToast(messages.success, {
+              id: "security-copy-success-toast",
+              kind: "success",
+              duration: 1800,
+              cooldownMs: 300,
+            });
           })
           .catch((err) => {
             console.error("Copy failed:", err);
-            if (typeof window.createToast === "function") {
-              window.createToast(messages.fail);
-            }
+            emitToast(messages.fail, {
+              id: "security-copy-fail-toast",
+              kind: "error",
+              duration: 2600,
+              cooldownMs: 300,
+            });
           });
       } else {
         const hidden = document.createElement("textarea");
@@ -314,16 +345,22 @@
         hidden.select();
         try {
           const successful = document.execCommand("copy");
-          if (typeof window.createToast === "function") {
-            window.createToast(
-              successful ? messages.success : messages.fail
-            );
-          }
+          emitToast(successful ? messages.success : messages.fail, {
+            id: successful
+              ? "security-copy-success-toast"
+              : "security-copy-fail-toast",
+            kind: successful ? "success" : "error",
+            duration: successful ? 1800 : 2600,
+            cooldownMs: 300,
+          });
         } catch (err) {
           console.error("execCommand copy failed:", err);
-          if (typeof window.createToast === "function") {
-            window.createToast(messages.fail);
-          }
+          emitToast(messages.fail, {
+            id: "security-copy-fail-toast",
+            kind: "error",
+            duration: 2600,
+            cooldownMs: 300,
+          });
         }
         document.body.removeChild(hidden);
       }
@@ -779,24 +816,32 @@
           timelineList.setAttribute("aria-busy", "false");
           initializeTimeline();
           setupTimelineSearch();
-          if (force && typeof window.createToast === "function") {
-            window.createToast(messages.refreshed);
+          if (force) {
+            emitToast(messages.refreshed, {
+              id: "security-timeline-refresh-toast",
+              kind: "success",
+              duration: 2200,
+              cooldownMs: 600,
+            });
           }
         })
         .catch((err) => {
-          if (typeof window.createToast === "function") {
-            let msg = messages.fetchFail;
-            if (err && err.message === "offline") {
-              msg = messages.offline;
-            } else if (err && err.message === "rate-limit") {
-              msg = messages.rateLimit;
-            } else if (err && err.message === "stale-data") {
-              // استفاده‌ی بی‌سروصدا از داده‌ی staled در ادامه
-              msg = "";
-            }
-            if (msg) {
-              window.createToast(msg);
-            }
+          let msg = messages.fetchFail;
+          if (err && err.message === "offline") {
+            msg = messages.offline;
+          } else if (err && err.message === "rate-limit") {
+            msg = messages.rateLimit;
+          } else if (err && err.message === "stale-data") {
+            // استفاده‌ی بی‌سروصدا از داده‌ی staled در ادامه
+            msg = "";
+          }
+          if (msg) {
+            emitToast(msg, {
+              id: "security-timeline-fetch-toast",
+              kind: msg === messages.offline ? "info" : "error",
+              duration: 3000,
+              cooldownMs: 1200,
+            });
           }
 
           if (
@@ -1040,15 +1085,18 @@
             return;
           }
 
-          if (typeof window.createToast === "function") {
-            let msg = messages.fetchFail;
-            if (err && err.message === "offline") {
-              msg = messages.offline;
-            } else if (err && err.message === "rate-limit") {
-              msg = messages.rateLimit;
-            }
-            window.createToast(msg);
+          let msg = messages.fetchFail;
+          if (err && err.message === "offline") {
+            msg = messages.offline;
+          } else if (err && err.message === "rate-limit") {
+            msg = messages.rateLimit;
           }
+          emitToast(msg, {
+            id: "security-last-updated-fetch-toast",
+            kind: msg === messages.offline ? "info" : "error",
+            duration: 3000,
+            cooldownMs: 1200,
+          });
         });
     }
 
@@ -1134,15 +1182,18 @@
               : "Failed to load advisories.";
           }
 
-          if (typeof window.createToast === "function") {
-            let msg = messages.fetchFail;
-            if (err && err.message === "offline") {
-              msg = messages.offline;
-            } else if (err && err.message === "rate-limit") {
-              msg = messages.rateLimit;
-            }
-            window.createToast(msg);
+          let msg = messages.fetchFail;
+          if (err && err.message === "offline") {
+            msg = messages.offline;
+          } else if (err && err.message === "rate-limit") {
+            msg = messages.rateLimit;
           }
+          emitToast(msg, {
+            id: "security-advisories-fetch-toast",
+            kind: msg === messages.offline ? "info" : "error",
+            duration: 3000,
+            cooldownMs: 1200,
+          });
         })
         .finally(() => {
           if (btn) {
@@ -1267,9 +1318,12 @@
     // --- Online / Offline events ---
     window.addEventListener("online", () => {
       updateConnection();
-      if (typeof window.createToast === "function") {
-        window.createToast(messages.online);
-      }
+      emitToast(messages.online, {
+        id: "security-network-online-toast",
+        kind: "success",
+        duration: 2200,
+        cooldownMs: 800,
+      });
       loadTimeline(true);
       loadAdvisories(true);
       loadPolicyExpiration(true);
@@ -1278,9 +1332,12 @@
 
     window.addEventListener("offline", () => {
       updateConnection();
-      if (typeof window.createToast === "function") {
-        window.createToast(messages.offline);
-      }
+      emitToast(messages.offline, {
+        id: "security-network-offline-toast",
+        kind: "info",
+        duration: 2600,
+        cooldownMs: 800,
+      });
     });
 
     // Cleanup timers and intervals قبل unload

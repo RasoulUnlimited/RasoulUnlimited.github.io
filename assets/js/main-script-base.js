@@ -103,6 +103,7 @@
       queue: [],
     },
   };
+  let toastKeyboardShortcutsInstalled = false;
 
   function normalizeToastKind(kind) {
     const safeKind = String(kind || "default").toLowerCase();
@@ -268,6 +269,7 @@
       }
 
       stopToastTimers(entry);
+      releaseToastInteractions(entry);
       entry.mounted = false;
       entry.dismissing = false;
       if (entry.settings.id && toastRegistry.get(entry.settings.id) === entry) {
@@ -290,6 +292,163 @@
       } catch {}
       entry.progressAnimation = null;
     }
+    entry.lifecycleStartedAt = 0;
+  }
+
+  function getEntryRemainingDuration(entry) {
+    if (!entry || !entry.settings || entry.settings.duration <= 0) {
+      return 0;
+    }
+    if (!Number.isFinite(entry.remainingDuration)) {
+      return entry.settings.duration;
+    }
+    return Math.max(0, Math.round(entry.remainingDuration));
+  }
+
+  function pauseToastLifecycle(entry) {
+    if (
+      !entry ||
+      !entry.settings ||
+      entry.settings.duration <= 0 ||
+      entry.lifecyclePaused
+    ) {
+      return;
+    }
+
+    const baseDuration = getEntryRemainingDuration(entry);
+    if (entry.lifecycleStartedAt > 0) {
+      const elapsed = Math.max(0, Date.now() - entry.lifecycleStartedAt);
+      entry.remainingDuration = Math.max(0, baseDuration - elapsed);
+    } else {
+      entry.remainingDuration = baseDuration;
+    }
+
+    entry.lifecyclePaused = true;
+    stopToastTimers(entry);
+  }
+
+  function resumeToastLifecycle(entry) {
+    if (
+      !entry ||
+      !entry.settings ||
+      entry.settings.duration <= 0 ||
+      !entry.lifecyclePaused
+    ) {
+      return;
+    }
+
+    entry.lifecyclePaused = false;
+    startToastLifecycle(entry, { useRemaining: true });
+  }
+
+  function installToastInteractions(entry) {
+    if (
+      !entry ||
+      !(entry.toast instanceof HTMLElement) ||
+      entry.interactionsInstalled
+    ) {
+      return;
+    }
+
+    const toast = entry.toast;
+    const onPointerEnter = () => {
+      pauseToastLifecycle(entry);
+    };
+    const onPointerLeave = () => {
+      resumeToastLifecycle(entry);
+    };
+    const onFocusIn = () => {
+      pauseToastLifecycle(entry);
+    };
+    const onFocusOut = (event) => {
+      const next = event.relatedTarget;
+      if (next instanceof Node && toast.contains(next)) {
+        return;
+      }
+      resumeToastLifecycle(entry);
+    };
+    const onKeyDown = (event) => {
+      if (event.key !== "Escape") {
+        return;
+      }
+      event.stopPropagation();
+      dismissToastEntry(entry);
+    };
+
+    toast.addEventListener("pointerenter", onPointerEnter);
+    toast.addEventListener("pointerleave", onPointerLeave);
+    toast.addEventListener("focusin", onFocusIn);
+    toast.addEventListener("focusout", onFocusOut);
+    toast.addEventListener("keydown", onKeyDown);
+
+    entry.interactionsInstalled = true;
+    entry.interactionsCleanup = () => {
+      toast.removeEventListener("pointerenter", onPointerEnter);
+      toast.removeEventListener("pointerleave", onPointerLeave);
+      toast.removeEventListener("focusin", onFocusIn);
+      toast.removeEventListener("focusout", onFocusOut);
+      toast.removeEventListener("keydown", onKeyDown);
+      entry.interactionsInstalled = false;
+    };
+  }
+
+  function releaseToastInteractions(entry) {
+    if (!entry || typeof entry.interactionsCleanup !== "function") {
+      if (entry) {
+        entry.interactionsInstalled = false;
+      }
+      return;
+    }
+    entry.interactionsCleanup();
+    entry.interactionsCleanup = null;
+    entry.interactionsInstalled = false;
+  }
+
+  function getMostRecentVisibleToastEntry() {
+    const visible = [...toastState.top.visible, ...toastState.bottom.visible]
+      .filter(
+        (entry) =>
+          !!entry &&
+          !!entry.mounted &&
+          !!entry.toast &&
+          entry.toast.isConnected &&
+          !entry.dismissing
+      )
+      .sort((a, b) => (b.lastMountedAt || 0) - (a.lastMountedAt || 0));
+
+    return visible[0] || null;
+  }
+
+  function installToastKeyboardShortcuts() {
+    if (toastKeyboardShortcutsInstalled || !document) {
+      return;
+    }
+    toastKeyboardShortcutsInstalled = true;
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") {
+        return;
+      }
+
+      const target = event.target;
+      if (
+        target instanceof HTMLElement &&
+        (target.isContentEditable ||
+          target.tagName === "INPUT" ||
+          target.tagName === "TEXTAREA" ||
+          target.tagName === "SELECT")
+      ) {
+        return;
+      }
+
+      const topEntry = getMostRecentVisibleToastEntry();
+      if (!topEntry) {
+        return;
+      }
+
+      event.stopPropagation();
+      dismissToastEntry(topEntry);
+    });
   }
 
   function stopSwipeRebound(entry) {
@@ -361,7 +520,7 @@
       stopSwipeRebound(entry);
       toast.classList.add("is-swiping");
       toast.classList.remove("swipe-rebound", "swipe-dismiss");
-      stopToastTimers(entry);
+      pauseToastLifecycle(entry);
 
       if (typeof toast.setPointerCapture === "function") {
         try {
@@ -430,7 +589,7 @@
         toast.classList.remove("swipe-rebound");
         state.reboundTimer = null;
       }, prefersReducedMotion ? 1 : 220);
-      startToastLifecycle(entry);
+      resumeToastLifecycle(entry);
     };
 
     const onPointerCancel = (event) => {
@@ -445,7 +604,7 @@
         toast.classList.remove("swipe-rebound");
         state.reboundTimer = null;
       }, prefersReducedMotion ? 1 : 220);
-      startToastLifecycle(entry);
+      resumeToastLifecycle(entry);
     };
 
     toast.addEventListener("pointerdown", onPointerDown);
@@ -530,14 +689,18 @@
     toast.replaceChildren(fragment);
   }
 
-  function startToastProgress(entry) {
+  function startToastProgress(entry, durationOverride) {
     const progress = entry.toast.querySelector(".toast-progress");
     if (!(progress instanceof HTMLElement)) {
       return;
     }
 
-    progress.hidden = entry.settings.duration <= 0;
-    if (prefersReducedMotion || entry.settings.duration <= 0) {
+    const duration =
+      Number.isFinite(durationOverride) && durationOverride >= 0
+        ? Math.round(durationOverride)
+        : entry.settings.duration;
+    progress.hidden = duration <= 0;
+    if (prefersReducedMotion || duration <= 0) {
       return;
     }
 
@@ -552,7 +715,7 @@
           { transform: "scaleX(0)" },
         ],
         {
-          duration: entry.settings.duration,
+          duration,
           easing: "linear",
           fill: "forwards",
         }
@@ -560,14 +723,23 @@
     } catch {}
   }
 
-  function startToastLifecycle(entry) {
+  function startToastLifecycle(entry, options = {}) {
+    const useRemaining = !!options.useRemaining;
     stopToastTimers(entry);
-    startToastProgress(entry);
+    const duration =
+      entry.settings.duration > 0
+        ? useRemaining
+          ? getEntryRemainingDuration(entry)
+          : entry.settings.duration
+        : 0;
+    entry.remainingDuration = duration;
+    entry.lifecycleStartedAt = duration > 0 ? Date.now() : 0;
+    startToastProgress(entry, duration);
 
-    if (entry.settings.duration > 0) {
+    if (duration > 0) {
       entry.timer = setTimeout(() => {
         dismissToastEntry(entry);
-      }, entry.settings.duration);
+      }, duration);
     }
   }
 
@@ -577,10 +749,15 @@
     }
 
     entry.dismissing = false;
+    entry.lifecyclePaused = false;
+    entry.remainingDuration = entry.settings.duration;
+    entry.lifecycleStartedAt = 0;
+    entry.lastMountedAt = Date.now();
     resetSwipeState(entry);
     applyToastContent(entry);
     entry.toast.classList.add("show");
     entry.toast.classList.remove("is-closing");
+    installToastInteractions(entry);
     startToastLifecycle(entry);
     syncToastStack(entry.state || getToastState(entry.settings.position));
   }
@@ -595,12 +772,17 @@
     entry.state = state;
     entry.mounted = true;
     entry.dismissing = false;
+    entry.lifecyclePaused = false;
+    entry.remainingDuration = entry.settings.duration;
+    entry.lifecycleStartedAt = 0;
+    entry.lastMountedAt = Date.now();
     resetSwipeState(entry);
     applyToastContent(entry);
     viewport.appendChild(entry.toast);
     state.visible.push(entry);
     syncToastStack(state);
     installToastSwipe(entry);
+    installToastInteractions(entry);
 
     requestAnimationFrame(() => {
       if (!entry.mounted) {
@@ -657,6 +839,7 @@
         toastRegistry.delete(entry.settings.id);
       }
       releaseToastSwipe(entry);
+      releaseToastInteractions(entry);
       entry.dismissing = false;
       return;
     }
@@ -679,6 +862,7 @@
         toastRegistry.delete(entry.settings.id);
       }
       releaseToastSwipe(entry);
+      releaseToastInteractions(entry);
       toast.remove();
       entry.mounted = false;
       entry.dismissing = false;
@@ -746,6 +930,12 @@
       dismissing: false,
       mounted: false,
       swipe: null,
+      remainingDuration: settings.duration,
+      lifecycleStartedAt: 0,
+      lifecyclePaused: false,
+      interactionsInstalled: false,
+      interactionsCleanup: null,
+      lastMountedAt: 0,
     };
 
     if (settings.id) {
@@ -770,6 +960,7 @@
 
   // Expose the unified toast API globally.
   window.createToast = createToast;
+  installToastKeyboardShortcuts();
 
   function getNetworkMessage(online) {
     const strings = window.langStrings || {};
@@ -1042,7 +1233,7 @@
       const msg = window.langStrings.themeChanged(theme);
       if (msg) {
         createToast(msg, {
-          id: "theme-toast",
+          id: "theme-change-toast",
           kind: "info",
           customClass: "theme-toast",
           duration: 1800,
