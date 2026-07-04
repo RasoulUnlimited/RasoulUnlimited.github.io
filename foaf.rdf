@@ -18,7 +18,8 @@
     <dc:title>FOAF Profile – Mohammad Rasoul Sohrabi (Rasoul Unlimited)</dc:title>
     <dc:language>en</dc:language>
     <dc:creator>Mohammad Rasoul Sohrabi</dc:creator>
-    <dc:date>2025-07-21</dc:date>
+    <dc:date>2026-01-03</dc:date>
+    <dc:modified>2026-01-03</dc:modified>
   </foaf:PersonalProfileDocument>
 
   <!-- Person Entity -->
@@ -31,15 +32,17 @@
     <foaf:birthday>2005-09-06</foaf:birthday>
 
     <!-- Titles & roles -->
-    <foaf:title>Biomedical Engineering Student & Software Developer</foaf:title>
+    <foaf:title>Biomedical Engineering Student &amp; Software Developer</foaf:title>
     <schema:jobTitle>Full-stack Developer</schema:jobTitle>
-    <schema:jobTitle>Digital Identity & Web Systems Designer</schema:jobTitle>
+    <schema:jobTitle>Digital Identity &amp; Web Systems Designer</schema:jobTitle>
+    <schema:jobTitle>کارشناس ارشد فروش و توسعه‌دهنده وب در IPSS</schema:jobTitle>
 
     <!-- Profile & identity -->
     <foaf:isPrimaryTopicOf rdf:resource="https://rasoulunlimited.ir/foaf.rdf"/>
     <foaf:openid rdf:resource="https://rasoulunlimited.ir"/>
     <foaf:homepage rdf:resource="https://rasoulunlimited.ir"/>
     <foaf:page rdf:resource="https://rasoulunlimited.ir/about.html"/>
+    <foaf:page rdf:resource="https://ipssmed.com"/>
 
     <!-- Images -->
     <foaf:img rdf:resource="https://rasoulunlimited.ir/assets/images/RasoulUnlimited.webp"/>
@@ -62,6 +65,20 @@
     <foaf:workplaceHomepage rdf:resource="https://ctb.iau.ir"/>
     <foaf:workInfoHomepage rdf:resource="https://rasoulunlimited.ir/projects/"/>
 
+    <!-- ===== NEW: IPSS Affiliation & WorksFor ===== -->
+    <schema:worksFor rdf:resource="https://ipssmed.com/#organization"/>
+    <schema:affiliation rdf:resource="https://ipssmed.com/#organization"/>
+    <schema:hasOccupation>
+      <schema:Occupation>
+        <schema:name>کارشناس ارشد فروش و توسعه‌دهنده وب</schema:name>
+        <schema:startDate>2025-09-22</schema:startDate>
+        <schema:employer rdf:resource="https://ipssmed.com/#organization"/>
+      </schema:Occupation>
+    </schema:hasOccupation>
+
+    <!-- ===== NEW: IPSS Organization Node ===== -->
+    <owl:sameAs rdf:resource="https://ipssmed.com/#organization"/>
+
     <!-- Languages -->
     <foaf:knowsLanguage>en</foaf:knowsLanguage>
     <foaf:knowsLanguage>fa</foaf:knowsLanguage>
@@ -74,11 +91,36 @@
     <foaf:topic_interest rdf:resource="http://dbpedia.org/resource/Web_development"/>
     <foaf:topic_interest rdf:resource="http://dbpedia.org/resource/Full_stack_developer"/>
     <foaf:topic_interest rdf:resource="http://dbpedia.org/resource/Content_strategy"/>
+    <foaf:topic_interest rdf:resource="http://dbpedia.org/resource/Medical_device"/>
 
     <!-- Member -->
     <foaf:member>
       <foaf:Organization>
         <rdfs:label>Biomedical Engineering Association – Islamic Azad University (Central Tehran Branch)</rdfs:label>
+      </foaf:Organization>
+    </foaf:member>
+
+    <!-- ===== NEW: IPSS Organization as Member ===== -->
+    <foaf:member>
+      <foaf:Organization rdf:about="https://ipssmed.com/#organization">
+        <foaf:name>IPSS — Ideh Pardazan Salamat Sepanta</foaf:name>
+        <foaf:homepage rdf:resource="https://ipssmed.com"/>
+        <rdfs:label>IPSS — ایده‌پردازان سلامت سپنتا</rdfs:label>
+        <dc:description>تولیدکننده پیشرو تیغ‌های اره ارتوپدی با کیفیت جهانی و گواهی‌های ISO 13485، ISO 9001 و GMP</dc:description>
+        <schema:address>
+          <schema:PostalAddress>
+            <schema:streetAddress>استان تهران - جاجرود - جاده دماوند، خیابان صنعت غربی، خیابان دانش فرعی اول، فرعی دوم، پلاک ۱۱۶</schema:streetAddress>
+            <schema:addressLocality>Tehran</schema:addressLocality>
+            <schema:addressCountry>IR</schema:addressCountry>
+          </schema:PostalAddress>
+        </schema:address>
+        <schema:contactPoint>
+          <schema:ContactPoint>
+            <schema:email>info@ipssmed.com</schema:email>
+            <schema:telephone>+98-21-12345678</schema:telephone>
+            <schema:contactType>sales</schema:contactType>
+          </schema:ContactPoint>
+        </schema:contactPoint>
       </foaf:Organization>
     </foaf:member>
 
@@ -172,7 +214,6 @@
         <owl:sameAs rdf:resource="https://www.researchgate.net/profile/Mohammad-Rasoul-Sohrabi"/>
       </foaf:OnlineAccount>
     </foaf:account>
-
 
     <!-- Medium -->
     <foaf:account>
@@ -349,6 +390,8 @@
     <dc:description>
       FOAF profile for Mohammad Rasoul Sohrabi (Rasoul Unlimited), biomedical engineering student,
       full-stack developer, open-source contributor, and creator of digital identity systems.
+      Currently working as Sales Senior Expert &amp; Web Developer at IPSS — Ideh Pardazan Salamat Sepanta,
+      a leading manufacturer of orthopedic saw blades with ISO certifications.
     </dc:description>
 
     <!-- License -->
