@@ -7,7 +7,7 @@
   <channel>
     <title>Rasoul Unlimited Updates</title>
     <link>https://rasoulunlimited.ir/</link>
-    <description>Latest verified articles, essays, and identity updates by Rasoul Unlimited.</description>
+    <description>Latest verified articles, essays, identity updates, and professional milestones by Rasoul Unlimited — including collaborations with IPSS.</description>
 
     <!-- Self-reference for feed autodiscovery -->
     <atom:link
@@ -16,8 +16,8 @@
       type="application/rss+xml" />
 
     <language>en-US</language>
-    <lastBuildDate>Sun, 18 May 2025 00:00:00 +0330</lastBuildDate>
-    <pubDate>Sat, 10 May 2025 00:00:00 +0330</pubDate>
+    <lastBuildDate>Sat, 03 Jan 2026 00:00:00 +0330</lastBuildDate>
+    <pubDate>Mon, 22 Sep 2025 00:00:00 +0330</pubDate>
     <ttl>360</ttl>
 
     <managingEditor>rasoul.unlimited@gmail.com (Rasoul Unlimited)</managingEditor>
@@ -34,7 +34,46 @@
     <category>software-development</category>
     <category>biomedical-engineering</category>
     <category>digital-identity</category>
+    <category>medical-devices</category>
 
+    <!-- NEW: Joining IPSS -->
+    <item>
+      <title>پیوستن به تیم IPSS — ایده‌پردازان سلامت سپنتا</title>
+      <link>https://rasoulunlimited.ir/about.html#collab-heading</link>
+      <guid isPermaLink="false">https://rasoulunlimited.ir/about.html#ipss-joining</guid>
+      <pubDate>Mon, 22 Sep 2025 00:00:00 +0330</pubDate>
+      <dc:creator><![CDATA[Rasoul Unlimited]]></dc:creator>
+      <category>career</category>
+      <category>IPSS</category>
+      <category>medical-devices</category>
+      <description>
+        <![CDATA[
+        Rasoul Unlimited joined IPSS — ایده‌پردازان سلامت سپنتا as Sales Senior Expert &amp; Web Developer.
+        IPSS is a leading manufacturer of high-quality orthopedic saw blades used in cardiac, orthopedic,
+        and trauma surgeries. This milestone bridges software development with the medical device industry.
+        ]]>
+      </description>
+    </item>
+
+    <!-- NEW: Digital Identity Analysis -->
+    <item>
+      <title>تحلیل هویت دیجیتال و حضور تأیید شده</title>
+      <link>https://rasoulunlimited.ir/analysis-digital-identity.html</link>
+      <guid isPermaLink="false">https://rasoulunlimited.ir/analysis-digital-identity.html</guid>
+      <pubDate>Fri, 01 Jul 2025 00:00:00 +0330</pubDate>
+      <dc:creator><![CDATA[آزمایشگاه پیش‌بینی روند]]></dc:creator>
+      <category>digital-identity</category>
+      <category>analysis</category>
+      <category>trust-signals</category>
+      <description>
+        <![CDATA[
+        An independent analysis of Rasoul Unlimited's digital identity strategy, focusing on verified presence,
+        trust signals, and the role of IPSS in strengthening his professional credibility.
+        ]]>
+      </description>
+    </item>
+
+    <!-- Existing: From Tatami to Technology -->
     <item>
       <title>From Tatami to Technology</title>
       <link>https://vrgl.ir/9D6Hy</link>
@@ -53,6 +92,7 @@
       </description>
     </item>
 
+    <!-- Existing: Personal Brand (Virgool) -->
     <item>
       <title>How to Build a Genuine Personal Brand in Today’s Noisy World (Virgool)</title>
       <link>https://vrgl.ir/cUmcv</link>
@@ -70,6 +110,7 @@
       </description>
     </item>
 
+    <!-- Existing: I am not a brand -->
     <item>
       <title>I am not a brand, I am a journey</title>
       <link>https://vrgl.ir/CKXlz</link>
@@ -87,6 +128,7 @@
       </description>
     </item>
 
+    <!-- Existing: Medium Article -->
     <item>
       <title>How to Build a Genuine Personal Brand in Today’s Noisy World (Medium)</title>
       <link>https://rasoulunlimited.medium.com/how-to-build-a-genuine-personal-brand-in-todays-noisy-world-c2adb129e623</link>
@@ -104,6 +146,7 @@
       </description>
     </item>
 
+    <!-- Existing: dev.to Article -->
     <item>
       <title>How to Build a Genuine Personal Brand in Today’s Noisy World (dev.to)</title>
       <link>https://dev.to/rasoulunlimited/how-to-build-a-genuine-personal-brand-in-todays-noisy-world-31k</link>
